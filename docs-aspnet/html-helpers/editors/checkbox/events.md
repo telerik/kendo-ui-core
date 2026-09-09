@@ -72,4 +72,4 @@ The following example demonstrates how to subscribe to events by a template dele
 ## See Also
 
 * [CheckBox Server-Side API for {{ site.framework}}](/api/checkbox)
-* [CheckBox Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/checkbox)
+* [CheckBox Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/checkbox)

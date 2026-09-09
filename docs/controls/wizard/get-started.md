@@ -50,7 +50,7 @@ In this step, you will initialize the Wizard from the empty `<div>` element. All
 
 ## 3. Add the Steps of the Wizard
 
-The Wizard provides different ways to display its data. In this guide, you will be using the [`steps`](/api/javascript/ui/wizard/configuration/steps) configuration which allows you to use an array to display the steps. For further information about the Wizard's content, check the [Content Article]({% slug content_wizard_widget %}).
+The Wizard provides different ways to display its data. In this guide, you will be using the [`steps`](/api/ui/wizard/configuration/steps) configuration which allows you to use an array to display the steps. For further information about the Wizard's content, check the [Content Article]({% slug content_wizard_widget %}).
 
 ```html
 <div id="wizard"></div>
@@ -73,7 +73,7 @@ The Wizard provides different ways to display its data. In this guide, you will 
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Wizard](/api/javascript/ui/wizard)
+* [JavaScript API Reference of the jQuery Wizard](/api/ui/wizard)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -66,4 +66,4 @@ The following example demonstrates how to create a Menu and bind it to a remote 
 
 * [Local Data Binding of the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/local-data-binding)
 * [Remote Data Binding of the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/remote-data-binding)
-* [JavaScript API Reference of the Menu](/api/javascript/ui/menu)
+* [JavaScript API Reference of the Menu](/api/ui/menu)

@@ -58,7 +58,7 @@ To set custom ascending and descending sorting icons when a specified Grid colum
  ```
 {% endif %}
 
-3. Within the `DataBound` event handler, define the desired SVG icons as explained in the [SVG Icons section in the documentation](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/sass-themes/svg-icons#setting-svg-icons-from-client). Then, access the currently sorted fields through the [`sort()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/sort) method of the DataSource and append the respective icon (ascending or descending).
+3. Within the `DataBound` event handler, define the desired SVG icons as explained in the [SVG Icons section in the documentation](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/sass-themes/svg-icons#setting-svg-icons-from-client). Then, access the currently sorted fields through the [`sort()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/sort) method of the DataSource and append the respective icon (ascending or descending).
 
 ```javascript
 <script>
@@ -131,7 +131,7 @@ For a runnable example based on the code above, refer to the [REPL example on cu
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)

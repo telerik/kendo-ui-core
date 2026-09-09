@@ -126,4 +126,4 @@ The following example demonstrates how to achieve this behavior also in case new
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

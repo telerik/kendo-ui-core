@@ -22,9 +22,9 @@ The CheckBox allows you to provide checkbox functionality to `<input />` element
 
 * [Getting Started with the Kendo UI CheckBox for jQuery]({% slug getting_started_kendoui_checkbox_widget %})
 * [Overview of the CheckBox (Demo)](https://demos.telerik.com/kendo-ui/checkbox/index)
-* [JavaScript API Reference of the CheckBox](/api/javascript/ui/checkbox)
+* [JavaScript API Reference of the CheckBox](/api/ui/checkbox)
 
 ## See Also
 
 * [Overview of the CheckBox (Demo)](https://demos.telerik.com/kendo-ui/checkbox/index)
-* [JavaScript API Reference of the CheckBox](/api/javascript/ui/checkbox)
+* [JavaScript API Reference of the CheckBox](/api/ui/checkbox)

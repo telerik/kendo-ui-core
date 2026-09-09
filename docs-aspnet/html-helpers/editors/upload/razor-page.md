@@ -119,7 +119,7 @@ For the complete project, refer to the [Upload in Razor Pages example](https://g
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Upload](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Client-Side API of the Upload](https://docs.telerik.com/kendo-ui/api/ui/upload)
 * [Server-Side HtmlHelper API of the Upload](/api/upload)
 * [Server-Side TagHelper API of the Upload](/api/taghelpers/upload)
 * [Knowledge Base Section](/knowledge-base)

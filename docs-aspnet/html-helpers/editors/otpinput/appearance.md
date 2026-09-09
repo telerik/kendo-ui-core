@@ -123,4 +123,4 @@ The following values are available for the `Rounded` option:
 {% if site.core %}
 * [Server-Side API of the OTPInput TagHelper](/api/taghelpers/otpinput)
 {% endif %}
-* [Client-Side API of the OTPInput](https://docs.telerik.com/kendo-ui/api/javascript/ui/otpinput)
+* [Client-Side API of the OTPInput](https://docs.telerik.com/kendo-ui/api/ui/otpinput)

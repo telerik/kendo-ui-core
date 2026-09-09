@@ -8,13 +8,13 @@ component: responsivepanel
 
 # kendo.ui.ResponsivePanel
 
-Represents the Kendo UI ResponsivePanel widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ResponsivePanel widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
 ### autoClose `Boolean` *(default: true)*
 
-If set to `false` the widget will not close when the page content is touched, after it was opened on a mobile device. You will need to call the [close method](/api/javascript/ui/responsivepanel/methods/close) when the panel needs to close.
+If set to `false` the widget will not close when the page content is touched, after it was opened on a mobile device. You will need to call the [close method](/api/ui/responsivepanel/methods/close) when the panel needs to close.
 
 
 <div class="meta-api-description">

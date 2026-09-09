@@ -8,13 +8,13 @@ component: timeline
 
 # kendo.ui.Timeline
 
-Represents the Kendo UI Timeline widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Timeline widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false`, the Timeline will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/javascript/data/datasource/methods/fetch) method of the [dataSource](/api/javascript/ui/grid/fields/datasource) instance. In such scenarios data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
+If set to `false`, the Timeline will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/data/datasource/methods/fetch) method of the [dataSource](/api/ui/grid/fields/datasource) instance. In such scenarios data binding will occur when the [change](/api/data/datasource/events/change) event of the
 dataSource instance is fired. By default, `autoBind` is set to `true` and the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.

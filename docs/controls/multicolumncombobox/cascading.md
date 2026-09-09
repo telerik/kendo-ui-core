@@ -11,7 +11,7 @@ position: 9
 
 The [cascading MultiColumnComboBox](https://demos.telerik.com/kendo-ui/multicolumncombobox/cascadingmulticolumncombobox) is a series of two or more MultiColumnComboBoxes in which each MultiColumnComboBox is filtered according to the selected options that are based on the `dataValueField` in the previous MultiColumnComboBox.
 
-The child MultiColumnComboBox cascades from the parent one if the [`cascadeFrom`](/api/javascript/ui/multicolumncombobox/configuration/cascadefrom) option is defined. The `cascadeFrom` option has to refer to the parent ID.
+The child MultiColumnComboBox cascades from the parent one if the [`cascadeFrom`](/api/ui/multicolumncombobox/configuration/cascadefrom) option is defined. The `cascadeFrom` option has to refer to the parent ID.
 
 > The cascading functionality works only when you define the `cascadeFrom` property and initialize the parent MultiColumnComboBox.
 
@@ -86,4 +86,4 @@ To initialize a cascading MultiColumnComboBox, use the following example.
 ## See Also
 
 * [Rendering Cascading MultiColumnComboBoxes (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/cascadingmulticolumncombobox)
-* [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
+* [JavaScript API Reference of the MultiColumnComboBox](/api/ui/multicolumncombobox)

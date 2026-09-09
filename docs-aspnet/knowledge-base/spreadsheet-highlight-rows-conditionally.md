@@ -29,8 +29,8 @@ How to highlight rows conditionally in the {{ site.product }} Spreadsheet?
 
 ## Solution
 
-1. Hook up for the [`DataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/events/databound) event of the Spreadsheet.
-2. Traverse the rows, and if the record meets the condition, recolor all the cells in the row by using the [`background`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/background) method of the [`range`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range) object.  
+1. Hook up for the [`DataBound`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/events/databound) event of the Spreadsheet.
+2. Traverse the rows, and if the record meets the condition, recolor all the cells in the row by using the [`background`](https://docs.telerik.com/kendo-ui/api/spreadsheet/range/methods/background) method of the [`range`](https://docs.telerik.com/kendo-ui/api/spreadsheet/range) object.  
 
 
 ```Razor Index.cshtml
@@ -145,7 +145,7 @@ For the complete implementation of the suggested approach, refer to the followin
 ## See Also
 
 * [Telerik REPL: Highlighting Rows in the Spreadsheet Conditionally](https://netcorerepl.telerik.com/GwOWOCFl48wKAzUb04)
-* [Client-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [Client-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
 * [Server-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/spreadsheet)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

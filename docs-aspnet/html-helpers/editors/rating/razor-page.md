@@ -69,7 +69,7 @@ For the complete project, refer to the [Rating in Razor Pages example](https://g
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Rating](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/rating)
+* [Client-Side API of the Rating](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/rating)
 * [Server-Side HtmlHelper API of the Rating](/api/rating)
 * [Server-Side TagHelper API of the Rating](/api/taghelpers/rating)
 * [Knowledge Base Section](/knowledge-base)

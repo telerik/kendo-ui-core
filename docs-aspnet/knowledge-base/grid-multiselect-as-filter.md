@@ -39,7 +39,7 @@ How can I use the [MultiSelect]({% slug htmlhelpers_multiselect_aspnetcore %}) a
 1. Remove the second filter input in the default column filter menu using the [`Extra(false)`](/api/kendo.mvc.ui.fluent/gridboundcolumnfilterablebuilder#extrasystemboolean) option of the `Filterable` configuration.
 1. Use the [`UI`](/api/kendo.mvc.ui.fluent/gridboundcolumnfilterablebuilder#uisystemstring) option of the `Filterable` configuration and pass the name of the JavaScript function (`multiselectFilter`) that will create the MultiSelect.
 1. Within the `multiselectFilter` function, initialize the MultiSelect editor and remove the default DropDownList editor with jQuery. Also, handle the `submit` event of the column filter menu, prevent its default action, and filter the Grid based on the selected options in the MultiSelect.
-1. The Grid is configured for remote data binding, and all data operations are performed server-side. As a result, when you call the [`filter()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method of the DataSource, the filter expression will be sent to the server. Intercept the applied filters through the `request` object and filter the data as demonstrated in the `Read` action in the code snippet below.
+1. The Grid is configured for remote data binding, and all data operations are performed server-side. As a result, when you call the [`filter()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/filter) method of the DataSource, the filter expression will be sent to the server. Intercept the applied filters through the `request` object and filter the data as demonstrated in the `Read` action in the code snippet below.
 
 ```HtmlHelper
 	@(Html.Kendo().Grid<ViewModel>()
@@ -202,12 +202,12 @@ For the complete implementation of how to use the MultiSelect as a filter in a s
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)
 {% endif %}
-* [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/multiselect)
 * [Server-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/multiselect)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/multiselect)

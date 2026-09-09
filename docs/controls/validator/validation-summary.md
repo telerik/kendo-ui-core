@@ -9,7 +9,7 @@ position: 6
 
 # Validation Summary
 
-The Validator enables you to list validation errors in a separate container through the [`validationSummary`](/api/javascript/ui/validator/configuration/validationsummary) option. 
+The Validator enables you to list validation errors in a separate container through the [`validationSummary`](/api/ui/validator/configuration/validationsummary) option. 
 
 The listed errors link to the corresponding form elements and focus them upon clicking an error message from the validation summary list.
 
@@ -35,7 +35,7 @@ To enable the summary of validation messages, set the `validationSummary` option
 
 ## Specifying the Summary Location 
 
-You can render the summary of the validation messages in a container of your choice by utilizing the [`validationSummary.container`](/api/javascript/ui/validator/configuration/validationsummary.container) option. For example, you can display the validation summary under the validated content with the following configuration:
+You can render the summary of the validation messages in a container of your choice by utilizing the [`validationSummary.container`](/api/ui/validator/configuration/validationsummary.container) option. For example, you can display the validation summary under the validated content with the following configuration:
 
     <form id="myform">
         <input name="username" required /> <br />
@@ -53,7 +53,7 @@ You can render the summary of the validation messages in a container of your cho
 
 ## Customizing the Validation Messages
 
-You can change the default template of the validation summary through the [`validationSummary.template`](/api/javascript/ui/validator/configuration/validationsummary.template) option. Note that the `data-field` attribute will link the error message to the corresponding form control and focus it on click.
+You can change the default template of the validation summary through the [`validationSummary.template`](/api/ui/validator/configuration/validationsummary.template) option. Note that the `data-field` attribute will link the error message to the corresponding form control and focus it on click.
 
 
     <form id="myform">
@@ -80,7 +80,7 @@ You can change the default template of the validation summary through the [`vali
 
 ## Showing and Hiding the Summary Programmatically
 
-To control the visibility of the summary container, use the [`showValidationSummary()`](/api/javascript/ui/validator/methods/showvalidationsummary) and [`hideValidationSummary()`](/api/javascript/ui/validator/methods/hidevalidationsummary) methods. 
+To control the visibility of the summary container, use the [`showValidationSummary()`](/api/ui/validator/methods/showvalidationsummary) and [`hideValidationSummary()`](/api/ui/validator/methods/hidevalidationsummary) methods. 
 
 However, note that `showValidationSummary()` will render error messages only if the form is already validated.
 
@@ -100,4 +100,4 @@ You can retrieve the DOM element of the summary through the Validator instance.
 ## See Also
 
 * [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
-* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
+* [JavaScript API Reference of the Validator](/api/ui/validator)

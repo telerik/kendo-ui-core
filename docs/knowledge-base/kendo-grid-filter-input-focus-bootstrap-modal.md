@@ -31,7 +31,7 @@ ticketid: 1670448
 
 ## Description
 
-When using the [Kendo UI Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) inside a Bootstrap modal, the input text fields of the grid's filter are no longer focusable, especially when the `tabindex` attribute is added to the modal for accessibility purposes. This issue prevents users from interacting with the filter inputs as expected. This KB article also answers the following questions:
+When using the [Kendo UI Grid](https://docs.telerik.com/kendo-ui/api/ui/grid) inside a Bootstrap modal, the input text fields of the grid's filter are no longer focusable, especially when the `tabindex` attribute is added to the modal for accessibility purposes. This issue prevents users from interacting with the filter inputs as expected. This KB article also answers the following questions:
 - How to make filter inputs in a Kendo Grid focusable when inside a Bootstrap modal?
 - How to maintain accessibility with `tabindex` in Bootstrap modals containing a Kendo Grid?
 - How to prevent focus from escaping a modal after applying a filter in a Kendo Grid?

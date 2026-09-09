@@ -28,7 +28,7 @@ Depending on the requirements, you can define its structure by using HTML or by 
 
 * [Getting Started with the Kendo UI PanelBar for jQuery]({% slug getting_started_kendoui_panelbar_component %})
 * [Basic Usage of the jQuery PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/index)
-* [JavaScript API Reference of the PanelBar](/api/javascript/ui/panelbar)
+* [JavaScript API Reference of the PanelBar](/api/ui/panelbar)
 
 ## See Also
 

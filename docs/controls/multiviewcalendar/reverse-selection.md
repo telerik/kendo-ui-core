@@ -9,7 +9,7 @@ position: 9
 
 # Reverse Selection
 
-Starting with Kendo UI R2 2024, the MultiViewCalendar provides an [`allowReverse`](/api/javascript/ui/multiviewcalendar/configuration/allowreverse) selection. It allows you to pick an end date which is before the selected start date when the [`selectable`](/api/javascript/ui/multiviewcalendar/configuration/selectable) option is set to `range`.
+Starting with Kendo UI R2 2024, the MultiViewCalendar provides an [`allowReverse`](/api/ui/multiviewcalendar/configuration/allowreverse) selection. It allows you to pick an end date which is before the selected start date when the [`selectable`](/api/ui/multiviewcalendar/configuration/selectable) option is set to `range`.
 
 ```dojo
     <div id="multiviewcalendar"></div>
@@ -21,9 +21,9 @@ Starting with Kendo UI R2 2024, the MultiViewCalendar provides an [`allowReverse
         });
     </script>
 ```
-> When range selection is configured, the [`showOtherMonthDays`](/api/javascript/ui/multiviewcalendar/configuration/showothermonthdays) needs to be set to `false`.
+> When range selection is configured, the [`showOtherMonthDays`](/api/ui/multiviewcalendar/configuration/showothermonthdays) needs to be set to `false`.
 
 ## See Also
 
 * [Reverse Selection Demo of the MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/reverse-selection)
-* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
+* [JavaScript API Reference of the MultiViewCalendar](/api/ui/multiviewcalendar)

@@ -417,7 +417,7 @@ public class WizardAjaxSubmitModel : PageModel
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Wizard](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard)
+* [Client-Side API of the Wizard](https://docs.telerik.com/kendo-ui/api/ui/wizard)
 * [Server-Side HtmlHelper API of the Wizard](/api/wizard)
 * [Server-Side TagHelper API of the Wizard](/api/taghelpers/wizard)
 * [Knowledge Base Section](/knowledge-base)

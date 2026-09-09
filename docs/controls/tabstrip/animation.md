@@ -16,4 +16,4 @@ For the complete example, refer to the [demo on adding animation effects to the 
 ## See Also
 
 * [Adding Animations to the TabStrip (Demo)](https://demos.telerik.com/kendo-ui/tabstrip/animation)
-* [JavaScript API Reference of the TabStrip](/api/javascript/ui/tabstrip)
+* [JavaScript API Reference of the TabStrip](/api/ui/tabstrip)

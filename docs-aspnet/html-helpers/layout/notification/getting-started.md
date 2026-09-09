@@ -235,7 +235,7 @@ You can reference the Notification instances that you have created and build on 
     </script>
     ```
 
-1. Use the [Notification client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/notification#methods) to control the behavior of the widget. In this example, you will use the `hide` method to close the Notification.
+1. Use the [Notification client-side API](https://docs.telerik.com/kendo-ui/api/ui/notification#methods) to control the behavior of the widget. In this example, you will use the `hide` method to close the Notification.
 
     ```JS script
     <script>
@@ -262,6 +262,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Notification for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/notification/api)
-* [Client-Side API of the Notification](https://docs.telerik.com/kendo-ui/api/javascript/ui/notification)
+* [Client-Side API of the Notification](https://docs.telerik.com/kendo-ui/api/ui/notification)
 * [Server-Side API of the Notification](/api/notification)
 * [Knowledge Base Section](/knowledge-base)

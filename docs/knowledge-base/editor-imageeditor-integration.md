@@ -28,7 +28,7 @@ Can I integrate an ImageEditor in the Kendo UI for jQuery Editor component to ed
 
 To achieve the desired scenario: 
 
-1. First, place the ImageEditor in a popup, for example, a [Kendo UI for jQuery Window](https://docs.telerik.com/kendo-ui/api/javascript/ui/window) which is initially closed. 
+1. First, place the ImageEditor in a popup, for example, a [Kendo UI for jQuery Window](https://docs.telerik.com/kendo-ui/api/ui/window) which is initially closed. 
 
 1. Next, define a Kendo UI for jQuery ContextMenu that opens when right-clicking an image.
 
@@ -169,5 +169,5 @@ To achieve the desired scenario:
 
 ## See Also
 
-* [Kendo UI for jQuery Editor API Reference](/api/javascript/ui/editor)
+* [Kendo UI for jQuery Editor API Reference](/api/ui/editor)
 * [Common Issues in Kendo UI for jQuery]({% slug troubleshooting_common_issues_kendoui %})

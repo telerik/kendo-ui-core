@@ -9,7 +9,7 @@ position: 10
 
 # Commands
 
-The FileManager component provides the following commands that can be executed using the [executeCommand](/api/javascript/ui/filemanager/methods/executecommand) method: 
+The FileManager component provides the following commands that can be executed using the [executeCommand](/api/ui/filemanager/methods/executecommand) method: 
 
 * [CreateFolderCommand;](#createfoldercommand)
 * [RenameCommand;](#renamecommand)

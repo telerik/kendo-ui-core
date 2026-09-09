@@ -136,6 +136,6 @@ The supported values include:
 {% if site.core %}
 * [Server-Side API of the PromptBox TagHelper](/api/taghelpers/promptbox)
 {% endif %}
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)
 * [PromptBox Adornments]({% slug htmlhelpers_promptbox_adornments_aspnetcore %})
 * [PromptBox Modes]({% slug htmlhelpers_promptbox_modes_aspnetcore %}

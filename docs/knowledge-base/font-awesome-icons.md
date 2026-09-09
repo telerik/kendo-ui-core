@@ -125,7 +125,7 @@ The following example demonstrates how to use FontAwesome icons in series notes 
 
 Visual templates are the most flexible way to override the rendering of the Chart elements. They allow you to construct the labels by using the [Drawing API]({% slug overview_kendoui_drawingapi %}).
 
-The following example demonstrates how to construct a visual that uses two [Text](/api/javascript/drawing/text) shapes and to position them in a [Layout](/api/javascript/drawing/layout). The first `Text` element contains the FontAwesome icon. The second one is a plain text label.
+The following example demonstrates how to construct a visual that uses two [Text](/api/drawing/text) shapes and to position them in a [Layout](/api/drawing/layout). The first `Text` element contains the FontAwesome icon. The second one is a plain text label.
 
 ```dojo
     <!-- Include FontAwesome -->
@@ -139,7 +139,7 @@ The following example demonstrates how to construct a visual that uses two [Text
           labels: {
             visual: function(e) {
               // Layout text elements. See:
-              // https://docs.telerik.com/kendo-ui/api/javascript/drawing/layout
+              // https://docs.telerik.com/kendo-ui/api/drawing/layout
               var layout = new kendo.drawing.Layout(e.rect, {
                 orientation: "horizontal",
 
@@ -185,8 +185,8 @@ The following example demonstrates how to construct a visual that uses two [Text
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
-* [API Reference of the Drawing layout](/api/javascript/drawing/layout)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
+* [API Reference of the Drawing layout](/api/drawing/layout)
 * [Embed Font Awesome in Exported PDF]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})
 * [Display Checkboxes Next to Legend Items]({% slug howto_displaycheckboxes_nexttolegenditems_charts %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

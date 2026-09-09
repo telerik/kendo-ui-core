@@ -27,7 +27,7 @@ ticketid: 1670626
 
 ## Description
 
-Changing the CSS of the placeholder in the [MultiSelect](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect) component is required to improve its appearance. Specifically, the goal is to modify the placeholder text color from black to red.
+Changing the CSS of the placeholder in the [MultiSelect](https://docs.telerik.com/kendo-ui/api/ui/multiselect) component is required to improve its appearance. Specifically, the goal is to modify the placeholder text color from black to red.
 
 This KB article also answers the following questions:
 - How can I customize the placeholder color in a Kendo UI MultiSelect?
@@ -99,4 +99,4 @@ Runnable example:
 ## See Also
 
 - [MultiSelect Overview](https://docs.telerik.com/kendo-ui/controls/editors/multiselect/overview)
-- [MultiSelect API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+- [MultiSelect API Reference](https://docs.telerik.com/kendo-ui/api/ui/multiselect)

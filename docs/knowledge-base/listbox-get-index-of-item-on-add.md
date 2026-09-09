@@ -40,7 +40,7 @@ How can I easily retrieve the index of each data item when addiing to the ListBo
 
 The ListBox does not provide a built-in solution for achieving this behavior but there is a logged [enhancement issue](https://github.com/telerik/kendo-ui-core/issues/3777). 
 
-The [`add`](/api/javascript/ui/listbox/events/add) event does not provide the index of the added item but we can get to it using the Kendo UI ListBox API. The item which is about to be added is already present in the receiving widget's `items()` collection. To identify it, we can look for the item with class "k-ghost":
+The [`add`](/api/ui/listbox/events/add) event does not provide the index of the added item but we can get to it using the Kendo UI ListBox API. The item which is about to be added is already present in the receiving widget's `items()` collection. To identify it, we can look for the item with class "k-ghost":
 
 ```dojo
     <link rel="stylesheet" href="https://demos.telerik.com/kendo-ui/content/shared/styles/examples-offline.css">

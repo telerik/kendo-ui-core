@@ -107,4 +107,4 @@ The following example shows a Form configured to display its editors in two grou
 ## See Also
 
 * [Groups in the Form (Demo)](https://demos.telerik.com/kendo-ui/form/groups)
-* [JavaScript API Reference of the Form](/api/javascript/ui/form)
+* [JavaScript API Reference of the Form](/api/ui/form)

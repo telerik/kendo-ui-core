@@ -37,7 +37,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To enable row selection by right-click in the Kendo UI for jQuery Grid, use the `mousedown` event and apply the `k-selected` class dynamically. Ensure the Grid is configured with the [`selectable`](/api/javascript/ui/grid/configuration/selectable) option set to `"single"` or `"multiple"`. This allows the Grid to recognize the selected row.
+To enable row selection by right-click in the Kendo UI for jQuery Grid, use the `mousedown` event and apply the `k-selected` class dynamically. Ensure the Grid is configured with the [`selectable`](/api/ui/grid/configuration/selectable) option set to `"single"` or `"multiple"`. This allows the Grid to recognize the selected row.
 
 ### Steps
 
@@ -184,4 +184,4 @@ You can view and test this implementation in the following example:
 ## See Also
 
 - [Kendo UI for jQuery Grid Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/overview)
-- [Selectable Configuration](/api/javascript/ui/grid/configuration/selectable)
+- [Selectable Configuration](/api/ui/grid/configuration/selectable)

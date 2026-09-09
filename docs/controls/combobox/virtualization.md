@@ -23,7 +23,7 @@ For runnable examples on virtualization, refer to the following demos:
 
 ## Getting Started
 
-To retrieve and display only a subset of the whole dataset, the ComboBox combines data and User Interface (UI) virtualization. To implement data virtualization, the ComboBox uses the paging functionality of the DataSource and remote data retrieval. In this way, the component retrieves only a specified data page instead of requesting the whole dataset at once. To ensure the proper functioning of the ComboBox, configure the paging of the DataSource correctly. For more information, refer to the [server paging](/api/javascript/data/datasource/configuration/serverpaging) configuration.
+To retrieve and display only a subset of the whole dataset, the ComboBox combines data and User Interface (UI) virtualization. To implement data virtualization, the ComboBox uses the paging functionality of the DataSource and remote data retrieval. In this way, the component retrieves only a specified data page instead of requesting the whole dataset at once. To ensure the proper functioning of the ComboBox, configure the paging of the DataSource correctly. For more information, refer to the [server paging](/api/data/datasource/configuration/serverpaging) configuration.
 
 The following example demonstrates how to set the minimum component and DataSource configurations for the virtualization to work as expected.
 
@@ -88,7 +88,7 @@ In order for the virtualization to properly work:
 
 ### Setting the Item and Container Heights
 
-The ComboBox applies a specific strategy of reusing a list of DOM elements for displaying the corresponding data chunk. The number of these elements is determined based on the [`height`](/api/javascript/ui/combobox/configuration/height) and [`itemHeight`](/api/javascript/ui/combobox/configuration/virtual#virtual.itemHeight) options. Once the number is calculated, the component creates those elements and starts reusing them to display the current data source page.
+The ComboBox applies a specific strategy of reusing a list of DOM elements for displaying the corresponding data chunk. The number of these elements is determined based on the [`height`](/api/ui/combobox/configuration/height) and [`itemHeight`](/api/ui/combobox/configuration/virtual#virtual.itemHeight) options. Once the number is calculated, the component creates those elements and starts reusing them to display the current data source page.
 
 All items in the virtualized list need to have the same height. If you do not specify a height value, `itemHeight` will be automatically set as it is set in the current theme and font size.
 
@@ -98,7 +98,7 @@ The virtualized list container needs to have a `height` option that is set in pi
 
 ### Setting the Page Size
 
-To ensure the correct work of the ComboBox, the `pageSize` value of the DataSource is calculated automatically based on the (([`height`](/api/javascript/ui/combobox/configuration/height) / [`itemHeight`](#itemheight)) * 4) formula. The ComboBox itself does the calculation and the defined `pageSize` value is overridden if it does not match the calculated one. For example, if the `height` is set to `520px` and the `itemHeight` is set to `26`, the `pageSize` will be set to `80` because ((520 / 26) * 4) is equal to `80`.
+To ensure the correct work of the ComboBox, the `pageSize` value of the DataSource is calculated automatically based on the (([`height`](/api/ui/combobox/configuration/height) / [`itemHeight`](#itemheight)) * 4) formula. The ComboBox itself does the calculation and the defined `pageSize` value is overridden if it does not match the calculated one. For example, if the `height` is set to `520px` and the `itemHeight` is set to `26`, the `pageSize` will be set to `80` because ((520 / 26) * 4) is equal to `80`.
 
 > * Enabling paging and setting `pageSize` is efficient only when the virtualization of the ComboBox is configured.
 > * To avoid multiple initial requests, define a correct `pageSize` value.
@@ -110,7 +110,7 @@ The response for each virtualization request has to contain the following fields
 * An array with the specified page of data.
 * The total count of all items that are present in the dataset of the `Total` field.
 
-You can specify the fields that contain the array of [`data`](/api/javascript/data/datasource/configuration/schema#schemadata) and the [`total`](/api/javascript/data/datasource/configuration/schema#schematotal) in the configuration of the data source schema of the ComboBox. Once a page of data is received on the client, it will be cached, and if the user scrolls through the list, no new requests will be made for earlier pages of data and the virtualization will happen on the client only.
+You can specify the fields that contain the array of [`data`](/api/data/datasource/configuration/schema#schemadata) and the [`total`](/api/data/datasource/configuration/schema#schematotal) in the configuration of the data source schema of the ComboBox. Once a page of data is received on the client, it will be cached, and if the user scrolls through the list, no new requests will be made for earlier pages of data and the virtualization will happen on the client only.
 
 > To prevent infinite requests for the last page of data, ensure that the `Total` count is reached. If it is not, the component will make requests until it receives the denoted total amount of unique items.
 
@@ -228,5 +228,5 @@ On initial load, the component checks whether the selected value is present in t
 ## See Also
 
 * [Virtualization in the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/virtualization)
-* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
-* [JavaScript API Reference of the DataSource](/api/javascript/data/datasource)
+* [JavaScript API Reference of the ComboBox](/api/ui/combobox)
+* [JavaScript API Reference of the DataSource](/api/data/datasource)

@@ -166,4 +166,4 @@ Select the desired icons from the comprehensive list of available <a href="https
 {% if site.core %}
 * [Server-Side API of the SpeechToTextButton TagHelper](/api/taghelpers/speechtotextbutton)
 {% endif %}
-* [Client-Side API of the SpeechToTextButton](https://docs.telerik.com/kendo-ui/api/javascript/ui/speechtotextbutton)
+* [Client-Side API of the SpeechToTextButton](https://docs.telerik.com/kendo-ui/api/ui/speechtotextbutton)

@@ -11,7 +11,7 @@ position: 5
 
 You can customize the content inside the center of the ArcGauge by using the center template.
 
-To render the center template of an ArcGauge, specify the [`centerTemplate`](/api/javascript/dataviz/ui/arcgauge/configuration/centertemplate).
+To render the center template of an ArcGauge, specify the [`centerTemplate`](/api/dataviz/ui/arcgauge/configuration/centertemplate).
 
 The following example demonstrates how to create a custom center template.
 
@@ -23,4 +23,4 @@ The following example demonstrates how to create a custom center template.
 ## See Also
 
 * [Basic Usage of the ArcGauge (Demo)](https://demos.telerik.com/kendo-ui/arc-gauge/index)
-* [JavaScript API Reference of the ArcGauge](/api/javascript/dataviz/ui/arcgauge)
+* [JavaScript API Reference of the ArcGauge](/api/dataviz/ui/arcgauge)

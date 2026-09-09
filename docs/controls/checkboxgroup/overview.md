@@ -24,9 +24,9 @@ The CheckBoxGroup allows you to style and provide checkbox functionality to list
 
 * [Getting Started with the Kendo UI CheckBoxGroup for jQuery]({% slug getting_started_kendoui_checkboxgroup_widget %})
 * [Overview of the CheckBoxGroup (Demo)](https://demos.telerik.com/kendo-ui/checkboxgroup/index)
-* [JavaScript API Reference of the CheckBoxGroup](/api/javascript/ui/checkboxgroup)
+* [JavaScript API Reference of the CheckBoxGroup](/api/ui/checkboxgroup)
 
 ## See Also
 
 * [Basic Usage of the CheckBoxGroup (Demo)](https://demos.telerik.com/kendo-ui/checkboxgroup/index)
-* [JavaScript API Reference of the CheckBoxGroup](/api/javascript/ui/checkboxgroup)
+* [JavaScript API Reference of the CheckBoxGroup](/api/ui/checkboxgroup)

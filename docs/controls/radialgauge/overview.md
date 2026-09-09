@@ -26,10 +26,10 @@ All graphics render on the client by using the [Scalable Vector Graphics (SVG)](
 
 * [Getting Started with the Kendo UI RadialGauge for jQuery]({% slug getting_started_kendoui_radialgauge_component %})
 * [Basic Usage of the RadialGauge (Demo)](https://demos.telerik.com/kendo-ui/radial-gauge/index)
-* [JavaScript API Reference of the RadialGauge](/api/javascript/dataviz/ui/radialgauge)
+* [JavaScript API Reference of the RadialGauge](/api/dataviz/ui/radialgauge)
 
 
 ## See Also
 
 * [Overview of the RadialGauge (Demo)](https://demos.telerik.com/kendo-ui/radial-gauge/index)
-* [JavaScript API Reference of the RadialGauge](/api/javascript/dataviz/ui/radialgauge)
+* [JavaScript API Reference of the RadialGauge](/api/dataviz/ui/radialgauge)

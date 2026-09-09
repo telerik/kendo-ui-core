@@ -31,7 +31,7 @@ Grid for Progress® Kendo UI®
 
 ## Description
 
-I want to change the expand/collapse [SVG icon](/styles-and-layout/sass-themes/svg-icons) in a hierarchy Grid in Kendo UI. The default Kendo UI caret icon needs to be replaced with custom SVG icons, such as `plus` for expand and `minus` for collapse. This requires implementing custom logic in the[`dataBound`](/api/javascript/ui/grid/events/databound), [`detailExpand`](/api/javascript/ui/grid/events/detailexpand), and [`detailCollapse`](/api/javascript/ui/grid/events/detailcollapse) event handlers of the Kendo UI Grid.
+I want to change the expand/collapse [SVG icon](/styles-and-layout/sass-themes/svg-icons) in a hierarchy Grid in Kendo UI. The default Kendo UI caret icon needs to be replaced with custom SVG icons, such as `plus` for expand and `minus` for collapse. This requires implementing custom logic in the[`dataBound`](/api/ui/grid/events/databound), [`detailExpand`](/api/ui/grid/events/detailexpand), and [`detailCollapse`](/api/ui/grid/events/detailcollapse) event handlers of the Kendo UI Grid.
 
 This knowledge base article also answers the following questions:
 - How to replace default icons in Kendo UI Grid hierarchy?
@@ -42,7 +42,7 @@ This knowledge base article also answers the following questions:
 
 To achieve this, follow these steps:
 
-1. Implement the [`dataBound`](/api/javascript/ui/grid/events/databound), [`detailExpand`](/api/javascript/ui/grid/events/detailexpand), and [`detailCollapse`](/api/javascript/ui/grid/events/detailcollapse) event handlers:
+1. Implement the [`dataBound`](/api/ui/grid/events/databound), [`detailExpand`](/api/ui/grid/events/detailexpand), and [`detailCollapse`](/api/ui/grid/events/detailcollapse) event handlers:
 
 ### `dataBound` Event Handler
 
@@ -232,9 +232,9 @@ For a runnable example, please refer to the next demo.
 
 ## See Also
 
-- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/overview)
-- [dataBound Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
-- [detailExpand Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand)
-- [detailCollapse Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailcollapse)
+- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/overview)
+- [dataBound Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound)
+- [detailExpand Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/events/detailexpand)
+- [detailCollapse Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/events/detailcollapse)
 - [Kendo UI SVG Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/svg-icons)
 - [Progress® Design System Kit Iconography](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/)

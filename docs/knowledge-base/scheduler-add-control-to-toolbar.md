@@ -73,4 +73,4 @@ To implement the scenario, use jQuery.
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler).
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler).

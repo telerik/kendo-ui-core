@@ -85,7 +85,7 @@ The following example demonstrates how to set `row` and `altRow` templates by us
 </script>
 ```
 
-Implement the templates in the script tags by using the [`data.model`](/api/javascript/data/model) properties. Here is an example:
+Implement the templates in the script tags by using the [`data.model`](/api/data/model) properties. Here is an example:
 
 ```
 <script id="template" type="text/x-kendo-template">

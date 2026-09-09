@@ -37,10 +37,10 @@ You cannot work around these issues, because no other reliable way to detect typ
 
 * [Getting Started with the Kendo UI MaskedTextBox for jQuery]({% slug getting_started_kendoui_maskedtextbox %})
 * [Overview of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
-* [JavaScript API Reference of the MaskedTextBox](/api/javascript/ui/maskedtextbox)
+* [JavaScript API Reference of the MaskedTextBox](/api/ui/maskedtextbox)
 
 ## See Also
 
 * [Overview of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
 * [Using the API of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/api)
-* [JavaScript API Reference of the MaskedTextBox](/api/javascript/ui/maskedtextbox)
+* [JavaScript API Reference of the MaskedTextBox](/api/ui/maskedtextbox)

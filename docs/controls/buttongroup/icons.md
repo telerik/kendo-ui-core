@@ -30,4 +30,4 @@ You can configure the icons by using the `icon` and `imageUrl` properties of the
 ## See Also
 
 * [Using Icons in the ButtonGroup (Demo)](https://demos.telerik.com/kendo-ui/buttongroup/icons)
-* [JavaScript API Reference of the ButtonGroup](/api/javascript/ui/buttongroup)
+* [JavaScript API Reference of the ButtonGroup](/api/ui/buttongroup)

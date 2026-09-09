@@ -35,7 +35,7 @@ How can I position a DropDownList popup in the content of the PanelBar?
 <li><span id="ddl-container"><input type="text" id="ddl"/></span></li>
 ```
 
-- Use the [`popup.appendTo`](/api/javascript/ui/dropdownlist/configuration/popup#popupappendto) option of the component, in order to configure the position of the popup to the container.
+- Use the [`popup.appendTo`](/api/ui/dropdownlist/configuration/popup#popupappendto) option of the component, in order to configure the position of the popup to the container.
 
 ```js
 popup: {
@@ -88,5 +88,5 @@ The following example demonstrates the full implementation of the suggested appr
 ```
 
 ## See Also
-* [JavaScript API Reference of the PanelBar](/api/javascript/ui/panelbar)
-* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the PanelBar](/api/ui/panelbar)
+* [JavaScript API Reference of the DropDownList](/api/ui/dropdownlist)

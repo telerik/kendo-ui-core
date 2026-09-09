@@ -11,7 +11,7 @@ position: 2
 
 The keyboard navigation of the MediaPlayer is always available.
 
-To enable it, use the [`navigatable`](/api/javascript/ui/mediaplayer/configuration/navigatable) property. For a complete example, refer to the [demo on using the keyboard navigation of the MediaPlayer](https://demos.telerik.com/kendo-ui/mediaplayer/keyboard-navigation).
+To enable it, use the [`navigatable`](/api/ui/mediaplayer/configuration/navigatable) property. For a complete example, refer to the [demo on using the keyboard navigation of the MediaPlayer](https://demos.telerik.com/kendo-ui/mediaplayer/keyboard-navigation).
 
 The MediaPlayer supports the following keyboard shortcuts:
 

@@ -8,7 +8,7 @@ component: sankey
 
 # kendo.dataviz.ui.Sankey
 
-Represents the Kendo UI Sankey component. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Sankey component. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -3731,7 +3731,7 @@ The supported values are:
 * "bottom" - the legend is positioned on the bottom.
 * "left" - the legend is positioned on the left.
 * "right" - the legend is positioned on the right.
-* "custom" - the legend is positioned using [legend.offsetX](/api/javascript/dataviz/ui/sankey#configuration-legend.offsetX) and [legend.offsetY](/api/javascript/dataviz/ui/sankey#configuration-legend.offsetY).
+* "custom" - the legend is positioned using [legend.offsetX](/api/dataviz/ui/sankey#configuration-legend.offsetX) and [legend.offsetY](/api/dataviz/ui/sankey#configuration-legend.offsetY).
 
 
 <div class="meta-api-description">
@@ -3791,7 +3791,7 @@ How do I reverse the order of legend items in a Sankey diagram using Kendo UI fo
 
 ### legend.spacing `Number`
 
-The spacing between the labels in pixels when the [legend.orientation](/api/javascript/dataviz/ui/sankey#configuration-legend.orientation) is "horizontal".
+The spacing between the labels in pixels when the [legend.orientation](/api/dataviz/ui/sankey#configuration-legend.orientation) is "horizontal".
 
 
 <div class="meta-api-description">
@@ -4607,7 +4607,7 @@ How to hide Sankey chart legend in Kendo UI for jQuery? Configure the display or
 
 ### legend.width `Number`
 
-The legend width when the [legend.orientation](/api/javascript/dataviz/ui/sankey#configuration-legend.orientation) is set to "horizontal".
+The legend width when the [legend.orientation](/api/dataviz/ui/sankey#configuration-legend.orientation) is set to "horizontal".
 
 
 <div class="meta-api-description">
@@ -6778,7 +6778,7 @@ How do I properly remove and reset a Sankey diagram in Kendo UI? Remove or delet
 
 ### exportVisual
 
-Exports the Sankey visual as a [Group](/api/javascript/drawing/group).
+Exports the Sankey visual as a [Group](/api/drawing/group).
 
 
 <div class="meta-api-description">
@@ -6855,7 +6855,7 @@ The Sankey options to be used for the exported visual. The options will extend a
 
 ### exportImage
 Exports the Sankey as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -6923,12 +6923,12 @@ for more details.
 
 ### exportPDF
 Exports the Sankey as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-The available configuration options can be found in the [PDFOptions](/api/javascript/drawing/pdfoptions) api.
+The available configuration options can be found in the [PDFOptions](/api/drawing/pdfoptions) api.
 
 
 <div class="meta-api-description">
@@ -6972,7 +6972,7 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the Sankey as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).

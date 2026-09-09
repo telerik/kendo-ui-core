@@ -32,7 +32,7 @@ I am trying to disable zoom on a diagram I am building. I set the `zoom` propert
 
 ## Solution
 
-The issue seems to be with values that are equal to or less than zero. I logged a [public issue](https://github.com/telerik/kendo-ui-core/issues/6142) so we can fix this internaly. Menawhile, you can use the [`zoomRate`](/api/javascript/dataviz/ui/diagram/configuration/zoomrate) property set to 0 instead.
+The issue seems to be with values that are equal to or less than zero. I logged a [public issue](https://github.com/telerik/kendo-ui-core/issues/6142) so we can fix this internaly. Menawhile, you can use the [`zoomRate`](/api/dataviz/ui/diagram/configuration/zoomrate) property set to 0 instead.
 
 ```dojo
     <button id="exportBtn">Export</button>

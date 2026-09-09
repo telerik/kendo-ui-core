@@ -152,4 +152,4 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 * [Using the API of the TreeView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/api)
 * [TreeView Server-Side API](/api/treeview)
-* [TreeView Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [TreeView Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/treeview)

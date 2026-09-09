@@ -67,6 +67,6 @@ How can I show a custom icon in the placeholder of the DropDownList?
 
 ## See Also
 
-* [API Reference of the optionLabelTemplate Property](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/optionlabeltemplate)
+* [API Reference of the optionLabelTemplate Property](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/configuration/optionlabeltemplate)
 * [Overview of the Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview)
 * [List of the Kendo UI Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web)

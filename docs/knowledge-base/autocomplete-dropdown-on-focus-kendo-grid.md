@@ -36,7 +36,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To display the AutoComplete dropdown on focus, bind the `focus` event to the input element and use the [search](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete/methods/search) method of the Kendo UI for jQuery AutoComplete.
+To display the AutoComplete dropdown on focus, bind the `focus` event to the input element and use the [search](https://docs.telerik.com/kendo-ui/api/ui/autocomplete/methods/search) method of the Kendo UI for jQuery AutoComplete.
 
 ### Steps:
 1. Add an AutoComplete editor to the Grid column.
@@ -201,6 +201,6 @@ Below is a runnable example:
 
 ## See Also
 
-- [Kendo UI AutoComplete API](/api/javascript/ui/autocomplete)
+- [Kendo UI AutoComplete API](/api/ui/autocomplete)
 - [Kendo UI for jQuery AutoComplete Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/autocomplete/overview)
 - [Kendo UI for jQuery Grid Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/overview)

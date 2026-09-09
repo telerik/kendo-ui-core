@@ -38,4 +38,4 @@ The template wraps the `value` in a `<div>` HTML element. The following example 
 
 * [Basic Usage of the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/index)
 * [Using the API of the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/api)
-* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
+* [JavaScript API Reference of the MultiViewCalendar](/api/ui/multiviewcalendar)

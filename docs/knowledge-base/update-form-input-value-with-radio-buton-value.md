@@ -29,7 +29,7 @@ How can I update input value in a Kendo UI for jQuery Form with the selected Rad
 
 ## Solution
 
-To achieve the desired scenario, use the [`select`](/api/javascript/ui/radiogroup/events/select) event of the RadioGroup to update the input value.
+To achieve the desired scenario, use the [`select`](/api/ui/radiogroup/events/select) event of the RadioGroup to update the input value.
 
 ```dojo
     <form id="myForm"></form>
@@ -60,9 +60,9 @@ To achieve the desired scenario, use the [`select`](/api/javascript/ui/radiogrou
 
 ## See Also
 
-* [JavaScript API Reference of the Kendo UI for jQuery Form](/api/javascript/ui/form)
+* [JavaScript API Reference of the Kendo UI for jQuery Form](/api/ui/form)
 * [jQuery Form Overview (Demo)](https://demos.telerik.com/kendo-ui/form/index)
 * [jQuery Form Product Page](https://www.telerik.com/kendo-jquery-ui/form)
-* [JavaScript API Reference of the Kendo UI for jQuery RadioGroup](/api/javascript/ui/radiogroup)
+* [JavaScript API Reference of the Kendo UI for jQuery RadioGroup](/api/ui/radiogroup)
 * [jQuery RadioGroup Overview (Demo)](https://demos.telerik.com/kendo-ui/radiogroup/index)
 * [jQuery RadioGroup Product Page](https://www.telerik.com/kendo-jquery-ui/radiogroup)

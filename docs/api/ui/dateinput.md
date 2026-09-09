@@ -8,7 +8,7 @@ component: dateinput
 
 # kendo.ui.DateInput
 
-Represents the Kendo UI DateInput widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI DateInput widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -238,7 +238,7 @@ The function context (available through the keyword `this`) will be set to the w
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/dateinput/methods/value) method **does not trigger** the `focusout` event of the dateinput.
+> **Important:** The [value](/api/ui/dateinput/methods/value) method **does not trigger** the `focusout` event of the dateinput.
 This can affect the floating label functionality.
 You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#dateinput").data("kendoDateInput").label.floatingLabel.refresh();`
 
@@ -987,9 +987,9 @@ The value to set.
 
 `Date` The value of the DateInput.
 
-> * This method **does not trigger** [change](/api/javascript/ui/dateinput/events/change) event.
+> * This method **does not trigger** [change](/api/ui/dateinput/events/change) event.
 This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
     <input id="dateinput" />
     <script>

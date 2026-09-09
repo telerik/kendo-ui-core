@@ -49,7 +49,7 @@ This will allow you to use the Date and View type (for example 'week') at the se
 
 Review the code above in [this Telerik REPL example](https://netcorerepl.telerik.com/cnuXkplF02JV6BYJ06).
 
-Furthermore,  subscribe to the [Navigate Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/navigate) of the Scheduler. In the handler of the event you can force another read request to ensure new data is applied when the selected View or Date change.
+Furthermore,  subscribe to the [Navigate Event](https://docs.telerik.com/kendo-ui/api/ui/scheduler/events/navigate) of the Scheduler. In the handler of the event you can force another read request to ensure new data is applied when the selected View or Date change.
 
 ## More {{ site.framework }} Scheduler Resources
 
@@ -73,7 +73,7 @@ Furthermore,  subscribe to the [Navigate Event](https://docs.telerik.com/kendo-u
 {% endif %}
 
 ## See Also
-* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
 * [Server-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/scheduler)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

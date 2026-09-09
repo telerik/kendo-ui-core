@@ -66,4 +66,4 @@ The following example demonstrates how to use a field with a specific name to pr
 ## See Also
 
 * [Templates in the Timeline]({% slug templates_kendoui_timeline_widget %})
-* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)
+* [JavaScript API Reference of the Timeline](/api/ui/timeline)

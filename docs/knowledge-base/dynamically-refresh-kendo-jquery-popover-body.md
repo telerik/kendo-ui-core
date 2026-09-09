@@ -32,7 +32,7 @@ Kendo UI for jQuery Popover
 
 ## Description
 
-I want to refresh the body content of a Kendo UI for jQuery [Popover](https://www.telerik.com/kendo-jquery-ui/documentation/controls/popover/overview) dynamically after it has been displayed. Setting the Popover options programmatically with [`setOptions`](/api/javascript/ui/widget/methods/setoptions) updates the initial configuration but does not reflect changes in the displayed content. The content remains static after the Popover has been shown. How can I ensure the body content updates dynamically?
+I want to refresh the body content of a Kendo UI for jQuery [Popover](https://www.telerik.com/kendo-jquery-ui/documentation/controls/popover/overview) dynamically after it has been displayed. Setting the Popover options programmatically with [`setOptions`](/api/ui/widget/methods/setoptions) updates the initial configuration but does not reflect changes in the displayed content. The content remains static after the Popover has been shown. How can I ensure the body content updates dynamically?
 
 This knowledge base article also answers the following questions:
 - How to update Kendo UI for jQuery Popover content dynamically?
@@ -41,7 +41,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To dynamically update the content of the Popover after it has been shown, use the [`show`](/api/javascript/ui/popover/events/show) event handler to modify the body content directly. The `show` event is triggered whenever the Popover becomes visible, allowing you to inject updated content.
+To dynamically update the content of the Popover after it has been shown, use the [`show`](/api/ui/popover/events/show) event handler to modify the body content directly. The `show` event is triggered whenever the Popover becomes visible, allowing you to inject updated content.
 
 Follow these steps:
 
@@ -90,4 +90,4 @@ Use this approach to ensure the Popover content updates each time it is opened.
 ## See Also
 
 - [Kendo UI for jQuery Popover Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/popover/overview)
-- [Popover API](https://docs.telerik.com/kendo-ui/api/javascript/ui/popover)
+- [Popover API](https://docs.telerik.com/kendo-ui/api/ui/popover)

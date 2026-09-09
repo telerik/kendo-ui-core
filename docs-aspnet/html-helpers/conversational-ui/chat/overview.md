@@ -142,4 +142,4 @@ The following example demonstrates how to define header items, predefined sugges
 {% if site.core %}
 * [Server-Side API of the Chat TagHelper](/api/taghelpers/chat)
 {% endif %}
-* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
+* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/ui/chat)

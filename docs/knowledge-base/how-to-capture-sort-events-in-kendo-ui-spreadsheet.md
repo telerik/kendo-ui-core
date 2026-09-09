@@ -26,7 +26,7 @@ ticketid: 1669478
 </table>
 
 ## Description
-I need to trigger a sort event in the [Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet) component when a user changes the sort order by using the built-in sort feature. Currently, the Spreadsheet does not natively provide sort or filter events.
+I need to trigger a sort event in the [Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet) component when a user changes the sort order by using the built-in sort feature. Currently, the Spreadsheet does not natively provide sort or filter events.
 
 This KB article also answers the following questions:
 - How can I detect when a user sorts data in the Spreadsheet?
@@ -184,4 +184,4 @@ For a practical demonstration, refer to the example below:
 ## See Also
 
 - [Kendo UI Spreadsheet Overview](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)
-- [Kendo UI Spreadsheet API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+- [Kendo UI Spreadsheet API Reference](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)

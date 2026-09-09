@@ -28,7 +28,7 @@ How can I copy a TreeView node along with all its children when `loadOnDemand` i
 
 ## Solution
 
-Asynchronously load the child nodes in the child data source by using the [`load()`](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/load) method of the node.
+Asynchronously load the child nodes in the child data source by using the [`load()`](https://docs.telerik.com/kendo-ui/api/data/node/methods/load) method of the node.
 
 ```dojo
 <div id="content">
@@ -125,4 +125,4 @@ $(document).ready(function() {
 
 ## See Also
 
-* [API Reference of the TreeView](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview).
+* [API Reference of the TreeView](https://docs.telerik.com/kendo-ui/api/ui/treeview).

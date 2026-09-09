@@ -18,4 +18,4 @@ For more information on using localization, internationalization, and right-to-l
 ## See Also
 
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the Pager](/api/javascript/ui/pager)
+* [JavaScript API Reference of the Pager](/api/ui/pager)

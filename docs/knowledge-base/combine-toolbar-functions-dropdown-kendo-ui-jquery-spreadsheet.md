@@ -44,7 +44,7 @@ To combine toolbar functions into a dropdown menu in Kendo UI for jQuery Spreads
 
 1. Define a custom toolbar template with a dropdown list.
 2. Implement a [`kendoDropDownList`](https://www.telerik.com/kendo-jquery-ui/documentation/controls/dropdownlist/overview) instance for the dropdown.
-3. Handle the [`change`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dropdownlist/events/change) event to execute actions based on the selected value.
+3. Handle the [`change`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdownlist/events/change) event to execute actions based on the selected value.
 
 Here is an example implementation:
 
@@ -92,4 +92,4 @@ Expand the dropdown to include additional actions as required.
 ## See Also
 
 - [Kendo UI for jQuery Spreadsheet Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/spreadsheet/overview)  
-- [API Reference: Kendo UI Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)  
+- [API Reference: Kendo UI Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)  

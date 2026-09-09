@@ -24,11 +24,11 @@ The OTPInput is a UI component that allows the user to enter a one-time password
 
 * [Getting Started with the Kendo UI OTPInput for jQuery]({% slug getting_started_kendoui_otpinput %})
 * [Demo Page for the OTPInput](https://demos.telerik.com/kendo-ui/otpinput/index)
-* [JavaScript API Reference of the OTPInput](/api/javascript/ui/otpinput)
+* [JavaScript API Reference of the OTPInput](/api/ui/otpinput)
 
 ## See Also
 
 * [Overview of the OTPInput (Demo)](https://demos.telerik.com/kendo-ui/otpinput/index) 
 * [Applying the OTPInput API (Demo)](https://demos.telerik.com/kendo-ui/otpinput/api)
-* [JavaScript API Reference of the OTPInput](/api/javascript/ui/otpinput) 
+* [JavaScript API Reference of the OTPInput](/api/ui/otpinput) 
 

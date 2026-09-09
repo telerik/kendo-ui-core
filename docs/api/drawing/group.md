@@ -58,7 +58,7 @@ How do I customize the appearance of a Kendo UI DrawingGroup? Configure group se
 
 ### clip `kendo.drawing.Path`
 The group clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element#configuration-clip)
+Inherited from [Element.clip](/api/drawing/element#configuration-clip)
 
 
 <div class="meta-api-description">
@@ -91,7 +91,7 @@ How do I restrict the rendering area of child drawings in a Kendo UI DrawingGrou
 
 ### cursor `String`
 The group cursor.
-Inherited from [Element.cursor](/api/javascript/drawing/element#configuration-cursor)
+Inherited from [Element.cursor](/api/drawing/element#configuration-cursor)
 
 
 <div class="meta-api-description">
@@ -118,7 +118,7 @@ How to change cursor style when hovering over drawing elements in Kendo UI for j
 
 ### opacity `Number`
 The group opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-opacity)
+Inherited from [Element.opacity](/api/drawing/element#configuration-opacity)
 
 The opacity of any child groups and elements will be multiplied by this value.
 
@@ -203,7 +203,7 @@ How to customize tooltip content for shapes in a Kendo UI DrawingGroup? Set, cus
 
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this group and its children.
-Inherited from [Element.transform](/api/javascript/drawing/element#configuration-transform)
+Inherited from [Element.transform](/api/drawing/element#configuration-transform)
 
 
 <div class="meta-api-description">
@@ -230,7 +230,7 @@ How to apply geometric transformations to a group of drawings in Kendo UI for jQ
 
 ### visible `Boolean`
 A flag, indicating if the group and its children are visible.
-Inherited from [Element.visible](/api/javascript/drawing/element#configuration-visible)
+Inherited from [Element.visible](/api/drawing/element#configuration-visible)
 
 
 <div class="meta-api-description">
@@ -352,7 +352,7 @@ How do I clear existing drawings from a Kendo UI DrawingGroup? Remove all shapes
 
 ### clip
 Gets or sets the group clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element#methods-clip)
+Inherited from [Element.clip](/api/drawing/element#methods-clip)
 
 
 <div class="meta-api-description">
@@ -394,7 +394,7 @@ The group clipping path.
 
 ### clippedBBox
 Returns the bounding box of the element with clipping and transformations applied.
-Inherited from [Element.clippedBBox](/api/javascript/drawing/element#methods-clippedBBox)
+Inherited from [Element.clippedBBox](/api/drawing/element#methods-clippedBBox)
 
 
 <div class="meta-api-description">
@@ -496,7 +496,7 @@ The element to insert.
 
 ### opacity
 Gets or sets the group opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element#methods-opacity)
+Inherited from [Element.opacity](/api/drawing/element#methods-opacity)
 
 The opacity of any child groups and elements will be multiplied by this value.
 

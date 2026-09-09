@@ -35,7 +35,7 @@ To achieve the desired scenario:
 1. Subscribe to the `DataBound` event of the Timeline.
 1. Within the function handler:
 
-  1. Get the current records through the [`dataSource.data()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/data) method.
+  1. Get the current records through the [`dataSource.data()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/data) method.
   1. Iterate through each of the items.
   1. Get the unique identifier for the currently rendered list item. 
   1. Add or remove the `k-reverse` class generated for the position of the current list item and based on the `isLeft` field of the state mentioned previously.
@@ -103,7 +103,7 @@ To achieve the desired scenario:
 
 ## See Also
 
-* [Client-Side API Reference of the Timeline for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)
+* [Client-Side API Reference of the Timeline for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/timeline)
 * [Server-Side API Reference of the Timeline for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/timeline)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

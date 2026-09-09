@@ -112,10 +112,10 @@ To enforce a `min-width` style to the `table` element, use CSS:
 This approach prevents the appearance of white space in the component when the sum of the widths of the visible columns is less than the initial width of the Grid.
 
 1. Store the initial width of the Grid in a variable.
-1. To call the method that performs the necessary calculations, use the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound), [`columnShow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnshow), and [`columnHide`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnhide) events.
+1. To call the method that performs the necessary calculations, use the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound), [`columnShow`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnshow), and [`columnHide`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnhide) events.
 
 To access and loop through the columns, the `setGridWidth()` method:
-* Uses the [`columns`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#fields-columns) field of the Grid.
+* Uses the [`columns`](https://docs.telerik.com/kendo-ui/api/ui/grid#fields-columns) field of the Grid.
 * Calculates the sum of the visible column widths.
 * Adds the width of the vertical scrollbar when necessary.
 
@@ -206,7 +206,7 @@ To access and loop through the columns, the `setGridWidth()` method:
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)
 * [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))
 * [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
 * [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})

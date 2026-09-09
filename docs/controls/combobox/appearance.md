@@ -25,7 +25,7 @@ The Kendo UI ComboBox supports the following styling options:
 
 The `size` option controls how big or small the ComboBox component looks. The structure of the class is `k-input-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/combobox/configuration/size) option:
+The following values are available for the [`size`](/api/ui/combobox/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -57,7 +57,7 @@ Below is the HTML that is affected from the configuration. The changes are appli
 
 The `rounded` option controls how much border radius is applied to the tags for the selected items in the component. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/combobox/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/combobox/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -89,7 +89,7 @@ The changes are applied to the `span.k-combobox` wrapping element:
 
 The `fillMode` option controls how the color is applied. The structure of the class is `k-input-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/combobox/configuration/fillMode) option:
+The following values are available for the [`fillMode`](/api/ui/combobox/configuration/fillMode) option:
 
 - `solid`
 - `flat`
@@ -179,4 +179,4 @@ The ComboBox enables you to remove the values from its input area by using the `
 * [Basic Usage of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/index)
 * [Using the API of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/api)
 * [Appearance Demo of the ComboBox](https://demos.telerik.com/kendo-ui/combobox/appearance)
-* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [JavaScript API Reference of the ComboBox](/api/ui/combobox)

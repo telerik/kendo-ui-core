@@ -9,7 +9,7 @@ position: 6
 
 # PivotConfiguratorV2 Overview
 
-The [Kendo UI PivotConfiguratorV2](/api/javascript/ui/pivotconfiguratorv2) represents an OLAP cube structure.
+The [Kendo UI PivotConfiguratorV2](/api/ui/pivotconfiguratorv2) represents an OLAP cube structure.
 
 The PivotConfiguratorV2 can be used for configuring the column and row dimensions, and the measure fields of the [PivotGridV2](https://demos.telerik.com/kendo-ui/pivotgridv2/index). It is a supplementary component which is strongly related to the Kendo UI `PivotDataSourceV2` component.
 
@@ -80,7 +80,7 @@ The following image demonstrates the output from the previous example.
 
 ## Referencing Existing Instances
 
-To reference an existing PivotConfigurator instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotConfigurator API](/api/javascript/ui/pivotconfiguratorv2) to control its behavior.
+To reference an existing PivotConfigurator instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotConfigurator API](/api/ui/pivotconfiguratorv2) to control its behavior.
 
 The following example demonstrates how to access an existing PivotConfigurator instance.
 
@@ -89,5 +89,5 @@ The following example demonstrates how to access an existing PivotConfigurator i
 ## See Also
 
 * [Basic Usage of the PivotGridV2 (Demo)](https://demos.telerik.com/kendo-ui/pivotgridv2/index)
-* [PivotGridV2 JavaScript API Reference](/api/javascript/ui/pivotgridv2)
-* [PivotConfiguratorV2 JavaScript API Reference](/api/javascript/ui/pivotconfiguratorv2)
+* [PivotGridV2 JavaScript API Reference](/api/ui/pivotgridv2)
+* [PivotConfiguratorV2 JavaScript API Reference](/api/ui/pivotconfiguratorv2)

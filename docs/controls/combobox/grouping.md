@@ -11,7 +11,7 @@ position: 4
 
 As of the Kendo UI Q1 2015 (2015.1.318) release, the [Kendo UI AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](https://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/index), and the [MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index) support binding to a grouped [DataSource]({% slug overview_kendoui_datasourcecomponent %}).
 
-Grouping enables you to display data items that are categorized by a specific model field. The ComboBox supports grouping by utilizing the [`group` configuration of the Kendo UI DataSource](/api/javascript/data/datasource/configuration/group).
+Grouping enables you to display data items that are categorized by a specific model field. The ComboBox supports grouping by utilizing the [`group` configuration of the Kendo UI DataSource](/api/data/datasource/configuration/group).
 
 The approaches for configuring the grouping functionality of the ComboBox that are demonstrated in this article are identical for configuring the grouping functionality of the AutoComplete, DropDownList, and MultiSelect components.
 
@@ -23,11 +23,11 @@ For runnable examples on grouping, refer to the following demos:
 
 ## Getting Started
 
-To display grouped items in the ComboBox, group the DataSource component by using its [`group` configuration](/api/javascript/data/datasource/configuration/group). As a result, the ComboBox automatically displays its grouped items.
+To display grouped items in the ComboBox, group the DataSource component by using its [`group` configuration](/api/data/datasource/configuration/group). As a result, the ComboBox automatically displays its grouped items.
 
 To enable the grouping functionality in the ComboBox, use the remote `transport` and a grouped data source.
 
-> By default, the grouped data of the ComboBox will be sorted either in ascending or descending order. To group the data in a specific order, use the [server grouping configuration](/api/javascript/data/datasource/configuration/servergrouping).
+> By default, the grouped data of the ComboBox will be sorted either in ascending or descending order. To group the data in a specific order, use the [server grouping configuration](/api/data/datasource/configuration/servergrouping).
 
 ```dojo
 <div class="demo-section k-header">
@@ -54,7 +54,7 @@ To enable the grouping functionality in the ComboBox, use the remote `transport`
 
 ## Customizing the Inline Group Title
 
-To customize the inline group title which is displayed next to the suggestion item in the popup element, use the [`groupTemplate`](/api/javascript/ui/combobox/configuration/grouptemplate) option. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value.
+To customize the inline group title which is displayed next to the suggestion item in the popup element, use the [`groupTemplate`](/api/ui/combobox/configuration/grouptemplate) option. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value.
 
 ```dojo
 <div class="demo-section k-header">
@@ -82,7 +82,7 @@ To customize the inline group title which is displayed next to the suggestion it
 
 ## Customizing the Fixed Group Header
 
-To customize the group title which is displayed in the fixed group header positioned on top of the list, use the [`fixedGroupTemplate`](/api/javascript/ui/combobox/configuration/fixedgrouptemplate) option. It renders the group title of the current visible group. The value is updated dynamically on the scroll position of the grouped list. The parameter that is passed to the template is the group title value.
+To customize the group title which is displayed in the fixed group header positioned on top of the list, use the [`fixedGroupTemplate`](/api/ui/combobox/configuration/fixedgrouptemplate) option. It renders the group title of the current visible group. The value is updated dynamically on the scroll position of the grouped list. The parameter that is passed to the template is the group title value.
 
 ```dojo
 <div class="demo-section k-header">
@@ -111,4 +111,4 @@ To customize the group title which is displayed in the fixed group header positi
 ## See Also
 
 * [Grouping in the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/grouping)
-* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [JavaScript API Reference of the ComboBox](/api/ui/combobox)

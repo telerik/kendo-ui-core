@@ -126,4 +126,4 @@ The following example demonstrates how the page markup from the previous example
 ## See Also
 
 * [Basic Usage of the ContextMenu (Demo)](https://demos.telerik.com/kendo-ui/menu/context-menu)
-* [JavaScript API Reference of the Menu](/api/javascript/ui/menu)
+* [JavaScript API Reference of the Menu](/api/ui/menu)

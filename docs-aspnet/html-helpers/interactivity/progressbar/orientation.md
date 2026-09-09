@@ -55,4 +55,4 @@ The calculation of the completeness % percents can happen with the `.value()` AP
 
 * [Vertical ProgressBar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/progressbar/vertical)
 * [Server-Side API of the ProgressBar](/api/progressbar)
-* [Client-Side API of the ProgressBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar)
+* [Client-Side API of the ProgressBar](https://docs.telerik.com/kendo-ui/api/ui/progressbar)

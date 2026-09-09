@@ -171,7 +171,7 @@ You can reference the CheckBoxGroup instances that you have created and build on
         });
     ```
 
-1. Use the [CheckBoxGroup client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/checkboxgroup#methods) to control the behavior of the component. In this example, you will use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/checkboxgroup/methods/value) method to select checkboxes programmatically.
+1. Use the [CheckBoxGroup client-side API](https://docs.telerik.com/kendo-ui/api/ui/checkboxgroup#methods) to control the behavior of the component. In this example, you will use the [`value`](https://docs.telerik.com/kendo-ui/api/ui/checkboxgroup/methods/value) method to select checkboxes programmatically.
 
     ```JavaScript
         $(document).ready(function (e) {
@@ -198,6 +198,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the CheckBoxGroup for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/api)
-* [Client-Side API of the CheckBoxGroup](https://docs.telerik.com/kendo-ui/api/javascript/ui/checkboxgroup)
+* [Client-Side API of the CheckBoxGroup](https://docs.telerik.com/kendo-ui/api/ui/checkboxgroup)
 * [Server-Side API of the CheckBoxGroup](/api/checkboxgroup)
 * [Knowledge Base Section](/knowledge-base)

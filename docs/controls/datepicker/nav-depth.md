@@ -11,7 +11,7 @@ position: 6
 
 The DatePicker enables you to set the initial view it renders and define the navigation depth of the views.  
 
-To define the initially rendered view, use the [`start`](/api/javascript/ui/datepicker/configuration/start) option. To control the navigation depth, use the [`depth`](/api/javascript/ui/datepicker/configuration/depth) option.
+To define the initially rendered view, use the [`start`](/api/ui/datepicker/configuration/start) option. To control the navigation depth, use the [`depth`](/api/ui/datepicker/configuration/depth) option.
 
 The DatePicker supports the following predefined views:
 * `month`&mdash;Shows the days of the month.
@@ -34,4 +34,4 @@ The following example demonstrates how to create a DatePicker that allows the us
 
 ## See Also
 
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)

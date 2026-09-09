@@ -68,7 +68,7 @@ The ChartWizard lets you bind the component to [selected Grid cells or rows]({% 
 
 ChartWizard component accepts table-like data comprising an array of objects with `dataItem` and `dataColumns` fields.
 
-To bind the Chart Wizard component to table-like data, create a `DataRow` collection and use the [`getWizardDataFromDataRows`](/api/javascript/ui/chartwizard/methods/getwizarddatafromdatarows) helper method to convert it to the format required by the ChartWizard.
+To bind the Chart Wizard component to table-like data, create a `DataRow` collection and use the [`getWizardDataFromDataRows`](/api/ui/chartwizard/methods/getwizarddatafromdatarows) helper method to convert it to the format required by the ChartWizard.
 
 The example below demonstrates ChartWizard bound to local table-like data:
 
@@ -121,7 +121,7 @@ The example below demonstrates ChartWizard bound to local table-like data:
 </script>
 ```
 
-To bind the ChartWizard component to a remote data source, which returns only the `dataItems`, set the [`dataColumns`](/api/javascript/ui/chartwizard/configuration/datacolumns) field.
+To bind the ChartWizard component to a remote data source, which returns only the `dataItems`, set the [`dataColumns`](/api/ui/chartwizard/configuration/datacolumns) field.
 
 ```dojo
     <div id="chartwizard"></div>
@@ -174,4 +174,4 @@ To bind the ChartWizard component to a remote data source, which returns only th
 
 * [Basic Usage of the ChartWizard (Demo)](https://demos.telerik.com/kendo-ui/chartwizard/index)
 * [Using the API of the ChartWizard (Demo)](https://demos.telerik.com/kendo-ui/chartwizard/api)
-* [JavaScript API Reference of the ChartWizard](/api/javascript/ui/chartwizard)
+* [JavaScript API Reference of the ChartWizard](/api/ui/chartwizard)

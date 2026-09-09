@@ -190,7 +190,7 @@ The following example demonstrates how to achieve the desired scenario, which me
 ## See Also
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)
 * [Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [Use Scrollbars]({% slug howto_usescrollbar_diagram %})
 * [Wrap Text]({% slug howto_wraptext_diagram %})

@@ -15,7 +15,7 @@ For a live example, visit the [Appearance Demo of the Avatar](https://demos.tele
 
 ## Rounding and Type
 
-The available [`types`](/api/javascript/ui/avatar/configuration/type) are:
+The available [`types`](/api/ui/avatar/configuration/type) are:
 
 - Image—By passing an `img` element as child element of the Avatar.
 - Text avatar (Default)—By passing a string that will be rendered as text (initials).
@@ -23,7 +23,7 @@ The available [`types`](/api/javascript/ui/avatar/configuration/type) are:
 
 All of the types can be rendered in a different shape by setting the `rounded` property.
 
-The available [`rounded`](/api/javascript/ui/avatar/configuration/rounded) values are:
+The available [`rounded`](/api/ui/avatar/configuration/rounded) values are:
 
 - "full" (default)—Renders a circle shape avatar.
 - "small"—Renders an avatar with small border radius.
@@ -51,7 +51,7 @@ The following example demonstrates the `type` and `rounded` options of the Avata
 
 The Avatar allows you to specify predefined theme colors.
 
-The available [themeColor](/api/javascript/ui/avatar/configuration/themeColor) values are:
+The available [themeColor](/api/ui/avatar/configuration/themeColor) values are:
 
 - "primary" (Default)—Applies coloring based on the primary theme color.
 - "base"-Applies base theme color.
@@ -72,16 +72,16 @@ The available [themeColor](/api/javascript/ui/avatar/configuration/themeColor) v
 
 ## Size
 
-The Avatar allows you to set predefined or custom sizes. To specify a predefined size, set the [`size`](/api/javascript/ui/avatar/configuration/size) property.
+The Avatar allows you to set predefined or custom sizes. To specify a predefined size, set the [`size`](/api/ui/avatar/configuration/size) property.
 
-The available [`size`](/api/javascript/ui/avatar/configuration/size) values are:
+The available [`size`](/api/ui/avatar/configuration/size) values are:
 
 - "small"
 - "medium" (Default)
 - "large"
 - "none"
 
-To specify a custom avatar size, use the [style](/api/javascript/ui/avatar/configuration/style) property.
+To specify a custom avatar size, use the [style](/api/ui/avatar/configuration/style) property.
 
 ```dojo
 	<p>Avatar Predefined Sizes</p>
@@ -98,15 +98,15 @@ To specify a custom avatar size, use the [style](/api/javascript/ui/avatar/confi
 
 ## FillMode
 
-The Avatar enables you to set styling options and create solid or outline avatars by setting the [`fillMode`](/api/javascript/ui/avatar/configuration/fillMode) property.
+The Avatar enables you to set styling options and create solid or outline avatars by setting the [`fillMode`](/api/ui/avatar/configuration/fillMode) property.
 
-The available [fillMode](/api/javascript/ui/avatar/configuration/fillMode) values are:
+The available [fillMode](/api/ui/avatar/configuration/fillMode) values are:
 
 - "solid" (Default)
 - "outline"
 - "none"
 
-An additional border around the content of an outline avatar can be rendered by setting the [`border`](/api/javascript/ui/avatar/configuration/border) property to true.
+An additional border around the content of an outline avatar can be rendered by setting the [`border`](/api/ui/avatar/configuration/border) property to true.
 
 ```dojo
     <div id="avatar"></div>
@@ -122,7 +122,7 @@ An additional border around the content of an outline avatar can be rendered by 
 
 ## Border
 
-The Avatar allows you to specify whether or not to render an additional border around its content by using the [border](/api/javascript/ui/avatar/configuration/border) property. By default, the border is set to `false`.
+The Avatar allows you to specify whether or not to render an additional border around its content by using the [border](/api/ui/avatar/configuration/border) property. By default, the border is set to `false`.
 
 ```dojo
     <div id="avatar"></div>
@@ -139,4 +139,4 @@ The Avatar allows you to specify whether or not to render an additional border a
 ## See Also
 
 * [Basic Usage of the Avatar (Demo)](https://demos.telerik.com/kendo-ui/avatar/index)
-* [JavaScript API Reference of the Avatar](/api/javascript/ui/avatar)
+* [JavaScript API Reference of the Avatar](/api/ui/avatar)

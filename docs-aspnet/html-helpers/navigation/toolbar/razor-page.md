@@ -159,7 +159,7 @@ public class ToolbarIndexModel : PageModel
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the ToolBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)
+* [Client-Side API of the ToolBar](https://docs.telerik.com/kendo-ui/api/ui/toolbar)
 * [Server-Side HtmlHelper API of the ToolBar](/api/toolbar)
 * [Server-Side TagHelper API of the ToolBar](/api/taghelpers/toolbar)
 * [Knowledge Base Section](/knowledge-base)

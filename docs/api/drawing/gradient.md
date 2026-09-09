@@ -41,7 +41,7 @@ How to set gradient options for Kendo UI drawingapi? Configure and set up gradie
 
 ### stops `Array`
 The color stops of the gradient.
-Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradient-stop) instances.
+Can contain either plain objects or [GradientStop](/api/drawing/gradient-stop) instances.
 
 
 <div class="meta-api-description">
@@ -72,7 +72,7 @@ How to reorder color stops in a Kendo UI gradient effect? Configure and manage t
 
 ### stops `Array`
 The array of gradient color stops.
-Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
+Contains [GradientStop](/api/drawing/gradient-stop) instances.
 
 
 <div class="meta-api-description">

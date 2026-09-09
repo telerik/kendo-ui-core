@@ -11,7 +11,7 @@ position: 2
 
 The Wizard provides integration with the [Kendo UI Form]({% slug overview_kendoui_form_widget  %}) component.
 
-Each step of the Wizard accepts a `form` configuration object which defines the options as they are available in the [Form](/api/javascript/ui/form) component itself. Each Form defined within the Wizard configuration will have all the functionality available in the stand-alone Form component.
+Each step of the Wizard accepts a `form` configuration object which defines the options as they are available in the [Form](/api/ui/form) component itself. Each Form defined within the Wizard configuration will have all the functionality available in the stand-alone Form component.
 
 In order to facilitate the scenarios where Forms are integrated within the Wizard, the component can be initialized either from a `<form>` element or a `<div>` element.
 
@@ -53,7 +53,7 @@ When the Wizard is initialized from a `<form>` element the Done button at the la
 
 ## Initialization from a `<div>` Element
 
-When the Wizard is initialized from a `<div>` element any forms initialized via the Wizard configuration will behave as regular forms. If the Wizard contains multiple forms as part of its steps content and the requirement is to submit them separately a Submit button must be defined via the Form [`buttonsTemplate`](/api/javascript/ui/form/configuration/buttonstemplate) configuration option. It is advisable to handle the Form submit event and submit the form data via Ajax as otherwise the page will reload and the Wizard will return in its initial state.
+When the Wizard is initialized from a `<div>` element any forms initialized via the Wizard configuration will behave as regular forms. If the Wizard contains multiple forms as part of its steps content and the requirement is to submit them separately a Submit button must be defined via the Form [`buttonsTemplate`](/api/ui/form/configuration/buttonstemplate) configuration option. It is advisable to handle the Form submit event and submit the form data via Ajax as otherwise the page will reload and the Wizard will return in its initial state.
 
 ```dojo
 <div id="wizard"></div>
@@ -116,4 +116,4 @@ Forms can be defined with the Wizard configuration (the build-in Form integratio
 ## See Also
 
 * [Basic usage of the Wizard](https://demos.telerik.com/kendo-ui/wizard/index)
-* [JavaScript API Reference of the Wizard](/api/javascript/ui/wizard)
+* [JavaScript API Reference of the Wizard](/api/ui/wizard)

@@ -48,4 +48,4 @@ The following example shows how to enable the available ColorPicker views and de
 
 * [Views of the {{ site.product }} ColorPicker (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/views)
 * [Server-Side API](/api/colorpicker)
-* [Client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker)
+* [Client-side API](https://docs.telerik.com/kendo-ui/api/ui/colorpicker)

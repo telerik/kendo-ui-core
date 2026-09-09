@@ -73,7 +73,7 @@ The following example demonstrates how to set `size` of the toolbar to `small`.
 
 ### Overflow Options
 
-The ToolBar and its [`overflow`](/api/javascript/ui/toolbar/configuration/items.overflow) configuration provide the following methods for styling:
+The ToolBar and its [`overflow`](/api/ui/toolbar/configuration/items.overflow) configuration provide the following methods for styling:
 
 - [`mode`](#Mode)—Defines the overflow mode. 
 - [`scrollButtons`](#ScrollButtons)—Defines the visibility of scroll buttons when mode is "scroll".
@@ -396,4 +396,4 @@ The following example demonstrates how to set `scrollDistance` to the toolbar.
 
 * [Resizing the ToolBar (Demo)](https://demos.telerik.com/kendo-ui/toolbar/resizing)
 * [Appearance ToolBar (Demo)](https://demos.telerik.com/kendo-ui/toolbar/appearance)
-* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/ui/toolbar)

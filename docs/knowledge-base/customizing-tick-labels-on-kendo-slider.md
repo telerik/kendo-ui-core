@@ -28,7 +28,7 @@ ticketid: 528111
 
 ## Description
 
-I need to modify the labels on the Kendo UI for jQuery [Slider](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider) ticks to display custom text values instead of numeric values. For example, I want each large step to display labels like "Small," "Medium," and "Large" instead of numbers.
+I need to modify the labels on the Kendo UI for jQuery [Slider](https://docs.telerik.com/kendo-ui/api/ui/slider) ticks to display custom text values instead of numeric values. For example, I want each large step to display labels like "Small," "Medium," and "Large" instead of numbers.
 
 This knowledge base article also answers the following questions:
 - How do I add custom labels to Kendo UI for jQuery Slider ticks?
@@ -76,5 +76,5 @@ var sizes = ["Small", "Medium", "Large"];
 
 ## See Also
 
-- [Kendo UI for jQuery Slider Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider) 
+- [Kendo UI for jQuery Slider Documentation](https://docs.telerik.com/kendo-ui/api/ui/slider) 
 - [Feature Request for Custom Formats on Slider](http://feedback.kendoui.com/forums/127393-kendo-ui-feedback/suggestions/3204718-allow-custom-formats-for-slider-range-slider-so-i-)

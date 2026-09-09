@@ -30,7 +30,7 @@ Kendo UI for jQuery Gantt
 
 ## Description
 
-After upgrading Kendo UI for jQuery Gantt, pressing the Delete key on a selected dependency line no longer triggers the deletion dialog, even when the [`dependencyDestroy`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/gantt/configuration/editable.dependencydestroy) option is set to true. 
+After upgrading Kendo UI for jQuery Gantt, pressing the Delete key on a selected dependency line no longer triggers the deletion dialog, even when the [`dependencyDestroy`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/gantt/configuration/editable.dependencydestroy) option is set to true. 
 
 This knowledge base article also answers the following questions:
 - How to enable dependency line deletion dialog triggered by the Delete key in Kendo UI for jQuery Gantt?
@@ -45,7 +45,7 @@ The behavior change is due to the Enhanced ARIA and Keyboard Navigation support 
 
 1. Attach a custom event listener to the Gantt widget's keyboard actions.
 2. Detect the Delete key press and the selection of a dependency line.
-3. Use the [`removeDependency`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/gantt/methods/removedependency) method to trigger the removal of the selected dependency line.
+3. Use the [`removeDependency`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/gantt/methods/removedependency) method to trigger the removal of the selected dependency line.
 
 Here is an example implementation using the latest version:
 
@@ -233,4 +233,4 @@ Here is an example implementation using the latest version:
 ## See Also
 
 - [Kendo UI for jQuery Gantt Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/gantt/overview)
-- [Kendo UI Gantt Dependencies API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+- [Kendo UI Gantt Dependencies API](https://docs.telerik.com/kendo-ui/api/ui/gantt)

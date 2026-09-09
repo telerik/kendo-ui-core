@@ -370,4 +370,4 @@ The example dynamically switches the orientation of the form and applies the sug
 ## See Also
 
 - [Kendo UI for jQuery Form Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/form/overview)
-- [JavaScript API Reference of the Form](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/form)
+- [JavaScript API Reference of the Form](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/form)

@@ -9,7 +9,7 @@ position: 3
 
 # Events
 
-The Kendo UI Popover exposes the [`show`](/api/javascript/ui/popover/events/show) and [`hide`](/api/javascript/ui/popover/events/hide) events which also provide extension points for customization on top of the built-in features.
+The Kendo UI Popover exposes the [`show`](/api/ui/popover/events/show) and [`hide`](/api/ui/popover/events/hide) events which also provide extension points for customization on top of the built-in features.
 
 * [Demo page for the Popover Events](https://demos.telerik.com/kendo-ui/popover/events)
 
@@ -109,4 +109,4 @@ The following example demonstrates how to subscribe to the `hide` event after in
 
 * [Basic Usage of the Popover (Demo)](https://demos.telerik.com/kendo-ui/popover/index)
 * [Using the API of the Popover (Demo)](https://demos.telerik.com/kendo-ui/popover/api)
-* [JavaScript API Reference of the Popover](/api/javascript/ui/popover)
+* [JavaScript API Reference of the Popover](/api/ui/popover)

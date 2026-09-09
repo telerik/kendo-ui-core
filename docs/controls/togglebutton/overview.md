@@ -30,5 +30,5 @@ The Kendo UI for jQuery ToggleButton provides a styled clickable UI functionalit
 ## See Also
 
 * [Using the API of the Kendo UI ToggleButton for jQuery (Demo)](https://demos.telerik.com/kendo-ui/togglebutton/api)
-* [JavaScript API Reference of the ToggleButton](/api/javascript/ui/togglebutton)
+* [JavaScript API Reference of the ToggleButton](/api/ui/togglebutton)
 * [Knowledge Base Section](/knowledge-base)

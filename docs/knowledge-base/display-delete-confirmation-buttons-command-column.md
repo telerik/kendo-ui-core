@@ -139,4 +139,4 @@ The following example demonstrates how to render the delete confirmation for a G
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

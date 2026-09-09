@@ -26,7 +26,7 @@ How can I render icons for a boolean column in the Kendo UI for jQuery Grid?
 
 ## Solution
 
-To achieve this, use a [`column template`](/api/javascript/ui/grid/configuration/columns.template) function and render the desired icons.
+To achieve this, use a [`column template`](/api/ui/grid/configuration/columns.template) function and render the desired icons.
   
 The following example demonstrates how to replace the `yes` value with `.k-i-check` and the `no` value with `.k-i-x` [`Kendo UI Web Font Icons`](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/font-icons). 
 
@@ -101,5 +101,5 @@ The following example demonstrates how to replace the `yes` value with `.k-i-che
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Grid](/api/ui/grid)
 * [jQuery Grid Overview Demo](https://demos.telerik.com/kendo-ui/grid/index)

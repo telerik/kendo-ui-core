@@ -39,17 +39,17 @@ How can I persist a focused cell in the Kendo UI Grid for jQuery after rebind?
 
 The following example demonstrates how to persist a focused Grid cell after rebinding.
 
-The demo implies the usage of incell editing, built-in keyboard navigation, and the [`autoSync:true`](/api/javascript/data/datasource/configuration/autosync) configuration for the Grid [DataSource instance](/api/javascript/data/datasource).
+The demo implies the usage of incell editing, built-in keyboard navigation, and the [`autoSync:true`](/api/data/datasource/configuration/autosync) configuration for the Grid [DataSource instance](/api/data/datasource).
 
 The functionality relies on the following milestones:
 
-* The [`navigatable`](/api/javascript/ui/grid/configuration/navigatable) option is set to `true`.
-* The [`editable`](/api/javascript/ui/grid/configuration/editable) option is set to `true` or the [`editable.mode`](/api/javascript/ui/grid/configuration/editable.mode) option is set to `"incell"`.
-* The [`dataBinding`](/api/javascript/ui/grid/events/databinding) event handler of the Grid is used to obtain the [`current`](/api/javascript/ui/grid/methods/current) Grid cell and its corresponding row and cell indexes.
-* The saved row and cell indexes are applied through the [`current()`](/api/javascript/ui/grid/methods/current) method in the [`dataBound`](/api/javascript/ui/grid/events/databound) event handler.
-* The [`table`](/api/javascript/ui/grid#fields-table) option of the Grid can be focused explicitly if the user has clicked on the **Save Changes** button&mdash;this requires you to set a flag in the [`saveChanges`](/api/javascript/ui/grid/events/savechanges) event handler.
+* The [`navigatable`](/api/ui/grid/configuration/navigatable) option is set to `true`.
+* The [`editable`](/api/ui/grid/configuration/editable) option is set to `true` or the [`editable.mode`](/api/ui/grid/configuration/editable.mode) option is set to `"incell"`.
+* The [`dataBinding`](/api/ui/grid/events/databinding) event handler of the Grid is used to obtain the [`current`](/api/ui/grid/methods/current) Grid cell and its corresponding row and cell indexes.
+* The saved row and cell indexes are applied through the [`current()`](/api/ui/grid/methods/current) method in the [`dataBound`](/api/ui/grid/events/databound) event handler.
+* The [`table`](/api/ui/grid#fields-table) option of the Grid can be focused explicitly if the user has clicked on the **Save Changes** button&mdash;this requires you to set a flag in the [`saveChanges`](/api/ui/grid/events/savechanges) event handler.
 
-Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/datasource/configuration/autosync) option for the incell editing because it greatly increases the amount of update-related remote requests. Nevertheless, it is possible for you to use such an approach if required.
+Generally, it is uncommon to enable the [`autoSync`](/api/data/datasource/configuration/autosync) option for the incell editing because it greatly increases the amount of update-related remote requests. Nevertheless, it is possible for you to use such an approach if required.
 
 ```dojo
 <div id="grid"></div>
@@ -147,4 +147,4 @@ Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/dataso
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

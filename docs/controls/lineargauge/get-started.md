@@ -91,7 +91,7 @@ The Kendo UI for jQuery LinearGauge provides multiple configuration options that
 * Change the colors of the minor and major ticks.
 * Set margins, border colors, etc. 
 
-To see the full list of the LinearGauge scale configuration options, see the [LinearGauge API](/api/javascript/dataviz/ui/lineargauge/configuration/scale).
+To see the full list of the LinearGauge scale configuration options, see the [LinearGauge API](/api/dataviz/ui/lineargauge/configuration/scale).
 
 In this step, you will add scale labels and style the major and minor ticks.
 
@@ -127,7 +127,7 @@ In this step, you will add scale labels and style the major and minor ticks.
 
 ## 4. Customize the Scale Colors
 
-Here, you will specify the [`colors of the scale ranges`](/api/javascript/dataviz/ui/lineargauge/configuration/scale.ranges#scale.ranges.color). 
+Here, you will specify the [`colors of the scale ranges`](/api/dataviz/ui/lineargauge/configuration/scale.ranges#scale.ranges.color). 
 
 ```dojo
     <div id="linear-gauge"></div>
@@ -176,7 +176,7 @@ Here, you will specify the [`colors of the scale ranges`](/api/javascript/datavi
 
 ## 5. Add the Pointer
 
-The LinearGauge allows you to add multiple [`pointers`](/api/javascript/dataviz/ui/lineargauge/configuration/pointer). In this step, you will add a single pointer and will configure its [`shape`](/api/javascript/dataviz/ui/lineargauge/configuration/pointer.shape) and [`color`](/api/javascript/dataviz/ui/lineargauge/configuration/pointer.color). 
+The LinearGauge allows you to add multiple [`pointers`](/api/dataviz/ui/lineargauge/configuration/pointer). In this step, you will add a single pointer and will configure its [`shape`](/api/dataviz/ui/lineargauge/configuration/pointer.shape) and [`color`](/api/dataviz/ui/lineargauge/configuration/pointer.color). 
 
 ```
     <div id="linear-gauge"></div>
@@ -236,7 +236,7 @@ The LinearGauge allows you to add multiple [`pointers`](/api/javascript/dataviz/
 
 ## See Also 
 
-* [JavaScript API Reference of the LinearGauge](/api/javascript/dataviz/ui/lineargauge)
+* [JavaScript API Reference of the LinearGauge](/api/dataviz/ui/lineargauge)
 * [Knowledge Base Section](/knowledge-base)
 
 

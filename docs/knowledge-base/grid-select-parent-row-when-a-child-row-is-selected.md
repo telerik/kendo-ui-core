@@ -26,8 +26,8 @@ I have a hierarchical Kendo Grid with checkboxes for selection. On selection of 
 
 ## Solution
 
-1. Add an event handler to the [`change`](/api/javascript/ui/grid/events/change) event of the child grid.
-1. Use the [`select()`](/api/javascript/ui/grid/methods/select) method to check if there are any selected rows
+1. Add an event handler to the [`change`](/api/ui/grid/events/change) event of the child grid.
+1. Use the [`select()`](/api/ui/grid/methods/select) method to check if there are any selected rows
 1. Get a reference to the master row and add or remove the `k-selected` class if there are any selected rows in the child grid.
 
 ```

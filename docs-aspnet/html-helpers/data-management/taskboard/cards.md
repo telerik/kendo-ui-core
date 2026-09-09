@@ -191,4 +191,4 @@ The following example demonstrates how to use a custom button that executes a cu
 ## See Also
 
 * [{{ site.framework }} TaskBoard Columns]({% slug htmlhelpers_taskboard_aspnetcore_columns %})
-* [JavaScript API Reference of the TaskBoard](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the TaskBoard](https://docs.telerik.com/kendo-ui/api/ui/taskboard)

@@ -38,7 +38,7 @@ First, create a `<div>` element on the page—it will serve as the main containe
 
 ## 2. Include Necessary Files
 
-When you use the [`pdfjsProcessing`](/api/javascript/ui/pdfviewer/configuration/pdfjsprocessing) option to preview a file, the [PDF.js](https://mozilla.github.io/pdf.js/) library must be included.
+When you use the [`pdfjsProcessing`](/api/ui/pdfviewer/configuration/pdfjsprocessing) option to preview a file, the [PDF.js](https://mozilla.github.io/pdf.js/) library must be included.
 
 ```html
 <div id="pdfViewer"></div>
@@ -110,7 +110,7 @@ The code below shows how you can define the `width` and `height` of the PDFViewe
 
 ## 5. Set Default Scale
 
-The [`scale`](/api/javascript/ui/pdfviewer/configuration/scale) configuration allows you to change the default scale of the document's pages.
+The [`scale`](/api/ui/pdfviewer/configuration/scale) configuration allows you to change the default scale of the document's pages.
 
 ```html
 <div id="pdfViewer"></div>
@@ -142,7 +142,7 @@ The [`scale`](/api/javascript/ui/pdfviewer/configuration/scale) configuration al
 
 ## See Also 
 
-* [JavaScript API Reference of the PDFViewer](/api/javascript/ui/pdfviewer)
+* [JavaScript API Reference of the PDFViewer](/api/ui/pdfviewer)
 * [Knowledge Base Section](/knowledge-base)
 
 

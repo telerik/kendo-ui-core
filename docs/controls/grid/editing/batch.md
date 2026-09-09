@@ -24,4 +24,4 @@ To enable batch editing operations in the Grid, set the `batch` option of the da
 
 * [Batch Editing by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/editing)
 * [Batch Editing with oData v.4 by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/odatav4)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

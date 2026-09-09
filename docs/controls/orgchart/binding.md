@@ -102,4 +102,4 @@ The following example demonstrates how to enable remote binding for the OrgChart
 * [Basic Usage of the OrgChart (Demo)](https://demos.telerik.com/kendo-ui/orgchart/index)
 * [Remote Data Binding in the OrgChart (Demo)](https://demos.telerik.com/kendo-ui/orgchart/remote-data-binding)
 * [Load On Demand in the OrgChart (Demo)](https://demos.telerik.com/kendo-ui/orgchart/load-on-demand)
-* [OrgChart JavaScript API Reference](/api/javascript/ui/orgchart)
+* [OrgChart JavaScript API Reference](/api/ui/orgchart)

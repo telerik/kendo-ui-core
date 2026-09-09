@@ -28,8 +28,8 @@ How can I create a filter widget with a multiple filter criterion in the Grid?
 
 ## Solution
 
-1. In the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event handler, add the required number of inputs.
-1. When the `click` event of the **Submit** button is clicked, build the filter query and filter the data source by using the [`flter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter) method.
+1. In the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/filtermenuinit) event handler, add the required number of inputs.
+1. When the `click` event of the **Submit** button is clicked, build the filter query and filter the data source by using the [`flter`](https://docs.telerik.com/kendo-ui/api/data/datasource#methods-filter) method.
 
 ```dojo
     <h1>Ship Name column has custom filter UI</h1>

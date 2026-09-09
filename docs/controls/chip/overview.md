@@ -26,7 +26,7 @@ The component can be clicked or removed and supports various styling options. Th
 
 * [Getting Started with the Kendo UI Chip for jQuery]({% slug getting_started_kendoui_chip_widget %})
 * [Basic Usage of the Chip (Demo)](https://demos.telerik.com/kendo-ui/chip/index)
-* [JavaScript API Reference of the Chip](/api/javascript/ui/chip)
+* [JavaScript API Reference of the Chip](/api/ui/chip)
 
 
 ## See Also

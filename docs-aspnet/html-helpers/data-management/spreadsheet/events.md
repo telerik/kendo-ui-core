@@ -96,4 +96,4 @@ The following example demonstrates how to subscribe to the `Changing` and `Chang
 ## See Also
 
 * [Server-Side API of the Spreadsheet](/api/spreadsheet)
-* [Client-Side API of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [Client-Side API of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)

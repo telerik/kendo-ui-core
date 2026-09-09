@@ -309,7 +309,7 @@ To see the example on how to export all pages and all expanded detail Grids, ref
 ## See Also
 
 * [Telerik REPL: Exporting a Detail Grid to Excel by Including All Pages and Details](https://netcorerepl.telerik.com/cwkFQYbK53UW6qxu07)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -36,7 +36,7 @@ I have a Grid column that contains a hyperlink. The link is clickable in the Gri
 
 ## Solution
 
-The [`Workbook API`](/api/javascript/ooxml/workbook/configuration/sheets.hyperlinks) exposes a configuration that enables you to set hyperlinks to specific cells. You can combine this configuration with the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event of the Grid to make the links clickable in the exported file.
+The [`Workbook API`](/api/ooxml/workbook/configuration/sheets.hyperlinks) exposes a configuration that enables you to set hyperlinks to specific cells. You can combine this configuration with the [`excelExport`](/api/ui/grid/events/excelexport) event of the Grid to make the links clickable in the exported file.
 
 1. Configure a column with links.
 2. Attach the `excelExport` event to the Grid.
@@ -100,5 +100,5 @@ The [`Workbook API`](/api/javascript/ooxml/workbook/configuration/sheets.hyperli
 
 ## See Also
 
-* [Workbook API Reference](/api/javascript/ooxml/workbook)
-* [JavaScript API Reference of the jQuery Grid](/api/javascript/ui/grid)
+* [Workbook API Reference](/api/ooxml/workbook)
+* [JavaScript API Reference of the jQuery Grid](/api/ui/grid)

@@ -58,4 +58,4 @@ The `avatarClass` property allows you to define a CSS class or multiple classes 
 
 * [Binding the Chip over MVVM (Demo)](https://demos.telerik.com/kendo-ui/chip/mvvm)
 * [Applying the Chip API (Demo)](https://demos.telerik.com/kendo-ui/chip/api)
-* [JavaScript API Reference of the Chip](/api/javascript/ui/chip)
+* [JavaScript API Reference of the Chip](/api/ui/chip)

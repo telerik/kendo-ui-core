@@ -95,4 +95,4 @@ The following example demonstrates how to use draggable components in a Grid whe
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

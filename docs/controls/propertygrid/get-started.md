@@ -98,7 +98,7 @@ In this step, you will initialize the PropertyGrid from the `<div>` element.
 ```
 ## 3. Configure the Columns in the PropertyGrid
 
-Once the basic initialization is completed, you can start adding additional configurations to the PropertyGrid. The PropertyGrid provides a [`columns`](/api/javascript/ui/propertygrid/configuration/columns) configuration option that allows you to configure the field and value columns configuration options.
+Once the basic initialization is completed, you can start adding additional configurations to the PropertyGrid. The PropertyGrid provides a [`columns`](/api/ui/propertygrid/configuration/columns) configuration option that allows you to configure the field and value columns configuration options.
 
 ```html
 <div id="propertygrid"></div>
@@ -120,7 +120,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 4. Bind the PropertyGrid to Its Items
 
-One of the most important configuration is the [`items`](/api/javascript/ui/propertygrid/configuration/items). The `items` option allows you to configure the properties of the model. You can set a group and description or configure the editor according to the requirements. 
+One of the most important configuration is the [`items`](/api/ui/propertygrid/configuration/items). The `items` option allows you to configure the properties of the model. You can set a group and description or configure the editor according to the requirements. 
 
 ```html
     <div id="propertygrid"></div>
@@ -170,7 +170,7 @@ One of the most important configuration is the [`items`](/api/javascript/ui/prop
 
 ## 5. Define the Model in the PropertyGrid
 
-The PropertyGrid allows you to define the [`model`](/api/javascript/ui/propertygrid/configuration/model) to which you bind the component.
+The PropertyGrid allows you to define the [`model`](/api/ui/propertygrid/configuration/model) to which you bind the component.
 
 ```html
     <div id="propertygrid"></div>
@@ -231,8 +231,8 @@ The PropertyGrid allows you to define the [`model`](/api/javascript/ui/propertyg
 
 ## 6. Enable the ContextMenu
 
-The PropertyGrid allows you to configure and customize the [`ContextMenu`](/api/javascript/ui/propertygrid/configuration/contextmenu) that will render on right-click on the cells. By default, the ContextMenu is disabled.
-The example below demonstrates how the default ContextMenu can be enabled. You can check the full list with the available options in the [`API`](/api/javascript/ui/propertygrid/configuration/contextmenu). 
+The PropertyGrid allows you to configure and customize the [`ContextMenu`](/api/ui/propertygrid/configuration/contextmenu) that will render on right-click on the cells. By default, the ContextMenu is disabled.
+The example below demonstrates how the default ContextMenu can be enabled. You can check the full list with the available options in the [`API`](/api/ui/propertygrid/configuration/contextmenu). 
 
 
 ```html
@@ -301,7 +301,7 @@ The example below demonstrates how the default ContextMenu can be enabled. You c
 
 ## See Also 
 
-* [JavaScript API Reference of the PropertyGrid](/api/javascript/ui/propertygrid)
+* [JavaScript API Reference of the PropertyGrid](/api/ui/propertygrid)
 * [Knowledge Base Section](/knowledge-base)
 
 

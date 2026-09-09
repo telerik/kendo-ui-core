@@ -16,5 +16,5 @@ To enable the user to reorder the columns of the Grid by dragging, set the `reor
 ## See Also
 
 * [Column Reordering by the Grid](https://demos.telerik.com/kendo-ui/grid/column-reordering)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Kendo UI Knowledge Base](/knowledge-base)

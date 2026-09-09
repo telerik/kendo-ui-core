@@ -33,7 +33,7 @@ We have requirement to change the kendo grid style (background color, font color
 To apply the custom background to odd and even rows, you can use the built-in functionality. The Kendo UI Grid decorates every other row with the `.k-alt` class. To make the styling dynamic and based on user selection we could: 
 
 1. Use a couple of ColorPickers
-1. Handle their [`change`](/api/javascript/ui/colorpicker/events/change) event
+1. Handle their [`change`](/api/ui/colorpicker/events/change) event
 1. Add the color via inline styles on `mousover` and then again on `mouseout` events
 
     ```

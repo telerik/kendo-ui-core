@@ -26,7 +26,7 @@ How can I achieve this?
 
 ## Solution
 
-1. Handle the [`e.Events(e=>e.Save())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/events/save) event of the Gantt component.
+1. Handle the [`e.Events(e=>e.Save())`](https://docs.telerik.com/kendo-ui/api/ui/gantt/events/save) event of the Gantt component.
 1. Find the time gap between the previous and the new end time of the updated task.
 1. Filter the dependencies of the updated tasks and update the start and end time accordignly.
 

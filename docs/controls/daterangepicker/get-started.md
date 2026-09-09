@@ -55,7 +55,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 3. Set the Minimum and Maximum Date
 
-To limit the range of the displayed dates in the DateRangePicker, use the supported [`min`](/api/javascript/ui/daterangepicker/configuration/min) and [`max`](/api/javascript/ui/daterangepicker/configuration/max) options.
+To limit the range of the displayed dates in the DateRangePicker, use the supported [`min`](/api/ui/daterangepicker/configuration/min) and [`max`](/api/ui/daterangepicker/configuration/max) options.
 
 ```html
 <div id="daterangepicker" title="daterangepicker"></div>
@@ -71,7 +71,7 @@ To limit the range of the displayed dates in the DateRangePicker, use the suppor
 
 ## 4. Set the Format
 
-You can customize the format of the displayed date by setting the [`format`](/api/javascript/ui/daterangepicker/configuration/format) configuration of the DateRangePicker.
+You can customize the format of the displayed date by setting the [`format`](/api/ui/daterangepicker/configuration/format) configuration of the DateRangePicker.
 
 ```html
 <div id="daterangepicker" title="daterangepicker"></div>
@@ -93,6 +93,6 @@ You can customize the format of the displayed date by setting the [`format`](/ap
 
 ## See Also 
 
-* [JavaScript API Reference of the jQuery DateRangePicker](/api/javascript/ui/daterangepicker)
+* [JavaScript API Reference of the jQuery DateRangePicker](/api/ui/daterangepicker)
 * [Knowledge Base Section](/knowledge-base)
 

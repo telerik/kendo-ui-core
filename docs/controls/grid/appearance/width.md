@@ -65,4 +65,4 @@ Depending on the specific scenarios, you can use any of the following approaches
 ## See Also
 
 * [Scroll Modes of the Grid]({% slug scrolling_kendoui_grid_widget %})
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

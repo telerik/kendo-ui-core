@@ -29,10 +29,10 @@ How can I change the `decimals` property of the Kendo UI NumericTextBox at runti
 
 ## Solution
 
-1. [Set the format](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/format) of the NumericTextBox initially to `n2`.
+1. [Set the format](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox/configuration/format) of the NumericTextBox initially to `n2`.
 1. When an event has occurred, such as a button click, get a reference to the NumericTextBox.
-1. [Get the value](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/methods/value) of the NumericTextBox.
-1. By using [the `setOptions` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions), configure the `value`, `format`, and [`decimals`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/decimals) properties.
+1. [Get the value](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox/methods/value) of the NumericTextBox.
+1. By using [the `setOptions` method](https://docs.telerik.com/kendo-ui/api/ui/widget/methods/setoptions), configure the `value`, `format`, and [`decimals`](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox/configuration/decimals) properties.
 
 ```dojo
     <input id="numericTextBox1" />
@@ -56,7 +56,7 @@ How can I change the `decimals` property of the Kendo UI NumericTextBox at runti
 
 ## See Also
 
-* [API Reference of `format`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/format)
-* [API Reference of `value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/methods/value)
-* [API Reference of `setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions)
-* [API Reference of `decimals`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/decimals)
+* [API Reference of `format`](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox/configuration/format)
+* [API Reference of `value`](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox/methods/value)
+* [API Reference of `setOptions`](https://docs.telerik.com/kendo-ui/api/ui/widget/methods/setoptions)
+* [API Reference of `decimals`](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox/configuration/decimals)

@@ -19,7 +19,7 @@ The lack of restrictions over the dimensions for vertical expanding of the Dialo
 
 ## Customizing Size and Position
 
-Similar to other Kendo UI components, the Dialog has two DOM elements which can be accessed and used to customize the appearance of the component or its content. These are the [`wrapper` and `element`]({% slug widgetwrapperandelement_references_gettingstarted %}) elements of the component which are provided as fields of the component object. In specific scenarios, the Dialog wrapper can be used to tweak the position or the size of the component although this is normally done through the API and the [`setOptions` method](/api/javascript/ui/widget/methods/setoptions).
+Similar to other Kendo UI components, the Dialog has two DOM elements which can be accessed and used to customize the appearance of the component or its content. These are the [`wrapper` and `element`]({% slug widgetwrapperandelement_references_gettingstarted %}) elements of the component which are provided as fields of the component object. In specific scenarios, the Dialog wrapper can be used to tweak the position or the size of the component although this is normally done through the API and the [`setOptions` method](/api/ui/widget/methods/setoptions).
 
     var dialog = $("#dialog").data("kendoDialog");
     var dialogWrapper = dialog.wrapper;
@@ -36,4 +36,4 @@ When the Dialog contains a form, which is submitted through a standard POST requ
 
 * [Basic Usage of the Dialog (Demo)](https://demos.telerik.com/kendo-ui/dialog/index)
 * [Using the API of the Dialog (Demo)](https://demos.telerik.com/kendo-ui/dialog/api)
-* [JavaScript API Reference of the Dialog](/api/javascript/ui/dialog)
+* [JavaScript API Reference of the Dialog](/api/ui/dialog)

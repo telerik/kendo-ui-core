@@ -7,7 +7,7 @@ component: floatingactionbutton
 
 # kendo.ui.FloatingActionButton
 
-Represents the Kendo UI FloatingActionButton widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI FloatingActionButton widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -25,7 +25,7 @@ Specifies position of the FloatingActionButton relative to its container. Valid 
 * `"bottom center"`: positions the button at top center of the container.
 * `"bottom end"`: positions the button at bottom right corner of the container.
 
-`align` works in conjunction with [`positionMode`](/api/javascript/ui/floatingactionbutton/configuration/positionmode) and [`alignOffset`](/api/javascript/ui/floatingactionbutton/configuration/alignoffset).
+`align` works in conjunction with [`positionMode`](/api/ui/floatingactionbutton/configuration/positionmode) and [`alignOffset`](/api/ui/floatingactionbutton/configuration/alignoffset).
 
 **Note: when using `align`, make sure the FloatingActionButton container has [css position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) other than `"static"` and allows [overflow content](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow).
 
@@ -363,7 +363,7 @@ How to set custom labels for individual items in Kendo UI Floating Action Button
 
 ### items.template `String|Function`
 
-Specifies the [template](/api/javascript/kendo/methods/template) used to render the contents of the speed-dial item.
+Specifies the [template](/api/kendo/methods/template) used to render the contents of the speed-dial item.
 
 The fields which can be used inside the template are:
 
@@ -696,7 +696,7 @@ How do I dynamically change the icon of a Kendo UI Floating Action Button? Set, 
 
 ##### icon `String`
 
-See [`floatingactionbutton.options.icon`](/api/javascript/ui/floatingactionbutton/configuration/icon) for valid options.
+See [`floatingactionbutton.options.icon`](/api/ui/floatingactionbutton/configuration/icon) for valid options.
 
 #### Example
 
@@ -805,7 +805,7 @@ How do I set the theme color of a Kendo UI Floating Action Button? Set, get, or 
 
 ##### themeColor `String`
 
-See [`floatingactionbutton.options.themeColor`](/api/javascript/ui/floatingactionbutton/configuration/themeColor) for valid options.
+See [`floatingactionbutton.options.themeColor`](/api/ui/floatingactionbutton/configuration/themeColor) for valid options.
 
 #### Example
 
@@ -826,7 +826,7 @@ See [`floatingactionbutton.options.themeColor`](/api/javascript/ui/floatingactio
 
 Fires when the user clicks on a the FloatingActionButton.
 
-**Note: when using [`items`](/api/javascript/ui/floatingactionbutton/configuration/items) configuration, clicking on the FloatingActionButton will open the speed-dial list popup.
+**Note: when using [`items`](/api/ui/floatingactionbutton/configuration/items) configuration, clicking on the FloatingActionButton will open the speed-dial list popup.
 
 
 <div class="meta-api-description">
@@ -865,7 +865,7 @@ If invoked prevents the click .
 
 Fires when the speed-dial popup is closed and its animation is finished.
 
-**Note: this event is triggered only when using [`items`](/api/javascript/ui/floatingactionbutton/configuration/items) configuration.
+**Note: this event is triggered only when using [`items`](/api/ui/floatingactionbutton/configuration/items) configuration.
 
 
 <div class="meta-api-description">
@@ -904,7 +904,7 @@ The **FloatingActionButton** instance that triggered the event.
 
 Fires when the speed-dial popup is opened and its animation is finished.
 
-**Note: this event is triggered only when using [`items`](/api/javascript/ui/floatingactionbutton/configuration/items) configuration.
+**Note: this event is triggered only when using [`items`](/api/ui/floatingactionbutton/configuration/items) configuration.
 
 
 <div class="meta-api-description">

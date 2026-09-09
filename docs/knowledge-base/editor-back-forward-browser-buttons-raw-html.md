@@ -32,7 +32,7 @@ By default, the Editor stores its value encoded. When the page is retrieved from
 
 ## Solution
 
-Set the [`encoded`](/api/javascript/ui/editor/configuration/encoded) property to `false`. The value of the Editor is expected to be posted unencoded to the server.
+Set the [`encoded`](/api/ui/editor/configuration/encoded) property to `false`. The value of the Editor is expected to be posted unencoded to the server.
 
 If you are using ASP.NET, make sure that you either disable the ASP.NET security validation or set the `AllowHtml` attribute on the model field that will receive the HTML string. For more information, refer to the documentation on [requesting validation in ASP.NET](http://blogs.learnnowonline.com/blog/bid/199703/ASP-NET-MVC-Request-Validation-Protection-AllowHtml-Attribute).
 
@@ -48,4 +48,4 @@ The back-forward cache of the browser can be disabled by attaching a `window.unl
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
 * [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

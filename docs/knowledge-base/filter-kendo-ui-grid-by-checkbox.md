@@ -27,7 +27,7 @@ ticketid: 1660908
 
 ## Description
 
-Filtering data in a Kendo UI Grid based on user interaction, such as a checkbox click, is a common scenario. This article demonstrates how to achieve this functionality by leveraging the dataSource [`filter()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method. 
+Filtering data in a Kendo UI Grid based on user interaction, such as a checkbox click, is a common scenario. This article demonstrates how to achieve this functionality by leveraging the dataSource [`filter()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/filter) method. 
 
 This KB article also answers the following questions:
 - How can I filter Grid records using a checkbox?
@@ -39,7 +39,7 @@ This KB article also answers the following questions:
 To filter the Kendo UI Grid records based on the state of a checkbox, follow these steps:
 
 1. Initialize the checkbox as a Kendo UI CheckBox component.
-2. Subscribe to the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/checkbox/events/change) event of the CheckBox to apply or remove the filter from the Grid's dataSource based on the checkbox state.
+2. Subscribe to the [`change`](https://docs.telerik.com/kendo-ui/api/ui/checkbox/events/change) event of the CheckBox to apply or remove the filter from the Grid's dataSource based on the checkbox state.
 
 Here is a practical example where a Grid is filtered to show only the records where the field "Discontinued" is `true` when the checkbox is checked. If the checkbox is unchecked, the filter is removed, and all records are shown.
 
@@ -136,6 +136,6 @@ For a live example, check the below Dojo demo.
 
 ## See Also
 
-- [Kendo UI Grid DataSource Filter Method Documentation](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter)
+- [Kendo UI Grid DataSource Filter Method Documentation](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/filter)
 - [Kendo UI CheckBox Component Documentation](https://docs.telerik.com/kendo-ui/controls/editors/checkbox/overview)
 - [Kendo UI Grid Overview](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)

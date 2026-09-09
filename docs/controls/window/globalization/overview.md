@@ -22,4 +22,4 @@ For more information on using localization, internationalization, and right-to-l
 
 * [RTL Support by the Window (Demo)](https://demos.telerik.com/kendo-ui/window/right-to-left-support)
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the Window](/api/ui/window)

@@ -44,4 +44,4 @@ chat.setOptions({
 * [Chat Overview]({% slug overview_kendoui_chat_widget %})
 * [Chat Adornments]({% slug adornments_kendoui_chat %})
 * [AutoScroll Threshold Demo](https://demos.telerik.com/kendo-ui/chat/autoscroll-threshold)
-* [Chat API Reference](/api/javascript/ui/chat)
+* [Chat API Reference](/api/ui/chat)

@@ -208,7 +208,7 @@ The following example demonstrates custom validation of the `RetireDate` field.
 
 ## Using the Validator Instance
 
-The Kendo Ui Form utilizes the [Kendo UI Validator component](https://demos.telerik.com/kendo-ui/validator) internally. This behavior facilitates use cases, in which you may need to use the [Validator API](/api/javascript/ui/form)&mdash;for example, to programmatically trigger validation.
+The Kendo Ui Form utilizes the [Kendo UI Validator component](https://demos.telerik.com/kendo-ui/validator) internally. This behavior facilitates use cases, in which you may need to use the [Validator API](/api/ui/form)&mdash;for example, to programmatically trigger validation.
 
 ```dojo
     <form id="myForm"></form>
@@ -239,4 +239,4 @@ The Kendo Ui Form utilizes the [Kendo UI Validator component](https://demos.tele
 ## See Also
 
 * [Validation of the Form (Demo)](https://demos.telerik.com/kendo-ui/form/validation)
-* [JavaScript API Reference of the Form](/api/javascript/ui/form)
+* [JavaScript API Reference of the Form](/api/ui/form)

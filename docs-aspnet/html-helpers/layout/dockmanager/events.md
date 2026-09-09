@@ -124,4 +124,4 @@ The following example demonstrates how to subscribe to events by using a templat
 
 * [Using the API of the DockManager HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dockmanager/api)
 * [DockManager Server-Side API](/api/dockmanager)
-* [DockManager Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dockmanager)
+* [DockManager Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/dockmanager)

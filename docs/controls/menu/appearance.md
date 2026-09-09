@@ -37,4 +37,4 @@ In left-to-right layouts, shrinking the horizontal Menu will cause the border of
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Basic Usage of the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/index)
 * [Using the API of the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/api)
-* [JavaScript API Reference of the Menu](/api/javascript/ui/menu)
+* [JavaScript API Reference of the Menu](/api/ui/menu)

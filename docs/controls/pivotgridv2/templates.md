@@ -17,9 +17,9 @@ For a live example, visit the [PivotGridV2 Templates](https://demos.telerik.com/
 
 The PivotGridV2 offers three template configurations:
 
-- [`dataCellTemplate`](/api/javascript/ui/pivotgridv2/configuration/datacelltemplate)—Changes the appearance of each data cell.
-- [`columnHeaderTemplate`](/api/javascript/ui/pivotgridv2/configuration/columnheadertemplate)—Changes the appearance of each column header.
-- [`rowHeaderTemplate`](/api/javascript/ui/pivotgridv2/configuration/rowheadertemplate)—Changes the appearance of each row header.
+- [`dataCellTemplate`](/api/ui/pivotgridv2/configuration/datacelltemplate)—Changes the appearance of each data cell.
+- [`columnHeaderTemplate`](/api/ui/pivotgridv2/configuration/columnheadertemplate)—Changes the appearance of each column header.
+- [`rowHeaderTemplate`](/api/ui/pivotgridv2/configuration/rowheadertemplate)—Changes the appearance of each row header.
 
 The following example demonstrates how to set-up a `dataCellTemplate`:
 
@@ -49,4 +49,4 @@ The following example demonstrates how to set-up both a `columnHeaderTemplate` a
 ## See also
 
 * [PivotGridV2 Templates (Demo)](https://demos.telerik.com/kendo-ui/pivotgridv2/templates)
-* [PivotGridV2 JavaScript API Reference](/api/javascript/ui/pivotgridv2)
+* [PivotGridV2 JavaScript API Reference](/api/ui/pivotgridv2)

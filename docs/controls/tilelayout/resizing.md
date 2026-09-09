@@ -13,11 +13,11 @@ The Kendo UI TileLayout widget allows you resize the containers by snapping to t
 
 The resizing takes advantage of the [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/) mechanism, meaning that the widget increases how the element spans and the browser takes care of how to re-arrange the items if necessary.
 
-> **Note:** When [`resizable`](/api/javascript/ui/tilelayout/configuration/resizable) is enabled items should have a defined rowSpan and colSpan.
+> **Note:** When [`resizable`](/api/ui/tilelayout/configuration/resizable) is enabled items should have a defined rowSpan and colSpan.
 
 ## Enabling the resizable feature of the TileLayout
 
-To enable the resizable feature of the TileLayout, set the [`resizable`](/api/javascript/ui/tilelayout/configuration/resizable) property to `true`.
+To enable the resizable feature of the TileLayout, set the [`resizable`](/api/ui/tilelayout/configuration/resizable) property to `true`.
 
 The example below will render a grid with two rows and two columns which can be resized both vertically and horizontally.
 
@@ -45,7 +45,7 @@ The example below will render a grid with two rows and two columns which can be 
 
 ## Event Handling
 
-The widget triggers a [`resize`](/api/javascript/ui/tilelayout/events/resize) event which provides access to the resized container.
+The widget triggers a [`resize`](/api/ui/tilelayout/events/resize) event which provides access to the resized container.
 
 ```
     resize: function (e) {
@@ -56,6 +56,6 @@ The widget triggers a [`resize`](/api/javascript/ui/tilelayout/events/resize) ev
 ## See Also
 
 * [Overview of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
-* [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)
+* [JavaScript API Reference of the TileLayout](/api/ui/tilelayout)
 * [Reordering]({% slug reordering_kendoui_tilelayout_widget %})
 * [Containers]({% slug containers_kendoui_tilelayout_widget %})

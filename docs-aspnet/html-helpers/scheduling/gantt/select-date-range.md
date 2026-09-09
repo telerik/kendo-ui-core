@@ -68,4 +68,4 @@ The example below demonstrates how to configure the different views of the Gantt
 
 * [Selected Date Range (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/selected-date-and-range)
 * [Using the API of the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/api)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/gantt)

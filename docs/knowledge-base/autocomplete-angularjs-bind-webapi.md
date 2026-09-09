@@ -96,6 +96,6 @@ To achieve the desired scenario, set the `dataSource` type to `webapi` and the `
 
 ## See Also
 
-* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)
+* [JavaScript API Reference of the AutoComplete](/api/ui/autocomplete)
 * [Product Page of the jQuery AutoComplete](https://www.telerik.com/kendo-jquery-ui/autocomplete)
 * [jQuery AutoComplete Overview (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/index)

@@ -51,7 +51,7 @@ In this step, you will initialize the Upload from the `input` element.
 
 ## 3. Configure the Upload Settings
 
-Next, set the [`saveUrl`](/api/javascript/ui/upload/configuration/async.saveurl) and [`removeUrl`](/api/javascript/ui/upload/configuration/async.removeurl) configuration options. These configurations allow the end-user to upload a file to the server and remove it afterwards.
+Next, set the [`saveUrl`](/api/ui/upload/configuration/async.saveurl) and [`removeUrl`](/api/ui/upload/configuration/async.removeurl) configuration options. These configurations allow the end-user to upload a file to the server and remove it afterwards.
 
 ```html
     <script>
@@ -80,6 +80,6 @@ The server-side logic must be implemented by the developers themselves. You can 
 
 ## See Also 
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)
 * [Knowledge Base Section](/knowledge-base)
 

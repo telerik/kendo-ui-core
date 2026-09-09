@@ -144,7 +144,7 @@ To see the complete example, refer to the [ASP.NET MVC application](https://gith
 
 ## See Also
 
-* [Client-Side API Reference of the PanelBar for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+* [Client-Side API Reference of the PanelBar for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/panelbar)
 * [Server-Side API Reference of the PanelBar for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/panelbar)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2024%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

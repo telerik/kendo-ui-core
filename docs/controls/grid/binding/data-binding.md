@@ -310,5 +310,5 @@ Check the `skeleton` loading type in action in the live demo below:
 * [Binding the Grid to SignalR (Demo)](https://demos.telerik.com/kendo-ui/grid/signalr)
 * [Binding the Grid over MVVM (Demo)](https://demos.telerik.com/kendo-ui/grid/mvvm)
 * [Working with the Grid Offline (Demo)](https://demos.telerik.com/kendo-ui/grid/offline)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

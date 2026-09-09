@@ -29,7 +29,7 @@ How can I determine the equivalency for the `noRecords.template` which uses data
 
 ## Solution
 
-To set the [`noRecords.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/norecords) use the [`data-no-records` data attribute](https://docs.telerik.com/kendo-ui/intro/widget-basics/mvvm-initialization#using-the-data-attributes).
+To set the [`noRecords.template`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/norecords) use the [`data-no-records` data attribute](https://docs.telerik.com/kendo-ui/intro/widget-basics/mvvm-initialization#using-the-data-attributes).
 
 ```
 <div data-role="grid"      

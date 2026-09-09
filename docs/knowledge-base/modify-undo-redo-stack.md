@@ -97,7 +97,7 @@ To achieve this behavior:
 ## See Also
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)
 * [Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [Wrap Text]({% slug howto_wraptext_diagram %})

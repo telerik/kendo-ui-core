@@ -9,9 +9,9 @@ position: 3
 
 # RGB and HEX Input Formats
 
-As of the end of 2021, the ColorGradient supports both RGB and HEX formats as input through its [`formats`](/api/javascript/ui/colorgradient/configuration/formats) configuration.
+As of the end of 2021, the ColorGradient supports both RGB and HEX formats as input through its [`formats`](/api/ui/colorgradient/configuration/formats) configuration.
 
-To choose the default format, use the [`format`](/api/javascript/ui/colorgradient/configuration/format) option:
+To choose the default format, use the [`format`](/api/ui/colorgradient/configuration/format) option:
 
 ```dojo
     <div id="rgb-picker"></div>
@@ -35,4 +35,4 @@ To choose the default format, use the [`format`](/api/javascript/ui/colorgradien
 ## See Also
 
 * [RGB and HEX formats of the ColorGradient (Demo)](https://demos.telerik.com/kendo-ui/colorgradient/rgb-hex)
-* [JavaScript API Reference of the ColorGradient](/api/javascript/ui/colorgradient)
+* [JavaScript API Reference of the ColorGradient](/api/ui/colorgradient)

@@ -23,7 +23,7 @@ To enhance the performance of the Grid, apply the sorting operations on the serv
 
 ![Kendo UI for jQuery Grid with Sorting Enabled](grid-sorting.png)
 
-> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be sortable. To enable sorting on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/kendo-ui/knowledge-base/enable-operations-for-object-column).
+> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.field) can be sortable. To enable sorting on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/kendo-ui/knowledge-base/enable-operations-for-object-column).
 
 ## Sort Modes
 
@@ -77,4 +77,4 @@ To enable multi-column sorting, set the `mode` option of `sortable` property to 
 ## See Also
 
 * [Sorting by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/sorting)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

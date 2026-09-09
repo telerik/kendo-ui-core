@@ -113,7 +113,7 @@ For more examples, refer to the [demo on using the events of the TimePicker](htt
 
 ## 4. (Optional) Reference Existing TimePicker Instances
 
-To use the [client-side API of the TimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker) and build on top of its initial configuration, you need a reference to the TimePicker instance. Once you get a valid reference, you can call the respective API methods:
+To use the [client-side API of the TimePicker](https://docs.telerik.com/kendo-ui/api/ui/timepicker) and build on top of its initial configuration, you need a reference to the TimePicker instance. Once you get a valid reference, you can call the respective API methods:
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
@@ -123,7 +123,7 @@ To use the [client-side API of the TimePicker](https://docs.telerik.com/kendo-ui
         </script>
     ```
 
-1. Use the [client-side API of the TimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker/methods/enable) method to disable the TimePicker.
+1. Use the [client-side API of the TimePicker](https://docs.telerik.com/kendo-ui/api/ui/timepicker) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/ui/timepicker/methods/enable) method to disable the TimePicker.
 
     ```JS script
         <script>
@@ -157,6 +157,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the TimePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timepicker/api)
-* [Client-Side API of the TimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker)
+* [Client-Side API of the TimePicker](https://docs.telerik.com/kendo-ui/api/ui/timepicker)
 * [Server-Side API of the TimePicker](/api/timepicker)
 * [Knowledge Base Section](/knowledge-base)

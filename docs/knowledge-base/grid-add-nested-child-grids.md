@@ -29,7 +29,7 @@ How can I add hierarchy of nested child grids in Kendo UI?
 
 ## Solution
 
-Handle the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit) event of each parent Grid and initialize the next level of the Hierarchy in it.
+Handle the [`detailInit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/detailinit) event of each parent Grid and initialize the next level of the Hierarchy in it.
 
 ```dojo
 

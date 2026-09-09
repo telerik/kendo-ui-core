@@ -110,7 +110,7 @@ The AI Toolbar Assistant provides various configuration options to customize the
 
 The AI Toolbar Assistant utilizes the [AIPrompt](slug:htmlhelpers_overview_aiprompt) component internally to provide conversational interface. You can customize the AIPrompt interface and user interaction by using the `aiPromptSettings` property of the tool.
 
-This property allows you to add [`promptSuggestions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/ai.aiassistant.promptsuggestions) tailored to your specific use case that can guide users with examples of what your AI service can understand. Furthermore, the [`speechToTextButton`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/ai.aiassistant.speechtotext) setting provides voice input capabilities for enhancing accessibility in your application.
+This property allows you to add [`promptSuggestions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/ai.aiassistant.promptsuggestions) tailored to your specific use case that can guide users with examples of what your AI service can understand. Furthermore, the [`speechToTextButton`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/ai.aiassistant.speechtotext) setting provides voice input capabilities for enhancing accessibility in your application.
 
  ```HtmlHelper
      .AIAssistant(aiAsst => aiAsst

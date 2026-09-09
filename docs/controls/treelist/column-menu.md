@@ -11,11 +11,11 @@ position: 12
 
 The TreeList provides a built-in option for triggering column operations through a menu.
 
-To enable the Column Menu implementation, use [`columnMenu:true`](/api/javascript/ui/treelist/configuration/columnmenu). As a result, the column headers of the TreeList render a column menu, which allows the user to sort, filter, reorder, or change the visibility of a column. The Column Menu also detects when a specific column operation is disabled through the column definition and does not render it. For a runnable example, refer to the [demo on implementing a Column Menu in the TreeList](https://demos.telerik.com/kendo-ui/treelist/column-menu).
+To enable the Column Menu implementation, use [`columnMenu:true`](/api/ui/treelist/configuration/columnmenu). As a result, the column headers of the TreeList render a column menu, which allows the user to sort, filter, reorder, or change the visibility of a column. The Column Menu also detects when a specific column operation is disabled through the column definition and does not render it. For a runnable example, refer to the [demo on implementing a Column Menu in the TreeList](https://demos.telerik.com/kendo-ui/treelist/column-menu).
 
-> When the [`columnMenu`](/api/javascript/ui/treelist/configuration/columnmenu) configuration is set to `true`, the TreeList fires the [`columnMenuInit`](/api/javascript/ui/treelist/events/columnmenuinit) and [`columnMenuOpen`](/api/javascript/ui/treelist/events/columnmenuopen) events instead of [`filterMenuInit`](/api/javascript/ui/treelist/events/filtermenuinit) and [`filterMenuOpen`](/api/javascript/ui/treelist/events/filtermenuopen).
+> When the [`columnMenu`](/api/ui/treelist/configuration/columnmenu) configuration is set to `true`, the TreeList fires the [`columnMenuInit`](/api/ui/treelist/events/columnmenuinit) and [`columnMenuOpen`](/api/ui/treelist/events/columnmenuopen) events instead of [`filterMenuInit`](/api/ui/treelist/events/filtermenuinit) and [`filterMenuOpen`](/api/ui/treelist/events/filtermenuopen).
 
-For more information about the available configuration properties, see the [Column Menu API reference](/api/javascript/ui/treelist/configuration/columnmenu).
+For more information about the available configuration properties, see the [Column Menu API reference](/api/ui/treelist/configuration/columnmenu).
 
 ## Column Reordering
 
@@ -63,5 +63,5 @@ As of Kendo UI R2 SP1 2023,the TreeList's Column Menu provides an option to chan
 ## See Also
 
 * [Column Menu by the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/column-menu)
-* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
+* [JavaScript API Reference of the TreeList](/api/ui/treelist)
 * [Kendo UI Knowledge Base](/knowledge-base)

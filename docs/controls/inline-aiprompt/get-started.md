@@ -67,7 +67,7 @@ In this step, you will initialize the InlineAIPrompt from the `<div>` element. W
 
 ## 3. Add the Service URL
 
-Configure the AI service endpoint that will process the prompts. The [`service.url`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/inlineaiprompt/configuration/service.url) option specifies the backend endpoint for AI completion requests.
+Configure the AI service endpoint that will process the prompts. The [`service.url`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/configuration/service.url) option specifies the backend endpoint for AI completion requests.
 
 The example in this article uses a Telerik-hosted AI service for demonstration purposes only.
 
@@ -81,7 +81,7 @@ service: {
 
 Prompt commands are predefined actions that you can apply to the content for which the InlineAIPrompt is displayed. They allow users to quickly modify or enhance a text without making a dedicated prompt.
 
-The following example shows how to set the prompt [commands](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/inlineaiprompt/configuration/commands) in the InlineAIPrompt component and quickly improve the writing, make it shorter, or fix grammar issues.
+The following example shows how to set the prompt [commands](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/configuration/commands) in the InlineAIPrompt component and quickly improve the writing, make it shorter, or fix grammar issues.
 
 ```javascript
 commands: [
@@ -102,7 +102,7 @@ commands: [
 
 ## 5. Configure the systemPrompt Option
 
-Set up the logic for how the system prompt is constructed. The [`systemPrompt`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/inlineaiprompt/configuration/systemPrompt) function customizes how the prompt and context are combined before sending to the AI service.
+Set up the logic for how the system prompt is constructed. The [`systemPrompt`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/configuration/systemPrompt) function customizes how the prompt and context are combined before sending to the AI service.
 
 ```javascript
 systemPrompt: function(context, prompt) {
@@ -112,7 +112,7 @@ systemPrompt: function(context, prompt) {
 
 ## 6. Enable the Speech-to-Text Button
 
-The InlineAIPrompt component supports speech-to-text functionality, allowing users to input prompts using their voice. To enable this feature, set the [`speechToText`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/inlineaiprompt/configuration/speechToText) property to `true`.
+The InlineAIPrompt component supports speech-to-text functionality, allowing users to input prompts using their voice. To enable this feature, set the [`speechToText`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/configuration/speechToText) property to `true`.
 
 ```javascript
 speechToText: true,
@@ -128,7 +128,7 @@ speechToText: true,
 
 ## See Also 
 
-* [JavaScript API Reference of the jQuery InlineAIPrompt](/api/javascript/ui/inlineaiprompt)
+* [JavaScript API Reference of the jQuery InlineAIPrompt](/api/ui/inlineaiprompt)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -168,7 +168,7 @@ The Pager component provides a convenient integration with the Grid and DataSour
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Pager](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager)
+* [Client-Side API of the Pager](https://docs.telerik.com/kendo-ui/api/ui/pager)
 * [Server-Side HtmlHelper API of the Pager](/api/pager)
 * [Server-Side TagHelper API of the Pager](/api/taghelpers/pager)
 * [Knowledge Base Section](/knowledge-base)

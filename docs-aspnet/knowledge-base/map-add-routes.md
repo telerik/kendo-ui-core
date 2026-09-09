@@ -193,7 +193,7 @@ Follow the steps below to achieve the desired scenario:
 
 ## See Also
 
-* [Client-Side API Reference of the Map for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/map)
+* [Client-Side API Reference of the Map for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/dataviz/map)
 * [Server-Side API Reference of the Map for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/map)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Map for ASP.NET Core](https://docs.telerik.com/aspnet-core/api/taghelpers/map)

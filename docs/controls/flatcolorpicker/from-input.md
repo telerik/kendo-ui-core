@@ -53,6 +53,6 @@ As of Kendo UI R3 2022, you can initialize the FlatColorPicker from an `input` e
 
 ## See Also 
 
-* [JavaScript API Reference of the FlatColorPicker](/api/javascript/ui/flatcolorpicker)
+* [JavaScript API Reference of the FlatColorPicker](/api/ui/flatcolorpicker)
 * [Knowledge Base Section](/knowledge-base)
 

@@ -80,4 +80,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the ListBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listbox/api)
 * [ListBox Server-Side API](/api/listbox)
-* [ListBox Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
+* [ListBox Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/listbox)

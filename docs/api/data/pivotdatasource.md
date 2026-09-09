@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.data.PivotDataSource
 
-The data source used by the [`kendo.ui.PivotGrid`](/api/javascript/ui/pivotgrid) widget. Inherits from [`kendo.data.DataSource`](/api/framework/datasource).
+The data source used by the [`kendo.ui.PivotGrid`](/api/ui/pivotgrid) widget. Inherits from [`kendo.data.DataSource`](/api/framework/datasource).
 
 ## Configuration
 
@@ -110,7 +110,7 @@ The configuration of measures. A string array whose values are interpreted as th
         type: "status"
     }]
 
-> The `type` value can be defined to `status` or `trend` to render [`kpiStatusTemplate`](/api/javascript/ui/pivotgrid/configuration/kpistatustemplate) or [`kpiTrendTemplate`](/api/javascript/ui/pivotgrid/configuration/kpitrendtemplate). If `type` is not defined, then the [`dataCellTemplate`](/api/javascript/ui/pivotgrid/configuration/datacelltemplate) will be used.
+> The `type` value can be defined to `status` or `trend` to render [`kpiStatusTemplate`](/api/ui/pivotgrid/configuration/kpistatustemplate) or [`kpiTrendTemplate`](/api/ui/pivotgrid/configuration/kpitrendtemplate). If `type` is not defined, then the [`dataCellTemplate`](/api/ui/pivotgrid/configuration/datacelltemplate) will be used.
 
 
 <div class="meta-api-description">
@@ -1305,7 +1305,7 @@ How to dynamically change column configurations in a Kendo UI pivot grid? Contro
 
 ##### val `Array`
 
-The columns configuration. Accepts the same values as the [`columns`](/api/javascript/data/pivotdatasource#configuration-columns) option.
+The columns configuration. Accepts the same values as the [`columns`](/api/data/pivotdatasource#configuration-columns) option.
 
 #### Returns
 
@@ -1587,7 +1587,7 @@ How to access and modify aggregation fields in a Kendo UI PivotGrid data source?
 
 ##### val `Array`
 
-The measures configuration. Accepts the same values as the [`measures`](/api/javascript/data/pivotdatasource#configuration-measures-values) option.
+The measures configuration. Accepts the same values as the [`measures`](/api/data/pivotdatasource#configuration-measures-values) option.
 
 #### Returns
 
@@ -1687,7 +1687,7 @@ How do I configure row fields in a Kendo UI pivot grid data source? Retrieve or 
 
 ##### val `Array`
 
-The rows configuration. Accepts the same values as the [`row`](/api/javascript/data/pivotdatasource#configuration-rows) option.
+The rows configuration. Accepts the same values as the [`row`](/api/data/pivotdatasource#configuration-rows) option.
 
 #### Returns
 

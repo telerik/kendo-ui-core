@@ -25,7 +25,7 @@ The Kendo UI DateTimePicker supports the following styling options:
 
 The `size` option controls how big or small the rendered DateTimePicker looks. The structure of the class is `k-input-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/datetimepicker/configuration/size) option:
+The following values are available for the [`size`](/api/ui/datetimepicker/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -54,7 +54,7 @@ The default size value is `medium` and it is applied to the wrapping span elemen
 
 The `rounded` option controls how much border radius is applied to the rendered DateTimePicker. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/datetimepicker/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/datetimepicker/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -84,7 +84,7 @@ The default rounded value is `medium` and it is applied to the wrapping span ele
 
 The `fillMode` option controls the way the color is applied to the rendered DateTimePicker. The structure of the class is `k-input-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/datetimepicker/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/datetimepicker/configuration/fillmode) option:
 
 - `solid`
 - `flat`
@@ -115,4 +115,4 @@ The default fillMode value is `solid` and it is applied to the wrapping span ele
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/appearance)
-* [JavaScript API Reference of the DateTimePicker](/api/javascript/ui/datetimepicker)
+* [JavaScript API Reference of the DateTimePicker](/api/ui/datetimepicker)

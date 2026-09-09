@@ -56,4 +56,4 @@ chat.setOptions({
 {% endif %}
 * [Chat Overview]({% slug htmlhelpers_chat_aspnetcore %})
 * [Chat Adornments]({% slug htmlhelpers_adornments_chat %})
-* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
+* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/ui/chat)

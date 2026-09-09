@@ -66,7 +66,7 @@ The following example demonstrates how to initialize the SegmentedControl.
 * [Getting Started with the SegmentedControl for {{ site.framework }}]({% slug htmlhelpers_segmentedcontrol_getting_started %})
 * [Basic Usage of the SegmentedControl HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/segmentedcontrol/index)
 * [Server-Side API of the SegmentedControl HtmlHelper for {{ site.framework }}](/api/segmentedcontrol)
-* [JavaScript API Reference of the SegmentedControl](https://docs.telerik.com/kendo-ui/api/javascript/ui/segmentedcontrol)
+* [JavaScript API Reference of the SegmentedControl](https://docs.telerik.com/kendo-ui/api/ui/segmentedcontrol)
 
 ## See Also
 

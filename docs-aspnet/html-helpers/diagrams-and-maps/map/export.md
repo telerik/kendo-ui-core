@@ -11,11 +11,11 @@ position: 2
 
 You can export the Telerik UI for {{ site.framework }} Map to a Document Format (PDF), Scalable Vector Graphics (SVG), and Portable Network Graphics (PNG) file format by using the [Kendo UI Drawing graphics library](https://docs.telerik.com/kendo-ui/framework/drawing/overview).
 
-You can also save all file formats through the Kendo UI [`saveAs()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/saveas) client-side method.
+You can also save all file formats through the Kendo UI [`saveAs()`](https://docs.telerik.com/kendo-ui/api/kendo/methods/saveas) client-side method.
 
 ## Exporting to PDF
 
-To export the Map to a PDF format document, use the [`exportPdf()`](https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/exportpdf) client-side method provided by the Kendo UI Drawing library.
+To export the Map to a PDF format document, use the [`exportPdf()`](https://docs.telerik.com/kendo-ui/api/drawing/methods/exportpdf) client-side method provided by the Kendo UI Drawing library.
 
 ```HtmlHelper
     @{
@@ -131,7 +131,7 @@ To export the Map to a PDF format document, use the [`exportPdf()`](https://docs
 
 ## Exporting to SVG 
 
-To export the Map to an SVG format document, use the [`exportSvg()`](https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/exportsvg) client-side method provided by the Kendo UI Drawing library.
+To export the Map to an SVG format document, use the [`exportSvg()`](https://docs.telerik.com/kendo-ui/api/drawing/methods/exportsvg) client-side method provided by the Kendo UI Drawing library.
 
 ```HtmlHelper
     @{
@@ -240,7 +240,7 @@ To export the Map to an SVG format document, use the [`exportSvg()`](https://doc
 
 ## Exporting to PNG
 
-To export the Map to a PNG format document, use the [`exportPNG()`](https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/exportsvg) client-side method provided by the Kendo UI Drawing library.
+To export the Map to a PNG format document, use the [`exportPNG()`](https://docs.telerik.com/kendo-ui/api/drawing/methods/exportsvg) client-side method provided by the Kendo UI Drawing library.
 
 ```HtmlHelper
     @{

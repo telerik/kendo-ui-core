@@ -28,7 +28,7 @@ ticketid: 1696460
 
 ## Description
 
-I want to restrict users from interacting with the action buttons in the sheet bar of the [Kendo UI for jQuery Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/overview). The goal is to allow users to navigate sheets but prevent actions such as adding sheets or accessing sheet menus.
+I want to restrict users from interacting with the action buttons in the sheet bar of the [Kendo UI for jQuery Spreadsheet](https://docs.telerik.com/kendo-ui/api/spreadsheet/overview). The goal is to allow users to navigate sheets but prevent actions such as adding sheets or accessing sheet menus.
 
 This knowledge base article also answers the following questions:
 - How can I hide buttons in the sheet bar?

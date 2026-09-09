@@ -36,7 +36,7 @@ How can I persist the selected rows of Kendo UI TreeList for jQuery bound to a r
 
 ## Solution
 
-Store the ids of the selected items whenever the user selects a row and then within the [`dataBound`](/api/javascript/ui/treelist/events/databound) event handler restore the selected rows.
+Store the ids of the selected items whenever the user selects a row and then within the [`dataBound`](/api/ui/treelist/events/databound) event handler restore the selected rows.
 
 
 ```dojo
@@ -99,4 +99,4 @@ Store the ids of the selected items whenever the user selects a row and then wit
 
 ## See Also
 
-* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
+* [JavaScript API Reference of the TreeList](/api/ui/treelist)

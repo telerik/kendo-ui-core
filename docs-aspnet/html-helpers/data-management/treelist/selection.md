@@ -85,10 +85,10 @@ To enable checkbox selection, add a column to the `columns` collection of the Tr
 
 > The TreeList does not support the simultaneous usage of the built-in checkbox-column selection and the selection which is enabled through the `Selectable` option.
 
-To get the currently selected items, you can use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods). The following example demonstrates how to access and store the data items of the selected TreeList items.
+To get the currently selected items, you can use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/ui/treelist#methods). The following example demonstrates how to access and store the data items of the selected TreeList items.
 
- 1. Call the [`select()` client-side API method](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/select).  The method will return an array with the elements of the selected items.
- 1. Loop through the selected items and call the [dataItem()](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/dataitem) method for each element to access the data item.
+ 1. Call the [`select()` client-side API method](https://docs.telerik.com/kendo-ui/api/ui/treelist/methods/select).  The method will return an array with the elements of the selected items.
+ 1. Loop through the selected items and call the [dataItem()](https://docs.telerik.com/kendo-ui/api/ui/treelist/methods/dataitem) method for each element to access the data item.
 
 ```JS script
     var treeListWidget = $("#treeList").data("kendoTreeList"); // Get a reference to the defined TreeList component.

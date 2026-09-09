@@ -22,4 +22,4 @@ To enable popup editing operations, set the `editable` option of the Grid to `po
 ## See Also
 
 * [Popup Editing by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/editing-popup)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

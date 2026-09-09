@@ -125,7 +125,7 @@ The following example shows how to apply a minimum width when resizing a single 
     </script>
 ```
 
-The following example shows how to apply the width to a certain column if the window is smaller than the specified number by utilizing the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method.
+The following example shows how to apply the width to a certain column if the window is smaller than the specified number by utilizing the [`setOptions`](/api/ui/grid/methods/setoptions) method.
 
 ```dojo
     <div id="grid"></div>
@@ -171,7 +171,7 @@ The following example shows how to apply the width to a certain column if the wi
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)
 * [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
 * [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
 * [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

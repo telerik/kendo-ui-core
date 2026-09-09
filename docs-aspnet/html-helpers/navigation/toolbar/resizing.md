@@ -29,4 +29,4 @@ This functionality is provided by default and may be disabled by setting the `Re
 {% if site.core %}
 * [Server-Side API of the ToolBar TagHelper](/api/taghelpers/toolbar)
 {% endif %}
-* [Client-Side API of the ToolBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)
+* [Client-Side API of the ToolBar](https://docs.telerik.com/kendo-ui/api/ui/toolbar)

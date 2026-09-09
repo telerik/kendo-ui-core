@@ -38,7 +38,7 @@ What is the best approach for adding a button in the Grid's command column heade
           })
     ```
 
-1. Initialize the Kendo UI Button and configure its [`click` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click). To add a new record to the Grid, use the [`addRow()` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/addrow).
+1. Initialize the Kendo UI Button and configure its [`click` event](https://docs.telerik.com/kendo-ui/api/ui/button/events/click). To add a new record to the Grid, use the [`addRow()` method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/addrow).
 
     ```javascript
           $(document).ready(function () {
@@ -77,7 +77,7 @@ What is the best approach for adding a button in the Grid's command column heade
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -61,4 +61,4 @@ $("#listView").kendoListView({
 ## See Also
 
 * [Basic Usage of the ListView (Demo)](https://demos.telerik.com/kendo-ui/listview/index)
-* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
+* [JavaScript API Reference of the ListView](/api/ui/listview)

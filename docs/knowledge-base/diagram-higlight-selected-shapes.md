@@ -46,9 +46,9 @@ How can I change the color of shapes in the Diagram when the user performs selec
       }
   	```
 
-    The shape visual is applied through the [`shapeDefaults.visual`](/api/javascript/dataviz/ui/diagram/configuration/shapedefaults.visual) property.
+    The shape visual is applied through the [`shapeDefaults.visual`](/api/dataviz/ui/diagram/configuration/shapedefaults.visual) property.
 
-1. Handle the [`select` event](/api/javascript/dataviz/ui/diagram/events/select) and trigger a redraw of the Diagram shapes.
+1. Handle the [`select` event](/api/dataviz/ui/diagram/events/select) and trigger a redraw of the Diagram shapes.
 
   	```
       select: function(e) {

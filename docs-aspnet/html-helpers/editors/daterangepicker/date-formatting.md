@@ -26,11 +26,11 @@ The following example demonstrates how to define the date format.
 ```
 {% endif %}
 
-You can find more information about the available formatting options in our [Date Formatting](https://docs.telerik.com/kendo-ui/globalization/intl/dateformatting) article. At the client-side you are also able to format dates by using the Kendo UI [`kendo.toString`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/tostring) method.
+You can find more information about the available formatting options in our [Date Formatting](https://docs.telerik.com/kendo-ui/globalization/intl/dateformatting) article. At the client-side you are also able to format dates by using the Kendo UI [`kendo.toString`](https://docs.telerik.com/kendo-ui/api/kendo/methods/tostring) method.
 
 
 ## See Also
 
 * [Using the API of the DateRangePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/api)
 * [Server-Side API](/api/daterangepicker)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker)

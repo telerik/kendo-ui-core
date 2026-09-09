@@ -11,7 +11,7 @@ position: 4
 
 In many scenarios where the Grid handles large datasets, it may be necessary to automatically scroll to a specific row (data item) based on external JavaScript logic or user input.
 
-The Grid component supports the client-side [`scrollToItem()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/scrolltoitem) method that allows you to programmatically scroll to a specific row.
+The Grid component supports the client-side [`scrollToItem()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/scrolltoitem) method that allows you to programmatically scroll to a specific row.
 
 The `scrollToItem()` method requires the following:
 
@@ -268,7 +268,7 @@ The following example shows how to scroll to an item that is not loaded yet when
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
 * [Scrolling to Specific Item by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/scroll-to-item)
-* [Client-Side Grid API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side Grid API](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side Grid HtmlHelper API](/api/grid)
 {% if site.core %}
 * [Server-Side Grid TagHelper API](/api/taghelpers/grid)

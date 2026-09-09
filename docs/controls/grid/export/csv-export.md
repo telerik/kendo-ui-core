@@ -18,9 +18,9 @@ For a runnable example, refer to the [demo on exporting the Grid to CSV](https:/
 To enable CSV export:
 
 1. Include the corresponding toolbar command and set the CSV settings.
-    * [Toolbar configuration](/api/javascript/ui/grid/configuration/toolbar)
-    * [CSV export configuration](/api/javascript/ui/grid/configuration/csv)
-1. To trigger export through code, call the [`saveAsCSV`](/api/javascript/ui/grid/methods/saveascsv) method.
+    * [Toolbar configuration](/api/ui/grid/configuration/toolbar)
+    * [CSV export configuration](/api/ui/grid/configuration/csv)
+1. To trigger export through code, call the [`saveAsCSV`](/api/ui/grid/methods/saveascsv) method.
 
 By default, the Grid exports the current page of data with the current sorting, filtering, grouping, and column state.
 
@@ -63,7 +63,7 @@ With regard to its CSV export, the Grid enables you to:
 
 ### Exporting All Pages
 
-By default, the Grid exports only the current page. To export all pages, set [`csv.allPages`](/api/javascript/ui/grid/configuration/csv.allpages) to `true`.
+By default, the Grid exports only the current page. To export all pages, set [`csv.allPages`](/api/ui/grid/configuration/csv.allpages) to `true`.
 
 ```dojo
     <div id="grid"></div>
@@ -95,13 +95,13 @@ By default, the Grid exports only the current page. To export all pages, set [`c
 
 ### Customizing CSV Options
 
-You can customize the exported CSV through the [`csv`](/api/javascript/ui/grid/configuration/csv) configuration:
+You can customize the exported CSV through the [`csv`](/api/ui/grid/configuration/csv) configuration:
 
-* [`csv.delimiter`](/api/javascript/ui/grid/configuration/csv.delimiter)
-* [`csv.lineSeparator`](/api/javascript/ui/grid/configuration/csv.lineseparator)
-* [`csv.includeUTF8BOM`](/api/javascript/ui/grid/configuration/csv.includeutf8bom)
-* [`csv.preventFormulaInjection`](/api/javascript/ui/grid/configuration/csv.preventformulainjection)
-* [`csv.maxCellLength`](/api/javascript/ui/grid/configuration/csv.maxcelllength)
+* [`csv.delimiter`](/api/ui/grid/configuration/csv.delimiter)
+* [`csv.lineSeparator`](/api/ui/grid/configuration/csv.lineseparator)
+* [`csv.includeUTF8BOM`](/api/ui/grid/configuration/csv.includeutf8bom)
+* [`csv.preventFormulaInjection`](/api/ui/grid/configuration/csv.preventformulainjection)
+* [`csv.maxCellLength`](/api/ui/grid/configuration/csv.maxcelllength)
 
 The following example demonstrates a custom delimiter, custom line separator, UTF-8 BOM, and formula injection protection.
 
@@ -148,7 +148,7 @@ The following example demonstrates a custom delimiter, custom line separator, UT
 
 ### Exporting Selected Rows
 
-To export only selected rows, enable row selection and call [`exportSelectedToCSV`](/api/javascript/ui/grid/methods/exportselectedtocsv).
+To export only selected rows, enable row selection and call [`exportSelectedToCSV`](/api/ui/grid/methods/exportselectedtocsv).
 
 ```dojo
     <button id="exportSelected">Export Selected to CSV</button>
@@ -187,7 +187,7 @@ To export only selected rows, enable row selection and call [`exportSelectedToCS
 
 ### Customizing the Generated CSV
 
-Use the [`csvExport`](/api/javascript/ui/grid/events/csvexport) event to inspect or modify the generated CSV string.
+Use the [`csvExport`](/api/ui/grid/events/csvexport) event to inspect or modify the generated CSV string.
 
 ```dojo
     <div id="grid"></div>
@@ -225,8 +225,8 @@ Use the [`csvExport`](/api/javascript/ui/grid/events/csvexport) event to inspect
 ## Known Limitations
 
 * When exporting all pages with large remote datasets, the browser may become unresponsive.
-* Older browsers may require a server proxy. Configure [`csv.proxyURL`](/api/javascript/ui/grid/configuration/csv.proxyurl) and [`csv.forceProxy`](/api/javascript/ui/grid/configuration/csv.forceproxy) when needed.
-* The [`saveAsCSV`](/api/javascript/ui/grid/methods/saveascsv) method does not trigger the [`csvExport`](/api/javascript/ui/grid/events/csvexport) event.
+* Older browsers may require a server proxy. Configure [`csv.proxyURL`](/api/ui/grid/configuration/csv.proxyurl) and [`csv.forceProxy`](/api/ui/grid/configuration/csv.forceproxy) when needed.
+* The [`saveAsCSV`](/api/ui/grid/methods/saveascsv) method does not trigger the [`csvExport`](/api/ui/grid/events/csvexport) event.
 * The Grid CSV export does not support exporting footer rows.
 
 If you need footer totals in the exported file, append a total row to the flat data before generating the CSV.
@@ -246,4 +246,4 @@ const rows = [
 * [Grid Excel Export]({% slug exporting_excel_kendoui_grid_widget %})
 * [Grid PDF Export]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Grid Selection & Export]({% slug exporting_selection_kendoui_grid %})
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

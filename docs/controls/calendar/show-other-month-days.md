@@ -9,7 +9,7 @@ position: 11
 
 # Other Month Days
 
-Starting with Kendo UI R2 2024, the Calendar exposes the [`showOtherMonthDays`](/api/javascript/ui/calendar/configuration/showothermonthdays) option, which allows you to control whether the days from the previous or next month will be displayed.
+Starting with Kendo UI R2 2024, the Calendar exposes the [`showOtherMonthDays`](/api/ui/calendar/configuration/showothermonthdays) option, which allows you to control whether the days from the previous or next month will be displayed.
 
 ```dojo
     <div id="calendar"></div>
@@ -20,9 +20,9 @@ Starting with Kendo UI R2 2024, the Calendar exposes the [`showOtherMonthDays`](
     </script>
 ```
 
-> When range selection is configured, the [`showOtherMonthDays`](/api/javascript/ui/calendar/configuration/showothermonthdays) needs to be set to `false`.
+> When range selection is configured, the [`showOtherMonthDays`](/api/ui/calendar/configuration/showothermonthdays) needs to be set to `false`.
 
 ## See Also
 
 * [Show Other Month Days Demo of the Calendar](https://demos.telerik.com/kendo-ui/calendar/show-other-month-days)
-* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/ui/calendar)

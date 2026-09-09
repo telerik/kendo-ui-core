@@ -44,4 +44,4 @@ The Kendo UI Validator addresses real-time requirements browser web application 
 ## See Also
 
 * [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
-* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
+* [JavaScript API Reference of the Validator](/api/ui/validator)

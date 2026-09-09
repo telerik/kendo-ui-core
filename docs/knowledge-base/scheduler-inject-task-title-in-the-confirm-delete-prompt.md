@@ -116,4 +116,4 @@ Handle the `dataBound` event and attach a `click` event handler to the `k-event-
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

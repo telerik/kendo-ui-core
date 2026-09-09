@@ -42,8 +42,8 @@ I want to implement:
 1. Implement a span element for the right arrow with classes: "k-icon k-i-chevron-right".
 1. Implement a span element for the Pager Total info with id "total".
 1. Handle the click event of the left arrow.
-1. In the event handler, get the current [page](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page). Set the previous page to the [dataSource](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/datasource) of the Grid by using the current page. Change the value of the numeric.
-1. Handle the [Change Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/events/change) of the NumericTextBox. It is fired even when clicking outside of the input, so it is perfect for the case.
+1. In the event handler, get the current [page](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/page). Set the previous page to the [dataSource](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/datasource) of the Grid by using the current page. Change the value of the numeric.
+1. Handle the [Change Event](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox/events/change) of the NumericTextBox. It is fired even when clicking outside of the input, so it is perfect for the case.
 1. In the Change Event handler, get the current value of the numeric and apply it to the Grid.
 1. Handle the click event of the right arrow.
 1. In the event handler, get the current page. Set the next page to the dataSource of the Grid by using the current page. Change the value of the numeric checking if the total pages are less or equal to the "next page".
@@ -169,7 +169,7 @@ I want to implement:
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

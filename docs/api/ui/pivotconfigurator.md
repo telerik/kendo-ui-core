@@ -7,18 +7,18 @@ res_type: api
 
 # kendo.ui.PivotConfigurator
 
-Represents the Kendo UI PivotConfigurator widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI PivotConfigurator widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
 ### dataSource `Object|kendo.data.PivotDataSource`
 
-The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.PivotDataSource](/api/javascript/data/pivotdatasource)
+The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.PivotDataSource](/api/data/pivotdatasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object the widget will initialize a new [kendo.data.PivotDataSource](/api/javascript/data/pivotdatasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object the widget will initialize a new [kendo.data.PivotDataSource](/api/data/pivotdatasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/javascript/data/pivotdatasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/data/pivotdatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -1433,11 +1433,11 @@ How to customize the "not equal" filter operator label in Kendo UI for jQuery Pi
 
 ### dataSource `kendo.data.PivotDataSource`
 
-The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](/api/javascript/ui/pivotconfigurator/configuration/datasource) option.
+The [data source](/api/data/pivotdatasource) of the widget. Configured via the [dataSource](/api/ui/pivotconfigurator/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/pivotconfigurator/methods/setdatasource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/ui/pivotconfigurator/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">

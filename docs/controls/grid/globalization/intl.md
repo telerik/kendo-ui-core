@@ -226,4 +226,4 @@ The following example demonstrates how to allow the user to manually select the 
 
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
 * [Formatting and Parsing of Dates and Numbers in Kendo UI for jQuery]({% slug dateformatting_kendoui_globalization %})
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

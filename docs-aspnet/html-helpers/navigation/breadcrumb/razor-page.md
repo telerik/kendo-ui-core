@@ -71,7 +71,7 @@ For the complete project, refer to the [Breadcrumb in Razor Pages example](https
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Breadcrumb](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/breadcrumb)
+* [Client-Side API of the Breadcrumb](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/breadcrumb)
 * [Server-Side HtmlHelper API of the Breadcrumb](/api/breadcrumb)
 * [Server-Side TagHelper API of the Breadcrumb](/api/taghelpers/breadcrumb)
 * [Knowledge Base Section](/knowledge-base)

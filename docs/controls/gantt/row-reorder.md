@@ -9,7 +9,7 @@ position: 7
 
 # Reorder Rows through Click-Move-Click
 
-As of Kendo UI R2 SP1 2023, users can reorder the Gantt's TreeList rows by using the click-move-click functionality provided by the [`clickMoveClick`](/api/javascript/ui/gantt/configuration/editable.clickmoveclick) option. To use this functionality, you must also add a `draggable` column that allows the draggable icon to appear. Once enabled, users can move the row by clicking the icon to start moving the row, and then clicking again to place the row in its new position.
+As of Kendo UI R2 SP1 2023, users can reorder the Gantt's TreeList rows by using the click-move-click functionality provided by the [`clickMoveClick`](/api/ui/gantt/configuration/editable.clickmoveclick) option. To use this functionality, you must also add a `draggable` column that allows the draggable icon to appear. Once enabled, users can move the row by clicking the icon to start moving the row, and then clicking again to place the row in its new position.
 
 ```dojo
     <div id="gantt"></div>
@@ -55,7 +55,7 @@ As of Kendo UI R2 SP1 2023, users can reorder the Gantt's TreeList rows by using
 
 # Reorder Rows by Dragging and Dropping
 
-You can reorder the Gantt's TreeList rows by using the drag and drop functionality provided by the [`reorder`](/api/javascript/ui/gantt/configuration/editable.reorder) option.
+You can reorder the Gantt's TreeList rows by using the drag and drop functionality provided by the [`reorder`](/api/ui/gantt/configuration/editable.reorder) option.
 
 The following example demonstrates how you can reorder the TreeList rows using drag and drop:
 
@@ -97,4 +97,4 @@ The following example demonstrates how you can reorder the TreeList rows using d
 
 ## See Also
 
-* [Gantt JavaScript API Reference](/api/javascript/ui/gantt)
+* [Gantt JavaScript API Reference](/api/ui/gantt)

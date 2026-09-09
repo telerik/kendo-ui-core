@@ -92,4 +92,4 @@ For a complete example of the Captcha integration within a form, check out the [
 ## See Also
 
 * [Form Integration of the Kendo Captcha](https://demos.telerik.com/kendo-ui/captcha/index)
-* [JavaScript API Reference of the Captcha](/api/javascript/ui/captcha)
+* [JavaScript API Reference of the Captcha](/api/ui/captcha)

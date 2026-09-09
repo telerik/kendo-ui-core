@@ -289,7 +289,7 @@ This example showcases an integrated {{ site.framework }} [`Template`](https://d
 
 ## 5. Handle a TaskBoard Event
 
-The TaskBoard exposes different [client-side events](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard#events) that you can handle and use to customize the component's functions. In this tutorial, you will use the `Execute` event to prevent the selection of tasks by the user.
+The TaskBoard exposes different [client-side events](https://docs.telerik.com/kendo-ui/api/ui/taskboard#events) that you can handle and use to customize the component's functions. In this tutorial, you will use the `Execute` event to prevent the selection of tasks by the user.
 
 To achieve the desired behavior, attach a handler in the declaration of the TaskBoard, declare the `onExecute` JavaScript function and prevent the event for the `SelectCardCommand`'s execution.
 
@@ -398,7 +398,7 @@ Referencing existing instances of a component allows you to build on top of thei
         </script>
     ```
 
-1. Use the [TaskBoard client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard#methods) to control the behavior of the widget. In this example, you will preview a task's card with the [`previewCard`](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard/methods/previewcard) method.
+1. Use the [TaskBoard client-side API](https://docs.telerik.com/kendo-ui/api/ui/taskboard#methods) to control the behavior of the widget. In this example, you will preview a task's card with the [`previewCard`](https://docs.telerik.com/kendo-ui/api/ui/taskboard/methods/previewcard) method.
 
     ```JS script
         <script>
@@ -427,6 +427,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the TaskBoard for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/api)
-* [TaskBoard client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [TaskBoard client-side API](https://docs.telerik.com/kendo-ui/api/ui/taskboard)
 * [TaskBoard server-side API](/api/taskboard)
 * [Knowledge Base Section](/knowledge-base)

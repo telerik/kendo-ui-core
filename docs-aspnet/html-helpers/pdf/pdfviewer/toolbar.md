@@ -16,7 +16,7 @@ You can also define [custom tools](#custom-tools) in the toolbar that trigger cu
 
 ## Built-In Tools
 
-You can control the number and type of the rendered tools by adding only the desired tools in the [`Items()`](/api/kendo.mvc.ui.fluent/pdfviewertoolbarsettingsbuilder#itemssystemaction) configuration of the `Toolbar`. For the full list of configuration options, refer to the [client-side API of the ToolBar items](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/configuration/toolbar.items).
+You can control the number and type of the rendered tools by adding only the desired tools in the [`Items()`](/api/kendo.mvc.ui.fluent/pdfviewertoolbarsettingsbuilder#itemssystemaction) configuration of the `Toolbar`. For the full list of configuration options, refer to the [client-side API of the ToolBar items](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer/configuration/toolbar.items).
 
 The toolbar of the PDFViewer supports the following built-in tools:
 
@@ -105,7 +105,7 @@ The `open`, `download`, and `print` built-in tools are displayed on the right-si
 ```
 {% endif %}
 
-You can also use the [`add()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/methods/add) and [`remove()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/methods/remove) client-side API methods to programmatically manage the rendered tools in the PDFViewer.
+You can also use the [`add()`](https://docs.telerik.com/kendo-ui/api/ui/toolbar/methods/add) and [`remove()`](https://docs.telerik.com/kendo-ui/api/ui/toolbar/methods/remove) client-side API methods to programmatically manage the rendered tools in the PDFViewer.
 
 ```HtmlHelper
     @(Html.Kendo().PDFViewer()
@@ -209,7 +209,7 @@ The following example demonstrates how to add a custom tool to the toolbar.
 ## See Also
 
 * [Basic Usage of the PDFViewer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/index)
-* [Client-Side API Reference of the ToolBar for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)
+* [Client-Side API Reference of the ToolBar for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/toolbar)
 * [Server-Side API Reference of the PDFViewer for {{ site.framework }}](/api/pdfviewer)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the PDFViewer for {{ site.framework }}](/api/taghelpers/pdfviewer)

@@ -41,4 +41,4 @@ To see the example on how to use a Kendo UI MultiSelect for a column editor in t
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

@@ -53,4 +53,4 @@ When using DPL Processing in the PdfViewer, the following limitations may be obs
 ## See Also
 
 * [Basic Usage of the PDFViewer (Demo)](https://demos.telerik.com/kendo-ui/pdfviewer/index)
-* [JavaScript API Reference of the PDFViewer](/api/javascript/ui/pdfviewer)
+* [JavaScript API Reference of the PDFViewer](/api/ui/pdfviewer)

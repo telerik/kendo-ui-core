@@ -231,6 +231,6 @@ The following example renders a Scheduler with a day view configured to use `min
 
 ## See Also
 
-- [Scheduler Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
-- [Scheduler View Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/views)
-- [Scheduler minorTickCount API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#configuration-views.minorTickCount)
+- [Scheduler Documentation](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
+- [Scheduler View Configuration](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/views)
+- [Scheduler minorTickCount API](https://docs.telerik.com/kendo-ui/api/ui/scheduler#configuration-views.minorTickCount)

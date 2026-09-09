@@ -26,7 +26,7 @@ Built around the HTML5 form validation attributes, it supports a variety of buil
 
 * [Getting Started with the Kendo UI Validator for jQuery]({% slug getting_started_kendoui_validator_widget %})
 * [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
-* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
+* [JavaScript API Reference of the Validator](/api/ui/validator)
 
 ## See Also 
 

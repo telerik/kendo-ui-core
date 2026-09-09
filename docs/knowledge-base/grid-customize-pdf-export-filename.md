@@ -26,7 +26,7 @@ How can I add the current date and time to the Pdf export filename of the Grid?
 
 ## Solution
 
-1. Use the [`pdfExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/pdfexport) event to access the Grid options.
+1. Use the [`pdfExport`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/pdfexport) event to access the Grid options.
 
 1. With the help of the [`kendo.toString()`](https://docs.telerik.com/kendo-ui/framework/globalization/dateformatting) method or another way to format the date, concatenate the date to the filename:
 

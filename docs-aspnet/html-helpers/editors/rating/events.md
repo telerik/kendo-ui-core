@@ -75,4 +75,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the Rating for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/rating/api)
 * [Server-Side API of the Rating](/api/rating)
-* [Client-Side API of the Rating](https://docs.telerik.com/kendo-ui/api/javascript/ui/rating)
+* [Client-Side API of the Rating](https://docs.telerik.com/kendo-ui/api/ui/rating)

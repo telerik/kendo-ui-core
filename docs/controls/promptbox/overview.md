@@ -30,4 +30,4 @@ The PromptBox serves as a dedicated input area for composing and sending prompts
 
 ## See Also
 
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)

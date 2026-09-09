@@ -8,7 +8,7 @@ component: radiogroup
 
 # kendo.ui.RadioGroup
 
-Represents the Kendo UI RadioGroup. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI RadioGroup. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

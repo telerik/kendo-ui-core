@@ -28,7 +28,7 @@ When you cancel changes, other events in the jQuery Scheduler disappear.
 
 ## Cause 
 
-It is possible to experience such behavior if the [`id` fields](/api/javascript/data/schedulerevent#fields-id) of the other events are not set to valid and unique values.
+It is possible to experience such behavior if the [`id` fields](/api/data/schedulerevent#fields-id) of the other events are not set to valid and unique values.
 
 ## Solution
 
@@ -38,4 +38,4 @@ Make sure the `id` fields of the Scheduler are properly configured and contain v
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

@@ -185,4 +185,4 @@ This implementation ensures that clicking or pressing "Enter" on the buttons onl
 ## See Also
 
 - [Kendo UI PanelBar Overview](https://docs.telerik.com/kendo-ui/controls/navigation/panelbar/overview)
-- [Kendo UI PanelBar API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+- [Kendo UI PanelBar API Reference](https://docs.telerik.com/kendo-ui/api/ui/panelbar)

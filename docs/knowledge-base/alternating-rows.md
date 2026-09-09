@@ -29,7 +29,7 @@ How can I customize the Excel document that the Data Grid generates during expor
 
 ## Solution
 
-To set the background color of the alternating rows, the demo uses the [`background`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background) option of the cell. For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+To set the background color of the alternating rows, the demo uses the [`background`](/api/ooxml/workbook/configuration/sheets.rows.cells.background) option of the cell. For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
 
 The following example demonstrates how to customize the Excel document that the Grid generates during exporting.
 
@@ -69,7 +69,7 @@ The following example demonstrates how to customize the Excel document that the 
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)
 * [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
 * [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
 * [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

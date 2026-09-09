@@ -6,7 +6,7 @@ res_type: api
 
 # kendo.spreadsheet.CustomFilter
 
-Represents a filter applied to a column of a given [range](/api/javascript/spreadsheet/range).  It may specify one or two criterion, comparison operator (equals, starts with, greater than etc.) and logical operator (and, or).
+Represents a filter applied to a column of a given [range](/api/spreadsheet/range).  It may specify one or two criterion, comparison operator (equals, starts with, greater than etc.) and logical operator (and, or).
 
 ## Methods
 

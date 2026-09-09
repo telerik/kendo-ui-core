@@ -31,7 +31,7 @@ I have a map that a user will utilize in order to mark their position. I want th
 
 ## Solution
 
-1. Add the [`click`](/api/javascript/dataviz/ui/map/events/click) event handler
+1. Add the [`click`](/api/dataviz/ui/map/events/click) event handler
 1. Use the `e.location` event data to add the new marker
 1. Add a tooltip with a remove button and include the current location. You can do that by adding your own `data-` attribute
 
@@ -141,6 +141,6 @@ The following example renders a Map centered on Austin, TX, adds a new marker at
 
 ## See Also
 
-* [Map API Reference](/api/javascript/dataviz/ui/map)
-* [Marker API](/api/javascript/dataviz/map/marker)
-* [MarkerLayer API](/api/javascript/dataviz/map/marker-layer)
+* [Map API Reference](/api/dataviz/ui/map)
+* [Marker API](/api/dataviz/map/marker)
+* [MarkerLayer API](/api/dataviz/map/marker-layer)

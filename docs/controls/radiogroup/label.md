@@ -14,7 +14,7 @@ If the RadioGroup widget is bound to an array of strings, those will be used as 
 
 ## Set the Label text
 
-To customize the text of the label, use the [`label`](/api/javascript/ui/radiogroup/configuration/items.label) option. 
+To customize the text of the label, use the [`label`](/api/ui/radiogroup/configuration/items.label) option. 
 
 ```dojo
     <ul id="radiogroup"></ul>
@@ -53,4 +53,4 @@ The labels of all radio buttons in the RadioGroup could be rendered before or af
 ## See Also 
 
 * [Basic Usage of the RadioGroup (Demo)](https://demos.telerik.com/kendo-ui/radiogroup/index)
-* [JavaScript API Reference of the RadioGroup](/api/javascript/ui/radiogroup)
+* [JavaScript API Reference of the RadioGroup](/api/ui/radiogroup)

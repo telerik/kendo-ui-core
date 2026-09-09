@@ -210,7 +210,7 @@ You can reference the ExpansionPanel instances that you have created and build o
         </script>
     ```
 
-1. Use the [ExpansionPanel client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel#methods) to control the behavior of the component. In this example, you will use the `toggle` method to toggle the state of the control dynamically (for example, when a button is clicked).
+1. Use the [ExpansionPanel client-side API](https://docs.telerik.com/kendo-ui/api/ui/expansionpanel#methods) to control the behavior of the component. In this example, you will use the `toggle` method to toggle the state of the control dynamically (for example, when a button is clicked).
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -257,6 +257,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the ExpansionPanel for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/expansionpanel/api)
-* [Client-Side API of the ExpansionPanel](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel)
+* [Client-Side API of the ExpansionPanel](https://docs.telerik.com/kendo-ui/api/ui/expansionpanel)
 * [Server-Side API of the ExpansionPanel](/api/expansionpanel)
 * [Knowledge Base Section](/knowledge-base)

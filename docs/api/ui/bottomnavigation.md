@@ -7,7 +7,7 @@ component: BottomNavigation
 
 # kendo.ui.BottomNavigation
 
-Represents the Kendo UI BottomNavigation. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI BottomNavigation. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

@@ -60,4 +60,4 @@ Here's a quick summary to outline the benefits of the new PivotGridV2:
 ## See Also
 
 * [Basic Usage of the PivotGridV2 (Demo)](https://demos.telerik.com/kendo-ui/pivotgridv2/index)
-* [PivotGridV2 JavaScript API Reference](/api/javascript/ui/pivotgridv2)
+* [PivotGridV2 JavaScript API Reference](/api/ui/pivotgridv2)

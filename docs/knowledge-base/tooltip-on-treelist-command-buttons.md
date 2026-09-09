@@ -27,7 +27,7 @@ How to update the content of Kendo Tooltip when it is used for the TreeList comm
 
 ## Solution
 
-Subscribe to the TreeList `edit`, `dataBound` and `cancel` events. In the event handlers refresh the Tooltip content using the [`refresh`](/api/javascript/ui/tooltip/methods/refresh) method
+Subscribe to the TreeList `edit`, `dataBound` and `cancel` events. In the event handlers refresh the Tooltip content using the [`refresh`](/api/ui/tooltip/methods/refresh) method
 
 ### DatePicker
 
@@ -131,5 +131,5 @@ The following example demonstrates how to refresh the content of Kendo Tooltip w
 
 ## See Also
 
-* [Tooltip] API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
-* [TreeList API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [Tooltip] API Reference](https://docs.telerik.com/kendo-ui/api/ui/tooltip)
+* [TreeList API Reference](https://docs.telerik.com/kendo-ui/api/ui/treelist)

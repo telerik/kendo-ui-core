@@ -198,7 +198,7 @@ kendo.drawing.pdf.toBlob(group, function(blob){
 
 ## See Also
 
-* [drawDOM API Reference](/api/javascript/drawing/methods/drawdom)
-* [PDF Options JavaScript API Reference](/api/javascript/drawing/pdfoptions)
+* [drawDOM API Reference](/api/drawing/methods/drawdom)
+* [PDF Options JavaScript API Reference](/api/drawing/pdfoptions)
 * [Limitations and Browser Support for Kendo UI Drawing API]({% slug supportedbrowsers_drawingapi %})
 * [Knowledge Base Section](/knowledge-base)

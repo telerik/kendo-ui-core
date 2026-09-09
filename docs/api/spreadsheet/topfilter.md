@@ -6,7 +6,7 @@ res_type: api
 
 # kendo.spreadsheet.TopFilter
 
-Represents a filter applied to a column of a given [range](/api/javascript/spreadsheet/range). It may be used to filter the top X items (top X percent, bottom X percent, top X number, bottom X number)
+Represents a filter applied to a column of a given [range](/api/spreadsheet/range). It may be used to filter the top X items (top X percent, bottom X percent, top X number, bottom X number)
 
 ## Methods
 

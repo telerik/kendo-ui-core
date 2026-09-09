@@ -8,13 +8,13 @@ component: treelist
 
 # kendo.ui.TreeList
 
-Represents the Kendo UI TreeList widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI TreeList widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
 ### altRowTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the alternating table rows. By default the treelist renders a table row (`<tr>`) for every data source item.
+The [template](/api/kendo/methods/template) which renders the alternating table rows. By default the treelist renders a table row (`<tr>`) for every data source item.
 
 > The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The treelist uses the `uid` data attribute to determine the data to which a table row is bound to.
 > Set the `class` of the table row to `k-alt` to get the default "alternating" look and feel.
@@ -83,7 +83,7 @@ How do I customize alternating row templates in Kendo UI for jQuery TreeList? Co
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false`, the TreeList will not bind to the specified DataSource during initialization. In this case, data binding will occur when the [`change`](/api/javascript/data/datasource/events/change) event of the DataSource fires. By default, the TreeList will bind to the DataSource that is specified in the configuration.
+If set to `false`, the TreeList will not bind to the specified DataSource during initialization. In this case, data binding will occur when the [`change`](/api/data/datasource/events/change) event of the DataSource fires. By default, the TreeList will bind to the DataSource that is specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same DataSource. Disabling automatic binding ensures that the shared DataSource makes a single request to the remote service.
 
@@ -132,7 +132,7 @@ How to prevent automatic data binding in Kendo UI TreeList on initial load? Conf
 ### columns `Array`
 
 The configuration of the TreeList columns whcih represents an array of JavaScript objects or strings. JavaScript objects are interpreted as column configurations. Strings are interpreted as the
-[`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the column is bound. The TreeList will create a column for each item of the array.
+[`field`](/api/ui/treelist#configuration-columns.field) to which the column is bound. The TreeList will create a column for each item of the array.
 
 
 <div class="meta-api-description">
@@ -258,11 +258,11 @@ The built-in commands are:
 * `createChild`- Adds a new child item to the current table row and switches to edit mode.
 * `destroy` - Removes the data item to which the current table row is bound.
 
-Custom commands are supported by specifying the [`click`](/api/javascript/ui/treelist#configuration-columns.command.click) option.
+Custom commands are supported by specifying the [`click`](/api/ui/treelist#configuration-columns.command.click) option.
 
-> * Each custom command requires you to explicitly specify its [`name`](/api/javascript/ui/treelist/configuration/columns.command#columnscommandname).
-> * A command column cannot be [`expandable`](/api/javascript/ui/treelist#configuration-columns.expandable).
-> * The built-in commands work only if editing is enabled through the [`editable`](/api/javascript/ui/treelist#configuration-editable) option and the DataSource of the TreeList is configured for [CRUD operations](https://docs.telerik.com/kendo-ui/framework/datasource/crud).
+> * Each custom command requires you to explicitly specify its [`name`](/api/ui/treelist/configuration/columns.command#columnscommandname).
+> * A command column cannot be [`expandable`](/api/ui/treelist#configuration-columns.expandable).
+> * The built-in commands work only if editing is enabled through the [`editable`](/api/ui/treelist#configuration-editable) option and the DataSource of the TreeList is configured for [CRUD operations](https://docs.telerik.com/kendo-ui/framework/datasource/crud).
 
 
 <div class="meta-api-description">
@@ -496,7 +496,7 @@ How do I handle click events on command buttons in a Kendo UI TreeList? Manage u
 
 ### columns.command.name `String`
 
-The name of the command. Commands can be built-in ("edit", "createChild" and "destroy") or custom. When set to a custom value, the `name` is rendered as a `data-command` attribute. For more information, refer to the [`columns.command`](/api/javascript/ui/treelist#configuration-columns.command) section.
+The name of the command. Commands can be built-in ("edit", "createChild" and "destroy") or custom. When set to a custom value, the `name` is rendered as a `data-command` attribute. For more information, refer to the [`columns.command`](/api/ui/treelist#configuration-columns.command) section.
 
 
 <div class="meta-api-description">
@@ -528,7 +528,7 @@ How do I customize the command identifier for row operations in a Kendo UI TreeL
 
 ### columns.command.text `String`
 
-The text that is displayed by the command button. If not set, the [`name`](/api/javascript/ui/treelist#configuration-columns.command.name) option is used as the button text. To have an icon button with no text, you can set the `text` property to an empty string.
+The text that is displayed by the command button. If not set, the [`name`](/api/ui/treelist#configuration-columns.command.name) option is used as the button text. To have an icon button with no text, you can set the `text` property to an empty string.
 
 
 <div class="meta-api-description">
@@ -652,10 +652,10 @@ How to enable editing in specific cells of Kendo UI TreeList based on custom log
 
 Provides a way to specify a custom editing UI for the column. To create the editing UI, use the `container` parameter.
 
-> * The editing UI has to contain an element with a set `name` HTML attribute. The attribute value has to match the [`field`](/api/javascript/ui/treelist#configuration-columns.field) name.
+> * The editing UI has to contain an element with a set `name` HTML attribute. The attribute value has to match the [`field`](/api/ui/treelist#configuration-columns.field) name.
 > * The validation settings that are defined in the `model.fields` configuration will not be applied automatically. In order for the validation to work, you (the developer) are responsible for attaching the corresponding validation attributes to the editor input. If the custom editor is a widget, to avoid visual issues, you can [customize the tooltip position of the validation warning](/framework/validator/overview#customizing-the-tooltip-position).
 
-When used as `String`, defines the editor widget type. For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditor)
+When used as `String`, defines the editor widget type. For further info check the Form API: [`field`](/api/ui/form/configuration/items#itemseditor)
 
 
 <div class="meta-api-description">
@@ -676,7 +676,7 @@ The name of the field to which the column is bound.
 
 ##### options.format `String`
 
-The format string of the column that is specified through the [`format`](/api/javascript/ui/treelist#configuration-columns.format) option.
+The format string of the column that is specified through the [`format`](/api/ui/treelist#configuration-columns.format) option.
 
 ##### options.model `kendo.data.TreeListModel`
 
@@ -804,7 +804,7 @@ The model instance to which the current table row is bound.
 
 ### columns.editorOptions `Object`
 
-Defines the widget configuration when one is initialized as editor for the column (or the widget defined in `items.editor`). For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditoroptions).
+Defines the widget configuration when one is initialized as editor for the column (or the widget defined in `items.editor`). For further info check the Form API: [`field`](/api/ui/form/configuration/items#itemseditoroptions).
 
 
 <div class="meta-api-description">
@@ -880,7 +880,7 @@ How do I prevent HTML injection attacks in my Kendo UI TreeList columns? Configu
 
 If set to `true`, the column will show the icons that are used for expanding and collapsing child rows. By default, the first column of the TreeList is expandable.
 
-> An expandable column cannot hold [commands](/api/javascript/ui/treelist#configuration-columns.command).
+> An expandable column cannot hold [commands](/api/ui/treelist#configuration-columns.command).
 
 
 <div class="meta-api-description">
@@ -937,7 +937,7 @@ How do I map a Kendo UI TreeList column to a specific data model property using 
 ### columns.filterable `Boolean|Object` *(default: true)*
 
 If set to `true` and if filtering is enabled, a filter menu will be displayed for this column. If set to `false`, the filter menu will not be displayed. By default, a filter menu is displayed
-for all columns when filtering is enabled through the [`filterable`](/api/javascript/ui/treelist#configuration-filterable) option. Can be set to a JavaScript object which represents the filter menu configuration.
+for all columns when filtering is enabled through the [`filterable`](/api/ui/treelist#configuration-filterable) option. Can be set to a JavaScript object which represents the filter menu configuration.
 
 
 <div class="meta-api-description">
@@ -1001,13 +1001,13 @@ How do I customize filter cells in a TreeList when applying row-based filtering?
 
 ### columns.filterable.cell.dataSource `Object|kendo.data.DataSource`
 
-Specifies a custom dataSource for the AutoComplete when the type of the column is `string`. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance.
+Specifies a custom dataSource for the AutoComplete when the type of the column is `string`. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [`kendo.data.DataSource`](/api/data/datasource) instance.
 
 It is not recommended that you use the same `dataSource` instance for the TreeList and the AutoComplete because it causes negative side effects.
 
 If the `dataSource` options is missing, a new cloned instance of the TreeList's dataSource will be used.
 
-If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance, the widget will use that instance and will _not_ initialize a new one.
+If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/data/datasource) instance, the widget will use that instance and will _not_ initialize a new one.
 
 
 <div class="meta-api-description">
@@ -1169,7 +1169,7 @@ How to set input width for filterable cells in TreeList column headers? Control 
 
 ### columns.filterable.cell.suggestionOperator `String` *(default: "startswith")*
 
-Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource/configuration/filter#filteroperator) option.
+Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/data/datasource/configuration/filter#filteroperator) option.
 
 > This operator is completely independent from the operator used for the filtering on this column. For more inforamtion, check [`operator`](columns.filterable.cell.operator).
 
@@ -1516,7 +1516,7 @@ How to customize filter UI in Kendo TreeList columns? Control and customize the 
 
 ### columns.footerTemplate `String|Function`
 
-The [`template`](/api/javascript/kendo/methods/template) which renders the footer table cell for the column.
+The [`template`](/api/kendo/methods/template) which renders the footer table cell for the column.
 
 The following fields can be used in the template:
 
@@ -1558,9 +1558,9 @@ How to customize footer content in a TreeList column using the `footerTemplate` 
 
 ### columns.format `String`
 
-The format that is applied to the value before it is displayed. Takes the `{0:format}` form where `format` is a [standard number format](/api/javascript/kendo#standard-number-formats), [custom number format](/api/javascript/kendo#custom-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
+The format that is applied to the value before it is displayed. Takes the `{0:format}` form where `format` is a [standard number format](/api/kendo#standard-number-formats), [custom number format](/api/kendo#custom-number-formats), [standard date format](/api/kendo#standard-date-formats) or a [custom date format](/api/kendo#custom-date-formats).
 
-> The [`kendo.format`](/api/javascript/kendo/methods/format) function is used to format the value.
+> The [`kendo.format`](/api/kendo/methods/format) function is used to format the value.
 
 
 <div class="meta-api-description">
@@ -1623,7 +1623,7 @@ How do I add custom CSS classes to column headers in a Kendo UI TreeList compone
 
 ### columns.headerTemplate `String|Function`
 
-The [`template`](/api/javascript/kendo/methods/template) which renders the column header content. By default, the value of the [`title`](/api/javascript/ui/treelist/configuration/columns.title) column option is displayed in the column header cell.
+The [`template`](/api/kendo/methods/template) which renders the column header content. By default, the value of the [`title`](/api/ui/treelist/configuration/columns.title) column option is displayed in the column header cell.
 
 > If sorting is enabled, the column header content will be wrapped in an `<a>` element. As a result, the template must contain only inline elements.
 
@@ -1652,7 +1652,7 @@ How do I customize the header template in Kendo UI TreeList to include HTML mark
 
 ### columns.minScreenWidth `Number`
 
-The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/treelist/configuration/columns.hidden) setting and the two cannot not be used at the same time.
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/ui/treelist/configuration/columns.hidden) setting and the two cannot not be used at the same time.
 
 
 <div class="meta-api-description">
@@ -1705,7 +1705,7 @@ How can I enable multi-row selection in my Kendo UI TreeList? Configure multi-ro
 
 ### columns.sortable `Boolean|Object` *(default: true)*
 
-If set to `true` and sorting is enabled, the user can click the column header and sort the TreeList by the column [`field`](/api/javascript/ui/treelist#configuration-columns.field). If set to `false`, sorting will be disabled for this column. By default, all columns are sortable if sorting is enabled though the [`sortable`](/api/javascript/ui/treelist#configuration-sortable) option.
+If set to `true` and sorting is enabled, the user can click the column header and sort the TreeList by the column [`field`](/api/ui/treelist#configuration-columns.field). If set to `false`, sorting will be disabled for this column. By default, all columns are sortable if sorting is enabled though the [`sortable`](/api/ui/treelist#configuration-sortable) option.
 
 
 <div class="meta-api-description">
@@ -1778,8 +1778,8 @@ How to customize sorting behavior in Kendo UI TreeList with a custom comparison 
 
 ### columns.template `String|Function`
 
-The [`template`](/api/javascript/kendo/methods/template) which renders the column content. The TreeList renders table rows (`<tr>`) which represent the data source items.
-Each table row consists of table cells (`<td>`) which represent the TreeList columns. By default, the HTML-encoded value of the [`field`](/api/javascript/ui/treelist#configuration-columns.field) is displayed in the column.
+The [`template`](/api/kendo/methods/template) which renders the column content. The TreeList renders table rows (`<tr>`) which represent the data source items.
+Each table row consists of table cells (`<td>`) which represent the TreeList columns. By default, the HTML-encoded value of the [`field`](/api/ui/treelist#configuration-columns.field) is displayed in the column.
 
 > To customize the way the column displays its value, use `template`.
 
@@ -1838,7 +1838,7 @@ How can I customize the rendering of each cell in a Kendo UI TreeList column? Co
 
 ### columns.title `String`
 
-The text that is displayed in the column header cell. If not set, the TreeList uses [`field`](/api/javascript/ui/treelist#configuration-columns.field).
+The text that is displayed in the column header cell. If not set, the TreeList uses [`field`](/api/ui/treelist#configuration-columns.field).
 
 
 <div class="meta-api-description">
@@ -1908,7 +1908,7 @@ How do I set fixed column widths in a Kendo UI TreeList? Control and configure f
       });
     </script>
 
-To set the column width after the TreeList initialization you can use the [setOptions()](/api/javascript/ui/treelist/methods/setoptions) method.
+To set the column width after the TreeList initialization you can use the [setOptions()](/api/ui/treelist/methods/setoptions) method.
 
 ### columns.hidden `Boolean` *(default: false)*
 
@@ -1966,7 +1966,7 @@ How can I enable hierarchical checkbox selection in Kendo UI TreeList? Enable hi
 
 ### columns.menu `Boolean`
 
-If set to `true`, the TreeList will display the column in the column menu. By default, the column menu includes all data-bound columns, that is, the ones with a set [`field`](/api/javascript/ui/treelist#configuration-columns.field) option.
+If set to `true`, the TreeList will display the column in the column menu. By default, the column menu includes all data-bound columns, that is, the ones with a set [`field`](/api/ui/treelist#configuration-columns.field) option.
 
 
 <div class="meta-api-description">
@@ -2025,7 +2025,7 @@ How to lock columns in Kendo UI TreeList so they stay visible while scrolling? C
 
 If set to `false`, the column will remain in that side of the TreeList where its own locked configuration placed it.
 
-> This option is useful when the TreeList has columns which are configured with a [`locked`](/api/javascript/ui/treelist#configuration-columns.locked) value. Setting it explicitly to `false` will
+> This option is useful when the TreeList has columns which are configured with a [`locked`](/api/ui/treelist#configuration-columns.locked) value. Setting it explicitly to `false` will
 prevent the user from locking or unlocking this column while using the user interface.
 
 
@@ -2208,7 +2208,7 @@ How to customize the column menu in Kendo UI TreeList? Configure and customize t
 
 ### columnMenu.filterable `Boolean` *(default: true)*
 
-If set to `true`, the column menu will allow the user to filter the TreeList. By default, if filtering is enabled through [`filterable`](/api/javascript/ui/treelist#configuration-filterable), the column menu allows the user to filter.
+If set to `true`, the column menu will allow the user to filter the TreeList. By default, if filtering is enabled through [`filterable`](/api/ui/treelist#configuration-filterable), the column menu allows the user to filter.
 
 
 <div class="meta-api-description">
@@ -2239,7 +2239,7 @@ How to enable filtering options in each column's menu in a Kendo UI TreeList wid
 
 ### columnMenu.sortable `Boolean` *(default: true)*
 
-If set to `true`, the column menu will allow the user to sort the TreeList by the column field. By default, if sorting is enabled through [`sortable`](/api/javascript/ui/treelist#configuration-sortable), the column menu allows the user to sort the data.
+If set to `true`, the column menu will allow the user to sort the TreeList by the column field. By default, if sorting is enabled through [`sortable`](/api/ui/treelist#configuration-sortable), the column menu allows the user to sort the data.
 
 > If this option is set to `false`, the user will still be able to sort by clicking the column header cell.
 
@@ -2607,9 +2607,9 @@ How do I customize the "unlock" option in a TreeList column menu? Customize or l
 
 ### dataSource `Object|Array|kendo.data.TreeListDataSource`
 
-The data source of the widget which is used to render table rows. Can be a JavaScript object which represents a valid [`kendo.data.TreeListDataSource`](/api/javascript/data/treelistdatasource) configuration, a JavaScript array, or an existing [`kendo.data.TreeListDataSource`](/api/javascript/data/treelistdatasource) instance.
+The data source of the widget which is used to render table rows. Can be a JavaScript object which represents a valid [`kendo.data.TreeListDataSource`](/api/data/treelistdatasource) configuration, a JavaScript array, or an existing [`kendo.data.TreeListDataSource`](/api/data/treelistdatasource) instance.
 
-* If the `dataSource` option is set to a JavaScript object or an array, the widget will initialize a new [`kendo.data.DataSource`](/api/javascript/data/treelistdatasource) instance and will use that value as the DataSource configuration.
+* If the `dataSource` option is set to a JavaScript object or an array, the widget will initialize a new [`kendo.data.DataSource`](/api/data/treelistdatasource) instance and will use that value as the DataSource configuration.
 * If the `dataSource` option is an existing `kendo.data.TreeListDataSource` instance, the widget will use that instance and will not initialize a new one.
 
 
@@ -3030,7 +3030,7 @@ How do I enable drag-and-drop row reordering in a Kendo UI TreeList widget? Enab
 
 ### editable.template `String|Function`
 
-The [`template`](/api/javascript/kendo/methods/template) which renders the popup editor.
+The [`template`](/api/kendo/methods/template) which renders the popup editor.
 
 The template has to contain elements whose `name` HTML attribute is set to the name of the editable field. In this way, the TreeList recognizes
 the field to which it has to bind the each editor. Alternatively, use [MVVM](/framework/mvvm/overview) bindings for binding HTML elements to data item fields.
@@ -3160,7 +3160,7 @@ How can I customize the popup editor template in a Kendo UI TreeList component t
 
 ### editable.window `Object`
 
-Configures the Kendo UI Window instance which is used when the TreeList edit mode is set to `popup`. For more information, refer to the [configuration API of the Window](/api/javascript/ui/window).
+Configures the Kendo UI Window instance which is used when the TreeList edit mode is set to `popup`. For more information, refer to the [configuration API of the Window](/api/ui/window).
 
 
 <div class="meta-api-description">
@@ -3379,7 +3379,7 @@ How to control column filters in TreeList Excel export? Control whether column f
 
 ### excel.forceProxy `Boolean` *(default: false)*
 
-If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/treelist#configuration-excel.proxyURL) even if the browser supports local file saving.
+If set to `true`, the content will be forwarded to [`proxyURL`](/api/ui/treelist#configuration-excel.proxyURL) even if the browser supports local file saving.
 
 
 <div class="meta-api-description">
@@ -5521,7 +5521,7 @@ How to enable keyboard navigation in Kendo UI TreeList? Configure keyboard navig
 
 If set to `true`, the TreeList displays a pager. By default, paging is disabled. Only client-side paging is supported which means that all data items are expected to be available when the TreeList is initialized. Can be set to a JavaScript object which represents the pager configuration.
 
-> Set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) no matter if paging is performed on the client or on the server. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/treelist/configuration/datasource) settings.
+> Set a [`pageSize`](/api/data/datasource/configuration/pagesize) no matter if paging is performed on the client or on the server. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/ui/treelist/configuration/datasource) settings.
 
 
 <div class="meta-api-description">
@@ -6039,7 +6039,7 @@ How do I customize the pagination labels in Kendo UI TreeList? Control and custo
 
 ### pageable.messages.display `String` *(default: "{0} - {1} of {2} items")*,
 
-The text with the pager information. Uses [`kendo.format`](/api/javascript/kendo/methods/format).
+The text with the pager information. Uses [`kendo.format`](/api/kendo/methods/format).
 
 Contains the following placeholders:
 - `{0}` - The first data item index.
@@ -6150,7 +6150,7 @@ How to customize the paging message in Kendo UI TreeList? Customize or configure
 
 ### pageable.messages.of `String` *(default: "of {0}")*,
 
-The label that is displayed before the pager input. Uses [`kendo.format`](/api/javascript/kendo/methods/format). Contains one optional `{0}` placeholder which represents the total number of pages.
+The label that is displayed before the pager input. Uses [`kendo.format`](/api/kendo/methods/format). Contains one optional `{0}` placeholder which represents the total number of pages.
 
 
 <div class="meta-api-description">
@@ -6749,7 +6749,7 @@ How do I customize the file name when exporting a tree list to PDF in Kendo UI f
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 
-If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/treelist#configuration-pdf.proxyURL) even if the browser supports the local saving of files.
+If set to `true`, the content will be forwarded to [`proxyURL`](/api/ui/treelist#configuration-pdf.proxyURL) even if the browser supports the local saving of files.
 
 
 <div class="meta-api-description">
@@ -7338,7 +7338,7 @@ How to set custom title for PDF export in Kendo UI TreeList? Configure the expor
 
 ### rowTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders rows. By default renders a table row (`<tr>`) for every data source item.
+The [template](/api/kendo/methods/template) which renders rows. By default renders a table row (`<tr>`) for every data source item.
 
 > The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The treelist uses the `uid` data attribute to determine the data to which a table row is bound to.
 
@@ -7649,7 +7649,7 @@ How to set sorting behavior for hierarchical data in Kendo UI TreeList? Control 
 
 ### toolbar `String|Function|Array|Object`
 
-* If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole TreeList toolbar and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
+* If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole TreeList toolbar and the string value will be passed as an argument to a [`kendo.template()`](/api/kendo/methods/template) function.
 * If a `Function` value is assigned (it may be a `kendo.template()` function call or a generic function reference), then the return value of the function will be used to render the contents of the TreeList toolbar.
 * If an `Array` value is assigned, it will be treated as the list of commands which are displayed in the TreeList toolbar. Commands can be custom or built-in. The supported built-in commands are:
   * `create` - Adds an empty data item to the treelist.
@@ -7658,7 +7658,7 @@ How to set sorting behavior for hierarchical data in Kendo UI TreeList? Control 
   * `search` - built-in search panel for the TreeList.
 * If an `Object` value is assigned, it will propagate these properties to the underlying Toolbar:
   * `items` - an array of commands as explained above
-  * `overflow` - an object that configures the overflow behavior of the toolbar. The same as [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) property
+  * `overflow` - an object that configures the overflow behavior of the toolbar. The same as [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) property
 
 
 <div class="meta-api-description">
@@ -7748,7 +7748,7 @@ How do I customize the toolbar in Kendo UI for jQuery TreeList component? Config
       });
     </script>
 
-Apart from the built-in tools, the TreeList fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself. Note that all tools (commands) must have their name specified:
+Apart from the built-in tools, the TreeList fully exposes the [ToolBar.items API](/api/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself. Note that all tools (commands) must have their name specified:
 
 #### Example
 
@@ -7911,7 +7911,7 @@ How to customize toolbar buttons in Kendo UI TreeList? Configure or set the iden
 
 ### toolbar.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button. Uses the template for a ToolBar item [toolbar.items.template](/api/javascript/ui/toolbar/configuration/items.template)
+The [template](/api/kendo/methods/template) which renders the command. By default renders a button. Uses the template for a ToolBar item [toolbar.items.template](/api/ui/toolbar/configuration/items.template)
 
 
 <div class="meta-api-description">
@@ -7976,7 +7976,7 @@ How do I customize the rendering of toolbar commands in Kendo UI TreeList compon
 
 ### toolbar.text `String`
 
-The text that is displayed by the command button. If not set, the TreeList will use the [`name`](/api/javascript/ui/treelist#configuration-toolbar.name)` option as the button text instead.
+The text that is displayed by the command button. If not set, the TreeList will use the [`name`](/api/ui/treelist#configuration-toolbar.name)` option as the button text instead.
 
 
 <div class="meta-api-description">
@@ -8181,7 +8181,7 @@ How to configure custom button actions in Kendo UI TreeList? Configure and contr
 
 ### toolbar.items.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button. Uses the template for a ToolBar item [toolbar.items.template](/api/javascript/ui/toolbar/configuration/items.template)
+The [template](/api/kendo/methods/template) which renders the command. By default renders a button. Uses the template for a ToolBar item [toolbar.items.template](/api/ui/toolbar/configuration/items.template)
 
 
 <div class="meta-api-description">
@@ -8220,7 +8220,7 @@ How do I customize toolbar commands in Kendo UI TreeList? Customize toolbar comm
 
 ### toolbar.items.text `String`
 
-The text that is displayed by the command button. If not set, the TreeList will use the [`name`](/api/javascript/ui/treelist#configuration-toolbar.name)` option as the button text instead.
+The text that is displayed by the command button. If not set, the TreeList will use the [`name`](/api/ui/treelist#configuration-toolbar.name)` option as the button text instead.
 
 
 <div class="meta-api-description">
@@ -8250,7 +8250,7 @@ How do I change the text label on a TreeList toolbar button? Customize, configur
     </script>
 
 ### toolbar.overflow `Object`
-Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+Specifies [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) configuration for the toolbar.
 
 
 <div class="meta-api-description">
@@ -8451,7 +8451,7 @@ How can I adjust the scroll distance of my Kendo UI TreeList toolbar overflow na
 
 ### columns `Array`
 
-The columns of the TreeList that are initialized from the [`columns`](/api/javascript/ui/treelist#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [`columns`](/api/javascript/ui/treelist#configuration-columns) option.
+The columns of the TreeList that are initialized from the [`columns`](/api/ui/treelist#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [`columns`](/api/ui/treelist#configuration-columns) option.
 
 
 <div class="meta-api-description">
@@ -8690,7 +8690,7 @@ How to access and customize the locked columns area in a Kendo UI TreeList? Cont
 
 ### addRow
 
-Adds an empty data item to the TreeList. In inline edit mode, appends a table row. In the popup edit mode, displays a popup window. Fires the [`edit`](/api/javascript/ui/treelist/events/edit) event.
+Adds an empty data item to the TreeList. In inline edit mode, appends a table row. In the popup edit mode, displays a popup window. Fires the [`edit`](/api/ui/treelist/events/edit) event.
 
 
 <div class="meta-api-description">
@@ -8834,7 +8834,7 @@ How do I automatically adjust column widths in a Kendo UI TreeList to fit its co
 
 ##### column `Number|String|Object`
 
-The index of the column, the [`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound, or the column object that is obtained from the [`columns`](/api/javascript/ui/treelist#fields-columns) collection.
+The index of the column, the [`field`](/api/ui/treelist#configuration-columns.field) to which the columns is bound, or the column object that is obtained from the [`columns`](/api/ui/treelist#fields-columns) collection.
 
 #### Example - automatically fitting a column by an index
 
@@ -8994,7 +8994,7 @@ How to cancel row editing in Kendo UI TreeList widget? Terminate or abort row ed
 
 ### clearSelection
 
-Depending on the current selection [mode](/api/javascript/ui/treelist#configuration-selectable), clears the currently selected table rows or cells.
+Depending on the current selection [mode](/api/ui/treelist#configuration-selectable), clears the currently selected table rows or cells.
 
 
 <div class="meta-api-description">
@@ -9026,9 +9026,9 @@ How to programmatically clear selected rows in Kendo UI TreeList? Remove or rese
 
 ### closeCell
 
-Stops editing the table cell which is in edit mode. Requires the incell [edit mode](/api/javascript/ui/treelist/configuration/editable#editablemode).
+Stops editing the table cell which is in edit mode. Requires the incell [edit mode](/api/ui/treelist/configuration/editable#editablemode).
 
-> When the user applies keyboard navigation, [`table`](/api/javascript/ui/treelist/fields/table) must be focused programmatically after calling `closeCell`.
+> When the user applies keyboard navigation, [`table`](/api/ui/treelist/fields/table) must be focused programmatically after calling `closeCell`.
 
 
 <div class="meta-api-description">
@@ -9187,7 +9187,7 @@ How do I safely remove a hierarchical Kendo UI TreeList widget from my page? Cle
 
 ### editCell
 
-Switches the specified table cell in edit mode. Requires the incell [edit mode](/api/javascript/ui/treelist/configuration/editable#editablemode). Fires the [`edit`](/api/javascript/ui/treelist/events/edit) event.
+Switches the specified table cell in edit mode. Requires the incell [edit mode](/api/ui/treelist/configuration/editable#editablemode). Fires the [`edit`](/api/ui/treelist/events/edit) event.
 
 
 <div class="meta-api-description">
@@ -9222,7 +9222,7 @@ The jQuery object which represents the table cell.
 
 ### editRow
 
-Switches the specified table row to edit mode. Fires the [`edit`](/api/javascript/ui/treelist/events/edit) event.
+Switches the specified table row to edit mode. Fires the [`edit`](/api/ui/treelist/events/edit) event.
 
 
 <div class="meta-api-description">
@@ -9446,7 +9446,7 @@ A model from the DataSource, or the `id` of a model in the DataSource.
 
 ### items
 
-Obtains an array of the DOM elements which correspond to the data items from the [`view`](/api/javascript/data/datasource/methods/view) of the data source.
+Obtains an array of the DOM elements which correspond to the data items from the [`view`](/api/data/datasource/methods/view) of the data source.
 
 
 <div class="meta-api-description">
@@ -9512,7 +9512,7 @@ How do I update Kendo UI TreeList rows in real-time when data changes programmat
 
 ### removeRow
 
-Removes the specified table row from the TreeList. Also removes the corresponding data item from the data source. Fires the [`remove`](/api/javascript/ui/treelist/events/remove) event.
+Removes the specified table row from the TreeList. Also removes the corresponding data item from the data source. Fires the [`remove`](/api/ui/treelist/events/remove) event.
 
 
 <div class="meta-api-description">
@@ -9581,7 +9581,7 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
 
 ### saveAsExcel
 
-Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/treelist/events/excelexport) event.
+Initiates the Excel export. Also fires the [`excelExport`](/api/ui/treelist/events/excelexport) event.
 
 > Calling this method may trigger the built-in browser popup blocker. To avoid that, always call it as a response to an end-user action (for example, a button click).
 
@@ -9610,7 +9610,7 @@ How can I programmatically export TreeList data to an Excel file in Kendo UI for
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [`pdfExport`](/api/javascript/ui/treelist/events/pdfexport) event.
+Initiates the PDF export and returns a promise. Also triggers the [`pdfExport`](/api/ui/treelist/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser popup blocker. To avoid that, call this method as a response to an end-user action (foe examlple, a button click).
 
@@ -9621,7 +9621,7 @@ How to export tree-like data from Kendo UI TreeList as a PDF? Export or convert 
 
 #### Returns
 
-`Promise` - A promise that will be resolved when the export completes. The same promise is available in the [`pdfExport`](/api/javascript/ui/treelist/events/pdfexport) event arguments.
+`Promise` - A promise that will be resolved when the export completes. The same promise is available in the [`pdfExport`](/api/ui/treelist/events/pdfexport) event arguments.
 
 #### Example - manually initiating the PDF export
 
@@ -9643,7 +9643,7 @@ How to export tree-like data from Kendo UI TreeList as a PDF? Export or convert 
 
 ### saveChanges
 
-Saves any pending changes by calling the [`sync`](/api/javascript/data/datasource/methods/sync) method. Fires the [`saveChanges`](/api/javascript/ui/treelist/events/savechanges) event.
+Saves any pending changes by calling the [`sync`](/api/data/datasource/methods/sync) method. Fires the [`saveChanges`](/api/ui/treelist/events/savechanges) event.
 
 
 <div class="meta-api-description">
@@ -9673,7 +9673,7 @@ How to save pending edits in Kendo UI TreeList component? Commit or persist all 
 
 ### saveRow
 
-Switches the table row which is in edit mode and saves any changes that are made by the user. Fires the [`edit`](/api/javascript/ui/treelist/events/save) event.
+Switches the table row which is in edit mode and saves any changes that are made by the user. Fires the [`edit`](/api/ui/treelist/events/save) event.
 
 
 <div class="meta-api-description">
@@ -9885,7 +9885,7 @@ The data source to which the widget will be bound.
 ### setOptions
 
 Sets the options of the Treelist. Use this method if you want to enable/disable a particular feature/option or to load
-the complete state obtained previously with the [`getOptions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/treelist/methods/getoptions) method.
+the complete state obtained previously with the [`getOptions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/treelist/methods/getoptions) method.
 
 When `setOptions` is called, the Treelist widget will be destroyed and recreated. If the widget is bound to remote data, a new read request will be made.
 
@@ -9959,7 +9959,7 @@ How can I dynamically hide or show specific columns in a Kendo UI for jQuery Tre
 
 ##### column `Number|String`
 
-The index of the column, or the [`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
+The index of the column, or the [`field`](/api/ui/treelist#configuration-columns.field) to which the columns is bound.
 
 #### Example - showing a hidden column by an index
 
@@ -10020,7 +10020,7 @@ How can I programmatically hide a specific column in my Kendo UI TreeList? Progr
 
 ##### column `Number|String`
 
-The index of the column or the [`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
+The index of the column or the [`field`](/api/ui/treelist#configuration-columns.field) to which the columns is bound.
 
 #### Example - hiding a column by an index
 
@@ -10081,7 +10081,7 @@ How to pin specific columns in Kendo UI TreeList for horizontal scrolling? Freez
 
 ##### column `Number|String`
 
-The index of the column or the [`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
+The index of the column or the [`field`](/api/ui/treelist#configuration-columns.field) to which the columns is bound.
 
 > To use this method, initialize the TreeList with at least one locked column and render unlocked columns which will remain after the target column is locked.
 
@@ -10122,7 +10122,7 @@ How do I enable scrolling in previously fixed columns of a Kendo UI TreeList con
 
 ##### column `Number|String`
 
-The index of the column or the [`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
+The index of the column or the [`field`](/api/ui/treelist#configuration-columns.field) to which the columns is bound.
 
 > To use this method, initialize the TreeList with at least one locked column and locked columns which will remain after the target column is unlocked.
 
@@ -10208,7 +10208,7 @@ How to cancel editing in Kendo UI TreeList widget? Intercept attempts to initiat
 
 ##### e.model `kendo.data.Model`
 
-The data item which will be edited. To check if the data item is new (created) or not (edited), use its [`isNew`](/api/javascript/data/model/methods/isnew) method.
+The data item which will be edited. To check if the data item is new (created) or not (edited), use its [`isNew`](/api/data/model/methods/isnew) method.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -10243,7 +10243,7 @@ The widget instance which fired the event.
 
 ### cancel
 
-Fires when the user clicks the **Cancel** button (in inline or popup [edit mode](/api/javascript/ui/treelist#configuration-editable.mode)) or closes the popup window. The event handler function context (available through the `this` keyword) will be set to the widget instance.
+Fires when the user clicks the **Cancel** button (in inline or popup [edit mode](/api/ui/treelist#configuration-editable.mode)) or closes the popup window. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 
 <div class="meta-api-description">
@@ -10329,7 +10329,7 @@ How do I handle cell close event in Kendo UI TreeList? Detect when an editable c
 
 ##### e.container `jQuery`
 
-The jQuery object that represents the edit container element. For more information, refer to the [`edit` event arguments](/api/javascript/ui/treelist/events/edit).
+The jQuery object that represents the edit container element. For more information, refer to the [`edit` event arguments](/api/ui/treelist/events/edit).
 
 ##### e.model `kendo.data.Model`
 
@@ -11191,7 +11191,7 @@ The jQuery object which represents the container element. The container element 
 
 ##### e.model `kendo.data.TreeListModel`
 
-The data item which will be edited. To check if the data item is new (created) or not (edited), use its [`isNew`](/api/javascript/data/model/methods/isnew) method.
+The data item which will be edited. To check if the data item is new (created) or not (edited), use its [`isNew`](/api/data/model/methods/isnew) method.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -11332,7 +11332,7 @@ The widget instance which fired the event.
 
 ##### e.workbook `Object`
 
-The Excel [`workbook` configuration object](/api/javascript/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will be reflected in the output Excel document.
+The Excel [`workbook` configuration object](/api/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will be reflected in the output Excel document.
 
 ##### e.preventDefault `Function`
 
@@ -11831,7 +11831,7 @@ The data item to which the table row is bound.
 
 ##### e.container `jQuery`
 
-The jQuery object which represents the current editor container element. If the [`editable.mode`](/api/javascript/ui/treelist#configuration-editable.mode) is `inline`, the container will be the edited row. If it is set to `popup`, then the container element will be the window element.
+The jQuery object which represents the current editor container element. If the [`editable.mode`](/api/ui/treelist#configuration-editable.mode) is `inline`, the container will be the edited row. If it is set to `popup`, then the container element will be the window element.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -11958,7 +11958,7 @@ How do I handle pending changes in Kendo UI TreeList when user interactions trig
 
 ##### e.preventDefault `Function`
 
-If invoked, the TreeList will not call the [`sync`](/api/javascript/data/datasource/methods/sync) method of the data source.
+If invoked, the TreeList will not call the [`sync`](/api/data/datasource/methods/sync) method of the data source.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -12028,7 +12028,7 @@ How do I detect when a hidden column becomes visible in a Kendo UI TreeList? Det
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -12099,7 +12099,7 @@ How do I capture column hiding events in Kendo UI TreeList? Detect and respond t
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -12170,7 +12170,7 @@ How do I detect column reordering in a Kendo UI TreeList? Capture, handle, or li
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/ui/treelist#configuration-columns) configuration.
 
 ##### e.newIndex `Number`
 
@@ -12247,7 +12247,7 @@ How do I detect when a user resizes a column in a Kendo UI TreeList? Detect, han
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/ui/treelist#configuration-columns) configuration.
 
 ##### e.newWidth `Number`
 
@@ -12484,7 +12484,7 @@ How do I detect when columns in my Kendo UI TreeList get locked by the user? Det
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -12555,7 +12555,7 @@ How to detect when a user unlocks a column in a TreeList? Detect when a user unl
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 

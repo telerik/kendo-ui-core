@@ -115,7 +115,7 @@ For more examples, refer to the [demo on using the events of the DateRangePicker
 
 ## 4. (Optional) Reference Existing DateRangePicker Instances
 
-To use the [client-side API of the DateRangePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker) and build on top of its initial configuration, you need a reference to the DateRangePicker instance. Once you get a valid reference, you can call the respective API methods:
+To use the [client-side API of the DateRangePicker](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker) and build on top of its initial configuration, you need a reference to the DateRangePicker instance. Once you get a valid reference, you can call the respective API methods:
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
@@ -125,7 +125,7 @@ To use the [client-side API of the DateRangePicker](https://docs.telerik.com/ken
         </script>
     ```
 
-1. Use the [client-side API of the DateRangePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/methods/enable) method to disable the DateRangePicker.
+1. Use the [client-side API of the DateRangePicker](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker/methods/enable) method to disable the DateRangePicker.
 
     ```JS script
         <script>
@@ -159,6 +159,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the DateRangePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/api)
-* [Client-Side API of the DateRangePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker)
+* [Client-Side API of the DateRangePicker](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker)
 * [Server-Side API of the DateRangePicker](/api/daterangepicker)
 * [Knowledge Base Section](/knowledge-base)

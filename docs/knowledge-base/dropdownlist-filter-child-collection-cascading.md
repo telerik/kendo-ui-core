@@ -29,7 +29,7 @@ How can I filter my child collection based on a property that is not the parent 
 
 ## Solution
 
-You can filter a child collection by another `datafield` by using the [`cascadeFromParentField` property](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/cascadefromparentfield).  
+You can filter a child collection by another `datafield` by using the [`cascadeFromParentField` property](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/configuration/cascadefromparentfield).  
 
 ```javascript
       $("#parent").kendoDropDownList({
@@ -88,4 +88,4 @@ You can filter a child collection by another `datafield` by using the [`cascadeF
 
 ## See Also
 
-* [API Reference of cascadeFromParentField](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/cascadefromparentfield)
+* [API Reference of cascadeFromParentField](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/configuration/cascadefromparentfield)

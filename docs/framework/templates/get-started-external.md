@@ -183,7 +183,7 @@ This is it! Now you are ready to dive more deeply into the Kendo UI Templates an
 
 * [Getting Started with the Inline Templates]({% slug getting_started_inline_templates %})
 * [Templates Performance]({% slug performance_kendoui_templatescomponent %})
-* [Templates JavaScript API Reference](/api/javascript/kendo/methods/template)
+* [Templates JavaScript API Reference](/api/kendo/methods/template)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -286,7 +286,7 @@ The following example demonstrates how to customize the Grid text.
 
 ## See Also
 
-* [Grid API Reference](/api/javascript/ui/grid)
+* [Grid API Reference](/api/ui/grid)
 * [Grid Batch Editing (Demo)](https://demos.telerik.com/kendo-ui/grid/editing)
 * [Grid Inline Editing (Demo)](https://demos.telerik.com/kendo-ui/grid/editing-inline)
 * [Grid Popup Editing (Demo)](https://demos.telerik.com/kendo-ui/grid/editing-popup)

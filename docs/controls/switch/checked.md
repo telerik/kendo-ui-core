@@ -9,7 +9,7 @@ position: 4
 
 # Checked Switch
 
-The checked state of the Switch depends on the [`checked` configuration option](/api/javascript/ui/switch#checked) or the `checked` attribute of the widget element.
+The checked state of the Switch depends on the [`checked` configuration option](/api/ui/switch#checked) or the `checked` attribute of the widget element.
 
 The following example demonstrates how to initialize the Switch from a checked `input`.
 
@@ -49,4 +49,4 @@ The following example demonstrates how to get or set the Switch checked state.
 
 * [Basic Usage of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/index)
 * [Using the API of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/api)
-* [JavaScript API Reference of the Switch](/api/javascript/ui/switch)
+* [JavaScript API Reference of the Switch](/api/ui/switch)

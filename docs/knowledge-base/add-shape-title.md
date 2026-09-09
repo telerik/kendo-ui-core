@@ -37,7 +37,7 @@ How can I add some title text for the shapes in the Kendo UI for jQuery Map?
 
 ## Solution
 
-The following example demonstrates how to add title text for Map shapes that are loaded from GeoJSON. In particular, the example adds a [`Text`](/api/javascript/drawing/text) element positioned over the shape center. Shape layers are rendered by using the [Drawing API]({% slug overview_kendoui_drawingapi %}). To render additional elements, use the [`shapeCreated`](/api/javascript/dataviz/ui/map/events/shapecreated) event.
+The following example demonstrates how to add title text for Map shapes that are loaded from GeoJSON. In particular, the example adds a [`Text`](/api/drawing/text) element positioned over the shape center. Shape layers are rendered by using the [Drawing API]({% slug overview_kendoui_drawingapi %}). To render additional elements, use the [`shapeCreated`](/api/dataviz/ui/map/events/shapecreated) event.
 
 ```dojo
   <div id="map"></div>
@@ -111,5 +111,5 @@ The following example demonstrates how to add title text for Map shapes that are
 
 * [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
 * [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
+* [JavaScript API Reference of the Map](/api/dataviz/ui/map)
 * [Product Page of the jQuery Map](https://www.telerik.com/kendo-jquery-ui/map)

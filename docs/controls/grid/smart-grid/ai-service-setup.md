@@ -167,7 +167,7 @@ The Smart Extensions library uses specific request and response structures when 
 
 ### Request Structure
 
-The Grid sends a `GridAIRequest` object to your endpoint when using [automatic](slug:ai_assistant_tools_setup#automatic-integration) or [controlled integration](slug:ai_assistant_tools_setup#controlled-integration). For [manual integration](slug:ai_assistant_tools_setup#manual-integration), use the [`getAIRequest()`](/api/javascript/ui/grid/methods/getairequest) helper method to generate this request format.
+The Grid sends a `GridAIRequest` object to your endpoint when using [automatic](slug:ai_assistant_tools_setup#automatic-integration) or [controlled integration](slug:ai_assistant_tools_setup#controlled-integration). For [manual integration](slug:ai_assistant_tools_setup#manual-integration), use the [`getAIRequest()`](/api/ui/grid/methods/getairequest) helper method to generate this request format.
 
 ```csharp Request format
 public class GridAIRequest

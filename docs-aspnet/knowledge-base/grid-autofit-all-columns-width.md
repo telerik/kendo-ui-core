@@ -28,7 +28,7 @@ How can I have the columns of a {{ site.framework }} Grid automatically fit thei
 ## Solution
 
 1. Subscribe to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event of the Grid.
-1. Loop through the Grid columns and pass the column index to the client-side [`autoFitColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/autofitcolumn) method.
+1. Loop through the Grid columns and pass the column index to the client-side [`autoFitColumn`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/autofitcolumn) method.
 
 ```HtmlHelper
   @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()

@@ -125,7 +125,7 @@ You can reference the QRCode instances that you have created and build on top of
         </script>
     ```
 
-1. Use the [QRCode client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/qrcode#methods) to control the behavior of the component. In this example, you will use the `value()` method to dynamically change the value of the QRCode (for example, when a button is clicked).
+1. Use the [QRCode client-side API](https://docs.telerik.com/kendo-ui/api/dataviz/ui/qrcode#methods) to control the behavior of the component. In this example, you will use the `value()` method to dynamically change the value of the QRCode (for example, when a button is clicked).
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -171,7 +171,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the QRCode for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/api)
-* [Client-Side API of the QRCode](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/qrcode)
+* [Client-Side API of the QRCode](https://docs.telerik.com/kendo-ui/api/dataviz/ui/qrcode)
 * [Server-Side API of the QRCode](/api/qrcode)
 {% if site.core %}
 * [Server-Side API of the QRCode TagHelper](/api/taghelpers/qrcode)

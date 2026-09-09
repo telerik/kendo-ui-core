@@ -69,7 +69,7 @@ The following example demonstrates how to achieve the desired scenario. To see t
               if (ctrlKey) {
                 e.preventDefault();
 
-                //https://docs.telerik.com/kendo-ui/api/javascript/data/schedulerevent/methods/clone
+                //https://docs.telerik.com/kendo-ui/api/data/schedulerevent/methods/clone
                 var newEvent = e.event.clone({
                   start: e.start,
                   end: e.end,
@@ -245,4 +245,4 @@ The following example demonstrates how to achieve the desired scenario. To see t
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

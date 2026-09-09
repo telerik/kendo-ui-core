@@ -8,7 +8,7 @@ component: aiprompt
 
 # kendo.ui.ChartWizard
 
-Represents the Kendo UI ChartWizard. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ChartWizard. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -16,9 +16,9 @@ Represents the Kendo UI ChartWizard. Inherits from [Widget](/api/javascript/ui/w
 
 Specifies the data to be visualized in the ChartWizard component.
 
-If the `dataSource` option is set to a JavaScript object or array, the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance by using the value as a data source configuration.
+If the `dataSource` option is set to a JavaScript object or array, the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance by using the value as a data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 > ChartWizard component needs a specific type of data(`ChartWizardDataRow`) to work as expected. This type of data, which is an array consists of single or multiple arrays of Objects, which have the `field` and `value` properties.
 
@@ -65,7 +65,7 @@ How do I connect my Kendo UI Chart Wizard to a data source? Connect charts to da
 
 #### Example - set dataSource as an existing kendo.data.DataSource instance
 
-> To bind the chartWizard component to a remote dataSource which returns only the dataItems, you should set the [dataColumns](/api/javascript/ui/chartwizard#configuration-dataColumns) field.
+> To bind the chartWizard component to a remote dataSource which returns only the dataItems, you should set the [dataColumns](/api/ui/chartwizard#configuration-dataColumns) field.
 
     <div id="chartwizard"></div>
     <script>
@@ -5137,7 +5137,7 @@ How to customize the y-axis panel title text in Kendo UI ChartWizard? Customize,
 
 Specifies the state of the ChartWizard component. If a state object is provided, the ChartWizard will neglect the dataSource and the creation of an initial state and will use this state instance instead.
 
-> In order to work as expected, the CharWizard requires the `state` object to have defined [data](/api/javascript/ui/chartwizard#configuration-state.data) and [series](/api/javascript/ui/chartwizard#configuration-state.series) fields.
+> In order to work as expected, the CharWizard requires the `state` object to have defined [data](/api/ui/chartwizard#configuration-state.data) and [series](/api/ui/chartwizard#configuration-state.series) fields.
 
 
 <div class="meta-api-description">
@@ -5503,9 +5503,9 @@ The array of data items which represent the series data.
 
 Can be set to :
 
-* Array of objects. Each point is bound to the field specified via the [series.field](/api/javascript/dataviz/ui/chart#configuration-series.field) option.
-* Array of numbers. Supported when the [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) option is set to "bar", "column", "pie", or "line".
-* Array of arrays of numbers. Supported when the [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) option is set to "scatter".
+* Array of objects. Each point is bound to the field specified via the [series.field](/api/dataviz/ui/chart#configuration-series.field) option.
+* Array of numbers. Supported when the [series.type](/api/ui/chartwizard#configuration-state.series.type) option is set to "bar", "column", "pie", or "line".
+* Array of arrays of numbers. Supported when the [series.type](/api/ui/chartwizard#configuration-state.series.type) option is set to "scatter".
 * Scatter and scatter line series need arrays of two values - X value and Y value
 
 
@@ -5561,7 +5561,7 @@ How do I configure the series field in Kendo UI Chart Wizard? Specify or configu
 
 The chart series label configuration.
 
-> The chart displays the series labels when the [series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true`.
+> The chart displays the series labels when the [series.labels.visible](/api/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -5612,9 +5612,9 @@ How to control series labels visibility in Kendo UI ChartWizard at initializatio
 ### state.initialSeries.stack `Boolean|String|Object` *(default: false)*
 
 A boolean value indicating if the series should be stacked.
-A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui/chart#configuration-series.stack.group).
+A string value is interpreted as [series.stack.group](/api/dataviz/ui/chart#configuration-series.stack.group).
 
-> The `stack` options is supported when [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) is set to "bar", "column", or "line". All series in the stack must be of the same type.
+> The `stack` options is supported when [series.type](/api/ui/chartwizard#configuration-state.series.type) is set to "bar", "column", or "line". All series in the stack must be of the same type.
 
 > Stack settings of the first series are inherited as a default value by the rest of the series, in case they are not overridden.
 
@@ -5699,7 +5699,7 @@ How to set default chart series type in Kendo UI ChartWizard? Define or configur
 
 The line width.
 
-> The `width` option is supported when [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) is set to "line".
+> The `width` option is supported when [series.type](/api/ui/chartwizard#configuration-state.series.type) is set to "line".
 
 
 <div class="meta-api-description">
@@ -5722,7 +5722,7 @@ How do I adjust the thickness of line series in a Kendo UI Chart Wizard? Configu
 
 ### state.series `Array`
 
-The configuration of the chart [series](/api/javascript/dataviz/ui/chart#configuration-series).
+The configuration of the chart [series](/api/dataviz/ui/chart#configuration-series).
 
 The series type is determined by the value of the type field.
 If a type value is missing, the type is assumed to be the one specified in seriesDefaults.
@@ -5836,9 +5836,9 @@ The array of data items which represent the series data.
 
 Can be set to :
 
-* Array of objects. Each point is bound to the field specified via the [series.field](/api/javascript/dataviz/ui/chart#configuration-series.field) option.
-* Array of numbers. Supported when the [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) option is set to "bar", "column", "pie", or "line".
-* Array of arrays of numbers. Supported when the [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) option is set to "scatter".
+* Array of objects. Each point is bound to the field specified via the [series.field](/api/dataviz/ui/chart#configuration-series.field) option.
+* Array of numbers. Supported when the [series.type](/api/ui/chartwizard#configuration-state.series.type) option is set to "bar", "column", "pie", or "line".
+* Array of arrays of numbers. Supported when the [series.type](/api/ui/chartwizard#configuration-state.series.type) option is set to "scatter".
 * Scatter and scatter line series need arrays of two values - X value and Y value
 
 
@@ -5890,7 +5890,7 @@ How to configure series field in Kendo UI Chart Wizard? Configure the specific d
 
 The chart series label configuration.
 
-> The chart displays the series labels when the [series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true`.
+> The chart displays the series labels when the [series.labels.visible](/api/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -5941,9 +5941,9 @@ How can I hide data labels on chart series with Kendo UI Chart Wizard? Toggle di
 ### state.series.stack `Boolean|String|Object` *(default: false)*
 
 A boolean value indicating if the series should be stacked.
-A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui/chart#configuration-series.stack.group).
+A string value is interpreted as [series.stack.group](/api/dataviz/ui/chart#configuration-series.stack.group).
 
-> The `stack` options is supported when [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) is set to "bar", "column", or "line". All series in the stack must be of the same type.
+> The `stack` options is supported when [series.type](/api/ui/chartwizard#configuration-state.series.type) is set to "bar", "column", or "line". All series in the stack must be of the same type.
 
 > Stack settings of the first series are inherited as a default value by the rest of the series, in case they are not overridden.
 
@@ -6029,7 +6029,7 @@ How do I configure different visualization styles for my chart series in a Kendo
 
 The line width.
 
-> The `width` option is supported when [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) is set to "line".
+> The `width` option is supported when [series.type](/api/ui/chartwizard#configuration-state.series.type) is set to "line".
 
 
 <div class="meta-api-description">
@@ -6514,7 +6514,7 @@ How to customize font appearance for category axis labels in Kendo UI ChartWizar
 
 ### state.categoryAxis.labels.format `String` *(default: "{0}")*
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -6588,7 +6588,7 @@ How to hide category axis labels in Kendo UI Chart Wizard? Control the display o
 
 The title configuration of the category axis.
 
-> The [categoryAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.title.text) option must be set in order to display the title.
+> The [categoryAxis.title.text](/api/dataviz/ui/chart#configuration-categoryAxis.title.text) option must be set in order to display the title.
 
 
 <div class="meta-api-description">
@@ -6840,7 +6840,7 @@ How do I customize the font of value axis labels in a Kendo UI ChartWizard? Adju
 
 ### state.valueAxis.labels.format `String` *(default: "{0}")*
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -6916,7 +6916,7 @@ How do I reverse the direction of the value axis in a Kendo UI ChartWizard? Inve
 
 The title configuration of the value axis.
 
-> The [valueAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-valueAxis.title.text) option must be set in order to display the title.
+> The [valueAxis.title.text](/api/dataviz/ui/chart#configuration-valueAxis.title.text) option must be set in order to display the title.
 
 
 <div class="meta-api-description">
@@ -7124,7 +7124,7 @@ The supported values are:
 * "bottom" - the legend is positioned on the bottom.
 * "left" - the legend is positioned on the left.
 * "right" - the legend is positioned on the right.
-* "custom" - the legend is positioned using [legend.offsetX](/api/javascript/dataviz/ui/chart#configuration-legend.offsetX) and [legend.offsetY](/api/javascript/dataviz/ui/chart#configuration-legend.offsetY).
+* "custom" - the legend is positioned using [legend.offsetX](/api/dataviz/ui/chart#configuration-legend.offsetX) and [legend.offsetY](/api/dataviz/ui/chart#configuration-legend.offsetY).
 
 
 <div class="meta-api-description">
@@ -7251,7 +7251,7 @@ How to configure cumulative vs percentage-based stacking for multiple series in 
 
 ### state.categoryField `String`
 
-The field which represents the configuration of the [series.categoryField](/api/javascript/ui/chartwizard#configuration-state.series.categoryField).
+The field which represents the configuration of the [series.categoryField](/api/ui/chartwizard#configuration-state.series.categoryField).
 
 
 <div class="meta-api-description">
@@ -7271,7 +7271,7 @@ How do I configure the category field in Kendo UI Chart Wizard? Specify or confi
 
 ### state.valueField `String`
 
-The field which represents the configuration of the [series.valueField](/api/javascript/ui/chartwizard#configuration-state.series.valueField).
+The field which represents the configuration of the [series.valueField](/api/ui/chartwizard#configuration-state.series.valueField).
 
 
 <div class="meta-api-description">
@@ -7291,7 +7291,7 @@ How do I configure the value field for chart series in Kendo UI Chart Wizard? Se
 
 ### defaultState `Object`
 
-Specifies the default [seriesType](/api/javascript/ui/chartwizard#configuration-defaultState.seriesType) and [stack](/api/javascript/ui/chartwizard#configuration-defaultState.stack) of the ChartWizard component. If a [state](/api/javascript/ui/chartwizard#configuration-state) is not defined, the ChartWizard will use the values of the defaultState to create an initial state.
+Specifies the default [seriesType](/api/ui/chartwizard#configuration-defaultState.seriesType) and [stack](/api/ui/chartwizard#configuration-defaultState.stack) of the ChartWizard component. If a [state](/api/ui/chartwizard#configuration-state) is not defined, the ChartWizard will use the values of the defaultState to create an initial state.
 
 
 <div class="meta-api-description">
@@ -7412,7 +7412,7 @@ How do I configure stacking mode for multiple data series in a Kendo UI Chart Wi
 
 ### window `Object`
 
-Specifies configuration for the [Window](/api/javascript/ui/window#configuration).
+Specifies configuration for the [Window](/api/ui/window#configuration).
 
 
 <div class="meta-api-description">
@@ -7622,7 +7622,7 @@ The new dataSource.
 
 ### setDataColumns
 
-Sets the provided [dataColumns](/api/javascript/ui/chartwizard#configuration-dataColumns) to the ChartWizard component.
+Sets the provided [dataColumns](/api/ui/chartwizard#configuration-dataColumns) to the ChartWizard component.
 
 
 <div class="meta-api-description">

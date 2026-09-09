@@ -108,4 +108,4 @@ In the example, each issue can have different tags at the same time, for example
 ## See Also
 
 * [Local binding of the TaskBoard (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/local-data-binding)
-* [JavaScript API Reference of the Kendo UI TaskBoard](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the Kendo UI TaskBoard](https://docs.telerik.com/kendo-ui/api/ui/taskboard)

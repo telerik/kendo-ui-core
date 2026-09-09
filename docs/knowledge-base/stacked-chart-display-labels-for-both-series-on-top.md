@@ -25,7 +25,7 @@ How can I display series labels above the bars in the Stacked Bar Chart componen
 
 ## Solution
 
-To achieve the desired scenario, utilize the [`series.labels.visual`](/api/javascript/dataviz/ui/chart/configuration/series.labels.visual) property for the secondly declared series. Obtain the data from both series and render it by using the [Kendo UI Drawing graphics library (Drawing API)]({% slug overview_kendoui_drawingapi %}).
+To achieve the desired scenario, utilize the [`series.labels.visual`](/api/dataviz/ui/chart/configuration/series.labels.visual) property for the secondly declared series. Obtain the data from both series and render it by using the [Kendo UI Drawing graphics library (Drawing API)]({% slug overview_kendoui_drawingapi %}).
 
 
 ```dojo
@@ -67,7 +67,7 @@ To achieve the desired scenario, utilize the [`series.labels.visual`](/api/javas
               }
 
               var center = e.rect.center();
-              // https://docs.telerik.com/kendo-ui/api/javascript/drawing/text
+              // https://docs.telerik.com/kendo-ui/api/drawing/text
               return new kendo.drawing.Text(goldText + "/" + e.text, [center.x, e.rect.origin.y], {
                 fill: {
                   color: "black"
@@ -85,5 +85,5 @@ To achieve the desired scenario, utilize the [`series.labels.visual`](/api/javas
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the jQuery Chart](/api/dataviz/ui/chart)
 * [jQuery Bar Charts Stacked Bars Demo](https://demos.telerik.com/kendo-ui/bar-charts/stacked-bar)

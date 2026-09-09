@@ -83,7 +83,7 @@ The configuration methods `Width`, `Height`, `Color`, `Border`, etc. allow you t
 
 ## 4. (Optional) Reference Existing Barcode Instances
 
-To use the [client-side API of the Barcode](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode) and build on top of its initial configuration, you need a reference to the Barcode instance. Once you get a valid reference, you can call the respective API methods:
+To use the [client-side API of the Barcode](https://docs.telerik.com/kendo-ui/api/dataviz/ui/barcode) and build on top of its initial configuration, you need a reference to the Barcode instance. Once you get a valid reference, you can call the respective API methods:
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
@@ -93,7 +93,7 @@ To use the [client-side API of the Barcode](https://docs.telerik.com/kendo-ui/ap
         </script>
     ```
 
-1. Use the [client-side API of the Barcode](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode) to control the behavior of the widget. In this example, you will use the [`redraw`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode/methods/redraw) method to disable the Barcode.
+1. Use the [client-side API of the Barcode](https://docs.telerik.com/kendo-ui/api/dataviz/ui/barcode) to control the behavior of the widget. In this example, you will use the [`redraw`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/barcode/methods/redraw) method to disable the Barcode.
 
     ```JS
         <script>
@@ -123,6 +123,6 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Client-Side API of the Barcode](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode)
+* [Client-Side API of the Barcode](https://docs.telerik.com/kendo-ui/api/dataviz/ui/barcode)
 * [Server-Side API of the Barcode](/api/barcode)
 * [Knowledge Base Section](/knowledge-base)

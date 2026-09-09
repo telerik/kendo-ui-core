@@ -57,8 +57,8 @@ How can I define the [AutoComplete]({% slug htmlhelpers_autocomplete_aspnetcore 
     {% endif %}
 
 1. Initialize the AutoComplete editor within the <b>productNameAutoCompleteEditor</b> handler.
-1. Handle the [`filtering`](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete/events/filtering) event of the AutoComplete, extract the search entry value from the event data, and store it into a global variable <b>searchParameter</b>.
-1. Use the [`data`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read#transportreaddata) option of the DataSource to pass the global variable as an additional parameter through the `Read` request of the AutoComplete. This way, you will ensure that the correct search entry will be sent to the server when the Filter component has multiple fields that use the same AutoComplete editor.
+1. Handle the [`filtering`](https://docs.telerik.com/kendo-ui/api/ui/autocomplete/events/filtering) event of the AutoComplete, extract the search entry value from the event data, and store it into a global variable <b>searchParameter</b>.
+1. Use the [`data`](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/transport.read#transportreaddata) option of the DataSource to pass the global variable as an additional parameter through the `Read` request of the AutoComplete. This way, you will ensure that the correct search entry will be sent to the server when the Filter component has multiple fields that use the same AutoComplete editor.
 
     ```JS scripts
         function productNameAutoCompleteEditor(container, options) {
@@ -143,7 +143,7 @@ For a runnable example based on the code above, refer to the [REPL example on ad
 
 ## See Also
 
-* [Client-Side API Reference of the Filter for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter)
+* [Client-Side API Reference of the Filter for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/filter)
 * [Server-Side API Reference of the Filter for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/filter)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Filter for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/filter)

@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.Avatar
 
-Represents the Kendo UI Avatar widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Avatar widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

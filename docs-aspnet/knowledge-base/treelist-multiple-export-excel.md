@@ -32,9 +32,9 @@ How can I export multiple {{ site.framework }} TreeList components to a single E
 In this example, each TreeList is exported to a separate Excel sheet. For more information on the Excel generation, refer to the [Excel export overview article](https://docs.telerik.com/kendo-ui/framework/excel/introduction).
 
 1. Create an external button to export the TreeLists data when it is clicked.
-1. Use the client-side [`saveAsExcel()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/saveasexcel) method to trigger the data export of each TreeList.
+1. Use the client-side [`saveAsExcel()`](https://docs.telerik.com/kendo-ui/api/ui/treelist/methods/saveasexcel) method to trigger the data export of each TreeList.
 1. Handle the [`ExcelExport`](/api/kendo.mvc.ui.fluent/treelisteventbuilder#excelexportsystemstring) event of the TreeLists and prevent its default action.
-1. Create a new Workbook that contains the sheets with the TreeLists data and save it through the [`kendo.saveAs()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/saveas) method.
+1. Create a new Workbook that contains the sheets with the TreeLists data and save it through the [`kendo.saveAs()`](https://docs.telerik.com/kendo-ui/api/kendo/methods/saveas) method.
 
 ```HtmlHelper
 <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
@@ -153,6 +153,6 @@ For a runnable example, refer to the [ASP.NET MVC application on how to export t
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the TreeList for {{ site.framework }}](/api/taghelpers/treelist)
 {% endif %}
-* [Client-Side API Reference of the TreeList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [Client-Side API Reference of the TreeList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/treelist)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2024%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

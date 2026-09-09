@@ -62,7 +62,7 @@ The following example demonstrates how to initialize the ChipList.
  
 * [Getting Started with the Telerik UI Chip for {{ site.framework }}]({% slug htmlhelpers_chip_aspnetcore_customization %})
 * [Basic Usage of the ChipList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chiplist/index)
-* [JavaScript API Reference of the ChipList HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chiplist#methods)
+* [JavaScript API Reference of the ChipList HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/chiplist#methods)
 * [Server-Side API of the ChipList HtmlHelper for {{ site.framework }}](/api/chiplist)
 
 ## See Also

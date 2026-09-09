@@ -106,7 +106,7 @@ The following example demonstrates how to format the date values of the dimensio
 
 ## See Also
 
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)
 * [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
 * [Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})

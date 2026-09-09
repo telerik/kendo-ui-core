@@ -59,7 +59,7 @@ In this step, you will initialize the Notification from the `<span>` element.
 
 ## 3. Display the Notification
 
-To render the Notification, use the [`show`](https://docs.telerik.com/kendo-ui/api/javascript/ui/notification/methods/show) or [`showText`](https://docs.telerik.com/kendo-ui/api/javascript/ui/notification/methods/showtext) methods.
+To render the Notification, use the [`show`](https://docs.telerik.com/kendo-ui/api/ui/notification/methods/show) or [`showText`](https://docs.telerik.com/kendo-ui/api/ui/notification/methods/showtext) methods.
 
 ```html
 	<span id="notification"></span>
@@ -74,7 +74,7 @@ To render the Notification, use the [`show`](https://docs.telerik.com/kendo-ui/a
 
 ## 4. Configure the Position
 
-You can customize the [`position`](https://docs.telerik.com/kendo-ui/api/javascript/ui/notification/configuration/position) of the displayed component and whether the notifications will move together with the page content during scrolling.
+You can customize the [`position`](https://docs.telerik.com/kendo-ui/api/ui/notification/configuration/position) of the displayed component and whether the notifications will move together with the page content during scrolling.
 
 ```html
 	<span id="notification"></span>
@@ -103,7 +103,7 @@ You can customize the [`position`](https://docs.telerik.com/kendo-ui/api/javascr
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Notification](/api/javascript/ui/notification)
+* [JavaScript API Reference of the jQuery Notification](/api/ui/notification)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -100,4 +100,4 @@ The following example demonstrates how to define a palette and apply it based on
 ## See Also
 
 * [Binding the Map to GeoJSON (Demo)](https://demos.telerik.com/kendo-ui/map/geojson)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
+* [JavaScript API Reference of the Map](/api/dataviz/ui/map)

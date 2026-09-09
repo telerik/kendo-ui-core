@@ -157,7 +157,7 @@ You can reference the Sparkline instances that you have created and build on top
     </script>
     ```
 
-1. Use the [Sparkline client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sparkline) to control the behavior of the widget. In this example, you will use the `refresh` method to reset the sparkline content.
+1. Use the [Sparkline client-side API](https://docs.telerik.com/kendo-ui/api/dataviz/ui/sparkline) to control the behavior of the widget. In this example, you will use the `refresh` method to reset the sparkline content.
 
     ```JS script
     <script>
@@ -183,6 +183,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Basic Usage of the Sparkline for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/sparklines)
-* [Client-Side API of the Sparkline](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sparkline)
+* [Client-Side API of the Sparkline](https://docs.telerik.com/kendo-ui/api/dataviz/ui/sparkline)
 * [Server-Side API of the Sparkline](/api/sparkline)
 * [Knowledge Base Section](/knowledge-base)

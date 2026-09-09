@@ -27,4 +27,4 @@ As a result, the Calendar will not navigate to a date that is earlier than the s
 
 * [Basic Usage of the Calendar (Demo)](https://demos.telerik.com/kendo-ui/calendar/index)
 * [Using the API of the Calendar (Demo)](https://demos.telerik.com/kendo-ui/calendar/api)
-* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/ui/calendar)

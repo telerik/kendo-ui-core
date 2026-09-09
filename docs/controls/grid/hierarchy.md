@@ -15,7 +15,7 @@ For a runnable example, refer to the [demo on using hierarchy in the Grid](https
 
 ## Configuration
 
-To implement hierarchy in the Grid, wire its [`detailInit`](/api/javascript/ui/grid/events/detailinit) event and filter the records in the child table based on the parent key field value.
+To implement hierarchy in the Grid, wire its [`detailInit`](/api/ui/grid/events/detailinit) event and filter the records in the child table based on the parent key field value.
 
 1. Initialize the parent grid and configure its settings.
 
@@ -190,5 +190,5 @@ The following code snippet showcases the full implementation of the Hierarchical
 ## See Also
 
 * [Hierarchy by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/hierarchy)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

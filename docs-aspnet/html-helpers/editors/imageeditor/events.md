@@ -53,4 +53,4 @@ The example below demonstrates how to use the [`Execute` event](/api/kendo.mvc.u
 
 * [Using the API of the ImageEditor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/imageeditor/api)
 * [ImageEditor Server-Side API](/api/imageeditor)
-* [ImageEditor Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor)
+* [ImageEditor Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/imageeditor)

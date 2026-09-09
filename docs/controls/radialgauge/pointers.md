@@ -37,4 +37,4 @@ You can independently customize each pointer including its current value, color,
 ## See Also
 
 * [Using Multiple Pointers in the RadialGauge (Demo)](https://demos.telerik.com/kendo-ui/radial-gauge/multiple-pointers)
-* [JavaScript API Reference of the RadialGauge](/api/javascript/dataviz/ui/radialgauge)
+* [JavaScript API Reference of the RadialGauge](/api/dataviz/ui/radialgauge)

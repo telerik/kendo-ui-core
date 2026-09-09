@@ -56,7 +56,7 @@ The following example demonstrates how to initialize the Chip.
 * [Getting Started with the Chip for {{ site.framework }}]({% slug chip_getting_started %})
 * [Basic Usage of the Chip HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chip/index)
 * [Server-Side API of the Chip HtmlHelper for {{ site.framework }}](/api/chip)
-* [JavaScript API Reference of the Chip HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chip#methods)
+* [JavaScript API Reference of the Chip HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/chip#methods)
 
 
 ## See Also

@@ -19,7 +19,7 @@ By default, the Calendar enables the user to select a single date by using the m
 
 ## Multiple Date Selection
 
-As of the 2017 R3 release, the Calendar allows you to implement the multiple date selection by using the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration property.
+As of the 2017 R3 release, the Calendar allows you to implement the multiple date selection by using the [`selectable`](/api/ui/calendar/configuration/selectable) configuration property.
 
 To perform the multiple date selection, the user can also use the keyboard:
 
@@ -42,9 +42,9 @@ The following image demonstrates a Calendar with selected multiple dates.
 
 ## Range Date Selection
 
-The Calendar provides range date selection with the keyboard. Starting with Kendo UI suite R2 2024, the component supports `range` selection through the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) option.
+The Calendar provides range date selection with the keyboard. Starting with Kendo UI suite R2 2024, the component supports `range` selection through the [`selectable`](/api/ui/calendar/configuration/selectable) option.
 
-The usage of the `Shift` key allows the user to select a range of dates in the same month or across different months when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration is set to `multiple`:
+The usage of the `Shift` key allows the user to select a range of dates in the same month or across different months when the [`selectable`](/api/ui/calendar/configuration/selectable) configuration is set to `multiple`:
 
 * `Shift` + mouse-clicking specific dates&mdash;Selects all dates between the most recently selected one (with `Space` or mouse click) and the clicked cell.
 * `Shift` + mouse clicking specific dates&mdash;If no previous selection was made, selects all dates from the beginning to the clicked cell.
@@ -64,4 +64,4 @@ The following image demonstrates a Calendar with enabled week selection.
 ## See Also
 
 * [Multiple Selection by the Calendar (Demo)](https://demos.telerik.com/kendo-ui/calendar/selection)
-* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/ui/calendar)

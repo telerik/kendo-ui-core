@@ -38,7 +38,7 @@ To ensure that the `.k-selected` class is applied to items when their checkboxes
 
 ### Steps:
 
-1. Attach a [`change`](/api/javascript/ui/dropdowntree/events/change) event listener to the checkboxes within the DropDownTree.
+1. Attach a [`change`](/api/ui/dropdowntree/events/change) event listener to the checkboxes within the DropDownTree.
 2. Use the event to determine the state of the checkbox (`checked` or `unchecked`).
 3. Apply or remove the `.k-selected` class to the corresponding item based on the checkbox's state.
 
@@ -117,4 +117,4 @@ The following example demonstrates a DropDownTree with checkboxes enabled. Selec
 ## See Also
 
 - [Kendo UI for jQuery DropDownTree Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/dropdowntree/overview)
-- [Kendo UI for jQuery DropDownTree API](/api/javascript/ui/dropdowntree)
+- [Kendo UI for jQuery DropDownTree API](/api/ui/dropdowntree)

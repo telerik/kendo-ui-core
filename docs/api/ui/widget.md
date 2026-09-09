@@ -5,7 +5,7 @@ res_type: api
 
 # kendo.ui.Widget
 
-Base class of all Kendo UI widgets. Inherits from [Observable](/api/javascript/observable).
+Base class of all Kendo UI widgets. Inherits from [Observable](/api/observable).
 
 ## Fields
 
@@ -60,7 +60,7 @@ How to access the outer container element of a Kendo UI widget after it's been r
 
 ### bind
 
-Attaches a handler to an event. Examples and more info can be found in the [bind](/api/javascript/observable#bind) section of the `kendo.Observable` API reference.
+Attaches a handler to an event. Examples and more info can be found in the [bind](/api/observable#bind) section of the `kendo.Observable` API reference.
 
 
 <div class="meta-api-description">
@@ -110,7 +110,7 @@ What happens when I call widget.destroy in Kendo UI for jQuery? Remove and clean
 
 ### one
 
-Attaches a handler to an event. The handler is executed only once. Examples and more info can be found in the [one](/api/javascript/observable/methods/one) section of the
+Attaches a handler to an event. The handler is executed only once. Examples and more info can be found in the [one](/api/observable/methods/one) section of the
 `kendo.Observable` API reference.
 
 
@@ -216,7 +216,7 @@ The options to be changed or added.
 
 ### trigger
 
-Executes all handlers attached to the given event. More info can be found in the [trigger](/api/javascript/observable/methods/trigger) section of the
+Executes all handlers attached to the given event. More info can be found in the [trigger](/api/observable/methods/trigger) section of the
 `kendo.Observable` API reference.
 
 
@@ -251,7 +251,7 @@ How can I programmatically trigger events on a Kendo UI widget? Invoke or fire e
 
 ### unbind
 
-Remove a previously attached event handler. More info can be found in the [unbind](/api/javascript/observable/methods/unbind) section of the
+Remove a previously attached event handler. More info can be found in the [unbind](/api/observable/methods/unbind) section of the
 `kendo.Observable` API reference.
 
 

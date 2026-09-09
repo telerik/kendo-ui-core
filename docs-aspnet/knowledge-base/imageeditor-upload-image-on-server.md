@@ -68,7 +68,7 @@ How can I upload the edited image from the ImageEditor directly to the server?
   ```
   {% endif %}
 
-1. Within the `click` event handler, get a reference to the ImageEditor and call the [`getCanvasElement()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor/methods/getcanvaselement) method to get the canvas element.
+1. Within the `click` event handler, get a reference to the ImageEditor and call the [`getCanvasElement()`](https://docs.telerik.com/kendo-ui/api/ui/imageeditor/methods/getcanvaselement) method to get the canvas element.
 
 1. Use the [`toDataURL()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL) method to convert the canvas to Base64 and trigger an AJAX request to the server to send the edited image.
 
@@ -123,7 +123,7 @@ How can I upload the edited image from the ImageEditor directly to the server?
 
 ## See Also
 
-* [Client-Side API Reference of the ImageEditor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor)
+* [Client-Side API Reference of the ImageEditor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/imageeditor)
 * [Server-Side API Reference of the ImageEditor for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/imageeditor)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the ImageEditor for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/imageeditor)

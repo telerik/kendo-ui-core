@@ -90,5 +90,5 @@ Saving the file as `.html` causes the browser to parse the tags upon opening, re
 ## See Also
 
 - [Editor Overview Documentation](https://docs.telerik.com/aspnet-core/html-helpers/editors/editor/overview)
-- [Editor API Reference](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/editor)
+- [Editor API Reference](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/editor)
 - [Customizing Tools in the Editor](https://docs.telerik.com/aspnet-core/html-helpers/editors/editor/tools)

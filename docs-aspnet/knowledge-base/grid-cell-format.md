@@ -43,7 +43,7 @@ The example relies on the following key steps:
     ```
     {% endif %}
 
-1. Within the `ExcelExport` event handler, loop through the rows in the sheet, select the cell by index, which value must be formatted, and use the [`format`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option to set the desired format:
+1. Within the `ExcelExport` event handler, loop through the rows in the sheet, select the cell by index, which value must be formatted, and use the [`format`](https://docs.telerik.com/kendo-ui/api/ooxml/workbook.html#configuration-sheets.rows.cells.format) option to set the desired format:
 
     ```JS
     function excelExport(e) {
@@ -91,7 +91,7 @@ To review the complete example, refer to the ASP.NET MVC project on [formatting 
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)

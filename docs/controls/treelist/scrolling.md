@@ -46,4 +46,4 @@ The following example demonstrates how to enable the scrolling functionality in 
 ## See Also
 
 * [Basic Usage of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/index)
-* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)
+* [TreeList JavaScript API Reference](/api/ui/treelist)

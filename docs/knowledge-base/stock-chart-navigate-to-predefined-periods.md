@@ -26,7 +26,7 @@ How can I create multiple zoom shortcuts for a StockChart&mdash;for example, 3 m
 ## Solution
 
 1. Declare a ButtonGroup to display the `zoom` options.
-1. Handle the [`select`](/api/javascript/ui/buttongroup/events/select) event of the ButtonGroup.
+1. Handle the [`select`](/api/ui/buttongroup/events/select) event of the ButtonGroup.
 1. When the user selects a ButtonGroup option, change the StockChart navigator range to reflect the selected period.
 
 The following example demonstrates how to implement the suggested approach.

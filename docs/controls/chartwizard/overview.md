@@ -24,9 +24,9 @@ The ChartWizard lets you create a chart using data from a Grid, another data-bou
 
 * [Getting Started with the Kendo UI ChartWizard for jQuery]({% slug getting_started_kendoui_chartwizard_component %})
 * [Overview of the ChartWizard (Demo)](https://demos.telerik.com/kendo-ui/chartwizard/index)
-* [JavaScript API Reference of the ChartWizard](/api/javascript/ui/chartwizard)
+* [JavaScript API Reference of the ChartWizard](/api/ui/chartwizard)
 
 ## See Also
 
 * [Basic Usage of the ChartWizard (Demo)](https://demos.telerik.com/kendo-ui/chartwizard/index)
-* [JavaScript API Reference of the ChartWizard](/api/javascript/ui/chartwizard)
+* [JavaScript API Reference of the ChartWizard](/api/ui/chartwizard)

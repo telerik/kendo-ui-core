@@ -13,10 +13,10 @@ The PivotGrid enables you to export its content to Excel.
 
 By default, the Excel export is enabled when `kendo.ooxml.min.js` is loaded on the page. `kendo.ooxml.min.js` is included in `kendo.all.min.js` and `kendo.web.min.js`.
 
-To initiate Excel export by using code, call the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgrid/methods/saveasexcel) method.
+To initiate Excel export by using code, call the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/ui/pivotgrid/methods/saveasexcel) method.
 
 For more information, refer to the following resources:
-* [Configuring the export to Excel](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgrid/methods/saveasexcel)
+* [Configuring the export to Excel](https://docs.telerik.com/kendo-ui/api/ui/pivotgrid/methods/saveasexcel)
 * [Exporting the PivotGrid to Excel (demo)](https://demos.telerik.com/{{ site.platform }}/pivotgrid/excel-export)
 
 ## Exporting the Content
@@ -49,7 +49,7 @@ To apply customizations during the export to Excel:
         </kendo-pivotgrid>
     ```
 
-1. In the handler, manipulate the generated workbook. The example alternates the [background color of the rows cells](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background).
+1. In the handler, manipulate the generated workbook. The example alternates the [background color of the rows cells](https://docs.telerik.com/kendo-ui/api/ooxml/workbook/configuration/sheets.rows.cells.background).
 
     ```JS
     <script>

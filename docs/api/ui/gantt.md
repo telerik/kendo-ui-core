@@ -8,7 +8,7 @@ component: gantt
 
 # kendo.ui.Gantt
 
-Represents the Kendo UI Gantt widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Gantt widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -47,12 +47,12 @@ How can I map resources to tasks in a Kendo UI Gantt chart? Control and configur
 
 ### assignments.dataSource `Object|Array|kendo.data.DataSource`
 
-The data source which contains assignment data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source which contains assignment data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -263,7 +263,7 @@ What is the dataValueField in Kendo UI Gantt for assigning resource workloads? C
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -389,7 +389,7 @@ How do I enable interactive column menus in Kendo UI Gantt chart? Enable or conf
 ### columns `Array`
 
 The configuration of the Gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
-[field](/api/javascript/ui/gantt#configuration-columns.field) to which the column is bound. The Gantt will create a column for every item of the array.
+[field](/api/ui/gantt#configuration-columns.field) to which the column is bound. The Gantt will create a column for every item of the array.
 
 > If this setting is **not** specified the Gantt will create a single column for the task title.
 
@@ -639,7 +639,7 @@ How can I make individual columns in my Kendo UI Gantt chart editable? Control w
 
 Provides a way to specify a custom editing UI for the column. To create the editing UI, use the `container` parameter.
 
-> * The editing UI has to contain an element with a set `name` HTML attribute. The attribute value has to match the [`field`](/api/javascript/ui/gantt#configuration-columns.field) name.
+> * The editing UI has to contain an element with a set `name` HTML attribute. The attribute value has to match the [`field`](/api/ui/gantt#configuration-columns.field) name.
 > * The validation settings that are defined in the `model.fields` configuration will not be applied automatically. In order for the validation to work, you (the developer) are responsible for attaching the corresponding validation attributes to the editor input. If the custom editor is a widget, to avoid visual issues, you can [customize the tooltip position of the validation warning](/framework/validator/overview#customizing-the-tooltip-position).
 
 
@@ -661,7 +661,7 @@ The name of the field to which the column is bound.
 
 ##### options.format `String`
 
-The format string of the column that is specified through the [`format`](/api/javascript/ui/gantt#configuration-columns.format) option.
+The format string of the column that is specified through the [`format`](/api/ui/gantt#configuration-columns.format) option.
 
 ##### options.model `kendo.data.GanttTask`
 
@@ -805,7 +805,7 @@ How do I bind a Gantt chart column to a specific data model attribute in Kendo U
 
 ### columns.filterable `Boolean|Object` *(default: true)*
 
-If set to `true` and if filtering is enabled for the entire Gantt, a filter menu will be displayed for this column. If set to `false`, the filter menu will not be displayed. By default, a filter menu is displayed for all columns when filtering is enabled through the [`filterable`](/api/javascript/ui/gantt#configuration-filterable) option. Can be set to a JavaScript object which represents the filter menu configuration.
+If set to `true` and if filtering is enabled for the entire Gantt, a filter menu will be displayed for this column. If set to `false`, the filter menu will not be displayed. By default, a filter menu is displayed for all columns when filtering is enabled through the [`filterable`](/api/ui/gantt#configuration-filterable) option. Can be set to a JavaScript object which represents the filter menu configuration.
 
 
 <div class="meta-api-description">
@@ -951,10 +951,10 @@ How do I customize the filter menu interface for Gantt chart columns? Configure 
 
 ### columns.format `String`
 
-The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/api/javascript/kendo#standard-number-formats),
-[custom number format](/api/javascript/kendo#custom-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
+The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/api/kendo#standard-number-formats),
+[custom number format](/api/kendo#custom-number-formats), [standard date format](/api/kendo#standard-date-formats) or a [custom date format](/api/kendo#custom-date-formats).
 
-> The [kendo.format](/api/javascript/kendo/methods/format) function is used to format the value.
+> The [kendo.format](/api/kendo/methods/format) function is used to format the value.
 
 
 <div class="meta-api-description">
@@ -1073,7 +1073,7 @@ How do I customize the styling of Gantt chart column headers in Kendo UI for jQu
 
 ### columns.headerTemplate `String|Function`
 
-The [`template`](/api/javascript/kendo/methods/template) which renders the column header content. By default, the value of the [`title`](/api/javascript/ui/gantt/configuration/columns.title) column option is displayed in the column header cell.
+The [`template`](/api/kendo/methods/template) which renders the column header content. By default, the value of the [`title`](/api/ui/gantt/configuration/columns.title) column option is displayed in the column header cell.
 
 > If sorting is enabled, the column header content will be wrapped in an `<a>` element. As a result, the template must contain only inline elements.
 
@@ -1205,7 +1205,7 @@ How to hide specific columns in Kendo UI Gantt chart? Control and customize whic
 
 ### columns.menu `Boolean`
 
-If set to `true`, the Gantt will display the column in the column menu. By default, the column menu includes all data-bound columns, that is, the ones with a set [`field`](/api/javascript/ui/gantt#configuration-columns.field) option.
+If set to `true`, the Gantt will display the column in the column menu. By default, the column menu includes all data-bound columns, that is, the ones with a set [`field`](/api/ui/gantt#configuration-columns.field) option.
 
 
 <div class="meta-api-description">
@@ -1271,7 +1271,7 @@ How do I customize column visibility in a Kendo UI Gantt chart? Manage the visib
 
 ### columns.minScreenWidth `Number`
 
-The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/gantt/configuration/columns.hidden) setting and the two cannot not be used at the same time.
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/ui/gantt/configuration/columns.hidden) setting and the two cannot not be used at the same time.
 
 
 <div class="meta-api-description">
@@ -1456,8 +1456,8 @@ How to customize sorting order in Gantt chart columns using compare function? Cu
 
 ### columns.template `String|Function`
 
-The [`template`](/api/javascript/kendo/methods/template) which renders the column content. The Gantt renders table rows (`<tr>`) which represent the data source items.
-Each table row consists of table cells (`<td>`) which represent the GanttList columns. By default, the HTML-encoded value of the [`field`](/api/javascript/ui/gantt#configuration-columns.field) is displayed in the column.
+The [`template`](/api/kendo/methods/template) which renders the column content. The Gantt renders table rows (`<tr>`) which represent the data source items.
+Each table row consists of table cells (`<td>`) which represent the GanttList columns. By default, the HTML-encoded value of the [`field`](/api/ui/gantt#configuration-columns.field) is displayed in the column.
 
 > To customize the way the column displays its value, use `template`.
 
@@ -1560,7 +1560,7 @@ How to customize Gantt chart column cell rendering with a custom template? Contr
 
 ### columns.title `String`
 
-The text that is displayed in the column header cell. If not set the [field](/api/javascript/ui/gantt#configuration-columns.field) is used.
+The text that is displayed in the column header cell. If not set the [field](/api/ui/gantt#configuration-columns.field) is used.
 
 
 <div class="meta-api-description">
@@ -1742,12 +1742,12 @@ How often does the current time marker in Kendo UI Gantt update? Control the fre
 
 ### dataSource `Object|Array|kendo.data.GanttDataSource`
 
-The data source of the widget which contains the tasks. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.GanttDataSource](/api/javascript/data/ganttdatasource)
+The data source of the widget which contains the tasks. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.GanttDataSource](/api/data/ganttdatasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.GanttDataSource](/api/javascript/data/ganttdatasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.GanttDataSource](/api/data/ganttdatasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/javascript/data/ganttdatasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/data/ganttdatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 > The Kendo UI Gantt widget can be bound *only* to a `kendo.data.GanttDataSource`. An exception will be thrown if the `dataSource` option is set to a `kendo.data.DataSource` instance.
 
@@ -1892,12 +1892,12 @@ How to set initial date focus in Kendo UI Gantt chart? Set or control the timeli
 
 ### dependencies `Object|Array|kendo.data.GanttDependencyDataSource`
 
-The data source of the widget which contains the dependencies. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.GanttDependencyDataSource](/api/javascript/data/ganttdependencydatasource)
+The data source of the widget which contains the dependencies. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.GanttDependencyDataSource](/api/data/ganttdependencydatasource)
 instance.
 
-If the `dependencies` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.GanttDependencyDataSource](/api/javascript/data/ganttdependencydatasource) instance using that value as data source configuration.
+If the `dependencies` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.GanttDependencyDataSource](/api/data/ganttdependencydatasource) instance using that value as data source configuration.
 
-If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSource](/api/javascript/data/ganttdependencydatasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSource](/api/data/ganttdependencydatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 > The Kendo UI Gantt dependencies can be bound *only* to a `kendo.data.GanttDependencyDataSource`. An exception will be thrown if the `dataSource` option is set to a `kendo.data.DataSource` instance.
 
@@ -2589,7 +2589,7 @@ How can I allow users to adjust task duration in a Gantt chart by dragging timel
 
 ### editable.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the editor.
+The [template](/api/kendo/methods/template) which renders the editor.
 
 The template should contain elements whose `name` HTML attributes are set as the editable fields. This is how the Gantt will know
 which field to update. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
@@ -2911,7 +2911,7 @@ What is the purpose of setting the workDayEnd property in a Kendo UI Gantt compo
 
 The start of working week (index based).
 
-> The `workWeekEnd` option is supported when [showWorkDays](/api/javascript/ui/gantt#configuration-showWorkDays) is `true`.
+> The `workWeekEnd` option is supported when [showWorkDays](/api/ui/gantt#configuration-showWorkDays) is `true`.
 
 
 <div class="meta-api-description">
@@ -2941,7 +2941,7 @@ How to set first day of workweek in Kendo UI Gantt component? Configure or set t
 
 The end of working week (index based).
 
-> The `workWeekEnd` option is supported when [showWorkDays](/api/javascript/ui/gantt#configuration-showWorkDays) is `true`.
+> The `workWeekEnd` option is supported when [showWorkDays](/api/ui/gantt#configuration-showWorkDays) is `true`.
 
 
 <div class="meta-api-description">
@@ -4906,7 +4906,7 @@ How do I change the default file name for exporting a Gantt chart as a PDF? Cont
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/gantt#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/ui/gantt#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 
 <div class="meta-api-description">
@@ -5475,7 +5475,7 @@ How to enable column resizing in Kendo UI Gantt chart? Control and configure int
 
 ### selectable `Boolean` *(default: true)*
 
-If set to `false` the user won't be able to select tasks in the Gantt. By default selection is enabled and triggers the [change event](/api/javascript/ui/gantt/events/change).
+If set to `false` the user won't be able to select tasks in the Gantt. By default selection is enabled and triggers the [change event](/api/ui/gantt/events/change).
 
 
 <div class="meta-api-description">
@@ -5581,9 +5581,9 @@ How do I show only business hours in Gantt day view? Control the display of hour
 
 ### taskTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the gantt tasks.
+The [template](/api/kendo/methods/template) used to render the gantt tasks.
 
-The fields which can be used in the template are the [task fields](/api/javascript/data/gantttask)
+The fields which can be used in the template are the [task fields](/api/data/gantttask)
 
 
 <div class="meta-api-description">
@@ -5627,7 +5627,7 @@ How do I customize task appearance in Kendo UI Gantt chart? Customize task rende
 ### toolbar `String|Function|Array`
 
 If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole Gantt Toolbar,
-and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
+and the string value will be passed as an argument to a [`kendo.template()`](/api/kendo/methods/template) function.
 
 If a `Function` value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Gantt Toolbar contents.
 
@@ -5738,7 +5738,7 @@ How can I customize the button names in my Kendo UI Gantt chart toolbar? Set or 
     });
     </script>
 
-Apart from the built-in tools, the Gantt fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
+Apart from the built-in tools, the Gantt fully exposes the [ToolBar.items API](/api/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
 
 #### Example
 
@@ -5773,7 +5773,7 @@ Apart from the built-in tools, the Gantt fully exposes the [ToolBar.items API](/
 
 ### toolbar.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button.
+The [template](/api/kendo/methods/template) which renders the command. By default renders a button.
 
 
 <div class="meta-api-description">
@@ -5837,7 +5837,7 @@ How to customize toolbar commands in Kendo UI Gantt chart? Customize and control
 
 ### toolbar.text `String`
 
-The text displayed by the command button. If not set the [name](/api/javascript/ui/gantt#configuration-toolbar.name)` option would be used as the button text instead.
+The text displayed by the command button. If not set the [name](/api/ui/gantt#configuration-toolbar.name)` option would be used as the button text instead.
 
 
 <div class="meta-api-description">
@@ -5895,7 +5895,7 @@ How to customize Gantt chart tooltip content in Kendo UI for jQuery? Configure a
 
 ### tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
+The [template](/api/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -5987,7 +5987,7 @@ How to customize timeline views in Kendo UI Gantt widget? Set or adjust the visi
 
 If set to some date and it is between the range start and range end of the selected view, the timeline of the currently selected view is scrolled to start from this date.
 
-Overrides the [date](/api/javascript/ui/gantt#configuration-date) option of the gantt.
+Overrides the [date](/api/ui/gantt#configuration-date) option of the gantt.
 
 
 <div class="meta-api-description">
@@ -6052,7 +6052,7 @@ How do I customize the timeline window in my Kendo UI Gantt chart to show a spec
 
 If set to some date the timeline of the view will start from this date.
 
-Overrides the [range.start](/api/javascript/ui/gantt#configuration-range.start) option of the gantt.
+Overrides the [range.start](/api/ui/gantt#configuration-range.start) option of the gantt.
 
 
 <div class="meta-api-description">
@@ -6087,7 +6087,7 @@ How to set the initial start date of my Gantt chart timeline in Kendo UI for jQu
 
 If set to some date the timeline of the view will end to this date.
 
-Overrides the [range.end](/api/javascript/ui/gantt#configuration-range.end) option of the gantt.
+Overrides the [range.end](/api/ui/gantt#configuration-range.end) option of the gantt.
 
 
 <div class="meta-api-description">
@@ -6208,7 +6208,7 @@ How do I adjust the size of time slots in a Kendo UI Gantt chart? Adjust the ver
 
 ### views.timeHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the time slots in "day" view
+The [template](/api/kendo/methods/template) used to render the time slots in "day" view
 
 
 <div class="meta-api-description">
@@ -6238,7 +6238,7 @@ How can I customize the display of time slots in a Gantt chart using the `timeHe
 
 ### views.dayHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the day slots in "day" and "week" views.
+The [template](/api/kendo/methods/template) used to render the day slots in "day" and "week" views.
 
 
 <div class="meta-api-description">
@@ -6295,7 +6295,7 @@ How to customize day header in Gantt chart with jQuery Kendo UI? Customize and c
 
 ### views.weekHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the week slots in "week" and "month" views.
+The [template](/api/kendo/methods/template) used to render the week slots in "week" and "month" views.
 
 
 <div class="meta-api-description">
@@ -6353,7 +6353,7 @@ How to customize week headers in Kendo Gantt views using the `weekHeaderTemplate
 
 ### views.monthHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the month slots in "month" and "year" views.
+The [template](/api/kendo/methods/template) used to render the month slots in "month" and "year" views.
 
 
 <div class="meta-api-description">
@@ -6413,7 +6413,7 @@ How do I customize month headers in Kendo UI Gantt project timeline views? Confi
 
 ### views.yearHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the year slots in "year" view.
+The [template](/api/kendo/methods/template) used to render the year slots in "year" view.
 
 
 <div class="meta-api-description">
@@ -6515,7 +6515,7 @@ How do I set up task assignments in Kendo UI Gantt? Set up and manage task assig
 ### resources.dataFormatField `String` *(default: "format")*
 
 The field of the resource data item containing the format of the resource value, which could be assigned to a gantt task.
-The data item format value could be any valid [kendo format](/api/javascript/kendo/methods/format).
+The data item format value could be any valid [kendo format](/api/kendo/methods/format).
 
 
 <div class="meta-api-description">
@@ -6595,12 +6595,12 @@ How do I specify which field in my resource data contains color values for a Gan
 
 ### resources.dataSource `Object|Array|kendo.data.DataSource`
 
-The data source which contains resource data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source which contains resource data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -6758,11 +6758,11 @@ How do I change the height of rows in my Gantt chart using Kendo UI for jQuery? 
 
 ### dataSource `kendo.data.GanttDataSource`
 
-The [data source](/api/javascript/data/ganttdatasource) of the widget. Configured via the [datasource](/api/javascript/ui/gantt/configuration/datasource) option.
+The [data source](/api/data/ganttdatasource) of the widget. Configured via the [datasource](/api/ui/gantt/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/gantt/methods/setdatasource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/ui/gantt/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -6869,11 +6869,11 @@ How to bind data to the Gantt chart using dataSource? Control task and dependenc
 
 ### dependencies `kendo.data.GanttDependencyDataSource`
 
-The [dependencies data source](/api/javascript/data/ganttdependencydatasource) of the widget. Configured via the [dependencies](/api/javascript/ui/gantt/configuration/dependencies) option.
+The [dependencies data source](/api/data/ganttdependencydatasource) of the widget. Configured via the [dependencies](/api/ui/gantt/configuration/dependencies) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDependenciesDataSource](/api/javascript/ui/gantt/methods/setdependenciesdatasource) method instead.
+> Assigning a new data source would have no effect. Use the [setDependenciesDataSource](/api/ui/gantt/methods/setdependenciesdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -7355,7 +7355,7 @@ The task which should be removed. Also accepts a string which is the `uid` of th
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/gantt/events/pdfexport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/ui/gantt/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
@@ -7365,7 +7365,7 @@ How to export Gantt chart as PDF using Kendo UI for jQuery? Export or save the c
 </div>
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/gantt/events/pdfexport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/ui/gantt/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
     <button id="export">Export to PDF</button>
@@ -8215,7 +8215,7 @@ How to detect when columns are hidden in a Kendo UI Gantt chart? Detect and resp
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [`column`](/api/javascript/ui/gantt#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/ui/gantt#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.Gantt`
 
@@ -8256,7 +8256,7 @@ How do I detect when columns in my Kendo UI Gantt chart are reordered? Detect an
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [`column`](/api/javascript/ui/gantt#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/ui/gantt#configuration-columns) configuration.
 
 ##### e.newIndex `Number`
 
@@ -8307,7 +8307,7 @@ How do I detect when a user resizes columns in a Kendo UI Gantt chart? Detect, c
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/gantt#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/ui/gantt#configuration-columns) configuration.
 
 ##### e.newWidth `Number`
 
@@ -8380,7 +8380,7 @@ How to detect when a column is visible in Kendo UI Gantt chart? Detect, capture,
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [`column`](/api/javascript/ui/gantt/configuration/columns) configuration.
+A JavaScript object which represents the [`column`](/api/ui/gantt/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Gantt`
 

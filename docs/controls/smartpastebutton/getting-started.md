@@ -159,5 +159,5 @@ And return a response with field values:
 ## See Also
 
 * [Basic Usage of the SmartPasteButton (Demo)](https://demos.telerik.com/kendo-ui/smartpastebutton/index)
-* [JavaScript API Reference of the SmartPasteButton](/api/javascript/ui/smartpastebutton)
+* [JavaScript API Reference of the SmartPasteButton](/api/ui/smartpastebutton)
 * [Knowledge Base Section](/knowledge-base)

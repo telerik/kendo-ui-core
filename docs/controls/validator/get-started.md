@@ -227,6 +227,6 @@ Among other functionalities, the Validator provides the ability to list validati
 
 ## See Also
 
-* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
+* [JavaScript API Reference of the Validator](/api/ui/validator)
 * [Knowledge Base Section](/knowledge-base)
 

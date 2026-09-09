@@ -14,11 +14,11 @@ You have to set an individual value axis to each pane. Multiple panes can share 
 
 > Only the Categorical Chart series - Area, Bar, Box Plot, Bullet, Line, Radar, Range Area, Range Bar and Waterfall support the configuration of panes.
 
-Panes are declared through the [`panes`](/api/javascript/dataviz/ui/chart/configuration/panes) configuration. To control the series placement, plot the series on a value axis, which is placed in the desired pane.
+Panes are declared through the [`panes`](/api/dataviz/ui/chart/configuration/panes) configuration. To control the series placement, plot the series on a value axis, which is placed in the desired pane.
 
 ## Default Settings
 
-Settings that apply to all panes can be declared through the [`paneDefaults`](/api/javascript/dataviz/ui/chart/configuration/paneDefaults) configuration.
+Settings that apply to all panes can be declared through the [`paneDefaults`](/api/dataviz/ui/chart/configuration/paneDefaults) configuration.
 
 The following example sets the default background color for the panes:
 
@@ -45,7 +45,7 @@ The following example sets the default background color for the panes:
 By default, the pane content cannot extend beyond its border. This prevents charts from overlapping other elements like the legend or title.
 
 Pane clipping may be undesired, for example when plotting series markers at the edge of the pane.
-To disable clipping, set the [panes.clip](/api/javascript/dataviz/ui/chart/configuration/panes.clip) setting to `false`:
+To disable clipping, set the [panes.clip](/api/dataviz/ui/chart/configuration/panes.clip) setting to `false`:
 
     $("#chart").kendoChart({
     seriesDefaults: {
@@ -68,4 +68,4 @@ To disable clipping, set the [panes.clip](/api/javascript/dataviz/ui/chart/confi
 ## See Also
 
 * [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

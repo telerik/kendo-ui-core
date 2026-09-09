@@ -27,10 +27,10 @@ The component displays a list of data that is contained in a box and allows sing
 
 * [Getting Started with the Kendo UI ListBox for jQuery]({% slug getting_started_kendoui_listbox_widget %})
 * [Demo Page for the ListBox](https://demos.telerik.com/kendo-ui/listbox/index)
-* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
+* [JavaScript API Reference of the ListBox](/api/ui/listbox)
 
 ## See Also
 
 * [Basic Usage of the ListBox (Demo)](https://demos.telerik.com/kendo-ui/listbox/index)
 * [Using the API of the ListBox (Demo)](https://demos.telerik.com/kendo-ui/listbox/api)
-* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
+* [JavaScript API Reference of the ListBox](/api/ui/listbox)

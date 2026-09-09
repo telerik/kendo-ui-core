@@ -53,7 +53,7 @@ public class CalendarIndexModel : PageModel
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [Client-Side API of the Calendar](https://docs.telerik.com/kendo-ui/api/ui/calendar)
 * [Server-Side HtmlHelper API of the Calenadr](/api/calendar)
 * [Server-Side TagHelper API of the Calendar](/api/taghelpers/calendar)
 * [Knowledge Base Section](/knowledge-base)

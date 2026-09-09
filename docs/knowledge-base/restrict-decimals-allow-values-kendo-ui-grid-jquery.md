@@ -216,5 +216,5 @@ For a complete implementation, refer to the below example.
 ## See Also
 
 - [Kendo UI for jQuery Grid Overview](https://docs.telerik.com/kendo-ui/controls/grid/overview)
-- [API Reference of the Grid Component](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-- [API Reference of NumericTextBox Component](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox)
+- [API Reference of the Grid Component](https://docs.telerik.com/kendo-ui/api/ui/grid)
+- [API Reference of NumericTextBox Component](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox)

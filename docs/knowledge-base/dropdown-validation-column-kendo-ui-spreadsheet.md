@@ -36,7 +36,7 @@ This knowledge base article also answers the following questions:
 
 ### Adding Dropdown Validation for a Whole Column
 
-To add dropdown validation for an entire column, configure the validation for the column range using the [`sheets.rows.cells.validation.from`](/api/javascript/ui/spreadsheet/configuration/sheets.rows.cells.validation#sheetsrowscellsvalidationfrom) property. For newly added rows, ensure the same validation is applied to the respective cell in the column by using the [`insertRow`](/api/javascript/ui/spreadsheet/events/insertrow) event. Below is an example of how to configure a custom editor for a column upon adding a new row:
+To add dropdown validation for an entire column, configure the validation for the column range using the [`sheets.rows.cells.validation.from`](/api/ui/spreadsheet/configuration/sheets.rows.cells.validation#sheetsrowscellsvalidationfrom) property. For newly added rows, ensure the same validation is applied to the respective cell in the column by using the [`insertRow`](/api/ui/spreadsheet/events/insertrow) event. Below is an example of how to configure a custom editor for a column upon adding a new row:
 
 ```javascript
 insertRow: function (e) {   
@@ -47,7 +47,7 @@ insertRow: function (e) {
 }
 ```
 
-Use the `Range.editor()` method for applying custom editors. For more details, refer to [Range.editor() documentation](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/editor).
+Use the `Range.editor()` method for applying custom editors. For more details, refer to [Range.editor() documentation](https://docs.telerik.com/kendo-ui/api/spreadsheet/range/methods/editor).
 
 ### Example
 
@@ -149,6 +149,6 @@ The following example registers a custom color-picker editor, initializes a Spre
 ## See Also
 
 - [Spreadsheet Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/spreadsheet/overview)
-- [Validation Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/sheets.rows.cells.validation)
-- [Range Editor Method](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/editor)
+- [Validation Configuration](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/configuration/sheets.rows.cells.validation)
+- [Range Editor Method](https://docs.telerik.com/kendo-ui/api/spreadsheet/range/methods/editor)
 - [Spreadsheet Custom Cell Editors (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/custom-editors)

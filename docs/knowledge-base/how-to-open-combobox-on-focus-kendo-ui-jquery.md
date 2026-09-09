@@ -93,5 +93,5 @@ For a practical implementation, refer to this example:
 ## See Also
 
 - [Kendo UI ComboBox for jQuery Documentation](https://docs.telerik.com/kendo-ui/controls/editors/combobox/overview)
-- [ComboBox API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+- [ComboBox API Reference](https://docs.telerik.com/kendo-ui/api/ui/combobox)
 - [Handling Focus Events in JavaScript](https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event)

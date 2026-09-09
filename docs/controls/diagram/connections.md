@@ -13,11 +13,11 @@ The Diagram provides extensive configuration options for connections that link s
 
 Connections are the lines that visually represent relationships between shapes in a diagram. The component supports various styling options, routing types, and label configurations to create professional and informative diagrams.
 
-> All connection settings described in this article can be applied globally to all connections using the [`connectionDefaults`](/api/javascript/dataviz/ui/diagram/configuration/connectiondefaults) configuration. Individual connections will inherit these defaults unless explicitly overridden.
+> All connection settings described in this article can be applied globally to all connections using the [`connectionDefaults`](/api/dataviz/ui/diagram/configuration/connectiondefaults) configuration. Individual connections will inherit these defaults unless explicitly overridden.
 
 ## Getting Started
 
-To create connections between shapes, specify the [`from`](/api/javascript/dataviz/ui/diagram/configuration/connections.from) and [`to`](/api/javascript/dataviz/ui/diagram/configuration/connections.to) properties referencing the shape IDs.
+To create connections between shapes, specify the [`from`](/api/dataviz/ui/diagram/configuration/connections.from) and [`to`](/api/dataviz/ui/diagram/configuration/connections.to) properties referencing the shape IDs.
 
 ```dojo
 <div id="diagram"></div>
@@ -36,11 +36,11 @@ $("#diagram").kendoDiagram({
 
 ## Stroke Configuration
 
-The [`stroke`](/api/javascript/dataviz/ui/diagram/configuration/connections.stroke) configuration controls the visual appearance of connection lines, including their color, width, and line style.
+The [`stroke`](/api/dataviz/ui/diagram/configuration/connections.stroke) configuration controls the visual appearance of connection lines, including their color, width, and line style.
 
 ### Defining Color and Width
 
-Use the [`stroke.color`](/api/javascript/dataviz/ui/diagram/configuration/connections.stroke#connectionsstrokecolor) and [`stroke.width`](/api/javascript/dataviz/ui/diagram/configuration/connections.stroke#connectionsstrokewidth) properties to customize the basic appearance of connections.
+Use the [`stroke.color`](/api/dataviz/ui/diagram/configuration/connections.stroke#connectionsstrokecolor) and [`stroke.width`](/api/dataviz/ui/diagram/configuration/connections.stroke#connectionsstrokewidth) properties to customize the basic appearance of connections.
 
 ```dojo
 <div id="diagram"></div>
@@ -66,7 +66,7 @@ The color accepts any valid CSS color value, and width is specified in pixels.
 
 ### Setting Dash Type
 
-The [`stroke.dashType`](/api/javascript/dataviz/ui/diagram/configuration/selectable#selectablestrokedashtype) property allows you to create dashed or dotted connection lines. This is useful for representing different types of relationships.
+The [`stroke.dashType`](/api/dataviz/ui/diagram/configuration/selectable#selectablestrokedashtype) property allows you to create dashed or dotted connection lines. This is useful for representing different types of relationships.
 
 ```dojo
 <div id="diagram"></div>
@@ -93,7 +93,7 @@ The supported dash types include `"dash"`, `"dashDot"`, `"dot"`, `"longDash"`, `
 
 ### Advanced Stroke Options
 
-The stroke configuration also supports [`lineCap`](/api/javascript/dataviz/ui/diagram/configuration/connections.stroke#connectionsstrokelinecap) and [`lineJoin`](/api/javascript/dataviz/ui/diagram/configuration/connections.stroke#connectionsstrokelinejoin) properties for fine-tuning the appearance of connection endpoints and corners.
+The stroke configuration also supports [`lineCap`](/api/dataviz/ui/diagram/configuration/connections.stroke#connectionsstrokelinecap) and [`lineJoin`](/api/dataviz/ui/diagram/configuration/connections.stroke#connectionsstrokelinejoin) properties for fine-tuning the appearance of connection endpoints and corners.
 
 ```dojo
 <div id="diagram"></div>
@@ -119,7 +119,7 @@ $("#diagram").kendoDiagram({
 
 ## Connection Types
 
-The [`type`](/api/javascript/dataviz/ui/diagram/configuration/connections.type) property specifies how connections route between shapes. The default value is `"cascading"`.
+The [`type`](/api/dataviz/ui/diagram/configuration/connections.type) property specifies how connections route between shapes. The default value is `"cascading"`.
 
 ### Cascading Connections
 
@@ -175,7 +175,7 @@ The `content` configuration enables you to add labels to connections with extens
 
 ### Basic Text Label
 
-Add a text label to a connection using the [`content.text`](/api/javascript/dataviz/ui/diagram/configuration/connections.content#connectionscontenttext) property.
+Add a text label to a connection using the [`content.text`](/api/dataviz/ui/diagram/configuration/connections.content#connectionscontenttext) property.
 
 ```dojo
 <div id="diagram"></div>
@@ -253,11 +253,11 @@ $("#diagram").kendoDiagram({
 </script>
 ```
 
-The [`border.dashType`](/api/javascript/dataviz/ui/diagram/configuration/connections.content#connectionscontentborderdashtype) supports the same values as stroke dash types.
+The [`border.dashType`](/api/dataviz/ui/diagram/configuration/connections.content#connectionscontentborderdashtype) supports the same values as stroke dash types.
 
 ### Label Positioning
 
-Control the position of connection labels relative to the connection path using the [`position`](/api/javascript/dataviz/ui/diagram/configuration/connections.content#connectionscontentposition) property.
+Control the position of connection labels relative to the connection path using the [`position`](/api/dataviz/ui/diagram/configuration/connections.content#connectionscontentposition) property.
 
 ```dojo
 <div id="diagram"></div>
@@ -361,7 +361,7 @@ $("#diagram").kendoDiagram({
 
 ### Label Offset
 
-The [`offset`](/api/javascript/dataviz/ui/diagram/configuration/connectiondefaults.content#connectiondefaultscontentoffset) property controls the distance in pixels between the label and the connection path. The default value is 5 pixels.
+The [`offset`](/api/dataviz/ui/diagram/configuration/connectiondefaults.content#connectiondefaultscontentoffset) property controls the distance in pixels between the label and the connection path. The default value is 5 pixels.
 
 ```dojo
 <div id="diagram"></div>
@@ -385,7 +385,7 @@ $("#diagram").kendoDiagram({
 
 ### Label Templates
 
-Use the [`content.template`](/api/javascript/dataviz/ui/diagram/configuration/connections.content#connectionscontenttemplate) property to create dynamic labels based on connection data.
+Use the [`content.template`](/api/dataviz/ui/diagram/configuration/connections.content#connectionscontenttemplate) property to create dynamic labels based on connection data.
 
 ```dojo
 <div id="diagram"></div>
@@ -410,7 +410,7 @@ $("#diagram").kendoDiagram({
 
 ### Connector Direction
 
-Specify which connector points to a shape with the [`fromConnector`](/api/javascript/dataviz/ui/diagram/configuration/connections.fromconnector) and [`toConnector`](/api/javascript/dataviz/ui/diagram/configuration/connections.toconnector) properties.
+Specify which connector points to a shape with the [`fromConnector`](/api/dataviz/ui/diagram/configuration/connections.fromconnector) and [`toConnector`](/api/dataviz/ui/diagram/configuration/connections.toconnector) properties.
 
 ```dojo
 <div id="diagram"></div>
@@ -434,7 +434,7 @@ The valid values are `"top"`, `"right"`, `"bottom"`, `"left"`, and `"auto"`. The
 
 ### Corner Radius
 
-Round the corners of connection paths using the [`cornerRadius`](/api/javascript/dataviz/ui/diagram/configuration/connections.cornerradius) property.
+Round the corners of connection paths using the [`cornerRadius`](/api/dataviz/ui/diagram/configuration/connections.cornerradius) property.
 
 ```dojo
 <div id="diagram"></div>
@@ -455,7 +455,7 @@ $("#diagram").kendoDiagram({
 
 ### End Caps
 
-Configure the appearance of connection endpoints using the [`endCap`](/api/javascript/dataviz/ui/diagram/configuration/connections.endcap) property.
+Configure the appearance of connection endpoints using the [`endCap`](/api/dataviz/ui/diagram/configuration/connections.endcap) property.
 
 ```dojo
 <div id="diagram"></div>
@@ -505,7 +505,7 @@ $("#diagram").kendoDiagram({
 
 ### Editing Options
 
-Control the editing behavior of connections using the [`editable`](/api/javascript/dataviz/ui/diagram/configuration/connections.editable) property.
+Control the editing behavior of connections using the [`editable`](/api/dataviz/ui/diagram/configuration/connections.editable) property.
 
 ```dojo
 <div id="diagram"></div>
@@ -526,11 +526,11 @@ $("#diagram").kendoDiagram({
 </script>
 ```
 
-Set [`editable`](/api/javascript/dataviz/ui/diagram/configuration/connections.editable) to `false` to disable editing for specific connections, or configure the [`tools`](/api/javascript/dataviz/ui/diagram/configuration/connections.editable#connectionseditabletools) array to specify available editing tools.
+Set [`editable`](/api/dataviz/ui/diagram/configuration/connections.editable) to `false` to disable editing for specific connections, or configure the [`tools`](/api/dataviz/ui/diagram/configuration/connections.editable#connectionseditabletools) array to specify available editing tools.
 
 ## See Also
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)
 * [Diagram Shapes](slug:shapes_kendoui_diagram)
 * [Diagram Tooltips](slug:tooltips_kendoui_diagram_widget)

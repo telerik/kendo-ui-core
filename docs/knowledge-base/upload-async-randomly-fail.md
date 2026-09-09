@@ -36,4 +36,4 @@ For Internet Explorer 10, see [KB2980019](http://support.microsoft.com/kb/298001
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

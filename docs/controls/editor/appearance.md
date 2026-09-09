@@ -156,4 +156,4 @@ You can also use custom styles with [higher specificity](https://developer.mozil
 ## See Also
 
 * [Using the Styles of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/styles)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

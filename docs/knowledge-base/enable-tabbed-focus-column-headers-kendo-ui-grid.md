@@ -22,9 +22,9 @@ I'm having trouble getting tabbed focus on column headers in the Kendo UI Grid. 
 
 ## Solution
 
-To ensure that the Kendo UI [Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) headers are accessible via keyboard navigation and comply with WCAG standards, follow these steps:
+To ensure that the Kendo UI [Grid](https://docs.telerik.com/kendo-ui/api/ui/grid) headers are accessible via keyboard navigation and comply with WCAG standards, follow these steps:
 
-1. Enable the [`navigatable`](/api/javascript/ui/grid/configuration/navigatable) option in the Grid to activate keyboard navigation.
+1. Enable the [`navigatable`](/api/ui/grid/configuration/navigatable) option in the Grid to activate keyboard navigation.
    
    ```javascript
    $("#grid").kendoGrid({
@@ -33,7 +33,7 @@ To ensure that the Kendo UI [Grid](https://docs.telerik.com/kendo-ui/api/javascr
    });
    ```
 
-2. Use the Grid's [`current`](/api/javascript/ui/grid/methods/current) method to set the initial focus on the first header cell when the Grid is focused.
+2. Use the Grid's [`current`](/api/ui/grid/methods/current) method to set the initial focus on the first header cell when the Grid is focused.
 
    ```javascript
    var grid = $("#grid").data("kendoGrid");
@@ -96,6 +96,6 @@ Below is a runnable example:
 
 ## See Also
 
-- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid)
 - [Keyboard Navigation in Kendo UI Grid](https://docs.telerik.com/kendo-ui/controls/grid/accessibility/key-nav)
 - [Kendo UI Grid Accessibility Guide](https://www.telerik.com/kendo-jquery-ui/documentation/accessibility/accessibility-overview)

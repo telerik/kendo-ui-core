@@ -65,5 +65,5 @@ To handle such situations, call the `value` method of the Kendo UI FlatColorPick
 
 * [Basic Usage of the ColorPicker (Demo)](https://demos.telerik.com/kendo-ui/colorpicker/index)
 * [Using the API of the ColorPicker (Demo)](https://demos.telerik.com/kendo-ui/colorpicker/api)
-* [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
-* [JavaScript API Reference of the ColorPalette](/api/javascript/ui/colorpalette)
+* [JavaScript API Reference of the ColorPicker](/api/ui/colorpicker)
+* [JavaScript API Reference of the ColorPalette](/api/ui/colorpalette)

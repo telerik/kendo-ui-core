@@ -92,7 +92,7 @@ Follow the next steps to update the <b>TransactionAmount</b> when the <b>CreditA
 
 1. Handle the `CellClose` event of the Grid that triggers when a specified cell in edit mode is going to be closed.
 1. Check if the closed cell contains the custom class of the <b>CreditAmount</b> column and if its value has changed.
-1. Use [`set()`](https://docs.telerik.com/kendo-ui/api/javascript/data/observableobject/methods/set) method to update the <b>TransactionAmount</b> column.
+1. Use [`set()`](https://docs.telerik.com/kendo-ui/api/data/observableobject/methods/set) method to update the <b>TransactionAmount</b> column.
 
     ```HtmlHelper
         @(Html.Kendo().Grid<GridViewModel>()
@@ -148,7 +148,7 @@ Follow the next steps to update the <b>TransactionAmount</b> when the <b>CreditA
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)

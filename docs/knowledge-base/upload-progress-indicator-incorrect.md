@@ -36,4 +36,4 @@ Deploy the application on a remote web server or disable asynchronous uploads.
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

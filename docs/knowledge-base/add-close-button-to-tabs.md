@@ -43,7 +43,7 @@ The following example shows how to add buttons inside the tabs to do this. The m
 
 * You have to place the buttons in a `<span>` element, which wraps the whole tab text.
 * When adding a new tab with a button programmatically, set `encoded` to `false`.
-* The example uses the [`tabGroup`](/api/javascript/ui/tabstrip#fields-tabgroup) field and the [`append`](/api/javascript/ui/tabstrip/methods/append) and [`remove`](/api/javascript/ui/tabstrip/methods/remove) TabStrip methods.
+* The example uses the [`tabGroup`](/api/ui/tabstrip#fields-tabgroup) field and the [`append`](/api/ui/tabstrip/methods/append) and [`remove`](/api/ui/tabstrip/methods/remove) TabStrip methods.
 * To distinguish the tab **Remove** buttons, the example also uses a `data-type="remove"` attribute.
 
 
@@ -111,6 +111,6 @@ The following example shows how to add buttons inside the tabs to do this. The m
 
 ## See Also
 
-* [JavaScript API Reference of the Kendo UI for jQuery TabStrip](/api/javascript/ui/tabstrip)
+* [JavaScript API Reference of the Kendo UI for jQuery TabStrip](/api/ui/tabstrip)
 * [Initialize the Data Grid in the TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
 * [Scroll the TabStrip with the Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})

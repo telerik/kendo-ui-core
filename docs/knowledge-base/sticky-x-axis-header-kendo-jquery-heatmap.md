@@ -352,4 +352,4 @@ Below is a runnable example:
 ## See Also
 
 - [Kendo UI for jQuery Heatmap Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/chart-types/heatmap)
-- [Chart API Reference](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+- [Chart API Reference](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart)

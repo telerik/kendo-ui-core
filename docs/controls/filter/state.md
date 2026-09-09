@@ -187,4 +187,4 @@ The following example demonstrates how to obtain the current filter expression a
 
 * [Basic Usage of the Filter (Demo)](https://demos.telerik.com/kendo-ui/filter/index)
 * [Persisting the State of the Filter (Demo)](https://demos.telerik.com/kendo-ui/filter/persist-state)
-* [JavaScript API Reference of the Filter](/api/javascript/ui/filter)
+* [JavaScript API Reference of the Filter](/api/ui/filter)

@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.Filter
 
-Represents the Kendo UI Filter widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Filter widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -59,7 +59,7 @@ How can I configure Kendo UI filter to require manual submission of filter expre
 
 ### dataSource `kendo.data.DataSource`
 
-The data source to which the widget will apply a filter. Should be an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source to which the widget will apply a filter. Should be an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
 
@@ -99,7 +99,7 @@ How to link Kendo UI filter functionality to a data source object? Bind the filt
 
 ### expression `Object`
 
-An object which represents a [filter](/api/javascript/ui/filter/configuration/expression) expression which the [kendo.data.DataSource](/api/javascript/data/datasource) can use to filter the data.
+An object which represents a [filter](/api/ui/filter/configuration/expression) expression which the [kendo.data.DataSource](/api/data/datasource) can use to filter the data.
 
 
 <div class="meta-api-description">
@@ -336,7 +336,7 @@ How do I prefill filter fields with default values in Kendo UI for jQuery? Set o
 
 ### fields.editorTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which the widget will use to create the field editor.
+The [template](/api/kendo/methods/template) which the widget will use to create the field editor.
 
 
 <div class="meta-api-description">

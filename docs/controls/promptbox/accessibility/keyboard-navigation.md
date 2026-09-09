@@ -36,4 +36,4 @@ The PromptBox supports the following keyboard shortcuts by default:
 
 * [PromptBox Modes]({% slug modes_kendoui_promptbox %})
 * [PromptBox Accessibility]({% slug accessibility_kendoui_promptbox %})
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)

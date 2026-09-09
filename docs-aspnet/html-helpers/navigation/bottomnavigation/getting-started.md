@@ -350,7 +350,7 @@ You can reference the BottomNavigation instances that you have created and build
     </script>
     ```
 
-1. Use the [BottomNavigation client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/bottomnavigation#methods) to control the behavior of the widget. In this example, you will use the `enable` method to control the state of the BottomNavigation items.
+1. Use the [BottomNavigation client-side API](https://docs.telerik.com/kendo-ui/api/ui/bottomnavigation#methods) to control the behavior of the widget. In this example, you will use the `enable` method to control the state of the BottomNavigation items.
 
     ```JS script
     <script>
@@ -380,6 +380,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the BottomNavigation for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/api)
-* [BottomNavigation Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/bottomnavigation)
+* [BottomNavigation Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/bottomnavigation)
 * [Server-Side API of the BottomNavigation](/api/bottomnavigation)
 * [Knowledge Base Section](/knowledge-base)

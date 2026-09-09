@@ -28,7 +28,7 @@ How to make the MultiSelect placeholder accessible to screen readers?
 
 ## Solution
 
-Use the text [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/change) event of the MultiSelect as demonstrated below.
+Use the text [`change`](https://docs.telerik.com/kendo-ui/api/ui/multiselect/events/change) event of the MultiSelect as demonstrated below.
 
 ```dojo
   <input type="text" placeholder="test placeholder" />
@@ -64,4 +64,4 @@ Use the text [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/mult
 
 ## See Also
 
-* [MultiSelect API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect API Reference](/api/ui/multiselect)

@@ -224,7 +224,7 @@ To bind the AutoComplete to a property from the `PageModel`, follow the next ste
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the AutoComplete](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
+* [Client-Side API of the AutoComplete](https://docs.telerik.com/kendo-ui/api/ui/autocomplete)
 * [Server-Side HtmlHelper API of the AutoComplete](/api/autocomplete)
 {% if site.core %}
 * [Server-Side TagHelper API of the AutoComplete](/api/taghelpers/autocomplete)

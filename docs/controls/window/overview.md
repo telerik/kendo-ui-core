@@ -29,7 +29,7 @@ By default, the user can move, resize, and close a Window. Its content can also 
 
 * [Getting Started with the Kendo UI Window for jQuery]({% slug getting_started_kendoui_window_widget %})
 * [Basic Usage of the Window (Demo)](https://demos.telerik.com/kendo-ui/window/index)
-* [JavaScript API Reference of the Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the Window](/api/ui/window)
 
 ## See Also
 

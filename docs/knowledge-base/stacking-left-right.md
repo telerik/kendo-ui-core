@@ -113,4 +113,4 @@ The following example demonstrates how to achieve the desired scenario.
 
 * [Basic Usage of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/index)
 * [Using the API of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/api)
-* [JavaScript API Reference of the Notification](/api/javascript/ui/notification)
+* [JavaScript API Reference of the Notification](/api/ui/notification)

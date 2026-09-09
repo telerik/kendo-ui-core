@@ -19,4 +19,4 @@ To set the adaptive mode, use the `adaptiveMode` option.
 
 ## See Also
 
-* [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
+* [JavaScript API Reference of the ColorPicker](/api/ui/colorpicker)

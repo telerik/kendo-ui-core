@@ -29,9 +29,9 @@ How can I allow user input for a specific field when adding a new row and preven
 
 ## Solution
 
-Based on the [`id`](https://docs.telerik.com/kendo-ui/api/javascript/data/model/fields/id) value of the Model, conditionally determine an editable column.
+Based on the [`id`](https://docs.telerik.com/kendo-ui/api/data/model/fields/id) value of the Model, conditionally determine an editable column.
 
-To control the editing capability of the column, the column [`editable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.editable) property accepts a function. In the following code snippet, based on the `ProductID` value, an `isEditable` function returns a Boolean value. If the value is `null`, the Grid will add a new record&mdash;the value will not be added until the Grid saves its changes. If a value is not `null`, the Grid will update an existing record.  
+To control the editing capability of the column, the column [`editable`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.editable) property accepts a function. In the following code snippet, based on the `ProductID` value, an `isEditable` function returns a Boolean value. If the value is `null`, the Grid will add a new record&mdash;the value will not be added until the Grid saves its changes. If a value is not `null`, the Grid will update an existing record.  
 
 ```       
     var dataSource = new kendo.data.DataSource({

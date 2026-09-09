@@ -19,7 +19,7 @@ The ArcGauge export functionality relies on the [Kendo UI Drawing library](https
 
 ## Export to PDF
 
-The ArcGauge allows you to retrieve the PDF representation of the content through the [`exportPDF()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportpdf). The `base64` result can be forwarded to a remote endpoint or downloaded client-side.
+The ArcGauge allows you to retrieve the PDF representation of the content through the [`exportPDF()` method](https://docs.telerik.com/kendo-ui/api/dataviz/ui/arcgauge/methods/exportpdf). The `base64` result can be forwarded to a remote endpoint or downloaded client-side.
 
 ```HtmlHelper
     <button class='export-pdf k-button'>Export to PDF</button>
@@ -79,7 +79,7 @@ The ArcGauge allows you to retrieve the PDF representation of the content throug
 
 ## Export as Image
 
-You can retrieve the image representation of the ArcGauge content by using the [`exportImage()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded client-side.
+You can retrieve the image representation of the ArcGauge content by using the [`exportImage()` method](https://docs.telerik.com/kendo-ui/api/dataviz/ui/arcgauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded client-side.
 
 ```HtmlHelper
     <button class='export-img k-button'>Export as Image</button>
@@ -133,7 +133,7 @@ You can retrieve the image representation of the ArcGauge content by using the [
 
 ## Export as SVG
 
-You can use the [`exportSVG()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportsvg) to export the ArcGauge as a Scalable Vector Graphics (SVG). The `base64` result can be forwarded to a service or downloaded on the client.
+You can use the [`exportSVG()` method](https://docs.telerik.com/kendo-ui/api/dataviz/ui/arcgauge/methods/exportsvg) to export the ArcGauge as a Scalable Vector Graphics (SVG). The `base64` result can be forwarded to a service or downloaded on the client.
 
 ```HtmlHelper
     <button class='export-svg k-button'>Export as SVG</button>

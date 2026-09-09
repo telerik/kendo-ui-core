@@ -32,4 +32,4 @@ To see the example on how to achieve this behavior, refer to [this how-to articl
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

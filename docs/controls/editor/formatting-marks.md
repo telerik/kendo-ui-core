@@ -29,7 +29,7 @@ The Space mark `∙` is represented by a small raised dot. This ensures the user
 
 ## Formatting Marks Refresh Delay
 
-The Editor exposes [`formattingMarksRefreshDelay`](/api/javascript/ui/editor/configuration/formattingmarksrefreshdelay) property allowing the user to delay formatting marks refreshing. This functionality prevents refreshing the Formatting marks on every key press and improves the Editor performance. The visual effect from this configuration is that the marks will briefly disappear while the user is typing.
+The Editor exposes [`formattingMarksRefreshDelay`](/api/ui/editor/configuration/formattingmarksrefreshdelay) property allowing the user to delay formatting marks refreshing. This functionality prevents refreshing the Formatting marks on every key press and improves the Editor performance. The visual effect from this configuration is that the marks will briefly disappear while the user is typing.
 
 The `formattingMarksRefreshDelay` accepts a `boolean` value for enabling or disabling the functionality or a `number` value for a specific delay in milliseconds before the formatting marks are refreshed. You can set the value to `false` to fully turn off this behavior.
 
@@ -39,4 +39,4 @@ This feature is useful for performance optimization as the formatting marks are 
 ## See Also
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

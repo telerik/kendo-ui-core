@@ -25,7 +25,7 @@ The Kendo UI AutoComplete supports the following styling options:
 
 The `size` option controls how big or small the AutoComplete component looks. The structure of the class is `k-input-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/autocomplete/configuration/size) option:
+The following values are available for the [`size`](/api/ui/autocomplete/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -57,7 +57,7 @@ Below is the HTML that is affected from the configuration. The changes are appli
 
 The `rounded` option controls how much border radius is applied to the tags for the selected items in the widget. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/autocomplete/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/autocomplete/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -89,7 +89,7 @@ The changes are applied to the `span.k-autocomplete` wrapping element:
 
 The `fillMode` option controls how the color is applied. The structure of the class is `k-input-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/autocomplete/configuration/fillMode) option:
+The following values are available for the [`fillMode`](/api/ui/autocomplete/configuration/fillMode) option:
 
 - `solid`
 - `flat`
@@ -174,4 +174,4 @@ The AutoComplete enables you to remove the values from its input area by using t
 * [Basic Usage of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/index)
 * [Using the API of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/api)
 * [Appearance Demo of the AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/appearance)
-* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)
+* [JavaScript API Reference of the AutoComplete](/api/ui/autocomplete)

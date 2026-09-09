@@ -28,10 +28,10 @@ How can I filter a boolean column on click of the radio button without the need 
 
 ## Solution
 
-1. Add a [`filterMenuInit`](/api/javascript/ui/grid/events/filtermenuinit) event handler.
+1. Add a [`filterMenuInit`](/api/ui/grid/events/filtermenuinit) event handler.
 1. Check if the field for which the event was triggered is the boolean field
 1. Attach a click handler to the radio buttons
-1. Programmatically apply the filter using the dataSource [`filter()`](/api/javascript/data/datasource/methods/filter) method.
+1. Programmatically apply the filter using the dataSource [`filter()`](/api/data/datasource/methods/filter) method.
 
 ```
     filterMenuInit: function(e){

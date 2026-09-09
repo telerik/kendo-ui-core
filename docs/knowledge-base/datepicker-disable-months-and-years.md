@@ -24,14 +24,14 @@ components: ["datepicker"]
 
 ## Description
 
-The [`disableDates`](/api/javascript/ui/datetimepicker/configuration/disabledates) configuration provides the functionality to disable certain days in the month view of the DatePicker. This article demonstates how to disable months and years as well.
+The [`disableDates`](/api/ui/datetimepicker/configuration/disabledates) configuration provides the functionality to disable certain days in the month view of the DatePicker. This article demonstates how to disable months and years as well.
 
 ## Solution
 
 1. Initialize two arrays that will hold the disabled months and years.
-1. Attach a handler to the [`open`](/api/javascript/ui/datepicker/events/open) event of the DatePicker.
+1. Attach a handler to the [`open`](/api/ui/datepicker/events/open) event of the DatePicker.
 1. Inside the `open` event, retrieve a reference to the underlying `Calendar` widget.
-1. Attach a handler to the [`navigate`](/api/javascript/ui/calendar/events/navigate) event of the `Calendar`.
+1. Attach a handler to the [`navigate`](/api/ui/calendar/events/navigate) event of the `Calendar`.
 1. Perform a conditional check to find out which view is currently open.
    * If the `year` view is open, iterate over the array of months.
    * If the `decade` view is open, iterate over the array of years.

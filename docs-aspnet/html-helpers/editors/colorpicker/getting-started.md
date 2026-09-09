@@ -215,7 +215,7 @@ You can reference the ColorPicker instances that you have created and build on t
              })
          </script>
     ```
-1. Toggle the popup of the component by using the [`toggle()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker/methods/toggle) client-side method.
+1. Toggle the popup of the component by using the [`toggle()`](https://docs.telerik.com/kendo-ui/api/ui/colorpicker/methods/toggle) client-side method.
 
     ```JS script
         <script>
@@ -249,6 +249,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the ColorPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/api)
-* [Client-Side API of the ColorPicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker)
+* [Client-Side API of the ColorPicker](https://docs.telerik.com/kendo-ui/api/ui/colorpicker)
 * [Server-Side API of the ColorPicker for {{ site.framework }}](/api/colorpicker)
 * [Knowledge Base Section](/knowledge-base)

@@ -257,7 +257,7 @@ You can reference the PDFViewer instances that you have created and build on top
     </script>
     ```
 
-1. Use the [PDFViewer client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer#methods) to control the behavior of the widget. In this example, you will use the `activatePage` method to activate a page.
+1. Use the [PDFViewer client-side API](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer#methods) to control the behavior of the widget. In this example, you will use the `activatePage` method to activate a page.
 
     ```
     <input id="btn1" type="button" value="Load page 3" onclick="changePdfViewerPage()" />
@@ -280,6 +280,6 @@ You can reference the PDFViewer instances that you have created and build on top
 ## See Also
 
 * [Using the API of the PDFViewer for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/api)
-* [Client-Side API of the PDFViewer ](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
+* [Client-Side API of the PDFViewer ](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer)
 * [Server-Side API of the PDFViewer](/api/pdfviewer)
 * [Knowledge Base Section](/knowledge-base)

@@ -24,7 +24,7 @@ How can I change From data based on user selection in another widget?
 
 ## Solution
 
-Get a reference to the Form instance and set the value of the required model field via the `kendo.data.Model` [set method](/api/javascript/data/observableobject/methods/set). This way the UI, as well as the form data that will be submitted, will be updated with the new value.
+Get a reference to the Form instance and set the value of the required model field via the `kendo.data.Model` [set method](/api/data/observableobject/methods/set). This way the UI, as well as the form data that will be submitted, will be updated with the new value.
 
 > Only a valid model can be updated following this approach
 

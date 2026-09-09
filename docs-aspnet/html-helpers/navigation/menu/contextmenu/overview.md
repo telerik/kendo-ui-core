@@ -213,6 +213,6 @@ The ContextMenu derives from the Menu component and largely shares the same func
 ## See Also
 
 * [Using the API of the Menu for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/api)
-* [Client-Side API of the ContextMenu](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu)
+* [Client-Side API of the ContextMenu](https://docs.telerik.com/kendo-ui/api/ui/contextmenu)
 * [Server-Side API of the ContextMenu](/api/contextmenu)
 * [Knowledge Base Section](/knowledge-base)

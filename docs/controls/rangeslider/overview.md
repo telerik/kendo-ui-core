@@ -28,4 +28,4 @@ Unlike the HTML5 range input, the RangeSlider enables the consistent experience 
 
 ## See Also
 
-* [JavaScript API Reference of the RangeSlider](/api/javascript/ui/rangeslider)
+* [JavaScript API Reference of the RangeSlider](/api/ui/rangeslider)

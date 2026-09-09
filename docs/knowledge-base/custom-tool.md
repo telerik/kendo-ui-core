@@ -151,6 +151,6 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
+* [ToolBar JavaScript API Reference](/api/ui/toolbar)
 * [Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})
 * [Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})

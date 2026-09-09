@@ -205,7 +205,7 @@ You can reference the OTPInput instances that you have created and build on top 
     </script>
     ```
 
-1. Use the [OTPInput client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/otpinput#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the OTPInput.
+1. Use the [OTPInput client-side API](https://docs.telerik.com/kendo-ui/api/ui/otpinput#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the OTPInput.
 
     ```JS script
     <script>
@@ -226,5 +226,5 @@ You can reference the OTPInput instances that you have created and build on top 
 {% if site.core %}
 * [Server-Side API of the OTPInput TagHelper](/api/taghelpers/otpinput)
 {% endif %}
-* [Client-Side API of the OTPInput](https://docs.telerik.com/kendo-ui/api/javascript/ui/otpinput)
+* [Client-Side API of the OTPInput](https://docs.telerik.com/kendo-ui/api/ui/otpinput)
 * [Knowledge Base Section](/knowledge-base)

@@ -226,7 +226,7 @@ You can reference the Sortable instances that you have created and build on top 
         </script>
     ```
 
-1. Use the [Sortable client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#methods) to control the behavior of the component. In this example, you will use the `items()` method to get all Sortable items when a button is clicked.
+1. Use the [Sortable client-side API](https://docs.telerik.com/kendo-ui/api/ui/sortable#methods) to control the behavior of the component. In this example, you will use the `items()` method to get all Sortable items when a button is clicked.
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -277,7 +277,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Implementing linked lists by using the Sortable for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/sortable/linkedlists)
-* [Client-Side API of the Sortable](https://docs.telerik.com/kendo-ui/api/javascript/ui/sortable)
+* [Client-Side API of the Sortable](https://docs.telerik.com/kendo-ui/api/ui/sortable)
 * [Server-Side API of the Sortable](/api/sortable)
 {% if site.core %}
 * [Server-Side API of the Sortable TagHelper](/api/taghelpers/sortable)

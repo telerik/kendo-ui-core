@@ -29,7 +29,7 @@ How can I implement row numbers in a {{ site.product }} Grid?
 
 ## Solution
 
-To achieve the desired scenario, use the [`page()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page) and [`pageSize()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
+To achieve the desired scenario, use the [`page()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/page) and [`pageSize()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/pagesize) methods of the Data Source.
 
 {% if site.mvc %}
 ```Razor Grid.cshtml
@@ -104,7 +104,7 @@ To see a complete example of the aforementioned approach, refer to the following
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 {% if site.core %}
 * [Adding Grid Row Numbers Telerik REPL for {{ site.framework }}](https://netcorerepl.telerik.com/mnaCPzYf29fek3Mu39)
 {% endif %}

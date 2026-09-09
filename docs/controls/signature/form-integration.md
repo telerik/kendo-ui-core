@@ -11,7 +11,7 @@ position: 3
 
 The Kendo UI for jQuery Signature allows you to integrate it inside a Kendo UI for jQuery Form. Furthermore, you can validate the Signature before the form is submitted.
 
-To integrate the Signature inside a Kendo UI Form widget, set the [`items.editor`](/api/javascript/ui/form/configuration/items#itemseditor) property of the form field to `Signature`.
+To integrate the Signature inside a Kendo UI Form widget, set the [`items.editor`](/api/ui/form/configuration/items#itemseditor) property of the form field to `Signature`.
 
 ```javascript
 $("#exampleform").kendoForm({
@@ -33,4 +33,4 @@ $("#exampleform").kendoForm({
 ## See Also
 
 * [Form Integration of the Signature (Demo)](https://demos.telerik.com/kendo-ui/signature/form-integration)
-* [JavaScript API Reference of the Signature](/api/javascript/ui/signature)
+* [JavaScript API Reference of the Signature](/api/ui/signature)

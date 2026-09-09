@@ -60,4 +60,4 @@ The Kendo UI Captcha server-side provider creates an audio file based on the con
 ## See Also
 
 * [Overview of the Kendo UI Captcha](https://demos.telerik.com/kendo-ui/captcha/index)
-* [JavaScript API Reference of the Captcha](/api/javascript/ui/captcha)
+* [JavaScript API Reference of the Captcha](/api/ui/captcha)

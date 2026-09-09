@@ -25,7 +25,7 @@ The following image demonstrates the export of the Spreadsheet data to Excel.
 
 ## API Export Reference
 
-The Spreadsheet client-side API includes the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/saveasexcel) method for initiating the export with JavaScript. This method does not ask you to specify a file name. Instead, it sets the value in [`excel.fileName`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/excel#excel.fileName).
+The Spreadsheet client-side API includes the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/methods/saveasexcel) method for initiating the export with JavaScript. This method does not ask you to specify a file name. Instead, it sets the value in [`excel.fileName`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/configuration/excel#excel.fileName).
 
 ```HtmlHelper
     @(Html.Kendo().Spreadsheet()

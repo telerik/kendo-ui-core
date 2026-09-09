@@ -15,7 +15,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 ## Column Templates
 
-You can define [column templates](/api/javascript/ui/multicolumncombobox/configuration/columns.template) and [header column templates](/api/javascript/ui/multicolumncombobox/configuration/columns.headertemplate) to customize the layout of your project.
+You can define [column templates](/api/ui/multicolumncombobox/configuration/columns.template) and [header column templates](/api/ui/multicolumncombobox/configuration/columns.headertemplate) to customize the layout of your project.
 
     <input id="multicolumncombobox" />
     <script>
@@ -131,4 +131,4 @@ The MultiColumnComboBox widget displays `noDataTemplate` in the popup when the d
 ## See Also
 
 * [Using Templates in the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/template)
-* [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
+* [JavaScript API Reference of the MultiColumnComboBox](/api/ui/multicolumncombobox)

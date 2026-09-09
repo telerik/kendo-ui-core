@@ -132,4 +132,4 @@ function ttOnHide(e) {
 
 - [Kendo UI for {{ site.product }} ToolTip Documentation](https://www.telerik.com/aspnet-core-ui/documentation/html-helpers/layout/tooltip/overview)
 - [Adding ToolTips to DropDownList](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/show-tooltip-for-items)
-- [Kendo UI Tooltip API](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
+- [Kendo UI Tooltip API](https://docs.telerik.com/kendo-ui/api/ui/tooltip)

@@ -93,7 +93,7 @@ How do I show/hide apply and cancel buttons in a Kendo UI ColorPicker widget? Co
 
 ### buttonsTemplate `String|Function` *(default: null)*
 
-Specifies the [template](/api/javascript/kendo/methods/template) which is used for rendering the action buttons.
+Specifies the [template](/api/kendo/methods/template) which is used for rendering the action buttons.
 
 > The `buttons` configuration option needs to be enabled.
 
@@ -189,7 +189,7 @@ How to configure Kendo UI ColorPicker to close automatically after selecting a c
 
 ### columns `Number`
 
-The number of columns to show in the color dropdown when a [`pallete`](/api/javascript/ui/colorpicker#configuration-palette) is specified.
+The number of columns to show in the color dropdown when a [`pallete`](/api/ui/colorpicker#configuration-palette) is specified.
 This is automatically initialized for the "basic" and "websafe" palettes.
 If you use a custom palette then you can set this to some value that makes sense for your colors.
 
@@ -980,7 +980,7 @@ How do I get/set the currently chosen color in a Kendo UI ColorPicker component?
 
 ### color
 
-Get or set the selected color. If no argument is given, this returns the currently selected color as a [`kendo.Color` object](/api/javascript/color).
+Get or set the selected color. If no argument is given, this returns the currently selected color as a [`kendo.Color` object](/api/color).
 
 
 <div class="meta-api-description">
@@ -1220,8 +1220,8 @@ What event is triggered when a Kendo UI ColorPicker dialog closes? Detect when a
     colorpicker.bind("close", picker_close);
     </script>
 
-[parseColor]: /api/javascript/kendo#parseColor
-[Color]: /api/javascript/kendo#Color
+[parseColor]: /api/kendo#parseColor
+[Color]: /api/kendo#Color
 
 ### kendoKeydown
 

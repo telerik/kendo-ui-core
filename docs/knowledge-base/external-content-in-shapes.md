@@ -143,7 +143,7 @@ The shape visual templates allow you to override the rendering entirely as demon
 ## See Also
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)
 * [Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
 * [Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
 * [Use Scrollbars]({% slug howto_usescrollbar_diagram %})

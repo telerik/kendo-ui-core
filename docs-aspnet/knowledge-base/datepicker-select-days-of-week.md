@@ -100,7 +100,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Select the Current Days of the Week in the DatePicker](https://netcorerepl.telerik.com/mGbauybw5279RlE740)
-* [Client-Side API Reference of the DatePicker for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [Client-Side API Reference of the DatePicker for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/datepicker)
 * [Server-Side API Reference of the DatePicker for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/datepicker)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

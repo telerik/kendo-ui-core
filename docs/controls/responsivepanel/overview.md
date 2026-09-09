@@ -95,6 +95,6 @@ The following example demonstrates how to collapse the menu on the left of small
 
 ## See Also
 
-* [JavaScript API Reference of the ResponsivePanel](/api/javascript/ui/responsivepanel)
+* [JavaScript API Reference of the ResponsivePanel](/api/ui/responsivepanel)
 * [Knowledge Base Section](/knowledge-base)
 * [jQuery ResponsivePanel Product Page](https://www.telerik.com/kendo-jquery-ui/responsivepanel)

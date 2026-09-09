@@ -157,4 +157,4 @@ The following example demonstrates how to add a button as a suffix of the MultiS
 
 * [Using the Prefix and Suffix of the MultiSelect for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiselect/prefix-suffix)
 * [Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/multiselect)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/multiselect)

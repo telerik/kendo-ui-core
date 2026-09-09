@@ -213,5 +213,5 @@ Keep in mind that this workaround is not officially supported and may have side 
 
 ## See Also
 
-* [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/ui/grid)
 * [Grid Group Paging of Remote Data(Demo)](https://demos.telerik.com/kendo-ui/grid/grouppaging)

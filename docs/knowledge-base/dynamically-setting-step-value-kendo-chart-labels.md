@@ -29,7 +29,7 @@ Kendo UI for jQuery Chart
 
 ## Description
 
-I am using the [Kendo UI for jQuery Chart](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/overview) and need to dynamically calculate the step value for the categoryAxis labels to avoid label overlap. The configuration options for [`labels.skip`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsskip) and [`labels.step`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsstep) require fixed values and do not auto-adjust based on the available space. I want to achieve an automatic adjustment of the step value based on the chart's width and the label size.
+I am using the [Kendo UI for jQuery Chart](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/overview) and need to dynamically calculate the step value for the categoryAxis labels to avoid label overlap. The configuration options for [`labels.skip`](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsskip) and [`labels.step`](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsstep) require fixed values and do not auto-adjust based on the available space. I want to achieve an automatic adjustment of the step value based on the chart's width and the label size.
 
 This knowledge base article also answers the following questions:
 - How to prevent label overlap in Kendo UI for jQuery Chart?
@@ -43,7 +43,7 @@ To dynamically calculate the step value for categoryAxis labels, follow these st
 1. Measure the chart's width and determine the number of categories.
 2. Estimate the minimum label width required to avoid overlap. This depends on your font size and label length.
 3. Calculate the maximum number of labels that can fit within the chart width.
-4. Set the [`labels.step`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsstep) value programmatically based on the calculated number of labels.
+4. Set the [`labels.step`](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsstep) value programmatically based on the calculated number of labels.
 
 Here is a runnable example:
 
@@ -102,4 +102,4 @@ Here is a runnable example:
 ## See Also
 
 - [Kendo UI for jQuery Chart Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/overview)
-- [Chart API Reference](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
+- [Chart API Reference](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart)

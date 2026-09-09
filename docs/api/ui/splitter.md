@@ -8,7 +8,7 @@ component: splitter
 
 # kendo.ui.Splitter
 
-Represents the Kendo UI Splitter widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Splitter widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -679,7 +679,7 @@ The pane(s) to be removed.
 
 Get or set the size of the pane. Setting this value will cause the widget to redraw and it will trigger the `resize` event.
 
-> Note: The correct usage of the method requires that the size of the panes should be set either through the [panes.size](/api/javascript/ui/splitter/configuration/panes#panes.size) property or the `size` method. Otherwise, the method will return *undefined*.
+> Note: The correct usage of the method requires that the size of the panes should be set either through the [panes.size](/api/ui/splitter/configuration/panes#panes.size) property or the `size` method. Otherwise, the method will return *undefined*.
 
 
 <div class="meta-api-description">
@@ -994,7 +994,7 @@ The expanding pane of the Splitter.
 
 ### layoutChange
 
-**This event is now obsolete and will be removed in the future. Please use the [`resize`](/api/javascript/ui/splitter/events/resize) event instead.**
+**This event is now obsolete and will be removed in the future. Please use the [`resize`](/api/ui/splitter/events/resize) event instead.**
 
 Fires when the splitter layout has changed
 

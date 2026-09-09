@@ -13,7 +13,7 @@ You can control the opened and closed state of the Dialog as well as its destroy
 
 ## Opening and Closing
 
-Usually, a Dialog is opened as a result of a user action rather than of the `load` event of the page. The [Dialog API](/api/javascript/ui/dialog) provides methods for handling such scenarios. Basically, the component can be initialized as non-visible and can opened when needed.
+Usually, a Dialog is opened as a result of a user action rather than of the `load` event of the page. The [Dialog API](/api/ui/dialog) provides methods for handling such scenarios. Basically, the component can be initialized as non-visible and can opened when needed.
 
 The following example demonstrates how to open a Dialog on a button click.
 
@@ -46,4 +46,4 @@ Unlike most components, the Dialog is completely removed from the DOM when it is
 
 * [Basic Usage of the Dialog (Demo)](https://demos.telerik.com/kendo-ui/dialog/index)
 * [Using the API of the Dialog (Demo)](https://demos.telerik.com/kendo-ui/dialog/api)
-* [JavaScript API Reference of the Dialog](/api/javascript/ui/dialog)
+* [JavaScript API Reference of the Dialog](/api/ui/dialog)

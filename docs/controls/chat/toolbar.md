@@ -71,4 +71,4 @@ The Chat configuration object allows you to configure the following behavior asp
 ## See Also
 
 * [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
-* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
+* [JavaScript API Reference of the Chat](/api/ui/chat)

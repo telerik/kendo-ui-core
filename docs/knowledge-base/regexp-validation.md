@@ -37,7 +37,7 @@ How can I use RegExp-based rules with the validation of the Kendo UI for jQuery 
 
 ## Solution
 
-The [validation types](/api/javascript/spreadsheet/range/methods/validation) of the Spreadsheet do not directly support RegExp-based rules.
+The [validation types](/api/spreadsheet/range/methods/validation) of the Spreadsheet do not directly support RegExp-based rules.
 
 To work around this issue, use a `custom` validation type that allows you to pass any formula. The validation will pass when the formula returns a non-false value. Though the built-in functions do not include a RegExp-matching function, a custom function is easy to create. For more information, refer to the article on [defining custom functions]({% slug custom_functions_spreadsheet_widget %}).
 
@@ -96,4 +96,4 @@ To work around this issue, use a `custom` validation type that allows you to pas
 ## See Also
 
 * [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

@@ -33,10 +33,10 @@ How can I create a filter menu inside the first cell of the header for the group
 To filter the hidden column:
 
 1. Display the column.
-1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event handler of the Grid:
+1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event handler of the Grid:
 	1. Get the HTML of the filter button.
 	1. [`Append`](https://api.jquery.com/append/) the button to the `k-group-cell`.
-	1. Use the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnhide) method to hide the column.
+	1. Use the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnhide) method to hide the column.
 
 		```dojo
 		<div id="example">

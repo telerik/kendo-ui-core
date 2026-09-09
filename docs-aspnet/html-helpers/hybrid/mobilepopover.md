@@ -60,7 +60,7 @@ The PopOver represents a transient view which is displayed when the user taps on
 
 ## Events
 
-You can subscribe to all hybrid PopOver [events](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/popover#events).
+You can subscribe to all hybrid PopOver [events](https://docs.telerik.com/kendo-ui/api/mobile/ui/popover#events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -83,7 +83,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-You can reference a hybrid PopOver instance by using the code from the following example. Once a reference is established, use the [hybrid PopOver client-side API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/popover#methods) to control its behavior.
+You can reference a hybrid PopOver instance by using the code from the following example. Once a reference is established, use the [hybrid PopOver client-side API](https://docs.telerik.com/kendo-ui/api/mobile/ui/popover#methods) to control its behavior.
 
     @(Html.Kendo().MobilePopOver()
             .Name("popOver")

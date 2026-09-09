@@ -9,7 +9,7 @@ position: 2
 
 # Items
 
-The Kendo UI DropDownButton provides a various set of options for its [items](/api/javascript/ui/dropdownbutton/configuration/items).
+The Kendo UI DropDownButton provides a various set of options for its [items](/api/ui/dropdownbutton/configuration/items).
 
 The following example demonstrates how to configure the DropDownButton items:
 
@@ -36,4 +36,4 @@ The following example demonstrates how to configure the DropDownButton items:
 ## See Also
 
 * [Items of the DropDownButton (Demo)](https://demos.telerik.com/kendo-ui/dropdownbutton/items)
-* [JavaScript API Reference of the DropDownButton](/api/javascript/ui/dropdownbutton)
+* [JavaScript API Reference of the DropDownButton](/api/ui/dropdownbutton)

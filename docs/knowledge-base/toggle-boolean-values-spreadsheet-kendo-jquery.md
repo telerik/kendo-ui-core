@@ -27,7 +27,7 @@ ticketid: 1696644
 
 ## Description
 
-I want to toggle the boolean value of a cell in the [Kendo UI for jQuery Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet) when the cell is clicked or focused. This functionality should eliminate the need for additional user clicks to toggle the value.
+I want to toggle the boolean value of a cell in the [Kendo UI for jQuery Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet) when the cell is clicked or focused. This functionality should eliminate the need for additional user clicks to toggle the value.
 
 This knowledge base article also answers the following questions:
 - How to handle boolean value toggling in Spreadsheet cells on selection?
@@ -35,7 +35,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To toggle boolean values (`true/false`) in a Kendo UI for jQuery Spreadsheet cell on selection, handle the [`select`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/spreadsheet/events/select) event of the Spreadsheet component. Use the event handler to check the current value of the selected range and toggle it. Follow the steps below:
+To toggle boolean values (`true/false`) in a Kendo UI for jQuery Spreadsheet cell on selection, handle the [`select`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/spreadsheet/events/select) event of the Spreadsheet component. Use the event handler to check the current value of the selected range and toggle it. Follow the steps below:
 
 1. Bind the `select` event to the Spreadsheet.
 2. Use the `e.range.value()` method to retrieve the current value of the selected range.
@@ -101,4 +101,4 @@ Below is a runnable example:
 ## See Also
 
 - [Kendo UI for jQuery Spreadsheet Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/spreadsheet/overview)
-- [Spreadsheet API](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+- [Spreadsheet API](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)

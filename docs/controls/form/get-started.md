@@ -99,7 +99,7 @@ In this step, you will initialize the Form from the `<form>` element.
 
 ## 3. Bind the Form to Data
 
-Once the basic initialization is completed, you can start adding additional configurations to the Form. The first and most important configuration is the [`formData`](/api/javascript/ui/form/configuration/formdata).
+Once the basic initialization is completed, you can start adding additional configurations to the Form. The first and most important configuration is the [`formData`](/api/ui/form/configuration/formdata).
 
 ```html
     <form id="form"></form>
@@ -121,7 +121,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 4. Add the Label and Hint Options
 
-The Form allows you to configure each of the displayed items. For example, you can configure the [`label`](/api/javascript/ui/form/configuration/items#items.label) or add a [`hint`](/api/javascript/ui/form/configuration/items#items.hint).
+The Form allows you to configure each of the displayed items. For example, you can configure the [`label`](/api/ui/form/configuration/items#items.label) or add a [`hint`](/api/ui/form/configuration/items#items.hint).
 
 ```html
     <form id="form"></form>
@@ -154,7 +154,7 @@ The Form allows you to configure each of the displayed items. For example, you c
 
 ## 5. Add Editors for the Form Items
 
-The Form allows you to configure a specific editor for the displayed items. The example below demonstrates how to set one of the predefined [`editors`](/api/javascript/ui/form/configuration/items#itemseditor). 
+The Form allows you to configure a specific editor for the displayed items. The example below demonstrates how to set one of the predefined [`editors`](/api/ui/form/configuration/items#itemseditor). 
 However, you can also implement a [`custom editor`](https://docs.telerik.com/kendo-ui/controls/form/items#custom-editor) that will fit the needs of your application. 
 
 ```html
@@ -207,7 +207,7 @@ However, you can also implement a [`custom editor`](https://docs.telerik.com/ken
 
 ## 6. Enable Validation
 
-You can specify which of the items in the Form are required. The Form component also gives you the option to configure the built-in Validator options by setting the [`validatable`](/api/javascript/ui/form/configuration/validatable#validatable.validationSummary) options.
+You can specify which of the items in the Form are required. The Form component also gives you the option to configure the built-in Validator options by setting the [`validatable`](/api/ui/form/configuration/validatable#validatable.validationSummary) options.
 
 ```html
     <form id="form"></form>
@@ -268,7 +268,7 @@ You can specify which of the items in the Form are required. The Form component 
 
 ## 7. Configure Form Orientation
 
-The [`orientation`](/api/javascript/ui/form/configuration/orientation) of the Form can be easily changed by using the respective option. 
+The [`orientation`](/api/ui/form/configuration/orientation) of the Form can be easily changed by using the respective option. 
 
 ```
 	<form id="form"></form>
@@ -336,7 +336,7 @@ The [`orientation`](/api/javascript/ui/form/configuration/orientation) of the Fo
 
 ## See Also 
 
-* [JavaScript API Reference of the Form](/api/javascript/ui/form)
+* [JavaScript API Reference of the Form](/api/ui/form)
 * [Knowledge Base Section](/knowledge-base)
 
 

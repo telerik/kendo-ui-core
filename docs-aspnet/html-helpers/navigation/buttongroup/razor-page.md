@@ -74,7 +74,7 @@ public class ButtonGroupIndexModel : PageModel
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the ButtonGroup](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/buttongroup)
+* [Client-Side API of the ButtonGroup](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/buttongroup)
 * [Server-Side HtmlHelper API of the ButtonGroup](/api/buttongroup)
 * [Server-Side TagHelper API of the ButtonGroup](/api/taghelpers/buttongroup)
 * [Knowledge Base Section](/knowledge-base)

@@ -38,7 +38,7 @@ This knowledge base article also answers the following questions:
 
 To validate the DateRangePicker on blur, follow these steps.
 
-### Using [`kendo.parseDate`](/api/javascript/kendo/methods/parsedate) Method
+### Using [`kendo.parseDate`](/api/kendo/methods/parsedate) Method
 
 1. Add a `blur` event handler for the DateRangePicker inputs.
 2. Use the `kendo.parseDate` method to check if the input value is a valid date.

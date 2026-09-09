@@ -79,7 +79,7 @@ For the complete project, refer to the [PanelBar in Razor Pages example](https:/
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the PanelBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+* [Client-Side API of the PanelBar](https://docs.telerik.com/kendo-ui/api/ui/panelbar)
 * [Server-Side HtmlHelper API of the PanelBar](/api/panelbar)
 * [Server-Side TagHelper API of the PanelBar](/api/taghelpers/panelbar)
 * [Knowledge Base Section](/knowledge-base)

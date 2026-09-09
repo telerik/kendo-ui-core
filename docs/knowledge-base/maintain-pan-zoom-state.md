@@ -39,7 +39,7 @@ How can I store and load the axis range on pan-and-zoom in the Chart?
 
 Normally, the Kendo UI Chart resets the axis range after the data source fetches new data. If users pan or zoom the Chart, they will see the initial viewport after the new data is loaded.
 
-The following example demonstrates how to store and load the axis range. Changes are detected in the [`drag`](/api/javascript/dataviz/ui/chart/events/drag) and [`zoom`](/api/javascript/dataviz/ui/chart/events/zoom) events. The axis range is restored in the [`databound` event](/api/javascript/dataviz/ui/chart/events/databound).
+The following example demonstrates how to store and load the axis range. Changes are detected in the [`drag`](/api/dataviz/ui/chart/events/drag) and [`zoom`](/api/dataviz/ui/chart/events/zoom) events. The axis range is restored in the [`databound` event](/api/dataviz/ui/chart/events/databound).
 
 ```dojo
     <button id="rebind">Rebind Chart</button>
@@ -116,7 +116,7 @@ The following example demonstrates how to store and load the axis range. Changes
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

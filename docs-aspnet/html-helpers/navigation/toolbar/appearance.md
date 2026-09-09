@@ -196,6 +196,6 @@ The `ScrollDistance()` setting specifies the distance (in pixels) the toolbar sc
 
 * [Appearance of the ToolBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar/appearance)
 * [ToolBar Server-Side API](/api/toolbar)
-* [ToolBar Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)
+* [ToolBar Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/toolbar)
 
 

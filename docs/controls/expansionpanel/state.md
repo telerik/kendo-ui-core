@@ -13,7 +13,7 @@ You can configure the default state of The Kendo UI for jQuery ExpansionPanel co
 
 ## ExpansionPanel Disabled State
 
-You can disable the Kendo UI ExpansionPanel component and make the user unable to expand or collapse the panel. To configure this state, set the [`disabled`](/api/javascript/ui/expansionpanel/configuration/disabled) property to `true`.
+You can disable the Kendo UI ExpansionPanel component and make the user unable to expand or collapse the panel. To configure this state, set the [`disabled`](/api/ui/expansionpanel/configuration/disabled) property to `true`.
 
 ```dojo
 <div id="brazil">
@@ -31,7 +31,7 @@ You can disable the Kendo UI ExpansionPanel component and make the user unable t
 
 ## ExpansionPanel Expanded State
 
-The Kendo UI ExpansionPanel component can be expanded by default. To configure this state, set the [`expanded`](/api/javascript/ui/expansionpanel/configuration/expanded) property to `true`.
+The Kendo UI ExpansionPanel component can be expanded by default. To configure this state, set the [`expanded`](/api/ui/expansionpanel/configuration/expanded) property to `true`.
 
 ```dojo
 <div id="brazil">
@@ -49,7 +49,7 @@ The Kendo UI ExpansionPanel component can be expanded by default. To configure t
 
 ## ExpansionPanel Toggleable State
 
-By default, the user can expand or collapse the ExpansionPanel component. To prevent this, set the [`toggleable `](/api/javascript/ui/expansionpanel/configuration/toggleable) property to `false`.
+By default, the user can expand or collapse the ExpansionPanel component. To prevent this, set the [`toggleable `](/api/ui/expansionpanel/configuration/toggleable) property to `false`.
 
 
 ```dojo
@@ -68,7 +68,7 @@ By default, the user can expand or collapse the ExpansionPanel component. To pre
 
 ## ExpansionPanel Animation State
 
-You can disable the ExpansionPanel visual animations that appear when the user expands or collapses the panel. To disable the animations, set the [`animation `](/api/javascript/ui/expansionpanel/configuration/animation) property to `false`.
+You can disable the ExpansionPanel visual animations that appear when the user expands or collapses the panel. To disable the animations, set the [`animation `](/api/ui/expansionpanel/configuration/animation) property to `false`.
 
 ```dojo
 <div id="brazil">
@@ -87,5 +87,5 @@ You can disable the ExpansionPanel visual animations that appear when the user e
 ## See Also
 
 * [Overview of the ExpansionPanel (Demo)](https://demos.telerik.com/kendo-ui/expansionpanel/index)
-* [JavaScript API Reference of the TileLayout](/api/javascript/ui/expansionpanel)
+* [JavaScript API Reference of the TileLayout](/api/ui/expansionpanel)
 * [Keyboard navigation]({% slug keynav_kendoui_expansionpanel_widget %})

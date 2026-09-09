@@ -121,5 +121,5 @@ The following example initializes a Scheduler in Agenda view and attaches a Cont
 
 ## See Also
 
-* [Kendo Scheduler API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
-* [Kendo ContextMenu API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu)
+* [Kendo Scheduler API Reference](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
+* [Kendo ContextMenu API Reference](https://docs.telerik.com/kendo-ui/api/ui/contextmenu)

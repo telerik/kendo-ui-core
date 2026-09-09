@@ -12,7 +12,7 @@ position: 2
 
 Telerik UI for ASP.NET MVC enables you to use the CustomDataSource builder that is available to helpers which support data binding.
 
-The CustomDataSource builder class allows full control over the [DataSource client-side API options](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource), through Razor syntax. The CustomDataSource builder facilitates the usage of the Telerik UI helpers&mdash;for example, the helpers generate validation attributes, editors, and so on, while they utilize the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
+The CustomDataSource builder class allows full control over the [DataSource client-side API options](https://docs.telerik.com/kendo-ui/api/data/datasource), through Razor syntax. The CustomDataSource builder facilitates the usage of the Telerik UI helpers&mdash;for example, the helpers generate validation attributes, editors, and so on, while they utilize the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
 
 ## DataSource and Custom DataSource
 

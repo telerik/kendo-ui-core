@@ -29,7 +29,7 @@ The integration with the AIPrompt component covers the following use cases:
 * Prompting with context - The user prompt will use additional context from the Editor (the UI allows the user to decide whether to use the selected text, if any, or the whole content).
 * Command with context - The user can select a command that will be applied to the selected content (if any) or the whole content if no text is selected.
 
-To configure the AI Integration Tool, utilize the [`ai`](/api/javascript/ui/editor/configuration/ai) configuration object. It allows you to define various settings, including establishing a connection between the Editor and the remote service responsible for generating AI-driven responses. You can also define various commands, or the options for the integrated AIPrompt component.
+To configure the AI Integration Tool, utilize the [`ai`](/api/ui/editor/configuration/ai) configuration object. It allows you to define various settings, including establishing a connection between the Editor and the remote service responsible for generating AI-driven responses. You can also define various commands, or the options for the integrated AIPrompt component.
 
 ## Using the Inline Prompt
 
@@ -49,4 +49,4 @@ To enable the inline prompt, set the [`ai.inlineAIPrompt`] option to `true`. The
 ## See Also
 
 * [AI Integration in the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/ai-integration)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

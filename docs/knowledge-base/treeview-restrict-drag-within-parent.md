@@ -25,7 +25,7 @@ How can I achieve that?
 
 ## Solution
 
-Handle the [`drag`](/api/javascript/ui/treeview/events/drag) event of the TreeView. In that event handler, check for the hierarchy of the dragged and target node and deny dragging if necessary.
+Handle the [`drag`](/api/ui/treeview/events/drag) event of the TreeView. In that event handler, check for the hierarchy of the dragged and target node and deny dragging if necessary.
 
 ```dojo
     <div id="treeview"></div>

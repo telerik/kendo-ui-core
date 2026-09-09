@@ -11,13 +11,13 @@ position: 6
 
 Grouping enables you to display data items that are categorized by a specific model field.
 
-The MultiColumnComboBox supports grouping by utilizing the [`group` configuration of the Kendo UI DataSource](/api/javascript/data/datasource/configuration/group).
+The MultiColumnComboBox supports grouping by utilizing the [`group` configuration of the Kendo UI DataSource](/api/data/datasource/configuration/group).
 
 ## Getting Started
 
-To display grouped items in the MultiColumnComboBox, group the data source component by using its [`group` configuration](/api/javascript/data/datasource/configuration/group). Once you define the `group` option, the widget automatically displays the suggestion items grouped.
+To display grouped items in the MultiColumnComboBox, group the data source component by using its [`group` configuration](/api/data/datasource/configuration/group). Once you define the `group` option, the widget automatically displays the suggestion items grouped.
 
-> The grouped data will be sorted either in ascending or descending order. This behavior is expected and cannot be modified. To group the data in a specific order, use [server grouping](/api/javascript/data/datasource/configuration/servergrouping).
+> The grouped data will be sorted either in ascending or descending order. This behavior is expected and cannot be modified. To group the data in a specific order, use [server grouping](/api/data/datasource/configuration/servergrouping).
 
 To enable the grouping functionality in a MultiColumnComboBox, use the remote transport and a grouped data source.
 
@@ -50,9 +50,9 @@ To enable the grouping functionality in a MultiColumnComboBox, use the remote tr
 
 ## Customizing the Inline Group Title
 
-The MultiColumnComboBox exposes the [`groupTemplate`](/api/javascript/ui/multicolumncombobox/configuration/grouptemplate) and [`fixedGroupedTemplate`](/api/javascript/ui/multicolumncombobox/configuration/fixedgrouptemplate) templates. They enable you to configure the rendering of the group titles.
+The MultiColumnComboBox exposes the [`groupTemplate`](/api/ui/multicolumncombobox/configuration/grouptemplate) and [`fixedGroupedTemplate`](/api/ui/multicolumncombobox/configuration/fixedgrouptemplate) templates. They enable you to configure the rendering of the group titles.
 
-To customize the inline group title which is displayed next to the suggestion item in the popup element, use the [`groupTemplate`](/api/javascript/ui/multicolumncombobox/configuration/grouptemplate) option. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value.
+To customize the inline group title which is displayed next to the suggestion item in the popup element, use the [`groupTemplate`](/api/ui/multicolumncombobox/configuration/grouptemplate) option. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value.
 
 ```dojo
 <div class="demo-section k-header">
@@ -85,4 +85,4 @@ To customize the inline group title which is displayed next to the suggestion it
 ## See Also
 
 * [Grouping in the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/grouping)
-* [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
+* [JavaScript API Reference of the MultiColumnComboBox](/api/ui/multicolumncombobox)

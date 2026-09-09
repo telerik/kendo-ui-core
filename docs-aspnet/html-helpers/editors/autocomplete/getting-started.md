@@ -279,7 +279,7 @@ To use the client-side API of the AutoComplete and build on top of its initial c
         </script>
     ```
 
-1. Use the [AutoComplete client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete#methods) to control the behavior of the control. In this example, you will use the `value` method to select an item.
+1. Use the [AutoComplete client-side API](https://docs.telerik.com/kendo-ui/api/ui/autocomplete#methods) to control the behavior of the control. In this example, you will use the `value` method to select an item.
 
     ```JS script
         <script>
@@ -309,6 +309,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the AutoComplete for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/api)
-* [Client-Side API of the AutoComplete ](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
+* [Client-Side API of the AutoComplete ](https://docs.telerik.com/kendo-ui/api/ui/autocomplete)
 * [Server-Side API of the AutoComplete](/api/autocomplete)
 * [Knowledge Base Section](/knowledge-base)

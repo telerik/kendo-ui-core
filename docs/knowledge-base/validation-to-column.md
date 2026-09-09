@@ -37,7 +37,7 @@ How can I set a validation rule to a column range in the Kendo UI for jQuery Spr
 
 ## Solution
 
-To apply the validation rule to the specific range, the following example uses the [`range.validation`](/api/javascript/spreadsheet/range/methods/validation) method.
+To apply the validation rule to the specific range, the following example uses the [`range.validation`](/api/spreadsheet/range/methods/validation) method.
 
 ```dojo
 <div id="spreadsheet" style="width: 100%;"></div>
@@ -541,4 +541,4 @@ To apply the validation rule to the specific range, the following example uses t
 ## See Also
 
 * [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

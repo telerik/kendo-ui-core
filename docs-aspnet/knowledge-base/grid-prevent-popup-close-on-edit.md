@@ -29,7 +29,7 @@ How can I keep the popup editor of the {{ site.product }} Grid open after I upda
 
 To achieve the desired scenario:
 
-1. Handle the [`Edit`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#editsystemstring) event of the Grid and attach an event handler for the [`close`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/events/close) event of the Popup window.
+1. Handle the [`Edit`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#editsystemstring) event of the Grid and attach an event handler for the [`close`](https://docs.telerik.com/kendo-ui/api/ui/window/events/close) event of the Popup window.
 1. In the `close` handler, the [`e.preventDefault()`](https://api.jquery.com/event.preventdefault/) method will be called to prevent the popup from closing.
 1. To allow the user to close the editor, set a `preventCloseOnSave` flag when the **Cancel** and **Close** buttons are clicked.
 1. Contrary to the previous step, subscribe to the [`Save`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#savesystemstring) event of the Grid and reset the flag.
@@ -109,7 +109,7 @@ To achieve the desired scenario:
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/aspnet-core/api/taghelpers/grid)
 * [Telerik REPL: Prevent Grid Popup Editor from Closing on Update and Create](https://netcorerepl.telerik.com/QxYXQKbI285l2ekv51)

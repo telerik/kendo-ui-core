@@ -11,18 +11,18 @@ position: 6
 
 Starting with the Q2 2025 release, the Grid component supports rendering selected toolbar tools in adaptive mode. This feature improves usability on smaller screens by displaying certain UI elements—such as sorting, filtering, grouping, and editing—in a mobile-friendly ActionSheet.
 
-To enable this behavior, configure the Grid with the [`adaptiveMode`](/api/javascript/ui/grid/configuration/adaptivemode) configuration option.
+To enable this behavior, configure the Grid with the [`adaptiveMode`](/api/ui/grid/configuration/adaptivemode) configuration option.
 
 <demo metaUrl="grid/toolbar-tools/" height="600"></demo>
 
 When the `adaptiveMode` is enabled and the Grid is rendered on small or medium screens, the Grid will display popups for sorting, filtering, and grouping in an ActionSheet. To ensure these tools function as expected, the corresponding configuration options (e.g., `sortable`, `filterable`, `groupable`) must be enabled on the Grid instance. If the Grid has editable mode `pop` set, an ActionSheet will also be displayed for editing or creating records. 
 
-The adaptive tools are not displayed and are not supported in the [`overflow`](/api/javascript/ui/toolbar/configuration/items.overflow) mode of the toolbar.
+The adaptive tools are not displayed and are not supported in the [`overflow`](/api/ui/toolbar/configuration/items.overflow) mode of the toolbar.
 
 
 ## Sorting
 
-To use sorting in adaptive mode, enable the Grid's [`sortable`](/api/javascript/ui/grid/configuration/sortable) option.
+To use sorting in adaptive mode, enable the Grid's [`sortable`](/api/ui/grid/configuration/sortable) option.
 
 * In `single` sorting mode, the sorting popup will close immediately after a field is selected, and the Grid will be sorted accordingly.
 
@@ -69,7 +69,7 @@ To use sorting in adaptive mode, enable the Grid's [`sortable`](/api/javascript/
 
 ## Filtering
 
-The adaptive filter UI is based on the Grid’s [`filterable`](/api/javascript/ui/grid/configuration/filterable) settings. These options determine how filters are presented and applied within the ActionSheet or popup. For example, if the [`filterable.extra`](/api/javascript/ui/grid/configuration/filterable.extra) is disabled for the Grid or [`filterable.multi`](/api/javascript/ui/grid/configuration/columns.filterable.multi) is enabled for any of the columns, the filter UI will be applied also in the filter adaptive tool.
+The adaptive filter UI is based on the Grid’s [`filterable`](/api/ui/grid/configuration/filterable) settings. These options determine how filters are presented and applied within the ActionSheet or popup. For example, if the [`filterable.extra`](/api/ui/grid/configuration/filterable.extra) is disabled for the Grid or [`filterable.multi`](/api/ui/grid/configuration/columns.filterable.multi) is enabled for any of the columns, the filter UI will be applied also in the filter adaptive tool.
  
 
 ```dojo  
@@ -168,7 +168,7 @@ The adaptive `grouping` tool allows users to add, remove, and reorder grouped co
 
 The Grid supports editing in adaptive mode for all available editing configurations: `popup`, `inline`, and `incell`.
 
-To enable editing or deleting rows in adaptive mode when the `popup` or `inline` editing is enabled, configure the Grid with the [`selectable`](/api/javascript/ui/grid/configuration/selectable) option. In a Grid with configured `incell` editing mode, `selectable` is needed only for deleting a row.  
+To enable editing or deleting rows in adaptive mode when the `popup` or `inline` editing is enabled, configure the Grid with the [`selectable`](/api/ui/grid/configuration/selectable) option. In a Grid with configured `incell` editing mode, `selectable` is needed only for deleting a row.  
 
 When multiple rows are selected, operations will apply to the most recently selected row.
 
@@ -433,7 +433,7 @@ When popup editing is enabled, selected rows can be edited or deleted using the 
 
 The following configuration options provide additional control over the appearance and behavior of adaptive tools:
 
-* [`showInactiveTools`](/api/javascript/ui/grid/configuration/toolbar.showinactivetools)&mdash;Controls whether the inactive tools in the toolbar are hidden or displayed in disabled state; 
+* [`showInactiveTools`](/api/ui/grid/configuration/toolbar.showinactivetools)&mdash;Controls whether the inactive tools in the toolbar are hidden or displayed in disabled state; 
 * `adaptiveTitle`&mdash;Customizes the title text displayed in the adaptive view;
 * `adaptiveSubtitle`&mdash;Customizes the subtitle text displayed in the adaptive view;
 
@@ -441,5 +441,5 @@ The following configuration options provide additional control over the appearan
 ## See Also
 
 * [Adaptive Mode jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/adaptive-mode)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

@@ -109,4 +109,4 @@ The following example shows a Form configured to handle its `validate`, `submit`
 
 * [Using the API of the Form for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/form/api)
 * [Server-Side API of the Form](/api/form)
-* [Client-Side API of the Form](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)
+* [Client-Side API of the Form](https://docs.telerik.com/kendo-ui/api/ui/form)

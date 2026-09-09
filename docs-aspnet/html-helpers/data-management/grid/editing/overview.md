@@ -231,7 +231,7 @@ Users execute commands in the following ways:
 * By clicking editable cells in InCell edit mode and then anywhere else on the page.
 * By using the [Grid keyboard navigation](https://demos.telerik.com/{{ site.platform }}/grid/keyboard-navigation).
 
-Command buttons can only reside in Grid [column commands](/api/kendo.mvc.ui.fluent/gridcolumnfactory#commandsystemaction) or the Grid [Toolbar]({% slug htmlhelpers_grid_aspnetcore_toolbar%}). You can also trigger the desired operation programmatically from anywhere on the page using the [client-side methods](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid#methods).
+Command buttons can only reside in Grid [column commands](/api/kendo.mvc.ui.fluent/gridcolumnfactory#commandsystemaction) or the Grid [Toolbar]({% slug htmlhelpers_grid_aspnetcore_toolbar%}). You can also trigger the desired operation programmatically from anywhere on the page using the [client-side methods](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid#methods).
 
 ## Known Limitations
 

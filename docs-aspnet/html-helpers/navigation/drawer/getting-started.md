@@ -354,7 +354,7 @@ You can reference the Drawer instances that you have created and build on top of
     </script>
     ```
 
-1. Use the [Drawer client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer#methods) to control the behavior of the widget. In this example, you will use the `hide` method to hide the Drawer.
+1. Use the [Drawer client-side API](https://docs.telerik.com/kendo-ui/api/ui/drawer#methods) to control the behavior of the widget. In this example, you will use the `hide` method to hide the Drawer.
 
     ```JS script
     <script>
@@ -383,6 +383,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Drawer for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/drawer/api)
-* [Drawer Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer)
+* [Drawer Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/drawer)
 * [Server-Side API of the Drawer](/api/drawer)
 * [Knowledge Base Section](/knowledge-base)

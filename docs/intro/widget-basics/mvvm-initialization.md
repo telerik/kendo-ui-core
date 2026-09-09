@@ -41,7 +41,7 @@ By using the `data` attribute you can also perform the following operations:
 
 Each configuration option can be set with the `data` attribute of the target element. Add the `"data-"` prefix to the name of the configuration option and specify the option value&mdash;for example, `data-delay="100"`.
 
-> The camelCase options are set through dash-separated attributes. For example, the [`ignoreCase`](/api/javascript/ui/autocomplete/configuration/ignorecase) option of the AutoComplete is set through `data-ignore-case`.
+> The camelCase options are set through dash-separated attributes. For example, the [`ignoreCase`](/api/ui/autocomplete/configuration/ignorecase) option of the AutoComplete is set through `data-ignore-case`.
 
 Options which start with `data` do not require an additional `"data"` in the attribute name. For example, the `dataTextField` option is set through the `data-text-field` attribute and `dataSource` is set through the `data-source` attribute. Complex configuration options are set as JavaScript object literals&mdash;for example, `data-source="{data: [{name: 'John Doe'},{name: 'Jane Doe'}]}"`.
 

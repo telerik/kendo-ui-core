@@ -27,7 +27,7 @@ ticketid: 1716232
 
 ## Description
 
-I want to implement both [columns.selectable](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/columns.selectable) and [columns.draggable](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/columns.draggable) functionality in Kendo UI for jQuery Grid. The goal is to allow dragging and dropping individual rows without requiring checkbox selection, while also enabling multi-row drag-and-drop using checkboxes.
+I want to implement both [columns.selectable](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/columns.selectable) and [columns.draggable](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/columns.draggable) functionality in Kendo UI for jQuery Grid. The goal is to allow dragging and dropping individual rows without requiring checkbox selection, while also enabling multi-row drag-and-drop using checkboxes.
 
 This knowledge base article also answers the following questions:
 - How can I drag and drop single rows without selecting in Kendo UI for jQuery Grid?
@@ -40,9 +40,9 @@ To achieve both single-row and multi-row drag-and-drop functionality in Kendo UI
 
 1. Add a checkbox column using a template for row selection. Refer to the [Grid Selection Checkbox](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/grid-selection-checkbox).
 
-2. Enable the [`selectable: "multiple, row"`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/selectable) option in the Grid configuration. This setting allows selecting multiple rows for drag-and-drop.
+2. Enable the [`selectable: "multiple, row"`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/selectable) option in the Grid configuration. This setting allows selecting multiple rows for drag-and-drop.
 
-3. Enable the [`reorderable.rows`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/reorderable.rows) feature for single-row drag-and-drop functionality.
+3. Enable the [`reorderable.rows`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/reorderable.rows) feature for single-row drag-and-drop functionality.
 
 You can find a working example of this setup below: 
 ```dojo
@@ -219,4 +219,4 @@ You can find a working example of this setup below:
 - [Kendo UI for jQuery Grid Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/overview)
 - [Grid Selection Checkbox KB](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/grid-selection-checkbox)
 - [Grid Selection Checkbox](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/selection#checkbox-column-selection)
-- [Kendo UI for jQuery Grid API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Kendo UI for jQuery Grid API Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid)

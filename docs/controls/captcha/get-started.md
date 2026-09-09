@@ -59,7 +59,7 @@ In this step, you will initialize the Captcha from the `<input>` element. All se
 
 ## 3. Add the Image Handler
 
-The Captcha generates its image after a request to the server. The link to the remote endpoint is configured through the [`handler`](/api/javascript/ui/captcha/configuration/handler) setting.
+The Captcha generates its image after a request to the server. The link to the remote endpoint is configured through the [`handler`](/api/ui/captcha/configuration/handler) setting.
 
 ```html
     <input id="captcha" name="captcha" placeholder="Enter captcha" />
@@ -76,7 +76,7 @@ The Captcha generates its image after a request to the server. The link to the r
 
 ## 4. Add the Audio Handler
 
-The Captcha can reproduce the content of its distorted image in audio format through the [`audioHandler`](/api/javascript/ui/captcha/configuration/audiohandler) setting.
+The Captcha can reproduce the content of its distorted image in audio format through the [`audioHandler`](/api/ui/captcha/configuration/audiohandler) setting.
 
 ```html
     <input id="captcha" name="captcha" placeholder="Enter captcha" />
@@ -96,7 +96,7 @@ The Captcha can reproduce the content of its distorted image in audio format thr
 
 ## 5. Add the Validation Handler
 
-The [`validationHandler`](/api/javascript/ui/captcha/configuration/validationhandler) allows you to configure an URL or an action that validates the user input. 
+The [`validationHandler`](/api/ui/captcha/configuration/validationhandler) allows you to configure an URL or an action that validates the user input. 
 
 ```html
     <input id="captcha" name="captcha" placeholder="Enter captcha" />
@@ -122,7 +122,7 @@ The [`validationHandler`](/api/javascript/ui/captcha/configuration/validationhan
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Captcha](/api/javascript/ui/captcha)
+* [JavaScript API Reference of the jQuery Captcha](/api/ui/captcha)
 * [Knowledge Base Section](/knowledge-base)
 
 

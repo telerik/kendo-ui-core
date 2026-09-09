@@ -18,4 +18,4 @@ For more information on using localization and right-to-left languages with Tele
 ## See Also
 
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the MediaPlayer](/api/javascript/ui/mediaplayer)
+* [JavaScript API Reference of the MediaPlayer](/api/ui/mediaplayer)

@@ -15,7 +15,7 @@ For a complete example, refer to the [demo on customizing the BottomNavigation t
 
 ## Item Templates
 
-The [`template`](/api/javascript/ui/bottomnavigation/configuration/template) configuration manages the rendering of the BottomNavigation items.
+The [`template`](/api/ui/bottomnavigation/configuration/template) configuration manages the rendering of the BottomNavigation items.
 
 ```dojo
     <nav id="fab"></nav>
@@ -40,4 +40,4 @@ The [`template`](/api/javascript/ui/bottomnavigation/configuration/template) con
 ## See Also
 
 * [Templates Demo of the BottomNavigation](https://demos.telerik.com/kendo-ui/bottomnavigation/templates)
-* [JavaScript API Reference of the BottomNavigation](/api/javascript/ui/bottomnavigation)
+* [JavaScript API Reference of the BottomNavigation](/api/ui/bottomnavigation)

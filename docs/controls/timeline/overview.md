@@ -27,7 +27,7 @@ You can scroll through the events and collapse/expand them. The events order can
 
 * [Getting Started with the Kendo UI Timeline for jQuery]({% slug getting_started_kendoui_timeline_component %})
 * [Basic Usage of the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/index)
-* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)
+* [JavaScript API Reference of the Timeline](/api/ui/timeline)
 
 ## See Also
 
@@ -35,4 +35,4 @@ You can scroll through the events and collapse/expand them. The events order can
 * [Using the Basic Events of the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/events)
 * [Binding the Timeline over MVVM (Demo)](https://demos.telerik.com/kendo-ui/timeline/mvvm)
 * [Applying the Timeline API (Demo)](https://demos.telerik.com/kendo-ui/timeline/api)
-* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)
+* [JavaScript API Reference of the Timeline](/api/ui/timeline)

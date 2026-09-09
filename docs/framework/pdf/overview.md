@@ -36,8 +36,8 @@ The Gauges and Barcodes can be exported to PDF by using the `exportPDF()` method
 * [CircularGauge (demo)](https://demos.telerik.com/kendo-ui/circular-gauge/export)
 * [LinearGauge (demo)](https://demos.telerik.com/kendo-ui/linear-gauge/export)
 * [RadialGauge (demo)](https://demos.telerik.com/kendo-ui/radial-gauge/export)
-* [BarCode (demo)](/api/javascript/dataviz/ui/barcode/methods/exportpdf)
-* [QRCode (demo)](/api/javascript/dataviz/ui/qrcode/methods/exportpdf)
+* [BarCode (demo)](/api/dataviz/ui/barcode/methods/exportpdf)
+* [QRCode (demo)](/api/dataviz/ui/qrcode/methods/exportpdf)
 
 ## Functionality and Features
 
@@ -71,7 +71,7 @@ For more information on the provided browser support, see the [Web Browser Suppo
 ## Next Steps
 
 * [Getting Started with the PDF Export]({% slug getting_started_kendoui_pdf_export %})
-* [PDF Options JavaScript API Reference](/api/javascript/drawing/pdfoptions)
+* [PDF Options JavaScript API Reference](/api/drawing/pdfoptions)
 * [Knowledge Base](https://docs.telerik.com/kendo-ui/knowledge-base)
 
 ## See Also

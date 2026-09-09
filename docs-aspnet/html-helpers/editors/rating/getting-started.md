@@ -96,7 +96,7 @@ The Rating exposes a [`Change` event](https://docs.telerik.com/aspnet-core/api/k
 
 ## (Optional) Reference Existing Rating Instances
 
-Referencing existing component instances allows you to build on top of their configuration. To reference an existing Rating instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Rating client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/rating#methods) to control its behavior.
+Referencing existing component instances allows you to build on top of their configuration. To reference an existing Rating instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Rating client-side API](https://docs.telerik.com/kendo-ui/api/ui/rating#methods) to control its behavior.
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
@@ -106,7 +106,7 @@ Referencing existing component instances allows you to build on top of their con
         </script>
     ```
 
-1. Use the [Rating client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/rating#methods) to control the behavior of the widget. In this example, you will see how to adjust the value of Rating programmatically.
+1. Use the [Rating client-side API](https://docs.telerik.com/kendo-ui/api/ui/rating#methods) to control the behavior of the widget. In this example, you will see how to adjust the value of Rating programmatically.
 
     ```JS script
         <script>
@@ -134,6 +134,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Rating for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/rating/api)
-* [Client-Side API of the Rating](https://docs.telerik.com/kendo-ui/api/javascript/ui/rating)
+* [Client-Side API of the Rating](https://docs.telerik.com/kendo-ui/api/ui/rating)
 * [Server-Side API of the Rating](/api/rating)
 * [Knowledge Base Section](/knowledge-base)

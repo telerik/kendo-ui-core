@@ -60,7 +60,7 @@ columns.Add().Field(e => e.CheckBoxColumnField).Template(
 
 ## See Also
 
-* [Client-Side API Reference of the TreeList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [Client-Side API Reference of the TreeList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/treelist)
 * [Server-Side API Reference of the TreeList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/treelist)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

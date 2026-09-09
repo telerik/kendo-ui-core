@@ -105,4 +105,4 @@ When [`State`](/api/toolcall/state) is `Error`, set [`ErrorText`](/api/toolcall/
 {% if site.core %}
 * [Server-Side API of the ToolCall TagHelper](/api/taghelpers/toolcall)
 {% endif %}
-* [JavaScript API Reference of the ToolCall](/api/javascript/ui/toolcall)
+* [JavaScript API Reference of the ToolCall](/api/ui/toolcall)

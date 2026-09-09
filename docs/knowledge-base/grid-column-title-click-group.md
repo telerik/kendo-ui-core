@@ -29,10 +29,10 @@ How can I get the name of a column when a user clicks one of its cells even if t
 
 ## Solution
 
-In the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event of the Grid:
+In the [`change`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/change) event of the Grid:
 
 1.  Reference the Grid.
-2.  Obtain the [selected cell](/api/javascript/ui/grid/methods/select) and its [`index`](https://api.jquery.com/index/).
+2.  Obtain the [selected cell](/api/ui/grid/methods/select) and its [`index`](https://api.jquery.com/index/).
 3.  [Find](https://api.jquery.com/find/) the table header DOM element corresponding to the `index` and [get the attribute of the data title](https://www.w3schools.com/jsref/met_element_getattribute.asp).
 
 > The suggested approach is not applicable to multi-column headers.

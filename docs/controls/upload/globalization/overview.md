@@ -22,4 +22,4 @@ For more information on using localization, internationalization, and right-to-l
 
 * [RTL Support by the Upload (Demo)](https://demos.telerik.com/kendo-ui/upload/right-to-left-support)
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

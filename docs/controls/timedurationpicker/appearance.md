@@ -25,7 +25,7 @@ The Kendo UI TimeDurationPicker supports the following styling options:
 
 The `size` option controls how big or small the rendered `input` looks. The structure of the class is `k-input-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/timedurationpicker/configuration/size) option:
+The following values are available for the [`size`](/api/ui/timedurationpicker/configuration/size) option:
 
 - `sm`—Small size.
 - `md`—Medium size.
@@ -43,7 +43,7 @@ The default size value is `medium` and is applied to the wrapping `span` element
 
 The `rounded` option controls the border radius of the rendered `input`. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rouned`](/api/javascript/ui/timedurationpicker/configuration/rounded) option:
+The following values are available for the [`rouned`](/api/ui/timedurationpicker/configuration/rounded) option:
 
 - `sm`—Small border radius.
 - `md`—Medium border radius.
@@ -63,7 +63,7 @@ The default rounded value is `medium` and it is applied to the wrapping `span` e
 
 The `fillMode` option controls the way the color is applied to the rendered `input`. The structure of the class is `k-input-{fillMode}`
 
-The following values are available for the [`fillMode`](/api/javascript/ui/timedurationpicker/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/timedurationpicker/configuration/fillmode) option:
 
 - `solid`
 - `flat`
@@ -83,4 +83,4 @@ To review the rendering of the component, refer to the HTML specifications in th
 ## See Also
 
 * [Appearance Demo of the TimeDurationPicker](https://demos.telerik.com/kendo-ui/timedurationpicker/appearance)
-* [JavaScript API Reference of the TimeDurationPicker](/api/javascript/ui/timedurationpicker)
+* [JavaScript API Reference of the TimeDurationPicker](/api/ui/timedurationpicker)

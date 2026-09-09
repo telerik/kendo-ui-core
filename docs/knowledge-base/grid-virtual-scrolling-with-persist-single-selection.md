@@ -32,7 +32,7 @@ When the user selects a row on the first page, scrolls to the second page, and s
 
 ## Solution
 
-Programmatically handle the collection of item selection on the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event of the Grid.
+Programmatically handle the collection of item selection on the [`change`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/change) event of the Grid.
 
 ````dojo
     <div id="example">

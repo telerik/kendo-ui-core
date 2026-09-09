@@ -28,8 +28,8 @@ By design, to be performed, the built-in drag-and-drop functionality of the Grid
 
 Therefore, to enable dragging and dropping of records to your empty Grid, you have to add an empty, dummy row to the component and, when a real record has been added to it, remove the dummy row:
 
-1. Handle the [`dataBound`](/api/javascript/ui/grid/events/databound) event of the Grids and, if the Grid is empty, add a dummy row.
-1. Remove the dummy row when a row is dropped into the Grid by handling the [`rowReorder`](/api/javascript/ui/grid/events/rowreorder) event handler.
+1. Handle the [`dataBound`](/api/ui/grid/events/databound) event of the Grids and, if the Grid is empty, add a dummy row.
+1. Remove the dummy row when a row is dropped into the Grid by handling the [`rowReorder`](/api/ui/grid/events/rowreorder) event handler.
 
 
 ```dojo
@@ -144,5 +144,5 @@ Therefore, to enable dragging and dropping of records to your empty Grid, you ha
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [jQuery Grid Drag & Drop Demo](https://demos.telerik.com/kendo-ui/grid/drag-drop)

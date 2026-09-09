@@ -59,4 +59,4 @@ By default, the adornments are part of the PromptBox. When you set the `enable` 
 
 * [PromptBox Modes]({% slug modes_kendoui_promptbox %})
 * [Appearance of the PromptBox]({% slug appearance_kendoui_promptbox %})
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)

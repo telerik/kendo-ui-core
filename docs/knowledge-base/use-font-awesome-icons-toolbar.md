@@ -65,6 +65,6 @@ The example below demonstrates how to use [FontAwesome icons](https://github.com
 
 ## See Also
 
-* [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
+* [ToolBar JavaScript API Reference](/api/ui/toolbar)
 * [Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})
 * [Develop and Register Custom ToolBar Tools]({% slug howto_customtool_toolbar %})

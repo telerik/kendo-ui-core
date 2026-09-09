@@ -51,7 +51,7 @@ In this step, you will initialize the ColorPalette from the `<div>` element.
 
 ## 3. Apply Configuration Settings to the ColorPalette
 
-Here, you will apply some settings as [tileSize](/api/javascript/ui/colorpalette/configuration/tilesize) and [columns](/api/javascript/ui/colorpalette/configuration/columns).
+Here, you will apply some settings as [tileSize](/api/ui/colorpalette/configuration/tilesize) and [columns](/api/ui/colorpalette/configuration/columns).
 
 ```dojo
     <div id="colorpalette"></div>
@@ -115,7 +115,7 @@ Here, you will apply some settings as [tileSize](/api/javascript/ui/colorpalette
 
 ## See Also 
 
-* [JavaScript API Reference of the ColorPalette](/api/javascript/ui/colorpalette)
+* [JavaScript API Reference of the ColorPalette](/api/ui/colorpalette)
 * [Knowledge Base Section](/knowledge-base)
 
 

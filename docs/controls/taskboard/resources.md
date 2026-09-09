@@ -102,4 +102,4 @@ The following example demonstrates how to use a multiple instance resource.
 ## See Also
 
 * [Overview Kendo UI TaskBoard (Demo)](https://demos.telerik.com/kendo-ui/taskboard/index)
-* [JavaScript API Reference of the Kendo UI TaskBoard](/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the Kendo UI TaskBoard](/api/ui/taskboard)

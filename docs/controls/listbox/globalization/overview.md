@@ -21,4 +21,4 @@ For more information on using localization, internationalization, and right-to-l
 
 * [RTL Support by the ListBox (Demo)](https://demos.telerik.com/kendo-ui/listbox/right-to-left-support)
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
+* [JavaScript API Reference of the ListBox](/api/ui/listbox)

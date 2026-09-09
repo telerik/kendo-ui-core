@@ -411,7 +411,7 @@ The following example consists of two AutoComplete editors that bind to Model pr
 
 ## See Also
 
-* [Client-Side API Reference of the AutoComplete for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
+* [Client-Side API Reference of the AutoComplete for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/autocomplete)
 * [Server-Side API Reference of the AutoComplete for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/autocomplete)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

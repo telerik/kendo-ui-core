@@ -36,7 +36,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To set the paste functionality to 'replace' programmatically in the Kendo UI Grid for jQuery, utilize the [`dataBound`](/api/javascript/ui/grid/events/databound) event. Within this event, access the paste dropdown list and modify its data source to include only the 'replace' option. Then, set the dropdown list's value to 'replace'.
+To set the paste functionality to 'replace' programmatically in the Kendo UI Grid for jQuery, utilize the [`dataBound`](/api/ui/grid/events/databound) event. Within this event, access the paste dropdown list and modify its data source to include only the 'replace' option. Then, set the dropdown list's value to 'replace'.
 
 ```javascript
 dataBound: function() {
@@ -78,6 +78,6 @@ Additionally, if you believe this feature should be a part of the Kendo UI Grid 
 
 ## See Also
 
-- [Grid dataBound event API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
+- [Grid dataBound event API](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound)
 - [DropDownList Overview](https://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/overview)
 - [Feature Request for Default Paste Mode](https://feedback.telerik.com/aspnet-core-ui/1670766-default-paste-mode)

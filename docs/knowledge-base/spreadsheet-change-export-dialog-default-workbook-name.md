@@ -35,7 +35,7 @@ How can I change the default filename of the workbook which appears in the Expor
 
 To change the default workbook name in the Spreadsheet export dialog, follow these steps:
 
-1. Get a reference to the Spreadsheet Menu and bind to its [`select`](/api/javascript/ui/menu/events/select) event.
+1. Get a reference to the Spreadsheet Menu and bind to its [`select`](/api/ui/menu/events/select) event.
 
 2. When the File menu is selected, attach a click handler to the Export button.
 
@@ -93,4 +93,4 @@ Below is a runnable example that demonstrates the approach:
 ## See Also
 
 - [Kendo UI Spreadsheet Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/spreadsheet/overview)
-- [Kendo UI Spreadsheet API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/spreadsheet)
+- [Kendo UI Spreadsheet API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/spreadsheet)

@@ -104,5 +104,5 @@ The following example initializes a Dialog with a form inside it and creates the
 ```
 
 ## See Also
-* [Wizard Configuration - API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard)
-* [open Event - API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/dialog/events/open)
+* [Wizard Configuration - API Reference](https://docs.telerik.com/kendo-ui/api/ui/wizard)
+* [open Event - API Reference](https://docs.telerik.com/kendo-ui/api/ui/dialog/events/open)

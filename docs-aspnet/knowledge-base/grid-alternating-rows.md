@@ -43,7 +43,7 @@ The example relies on the following key steps:
     ```
     {% endif %}
 
-1. Within the `ExcelExport` event handler, loop through the rows in the sheet, select each alternating row, and set the [`background`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background) option of each cell to the desired color:
+1. Within the `ExcelExport` event handler, loop through the rows in the sheet, select each alternating row, and set the [`background`](https://docs.telerik.com/kendo-ui/api/ooxml/workbook#configuration-sheets.rows.cells.background) option of each cell to the desired color:
 
     ```JS
         function excelExport(e) {
@@ -88,7 +88,7 @@ To review the complete example, refer to the ASP.NET MVC project on [coloring al
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)

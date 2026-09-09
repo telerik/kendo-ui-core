@@ -32,7 +32,7 @@ This knowledge base article also answers the following questions:
 - Is there a method to dynamically set the row count based on the data source in the Kendo UI Spreadsheet?
 
 ## Solution
-To load more than the default 200 rows in the Kendo UI Spreadsheet, dynamically set the rows count based on the number of items in the data source. Use the[ `setDataSource`](/api/javascript/spreadsheet/sheet/methods/setdatasource) method to load the data into the Spreadsheet. This approach involves fetching the data, determining the count, and then configuring the Spreadsheet to accommodate the number of rows equivalent to the data items. Follow the steps below to implement this solution:
+To load more than the default 200 rows in the Kendo UI Spreadsheet, dynamically set the rows count based on the number of items in the data source. Use the[ `setDataSource`](/api/spreadsheet/sheet/methods/setdatasource) method to load the data into the Spreadsheet. This approach involves fetching the data, determining the count, and then configuring the Spreadsheet to accommodate the number of rows equivalent to the data items. Follow the steps below to implement this solution:
 
 1. Fetch the data from the dataSource.
 2. Determine the number of items in the dataSource.
@@ -102,7 +102,7 @@ Below you will find a runnable example:
 
 
 ## See Also
-- [Spreadsheet API](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-- [Spreadsheet setDataSource Method](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/setdatasource)
-- [Spreadsheet removeSheet Method](/api/javascript/ui/spreadsheet/methods/removesheet)
+- [Spreadsheet API](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
+- [Spreadsheet setDataSource Method](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet/methods/setdatasource)
+- [Spreadsheet removeSheet Method](/api/ui/spreadsheet/methods/removesheet)
 - [Official Documentation for Kendo UI Spreadsheet](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)

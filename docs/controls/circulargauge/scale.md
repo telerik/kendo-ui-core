@@ -11,7 +11,7 @@ position: 4
 
 The CircularGauge enables you to customize the appearance of the scale by configuring the component's options.
 
-For example, you can change the start and end angle, the appearance of the label and ticks, customize the ranges, and others. For the full list of options, refer to the [API reference of the CircularGauge](/api/javascript/dataviz/ui/circulargauge).
+For example, you can change the start and end angle, the appearance of the label and ticks, customize the ranges, and others. For the full list of options, refer to the [API reference of the CircularGauge](/api/dataviz/ui/circulargauge).
 
     $("#gauge").kendoCircularGauge({
         scale: {
@@ -29,4 +29,4 @@ For example, you can change the start and end angle, the appearance of the label
 ## See Also
 
 * [Scale Options of the CircularGauge (Demo)](https://demos.telerik.com/kendo-ui/circular-gauge/scale-options)
-* [JavaScript API Reference of the CircularGauge](/api/javascript/dataviz/ui/circulargauge)
+* [JavaScript API Reference of the CircularGauge](/api/dataviz/ui/circulargauge)

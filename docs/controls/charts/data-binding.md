@@ -349,4 +349,4 @@ To bind the scatter series to a data source, use the fields that are specified a
 ## See Also
 
 * [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

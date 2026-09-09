@@ -50,8 +50,8 @@ You can configure the Telerik UI DropDownList for data binding to use a custom D
                     })
                         .Schema(schema =>
                         {
-                            schema.Data("Data") // Define the [data](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
-                                .Total("Total"); // Define the [total](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
+                            schema.Data("Data") // Define the [data](https://docs.telerik.com/kendo-ui/api/data/datasource#configuration-schema.data) option.
+                                .Total("Total"); // Define the [total](https://docs.telerik.com/kendo-ui/api/data/datasource#configuration-schema.total) option.
                         });
             })
         )
@@ -65,8 +65,8 @@ You can configure the Telerik UI DropDownList for data binding to use a custom D
             <transport>
                 <read url="@Url.Action("GetProducts", "Home")" />
             </transport>
-            <schema data="Data"     // Define the [data](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
-                    total="Total">  // Define the [total](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
+            <schema data="Data"     // Define the [data](https://docs.telerik.com/kendo-ui/api/data/datasource#configuration-schema.data) option.
+                    total="Total">  // Define the [total](https://docs.telerik.com/kendo-ui/api/data/datasource#configuration-schema.total) option.
             </schema>
         </datasource>
     </kendo-dropdownlist>

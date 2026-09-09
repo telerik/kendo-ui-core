@@ -22,11 +22,11 @@ To achieve this behavior, you need to implement a custom pagination dropdown in 
 
 1. Hide the default pager.
 2. Implement a custom `<div>` element that will be used for the custom pager.
-3. In the "document.ready" scope, get the [`dataSource`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/datasource) instance of the Kendo UI Grid.
-4. Use the [`totalPages`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/totalpages) method of the `dataSource` to get the page count of the Grid.
+3. In the "document.ready" scope, get the [`dataSource`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/datasource) instance of the Kendo UI Grid.
+4. Use the [`totalPages`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/totalpages) method of the `dataSource` to get the page count of the Grid.
 5. Implement a DropDownList using the custom `<div>` element from step 2, with items from 1 to the page count obtained in step 4.
-6. Use the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/change) event of the DropDownList.
-7. In the event handler, get the current value of the DropDownList and set it as the current page of the Grid using the [`page`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page) method of the `dataSource`.
+6. Use the [`change`](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/events/change) event of the DropDownList.
+7. In the event handler, get the current value of the DropDownList and set it as the current page of the Grid using the [`page`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/page) method of the `dataSource`.
 
 Here is an example implementation:
 

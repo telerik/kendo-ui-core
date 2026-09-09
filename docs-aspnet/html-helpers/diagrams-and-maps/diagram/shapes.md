@@ -9,7 +9,7 @@ position: 7
 
 # Shapes
 
-The Diagram enables you to add various shapes by using its [API reference on shapes](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/diagram/shape).
+The Diagram enables you to add various shapes by using its [API reference on shapes](https://docs.telerik.com/kendo-ui/api/dataviz/diagram/shape).
 
 ## Getting Started
 

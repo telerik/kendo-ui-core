@@ -9,12 +9,12 @@ position: 3
 
 # Predefined Types
 
-The Dialog provides options for rendering predefined dialogs by setting its [`kendo`](/api/javascript/kendo) object.
+The Dialog provides options for rendering predefined dialogs by setting its [`kendo`](/api/kendo) object.
 
 For more information, refer the API documentation of:
-* [Alert dialogs](/api/javascript/ui/alert)
-* [Confirm dialogs](/api/javascript/ui/confirm)
-* [Prompt dialogs](/api/javascript/ui/prompt)
+* [Alert dialogs](/api/ui/alert)
+* [Confirm dialogs](/api/ui/confirm)
+* [Prompt dialogs](/api/ui/prompt)
 
 The following example demonstrates how to call the alert, confirm, and prompt Dialogs.
 
@@ -34,4 +34,4 @@ To interrupt the current thread for the confirm and prompt Dialogs in a similar 
 ## See Also
 
 * [Predefined Dialog Types (Demo)](https://demos.telerik.com/kendo-ui/dialog/predefined-dialogs)
-* [JavaScript API Reference of the Dialog](/api/javascript/ui/dialog)
+* [JavaScript API Reference of the Dialog](/api/ui/dialog)

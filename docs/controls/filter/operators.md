@@ -13,7 +13,7 @@ The Filter provides options for defining which filter operators will be displaye
 
 ## Set operator per type
 
-The [`operators`](/api/javascript/ui/filter/configuration/operators) field takes a literal with the available operators for each field type and you can list the desired operators together with their text.
+The [`operators`](/api/ui/filter/configuration/operators) field takes a literal with the available operators for each field type and you can list the desired operators together with their text.
 
 The following example demonstrates how to set the `equals` and `contains` filter operators to the string fields and the `greater than` and `less than` filter operators to the numerical fields.
 
@@ -89,7 +89,7 @@ The following example demonstrates how to set the `equals` and `contains` filter
 
 ## Set operator per field
 
-The [`fields.operators`](/api/javascript/ui/filter/configuration/fields.operators) configuration allows you to specify the available operators for the current field of the model.
+The [`fields.operators`](/api/ui/filter/configuration/fields.operators) configuration allows you to specify the available operators for the current field of the model.
 
 The following example demonstrates how to set the `equals` and `contains` filter operators of the name field.
 
@@ -158,7 +158,7 @@ The following example demonstrates how to set the `equals` and `contains` filter
 
 ## Use custom operators
 
-The [`operators.{type}.custom`](/api/javascript/ui/filter/configuration/operators.string.custom) settings allows you to create a custom operator.
+The [`operators.{type}.custom`](/api/ui/filter/configuration/operators.string.custom) settings allows you to create a custom operator.
 
 The following example demonstrates how to create a custom operator for string fields.
 
@@ -242,4 +242,4 @@ The following example demonstrates how to create a custom operator for string fi
 
 * [Basic Usage of the Filter (Demo)](https://demos.telerik.com/kendo-ui/filter/index)
 * [Localization of Messages in the Filter]({% slug localization_kendoui_filter_widget %})
-* [JavaScript API Reference of the  Filter](/api/javascript/ui/filter)
+* [JavaScript API Reference of the  Filter](/api/ui/filter)

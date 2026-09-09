@@ -55,7 +55,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 3. Change the Appearance of the ButtonGroup
 
-The ButtonGroup provides various configurations to change its appearance. Below you can see how to use the [`fillMode`](/api/javascript/ui/buttongroup/configuration/fillmode), [`rounded`](/api/javascript/ui/buttongroup/configuration/rounded), [`themeColor`](/api/javascript/ui/buttongroup/configuration/themecolor), and [`size`](/api/javascript/ui/buttongroup/configuration/size) options.
+The ButtonGroup provides various configurations to change its appearance. Below you can see how to use the [`fillMode`](/api/ui/buttongroup/configuration/fillmode), [`rounded`](/api/ui/buttongroup/configuration/rounded), [`themeColor`](/api/ui/buttongroup/configuration/themecolor), and [`size`](/api/ui/buttongroup/configuration/size) options.
 
 ```html
     <div id="buttonGroup"></div>
@@ -81,7 +81,7 @@ The ButtonGroup provides various configurations to change its appearance. Below 
 
 ## See Also
 
-* [JavaScript API Reference of the ButtonGroup](/api/javascript/ui/buttongroup)
+* [JavaScript API Reference of the ButtonGroup](/api/ui/buttongroup)
 * [Knowledge Base Section](/knowledge-base)
 
 

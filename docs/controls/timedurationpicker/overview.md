@@ -23,11 +23,11 @@ The TimeDurationPicker component enables the end user to select a time range sto
 
 * [Getting Started with the Kendo UI TimeDurationPicker for jQuery]({% slug getting_started_kendoui_timedurationpicker_widget %})
 * [Overview of the TimeDurationPicker (Demo)](https://demos.telerik.com/kendo-ui/timedurationpicker/index)
-* [JavaScript API Reference of the TimeDurationPicker](/api/javascript/ui/timedurationpicker)
+* [JavaScript API Reference of the TimeDurationPicker](/api/ui/timedurationpicker)
 
 ## See Also
 
 * [Using the Basic Events of the TimeDurationPicker (Demo)](https://demos.telerik.com/kendo-ui/timedurationpicker/events)
 * [Binding the TimeDurationPicker over MVVM (Demo)](https://demos.telerik.com/kendo-ui/timedurationpicker/mvvm)
 * [Applying the TimeDurationPicker API (Demo)](https://demos.telerik.com/kendo-ui/timedurationpicker/api)
-* [JavaScript API Reference of the TimeDurationPicker](/api/javascript/ui/timedurationpicker)
+* [JavaScript API Reference of the TimeDurationPicker](/api/ui/timedurationpicker)

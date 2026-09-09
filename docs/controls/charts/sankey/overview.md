@@ -35,4 +35,4 @@ The Kendo UI for jQuery Sankey Diagram includes the following customizable eleme
 
 ## See Also
 
-* [JavaScript API Reference of the Sankey Diagram](/api/javascript/dataviz/ui/sankey)
+* [JavaScript API Reference of the Sankey Diagram](/api/dataviz/ui/sankey)

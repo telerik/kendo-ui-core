@@ -91,4 +91,4 @@ The following example demonstrates how to adjust the row height of the Grid when
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

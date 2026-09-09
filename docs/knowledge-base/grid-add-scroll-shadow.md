@@ -29,7 +29,7 @@ How can I add top and bottom scroll shadows which disappear when the Grid is scr
 
 ## Solution
 
-1. Handle the  [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event&mdash;in the event handler, [`wrap`](https://api.jquery.com/wrap/) the `.k-grid-element` in a `div` element and, depending on the scroll position and the height of the scrollable element, add classes to the `div`:
+1. Handle the  [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event&mdash;in the event handler, [`wrap`](https://api.jquery.com/wrap/) the `.k-grid-element` in a `div` element and, depending on the scroll position and the height of the scrollable element, add classes to the `div`:
 	1. If the height of the scrollable element is bigger than the fixed height of the table, add a bottom shadow.
 	1. When the element is scrolled down, add a top shadow.
 	1. When the element is scrolled to the very bottom, remove the bottom shadow.

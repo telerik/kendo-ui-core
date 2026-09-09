@@ -496,4 +496,4 @@ In order to have the DropDownList and the checkboxes instead of the current Butt
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler).
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler).

@@ -69,5 +69,5 @@ For a practical demonstration, refer to the following [Progress Kendo UI Dojo](h
 ## See Also
 
 - [Rendering SVG Icons with Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/svg-icons?#rendering-svg-icons)
-- [Kendo UI Button API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/configuration/iconclass)
+- [Kendo UI Button API Documentation](https://docs.telerik.com/kendo-ui/api/ui/button/configuration/iconclass)
 - [jQuery Append Method Documentation](https://api.jquery.com/append/)

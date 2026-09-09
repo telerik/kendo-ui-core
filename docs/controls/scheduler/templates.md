@@ -15,7 +15,7 @@ For a runnable example, refer to the [Scheduler templates demo](https://demos.te
 
 ## Configure an Event Template
 
-Set the [`eventTemplate`](/api/javascript/ui/scheduler/configuration/eventtemplate) option to a Kendo UI template. The template can use the event `title`, `description`, `start`, `end`, and `resources` fields.
+Set the [`eventTemplate`](/api/ui/scheduler/configuration/eventtemplate) option to a Kendo UI template. The template can use the event `title`, `description`, `start`, `end`, and `resources` fields.
 
 The following example renders the event title and time range for each Scheduler event.
 
@@ -52,16 +52,16 @@ The following example renders the event title and time range for each Scheduler 
 
 The Scheduler provides templates for other parts of its interface:
 
-* [`allDayEventTemplate`](/api/javascript/ui/scheduler/configuration/alldayeventtemplate) customizes all-day event content.
-* [`dateHeaderTemplate`](/api/javascript/ui/scheduler/configuration/dateheadertemplate) customizes date headers.
-* [`groupHeaderTemplate`](/api/javascript/ui/scheduler/configuration/groupheadertemplate) customizes resource group headers.
-* [`majorTimeHeaderTemplate`](/api/javascript/ui/scheduler/configuration/majortimeheadertemplate) and [`minorTimeHeaderTemplate`](/api/javascript/ui/scheduler/configuration/minortimeheadertemplate) customize time headers.
-* [`views.slotTemplate`](/api/javascript/ui/scheduler/configuration/views.slottemplate) customizes time slots in supported views.
-* [`views.tooltipTemplate`](/api/javascript/ui/scheduler/configuration/views.tooltiptemplate) customizes tooltips in the Year view.
+* [`allDayEventTemplate`](/api/ui/scheduler/configuration/alldayeventtemplate) customizes all-day event content.
+* [`dateHeaderTemplate`](/api/ui/scheduler/configuration/dateheadertemplate) customizes date headers.
+* [`groupHeaderTemplate`](/api/ui/scheduler/configuration/groupheadertemplate) customizes resource group headers.
+* [`majorTimeHeaderTemplate`](/api/ui/scheduler/configuration/majortimeheadertemplate) and [`minorTimeHeaderTemplate`](/api/ui/scheduler/configuration/minortimeheadertemplate) customize time headers.
+* [`views.slotTemplate`](/api/ui/scheduler/configuration/views.slottemplate) customizes time slots in supported views.
+* [`views.tooltipTemplate`](/api/ui/scheduler/configuration/views.tooltiptemplate) customizes tooltips in the Year view.
 
 ## See Also
 
 * [Scheduler Templates Demo](https://demos.telerik.com/kendo-ui/scheduler/templates)
 * [Kendo UI Templates Overview](/framework/templates/overview)
-* [Scheduler Event Template API](/api/javascript/ui/scheduler/configuration/eventtemplate)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [Scheduler Event Template API](/api/ui/scheduler/configuration/eventtemplate)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

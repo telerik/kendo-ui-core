@@ -29,7 +29,7 @@ How can I display the hidden columns values in the detail template of the rows i
 
 ## Solution
 
-1. Implement a [`detailTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/detailtemplate).
+1. Implement a [`detailTemplate`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/detailtemplate).
 1. Use [media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries) to show and hide the desired data in the detail template.
 
 ```dojo

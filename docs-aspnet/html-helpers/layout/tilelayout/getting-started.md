@@ -479,6 +479,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the Events of the TileLayout for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tilelayout/events)
-* [Client-Side API of the TileLayout](https://docs.telerik.com/kendo-ui/api/javascript/ui/tilelayout)
+* [Client-Side API of the TileLayout](https://docs.telerik.com/kendo-ui/api/ui/tilelayout)
 * [Server-Side API of the TileLayout](/api/tilelayout)
 * [Knowledge Base Section](/knowledge-base)

@@ -29,7 +29,7 @@ How can I show the total of all the series points in the shared tooltip template
 
 ## Solution
 
-1. Use the [`tooltip.sharedTemplate`](/api/javascript/dataviz/ui/chart/configuration/tooltip#tooltipsharedtemplate) fields to calulate and display the sum of all points.
+1. Use the [`tooltip.sharedTemplate`](/api/dataviz/ui/chart/configuration/tooltip#tooltipsharedtemplate) fields to calulate and display the sum of all points.
 
 ```
     <script id="template" type="text/x-kendo-template">

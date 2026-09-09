@@ -36,9 +36,9 @@ When binding multiple columns to the MultiColumnComboBox, the columns may not fi
 
 To handle scenarios where all columns in the MultiColumnComboBox do not fit properly on the screen, resulting in the need for a scrollbar, follow these steps:
 
-1. Use the [`open`](/api/javascript/ui/multicolumncombobox/events/open) event of the Kendo UI for jQuery MultiColumnComboBox to dynamically adjust the column widths based on the screen size. 
+1. Use the [`open`](/api/ui/multicolumncombobox/events/open) event of the Kendo UI for jQuery MultiColumnComboBox to dynamically adjust the column widths based on the screen size. 
 2. Within the event handler, calculate the new width for the columns.
-3. Use the [`setOptions`](/api/javascript/ui/widget/methods/setoptions) method to apply the new width to the columns.
+3. Use the [`setOptions`](/api/ui/widget/methods/setoptions) method to apply the new width to the columns.
 
 Here is an example of how to dynamically set the column widths:
 
@@ -164,11 +164,11 @@ Below is a runnable example:
 ```
 
 For more detailed information on configuring the columns and dropdown width of the MultiColumnComboBox, refer to the official documentation:
-- [Configuring columns in MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/configuration/columns.width)
-- [Setting dropdown width](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/configuration/dropdownwidth)
+- [Configuring columns in MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox/configuration/columns.width)
+- [Setting dropdown width](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox/configuration/dropdownwidth)
 
 ## See Also
 
 - [Kendo UI for jQuery MultiColumnComboBox Overview]https://docs.telerik.com/kendo-ui/controls/multicolumncombobox/overview)
-- [MultiColumnComboBox Open Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/events/open)
-- [MultiColumnComboBox setOptions Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions)
+- [MultiColumnComboBox Open Event](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox/events/open)
+- [MultiColumnComboBox setOptions Method](https://docs.telerik.com/kendo-ui/api/ui/widget/methods/setoptions)

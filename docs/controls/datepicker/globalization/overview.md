@@ -22,4 +22,4 @@ For more information on using localization, internationalization, and right-to-l
 
 * [RTL Support by the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/right-to-left-support)
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)

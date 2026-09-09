@@ -11,7 +11,7 @@ position: 4
 
 The Spreadsheet offers support for comments to be placed within each of its cells.
 
-The following example demonstrates how a cell in the Spreadsheet can be initially [configured to contain a comment](/api/javascript/ui/spreadsheet/configuration/sheets.rows.cells.comment).
+The following example demonstrates how a cell in the Spreadsheet can be initially [configured to contain a comment](/api/ui/spreadsheet/configuration/sheets.rows.cells.comment).
 
 ```dojo
     <div id="spreadsheet"></div>
@@ -37,4 +37,4 @@ The following example demonstrates how a cell in the Spreadsheet can be initiall
 ## See Also
 
 * [Adding Cell Comments to the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/cell-comments)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

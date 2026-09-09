@@ -71,11 +71,11 @@ To achieve the desired scenario:
     ```
 
 For more information, refer to the articles on:
-* The [`change`](/api/javascript/ui/listbox/events/change) event of the ListBox.
-* The [`dataItem`](/api/javascript/ui/listbox/methods/dataitem) method of the ListBox.
+* The [`change`](/api/ui/listbox/events/change) event of the ListBox.
+* The [`dataItem`](/api/ui/listbox/methods/dataitem) method of the ListBox.
 
 ## See Also
 
 * [Kendo UI for jQuery ListBox Overview (Demo)](https://demos.telerik.com/kendo-ui/listbox/index)
 * [jQuery ListBox Overview (Documentation)]({% slug overview_kendoui_listbox_widget %})
-* [JavaScript API of the ListBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
+* [JavaScript API of the ListBox](https://docs.telerik.com/kendo-ui/api/ui/listbox)

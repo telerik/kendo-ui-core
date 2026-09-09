@@ -34,8 +34,8 @@ To achieve the desired scenario:
 
 1. Create two separate buttons which will be responsible for the loading and persisting of the Grid's state.
 1. Handle the [`click`](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) event of both buttons.
-1. Store the options of the Grid by using the [`getOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/getoptions) method while serializing them within the `LocalStorage` of the application by using the [`kendo.stringify()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/stringify) method.
-1. Just before you pass the options to the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method of the Grid upon the state's persistence, add the function reference to the parsed JSON file retrieved from the `LocalStorage`.
+1. Store the options of the Grid by using the [`getOptions()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/getoptions) method while serializing them within the `LocalStorage` of the application by using the [`kendo.stringify()`](https://docs.telerik.com/kendo-ui/api/kendo/methods/stringify) method.
+1. Just before you pass the options to the [`setOptions`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/setoptions) method of the Grid upon the state's persistence, add the function reference to the parsed JSON file retrieved from the `LocalStorage`.
 
 ```Razor Index.cshtml
     <a href="#" class="k-button"  id="save">Save State</a>
@@ -117,7 +117,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Persist Function References to a Custom Command in the Grid](https://netcorerepl.telerik.com/cwlwmMOt161GtEqa56)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

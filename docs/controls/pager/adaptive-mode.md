@@ -9,7 +9,7 @@ slug: adaptivemode_kendoui_pager_widget
 
 # Adaptive Mode
 
-The Kendo UI for jQuery Pager features an [adaptive mode](/api/javascript/ui/pager/configuration/adaptivemode) that improves usability on mobile and small screens by transforming the page selection interface. When enabled via the `adaptiveMode` option, the Pager automatically switches its page selector to a DropDownList, which adapts its appearance based on the device's screen size.
+The Kendo UI for jQuery Pager features an [adaptive mode](/api/ui/pager/configuration/adaptivemode) that improves usability on mobile and small screens by transforming the page selection interface. When enabled via the `adaptiveMode` option, the Pager automatically switches its page selector to a DropDownList, which adapts its appearance based on the device's screen size.
 
 Depending on the screen width, the DropDownList for page selection may appear as a standard popup, docked to the bottom, or as a full-screen modal—ensuring optimal accessibility and touch support. Typical breakpoints are up to 500px for small screens, 501–768px for medium, and above 768px for large screens.
 
@@ -21,7 +21,7 @@ To enable, set `adaptiveMode: true` in the Pager configuration.
 
 ## See Also
 
-* [JavaScript API Reference of the Pager](/api/javascript/ui/pager)
+* [JavaScript API Reference of the Pager](/api/ui/pager)
 * [Responsive Pager]({% slug responsive_kendoui_pager_widget %})
 * [Pager Settings and Types]({% slug settings_kendoui_pager_widget %})
 * [Pager Templates]({% slug templates_kendoui_pager_widget %})

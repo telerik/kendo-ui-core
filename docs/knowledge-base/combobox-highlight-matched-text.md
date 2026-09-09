@@ -112,4 +112,4 @@ Implement the `dataBound` event handler for the widget.
 
 ## See Also
 
-* [API Reference of the ComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [API Reference of the ComboBox](https://docs.telerik.com/kendo-ui/api/ui/combobox)

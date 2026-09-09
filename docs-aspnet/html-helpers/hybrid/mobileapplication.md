@@ -148,7 +148,7 @@ To implement navigation, use either of the available approaches:
 
 ## Referencing Existing Instances
 
-You can reference a hybrid Application instance by using the code from the following example. Once a reference is established, use the [hybrid Application client-side API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/application#methods) to control its behavior.
+You can reference a hybrid Application instance by using the code from the following example. Once a reference is established, use the [hybrid Application client-side API](https://docs.telerik.com/kendo-ui/api/mobile/application#methods) to control its behavior.
 
     @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)

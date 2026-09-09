@@ -287,7 +287,7 @@ You can reference the TreeView instances that you have created and build on top 
     </script>
     ```
 
-1. Use the [TreeView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview#methods) to control the behavior of the widget. In this example, you will use the `findByText` and `select` methods to select an item.
+1. Use the [TreeView client-side API](https://docs.telerik.com/kendo-ui/api/ui/treeview#methods) to control the behavior of the widget. In this example, you will use the `findByText` and `select` methods to select an item.
 
     ```JS script
     <script>
@@ -317,6 +317,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the TreeView for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/api)
-* [TreeView Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [TreeView Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/treeview)
 * [Server-Side API of the TreeView](/api/treeview)
 * [Knowledge Base Section](/knowledge-base)

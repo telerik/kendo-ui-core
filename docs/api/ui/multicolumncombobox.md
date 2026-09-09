@@ -8,7 +8,7 @@ component: multicolumncombobox
 
 # kendo.ui.MultiColumnComboBox
 
-Represents the Kendo UI MultiColumnComboBox widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI MultiColumnComboBox widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -192,7 +192,7 @@ How to configure closing animation effects in Kendo UI MultiColumnComboBox? Conf
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -291,7 +291,7 @@ How can I customize the animation effect when opening the suggestion dropdown in
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -429,7 +429,7 @@ How do I link two MultiColumnComboBox controls for cascading relationships in Ke
 
 ### cascadeFromField `String`
 
-Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/multicolumncombobox/configuration/datavaluefield).
+Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/ui/multicolumncombobox/configuration/datavaluefield).
 [Help topic showing how cascading functionality works](/controls/multicolumncombobox/cascading)
 
 
@@ -476,7 +476,7 @@ How do I enable dependent dropdowns in Kendo UI MultiColumnComboBox using the ca
 
 ### cascadeFromParentField `String`
 
-Defines the parent field to be used to retain value from. This value will be used further to filter the dataSource. If not defined the value from the [parent's dataValueField will be used](/api/javascript/ui/multicolumncombobox/configuration/datavaluefield).
+Defines the parent field to be used to retain value from. This value will be used further to filter the dataSource. If not defined the value from the [parent's dataValueField will be used](/api/ui/multicolumncombobox/configuration/datavaluefield).
 
 
 <div class="meta-api-description">
@@ -733,12 +733,12 @@ How can I enable or disable the clear button in a Kendo UI MultiColumnComboBox? 
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -969,7 +969,7 @@ How do I disable user interaction in a Kendo UI MultiColumnComboBox? Control whe
 
 ### enforceMinLength `Boolean` *(default: false)*
 
-If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/javascript/ui/multicolumncombobox#configuration-minLength).
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/ui/multicolumncombobox#configuration-minLength).
 
 
 <div class="meta-api-description">
@@ -1040,7 +1040,7 @@ How do I customize the color fill style in a Kendo UI MultiColumnComboBox? Confi
 
 ### filter `String`*(default: "none")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/multicolumncombobox#configuration-dataTextField) option).
+The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/ui/multicolumncombobox#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 
@@ -1098,7 +1098,7 @@ How do I configure multi-field filtering in a Kendo UI MultiColumnComboBox? Spec
 
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
 
 <div class="meta-api-description">
@@ -1131,7 +1131,7 @@ How to customize the group headers in Kendo UI MultiColumnComboBox? Customize an
 
 ### footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+The [template](/api/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
 
 
 <div class="meta-api-description">
@@ -1280,7 +1280,7 @@ The function context (available through the keyword `this`) will be set to the w
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/multicolumncombobox/methods/value) method **does not trigger** the `focusout` event of the input.
+> **Important:** The [value](/api/ui/multicolumncombobox/methods/value) method **does not trigger** the `focusout` event of the input.
 This can affect the floating label functionality.
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#multicolumncombobox").data("kendoMultiColumnComboBox").label.floatingLabel.refresh();`
 
@@ -1309,7 +1309,7 @@ How to enable floating labels in Kendo UI MultiColumnComboBox? Enable or configu
 
 ### groupTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
 
 
 <div class="meta-api-description">
@@ -1497,7 +1497,7 @@ How do I customize the message when there's no data in a Kendo UI MultiColumnCom
 
 The minimum number of characters the user must type before a search is performed. Set to higher value than `1` if the search could match a lot of items.
 
-> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/javascript/ui/multicolumncombobox/events/filtering) event for more details.
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/ui/multicolumncombobox/events/filtering) event for more details.
 
 
 <div class="meta-api-description">
@@ -1515,7 +1515,7 @@ What is the minimum number of characters required to trigger autocomplete in a K
 
 ### noDataTemplate `String|Function|Boolean` *(default: true)*
 
-The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The [template](/api/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
 > **Important** The popup will open when 'noDataTemplate' is defined
@@ -1575,7 +1575,7 @@ How to customize the placeholder text in Kendo UI MultiColumnComboBox? Set or cu
 ### popup `Object`
 
 The options that will be used for the popup initialization. For more details about the available options
-refer to [Popup](/api/javascript/ui/popup) documentation.
+refer to [Popup](/api/ui/popup) documentation.
 
 
 <div class="meta-api-description">
@@ -1802,7 +1802,7 @@ How can I add an icon to the input field of a MultiColumnComboBox? Set or custom
 
 ### prefixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+The [template](/api/kendo/methods/template) for the prefix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -2004,7 +2004,7 @@ How do I change the default suffix icon in a Kendo UI MultiColumnComboBox? Set o
 
 ### suffixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+The [template](/api/kendo/methods/template) for the suffix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -2501,11 +2501,11 @@ How do I map selected values to their corresponding data indexes in a Kendo UI M
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/multicolumncombobox/configuration/datasource) option.
+The [data source](/api/data/datasource) of the widget. Configured via the [dataSource](/api/ui/multicolumncombobox/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/multicolumncombobox/methods/setdatasource) method instead.
+> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/ui/multicolumncombobox/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -2754,7 +2754,7 @@ How do I programmatically focus the MultiColumnComboBox dropdown input in jQuery
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/data/datasource/methods/view).
 
 
 <div class="meta-api-description">
@@ -2920,14 +2920,14 @@ The filter value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
-> **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](/api/javascript/ui/multicolumncombobox/methods/value) method), and no item will be selected.
+> **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](/api/ui/multicolumncombobox/methods/value) method), and no item will be selected.
 
 > **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 
-> **Important:** This method **does not trigger** [change](/api/javascript/ui/multicolumncombobox/events/change) event.
+> **Important:** This method **does not trigger** [change](/api/ui/multicolumncombobox/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
     <input id="multicolumncombobox" />
     <script>
@@ -3141,9 +3141,9 @@ there are no matches then the text will be considered as a custom value of the w
 
 > **Important:** When the `autoBind` option is set to *false*, the widget will update only the selected text. The widget will stay **unbound**.
 
-> **Important:** This method **does not trigger** [change](/api/javascript/ui/multicolumncombobox/events/change) event.
+> **Important:** This method **does not trigger** [change](/api/ui/multicolumncombobox/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
     <input id="multicolumncombobox" />
     <script>
@@ -3247,9 +3247,9 @@ Gets or sets the value of the MultiColumnComboBox.
 
 > **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
 
-> **Important:** This method **does not trigger** [change](/api/javascript/ui/multicolumncombobox/events/change) event.
+> **Important:** This method **does not trigger** [change](/api/ui/multicolumncombobox/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
     <input id="multicolumncombobox" />
     <script>
@@ -3317,7 +3317,7 @@ Fired when the value of the widget is changed by the user. As of 2015 Q3 SP1 cas
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 > **Important:** The event is not fired when the value of the widget is changed from code.
-> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/multicolumncombobox/events/cascade) event.
+> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/ui/multicolumncombobox/events/cascade) event.
 
 
 <div class="meta-api-description">
@@ -3519,7 +3519,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource/configuration/serverfiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/data/datasource/configuration/serverfiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 

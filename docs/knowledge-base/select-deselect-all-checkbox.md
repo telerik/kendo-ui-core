@@ -231,4 +231,4 @@ You can also select multiple rows by using the checkboxes and applying custom st
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

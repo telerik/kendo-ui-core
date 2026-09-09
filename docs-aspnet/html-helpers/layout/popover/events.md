@@ -105,4 +105,4 @@ The following example demonstrates how to subscribe to the PopOver events.
 {% if site.core %}
 * [PopOver Server-Side TagHelper API](/api/taghelpers/popover)
 {% endif %}
-* [PopOver Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/popover)
+* [PopOver Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/popover)

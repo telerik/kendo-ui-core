@@ -80,11 +80,11 @@ The following example demonstrates how to add an Upload editor to a Form:
 
 When using the Upload as a Form editor, you can configure the following options:
 
-- [`multiple`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/multiple)&mdash;Determines whether multiple file selection is enabled.
-- [`validation`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/validation)&mdash;Lets you configure file restrictions:
-  - [`allowedExtensions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/validation#validation.allowedExtensions)&mdash;Lets you set an array of allowed file extensions.
-  - [`maxFileSize`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/validation#validationmaxfilesize)&mdash;Lets you configure the maximum allowed file size in bytes.
-  - [`minFileSize`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/validation#validationminfilesize)&mdash;Lets you configure the minimum required file size in bytes.
+- [`multiple`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/multiple)&mdash;Determines whether multiple file selection is enabled.
+- [`validation`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/validation)&mdash;Lets you configure file restrictions:
+  - [`allowedExtensions`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/validation#validation.allowedExtensions)&mdash;Lets you set an array of allowed file extensions.
+  - [`maxFileSize`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/validation#validationmaxfilesize)&mdash;Lets you configure the maximum allowed file size in bytes.
+  - [`minFileSize`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/validation#validationminfilesize)&mdash;Lets you configure the minimum required file size in bytes.
   - `required`&mdash;Whether file selection is required.
 
 ## Custom Validation Messages
@@ -198,7 +198,7 @@ For detailed information about browser compatibility, refer to the [Upload Brows
 ## See Also
 
 
-- [Form Component API Reference](/api/javascript/ui/form)
-- [Upload Component API Reference](/api/javascript/ui/upload)
+- [Form Component API Reference](/api/ui/form)
+- [Upload Component API Reference](/api/ui/upload)
 - [Form Demo Examples](https://demos.telerik.com/kendo-ui/form/index)
 - [Upload Validation]({% slug validation_upload_widget %})

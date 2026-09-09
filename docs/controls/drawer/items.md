@@ -9,7 +9,7 @@ position: 3
 
 # Items
 
-The [`items`](/api/javascript/ui/drawer/configuration/items) configuration lets you populate the Drawer from a data array instead of writing a full HTML [`template`](/api/javascript/ui/drawer/configuration/template). Each item supports text, an icon, separator, selected and enabled state, custom CSS classes, custom HTML attributes, per-item templates, and nested child items.
+The [`items`](/api/ui/drawer/configuration/items) configuration lets you populate the Drawer from a data array instead of writing a full HTML [`template`](/api/ui/drawer/configuration/template). Each item supports text, an icon, separator, selected and enabled state, custom CSS classes, custom HTML attributes, per-item templates, and nested child items.
 
 > When `template` is configured it takes precedence and the `items` array is ignored.
 
@@ -119,7 +119,7 @@ When you need full control over a single item's markup without switching the who
 
 ## Mini-Mode Per-Item Templates
 
-When the Drawer is configured with [`mini`](/api/javascript/ui/drawer/configuration/mini) mode, supply `miniTemplate` on individual items to control their collapsed appearance. If [`mini.template`](/api/javascript/ui/drawer/configuration/mini.template) is also set, it takes precedence over per-item `miniTemplate` values.
+When the Drawer is configured with [`mini`](/api/ui/drawer/configuration/mini) mode, supply `miniTemplate` on individual items to control their collapsed appearance. If [`mini.template`](/api/ui/drawer/configuration/mini.template) is also set, it takes precedence over per-item `miniTemplate` values.
 
 ```dojo
     <div id="drawer">
@@ -177,7 +177,7 @@ Pass an `items` array inside any item to create a multi-level navigation structu
 
 ## See Also
 
-* [JavaScript API Reference of the Drawer — items](/api/javascript/ui/drawer/configuration/items)
+* [JavaScript API Reference of the Drawer — items](/api/ui/drawer/configuration/items)
 * [Templates of the Drawer]({% slug templates_kendoui_drawer %})
 * [Hierarchy of the Drawer]({% slug hierarchy_kendoui_drawer %})
 * [Basic Usage of the Drawer (Demo)](https://demos.telerik.com/kendo-ui/drawer/index)

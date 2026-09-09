@@ -79,6 +79,6 @@ $(document).ready(function () {
 
 ## See Also 
 
-* [JavaScript API Reference of the Signature](/api/javascript/ui/signature)
+* [JavaScript API Reference of the Signature](/api/ui/signature)
 * [Knowledge Base Section](/knowledge-base)
 

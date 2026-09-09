@@ -57,7 +57,7 @@ In this step, you will initialize the SkeletonContainer from the `<div>` element
 
 ## 3. Apply Configuration Settings
 
-Here, you will apply configuration settings, such as [`animation`](/api/javascript/ui/skeletoncontainer/configuration/animation), [`height`](/api/javascript/ui/skeletoncontainer/configuration/height), [`width`](/api/javascript/ui/skeletoncontainer/configuration/width), and [`grid`](/api/javascript/ui/skeletoncontainer/configuration/grid).
+Here, you will apply configuration settings, such as [`animation`](/api/ui/skeletoncontainer/configuration/animation), [`height`](/api/ui/skeletoncontainer/configuration/height), [`width`](/api/ui/skeletoncontainer/configuration/width), and [`grid`](/api/ui/skeletoncontainer/configuration/grid).
 
 ```dojo
     <div id="skeleton"></div>
@@ -88,7 +88,7 @@ Here, you will apply configuration settings, such as [`animation`](/api/javascri
 
 ## See Also 
 
-* [JavaScript API Reference of the SkeletonContainer](/api/javascript/ui/skeletoncontainer)
+* [JavaScript API Reference of the SkeletonContainer](/api/ui/skeletoncontainer)
 * [Knowledge Base Section](/knowledge-base)
 
 

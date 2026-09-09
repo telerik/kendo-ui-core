@@ -95,7 +95,7 @@ How can I add a checkbox option in the Telerik UI for {{ site.framework }} Grid 
             });
         }
     ```
-1. In the `change` event handler of the footer checkbox, use the client-side [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) and [`clearSelection()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/clearselection) methods to select and unselect the Grid rows.
+1. In the `change` event handler of the footer checkbox, use the client-side [`select()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/select) and [`clearSelection()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/clearselection) methods to select and unselect the Grid rows.
 
     ```JS script
         function onDataBound(e) {
@@ -140,7 +140,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

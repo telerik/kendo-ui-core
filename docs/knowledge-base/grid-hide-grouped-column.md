@@ -22,7 +22,7 @@ components: ["grid"]
 
 ## Description
 
-I have enabled the [`hideOnGroup`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.hideongroup) option, but the column is still visible when the Grid is loaded initially. How can I hide the grouped column when the dataSource is grouped initially?
+I have enabled the [`hideOnGroup`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.hideongroup) option, but the column is still visible when the Grid is loaded initially. How can I hide the grouped column when the dataSource is grouped initially?
 
 By design, the `hideOnGroup` option specifies if the column will be hidden when the Grid is grouped upon user interaction. For this reason, even if the dataSource is grouped initially using the group option, the respective column is visible in the table.
 
@@ -31,9 +31,9 @@ The example below demonstrates how the grouped column can be hidden initially.
 
 ## Solution
 
-1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event.
-1. Retrieve the Grid [`groups`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/group) using the dataSource group method.
-1. Use the Grid [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) method.
+1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event.
+1. Retrieve the Grid [`groups`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/group) using the dataSource group method.
+1. Use the Grid [`hideColumn`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/hidecolumn) method.
 
 ```dojo
 	<div id="grid"></div>
@@ -104,4 +104,4 @@ The example below demonstrates how the grouped column can be hidden initially.
 
 ## See Also
 
-* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid).
+* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/ui/grid).

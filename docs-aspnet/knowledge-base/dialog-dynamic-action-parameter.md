@@ -126,7 +126,7 @@ For a runnable example based on the code above, refer to the [REPL example on pa
 
 ## See Also
 
-* [Client-Side API Reference of the Dialog for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/dialog)
+* [Client-Side API Reference of the Dialog for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/dialog)
 * [Server-Side API Reference of the Dialog for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/dialog)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Dialog for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/dialog)

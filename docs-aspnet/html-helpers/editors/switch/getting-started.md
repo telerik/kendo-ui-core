@@ -152,7 +152,7 @@ You can reference the Switch instances that you have created and build on top of
              })
          </script>
     ```
-1. Set the check state of the component by using the [`check()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch/methods/check) client-side method.
+1. Set the check state of the component by using the [`check()`](https://docs.telerik.com/kendo-ui/api/ui/switch/methods/check) client-side method.
 
     ```JS script
         <script>
@@ -183,6 +183,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Switch for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/switch/api)
-* [Client-Side API of the Switch](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch)
+* [Client-Side API of the Switch](https://docs.telerik.com/kendo-ui/api/ui/switch)
 * [Server-Side API of the Switch for {{ site.framework }}](/api/switch)
 * [Knowledge Base Section](/knowledge-base)

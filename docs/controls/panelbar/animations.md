@@ -29,4 +29,4 @@ The following example demonstrates how to change the PanelBar animation and its 
 ## See Also
 
 * [Using Animations in the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/animation)
-* [JavaScript API Reference of the PanelBar](/api/javascript/ui/panelbar)
+* [JavaScript API Reference of the PanelBar](/api/ui/panelbar)

@@ -94,9 +94,9 @@ The following example demonstrates how to bind a TreeList with a non-nullable `p
 
 You can also bind the `TreeListDataSource` to remote data which means that the TreeList will load items from a web service. Remote data binding enables the retrieval of data from the server and the saving of the TreeList data items to the server database. For more information, refer to the article on [using the Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}).
 
-> To lazy-load the TreeList hierarchy, calculate and include the Boolean [`hasChildren`](/api/javascript/data/treelistmodel/fields/haschildren) field on the server.
+> To lazy-load the TreeList hierarchy, calculate and include the Boolean [`hasChildren`](/api/data/treelistmodel/fields/haschildren) field on the server.
 > When the user clicks the expand icon, the TreeList DataSource requests the children of the item by sending the parent item `id` as a request parameter, for example `&id=1`.
-> You can change the parameter name by using the [`paramaterMap`](/api/javascript/data/datasource/configuration/transport.parametermap) function. For more information, refer to the controller code in the [`kendo-ui-demos service`](https://github.com/telerik/kendo-ui-demos-service/blob/master/demos-and-odata-v3/KendoCRUDService/Controllers/EmployeeDirectoryController.cs).
+> You can change the parameter name by using the [`paramaterMap`](/api/data/datasource/configuration/transport.parametermap) function. For more information, refer to the controller code in the [`kendo-ui-demos service`](https://github.com/telerik/kendo-ui-demos-service/blob/master/demos-and-odata-v3/KendoCRUDService/Controllers/EmployeeDirectoryController.cs).
 
 The following example demonstrates how to enable the remote binding for the TreeList by setting the DataSource `transport`.
 
@@ -183,4 +183,4 @@ The following example demonstrates how to enable the remote binding for the Tree
 
 * [Local Data Binding in the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/local-data-binding)
 * [Remote Data Binding in the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/remote-data-binding)
-* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)
+* [TreeList JavaScript API Reference](/api/ui/treelist)

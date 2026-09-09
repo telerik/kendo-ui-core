@@ -44,7 +44,7 @@ Here is one way of achieving the desired result:
         });
     ```
 
-1. Add the click handler which will [save the row](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saverow) and trigger the create action:
+1. Add the click handler which will [save the row](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/saverow) and trigger the create action:
     
     ```JS
         function saveRow(e) {
@@ -55,7 +55,7 @@ Here is one way of achieving the desired result:
         }
     ```
     
-1. Set the visibility of the custom button to true only for [new models](https://docs.telerik.com/kendo-ui/api/javascript/data/model/methods/isnew):
+1. Set the visibility of the custom button to true only for [new models](https://docs.telerik.com/kendo-ui/api/data/model/methods/isnew):
 
     ```JS
         function shouldBeVisible(e) {       
@@ -86,7 +86,7 @@ Here is one way of achieving the desired result:
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

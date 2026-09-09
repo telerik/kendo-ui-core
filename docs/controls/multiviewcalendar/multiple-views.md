@@ -47,4 +47,4 @@ To display two or more months and especially in case of range selection among a 
 ## See Also
 
 * [Using Multiple Views in the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/multiple-views)
-* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
+* [JavaScript API Reference of the MultiViewCalendar](/api/ui/multiviewcalendar)

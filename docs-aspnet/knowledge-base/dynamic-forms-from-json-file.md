@@ -287,7 +287,7 @@ How can I generate dynamic {{ site.product }} Forms through a JSON file?
 
 ## See Also
 
-* [Client-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)
+* [Client-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/form)
 * [Server-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/form)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/form)

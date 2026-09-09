@@ -113,7 +113,7 @@ This CSS targets the search box within the Grid's toolbar and sets its width to 
 
 ## See Also
 
-- [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+- [JavaScript API Reference of the Grid](/api/ui/grid)
 - [Grid Search Panel (Demo)](https://demos.telerik.com/kendo-ui/grid/search-panel)
 - [Grid Documentation Overview](/controls/grid/overview)
 

@@ -16,7 +16,7 @@ For more information about the available export options of the TreeList, refer t
 * [Excel export]({% slug htmlhelpers_treelist_aspnetcore_excelexport %})
 * [PDF export]({% slug htmlhelpers_treelist_aspnetcore_pdfexport %})
 
-Under the hood, most of the PDF export options use the Kendo UI for jQuery [Drawing library](https://docs.telerik.com/kendo-ui/framework/drawing/overview) and the Excel export builds a [`kendo.ooxml.Workbook`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook).
+Under the hood, most of the PDF export options use the Kendo UI for jQuery [Drawing library](https://docs.telerik.com/kendo-ui/framework/drawing/overview) and the Excel export builds a [`kendo.ooxml.Workbook`](https://docs.telerik.com/kendo-ui/api/ooxml/workbook).
 
 To enable the PDF and Excel Export functionality, add the following ToolBar configuration:
 

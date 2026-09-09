@@ -36,11 +36,11 @@ When the component navigation is enabled, its wrapper becomes a focusable elemen
 
 To mitigate this behavior, choose either of the available options:
 
-* [Disable the navigation of the component](/api/javascript/ui/scheduler/configuration/selectable) if the feature is not needed in your business case.
+* [Disable the navigation of the component](/api/ui/scheduler/configuration/selectable) if the feature is not needed in your business case.
 * [Resize the component according to the view-port dimensions]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %}).
 
 ## See Also
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

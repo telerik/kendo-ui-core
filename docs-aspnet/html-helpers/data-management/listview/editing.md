@@ -69,7 +69,7 @@ namespace ListViewExample.Models
 
 The following example demonstrates how to define the item template for the Telerik UI ListView. Add buttons for the create, update and destroy operations.
 
-> `click` events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Telerik UI ListView as `update` and `destroy` actions. To facilitate the `create` operation add a click handler to the `k-add-button`, get the Telerik UI ListView instance and call the [`add()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/add) method.
+> `click` events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Telerik UI ListView as `update` and `destroy` actions. To facilitate the `create` operation add a click handler to the `k-add-button`, get the Telerik UI ListView instance and call the [`add()`](https://docs.telerik.com/kendo-ui/api/ui/listview/methods/add) method.
 
 ```HtmlHelper
     <!-- Button for the Create operation. Use it to call the client ListView method add()  -->

@@ -9,7 +9,7 @@ position: 2
 
 # Keyboard Navigation
 
-The Avatar component can automatically populate the `alt` attribute of the `<img>` element and provide a text description of the Avatar's image. To use this [`alt`](/api/javascript/ui/avatar/configuration/alt) option, set the [`type`](/api/javascript/ui/avatar/configuration/type) to `image`
+The Avatar component can automatically populate the `alt` attribute of the `<img>` element and provide a text description of the Avatar's image. To use this [`alt`](/api/ui/avatar/configuration/alt) option, set the [`type`](/api/ui/avatar/configuration/type) to `image`
 
 The Avatar is a non-focusable element.
 

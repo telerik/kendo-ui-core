@@ -158,7 +158,7 @@ You can reference the RadioButton instances that you have created and build on t
     </script>
     ```
 
-1. Use the [RadioButton client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/radiobutton#methods) to control the behavior of the widget. In this example, you will use the `check` method to check the RadioButton.
+1. Use the [RadioButton client-side API](https://docs.telerik.com/kendo-ui/api/ui/radiobutton#methods) to control the behavior of the widget. In this example, you will use the `check` method to check the RadioButton.
 
     ```JS script
     <script>
@@ -190,6 +190,6 @@ You can continue experimenting with the code sample above by running it in the T
 
 * [Basic Usage of the RadioButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiobutton)
 * [Changing the Appearance of the RadioButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiobutton/appearance)
-* [Client-Side API of the RadioButton](https://docs.telerik.com/kendo-ui/api/javascript/ui/radiobutton)
+* [Client-Side API of the RadioButton](https://docs.telerik.com/kendo-ui/api/ui/radiobutton)
 * [Server-Side API of the RadioButton](/api/radiobutton)
 * [Knowledge Base Section](/knowledge-base)

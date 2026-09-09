@@ -38,7 +38,7 @@ How can I filter the dimensions of the PivotGrid?
 
 ## Solution
 
-The following example demonstrates how use the [`filter`](/api/javascript/data/datasource/configuration/filter) option of the Data Source to filter the result set.
+The following example demonstrates how use the [`filter`](/api/data/datasource/configuration/filter) option of the Data Source to filter the result set.
 
 ```dojo
 <div id="example">
@@ -82,7 +82,7 @@ The following example demonstrates how use the [`filter`](/api/javascript/data/d
 
 ## See Also
 
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)
 * [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
 * [Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})

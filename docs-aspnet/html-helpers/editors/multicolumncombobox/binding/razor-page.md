@@ -280,7 +280,7 @@ To bind the MultiColumnComboBox to a property from the `PageModel`, follow the n
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
+* [Client-Side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox)
 * [Server-Side HtmlHelper API of the MultiColumnComboBox](/api/multicolumncombobox)
 * [Server-Side TagHelper API of the MultiColumnComboBox](/api/taghelpers/multicolumncombobox)
 * [Knowledge Base Section](/knowledge-base)

@@ -12,7 +12,7 @@ ticketid: 1678934
 
 ## Description
 
-When working with the [Editor for Progress® Kendo UI®](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor), there might be a need to programmatically open the `Table Wizard` dialog. This is possible by using the `exec` command with a specific argument. This knowledge base article also answers the following questions:
+When working with the [Editor for Progress® Kendo UI®](https://docs.telerik.com/kendo-ui/api/ui/editor), there might be a need to programmatically open the `Table Wizard` dialog. This is possible by using the `exec` command with a specific argument. This knowledge base article also answers the following questions:
 
 - How to open the Table Wizard dialog in Kendo UI Editor?
 - How to link the Table Wizard opening with a button click in Kendo UI Editor?
@@ -85,4 +85,4 @@ For a practical demonstration, refer to the example below:
 ## See Also
 
 - [Kendo UI Editor Overview](https://docs.telerik.com/kendo-ui/controls/editor/overview)
-- [Kendo UI Editor Exec Command Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/methods/exec)
+- [Kendo UI Editor Exec Command Documentation](https://docs.telerik.com/kendo-ui/api/ui/editor/methods/exec)

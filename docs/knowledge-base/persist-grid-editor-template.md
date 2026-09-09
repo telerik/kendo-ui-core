@@ -32,11 +32,11 @@ slug: howto_persist_editor_template__while_restoring_state
 
 ## Description
 
-How can I persist Grid Editor Template after Restoring State with [`setOptions`](/api/javascript/ui/grid/methods/setoptions)?
+How can I persist Grid Editor Template after Restoring State with [`setOptions`](/api/ui/grid/methods/setoptions)?
 
 ## Solution
 
-> As pointed out in the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) API documentation `JSON.stringify()` cannot serialize function references (e.g. event handlers), so if stringification is used for the retrieved Grid state, all configuration fields, which represent function references, will be lost.
+> As pointed out in the [`setOptions`](/api/ui/grid/methods/setoptions) API documentation `JSON.stringify()` cannot serialize function references (e.g. event handlers), so if stringification is used for the retrieved Grid state, all configuration fields, which represent function references, will be lost.
 
 Specify the custom editor to the columns object before passing it to the `setOptions()` method.
 
@@ -138,4 +138,4 @@ Specify the custom editor to the columns object before passing it to the `setOpt
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

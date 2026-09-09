@@ -25,7 +25,7 @@ ticketid: 1660926
 </table>
 
 ## Description
-When using the [Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar) component, you might need to get the date range of the current view, such as:
+When using the [Calendar](https://docs.telerik.com/kendo-ui/api/ui/calendar) component, you might need to get the date range of the current view, such as:
 
 - From 08/01/2024 to 08/31/2024 for a month view
 - From 01/01/2024 to 12/31/2024 for a year view
@@ -37,7 +37,7 @@ This KB article also answers the following questions:
 - How do I find the date range of the currently selected view in a Calendar?
 
 ## Solution
-To get the date range of the current view in a Kendo UI Calendar, use the [`view()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/methods/view) and [`current()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/methods/current) methods.
+To get the date range of the current view in a Kendo UI Calendar, use the [`view()`](https://docs.telerik.com/kendo-ui/api/ui/calendar/methods/view) and [`current()`](https://docs.telerik.com/kendo-ui/api/ui/calendar/methods/current) methods.
 
 Below is an example for the month view:
 
@@ -76,5 +76,5 @@ For a complete example and to see the code in action, check the following Dojo d
 
 ## See Also
 - [Calendar Overview](https://docs.telerik.com/kendo-ui/controls/editors/calendar/overview)
-- [Calendar Methods API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/calendar#methods)
+- [Calendar Methods API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/calendar#methods)
 - [Kendo UI Dojo - Interactive Examples](https://dojo.telerik.com/)

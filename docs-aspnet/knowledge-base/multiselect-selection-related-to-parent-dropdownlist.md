@@ -125,15 +125,15 @@ How can I implement a DropDownList where every item is related to a MultiSelect 
 
 1. In the global scope of the JavaScript, implement variables for the arrays of "Projects" selections per "Preference". 
 1. Implement a function(named "populateMulti") for populating the values of the current MultiSelect(Projects) which stands for the DropDownList(Preference) value.
-1. Use the [`Change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/change) Event of the MultiSelect(Projects) in the Window.
+1. Use the [`Change`](https://docs.telerik.com/kendo-ui/api/ui/multiselect/events/change) Event of the MultiSelect(Projects) in the Window.
 1. In the Event handler("onMultiInWindowChange"), get the current selection of the MultiSelect(Projects selected in the Window) and assign them to the proper array variable in the global scope depending on the value of the DropDownList(Preference) selected in the Window. 
-1. Use the [`Change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/change) Event of the Preference DropDownList in the Window.
+1. Use the [`Change`](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/events/change) Event of the Preference DropDownList in the Window.
 1. In the Event handler("onPreferenceWindowChange"), get the current selection of the DropDownList and the instance of the MultiSelect in the Window. Call the "populateMulti" function by using the pointed values as parameters.
-1. Use the [`Change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/change) Event of the Preference DropDownList of the Main View.
+1. Use the [`Change`](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/events/change) Event of the Preference DropDownList of the Main View.
 1. In the Event handler("onPreferenceWindowChange"), get the current selection of the DropDownList and the instance of the MultiSelect of the Main View. Call the "populateMulti" function by using the pointed values as parameters.
-1. Use the [`Close`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/events/close) Event of the Window.
+1. Use the [`Close`](https://docs.telerik.com/kendo-ui/api/ui/window/events/close) Event of the Window.
 1. In the Event handler, show the custom button by using the [`show`](https://api.jquery.com/show/) method. Get the current selection of the DropDownList and the instance of the MultiSelect of the Main View. Call the "populateMulti" function by using the pointed values as parameters.
-1. In the [`document.ready`](https://learn.jquery.com/using-jquery-core/document-ready/) scope, [`hide`](https://api.jquery.com/hide/) the button and [`open`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/open) the Window.
+1. In the [`document.ready`](https://learn.jquery.com/using-jquery-core/document-ready/) scope, [`hide`](https://api.jquery.com/hide/) the button and [`open`](https://docs.telerik.com/kendo-ui/api/ui/window/methods/open) the Window.
 1. Here is an example of the JavaScript needed:
 
 ```
@@ -245,7 +245,7 @@ The following REPL example implements the steps described above: [Using MultiSel
 ## See Also
 
 * [Telerik REPL: Using MultiSelect in a Window Related to DropDownList Item](https://netcorerepl.telerik.com/QwksPSlS24dfJjqy29)
-* [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/multiselect)
 * [Server-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/multiselect)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

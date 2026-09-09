@@ -72,7 +72,7 @@ In this step, initialize the Spreadsheet from the `<div>` element.
 
 Next, populate the Spreadsheet with data.
 
-You can add multiple sheets in the [`sheets`](/api/javascript/ui/spreadsheet/configuration/sheets) configuration array. Use the [`sheets.rows`](/api/javascript/ui/spreadsheet/configuration/sheets.rows) and [`sheets.rows.cells`](/api/javascript/ui/spreadsheet/configuration/sheets.rows.cells) options to define the data.
+You can add multiple sheets in the [`sheets`](/api/ui/spreadsheet/configuration/sheets) configuration array. Use the [`sheets.rows`](/api/ui/spreadsheet/configuration/sheets.rows) and [`sheets.rows.cells`](/api/ui/spreadsheet/configuration/sheets.rows.cells) options to define the data.
 
 ```dojo
     <div id="spreadsheet"></div>
@@ -108,7 +108,7 @@ You can add multiple sheets in the [`sheets`](/api/javascript/ui/spreadsheet/con
 
 ## 4. Add Formula in the Cells
 
-You can use the [`formula`](/api/javascript/spreadsheet/range/methods/formula) method to add formulas, reference other cells and sheets, and calculate values. You can find the full list of the supported formulas and functions [here]({% slug list_offormulas_andfunctions_spreadsheet_widget %}).
+You can use the [`formula`](/api/spreadsheet/range/methods/formula) method to add formulas, reference other cells and sheets, and calculate values. You can find the full list of the supported formulas and functions [here]({% slug list_offormulas_andfunctions_spreadsheet_widget %}).
 
 ```dojo
   <div id="spreadsheet"></div>
@@ -147,7 +147,7 @@ You can use the [`formula`](/api/javascript/spreadsheet/range/methods/formula) m
 
 ## 5. Customize the Cells Appearance
 
-The Spreadsheet component provides multiple configuration options that let you customize the cells appearance. You can use the [`format`](/api/javascript/ui/spreadsheet/configuration/sheets.rows.cells.format) configuration to format the numbers and dates displayed in the cells. You can also customize the [`font-size`](/api/javascript/ui/spreadsheet/configuration/sheets.rows.cells.fontsize), [`color`](/api/javascript/ui/spreadsheet/configuration/sheets.rows.cells.color), [`borders`](/api/javascript/ui/spreadsheet/configuration/sheets.rows.cells.bordertop), etc.
+The Spreadsheet component provides multiple configuration options that let you customize the cells appearance. You can use the [`format`](/api/ui/spreadsheet/configuration/sheets.rows.cells.format) configuration to format the numbers and dates displayed in the cells. You can also customize the [`font-size`](/api/ui/spreadsheet/configuration/sheets.rows.cells.fontsize), [`color`](/api/ui/spreadsheet/configuration/sheets.rows.cells.color), [`borders`](/api/ui/spreadsheet/configuration/sheets.rows.cells.bordertop), etc.
 
 ```dojo
     <div id="spreadsheet"></div>
@@ -191,9 +191,9 @@ The Spreadsheet component provides multiple configuration options that let you c
 
 ## See Also 
 
-* [JavaScript API Reference of the Spreadsheet](/api/javascript/ui/spreadsheet)
-* [JavaScript API Reference of the Sheet](/api/javascript/spreadsheet/sheet)
-* [JavaScript API Reference of the Range](/api/javascript/spreadsheet/range)
+* [JavaScript API Reference of the Spreadsheet](/api/ui/spreadsheet)
+* [JavaScript API Reference of the Sheet](/api/spreadsheet/sheet)
+* [JavaScript API Reference of the Range](/api/spreadsheet/range)
 * [Knowledge Base Section](/knowledge-base)
 
 

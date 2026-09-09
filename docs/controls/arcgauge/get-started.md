@@ -73,7 +73,7 @@ In this step, you will initialize the ArcGauge from the `<div>` element.
 
 ## 3. Specify the Colors
 
-Here, you will specify the [`colors`](/api/javascript/dataviz/ui/arcgauge/configuration/colors) of the value pointer. The color of the pointer will change based on the current value of the ArcGauge component. 
+Here, you will specify the [`colors`](/api/dataviz/ui/arcgauge/configuration/colors) of the value pointer. The color of the pointer will change based on the current value of the ArcGauge component. 
 
 ```dojo
     <div id="arc-gauge"></div>
@@ -99,7 +99,7 @@ The Kendo UI for jQuery ArcGauge provides multiple configuration options that yo
 * Change the colors of the minor and major ticks.
 * Set margins, border colors, etc.
 
-To see the full list of the ArcGauge scale configuration options, see the [ArcGauge API](/api/javascript/dataviz/ui/arcgauge/configuration/scale).
+To see the full list of the ArcGauge scale configuration options, see the [ArcGauge API](/api/dataviz/ui/arcgauge/configuration/scale).
 
 In this step, you will add scale labels and style the major and minor ticks.
 
@@ -142,7 +142,7 @@ In this step, you will add scale labels and style the major and minor ticks.
 
 ## 5. Add Content in the Center
 
-By default, the ArcGauge does not render content in the center. To add content and modify it according to your preferences use the [`centerTemplate`](/api/javascript/dataviz/ui/arcgauge/configuration/centertemplate).
+By default, the ArcGauge does not render content in the center. To add content and modify it according to your preferences use the [`centerTemplate`](/api/dataviz/ui/arcgauge/configuration/centertemplate).
 
 ```
     <div id="arc-gauge"></div>
@@ -190,7 +190,7 @@ By default, the ArcGauge does not render content in the center. To add content a
 
 ## See Also 
 
-* [JavaScript API Reference of the ArcGauge](/api/javascript/dataviz/ui/arcgauge)
+* [JavaScript API Reference of the ArcGauge](/api/dataviz/ui/arcgauge)
 * [Knowledge Base Section](/knowledge-base)
 
 

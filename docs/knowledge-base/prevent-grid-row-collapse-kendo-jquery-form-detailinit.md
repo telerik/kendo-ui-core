@@ -31,7 +31,7 @@ Kendo UI for jQuery Grid
 
 ## Description
 
-I have a Kendo UI for jQuery Grid with a [Form](https://docs.telerik.com/kendo-ui/api/javascript/ui/form) inside its [`detailInit`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/detailinit). When I change a value in the form, the grid row collapses.
+I have a Kendo UI for jQuery Grid with a [Form](https://docs.telerik.com/kendo-ui/api/ui/form) inside its [`detailInit`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/detailinit). When I change a value in the form, the grid row collapses.
 
 This knowledge base article also answers the following questions:
 - Why does my Kendo UI Grid row collapse when using Form in detailInit?
@@ -40,7 +40,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To prevent the grid row from collapsing when using a Kendo UI for jQuery Form inside the [`detailInit`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/detailinit), track the expanded rows using the [`detailExpand`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/detailexpand), [`detailCollapse`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/detailcollapse), and [`dataBound`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/databound) events of the grid. Follow these steps:
+To prevent the grid row from collapsing when using a Kendo UI for jQuery Form inside the [`detailInit`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/detailinit), track the expanded rows using the [`detailExpand`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/detailexpand), [`detailCollapse`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/detailcollapse), and [`dataBound`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/databound) events of the grid. Follow these steps:
 
 1. Track expanded rows when a `detailExpand` event occurs.
 2. Remove rows from tracking when manually collapsed using the `detailCollapse` event.
@@ -215,6 +215,6 @@ Use the following code snippet to achieve the desired behavior:
 
 ## See Also
 
-- [Kendo UI Grid API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/)
+- [Kendo UI Grid API](https://docs.telerik.com/kendo-ui/api/ui/grid/)
 - [Kendo UI Grid Hierarchy](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/hierarchy)
 - [Kendo UI Form Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/form/overview)

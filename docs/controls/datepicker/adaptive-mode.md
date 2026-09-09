@@ -38,4 +38,4 @@ The following example demonstrates how to configure an on-screen keyboard for th
 
 ## See Also
 
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)

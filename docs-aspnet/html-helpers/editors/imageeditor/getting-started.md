@@ -145,7 +145,7 @@ Referencing existing instances allows you to build on top of their configuration
     </script>
     ```
 
-1. Use the [ImageEditor client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor#methods) to control the behavior of the widget. In this example, you will programmatically execute the `ZoomImageEditorCommand` by using the `executeCommand` method.
+1. Use the [ImageEditor client-side API](https://docs.telerik.com/kendo-ui/api/ui/imageeditor#methods) to control the behavior of the widget. In this example, you will programmatically execute the `ZoomImageEditorCommand` by using the `executeCommand` method.
 
     ```JS script
     <script>
@@ -176,6 +176,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the ImageEditor for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/imageeditor/api)
-* [ImageEditor Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor)
+* [ImageEditor Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/imageeditor)
 * [Server-Side API of the ImageEditor](/api/imageeditor)
 * [Knowledge Base Section](/knowledge-base)

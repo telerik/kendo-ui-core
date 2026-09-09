@@ -105,7 +105,7 @@ For more information about the alternative approach to load the content, refer t
 
 ## See Also
 
-* [JavaScript API Reference of the TabStrip](/api/javascript/ui/tabstrip)
+* [JavaScript API Reference of the TabStrip](/api/ui/tabstrip)
 * [Knowledge Base Section](/knowledge-base)
 
 

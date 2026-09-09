@@ -26,8 +26,8 @@ components: ["window"]
 How do I disable the drag event of the Window, when the pin action is active?
 
 ## Solution
-1. Set up the [Pin action](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/configuration/actions)
-1. Subscribe to the [`dragstart`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/events/dragstart) event and define its handler
+1. Set up the [Pin action](https://docs.telerik.com/kendo-ui/api/ui/window/configuration/actions)
+1. Subscribe to the [`dragstart`](https://docs.telerik.com/kendo-ui/api/ui/window/events/dragstart) event and define its handler
 1. In the handler check whether **e.sender.options.pinned** is true
 1. If true prevent the event - **e.preventDefault()**
 

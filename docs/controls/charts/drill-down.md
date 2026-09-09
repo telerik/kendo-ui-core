@@ -19,8 +19,8 @@ The view hierarchy is displayed in a breadcrumb for easy navigation back to prev
 ## Getting Started
 
 To configure a chart series for drilldown:
-* Set [`drilldownField`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.drilldownfield) to a field that contains the drilldown series configuration for each point.
-* Add a [`kendoChartBreadcrumb`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart-breadcrumb) component and link it to the Chart.
+* Set [`drilldownField`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.drilldownfield) to a field that contains the drilldown series configuration for each point.
+* Add a [`kendoChartBreadcrumb`](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart-breadcrumb) component and link it to the Chart.
 
 ```dojo
     <nav id="breadcrumb"></nav>
@@ -78,7 +78,7 @@ To configure a chart series for drilldown:
 ## Drilling Down with Dynamic Data
 
 To populate the drilldown series on demand:
-* Set [`drilldownField`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.drilldownfield) to a field that contains the drilldown value field for each point.
+* Set [`drilldownField`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.drilldownfield) to a field that contains the drilldown value field for each point.
 * Define a `drilldownSeriesFactory` function that returns the series definition for each data point.
 
 ```dojo
@@ -144,7 +144,7 @@ To populate the drilldown series on demand:
 ## Drilling Down with Async Data
 
 To populate the drilldown series on demand:
-* Set [`drilldownField`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.drilldownfield) to a field that contains the drilldown value field for each point.
+* Set [`drilldownField`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.drilldownfield) to a field that contains the drilldown value field for each point.
 * Define a `drilldownSeriesFactory` function that returns a `Promise` that resolves to the series definition for each data point.
 
 ```dojo
@@ -213,7 +213,7 @@ To populate the drilldown series on demand:
 
 ## Customizing the Breadcrumb Root Item
 
-To customize the root item of the chart Breadcrumb, set the [`rootItem`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart-breadcrumb/configuration/rootitem).
+To customize the root item of the chart Breadcrumb, set the [`rootItem`](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart-breadcrumb/configuration/rootitem).
 
 ```dojo
   <nav id="breadcrumb"></nav>
@@ -256,8 +256,8 @@ To customize the root item of the chart Breadcrumb, set the [`rootItem`](https:/
 ## Implementing Custom Navigation
 
 To implement a custom drilldown navigation:
-* Handle the [`drilldown`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/drilldown) event to append new drilldown levels to the navigation.
-* Call the [`resetDrilldownLevel`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/resetdrilldownlevel) method to return to a previous level.
+* Handle the [`drilldown`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/events/drilldown) event to append new drilldown levels to the navigation.
+* Call the [`resetDrilldownLevel`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/methods/resetdrilldownlevel) method to return to a previous level.
 
 ```dojo
   <nav id="breadcrumb"></nav>
@@ -344,4 +344,4 @@ To implement a custom drilldown navigation:
 ## See Also
 
 * [Drilldown Chart (Demo)](https://demos.telerik.com/kendo-ui/drilldown-charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

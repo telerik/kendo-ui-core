@@ -45,12 +45,12 @@ To export master and detail Grids to a single Excel file, prevent the default ma
 
 Use the following steps:
 
-1. Handle the Grid [`excelExport`](/api/javascript/ui/grid/events/excelexport) event and call `e.preventDefault()` so the master Grid workbook can be updated before it is saved.
+1. Handle the Grid [`excelExport`](/api/ui/grid/events/excelexport) event and call `e.preventDefault()` so the master Grid workbook can be updated before it is saved.
 1. Start a detail Grid export for each master row and store a jQuery `$.Deferred()` object for every asynchronous child export.
 1. Wait for all detail Grid promises with `$.when.apply(null, detailExportPromises)` and sort the returned sheets by their master row index.
 1. Insert the exported detail rows into the master workbook and save the merged result.
 
-To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event. This event is prevented to avoid the saving of an Excel file for each detail Grid. For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/ui/grid/events/excelexport) event. This event is prevented to avoid the saving of an Excel file for each detail Grid. For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
 
 The implementation uses jQuery `$.Deferred()` objects to track each asynchronous detail Grid export and waits until all child workbooks are available before merging them into the master workbook.
 
@@ -422,7 +422,7 @@ The following example demonstrates how to export a detail Grid to Excel includin
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
-* [Grid excelExport Event API](/api/javascript/ui/grid/events/excelexport)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)
+* [Grid excelExport Event API](/api/ui/grid/events/excelexport)
 * [Excel Export Overview](/framework/excel/introduction)
 * [jQuery Deferred Documentation](https://api.jquery.com/jquery.deferred/)

@@ -30,7 +30,7 @@ How can I apply a gradient color effect on the Kendo UI Area Chart?
 ## Solution
 
 1. Use an external gradient.
-1. Use the [`series.color`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.color) configuration to set the external gradient.
+1. Use the [`series.color`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.color) configuration to set the external gradient.
 
 ```dojo
 <div style="height: 0">

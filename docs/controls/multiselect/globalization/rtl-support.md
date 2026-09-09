@@ -20,4 +20,4 @@ For more information, refer to:
 * [RTL Support by the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/right-to-left-support)
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
 * [RTL Support in Kendo UI for jQuery]({% slug right_toleft_languages_accessibility_support %})
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [JavaScript API Reference of the MultiSelect](/api/ui/multiselect)

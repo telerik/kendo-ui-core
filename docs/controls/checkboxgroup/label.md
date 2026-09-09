@@ -14,7 +14,7 @@ If the CheckBoxGroup widget is bound to an array of strings, those will be used 
 
 ## Set the Label text
 
-To customize the text of the label, use the [`label`](/api/javascript/ui/checkboxgroup/configuration/items.label) option.
+To customize the text of the label, use the [`label`](/api/ui/checkboxgroup/configuration/items.label) option.
 
 ```dojo
     <ul id="checkboxgroup"></ul>
@@ -37,7 +37,7 @@ To customize the text of the label, use the [`label`](/api/javascript/ui/checkbo
 
 ## Configure the Label Position
 
-The labels of all checkboxes in the CheckBoxGroup could be rendered before or after each checkbox. Use the [`labelPosition`](/api/javascript/ui/checkboxgroup/configuration/labelposition) configuration option to set the position of the label. 
+The labels of all checkboxes in the CheckBoxGroup could be rendered before or after each checkbox. Use the [`labelPosition`](/api/ui/checkboxgroup/configuration/labelposition) configuration option to set the position of the label. 
 
 ```dojo
     <ul id="checkboxgroup"></ul>
@@ -53,4 +53,4 @@ The labels of all checkboxes in the CheckBoxGroup could be rendered before or af
 ## See Also
 
 * [Basic Usage of the CheckBoxGroup (Demo)](https://demos.telerik.com/kendo-ui/checkboxgroup/index)
-* [JavaScript API Reference of the CheckBoxGroup](/api/javascript/ui/checkboxgroup)
+* [JavaScript API Reference of the CheckBoxGroup](/api/ui/checkboxgroup)

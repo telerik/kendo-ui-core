@@ -286,7 +286,7 @@ To use the client-side API of the DropDownList and build on top of its initial c
         </script>
     ```
 
-1. Use the [DropDownList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#methods) to control the behavior of the control. In this example, you will use the `value` method to select an item.
+1. Use the [DropDownList client-side API](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist#methods) to control the behavior of the control. In this example, you will use the `value` method to select an item.
 
     ```JS script
         <script>
@@ -319,6 +319,6 @@ You can continue experimenting with the code sample above by running it in the T
 * [ASP.NET Core demo](https://demos.telerik.com/{{ site.platform }}/dropdownlist)
 {% endif %}
 * [Using the API of the DropDownList for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist/api)
-* [Client-Side API of the DropDownList](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [Client-Side API of the DropDownList](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist)
 * [Server-Side API of the DropDownList](/api/dropdownlist)
 * [Knowledge Base Section](/knowledge-base)

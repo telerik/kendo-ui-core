@@ -111,5 +111,5 @@ Once a Menu group is opened, the `ul.k-group` element is wrapped by a `div.k-ani
 
 * [Getting Started with the Menu]({% slug getting_started_kendoui_menu_widget %})
 * [Demo Page for the jQuery Menu](https://demos.telerik.com/kendo-ui/menu/index)
-* [JavaScript API Reference of the Menu](/api/javascript/ui/menu)
+* [JavaScript API Reference of the Menu](/api/ui/menu)
 * [Knowledge Base Section](/knowledge-base)

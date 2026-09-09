@@ -27,7 +27,7 @@ components: ["grid"]
 
 You might have to handle a scenario with locked columns where the content of the column template is initially hidden through the `ng-if` directive.
 
-In such cases, if you show the content later, you might cause issues related to the proper calculation of the row heights for the locked and unlocked parts of the Grid. To avoid such possible issues, conditionally call the [`resize()`](/api/javascript/kendo/methods/resize) and [`refresh()`](/api/javascript/ui/grid/methods/refresh) methods of the Grid in its [`dataBound`](/api/javascript/ui/grid/events/databound) event when the scope value that controls the visibility of the template content is changed.
+In such cases, if you show the content later, you might cause issues related to the proper calculation of the row heights for the locked and unlocked parts of the Grid. To avoid such possible issues, conditionally call the [`resize()`](/api/kendo/methods/resize) and [`refresh()`](/api/ui/grid/methods/refresh) methods of the Grid in its [`dataBound`](/api/ui/grid/events/databound) event when the scope value that controls the visibility of the template content is changed.
 
 ## Solution
 
@@ -111,7 +111,7 @@ The following example demonstrates how to adjust the row heights in a Kendo UI G
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)
 * [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))
 * [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
 * [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})

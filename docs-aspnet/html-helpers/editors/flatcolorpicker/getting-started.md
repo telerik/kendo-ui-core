@@ -137,7 +137,7 @@ You can reference the FlatColorPicker instances that you have created and build 
              })
          </script>
     ```
-1. Toggle the state of the component by using the [`enable()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker/methods/enable) client-side method.
+1. Toggle the state of the component by using the [`enable()`](https://docs.telerik.com/kendo-ui/api/ui/flatcolorpicker/methods/enable) client-side method.
 
     ```JS script
         <script>
@@ -170,6 +170,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the FlatColorPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/api)
-* [Client-Side API of the FlatColorPicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker)
+* [Client-Side API of the FlatColorPicker](https://docs.telerik.com/kendo-ui/api/ui/flatcolorpicker)
 * [Server-Side API of the FlatColorPicker for {{ site.framework }}](/api/flatcolorpicker)
 * [Knowledge Base Section](/knowledge-base)

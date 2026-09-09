@@ -177,4 +177,4 @@ public class TimelineEventActionModel
 
 
 * [Templates in the Timeline (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/templates)
-* [JavaScript API Reference of the Timeline](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)
+* [JavaScript API Reference of the Timeline](https://docs.telerik.com/kendo-ui/api/ui/timeline)

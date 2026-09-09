@@ -173,6 +173,6 @@ The following example is a sample case for applying a consistent convention and 
 
 * [Templates Essentials]({% slug essentials_templates %})
 * [Templates Performance]({% slug performance_kendoui_templatescomponent %})
-* [Templates JavaScript API Reference](/api/javascript/kendo/methods/template)
+* [Templates JavaScript API Reference](/api/kendo/methods/template)
 * [Templates Demos](https://demos.telerik.com/kendo-ui/templates/index)
 * [Knowledge Base](https://docs.telerik.com/kendo-ui/knowledge-base)

@@ -783,7 +783,7 @@ The drill-down functionality enables you to alter the default navigation and pro
 To implement a custom drill-down navigation:
 
 1. Handle the [`DrillDown`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/charteventbuilder#databoundsystemstring) event to append new drill-down levels to the navigation.
-1. Within the handler, call the [`resetDrilldownLevel()`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/resetdrilldownlevel) client-side method to return to a previous level.
+1. Within the handler, call the [`resetDrilldownLevel()`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/methods/resetdrilldownlevel) client-side method to return to a previous level.
 
 ```HtmlHelper
     @(Html.Kendo().ChartBreadcrumb()

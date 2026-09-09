@@ -155,4 +155,4 @@ The following example demonstrates how to use FontAwesome icons with the built-i
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

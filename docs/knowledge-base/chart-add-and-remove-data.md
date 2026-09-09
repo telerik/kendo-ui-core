@@ -24,7 +24,7 @@ How can I dynamically add data points, remove data points, randomize values, and
 
 ## Solution
 
-Use the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/setoptions) method to update the Chart series data at runtime. This approach works for any series type, including Line and Candlestick charts.
+Use the [`setOptions`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/methods/setoptions) method to update the Chart series data at runtime. This approach works for any series type, including Line and Candlestick charts.
 
 The following approach demonstrates how to:
 
@@ -192,6 +192,6 @@ For a runnable example, refer to this [Chart Add and Remove Data dojo sample](ht
 
 ## See Also
 
-* [Chart setOptions() Method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/setoptions)
-* [Chart Series Configuration](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series)
+* [Chart setOptions() Method](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/methods/setoptions)
+* [Chart Series Configuration](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series)
 * [Kendo UI for jQuery Chart Demos](https://demos.telerik.com/kendo-ui/line-charts)

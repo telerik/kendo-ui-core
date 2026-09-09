@@ -63,4 +63,4 @@ For a complete example on basic ButtonGroup events, refer to the [demo on using 
 
 * [Using the API of the ButtonGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/buttongroup/api)
 * [ButtonGroup Server-Side API for {{ site.framework }}](/api/buttongroup)
-* [ButtonGroup Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup)
+* [ButtonGroup Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/buttongroup)

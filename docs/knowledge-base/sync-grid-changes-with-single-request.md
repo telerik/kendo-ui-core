@@ -29,4 +29,4 @@ To see the example, refer to [this project](https://github.com/telerik/kendo-exa
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Grid](/api/ui/grid)

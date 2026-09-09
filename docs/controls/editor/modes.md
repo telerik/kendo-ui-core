@@ -15,7 +15,7 @@ Depending on the element from which the Editor is initiated, it provides two typ
 
 If you use the default `<textarea>` element for initializing the Editor, the Editor assumes its classic mode. The `textarea` is not visible and is used to hold the value of the widget. You can type in the `contenteditable iframe` that is created.
 
-The classic Editor posts its value automatically because it is based on a `form` element. The tools of the Editor are always visible. Its content does not reside on the main web page and the styling of the page does not influence the editable content. To apply custom styles to the editable content, [inject them through the configuration of the Editor](/api/javascript/ui/editor/configuration/stylesheets). For a runnable example, refer to the [demo on the classic Editor mode](https://demos.telerik.com/kendo-ui/editor/basic-usage).
+The classic Editor posts its value automatically because it is based on a `form` element. The tools of the Editor are always visible. Its content does not reside on the main web page and the styling of the page does not influence the editable content. To apply custom styles to the editable content, [inject them through the configuration of the Editor](/api/ui/editor/configuration/stylesheets). For a runnable example, refer to the [demo on the classic Editor mode](https://demos.telerik.com/kendo-ui/editor/basic-usage).
 
 ## Inline Mode
 
@@ -30,4 +30,4 @@ By default, inline Editors do not post their value and you have to [post their v
 ## See Also
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

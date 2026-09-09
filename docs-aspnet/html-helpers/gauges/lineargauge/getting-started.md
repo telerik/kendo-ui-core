@@ -187,7 +187,7 @@ You can reference the Linear Gauge instances that you have created and build on 
         });
     ```
 
-1. Use the [Linear Gauge client-side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/lineargauge#methods) to control the behavior of the component. In this example, you will use the [`value()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/lineargauge/methods/value) method to change the value of the Linear Gauge every second.
+1. Use the [Linear Gauge client-side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/lineargauge#methods) to control the behavior of the component. In this example, you will use the [`value()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/lineargauge/methods/value) method to change the value of the Linear Gauge every second.
 
     ```JavaScript
         setInterval(function(){
@@ -217,6 +217,6 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Client-Side API of the Linear Gauge](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge)
+* [Client-Side API of the Linear Gauge](https://docs.telerik.com/kendo-ui/api/dataviz/ui/lineargauge)
 * [Server-Side API of the Linear Gauge](/api/lineargauge)
 * [Knowledge Base Section](/knowledge-base)

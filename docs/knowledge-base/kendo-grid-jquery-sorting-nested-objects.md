@@ -82,5 +82,5 @@ function getColumns() {
 
 ## See Also
 - [Kendo UI for jQuery Grid Overview](https://docs.telerik.com/kendo-ui/controls/grid/overview)
-- [Kendo UI for jQuery Grid API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Kendo UI for jQuery Grid API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid)
 - [Filter a Column with a DropDownList Editor When the Column Is Bound To a Complex Object](https://docs.telerik.com/kendo-ui/knowledge-base/grid-filter-column-with-dropdownlist)

@@ -82,7 +82,7 @@ The following example demonstrates how to subscribe to events by a template dele
 ## See Also
 
 * [Using the API of the PropertyGrid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/propertygrid/api)
-* [Client-Side API of the PropertyGrid](https://docs.telerik.com/kendo-ui/api/javascript/ui/propertygrid)
+* [Client-Side API of the PropertyGrid](https://docs.telerik.com/kendo-ui/api/ui/propertygrid)
 * [Server-Side API of the PropertyGrid](/api/propertygrid)
 {% if site.core %}
 * [Server-Side API of the PropertyGrid TagHelper](/api/taghelpers/propertygrid)

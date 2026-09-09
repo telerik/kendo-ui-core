@@ -30,7 +30,7 @@ How can I retrieve the date range of the current {{ site.product }} Scheduler vi
 
 To achieve the desired scenario:
 
-1. Define a common function which will be responsible for showing the Scheduler's date range. Inside, utilize the [`view()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/view) client-side method of the Scheduler to retrieve the range.
+1. Define a common function which will be responsible for showing the Scheduler's date range. Inside, utilize the [`view()`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/methods/view) client-side method of the Scheduler to retrieve the range.
 1. To handle where the date range is being navigated **from**, subscribe to the [`Navigate`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/schedulereventbuilder#navigatesystemstring) event and call the previously defined function.
 1. To handle where the date range is being navigated **to**, subscribe to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/schedulereventbuilder#databoundsystemstring) event and call the previously defined function.
 
@@ -139,7 +139,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 
 ## See Also
 
-* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
 * [Server-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/scheduler)
 {% if site.core %}
 * [TagHelper Server-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/aspnet-core/api/taghelpers/scheduler)

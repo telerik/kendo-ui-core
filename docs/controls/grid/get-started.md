@@ -134,7 +134,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 4. Configure the Grid Columns
 
-The Grid allows you to configure each individual column and apply a set of [column properties](/api/javascript/ui/grid/configuration/columns#related-properties).
+The Grid allows you to configure each individual column and apply a set of [column properties](/api/ui/grid/configuration/columns#related-properties).
 
 ```html
 <div id="my-grid"></div>
@@ -243,7 +243,7 @@ Among other functionalities, the Grid supports editing and filtering. The [editi
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Grid](/api/ui/grid)
 * [Knowledge Base Section](/knowledge-base)
 
 

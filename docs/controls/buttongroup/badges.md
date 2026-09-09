@@ -11,7 +11,7 @@ position: 5
 
 The ButtonGroup provides options for adding badges to its Buttons.
 
-To add or update a badge, use the `badge` property or the [`badge`](/api/javascript/ui/buttongroup/methods/badge) method.
+To add or update a badge, use the `badge` property or the [`badge`](/api/ui/buttongroup/methods/badge) method.
 
     <div id="buttongroup">
     </div>
@@ -28,4 +28,4 @@ To add or update a badge, use the `badge` property or the [`badge`](/api/javascr
 ## See Also
 
 * [Using Badges in the ButtonGroup (Demo)](https://demos.telerik.com/kendo-ui/buttongroup/badges)
-* [JavaScript API Reference of the ButtonGroup](/api/javascript/ui/buttongroup)
+* [JavaScript API Reference of the ButtonGroup](/api/ui/buttongroup)

@@ -27,7 +27,7 @@ You can initialize the TreeView from HTML or bind it to local or remote data. It
 
 * [Getting Started with the Kendo UI TreeView for jQuery]({% slug getting_started_kendoui_treeview_component %})
 * [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
-* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)
+* [JavaScript API Reference of the TreeView](/api/ui/treeview)
 
 ## See Also
 

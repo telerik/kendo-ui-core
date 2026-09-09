@@ -31,4 +31,4 @@ The `Size` option does not affect elements which are displayed inside a popup su
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
 * [Sizing the Telerik UI for {{ site.framework }} Data Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/sizing)
-* [JavaScript API Reference of the size property](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/size)
+* [JavaScript API Reference of the size property](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/size)

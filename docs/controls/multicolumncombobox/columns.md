@@ -11,9 +11,9 @@ position: 4
 
 The MultiColumnComboBox allows you to predefine the columns that will be rendered in its drop-down.
 
-You can also set which field from the `dataItem` will be populated, set a title, template, `headerTemplate`, and width. For more information, refer to the [API for the columns configuration of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox/configuration/columns#related-properties).
+You can also set which field from the `dataItem` will be populated, set a title, template, `headerTemplate`, and width. For more information, refer to the [API for the columns configuration of the MultiColumnComboBox](/api/ui/multicolumncombobox/configuration/columns#related-properties).
 
-The MultiColumnComboBox allows you to set the width of the drop-down through the [`dropDownWidth`](/api/javascript/ui/multicolumncombobox/configuration/dropdownwidth) option. In addition, the columns also allow you to [set their width](/api/javascript/ui/multicolumncombobox/configuration/columns.width).
+The MultiColumnComboBox allows you to set the width of the drop-down through the [`dropDownWidth`](/api/ui/multicolumncombobox/configuration/dropdownwidth) option. In addition, the columns also allow you to [set their width](/api/ui/multicolumncombobox/configuration/columns.width).
 
 > * If the widths of all columns are defined in pixels through their `width` option, the `dropDownWidth` value (if set) is overridden.
 > * In all other cases when the widths of all columns are not set, the `dropDownWidth` value is applied to the element.
@@ -61,4 +61,4 @@ The following example demonstrated how to set a specific width for the first col
 
 * [Basic Usage of the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/index)
 * [Using the API of the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/api)
-* [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
+* [JavaScript API Reference of the MultiColumnComboBox](/api/ui/multicolumncombobox)

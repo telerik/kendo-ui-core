@@ -125,7 +125,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## See Also
 
-* [Client-Side API of the Sortable](https://docs.telerik.com/kendo-ui/api/javascript/ui/sortable)
+* [Client-Side API of the Sortable](https://docs.telerik.com/kendo-ui/api/ui/sortable)
 * [Server-Side API of the Sortable HtmlHelper](/api/sortable)
 {% if site.core %}
 * [Server-Side API of the Sortable TagHelper](/api/taghelpers/sortable)

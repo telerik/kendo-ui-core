@@ -22,4 +22,4 @@ The annotations tool is enabled by default. If you wish to exclude it, you can c
 ## See Also
 
 * [Overview of the PDFViewer (Demo)](https://demos.telerik.com/kendo-ui/pdfviewer/index)
-* [JavaScript API Reference of the PDFViewer](/api/javascript/ui/pdfviewer)
+* [JavaScript API Reference of the PDFViewer](/api/ui/pdfviewer)

@@ -30,8 +30,8 @@ How can I use the [Window]({% slug htmlhelpers_window_aspnetcore %}) component t
 
 1. Define an external [Button]({% slug htmlhelpers_button_aspnetcore %}) (for example, above or below the Grid) and handle its `Click` event.
 1. Define a hidden Window component.
-1. Handle the [`Click`](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) event of the Button.
-1. Within the `Click` event handler of the Button, call the [`center()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/center) method to center the Window and then the [`open()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/open) method to open it.
+1. Handle the [`Click`](https://docs.telerik.com/kendo-ui/api/ui/button/events/click) event of the Button.
+1. Within the `Click` event handler of the Button, call the [`center()`](https://docs.telerik.com/kendo-ui/api/ui/window/methods/center) method to center the Window and then the [`open()`](https://docs.telerik.com/kendo-ui/api/ui/window/methods/open) method to open it.
 1. Load the Content for the Window from a Partial View ("_OrderCreate").
 1. When submitting the form that is displayed through the Partial View, add the new item to the Grid (`Create` action in the `GridController`).
 
@@ -303,7 +303,7 @@ For the complete implementation of the suggested approach, refer to the [ASP.NET
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)

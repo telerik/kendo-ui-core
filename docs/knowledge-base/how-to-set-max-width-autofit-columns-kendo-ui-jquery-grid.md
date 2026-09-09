@@ -31,15 +31,15 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To set a maximum width for columns using the [`autoFitColumn`](/api/javascript/ui/grid/methods/autofitcolumn) feature in Kendo UI for jQuery Grid, you can manually check and adjust the column widths after the Grid has autofitted the columns. Although the Grid component does not provide a built-in API for setting a maximum width on autofit columns, you can achieve the desired functionality by utilizing the `autoFitColumn` method in conjunction with the [`resizeColumn`](/api/javascript/ui/grid/methods/resizecolumn) method.
+To set a maximum width for columns using the [`autoFitColumn`](/api/ui/grid/methods/autofitcolumn) feature in Kendo UI for jQuery Grid, you can manually check and adjust the column widths after the Grid has autofitted the columns. Although the Grid component does not provide a built-in API for setting a maximum width on autofit columns, you can achieve the desired functionality by utilizing the `autoFitColumn` method in conjunction with the [`resizeColumn`](/api/ui/grid/methods/resizecolumn) method.
 
 Follow these steps to implement the solution:
 
-1. Use the Grid's [`dataBound`](/api/javascript/ui/grid/events/databound) event to trigger the column resizing logic after the Grid has been rendered and its data has been bound.
+1. Use the Grid's [`dataBound`](/api/ui/grid/events/databound) event to trigger the column resizing logic after the Grid has been rendered and its data has been bound.
 
-2. Iterate through the Grid's columns and for each column, call the  [`autoFitColumn`](/api/javascript/ui/grid/methods/autofitcolumn) method to autofit its width.
+2. Iterate through the Grid's columns and for each column, call the  [`autoFitColumn`](/api/ui/grid/methods/autofitcolumn) method to autofit its width.
 
-3. After autofitting, check if the column's width exceeds your maximum desired width. If it does, use the [`resizeColumn`](/api/javascript/ui/grid/methods/resizecolumn) method to set the column's width to the maximum desired width.
+3. After autofitting, check if the column's width exceeds your maximum desired width. If it does, use the [`resizeColumn`](/api/ui/grid/methods/resizecolumn) method to set the column's width to the maximum desired width.
 
 Here is a runnable example demonstrating how to manually resize columns after autofitting:
 
@@ -83,6 +83,6 @@ Here is a runnable example demonstrating how to manually resize columns after au
 
 ## See Also
 
-- [Kendo UI for jQuery Grid - API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Kendo UI for jQuery Grid - API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid)
 - [Kendo UI for jQuery Grid Documentation](https://docs.telerik.com/kendo-ui/controls/grid/overview)
 - [Resizing of Columns Feature in Kendo UI for jQuery Grid](https://docs.telerik.com/kendo-ui/controls/grid/columns/resizing)

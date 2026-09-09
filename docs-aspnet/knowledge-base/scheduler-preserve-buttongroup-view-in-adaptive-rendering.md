@@ -34,7 +34,7 @@ Follow the steps below to achieve the desired scenario:
 1. Create a variable that will hold the DOM representation of the ButtonGroup. Which will contain the `day`, `month`, `agenda`, and `week`, `timeline`, and `year` buttons.
 1. Subscribe to the [document.ready()](https://learn.jquery.com/using-jquery-core/document-ready/) event.
 1. Within the handler, replace the transformed DropDownList element by using the [replaceWith()](https://api.jquery.com/replaceWith/) method.
-1. From there, add a click handler to each of the buttons from the previously created ButtonGroup. And based on an assertion, call the client-side [view()](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/view) method of the Scheduler with the appropriate view name.
+1. From there, add a click handler to each of the buttons from the previously created ButtonGroup. And based on an assertion, call the client-side [view()](https://docs.telerik.com/kendo-ui/api/ui/scheduler/methods/view) method of the Scheduler with the appropriate view name.
 1. To change a given button's state upon selection, add the [`k-selected`](https://docs.telerik.com/kendo-ui/styles-and-layout/components-rendering-overview#state-classes) state class.
 1. Subscribe to the [window.resize](https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event) event and replace the transformed DropDownList when the view dimensions are changed.
 
@@ -262,7 +262,7 @@ For the complete implementation of the suggested approach, refer to the followin
 ## See Also
 
 * [Telerik REPL: Preserve the ButtonGroup View for Mobile Rendering in the Scheduler](https://netcorerepl.telerik.com/GRbPcElf56LgXM3126)
-* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
 * [Server-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/scheduler)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Scheduler for ASP.NET Core](https://docs.telerik.com/aspnet-core/api/taghelpers/scheduler)

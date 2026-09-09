@@ -86,7 +86,7 @@ As of the 2024 Q4 Release the {{ site.framework }} DateRangePicker is compatible
 
 ## Referencing Existing Instances
 
-To reference an existing DateRangePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [DateRangePicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker#methods) to control its behavior.
+To reference an existing DateRangePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [DateRangePicker client-side API](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker#methods) to control its behavior.
 
 The following example demonstrates how to access an existing DateRangePicker instance.
 

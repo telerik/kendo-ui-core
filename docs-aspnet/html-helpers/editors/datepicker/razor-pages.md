@@ -64,7 +64,7 @@ To bind the DatePicker to a property from the `PageModel`, follow the next steps
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the DatePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [Client-Side API of the DatePicker](https://docs.telerik.com/kendo-ui/api/ui/datepicker)
 * [Server-Side HtmlHelper API of the DatePicker](/api/datepicker)
 * [Server-Side TagHelper API of the DatePicker](/api/taghelpers/datepicker)
 * [Knowledge Base Section](/knowledge-base)

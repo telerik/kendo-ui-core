@@ -44,4 +44,4 @@ If `ExpandMode` is set to `Multiple`, the user can expand multiple root items or
 
 * [Basic Usage of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/index)
 * [Using the API of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/api)
-* [JavaScript API Reference of the PanelBar](/api/javascript/ui/panelbar)
+* [JavaScript API Reference of the PanelBar](/api/ui/panelbar)

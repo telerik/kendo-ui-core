@@ -32,9 +32,9 @@ I have a requirement to export an Excel sheet with tabular data and equations wi
 
 You can alter the generated workbook to include a column with formulas by following the steps below:
 
-1. Add an [`excelExport`](/api/javascript/ui/grid/events/excelexport) event handler function to loop over the workbook.
+1. Add an [`excelExport`](/api/ui/grid/events/excelexport) event handler function to loop over the workbook.
 1. Add a header cell for the formula column.
-1. Generate the formula for all the next cells and add it as the [`sheets.rows.cells.formula`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.formula).
+1. Generate the formula for all the next cells and add it as the [`sheets.rows.cells.formula`](/api/ooxml/workbook/configuration/sheets.rows.cells.formula).
 
 ```
     excelExport: function(e) {

@@ -139,4 +139,4 @@ The following example demonstrates how to bind the OrgChart to a JSON array avai
 
 ## See Also
 
-* [JavaScript API Reference of the OrgChart](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart)
+* [JavaScript API Reference of the OrgChart](https://docs.telerik.com/kendo-ui/api/ui/orgchart)

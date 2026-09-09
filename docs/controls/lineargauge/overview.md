@@ -24,9 +24,9 @@ All graphics render on the client by using the [Scalable Vector Graphics (SVG)](
 
 * [Getting Started with the Kendo UI LinearGauge for jQuery]({% slug getting_started_kendoui_lineargauge_component %})
 * [Basic Usage of the LinearGauge (Demo)](https://demos.telerik.com/kendo-ui/linear-gauge/index)
-* [JavaScript API Reference of the LinearGauge](/api/javascript/dataviz/ui/lineargauge)
+* [JavaScript API Reference of the LinearGauge](/api/dataviz/ui/lineargauge)
 
 ## See Also
 
 * [Overview of the LinearGauge (Demo)](https://demos.telerik.com/kendo-ui/linear-gauge/index)
-* [JavaScript API Reference of the LinearGauge](/api/javascript/dataviz/ui/lineargauge)
+* [JavaScript API Reference of the LinearGauge](/api/dataviz/ui/lineargauge)

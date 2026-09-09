@@ -115,7 +115,7 @@ For more examples, refer to the [demo on using the events of the DateTimePicker]
 
 ## 4. (Optional) Reference Existing DateTimePicker Instances
 
-To use the [client-side API of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker) and build on top of its initial configuration, you need a reference to the DateTimePicker instance. Once you get a valid reference, you can call the respective API methods:
+To use the [client-side API of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker) and build on top of its initial configuration, you need a reference to the DateTimePicker instance. Once you get a valid reference, you can call the respective API methods:
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
@@ -125,7 +125,7 @@ To use the [client-side API of the DateTimePicker](https://docs.telerik.com/kend
         </script>
     ```
 
-1. Use the [client-side API of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/enable) method to disable the DateTimePicker.
+1. Use the [client-side API of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker/methods/enable) method to disable the DateTimePicker.
 
     ```JS script
         <script>
@@ -159,6 +159,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the DateTimePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datetimepicker/api)
-* [Client-Side API of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [Client-Side API of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker)
 * [Server-Side API of the DateTimePicker](/api/datetimepicker)
 * [Knowledge Base Section](/knowledge-base)

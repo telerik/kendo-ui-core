@@ -133,7 +133,7 @@ You can reference the ArcGauge instances that you have created and build on top 
         </script>
     ```
 
-1. Use the [ArcGauge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge#methods) to control the behavior of the component. In this example, you will use the `value()` method to change the ArcGauge value and the `setOptions()` method to update the background color (for example, when a button is clicked).
+1. Use the [ArcGauge client-side API](https://docs.telerik.com/kendo-ui/api/dataviz/ui/arcgauge#methods) to control the behavior of the component. In this example, you will use the `value()` method to change the ArcGauge value and the `setOptions()` method to update the background color (for example, when a button is clicked).
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -181,7 +181,7 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Client-Side API of the ArcGauge](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge)
+* [Client-Side API of the ArcGauge](https://docs.telerik.com/kendo-ui/api/dataviz/ui/arcgauge)
 * [Server-Side API of the ArcGauge HtmlHelper](/api/arcgauge)
 {% if site.core %}
 * [Server-Side API of the ArcGauge TagHelper](/api/taghelpers/arcgauge)

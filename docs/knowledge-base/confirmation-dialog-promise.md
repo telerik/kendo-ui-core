@@ -99,7 +99,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Window JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/ui/window)
 * [Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
 * [Initialize the Grid]({% slug initialize_thegrid_window_widget %})

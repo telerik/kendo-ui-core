@@ -49,7 +49,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 3. Add an Icon
 
-You can display an icon in the Chip by configuring the [`icon`](/api/javascript/ui/chip/configuration/icon). For more information about the variety of the icons supported by the Chip, refer to the article on the [Customization of the Chip]({% slug customization_kendoui_chip_widget %}).
+You can display an icon in the Chip by configuring the [`icon`](/api/ui/chip/configuration/icon). For more information about the variety of the icons supported by the Chip, refer to the article on the [Customization of the Chip]({% slug customization_kendoui_chip_widget %}).
 
 ```html
 	<span id="chip"></span>
@@ -63,7 +63,7 @@ You can display an icon in the Chip by configuring the [`icon`](/api/javascript/
 
 ## 4. Add a Label to the Chip
 
-Now you can use the [`label`](/api/javascript/ui/chip/configuration/label) option which allows you to display a label on the Chip.
+Now you can use the [`label`](/api/ui/chip/configuration/label) option which allows you to display a label on the Chip.
 
 ```html
 	<span id="chip"></span>
@@ -83,7 +83,7 @@ Now you can use the [`label`](/api/javascript/ui/chip/configuration/label) optio
 
 ## See Also
 
-* [JavaScript API Reference of the Chip](/api/javascript/ui/chip)
+* [JavaScript API Reference of the Chip](/api/ui/chip)
 * [Knowledge Base Section](/knowledge-base)
 
 

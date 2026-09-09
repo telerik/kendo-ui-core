@@ -9,7 +9,7 @@ position: 6
 
 # Navigation
 
-The [`navigational`](/api/javascript/ui/breadcrumb/configuration/navigational) configuration determines whether automatic navigation will be enabled. The default value is false. When set to true, the url will be added to the `href` attribute of the Breadcrumb items.
+The [`navigational`](/api/ui/breadcrumb/configuration/navigational) configuration determines whether automatic navigation will be enabled. The default value is false. When set to true, the url will be added to the `href` attribute of the Breadcrumb items.
 
 The below example demonstrates the automatic navigation:
 
@@ -24,11 +24,11 @@ The below example demonstrates the automatic navigation:
     </script>
 ```
 
-The [`bindToLocation`](/api/javascript/ui/breadcrumb/configuration/bindtolocation) configuration sets the value ot the component to the current URL (the location object). In addition, that URL will be added to the `href` attribute of the Breadcrumb items through the `navigational` configuration.
+The [`bindToLocation`](/api/ui/breadcrumb/configuration/bindtolocation) configuration sets the value ot the component to the current URL (the location object). In addition, that URL will be added to the `href` attribute of the Breadcrumb items through the `navigational` configuration.
 
 When the configuration is disabled, you need to implement the navigation programmatically.
 
 ## See Also
 
 * [Navigation of the Breadcrumb (Demo)](https://demos.telerik.com/kendo-ui/breadcrumb/navigation)
-* [JavaScript API Reference of the Breadcrumb](/api/javascript/ui/breadcrumb)
+* [JavaScript API Reference of the Breadcrumb](/api/ui/breadcrumb)

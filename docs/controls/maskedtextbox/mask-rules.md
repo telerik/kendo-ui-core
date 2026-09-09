@@ -68,4 +68,4 @@ The MaskedTextBox enables you to define custom mask rules during initialization.
 ## See Also
 
 * [Validating User Input in the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/validation)
-* [JavaScript API Reference of the MaskedTextBox](/api/javascript/ui/maskedtextbox)
+* [JavaScript API Reference of the MaskedTextBox](/api/ui/maskedtextbox)

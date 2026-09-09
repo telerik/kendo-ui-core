@@ -149,4 +149,4 @@ The available `Size` values are:
 
 * [Appearance of the Loader HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/loader/appearance)
 * [Loader Server-Side API](/api/loader)
-* [Loader Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/loader)
+* [Loader Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/loader)

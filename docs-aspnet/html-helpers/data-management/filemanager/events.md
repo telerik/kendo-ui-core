@@ -74,4 +74,4 @@ The following example demonstrates how to subscribe to events by using a templat
 
 * [Using the API of the FileManager for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filemanager/api)
 * [FileManager Server-Side API for {{site.framework}}](/api/filemanager)
-* [FileManager Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager)
+* [FileManager Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/filemanager)

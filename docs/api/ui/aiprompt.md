@@ -8,7 +8,7 @@ component: aiprompt
 
 # kendo.ui.AIPrompt
 
-Represents the Kendo UI AIPrompt. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI AIPrompt. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -289,7 +289,7 @@ How to limit the number of speech recognition results in Kendo UI for jQuery AIP
 
 ### promptTextArea `Object`
 
-Configuration options for the [Kendo UI TextArea](/api/javascript/ui/textarea) component used in the prompt view. Only specific properties from the Kendo UI TextArea are supported.
+Configuration options for the [Kendo UI TextArea](/api/ui/textarea) component used in the prompt view. Only specific properties from the Kendo UI TextArea are supported.
 
 
 <div class="meta-api-description">

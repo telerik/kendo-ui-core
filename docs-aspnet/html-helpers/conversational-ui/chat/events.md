@@ -81,7 +81,7 @@ The following example demonstrates how to subscribe to events by a template dele
 ## See Also
 
 * [Using the API of the Chat for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/api)
-* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
+* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/ui/chat)
 * [Server-Side API of the Chat](/api/chat)
 {% if site.core %}
 * [Server-Side API of the Chat TagHelper](/api/taghelpers/chat)

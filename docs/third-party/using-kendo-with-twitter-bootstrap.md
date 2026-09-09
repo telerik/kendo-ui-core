@@ -106,7 +106,7 @@ The `form-control` Bootstrap CSS class is normally added to textboxes to apply b
 
 ## Known Limitations
 
-* Bootstrap modal dialogs prevent access to Kendo UI popups, which are opened by components placed inside the modal dialog. In such cases, use non-modal Bootstrap dialogs or [modal](/api/javascript/ui/window/configuration/modal) [Kendo UI Windows]({% slug overview_kendoui_window_widget %}).
+* Bootstrap modal dialogs prevent access to Kendo UI popups, which are opened by components placed inside the modal dialog. In such cases, use non-modal Bootstrap dialogs or [modal](/api/ui/window/configuration/modal) [Kendo UI Windows]({% slug overview_kendoui_window_widget %}).
 * The latest version of the Bootstrap library introduces code in the `bootstrap.js` file that prevents the input in elements with `data-role=filter`. This causes trouble with data input in filter menu input elements.
 
 ## See Also

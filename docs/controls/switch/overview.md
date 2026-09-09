@@ -28,10 +28,10 @@ When initialized, the Switch renders the currently selected value. The Switch ca
 
 * [Getting Started with the Kendo UI Switch for jQuery]({% slug getting_started_kendoui_switch_widget %})
 * [Overview of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/index)
-* [JavaScript API Reference of the Switch](/api/javascript/ui/switch)
+* [JavaScript API Reference of the Switch](/api/ui/switch)
 
 ## See Also
 
 * [Basic Usage of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/index)
 * [Using the API of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/api)
-* [JavaScript API Reference of the Switch](/api/javascript/ui/switch)
+* [JavaScript API Reference of the Switch](/api/ui/switch)

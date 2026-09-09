@@ -260,4 +260,4 @@ The following example demonstrates how to resize the Kendo UI Grid in a Kendo UI
 
 ## See Also
 
-* [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
+* [Kendo UI Grid JavaScript API Reference](/api/ui/grid)

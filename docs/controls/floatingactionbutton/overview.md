@@ -32,4 +32,4 @@ The FloatingActionButton floats in the application above other items, and its ma
 ## See Also
 
 * [Overview of the FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/index)
-* [JavaScript API Reference of the FloatingActionButton](/api/javascript/ui/floatingactionbutton)
+* [JavaScript API Reference of the FloatingActionButton](/api/ui/floatingactionbutton)

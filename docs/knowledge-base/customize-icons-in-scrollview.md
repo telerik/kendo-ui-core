@@ -27,9 +27,9 @@ This KB article also answers the following questions:
 
 ## Solution
 
-To customize the navigation arrow icons for specific ScrollView instances, use the [`kendo.ui.icon`](/api/javascript/ui/ui/methods/icon) method with a selector that targets the arrows within the desired ScrollView. This approach allows setting different icons for the navigation arrows in each ScrollView instance without affecting other controls or instances.
+To customize the navigation arrow icons for specific ScrollView instances, use the [`kendo.ui.icon`](/api/ui/ui/methods/icon) method with a selector that targets the arrows within the desired ScrollView. This approach allows setting different icons for the navigation arrows in each ScrollView instance without affecting other controls or instances.
 
-First, ensure the [ScrollView](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview) is initialized. Then, use the following code snippet to customize the icons:
+First, ensure the [ScrollView](https://docs.telerik.com/kendo-ui/api/ui/scrollview) is initialized. Then, use the following code snippet to customize the icons:
 
 ```javascript
 // Customize the previous (left) navigation arrow
@@ -146,5 +146,5 @@ Below is a runnable example:
 
 ## See Also
 
-- [Kendo UI ScrollView API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview)
+- [Kendo UI ScrollView API](https://docs.telerik.com/kendo-ui/api/ui/scrollview)
 - [Kendo UI ScrollView Documentation](https://docs.telerik.com/kendo-ui/controls/scrollview/overview)

@@ -83,4 +83,4 @@ To remove the connecting lines, specify `"scatter"` instead of `"scatterLine"`.
 ## See Also
 
 * [Basic Usage of the Scatter Chart (Demo)](https://demos.telerik.com/kendo-ui/scatter-charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

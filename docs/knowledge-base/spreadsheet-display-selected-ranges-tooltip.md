@@ -25,8 +25,8 @@ How can I get the data of the selected range in the Spreadsheet and display it i
 
 ## Solution
 
-1. Use the Tooltip [`filter`](/api/javascript/ui/tooltip/configuration/filter) configuration option to display the Tooltip only over the selected range.
-1. In the [`content`](/api/javascript/ui/tooltip/configuration/content) function of the Tooltip get the values of the selected cells using the [`Range values()`](/api/javascript/spreadsheet/range/methods/values) method.
+1. Use the Tooltip [`filter`](/api/ui/tooltip/configuration/filter) configuration option to display the Tooltip only over the selected range.
+1. In the [`content`](/api/ui/tooltip/configuration/content) function of the Tooltip get the values of the selected cells using the [`Range values()`](/api/spreadsheet/range/methods/values) method.
 1. Use the returned array with values to format the content of the Tooltip and return it as a content result. 
 
 ```dojo
@@ -148,5 +148,5 @@ How can I get the data of the selected range in the Spreadsheet and display it i
 
 ## See Also
 
-* [Spreadsheet API Reference](/api/javascript/ui/spreadsheet)
-* [Tooltip API Reference](/api/javascript/ui/tooltip)
+* [Spreadsheet API Reference](/api/ui/spreadsheet)
+* [Tooltip API Reference](/api/ui/tooltip)

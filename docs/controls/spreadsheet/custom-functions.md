@@ -549,4 +549,4 @@ In other words, if you use this raw form, you are responsible for type-checking 
 ## See Also
 
 * [Validation in the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/validation)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

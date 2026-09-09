@@ -70,7 +70,7 @@ Technically, you can use the `spriteCssClass` to achieve the same result as `ico
 
 ## Image Icons
 
-Image icons are applied over the `imageUrl` property and are displayed as an `img` element. You can use [`imageUrl`](/api/javascript/ui/dropdownbutton/configuration/imageurl) to set an image for the default button, and the [`items.imageUrl`](/api/javascript/ui/dropdownbutton/configuration/items) to set the image for each item in the dropdown.
+Image icons are applied over the `imageUrl` property and are displayed as an `img` element. You can use [`imageUrl`](/api/ui/dropdownbutton/configuration/imageurl) to set an image for the default button, and the [`items.imageUrl`](/api/ui/dropdownbutton/configuration/items) to set the image for each item in the dropdown.
 
 ## Font Icons
 
@@ -125,4 +125,4 @@ To handle this issue, use either of the following approaches:
 ## See Also
 
 * [Icons in the DropDownButton (Demo)](https://demos.telerik.com/kendo-ui/dropdownbutton/icons)
-* [JavaScript API Reference of the DropDownButton](/api/javascript/ui/dropdownbutton)
+* [JavaScript API Reference of the DropDownButton](/api/ui/dropdownbutton)

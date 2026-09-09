@@ -69,4 +69,4 @@ The following example demonstrates how to create a Menu and bind it to a remote 
 ## See Also
 
 * [Basic Usage of the ContextMenu (Demo)](https://demos.telerik.com/kendo-ui/menu/context-menu)
-* [JavaScript API Reference of the Menu](/api/javascript/ui/menu)
+* [JavaScript API Reference of the Menu](/api/ui/menu)

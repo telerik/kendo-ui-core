@@ -32,7 +32,7 @@ By design, the Editor strives to output a clean and XHTML-compatible markup. Tha
 
 ## Solution 
 
-Ideally, the output of the Editor has to be styled via a stylesheet provided through the [stylesheets configuration option](/api/javascript/ui/editor/configuration/stylesheets). It allows for the whole pasted content to be consistently styled across your site.
+Ideally, the output of the Editor has to be styled via a stylesheet provided through the [stylesheets configuration option](/api/ui/editor/configuration/stylesheets). It allows for the whole pasted content to be consistently styled across your site.
 
 If wrong pasting removes semantics or actual content along with the styles:
 
@@ -43,4 +43,4 @@ If wrong pasting removes semantics or actual content along with the styles:
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
 * [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

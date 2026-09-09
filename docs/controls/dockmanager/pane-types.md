@@ -92,4 +92,4 @@ The Kendo UI for jQuery DockManager widget exposes the ability to configure diff
 
 ## See Also
 
-* [JavaScript API Reference of the DockManager](/api/javascript/ui/dockmanager)
+* [JavaScript API Reference of the DockManager](/api/ui/dockmanager)

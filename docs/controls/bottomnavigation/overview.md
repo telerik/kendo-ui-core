@@ -22,9 +22,9 @@ The Kendo UI BottomNavigation bar allows movement between primary destinations i
 
 * [Getting Started with the Kendo UI BottomNavigation for jQuery]({% slug getting_started_kendoui_bottomnavigation_component %})
 * [Basic Usage of the BottomNavigation (Demo)](https://demos.telerik.com/kendo-ui/bottomnavigation/index)
-* [JavaScript API Reference of the BottomNavigation](/api/javascript/ui/bottomnavigation)
+* [JavaScript API Reference of the BottomNavigation](/api/ui/bottomnavigation)
 
 ## See Also
 
 * [Overview of the BottomNavigation (Demo)](https://demos.telerik.com/kendo-ui/bottomnavigation/index)
-* [JavaScript API Reference of the BottomNavigation](/api/javascript/ui/bottomnavigation)
+* [JavaScript API Reference of the BottomNavigation](/api/ui/bottomnavigation)

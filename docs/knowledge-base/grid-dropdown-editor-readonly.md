@@ -29,8 +29,8 @@ How can I make the drop-down editor read-only based on a condition in the Kendo 
 
 ## Solution
 
-1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) event of the Grid.
-2. In  the event handler and based on a condition, use the [`readonly`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/methods/readonly) method.
+1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/edit) event of the Grid.
+2. In  the event handler and based on a condition, use the [`readonly`](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/methods/readonly) method.
 
 ```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>

@@ -174,7 +174,7 @@ The next step is to get a couple of lists with Model (`ProductViewModel`) IDs pa
 
 Convert each `List<ProductViewModel>` Model property into a comma-separated string and store it in a hidden input element on the page. As a result, there will be two hidden inputs on the page that will contain the product IDs, which must be selected or disabled in the ListBox.
 
-Handle the `DataBound` event of the ListBox, which fires when the data is received from the remote service, and use the [ListBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox#methods) to select and disable the specified items programmatically.
+Handle the `DataBound` event of the ListBox, which fires when the data is received from the remote service, and use the [ListBox client-side API](https://docs.telerik.com/kendo-ui/api/ui/listbox#methods) to select and disable the specified items programmatically.
 
 
 ```HtmlHelper
@@ -429,7 +429,7 @@ You can reference the ListBox instances that you have created and build on top o
         </script>
    ```
 
-1. Use the [ListBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox#methods) to control the behavior of the control. In this example, you will use the following methods:
+1. Use the [ListBox client-side API](https://docs.telerik.com/kendo-ui/api/ui/listbox#methods) to control the behavior of the control. In this example, you will use the following methods:
 
 * The `dataItems` method to get all data items to which the control is bound.
 * The `items` method to obtain the `DOM` elements that correspond to the data items.
@@ -470,6 +470,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the ListBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listbox/api)
-* [Client-Side API of the ListBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
+* [Client-Side API of the ListBox](https://docs.telerik.com/kendo-ui/api/ui/listbox)
 * [Server-Side API of the ListBox](/api/listbox)
 * [Knowledge Base Section](/knowledge-base)

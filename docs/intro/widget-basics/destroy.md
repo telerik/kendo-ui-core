@@ -55,8 +55,8 @@ The Kendo UI components are automatically destroyed when the web page is unloade
 
 To properly destroy components that were [declaratively created]({% slug mvvm_initialization_kendoui %}) through the [Kendo UI MVVM mechanism]({% slug overview_mvvmpattern_kendoui %}):
 
-1. Use the [`kendo.unbind()`](/api/javascript/kendo/methods/unbind) method to remove any MVVM bindings related to the component.
-1. Call [`kendo.destroy()`](/api/javascript/kendo/methods/destroy) for the appropriate container, or the [`destroy()`](/api/javascript/ui/widget/methods/destroy) method of each component inside this container.
+1. Use the [`kendo.unbind()`](/api/kendo/methods/unbind) method to remove any MVVM bindings related to the component.
+1. Call [`kendo.destroy()`](/api/kendo/methods/destroy) for the appropriate container, or the [`destroy()`](/api/ui/widget/methods/destroy) method of each component inside this container.
 
 ## Destroying Multiple Components
 

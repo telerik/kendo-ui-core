@@ -246,4 +246,4 @@ The following values are available for the `PositionMode` option:
 
 * [Appearance of the BottomNavigation HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/appearance)
 * [Server-Side API](/api/bottomnavigation)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/bottomnavigation)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/bottomnavigation)

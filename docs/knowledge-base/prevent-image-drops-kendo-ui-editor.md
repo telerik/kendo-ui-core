@@ -31,7 +31,7 @@ I want to prevent users from dropping images into the [Editor for Progress® Ken
 - Is there a way to disable image pasting in the Editor?
 
 ## Solution
-To prevent an image from being dropped into the Editor, utilize the [`paste`](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/events/paste) event. In the event handler, check if the pasted content includes an `<img>` tag and stop the event's propagation if it does. 
+To prevent an image from being dropped into the Editor, utilize the [`paste`](https://docs.telerik.com/kendo-ui/api/ui/editor/events/paste) event. In the event handler, check if the pasted content includes an `<img>` tag and stop the event's propagation if it does. 
 
 Here's how you can implement this solution:
 
@@ -52,4 +52,4 @@ This code checks the HTML content being pasted and cancels the event if an `<img
 
 ## See Also
 - [Editor Overview Documentation](https://docs.telerik.com/kendo-ui/controls/editors/editor/overview)
-- [Kendo UI Editor API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+- [Kendo UI Editor API Documentation](https://docs.telerik.com/kendo-ui/api/ui/editor)

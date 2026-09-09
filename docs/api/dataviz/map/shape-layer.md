@@ -229,7 +229,7 @@ How do I dynamically update the data source of a Kendo UI map shape layer? Updat
 
 #### Parameters
 ##### dataSource `Object`
-A live [DataSource](/api/javascript/data/datasource) instance
-or its [configuration](/api/javascript/data/datasource#configuration) object.
+A live [DataSource](/api/data/datasource) instance
+or its [configuration](/api/data/datasource#configuration) object.
 
 

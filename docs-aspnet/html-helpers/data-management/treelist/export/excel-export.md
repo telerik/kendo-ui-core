@@ -54,7 +54,7 @@ To enable the Excel export option of the TreeList:
     ```
     {% endif %}
 
-To initiate the Excel export, press the **Toolbar** button or use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist) and call the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/saveasexcel) method.
+To initiate the Excel export, press the **Toolbar** button or use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/ui/treelist) and call the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/ui/treelist/methods/saveasexcel) method.
 
 ## Outputting the Result
 

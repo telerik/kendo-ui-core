@@ -130,7 +130,7 @@ The following image demonstrates the output from the previous example.
 
 ## Referencing Existing Instances
 
-To reference an existing PivotConfigurator instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotConfigurator client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotconfigurator) to control its behavior.
+To reference an existing PivotConfigurator instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotConfigurator client-side API](https://docs.telerik.com/kendo-ui/api/ui/pivotconfigurator) to control its behavior.
 
     var pivotconfigurator = $("#pivotconfigurator").data("kendoPivotConfigurator");
 

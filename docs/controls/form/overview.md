@@ -28,11 +28,11 @@ The Kendo UI Form component allows you to generate and manage forms. Through a v
 
 * [Getting Started with the Kendo UI Form for jQuery]({% slug getting_started_kendoui_form_widget %})
 * [Demo Page for the Form](https://demos.telerik.com/kendo-ui/form/index)
-* [JavaScript API Reference of the Form](/api/javascript/ui/form)
+* [JavaScript API Reference of the Form](/api/ui/form)
 
 ## See Also
 
-* [JavaScript API Reference of the Form](/api/javascript/ui/form)
+* [JavaScript API Reference of the Form](/api/ui/form)
 * [Demo Page for the jQuery Form](https://demos.telerik.com/kendo-ui/form/index)
 * [Knowledge Base Section](/knowledge-base)
 * [jQuery Form Product Page](https://www.telerik.com/kendo-jquery-ui/form)

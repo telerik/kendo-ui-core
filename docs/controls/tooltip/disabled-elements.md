@@ -49,4 +49,4 @@ While the Tooltip relies on the `mouseenter` and `mouseleave` events to work, di
 
 * [Basic Usage of the Tooltip (Demo)](https://demos.telerik.com/kendo-ui/tooltip/index)
 * [Using the API of the Tooltip (Demo)](https://demos.telerik.com/kendo-ui/tooltip/api)
-* [JavaScript API Reference of the Tooltip](/api/javascript/ui/tooltip)
+* [JavaScript API Reference of the Tooltip](/api/ui/tooltip)

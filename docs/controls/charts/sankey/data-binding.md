@@ -9,11 +9,11 @@ position: 2
 
 # Data Binding
 
-You can bind the Sankey Diagram to data by using the component's [`data`](/api/javascript/dataviz/ui/sankey/configuration/data) property. The data object contains the Sankey nodes and links configuration.
+You can bind the Sankey Diagram to data by using the component's [`data`](/api/dataviz/ui/sankey/configuration/data) property. The data object contains the Sankey nodes and links configuration.
 
 ## Binding to SankeyData
 
-The following example demonstrates how to set the [`data`](/api/javascript/dataviz/ui/sankey/configuration/data) property. 
+The following example demonstrates how to set the [`data`](/api/dataviz/ui/sankey/configuration/data) property. 
 
 ```dojo
     <div id="sankey"></div>
@@ -385,4 +385,4 @@ The following example demonstrates this approach by mapping the `data.nodes` to 
 ## Suggested Links
 
 
-* [JavaScript API Reference of the Sankey](/api/javascript/dataviz/ui/sankey)
+* [JavaScript API Reference of the Sankey](/api/dataviz/ui/sankey)

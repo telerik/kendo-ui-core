@@ -8,7 +8,7 @@ component: taskboard
 
 # kendo.ui.TaskBoard
 
-Represents the Kendo UI TaskBoard. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI TaskBoard. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -374,7 +374,7 @@ How to customize the options in TaskBoard card menu? Control and customize the l
 
 ### columns `Object|Array|kendo.data.DataSource`
 
-Sets the [DataSource](/api/javascript/data/datasource) for the Columns of the TaskBoard. Can be bound to a remote service or local data.
+Sets the [DataSource](/api/data/datasource) for the Columns of the TaskBoard. Can be bound to a remote service or local data.
 
 
 <div class="meta-api-description">
@@ -1085,7 +1085,7 @@ How do I configure the task card description field in a Kendo UI TaskBoard widge
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-Sets the [DataSource](/api/javascript/data/datasource) for the Cards of the TaskBoard. Can be bound to a remote service or local data.
+Sets the [DataSource](/api/data/datasource) for the Cards of the TaskBoard. Can be bound to a remote service or local data.
 
 
 <div class="meta-api-description">
@@ -2466,12 +2466,12 @@ How do I specify the field in my data objects that holds color information for T
 
 ### resources.dataSource `Object|Array|kendo.data.DataSource`
 
-The data source which contains resource data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source which contains resource data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -2664,7 +2664,7 @@ How do I configure the field that holds the resource identifier in Kendo UI Task
 
 ### resources.multiple `Boolean` *(default: false)*
 
-If set to `true` the TaskBoard event can be assigned multiple instances of the resource. The TaskBoard event field specified via the [field](/api/javascript/ui/TaskBoard#configuration-resources.field) option will contain an array of resources.
+If set to `true` the TaskBoard event can be assigned multiple instances of the resource. The TaskBoard event field specified via the [field](/api/ui/TaskBoard#configuration-resources.field) option will contain an array of resources.
 By default only one resource instance can be assigned to an event.
 
 
@@ -2718,7 +2718,7 @@ How can I enable assigning multiple resources to a single event in Kendo UI Task
 
 ### resources.name `String`
 
-The name of the resource used to distinguish resource. If not set the value of the [field](/api/javascript/ui/TaskBoard#configuration-resources.field) option is used.
+The name of the resource used to distinguish resource. If not set the value of the [field](/api/ui/TaskBoard#configuration-resources.field) option is used.
 
 
 <div class="meta-api-description">
@@ -2769,7 +2769,7 @@ How to set the identifier for resources in a Kendo UI TaskBoard? Set or customiz
 
 ### resources.title `String`
 
-The user friendly title of the resource displayed in the TaskBoard edit form. If not set the value of the [field](/api/javascript/ui/TaskBoard#configuration-resources.field) option is used.
+The user friendly title of the resource displayed in the TaskBoard edit form. If not set the value of the [field](/api/ui/TaskBoard#configuration-resources.field) option is used.
 
 
 <div class="meta-api-description">
@@ -2820,7 +2820,7 @@ How to customize the display title for resources in a TaskBoard? Control and cus
 
 ### resources.valuePrimitive `Boolean` *(default: true)*
 
-Set to `false` if the TaskBoard event field specified via the [field](/api/javascript/ui/TaskBoard#configuration-resources.field) option contains a resource data item.
+Set to `false` if the TaskBoard event field specified via the [field](/api/ui/TaskBoard#configuration-resources.field) option contains a resource data item.
 By default the TaskBoard expects that field to contain a primitive value (string, number) which corresponds to the "value" of the resource (specified via `dataValueField`).
 
 
@@ -2993,7 +2993,7 @@ How do I customize the toolbar in a Kendo UI TaskBoard? Customize and control th
       });
     </script>
 
-Apart from the built-in tools, the TaskBoard fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself. When passing an `object` to the `toolbar` configuration option it could also contain [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration.
+Apart from the built-in tools, the TaskBoard fully exposes the [ToolBar.items API](/api/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself. When passing an `object` to the `toolbar` configuration option it could also contain [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) configuration.
 
 ### toolbar.items `Array`
 
@@ -3606,7 +3606,7 @@ How to uniquely identify toolbar buttons in a TaskBoard widget? Configure or set
     </script>
 
 ### toolbar.overflow `Object`
-Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+Specifies [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) configuration for the toolbar.
 
 
 <div class="meta-api-description">
@@ -3825,7 +3825,7 @@ How do I set the width of a Kendo UI TaskBoard component? Set or adjust the hori
     </script>
 
 ### toolbar.overflow `Object`
-Specifies overflow configuration of the toolbar as [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow).
+Specifies overflow configuration of the toolbar as [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow).
 
 
 <div class="meta-api-description">

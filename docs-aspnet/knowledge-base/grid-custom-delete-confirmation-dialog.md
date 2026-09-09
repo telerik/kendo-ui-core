@@ -31,7 +31,7 @@ How can I customize the **Delete** confirmation dialog in the {{ site.product }}
 
 1. Declare a custom Dialog.
 1. Include a [custom command button](https://demos.telerik.com/kendo-ui/grid/custom-command).
-1. Hook up for the [`Click`](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) event of the command button.
+1. Hook up for the [`Click`](https://docs.telerik.com/kendo-ui/api/ui/button/events/click) event of the command button.
 1. When the `Click` event is triggered, get a reference to the row in which the button is positioned and open the dialog. Save the current record in a global variable.
 1. In the custom dialog, add two options to confirm/cancel the deletion.
 1. On confirm delete the record.
@@ -120,7 +120,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Customizing the Delete Confirmation Dialog](https://netcorerepl.telerik.com/mwkMYsFG19Xfgl0512)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

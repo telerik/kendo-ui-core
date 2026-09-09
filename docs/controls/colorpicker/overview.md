@@ -32,10 +32,10 @@ You can also create a simple ColorPicker and render 20 colors.
 
 * [Getting Started with the Kendo UI ColorPicker for jQuery]({% slug getting_started_kendoui_colorpicker_widget %})
 * [Overview of the ColorPicker (Demo)](https://demos.telerik.com/kendo-ui/colorpicker/index)
-* [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
+* [JavaScript API Reference of the ColorPicker](/api/ui/colorpicker)
 
 ## See Also
 
 * [Basic Usage of the ColorPicker (Demo)](https://demos.telerik.com/kendo-ui/colorpicker/index)
 * [Using the API of the ColorPicker (Demo)](https://demos.telerik.com/kendo-ui/colorpicker/api)
-* [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
+* [JavaScript API Reference of the ColorPicker](/api/ui/colorpicker)

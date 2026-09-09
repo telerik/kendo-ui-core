@@ -157,4 +157,4 @@ You can specify a Menu item as disabled by using the `enabled` field.
 
 * [Overview of the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/index)
 * [Using the API of the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/api)
-* [JavaScript API Reference of the Menu](/api/javascript/ui/menu)
+* [JavaScript API Reference of the Menu](/api/ui/menu)

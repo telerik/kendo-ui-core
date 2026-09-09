@@ -27,7 +27,7 @@ ticketid: 1688326
 
 ## Description
 
-When using the MultiSelect component in Progress® Kendo UI® for jQuery, the tags may appear partially styled if you use the [`tagTemplate`](/api/javascript/ui/multiselect/configuration/tagtemplate) to set a background color. This happens because only the inner `<span>` element is affected by the custom template, while the outer frame remains styled with the default gray color. I want to apply the background color to the entire tag, including its frame.
+When using the MultiSelect component in Progress® Kendo UI® for jQuery, the tags may appear partially styled if you use the [`tagTemplate`](/api/ui/multiselect/configuration/tagtemplate) to set a background color. This happens because only the inner `<span>` element is affected by the custom template, while the outer frame remains styled with the default gray color. I want to apply the background color to the entire tag, including its frame.
 
 This knowledge base article also answers the following questions:  
 - How to style the entire MultiSelect tag in Kendo UI?  
@@ -52,7 +52,7 @@ To fully style the tags in the MultiSelect component, use the following approach
    </script>
    ```
 
-2. **Handle the [`change`](/api/javascript/ui/multiselect/events/change) and [`dataBound`](/api/javascript/ui/multiselect/events/databound) events to apply styles:**
+2. **Handle the [`change`](/api/ui/multiselect/events/change) and [`dataBound`](/api/ui/multiselect/events/databound) events to apply styles:**
    Use JavaScript to find the parent element of the inner `span` and apply the desired background color. Example:
 
    ```javascript

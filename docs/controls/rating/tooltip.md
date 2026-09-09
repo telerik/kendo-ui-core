@@ -30,7 +30,7 @@ The following example demonstrates how to use the default tooltip of the Rating.
 
 ## Disabling Tooltips
 
-Setting the [`tooltip`](/api/javascript/ui/rating/configuration/tooltip) option to `false` prevents the items to display tooltips when hovered.
+Setting the [`tooltip`](/api/ui/rating/configuration/tooltip) option to `false` prevents the items to display tooltips when hovered.
 
 ```dojo
     <input id="rating" name="rating">
@@ -49,4 +49,4 @@ Setting the [`tooltip`](/api/javascript/ui/rating/configuration/tooltip) option 
 
 ## See Also
 
-* [JavaScript API Reference of the Rating](/api/javascript/ui/rating)
+* [JavaScript API Reference of the Rating](/api/ui/rating)

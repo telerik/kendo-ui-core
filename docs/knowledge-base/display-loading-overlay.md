@@ -33,7 +33,7 @@ components: ["window"]
 
 ## Description
 
-How can I display a [Kendo-UI-style loading indicator](/api/javascript/ui/ui/methods/progress) over the Window content area while (or before) a remote request is made?
+How can I display a [Kendo-UI-style loading indicator](/api/ui/ui/methods/progress) over the Window content area while (or before) a remote request is made?
 
 ## Solution
 
@@ -81,7 +81,7 @@ The following example demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Window JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/ui/window)
 * [Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
 * [Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
 * [Post to Iframe]({% slug howto_posttoiframe_window %})

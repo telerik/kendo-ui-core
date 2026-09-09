@@ -74,7 +74,7 @@ You can configure each axis so that it displays bands with different colors for 
 
 ## Applying Global Settings
 
-To apply settings to all axes, use the [`axisDefaults`](/api/javascript/dataviz/ui/chart#axisdefaults-object) object.
+To apply settings to all axes, use the [`axisDefaults`](/api/dataviz/ui/chart#axisdefaults-object) object.
 
     $("#chart").kendoChart({
         series: [{
@@ -92,4 +92,4 @@ To apply settings to all axes, use the [`axisDefaults`](/api/javascript/dataviz/
 ## See Also
 
 * [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

@@ -163,5 +163,5 @@ The following example demonstrates how to achieve the desired scenario.
 
 * [Basic Usage of the Kendo UI for jQuery Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the jQuery Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)
 * [jQuery Scheduler Product Page](https://www.telerik.com/kendo-jquery-ui/scheduler)

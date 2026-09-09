@@ -76,4 +76,4 @@ $(document).on("click", ".k-grid-selectedRows", function() {
 ## See Also
 
 - [Kendo UI for jQuery Grid Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-- [Kendo UI for jQuery Grid API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Kendo UI for jQuery Grid API](https://docs.telerik.com/kendo-ui/api/ui/grid)

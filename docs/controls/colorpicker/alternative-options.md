@@ -60,5 +60,5 @@ The following example demonstrates how to create a web-safe color palette with 2
 
 ## See Also 
 
-* [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
+* [JavaScript API Reference of the ColorPicker](/api/ui/colorpicker)
 * [Knowledge Base Section](/knowledge-base)

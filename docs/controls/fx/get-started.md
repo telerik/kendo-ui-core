@@ -44,7 +44,7 @@ Once the basic initialization is completed, you can start applying effects to th
 
 ## 2. Apply Effects
 
-In this step, you will apply the [`fadeOut`](/api/javascript/effects/fade) and the [`zoomOut`](/api/javascript/effects/zoom) effects.
+In this step, you will apply the [`fadeOut`](/api/effects/fade) and the [`zoomOut`](/api/effects/zoom) effects.
 
 ```dojo
 <div id="foo">
@@ -57,7 +57,7 @@ In this step, you will apply the [`fadeOut`](/api/javascript/effects/fade) and t
     fadeOutEffect.add(effectWrapper.zoomOut()); // Apply zoom out effect.
 </script>
 ```
-See the [FX API reference](/api/javascript/effects/common) for more available effects.
+See the [FX API reference](/api/effects/common) for more available effects.
 
 ## 3. Play Effects
 
@@ -83,7 +83,7 @@ In this step, you will play the effects.
 
 ## See Also 
 
-* [JavaScript API Reference of the FX](/api/javascript/effects/common)
+* [JavaScript API Reference of the FX](/api/effects/common)
 * [Knowledge Base Section](/knowledge-base)
 
 

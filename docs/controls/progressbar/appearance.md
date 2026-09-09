@@ -33,4 +33,4 @@ The following example demonstrates how to make the ProgressBar 100% wide and aut
 
 * [Basic Usage of the ProgressBar (Demo)](https://demos.telerik.com/kendo-ui/progressbar/index)
 * [Using the API of the ProgressBar (Demo)](https://demos.telerik.com/kendo-ui/progressbar/api)
-* [JavaScript API Reference of the ProgressBar](/api/javascript/ui/progressbar)
+* [JavaScript API Reference of the ProgressBar](/api/ui/progressbar)

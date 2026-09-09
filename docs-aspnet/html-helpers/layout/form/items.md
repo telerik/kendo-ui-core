@@ -110,7 +110,7 @@ The following example shows how to set the `Hint` of an item. The hint is displa
 
 ## Configure Editor
 
-With the `Editor` option you can explicitly configure an editor to be used for a specific field. See the [editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/form/configuration/items#itemseditor) configuration option in the client-side API documentation, for a list of the supported editors.
+With the `Editor` option you can explicitly configure an editor to be used for a specific field. See the [editor](https://docs.telerik.com/kendo-ui/api/ui/form/configuration/items#itemseditor) configuration option in the client-side API documentation, for a list of the supported editors.
 
 ```HtmlHelper
     @(Html.Kendo().Form<MyApplication.Models.FormItemsViewModels>()

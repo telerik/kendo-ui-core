@@ -195,4 +195,4 @@ The following example demonstrates how to add a button as a suffix of the MultiC
 
 * [Using the Prefix and Suffix of the MultiColumnComboBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/prefix-suffix)
 * [Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/multicolumncombobox)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox)

@@ -76,7 +76,7 @@ Upon its initialization, the MultiSelect wraps the `<select>` element with a `<d
 
 ## 2. Specify a Data Source
 
-Here, you will specify a [`dataSource`](/api/javascript/ui/multiselect/configuration/datasource) configuration for the component which is used to display a list of values.
+Here, you will specify a [`dataSource`](/api/ui/multiselect/configuration/datasource) configuration for the component which is used to display a list of values.
 
 ```html
 <select id="customers"></select>
@@ -99,7 +99,7 @@ Here, you will specify a [`dataSource`](/api/javascript/ui/multiselect/configura
 
 ## 4. Apply Some Styling
 
-The MultiSelect provides several options that enable you to modify its appearance. The following example demonstrates how to apply a flat [`fillMode`](/api/javascript/ui/multiselect/configuration/fillmode) configuration to the component.
+The MultiSelect provides several options that enable you to modify its appearance. The following example demonstrates how to apply a flat [`fillMode`](/api/ui/multiselect/configuration/fillmode) configuration to the component.
 
 ```html
 <select id="customers"></select>
@@ -121,7 +121,7 @@ The MultiSelect provides several options that enable you to modify its appearanc
 
 ## 5. Configure the Label 
 
-The MultiSelect enables you to configure the label by using its [`label`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/label) property.
+The MultiSelect enables you to configure the label by using its [`label`](https://docs.telerik.com/kendo-ui/api/ui/multiselect/configuration/label) property.
 
 ```html
 <select id="customers"></select>
@@ -152,7 +152,7 @@ The MultiSelect enables you to configure the label by using its [`label`](https:
 
 ## See Also 
 
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [JavaScript API Reference of the MultiSelect](/api/ui/multiselect)
 * [Knowledge Base Section](/knowledge-base)
 
 

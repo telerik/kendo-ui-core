@@ -19,7 +19,7 @@ The following example demonstrates how to launch the Chart Wizard from a [Contex
 ## Generating Chart from Grid Selection
 
 You can create charts from the Grid row and cell selection. 
-The example below demonstrates how you can use the [generateDataRows](/api/javascript/ui/chartwizard/methods/generatedatarows) method to create charts from the selected Grid cells or rows. 
+The example below demonstrates how you can use the [generateDataRows](/api/ui/chartwizard/methods/generatedatarows) method to create charts from the selected Grid cells or rows. 
 To enable the generation of a chart, get a reference to the Grid component and pass the Grid selection and the Grid columns to the `generateDataRows` method:
 
 ```
@@ -124,7 +124,7 @@ In the example below you can select multiple cells using `Ctrl` + `click` and th
 ## See Also
 
 * [Chart Integration Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/chart-integration)
-* [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/ui/grid)
 * [Overview Kendo UI for jQuery ChartWizard (Demo)](https://demos.telerik.com/kendo-ui/chartwizard/index)
-* [JavaScript API Reference of the Kendo UI for jQuery ChartWizard](/api/javascript/ui/chartwizard)
+* [JavaScript API Reference of the Kendo UI for jQuery ChartWizard](/api/ui/chartwizard)
 

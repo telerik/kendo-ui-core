@@ -6,7 +6,7 @@ res_type: api
 
 # kendo.spreadsheet.ValueFilter
 
-Represents a filter applied to a column of a given [range](/api/javascript/spreadsheet/range). Used to filter a column by a predefined set of values.
+Represents a filter applied to a column of a given [range](/api/spreadsheet/range). Used to filter a column by a predefined set of values.
 
 ## Methods
 

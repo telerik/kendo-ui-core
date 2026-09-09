@@ -52,11 +52,11 @@ In this step, you will initialize the TimeDurationPicker from the `<input>` elem
 
 ## 3. Configure the Columns
 
-Now, you will set the [`columns`](/api/javascript/ui/timedurationpicker/configuration/columns) configuration, which:
+Now, you will set the [`columns`](/api/ui/timedurationpicker/configuration/columns) configuration, which:
 
 * Is a fundamental and mandatory setting for the TimeDurationPicker&mdash;the component will not work without it. 
 * Allows you to specify which time portion columns will be visible when the drop-down is expanded. 
-* Enables you to specify a [`format`](/api/javascript/ui/timedurationpicker/configuration/columns.format), [`min`](/api/javascript/ui/timedurationpicker/configuration/columns.min) and [`max`](/api/javascript/ui/timedurationpicker/configuration/columns.max) allowed values, and [`step`](/api/javascript/ui/timedurationpicker/configuration/columns.step) for each individual column.
+* Enables you to specify a [`format`](/api/ui/timedurationpicker/configuration/columns.format), [`min`](/api/ui/timedurationpicker/configuration/columns.min) and [`max`](/api/ui/timedurationpicker/configuration/columns.max) allowed values, and [`step`](/api/ui/timedurationpicker/configuration/columns.step) for each individual column.
 
 ```html
 <input id="timedurationpicker" />
@@ -74,7 +74,7 @@ Now, you will set the [`columns`](/api/javascript/ui/timedurationpicker/configur
 
 ## 4. Configure the Separator
 
-The TimeDurationPicker enables you to specify your own [`separator`](/api/javascript/ui/timedurationpicker/configuration/separator) that will be used to divide the individual time portions such as hours, minutes, and seconds.
+The TimeDurationPicker enables you to specify your own [`separator`](/api/ui/timedurationpicker/configuration/separator) that will be used to divide the individual time portions such as hours, minutes, and seconds.
 
 ```html
 <input id="timedurationpicker" />
@@ -99,6 +99,6 @@ The TimeDurationPicker enables you to specify your own [`separator`](/api/javasc
 
 ## See Also 
 
-* [JavaScript API Reference of the TimeDurationPicker](/api/javascript/ui/timedurationpicker)
+* [JavaScript API Reference of the TimeDurationPicker](/api/ui/timedurationpicker)
 * [Knowledge Base Section](/knowledge-base)
 

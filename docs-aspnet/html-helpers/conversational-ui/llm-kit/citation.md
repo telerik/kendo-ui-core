@@ -52,4 +52,4 @@ Add [`Description`](/api/citation/sources) to each source so users have enough c
 {% if site.core %}
 * [Server-Side API of the Citation TagHelper](/api/taghelpers/citation)
 {% endif %}
-* [JavaScript API Reference of the Citation](/api/javascript/ui/citation)
+* [JavaScript API Reference of the Citation](/api/ui/citation)

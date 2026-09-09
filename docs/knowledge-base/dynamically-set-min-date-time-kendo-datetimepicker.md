@@ -21,7 +21,7 @@ ticketid: 1674797
 
 ## Description
 
-When using two [Kendo UI for jQuery DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker) components for start and end date selections, it's necessary to update the minimum selectable date and time of the end date picker based on the selection in the start date picker. This ensures that the end date cannot precede the start date. 
+When using two [Kendo UI for jQuery DateTimePicker](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker) components for start and end date selections, it's necessary to update the minimum selectable date and time of the end date picker based on the selection in the start date picker. This ensures that the end date cannot precede the start date. 
 
 This knowledge base article also answers the following questions:
 - How to dynamically change the minimum date of a DateTimePicker based on another DateTimePicker's value?
@@ -67,6 +67,6 @@ This code snippet demonstrates how to configure the `shiftStart` DateTimePicker 
 
 ## See Also
 
-- [Kendo UI DateTimePicker Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
-- [Kendo UI DateTimePicker setOptions Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/setoptions)
+- [Kendo UI DateTimePicker Documentation](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker)
+- [Kendo UI DateTimePicker setOptions Method](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker/methods/setoptions)
 - [Example of Synchronizing Two DateTimePickers](https://dojo.telerik.com/dXCVgCOv)

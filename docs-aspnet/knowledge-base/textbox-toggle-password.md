@@ -84,7 +84,7 @@ For the complete implementation of the suggested approach, refer to the followin
 ## See Also
 
 * [Telerik REPL: Show and Hide Passwords in TextBox](https://netcorerepl.telerik.com/GckrEqvI37R0V54u19)
-* [Client-Side API Reference of the TextBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox)
+* [Client-Side API Reference of the TextBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/textbox)
 * [Server-Side API Reference of the TextBox for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/textbox)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

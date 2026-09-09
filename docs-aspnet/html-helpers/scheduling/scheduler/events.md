@@ -237,7 +237,7 @@ By handling the client-side events of the Scheduler, you can restrict the creati
 
 * [Using the API of the Scheduler for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/api)
 * [Assigning predefined resources to the Scheduler (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/resources)
-* [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
 * [Server-Side API of the Scheduler](/api/scheduler)
 {% if site.core %}
 * [Server-Side API of the Scheduler TagHelper](/api/taghelpers/scheduler)

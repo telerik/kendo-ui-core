@@ -29,7 +29,7 @@ The DataSource is an abstraction for using local data (arrays of JavaScript obje
 * [Getting Started with the Local DataSource Binding]({% slug getting_started_kendoui_local_data_binding %})
 * [Getting Started with the Remote DataSource Binding]({% slug getting_started_kendoui_remote_data_binding %})
 * [CORS Data Fetching from Another Domain]({% slug corsdatafetching_anotherdomain_datasourcecomponent %})
-* [DataSource JavaScript API Reference](/api/javascript/data/datasource)
+* [DataSource JavaScript API Reference](/api/data/datasource)
 * [DataSource Demos](https://demos.telerik.com/kendo-ui/datasource/index)
 * [Knowledge Base](https://docs.telerik.com/kendo-ui/knowledge-base)
 

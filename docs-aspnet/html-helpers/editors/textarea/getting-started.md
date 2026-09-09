@@ -164,7 +164,7 @@ You can reference the TextArea instances that you have created and build on top 
          </script>
     ```
 
-1. Use the [TextArea Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textarea#methods) to control the behavior of the widget. In this example, you will change the value of the widget programmatically.
+1. Use the [TextArea Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/textarea#methods) to control the behavior of the widget. In this example, you will change the value of the widget programmatically.
 
     ```JS script
         <script>
@@ -196,7 +196,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the TextArea for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textarea/api)
-* [Client-Side API of the TextArea](https://docs.telerik.com/kendo-ui/api/javascript/ui/textarea)
+* [Client-Side API of the TextArea](https://docs.telerik.com/kendo-ui/api/ui/textarea)
 * [Server-Side API of the TextArea for {{ site.framework }}](/api/textarea)
 * [Knowledge Base Section](/knowledge-base)
 

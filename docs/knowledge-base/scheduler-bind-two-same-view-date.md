@@ -408,6 +408,6 @@ My application displays two Kendo UI Schedulers on the same page. How can I bind
 
 ## See Also
 
-* [API Reference of the navigate Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/navigate)
-* [API Reference of the view Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/view)
-* [API Reference of the date Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/date)
+* [API Reference of the navigate Event](https://docs.telerik.com/kendo-ui/api/ui/scheduler/events/navigate)
+* [API Reference of the view Method](https://docs.telerik.com/kendo-ui/api/ui/scheduler/methods/view)
+* [API Reference of the date Method](https://docs.telerik.com/kendo-ui/api/ui/scheduler/methods/date)

@@ -45,7 +45,7 @@ $("#pivotgrid").kendoPivotGrid({
 
 You can construct the PivotGridV2 table by using the fields from the sample data in the [previous section](#data-array).
 
-   1. Configure the [`schema`](/api/javascript/data/pivotdatasource/configuration/schema#schemacube).
+   1. Configure the [`schema`](/api/data/pivotdatasource/configuration/schema#schemacube).
 
    ```javascript
             schema: {
@@ -147,7 +147,7 @@ The following example showcases the full implementation of the previous steps.
 
 ## Known Limitations
 
-When you bind the PivotGridV2 to a flat data structure, the component processes the data on the client (browser) and creates a client cube representation [(configuration)](/api/javascript/data/pivotdatasource/configuration/schema#schemacube). This means that the component uses the processing power of the browser to project the data and produce the required categorized data output. Even though the PivotGridV2 does not restrict the maximum amount of data that you can bind to it, the data has limits that are directly related to the browser's capability to handle the loaded dataset.
+When you bind the PivotGridV2 to a flat data structure, the component processes the data on the client (browser) and creates a client cube representation [(configuration)](/api/data/pivotdatasource/configuration/schema#schemacube). This means that the component uses the processing power of the browser to project the data and produce the required categorized data output. Even though the PivotGridV2 does not restrict the maximum amount of data that you can bind to it, the data has limits that are directly related to the browser's capability to handle the loaded dataset.
 
 The symptoms for an overloaded browser are:
 - The browser is loading extremely slowly or gets unresponsive for a long time.

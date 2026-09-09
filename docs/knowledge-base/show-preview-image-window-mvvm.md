@@ -30,4 +30,4 @@ To see the example, refer to [this project](https://github.com/telerik/kendo-exa
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

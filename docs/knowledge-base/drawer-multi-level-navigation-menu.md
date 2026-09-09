@@ -30,10 +30,10 @@ You may need to create a multi-level menu in the Drawer similar to the one on th
 
 To achieve the desired scenario: 
 
-1. Add two separate `ul` elements to the [`template`](/api/javascript/ui/drawer/configuration/template) configuration of the Drawer.
+1. Add two separate `ul` elements to the [`template`](/api/ui/drawer/configuration/template) configuration of the Drawer.
 1. List all main menu options in the first `ul` element.
 1. Leave the second `ul` element empty.
-1. Attach a handler to the [`itemClick`](/api/javascript/ui/drawer/events/itemclick) event of the Drawer.
+1. Attach a handler to the [`itemClick`](/api/ui/drawer/events/itemclick) event of the Drawer.
 1. Inside the handling function, check which `ul` element is currently visible.
 1. If the main menu is currently visible, hide it and display one of the submenus.
 1. If a submenu has been activated, list the possible options in the second `ul` element.

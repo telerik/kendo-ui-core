@@ -217,6 +217,6 @@ For a better visualization of the scenario, you can add styles to the Draggable 
 
 ## See Also 
 
-* [JavaScript API Reference of the Draggable](/api/javascript/ui/draggable)
+* [JavaScript API Reference of the Draggable](/api/ui/draggable)
 * [Knowledge Base Section](/knowledge-base)
 

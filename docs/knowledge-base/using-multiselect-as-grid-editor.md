@@ -42,7 +42,7 @@ This knowledge base article also answers the following questions:
 To configure the Kendo UI MultiSelect as a custom editor for a field in the Kendo UI Grid, follow these steps:
 
 1. Define a custom editor function for the Grid column.
-2. Bind the MultiSelect to the appropriate data source and configure the [`value`](/api/javascript/ui/multiselect/configuration/value) property and [`change`](/api/javascript/ui/multiselect/events/change) events to synchronize the selected values.
+2. Bind the MultiSelect to the appropriate data source and configure the [`value`](/api/ui/multiselect/configuration/value) property and [`change`](/api/ui/multiselect/events/change) events to synchronize the selected values.
 
 Here is an example implementation:
 

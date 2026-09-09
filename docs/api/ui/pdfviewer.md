@@ -705,7 +705,7 @@ How can I adjust the zoom increment for Kendo UI PDFViewer? Adjust the amount by
 
 ### view `Object`
 
-Defines the page surface options. This setting is available only for DPL Processing. The page render a drawing [Surface](/api/javascript/drawing/surface) and all of its configuration options could be defined.
+Defines the page surface options. This setting is available only for DPL Processing. The page render a drawing [Surface](/api/drawing/surface) and all of its configuration options could be defined.
 
 
 <div class="meta-api-description">
@@ -753,7 +753,7 @@ What is the difference between using canvas and SVG rendering in Kendo UI PDFVie
 
 ### toolbar `Boolean|Object` *(default: true)*
 
-Toolbar option accepts a Boolean value which indicates if the toolbar will be displayed or an Object with `items` and `overflow` configuration. Inherits [Kendo UI Toolbar](/api/javascript/ui/toolbar).
+Toolbar option accepts a Boolean value which indicates if the toolbar will be displayed or an Object with `items` and `overflow` configuration. Inherits [Kendo UI Toolbar](/api/ui/toolbar).
 
 
 <div class="meta-api-description">
@@ -863,7 +863,7 @@ How to customize the toolbar in Kendo UI for jQuery PDFViewer? Control and custo
         });
     </script>
 
-Apart from the built-in tools, the PDFViewer fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
+Apart from the built-in tools, the PDFViewer fully exposes the [ToolBar.items API](/api/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
 
 ### toolbar.items.type `String`
 
@@ -1457,7 +1457,7 @@ How to set a unique id for a PDF viewer toolbar button in Kendo UI? Specify or c
     </script>
 
 ### toolbar.overflow `Object`
-Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+Specifies [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) configuration for the toolbar.
 
 
 <div class="meta-api-description">

@@ -104,7 +104,7 @@ Refer to this [REPL](https://netcorerepl.telerik.com/mmkzQEEi225iCf3606) for a r
 ## See Also
 
 * [Telerik REPL: Creating an ImageEditor Print Command](https://netcorerepl.telerik.com/mmkzQEEi225iCf3606)
-* [Client-Side API Reference of the ImageEditor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor)
+* [Client-Side API Reference of the ImageEditor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/imageeditor)
 * [Server-Side API Reference of the ImageEditor for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/imageeditor)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

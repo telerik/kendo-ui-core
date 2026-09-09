@@ -36,7 +36,7 @@ How can I implement a stock navigator inside a convetional categorical chart suc
 
 ## Solution
 
-Your project might require you to create a secondary chart that should show a subset of data from the main chart. The secondary chart will be created based on the selected categories from the main chart, therefore, the [chart.categoryAxis.select option](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis.select#categoryaxisselect) has to be added.
+Your project might require you to create a secondary chart that should show a subset of data from the main chart. The secondary chart will be created based on the selected categories from the main chart, therefore, the [chart.categoryAxis.select option](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.select#categoryaxisselect) has to be added.
 
 After the user interacts with the selector, recreate the secondary chart in order to depict the newly selected subset of data.
 
@@ -220,4 +220,4 @@ The following example demonstrates how to implement a stock navigator with the c
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Data Grid](/api/dataviz/ui/chart)

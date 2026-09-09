@@ -41,7 +41,7 @@ To enable grouping, use the remote `groupField` configuration to specify the fie
 
 ## Customizing the Group Header Template
 
-To customize the label that is rendered for each group, use the [`groupHeaderTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart/configuration/groupHeaderTemplate) configuration. 
+To customize the label that is rendered for each group, use the [`groupHeaderTemplate`](https://docs.telerik.com/kendo-ui/api/ui/orgchart/configuration/groupHeaderTemplate) configuration. 
 
 The following example demonstrates how to define a custom `groupHeaderTemplate`.
 
@@ -73,4 +73,4 @@ The following example demonstrates how to define a custom `groupHeaderTemplate`.
 
 * [Grouping in the OrgChart (Demo)](https://demos.telerik.com/kendo-ui/orgchart/grouping)
 * [Group by Parent in the OrgChart (Demo)](https://demos.telerik.com/kendo-ui/orgchart/grouping-by-parent)
-* [JavaScript API Reference of the OrgChart](/api/javascript/ui/orgchart)
+* [JavaScript API Reference of the OrgChart](/api/ui/orgchart)

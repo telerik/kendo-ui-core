@@ -17,7 +17,7 @@ For a complete example, refer to the [demo on customizing the InlineAIPrompt tem
 
 The InlineAIPrompt component provides the ability to customize the appearance of the AI response that is displayed in the output card.
 
-To customize the response appearance, handle the [`responseTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/inlineaiprompt/configuration/responsetemplate) function and customize the rendering of the AI response. 
+To customize the response appearance, handle the [`responseTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/configuration/responsetemplate) function and customize the rendering of the AI response. 
 
 ```
     responseTemplate: function(response) {
@@ -34,4 +34,4 @@ To customize the response appearance, handle the [`responseTemplate`](https://ww
 ## See Also
 
 * [Templates Demo of the InlineAIPrompt](https://demos.telerik.com/kendo-ui/inline-aiprompt/templates)
-* [JavaScript API Reference of the InlineAIPrompt](/api/javascript/ui/inlineaiprompt)
+* [JavaScript API Reference of the InlineAIPrompt](/api/ui/inlineaiprompt)

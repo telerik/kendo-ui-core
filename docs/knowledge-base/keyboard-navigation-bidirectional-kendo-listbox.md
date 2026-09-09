@@ -150,4 +150,4 @@ You can explore the complete implementation in this example:
 ## See Also
 
 - [Kendo UI for jQuery ListBox Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/listbox/overview)
-- [ListBox connectWith API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox/configuration/connectwith)
+- [ListBox connectWith API Reference](https://docs.telerik.com/kendo-ui/api/ui/listbox/configuration/connectwith)

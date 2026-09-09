@@ -131,7 +131,7 @@ To use the client-side API of the DatePicker and build on top of its initial con
         </script>
     ```
 
-1. Use the [DatePicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#methods) to control the behavior of the control. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/methods/enable) method to disable the input.
+1. Use the [DatePicker client-side API](https://docs.telerik.com/kendo-ui/api/ui/combobox#methods) to control the behavior of the control. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/ui/datepicker/methods/enable) method to disable the input.
 
     ```JS script
         <script>
@@ -162,7 +162,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the DatePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datepicker/api)
-* [Client-Side API of the DatePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [Client-Side API of the DatePicker](https://docs.telerik.com/kendo-ui/api/ui/datepicker)
 * [Server-Side API of the DatePicker](/api/datepicker)
 * [Knowledge Base Section](/knowledge-base)
 

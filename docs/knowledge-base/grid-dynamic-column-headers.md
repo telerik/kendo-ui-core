@@ -35,7 +35,7 @@ The Kendo UI Grid with multi-header columns creates them with a `data-title` att
 
 1. Create a custom function `updateColumnTitle`.
 1. Get the Grid instance, the DatePicker instances and their values and generate the new title. 
-1. Use the grid [`thead`](/api/javascript/ui/grid/fields/thead) field to locate the target title and replace it with the new one.
+1. Use the grid [`thead`](/api/ui/grid/fields/thead) field to locate the target title and replace it with the new one.
     `grid.thead.find("[data-title~='Price']").html(newTitle);`
 1. Call the `updateColumnTitle` function in the `dataBound` event of the grid and also in the `change` event of the DatePickers
 

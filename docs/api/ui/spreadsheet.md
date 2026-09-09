@@ -8,7 +8,7 @@ component: spreadsheet
 
 # kendo.ui.Spreadsheet
 
-Represents the Kendo UI Spreadsheet widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Spreadsheet widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -349,7 +349,7 @@ How do I customize the filename when exporting Excel spreadsheets with Kendo UI 
 
 ### excel.forceProxy `Boolean` *(default: false)*
 
-If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/spreadsheet#configuration-excel.proxyURL) even if the browser supports the saving of files locally.
+If set to `true`, the content will be forwarded to [`proxyURL`](/api/ui/spreadsheet#configuration-excel.proxyURL) even if the browser supports the saving of files locally.
 
 
 <div class="meta-api-description">
@@ -412,7 +412,7 @@ How to configure Kendo UI Spreadsheet to export Excel files using a proxy URL? C
 
 An object containing any images used in the Spreadsheet.  The keys
 should be image ID-s (they are referenced by this ID in
-[`sheets.drawings`](/api/javascript/ui/spreadsheet/configuration/sheets.drawings)) and the values
+[`sheets.drawings`](/api/ui/spreadsheet/configuration/sheets.drawings)) and the values
 should be image URLs.
 
 The image URLs can be either
@@ -465,7 +465,7 @@ How do I configure images in Kendo UI Spreadsheet to load from a data URL versus
 
 Note, we can reference the same image ID in two different drawings,
 anchored to cells C2 and E3.  See the
-[`sheets.drawings`](/api/javascript/ui/spreadsheet/configuration/sheets.drawings) property for more
+[`sheets.drawings`](/api/ui/spreadsheet/configuration/sheets.drawings) property for more
 information about a drawing's properties.
 
 ### pdf `Object`
@@ -712,7 +712,7 @@ How to prevent horizontal overflow in Kendo UI Spreadsheet PDF export? Configure
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 
-If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/spreadsheet#configuration-pdf.proxyURL) even if the browser supports the saving of files locally.
+If set to `true`, the content will be forwarded to [`proxyURL`](/api/ui/spreadsheet#configuration-pdf.proxyURL) even if the browser supports the saving of files locally.
 
 
 <div class="meta-api-description">
@@ -765,7 +765,7 @@ How to control cell gridlines in Kendo UI Spreadsheet PDF export? Configure whet
 
 ### pdf.hCenter `Boolean` *(default: false)*
 
-Indicates whether to center the content horizontally. For more information, refer to [`vCenter`](/api/javascript/ui/spreadsheet#configuration-pdf.vCenter).
+Indicates whether to center the content horizontally. For more information, refer to [`vCenter`](/api/ui/spreadsheet#configuration-pdf.vCenter).
 
 
 <div class="meta-api-description">
@@ -1208,7 +1208,7 @@ How do I set the title of a PDF file exported from Kendo UI for jQuery Spreadshe
 
 ### pdf.vCenter `Boolean` *(default: false)*
 
-Indicates whether to center the content vertically. For more information, refer to [`hCenter`](/api/javascript/ui/spreadsheet#configuration-pdf.hCenter).
+Indicates whether to center the content vertically. For more information, refer to [`hCenter`](/api/ui/spreadsheet#configuration-pdf.hCenter).
 
 
 <div class="meta-api-description">
@@ -1396,7 +1396,7 @@ How do I set the position of a column in Kendo UI Spreadsheet? Set or retrieve t
 
 ### sheets.columns.width `Number`
 
-The width of the column in pixels. Defaults to [`columnWidth`](/api/javascript/ui/spreadsheet#configuration-columnWidth).
+The width of the column in pixels. Defaults to [`columnWidth`](/api/ui/spreadsheet#configuration-columnWidth).
 
 
 <div class="meta-api-description">
@@ -1811,7 +1811,7 @@ How do I apply dynamic filtering on specific columns in a Kendo UI Spreadsheet? 
 
 ### sheets.filter.columns.index `Number`
 
-The index of the column relative to the [`filter` range](/api/javascript/ui/spreadsheet#configuration-sheets.filter.ref).
+The index of the column relative to the [`filter` range](/api/ui/spreadsheet#configuration-sheets.filter.ref).
 
 
 <div class="meta-api-description">
@@ -1840,7 +1840,7 @@ How do I target a specific column in a Kendo UI Spreadsheet filter? Specify, sel
 
 ### sheets.filter.columns.logic `String`
 
-The logical operator that will apply to [`filter` criteria](/api/javascript/ui/spreadsheet#configuration-sheets.filter.columns.criteria).
+The logical operator that will apply to [`filter` criteria](/api/ui/spreadsheet#configuration-sheets.filter.columns.criteria).
 
 The supported values are:
 
@@ -1877,7 +1877,7 @@ How do I configure multiple filtering conditions for a single column in Kendo UI
 
 The filter sub-type, if any.
 
-The applicable types according to the [main `filter`](/api/javascript/ui/spreadsheet#configuration-sheets.filter.columns.filter) are:
+The applicable types according to the [main `filter`](/api/ui/spreadsheet#configuration-sheets.filter.columns.filter) are:
 
 * `top`
     * `topNumber`
@@ -3384,7 +3384,7 @@ How to enable wrapping of text in Kendo UI Spreadsheet cells? Enable or disable 
 
 ### sheets.rows.height `Number`
 
-The row height in pixels. Defaults to [`rowHeight`](/api/javascript/ui/spreadsheet#configuration-rowHeight).
+The row height in pixels. Defaults to [`rowHeight`](/api/ui/spreadsheet#configuration-rowHeight).
 
 
 <div class="meta-api-description">
@@ -3706,7 +3706,7 @@ How can I control the visibility of worksheet tabs in Kendo UI for jQuery Spread
 
 A Boolean value which indicates if the toolbar will be displayed.
 
-Apart from the built-in tools, the Spreadsheet File, Home, Insert, Format, Data and View ToolBars fully expose the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
+Apart from the built-in tools, the Spreadsheet File, Home, Insert, Format, Data and View ToolBars fully expose the [ToolBar.items API](/api/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
 
 
 <div class="meta-api-description">
@@ -3780,7 +3780,7 @@ How do I hide the File tab in Kendo UI Spreadsheet's toolbar? Control the visibi
             toolbar: {
                 file: [
                     // for all available options, see the toolbar items configuration
-                    // https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/items
+                    // https://docs.telerik.com/kendo-ui/api/ui/toolbar/configuration/items
                     {
                         type: "button",
                         text: "Custom",
@@ -3845,7 +3845,7 @@ How can I customize the home tab in Kendo UI Spreadsheet's toolbar? Control the 
             toolbar: {
                 home: [
                     // for all available options, see the toolbar items configuration
-                    // https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/items
+                    // https://docs.telerik.com/kendo-ui/api/ui/toolbar/configuration/items
                     {
                         type: "button",
                         text: "Custom",
@@ -4086,11 +4086,11 @@ How to programmatically change the active sheet in Kendo UI Spreadsheet? Switch 
 
 ##### sheet `kendo.spreadsheet.Sheet` *optional*
 
-The [sheet](/api/javascript/spreadsheet/sheet) to set as active.
+The [sheet](/api/spreadsheet/sheet) to set as active.
 
 #### Returns
 
-`kendo.spreadsheet.Sheet` - The active [sheet](/api/javascript/spreadsheet/sheet).
+`kendo.spreadsheet.Sheet` - The active [sheet](/api/spreadsheet/sheet).
 
 #### Example - changing the active sheet
 
@@ -4389,7 +4389,7 @@ The file or blob that is usually obtained through a file input.
 
 ### saveAsExcel
 
-Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/spreadsheet/events/excelexport) event.
+Initiates the Excel export. Also fires the [`excelExport`](/api/ui/spreadsheet/events/excelexport) event.
 
 > Calling this method may trigger the built-in popup blocker of the browser. To avoid that, always call it as a response to an end-user action, for example, a button click.
 
@@ -4428,7 +4428,7 @@ How to export Kendo UI Spreadsheet data as an Excel file? Export spreadsheet dat
 
 ### saveAsPDF
 
-Initiates the PDF export. Also fires the [`pdfExport`](/api/javascript/ui/spreadsheet/events/pdfexport) event.
+Initiates the PDF export. Also fires the [`pdfExport`](/api/ui/spreadsheet/events/pdfexport) event.
 
 > Calling this method may trigger the built-in popup blocker of the browser. To avoid that, always call it as a response to an end-user action, for example, a button click.
 
@@ -4441,11 +4441,11 @@ How to export Kendo UI Spreadsheet data as PDF programmatically? Trigger exporti
 
 ##### options `Object`
 
-An `options` object with the same structure as the [`pdf`](/api/javascript/ui/spreadsheet#configuration-pdf) options.
+An `options` object with the same structure as the [`pdf`](/api/ui/spreadsheet#configuration-pdf) options.
 
 #### Returns
 
-`Promise` - A promise that will be resolved when the export completes. The same promise is available in the [`pdfExport`](/api/javascript/ui/spreadsheet/events/pdfexport) event arguments.
+`Promise` - A promise that will be resolved when the export completes. The same promise is available in the [`pdfExport`](/api/ui/spreadsheet/events/pdfexport) event arguments.
 
 #### Example - manually initiating the export to PDF
 
@@ -4649,7 +4649,7 @@ The data source for this sheet.
 
 ##### options.data `Object`
 
-The sheet state and data as `Object`. The schema follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration).
+The sheet state and data as `Object`. The schema follows the same structure as the [widget configuration](/api/ui/spreadsheet#configuration).
 
 #### Returns
 
@@ -5455,7 +5455,7 @@ The widget instance which fired the event.
 
 ##### e.range `kendo.spreadsheet.Range`
 
-The [`Range`](/api/javascript/spreadsheet/range) that is selected.
+The [`Range`](/api/spreadsheet/range) that is selected.
 
 #### Example
 
@@ -5485,7 +5485,7 @@ The widget instance which fired the event.
 
 ##### e.range `kendo.spreadsheet.Range`
 
-The [`Range`](/api/javascript/spreadsheet/range) whose format is changed.
+The [`Range`](/api/spreadsheet/range) whose format is changed.
 
 #### Example
 
@@ -5515,7 +5515,7 @@ The widget instance which fired the event.
 
 ##### e.range `kendo.spreadsheet.Range`
 
-The [Range](/api/javascript/spreadsheet/range) which values are about to be changed in the spreadsheet.
+The [Range](/api/spreadsheet/range) which values are about to be changed in the spreadsheet.
 
 ##### e.changeType `String`
 
@@ -5601,7 +5601,7 @@ The widget instance which fired the event.
 
 ##### e.range `kendo.spreadsheet.Range`
 
-The [`Range`](/api/javascript/spreadsheet/range) that triggered the change.
+The [`Range`](/api/spreadsheet/range) that triggered the change.
 
 #### Example
 
@@ -5661,7 +5661,7 @@ The array of data items that is used to create the Excel workbook.
 
 ##### e.workbook `kendo.ooxml.Workbook`
 
-The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will reflect in the output Excel document.
+The Excel [workbook configuration object](/api/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will reflect in the output Excel document.
 
 ##### e.preventDefault `Function`
 
@@ -5748,7 +5748,7 @@ If invoked, the Spreadsheet will not import the file.
 A promise that will be resolved when the import operation completes.
 
 The [progress handler](https://api.jquery.com/deferred.progress/) of the promise will be called periodically with the following arguments:
-* `sheet` - The current sheet. An instance of [`kendo.spreadsheet.Sheet`](/api/javascript/spreadsheet/sheet).
+* `sheet` - The current sheet. An instance of [`kendo.spreadsheet.Sheet`](/api/spreadsheet/sheet).
 * `progress` - A number if the range is from `0` to `1` which indicates the progress of the current import operation.
 
 #### Example - monitoring the progress of an import operation
@@ -5837,7 +5837,7 @@ The widget instance which fired the event.
 
 ##### e.range `kendo.spreadsheet.Range`
 
-The [Range](/api/javascript/spreadsheet/range) that is selected and about to be copied.
+The [Range](/api/spreadsheet/range) that is selected and about to be copied.
 
 ##### e.preventDefault `Function`
 
@@ -5871,7 +5871,7 @@ The widget instance which fired the event.
 
 ##### e.range `kendo.spreadsheet.Range`
 
-The [Range](/api/javascript/spreadsheet/range) that is selected and about to be cut.
+The [Range](/api/spreadsheet/range) that is selected and about to be cut.
 
 ##### e.preventDefault `Function`
 
@@ -5905,7 +5905,7 @@ The widget instance which fired the event.
 
 ##### e.range `kendo.spreadsheet.Range`
 
-The [Range](/api/javascript/spreadsheet/range) that is currently selected in the spreadsheet. The actual selection will change according to the pasted range / values.
+The [Range](/api/spreadsheet/range) that is currently selected in the spreadsheet. The actual selection will change according to the pasted range / values.
 
 ##### e.clipboardContent `Object`
 

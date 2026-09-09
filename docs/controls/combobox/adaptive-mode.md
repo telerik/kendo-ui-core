@@ -44,4 +44,4 @@ The following example demonstrates how to configure an on-screen keyboard for th
 
 ## See Also
 
-* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [JavaScript API Reference of the ComboBox](/api/ui/combobox)

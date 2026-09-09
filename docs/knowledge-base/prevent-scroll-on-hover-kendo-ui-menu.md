@@ -29,7 +29,7 @@ This KB article also answers the following questions:
 
 To disable the default scrolling behavior on hover and implement custom scrolling with button clicks, follow these steps:
 
-1. Enable [scrolling](/api/javascript/ui/menu/configuration/scrollable) in the Menu but hide the default scroll buttons.
+1. Enable [scrolling](/api/ui/menu/configuration/scrollable) in the Menu but hide the default scroll buttons.
 2. Add custom buttons for scrolling.
 3. Use the custom buttons to programmatically scroll the Menu.
 
@@ -158,6 +158,6 @@ For a live demonstration, refer to the following example:
 
 ## See Also
 
-- [Kendo UI Menu Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+- [Kendo UI Menu Documentation](https://docs.telerik.com/kendo-ui/api/ui/menu)
 - [Kendo UI Menu Scrollable Demo](https://demos.telerik.com/kendo-ui/menu/scrollable)
-- [Kendo UI Button Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/button)
+- [Kendo UI Button Documentation](https://docs.telerik.com/kendo-ui/api/ui/button)

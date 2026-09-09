@@ -11,7 +11,7 @@ position: 3
 
 The ComboBox enables you to bind it to [local data arrays](#binding-to-local-data) or to [remote data services](#binding-to-remote-data).
 
-> When you configure the local or remote data source of the ComboBox, enabling the paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In all other cases, do not enable the paging functionality or set the `pageSize`.
+> When you configure the local or remote data source of the ComboBox, enabling the paging functionality and setting [`pageSize`](/api/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In all other cases, do not enable the paging functionality or set the `pageSize`.
 
 ## Basic Approaches for Initialization
 
@@ -90,4 +90,4 @@ Remote data binding is useful for larger datasets so that the items are loaded o
 
 * [Basic Usage of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/index)
 * [Using the API of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/api)
-* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [JavaScript API Reference of the ComboBox](/api/ui/combobox)

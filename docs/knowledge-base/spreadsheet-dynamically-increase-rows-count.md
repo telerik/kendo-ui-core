@@ -24,10 +24,10 @@ I want to insert a new row in the Spreadsheet. Currently, the Kendo UI Spreadshe
 
 ## Solution
 
-1. Hide a part of the rows initially using the [`hideRow`](/api/javascript/spreadsheet/sheet/methods/hiderow) method.
-1. Handle the [`insertRow`](/api/javascript/ui/spreadsheet/events/insertrow) event and check the count of the currently visible rows and the total count of rows.
-1. Utilize the [`fromJSON`](/api/javascript/ui/spreadsheet/methods/fromjson) and  [`toJSON`](/api/javascript/ui/spreadsheet/methods/tojson) methods to accommodate all the records.
-1. Use the [`batch`](/api/javascript/spreadsheet/sheet/methods/batch) method for better performance.
+1. Hide a part of the rows initially using the [`hideRow`](/api/spreadsheet/sheet/methods/hiderow) method.
+1. Handle the [`insertRow`](/api/ui/spreadsheet/events/insertrow) event and check the count of the currently visible rows and the total count of rows.
+1. Utilize the [`fromJSON`](/api/ui/spreadsheet/methods/fromjson) and  [`toJSON`](/api/ui/spreadsheet/methods/tojson) methods to accommodate all the records.
+1. Use the [`batch`](/api/spreadsheet/sheet/methods/batch) method for better performance.
 
 
 ```dojo

@@ -169,7 +169,7 @@ For a runnable example with the code above, refer to the REPL project on [export
 ## See Also
 
 * [Telerik REPL: Exporting Detail Grids and Merging Their Workbooks with the Parent](https://netcorerepl.telerik.com/QGOKQDvS30QKTkiV55)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

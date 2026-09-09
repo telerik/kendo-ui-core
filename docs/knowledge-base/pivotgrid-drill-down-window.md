@@ -28,7 +28,7 @@ This sample demonstrates how to implement a Drill Down Window for the PivotGrid,
 
 ## Solution
 
-The key part is creating a secondary **drillDownDataSource**, which will request and hold only a subset of the data related to the clicked cell. This is achieved using multiple [filters](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter#filterfilters).
+The key part is creating a secondary **drillDownDataSource**, which will request and hold only a subset of the data related to the clicked cell. This is achieved using multiple [filters](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/filter#filterfilters).
 
 ```dojo
    <style>

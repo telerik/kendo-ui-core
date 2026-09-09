@@ -19,11 +19,11 @@ The following example demonstrates how the `Layout` method generates a random Di
     // Call the layout method.
     diagram.layout();
 
-The default layout algorithm is the top-down tree layout. To change the default types to another type and subtype, insert it in the layout options. For more information, refer to the [`layout` API reference](/api/javascript/dataviz/ui/diagram/configuration/layout).
+The default layout algorithm is the top-down tree layout. To change the default types to another type and subtype, insert it in the layout options. For more information, refer to the [`layout` API reference](/api/dataviz/ui/diagram/configuration/layout).
 
     diagram.layout({ type: "ForceDirected" });
 
 ## See Also
 
 * [Using the Built-In Layouts of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/layout)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)

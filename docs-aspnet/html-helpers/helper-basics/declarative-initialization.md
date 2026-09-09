@@ -20,7 +20,7 @@ The declarative initialization feature serializes the helper declaration as an M
 To enable the declarative initialization:
 
 1. Add the `UseMvvmInitialization()` method in the HTML Helper declaration. This option will instruct the respective component to serialize its helper declaration as an MVVM declarative configuration.
-1. Call the <a href="https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/bind" target="_blank">`kendo.bind()`</a> method after the component's definition by passing the jQuery selector of the element that wraps the helper declaration or the `Name()` of the component. It is important to call the `kendo.bind()` in the `$(document).ready()` function.
+1. Call the <a href="https://docs.telerik.com/kendo-ui/api/kendo/methods/bind" target="_blank">`kendo.bind()`</a> method after the component's definition by passing the jQuery selector of the element that wraps the helper declaration or the `Name()` of the component. It is important to call the `kendo.bind()` in the `$(document).ready()` function.
 
 The following example illustrates the generated declarative configuration of a [TextBox]({% slug htmlhelpers_overview_textbox %}) component when declarative initialization is enabled:
 

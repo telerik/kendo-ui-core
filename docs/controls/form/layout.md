@@ -131,4 +131,4 @@ The following example shows the Form with `grid` layout set.
 ## See Also
 
 * [Layout of the Form (Demo)](https://demos.telerik.com/kendo-ui/form/layout)
-* [JavaScript API Reference of the Form](/api/javascript/ui/form)
+* [JavaScript API Reference of the Form](/api/ui/form)

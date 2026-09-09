@@ -25,8 +25,8 @@ How can I add overlay text over an image in ImageEditor?
 
 ## Solution
 
-Adding an overlay text over image could be achieved by utilizing [CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) through the [ImageEditor's methods](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor#methods).
-By getting the Image's [canvas](/api/javascript/ui/imageeditor/methods/getcanvaselement) element and [context](/api/javascript/ui/imageeditor/methods/getcurrent2dcontext) object, the developer can customize the content placed on the image.
+Adding an overlay text over image could be achieved by utilizing [CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) through the [ImageEditor's methods](https://docs.telerik.com/kendo-ui/api/ui/imageeditor#methods).
+By getting the Image's [canvas](/api/ui/imageeditor/methods/getcanvaselement) element and [context](/api/ui/imageeditor/methods/getcurrent2dcontext) object, the developer can customize the content placed on the image.
 
 
 ### DatePicker
@@ -101,4 +101,4 @@ The following example demonstrates how a [custom command](https://docs.telerik.c
 
 ## See Also
 
-* [ImageEditor] API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor)
+* [ImageEditor] API Reference](https://docs.telerik.com/kendo-ui/api/ui/imageeditor)

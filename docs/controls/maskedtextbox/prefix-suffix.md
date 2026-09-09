@@ -17,7 +17,7 @@ The prefix and suffix input adornments are elements positioned before and after 
 
 The prefix input adornment is located before the MaskedTextBox input field. It provides additional context to guide users when entering specific data, such as icons for currencies or unit indicators.
 
-To add a prefix before your MaskedTextBox input, use the [`prefixOptions`](/api/javascript/ui/maskedtextbox/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
+To add a prefix before your MaskedTextBox input, use the [`prefixOptions`](/api/ui/maskedtextbox/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
 
 * `Icon`&mdash;Inserts an icon before the MaskedTextBox element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content before the MaskedTextBox element.
@@ -42,7 +42,7 @@ The following example demonstrates how to set an icon as a prefix of the MaskedT
 
 The suffix input adornment is located after the MaskedTextBox input field. Usually, it offers direct functionality related to the entered data, such as toggles for password visibility, formatting options, or the ability to clear the input.
 
-To add a suffix after your MaskedTextBox input, use the [`suffixOptions`](/api/javascript/ui/maskedtextbox/configuration/suffixoptions). `suffixOptions` provides the following options:
+To add a suffix after your MaskedTextBox input, use the [`suffixOptions`](/api/ui/maskedtextbox/configuration/suffixoptions). `suffixOptions` provides the following options:
 
 * `Icon`&mdash;Adds an icon after the MaskedTextBox element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content after the MaskedTextBox element.
@@ -69,4 +69,4 @@ The following example demonstrates how to add a button as a suffix of the Masked
 ## See Also
 
 * [MaskedTextBox Prefix and Suffix (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/prefix-suffix)
-* [JavaScript API Reference of the MaskedTextBox](/api/javascript/ui/maskedtextbox)
+* [JavaScript API Reference of the MaskedTextBox](/api/ui/maskedtextbox)

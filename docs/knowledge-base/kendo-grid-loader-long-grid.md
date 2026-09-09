@@ -41,7 +41,7 @@ This knowledge base article also answers the following questions:
 
 To ensure the loader appears above the fold, you can modify its position by appending a CSS class dynamically in the `excelExport` event handler of the Grid. The CSS class will adjust the loader's position based on the grid's height.
 
-1. Attach an [`excelExport`](/api/javascript/ui/grid/events/excelexport) event handler to the Grid.
+1. Attach an [`excelExport`](/api/ui/grid/events/excelexport) event handler to the Grid.
 2. Check the Grid's height in the event handler.
 3. Conditionally add a CSS class to the loader for proper positioning.
 4. Define the new styles in your CSS.

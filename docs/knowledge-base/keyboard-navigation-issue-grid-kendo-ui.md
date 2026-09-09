@@ -126,4 +126,4 @@ Here is an example of how you can implement this workaround:
 ```
 
 ## See Also
-- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid)

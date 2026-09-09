@@ -36,7 +36,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To achieve this, use the [`excelExport`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/excelexport) event of the Kendo UI for jQuery Grid to modify the workbook configuration object before the file is generated.
+To achieve this, use the [`excelExport`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/excelexport) event of the Kendo UI for jQuery Grid to modify the workbook configuration object before the file is generated.
 
 ### Steps to Merge Rows:
 
@@ -114,7 +114,7 @@ The following example configures a Grid with an `excelExport` handler that itera
 
 ### Key Points in the Code:
 
-- The [`excelExport`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/excelexport) event provides access to the workbook's structure.
+- The [`excelExport`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/excelexport) event provides access to the workbook's structure.
 - Rows are iterated and checked for the specified condition (`addchgInd == "Y`).
 - Matching rows are merged into a single row by combining their cell values.
 - The workbook's rows array is updated with the modified rows.

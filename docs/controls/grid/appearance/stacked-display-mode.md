@@ -15,7 +15,7 @@ This mode is particularly useful for responsive designs and when displaying data
 
 ## Getting Started
 
-To enable the Stacked Display Mode, set the [`dataLayoutMode`](/api/javascript/ui/grid/configuration/datalayoutmode) property to `"stacked"`. Additionally, you can configure the layout using the [`stackedLayoutSettings`](/api/javascript/ui/grid/configuration/stackedlayoutsettings) property.
+To enable the Stacked Display Mode, set the [`dataLayoutMode`](/api/ui/grid/configuration/datalayoutmode) property to `"stacked"`. Additionally, you can configure the layout using the [`stackedLayoutSettings`](/api/ui/grid/configuration/stackedlayoutsettings) property.
 
 The following example demonstrates how to configure the Grid in Stacked Display Mode:
 
@@ -49,7 +49,7 @@ The following example demonstrates how to configure the Grid in Stacked Display 
 
 ## Layout Settings
 
-The stacked layout can be customized using the [`stackedLayoutSettings`](/api/javascript/ui/grid/configuration/stackedLayoutSettings) property, which accepts the following options:
+The stacked layout can be customized using the [`stackedLayoutSettings`](/api/ui/grid/configuration/stackedLayoutSettings) property, which accepts the following options:
 
 ### cols `Number|Array` *(default: 2)*
 
@@ -235,6 +235,6 @@ $(window).resize(function() {
 
 ## See Also
 
-* [API Reference of the Grid](/api/javascript/ui/grid)
+* [API Reference of the Grid](/api/ui/grid)
 * [Grid Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
 * [Grid Sizing]({% slug sizing_kendoui_grid %})

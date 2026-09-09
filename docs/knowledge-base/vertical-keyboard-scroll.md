@@ -90,7 +90,7 @@ The following example demonstrates how to implement the suggested approach.
         $(document).ready(function () {
             // this handler should be attached before the TabStrip is initialized!
             $("#tabstrip").on("keydown", function (e) {
-                // kendo.keys is documented at https://docs.telerik.com/kendo-ui/api/javascript/kendo#fields-keys
+                // kendo.keys is documented at https://docs.telerik.com/kendo-ui/api/kendo#fields-keys
                 if (e.keyCode == kendo.keys.DOWN || e.keyCode == kendo.keys.UP) {
                     // prevent the built-in TabStrip keyboard navigation
                     e.stopImmediatePropagation();
@@ -124,7 +124,7 @@ The following example demonstrates how to implement the suggested approach.
 
 ## See Also
 
-* [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
+* [TabStrip JavaScript API Reference](/api/ui/tabstrip)
 * [Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
 * [Save Content Scroll Position]({% slug howto_savecontentscrollposition_tabstrip %})
 

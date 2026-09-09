@@ -24,9 +24,9 @@ The Kendo UI Captcha component is a security measure that prevents automated spa
 
 * [Getting Started with the Kendo UI Captcha for jQuery]({% slug getting_started_kendoui_captcha_widget %})
 * [Overview of the Captcha (Demo)](https://demos.telerik.com/kendo-ui/captcha/index)
-* [JavaScript API Reference of the Captcha](/api/javascript/ui/captcha)
+* [JavaScript API Reference of the Captcha](/api/ui/captcha)
 
 ## See Also
 
 * [Overview of the Captcha (Demo)](https://demos.telerik.com/kendo-ui/captcha/index)
-* [JavaScript API Reference of the Captcha](/api/javascript/ui/captcha)
+* [JavaScript API Reference of the Captcha](/api/ui/captcha)

@@ -173,4 +173,4 @@ The example below demonstrates how to use the [`Move` event](/api/kendo.mvc.ui.f
 
 * [Using the API of the Gantt for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/api)
 * [Server-Side API of the Gantt](/api/gantt)
-* [Client-Side API of the Gantt](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [Client-Side API of the Gantt](https://docs.telerik.com/kendo-ui/api/ui/gantt)

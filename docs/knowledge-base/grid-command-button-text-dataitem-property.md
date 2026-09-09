@@ -31,7 +31,7 @@ How can I add a column with custom command buttons in which the text corresponds
 ## Solution
 
 1. Add a custom command column.
-1. Go through every row during the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event to change its custom command text.
+1. Go through every row during the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event to change its custom command text.
 
 ```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>

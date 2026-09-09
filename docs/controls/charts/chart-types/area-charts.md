@@ -59,7 +59,7 @@ The configuration from the previous example results in the following Area Chart.
 
 ## Configuring the Line Styles
 
-The Area Charts support the rendering of lines between points by using different styles. You can set the supported styles through the [`line.style`](/api/javascript/dataviz/ui/chart/configuration/series.line#series.line.style) option.
+The Area Charts support the rendering of lines between points by using different styles. You can set the supported styles through the [`line.style`](/api/dataviz/ui/chart/configuration/series.line#series.line.style) option.
 
 The Area Chart supports the following styles:
 
@@ -76,4 +76,4 @@ The following image displays a smooth-line Area Chart.
 ## See Also
 
 * [Basic Usage of the Area Chart (Demo)](https://demos.telerik.com/kendo-ui/area-charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

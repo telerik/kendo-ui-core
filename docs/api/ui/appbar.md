@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.AppBar
 
-Represents the Kendo UI AppBar widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI AppBar widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -101,7 +101,7 @@ How to add custom CSS classes to individual items in a Kendo UI AppBar? Customiz
 
 ### items.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders as content for the appbar item. Valid only for the **contentItem** type
+The [template](/api/kendo/methods/template) which renders as content for the appbar item. Valid only for the **contentItem** type
 
 
 <div class="meta-api-description">

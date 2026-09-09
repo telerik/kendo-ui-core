@@ -36,11 +36,11 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To prevent accidental overwrites during drag-and-copy operations in Kendo UI for jQuery Spreadsheet, handle the [changing](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/spreadsheet/events/changing) event. Implement a confirmation dialog that prompts the user before proceeding with the operation.
+To prevent accidental overwrites during drag-and-copy operations in Kendo UI for jQuery Spreadsheet, handle the [changing](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/spreadsheet/events/changing) event. Implement a confirmation dialog that prompts the user before proceeding with the operation.
 
 ### Steps
 
-1. Attach an event handler to the [`changing`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/spreadsheet/events/changing) event of the Spreadsheet component.
+1. Attach an event handler to the [`changing`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/spreadsheet/events/changing) event of the Spreadsheet component.
 2. In the event handler, check if the `changeType` is `"autoFill"`.
 3. Display a confirmation dialog to the user.
 4. Use `e.preventDefault()` to stop the operation if the user cancels.
@@ -94,4 +94,4 @@ For a live demonstration, refer to the example below
 ## See Also
 
 - [Kendo UI for jQuery Spreadsheet Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/spreadsheet/overview)
-- [Kendo UI for jQuery Spreadsheet API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/spreadsheet)
+- [Kendo UI for jQuery Spreadsheet API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/spreadsheet)

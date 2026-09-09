@@ -28,4 +28,4 @@ It also provides customizing its content through templates, setting different sh
 ## See Also
 
 * [Use Badge as a label (Demo)](https://demos.telerik.com/kendo-ui/badge/labels)
-* [JavaScript API Reference of the Badge](/api/javascript/ui/badge)
+* [JavaScript API Reference of the Badge](/api/ui/badge)

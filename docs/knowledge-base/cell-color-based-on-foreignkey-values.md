@@ -128,4 +128,4 @@ The following example demonstrates how to set the color of a text cell based on 
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

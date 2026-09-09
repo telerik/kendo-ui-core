@@ -199,6 +199,6 @@ Use the `Events()` configuration to subscribe to the [`Change`](/api/kendo.mvc.u
 ## See Also
 
 * [Using the API of the SegmentedControl for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/segmentedcontrol/api)
-* [Client-Side API of the SegmentedControl](https://docs.telerik.com/kendo-ui/api/javascript/ui/segmentedcontrol)
+* [Client-Side API of the SegmentedControl](https://docs.telerik.com/kendo-ui/api/ui/segmentedcontrol)
 * [Server-Side API of the SegmentedControl HtmlHelper for {{ site.framework }}](/api/segmentedcontrol)
 * [Knowledge Base Section](/knowledge-base)

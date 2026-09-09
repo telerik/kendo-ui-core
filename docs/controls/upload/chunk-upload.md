@@ -17,9 +17,9 @@ You can persist the successfully uploaded files in the list and display them aga
 
 ## Uploading Batches of Files
 
-The Upload generates a unique identifier (`uid`) for each upload unit. When the [`batch` option](/api/javascript/ui/upload/configuration/async.batch) is enabled, all files selected at the same time share a single `uid` that identifies the batch. When the [`batch` option](/api/javascript/ui/upload/configuration/async.batch) is disabled, each file receives its own `uid`.
+The Upload generates a unique identifier (`uid`) for each upload unit. When the [`batch` option](/api/ui/upload/configuration/async.batch) is enabled, all files selected at the same time share a single `uid` that identifies the batch. When the [`batch` option](/api/ui/upload/configuration/async.batch) is disabled, each file receives its own `uid`.
 
-The generated `uid` is added to the [`cancel`](/api/javascript/ui/upload/events/cancel), [`error`](/api/javascript/ui/upload/events/error), [`progress`](/api/javascript/ui/upload/events/progress), [`remove`](/api/javascript/ui/upload/events/remove), [`select`](/api/javascript/ui/upload/events/select), or [`upload`](/api/javascript/ui/upload/events/upload) events as a property of the `e.files` collection.
+The generated `uid` is added to the [`cancel`](/api/ui/upload/events/cancel), [`error`](/api/ui/upload/events/error), [`progress`](/api/ui/upload/events/progress), [`remove`](/api/ui/upload/events/remove), [`select`](/api/ui/upload/events/select), or [`upload`](/api/ui/upload/events/upload) events as a property of the `e.files` collection.
 
 ## Chunk Upload of Files from Multiple Requests
 
@@ -29,7 +29,7 @@ As of the Kendo UI 2017 R2 release, the Upload enables the user to send large fi
 
 ### Enabling the Chunk Upload
 
-1. Set up the [`async.chunkSize`](/api/javascript/ui/upload/configuration/async.chunksize) option of the Upload.
+1. Set up the [`async.chunkSize`](/api/ui/upload/configuration/async.chunksize) option of the Upload.
 
     ```
     <input name="files" id="files" type="file" />
@@ -54,9 +54,9 @@ As of the Kendo UI 2017 R2 release, the Upload enables the user to send large fi
 
 To modify (fine-tune) the chunk upload, use any of the following configuration options:
 
-* [`async.concurrent`](/api/javascript/ui/upload/configuration/async.concurrent)&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
-* [`async.autoRetryAfter`](/api/javascript/ui/upload/configuration/async.autoretryafter)&mdash;The time interval in milliseconds after which the Upload attempts to retry a failed upload.
-* [`async.maxAutoRetries`](/api/javascript/ui/upload/configuration/async.maxautoretries)&mdash;The number of attempts the Upload makes to retry a failed upload before reporting it.
+* [`async.concurrent`](/api/ui/upload/configuration/async.concurrent)&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
+* [`async.autoRetryAfter`](/api/ui/upload/configuration/async.autoretryafter)&mdash;The time interval in milliseconds after which the Upload attempts to retry a failed upload.
+* [`async.maxAutoRetries`](/api/ui/upload/configuration/async.maxautoretries)&mdash;The number of attempts the Upload makes to retry a failed upload before reporting it.
 
 ```
 <input name="files" id="files" type="file" />
@@ -113,4 +113,4 @@ The following list of Kendo UI demos provides examples of server-side logic that
 ## See Also
 
 * [Uploading Chunks of Files with the Upload (Demo)](https://demos.telerik.com/kendo-ui/upload/chunkupload)
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

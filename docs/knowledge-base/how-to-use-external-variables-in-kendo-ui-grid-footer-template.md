@@ -27,7 +27,7 @@ This KB article also answers the following questions:
 
 ## Solution
 
-To use a variable from an external method in the [`footerTemplate`](/api/javascript/ui/grid/configuration/columns.footertemplate) of a Kendo UI Grid, you need to ensure that the variable is accessible in the scope where the Grid is defined. You can then reference this variable directly within the `footerTemplate`.
+To use a variable from an external method in the [`footerTemplate`](/api/ui/grid/configuration/columns.footertemplate) of a Kendo UI Grid, you need to ensure that the variable is accessible in the scope where the Grid is defined. You can then reference this variable directly within the `footerTemplate`.
 
 1. **Ensure global or higher scope availability**: The variable you wish to use must be accessible in the scope where the Grid is initialized. If it is returned from an external method, store it in a variable that's accessible in the Grid's scope.
 
@@ -74,5 +74,5 @@ Below is an example:
 
 ## See Also
 
-- [Official Documentation for Kendo UI Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-- [Kendo UI Grid footerTemplate Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.footertemplate)
+- [Official Documentation for Kendo UI Grid](https://docs.telerik.com/kendo-ui/api/ui/grid)
+- [Kendo UI Grid footerTemplate Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.footertemplate)

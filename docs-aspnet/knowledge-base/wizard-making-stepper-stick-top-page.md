@@ -83,7 +83,7 @@ $(document).ready(function () {
 
 ## See Also
 
-* [Client-Side API Reference of the Wizard for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard)
+* [Client-Side API Reference of the Wizard for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/wizard)
 * [Server-Side API Reference of the Wizard for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/wizard)
 {% if site.core %}
 * [Server-Side API TagHelper Reference of the Wizard for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/wizard)

@@ -36,9 +36,9 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To iterate and manually check items in a Kendo UI for jQuery Grid FilterMultiCheck component based on their text or value, follow the steps outlined below. Note that while Kendo UI does not support direct manipulation of checkboxes within the FilterMultiCheck, you can achieve the desired result by using jQuery to target the checkboxes after the filter menu has rendered. This can be done in the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event handler.
+To iterate and manually check items in a Kendo UI for jQuery Grid FilterMultiCheck component based on their text or value, follow the steps outlined below. Note that while Kendo UI does not support direct manipulation of checkboxes within the FilterMultiCheck, you can achieve the desired result by using jQuery to target the checkboxes after the filter menu has rendered. This can be done in the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/filtermenuinit) event handler.
 
-1. Subscribe to the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event of the Kendo UI for jQuery Grid. 
+1. Subscribe to the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/filtermenuinit) event of the Kendo UI for jQuery Grid. 
 
 2. Verify the field being filtered matches your criteria (e.g., 'UnitPrice' or 'UnitsInStock').
 
@@ -180,5 +180,5 @@ For a practical implementation, refer to the below runnable demo: [Kendo UI for 
 ## See Also
 
 - [Kendo UI for jQuery Grid Documentation](https://docs.telerik.com/kendo-ui/controls/grid/overview)
-- [Grid API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Grid API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid)
 

@@ -13,7 +13,7 @@ The Spreadsheet allows you to store and load data in a native JSON format.
 
 ## Getting Started
 
-The format follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration). It is designed to be used both for direct storage and as an [intermediate format]({% slug serverside_processing_spreadsheet_widget %}).
+The format follows the same structure as the [widget configuration](/api/ui/spreadsheet#configuration). It is designed to be used both for direct storage and as an [intermediate format]({% slug serverside_processing_spreadsheet_widget %}).
 
 The information that is persisted includes:
 
@@ -24,7 +24,7 @@ The information that is persisted includes:
 
 ## Using the Serialization API
 
-The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spreadsheet/methods/fromjson) and [`toJSON`](/api/javascript/ui/spreadsheet/methods/tojson) methods for loading and storing its state. To load the Spreadsheet with data, pass an object matching the required schema to `fromJSON`. This resets the component and clears all existing data.
+The Spreadsheet client-side API includes the [`fromJSON`](/api/ui/spreadsheet/methods/fromjson) and [`toJSON`](/api/ui/spreadsheet/methods/tojson) methods for loading and storing its state. To load the Spreadsheet with data, pass an object matching the required schema to `fromJSON`. This resets the component and clears all existing data.
 
 The following example demonstrates how to load data by using `fromJSON`.
 
@@ -51,7 +51,7 @@ The following example demonstrates how to load data by using `fromJSON`.
     </script>
 ```
 
-You can also choose to load data only in a specific [sheet](/api/javascript/spreadsheet/sheet). This will not affect the data located in the other sheets, apart from the formulas that refer to it.
+You can also choose to load data only in a specific [sheet](/api/spreadsheet/sheet). This will not affect the data located in the other sheets, apart from the formulas that refer to it.
 
 The following example demonstrates how to load sheet data by using `fromJSON`.
 
@@ -91,4 +91,4 @@ The following example demonstrates how to load sheet data by using `fromJSON`.
 ## See Also
 
 * [Server-Side Import and Export in the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/server-side-import-export)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

@@ -72,7 +72,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Menu JavaScript API Reference](/api/javascript/ui/menu)
+* [Menu JavaScript API Reference](/api/ui/menu)
 * [Create Split Button]({% slug howto_createa_split_button_menu %})
 * [Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
 

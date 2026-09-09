@@ -54,7 +54,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 3. Set the Min and Max Dates
 
-The DateInput can restrict the date range that can be entered in the input by configuring the [`min`](/api/javascript/ui/dateinput/configuration/min) and [`max`](/api/javascript/ui/dateinput/configuration/max) options.
+The DateInput can restrict the date range that can be entered in the input by configuring the [`min`](/api/ui/dateinput/configuration/min) and [`max`](/api/ui/dateinput/configuration/max) options.
 
 ```html
     <input id="dateinput"/>
@@ -68,7 +68,7 @@ The DateInput can restrict the date range that can be entered in the input by co
 
 ## 4. Set the Format
 
-You can customize the format of the displayed date by setting the [`format`](/api/javascript/ui/dateinput/configuration/format) configuration of the DateInput.
+You can customize the format of the displayed date by setting the [`format`](/api/ui/dateinput/configuration/format) configuration of the DateInput.
 
 ```html
     <input id="dateinput" style="width: 150px;"/>
@@ -83,7 +83,7 @@ You can customize the format of the displayed date by setting the [`format`](/ap
 
 ## 5. Apply Styling Settings
 
-In this step, you can apply different styling settings to the component such as [`size`](/api/javascript/ui/dateinput/configuration/size), [`rounded`](/api/javascript/ui/dateinput/configuration/rounded), and [`fillMode`](/api/javascript/ui/dateinput/configuration/fillmode).
+In this step, you can apply different styling settings to the component such as [`size`](/api/ui/dateinput/configuration/size), [`rounded`](/api/ui/dateinput/configuration/rounded), and [`fillMode`](/api/ui/dateinput/configuration/fillmode).
 
 ```dojo
     <input id="dateinput" style="width: 150px;"/>
@@ -106,7 +106,7 @@ In this step, you can apply different styling settings to the component such as 
 
 ## See Also 
 
-* [JavaScript API Reference of the DateInput](/api/javascript/ui/dateinput)
+* [JavaScript API Reference of the DateInput](/api/ui/dateinput)
 * [Knowledge Base Section](/knowledge-base)
 
 

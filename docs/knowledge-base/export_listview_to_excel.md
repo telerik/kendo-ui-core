@@ -40,7 +40,7 @@ var rows = [{
 }];
 ```
 
-* Add a new external button and handle its [`click`] event. In the event handler, get an instance of the ListView component and access its DataSource. Then, fetch the remote data and by using the callback of the [`fetch()`](/api/javascript/data/datasource/methods/fetch) method, loop through the items, and push the data to the rows array.
+* Add a new external button and handle its [`click`] event. In the event handler, get an instance of the ListView component and access its DataSource. Then, fetch the remote data and by using the callback of the [`fetch()`](/api/data/datasource/methods/fetch) method, loop through the items, and push the data to the rows array.
 
 ```js
  $('#btn').on('click', function(){
@@ -62,7 +62,7 @@ var rows = [{
 })
 ```
 
-* Instantiate a kendo.ooxml.Workbook component. The workbook has an array of sheets, where you can set their width and title, and set the rows property to the already created rows array. After that, call the [`toDataURLAsync()`](/api/javascript/ooxml/workbook/methods/todataurlasync) method of the workbook to get the output Excel file as a data URI. 
+* Instantiate a kendo.ooxml.Workbook component. The workbook has an array of sheets, where you can set their width and title, and set the rows property to the already created rows array. After that, call the [`toDataURLAsync()`](/api/ooxml/workbook/methods/todataurlasync) method of the workbook to get the output Excel file as a data URI. 
 
 ```js
 var workbook = new kendo.ooxml.Workbook({
@@ -245,7 +245,7 @@ The following example demonstrates a full implementation of the described approa
 ```
 
 ## See Also
-* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
-* [JavaScript API Reference of the Workbook](/api/javascript/ooxml/workbook)
+* [JavaScript API Reference of the ListView](/api/ui/listview)
+* [JavaScript API Reference of the Workbook](/api/ooxml/workbook)
 
 

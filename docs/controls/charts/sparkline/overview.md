@@ -50,4 +50,4 @@ To render the Sparkline, select the `div` with a jQuery selector and call the `k
 ## See Also
 
 * [Basic Usage of the Sparkline (Demo)](https://demos.telerik.com/kendo-ui/sparklines/index)
-* [JavaScript API Reference of the Sparkline](/api/javascript/dataviz/ui/sparkline)
+* [JavaScript API Reference of the Sparkline](/api/dataviz/ui/sparkline)

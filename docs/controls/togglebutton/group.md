@@ -29,4 +29,4 @@ The following example illustrates how to enable the group functionality
 ## See Also
 
 * [ToggleButton API Kendo UI for jQuery (Demo)](https://demos.telerik.com/kendo-ui/togglebutton/api)
-* [JavaScript API Reference of the ToggleButton HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/togglebutton)
+* [JavaScript API Reference of the ToggleButton HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/togglebutton)

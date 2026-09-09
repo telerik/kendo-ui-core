@@ -20,4 +20,4 @@ For more information, refer to:
 * [Localization Support by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/localization)
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
 * [RTL Support in Kendo UI for jQuery]({% slug right_toleft_languages_accessibility_support %})
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

@@ -7,13 +7,13 @@ res_type: api
 
 # kendo.ui.Form
 
-Represents the Kendo UI Form widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Form widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
 ### buttonsTemplate `String|Function`
 
-Specifies the [template](/api/javascript/kendo/methods/template) which is used for rendering the Form buttons.
+Specifies the [template](/api/kendo/methods/template) which is used for rendering the Form buttons.
 
 
 <div class="meta-api-description">
@@ -1128,7 +1128,7 @@ How do I control the layout of form items within a grouped section in Kendo UI f
 
 ### items.grid `Object`
 
-[Grid layout](/api/javascript/ui/form/configuration/grid) settings of the form item.
+[Grid layout](/api/ui/form/configuration/grid) settings of the form item.
 
 
 <div class="meta-api-description">
@@ -2412,7 +2412,7 @@ How can I configure client-side validation for a form using the Kendo UI validat
 
 ### validatable.validateOnBlur `Boolean` *(default: true)*
 
-Configures the Form Validator [validateOnBlur](/api/javascript/ui/validator/configuration/validateonblur) option.
+Configures the Form Validator [validateOnBlur](/api/ui/validator/configuration/validateonblur) option.
 
 
 <div class="meta-api-description">
@@ -2447,7 +2447,7 @@ How to enable immediate input validation when user leaves form field in Kendo UI
 
 ### validatable.validationSummary `Boolean|Object` *(default: false)*
 
-Configures the Form Validator [validationSummary](/api/javascript/ui/validator/configuration/validationsummary) option.
+Configures the Form Validator [validationSummary](/api/ui/validator/configuration/validationsummary) option.
 
 
 <div class="meta-api-description">
@@ -2511,7 +2511,7 @@ How do I customize the error summary in a Kendo UI form? Control and customize t
 
 ### validatable.errorTemplate `String|Function`
 
-Configures the Form Validator [errorTemplate](/api/javascript/ui/validator/configuration/errortemplate) option.
+Configures the Form Validator [errorTemplate](/api/ui/validator/configuration/errortemplate) option.
 
 
 <div class="meta-api-description">
@@ -2546,7 +2546,7 @@ How can I customize the appearance of form validation errors in a Kendo UI for j
 
 ### validatable.messageBoxThemeColor `String` *(default: "error")*
 
-Configures the Form Validator [messageBoxThemeColor](/api/javascript/ui/validator/configuration/messageboxthemecolor) option.
+Configures the Form Validator [messageBoxThemeColor](/api/ui/validator/configuration/messageboxthemecolor) option.
 
 The supported values are:
 
@@ -3382,7 +3382,7 @@ How do I adjust the size of form elements in Kendo UI for jQuery? Adjust form di
 
 ### validate
 
-Validates the form by executing the Form Validator [validate() method](/api/javascript/ui/validator/methods/validate).
+Validates the form by executing the Form Validator [validate() method](/api/ui/validator/methods/validate).
 
 
 <div class="meta-api-description">
@@ -3511,7 +3511,7 @@ How do I properly dispose of form components in Kendo UI to prevent memory leaks
 
 ### validator `kendo.ui.Validator`
 
-The [Validator instance](/api/javascript/ui/validator).
+The [Validator instance](/api/ui/validator).
 
 
 <div class="meta-api-description">

@@ -71,4 +71,4 @@ There are limitations when using editing along with other features of the compon
 ## See Also
 
 * [Editing in the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/editing)
-* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)
+* [TreeList JavaScript API Reference](/api/ui/treelist)

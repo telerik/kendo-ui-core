@@ -85,4 +85,4 @@ The following example demonstrates how to add a button as a suffix of the Masked
 
 * [Using the Prefix and Suffix of the MaskedTextBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/prefix-suffix)
 * [Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/maskedtextbox)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/maskedtextbox)

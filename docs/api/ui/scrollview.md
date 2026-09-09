@@ -8,7 +8,7 @@ component: scrollview
 
 # kendo.ui.ScrollView
 
-Represents the Kendo UI ScrollView widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ScrollView widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -335,7 +335,7 @@ How do I customize the default empty state in Kendo UI ScrollView? Customize or 
 
 If set to `true`, the ScrollView will display a pager. By default, the pager is enabled.
 
-> **Note:** The property has a lower priority than the [`pageable`](/api/javascript/ui/scrollview/configuration/pageable) property.
+> **Note:** The property has a lower priority than the [`pageable`](/api/ui/scrollview/configuration/pageable) property.
 
 
 <div class="meta-api-description">

@@ -333,7 +333,7 @@ The `messageContentTemplate` option controls the rendering of the content area f
 
 ### Per-User Content Templates
 
-You can set different content templates for author (sender) and receiver messages through the [`authorMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/authormessagesettings) and [`receiverMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/receivermessagesettings) configuration options. These per-user templates override the global `messageContentTemplate` when set.
+You can set different content templates for author (sender) and receiver messages through the [`authorMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/authormessagesettings) and [`receiverMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/receivermessagesettings) configuration options. These per-user templates override the global `messageContentTemplate` when set.
 
 ```dojo
 <div id="chat"></div>
@@ -694,4 +694,4 @@ The `timestampTemplate` function controls how date and time separators are displ
 
 * [Templates (Demo)](https://demos.telerik.com/kendo-ui/chat/templates)
 * [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
-* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
+* [JavaScript API Reference of the Chat](/api/ui/chat)

@@ -71,7 +71,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Window JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/ui/window)
 * [Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
 * [Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})

@@ -36,7 +36,7 @@ The user input is restricted within the predefined options. To apply a keyboard 
 
 * [Getting Started with the Kendo UI DropDownList for jQuery]({% slug getting_started_kendoui_dropdownlist_widget %})
 * [Basic Usage of the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/index)
-* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/ui/dropdownlist)
 
 ## See Also
 

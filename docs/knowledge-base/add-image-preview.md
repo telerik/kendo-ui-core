@@ -93,6 +93,6 @@ The following example demonstrates how to add an image preview and read the file
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the jQuery Upload](/api/ui/upload)
 * [Modes of Upload Operation]({% slug modes_upload_widget %})
 * [Handling Metadata in the Upload]({% slug metadata_upload_widget %})

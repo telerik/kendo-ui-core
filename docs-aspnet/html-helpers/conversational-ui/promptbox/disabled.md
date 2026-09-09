@@ -55,5 +55,5 @@ To disable a specific button, use the `Enabled` option within the button configu
 {% if site.core %}
 * [Server-Side API of the PromptBox TagHelper](/api/taghelpers/promptbox)
 {% endif %}
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)
 * [PromptBox Appearance]({% slug htmlhelpers_promptbox_appearance_aspnetcore %})

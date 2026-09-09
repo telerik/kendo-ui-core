@@ -35,7 +35,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To achieve this, use the [`series.highlight.visual`](/api/javascript/dataviz/ui/chart/configuration/series.highlight#serieshighlightvisual) property to customize the hover effect of the chart elements. This property allows you to define a visual representation of the hovered element, enabling you to apply a darker color.
+To achieve this, use the [`series.highlight.visual`](/api/dataviz/ui/chart/configuration/series.highlight#serieshighlightvisual) property to customize the hover effect of the chart elements. This property allows you to define a visual representation of the hovered element, enabling you to apply a darker color.
 
 ### Implementation Example
 
@@ -242,6 +242,6 @@ The following example demonstrates a Stacked Bar Chart where each series uses a 
 
 ## See Also
 
-- [Kendo UI Chart API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
+- [Kendo UI Chart API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart)
 - [Kendo UI for jQuery Chart Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/overview)
 

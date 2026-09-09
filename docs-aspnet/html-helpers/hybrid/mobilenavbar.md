@@ -53,7 +53,7 @@ The NavBar displays an application navigation bar. It provides options for showi
 
 ## Referencing Existing Instances
 
-You can reference a hybrid NavBar instance by using the code from the following example. Once a reference is established, use the [hybrid NavBar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/navbar#methods) to control its behavior.
+You can reference a hybrid NavBar instance by using the code from the following example. Once a reference is established, use the [hybrid NavBar client-side API](https://docs.telerik.com/kendo-ui/api/mobile/ui/navbar#methods) to control its behavior.
 
     @(Html.Kendo().MobileView()
         .Name("navbar-home")

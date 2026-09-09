@@ -37,7 +37,7 @@ How can I zoom the Kendo UI for jQuery Map upon a double click?
 
 ## Solution
 
-In the following example, which demonstrates how to achieve the desired scenario, the event coordinates are mapped to the location by using the [`eventToLocation`](/api/javascript/dataviz/ui/map/methods/eventtolocation) method.
+In the following example, which demonstrates how to achieve the desired scenario, the event coordinates are mapped to the location by using the [`eventToLocation`](/api/dataviz/ui/map/methods/eventtolocation) method.
 
 ```dojo
 <div id="map"></div>
@@ -70,4 +70,4 @@ In the following example, which demonstrates how to achieve the desired scenario
 
 * [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
 * [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
+* [JavaScript API Reference of the Map](/api/dataviz/ui/map)

@@ -15,7 +15,7 @@ You can use the [Kendo UI Sortable component](https://demos.telerik.com/kendo-ui
 
 * [Overview of the Kendo UI Sortable component]({% slug overview_kendoui_sortable_widget %})
 * [Overview of Kendo UI Grid component]({% slug overview_kendoui_grid_widget %})
-* [API reference of the Kendo UI DataSource component](/api/javascript/data/datasource#methods)
+* [API reference of the Kendo UI DataSource component](/api/data/datasource#methods)
 
 ## Reordering of Sortable Items
 
@@ -23,7 +23,7 @@ The Sortable reorders the HTML DOM elements. It does not automatically update th
 
 ## Reordering of Grid Table Rows
 
-To reorder the table rows of the Grid, initialize the Sortable on the [`table` element](/api/javascript/ui/grid#fields-table) of the Grid. Normally, the `filter` property of the Sortable selects all `tr` elements that are direct children of the table `tbody` element, for example, `filter: ">tbody >tr"`.
+To reorder the table rows of the Grid, initialize the Sortable on the [`table` element](/api/ui/grid#fields-table) of the Grid. Normally, the `filter` property of the Sortable selects all `tr` elements that are direct children of the table `tbody` element, for example, `filter: ">tbody >tr"`.
 
 > In AngularJS applications, initialize the Sortable as a parent directive. The `filter` configuration option selects all `tr` elements that are children of the `.k-grid` wrapper.
 
@@ -77,7 +77,7 @@ If the editing functionality of the Grid is enabled, use a more specific filter 
 
 If the Grid is configured to display details, use a selector that matches only the master Grid rows, for example, `filter: ">tbody >tr.k-master-row"`. In this way, the detail rows will not be draggable.
 
-For more information on the Sortable events, refer to the [JavaScript API article on Sortable events](/api/javascript/ui/sortable#events) and the [demo on integrating the Sortable and the Grid](https://demos.telerik.com/kendo-ui/sortable/integration-grid).
+For more information on the Sortable events, refer to the [JavaScript API article on Sortable events](/api/ui/sortable#events) and the [demo on integrating the Sortable and the Grid](https://demos.telerik.com/kendo-ui/sortable/integration-grid).
 
 The editing functionality of the Kendo UI Grid is rendered through its [inline](https://demos.telerik.com/kendo-ui/grid/editing-inline), [popup](https://demos.telerik.com/kendo-ui/grid/editing-popup), or [batch](https://demos.telerik.com/kendo-ui/grid/editing) edit mode. The inline and popup modes are more common and easier to implement than the batch edit mode.
 
@@ -91,7 +91,7 @@ If you use the inline or the popup edit mode, set a more specific filter which e
 
 The draggable functionality of the Sortable prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM from saving the updated value.
 
-If you use the batch (incell) edit mode, the code from the previous example that is applied to the inline and popup edit modes will not work. To work around this issue, use [custom editors](/api/javascript/ui/grid/configuration/columns.editor) and configure them to [update when the `input` event fires]({% slug valuebinding_mvvm_kendoui %}#controlling-when-the-view-model-is-updated)&mdash;by default, the framework listens for the `change` event. To implement the solution, add the `data-value-update="input"` attribute to the editor inputs. The downside of this approach is that the `input` event does not work for earlier Internet Explorer versions.
+If you use the batch (incell) edit mode, the code from the previous example that is applied to the inline and popup edit modes will not work. To work around this issue, use [custom editors](/api/ui/grid/configuration/columns.editor) and configure them to [update when the `input` event fires]({% slug valuebinding_mvvm_kendoui %}#controlling-when-the-view-model-is-updated)&mdash;by default, the framework listens for the `change` event. To implement the solution, add the `data-value-update="input"` attribute to the editor inputs. The downside of this approach is that the `input` event does not work for earlier Internet Explorer versions.
 
 > The `data-value-update` approach works with regular inputs. However, you must manually configure the Kendo UI components as they do not support the `data-value-update` attribute.
 
@@ -168,4 +168,4 @@ The following example demonstrates how to send the `newIndex` and `oldIndex` to 
 ## See Also
 
 * [Grid Integration of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/integration-grid)
-* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
+* [JavaScript API Reference of the Sortable](/api/ui/sortable)

@@ -37,7 +37,7 @@ How can I aggregate Pie Chart data and override the sort order of the Chart cate
 
 ## Solution
 
-The following example demonstrates how to achieve this behavior by using the [dataSource aggregates](/api/javascript/data/datasource/configuration/aggregate).
+The following example demonstrates how to achieve this behavior by using the [dataSource aggregates](/api/data/datasource/configuration/aggregate).
 
 ```dojo
     <div id="piechart"></div>
@@ -105,7 +105,7 @@ The following example demonstrates how to achieve this behavior by using the [da
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
 * [Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})

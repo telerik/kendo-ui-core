@@ -84,4 +84,4 @@ Because of its complex rendering, focusing the widget by using a `label` element
 
 ## See Also
 
-* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/ui/dropdownlist)

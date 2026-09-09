@@ -38,7 +38,7 @@ How can I reload the configuration options of the Kendo UI PivotGrid widget?
 
 ## Solution
 
-The following example demonstrates how to reload the configuration options of the Kendo UI PivotGrid widget on a button `click` event. To set the options, the demo uses the [PivotDataSource API](https://docs.telerik.com/kendo-ui/api/javascript/data/pivotdatasource#methods).
+The following example demonstrates how to reload the configuration options of the Kendo UI PivotGrid widget on a button `click` event. To set the options, the demo uses the [PivotDataSource API](https://docs.telerik.com/kendo-ui/api/data/pivotdatasource#methods).
 
 ```dojo
 <div id="example">
@@ -101,7 +101,7 @@ The following example demonstrates how to reload the configuration options of th
 
 ## See Also
 
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)
 * [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
 * [Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})

@@ -95,7 +95,7 @@ The TreeView component supports AJAX data binding by using Entity Framework. To 
             )
         )
 
-1. Add a button which will asynchronously load child nodes with the [`load()`](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/load) method in the child data source and, therefore, asynchronously expand the currently selected node.
+1. Add a button which will asynchronously load child nodes with the [`load()`](https://docs.telerik.com/kendo-ui/api/data/node/methods/load) method in the child data source and, therefore, asynchronously expand the currently selected node.
 
     ```C#
     @(Html.Kendo().Button()
@@ -174,7 +174,7 @@ To see the complete implementation, refer to the [ASP.NET MVC project on asynchr
 
 ## See Also
 
-* [Client-Side API Reference of the TreeView for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [Client-Side API Reference of the TreeView for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/treeview)
 * [Server-Side API Reference of the TreeView for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/treeview)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2024%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

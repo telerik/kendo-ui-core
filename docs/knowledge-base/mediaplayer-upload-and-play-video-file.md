@@ -31,8 +31,8 @@ To upload and play a video file by using the Kendo UI Upload and Kendo UI MediaP
 
 1. Initialize the Media Player widget.
 1. Initialize the Upload widget.
-1. Handle the [`select`](/api/javascript/ui/upload/events/upload) event of the Upload.
-1. Load the video file by using the [`media`](/api/javascript/ui/mediaplayer/methods/media) method of the MediaPlayer.
+1. Handle the [`select`](/api/ui/upload/events/upload) event of the Upload.
+1. Load the video file by using the [`media`](/api/ui/mediaplayer/methods/media) method of the MediaPlayer.
 
 ```dojo
 <div style="width: 720px; position: absolute; left: 120px;">

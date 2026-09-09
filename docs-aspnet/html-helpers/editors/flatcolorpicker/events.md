@@ -79,5 +79,5 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the FlatColorPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/api)
 * [FlatColorPicker Server-Side API for {{ site.framework}}](/api/flatcolorpicker)
-* [FlatColorPicker Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker)
+* [FlatColorPicker Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/flatcolorpicker)
 

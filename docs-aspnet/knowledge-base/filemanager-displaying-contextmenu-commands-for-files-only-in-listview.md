@@ -23,11 +23,11 @@ How can I configure the {{ site.product }} to only allow a context menu command 
 
 To display ContextMenu commands only for files and not folders in the right pane/ListView of the {{ site.product_short }} FileManager, follow the steps below:
 
-1. Define the [ContextMenu's Open event handler.](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/events/open)
+1. Define the [ContextMenu's Open event handler.](https://docs.telerik.com/kendo-ui/api/ui/contextmenu/events/open)
 2. Check if the target is the TreeView (left pane) by determining if it [has the `k-treeview-item` class.](https://api.jquery.com/hasClass/)
 3. Determine if the target is a folder by checking if [the `k-svg-i-folder` icon exists.](https://api.jquery.com/find/)
 4. Make a reference to the specific command item [using the data attribute.](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors)
-5. Conditionally [disable the listItem from the Kendo UI ContextMenu.](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/methods/enable)
+5. Conditionally [disable the listItem from the Kendo UI ContextMenu.](https://docs.telerik.com/kendo-ui/api/ui/contextmenu/methods/enable)
 
 ```HtmlHelper
 @(Html.Kendo().FileManager().Name("filemanager")

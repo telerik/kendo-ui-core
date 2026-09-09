@@ -259,7 +259,7 @@ To create an AI chat service that connects to the Chat, follow the steps below:
       - `onError`: Clears the current AI message reference and stops the generating indicator.
       - `onAbort`: Calls `completeStream()` to finalize whatever content was received before cancellation.
 
-    * `Download` event&mdash;Fires when a download action is triggered, either from the **Download All** button or from a file menu download action. Within the event handler, iterate through each file in the message, convert the file URL to a downloadable blob, and trigger a browser download using the [`kendo.saveAs()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/kendo/methods/saveas) method.
+    * `Download` event&mdash;Fires when a download action is triggered, either from the **Download All** button or from a file menu download action. Within the event handler, iterate through each file in the message, convert the file URL to a downloadable blob, and trigger a browser download using the [`kendo.saveAs()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/kendo/methods/saveas) method.
 
     ```HtmlHelper
     @(Html.Kendo().Chat()
@@ -475,7 +475,7 @@ For the complete example, visit the [AI Integration Demo of the Chat component](
 ## See Also
 
 * [Person-to-Bot Conversation using the Chat for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/person-to-bot)
-* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
+* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/ui/chat)
 * [Server-Side API of the Chat HtmlHelper](/api/chat)
 {% if site.core %}
 * [Server-Side API of the Chat TagHelper](/api/taghelpers/chat)

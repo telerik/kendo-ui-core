@@ -72,7 +72,7 @@ For the complete project, refer to the [NumericTextBox in Razor Pages example](h
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the NumericTextBox](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/numerictextbox)
+* [Client-Side API of the NumericTextBox](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/numerictextbox)
 * [Server-Side HtmlHelper API of the NumericTextBox](/api/numerictextbox)
 * [Server-Side TagHelper API of the NumericTextBox](/api/taghelpers/numerictextbox)
 * [Knowledge Base Section](/knowledge-base)

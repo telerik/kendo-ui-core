@@ -41,4 +41,4 @@ To handle the issue, apply the CSS style to the scrollbar container below the Di
 
 * [Basic Usage of the Dialog (Demo)](https://demos.telerik.com/kendo-ui/dialog/index)
 * [Using the API of the Dialog (Demo)](https://demos.telerik.com/kendo-ui/dialog/api)
-* [JavaScript API Reference of the Dialog](/api/javascript/ui/dialog)
+* [JavaScript API Reference of the Dialog](/api/ui/dialog)

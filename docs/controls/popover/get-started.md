@@ -58,7 +58,7 @@ In this step, you will initialize the Popover from the `div` element.
 
 ## 3. Specify the Header and Body of the Popover
 
-The Popover allows you to specify a [`header`](/api/javascript/ui/popover/configuration/header) and a [`body`](/api/javascript/ui/popover/configuration/body). Both options can accept either a string or a function.
+The Popover allows you to specify a [`header`](/api/ui/popover/configuration/header) and a [`body`](/api/ui/popover/configuration/body). Both options can accept either a string or a function.
 
 ```html
     <div id="container">
@@ -104,7 +104,7 @@ You can specify a selector so that the Popover would appear only for certain par
 
 ## See Also 
 
-* [JavaScript API Reference of the Popover](/api/javascript/ui/popover)
+* [JavaScript API Reference of the Popover](/api/ui/popover)
 * [Knowledge Base Section](/knowledge-base)
 
 

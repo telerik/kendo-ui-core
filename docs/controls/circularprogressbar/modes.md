@@ -11,7 +11,7 @@ position: 4
 
 The CircularProgressBar comes in the `infinite` and `finite` modes:
 
-* The `infinite` mode renders a CircularProgressBar that is always spinning and with no clear indication of when the task will be completed. To enable the `infinite` mode, set the [`indeterminate`](/api/javascript/ui/circularprogressbar/configuration/indeterminate) configuration to `true`:
+* The `infinite` mode renders a CircularProgressBar that is always spinning and with no clear indication of when the task will be completed. To enable the `infinite` mode, set the [`indeterminate`](/api/ui/circularprogressbar/configuration/indeterminate) configuration to `true`:
 
 ```javascript
     $("#circularprogressbar").kendoCircularProgressBar({
@@ -19,7 +19,7 @@ The CircularProgressBar comes in the `infinite` and `finite` modes:
     });
 ```
 
-* The `finite` mode is the default mode of the CircularProgressBar and shows a clear indication of when a task will be completed. To update the value of the CircularProgressBar, use the [`value`](/api/javascript/ui/circularprogressbar/methods/value) method. The following example showcases how to update the value every 50 milliseconds:
+* The `finite` mode is the default mode of the CircularProgressBar and shows a clear indication of when a task will be completed. To update the value of the CircularProgressBar, use the [`value`](/api/ui/circularprogressbar/methods/value) method. The following example showcases how to update the value every 50 milliseconds:
 
 ```dojo
 <div id="circularprogressbar"></div>
@@ -46,4 +46,4 @@ The CircularProgressBar comes in the `infinite` and `finite` modes:
 ## See Also
 
 * [Colors in the CircularProgressBar (Demo)](https://demos.telerik.com/kendo-ui/circularprogressbar/colors) 
-* [JavaScript API Reference of the CircularProgressBar](/api/javascript/ui/circularprogressbar)
+* [JavaScript API Reference of the CircularProgressBar](/api/ui/circularprogressbar)

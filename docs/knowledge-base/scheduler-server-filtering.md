@@ -15,7 +15,7 @@ components: ["scheduler"]
 
 ## Description
 
-You can implement server-side filtering for the Scheduler component by using the [`parameterMap`](/api/javascript/data/datasource/configuration/transport.parametermap) method of the DataSource to send the range to the backend.
+You can implement server-side filtering for the Scheduler component by using the [`parameterMap`](/api/data/datasource/configuration/transport.parametermap) method of the DataSource to send the range to the backend.
 
 ## Solution
 
@@ -137,5 +137,5 @@ A full ASP.Net MVC project utilizing the above approach you can find in [`this r
 
 ## See Also
 
-* [Scheduler API Reference](/api/javascript/ui/scheduler)
-* [DataSource API Reference)](/api/javascript/data/datasource)
+* [Scheduler API Reference](/api/ui/scheduler)
+* [DataSource API Reference)](/api/data/datasource)

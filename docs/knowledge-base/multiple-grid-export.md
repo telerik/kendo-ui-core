@@ -129,4 +129,4 @@ Each Grid is exported in a separate Excel sheet. For additional information abou
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid/configuration/excel)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid/configuration/excel)

@@ -39,9 +39,9 @@ Sometimes the loading of my Chart takes longer time than the user expects. How c
 
 For such scenarios, you can configure the Kendo UI Chart to show the progress of the process.
 
-The following example demonstrates how to display a loading indicator while the data of a Kendo UI Chart is loading. The loading indicator is cleared in the [`render`](/api/javascript/dataviz/ui/chart/events/render) event.
+The following example demonstrates how to display a loading indicator while the data of a Kendo UI Chart is loading. The loading indicator is cleared in the [`render`](/api/dataviz/ui/chart/events/render) event.
 
-> For Kendo UI versions prior to 2014.3.1119, replace it with the [`dataBound`](/api/javascript/dataviz/ui/chart/events/databound) event.
+> For Kendo UI versions prior to 2014.3.1119, replace it with the [`dataBound`](/api/dataviz/ui/chart/events/databound) event.
 
 ```dojo
     <div class="chart-wrap" style="position: relative;">
@@ -87,7 +87,7 @@ The following example demonstrates how to display a loading indicator while the 
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

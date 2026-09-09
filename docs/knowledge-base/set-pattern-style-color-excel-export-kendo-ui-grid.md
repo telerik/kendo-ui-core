@@ -18,7 +18,7 @@ ticketid: 1651731
 
 ## Description
 
-When exporting data from the [Grid for Progress® Kendo UI®](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) to an Excel file using jQuery, I need to set the pattern color and style of a cell. How can I customize the background color of cells based on their values or other conditions?
+When exporting data from the [Grid for Progress® Kendo UI®](https://docs.telerik.com/kendo-ui/api/ui/grid) to an Excel file using jQuery, I need to set the pattern color and style of a cell. How can I customize the background color of cells based on their values or other conditions?
 
 This KB article also answers the following questions:
 - How to apply conditional styling to cells in an Excel export?
@@ -50,5 +50,5 @@ For a live demonstration, refer to this Dojo demo: [https://dojo.telerik.com/IxA
 
 ## See Also
 
-- [Grid excelExport Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport)
-- [Workbook sheets.rows.cells.background Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background)
+- [Grid excelExport Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/events/excelexport)
+- [Workbook sheets.rows.cells.background Configuration](https://docs.telerik.com/kendo-ui/api/ooxml/workbook/configuration/sheets.rows.cells.background)

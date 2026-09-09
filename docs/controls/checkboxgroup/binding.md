@@ -24,4 +24,4 @@ The following example demonstrates how to create a CheckBoxGroup and bind it to 
 ## See Also
 
 * [Basic Usage of the CheckBoxGroup (Demo)](https://demos.telerik.com/kendo-ui/checkboxgroup/index)
-* [JavaScript API Reference of the CheckBoxGroup](/api/javascript/ui/checkboxgroup)
+* [JavaScript API Reference of the CheckBoxGroup](/api/ui/checkboxgroup)

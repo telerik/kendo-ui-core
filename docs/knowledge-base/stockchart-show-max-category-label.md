@@ -30,7 +30,7 @@ components: ["chart"]
 How can I show the maximum value of the categoryAxis.labels even when it is not in the selection range of the navigator?
 
 ## Solution
-In order to show the maximum value of categoryAxis all the time, use the following custom approach using the [render](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart/events/render) event and the [selectEnd](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart/events/selectend) event:
+In order to show the maximum value of categoryAxis all the time, use the following custom approach using the [render](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/events/render) event and the [selectEnd](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/events/selectend) event:
 
 ```javascript
 var stockChart = $("#stock-chart").kendoStockChart({
@@ -178,5 +178,5 @@ var stockChart = $("#stock-chart").kendoStockChart({
 
 
 ## See Also
-- [render event](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart/events/render)
-- [selectEnd event](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart/events/selectend)
+- [render event](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/events/render)
+- [selectEnd event](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/events/selectend)

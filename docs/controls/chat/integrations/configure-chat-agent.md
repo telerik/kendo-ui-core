@@ -13,7 +13,7 @@ The [Chat](https://demos.telerik.com/kendo-ui/chat/index) allows you to connect 
 
 ## Communicating with the Remote Service
 
-To connect the Chat to and render the responses from any service, utilize the `post` event of the component and its public [API](/api/javascript/ui/chat). The `post` event allows you to react on user interaction. Its event arguments object contains all the information about the typed message or the taken action, and the user data. This approach allows you to send all the data to the remote Chat Bot service of your choice. Then, depending on the service architecture, the implementation will react on the response from the remote server and display it appropriately in the Chat.
+To connect the Chat to and render the responses from any service, utilize the `post` event of the component and its public [API](/api/ui/chat). The `post` event allows you to react on user interaction. Its event arguments object contains all the information about the typed message or the taken action, and the user data. This approach allows you to send all the data to the remote Chat Bot service of your choice. Then, depending on the service architecture, the implementation will react on the response from the remote server and display it appropriately in the Chat.
 
 An example of such communication is to send an AJAX request to a server endpoint and display the returned data in the Chat component.
 
@@ -139,4 +139,4 @@ You can achieve the same result by encapsulating the communication logic in an `
 ## See Also
 
 * [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
-* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
+* [JavaScript API Reference of the Chat](/api/ui/chat)

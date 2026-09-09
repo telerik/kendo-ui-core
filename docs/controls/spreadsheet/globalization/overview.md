@@ -18,4 +18,4 @@ For more information on using localization, internationalization, and right-to-l
 ## See Also
 
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

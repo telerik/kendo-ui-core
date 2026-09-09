@@ -37,4 +37,4 @@ To handle this issue in Internet Explorer, set **Internet Options** > **Security
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

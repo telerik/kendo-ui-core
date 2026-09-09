@@ -31,7 +31,7 @@ How can I create custom tools (*moveTop* and *moveBottom*) that move the selecte
 The ListBox supports [`MoveUp()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/listboxtoolfactory#moveup) and [`MoveDown()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/listboxtoolfactory#movedown) that move up and down the selected option. To create tools that move the option to the top or the bottom of the options list, follow the steps below:
 
 1. Create two buttons and handle their [`Click`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/buttoneventbuilder#clicksystemstring) events.
-1. Get a reference to the ListBox and use the client-side API methods [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox/methods/select) and [`reorder()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox/methods/reorder) to get the selected item and move it to the respective position.
+1. Get a reference to the ListBox and use the client-side API methods [`select()`](https://docs.telerik.com/kendo-ui/api/ui/listbox/methods/select) and [`reorder()`](https://docs.telerik.com/kendo-ui/api/ui/listbox/methods/reorder) to get the selected item and move it to the respective position.
 1. To render the "moveTop" and "moveBottom" buttons within the toolbar, handle the `DataBound` event of the ListBox and use the jQuery [`append()`](https://api.jquery.com/append/) method to append each button in the `k-listbox-actions` element.
 
     ```HtmlHelper
@@ -145,7 +145,7 @@ For a runnable example based on the code above, refer to the [REPL example on cr
 
 ## See Also
 
-* [Client-Side API Reference of the ListBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
+* [Client-Side API Reference of the ListBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/listbox)
 * [Server-Side API Reference of the ListBox for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/listbox)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the ListBox for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/listbox)

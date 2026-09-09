@@ -29,7 +29,7 @@ How can I change the scrolling position of the master Grid during the navigation
 
 ## Solution
 
-1. Handle the [`navigate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/navigate) event of the child Grid.
+1. Handle the [`navigate`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/navigate) event of the child Grid.
 1. In the `navigate` event handler, based on the `offset` of the element, manually scroll the container of the parent Grid.
 
 ```dojo

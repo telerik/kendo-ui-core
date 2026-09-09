@@ -30,9 +30,9 @@ The Spreadsheet supports Internet Explorer 9 and later versions. The component i
 
 * [Getting Started with the Kendo UI Spreadsheet for jQuery]({% slug getting_started_kendoui_spreadsheet_component %})
 * [Demo Page for the Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/index)
-* [JavaScript API Reference of the Spreadsheet](/api/javascript/ui/spreadsheet)
+* [JavaScript API Reference of the Spreadsheet](/api/ui/spreadsheet)
 
 ## See Also
 
 * [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

@@ -251,5 +251,5 @@ In this approach:
 
 - [Kendo UI for jQuery ComboBox Overview](/controls/combobox/overview)
 - [Kendo UI for jQuery ListBox Overview](/controls/listbox/overview)
-- [ComboBox Filtering Configuration](/api/javascript/ui/combobox/configuration/filter)
-- [DataSource Filter Method](/api/javascript/data/datasource/methods/filter)
+- [ComboBox Filtering Configuration](/api/ui/combobox/configuration/filter)
+- [DataSource Filter Method](/api/data/datasource/methods/filter)

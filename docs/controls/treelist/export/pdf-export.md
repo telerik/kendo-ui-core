@@ -18,7 +18,7 @@ For a runnable example, refer to the [TreeList PDF export demo](https://demos.te
 To enable PDF export:
 
 1. Add the `pdf` command to the TreeList `toolbar` configuration.
-1. Configure the [`pdf`](/api/javascript/ui/treelist/configuration/pdf) options.
+1. Configure the [`pdf`](/api/ui/treelist/configuration/pdf) options.
 1. For large PDF documents, include the Pako library to enable compression.
 
 The following example adds an **Export to PDF** button to the TreeList toolbar and configures the exported document.
@@ -50,7 +50,7 @@ The following example adds an **Export to PDF** button to the TreeList toolbar a
 
 ## Export All Pages and Configure Layout
 
-By default, the TreeList exports the current page. Set [`pdf.allPages`](/api/javascript/ui/treelist/configuration/pdf.allpages) to `true` to export all pages, and use PDF options such as `paperSize`, `landscape`, and `margin` to configure the document layout.
+By default, the TreeList exports the current page. Set [`pdf.allPages`](/api/ui/treelist/configuration/pdf.allpages) to `true` to export all pages, and use PDF options such as `paperSize`, `landscape`, and `margin` to configure the document layout.
 
 ```javascript
 pdf: {
@@ -63,7 +63,7 @@ pdf: {
 
 ## Export Programmatically
 
-You can call the [`saveAsPDF`](/api/javascript/ui/treelist/methods/saveaspdf) method when a user interacts with an external element to export the TreeList data to a PDF file.
+You can call the [`saveAsPDF`](/api/ui/treelist/methods/saveaspdf) method when a user interacts with an external element to export the TreeList data to a PDF file.
 
 ```javascript
 $("#export").on("click", function() {
@@ -72,10 +72,10 @@ $("#export").on("click", function() {
 });
 ```
 
-The [`pdfExport`](/api/javascript/ui/treelist/events/pdfexport) event fires before the TreeList saves the generated PDF. Use its `e.promise` argument to determine when the export completes.
+The [`pdfExport`](/api/ui/treelist/events/pdfexport) event fires before the TreeList saves the generated PDF. Use its `e.promise` argument to determine when the export completes.
 
 ## See Also
 
-* [TreeList PDF Export API](/api/javascript/ui/treelist/configuration/pdf)
+* [TreeList PDF Export API](/api/ui/treelist/configuration/pdf)
 * [TreeList PDF Export Demo](https://demos.telerik.com/kendo-ui/treelist/pdf-export)
 * [TreeList Excel Export]({% slug exporting_excel_kendoui_treelist_widget %})

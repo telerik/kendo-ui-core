@@ -39,4 +39,4 @@ The following example demonstrates how to disable all items at runtime.
 ## See Also
 
 * [Filtering and Disabling Items in the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/filter-disable)
-* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
+* [JavaScript API Reference of the Sortable](/api/ui/sortable)

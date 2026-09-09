@@ -50,4 +50,4 @@ The following example demonstrates how to change the service accordingly.
 
 ## See Also
 
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [JavaScript API Reference of the MultiSelect](/api/ui/multiselect)

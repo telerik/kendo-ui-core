@@ -104,7 +104,7 @@ How to get percentage values from pie chart data points in Kendo UI for jQuery? 
 
 ### runningTotal `Number`
 
-The sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart/configuration/series.summaryfield). Available for waterfall series points.
+The sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart/configuration/series.summaryfield). Available for waterfall series points.
 
 
 <div class="meta-api-description">

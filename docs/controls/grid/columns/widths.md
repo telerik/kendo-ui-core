@@ -10,7 +10,7 @@ position: 1
 
 # Column Widths
 
-To set the widths of the Grid columns, use their [`width`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.width) property.
+To set the widths of the Grid columns, use their [`width`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.width) property.
 
 You can also set the width of the columns when you create a Grid from an HTML `table` through the `col` elements, however, avoid this approach when you use width styles for table cells.
 
@@ -23,7 +23,7 @@ Depending on whether scrolling is enabled, the columns of the Grid acquire diffe
     * When the horizontal space is not enough, columns without a defined width shrink to a zero width.
     * Regardless of the cell content, the defined column widths are obeyed.
     * If the content of a cell cannot fit, the Grid will either wrap or clip it.
-    * During the resizing of columns, only the resized column and the [`table`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/fields/table) will change its widths.
+    * During the resizing of columns, only the resized column and the [`table`](https://docs.telerik.com/kendo-ui/api/ui/grid/fields/table) will change its widths.
     * When a column is resized or hidden, the Grid applies a pixel width to its `table` elements. This behavior helps maintain the widths of all remaining columns except for the column that is currently resized or hidden.
     * When all columns have pixel widths and their sum exceeds the width of the Grid, a horizontal scrollbar appears.
     * When all columns have pixel widths and their sum is less than the width of the Grid, the column widths are ignored and the browser expands all columns.
@@ -54,5 +54,5 @@ To remove the misalignment of the columns and headers when the Grid is resized, 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Kendo UI Knowledge Base](/knowledge-base)

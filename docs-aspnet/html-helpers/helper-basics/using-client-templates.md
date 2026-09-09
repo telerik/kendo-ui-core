@@ -471,7 +471,7 @@ The templating options use [Kendo UI Templates](https://docs.telerik.com/kendo-u
 
 > To display the values of the Model properties as HTML, use the [hash syntax (`#=#`)](https://docs.telerik.com/kendo-ui/framework/templates/essentials#template-syntax).
 
-The `data` object, available in the template, varies depending on the component and the template type. For example, the [Grid Column FooterTemplate](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.footertemplate) exposes the aggregates data for the specific column, while the [Chart Series TooltipTemplate](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.tooltip.template) exposes the `category`, `value`, `series`, and `dataItem` objects.
+The `data` object, available in the template, varies depending on the component and the template type. For example, the [Grid Column FooterTemplate](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.footertemplate) exposes the aggregates data for the specific column, while the [Chart Series TooltipTemplate](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.tooltip.template) exposes the `category`, `value`, `series`, and `dataItem` objects.
 
 For more information on the data available in the different templates, refer to the [Kendo UI for jQuery API documentation](https://docs.telerik.com/kendo-ui/api/introduction) or search the [Knowledge Base](https://docs.telerik.com/kendo-ui/knowledge-base).
 

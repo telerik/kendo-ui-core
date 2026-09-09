@@ -201,5 +201,5 @@ Use the `detailInit` event and custom CSS rules.
 
 ## See Also
 
-* [API Reference of the detailInit Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit)
+* [API Reference of the detailInit Event](https://docs.telerik.com/kendo-ui/api/ui/grid/events/detailinit)
 * [Slide-In Animation Effect Demo](https://demos.telerik.com/kendo-ui/fx/slidein)

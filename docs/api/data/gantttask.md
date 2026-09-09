@@ -144,7 +144,7 @@ How to dynamically update task progress in Kendo UI Gantt chart? Specify the pro
 
 ### plannedEnd `Date`
 
-The date at which the Gantt task ends as per the planned schedule. The `plannedEnd` date is mandatory when rendering the [Planned vs Actual](/api/javascript/ui/gantt/configuration/showplannedtasks) view in the Gantt.
+The date at which the Gantt task ends as per the planned schedule. The `plannedEnd` date is mandatory when rendering the [Planned vs Actual](/api/ui/gantt/configuration/showplannedtasks) view in the Gantt.
 
 
 <div class="meta-api-description">
@@ -166,7 +166,7 @@ How do I set a deadline for tasks in a Kendo UI Gantt widget? Define or adjust t
 
 ### plannedStart `Date`
 
-The date at which the Gantt task starts as per the planned schedule. The `plannedStart` date is mandatory when rendering the [Planned vs Actual](/api/javascript/ui/gantt/configuration/showplannedtasks) view in the Gantt.
+The date at which the Gantt task starts as per the planned schedule. The `plannedStart` date is mandatory when rendering the [Planned vs Actual](/api/ui/gantt/configuration/showplannedtasks) view in the Gantt.
 
 
 <div class="meta-api-description">

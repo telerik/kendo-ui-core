@@ -28,7 +28,7 @@ Follow the steps below to define a [Slider component]({% slug overview_sliderhel
 
 1. Create a Bar Chart component that binds to remote data and set the `PageSize()` option (series per page).
 2. Define a vertical Slider next to the Chart and set its `Min()` and `Max()` options.
-3. Handle the `Zoom` event of the Chart and call the [`page()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page) method of the Chart's DataSource to change the current page when the user zooms the Chart through the mouse wheel. Get a reference to the Slider and update its value based on the index of the new page.
+3. Handle the `Zoom` event of the Chart and call the [`page()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/page) method of the Chart's DataSource to change the current page when the user zooms the Chart through the mouse wheel. Get a reference to the Slider and update its value based on the index of the new page.
 4. Handle the `Change` event of the Slider and update the Chart's DataSource page when the Slider value changes. Each time the Slider is scrolled, the Chart's DataSource will send a read request to the remote endpoint to request the next or previous page.
 
 ```HtmlHelper
@@ -191,7 +191,7 @@ For a runnable example based on the code above, refer to the [REPL example on en
 
 ## See Also
 
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/chart)

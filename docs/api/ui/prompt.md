@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.Prompt : kendo.ui.Dialog
 
-Represents the Kendo UI Prompt. Inherits from [Dialog](/api/javascript/ui/dialog).
+Represents the Kendo UI Prompt. Inherits from [Dialog](/api/ui/dialog).
 
 ## Configuration
 

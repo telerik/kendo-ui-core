@@ -99,10 +99,10 @@ You can change the orientation of the Bullet Chart by setting the series type to
 
 ## Displaying labels
 
-To display labels for the bullet chart value, set the [`labels.visible`](/api/javascript/dataviz/ui/chart/configuration/series.labels.visible) option to `true`.
+To display labels for the bullet chart value, set the [`labels.visible`](/api/dataviz/ui/chart/configuration/series.labels.visible) option to `true`.
 
-The label content can be customized using the [`format`](/api/javascript/dataviz/ui/chart/configuration/series.labels.format) or
-[`template`](/api/javascript/dataviz/ui/chart/configuration/series.labels.template) options.
+The label content can be customized using the [`format`](/api/dataviz/ui/chart/configuration/series.labels.format) or
+[`template`](/api/dataviz/ui/chart/configuration/series.labels.template) options.
 
 ```dojo
       <div id="chart-sales"></div>
@@ -184,4 +184,4 @@ The following example demonstrates how to use all three options to customize the
 ## See Also
 
 * [Basic Usage of the Bullet Chart (Demo)](https://demos.telerik.com/kendo-ui/bullet-charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

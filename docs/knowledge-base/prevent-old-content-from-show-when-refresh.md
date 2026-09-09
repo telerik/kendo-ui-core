@@ -36,7 +36,7 @@ The Kendo UI Window places the data that is returned by the controller as its co
 
 ## Solution
 
-To prevent the user from seeing and interacting with outdated content, use the [`close` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/events/close) of the Window instance and its [`content()` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/content) to clean out the old content&mdash;for example, call `.content("loading, please wait..."))`. You can call this at any other suitable time as well&mdashh;for example, when you need to make the call even when the Window is opened.
+To prevent the user from seeing and interacting with outdated content, use the [`close` event](https://docs.telerik.com/kendo-ui/api/ui/window/events/close) of the Window instance and its [`content()` method](https://docs.telerik.com/kendo-ui/api/ui/window/methods/content) to clean out the old content&mdash;for example, call `.content("loading, please wait..."))`. You can call this at any other suitable time as well&mdashh;for example, when you need to make the call even when the Window is opened.
 
 ```View
 @(Html.Kendo().Window()

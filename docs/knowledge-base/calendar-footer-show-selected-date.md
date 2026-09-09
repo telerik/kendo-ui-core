@@ -32,10 +32,10 @@ I would like to show the currently selected date in the footer of the calendar a
 
 To implement a timezone we need to take care of the following:
 
-1. Add a [`change`](/api/javascript/ui/calendar/events/change) event in the calendar
-1. Get the currently selected date with the [`value()`](/api/javascript/ui/calendar/methods/value) method
+1. Add a [`change`](/api/ui/calendar/events/change) event in the calendar
+1. Get the currently selected date with the [`value()`](/api/ui/calendar/methods/value) method
 1. Update the footer template and remove the built-in click handler from the anchor element
-1. Add your own click handler that calls the [`navigate()`](/api/javascript/ui/calendar/methods/navigate) method and navigates to the selected date
+1. Add your own click handler that calls the [`navigate()`](/api/ui/calendar/methods/navigate) method and navigates to the selected date
 
 ```
     change: function(e){
@@ -78,4 +78,4 @@ To implement a timezone we need to take care of the following:
 
 ## See Also
 
-* [API Reference of the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the Calendar](https://docs.telerik.com/kendo-ui/api/ui/calendar)

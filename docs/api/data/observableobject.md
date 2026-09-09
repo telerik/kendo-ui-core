@@ -9,7 +9,7 @@ res_type: api
 
 The `kendo.data.ObservableObject` is the building block of the [Kendo UI MVVM](/framework/mvvm/overview) design pattern. In addition, the items of the [`kendo.data.DataSource`](/framework/datasource/overview) are `kendo.data.ObservableObject` instances.
 
-Inherits from [`kendo.Observable`](/api/javascript/observable).
+Inherits from [`kendo.Observable`](/api/observable).
 
 ## Configuration
 
@@ -76,7 +76,7 @@ How do I get a unique identifier for each instance of an observable object in Ke
 
 ### bind
 
-Attaches a handler to an event. For more information and examples, refer to the [`bind`](/api/javascript/observable#bind) API reference.
+Attaches a handler to an event. For more information and examples, refer to the [`bind`](/api/observable#bind) API reference.
 
 
 <div class="meta-api-description">

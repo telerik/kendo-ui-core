@@ -9,7 +9,7 @@ position: 14
 
 # Automatic Correction
 
-Starting with Kendo UI R3 2024, the DatePicker component exposes an [`autoAdjust`](/api/javascript/ui/datepicker/configuration/autoadjust) feature which provides control over the autocorrect functionality. By default, when you have `min` and `max` dates configured and the [`dateInput`](/api/javascript/ui/datepicker/configuration/dateinput) is set to `true`, the component will autocorrect the user input if it is not within the specified range. The autocorrected value will be either the `min` or the `max` value you have set for the component depending on which the invalid date is closer to.
+Starting with Kendo UI R3 2024, the DatePicker component exposes an [`autoAdjust`](/api/ui/datepicker/configuration/autoadjust) feature which provides control over the autocorrect functionality. By default, when you have `min` and `max` dates configured and the [`dateInput`](/api/ui/datepicker/configuration/dateinput) is set to `true`, the component will autocorrect the user input if it is not within the specified range. The autocorrected value will be either the `min` or the `max` value you have set for the component depending on which the invalid date is closer to.
 
 In order to disable the autocorrect, you can now set the `autoAdjust` option to `false`.
 
@@ -31,4 +31,4 @@ In order to disable the autocorrect, you can now set the `autoAdjust` option to 
 ## See Also
 
 * [Using the API of the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/api)
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)

@@ -56,4 +56,4 @@ The `cursor` option changes the cursor style only for the time while the item is
 ## See Also
 
 * [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
-* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
+* [JavaScript API Reference of the Sortable](/api/ui/sortable)

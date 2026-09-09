@@ -296,5 +296,5 @@ The main milestones of the approach are the following:
 ## See Also
 
 * [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
-* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
+* [JavaScript API Reference of the Sortable](/api/ui/sortable)
 * [Reorder rows in grid with locked columns]({% slug grid-drag-drop-with-locked-columns %})

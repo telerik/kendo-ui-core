@@ -93,7 +93,7 @@ For the complete project, refer to the [Menu in Razor Pages example](https://git
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Menu](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/menu)
+* [Client-Side API of the Menu](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/menu)
 * [Server-Side HtmlHelper API of the Menu](/api/menu)
 * [Server-Side TagHelper API of the Menu](/api/taghelpers/menu)
 * [Knowledge Base Section](/knowledge-base)

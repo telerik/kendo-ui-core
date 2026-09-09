@@ -93,7 +93,7 @@ For the complete project, refer to the [Dialog in Razor Pages example](https://g
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Dialog](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dialog)
+* [Client-Side API of the Dialog](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dialog)
 * [Server-Side HtmlHelper API of the Dialog](/api/dialog)
 * [Server-Side TagHelper API of the Dialog](/api/taghelpers/dialog)
 * [Knowledge Base Section](/knowledge-base)

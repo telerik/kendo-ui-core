@@ -10,7 +10,7 @@ position: 3
 
 # Localization
 
-The DatePicker provides options for localizing its user interface by utilizing its [`culture`](/api/javascript/ui/datepicker/configuration/culture) property.
+The DatePicker provides options for localizing its user interface by utilizing its [`culture`](/api/ui/datepicker/configuration/culture) property.
 
 To enable the desired culture, add a reference to the script file before the widget is initialized and include the desired culture in the settings of the widget.
 
@@ -29,4 +29,4 @@ To enable the desired culture, add a reference to the script file before the wid
 
 * [RTL Support by the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/right-to-left-support)
 * [Localization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)

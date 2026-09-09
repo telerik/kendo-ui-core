@@ -72,7 +72,7 @@ The following example demonstrates how to extend an existing culture script, cre
 
 ## See Also
 
-* [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
+* [NumericTextBox JavaScript API Reference](/api/ui/numerictextbox)
 * [Change Text Color]({% slug howto_change_text_color_numerictextbox %})
 * [Persist Old Value]({% slug howto_persist_old_value_numerictextbox %})
 * [Select All Text on Focus]({% slug howto_select_all_texton_focus_numerictextbox %})

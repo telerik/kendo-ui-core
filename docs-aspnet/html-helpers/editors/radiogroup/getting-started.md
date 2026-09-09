@@ -158,7 +158,7 @@ You can reference the RadioGroup instances that you have created and build on to
     </script>
     ```
 
-1. Use the [RadioGroup client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/radiogroup#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the RadioGroup.
+1. Use the [RadioGroup client-side API](https://docs.telerik.com/kendo-ui/api/ui/radiogroup#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the RadioGroup.
 
     ```JS script
     <script>
@@ -185,6 +185,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the RadioGroup for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiogroup/api)
-* [Client-Side API of the RadioGroup](https://docs.telerik.com/kendo-ui/api/javascript/ui/radiogroup)
+* [Client-Side API of the RadioGroup](https://docs.telerik.com/kendo-ui/api/ui/radiogroup)
 * [Server-Side API of the RadioGroup](/api/radiogroup)
 * [Knowledge Base Section](/knowledge-base)

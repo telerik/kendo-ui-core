@@ -127,4 +127,4 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 * [Using the API of the PDFViewer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/api)
 * [PDFViewer Server-Side API](/api/pdfviewer)
-* [PDFViewer Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
+* [PDFViewer Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer)

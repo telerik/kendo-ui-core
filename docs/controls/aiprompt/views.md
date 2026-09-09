@@ -9,14 +9,14 @@ position: 2
 
 # Views
 
-The AIPrompt allows you to show pre-defined and custom views. The [`views`](/api/javascript/ui/aiprompt/configuration/views) configuration exposes a number of options that you can set for a view, such as text, name, or icon. 
+The AIPrompt allows you to show pre-defined and custom views. The [`views`](/api/ui/aiprompt/configuration/views) configuration exposes a number of options that you can set for a view, such as text, name, or icon. 
 
 Below you will find a list of the supported view types: 
 
 * `prompt`&mdash;This view contains the prompt suggestions. Rendered by default.
 * `output`&mdash;The output view is where you see the generated content, along with the copy, retry, and rating buttons. Rendered by default.
 * `commands`&mdash;The commands view contains the actions a user can pick from to further process the generated content. Rendered only if a set of commands is passed.
-* `custom`&mdash;With custom views, you can configure and show additional content based on your project's requirements. Use [`viewTemplate`](/api/javascript/ui/aiprompt/configuration/views.viewtemplate) and [`footerTemplate`](/api/javascript/ui/aiprompt/configuration/views.footertemplate) to control the contents of the custom view.  
+* `custom`&mdash;With custom views, you can configure and show additional content based on your project's requirements. Use [`viewTemplate`](/api/ui/aiprompt/configuration/views.viewtemplate) and [`footerTemplate`](/api/ui/aiprompt/configuration/views.footertemplate) to control the contents of the custom view.  
 
 The example below shows a possible configuration for all the view types:
 
@@ -94,4 +94,4 @@ The example below shows a possible configuration for all the view types:
 ## See Also
 
 * [Templates in the AIPrompt]({% slug templates_aiprompt_component %})
-* [JavaScript API Reference of the AIPrompt](/api/javascript/ui/aiprompt)
+* [JavaScript API Reference of the AIPrompt](/api/ui/aiprompt)

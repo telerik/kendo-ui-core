@@ -172,7 +172,7 @@ You can reference the TimeDurationPicker instances that you have created and bui
     </script>
     ```
 
-1. Use the [TimeDurationPicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timedurationpicker#methods) to control the behavior of the widget. In this example, you will use the `readonly` method to disable user input.
+1. Use the [TimeDurationPicker client-side API](https://docs.telerik.com/kendo-ui/api/ui/timedurationpicker#methods) to control the behavior of the widget. In this example, you will use the `readonly` method to disable user input.
 
     ```JS script
     <script>
@@ -192,6 +192,6 @@ For more information on referencing specific helper instances, see the [Methods 
 ## See Also
 
 * [Using the API of the TimeDurationPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timedurationpicker/api)
-* [TimeDurationPicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timedurationpicker)
+* [TimeDurationPicker client-side API](https://docs.telerik.com/kendo-ui/api/ui/timedurationpicker)
 * [TimeDurationPicker server-side API](/api/timedurationpicker)
 * [Knowledge Base Section](/knowledge-base)

@@ -186,7 +186,7 @@ To bind the DropDownTree to a property from the `PageModel`, follow the next ste
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the DropDownTree](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
+* [Client-Side API of the DropDownTree](https://docs.telerik.com/kendo-ui/api/ui/dropdowntree)
 * [Server-Side HtmlHelper API of the DropDownTree](/api/dropdowntree)
 * [Server-Side TagHelper API of the DropDownTree](/api/taghelpers/dropdowntree)
 * [Knowledge Base Section](/knowledge-base)

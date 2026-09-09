@@ -17,7 +17,7 @@ components: ["grid"]
 I want to remove specific options from the Grid's classic columnMenu without using CSS. Specifically, I would like to remove the 'Group column' and 'Set column position' options.
 
 ## Solution
-To achieve this, you can use jQuery during the [columnMenuInit event](/api/javascript/ui/grid/events/columnmenuinit) to remove the desired options. Here's an example of how to do it:
+To achieve this, you can use jQuery during the [columnMenuInit event](/api/ui/grid/events/columnmenuinit) to remove the desired options. Here's an example of how to do it:
 
 ```javascript
 $("#grid").kendoGrid({

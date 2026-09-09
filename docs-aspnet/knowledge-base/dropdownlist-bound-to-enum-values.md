@@ -117,7 +117,7 @@ Refer to [this REPL example](https://netcorerepl.telerik.com/mxORFgEN03Pjpclo16)
 ## See Also
 
 * [Telerik REPL: Populating a Form DropDownList with Enum Values](https://netcorerepl.telerik.com/mxORFgEN03Pjpclo16)
-* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist)
 * [Server-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/dropdownlist)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

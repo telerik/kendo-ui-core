@@ -108,4 +108,4 @@ I want to change the color of the entire element of the Scheduler event.
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler).
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler).

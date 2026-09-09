@@ -31,7 +31,7 @@ How can I format the `weekNumber` section in the calendar to include the year in
 
 ## Solution
 
-1. Format the `weekNumber` in the [`month.weekNumber` configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/month#monthweeknumber) by using a template. To modify the appearance, use the `currentDate` and `weekNumber` properties.  
+1. Format the `weekNumber` in the [`month.weekNumber` configuration](https://docs.telerik.com/kendo-ui/api/ui/datepicker/configuration/month#monthweeknumber) by using a template. To modify the appearance, use the `currentDate` and `weekNumber` properties.  
 
     ```html
         <script id="week-template" type="text/x-kendo-template">
@@ -94,6 +94,6 @@ The following example demonstrates the full implementation of the suggested appr
 
 ## See Also
 
-* [API Reference of month.weekNumber for the DatePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/month#monthweeknumber)
-* [API Reference of month.weekNumber for the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/configuration/month#monthweeknumber)
-* [API Reference of month.weekNumber for the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/configuration/month#monthweeknumber)
+* [API Reference of month.weekNumber for the DatePicker](https://docs.telerik.com/kendo-ui/api/ui/datepicker/configuration/month#monthweeknumber)
+* [API Reference of month.weekNumber for the DateTimePicker](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker/configuration/month#monthweeknumber)
+* [API Reference of month.weekNumber for the Calendar](https://docs.telerik.com/kendo-ui/api/ui/calendar/configuration/month#monthweeknumber)

@@ -7,7 +7,7 @@ component: chiplist
 
 # kendo.ui.ChipList
 
-Represents the Kendo UI ChipList widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ChipList widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

@@ -127,4 +127,4 @@ The following example demonstrates how to use nested model properties. The CRUD 
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

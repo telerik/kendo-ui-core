@@ -37,7 +37,7 @@ How can I make long chunks of text fit in a shape of the Kendo UI for jQuery Dia
 
 ## Solution
 
-The following example demonstrates how to use the [`Layout`](/api/javascript/dataviz/diagram/layout) element to make long chunks of text fit in a shape.
+The following example demonstrates how to use the [`Layout`](/api/dataviz/diagram/layout) element to make long chunks of text fit in a shape.
 
 > The `Layout` element is available as of the Kendo UI Q3 2015 (2015.3.x) release.
 
@@ -104,7 +104,7 @@ The following example demonstrates how to use the [`Layout`](/api/javascript/dat
 ## See Also
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)
 * [Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
 * [Use Scrollbars]({% slug howto_usescrollbar_diagram %})

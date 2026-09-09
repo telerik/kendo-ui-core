@@ -27,7 +27,7 @@ ticketid: 1669505
 
 ## Description
 
-I want to configure a JSON array to bind a URL and a title/tooltip for the [Kendo UI Menu's](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu) DataSource. Additionally, I need to open links in a new tab or window when clicking a menu item. This KB article also answers the following questions:
+I want to configure a JSON array to bind a URL and a title/tooltip for the [Kendo UI Menu's](https://docs.telerik.com/kendo-ui/api/ui/menu) DataSource. Additionally, I need to open links in a new tab or window when clicking a menu item. This KB article also answers the following questions:
 - How to add a tooltip to Kendo UI Menu items?
 - How to configure the DataSource for Kendo UI Menu with URLs?
 - How to open Kendo UI Menu links in a new tab?
@@ -94,7 +94,7 @@ To bind URLs and titles/tooltips to the Kendo UI Menu through a JSON array and e
     });
     ```
 
-Refer to the Kendo UI Menu's [API documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu/configuration/datasource) for more details on the dataSource configuration including a list of supported properties and the [`Open a New Tab on Menu Item Click` knowledge base article](https://docs.telerik.com/kendo-ui/knowledge-base/menu-target-attribute-new-tab-open) for additional approaches on opening links in a new tab.
+Refer to the Kendo UI Menu's [API documentation](https://docs.telerik.com/kendo-ui/api/ui/menu/configuration/datasource) for more details on the dataSource configuration including a list of supported properties and the [`Open a New Tab on Menu Item Click` knowledge base article](https://docs.telerik.com/kendo-ui/knowledge-base/menu-target-attribute-new-tab-open) for additional approaches on opening links in a new tab.
 
 Below is a runnable example: 
 
@@ -162,7 +162,7 @@ Below is a runnable example:
 
 ## See Also
 
-- [Kendo UI Menu API - DataSource Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu/configuration/datasource)
-- [Kendo UI Menu Events - Open](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu/events/open)
+- [Kendo UI Menu API - DataSource Configuration](https://docs.telerik.com/kendo-ui/api/ui/menu/configuration/datasource)
+- [Kendo UI Menu Events - Open](https://docs.telerik.com/kendo-ui/api/ui/menu/events/open)
 - [Kendo UI Menu - Opening Links in a New Tab](https://docs.telerik.com/kendo-ui/knowledge-base/menu-target-attribute-new-tab-open)
 - [Progress Kendo UI Dojo Example](https://dojo.telerik.com/QIxOAwqU)

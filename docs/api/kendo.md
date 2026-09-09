@@ -11,7 +11,7 @@ res_type: api
 ## Methods
 
 ### alert
-Opens a [Kendo UI Alert](/api/javascript/ui/alert) popup. Similar to the native [window.alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) method.
+Opens a [Kendo UI Alert](/api/ui/alert) popup. Similar to the native [window.alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) method.
 
 
 <div class="meta-api-description">
@@ -65,7 +65,7 @@ How do I include CSRF tokens in AJAX requests with Kendo UI? Retrieve and manage
 `Object` An object that contains common CSRF tokens found on the page
 
 ### bind
-Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elements based on `data-role` attributes, similar to [`kendo.init()`](/api/javascript/kendo/methods/init).
+Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elements based on `data-role` attributes, similar to [`kendo.init()`](/api/kendo/methods/init).
 
 Model View ViewModel ([MVVM](https://en.wikipedia.org/wiki/Model_View_ViewModel)) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
@@ -123,7 +123,7 @@ Optional namespace to look in when instantiating Kendo UI widgets. The valid nam
 `kendo.ui` will be used. Multiple namespaces can be passed.
 
 ### confirm
-Opens a [Kendo UI Confirm](/api/javascript/ui/confirm) popup. Similar to the native [window.confirm()](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method.
+Opens a [Kendo UI Confirm](/api/ui/confirm) popup. Similar to the native [window.confirm()](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method.
 
 
 <div class="meta-api-description">
@@ -226,7 +226,7 @@ How do I properly remove all Kendo UI components from a specific DOM element to 
 
 ### format
 
-Replaces each format item in a specified string with the text equivalent of a corresponding object's value. Uses [toString](/api/javascript/kendo/methods/tostring) for every format item.
+Replaces each format item in a specified string with the text equivalent of a corresponding object's value. Uses [toString](/api/kendo/methods/tostring) for every format item.
 
 
 <div class="meta-api-description">
@@ -724,7 +724,7 @@ If you pass `true` then this function will return `undefined` rather than throwi
 `kendo.Color` A Color object.
 
 ### prompt
-Opens a [Kendo UI Prompt](/api/javascript/ui/prompt) popup. Similar to the native [window.prompt()](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt) method.
+Opens a [Kendo UI Prompt](/api/ui/prompt) popup. Similar to the native [window.prompt()](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt) method.
 
 
 <div class="meta-api-description">
@@ -835,7 +835,7 @@ How do I use Kendo UI's render method to dynamically generate HTML from a data a
 
 ##### template `Function`
 
-The Kendo UI template which should be rendered. Create one via the [template](/api/javascript/kendo/methods/template) method.
+The Kendo UI template which should be rendered. Create one via the [template](/api/kendo/methods/template) method.
 
 ##### data `Array`
 
@@ -940,7 +940,7 @@ Such browsers are IE version 9 and lower and Safari.
 
 The developer is responsible for implementing the server-side proxy.
 
-When a proxy is used the `kendo.saveAs()` method includes any CSRF and anti-forgery tokens out of the box as long as they are present on the page. The logic internally uses the [`kendo.antiForgeryTokens()`](/api/javascript/kendo/methods/antiforgerytokens) method and adds that to the request data as it posts to the proxy.
+When a proxy is used the `kendo.saveAs()` method includes any CSRF and anti-forgery tokens out of the box as long as they are present on the page. The logic internally uses the [`kendo.antiForgeryTokens()`](/api/kendo/methods/antiforgerytokens) method and adds that to the request data as it posts to the proxy.
 
 The proxy will receive a POST request with the following parameters in the request body:
 

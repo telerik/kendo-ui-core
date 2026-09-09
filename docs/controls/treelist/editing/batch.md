@@ -45,4 +45,4 @@ The following example demonstrates how to implement the incell edit mode in the 
 ## See Also
 
 * [Incell Editing in the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/editing-incell)
-* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)
+* [TreeList JavaScript API Reference](/api/ui/treelist)

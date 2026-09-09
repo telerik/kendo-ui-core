@@ -28,7 +28,7 @@ How can I toggle the editable mode of the Grid using a button in the ToolBar?
 
 ## Solution
 
-The Kendo UI Grid's options can be modified through the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method.
+The Kendo UI Grid's options can be modified through the [`setOptions`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/setoptions) method.
 
 1. Create a custom button in the grid's toolbar.
 1. Inside the grid's `dataBound` event obtain a reference to the button.

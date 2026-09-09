@@ -95,5 +95,5 @@ The following example demonstrates how to automatically maintain an up-to-date s
 ## See Also
 
 * [State Persistence by the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/persist-state)
-* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
+* [JavaScript API Reference of the TreeList](/api/ui/treelist)
 * [Knowledge Base Section](/knowledge-base)

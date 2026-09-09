@@ -7,7 +7,7 @@ component: loader
 
 # kendo.ui.Loader
 
-Represents the Kendo UI Loader widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Loader widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -158,7 +158,7 @@ How to dynamically change the color of a Kendo UI loader in JavaScript? Set, get
 
 ##### color `String`
 
-See [`loader.options.themeColor`](/api/javascript/ui/loader/configuration/themeColor) for valid options.
+See [`loader.options.themeColor`](/api/ui/loader/configuration/themeColor) for valid options.
 
 #### Example
 

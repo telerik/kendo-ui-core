@@ -202,7 +202,7 @@ For the complete project, refer to the [MediaPlayer in Razor Pages example](http
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the MediaPlayer](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/mediaplayer)
+* [Client-Side API of the MediaPlayer](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/mediaplayer)
 * [Server-Side HtmlHelper API of the MediaPlayer](/api/mediaplayer)
 * [Server-Side TagHelper API of the MediaPlayer](/api/taghelpers/mediaplayer)
 * [Knowledge Base Section](/knowledge-base)

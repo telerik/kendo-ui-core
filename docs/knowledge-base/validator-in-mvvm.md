@@ -37,7 +37,7 @@ How can I fully integrate the Kendo UI Validator in an MVVM scenario?
 
 ## Solution
 
-To achieve the desired scenario, use the [`change`](/api/javascript/data/observableobject/events/change) event of the `Observable` and the [`validate`](/api/javascript/ui/validator/methods/validate) method of the Validator.
+To achieve the desired scenario, use the [`change`](/api/data/observableobject/events/change) event of the `Observable` and the [`validate`](/api/ui/validator/methods/validate) method of the Validator.
 
 ```dojo
 <div id="example">
@@ -135,4 +135,4 @@ To achieve the desired scenario, use the [`change`](/api/javascript/data/observa
 ## See Also
 
 * [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
-* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
+* [JavaScript API Reference of the Validator](/api/ui/validator)

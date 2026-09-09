@@ -98,4 +98,4 @@ In the example below, you can see how to enable the Form Filling feature:
 ## See Also
 
 * [Form Filling in the PDFViewer (Demo)](https://demos.telerik.com/kendo-ui/pdfviewer/form-filling)
-* [JavaScript API Reference of the PDFViewer](/api/javascript/ui/pdfviewer)
+* [JavaScript API Reference of the PDFViewer](/api/ui/pdfviewer)

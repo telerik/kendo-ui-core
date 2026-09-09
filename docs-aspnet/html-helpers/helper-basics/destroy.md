@@ -15,7 +15,7 @@ The client objects of all Telerik UI for {{ site.framework }} helpers provide a 
 The `destroy` method:
 * Deletes the helper instance (client object). As a result, the instance is no longer accessible and all its event handlers stop working.
 * Removes auto-generated HTML content, which is outside the helper&mdash;for example, detached popups and dropdowns. The main HTML of the helper remains intact and if needed, you have to manually remove it from the DOM. The Window helper is an exception because it represents a detached popup on its own.
-* Destroys all child helpers with the help of the [`kendo.destroy()` method](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/destroy).
+* Destroys all child helpers with the help of the [`kendo.destroy()` method](https://docs.telerik.com/kendo-ui/api/kendo/methods/destroy).
 
 Telerik UI for {{ site.framework }} provides the following options for destroying helpers:
 * [Destroying helpers manually](#destroying-helpers-manually)
@@ -49,7 +49,7 @@ The Telerik UI for {{ site.framework }} helpers are automatically destroyed when
 
 ## Destroying Multiple Helpers
 
-In addition to destroying a particular Telerik UI for {{ site.framework }} helper, the Kendo UI framework provides a [`kendo.destroy()` method](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/destroy), which can destroy multiple UI for ASP.NET helpers or Kendo UI widgets that are placed inside a specific container.
+In addition to destroying a particular Telerik UI for {{ site.framework }} helper, the Kendo UI framework provides a [`kendo.destroy()` method](https://docs.telerik.com/kendo-ui/api/kendo/methods/destroy), which can destroy multiple UI for ASP.NET helpers or Kendo UI widgets that are placed inside a specific container.
 
 ## See Also
 

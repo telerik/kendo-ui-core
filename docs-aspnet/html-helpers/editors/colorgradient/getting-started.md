@@ -252,7 +252,7 @@ To use the client-side API of the ColorGradient and build on top of its initial 
         </script>
     ```
 
-1. Use the [ColorGradient client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorgradient#methods) to control the behavior of the control. In this example, you will use the `value` method to change the color programmatically.
+1. Use the [ColorGradient client-side API](https://docs.telerik.com/kendo-ui/api/ui/colorgradient#methods) to control the behavior of the control. In this example, you will use the `value` method to change the color programmatically.
 
     ```JS script
         <script>
@@ -282,6 +282,6 @@ You can continue experimenting with the code sample above by running it in the T
 
 * [RGB and HEX input formats]({% slug htmlhelpers_rgb_hex_formats_colorgradient %})
 * [Using the API of the ColorGradient for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorgradient/api)
-* [Client-Side API of the ColorGradient](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorgradient)
+* [Client-Side API of the ColorGradient](https://docs.telerik.com/kendo-ui/api/ui/colorgradient)
 * [Server-Side API of the ColorGradient](/api/colorgradient)
 * [Knowledge Base Section](/knowledge-base)

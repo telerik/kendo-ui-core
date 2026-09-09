@@ -39,8 +39,8 @@ How can I export a PDF file with a page template from a hidden Editor and load i
 The example below relies on the following key steps:
 
 1. Create a hidden [Editor with specified PDF export settings](https://demos.telerik.com/{{ site.platform }}/editor/pdf-export), a [page template](https://docs.telerik.com/kendo-ui/framework/drawing/pdf-output/page-templates), and a [PDFViewer](https://demos.telerik.com/{{ site.platform }}/pdfviewer).
-1. Override the default implementation of the [`saveAsPDF()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/methods/saveaspdf) method of the Editor so the data about the PDF file is accessible in the returned promise in the PdfExport event handler.
-1. Handle the [`PdfExport event`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/editoreventbuilder#pdfexportsystemfunc) of the editor and pass the file to the PDFViewer by using the [`fromFile()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/methods/fromfile) method.
+1. Override the default implementation of the [`saveAsPDF()`](https://docs.telerik.com/kendo-ui/api/ui/editor/methods/saveaspdf) method of the Editor so the data about the PDF file is accessible in the returned promise in the PdfExport event handler.
+1. Handle the [`PdfExport event`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/editoreventbuilder#pdfexportsystemfunc) of the editor and pass the file to the PDFViewer by using the [`fromFile()`](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer/methods/fromfile) method.
 1. When the page is loaded, get a reference to the hidden Editor, set the page template in the Editor's PDF options, and trigger its `saveAsPDF()` method.
 
 
@@ -145,8 +145,8 @@ For a runnable example based on the code above, refer to the [REPL example on ex
 ## See Also
 
 * [Telerik REPL: Exporting a PDF File from an Editor and Loading It into a PDFViewer](https://netcorerepl.telerik.com/wmFaGhGv31uIA5d258)
-* [Client-Side API Reference of the Editor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
-* [Client-Side API Reference of the PDFViewer for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
+* [Client-Side API Reference of the Editor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/editor)
+* [Client-Side API Reference of the PDFViewer for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer)
 * [Server-Side API Reference of the Editor for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/editor)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

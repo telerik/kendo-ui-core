@@ -24,7 +24,7 @@ components: ["datepicker"]
 
 ## Description
 
-To set a default value for the DatePicker, use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/methods/value) method provided by the component.
+To set a default value for the DatePicker, use the [`value`](https://docs.telerik.com/kendo-ui/api/ui/datepicker/methods/value) method provided by the component.
 
 ## Solution
 

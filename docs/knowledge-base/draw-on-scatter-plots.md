@@ -40,7 +40,7 @@ How can I freely draw on the surface of a Kendo UI Chart with scatter series?
 To achieve this behavior:
 
 1. Draw a rectangle with gradient fill on a scatter plot at specified coordinates.
-2. Create custom elements in the [`render` event](/api/javascript/dataviz/ui/chart/events/render) to ensure they survive redraws.
+2. Create custom elements in the [`render` event](/api/dataviz/ui/chart/events/render) to ensure they survive redraws.
 
 For a list of all available drawing primitives, refer to the introductory article on the [Drawing API]({% slug overview_kendoui_drawingapi %}).
 
@@ -105,7 +105,7 @@ The following example demonstrates how to draw freely on the Scatter plot surfac
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})

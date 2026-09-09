@@ -96,7 +96,7 @@ Use the HtmlAttributes configuration option, to set a custom class (`always-visi
 
 ## See Also
 
-* [Client-Side API Reference of the TabStrip for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)
+* [Client-Side API Reference of the TabStrip for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/tabstrip)
 * [Server-Side API Reference of the TabStrip for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/tabstrip)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

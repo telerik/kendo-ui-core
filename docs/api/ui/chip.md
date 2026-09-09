@@ -7,7 +7,7 @@ component: Chip
 
 # kendo.ui.Chip
 
-Represents the Kendo UI Chip widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Chip widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

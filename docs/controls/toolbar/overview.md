@@ -28,10 +28,10 @@ The ToolBar consists of the ToolBar wrapper, overflow anchor, and command overfl
 
 * [Getting Started with the Kendo UI ToolBar for jQuery]({% slug getting_started_kendoui_toolbar %})
 * [Overview of the ToolBar (Demo)](https://demos.telerik.com/kendo-ui/toolbar/index)
-* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/ui/toolbar)
 
 ## See Also
 
 * [Basic Usage of the ToolBar (Demo)](https://demos.telerik.com/kendo-ui/toolbar/index)
 * [Using the API of the ToolBar (Demo)](https://demos.telerik.com/kendo-ui/toolbar/api)
-* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/ui/toolbar)

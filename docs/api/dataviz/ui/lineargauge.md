@@ -2835,7 +2835,7 @@ How do I properly remove a Kendo UI LinearGauge widget from my web page to avoid
 
 ### exportImage
 Exports the Gauge as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -2884,7 +2884,7 @@ The height of the exported image. Defaults to the Gauge height.
 
 ### exportPDF
 Exports the Gauge as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -2928,7 +2928,7 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the Gauge as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -3061,7 +3061,7 @@ converted to other formats using tools like [Inkscape](https://inkscape.org/en) 
 [ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/lineargauge/methods/exportsvg), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/dataviz/ui/lineargauge/methods/exportsvg), but will remain fully functional.
 
 
 <div class="meta-api-description">
@@ -3091,7 +3091,7 @@ How can I generate an SVG string for a Kendo UI linear gauge? Generate, create, 
 
 Returns a PNG image of the gauge encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is obsoleted and replaced by [exportImage](/api/javascript/dataviz/ui/lineargauge/methods/exportimage), but will remain fully functional.
+> This method is obsoleted and replaced by [exportImage](/api/dataviz/ui/lineargauge/methods/exportimage), but will remain fully functional.
 
 
 <div class="meta-api-description">

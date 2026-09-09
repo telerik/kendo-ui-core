@@ -96,6 +96,6 @@ To specify the location of the tick marks on the Slider, use the `TickPlacement(
 {% if site.core %}
 * [Server-Side TagHelper API](/api/taghelpers/slider)
 {% endif %}
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/slider)
 
 

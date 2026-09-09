@@ -24,4 +24,4 @@ refer to the article on [PDF export of a page template]({% slug exporting_pdf_ke
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

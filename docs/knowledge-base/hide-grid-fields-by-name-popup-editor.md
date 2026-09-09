@@ -53,7 +53,7 @@ edit: function(e) {
 ```
 
 ### Explanation
-1. The [`edit`](/api/javascript/ui/grid/events/edit) function is triggered when the popup editor is initialized.
+1. The [`edit`](/api/ui/grid/events/edit) function is triggered when the popup editor is initialized.
 2. The condition `if(e.model.name !== "Jane")` checks the value of the `name` field.
 3. Use the `data-container-for` attribute to locate specific fields by their names and hide their parent elements.
 
@@ -98,5 +98,5 @@ Below is a runnable Dojo example:
 ## See Also
 
 - [Grid Non-Editable Fields in Popup Editor](https://docs.telerik.com/kendo-ui/knowledge-base/grid-non-editable-fields-in-popup-editor)
-- [Kendo UI for jQuery Grid API](/api/javascript/ui/grid)
+- [Kendo UI for jQuery Grid API](/api/ui/grid)
 - [Grid Editing Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/editing/editing)

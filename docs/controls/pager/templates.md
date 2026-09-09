@@ -10,13 +10,13 @@ slug: templates_kendoui_pager_widget
 
 The Kendo UI Pager features templates for its page number links.
 
-To change the look of the currently selected page number, use the [`selectTemplate`](/api/javascript/ui/pager/configuration/selecttemplate).
+To change the look of the currently selected page number, use the [`selectTemplate`](/api/ui/pager/configuration/selecttemplate).
 
-To change the look of the non-selected page number links, use the [`linkTemplate `](/api/javascript/ui/pager/configuration/linktemplate).
+To change the look of the non-selected page number links, use the [`linkTemplate `](/api/ui/pager/configuration/linktemplate).
 
 ## See Also
 
-* [JavaScript API Reference of the Pager](/api/javascript/ui/pager)
+* [JavaScript API Reference of the Pager](/api/ui/pager)
 * [Pager Settings and Types]({% slug settings_kendoui_pager_widget %})
 * [Responsive Pager]({% slug responsive_kendoui_pager_widget  %})
 * [Globalization and Messages]({% slug globalization_kendoui_pager_widget %})

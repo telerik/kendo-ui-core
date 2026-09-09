@@ -8,7 +8,7 @@ component: timedurationpicker
 
 # kendo.ui.TimeDurationPicker
 
-Represents the Kendo UI TimeDurationPicker widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI TimeDurationPicker widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -697,9 +697,9 @@ If set to `true`, the widget will not allow user input. If set to `false`, the w
 
 Gets or sets the value of the widget.
 
-> **Important:** This method **does not trigger** the [change](/api/javascript/ui/textarea/events/change) event.
+> **Important:** This method **does not trigger** the [change](/api/ui/textarea/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior triggering the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior triggering the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
 
 <div class="meta-api-description">

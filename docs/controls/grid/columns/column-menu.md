@@ -11,11 +11,11 @@ position: 5
 
 The Grid provides a built-in option for triggering column operations through a menu.
 
-To enable the column menu implementation, set [`columnMenu:true`](/api/javascript/ui/grid/configuration/columnmenu). As a result, the column headers of the Grid render a column menu, which allows the user to sort, filter, or change the visibility of a column. The column menu also detects when a specific column operation is disabled through the column definition and excludes the corresponding UI from its rendering. For a runnable example, refer to the [demo on implementing a column menu in the Grid](https://demos.telerik.com/kendo-ui/grid/column-menu).
+To enable the column menu implementation, set [`columnMenu:true`](/api/ui/grid/configuration/columnmenu). As a result, the column headers of the Grid render a column menu, which allows the user to sort, filter, or change the visibility of a column. The column menu also detects when a specific column operation is disabled through the column definition and excludes the corresponding UI from its rendering. For a runnable example, refer to the [demo on implementing a column menu in the Grid](https://demos.telerik.com/kendo-ui/grid/column-menu).
 
-> When the [`columnMenu`](/api/javascript/ui/grid/configuration/columnmenu) configuration is set to true, the Grid fires the [`columnMenuInit`](/api/javascript/ui/grid/events/columnmenuinit) and [`columnMenuOpen`](/api/javascript/ui/grid/events/columnmenuopen) events instead of [`filterMenuInit`](/api/javascript/ui/grid/events/filtermenuinit) and [`filterMenuOpen`](/api/javascript/ui/grid/events/filtermenuopen).
+> When the [`columnMenu`](/api/ui/grid/configuration/columnmenu) configuration is set to true, the Grid fires the [`columnMenuInit`](/api/ui/grid/events/columnmenuinit) and [`columnMenuOpen`](/api/ui/grid/events/columnmenuopen) events instead of [`filterMenuInit`](/api/ui/grid/events/filtermenuinit) and [`filterMenuOpen`](/api/ui/grid/events/filtermenuopen).
 
-Further information about the available columnMenu configuration properties can be obtained from this [`API article`](/api/javascript/ui/grid/configuration/columnmenu).
+Further information about the available columnMenu configuration properties can be obtained from this [`API article`](/api/ui/grid/configuration/columnmenu).
 
 ## Column Reordering
 
@@ -23,7 +23,7 @@ As of Kendo UI R2 SP1 2023, the Grid's Column Menu provides an option to change 
 
 ## Column Grouping
 
-As of Kendo UI R2 SP1 2023, the Grid's Column Menu provides an option that allows users to select the target column for grouping or ungrouping the Grid. To display the option item in the Column Menu, set the [`groupable`](/api/javascript/ui/grid/configuration/groupable) configuration to `true`.
+As of Kendo UI R2 SP1 2023, the Grid's Column Menu provides an option that allows users to select the target column for grouping or ungrouping the Grid. To display the option item in the Column Menu, set the [`groupable`](/api/ui/grid/configuration/groupable) configuration to `true`.
 
 ```dojo
     <div id="grid"></div>
@@ -123,7 +123,7 @@ As of R3 2023 version of the Kendo UI, the Grid component supports a new `tabbed
 
 As of R3 2022, the Kendo UI Grid enables the developer to disable the columnMenu for specific columns.
 
-To take advantage of this feature, use the [`columns.columnMenu`](/api/javascript/ui/grid/configuration/columns.columnMenu) property.
+To take advantage of this feature, use the [`columns.columnMenu`](/api/ui/grid/configuration/columns.columnMenu) property.
 
 ## Global Column Menu
 
@@ -183,5 +183,5 @@ As of R1 2024, the Kendo UI Grid has a new built-in toolbar command - `columns`.
 ## See Also
 
 * [Column Menu by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/column-menu)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Kendo UI Knowledge Base](/knowledge-base)

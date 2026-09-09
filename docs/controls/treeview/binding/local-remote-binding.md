@@ -13,7 +13,7 @@ The TreeView provides options for binding it to local data arrays or remote data
 
 For more information on binding the TreeView to different service end-points, refer to the [`HierarchicalDataSource`](/api/framework/hierarchicaldatasource) documentation.
 
-> Do not use the names of the [`kendo.data.Node` fields and methods](/api/javascript/data/node) (for example, `children`) as fields in the TreeView data.
+> Do not use the names of the [`kendo.data.Node` fields and methods](/api/data/node) (for example, `children`) as fields in the TreeView data.
 
 ## Binding to Local Data
 
@@ -62,4 +62,4 @@ The following example demonstrates how to create a TreeView and bind it to a rem
 
 * [Local Data Binding of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/local-data-binding)
 * [Remote Data Binding of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/remote-data-binding)
-* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)
+* [JavaScript API Reference of the TreeView](/api/ui/treeview)

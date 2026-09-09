@@ -31,11 +31,11 @@ How can I load the Grid when the PanelBar is activated for the first time? How c
 
 ## Solution
 
-1. Set the Grids [not to bind automatically](/api/javascript/ui/grid/configuration/autobind) so they do not request data upon initialization.
-1. In the [`expand` event of the PanelBar](/api/javascript/ui/panelbar/events/expand), call their [`dataSource.read()` method](/api/javascript/data/datasource/methods/read).
+1. Set the Grids [not to bind automatically](/api/ui/grid/configuration/autobind) so they do not request data upon initialization.
+1. In the [`expand` event of the PanelBar](/api/ui/panelbar/events/expand), call their [`dataSource.read()` method](/api/data/datasource/methods/read).
 1. Keep a flag (for example, in the DOM as a `data` attribute on the Grid or PanelBar element) to know if you need to read the data source.
 
-Another option is to use the [`expand`](/api/javascript/ui/panelbar/events/expand) event of the PanelBar to add the Grid to the DOM dynamically and instantiate the jQuery widget only then. By doing this, you avoid creating the Grid with the initial page load thereby making the page more lightweight. This approach is useful if this item from the PanelBar is not expected to be used often by the end user. In this case, you will not be able to use the Kendo UI helpers for ASP.NET MVC, though, and you will need to rely on the jQuery widget syntax only.
+Another option is to use the [`expand`](/api/ui/panelbar/events/expand) event of the PanelBar to add the Grid to the DOM dynamically and instantiate the jQuery widget only then. By doing this, you avoid creating the Grid with the initial page load thereby making the page more lightweight. This approach is useful if this item from the PanelBar is not expected to be used often by the end user. In this case, you will not be able to use the Kendo UI helpers for ASP.NET MVC, though, and you will need to rely on the jQuery widget syntax only.
 
 The following example is jQuery-based.
 

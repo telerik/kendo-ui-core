@@ -140,12 +140,12 @@ function showSkippedRecordsPopup(skippedRecords) {
 
 ### Summary
 
-- Use the [`change`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/data/datasource/events/change) event to refresh the grid after update or create operations.
+- Use the [`change`](https://www.telerik.com/kendo-jquery-ui/documentation/api/data/datasource/events/change) event to refresh the grid after update or create operations.
 - Add error handling using the `Error` event.
 - Display skipped records in a popup by returning them in the server response and processing them in the `change` event.
 
 ## See Also
 
 - [Grid Overview](https://www.telerik.com/aspnet-core-ui/documentation/html-helpers/data-management/grid/overview)
-- [DataSource Change Event](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/data/datasource/events/change)
-- [Kendo Window API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/window)
+- [DataSource Change Event](https://www.telerik.com/kendo-jquery-ui/documentation/api/data/datasource/events/change)
+- [Kendo Window API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/window)

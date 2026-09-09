@@ -148,7 +148,7 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
         </script>
     ```
 
-    You can also pass additional parameters with the request. The names of the custom parameters must be different from the reserved words, which are used by the Kendo UI DataSource for jQuery for [sorting](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverSorting), [filtering](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering), [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverPaging), and [grouping](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping).
+    You can also pass additional parameters with the request. The names of the custom parameters must be different from the reserved words, which are used by the Kendo UI DataSource for jQuery for [sorting](http://docs.telerik.com/kendo-ui/api/data/datasource#configuration-serverSorting), [filtering](http://docs.telerik.com/kendo-ui/api/data/datasource#configuration-serverFiltering), [paging](http://docs.telerik.com/kendo-ui/api/data/datasource#configuration-serverPaging), and [grouping](http://docs.telerik.com/kendo-ui/api/data/datasource#configuration-serverGrouping).
 
     ```JavaScript
         <script>
@@ -417,7 +417,7 @@ The table below contains links to available examples of using Telerik UI for ASP
 
 ## Anti-request Forgery
 
-Razor pages are automatically protected from [XSRF/CSRF](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-3.1&tabs=visual-studio#xsrf). This is why, when you bind a Telerik component to page methods, you need to pass an anti-forgery token, to validate the request. For that purpose, you can use [kendo.antiForgeryTokens();](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/antiforgerytokens#antiforgerytokens). More on anti-forgery you can find on [Microsoft documentation](https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-3.1)
+Razor pages are automatically protected from [XSRF/CSRF](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-3.1&tabs=visual-studio#xsrf). This is why, when you bind a Telerik component to page methods, you need to pass an anti-forgery token, to validate the request. For that purpose, you can use [kendo.antiForgeryTokens();](https://docs.telerik.com/kendo-ui/api/kendo/methods/antiforgerytokens#antiforgerytokens). More on anti-forgery you can find on [Microsoft documentation](https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-3.1)
 
 ## Known Limitations
 

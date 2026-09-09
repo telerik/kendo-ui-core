@@ -35,8 +35,8 @@ The Editor allows you to create rich textual content through a What-You-See-Is-W
 
 The Editor component relies on inline styles for several of its features. If strict [CSP mode]({% slug troubleshooting_content_security_policy_kendoui %}) is enabled for the application you can use the following configuration options to make the Editor component CSP-compliant:
 
-* Use the [`nonce`](/api/javascript/ui/editor/configuration/nonce) configuration and pass a value for the nonce attribute. The passed value would be used as the nonce attribute for the inline styles in the content area iframe, the placeholder inline style and the link tags loading external stylesheets in the content area.
-* Use the [`unsafeInline`](/api/javascript/ui/editor/configuration/unsafeinline) configuration and set it to `false`, so no inline styles are used by the formatting tool. As a result no decoration will be applied to the formatting tool dropdown and the formatted values will appear as plain text. Actual formatting will be applied (for example if the content of the Editor is exported to MS Word), but the applied format will not be visible in the Editor component, due to the enabled strict CSP mode.
+* Use the [`nonce`](/api/ui/editor/configuration/nonce) configuration and pass a value for the nonce attribute. The passed value would be used as the nonce attribute for the inline styles in the content area iframe, the placeholder inline style and the link tags loading external stylesheets in the content area.
+* Use the [`unsafeInline`](/api/ui/editor/configuration/unsafeinline) configuration and set it to `false`, so no inline styles are used by the formatting tool. As a result no decoration will be applied to the formatting tool dropdown and the formatted values will appear as plain text. Actual formatting will be applied (for example if the content of the Editor is exported to MS Word), but the applied format will not be visible in the Editor component, due to the enabled strict CSP mode.
 
 ## Next Steps
 
@@ -46,7 +46,7 @@ The Editor component relies on inline styles for several of its features. If str
 
 ## See Also
 
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)
 * [Demo Page for the jQuery Editor](https://demos.telerik.com/kendo-ui/editor/index)
 * [Knowledge Base Section](/knowledge-base)
 * [jQuery Editor Product Page](https://www.telerik.com/kendo-jquery-ui/rich-text-editor)

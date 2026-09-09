@@ -216,7 +216,7 @@ You can reference the Breadcrumb instances that you have created and build on to
     </script>
     ```
 
-1. Use the [Breadcrumb client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/breadcrumb#methods) to control the behavior of the widget. In this example, you will use the `value` method to change Breadcrumb value.
+1. Use the [Breadcrumb client-side API](https://docs.telerik.com/kendo-ui/api/ui/breadcrumb#methods) to control the behavior of the widget. In this example, you will use the `value` method to change Breadcrumb value.
 
     ```JS script
     <script>
@@ -245,6 +245,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Breadcrumb for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/breadcrumb/api)
-* [Breadcrumb Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/breadcrumb)
+* [Breadcrumb Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/breadcrumb)
 * [Server-Side API of the Breadcrumb](/api/breadcrumb)
 * [Knowledge Base Section](/knowledge-base)

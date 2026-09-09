@@ -29,7 +29,7 @@ How can I highlight the clicked bar in the Kendo UI Bar Chart?
 
 ## Solution
 
-Handle the [`seriesClick`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/seriesclick) event&mdash;in the event handler, add a custom style class to the desired HTML elements.
+Handle the [`seriesClick`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/events/seriesclick) event&mdash;in the event handler, add a custom style class to the desired HTML elements.
 
 ```dojo
 <style>

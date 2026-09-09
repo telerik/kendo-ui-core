@@ -248,7 +248,7 @@ This approach temporarily enables disabled steps to let the Wizard behave normal
 
 ## See Also
 - [Kendo UI Wizard Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/wizard/overview)
-* [JavaScript API Reference of the Wizard](/api/javascript/ui/wizard)
-* [JavaScript API Reference of the Wizard's enableStep method](/api/javascript/ui/wizard/methods/enablestep)
-* [JavaScript API Reference of the Wizard's activeStep method](/api/javascript/ui/wizard/methods/activestep)
-* [JavaScript API Reference of the Wizard's select Method](/api/javascript/ui/wizard/methods/select)
+* [JavaScript API Reference of the Wizard](/api/ui/wizard)
+* [JavaScript API Reference of the Wizard's enableStep method](/api/ui/wizard/methods/enablestep)
+* [JavaScript API Reference of the Wizard's activeStep method](/api/ui/wizard/methods/activestep)
+* [JavaScript API Reference of the Wizard's select Method](/api/ui/wizard/methods/select)

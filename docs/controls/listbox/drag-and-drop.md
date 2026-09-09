@@ -9,7 +9,7 @@ position: 4
 
 # Dragging and Dropping
 
-To enable the drag-and-drop feature of the ListBox, set its [`draggable`](/api/javascript/ui/listbox/configuration/draggable) property to `true`.
+To enable the drag-and-drop feature of the ListBox, set its [`draggable`](/api/ui/listbox/configuration/draggable) property to `true`.
 
 You can also customize the drag-and-drop behavior of the widget by using its `draggable.placeholder` and `draggable.hint` options.
 
@@ -49,4 +49,4 @@ You can also customize the drag-and-drop behavior of the widget by using its `dr
 ## See Also
 
 * [Dragging and Dropping in the ListBox (Demo)](https://demos.telerik.com/kendo-ui/listbox/drag-and-drop)
-* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
+* [JavaScript API Reference of the ListBox](/api/ui/listbox)

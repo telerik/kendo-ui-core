@@ -38,7 +38,7 @@ This knowledge base article also answers the following questions:
 
 ### Option 1: Decode Values Dynamically in `schema.parse`
 
-Use the [`schema.parse`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/data/datasource/configuration/schema#schemaparse) method to decode HTML-encoded values dynamically and apply decoding to all string-type fields.
+Use the [`schema.parse`](https://www.telerik.com/kendo-jquery-ui/documentation/api/data/datasource/configuration/schema#schemaparse) method to decode HTML-encoded values dynamically and apply decoding to all string-type fields.
 
 ```javascript
 function decodeHTMLEntities(text) {
@@ -188,7 +188,7 @@ Runnable example:
 
 ### Option 2: Customize Filter Row with DropDownList
 
-If you want filtering without changing the data source, customize the filter row using [`filterable.cell.template`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/columns.filterable.cell). Use a [DropDownList](https://www.telerik.com/kendo-jquery-ui/documentation/controls/dropdownlist/overview#kendo-ui-for-jquery-dropdownlist-overview) for filtering.
+If you want filtering without changing the data source, customize the filter row using [`filterable.cell.template`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/columns.filterable.cell). Use a [DropDownList](https://www.telerik.com/kendo-jquery-ui/documentation/controls/dropdownlist/overview#kendo-ui-for-jquery-dropdownlist-overview) for filtering.
 
 ```javascript
 columns: [
@@ -338,6 +338,6 @@ Runnable example:
 ## See Also
 
 - [Kendo UI for jQuery Grid Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/overview)
-- [DataSource Schema Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/data/datasource/configuration/schema)
-- [DropDownList Configuration for Filtering](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dropdownlist/configuration/filter) 
-- [Columns Filterable Cell Template](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/columns.filterable.cell)
+- [DataSource Schema Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/data/datasource/configuration/schema)
+- [DropDownList Configuration for Filtering](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdownlist/configuration/filter) 
+- [Columns Filterable Cell Template](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/columns.filterable.cell)

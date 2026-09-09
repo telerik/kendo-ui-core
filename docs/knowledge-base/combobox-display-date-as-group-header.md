@@ -28,7 +28,7 @@ How van I render the date in a standard format and not like `/DATE/1498798800000
 
 ## Solution
 
-To properly display properly the group headers, configure a [`groupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/grouptemplate) and a [`fixedGroupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/fixedgrouptemplate).
+To properly display properly the group headers, configure a [`groupTemplate`](https://docs.telerik.com/kendo-ui/api/ui/combobox/configuration/grouptemplate) and a [`fixedGroupTemplate`](https://docs.telerik.com/kendo-ui/api/ui/combobox/configuration/fixedgrouptemplate).
 
 ```dojo
 <input id="customers" style="width: 400px" />
@@ -56,6 +56,6 @@ To properly display properly the group headers, configure a [`groupTemplate`](ht
 
 ## See Also
 
-* [API Reference of the ComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
-* [`object`](https://docs.telerik.com/kendo-ui/api/javascript/kendo)
+* [API Reference of the ComboBox](https://docs.telerik.com/kendo-ui/api/ui/combobox)
+* [`object`](https://docs.telerik.com/kendo-ui/api/kendo)
 * [Kendo UI Documentation on Date Formatting](https://docs.telerik.com/kendo-ui/framework/globalization/dateformatting)

@@ -28,7 +28,7 @@ How can I call the validation an AJAX request and, if the validation fails, to k
 
 ## Solution
 
-Perform a custom check on the server in the [`moveEnd`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/events/moveend) event of the Gantt. As a result, the default change is prevented and if the validation passes, the new start and end dates are saved for that task.  
+Perform a custom check on the server in the [`moveEnd`](https://docs.telerik.com/kendo-ui/api/ui/gantt/events/moveend) event of the Gantt. As a result, the default change is prevented and if the validation passes, the new start and end dates are saved for that task.  
 
 ```dojo
 <div id="gantt"></div>
@@ -68,4 +68,4 @@ Perform a custom check on the server in the [`moveEnd`](https://docs.telerik.com
 
 ## See Also
 
-* [API Reference of the Gantt](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [API Reference of the Gantt](https://docs.telerik.com/kendo-ui/api/ui/gantt)

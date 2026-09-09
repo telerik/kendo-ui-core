@@ -127,6 +127,6 @@ For a complete runnable example, see [jQuery Grid AI Assistant - Custom Column](
 
 ## Suggested Links
 
-* [InlineAIPrompt Overview](/api/javascript/ui/inlineaiprompt)
+* [InlineAIPrompt Overview](/api/ui/inlineaiprompt)
 * [Kendo UI for jQuery Grid Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 * [jQuery Grid AI Assistant - Custom Column](https://docs.telerik.com/kendo-ui/grid/ai-custom-column)

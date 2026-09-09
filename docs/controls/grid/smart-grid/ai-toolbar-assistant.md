@@ -93,9 +93,9 @@ The AI Toolbar Assistant provides various configuration options to customize the
 
 ### AIPrompt Customization
 
-The AI Toolbar Assistant utilizes the [AIPrompt](slug:overview_kendoui_aiprompt_component) component internally to provide conversational interface. You can customize the AIPrompt interface and user interaction by using the [`ai`](/api/javascript/ui/grid/configuration/ai) property of the tool.
+The AI Toolbar Assistant utilizes the [AIPrompt](slug:overview_kendoui_aiprompt_component) component internally to provide conversational interface. You can customize the AIPrompt interface and user interaction by using the [`ai`](/api/ui/grid/configuration/ai) property of the tool.
 
-This property allows you to add [`promptSuggestions`](slug:/api/javascript/ui/grid/configuration/ai.aiassistant.promptsuggestions) tailored to your specific use case that can guide users with examples of what your AI service can understand. Furthermore, the [`speechToTextButton`](/api/javascript/ui/grid/configuration/ai.aiassistant.speechtotext) setting provides voice input capabilities for enhancing accessibility in your application.
+This property allows you to add [`promptSuggestions`](slug:/api/ui/grid/configuration/ai.aiassistant.promptsuggestions) tailored to your specific use case that can guide users with examples of what your AI service can understand. Furthermore, the [`speechToTextButton`](/api/ui/grid/configuration/ai.aiassistant.speechtotext) setting provides voice input capabilities for enhancing accessibility in your application.
 
 ```javascript
 // Pass prompt settings to your assistant helper or use them when rendering the assistant UI
@@ -116,7 +116,7 @@ var aiPromptSettings = {
 
 You can also customize the appearance of the [Window](slug:overview_kendoui_window_widget) component, in which the AIPrompt of the toolbar tool is rendered. 
 
-To achieve this, use the [`aiassistantwindow`](/api/javascript/ui/grid/configuration/ai.aiassistantwindow) property of the `kendoGridAIAssistantTool` directive, which allows you to control the positioning and visual appearance of the Window to match your application's design and requirements.
+To achieve this, use the [`aiassistantwindow`](/api/ui/grid/configuration/ai.aiassistantwindow) property of the `kendoGridAIAssistantTool` directive, which allows you to control the positioning and visual appearance of the Window to match your application's design and requirements.
 
 ```javascript
 var aiWindowSettings = {
@@ -136,4 +136,4 @@ var aiWindowSettings = {
 * [Smart Grid Overview](slug:overview_smart_grid)
 * [Grid Configuring the ToolBar](slug:toolbar_kendoui_grid_widget)
 * [AIPrompt Overview](slug:overview_kendoui_aiprompt_component)
-* [API Grid](/api/javascript/ui/grid/)
+* [API Grid](/api/ui/grid/)

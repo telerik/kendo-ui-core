@@ -119,7 +119,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Sparkline](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sparkline)
+* [Client-Side API of the Sparkline](https://docs.telerik.com/kendo-ui/api/dataviz/ui/sparkline)
 * [Server-Side HtmlHelper API of the Sparkline](/api/sparkline)
 * [Server-Side TagHelper API of the Sparkline](/api/taghelpers/sparkline)
 * [Knowledge Base Section](/knowledge-base)

@@ -11,7 +11,7 @@ position: 8
 
 A floating label is a placeholder text for form or input fields, which floats above that field and remains visible once the user starts interacting with that field. 
 
-To implement a [floating label in the Kendo UI for jQuery DropDownTree](/api/javascript/ui/dropdowntree/configuration/label), define it either as a string or from a function.
+To implement a [floating label in the Kendo UI for jQuery DropDownTree](/api/ui/dropdowntree/configuration/label), define it either as a string or from a function.
 
 The following example demonstrates how to set the floating label as a string:
 
@@ -71,4 +71,4 @@ The following example demonstrates how to set the floating label from a function
 ## See Also
 
 * [Floating Label (Demo) of the DropDownTree](https://demos.telerik.com/kendo-ui/dropdowntree/floating-label)
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)
+* [JavaScript API Reference of the DropDownTree](/api/ui/dropdowntree)

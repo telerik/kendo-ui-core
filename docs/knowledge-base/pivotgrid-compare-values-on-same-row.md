@@ -29,7 +29,7 @@ How can I compare the cell values of the Kendo UI for jQuery PivotGridV2 on the 
 
 To achieve the desired scenario:
 
-1. Obtain a reference to the `td` elements of the row by using the [`dataBound`](/api/javascript/ui/pivotgridv2/events/databound) event of the component.
+1. Obtain a reference to the `td` elements of the row by using the [`dataBound`](/api/ui/pivotgridv2/events/databound) event of the component.
 1. Retrieve the values from the cells and compare them.
 
 The following example demonstrates the full implementation of the suggested approach:

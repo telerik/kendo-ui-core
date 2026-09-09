@@ -22,7 +22,7 @@ components: ["grid"]
 
 ## Description
 
-By default, the [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method cannot serialize function definitions. Event handlers and other similar Grid configurations are lost when the state of the component is persisted with [`getOptions`](/api/javascript/ui/grid/methods/getoptions) and [`setOptions`](/api/javascript/ui/grid/methods/setoptions).
+By default, the [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method cannot serialize function definitions. Event handlers and other similar Grid configurations are lost when the state of the component is persisted with [`getOptions`](/api/ui/grid/methods/getoptions) and [`setOptions`](/api/ui/grid/methods/setoptions).
 
 How can I persist the state of the Data Grid and include the function definitions in the saved options?
 
@@ -154,6 +154,6 @@ To achieve the desired scenario, implement a custom JSON [`reviver`](https://dev
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Data Grid](/api/ui/grid)
 * [jQuery Data Grid Overview Demo](https://demos.telerik.com/kendo-ui/grid/index)
 * [Persist the Multi-Checkbox Filter When the Grid Uses an External DataSource](/knowledge-base/grid-persist-checkbox-filter-with external-datasource)

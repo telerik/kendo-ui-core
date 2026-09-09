@@ -93,7 +93,7 @@ To use the client-side API of the DateInput and build on top of its initial conf
         </script>
     ```
 
-1. Use the [DateInput client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#methods) to control the behavior of the control. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput/methods/enable) method to disable the input.
+1. Use the [DateInput client-side API](https://docs.telerik.com/kendo-ui/api/ui/combobox#methods) to control the behavior of the control. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/ui/dateinput/methods/enable) method to disable the input.
 
     ```JS script
         <script>
@@ -122,7 +122,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the DateInput for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dateinput/api)
-* [Client-Side API of the DateInput](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput)
+* [Client-Side API of the DateInput](https://docs.telerik.com/kendo-ui/api/ui/dateinput)
 * [Server-Side API of the DateInput](/api/dateinput)
 * [Knowledge Base Section](/knowledge-base)
 

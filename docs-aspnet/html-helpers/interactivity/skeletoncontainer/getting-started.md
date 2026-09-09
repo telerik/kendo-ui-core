@@ -411,6 +411,6 @@ You can continue experimenting with the code sample above by running it in the T
 * [Configure the Items in SkeletonContainer]({% slug htmlhelpers_skeletoncontainer_aspnetcore_items %})
 ## See Also
 * [SkeletonContainer for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/skeletoncontainer)
-* [Client-Side API of the SkeletonContainer](https://docs.telerik.com/kendo-ui/api/javascript/ui/skeletoncontainer)
+* [Client-Side API of the SkeletonContainer](https://docs.telerik.com/kendo-ui/api/ui/skeletoncontainer)
 * [Server-Side API of the SkeletonContainer](/api/skeletoncontainer)
 * [Knowledge Base Section](/knowledge-base)

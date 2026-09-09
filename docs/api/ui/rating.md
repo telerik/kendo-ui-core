@@ -8,7 +8,7 @@ component: rating
 
 # kendo.ui.Rating
 
-Represents the Kendo UI Rating. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Rating. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -175,7 +175,7 @@ The current value of the widget.
 
 The max value of the widget.
 
-Specifies the [template](/api/javascript/kendo/methods/template) which is used for rendering the label.
+Specifies the [template](/api/kendo/methods/template) which is used for rendering the label.
 
 #### Example - customize the label through the template option
 
@@ -210,7 +210,7 @@ How can I make Kendo UI rating widget automatically select a value when it gains
 
 ### itemTemplate `String|Function`
 
-Specifies the [template](/api/javascript/kendo/methods/template) which is used for rendering the items of the Rating.
+Specifies the [template](/api/kendo/methods/template) which is used for rendering the items of the Rating.
 
 
 <div class="meta-api-description">
@@ -229,7 +229,7 @@ How do I customize the appearance of individual rating elements in Kendo UI for 
 
 ### selectedTemplate `String|Function`
 
-Specifies the [template](/api/javascript/kendo/methods/template) which is used for rendering the selected state of the items.
+Specifies the [template](/api/kendo/methods/template) which is used for rendering the selected state of the items.
 
 
 <div class="meta-api-description">
@@ -248,7 +248,7 @@ How can I customize the appearance of selected rating elements in a Kendo UI rat
 
 ### hoveredTemplate `String|Function`
 
-Specifies the [template](/api/javascript/kendo/methods/template) which is used for rendering the hovered state of the items.
+Specifies the [template](/api/kendo/methods/template) which is used for rendering the hovered state of the items.
 
 
 <div class="meta-api-description">

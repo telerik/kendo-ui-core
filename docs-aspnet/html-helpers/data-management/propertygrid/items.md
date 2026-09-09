@@ -333,4 +333,4 @@ You can explicitly configure an editor for a specific field by using any of the 
 {% if site.core %}
 * [Server-Side API of the PropertyGrid TagHelper](/api/taghelpers/propertygrid)
 {% endif %}
-* [Client-Side API of the PropertyGrid](https://docs.telerik.com/kendo-ui/api/javascript/ui/propertygrid)
+* [Client-Side API of the PropertyGrid](https://docs.telerik.com/kendo-ui/api/ui/propertygrid)

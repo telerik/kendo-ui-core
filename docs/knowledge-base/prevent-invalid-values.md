@@ -39,7 +39,7 @@ How can I prevent invalid values in the Kendo UI for jQuery DateTimePicker?
 
 To achieve the desired scenario:
 
-1. Attach a handler to the [`change`](/api/javascript/ui/datetimepicker/events/change) event of the `DateTimePicker`.
+1. Attach a handler to the [`change`](/api/ui/datetimepicker/events/change) event of the `DateTimePicker`.
 
 1. Check if the new value of the `DateTimePicker` is `null`, which will indicate whether the entered value is invalid or not.
 
@@ -90,4 +90,4 @@ To achieve the desired scenario:
 ## See Also
 
 * [Using the API of the DateTimePicker (Demo)](https://demos.telerik.com/kendo-ui/datetimepicker/api)
-* [JavaScript API Reference of the DateTimePicker](/api/javascript/ui/datetimepicker)
+* [JavaScript API Reference of the DateTimePicker](/api/ui/datetimepicker)

@@ -166,7 +166,7 @@ You can reference the Slider instances that you have created and build on top of
         </script>
     ```
 
-1. Use the [Slider client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider#methods) to control the behavior of the component. In this example, you will use the `enable()` method to disable the Slider when the user selects a value greater than 3000. Then, when the button **Enable** is clicked, the Slider will be enabled again.
+1. Use the [Slider client-side API](https://docs.telerik.com/kendo-ui/api/ui/slider#methods) to control the behavior of the component. In this example, you will use the `enable()` method to disable the Slider when the user selects a value greater than 3000. Then, when the button **Enable** is clicked, the Slider will be enabled again.
 
     ```HtmlHelper
         @(Html.Kendo().Slider()
@@ -238,8 +238,8 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Slider for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/slider/api)
-* [Client-Side API of the Slider](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider)
-* [Client-Side API of the RangeSlider](https://docs.telerik.com/kendo-ui/api/javascript/ui/rangeslider)
+* [Client-Side API of the Slider](https://docs.telerik.com/kendo-ui/api/ui/slider)
+* [Client-Side API of the RangeSlider](https://docs.telerik.com/kendo-ui/api/ui/rangeslider)
 * [Server-Side API of the Slider](/api/slider)
 {% if site.core %}
 * [Server-Side API of the RangeSlider](/api/rangeslider)

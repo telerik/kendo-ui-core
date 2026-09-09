@@ -9,7 +9,7 @@ position: 3
 
 # Binding to a Custom DataSource
 
-The Custom DataSource type of data binding is the default type of binding and provides full control over the [client-side API options of the Kendo UI for jQuery DataSource](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource).
+The Custom DataSource type of data binding is the default type of binding and provides full control over the [client-side API options of the Kendo UI for jQuery DataSource](https://docs.telerik.com/kendo-ui/api/data/datasource).
 
 Using a custom DataSource gives you complete control when it comes to:
 
@@ -192,4 +192,4 @@ For a complete example on the Custom DataSource Binding, refer to the [demo on c
 {% if site.core %}
 * [Server-Side API of the Scheduler TagHelper](/api/taghelpers/scheduler)
 {% endif %}
-* [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

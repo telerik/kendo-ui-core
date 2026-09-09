@@ -155,5 +155,5 @@ Refer to the below Dojo demo for a complete example.
 
 ## See Also
 
-- [Kendo UI Filter Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter)
-- [Kendo.stringify Function Documentation](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/stringify)
+- [Kendo UI Filter Documentation](https://docs.telerik.com/kendo-ui/api/ui/filter)
+- [Kendo.stringify Function Documentation](https://docs.telerik.com/kendo-ui/api/kendo/methods/stringify)

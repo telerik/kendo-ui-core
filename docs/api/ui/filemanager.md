@@ -8,7 +8,7 @@ component: filemanager
 
 # kendo.ui.FileManager
 
-Represents the Kendo UI FileManager. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI FileManager. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -156,9 +156,9 @@ How to enable drag-and-drop functionality in Kendo UI FileManager? Control the a
 
 ### dataSource `Object | Array | kendo.data.FileManagerDataSource`
 
-Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of the FileManager. Can be bound to a remote service or local data.
+Sets the [FileManagerDataSource](/api/data/filemanagerdatasource) of the FileManager. Can be bound to a remote service or local data.
 
-> When using the transport options as functions the target parameter will not be sent automatically due to the DataSource not calling the [parameterMap method](/api/javascript/data/datasource/configuration/transport.parametermap).
+> When using the transport options as functions the target parameter will not be sent automatically due to the DataSource not calling the [parameterMap method](/api/data/datasource/configuration/transport.parametermap).
 > You can call it within your function to pass the required data - Example - read as function.
 
 
@@ -301,7 +301,7 @@ How to configure data source for Kendo UI FileManager component? Configure or se
 
 ### upload `Object`
 
-Configures the composite Upload widget of the FileManager. Accepts the same options as the [kendoUpload widget](/api/javascript/ui/upload).
+Configures the composite Upload widget of the FileManager. Accepts the same options as the [kendoUpload widget](/api/ui/upload).
 
 
 <div class="meta-api-description">
@@ -364,7 +364,7 @@ How do I configure the upload URL for Kendo UI FileManager to send files to a sp
 
 ### upload.cancel `Function`
 
-Fires when the upload was cancelled while in progress. [Upload Events](/api/javascript/ui/upload#events).
+Fires when the upload was cancelled while in progress. [Upload Events](/api/ui/upload#events).
 
 
 <div class="meta-api-description">
@@ -396,7 +396,7 @@ How to cancel ongoing file uploads in Kendo UI for jQuery FileManager control? C
 
 ### upload.clear `Function`
 
-Fires when the files are cleared by clicking on the **Clear** button. [Upload Events](/api/javascript/ui/upload#events).
+Fires when the files are cleared by clicking on the **Clear** button. [Upload Events](/api/ui/upload#events).
 
 
 <div class="meta-api-description">
@@ -428,7 +428,7 @@ How to handle clear event in Kendo UI FileManager? Detect and manage actions tri
 
 ### upload.complete `Function`
 
-Fires when all active uploads complete&mdash;either successfully or with errors. [Upload Events](/api/javascript/ui/upload#events).
+Fires when all active uploads complete&mdash;either successfully or with errors. [Upload Events](/api/ui/upload#events).
 
 
 <div class="meta-api-description">
@@ -460,7 +460,7 @@ What triggers when all file uploads finish in Kendo UI's FileManager? Trigger ac
 
 ### upload.error `Function`
 
-Fires when an `upload` or `remove` operation fails. [Upload Events](/api/javascript/ui/upload#events).
+Fires when an `upload` or `remove` operation fails. [Upload Events](/api/ui/upload#events).
 
 
 <div class="meta-api-description">
@@ -492,7 +492,7 @@ How do I handle failed file uploads in Kendo UI for jQuery FileManager? Manage a
 
 ### upload.pause `Function`
 
-Fires when the files are cleared by clicking the **Pause** button. The button is visible if `chunksize` is set. [Upload Events](/api/javascript/ui/upload#events).
+Fires when the files are cleared by clicking the **Pause** button. The button is visible if `chunksize` is set. [Upload Events](/api/ui/upload#events).
 
 
 <div class="meta-api-description">
@@ -524,7 +524,7 @@ How to pause file upload in Kendo UI FileManager? Control and manage the pausing
 
 ### upload.progress `Function`
 
-Fires when the data about the progress of the upload is available. [Upload Events](/api/javascript/ui/upload#events).
+Fires when the data about the progress of the upload is available. [Upload Events](/api/ui/upload#events).
 
 
 <div class="meta-api-description">
@@ -556,7 +556,7 @@ How to track file upload progress in Kendo UI FileManager? Track and monitor fil
 
 ### upload.resume `Function`
 
-Fires when the files are resumed through clicking the **Resume** button. The button is visible if `chunksize` is set and the file upload is paused. [Upload Events](/api/javascript/ui/upload#events).
+Fires when the files are resumed through clicking the **Resume** button. The button is visible if `chunksize` is set and the file upload is paused. [Upload Events](/api/ui/upload#events).
 
 
 <div class="meta-api-description">
@@ -588,7 +588,7 @@ How do I resume an interrupted file upload in Kendo UI FileManager? Enable resum
 
 ### upload.remove `Function`
 
-Fires when an uploaded file is about to be removed. If the event is canceled, the `remove` operation is prevented. [Upload Events](/api/javascript/ui/upload#events).
+Fires when an uploaded file is about to be removed. If the event is canceled, the `remove` operation is prevented. [Upload Events](/api/ui/upload#events).
 
 
 <div class="meta-api-description">
@@ -620,7 +620,7 @@ How to prevent accidental file removal during upload in Kendo UI FileManager? In
 
 ### upload.select `Function`
 
-Fires when a file is selected. [Upload Events](/api/javascript/ui/upload#events).
+Fires when a file is selected. [Upload Events](/api/ui/upload#events).
 
 
 <div class="meta-api-description">
@@ -652,7 +652,7 @@ How to handle file selection in Kendo UI FileManager upload interface? Detect an
 
 ### upload.success `Function`
 
-Fires when an `upload` or `remove` operation is completed successfully. [Upload Events](/api/javascript/ui/upload#events).
+Fires when an `upload` or `remove` operation is completed successfully. [Upload Events](/api/ui/upload#events).
 
 
 <div class="meta-api-description">
@@ -684,7 +684,7 @@ How to detect successful file uploads in Kendo UI FileManager? Trigger actions o
 
 ### upload.upload `Function`
 
-Fires when one or more files are about to be uploaded. The canceling of the event prevents the upload. [Upload Events](/api/javascript/ui/upload#events).
+Fires when one or more files are about to be uploaded. The canceling of the event prevents the upload. [Upload Events](/api/ui/upload#events).
 
 
 <div class="meta-api-description">
@@ -788,7 +788,7 @@ How can I customize the toolbar in Kendo UI FileManager to show only specific bu
         });
     </script>
 
-Apart from the built-in tools, the FileManager fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
+Apart from the built-in tools, the FileManager fully exposes the [ToolBar.items API](/api/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
 
 ### toolbar.items.type `String`
 Specifies the type of the button.
@@ -1406,7 +1406,7 @@ How to uniquely identify a file manager toolbar button in Kendo UI for jQuery? S
 
 ### toolbar.click `Function`
 
-Fires when the user clicks a command button. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the user clicks a command button. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">
@@ -1438,7 +1438,7 @@ How to handle click events on File Manager toolbar buttons in Kendo UI for jQuer
 
 ### toolbar.close `Function`
 
-Fires when the SplitButton's popup closes. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the SplitButton's popup closes. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">
@@ -1470,7 +1470,7 @@ How to handle closing of popup menus in Kendo UI FileManager toolbar? Control an
 
 ### toolbar.open `Function`
 
-Fires when the Split Button's popup opens. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the Split Button's popup opens. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">
@@ -1502,7 +1502,7 @@ How to handle opening split-button popup in Kendo UI FileManager toolbar? Detect
 
 ### toolbar.toggle `Function`
 
-Fires when the user changes the checked state of a toggle button. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the user changes the checked state of a toggle button. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">
@@ -1533,7 +1533,7 @@ How do I detect toggle button state changes in Kendo UI FileManager toolbar? Det
     </script>
 
 ### toolbar.overflow `Object`
-Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+Specifies [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) configuration for the toolbar.
 
 
 <div class="meta-api-description">
@@ -1707,7 +1707,7 @@ How to control the scroll increment of toolbar buttons in Kendo UI FileManager? 
 
 ### toolbar.overflowClose `Function`
 
-Fires when the overflow popup container is about to close. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the overflow popup container is about to close. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">
@@ -1739,7 +1739,7 @@ How to handle close event in Kendo UI FileManager toolbar overflow popup? Detect
 
 ### toolbar.overflowOpen `Function`
 
-Fires when the overflow popup container is about to open. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the overflow popup container is about to open. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">
@@ -1806,7 +1806,7 @@ How to customize file operation dialogs in Kendo UI for jQuery? Customize and co
 
 ### dialogs.upload `Object`
 
-Configures the Upload dialog - [kendoDialog](/api/javascript/ui/dialog)
+Configures the Upload dialog - [kendoDialog](/api/ui/dialog)
 
 
 <div class="meta-api-description">
@@ -1838,7 +1838,7 @@ How do I customize the upload dialog interface in Kendo UI for jQuery's file man
 
 ### dialogs.moveConfirm `Object`
 
-Configures the Move (when drag/drop action is performed) dialog - [kendoConfirm](/api/javascript/ui/confirm)
+Configures the Move (when drag/drop action is performed) dialog - [kendoConfirm](/api/ui/confirm)
 
 
 <div class="meta-api-description">
@@ -1870,7 +1870,7 @@ How do I customize the move confirmation dialog in Kendo UI FileManager? Control
 
 ### dialogs.deleteConfirm `Object`
 
-Configures the Delete dialog - [kendoConfirm](/api/javascript/ui/confirm)
+Configures the Delete dialog - [kendoConfirm](/api/ui/confirm)
 
 
 <div class="meta-api-description">
@@ -1902,7 +1902,7 @@ How can I customize the confirmation dialog when deleting files in Kendo UI File
 
 ### dialogs.renamePrompt `Object`
 
-Configures the Rename dialog - [kendoPrompt](/api/javascript/ui/prompt)
+Configures the Rename dialog - [kendoPrompt](/api/ui/prompt)
 
 
 <div class="meta-api-description">
@@ -2170,7 +2170,7 @@ How to customize the action triggered by selecting a context menu option in Kend
 
 ### contextMenu.close `Function`
 
-Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.  [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.  [ContextMenu Events](/api/ui/contextmenu#events).
 
 
 <div class="meta-api-description">
@@ -2202,7 +2202,7 @@ How to prevent close actions on Kendo UI FileManager context menus? Control the 
 
 ### contextMenu.open `Function`
 
-Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu. [ContextMenu Events](/api/ui/contextmenu#events).
 
 
 <div class="meta-api-description">
@@ -2234,7 +2234,7 @@ How to customize the behavior of opening the context menu in Kendo UI FileManage
 
 ### contextMenu.activate `Function`
 
-Fires when a sub menu or the ContextMenu gets opened and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+Fires when a sub menu or the ContextMenu gets opened and its animation finished. [ContextMenu Events](/api/ui/contextmenu#events).
 
 
 <div class="meta-api-description">
@@ -2266,7 +2266,7 @@ How do I trigger custom code when a context menu finishes opening in Kendo UI Fi
 
 ### contextMenu.deactivate `Function`
 
-Fires when a sub menu or the ContextMenu gets closed and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+Fires when a sub menu or the ContextMenu gets closed and its animation finished. [ContextMenu Events](/api/ui/contextmenu#events).
 
 
 <div class="meta-api-description">
@@ -2298,7 +2298,7 @@ When does Kendo UI FileManager context menu deactivate event trigger? Detect whe
 
 ### contextMenu.select `Function`
 
-Fires when a menu item gets selected. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+Fires when a menu item gets selected. [ContextMenu Events](/api/ui/contextmenu#events).
 
 
 <div class="meta-api-description">
@@ -2365,7 +2365,7 @@ How to customize file list view in Kendo UI FileManager? Configure, customize, a
 
 ### views.grid `Object`
 
-Configures the built-in grid view - accepts [kendoGrid options](/api/javascript/ui/grid)
+Configures the built-in grid view - accepts [kendoGrid options](/api/ui/grid)
 
 
 <div class="meta-api-description">
@@ -2397,7 +2397,7 @@ How do I customize the file manager grid in Kendo UI for jQuery? Adjust the file
 
 ### views.list `Object`
 
-Configures the built-in list view (thumbnails) - accepts [kendoListView options](/api/javascript/ui/listview)
+Configures the built-in list view (thumbnails) - accepts [kendoListView options](/api/ui/listview)
 
 
 <div class="meta-api-description">
@@ -2429,7 +2429,7 @@ How to customize file manager list display in Kendo UI for jQuery? Customize and
 
 ### views.tree `Object`
 
-Configures the built-in tree view - accepts [kendoTreeView options](/api/javascript/ui/treeview)
+Configures the built-in tree view - accepts [kendoTreeView options](/api/ui/treeview)
 
 
 <div class="meta-api-description">

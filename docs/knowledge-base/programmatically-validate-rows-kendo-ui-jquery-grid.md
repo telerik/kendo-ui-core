@@ -122,7 +122,7 @@ Example implementation:
 ```
 
 ### Key Points:
-- Use the [`dataSource.view()`](/api/javascript/data/datasource/methods/view) method to fetch the current data items.
+- Use the [`dataSource.view()`](/api/data/datasource/methods/view) method to fetch the current data items.
 - Highlight invalid cells using the `k-invalid` CSS class or any custom class.
 - Append validation messages as HTML elements inside the cells.
 

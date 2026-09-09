@@ -258,7 +258,7 @@ To see the complete example, refer to the ASP.NET MVC project on how to [cascade
 
 ## See Also
 
-* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist)
 * [Server-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/dropdownlist)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the DropDownList for {{ site.framework }}](/api/taghelpers/dropdownlist)

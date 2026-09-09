@@ -118,4 +118,4 @@ Below is a runnable example:
 ## See Also
 
 - [Kendo UI for jQuery Grid Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/overview)
-- [Kendo UI for jQuery Grid API](/api/javascript/ui/grid)
+- [Kendo UI for jQuery Grid API](/api/ui/grid)

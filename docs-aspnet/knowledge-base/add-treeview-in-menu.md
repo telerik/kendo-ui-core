@@ -102,4 +102,4 @@ https://netcorerepl.telerik.com/myOLcRPH44J5JsFJ29).
 - [ASP.NET MVC Menu Overview](https://docs.telerik.com/aspnet-mvc/html-helpers/navigation/menu/overview)
 - [ASP.NET MVC TreeView Overview](https://docs.telerik.com/aspnet-mvc/html-helpers/navigation/treeview/overview)
 - [jQuery Document Ready](https://learn.jquery.com/using-jquery-core/document-ready/)
-- [TreeView Collapse Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/methods/collapse)
+- [TreeView Collapse Method](https://docs.telerik.com/kendo-ui/api/ui/treeview/methods/collapse)

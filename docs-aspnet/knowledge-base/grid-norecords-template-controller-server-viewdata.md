@@ -108,7 +108,7 @@ public class HomeController : Controller
 * [Overview of the Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview.html)
 * [Official Microsoft Documentation of ViewData](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controller.viewdata?view=aspnetcore-2.2)
 * [API Reference of Kendo.Mvc.UI.Fluent.GridNoRecordsSettingsBuilder](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridnorecordssettingsbuilder)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -271,7 +271,7 @@ Another workaround is to include the Kendo UI scripts twice—with and without `
 
 ## See Also
 
-* [Client-Side API Reference of the PDFViewer for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
+* [Client-Side API Reference of the PDFViewer for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer)
 * [Server-Side API Reference of the PDFViewer for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/pdfviewer)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the PDFViewer for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/pdfviewer)

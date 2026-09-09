@@ -45,7 +45,7 @@ To add a custom button:
         })
     ```
 
-1. On the click event of the button, add the logic to [open the {{ site.product }} Window](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/open).
+1. On the click event of the button, add the logic to [open the {{ site.product }} Window](https://docs.telerik.com/kendo-ui/api/ui/window/methods/open).
 
     ```javascript
         $("#grid").on("click", "#customButton", function (e) {
@@ -87,7 +87,7 @@ To add a custom button:
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

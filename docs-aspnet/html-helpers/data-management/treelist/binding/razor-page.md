@@ -248,7 +248,7 @@ For the complete project, refer to the [TreeList in Razor Pages example](https:/
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the TreeList](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [Client-Side API of the TreeList](https://docs.telerik.com/kendo-ui/api/ui/treelist)
 * [Server-Side HtmlHelper API of the TreeList](/api/treelist)
 * [Server-Side TagHelper API of the TreeList](/api/taghelpers/treelist)
 * [Knowledge Base Section](/knowledge-base)

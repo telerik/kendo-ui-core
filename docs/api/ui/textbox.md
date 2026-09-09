@@ -8,7 +8,7 @@ component: textbox
 
 # kendo.ui.TextBox
 
-Represents the Kendo UI TextBox widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI TextBox widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -162,7 +162,7 @@ The function context (available through the keyword `this`) will be set to the w
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/textbox/methods/value) method **does not trigger** the `focusout` event of the input.
+> **Important:** The [value](/api/ui/textbox/methods/value) method **does not trigger** the `focusout` event of the input.
 This can affect the floating label functionality.
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#textbox").data("kendoTextBox").floatingLabel.refresh();`
 
@@ -243,7 +243,7 @@ How to set an icon before the input field in a Kendo UI TextBox? Configure or cu
 
 ### prefixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+The [template](/api/kendo/methods/template) for the prefix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -367,7 +367,7 @@ How to customize the icon in a Kendo UI text box? Set or customize the icon disp
 
 ### suffixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+The [template](/api/kendo/methods/template) for the suffix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -565,12 +565,12 @@ If set to `true`, the widget will not allow user input. If set to `false`, the w
 
 Gets or sets the value of the widget.
 
-> **Important:** This method **does not trigger** the [change](/api/javascript/ui/textbox/events/change) event.
+> **Important:** This method **does not trigger** the [change](/api/ui/textbox/events/change) event.
 This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior triggering the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior triggering the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
 > **Important:** This method **does not trigger** the `focusout` event of the input.
-This can affect the [floating label functionality](/api/javascript/ui/textbox/configuration/label.floating).
+This can affect the [floating label functionality](/api/ui/textbox/configuration/label.floating).
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#textbox").data("kendoTextBox").floatingLabel.refresh();`
 
 

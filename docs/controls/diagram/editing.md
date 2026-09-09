@@ -236,4 +236,4 @@ The following example demonstrates the `connectionsDataSource model` definition.
 ## See Also
 
 * [Editing in the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/editing)
-* [Diagram JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [Diagram JavaScript API Reference](/api/dataviz/ui/diagram)

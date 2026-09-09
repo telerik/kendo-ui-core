@@ -162,4 +162,4 @@ The InlineAIPrompt provides options for configuring its commands, system prompt,
 {% if site.core %}
 * [Server-Side API of the InlineAIPrompt TagHelper](/api/taghelpers/inline-aiprompt)
 {% endif %}
-* [Client-Side API of the InlineAIPrompt](https://docs.telerik.com/kendo-ui/api/javascript/ui/inline-aiprompt)
+* [Client-Side API of the InlineAIPrompt](https://docs.telerik.com/kendo-ui/api/ui/inline-aiprompt)

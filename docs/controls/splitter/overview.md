@@ -25,7 +25,7 @@ The component converts the children of an HTML element into an interactive layou
 
 * [Getting Started with the Kendo UI Splitter for jQuery]({% slug getting_started_kendoui_splitter_component %})
 * [Basic Usage of the jQuery Splitter (Demo)](https://demos.telerik.com/kendo-ui/splitter/index)
-* [JavaScript API Reference of the Splitter](/api/javascript/ui/splitter)
+* [JavaScript API Reference of the Splitter](/api/ui/splitter)
 
 ## See Also
 

@@ -73,7 +73,7 @@ For the complete project, refer to the [Window in Razor Pages example](https://g
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Window](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/window)
+* [Client-Side API of the Window](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/window)
 * [Server-Side HtmlHelper API of the Window](/api/window)
 * [Server-Side TagHelper API of the Window](/api/taghelpers/window)
 * [Knowledge Base Section](/knowledge-base)

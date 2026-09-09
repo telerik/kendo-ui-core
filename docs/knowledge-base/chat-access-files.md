@@ -26,11 +26,11 @@ How can I allow users to attach files to Chat messages, download them, and view 
 
 The following approach demonstrates how to:
 
-1. Enable file attachments with allowed extension restrictions using the [`fileAttachment`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/configuration/fileattachment) option.
-2. Define custom file actions (Download and View Details) through the [`fileActions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/configuration/fileactions) configuration.
-3. Upload files to a server endpoint via AJAX inside the [`sendMessage`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/sendmessage) event handler.
-4. Handle file downloads in the [`download`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/download) event using `kendo.saveAs`.
-5. Show file metadata and image previews inside a Kendo UI Window when the custom "View Details" action is triggered through the [`fileMenuAction`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/filemenuaction) event.
+1. Enable file attachments with allowed extension restrictions using the [`fileAttachment`](https://docs.telerik.com/kendo-ui/api/ui/chat/configuration/fileattachment) option.
+2. Define custom file actions (Download and View Details) through the [`fileActions`](https://docs.telerik.com/kendo-ui/api/ui/chat/configuration/fileactions) configuration.
+3. Upload files to a server endpoint via AJAX inside the [`sendMessage`](https://docs.telerik.com/kendo-ui/api/ui/chat/events/sendmessage) event handler.
+4. Handle file downloads in the [`download`](https://docs.telerik.com/kendo-ui/api/ui/chat/events/download) event using `kendo.saveAs`.
+5. Show file metadata and image previews inside a Kendo UI Window when the custom "View Details" action is triggered through the [`fileMenuAction`](https://docs.telerik.com/kendo-ui/api/ui/chat/events/filemenuaction) event.
 
 ### Configure the Chat with File Attachments and Actions
 
@@ -401,7 +401,7 @@ For a runnable example, refer to the [Chat Access Files demo](https://github.com
 
 ## See Also
 
-* [Chat File Attachment API](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/configuration/fileattachment)
-* [Chat File Actions API](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/configuration/fileactions)
-* [Chat Events](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat#events)
+* [Chat File Attachment API](https://docs.telerik.com/kendo-ui/api/ui/chat/configuration/fileattachment)
+* [Chat File Actions API](https://docs.telerik.com/kendo-ui/api/ui/chat/configuration/fileactions)
+* [Chat Events](https://docs.telerik.com/kendo-ui/api/ui/chat#events)
 * [Kendo UI for jQuery Chat Demos](https://demos.telerik.com/kendo-ui/chat)

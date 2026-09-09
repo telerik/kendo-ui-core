@@ -90,7 +90,7 @@ How do I configure options for a linear gradient in Kendo UI drawingapi? Configu
 
 ### stops `Array`
 The color stops of the gradient.
-Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradient-stop) instances.
+Can contain either plain objects or [GradientStop](/api/drawing/gradient-stop) instances.
 
 
 <div class="meta-api-description">
@@ -128,7 +128,7 @@ How do I control the sequence and positioning of colors in a linear gradient wit
 
 ### stops `Array`
 The array of gradient color stops.
-Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
+Contains [GradientStop](/api/drawing/gradient-stop) instances.
 
 
 <div class="meta-api-description">
@@ -169,7 +169,7 @@ How do I control the sequence of color points in a linear gradient using the Ken
 
 ### addStop
 Adds a color stop to the gradient.
-Inherited from [Gradient.addStop](/api/javascript/drawing/gradient/methods/addstop)
+Inherited from [Gradient.addStop](/api/drawing/gradient/methods/addstop)
 
 
 <div class="meta-api-description">
@@ -328,7 +328,7 @@ For example [0, 0] is top left and [1, 1] is bottom right.
 
 ### removeStop
 Removes a color stop from the gradient.
-Inherited from [Gradient.removeStop](/api/javascript/drawing/gradient/methods/removestop)
+Inherited from [Gradient.removeStop](/api/drawing/gradient/methods/removestop)
 
 
 <div class="meta-api-description">

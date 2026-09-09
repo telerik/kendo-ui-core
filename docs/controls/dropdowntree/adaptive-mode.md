@@ -19,4 +19,4 @@ To set the adaptive mode, use the `adaptiveMode` option.
 
 ## See Also
 
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)
+* [JavaScript API Reference of the DropDownTree](/api/ui/dropdowntree)

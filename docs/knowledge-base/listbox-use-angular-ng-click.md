@@ -37,8 +37,8 @@ It is possible to use AngularJS directive in the jQuery template if we compile i
 
 Here are the important steps:
 
-1. Add an event handler to the [`dataBound`](/api/javascript/ui/listbox/events/databound) event of the first ListBox(the one which has a dataSource).
-1. Add an event handler to both of the ListBoxes [`add`](/api/javascript/ui/listbox/events/add) events.
+1. Add an event handler to the [`dataBound`](/api/ui/listbox/events/databound) event of the first ListBox(the one which has a dataSource).
+1. Add an event handler to both of the ListBoxes [`add`](/api/ui/listbox/events/add) events.
 1. Pass the function to the handlers above using a `$timeout`  because the `add` event is triggered before the item is actually added in which the compilation occurs:
 
 ```

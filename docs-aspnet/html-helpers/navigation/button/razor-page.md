@@ -76,7 +76,7 @@ public class ButtonIndexModel : PageModel
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Button](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/button)
+* [Client-Side API of the Button](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/button)
 * [Server-Side HtmlHelper API of the Button](/api/button)
 * [Server-Side TagHelper API of the Button](/api/taghelpers/button)
 * [Knowledge Base Section](/knowledge-base)

@@ -30,7 +30,7 @@ MultiSelect for Kendo UI for jQuery
 </tbody>
 </table>
 
-> Starting with the **2026 Q3** release, the MultiSelect provides a built-in [`selectAll`](/api/javascript/ui/multiselect/configuration/selectall) option that renders a sticky header for selecting or deselecting all items. Consider using the built-in functionality instead of the custom approach shown below.
+> Starting with the **2026 Q3** release, the MultiSelect provides a built-in [`selectAll`](/api/ui/multiselect/configuration/selectall) option that renders a sticky header for selecting or deselecting all items. Consider using the built-in functionality instead of the custom approach shown below.
 
 ## Description 
 
@@ -45,7 +45,7 @@ This knowledge base article also answers the following questions:
 
 ### Displaying Selected Values as a Single Tag
 
-Use the [`tagMode`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect/configuration/tagmode) configuration to display selected values as a single tag with the count of selected items.
+Use the [`tagMode`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect/configuration/tagmode) configuration to display selected values as a single tag with the count of selected items.
 
 ```html
 <input id="multiselect" />
@@ -58,7 +58,7 @@ Use the [`tagMode`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ja
 
 ### Adding a "Select All" Option
 
-Use the [`headerTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect/configuration/headertemplate) property to add a "Select All" checkbox at the top of the dropdown. Apply custom styling to ensure it aligns with other options.
+Use the [`headerTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect/configuration/headertemplate) property to add a "Select All" checkbox at the top of the dropdown. Apply custom styling to ensure it aligns with other options.
 
 ```html
 <input id="multiselect" />
@@ -76,7 +76,7 @@ Adjust the styles as needed for alignment consistency.
 
 ### Customizing the Tag Template
 
-Use the [`tagTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect/configuration/tagtemplate) property to display "ALL" when all items are selected.
+Use the [`tagTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect/configuration/tagtemplate) property to display "ALL" when all items are selected.
 
 ```html
 <input id="multiselect" />
@@ -301,7 +301,7 @@ Refer to the following runnable example to see the combined implementation:
 
 ## See Also 
 
-- [MultiSelect API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/)
+- [MultiSelect API Reference](https://docs.telerik.com/kendo-ui/api/ui/multiselect/)
 - [How to Add Select All in MultiSelect](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/how-to-add-select-all-multiselect)
 - [Select All Values with One Selection](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/select-all-values-with-one-selection)
 - [Checkbox Item Template in MultiSelect](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/checkbox-item-template)

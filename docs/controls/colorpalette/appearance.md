@@ -15,7 +15,7 @@ In this article, you will find information about the styling options and renderi
 
 The `size` option controls how big or small the ColorGradient component looks. The structure of the class is `k-colorpalette-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/colorpalette/configuration/size) option:
+The following values are available for the [`size`](/api/ui/colorpalette/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -45,4 +45,4 @@ Below is the HTML that is affected from the configuration. The changes are appli
 
 ## See Also
 
-* [JavaScript API Reference of the ColorPalette](/api/javascript/ui/colorpalette)
+* [JavaScript API Reference of the ColorPalette](/api/ui/colorpalette)

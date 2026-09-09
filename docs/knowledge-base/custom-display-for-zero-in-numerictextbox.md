@@ -33,7 +33,7 @@ This KB article also answers the following questions:
 - Is it possible to show double zeros for a zero value in NumericTextBox?
 
 ## Solution
-To achieve custom formatting for zero values in a NumericTextBox, utilize the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/events/change) event and the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions) method to conditionally update the format. 
+To achieve custom formatting for zero values in a NumericTextBox, utilize the [`change`](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox/events/change) event and the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/ui/widget/methods/setoptions) method to conditionally update the format. 
 
 Here's how to implement this approach:
 
@@ -65,5 +65,5 @@ Here's how to implement this approach:
 ```
 
 ## See Also
-- [NumericTextBox Change Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/events/change)
+- [NumericTextBox Change Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox/events/change)
 - [NumericTextBox Overview](https://docs.telerik.com/kendo-ui/controls/editors/numerictextbox/overview)

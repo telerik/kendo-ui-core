@@ -64,7 +64,7 @@ In this step, you will initialize the ExpansionPanel from the `<div>` element.
 
 ## See Also 
 
-* [JavaScript API Reference of the ExpansionPanel](/api/javascript/ui/expansionpanel)
+* [JavaScript API Reference of the ExpansionPanel](/api/ui/expansionpanel)
 * [Knowledge Base Section](/knowledge-base)
 
 

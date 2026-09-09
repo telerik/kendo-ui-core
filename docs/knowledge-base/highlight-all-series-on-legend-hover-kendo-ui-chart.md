@@ -36,7 +36,7 @@ This KB article also answers the following questions:
 
 ## Solution
 
-To highlight all series across groups in a Kendo UI Bar Chart when hovering over a legend item, prevent the Chart's internal highlighting logic and implement a custom highlight by using the [`toggleHighlight`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/togglehighlight) method. This can be accomplished within the [`legendItemHover`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/legenditemhover) and [`legendItemLeave`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/legenditemleave) event handlers.
+To highlight all series across groups in a Kendo UI Bar Chart when hovering over a legend item, prevent the Chart's internal highlighting logic and implement a custom highlight by using the [`toggleHighlight`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/methods/togglehighlight) method. This can be accomplished within the [`legendItemHover`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/events/legenditemhover) and [`legendItemLeave`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/events/legenditemleave) event handlers.
 
 1. Handle the `legendItemHover` event to prevent the default highlighting logic and manually apply the highlight to the series matching the legend item's text.
 2. Use the `legendItemLeave` event to remove the highlight from the series when the mouse leaves the legend item.
@@ -169,6 +169,6 @@ For a practical demonstration, refer to the below Dojo demo.
 ## See Also
 
 - [Chart Overview](https://docs.telerik.com/kendo-ui/controls/charts/chart/overview)
-- [Chart toggleHighlight Method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/togglehighlight)
-- [Chart legendItemHover Event](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/legenditemhover)
+- [Chart toggleHighlight Method](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/methods/togglehighlight)
+- [Chart legendItemHover Event](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/events/legenditemhover)
 - [Kendo UI Dojo - Interactive Examples](https://dojo.telerik.com/)

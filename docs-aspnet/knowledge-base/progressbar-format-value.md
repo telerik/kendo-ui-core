@@ -76,7 +76,7 @@ Follow the steps below to initialize a ProgressBar into a specified Grid column 
     </script>
   ```
 
-1. Within the `DataBound` event handler, select the `k-progressbar` elements, and access the respective ProgressBar value through the `k-progressbar-status` element. Use the [`kendo.parseFloat()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/parsefloat) and [`kendo.toString()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/tostring) methods to format the value and update it with jQuery.
+1. Within the `DataBound` event handler, select the `k-progressbar` elements, and access the respective ProgressBar value through the `k-progressbar-status` element. Use the [`kendo.parseFloat()`](https://docs.telerik.com/kendo-ui/api/kendo/methods/parsefloat) and [`kendo.toString()`](https://docs.telerik.com/kendo-ui/api/kendo/methods/tostring) methods to format the value and update it with jQuery.
 
   ```JS scripts
     <script>
@@ -126,7 +126,7 @@ For a runnable example based on the code above, refer to the [REPL example on fo
 
 ## See Also
 
-* [Client-Side API Reference of the ProgressBar for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar)
+* [Client-Side API Reference of the ProgressBar for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/progressbar)
 * [Server-Side API Reference of the ProgressBar for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/progressbar)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the ProgressBar for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/progressbar)

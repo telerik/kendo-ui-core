@@ -24,4 +24,4 @@ The Window then renders `k-icon` and `k-svg-i-actionname` CSS classes for the ac
 ## See Also
 
 * [Implementing Custom Actions in the Window (Demo)](https://demos.telerik.com/kendo-ui/window/actions)
-* [JavaScript API Reference of the Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the Window](/api/ui/window)

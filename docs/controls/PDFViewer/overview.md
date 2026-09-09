@@ -33,4 +33,4 @@ The default tools collection includes the `pager`, `open`, and `download` tools.
 
 * [Basic Usage of the PDFViewer (Demo)](https://demos.telerik.com/kendo-ui/pdfviewer/index)
 * [Using the API of the PDFViewer (Demo)](https://demos.telerik.com/kendo-ui/pdfviewer/api)
-* [JavaScript API Reference of the PDFViewer](/api/javascript/ui/pdfviewer)
+* [JavaScript API Reference of the PDFViewer](/api/ui/pdfviewer)

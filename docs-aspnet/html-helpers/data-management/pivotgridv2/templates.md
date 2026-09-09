@@ -24,7 +24,7 @@ For a live example, see the [PivotGridV2 Templates](https://demos.telerik.com/{{
 
 ## Data Cell Template
 
-The data cell template is the [template](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/template) which renders the content of the data cell. By default, it renders the `fmtValue` formatted value of the data item.
+The data cell template is the [template](https://docs.telerik.com/kendo-ui/api/kendo/methods/template) which renders the content of the data cell. By default, it renders the `fmtValue` formatted value of the data item.
 
 In the data cell template, you can access the following fields:
 * `columnTuple`&mdash;The tuple of the corresponding column header cell.
@@ -64,7 +64,7 @@ In the data cell template, you can access the following fields:
 
 ## Column Header Template
 
-The column header template is the [template](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/template) which renders the content of the column header cell. By default, it renders the caption of the tuple member.
+The column header template is the [template](https://docs.telerik.com/kendo-ui/api/kendo/methods/template) which renders the content of the column header cell. By default, it renders the caption of the tuple member.
 
 In the column header template, you can access the following fields:
 * `member`&mdash;The member of the corresponding column header cell.
@@ -98,7 +98,7 @@ In the column header template, you can access the following fields:
 
 ## Row Header Template
 
-The row header template is the [template](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/template) which renders the content of the row header cell. By default, it renders the caption of the tuple member.
+The row header template is the [template](https://docs.telerik.com/kendo-ui/api/kendo/methods/template) which renders the content of the row header cell. By default, it renders the caption of the tuple member.
 
 In the row header template, you can access the following fields:
 * `member`&mdash;The member of the corresponding column header cell.
@@ -132,7 +132,7 @@ In the row header template, you can access the following fields:
 
 ## KPI Status Template
 
-The [template](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/template) which renders the content of the `KPI Status` value. By default renders "open", "hold" and "denied" status icons.
+The [template](https://docs.telerik.com/kendo-ui/api/kendo/methods/template) which renders the content of the `KPI Status` value. By default renders "open", "hold" and "denied" status icons.
 
 The fields which can be used in the template are:
 
@@ -202,7 +202,7 @@ The fields which can be used in the template are:
 
 ## KPI Trend Template
 
-The [template](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/template) which renders the content of the `KPI Trend` value. By default renders "increase", "decrease" and "equal" status icons.
+The [template](https://docs.telerik.com/kendo-ui/api/kendo/methods/template) which renders the content of the `KPI Trend` value. By default renders "increase", "decrease" and "equal" status icons.
 
 The fields which can be used in the template are:
 

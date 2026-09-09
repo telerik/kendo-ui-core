@@ -42,7 +42,7 @@ This knowledge base article also answers the following questions:
 
 To remove summary tasks from the Successors and Predecessors tabs in the Gantt popup editor, follow these steps:
 
-1. Use the [`edit`](/api/javascript/ui/gantt/events/edit) event of the Gantt widget to access the popup editor when it opens.
+1. Use the [`edit`](/api/ui/gantt/events/edit) event of the Gantt widget to access the popup editor when it opens.
 
 2. Collect the IDs of all tasks marked as `summary: true` from the main Gantt data source.
 
@@ -258,6 +258,6 @@ $("#gantt").kendoGantt({
 ## See Also
 
 - [Kendo UI for jQuery Gantt Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/gantt/overview)
-- [Kendo UI for jQuery Gantt API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/gantt)
+- [Kendo UI for jQuery Gantt API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/gantt)
 - [Kendo UI Grid Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/overview)
 ```

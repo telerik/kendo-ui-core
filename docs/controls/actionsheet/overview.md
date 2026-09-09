@@ -24,9 +24,9 @@ The Kendo UI ActionSheet is a dialog that displays a set of options for the user
 
 * [Getting Started with the Kendo UI ActionSheet for jQuery]({% slug getting_started_kendoui_actionsheet_widget %})
 * [Demo Page for the ActionSheet](https://demos.telerik.com/kendo-ui/actionsheet/index)
-* [JavaScript API Reference of the ActionSheet](/api/javascript/ui/actionsheet)
+* [JavaScript API Reference of the ActionSheet](/api/ui/actionsheet)
 
 ## See Also
 
 * [Overview of the ActionSheet (Demo)](https://demos.telerik.com/kendo-ui/actionsheet/index)
-* [JavaScript API Reference of the ActionSheet](/api/javascript/ui/actionsheet)
+* [JavaScript API Reference of the ActionSheet](/api/ui/actionsheet)

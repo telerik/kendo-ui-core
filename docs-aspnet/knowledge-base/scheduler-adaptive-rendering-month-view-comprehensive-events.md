@@ -30,7 +30,7 @@ I am using Adaptive Rendering mode for the Scheduler in Month View. The users ne
 
 ## Solution
 1.  Subscribe to the [DataBound Event](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/schedulereventbuilder#databoundsystemstring) of the Scheduler
-2. In the **onDataBound** JavaScript handler, subscribe to the `click` event over the `.k-event` elements. These elements represent the event dots. Then, within the `click` event handler, use the [`occurrenceByUid()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/occurrencebyuid) method to get the [kendo.data.SchedulerEvent](https://docs.telerik.com/kendo-ui/api/javascript/data/schedulerevent) item, and save it into a global variable.
+2. In the **onDataBound** JavaScript handler, subscribe to the `click` event over the `.k-event` elements. These elements represent the event dots. Then, within the `click` event handler, use the [`occurrenceByUid()`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/methods/occurrencebyuid) method to get the [kendo.data.SchedulerEvent](https://docs.telerik.com/kendo-ui/api/data/schedulerevent) item, and save it into a global variable.
 
     ```JavaScript
         var schedulerEvent;
@@ -61,7 +61,7 @@ I am using Adaptive Rendering mode for the Scheduler in Month View. The users ne
         )
     ```
 
-4. (Optionally) Add an **Edit Event** button in the Tooltip's content. Handle its `onclick` event and utilize the [`editEvent()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/editevent) method to start editing the particular Scheduler event.
+4. (Optionally) Add an **Edit Event** button in the Tooltip's content. Handle its `onclick` event and utilize the [`editEvent()`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/methods/editevent) method to start editing the particular Scheduler event.
 
     ```JavaScript
         function tooltipContent(e){
@@ -103,7 +103,7 @@ Refer to [this Telerik REPL sample](https://netcorerepl.telerik.com/QRPFmsPf10mK
 * [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
 {% endif %}
 ## See Also
-* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
 * [Server-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/scheduler)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

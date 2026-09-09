@@ -9,9 +9,9 @@ position: 4
 
 # Signature Image Export
 
-You can export the Kendo UI for jQuery Signature to a PNG file through the Kendo UI [`saveAs`](/api/javascript/kendo/methods/saveas) method.
+You can export the Kendo UI for jQuery Signature to a PNG file through the Kendo UI [`saveAs`](/api/kendo/methods/saveas) method.
 
-To achieve this functionality, retrieve the base64 value of the Signature by using the [`value`](/api/javascript/ui/signature/methods/value) method of the widget.
+To achieve this functionality, retrieve the base64 value of the Signature by using the [`value`](/api/ui/signature/methods/value) method of the widget.
 
 ```dojo
     <button id="export">Export as PNG</button>
@@ -39,4 +39,4 @@ To achieve this functionality, retrieve the base64 value of the Signature by usi
 ## See Also
 
 * [Image Export of the Signature (Demo)](https://demos.telerik.com/kendo-ui/signature/export-image)
-* [JavaScript API Reference of the Signature](/api/javascript/ui/signature)
+* [JavaScript API Reference of the Signature](/api/ui/signature)

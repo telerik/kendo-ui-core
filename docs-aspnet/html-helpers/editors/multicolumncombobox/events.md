@@ -148,4 +148,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the MultiColumnComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/api)
 * [Server-Side API of the MultiColumnComboBox](/api/multicolumncombobox)
-* [Client-Side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
+* [Client-Side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox)

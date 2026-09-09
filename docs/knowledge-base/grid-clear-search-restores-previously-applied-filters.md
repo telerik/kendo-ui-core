@@ -28,7 +28,7 @@ When I clear the Grid's search panel, all of my filters are deleted. How can I r
 
 ## Solution
 
-Utilize the Grid's [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filter) event and save the filters applied through the UI.
+Utilize the Grid's [`filter`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/filter) event and save the filters applied through the UI.
 
 ```dojo
     <div id="grid"></div>

@@ -176,5 +176,5 @@ public class TimelineEventActionModel
 {% endif %}
 * [Using the Events of the Timeline (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/events)
 * [Applying the Timeline API (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/api)
-* [JavaScript API Reference of the Timeline](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)
+* [JavaScript API Reference of the Timeline](https://docs.telerik.com/kendo-ui/api/ui/timeline)
 

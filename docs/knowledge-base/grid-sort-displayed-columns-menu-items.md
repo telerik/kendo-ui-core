@@ -30,11 +30,11 @@ My Grid has a column menu, which contains displayed columns submenu.
 
 How can I sort the items of the displayed columns submenu?
 
->* As of Kendo UI R3 2020 SP1(v2020.3.1021) the columns submenu can be sorted via the [columnMenu.columns.sort](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columnmenu.columns.sort) configuration.
+>* As of Kendo UI R3 2020 SP1(v2020.3.1021) the columns submenu can be sorted via the [columnMenu.columns.sort](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columnmenu.columns.sort) configuration.
 
 ## Solution
 
-A possible solution is to sort the li elements of the column menu within the [columnMenuInit](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event of the widget.
+A possible solution is to sort the li elements of the column menu within the [columnMenuInit](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnmenuinit) event of the widget.
 
 ```dojo
     <div id="example">

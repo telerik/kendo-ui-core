@@ -41,7 +41,7 @@ The following example demonstrates how to use the Template feature of the [Drawi
 
 To style the header and footer elements:
 * Use an inline style tag as in the following example.
-* If the Editor is in its [classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), add an external CSS file to the [`options.stylesheets` array](/api/javascript/ui/editor/configuration/stylesheets) and apply the needed decoration.
+* If the Editor is in its [classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), add an external CSS file to the [`options.stylesheets` array](/api/ui/editor/configuration/stylesheets) and apply the needed decoration.
 * If the Editor is in its [inline mode]({%slug overview_kendoui_editor_widget%}#inline-mode), directly reference the implemented CSS file to the page.
 
 ```dojo
@@ -111,4 +111,4 @@ To style the header and footer elements:
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
 * [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

@@ -28,9 +28,9 @@ This KB article also answers the following questions:
 
 ## Solution
 
-To set a default search text in the PDFViewer's search box, handle the [`click`](/api/javascript/ui/toolbar/events/click) event of the PDFViewer Toolbar. In the event handler, set the value of the search input. Then, use the same text to execute a search operation by accessing the private`_searchDOM` property of the PDFViewer. Below is an example of how to implement this:
+To set a default search text in the PDFViewer's search box, handle the [`click`](/api/ui/toolbar/events/click) event of the PDFViewer Toolbar. In the event handler, set the value of the search input. Then, use the same text to execute a search operation by accessing the private`_searchDOM` property of the PDFViewer. Below is an example of how to implement this:
 
-1. Bind to the [`click`](/api/javascript/ui/toolbar/events/click) event of the PDFViewer Toolbar.
+1. Bind to the [`click`](/api/ui/toolbar/events/click) event of the PDFViewer Toolbar.
 2. Set the default search text value in the search input.
 3. Use a `setTimeout` function to ensure the search operation is triggered after setting the value.
 
@@ -71,5 +71,5 @@ To set a default search text in the PDFViewer's search box, handle the [`click`]
 
 ## See Also
 
-- [PDFViewer Toolbar Click Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/events/click)
+- [PDFViewer Toolbar Click Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/toolbar/events/click)
 - [PDFViewer Official Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/pdfviewer/overview)

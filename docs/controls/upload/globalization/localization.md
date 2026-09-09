@@ -15,4 +15,4 @@ The Upload provides options for localizing its user interface by utilizing the a
 
 * [RTL Support by the Upload (Demo)](https://demos.telerik.com/kendo-ui/upload/right-to-left-support)
 * [Localization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

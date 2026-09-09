@@ -30,7 +30,7 @@ components: ["listbox"]
 How can I select the first item in the Kendo UI ListBox whenever I remove any item from the ListBox?
 
 ## Solution
-Use the [select method](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox/methods/select) in the [remove event](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox/events/remove). Make sure to use the [setTimeout() method](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) so that the first item is selected after the remove function is executed.
+Use the [select method](https://docs.telerik.com/kendo-ui/api/ui/listbox/methods/select) in the [remove event](https://docs.telerik.com/kendo-ui/api/ui/listbox/events/remove). Make sure to use the [setTimeout() method](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) so that the first item is selected after the remove function is executed.
 
 ```javascript
   $("#listBox").kendoListBox({
@@ -71,6 +71,6 @@ The following example initializes a ListBox with a **Remove** toolbar button and
 ```
 
 ## See Also
-- [select](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox/methods/select)
-- [remove](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox/events/remove)
+- [select](https://docs.telerik.com/kendo-ui/api/ui/listbox/methods/select)
+- [remove](https://docs.telerik.com/kendo-ui/api/ui/listbox/events/remove)
 - [setTimeout()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)

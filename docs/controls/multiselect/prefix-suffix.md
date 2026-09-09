@@ -17,7 +17,7 @@ The prefix and suffix input adornments are elements positioned before and after 
 
 The prefix input adornment is located before the MultiSelect input field. It provides additional context to guide users when entering specific data, such as icons for currencies or unit indicators.
 
-To add a prefix before your MultiSelect input, use the [`prefixOptions`](/api/javascript/ui/multiselect/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
+To add a prefix before your MultiSelect input, use the [`prefixOptions`](/api/ui/multiselect/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
 
 * `Icon`&mdash;Inserts an icon before the MultiSelect element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content before the MultiSelect element.
@@ -50,7 +50,7 @@ The following example demonstrates how to set an icon as a prefix of the MultiSe
 
 The suffix input adornment is located after the MultiSelect input field. Usually, it offers direct functionality related to the entered data, such as toggles for password visibility, formatting options, or the ability to clear the input.
 
-To add a suffix after your MultiSelect input, use the [`suffixOptions`](/api/javascript/ui/multiselect/configuration/suffixoptions). `suffixOptions` provides the following options:
+To add a suffix after your MultiSelect input, use the [`suffixOptions`](/api/ui/multiselect/configuration/suffixoptions). `suffixOptions` provides the following options:
 
 * `Icon`&mdash;Adds an icon after the MultiSelect element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content after the MultiSelect element.
@@ -85,4 +85,4 @@ The following example demonstrates how to add a button as a suffix of the MultiS
 ## See Also
 
 * [MultiSelect Prefix and Suffix (Demo)](https://demos.telerik.com/kendo-ui/multiselect/prefix-suffix)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [JavaScript API Reference of the MultiSelect](/api/ui/multiselect)

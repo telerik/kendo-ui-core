@@ -29,9 +29,9 @@ function buttonClick() {
 
 ## Seeking Forward
 
-Some applications enforce the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](/api/javascript/ui/mediaplayer#forwardseek-boolean-default-true) configuration, which helps to achieve this requirement.
+Some applications enforce the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](/api/ui/mediaplayer#forwardseek-boolean-default-true) configuration, which helps to achieve this requirement.
 
 ## See Also
 
 * [Adding Custom Playlists to the MediaPlayer (Demo)](https://demos.telerik.com/kendo-ui/mediaplayer/playlist)
-* [JavaScript API Reference of the MediaPlayer](/api/javascript/ui/mediaplayer)
+* [JavaScript API Reference of the MediaPlayer](/api/ui/mediaplayer)

@@ -73,4 +73,4 @@ The following example demonstrates the `multiple` selection mode.
 
 * [Binding the ChipList over MVVM (Demo)](https://demos.telerik.com/kendo-ui/chiplist/mvvm)
 * [Applying the ChipList API (Demo)](https://demos.telerik.com/kendo-ui/chiplist/api)
-* [JavaScript API Reference of the ChipList](/api/javascript/ui/chiplist)
+* [JavaScript API Reference of the ChipList](/api/ui/chiplist)

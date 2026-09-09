@@ -27,7 +27,7 @@ ticketid: 1688006
 
 ## Description
 
-I want to detect when a user switches between HEX and RGB modes in the [Kendo UI ColorPicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker). The component supports events such as `change`, `select`, `open`, and `close`, but none of these directly capture the mode switch action. How can I implement this functionality?
+I want to detect when a user switches between HEX and RGB modes in the [Kendo UI ColorPicker](https://docs.telerik.com/kendo-ui/api/ui/colorpicker). The component supports events such as `change`, `select`, `open`, and `close`, but none of these directly capture the mode switch action. How can I implement this functionality?
 
 This knowledge base article also answers the following questions:
 - How to track HEX and RGB mode changes in the Kendo UI ColorPicker?
@@ -78,4 +78,4 @@ You can find a working example in the [Kendo UI Dojo](https://dojo.telerik.com/i
 ## See Also
 
 - [Kendo UI ColorPicker Documentation](https://docs.telerik.com/kendo-ui/controls/colorpicker/overview)
-- [Kendo UI ColorPicker Events](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker/events/open)
+- [Kendo UI ColorPicker Events](https://docs.telerik.com/kendo-ui/api/ui/colorpicker/events/open)

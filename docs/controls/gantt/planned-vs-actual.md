@@ -56,4 +56,4 @@ Through the `editable` configuration, you can allow or prevent editing of planne
 
 * [Gantt Data Binding]({% slug databinding_kendoui_gantt %})
 * [Planned vs Actual (Demo)](https://demos.telerik.com/kendo-ui/gantt/planned-vs-actual)
-* [JavaScript API Reference of the Gantt](/api/javascript/ui/gantt)
+* [JavaScript API Reference of the Gantt](/api/ui/gantt)

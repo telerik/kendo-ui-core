@@ -43,4 +43,4 @@ You can independently customize each pointer including its current value, color,
 ## See Also
 
 * [Using Multiple Pointers in the LinearGauge (Demo)](https://demos.telerik.com/kendo-ui/linear-gauge/multiple-pointers)
-* [JavaScript API Reference of the LinearGauge](/api/javascript/dataviz/ui/lineargauge)
+* [JavaScript API Reference of the LinearGauge](/api/dataviz/ui/lineargauge)

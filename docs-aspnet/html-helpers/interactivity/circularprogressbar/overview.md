@@ -123,7 +123,7 @@ The Circular ProgressBar supports infinite and finite modes.
     ```
     {% endif %}
 
-* The finite mode is the default mode of the Circular ProgressBar. The component indicates the task completion. To update the value of the Circular ProgressBar dynamically, use the [`value()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/circularprogressbar/methods/value) API method. 
+* The finite mode is the default mode of the Circular ProgressBar. The component indicates the task completion. To update the value of the Circular ProgressBar dynamically, use the [`value()`](https://docs.telerik.com/kendo-ui/api/ui/circularprogressbar/methods/value) API method. 
 
     The following example showcases how to update the Circular ProgressBar value every 50 milliseconds.
 

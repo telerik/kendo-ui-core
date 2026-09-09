@@ -46,7 +46,7 @@ To display a Tooltip on a disabled button, set the `pointer-events` CSS property
 </style>
 ```
 
-If you want the Tooltip to show only when the button is disabled and not when it is enabled, handle the Tooltip [`show`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/tooltip/events/show) event. Hide the Tooltip when the button is enabled by using the following JavaScript:
+If you want the Tooltip to show only when the button is disabled and not when it is enabled, handle the Tooltip [`show`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/tooltip/events/show) event. Hide the Tooltip when the button is enabled by using the following JavaScript:
 
 ```javascript
 function onShow(e) {
@@ -66,4 +66,4 @@ Here is an example demonstrating how to display a Tooltip only when the KendoBut
 ## See Also
 
 - [Tooltip Overview](https://www.telerik.com/aspnet-core-ui/documentation/html-helpers/layout/tooltip/overview)
-- [Tooltip API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/tooltip)
+- [Tooltip API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/tooltip)

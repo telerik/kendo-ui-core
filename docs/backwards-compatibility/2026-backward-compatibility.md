@@ -605,7 +605,7 @@ The following components no longer render default appearance classes:
 | MenuButton | Removed | Removed | Removed | Removed |
 | FloatingActionButton | Removed | Removed | Removed | Removed |
 
->tip The ButtonGroup's [`items.badge.themeColor`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/buttongroup/configuration/items#itemsbadgethemecolor) no longer render default appearance classes as well. It defaults to `undefined` which enforces the theme to control the default color
+>tip The ButtonGroup's [`items.badge.themeColor`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/buttongroup/configuration/items#itemsbadgethemecolor) no longer render default appearance classes as well. It defaults to `undefined` which enforces the theme to control the default color
 
 #### Chip Components
 
@@ -661,7 +661,7 @@ The following components no longer render default appearance classes:
 
 #### Notification
 
- >tip Starting with **2026 Q1** version when no `type` parameter is passed the the [`show()`](/api/javascript/ui/notification/methods/show) method, the Notification will be displayed with default colors. Previously, the default value of the `type` property was `info`. If you need to acheive the previous behavior you can use the approaches demonstrated below:
+ >tip Starting with **2026 Q1** version when no `type` parameter is passed the the [`show()`](/api/ui/notification/methods/show) method, the Notification will be displayed with default colors. Previously, the default value of the `type` property was `info`. If you need to acheive the previous behavior you can use the approaches demonstrated below:
 
 ```
 var notification = $("#notification").kendoNotification().data("kendoNotification");

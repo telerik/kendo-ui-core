@@ -479,7 +479,7 @@ The default format strings that are shown in the formatting drop-down are stored
 | dateTime          | Format values as date-time.                                                   |
 | duration          | Format as an elapsed duration in hours, minutes, or seconds.                  |
 
-You can use these formats with the [`range` value method](/api/javascript/spreadsheet/range/methods/format) in the following way: `sheet.range("A1").format(kendo.spreadsheet.formats.currency)`.
+You can use these formats with the [`range` value method](/api/spreadsheet/range/methods/format) in the following way: `sheet.range("A1").format(kendo.spreadsheet.formats.currency)`.
 
 ### Text and Numbers
 
@@ -553,4 +553,4 @@ The Spreadsheet does not support the following options that are otherwise availa
 ## See Also
 
 * [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

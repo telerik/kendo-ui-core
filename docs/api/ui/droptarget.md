@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.DropTarget
 
-Represents the Kendo UI DropTarget widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI DropTarget widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

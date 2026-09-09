@@ -54,4 +54,4 @@ The following example demonstrates how to create a Bubble Chart and visualizes s
 ## See Also
 
 * [Basic Usage of the Bubble Chart (Demo)](https://demos.telerik.com/kendo-ui/bubble-charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

@@ -305,7 +305,7 @@ You need this functionality because assigning a non-default `id` value for the n
 ## See Also
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)
 * [Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
 * [Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
 * [Wrap Text]({% slug howto_wraptext_diagram %})

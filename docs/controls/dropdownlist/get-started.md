@@ -121,5 +121,5 @@ Among other functionalities, the DropDownList supports filtering. The filtering 
 
 ## See Also 
 
-* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/ui/dropdownlist)
 * [Knowledge Base Section](/knowledge-base)

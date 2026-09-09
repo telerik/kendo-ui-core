@@ -31,7 +31,7 @@ How can I make the master checkbox in the Grid header appear as indeterminate?
 
 ## Solution
 
-Utilize the [`change`](/api/javascript/ui/grid/events/change) event of the Grid and find if the checked checkboxes are more than zero but less than all available checkboxes on the page. If so, use the [jQuery.prop()](https://api.jquery.com/prop/) method to change the status of the master checkbox.
+Utilize the [`change`](/api/ui/grid/events/change) event of the Grid and find if the checked checkboxes are more than zero but less than all available checkboxes on the page. If so, use the [jQuery.prop()](https://api.jquery.com/prop/) method to change the status of the master checkbox.
 
 The following example demonstrates how to implement indeterminate checkboxes.
 

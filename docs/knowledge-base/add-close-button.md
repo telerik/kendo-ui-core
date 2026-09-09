@@ -75,7 +75,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [JavaScript API Reference of the Kendo UI for jQuery Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the Kendo UI for jQuery Window](/api/ui/window)
 * [Post to Iframes in the Window]({% slug howto_posttoiframe_window %})
 * [Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
 * [Use Custom Action Icons in the Window]({% slug howto_customactionicons_window %})

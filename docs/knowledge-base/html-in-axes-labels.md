@@ -37,7 +37,7 @@ How can I use HTML for the `categoryAxis.labels` configuration of the Chart?
 
 ## Solution
 
-The following example demonstrates how to achieve this through the [`visual`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual) option.
+The following example demonstrates how to achieve this through the [`visual`](/api/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual) option.
 
 ```dojo
 
@@ -134,7 +134,7 @@ The following example demonstrates how to achieve this through the [`visual`](/a
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

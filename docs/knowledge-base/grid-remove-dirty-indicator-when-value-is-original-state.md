@@ -29,7 +29,7 @@ How can I remove the dirty indicators from the cells when the user changes the v
 
 ## Solution
 
-To remove the dirty indicators, handle the [`save`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/save) event&mdash;in the event handler:
+To remove the dirty indicators, handle the [`save`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/save) event&mdash;in the event handler:
 
 1. Use the internal `_pristineForModel` method to get the original values.
 1. If the changed value is equal to the original value, `delete` the field from the `dirtyFields` object of the `model`.

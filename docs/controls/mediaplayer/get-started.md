@@ -52,7 +52,7 @@ In this step, you will initialize the MediaPlayer from the `<div>` element.
 
 ## 3. Specify the Media
 
-Here, you will specify the [`media`](/api/javascript/ui/mediaplayer/configuration/media) that will be played by the component.
+Here, you will specify the [`media`](/api/ui/mediaplayer/configuration/media) that will be played by the component.
 
 ```dojo
     <div id="mediaplayer" style="width:640px; height: 360px;"></div>
@@ -82,7 +82,7 @@ Other functionalities may also be limited due to iOS restrictions. For more info
 
 ## See Also 
 
-* [JavaScript API Reference of the MediaPlayer](/api/javascript/ui/mediaplayer)
+* [JavaScript API Reference of the MediaPlayer](/api/ui/mediaplayer)
 * [Knowledge Base Section](/knowledge-base)
 
 

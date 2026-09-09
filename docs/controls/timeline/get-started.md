@@ -105,7 +105,7 @@ First, create a `<div>` element on the page that will be used to initialize the 
 
 ## 2. Specify the Data Source
 
-In this step, you will specify a [`dataSource`](/api/javascript/ui/autocomplete/configuration/datasource) instance and pass local data to it.
+In this step, you will specify a [`dataSource`](/api/ui/autocomplete/configuration/datasource) instance and pass local data to it.
 
 ```html
         // The literals in this example use the default field names the component takes.
@@ -350,7 +350,7 @@ Here, you will define the `vertical` layout of the component, set the events ren
 
 ## See Also 
 
-* [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)
+* [JavaScript API Reference of the TimeLine](/api/ui/timeline)
 * [Knowledge Base Section](/knowledge-base)
 
 

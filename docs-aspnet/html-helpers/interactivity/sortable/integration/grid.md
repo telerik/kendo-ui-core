@@ -15,7 +15,7 @@ You can use the [Telerik UI Sortable component for {{ site.framework }}](https:/
 
 * [Overview of the Telerik UI Sortable component for {{ site.framework }}]({% slug htmlhelpers_sortable_aspnetcore %})
 * [Overview of the Telerik UI Grid component for {{ site.framework }}]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [DataSource client-side API](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods)
+* [DataSource client-side API](https://docs.telerik.com/kendo-ui/api/data/datasource#methods)
 
 ## Reordering of Sortable Items
 
@@ -23,7 +23,7 @@ The Sortable reorders the HTML DOM elements. It does not automatically update th
 
 ## Reordering of Grid Table Rows
 
-To reorder the table rows of the Grid, initialize the Sortable on the [`table` element](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/fields/table) of the Grid. Normally, the `filter` property of the Sortable selects all `tr` elements that are direct children of the table `tbody` element, for example, `filter: ">tbody >tr"`.
+To reorder the table rows of the Grid, initialize the Sortable on the [`table` element](https://docs.telerik.com/kendo-ui/api/ui/grid/fields/table) of the Grid. Normally, the `filter` property of the Sortable selects all `tr` elements that are direct children of the table `tbody` element, for example, `filter: ">tbody >tr"`.
 
 ## Setting the Hint in the Grid
 

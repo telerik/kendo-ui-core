@@ -25,8 +25,8 @@ I want to add custom commands in the Grid context menu. Based on the selection i
 
 ## Solution
 
-1. To achieve the desired behavior you can add a [`footerTemplates`](/api/javascript/ui/grid/configuration/columns.footertemplate) in the columns with an empty `span` element with custom class.
-1. You can also add custom commands to the [`contextMenu.body`](/api/javascript/ui/grid/configuration/contextmenu.body).
+1. To achieve the desired behavior you can add a [`footerTemplates`](/api/ui/grid/configuration/columns.footertemplate) in the columns with an empty `span` element with custom class.
+1. You can also add custom commands to the [`contextMenu.body`](/api/ui/grid/configuration/contextmenu.body).
 1. When an item in the ContextMenu is selected you can find the current column index and the field of the selected column.
 1. Based on the selected custom command you can find the needed aggregate and construct a string containing the needed information. You can use that string to change the content of the footer template of the respective column. 
 
@@ -141,6 +141,6 @@ I want to add custom commands in the Grid context menu. Based on the selection i
 
 ## See Also
 
-* [Grid API Reference](/api/javascript/ui/grid)
+* [Grid API Reference](/api/ui/grid)
 * [Grid Context Menu](https://docs.telerik.com/kendo-ui/controls/grid/context-menu)
 * [Grid Context Menu Demo](https://demos.telerik.com/kendo-ui/grid/context-menu)

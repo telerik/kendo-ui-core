@@ -21,7 +21,7 @@ How can the Kendo UI TaskBoard use nested properties in its data?
 
 ## Solution
 
-Nested properties can be used in the Kendo UI TaskBoard. To configure this, you need to [set the schema.model.fields.fieldName.from property](/api/javascript/data/model/methods/define) of the DataSource to the specific nested item.
+Nested properties can be used in the Kendo UI TaskBoard. To configure this, you need to [set the schema.model.fields.fieldName.from property](/api/data/model/methods/define) of the DataSource to the specific nested item.
 
 Here is an example of how to set up the dataSource with nested properties:
 

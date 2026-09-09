@@ -8,18 +8,18 @@ component: pivotgridv2
 
 # kendo.ui.PivotGridV2
 
-Represents the Kendo UI PivotGridV2 widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI PivotGridV2 widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
 ### dataSource `Object|kendo.data.PivotDataSourceV2`
 
-The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.PivotDataSourceV2](/api/javascript/data/pivotdatasourcev2)
+The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.PivotDataSourceV2](/api/data/pivotdatasourcev2)
 instance.
 
-If the `dataSource` option is set to a JavaScript object the widget will initialize a new [kendo.data.PivotDataSourceV2](/api/javascript/data/pivotdatasourcev2) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object the widget will initialize a new [kendo.data.PivotDataSourceV2](/api/data/pivotdatasourcev2) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.PivotDataSourceV2](/api/javascript/data/pivotdatasourcev2) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.PivotDataSourceV2](/api/data/pivotdatasourcev2) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -74,7 +74,7 @@ How do I configure the data source for a Kendo UI PivotGridV2 widget? Configure 
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -264,7 +264,7 @@ How to enable Excel filter dropdowns in PivotGridV2 export? Enable or disable au
     </script>
 
 ### excel.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgridv2#configuration-excel.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/ui/pivotgridv2#configuration-excel.proxyURL) even if the browser supports saving files locally.
 
 
 <div class="meta-api-description">
@@ -600,7 +600,7 @@ How to customize PDF filename when exporting pivot grid data in Kendo UI? Set or
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgridv2#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/ui/pivotgridv2#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 
 <div class="meta-api-description">
@@ -1235,14 +1235,14 @@ How do I set the height of my Kendo UI PivotGridV2 component? Set or adjust the 
 
 ### columnHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the column header cell. By default it renders the *caption* of the tuple member.
+The [template](/api/kendo/methods/template) which renders the content of the column header cell. By default it renders the *caption* of the tuple member.
 
 The fields which can be used in the template are:
 
 * member - the member of the corresponding column header cell
 * tuple - the tuple of the corresponding column header cell
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema#schemaaxes).
+For information about the tuple structure check this [link](/api/data/pivotdatasource/configuration/schema#schemaaxes).
 
 
 <div class="meta-api-description">
@@ -1281,7 +1281,7 @@ How to customize column header cells in Kendo UI for jQuery PivotGridV2? Customi
 
 ### dataCellTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.
+The [template](/api/kendo/methods/template) which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.
 
 The fields which can be used in the template are:
 
@@ -1290,8 +1290,8 @@ The fields which can be used in the template are:
 * measure - the value of the data cell measure
 * dataItem - the data item itself
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema#schemaaxes).
-About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema#schemadata).
+For information about the tuple structure check this [link](/api/data/pivotdatasource/configuration/schema#schemaaxes).
+About the data item structure review this [help topic](/api/data/pivotdatasource/configuration/schema#schemadata).
 
 
 <div class="meta-api-description">
@@ -1332,7 +1332,7 @@ How to customize data cell rendering in Kendo UI PivotGridV2? Control and custom
 
 ### kpiStatusTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the `KPI Status` value. By default renders "open", "hold" and "denied" status icons.
+The [template](/api/kendo/methods/template) which renders the content of the `KPI Status` value. By default renders "open", "hold" and "denied" status icons.
 
 The fields which can be used in the template are:
 
@@ -1380,7 +1380,7 @@ How to customize the appearance of KPI status cells in a PivotGridV2 widget? Con
 
 ### kpiTrendTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the `KPI Trend` value. By default renders "increase", "decrease" and "equal" status icons.
+The [template](/api/kendo/methods/template) which renders the content of the `KPI Trend` value. By default renders "increase", "decrease" and "equal" status icons.
 
 The fields which can be used in the template are:
 
@@ -1427,14 +1427,14 @@ How to customize trend indicators in Kendo UI pivot grid cells? Customize and co
 
 ### rowHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the row header cell. By default it renders the *caption* of the tuple member.
+The [template](/api/kendo/methods/template) which renders the content of the row header cell. By default it renders the *caption* of the tuple member.
 
 The fields which can be used in the template are:
 
 * member - the member of the corresponding row header cell
 * tuple - the tuple of the corresponding row header cell
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema#schemaaxes).
+For information about the tuple structure check this [link](/api/data/pivotdatasource/configuration/schema#schemaaxes).
 
 
 <div class="meta-api-description">
@@ -1475,11 +1475,11 @@ How do I customize the appearance of row headers in a Kendo UI PivotGridV2? Cust
 
 ### dataSource `kendo.data.PivotDataSourceV2`
 
-The [data source](/api/javascript/data/pivotdatasourcev2) of the widget. Configured via the [dataSource](/api/javascript/ui/pivotgridv2/configuration/datasource) option.
+The [data source](/api/data/pivotdatasourcev2) of the widget. Configured via the [dataSource](/api/ui/pivotgridv2/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/pivotgridv2/methods/setdatasource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/ui/pivotgridv2/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -1758,7 +1758,7 @@ The data source to which the widget should be bound.
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/pivotgridv2/events/pdfexport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/ui/pivotgridv2/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
@@ -1768,7 +1768,7 @@ How do I export a Kendo UI PivotGridV2 to PDF asynchronously? Export, generate, 
 </div>
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/pivotgridv2/events/pdfexport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/ui/pivotgridv2/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
 

@@ -144,5 +144,5 @@ To have a runnable example, paste the above HTML, CSS and JS in an HTML file and
 ## See Also
 
 - [Loader Documentation](https://docs.telerik.com/kendo-ui/controls/interactivity/loader/overview)
-- [Progress API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/ui/methods/progress)
+- [Progress API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/ui/methods/progress)
 

@@ -152,7 +152,7 @@ The TaskBoard uses two different data source instances for its columns and cards
 > * Define the `id` field of the data items in `schema.model.id`. This ensures correct adding, editing, and deleting of items.
 > * Define the model fields.
 
-For more information on the DataSource schema configuration, refer to [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel).
+For more information on the DataSource schema configuration, refer to [`schema.model`](/api/data/datasource/configuration/schema#schemamodel).
 
 The following example demonstrates how to configure the data source of the columns.
 
@@ -263,4 +263,4 @@ The following example demonstrates how to set the `editable` configuration.
 ## See Also
 
 * [Editing of the TaskBoard (Demo)](https://demos.telerik.com/kendo-ui/taskboard/editing)
-* [JavaScript API Reference of the TaskBoard](/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the TaskBoard](/api/ui/taskboard)

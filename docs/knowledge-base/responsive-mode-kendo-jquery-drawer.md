@@ -27,7 +27,7 @@ ticketid: 1717199
 
 ## Description
 
-I want to implement a sidebar navigation using the Kendo UI for jQuery [Drawer](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer) that supports responsive behavior. Above 700px, the Drawer should use the "push" mode with "mini" or "extended" states. Below 700px, the Drawer should switch to the "overlay" mode. Switching the mode dynamically during runtime causes layout issues if I destroy and recreate the Drawer.
+I want to implement a sidebar navigation using the Kendo UI for jQuery [Drawer](https://docs.telerik.com/kendo-ui/api/ui/drawer) that supports responsive behavior. Above 700px, the Drawer should use the "push" mode with "mini" or "extended" states. Below 700px, the Drawer should switch to the "overlay" mode. Switching the mode dynamically during runtime causes layout issues if I destroy and recreate the Drawer.
 
 This knowledge base article also answers the following questions:
 - How to handle responsive mode changes in the Kendo UI for jQuery Drawer?
@@ -222,6 +222,6 @@ Below is a runnable example:
 
 ## See Also
 
-- [Kendo UI for jQuery Drawer API](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer)
+- [Kendo UI for jQuery Drawer API](https://docs.telerik.com/kendo-ui/api/ui/drawer)
 - [Kendo UI for jQuery Drawer Overview](https://docs.telerik.com/kendo-ui/controls/layout/drawer/overview)
 - [Kendo UI for jQuery Drawer Demo](https://demos.telerik.com/kendo-ui/drawer/index)

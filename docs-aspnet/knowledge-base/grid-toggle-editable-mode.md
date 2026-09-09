@@ -25,7 +25,7 @@ How can I toggle the editable mode of the Grid by using a button in the ToolBar 
 
 ## Solution
 
-The {{ site.product }} Grid options can be modified through the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method.
+The {{ site.product }} Grid options can be modified through the [`setOptions`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/setoptions) method.
 
 1. Create a custom button in the Grid's toolbar.
 1. Inside the Grid's `dataBound` event, obtain a reference to the button.
@@ -98,7 +98,7 @@ The {{ site.product }} Grid options can be modified through the [`setOptions`](h
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

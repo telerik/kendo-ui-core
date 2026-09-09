@@ -46,7 +46,7 @@ The following example demonstrates how to set templates for the Popover body and
 
 * [Basic Usage of the Popover (Demo)](https://demos.telerik.com/kendo-ui/popover/index)
 * [Using the API of the Popover (Demo)](https://demos.telerik.com/kendo-ui/popover/api)
-* [JavaScript API Reference of the Popover](/api/javascript/ui/popover)
+* [JavaScript API Reference of the Popover](/api/ui/popover)
 
 
 

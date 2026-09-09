@@ -10,7 +10,7 @@ slug: localization_kendoui_pager_widget
 
 The Pager provides options for defining the tooltips for its page and navigation links, information text and labels.
 
-To localize the messages, set the desired strings in the [`messages`](/api/javascript/ui/pager/configuration/messages) field.
+To localize the messages, set the desired strings in the [`messages`](/api/ui/pager/configuration/messages) field.
 
 The example below shows how to change the tooltip of the refresh button and the information message.
 
@@ -49,4 +49,4 @@ The example below shows how to change the tooltip of the refresh button and the 
 ## See Also
 
 * [Basic Usage of the Pager (Demo)](https://demos.telerik.com/kendo-ui/pager/index)
-* [JavaScript API Reference of the Pager](/api/javascript/ui/pager)
+* [JavaScript API Reference of the Pager](/api/ui/pager)

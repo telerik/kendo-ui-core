@@ -41,4 +41,4 @@ It provides options for using custom templates for its **Month** view, setting m
 
 * [Keyboard Navigation of the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/keyboard-navigation)
 * [Applying the DatePicker API (Demo)](https://demos.telerik.com/kendo-ui/datepicker/api)
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)

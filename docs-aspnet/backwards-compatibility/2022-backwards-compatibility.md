@@ -43,12 +43,12 @@ The Size, FillMode and Rounded properties now provide the None option instead of
 
 **DatePicker TagHelper**
 
-As of the 2022 R2 SP1 release the DatePicker `month-template` and `month-template-id` attributes are depricated. Exposed is a `month-template` child tag to support full customization as the [month](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/month) configuration option.
+As of the 2022 R2 SP1 release the DatePicker `month-template` and `month-template-id` attributes are depricated. Exposed is a `month-template` child tag to support full customization as the [month](https://docs.telerik.com/kendo-ui/api/ui/datepicker/configuration/month) configuration option.
 
 
 **DateTimePicker TagHelper**
 
-As of the 2022 R2 SP1 release the DatePicker `month-template` and `month-template-id` attributes are depricated. Exposed is a `month-template` child tag to support full customization as the [month](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/configuration/month) configuration option.
+As of the 2022 R2 SP1 release the DatePicker `month-template` and `month-template-id` attributes are depricated. Exposed is a `month-template` child tag to support full customization as the [month](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker/configuration/month) configuration option.
 
 {% endif %}
 

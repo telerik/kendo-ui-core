@@ -205,5 +205,5 @@ Here's a step-by-step guide to implementing this functionality:
 
 ## See Also
 
-- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-- [Grid Grouping Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/groupable)
+- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid)
+- [Grid Grouping Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/groupable)

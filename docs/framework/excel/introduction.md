@@ -37,7 +37,7 @@ Excel generation is available for all [supported browsers]({% slug wbe_browseran
 ## Next Steps 
 
 * [Getting Started with the Excel Export]({% slug getting_started_kendoui_excel_export %})
-* [Workbook JavaScript API Reference](/api/javascript/ooxml/workbook)
+* [Workbook JavaScript API Reference](/api/ooxml/workbook)
 * [Knowledge Base](https://docs.telerik.com/kendo-ui/knowledge-base)
 
 ## See Also

@@ -36,10 +36,10 @@ The HTML markup in the Window resembles the HTML markup internally used by the K
 However, this is not required as demonstrated in the following example, which shows how to use a custom Kendo UI Editor tool and a Kendo UI Window for inserting HTML content in the Editor.
 
 For additional information about the code used in the example, refer to the following resources:
-* [Configure Editor Tools](/api/javascript/ui/editor/configuration/tools)
-* [Execute Editor Commands](/api/javascript/ui/editor/methods/exec)
+* [Configure Editor Tools](/api/ui/editor/configuration/tools)
+* [Execute Editor Commands](/api/ui/editor/methods/exec)
 * [Editor Custom Tools Demo](https://demos.telerik.com/kendo-ui/editor/custom-tools)
-* [Configure a Window](/api/javascript/ui/window)
+* [Configure a Window](/api/ui/window)
 * [Obtain Widget's Element from Its Client Object](/framework/widgets/wrapper-element)
 * [Notes on Destroying Windows]({% slug overview_kendoui_window_widget %}#configuration-Destroy)
 
@@ -124,4 +124,4 @@ For additional information about the code used in the example, refer to the foll
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
 * [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

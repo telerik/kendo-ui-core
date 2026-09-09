@@ -52,4 +52,4 @@ The following example illustrates how to enable the group functionality
 
 * [ToggleButton API HtmlHelper (Demo)](https://demos.telerik.com/{{ site.platform }}/togglebutton/api)
 * [Server-Side API of the ToggleButton HtmlHelper for {{ site.framework }}](/api/togglebutton)
-* [JavaScript API Reference of the ToggleButton HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/togglebutton)
+* [JavaScript API Reference of the ToggleButton HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/togglebutton)

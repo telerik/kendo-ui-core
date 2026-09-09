@@ -32,7 +32,7 @@ How can I use the ContextMenu to Add, Edit, or Remove rows in the Grid?
 1. Create a {{ site.product }} ContextMenu that will have the `add`, `edit`, and `delete` actions whilst providing handlers.
 1. Set the [`Filter`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/contextmenubuilder#filtersystemstring) of the contextmenu to the table data element (`td`).
 1. Store the currently selected row through the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event of the Grid.
-1. Invoke the appropriate [client-side Grid methods](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods) within the item handlers of the ContextMenu.
+1. Invoke the appropriate [client-side Grid methods](https://docs.telerik.com/kendo-ui/api/ui/grid#methods) within the item handlers of the ContextMenu.
 
 ```Razor Index.cshtml
 // Grid
@@ -139,7 +139,7 @@ For the complete implementation of the suggested approach, refer to the followin
 ## See Also
 
 * [Telerik REPL: Using Context Menu to Perform Actions on Grid Rows](https://netcorerepl.telerik.com/ccYeQKvJ376K12kZ27)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

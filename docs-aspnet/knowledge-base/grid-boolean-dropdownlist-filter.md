@@ -44,7 +44,7 @@ function boolFilterTemplate(input) {
         }
 ```
 
-2. Use the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event of the Grid to replace the default filter label with more appropriate text.
+2. Use the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/filtermenuinit) event of the Grid to replace the default filter label with more appropriate text.
 
 ```JS
 function onFilterMenuInit(e) {
@@ -55,7 +55,7 @@ function onFilterMenuInit(e) {
         }
 ```
 
-3. Use the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filter) event of the Grid to replace the string value in the generated filter expression with its Boolean equivalent.
+3. Use the [`filter`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/filter) event of the Grid to replace the string value in the generated filter expression with its Boolean equivalent.
 
 ```JS
 function onFilter(e) {
@@ -192,7 +192,7 @@ public partial class GridController : Controller
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

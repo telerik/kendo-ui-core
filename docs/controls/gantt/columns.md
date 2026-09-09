@@ -70,4 +70,4 @@ The following example demonstrates how to configure Gantt columns.
 
 * [Basic Usage of the Gantt (Demo)](https://demos.telerik.com/kendo-ui/gantt/index)
 * [Using the API of the Gantt (Demo)](https://demos.telerik.com/kendo-ui/gantt/api)
-* [JavaScript API Reference of the Gantt](/api/javascript/ui/gantt)
+* [JavaScript API Reference of the Gantt](/api/ui/gantt)

@@ -6,7 +6,7 @@ res_type: api
 
 # kendo.Observable
 
-Provides support for firing events. Inherits from [kendo.Class](/api/javascript/class).
+Provides support for firing events. Inherits from [kendo.Class](/api/class).
 
 ## Methods
 

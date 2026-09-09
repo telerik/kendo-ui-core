@@ -88,4 +88,4 @@ The following example demonstrates how to achieve the desired scenario.
 
 * [Basic Usage of the jQuery TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
 * [Using the API of the jQuery TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
-* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)
+* [JavaScript API Reference of the TreeView](/api/ui/treeview)

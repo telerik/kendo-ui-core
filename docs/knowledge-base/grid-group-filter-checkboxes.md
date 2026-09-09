@@ -24,7 +24,7 @@ How to group the checkboxes in the filter menu by a specific field?
 
 ## Solution
 
-Although sorting the dataSource of the checkboxes is possible, applying group expression to it will break the built-in functionality of the Grid. However, you can sort the dataSource of the checkboxes by the field that you want to group by and manually insert group separators. In the following example, the entire logic for grouping the checkboxes is within the [`filterMenuOpen`](/api/javascript/ui/grid/events/filtermenuopen) event of the Grid.
+Although sorting the dataSource of the checkboxes is possible, applying group expression to it will break the built-in functionality of the Grid. However, you can sort the dataSource of the checkboxes by the field that you want to group by and manually insert group separators. In the following example, the entire logic for grouping the checkboxes is within the [`filterMenuOpen`](/api/ui/grid/events/filtermenuopen) event of the Grid.
 
 ```dojo
 <style>

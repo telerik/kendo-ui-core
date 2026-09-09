@@ -100,7 +100,7 @@ The code comments contain tips for the suggested implementation. For more inform
 							var targetVal = targetInput.first().val();
 
 							//get current element value. To make it more generic you can use the kendo.widgetInstance(element) method
-							//https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/widgetinstance
+							//https://docs.telerik.com/kendo-ui/api/kendo/methods/widgetinstance
 							var currVal = "";
 							var widget = kendo.widgetInstance(input);
 							if (widget && widget.value) {
@@ -146,4 +146,4 @@ The code comments contain tips for the suggested implementation. For more inform
 
 * [Custom Validator Rules](https://docs.telerik.com/kendo-ui/controls/validator/overview#custom-rules-for-validation)
 * [Demo on Custom Validation Rules](https://demos.telerik.com/kendo-ui/validator/custom-validation)
-* [API Reference of the kendo.widgetInstance() Method](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/widgetinstance)
+* [API Reference of the kendo.widgetInstance() Method](https://docs.telerik.com/kendo-ui/api/kendo/methods/widgetinstance)

@@ -65,5 +65,5 @@ Load the generated base64 PDF data in the `<iframe>` element. To do that, use th
 
 ## See Also
 
-* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-* [`sheet`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
+* [`sheet`](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet)

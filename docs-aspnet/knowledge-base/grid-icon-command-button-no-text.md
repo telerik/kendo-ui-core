@@ -57,7 +57,7 @@ Use either of the following approaches:
 	})
 	```
 
-* Create a custom template for the **Edit** button with an additional class. By using the [`onclick` event](https://api.jquery.com/on/) handler, set the [`editRow` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/editrow) for the specific Grid row.
+* Create a custom template for the **Edit** button with an additional class. By using the [`onclick` event](https://api.jquery.com/on/) handler, set the [`editRow` method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/editrow) for the specific Grid row.
 
 	```Razor
 	.Columns(columns =>
@@ -100,7 +100,7 @@ Use either of the following approaches:
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

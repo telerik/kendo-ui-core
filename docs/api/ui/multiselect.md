@@ -7,7 +7,7 @@ component: multi-select
 
 # kendo.ui.MultiSelect
 
-Represents the Kendo UI MultiSelect widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI MultiSelect widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -154,7 +154,7 @@ How do I customize the closing animation of a Kendo UI MultiSelect dropdown? Con
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -232,7 +232,7 @@ How can I customize the animation effect when opening the suggestion dropdown in
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -384,7 +384,7 @@ How do I show/hide the clear button in a Kendo UI MultiSelect widget? Control th
 
 ### checkboxes `Boolean` *(default: false)*
 
-When set to `true`, renders a checkbox next to each item in the dropdown list. Works in conjunction with the [selectAll](/api/javascript/ui/multiselect#configuration-selectAll) option to provide a fully checkbox-driven multi-selection experience.
+When set to `true`, renders a checkbox next to each item in the dropdown list. Works in conjunction with the [selectAll](/api/ui/multiselect#configuration-selectAll) option to provide a fully checkbox-driven multi-selection experience.
 
 
 <div class="meta-api-description">
@@ -406,12 +406,12 @@ How do I show checkboxes next to items in a Kendo UI MultiSelect dropdown? Enabl
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -578,7 +578,7 @@ How to disable user input in Kendo UI MultiSelect? Control whether the multi-sel
 
 ### enforceMinLength `Boolean` *(default: false)*
 
-If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/javascript/ui/multiselect#configuration-minLength).
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/ui/multiselect#configuration-minLength).
 
 
 <div class="meta-api-description">
@@ -642,7 +642,7 @@ How to customize the appearance of selected items in Kendo UI MultiSelect? Confi
 
 ### filter `String`*(default: "startswith")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned of by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/multiselect#configuration-dataTextField) option).
+The filtering method used to determine the suggestions for the current value. Filtration is turned of by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/ui/multiselect#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 
@@ -664,7 +664,7 @@ How do I configure Kendo UI MultiSelect to filter items as users type? Configure
 
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
 
 <div class="meta-api-description">
@@ -694,7 +694,7 @@ How to customize group headers in Kendo UI MultiSelect dropdown? Customize and c
 
 ### footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+The [template](/api/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
 
 
 <div class="meta-api-description">
@@ -846,7 +846,7 @@ The function context (available through the keyword `this`) will be set to the w
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/multiselect/methods/value) method **does not trigger** the `focusout` event of the input.
+> **Important:** The [value](/api/ui/multiselect/methods/value) method **does not trigger** the `focusout` event of the input.
 This can affect the floating label functionality.
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#multiselect").data("kendoMultiColumnComboBox").label.floatingLabel.refresh();`
 
@@ -878,7 +878,7 @@ How to enable floating label for multi-select input in Kendo UI jQuery? Configur
 
 ### groupTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
 
 
 <div class="meta-api-description">
@@ -1117,7 +1117,7 @@ How do I customize the text label for a single selected item in a Kendo UI Multi
 
 ### messages.selectAll `String` *(default: "Select all")*
 
-The text used for the label of the "Select all" sticky header item. Only relevant when [`selectAll`](/api/javascript/ui/multiselect#configuration-selectAll) is enabled.
+The text used for the label of the "Select all" sticky header item. Only relevant when [`selectAll`](/api/ui/multiselect#configuration-selectAll) is enabled.
 
 
 <div class="meta-api-description">
@@ -1145,7 +1145,7 @@ How do I customize the label text of the select-all header in a Kendo UI MultiSe
 The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
 A zero value means that a request will be made as soon as the user focuses the widget.
 
-> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/javascript/ui/multiselect/events/filtering) event for more details.
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/ui/multiselect/events/filtering) event for more details.
 
 
 <div class="meta-api-description">
@@ -1189,7 +1189,7 @@ How can I limit the number of items that can be selected in a Kendo UI multisele
 
 ### noDataTemplate `String|Function|Boolean` *(default: true)*
 
-The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The [template](/api/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
 > **Important** The popup will open when 'noDataTemplate' is defined
@@ -1249,7 +1249,7 @@ How to set the placeholder text in a Kendo UI MultiSelect? Configure or set the 
 ### popup `Object`
 
 The options that will be used for the popup initialization. For more details about the available options
-refer to [Popup](/api/javascript/ui/popup) documentation.
+refer to [Popup](/api/ui/popup) documentation.
 
 
 <div class="meta-api-description">
@@ -1422,7 +1422,7 @@ How do I customize the header in a Kendo UI MultiSelect dropdown popup? Configur
 
 ### itemTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the items in the popup list.
+The [template](/api/kendo/methods/template) used to render the items in the popup list.
 
 
 <div class="meta-api-description">
@@ -1524,7 +1524,7 @@ How can I customize the icon shown in a Kendo UI MultiSelect's prefix area? Conf
 
 ### prefixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+The [template](/api/kendo/methods/template) for the prefix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -1641,7 +1641,7 @@ How can I customize the icon that appears after selected items in a Kendo UI Mul
 
 ### suffixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+The [template](/api/kendo/methods/template) for the suffix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -1700,7 +1700,7 @@ How do I customize the separator in Kendo UI's MultiSelect component? Control, e
 
 ### summarizeAfter `Number` *(default: 10)*
 
-When set to a number, the tag list switches to a summarized display once the number of selected items reaches or exceeds that threshold. The first `summarizeAfter` items are rendered as individual tags, and the remaining items are collapsed into a single overflow chip showing the count (e.g. "+5 item(s) selected"). Set `summarizeAfter` to `null` to render all selected items as individual tags unless [tagMode](/api/javascript/ui/multiselect#configuration-tagMode) is set to `"single"`.
+When set to a number, the tag list switches to a summarized display once the number of selected items reaches or exceeds that threshold. The first `summarizeAfter` items are rendered as individual tags, and the remaining items are collapsed into a single overflow chip showing the count (e.g. "+5 item(s) selected"). Set `summarizeAfter` to `null` to render all selected items as individual tags unless [tagMode](/api/ui/multiselect#configuration-tagMode) is set to `"single"`.
 
 
 <div class="meta-api-description">
@@ -1724,20 +1724,20 @@ How do I limit the number of visible tags in a Kendo UI MultiSelect and collapse
 
 ### tagTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the tags.
+The [template](/api/kendo/methods/template) used to render the tags.
 
 
 <div class="meta-api-description">
 How do I customize the appearance of selected items in a Kendo UI MultiSelect component? Control and customize the appearance and layout of selected items as tags in multi-selection components by defining templates that render tags with custom HTML, styling, and dynamic content based on item data fields; configure, adjust, or override default tag displays in multi-select inputs to incorporate personalized formatting, labels, icons, or additional information for each chosen item, enabling flexible tag presentation that suits various user interface designs and interaction patterns for selected values in list or dropdown selections.
 </div>
 
-#### Template Data for the 'multiple' [tagMode](/api/javascript/ui/multiselect#configuration-tagMode)
+#### Template Data for the 'multiple' [tagMode](/api/ui/multiselect#configuration-tagMode)
 
 ##### data `Object`
 
 The dataitem that corresponds to the selected value.
 
-#### Template Data for the 'single' [tagMode](/api/javascript/ui/multiselect#configuration-tagMode)
+#### Template Data for the 'single' [tagMode](/api/ui/multiselect#configuration-tagMode)
 
 ##### data.values `Array`
 
@@ -1749,7 +1749,7 @@ A list of the selected data items.
 
 ##### data.currentTotal `Array`
 
-The current dataSource total value. If it is server filtered, it will show the current length of the [view](/api/javascript/data/datasource/methods/view).
+The current dataSource total value. If it is server filtered, it will show the current length of the [view](/api/data/datasource/methods/view).
 
 ##### data.maxTotal `Array`
 
@@ -1826,7 +1826,7 @@ The mode used to render the selected tags. The available modes are:
 - `single` - renders only one tag that shows the number of the selected values
 
 > Every tagMode has a specific `tagTemplate` value. If you would like to control the content of the rendered tags,
-set a custom a [tagTemplate](/api/javascript/ui/multiselect#configuration-tagTemplate) value.
+set a custom a [tagTemplate](/api/ui/multiselect#configuration-tagTemplate) value.
 
 
 <div class="meta-api-description">
@@ -2292,9 +2292,9 @@ How to set rounded corners for Kendo UI multiselect dropdowns? Adjust the border
 
 ### selectAll `Boolean` *(default: false)*
 
-When set to `true`, renders a sticky "Select all" header at the top of the dropdown list. Clicking it selects all currently rendered items. When [checkboxes](/api/javascript/ui/multiselect#configuration-checkboxes) is also enabled, the header shows a checkbox that reflects the aggregate selection state: unchecked (none selected), indeterminate (some selected), or checked (all selected).
+When set to `true`, renders a sticky "Select all" header at the top of the dropdown list. Clicking it selects all currently rendered items. When [checkboxes](/api/ui/multiselect#configuration-checkboxes) is also enabled, the header shows a checkbox that reflects the aggregate selection state: unchecked (none selected), indeterminate (some selected), or checked (all selected).
 
-The built-in click behavior can be overridden by handling the preventable [selectAllChange](/api/javascript/ui/multiselect#events-selectAllChange) event.
+The built-in click behavior can be overridden by handling the preventable [selectAllChange](/api/ui/multiselect#events-selectAllChange) event.
 
 
 <div class="meta-api-description">
@@ -2346,11 +2346,11 @@ How do I adjust the size of a Kendo UI MultiSelect component? Adjust the overall
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/multiselect/configuration/datasource) option.
+The [data source](/api/data/datasource) of the widget. Configured via the [dataSource](/api/ui/multiselect/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/multiselect/methods/setdatasource) method instead.
+> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/ui/multiselect/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -2598,7 +2598,7 @@ How do I programmatically set focus on the multi-select input field in Kendo UI 
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/data/datasource/methods/view).
 
 
 <div class="meta-api-description">
@@ -2790,9 +2790,9 @@ Gets or sets the value of the MultiSelect.
 
 > **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
 
-> **Important:** This method **does not trigger** [change](/api/javascript/ui/multiselect/events/change) event.
+> **Important:** This method **does not trigger** [change](/api/ui/multiselect/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior by triggering the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior by triggering the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
     <select id="multiselect" multiple="multiple">
         <option>Item1</option>
@@ -3025,7 +3025,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource/configuration/serverfiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/data/datasource/configuration/serverfiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 

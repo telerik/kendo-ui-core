@@ -94,7 +94,7 @@ The example uses an Upload nested in a [Grid]({% slug htmlhelpers_grid_aspnetcor
 
 ## See Also
 
-* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/upload)
 * [Server-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/upload)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/aspnet-core/api/taghelpers/upload)

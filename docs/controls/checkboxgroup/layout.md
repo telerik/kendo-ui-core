@@ -9,7 +9,7 @@ position: 5
 
 # Layout
 
-The CheckBoxGroup widget supports two types of [`layout`](/api/javascript/ui/checkboxgroup/configuration/layout) - "horizontal" and "vertical". By default the radio buttons are rendered vertically.
+The CheckBoxGroup widget supports two types of [`layout`](/api/ui/checkboxgroup/configuration/layout) - "horizontal" and "vertical". By default the radio buttons are rendered vertically.
 
 The following example shows how to set the CheckBoxGroup layout:
 
@@ -27,4 +27,4 @@ The following example shows how to set the CheckBoxGroup layout:
 ## See Also
 
 * [Layout of the CheckBoxGroup (Demo)](https://demos.telerik.com/kendo-ui/checkboxgroup/layout)
-* [JavaScript API Reference of the CheckBoxGroup](/api/javascript/ui/checkboxgroup)
+* [JavaScript API Reference of the CheckBoxGroup](/api/ui/checkboxgroup)

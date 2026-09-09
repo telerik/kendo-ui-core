@@ -25,8 +25,8 @@ How can I update the text of the selected node in Kendo UI for jQuery TreeView?
 
 ## Solution
 
-1. Find the [`dataItem`](/api/javascript/ui/treeview/methods/dataitem) of the selected node.
-1. Use the [`set`](/api/javascript/data/model/methods/set) method to update the node.
+1. Find the [`dataItem`](/api/ui/treeview/methods/dataitem) of the selected node.
+1. Use the [`set`](/api/data/model/methods/set) method to update the node.
 
 ```dojo
     <label>Value: <input id="update-textbox" class="k-textbox" value="abc" /></label>

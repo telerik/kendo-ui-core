@@ -13,7 +13,7 @@ The PivotGridV2 provides a built-in PDF export functionality.
 
 ## General
 
-* To export the PivotGridV2, call the [`saveAsPDF()`](/api/javascript/ui/pivotgridv2/methods/saveaspdf) method of the component.
+* To export the PivotGridV2, call the [`saveAsPDF()`](/api/ui/pivotgridv2/methods/saveaspdf) method of the component.
 
         <button id="export" class="k-button k-button-icontext"><span class="k-icon k-i-pdf"></span>Export to PDF</button>
         <div id="pivotgrid"></div>
@@ -30,7 +30,7 @@ The PivotGridV2 provides a built-in PDF export functionality.
         </script>
 
 
-* To configure the PDF file, refer to the [`pdf` configuration options](/api/javascript/ui/pivotgridv2/configuration/pdf).
+* To configure the PDF file, refer to the [`pdf` configuration options](/api/ui/pivotgridv2/configuration/pdf).
 
 * For the runnable project, refer to the demo on [exporting the PivotGridV2 to PDF](https://demos.telerik.com/kendo-ui/pivotgridv2/pdf-export).
 
@@ -40,4 +40,4 @@ The PivotGridV2 provides a built-in PDF export functionality.
 
 * [Exporting the PivotGridV2 to PDF (Demo)](https://demos.telerik.com/kendo-ui/pivotgridv2/pdf-export)
 * [PDF Export Known Limitations]({% slug supportedbrowsers_drawingapi %})
-* [PivotGridV2 JavaScript API Reference](/api/javascript/ui/pivotgridv2)
+* [PivotGridV2 JavaScript API Reference](/api/ui/pivotgridv2)

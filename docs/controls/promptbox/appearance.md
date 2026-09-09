@@ -94,6 +94,6 @@ The supported values include:
 
 ## See Also
 
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)
 * [PromptBox Adornments]({% slug adornments_kendoui_promptbox %})
 * [PromptBox Modes]({% slug modes_kendoui_promptbox %})

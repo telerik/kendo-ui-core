@@ -39,5 +39,5 @@ By design, the last column of the Grid has no right border, so that no double bo
 ## See Also
 
 * [Column Resizing by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/column-resizing)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Kendo UI Knowledge Base](/knowledge-base)

@@ -94,7 +94,7 @@ The following example demonstrates a singleFileTemplate declaration in the FileM
 * [Overview of Kendo UI FileManager]({% slug overview_kendoui_filemanager_widget %})
 * [Basic Usage of the FileManager (Demo)](https://demos.telerik.com/kendo-ui/filemanager/index)
 * [Knowledge Base Section](/knowledge-base)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/filemanager)
+* [JavaScript API Reference of the Grid](/api/ui/filemanager)
 * [Sort in Kendo UI FileManager]({% slug sort_kendoui_filemanager_widget %})
 * [Toolbar Commands in Kendo UI FileManager]({% slug toolbar_kendoui_filemanager_widget %})
 

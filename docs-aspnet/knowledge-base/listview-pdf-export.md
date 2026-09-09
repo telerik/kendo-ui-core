@@ -47,7 +47,7 @@ How can I use the [Kendo UI Drawing](https://docs.telerik.com/kendo-ui/framework
     {% endif %}
 
 1. Within the button `click` event handler, get a reference to the ListView, store its page size into a global variable, and calculate the total records.
-1. Call the [`pageSize()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize) method of the DataSource to update the current page size with all available records to export them into the PDF file. Otherwise, the exported file will contain only the current page records.
+1. Call the [`pageSize()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/pagesize) method of the DataSource to update the current page size with all available records to export them into the PDF file. Otherwise, the exported file will contain only the current page records.
 1. Subscribe only once to the `DataBound` event of the ListView to ensure that all records are loaded.
 1. Use the Kendo UI Drawing API to export the ListView content.
 1. Change back the page size of the ListView.
@@ -114,7 +114,7 @@ For a runnable example based on the code above, refer to the [REPL example on ex
 
 ## See Also
 
-* [Client-Side API Reference of the ListView for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
+* [Client-Side API Reference of the ListView for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/listview)
 * [Server-Side API Reference of the ListView for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/listview)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the ListView for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/listview)

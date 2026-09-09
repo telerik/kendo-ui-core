@@ -14,8 +14,8 @@ To distinguish the items within the template when the user interacts with the Dr
 To add a separator between the Drawer items, use the `data-role="drawer-separator"` attribute.
 
 The Drawer provides the following configurable templates:
-* The main [`template`](/api/javascript/ui/drawer/configuration/template).
-* The [`mini.template`](/api/javascript/ui/drawer/configuration/mini.template).
+* The main [`template`](/api/ui/drawer/configuration/template).
+* The [`mini.template`](/api/ui/drawer/configuration/mini.template).
 
 You can add icons with a span with the `k-icon` class combined with the desired [Kendo UI for jQuery web font icon]({% slug webfonticons_kendoui_desktopwidgets %}#list-of-font-icons) class. To ensure that the icons and text have a sufficient padding, wrap the item template text in a span with class `k-item-text`.
 
@@ -24,4 +24,4 @@ You can add icons with a span with the `k-icon` class combined with the desired 
 ## See Also
 
 * [Basic Usage of the Drawer (Demo)](https://demos.telerik.com/kendo-ui/drawer/index)
-* [JavaScript API Reference of the Drawer](/api/javascript/ui/drawer)
+* [JavaScript API Reference of the Drawer](/api/ui/drawer)

@@ -2083,8 +2083,8 @@ How to access data for a specific diagram shape in Kendo UI? Accessing or modify
 The visual element representing the shape.
 
 This is either the result returned from
-[shape.visual](/api/javascript/dataviz/ui/diagram/configuration/shapedefaults.visual)
-or a [predefined type](/api/javascript/dataviz/ui/diagram/configuration/shapes.type).
+[shape.visual](/api/dataviz/ui/diagram/configuration/shapedefaults.visual)
+or a [predefined type](/api/dataviz/ui/diagram/configuration/shapes.type).
 
 
 <div class="meta-api-description">
@@ -2128,7 +2128,7 @@ How do I customize the visual rendering of shapes in a Kendo UI diagram? Accessi
 
 ### visual `kendo.dataviz.diagram.Group`
 
-A container for the [shapeVisual](/api/javascript/dataviz/diagram/shape#fields-shapeVisual) element.
+A container for the [shapeVisual](/api/dataviz/diagram/shape#fields-shapeVisual) element.
 
 Positioning and transformations are applied on this container.
 

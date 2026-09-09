@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.TileLayout
 
-Represents the Kendo UI TileLayout widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI TileLayout widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -137,7 +137,7 @@ How do I customize the layout of tiles in Kendo UI TileLayout with the container
 
 ### containers.bodyTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders as content for the tile item.
+The [template](/api/kendo/methods/template) which renders as content for the tile item.
 
 
 <div class="meta-api-description">
@@ -273,7 +273,7 @@ How to customize the appearance of a header container in Kendo UI TileLayout? Co
 
 ### containers.header.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) that will be rendered as a header.
+The [template](/api/kendo/methods/template) that will be rendered as a header.
 
 
 <div class="meta-api-description">
@@ -605,7 +605,7 @@ How do I set the height of a Kendo UI tile layout container? Control or configur
 
 A value indicating whether keyboard navigation will be enabled.
 
-> **Note:** When [`reorderable`](/api/javascript/ui/tilelayout/configuration/reorderable) is enabled after reordering the items the DOM are also reordered.
+> **Note:** When [`reorderable`](/api/ui/tilelayout/configuration/reorderable) is enabled after reordering the items the DOM are also reordered.
 
 
 <div class="meta-api-description">
@@ -736,7 +736,7 @@ How do I enable click-to-move item rearrangement in a Kendo UI TileLayout? Enabl
 
 Determines whether the resizing functionality will be enabled.
 
-> **Note:** When [`resizable`](/api/javascript/ui/tilelayout/configuration/resizable) is enabled items should have a defined rowSpan and colSpan.
+> **Note:** When [`resizable`](/api/ui/tilelayout/configuration/resizable) is enabled items should have a defined rowSpan and colSpan.
 
 
 <div class="meta-api-description">

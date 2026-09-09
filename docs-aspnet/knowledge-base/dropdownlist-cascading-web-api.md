@@ -168,7 +168,7 @@ You can refer to the [ASP.NET MVC application](https://github.com/telerik/ui-for
 
 ## See Also
 
-* [Client-Side API Reference of the ComboBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [Client-Side API Reference of the ComboBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/combobox)
 * [Server-Side API Reference of the ComboBox for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/combobox)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the ComboBox for {{ site.framework }}](/api/taghelpers/combobox)

@@ -25,4 +25,4 @@ It can be scrolled through dragging, gestures, arrow click or page click or tap.
 
 * [Basic Usage of the ScrollView (Demo)](https://demos.telerik.com/kendo-ui/scrollview/index)
 * [Using the API of the ScrollView (Demo)](https://demos.telerik.com/kendo-ui/scrollview/api)
-* [JavaScript API Reference of the ScrollView](/api/javascript/ui/scrollview)
+* [JavaScript API Reference of the ScrollView](/api/ui/scrollview)

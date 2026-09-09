@@ -23,11 +23,11 @@ I want to be able to export data from a Kendo UI Chart to Excel.  How can I achi
 
 You can implement the export to Excel functionality for a Kendo UI Chart by following these steps:
 
-1. Reference the [Kendo UI Chart and DataSource](/api/javascript/dataviz/ui/chart/fields/datasource).
+1. Reference the [Kendo UI Chart and DataSource](/api/dataviz/ui/chart/fields/datasource).
 2. Define the [column headers](https://docs.telerik.com/kendo-ui/framework/excel/get-started?#3-configure-the-workbook-settings) in a rows array.
-3. Get the [Chart's DataSource data](/api/javascript/data/datasource/methods/data), and push it to the rows array.
+3. Get the [Chart's DataSource data](/api/data/datasource/methods/data), and push it to the rows array.
 4. Define a [Kendo UI ooxml.Workbook and include the rows](https://docs.telerik.com/kendo-ui/framework/excel/get-started?#2-instantiate-a-workbook).
-5. Use the [Kendo.saveAs method](/api/javascript/kendo/methods/saveas) to [save the Excel file with the data](https://docs.telerik.com/kendo-ui/framework/excel/get-started?#4-convert-the-workbook-to-data-uri).
+5. Use the [Kendo.saveAs method](/api/kendo/methods/saveas) to [save the Excel file with the data](https://docs.telerik.com/kendo-ui/framework/excel/get-started?#4-convert-the-workbook-to-data-uri).
 
 Here is an example of how to achieve this using JavaScript:
 

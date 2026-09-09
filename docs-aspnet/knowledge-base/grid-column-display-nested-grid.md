@@ -116,7 +116,7 @@ Here are the steps for implementation:
     ```
 
 1. Handle the `click` event of the **Expand** button and toggle the Grid's container.
-Get a reference to the Grid and call the [`read()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/read) method of its DataSource by passing the **Id** field to the server to filter the data based on the data item of the current row (the main Grid's row).
+Get a reference to the Grid and call the [`read()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/read) method of its DataSource by passing the **Id** field to the server to filter the data based on the data item of the current row (the main Grid's row).
 
   ```JS scripts
       function onDetailsClick(e) {
@@ -161,7 +161,7 @@ Get a reference to the Grid and call the [`read()`](https://docs.telerik.com/ken
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)

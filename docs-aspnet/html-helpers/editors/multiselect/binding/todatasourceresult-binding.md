@@ -46,8 +46,8 @@ You can configure the Telerik UI MultiSelect to use a custom DataSource and, in 
                         })
                         .Schema(schema =>
                         {
-                            schema.Data("Data") // Define the [data](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
-                                .Total("Total"); // Define the [total](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
+                            schema.Data("Data") // Define the [data](https://docs.telerik.com/kendo-ui/api/data/datasource#configuration-schema.data) option.
+                                .Total("Total"); // Define the [total](https://docs.telerik.com/kendo-ui/api/data/datasource#configuration-schema.total) option.
                         });
             })
         )

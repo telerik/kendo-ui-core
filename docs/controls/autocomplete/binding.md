@@ -13,7 +13,7 @@ The AutoComplete enables you to provide its suggestions by binding the widget to
 
 When you use the AutoComplete with the DataSource component, you can perform the filtering of large remote data to the server and maximize the client-side performance.
 
-> When you configure the local or remote data source of the AutoComplete, enabling paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_autocomplete_widget %}). In all other cases, do not enable the paging functionality or set the `pageSize`.
+> When you configure the local or remote data source of the AutoComplete, enabling paging functionality and setting [`pageSize`](/api/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_autocomplete_widget %}). In all other cases, do not enable the paging functionality or set the `pageSize`.
 
 ## Binding to Local Data
 
@@ -93,4 +93,4 @@ The following example demonstrates how to bind the AutoComplete to a JSONP servi
 
 * [Basic Usage of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/index)
 * [Using the API of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/api)
-* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)
+* [JavaScript API Reference of the AutoComplete](/api/ui/autocomplete)

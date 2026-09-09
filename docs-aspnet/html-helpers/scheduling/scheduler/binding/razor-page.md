@@ -239,7 +239,7 @@ For the complete project, refer to the [Scheduler in Razor Pages example](https:
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
 * [Server-Side HtmlHelper API of the Scheduler](/api/scheduler)
 * [Server-Side TagHelper API of the Scheduler](/api/taghelpers/scheduler)
 * [Knowledge Base Section](/knowledge-base)

@@ -107,4 +107,4 @@ The following example demonstrates how to add a custom tool to the component if 
 
 ## See Also
 
-* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/ui/toolbar)

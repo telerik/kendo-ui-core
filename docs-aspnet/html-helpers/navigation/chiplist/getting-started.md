@@ -147,7 +147,7 @@ Now you can use the `Items.Icon` option which allows you to display a label on t
 
 ## See Also 
 
-* [JavaScript API Reference of the ChipList HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chiplist)
+* [JavaScript API Reference of the ChipList HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/chiplist)
 * [Server-Side API of the ChipList HtmlHelper for {{ site.framework }}](/api/chiplist)
 * [Knowledge Base Section](/knowledge-base)
 

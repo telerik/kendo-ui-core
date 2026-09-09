@@ -30,7 +30,7 @@ When you create a custom tool, it depends on the further CSS stylization whether
 To add an SVG icon:
 
 1. Target the default icon using the `k-icon` class and the title ofthe custom tool. For example, `$('.k-editor [title="My tool"] k-icon')` .
-2. Use the [`kendo.ui.icon`](/api/javascript/ui/ui/methods/icon)method and set the needed icon.
+2. Use the [`kendo.ui.icon`](/api/ui/ui/methods/icon)method and set the needed icon.
 
 
 The following example demonstrates how to decorate your own custom tool with a SVG icon.
@@ -123,5 +123,5 @@ The following example demonstrates how to decorate your own custom tool with a F
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
 * [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)
 * [jQuery Rich Text Editor Product Page](https://www.telerik.com/kendo-jquery-ui/rich-text-editor)

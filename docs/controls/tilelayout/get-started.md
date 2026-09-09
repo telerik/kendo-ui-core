@@ -65,7 +65,7 @@ In this step, you will initialize the TileLayout from the empty `<div>` element.
 
 ## 3. Add Tiles
 
-The tiles of the component are generated through the [`containers`](/api/javascript/ui/tilelayout/configuration/containers) configuration where you can also define their content.
+The tiles of the component are generated through the [`containers`](/api/ui/tilelayout/configuration/containers) configuration where you can also define their content.
 
 ```html
     <div id="tilelayout"></div>
@@ -123,7 +123,7 @@ The TileLayout allows you to configure how many columns will be displayed for th
 
 ## 5. Enable Tile Resizing
 
-You can enable the [`resizable`](/api/javascript/ui/tilelayout/configuration/resizable) feature of the component.
+You can enable the [`resizable`](/api/ui/tilelayout/configuration/resizable) feature of the component.
 
 ```html
 <div id="tilelayout"></div>
@@ -159,7 +159,7 @@ You can enable the [`resizable`](/api/javascript/ui/tilelayout/configuration/res
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery TileLayout](/api/javascript/ui/tilelayout)
+* [JavaScript API Reference of the jQuery TileLayout](/api/ui/tilelayout)
 * [Knowledge Base Section](/knowledge-base)
 
 

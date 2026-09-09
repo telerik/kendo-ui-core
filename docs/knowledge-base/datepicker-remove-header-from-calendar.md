@@ -29,7 +29,7 @@ How can I remove the header of the Calendar within the DatePicker widget?
 
 ## Solution
 
-1. Attach a handler to the [`open event`](/api/javascript/ui/datepicker/events/open) of the DatePicker.
+1. Attach a handler to the [`open event`](/api/ui/datepicker/events/open) of the DatePicker.
 1. Obtain a reference to the Calendar widget inside the event.
 1. Find the header element and remove it.
 

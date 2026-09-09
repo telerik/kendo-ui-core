@@ -8,7 +8,7 @@ component: checkbox
 
 # kendo.ui.CheckBox
 
-Represents the Kendo UI CheckBox. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI CheckBox. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

@@ -38,7 +38,7 @@ To lock specific TaskBoard items or all items within a column and prevent them f
 
 To achieve this, follow the steps below:
 
-1. Attach a handler to the TaskBoard's `moveStart` [event](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard/events/movestart).
+1. Attach a handler to the TaskBoard's `moveStart` [event](https://docs.telerik.com/kendo-ui/api/ui/taskboard/events/movestart).
 2. Within the `moveStart` event handler, use the event's `card` and `column` properties to identify the item or column.
 3. Call `ev.preventDefault()` to cancel the move operation based on your condition.
 
@@ -104,5 +104,5 @@ For a runnable demonstration, refer to the below Dojo demo.
 
 ## See Also
 
-- [TaskBoard MoveStart Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard/events/movestart)
+- [TaskBoard MoveStart Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/taskboard/events/movestart)
 - [Progress® Kendo UI® TaskBoard Overview](https://docs.telerik.com/kendo-ui/controls/scheduling/taskboard/overview)

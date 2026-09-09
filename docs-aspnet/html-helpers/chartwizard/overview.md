@@ -208,4 +208,4 @@ The following example demonstrates the basic configuration of the Chart Wizard b
 {% if site.core %}
 * [Server-Side API of the Chart Wizard TagHelper](/api/taghelpers/chartwizard)
 {% endif %}
-* [Client-Side API of the Chart Wizard](https://docs.telerik.com/kendo-ui/api/javascript/ui/chartwizard)
+* [Client-Side API of the Chart Wizard](https://docs.telerik.com/kendo-ui/api/ui/chartwizard)

@@ -36,7 +36,7 @@ How can I implement a confirm dialog before the user uploads a file when the Upl
 
 ## Solution
 
-Use the [Kendo UI Confirm Dialog](https://demos.telerik.com/kendo-ui/dialog/predefined-dialogs) and an [Asynchronous Upload Mode](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/upload/modes-of-operation#asynchronous-mode) with [AutoUpload](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.autoupload) **turned off**.<br>
+Use the [Kendo UI Confirm Dialog](https://demos.telerik.com/kendo-ui/dialog/predefined-dialogs) and an [Asynchronous Upload Mode](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/upload/modes-of-operation#asynchronous-mode) with [AutoUpload](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async.autoupload) **turned off**.<br>
 > This is a customized solution that does not support other modes. Such as [Chunk Upload](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/upload/chunk-upload) or [Synchronous Mode](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/upload/modes-of-operation) of operation.
 
 To achieve the desired outcome:
@@ -44,7 +44,7 @@ To achieve the desired outcome:
 1. Subscribe to the [Select](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/uploadeventbuilder#selectsystemstring) event handler of the Upload.
 1. Within the handler, remove the default click handler from the upload button programmatically by using the [off](https://api.jquery.com/off/) jQuery method.
 1. Prevent the default upload workflow. 
-1. Depending on the user's response from the dialog, either call the [upload](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/methods/upload?_gl=1*102tlvl*_gcl_au*MTU0Nzc4NDk1LjE3MjAxODc4MjM.*_ga*Mzc1Nzg4OTUxLjE3MjAxODc4MjE.*_ga_9JSNBCSF54*MTcyNDEzODY3OS4xNi4xLjE3MjQxNjUyNzguNTQuMC4w#upload) method if confirmed or the [removeAllFiles](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/methods/removeallfiles?_gl=1*102tlvl*_gcl_au*MTU0Nzc4NDk1LjE3MjAxODc4MjM.*_ga*Mzc1Nzg4OTUxLjE3MjAxODc4MjE.*_ga_9JSNBCSF54*MTcyNDEzODY3OS4xNi4xLjE3MjQxNjUyNzguNTQuMC4w#removeallfiles) method if cancelled. 
+1. Depending on the user's response from the dialog, either call the [upload](https://docs.telerik.com/kendo-ui/api/ui/upload/methods/upload?_gl=1*102tlvl*_gcl_au*MTU0Nzc4NDk1LjE3MjAxODc4MjM.*_ga*Mzc1Nzg4OTUxLjE3MjAxODc4MjE.*_ga_9JSNBCSF54*MTcyNDEzODY3OS4xNi4xLjE3MjQxNjUyNzguNTQuMC4w#upload) method if confirmed or the [removeAllFiles](https://docs.telerik.com/kendo-ui/api/ui/upload/methods/removeallfiles?_gl=1*102tlvl*_gcl_au*MTU0Nzc4NDk1LjE3MjAxODc4MjM.*_ga*Mzc1Nzg4OTUxLjE3MjAxODc4MjE.*_ga_9JSNBCSF54*MTcyNDEzODY3OS4xNi4xLjE3MjQxNjUyNzguNTQuMC4w#removeallfiles) method if cancelled. 
 
 The following example demonstrates how to implement these steps:
 
@@ -131,7 +131,7 @@ For a runnable example based on the code above, refer to the [REPL example on Co
 
 ## See Also
 
-* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/upload)
 * [Server-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/upload)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/upload)

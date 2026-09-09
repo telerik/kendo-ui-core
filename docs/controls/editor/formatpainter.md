@@ -38,4 +38,4 @@ The tool will also transfer the dom structure from the source to the target, cle
 ## See Also
 
 * [Editor Format Painter tool (Demo)](https://demos.telerik.com/kendo-ui/editor/format-painter)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

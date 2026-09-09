@@ -25,9 +25,9 @@ How can I display both stackValue label and individual series labels in a Stacke
 
 ## Solution
 
-1. Create a new separate [`series`](/api/javascript/dataviz/ui/chart/configuration/series) at the end of the corresponding stack and set the values of its [`data`](/api/javascript/dataviz/ui/chart/configuration/series.data) to zero. 
-1. Set the `stackValue` label [`template`](/api/javascript/dataviz/ui/chart/configuration/series.labels.template) in the newly created series.
-1. Do not set the [`name`](/api/javascript/dataviz/ui/chart/configuration/series.name) property of the new series, so it would not be visible in the chart.
+1. Create a new separate [`series`](/api/dataviz/ui/chart/configuration/series) at the end of the corresponding stack and set the values of its [`data`](/api/dataviz/ui/chart/configuration/series.data) to zero. 
+1. Set the `stackValue` label [`template`](/api/dataviz/ui/chart/configuration/series.labels.template) in the newly created series.
+1. Do not set the [`name`](/api/dataviz/ui/chart/configuration/series.name) property of the new series, so it would not be visible in the chart.
 
 The following example demonstrates how to achieve the desired scenario: 
 ```dojo
@@ -172,6 +172,6 @@ The following example demonstrates how to achieve the desired scenario:
 ```
 
 ## See Also
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)
 * [Show a Total Sum for Stacked Chart Series](/knowledge-base/show-stack-total)
 * [jQuery Bar Charts Stacked and Grouped Bars Demo](https://demos.telerik.com/kendo-ui/bar-charts/grouped-stacked-bar)

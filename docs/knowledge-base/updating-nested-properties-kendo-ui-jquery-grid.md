@@ -28,9 +28,9 @@ ticketid: 1698964
 
 ## Description
 
-I need to update a column in the Kendo UI for jQuery Grid that is bound to a complex JSON object when another column's value changes. When using [`model.set()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/data/model/methods/set) in the Save event to update the nested properties of the complex JSON object, the UI does not refresh automatically. This issue also prevents the column from being marked as dirty, even though the value is updated correctly in the model.
+I need to update a column in the Kendo UI for jQuery Grid that is bound to a complex JSON object when another column's value changes. When using [`model.set()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/data/model/methods/set) in the Save event to update the nested properties of the complex JSON object, the UI does not refresh automatically. This issue also prevents the column from being marked as dirty, even though the value is updated correctly in the model.
 
-Using grid [`refresh`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/methods/refresh) resolves the UI refresh issue, but it introduces a performance hit due to the large number of columns. Other columns bound to primitive values behave correctly and update both the UI and the dirty flag.
+Using grid [`refresh`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/methods/refresh) resolves the UI refresh issue, but it introduces a performance hit due to the large number of columns. Other columns bound to primitive values behave correctly and update both the UI and the dirty flag.
 
 This knowledge base article also answers the following questions:
 - How to update nested JSON object properties in Kendo UI Grid without manual refresh?
@@ -136,7 +136,7 @@ You can find an example of this approach below:
 
 ### Using Nested Properties and Manual Refresh
 
-If replacing the entire object is not feasible, call [`refresh`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/methods/refresh) after updating nested properties. This forces the UI to redraw but may introduce performance issues for large grids.
+If replacing the entire object is not feasible, call [`refresh`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/methods/refresh) after updating nested properties. This forces the UI to redraw but may introduce performance issues for large grids.
 
 Example:
 
@@ -156,4 +156,4 @@ save: function(e) {
 
 - [Using Nested Model Properties in Kendo UI for jQuery Grid](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/use-nested-model-properties)
 - [Kendo UI Grid Overview](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-- [Kendo UI Grid API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Kendo UI Grid API Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid)

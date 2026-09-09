@@ -25,7 +25,7 @@ How can I add a custom checkbox filter functionality in combination with the def
 
 ## Solution
 
-To achieve the desired scenario, apply custom logic in the [`filterMenuInit`](/api/javascript/ui/grid/events/filtermenuinit) event handler.
+To achieve the desired scenario, apply custom logic in the [`filterMenuInit`](/api/ui/grid/events/filtermenuinit) event handler.
 
 The following example demonstrates how to add the `Is Null` or `Empty` and `Is not empty` checkbox filter options on top of the default filter functionality of the Grid.
 
@@ -186,4 +186,4 @@ The following example demonstrates how to add the `Is Null` or `Empty` and `Is n
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Data Grid](/api/ui/grid)

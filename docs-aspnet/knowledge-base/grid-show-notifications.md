@@ -157,5 +157,5 @@ How can I show success and error notification messages when editing Inline Grid?
 
 * [Inline Editing in the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/editing/inline)
 * [Notification Component for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/html-helpers/layout/notification/overview)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)

@@ -29,7 +29,7 @@ To create a single-line functional template:
         var templateString = ({ firstName, age }) => `<b>Name: ${htmlEncode(firstName)}</b> --> Age: <i> ${htmlEncode(age)} </i>`;
     ```
 
-1. Next, compile the inline template to a function that builds HTML by using the Kendo UI [`template`](/api/javascript/kendo/methods/template) method.
+1. Next, compile the inline template to a function that builds HTML by using the Kendo UI [`template`](/api/kendo/methods/template) method.
 
     ```javascript
         var data = { firstName: "Todd", age: 16 };
@@ -129,7 +129,7 @@ To create templates that have more complex logic, write them as functions with a
 
 ## Converting Existing Templates to CSP-Compatible Templates
 
-You can also convert your existing templates into CSP-compatible ones, for example, an existing Grid [column template](/api/javascript/ui/grid/configuration/columns.template) into a CSP-compatible one.
+You can also convert your existing templates into CSP-compatible ones, for example, an existing Grid [column template](/api/ui/grid/configuration/columns.template) into a CSP-compatible one.
 
 The following snippet demonstrates the previously used approach for defining the template in the specific scenario. 
 
@@ -161,7 +161,7 @@ The next snippet shows the new approach for defining a CSP column template in th
     </script>
 ```
 
-The examples that follow illustrate another scenario&mdash;converting a Scheduler [`eventTemplate`](/api/javascript/ui/scheduler/configuration/eventtemplate) into a CSP-compatible template.
+The examples that follow illustrate another scenario&mdash;converting a Scheduler [`eventTemplate`](/api/ui/scheduler/configuration/eventtemplate) into a CSP-compatible template.
 
 The following snippet demonstrates the previously used approach for defining the template in the specific scenario. 
 
@@ -244,5 +244,5 @@ The next snippet shows the new approach for defining a CSP event template in the
 * [Getting Started with the Inline Templates]({% slug getting_started_inline_templates %})
 * [Getting Started with the External Templates]({% slug getting_started_external_templates %})
 * [Templates Performance]({% slug performance_kendoui_templatescomponent %})
-* [Templates JavaScript API Reference](/api/javascript/kendo/methods/template)
+* [Templates JavaScript API Reference](/api/kendo/methods/template)
 * [Knowledge Base Section](/knowledge-base)

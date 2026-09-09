@@ -14,7 +14,7 @@ Starting with Kendo UI suite R2 2024, the MultiViewCalendar component provides t
 * `long` (default)&mdash;Shows decades in the `YYYY-YYYY` format (for example: `2010-2019`).
 * `short`&mdash;Shows only the starting year of the decade (for example: `2010`).
 
-To change the way decades display in the MultiViewCalendar century view, you can use [`centuryCellsFormat`](/api/javascript/ui/multiviewcalendar/configuration/centurycellsformat).
+To change the way decades display in the MultiViewCalendar century view, you can use [`centuryCellsFormat`](/api/ui/multiviewcalendar/configuration/centurycellsformat).
 
 The following example shows how to change the display format for decades in the Century view.
 
@@ -32,4 +32,4 @@ The following example shows how to change the display format for decades in the 
 ## See Also
 
 * [Century Cells Format Demo of the MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/century-cells-format)
-* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
+* [JavaScript API Reference of the MultiViewCalendar](/api/ui/multiviewcalendar)

@@ -91,4 +91,4 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 * [Using the API of the TabStrip HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tabstrip/api)
 * [TabStrip Server-Side API](/api/tabstrip)
-* [TabStrip Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)
+* [TabStrip Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/tabstrip)

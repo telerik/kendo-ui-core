@@ -9,7 +9,7 @@ position: 10
 
 # Other Month Days
 
-Starting with Kendo UI R2 2024, the MultiViewCalendar exposes the [`showOtherMonthDays`](/api/javascript/ui/multiviewcalendar/configuration/showothermonthdays) option, which allows you to control whether the days from the previous or next month will be displayed.
+Starting with Kendo UI R2 2024, the MultiViewCalendar exposes the [`showOtherMonthDays`](/api/ui/multiviewcalendar/configuration/showothermonthdays) option, which allows you to control whether the days from the previous or next month will be displayed.
 
 ```dojo
     <div id="multiviewcalendar"></div>
@@ -20,9 +20,9 @@ Starting with Kendo UI R2 2024, the MultiViewCalendar exposes the [`showOtherMon
     </script>
 ```
 
-> When range selection is configured, the [`showOtherMonthDays`](/api/javascript/ui/multiviewcalendar/configuration/showothermonthdays) needs to be set to `false`.
+> When range selection is configured, the [`showOtherMonthDays`](/api/ui/multiviewcalendar/configuration/showothermonthdays) needs to be set to `false`.
 
 ## See Also
 
 * [Show Other Month Days Demo of the MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/show-other-month-days)
-* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
+* [JavaScript API Reference of the MultiViewCalendar](/api/ui/multiviewcalendar)

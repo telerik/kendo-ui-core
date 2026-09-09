@@ -50,7 +50,7 @@ You will also need an element that will serve as an anchor for the Popup. For th
 
 ## 3. Initialize the Popup
 
-In this step, you will initialize the Popup from the `<div>` element. All settings of the Popup will be provided in the initialization script statement and you have to describe its layout and configuration in JavaScript. You need to specify the [`anchor`](/api/javascript/ui/popup/configuration/anchor) option so that the Popup appears next to it.
+In this step, you will initialize the Popup from the `<div>` element. All settings of the Popup will be provided in the initialization script statement and you have to describe its layout and configuration in JavaScript. You need to specify the [`anchor`](/api/ui/popup/configuration/anchor) option so that the Popup appears next to it.
 
 ```html
 <input id="datepicker" data-role="datepicker" />
@@ -72,7 +72,7 @@ In this step, you will initialize the Popup from the `<div>` element. All settin
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Popup](/api/javascript/ui/popup)
+* [JavaScript API Reference of the jQuery Popup](/api/ui/popup)
 * [Knowledge Base Section](/knowledge-base)
 
 

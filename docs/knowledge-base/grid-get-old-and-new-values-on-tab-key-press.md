@@ -31,7 +31,7 @@ How can the user get the previous value, modified value, and row data when tabbi
 
 ## Solution
 
-To gain access to the previous value, currently changed value, and row data, utilize the [save event's](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/save) arguments.  e.model will contain the previous values and row data, and e.values will hold the newly changed values.
+To gain access to the previous value, currently changed value, and row data, utilize the [save event's](https://docs.telerik.com/kendo-ui/api/ui/grid/events/save) arguments.  e.model will contain the previous values and row data, and e.values will hold the newly changed values.
 
 ```javascript
       function onSave(e) {
@@ -42,4 +42,4 @@ To gain access to the previous value, currently changed value, and row data, uti
 
 ## See Also
 
-* [Save - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/save)
+* [Save - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid/events/save)

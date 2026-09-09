@@ -40,7 +40,7 @@ This example demonstrates how to validate or save each step and change its color
 The scenario relies on the following key steps:
 
 1. Create a "Validate step" button and handle its `click` event. In the `click` event handler:
-  * Get the currently active step by using the [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/stepper/methods/select) method of the Stepper.
+  * Get the currently active step by using the [`select()`](https://docs.telerik.com/kendo-ui/api/ui/stepper/methods/select) method of the Stepper.
   * Validate the step's content and store the step-index in a global array `validatedSteps`.
   * If the validation succeeds, add class "correct" to the step HTML element. Otherwise, add class "errors-step".
 1. Create a "Save step" button and handle its `click` event. In the `click` event handler:
@@ -383,7 +383,7 @@ For a runnable example implementing the steps above, refer to [this REPL](https:
 ## See Also
 
 * [Telerik REPL: Dynamically Change the Color of the Stepper Steps](https://netcorerepl.telerik.com/QcaDcJYW13RlZJBb39)
-* [Client-Side API Reference of the Stepper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/stepper)
+* [Client-Side API Reference of the Stepper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/stepper)
 * [Server-Side API Reference of the Stepper for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/stepper)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

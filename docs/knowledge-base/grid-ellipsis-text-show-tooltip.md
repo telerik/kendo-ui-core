@@ -95,5 +95,5 @@ The following example illustrates how to achieve the functionality.
 
 ## See Also
 
-* [API Reference of Kendo UI Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [API Reference of Kendo UI Tooltip](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
+* [API Reference of Kendo UI Grid](https://docs.telerik.com/kendo-ui/api/ui/grid)
+* [API Reference of Kendo UI Tooltip](https://docs.telerik.com/kendo-ui/api/ui/tooltip)

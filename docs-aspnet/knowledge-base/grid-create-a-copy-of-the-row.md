@@ -28,10 +28,10 @@ How can I create a copy of a Grid row when the user clicks a button?
 
 ## Solution
 
-1. Create a [`custom command button`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command#columnscommand) and provide a handler inside the [`click`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command#columnscommandclick) method.
+1. Create a [`custom command button`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.command#columnscommand) and provide a handler inside the [`click`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.command#columnscommandclick) method.
 1. Initialize the `click` handler.
-1. In the `click` handler, get the current table row and the data item bound to it through the [`dataitem`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method.
-1. Add a new record to the grid [`dataSource`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/datasource) with the corresponding properties of the current data item. 
+1. In the `click` handler, get the current table row and the data item bound to it through the [`dataitem`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem) method.
+1. Add a new record to the grid [`dataSource`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/datasource) with the corresponding properties of the current data item. 
 
 ```Razor Index.cshtml
 	@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
@@ -108,7 +108,7 @@ For more information on how to implement the suggested approach, refer to the fo
 ## See Also
 
 * [Telerik REPL: Creating Copies of Grid Rows](https://netcorerepl.telerik.com/mFvcYAaB11ZFNfF510)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

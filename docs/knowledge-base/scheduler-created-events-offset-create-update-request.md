@@ -28,7 +28,7 @@ Created jQuery Scheduler events are offset after a create or update request.
 
 ## Cause
 
-This behavior may be caused if the Scheduler [`timezone`](/api/javascript/ui/scheduler/configuration/timezone) option is not set, or if the remote service does not keep dates in the correct format.
+This behavior may be caused if the Scheduler [`timezone`](/api/ui/scheduler/configuration/timezone) option is not set, or if the remote service does not keep dates in the correct format.
 
 ## Solution
 
@@ -38,4 +38,4 @@ Set the `timezone` option of the Scheduler and make sure the dates on the remote
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

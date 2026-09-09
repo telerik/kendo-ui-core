@@ -77,7 +77,7 @@ In this step, you will initialize the ProgressBar from the `<div>` element. When
 
 ## 3. Configure the Min and Max Values
 
-After the initialization, you can configure additional options for the ProgressBar, such as the [`min`](/api/javascript/ui/progressbar/configuration/min) and the [`max`](/api/javascript/ui/progressbar/configuration/max) values.
+After the initialization, you can configure additional options for the ProgressBar, such as the [`min`](/api/ui/progressbar/configuration/min) and the [`max`](/api/ui/progressbar/configuration/max) values.
  
 ```html
     <div id="progressbar"></div>
@@ -92,7 +92,7 @@ After the initialization, you can configure additional options for the ProgressB
 
 ## 4. Set the ProgressBar Value
 
-You can utilize the [`value`](/api/javascript/ui/progressbar/configuration/value) option if you wish to set the ProgressBar indicator to a given value.
+You can utilize the [`value`](/api/ui/progressbar/configuration/value) option if you wish to set the ProgressBar indicator to a given value.
 
 ```html
     <div id="progressbar"></div>
@@ -125,7 +125,7 @@ You can specify different ProgressBar [`types`] which affect how the value is vi
 
 ## 6. Bind to the ProgressBar Events
 
-The ProgressBar supports the [`change`](/api/javascript/ui/progressbar/events/change) and [`complete`](/api/javascript/ui/progressbar/events/complete) events. The `change` event fires each time a new value is set. The `complete` fires when the progress of the task is completed, that is, each time the ProgressBar reaches its maximum value.
+The ProgressBar supports the [`change`](/api/ui/progressbar/events/change) and [`complete`](/api/ui/progressbar/events/complete) events. The `change` event fires each time a new value is set. The `complete` fires when the progress of the task is completed, that is, each time the ProgressBar reaches its maximum value.
  
 ```html
     <div id="progressbar"></div>
@@ -175,8 +175,8 @@ The ProgressBar supports the [`change`](/api/javascript/ui/progressbar/events/ch
 
 ## See Also
 
-* [Event Documentation of the ProgressBar](/api/javascript/ui/progressbar#events)
-* [JavaScript API Reference of the ProgressBar](/api/javascript/ui/progressbar)
+* [Event Documentation of the ProgressBar](/api/ui/progressbar#events)
+* [JavaScript API Reference of the ProgressBar](/api/ui/progressbar)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -81,4 +81,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the ToggleButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/togglebutton/api)
 * [ToggleButton Server-Side API](/api/togglebutton)
-* [ToggleButton Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/togglebutton)
+* [ToggleButton Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/togglebutton)

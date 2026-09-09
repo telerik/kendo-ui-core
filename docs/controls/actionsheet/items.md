@@ -11,7 +11,7 @@ position: 2
 
 The ActionSheet items are set of options that users can choose from.
 
-The [`items`](/api/javascript/ui/actionsheet/configuration/items) configuration allows you to set specific attributes of the ActionSheet items. You can set their:
+The [`items`](/api/ui/actionsheet/configuration/items) configuration allows you to set specific attributes of the ActionSheet items. You can set their:
 
 - text
 - icon
@@ -60,4 +60,4 @@ The following example demonstrates the possible options for the `items` configur
 ## See Also
 
 * [Overview demo of the ActionSheet](https://demos.telerik.com/kendo-ui/actionsheet/index)
-* [JavaScript API Reference of the ActionSheet](/api/javascript/ui/actionsheet)
+* [JavaScript API Reference of the ActionSheet](/api/ui/actionsheet)

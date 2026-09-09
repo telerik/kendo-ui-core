@@ -32,4 +32,4 @@ To see the example, refer to [this how-to article]({% slug howto_restrict_reorde
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

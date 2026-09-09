@@ -76,4 +76,4 @@ Implementing these steps allows you to set custom colors for each marker on your
 ## See Also
 
 - [Kendo UI Map Overview](https://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/map/overview)
-- [Kendo UI Map MarkerActivate Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/events/markeractivate)
+- [Kendo UI Map MarkerActivate Event Documentation](https://docs.telerik.com/kendo-ui/api/dataviz/ui/map/events/markeractivate)

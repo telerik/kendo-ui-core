@@ -110,4 +110,4 @@ The following example demonstrates how to change the group header position when 
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

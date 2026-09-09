@@ -87,4 +87,4 @@ Set the `orientation` option to `horizontal`, if you want to render labels to th
 ## See Also
 
 * [Orientation of the Form (Demo)](https://demos.telerik.com/kendo-ui/form/orientation)
-* [JavaScript API Reference of the Form](/api/javascript/ui/form)
+* [JavaScript API Reference of the Form](/api/ui/form)

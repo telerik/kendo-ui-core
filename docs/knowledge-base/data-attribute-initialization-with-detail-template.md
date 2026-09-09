@@ -91,4 +91,4 @@ The following example demonstrates how to initialize a Grid by using data attrib
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

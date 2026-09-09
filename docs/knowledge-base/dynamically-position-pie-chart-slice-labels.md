@@ -39,7 +39,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To adjust the label position dynamically based on the slice size, utilize the [`series.labels.visual`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.labels.visual) property. This allows creating custom visuals for the labels.
+To adjust the label position dynamically based on the slice size, utilize the [`series.labels.visual`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.labels.visual) property. This allows creating custom visuals for the labels.
 
 ### Example Implementation
 
@@ -121,13 +121,13 @@ The following example demonstrates how to position labels dynamically for Pie Ch
 ```
 
 ### Explanation:
-1. Use [`series.labels.visual`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.labels.visual) to define a custom visual function.
+1. Use [`series.labels.visual`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.labels.visual) to define a custom visual function.
 2. Check the value of the slice (`e.dataItem.value`) to set custom label positions for smaller slices.
 3. For larger slices, use the default `createVisual()` method.
 
 ## See Also
 
 - [Kendo UI for jQuery Chart Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/overview)
-- [Series Labels Visual API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.labels.visual)
-- [Kendo Drawing Text API](https://docs.telerik.com/kendo-ui/api/javascript/drawing/text)
-- [Pie Chart Overview](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.type#series.type)
+- [Series Labels Visual API](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.labels.visual)
+- [Kendo Drawing Text API](https://docs.telerik.com/kendo-ui/api/drawing/text)
+- [Pie Chart Overview](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.type#series.type)

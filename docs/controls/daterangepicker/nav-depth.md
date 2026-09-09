@@ -24,4 +24,4 @@ To enable the selection of dates for the range, set the `depth` to `month`.
 ## See Also
 
 * [Basic Usage of the DateRangePicker (Demo)](https://demos.telerik.com/kendo-ui/daterangepicker/index)
-* [JavaScript API Reference of the DateRangePicker](/api/javascript/ui/daterangepicker)
+* [JavaScript API Reference of the DateRangePicker](/api/ui/daterangepicker)

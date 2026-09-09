@@ -109,4 +109,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the DateRangePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/api)
 * [DateRangePicker Server-Side API](/api/daterangepicker)
-* [DateRangePicker Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker)
+* [DateRangePicker Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker)

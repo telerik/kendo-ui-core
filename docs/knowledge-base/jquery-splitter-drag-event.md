@@ -36,7 +36,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To capture drag events for the Splitbar in the jQuery Splitter, you need to access the Draggable widget of the Splitbar and bind to its [`drag`](/api/javascript/ui/draggable/events/drag), [`dragstart`](/api/javascript/ui/draggable/events/dragstart), and [`dragend`](/api/javascript/ui/draggable/events/dragend) events. Below is an implementation example:
+To capture drag events for the Splitbar in the jQuery Splitter, you need to access the Draggable widget of the Splitbar and bind to its [`drag`](/api/ui/draggable/events/drag), [`dragstart`](/api/ui/draggable/events/dragstart), and [`dragend`](/api/ui/draggable/events/dragend) events. Below is an implementation example:
 
 ### Example Code
 ```javascript
@@ -96,4 +96,4 @@ For a live demonstration, refer to the following Dojo example:
 ## See Also
 
 - [Kendo UI for jQuery Splitter Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/splitter/overview)
-- [Kendo UI jQuery Draggable API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/draggable)
+- [Kendo UI jQuery Draggable API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/draggable)

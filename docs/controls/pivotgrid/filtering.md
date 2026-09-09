@@ -13,7 +13,7 @@ The PivotGrid supports filtering both in the OLAP and flat data-binding scenario
 
 The PivotGrid uses [`kendo.data.PivotDataSource`](/api/framework/pivotdatasource) to perform `label` filtration. However, it filters only by the caption value of the members.
 
-The filter descriptor is similar to [the filter option of the `kendo.data.DataSource`](/api/javascript/data/datasource/configuration/filter) and contains the following options:
+The filter descriptor is similar to [the filter option of the `kendo.data.DataSource`](/api/data/datasource/configuration/filter) and contains the following options:
 - `field`&mdash;The full path to the tuple member. For example, `[Date].[Calendar].[Calendar Year].&[2005]`.
 - `operator`&mdash;All operators that work with strings. Note that the component treats field values as strings.
 - `value`&mdash;The filter value.
@@ -67,7 +67,7 @@ The example below demonstrates how to filter data only for cities starting with 
 
 ### Filtering when using Flat Data
 
-Build the filter descriptor similar to [the filter option of the `kendo.data.DataSource`](/api/javascript/data/datasource/configuration/filter), keeping in mind the field values are treated as strings.
+Build the filter descriptor similar to [the filter option of the `kendo.data.DataSource`](/api/data/datasource/configuration/filter), keeping in mind the field values are treated as strings.
 
 For example, to filter a [PivotGrid bound to local data](https://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding) for products starting with "C" that are discontinued you can provide a filter configuration as demonstrated below:
 
@@ -109,4 +109,4 @@ For example, to filter a [PivotGrid bound to local data](https://demos.telerik.c
 * [Filtering a Dimension in the PivotGrid]({% slug howto_filter_dimensions_pivotgrid %})
 * [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
 * [Binding the PivotGrid to flat local data (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding)
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)

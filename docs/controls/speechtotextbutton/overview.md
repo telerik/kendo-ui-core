@@ -42,5 +42,5 @@ The SpeechToTextButton depends on the Web Speech API, which has varying levels o
 
 ## See Also
 
-* [JavaScript API Reference of the SpeechToTextButton](/api/javascript/ui/speechtotextbutton)
+* [JavaScript API Reference of the SpeechToTextButton](/api/ui/speechtotextbutton)
 * [Knowledge Base Section](/knowledge-base)

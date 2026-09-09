@@ -9,7 +9,7 @@ position: 2
 
 # Items
 
-The `Items` represent the content of the AppBar. The [`items`](/api/javascript/ui/appbar/configuration/items) configuration accepts a collection of objects that will be rendered inside the AppBar widget. There are two types of items that developers can choose from:
+The `Items` represent the content of the AppBar. The [`items`](/api/ui/appbar/configuration/items) configuration accepts a collection of objects that will be rendered inside the AppBar widget. There are two types of items that developers can choose from:
 
 * [Content Items](#content-items)
 * [Spacer](#spacer)
@@ -85,4 +85,4 @@ The `spacer` item could be utilized to easily separate the content items from on
 ## See Also
 
 * [Overview of the AppBar (Demo)](https://demos.telerik.com/kendo-ui/appbar/index)
-* [JavaScript API Reference of the AppBar](/api/javascript/ui/appbar)
+* [JavaScript API Reference of the AppBar](/api/ui/appbar)

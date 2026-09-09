@@ -13,11 +13,11 @@ The Breadcrumb allows to configure the icons of the items and the delimiters.
 
 ## Root Icon
 
-The root icon is the first icon and is rendered as a `home` icon. It can be changed through the [`items.icon`](/api/javascript/ui/breadcrumb/configuration/items) configuration. It is also clickable and it will reset the value of the component.
+The root icon is the first icon and is rendered as a `home` icon. It can be changed through the [`items.icon`](/api/ui/breadcrumb/configuration/items) configuration. It is also clickable and it will reset the value of the component.
 
 ## Item Icon
 
-The icons rendered for each element after the root icon. It is also clickable and can be configured through the [`items.icon`](/api/javascript/ui/breadcrumb/configuration/items).
+The icons rendered for each element after the root icon. It is also clickable and can be configured through the [`items.icon`](/api/ui/breadcrumb/configuration/items).
 
 ## Delimiter Icon
 
@@ -44,5 +44,5 @@ The following example demonstrates how to configure different icons.
 
 ## See Also
 
-* [JavaScript API Reference of the Breadcrumb](/api/javascript/ui/breadcrumb)
+* [JavaScript API Reference of the Breadcrumb](/api/ui/breadcrumb)
 * [Icons of the Breadcrumb (Demo)](https://demos.telerik.com/kendo-ui/breadcrumb/icons)

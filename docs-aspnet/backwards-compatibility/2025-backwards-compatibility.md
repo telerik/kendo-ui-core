@@ -43,7 +43,7 @@ These classes are applied to the control wrapper elements based on the `position
 The [Chat component has been completely redesigned](slug:htmlhelpers_chat_aspnetcore).
 
 * `Toolbar()` and `User()` configurations have been deprecated.
-* The following client-side methods have been deprecated: `getUser()`, `renderAttachments()`, `renderMessage()`, `renderSuggestedActions()`, `renderUserTypingIndicator()`, `clearUserTypingIndicator()`, `removeTypingIndicator()`, and `toggleToolbar()`. For more information on the new client-side methods, refer to the [client-side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat#methods).
+* The following client-side methods have been deprecated: `getUser()`, `renderAttachments()`, `renderMessage()`, `renderSuggestedActions()`, `renderUserTypingIndicator()`, `clearUserTypingIndicator()`, `removeTypingIndicator()`, and `toggleToolbar()`. For more information on the new client-side methods, refer to the [client-side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat#methods).
 
 #### HtmlHelper Chat Options
 

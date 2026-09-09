@@ -28,7 +28,7 @@ How can I animate the [`Kendo UI Map`](/controls/diagrams-and-maps/map/overview)
 
 ## Solution
 
-1. Create the map and retrieve the current longitude and latitude coordinates using the [`viewToLocation`](/api/javascript/dataviz/ui/map/methods/viewtolocation) method.
+1. Create the map and retrieve the current longitude and latitude coordinates using the [`viewToLocation`](/api/dataviz/ui/map/methods/viewtolocation) method.
 1. Use the current coordinates to determine if the map must be panned to the West or to the East to reach the destination.
 1. Use the current coordinates to determine if the map must be panned to the North or to the South to reach the destination.
 1. Change the default `pan step` of the map navigator to reduce the speed at which the map is panned.

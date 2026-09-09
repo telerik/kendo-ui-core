@@ -31,19 +31,19 @@ The Editor provides configuration options that help the developer prevent XSS at
 
 **Grid**
 
-The [`columns.encoded`](/api/javascript/ui/grid/configuration/columns.encoded) configuration option of the Grid provides the possibility to display non-encoded HTML value if set to `false`. In such scenarios it is important to sanitize the values on the server to ensure only safe HTML is rendered.
+The [`columns.encoded`](/api/ui/grid/configuration/columns.encoded) configuration option of the Grid provides the possibility to display non-encoded HTML value if set to `false`. In such scenarios it is important to sanitize the values on the server to ensure only safe HTML is rendered.
 
 **Spreadsheet**
 
-When the [`html` method](/api/javascript/spreadsheet/range/methods/html) is used or the [`sheets.rows.cells.html` configuration option](/api/javascript/ui/spreadsheet/configuration/sheets.rows.cells) is set to `true` the user is allowed to input HTML. In such scenarios it is important to sanitize cell values on the server to ensure only safe html is passed.
+When the [`html` method](/api/spreadsheet/range/methods/html) is used or the [`sheets.rows.cells.html` configuration option](/api/ui/spreadsheet/configuration/sheets.rows.cells) is set to `true` the user is allowed to input HTML. In such scenarios it is important to sanitize cell values on the server to ensure only safe html is passed.
 
 **PanelBar**
 
-The PanelBar [`dataSource` configuration option](/api/javascript/ui/panelbar/configuration/datasource#datasource) allows the developer to pass a JavaScript object or array to the component to be used for initializing a new kendo.data.HierarchicalDataSource instance using that value as data source configuration. In such scenarios the use of HTML for the item text is allowed. The developer should sanitize any values on the server to ensure only safe html is passed.
+The PanelBar [`dataSource` configuration option](/api/ui/panelbar/configuration/datasource#datasource) allows the developer to pass a JavaScript object or array to the component to be used for initializing a new kendo.data.HierarchicalDataSource instance using that value as data source configuration. In such scenarios the use of HTML for the item text is allowed. The developer should sanitize any values on the server to ensure only safe html is passed.
 
 **Menu**
 
-The Menu [`dataSource.encoded` configuration option](/api/javascript/ui/menu/configuration/datasource#datasource) allows the developer to disable the encoding for a menu item. In such scenarios the use of HTML for the Menu item text is allowed. The developer has to sanitize any values on the server to ensure only safe html is passed.
+The Menu [`dataSource.encoded` configuration option](/api/ui/menu/configuration/datasource#datasource) allows the developer to disable the encoding for a menu item. In such scenarios the use of HTML for the Menu item text is allowed. The developer has to sanitize any values on the server to ensure only safe html is passed.
 
 **Kendo UI Templates**
 
@@ -65,7 +65,7 @@ The following examples demonstrate the steps for implementing the CSRF token val
 
   > In .NET Environment, the hidden input with the generated value is created by using the AntiForgeryToken() HtmlHelper.
 
-1. Send the token to the server-side by using the `transport.data` option of the DataSource. The [`kendo.antiforgerytokens`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/antiforgerytokens) method returns an object that contains common CSRF tokens which are found on the page.
+1. Send the token to the server-side by using the `transport.data` option of the DataSource. The [`kendo.antiforgerytokens`](https://docs.telerik.com/kendo-ui/api/kendo/methods/antiforgerytokens) method returns an object that contains common CSRF tokens which are found on the page.
 
   ```
       .Read(read=>read.Action("DetailProducts_Read", "Grid").Data("sendForgery"))

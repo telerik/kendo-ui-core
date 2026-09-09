@@ -100,4 +100,4 @@ The following example demonstrates how to show Kendo UI Tooltip for Kendo UI Gri
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

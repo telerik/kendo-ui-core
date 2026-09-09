@@ -458,7 +458,7 @@ You can reference the ScrollView instances that you have created and build on to
         var scrollView = $("#scrollView").kendoScrollView().data().kendoScrollView; // scrollView is a reference to the existing scrollView instance of the helper.
     </script>
     ```
-1. Use the [ScrollView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview#methods) to control the behavior of the widget. In this example, you will use the `next` method to switch to the next page with an animation.
+1. Use the [ScrollView client-side API](https://docs.telerik.com/kendo-ui/api/ui/scrollview#methods) to control the behavior of the widget. In this example, you will use the `next` method to switch to the next page with an animation.
     ```JS script
     <script>
         var scrollView = $("#scrollView").kendoScrollView().data().kendoScrollView; // scrollView is a reference to the existing scrollView instance of the helper.
@@ -479,6 +479,6 @@ You can continue experimenting with the code sample above by running it in the T
 * [Use Keyboard Navigation for the ScrollView]({% slug htmlhelpers_scrollview_accessibility_keyboard_navigation_aspnetcore %})
 ## See Also
 * [Using the API of the ScrollView for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/api)
-* [Client-Side API of the ScrollView](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview)
+* [Client-Side API of the ScrollView](https://docs.telerik.com/kendo-ui/api/ui/scrollview)
 * [Server-Side API of the ScrollView](/api/scrollview)
 * [Knowledge Base Section](/knowledge-base)

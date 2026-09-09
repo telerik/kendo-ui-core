@@ -100,7 +100,7 @@ For the complete project, refer to the [Notification in Razor Pages example](htt
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Notification](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/notification)
+* [Client-Side API of the Notification](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/notification)
 * [Server-Side HtmlHelper API of the Notification](/api/notification)
 * [Server-Side TagHelper API of the Notification](/api/taghelpers/notification)
 * [Knowledge Base Section](/knowledge-base)

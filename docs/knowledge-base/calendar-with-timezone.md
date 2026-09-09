@@ -79,4 +79,4 @@ To implement a timezone we need to take care of the following:
 
 ## See Also
 
-* [API Reference of the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the Calendar](https://docs.telerik.com/kendo-ui/api/ui/calendar)

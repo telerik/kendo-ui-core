@@ -76,4 +76,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the Switch for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/switch/api)
 * [Switch Server-Side API for {{ site.framework}}](/api/switch)
-* [Switch Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch)
+* [Switch Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/switch)

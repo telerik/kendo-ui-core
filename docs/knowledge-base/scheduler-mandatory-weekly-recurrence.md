@@ -155,5 +155,5 @@ To achieve the desired scenario, refer to the following implememtation:
 
 ## See Also
 
-* [Kendo UI for jQuery Scheduler API Reference](/api/javascript/ui/scheduler)
+* [Kendo UI for jQuery Scheduler API Reference](/api/ui/scheduler)
 * [Common Issues in Kendo UI for jQuery]({% slug troubleshooting_common_issues_kendoui %})

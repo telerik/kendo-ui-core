@@ -79,6 +79,6 @@ As of the 2024 Q4 Release the {{ site.framework }} DateInput is compatible with 
 ## See Also
 
 * [Using the API of the DateInput HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dateinput/api)
-* [Client-Side API of the DateInput](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput)
+* [Client-Side API of the DateInput](https://docs.telerik.com/kendo-ui/api/ui/dateinput)
 * [Server-Side API](/api/dateinput)
 * [Knowledge Base Section](/knowledge-base)

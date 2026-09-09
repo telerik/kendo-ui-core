@@ -33,6 +33,6 @@ On smaller screens, when using the default [`Numeric()`](/api/kendo.mvc.ui.fluen
 {% if site.core %}
 * [Server-Side API of the Pager TagHelper](/api/taghelpers/pager)
 {% endif %}
-* [Client-Side API  of the Pager](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager)
+* [Client-Side API  of the Pager](https://docs.telerik.com/kendo-ui/api/ui/pager)
 
 

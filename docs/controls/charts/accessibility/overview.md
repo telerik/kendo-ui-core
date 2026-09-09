@@ -33,7 +33,7 @@ Meeting some of the Success Criteria in WCAG 2.2 may require additional customiz
   The color of chart elements may need to be customized to meet the minimum required contrast level. Some [Theme Swatches]({% slug sassbasedthemes_kendoui %}) like the [Ocean Blue A11y Accessibility Swatch]({%slug sassbasedthemes_kendoui%}#swatch) meet and exceed this criteria.
 * ***2.5.8:** Target Size (Minimum)*
 
-  The size of [Series Markers](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.markers) and the font size of [Legend Items](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/legend.item) may need to be customized to meet the minimum size of 24x24px required by this criteria.
+  The size of [Series Markers](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.markers) and the font size of [Legend Items](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/legend.item) may need to be customized to meet the minimum size of 24x24px required by this criteria.
 
 For more information, refer to:
 * [WCAG 2.2 support by the Chart (demo)](https://demos.telerik.com/kendo-ui/charts/index)

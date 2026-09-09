@@ -7,7 +7,7 @@ component: stepper
 
 # kendo.ui.Stepper
 
-Represents the Kendo UI Stepper widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Stepper widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -228,7 +228,7 @@ How do I change the icon in my Kendo UI Stepper step indicator? Set or customize
 
 ### steps.iconTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the icon in the indicator of the step.
+The [template](/api/kendo/methods/template) used to render the icon in the indicator of the step.
 
 The fields which can be used in the template are:
 
@@ -559,7 +559,7 @@ How do I update a Kendo UI Stepper's progress indicator dimensions after resizin
 
 ### select
 
-Selects a Step that is present at a given index. If used without parameter returns the currently selected [`Step`](/api/javascript/stepper/step) instance.
+Selects a Step that is present at a given index. If used without parameter returns the currently selected [`Step`](/api/stepper/step) instance.
 
 
 <div class="meta-api-description">
@@ -574,7 +574,7 @@ The index of the Step which should be selected.
 
 #### Returns `kendo.stepper.Step`
 
-`Step` The currently selected [`Step`](/api/javascript/stepper/step) instance.
+`Step` The currently selected [`Step`](/api/stepper/step) instance.
 
 #### Example
 
@@ -652,7 +652,7 @@ Array of steps to be rendered in the **Stepper**.
 
 #### Returns `Array`
 
-`Array[Step]` The [Step](/api/javascript/stepper/step) instances available in the **Stepper** widget.
+`Array[Step]` The [Step](/api/stepper/step) instances available in the **Stepper** widget.
 
 #### Example
 
@@ -700,7 +700,7 @@ The **Stepper** instance that triggered the event.
 
 ##### e.step `kendo.stepper.Step`
 
-The [Step](/api/javascript/stepper/step) instance that has been selected.
+The [Step](/api/stepper/step) instance that has been selected.
 
 #### Example
 
@@ -743,7 +743,7 @@ The **Stepper** instance that triggered the event.
 
 ##### e.step `kendo.stepper.Step`
 
-The [Step](/api/javascript/stepper/step) instance that is about to be selected.
+The [Step](/api/stepper/step) instance that is about to be selected.
 
 ##### e.preventDefault `Function`
 

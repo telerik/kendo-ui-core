@@ -8,7 +8,7 @@ component: dialog
 
 # kendo.ui.Dialog
 
-Represents the Kendo UI Dialog. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Dialog. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -1002,7 +1002,7 @@ How do I completely remove a Kendo UI dialog instance from the webpage? Complete
 
 ### open
 
-Opens a Dialog and brings it on top of any other open Dialog or Window instances by calling [`toFront`](/api/javascript/ui/dialog/methods/tofront) internally.
+Opens a Dialog and brings it on top of any other open Dialog or Window instances by calling [`toFront`](/api/ui/dialog/methods/tofront) internally.
 
 
 <div class="meta-api-description">
@@ -1095,7 +1095,7 @@ The title of the Dialog.
 
 ### toFront
 
-Increases the `z-index` style of a Dialog [`wrapper`](/intro/widget-basics/wrapper-element) to bring the instance on top of other open Dialogs. This method is executed automatically when the [`open`](/api/javascript/ui/dialog/methods/open) method is used.
+Increases the `z-index` style of a Dialog [`wrapper`](/intro/widget-basics/wrapper-element) to bring the instance on top of other open Dialogs. This method is executed automatically when the [`open`](/api/ui/dialog/methods/open) method is used.
 
 
 <div class="meta-api-description">

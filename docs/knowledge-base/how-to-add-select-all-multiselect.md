@@ -36,7 +36,7 @@ This KB article also answers the following questions:
 
 ## Solution
 
-To add a "Select All" checkbox in the MultiSelect component, use the [`headerTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/headertemplate) configuration. This template renders a checkbox at the top of the dropdown list. By interacting with this checkbox, users can select or deselect all items. Additionally, the [`tagMode`](/api/javascript/ui/multiselect/configuration/tagmode) configuration controls the display of selected items - having a separate tag for every item or a single tag with the count of the selected items.
+To add a "Select All" checkbox in the MultiSelect component, use the [`headerTemplate`](https://docs.telerik.com/kendo-ui/api/ui/multiselect/configuration/headertemplate) configuration. This template renders a checkbox at the top of the dropdown list. By interacting with this checkbox, users can select or deselect all items. Additionally, the [`tagMode`](/api/ui/multiselect/configuration/tagmode) configuration controls the display of selected items - having a separate tag for every item or a single tag with the count of the selected items.
 
 Here's an example to achieve this functionality:
 
@@ -164,7 +164,7 @@ This code snippet demonstrates how to integrate a "Select All" option using the 
 
 ## See Also
 
-- [MultiSelect HeaderTemplate Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/headertemplate)
-- [MultiSelect TagMode Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/tagmode)
+- [MultiSelect HeaderTemplate Configuration](https://docs.telerik.com/kendo-ui/api/ui/multiselect/configuration/headertemplate)
+- [MultiSelect TagMode Configuration](https://docs.telerik.com/kendo-ui/api/ui/multiselect/configuration/tagmode)
 - [Kendo UI MultiSelect for jQuery Templates (Demo)](https://demos.telerik.com/kendo-ui/multiselect/template)
-- [Kendo UI MultiSelect for jQuery API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+- [Kendo UI MultiSelect for jQuery API](https://docs.telerik.com/kendo-ui/api/ui/multiselect)

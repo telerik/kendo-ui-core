@@ -200,4 +200,4 @@ const connections = [
 ## See Also
 
 * [Workflow Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/workflow-diagram)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)

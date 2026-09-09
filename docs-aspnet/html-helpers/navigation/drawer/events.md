@@ -136,4 +136,4 @@ The next example shows how to use the `ItemClick()` event to display the content
 
 * [Using the API of the Drawer for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/drawer/api)
 * [Drawer Server-Side API](/api/drawer)
-* [Drawer Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer)
+* [Drawer Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/drawer)

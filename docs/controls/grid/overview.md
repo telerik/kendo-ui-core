@@ -45,12 +45,12 @@ It provides options for executing data operations, such as paging, sorting, filt
 
 * [Getting Started with the Kendo UI Grid for jQuery]({% slug getting_started_kendoui_grid_widget %})
 * [Demo Page for the Grid](https://demos.telerik.com/kendo-ui/grid/index)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 
 ## See Also
 
 * [Initializing the Grid from an HTML Table (Guide)]({% slug html_table_kendoui_grid_widget %})
 * [Initializing the Grid from an HTML Table (Demo)](https://demos.telerik.com/kendo-ui/grid/from-table)
 * [Demo Page for the jQuery Data Grid](https://demos.telerik.com/kendo-ui/grid/index)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

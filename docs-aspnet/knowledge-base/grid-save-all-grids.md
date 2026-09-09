@@ -31,7 +31,7 @@ How can I consolidate the save operations of all the {{ site.product }} Grids th
 To achieve the desired scenario:
 
 1. Create an external **Save** Button and subscribe to its [`Click`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/buttoneventbuilder#clicksystemstring) event.
-1. Within the `Click` handler, loop through all utilized Grids by accessing them through the `.k-grid` class and save the changes by using the [`saveChanges()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/savechanges) method.
+1. Within the `Click` handler, loop through all utilized Grids by accessing them through the `.k-grid` class and save the changes by using the [`saveChanges()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/savechanges) method.
 
 ```Razor Index.cshtml
     @(Html.Kendo().Button()
@@ -122,7 +122,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 
 ## See Also
 
-* [Client-Side API Reference of the Grid  for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid  for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid  for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik REPL: Save Changes in All Grids](https://netcorerepl.telerik.com/QnEeQhEV26Fi4SlI30)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})

@@ -75,4 +75,4 @@ The following example demonstrates how to bind two Kendo UI components to the sa
 ## See Also
 
 * [Bindig to a Shared DataSource (Demo)](https://demos.telerik.com/kendo-ui/timeline/shared-datasource).
-* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)
+* [JavaScript API Reference of the Timeline](/api/ui/timeline)

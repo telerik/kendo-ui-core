@@ -33,7 +33,7 @@ To achieve the desired behavior, use the following approach:
 1. The button stands for a row, so when clicked, add it to a global scope variable (array).
 1. You can add some styles to the clicked row—this allows you to show that this row will be removed.
 1. For the removal, add a new custom button outside of the Grid or in its Toolbar.
-1. In the [`Click`](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) event handler of the button from step 5, remove all the rows saved in the global scope variable. You can achieve this with the help of the [`removeRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/removerow) method.
+1. In the [`Click`](https://docs.telerik.com/kendo-ui/api/ui/button/events/click) event handler of the button from step 5, remove all the rows saved in the global scope variable. You can achieve this with the help of the [`removeRow`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/removerow) method.
 
 The following example represents the steps described above.
 
@@ -89,7 +89,7 @@ columns.Command(command => command.Custom("DeleteRow").Click("deleteRow")).Width
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

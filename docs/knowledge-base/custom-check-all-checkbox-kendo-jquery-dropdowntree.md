@@ -43,7 +43,7 @@ To achieve this, create a custom "Check All" checkbox and add it to the DropDown
 ### Steps
 
 1. **Add Custom Checkbox in the Popup**
-   Use the [`open`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dropdowntree/events/open) event of the DropDownTree to create and add the custom checkbox.
+   Use the [`open`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdowntree/events/open) event of the DropDownTree to create and add the custom checkbox.
 
    ```javascript
    open: function (e) {
@@ -100,7 +100,7 @@ To achieve this, create a custom "Check All" checkbox and add it to the DropDown
    ```
 
 3. **Ensure Checkbox Visibility During Filtering**
-   Use the [`filtering`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dropdowntree/events/filtering) event to re-create the custom checkbox when filtering is applied.
+   Use the [`filtering`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdowntree/events/filtering) event to re-create the custom checkbox when filtering is applied.
 
    ```javascript
    filtering: function (e) {
@@ -333,4 +333,4 @@ The provided code demonstrates adding a custom "Check All Custom" checkbox to th
 
 - [Kendo UI for jQuery DropDownTree Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/dropdowntree/overview)
 - [Kendo UI for jQuery DropDownTree Checkboxes](https://www.telerik.com/kendo-jquery-ui/documentation/controls/dropdowntree/checkboxes)
-- [JavaScript API Reference of the DropDownTree](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dropdowntree)
+- [JavaScript API Reference of the DropDownTree](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdowntree)

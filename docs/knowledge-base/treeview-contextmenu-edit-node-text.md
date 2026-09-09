@@ -92,4 +92,4 @@ How can I edit the text of a TreeView node by using a context menu?
 
 ## See Also
 
-* [API Reference of the TreeView](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview).
+* [API Reference of the TreeView](https://docs.telerik.com/kendo-ui/api/ui/treeview).

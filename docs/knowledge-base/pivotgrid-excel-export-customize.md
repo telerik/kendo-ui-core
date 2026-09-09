@@ -31,7 +31,7 @@ I am playing around with the Excel export of the PivotGrid and would like to kno
 
 ## Solution
 
-The PivotGrid triggers its [`excelExport`](api/javascript/ui/pivotgrid/events/excelexport) event that features the generated [`kendo.ooxml.Workbook`](/api/javascript/ooxml/workbook). You can use it to accomplich the desired outcome by following the steps below:
+The PivotGrid triggers its [`excelExport`](api/javascript/ui/pivotgrid/events/excelexport) event that features the generated [`kendo.ooxml.Workbook`](/api/ooxml/workbook). You can use it to accomplich the desired outcome by following the steps below:
 
 1. Loop the sheet rows and columns
 1. Use the `cells.borderTop`, `cells.borderBottom`, `cells.borderRight` and `cells.borderLeft` `size` and `color` properties to assign the desired border width and color

@@ -9,7 +9,7 @@ position: 5
 
 # Animations
 
-The ActionSheet in [adaptive mode](/api/javascript/ui/actionsheet/configuration/adaptive) supports opening and closing animations. 
+The ActionSheet in [adaptive mode](/api/ui/actionsheet/configuration/adaptive) supports opening and closing animations. 
 
 By default, the ActionSheet animations are disabled, and the component opens and closes instantly.
 
@@ -67,4 +67,4 @@ The following example demonstrates how to specify animation effects with duratio
 ## See Also
 
 * [Animation of the ActionSheet (Demo)](https://demos.telerik.com/kendo-ui/actionsheet/animation)
-* [JavaScript API Reference of the ActionSheet](/api/javascript/ui/actionsheet)
+* [JavaScript API Reference of the ActionSheet](/api/ui/actionsheet)

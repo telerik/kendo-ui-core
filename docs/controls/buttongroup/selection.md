@@ -28,4 +28,4 @@ The property can be configured for a `single` or `multiple` selection.
 ## See Also
 
 * [Using Selection in the ButtonGroup (Demo)](https://demos.telerik.com/kendo-ui/buttongroup/selection)
-* [JavaScript API Reference of the ButtonGroup](/api/javascript/ui/buttongroup)
+* [JavaScript API Reference of the ButtonGroup](/api/ui/buttongroup)

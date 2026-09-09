@@ -123,7 +123,7 @@ With this change, the Grid puts the entire row in edit mode when you click the *
 
 ### Specify Model for DataSource
 
-However, you will notice that the Grid currently has the `BirthDate` field as a textbox and allows you to completely null out the **LastName**. This is not ideal. You can add constraints for column editing by specifying a model in the schema on the DataSource. The [`Model`](/api/javascript/data/model) object specifies a client-side model structure that can describe the data in terms of type and validation rules.
+However, you will notice that the Grid currently has the `BirthDate` field as a textbox and allows you to completely null out the **LastName**. This is not ideal. You can add constraints for column editing by specifying a model in the schema on the DataSource. The [`Model`](/api/data/model) object specifies a client-side model structure that can describe the data in terms of type and validation rules.
 
 Add a `model` to the `schema` declaration specifying that the `id` is mapped to the **Id** field from the database. Then specify a `fields` object. Each object in the fields can be either a simple string, or an object that provides some more information about the `model` field. To specify that fields are required, add a `validation` object. Also, specify that its type is `date`, so that the Grid gives you a [DatePicker](https://demos.telerik.com/kendo-ui/datepicker) for the **BirthDate** column when in edit mode.
 
@@ -435,7 +435,7 @@ Build on this tutorial by gradually adding more advanced functionalities to this
 * [Kendo UI Grid Editing Functionality in Popups](https://demos.telerik.com/kendo-ui/grid/editing-popup)
 * [Kendo UI Grid Editing Functionality Inline](https://demos.telerik.com/kendo-ui/grid/editing-inline)
 * [Kendo UI Grid Custom Editing](https://demos.telerik.com/kendo-ui/grid/editing-custom)
-* [JavaScript `model` API](/api/javascript/data/model)
+* [JavaScript `model` API](/api/data/model)
 * [Kendo UI DatePicker Demo Online](https://demos.telerik.com/kendo-ui/datepicker)
 
 ## See Also

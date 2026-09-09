@@ -10,7 +10,7 @@ position: 8
 
 # Hierarchical DataSource Component
 
-The [Kendo UI for jQuery HierarchicalDataSource component](/api/javascript/data/hierarchicaldatasource) extends the [DataSource component](/api/javascript/data/datasource) and allows the representation of hierarchical data.
+The [Kendo UI for jQuery HierarchicalDataSource component](/api/data/hierarchicaldatasource) extends the [DataSource component](/api/data/datasource) and allows the representation of hierarchical data.
 
 ## Binding to Local Data
 
@@ -311,6 +311,6 @@ Because the HierarchicalDataSource loads data on demand, loading all available d
 ```
 ## See Also
 
-* [HierarchicalDataSource JavaScript API Reference](/api/javascript/data/hierarchicaldatasource)
+* [HierarchicalDataSource JavaScript API Reference](/api/data/hierarchicaldatasource)
 * [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
-* [DataSource JavaScript API Reference](/api/javascript/data/datasource)
+* [DataSource JavaScript API Reference](/api/data/datasource)

@@ -509,4 +509,4 @@ The following example shows how to integrate the Upload component into a standar
 {% if site.core %}
 * [Server-Side API of the Upload TagHelper](/api/taghelpers/upload)
 {% endif %}
-* [Client-Side API of the Upload](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Client-Side API of the Upload](https://docs.telerik.com/kendo-ui/api/ui/upload)

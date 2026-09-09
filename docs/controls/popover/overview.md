@@ -23,9 +23,9 @@ The Kendo UI Popover widget for jQuery provides a simple way to display addition
 
 * [Getting Started with the Kendo UI Popover for jQuery]({% slug getting_started_kendoui_popover %})
 * [Demo Page for the Popover](https://demos.telerik.com/kendo-ui/popover/index)
-* [JavaScript API Reference of the Popover](/api/javascript/ui/popover)
+* [JavaScript API Reference of the Popover](/api/ui/popover)
 
 ## See Also
 
 * [Using the API of the Popover (Demo)](https://demos.telerik.com/kendo-ui/popover/api)
-* [JavaScript API Reference of the Popover](/api/javascript/ui/popover)
+* [JavaScript API Reference of the Popover](/api/ui/popover)

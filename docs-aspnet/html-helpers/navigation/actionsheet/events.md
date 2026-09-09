@@ -77,7 +77,7 @@ The following example demonstrates how you can subscribe to the `Open` and `Clos
 ## See Also
 
 * [Using the API of the ActionSheet for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/actionsheet/api)
-* [Client-Side API of the ActionSheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet)
+* [Client-Side API of the ActionSheet](https://docs.telerik.com/kendo-ui/api/ui/actionsheet)
 * [Server-Side API of the ActionSheet HtmlHelper](/api/actionsheet)
 {% if site.core %}
 * [Server-Side API of the ActionSheet TagHelper](/api/taghelpers/actionsheet)

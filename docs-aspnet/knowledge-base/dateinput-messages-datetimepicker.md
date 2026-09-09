@@ -29,7 +29,7 @@ How can I configure the messages of the date input in the {{ site.product }} Dat
 
 ## Solution
 
-To achieve the desired scenario, reference the `dateInput` of the DateTimePicker and use the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/setoptions) method of the DateTimePicker to change its messages. 
+To achieve the desired scenario, reference the `dateInput` of the DateTimePicker and use the [`setOptions`](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker/methods/setoptions) method of the DateTimePicker to change its messages. 
 
 
 ```Razor Index.cshtml
@@ -85,7 +85,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Setting the Date Input Messages of the DateTimePicker](https://netcorerepl.telerik.com/cwPlmlFH31nEdqv650)
-* [Client-Side API Reference of the DateTimePicker for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [Client-Side API Reference of the DateTimePicker for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker)
 * [Server-Side API Reference of the DateTimePicker for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/datetimepicker)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

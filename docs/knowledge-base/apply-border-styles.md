@@ -81,5 +81,5 @@ The following example demonstrates how to apply border styles to the Kendo UI Tr
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery TreeMap](/api/javascript/dataviz/ui/treemap)
+* [JavaScript API Reference of the jQuery TreeMap](/api/dataviz/ui/treemap)
 * [Set the Color for the TreeMap Header Items]({% slug howto_setheaderitemscolor_treemap %})

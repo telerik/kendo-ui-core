@@ -334,6 +334,6 @@ Refer to the example below for a demonstration of the implementation.
 ## See Also
 
 - [Kendo UI for jQuery Spreadsheet Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)
-- [Spreadsheet API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/spreadsheet)
-- [Spreadsheet Range API](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range)
+- [Spreadsheet API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/spreadsheet)
+- [Spreadsheet Range API](https://docs.telerik.com/kendo-ui/api/spreadsheet/range)
 

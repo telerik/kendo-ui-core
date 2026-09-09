@@ -32,7 +32,7 @@ Progress® Kendo UI® jQuery Grid</td>
 
 ## Solution
 
-To disable the AutoComplete popup in the filter row of the Kendo UI Grid, bind the [`open`](/api/javascript/ui/autocomplete/events/open) event of the AutoComplete to prevent its default action. This can be achieved within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event of the Grid. The following example demonstrates how to accomplish this:
+To disable the AutoComplete popup in the filter row of the Kendo UI Grid, bind the [`open`](/api/ui/autocomplete/events/open) event of the AutoComplete to prevent its default action. This can be achieved within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event of the Grid. The following example demonstrates how to accomplish this:
 
 ```javascript
 dataBound: function (e) {
@@ -130,5 +130,5 @@ For a practical demonstration, refer to this example: [
 
 - [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 - [Kendo UI AutoComplete Documentation](https://docs.telerik.com/kendo-ui/controls/editors/autocomplete/overview)
-- [Grid API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-- [AutoComplete API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
+- [Grid API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid)
+- [AutoComplete API Reference](https://docs.telerik.com/kendo-ui/api/ui/autocomplete)

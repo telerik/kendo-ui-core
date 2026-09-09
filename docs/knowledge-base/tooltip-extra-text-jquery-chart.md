@@ -35,7 +35,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To display additional text fields in the tooltip for a [Kendo UI for jQuery Tooltip](https://www.telerik.com/kendo-jquery-ui/documentation/controls/tooltip/overview) associated with the chart, use the [`tooltip.template`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart/configuration/tooltip#tooltiptemplate) option to customize the content. Ensure the chart data includes all the fields you want to display.
+To display additional text fields in the tooltip for a [Kendo UI for jQuery Tooltip](https://www.telerik.com/kendo-jquery-ui/documentation/controls/tooltip/overview) associated with the chart, use the [`tooltip.template`](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/tooltip#tooltiptemplate) option to customize the content. Ensure the chart data includes all the fields you want to display.
 
 1. Define your chart data with the required fields.
 
@@ -143,6 +143,6 @@ Below, you can observe a runnable example.
 
 ## See Also
 
-- [Kendo UI for jQuery Tooltip Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/tooltip)
-- [Kendo UI for jQuery Chart API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
+- [Kendo UI for jQuery Tooltip Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/tooltip)
+- [Kendo UI for jQuery Chart API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart)
 - [Kendo UI for jQuery Charts Overview Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/overview)

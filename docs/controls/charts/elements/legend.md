@@ -11,9 +11,9 @@ slug: legend_features_charts
 The Chart legend displays the name of the configured data series.
 
 > * Series without a specified name will not display legend items.
-> * To render a legend item for the Pie, Donut and Funnel series, provide the items with a [`categoryField`](/api/javascript/dataviz/ui/chart/configuration/series.categoryfield).
+> * To render a legend item for the Pie, Donut and Funnel series, provide the items with a [`categoryField`](/api/dataviz/ui/chart/configuration/series.categoryfield).
 
-To customize the legend, use the [`legend`](/api/javascript/dataviz/ui/chart/configuration/legend) configuration option.
+To customize the legend, use the [`legend`](/api/dataviz/ui/chart/configuration/legend) configuration option.
 
 The following example demonstrates how to configure the position and orientation of the Chart legend.
 
@@ -40,7 +40,7 @@ The following example demonstrates how to configure the position and orientation
 
 If you set the series names, the Chart displays a default legend.
 
-The following example demonstrates how to hide the legend by using its [`visible`](/api/javascript/dataviz/ui/chart/configuration/legend.visible) property.
+The following example demonstrates how to hide the legend by using its [`visible`](/api/dataviz/ui/chart/configuration/legend.visible) property.
 
     <div id="chart"></div>
     <script>
@@ -61,7 +61,7 @@ The following example demonstrates how to hide the legend by using its [`visible
     </script>
 
 ## Hiding a Series from the Legend
-To exclude series from the legend, set their [`visibleInLegend`](/api/javascript/dataviz/ui/chart/configuration/series.visibleinlegend) option to `false`.
+To exclude series from the legend, set their [`visibleInLegend`](/api/dataviz/ui/chart/configuration/series.visibleinlegend) option to `false`.
 
     <div id="chart"></div>
     <script>
@@ -83,7 +83,7 @@ To exclude series from the legend, set their [`visibleInLegend`](/api/javascript
 
 The legend item types and settings are derived from the series configuration.
 
-To customize the legend item for each series, use the series [`legendItem`](/api/javascript/dataviz/ui/chart/configuration/series.legendItem) options.
+To customize the legend item for each series, use the series [`legendItem`](/api/dataviz/ui/chart/configuration/series.legendItem) options.
 
 The following example shows how to customize the Legend Item of a given series:
 
@@ -110,7 +110,7 @@ The following example shows how to customize the Legend Item of a given series:
     </script>
 
 
-To configure the legend items for all series, use the legend [`seriesDefaults.legendItem`](/api/javascript/dataviz/ui/chart/configuration/seriesDefaults.legendItem) option.
+To configure the legend items for all series, use the legend [`seriesDefaults.legendItem`](/api/dataviz/ui/chart/configuration/seriesDefaults.legendItem) option.
 
 The following example shows how to set the legend items for all series:
 
@@ -173,7 +173,7 @@ It is possible to remove the legend from the flow and to absolutely position it 
 ## Setting a Title
 
 The Chart legend section can be configured to hold a title with customizable layout and content.
-To define a title, provide a [`title`](/api/javascript/dataviz/ui/chart/configuration/legend.title) object to the legend configuration.
+To define a title, provide a [`title`](/api/dataviz/ui/chart/configuration/legend.title) object to the legend configuration.
 
     <div id="chart"></div>
     <script>
@@ -199,4 +199,4 @@ To define a title, provide a [`title`](/api/javascript/dataviz/ui/chart/configur
 ## See Also
 
 * [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

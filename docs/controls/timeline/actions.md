@@ -73,4 +73,4 @@ The following example demonstrates how to use a field with a specific name to pr
 ## See Also
 
 * [Basic Usage of the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/index)
-* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)
+* [JavaScript API Reference of the Timeline](/api/ui/timeline)

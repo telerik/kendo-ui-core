@@ -86,5 +86,5 @@ This configuration ensures that clicks on the specified elements (in this case, 
 ## See Also
 
 - [Kendo UI for jQuery TileLayout Documentation](https://docs.telerik.com/kendo-ui/controls/tilelayout/overview)
-- [Kendo UI Draggable Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable)
-- [Configuring Container Header in Kendo UI TileLayout](https://docs.telerik.com/kendo-ui/api/javascript/ui/tilelayout/configuration/containers.header.template)
+- [Kendo UI Draggable Documentation](https://docs.telerik.com/kendo-ui/api/ui/draggable)
+- [Configuring Container Header in Kendo UI TileLayout](https://docs.telerik.com/kendo-ui/api/ui/tilelayout/configuration/containers.header.template)

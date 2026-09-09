@@ -15,4 +15,4 @@ The NumericTextBox provides options for localizing its user interface by utilizi
 
 * [RTL Support by the NumericTextBox (Demo)](https://demos.telerik.com/kendo-ui/numerictextbox/right-to-left-support)
 * [Localization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
+* [JavaScript API Reference of the NumericTextBox](/api/ui/numerictextbox)

@@ -52,4 +52,4 @@ As of the 2025 Q1 release, the Form enables you to toggle the visibility state o
 ## See Also
 
 * [API of the Form (Demo)](https://demos.telerik.com/kendo-ui/form/api)
-* [JavaScript API Reference of the Form](/api/javascript/ui/form)
+* [JavaScript API Reference of the Form](/api/ui/form)

@@ -111,11 +111,11 @@ The following example demonstrates how to set a Floating Label for a TextArea.
 
 If set to `true`, the component will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/textarea/methods/value) method **does not trigger** the `focusout` event of the textarea.
+> **Important:** The [value](/api/ui/textarea/methods/value) method **does not trigger** the `focusout` event of the textarea.
 This could affect the floating label functionality.
 You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#description").data("kendoTextArea").floatingLabel.refresh();`
 
 ## See Also
 
 * [Applying the TextArea API (Demo)](https://demos.telerik.com/kendo-ui/textarea/api)
-* [JavaScript API Reference of the TextArea](/api/javascript/ui/textarea)
+* [JavaScript API Reference of the TextArea](/api/ui/textarea)

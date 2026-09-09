@@ -22,4 +22,4 @@ The RippleContainer is compatible only with [the SASS-based Material Theme](http
 ## See Also
 
 * [Basic Usage of the RippleContainer (Demo)](https://demos.telerik.com/kendo-ui/ripplecontainer/index)
-* [JavaScript API Reference of the RippleContainer](/api/javascript/ui/ripplecontainer)
+* [JavaScript API Reference of the RippleContainer](/api/ui/ripplecontainer)

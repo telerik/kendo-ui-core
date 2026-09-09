@@ -180,7 +180,7 @@ For the complete project, refer to the [Captcha in Razor Pages example](https://
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Captcha](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/captcha)
+* [Client-Side API of the Captcha](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/captcha)
 * [Server-Side HtmlHelper API of the Captcha](/api/captcha)
 * [Server-Side TagHelper API of the Captcha](/api/taghelpers/captcha)
 * [Knowledge Base Section](/knowledge-base)

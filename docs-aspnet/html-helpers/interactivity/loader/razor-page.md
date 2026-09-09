@@ -63,7 +63,7 @@ For the complete project, refer to the [Loader in Razor Pages example](https://g
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Loader](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/loader)
+* [Client-Side API of the Loader](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/loader)
 * [Server-Side HtmlHelper API of the Loader](/api/loader)
 * [Server-Side TagHelper API of the Loader](/api/taghelpers/loader)
 * [Knowledge Base Section](/knowledge-base)

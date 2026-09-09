@@ -34,7 +34,7 @@ I want to retrieve the computed value of a cell containing a formula in Kendo UI
 
 This knowledge base article also answers the following questions:
 - How to get the computed value of formula cells in Kendo UI Spreadsheet?
-- Why does [`.value()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/spreadsheet/range/methods/value) return null for formula cells in Kendo UI Spreadsheet?
+- Why does [`.value()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/spreadsheet/range/methods/value) return null for formula cells in Kendo UI Spreadsheet?
 - How to access cell values after batch operations in Kendo UI Spreadsheet?
 
 ## Solution
@@ -79,5 +79,5 @@ Ensure proper script loading to avoid errors:
 ## See Also
 
 - [Spreadsheet Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/spreadsheet/overview)
-- [Spreadsheet Batch Method](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/batch)
+- [Spreadsheet Batch Method](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet/methods/batch)
 - [Forum Discussion on Batch Recalculation](https://www.telerik.com/forums/spreadsheet-sheet-batch-option)

@@ -31,7 +31,7 @@ How can I upload a `PDF` file by using the Telerik UI for {{ site.framework }} U
 1. Define an Upload component in [asynchronous mode]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore%}#asynchronous-mode).
 1. Define a PDFViewer component and hide it with CSS.
 1. Subscribe to the [`Success`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/uploadeventbuilder#successsystemstring) event to access the file information when it is uploaded successfully.
-1. Within the handler, get the name of the uploaded `PDF` file from the event data, get a reference to the PDFViewer, and call the [`fromFile()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/methods/fromfile) to load the file that is uploaded on the server.
+1. Within the handler, get the name of the uploaded `PDF` file from the event data, get a reference to the PDFViewer, and call the [`fromFile()`](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer/methods/fromfile) to load the file that is uploaded on the server.
 1. Call the jQuery [`show()`](http://api.jquery.com/show/) method to show the hidden PDFViewer.
 
 ```HtmlHelper
@@ -183,10 +183,10 @@ How can I upload a `PDF` file by using the Telerik UI for {{ site.framework }} U
 
 ## See Also
 
-* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/upload)
 * [Server-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/upload)
 * [Server-Side TagHelper API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/upload)
-* [Client-Side API Reference of the PDFViewer for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
+* [Client-Side API Reference of the PDFViewer for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer)
 * [Server-Side API Reference of the PDFViewer for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/pdfviewer)
 * [Server-Side TagHelper API Reference of the PDFViewer for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/pdfviewer)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})

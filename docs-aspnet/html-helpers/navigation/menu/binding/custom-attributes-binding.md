@@ -230,4 +230,4 @@ For a complete example on the Custom Attributes Binding, refer to the [demo on c
 {% if site.core %}
 * [Server-Side API of the Menu TagHelper](/api/taghelpers/menu)
 {% endif %}
-* [Client-Side API of the Menu](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+* [Client-Side API of the Menu](https://docs.telerik.com/kendo-ui/api/ui/menu)

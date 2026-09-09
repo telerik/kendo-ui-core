@@ -242,7 +242,7 @@ The following example demonstrates how to create a power trendline for Categoric
 
 Polynomial trendlines are best suited for data series that alternates between growth and decline.
 
-This type of trendlines accepts a [`series.trendline.order`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.trendline.order) parameter that specifies the degree of the polynomial.
+This type of trendlines accepts a [`series.trendline.order`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.trendline.order) parameter that specifies the degree of the polynomial.
 The default order is 2. Accepted values are from 2 to 6:
 * 2: a Quadratic polynomial with a single extreme point (minimum or maximum) point.
 * 3: a Cubic polynomial with up to 2 extreme points.
@@ -380,7 +380,7 @@ The following example demonstrates how to create a moving average trendline for 
 
 ## Forecasts
 
-To create a forecast, extend the trendline by specifying the number of intervals using the [`series.trendline.after`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.trendline.forecast.after) setting. It's also possible to extend the forecast in reverse direction using the [`series.trendline.before`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.trendline.forecast.before) setting. By default, the trendline does not display a forecast.
+To create a forecast, extend the trendline by specifying the number of intervals using the [`series.trendline.after`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.trendline.forecast.after) setting. It's also possible to extend the forecast in reverse direction using the [`series.trendline.before`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.trendline.forecast.before) setting. By default, the trendline does not display a forecast.
 
 > The `forecast` option is supported for **linear**, **exponential**, **logarithmic** and **power** trendlines. The parent series must be either a [Date Series]({% slug htmlhelpers_charts_dateseries_aspnetcore %}), "scatter" or "scatterLine".
 
@@ -503,4 +503,4 @@ Trendlines are supported for the following [chart types]({% slug overview_chartt
 
 * [Getting Started with the {{ site.platform }} Chart]({% slug htmlhelpers_charts_aspnetcore %})
 * [Server-side API Reference of the Chart](/api/chart)
-* [Client-side API Reference of the Chart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Client-side API Reference of the Chart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart)

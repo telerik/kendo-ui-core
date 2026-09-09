@@ -27,7 +27,7 @@ ticketid: 1665651
 
 ## Description
 
-When I set the `filter: 'contains'` option in a [ComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox), and I try to clear the selected value using the backspace key, the focus moves to the first item in the dropdown list. If I press the Enter key at this point, the first item is automatically selected, but I want the ComboBox to be cleared and remain empty instead, similar to when the filter option is not set. How can I achieve this behavior?
+When I set the `filter: 'contains'` option in a [ComboBox](https://docs.telerik.com/kendo-ui/api/ui/combobox), and I try to clear the selected value using the backspace key, the focus moves to the first item in the dropdown list. If I press the Enter key at this point, the first item is automatically selected, but I want the ComboBox to be cleared and remain empty instead, similar to when the filter option is not set. How can I achieve this behavior?
 
 This KB article also answers the following questions:
 - How to prevent automatic selection of the first item in Kendo UI ComboBox after clearing the value?
@@ -112,5 +112,5 @@ Below you will find a runnable example:
 
 ## See Also
 
-- [ComboBox API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+- [ComboBox API Reference](https://docs.telerik.com/kendo-ui/api/ui/combobox)
 - [ComboBox Keyboard Navigation (Demo)](https://demos.telerik.com/kendo-ui/combobox/keyboard-navigation)

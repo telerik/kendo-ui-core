@@ -63,7 +63,7 @@ The Columns [`.Encoded()`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#encod
 
 ### Spreadsheet
 
-When the [`Html()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetrowcellbuilder#htmlsystemboolean) configuration option of the [spreadsheet]({% slug htmlhelpers_spreadsheet_aspnetcore %}) is set to `true`, or the client-side [`html` method](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/html) is used, the user is allowed to input HTML. {% if site.core %} When using the TagHelper implementaion of the component, enable the cell `html` attribute.{% endif %} In such scenarios, it is important to sanitize cell values on the server to ensure only safe html is passed.
+When the [`Html()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetrowcellbuilder#htmlsystemboolean) configuration option of the [spreadsheet]({% slug htmlhelpers_spreadsheet_aspnetcore %}) is set to `true`, or the client-side [`html` method](https://docs.telerik.com/kendo-ui/api/spreadsheet/range/methods/html) is used, the user is allowed to input HTML. {% if site.core %} When using the TagHelper implementaion of the component, enable the cell `html` attribute.{% endif %} In such scenarios, it is important to sanitize cell values on the server to ensure only safe html is passed.
 
 ```HtmlHelper
     @(Html.Kendo().Spreadsheet()
@@ -253,7 +253,7 @@ The anti-forgery tokens are used to ensure that a form or a request has been sub
         Html.AntiForgeryToken()
     ```
 
-1. Send the token to the server-side by using the transport.data option of the DataSource. The [`kendo.antiforgerytokens`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/antiforgerytokens) method returns an object that contains common CSRF tokens that are found on the page.
+1. Send the token to the server-side by using the transport.data option of the DataSource. The [`kendo.antiforgerytokens`](https://docs.telerik.com/kendo-ui/api/kendo/methods/antiforgerytokens) method returns an object that contains common CSRF tokens that are found on the page.
 
 
     ```Razor

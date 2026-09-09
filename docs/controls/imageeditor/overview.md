@@ -26,4 +26,4 @@ The ImageEditor utilizes a canvas element and enables image editing. It allows y
 
 * [Overview of the ImageEditor functionality (Demo)](https://demos.telerik.com/kendo-ui/imageeditor/index)
 * [Using the API of the ImageEditor (Demo)](https://demos.telerik.com/kendo-ui/imageeditor/api)
-* [JavaScript API Reference of the ImageEditor](/api/javascript/ui/imageeditor)
+* [JavaScript API Reference of the ImageEditor](/api/ui/imageeditor)

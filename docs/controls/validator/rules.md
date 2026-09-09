@@ -125,7 +125,7 @@ The Kendo Validator supports the following HTML5 validation rules.
     </script>
 ```
 
-* The `date` rule constrains the value to a valid date format. To validate the input, use [`kendo.parseDate`](/api/javascript/kendo/methods/parsedate). Input elements of type `<input type="date" name="date" />` and `<input data-type="date" name="date" />`are supported.
+* The `date` rule constrains the value to a valid date format. To validate the input, use [`kendo.parseDate`](/api/kendo/methods/parsedate). Input elements of type `<input type="date" name="date" />` and `<input data-type="date" name="date" />`are supported.
 
 ```dojo
     <form class="myValidator">
@@ -155,7 +155,7 @@ The Kendo Validator supports the following HTML5 validation rules.
 
 ## Custom Rules
 
-You can set custom rules with the Validator by using its [`rules` configuration option](/api/javascript/ui/validator/configuration/rules).
+You can set custom rules with the Validator by using its [`rules` configuration option](/api/ui/validator/configuration/rules).
 
 When you implement your custom validation rules, consider the following specifics:
 
@@ -178,7 +178,7 @@ When you implement your custom validation rules, consider the following specific
 
 ## Custom Messages
 
-By default, the Validator provides built-in messages which map to built-in validation rules. However, the widget also allows you to define custom messages which override the built-in messages. You can set the validation messages for Kendo Validator by using its [`messages` configuration option](/api/javascript/ui/validator/configuration/messages)
+By default, the Validator provides built-in messages which map to built-in validation rules. However, the widget also allows you to define custom messages which override the built-in messages. You can set the validation messages for Kendo Validator by using its [`messages` configuration option](/api/ui/validator/configuration/messages)
 
 > For the custom error messages to work properly, you are required to set a `name` attribute to the `input` element.
 
@@ -294,4 +294,4 @@ Validation messages can also be defined for custom rules.
 ## See Also
 
 * [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
-* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
+* [JavaScript API Reference of the Validator](/api/ui/validator)

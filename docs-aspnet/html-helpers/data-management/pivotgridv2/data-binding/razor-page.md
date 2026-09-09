@@ -83,7 +83,7 @@ The following example demonstrates how to configure the PivotGridV2 DataSource f
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the PivotGridV2](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgridv2)
+* [Client-Side API of the PivotGridV2](https://docs.telerik.com/kendo-ui/api/ui/pivotgridv2)
 * [Server-Side HtmlHelper API of the PivotGridV2](/api/pivotgridv2)
 * [Server-Side TagHelper API of the PivotGridV2](/api/taghelpers/pivotgridv2)
 * [Knowledge Base Section](/knowledge-base)

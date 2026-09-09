@@ -32,9 +32,9 @@ How do I expand only the first item on page load in the Telerik UI for {{ site.f
 To achieve the desired results:
 
 1. Set the TreeList [`AutoBind()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/treelistbuilder#autobindsystemboolean) property explicitly to `false`.
-1. Make a read request (the custom call which will return the initial data) by using the client-side dataSource's [`read()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/read) method.
-1. Use the client-side TreeListDataSource's [`load()`](https://docs.telerik.com/kendo-ui/api/javascript/data/treelistdatasource/methods/load) method to load the root.
-1. To expand only the items which are in the view, use the client-side [`expand()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/expand) method - this will not make a request for non-loaded items.
+1. Make a read request (the custom call which will return the initial data) by using the client-side dataSource's [`read()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/read) method.
+1. Use the client-side TreeListDataSource's [`load()`](https://docs.telerik.com/kendo-ui/api/data/treelistdatasource/methods/load) method to load the root.
+1. To expand only the items which are in the view, use the client-side [`expand()`](https://docs.telerik.com/kendo-ui/api/ui/treelist/methods/expand) method - this will not make a request for non-loaded items.
 
 
 ```Razor Index.cshtml
@@ -145,7 +145,7 @@ To achieve the desired results:
 
 ## See Also
 
-* [Client-Side API Reference of the TreeList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [Client-Side API Reference of the TreeList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/treelist)
 * [Server-Side API Reference of the TreeList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/treelist)
 * [Server-Side TagHelper API Reference of the TreeList for {{ site.framework }}](https://docs.telerik.com/aspnet-core/api/taghelpers/treelist)
 * [Telerik REPL: Load and expand only the first level data in the TreeList](https://netcorerepl.telerik.com/wxFEQyOL10jhfbhi36)

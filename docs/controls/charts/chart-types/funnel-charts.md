@@ -118,4 +118,4 @@ The following example demonstrates how to set equal height of all segments by di
 ## See Also
 
 * [Basic Usage of the Funnel Chart (Demo)](https://demos.telerik.com/kendo-ui/funnel-charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

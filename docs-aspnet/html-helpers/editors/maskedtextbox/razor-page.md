@@ -86,7 +86,7 @@ For the complete project, refer to the [MaskedTextBox in Razor Pages example](ht
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the MaskedTextBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox)
+* [Client-Side API of the MaskedTextBox](https://docs.telerik.com/kendo-ui/api/ui/maskedtextbox)
 * [Server-Side HtmlHelper API of the MaskedTextBox](/api/maskedtextbox)
 * [Server-Side TagHelper API of the MaskedTextBox](/api/taghelpers/maskedtextbox)
 * [Knowledge Base Section](/knowledge-base)

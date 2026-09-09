@@ -16,7 +16,7 @@ This article lists the breaking changes in the Kendo UI 2012 releases.
 
 **Cascading ComboBoxes/DropDownLists**
 
-The `parameterMap` of the child widget dataSource is called before the `change` event of the parent widget. Use the [`cascade`](/api/javascript/ui/combobox#cascade) event instead of the `change` event.
+The `parameterMap` of the child widget dataSource is called before the `change` event of the parent widget. Use the [`cascade`](/api/ui/combobox#cascade) event instead of the `change` event.
 
 **Telerik UI for ASP.NET MVC**
 

@@ -12,7 +12,7 @@ component: diagram
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -395,7 +395,7 @@ How to set font weight for connection labels in Kendo UI Diagram? Control and cu
 
 ### connectionDefaults.content.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -1134,7 +1134,7 @@ How to disable removing connections in Kendo UI diagram? Control whether users c
 
 ### connectionDefaults.editable.tools `Array`|`Boolean`
 
-Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar/configuration/items). If set to `false`, no edit tools will be displayed.
+Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/ui/toolbar/configuration/items). If set to `false`, no edit tools will be displayed.
 
 Predefined tools are:
 
@@ -1848,7 +1848,7 @@ How do I set the size of connection midpoint handles in a Kendo UI Diagram? Conf
 
 ### connectionDefaults.endCap `String|Object`
 
-The connections end cap configuration. Can be set to a configuration object or a string that represents the [endCap.type](/api/javascript/dataviz/ui/diagram/configuration/connectiondefaults.endcap#connectionDefaults.endCap.type) value.
+The connections end cap configuration. Can be set to a configuration object or a string that represents the [endCap.type](/api/dataviz/ui/diagram/configuration/connectiondefaults.endcap#connectionDefaults.endCap.type) value.
 
 
 <div class="meta-api-description">
@@ -4095,7 +4095,7 @@ How can I adjust the boldness of connection labels in a Kendo UI Diagram? Contro
 
 ### connections.content.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 
 <div class="meta-api-description">
@@ -4696,7 +4696,7 @@ How to enable interactive editing of connection shapes in Kendo UI diagram? Cont
 
 ### connections.editable.tools `Array`
 
-Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar/configuration/items). Predefined tools are:
+Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/ui/toolbar/configuration/items). Predefined tools are:
 
 * "edit" - The selected item can be edited
 * "delete" - The selected items can be deleted
@@ -7608,12 +7608,12 @@ Speifies the connection type, which defines the way it routes.
 
 The routing of a connection is the way intermediate points of a connection define a route. A route is usually defined on the basis of constraints or behaviors. Currently there are two routing mechanisms for Diagram connections:
 
-* polyline route - connects the defined intermediate points, see [connections.points](/api/javascript/dataviz/ui/diagram/configuration/connections.points).
+* polyline route - connects the defined intermediate points, see [connections.points](/api/dataviz/ui/diagram/configuration/connections.points).
 * cascading route - a simple rectangular route that creates a cascading path between the two ends of a connection, ignoring given connection points. The cascading type is useful when using tree layout and hierarchies. The routed connection will in this case enhance the representation of the hierarchy, reproducing a classic organization diagram.
 
 The available values for the `type` property are:
 
-* "polyline" - connects the defined intermediate points. See [connections.points](/api/javascript/dataviz/ui/diagram/configuration/connections.points).
+* "polyline" - connects the defined intermediate points. See [connections.points](/api/dataviz/ui/diagram/configuration/connections.points).
 * "cascading" - discards given points and defines a cascading path between the endpoints.
 
 
@@ -7853,7 +7853,7 @@ How do I set up data binding for diagram connections in Kendo UI? Configure, bin
 
 #### Example - setting the connectionsDataSource and dynamic labelling
 
-Note that the 'from' and 'to' fields in the connectionsDataSource refer to the 'id' of the dataSource. The label on the connection is set via the [connectionsDefaults.content.template](/api/javascript/dataviz/ui/diagram#configuration-connectionDefaults.content.template).
+Note that the 'from' and 'to' fields in the connectionsDataSource refer to the 'id' of the dataSource. The label on the connection is set via the [connectionsDefaults.content.template](/api/dataviz/ui/diagram#configuration-connectionDefaults.content.template).
 
     <div id="diagram"></div>
     <script>
@@ -8420,7 +8420,7 @@ How to customize shape resize handles in Kendo UI Diagram? Control and configure
 
 ### editable.resize.handles `Object`
 
-Specifies the settings of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the settings of the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8450,7 +8450,7 @@ How to customize the appearance of resize handles in Kendo UI Diagram? Control a
 
 ### editable.resize.handles.fill `String|Object`
 
-Specifies the fill settings of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the fill settings of the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8487,7 +8487,7 @@ How to customize the fill style of interactive resizing handles in Kendo UI Diag
 
 ### editable.resize.handles.fill.color `String`
 
-Specifies the fill color of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the fill color of the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8523,7 +8523,7 @@ How to change the color of resize handles in Kendo UI Diagram during editing mod
 
 ### editable.resize.handles.fill.opacity `Number` *(default: 1)*
 
-Specifies the fill opacity of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the fill opacity of the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8560,7 +8560,7 @@ How do I make resize handles in my Kendo UI diagram more transparent? Adjust the
 
 ### editable.resize.handles.height `Number`
 
-Specifies the height of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the height of the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8594,7 +8594,7 @@ How to adjust the height of resize handles in Kendo UI Diagram? Adjust or config
 
 ### editable.resize.handles.hover `Object`
 
-Specifies the settings of the resizing handles on hovering over them. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the settings of the resizing handles on hovering over them. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8637,7 +8637,7 @@ How can I customize the hover behavior of resize handles in a Kendo UI Diagram? 
 
 ### editable.resize.handles.hover.fill `String|Object`
 
-Specifies the fill settings on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the fill settings on hovering over the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8677,7 +8677,7 @@ How to customize hover fill color of resizable handles in Kendo UI diagram? Cont
 
 ### editable.resize.handles.hover.fill.color `String`
 
-Specifies the fill color on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the fill color on hovering over the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8715,7 +8715,7 @@ How to change the hover fill color of resize handles in a Kendo UI Diagram? Cust
 
 ### editable.resize.handles.hover.fill.opacity `Number` *(default: 1)*
 
-Specifies the fill opacity on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the fill opacity on hovering over the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8754,7 +8754,7 @@ How to change the fill color opacity when hovering over resize handles in a Kend
 
 ### editable.resize.handles.hover.stroke `Object`
 
-Specifies the stroke on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the stroke on hovering over the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8795,7 +8795,7 @@ How do I change the color of the hover border around Kendo UI diagram resize han
 
 ### editable.resize.handles.hover.stroke.color `String`
 
-Specifies the stroke color on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the stroke color on hovering over the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8833,7 +8833,7 @@ How to change the color of resizing handle hover stroke in a Kendo UI diagram? C
 
 ### editable.resize.handles.hover.stroke.dashType `String`
 
-Specifies the stroke dash type on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the stroke dash type on hovering over the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 The following dash types are supported:
 
@@ -8882,7 +8882,7 @@ How to customize the hover stroke pattern for resize handles in a Kendo UI diagr
 
 ### editable.resize.handles.hover.stroke.width `Number`
 
-Specifies the stroke color on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the stroke color on hovering over the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8921,7 +8921,7 @@ How do I adjust the stroke width of resizing handles in a Kendo UI Diagram when 
 
 ### editable.resize.handles.stroke `Object`
 
-Specifies the stroke of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the stroke of the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8960,7 +8960,7 @@ How to customize the appearance of resizing handles in Kendo UI Diagram? Configu
 
 ### editable.resize.handles.stroke.color `String`
 
-Specifies the stroke color of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the stroke color of the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -8996,7 +8996,7 @@ How to customize the border color of resizing handles in a Kendo UI diagram? Con
 
 ### editable.resize.handles.stroke.dashType `String`
 
-Specifies the stroke dash type of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the stroke dash type of the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 The following dash types are supported:
 
@@ -9043,7 +9043,7 @@ How to customize dash pattern of resize handles in Kendo UI Diagram? Customize a
 
 ### editable.resize.handles.stroke.width `Number`
 
-Specifies the stroke thickness of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the stroke thickness of the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -9080,7 +9080,7 @@ How do I change the thickness of resize handles in a Kendo UI Diagram? Adjust th
 
 ### editable.resize.handles.width `Number`
 
-Specifies the width of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+Specifies the width of the resizing handles. See the [editable.resize](/api/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 <div class="meta-api-description">
@@ -9533,7 +9533,7 @@ How do I customize the editing interface for Kendo UI Diagram shapes? Configure 
 
 ### editable.tools `Array`
 
-Specifies the toolbar tools. Supports all options supported by the [toolbar.items](/api/javascript/ui/toolbar/configuration/items) property. Predefined tools are:
+Specifies the toolbar tools. Supports all options supported by the [toolbar.items](/api/ui/toolbar/configuration/items) property. Predefined tools are:
 
 * "edit" - The selected item can be edited.
 * "createShape" - Adds an empty shape data item and a popup window is displayed.
@@ -10243,7 +10243,7 @@ How do I customize the layout of nodes in a Kendo UI diagram with directional fl
 
 ### layout.tipOverTreeStartLevel `Number` *(default: 0)*
 
-Specifies the start level when the [subtype](/api/javascript/dataviz/ui/diagram#configuration-layout.subtype) is `tipOver`.
+Specifies the start level when the [subtype](/api/dataviz/ui/diagram#configuration-layout.subtype) is `tipOver`.
 
 
 <div class="meta-api-description">
@@ -10602,7 +10602,7 @@ How to enable drag-to-pan interaction in Kendo UI Diagram? Enable or disable dra
 
 ### pannable.key `String` *(default: "ctrl")*
 
-Defines the meta key that will be used while panning the Diagram. To avoid clashes, verify that the `pannable.key` and [`selectable.key`](/api/javascript/dataviz/ui/diagram#configuration-selectable.key) options are different. The available values are:
+Defines the meta key that will be used while panning the Diagram. To avoid clashes, verify that the `pannable.key` and [`selectable.key`](/api/dataviz/ui/diagram#configuration-selectable.key) options are different. The available values are:
 
 * "none" - No activation key
 * "ctrl" - The activation key will be `Ctrl`
@@ -10691,7 +10691,7 @@ How do I configure the activation key for panning in Kendo UI Diagram? Control a
 
 ### pdf `Object`
 
-Configures the export settings for the [`saveAsPDF`](/api/javascript/dataviz/ui/diagram/methods/saveaspdf) method.
+Configures the export settings for the [`saveAsPDF`](/api/dataviz/ui/diagram/methods/saveaspdf) method.
 
 
 <div class="meta-api-description">
@@ -10850,7 +10850,7 @@ How to customize the PDF file name when exporting a Kendo UI diagram? Specify or
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 
-If set to `true`, the exported content is forwarded to the endpoint specified using the [`proxyURL`](/api/javascript/dataviz/ui/diagram#configuration-pdf.proxyURL) setting, even if the browser supports saving of files in the user's local file system.
+If set to `true`, the exported content is forwarded to the endpoint specified using the [`proxyURL`](/api/dataviz/ui/diagram#configuration-pdf.proxyURL) setting, even if the browser supports saving of files in the user's local file system.
 
 
 <div class="meta-api-description">
@@ -10908,7 +10908,7 @@ How do I customize metadata keywords in Kendo UI Diagram PDF exports? Set or con
 
 ### pdf.landscape `Boolean` *(default: false)*
 
-If set to `true`, changes the document orientation to landscape. This property takes effect when [pdf.paperSize](/api/javascript/dataviz/ui/diagram/configuration/pdf.papersize) is set.
+If set to `true`, changes the document orientation to landscape. This property takes effect when [pdf.paperSize](/api/dataviz/ui/diagram/configuration/pdf.papersize) is set.
 
 
 <div class="meta-api-description">
@@ -11284,7 +11284,7 @@ How to enable multi-select in Kendo UI Diagram? Control and customize shape sele
 
 ### selectable.key `String` *(default: "none")*
 
-Defines the meta key when doing a visual selection through drawing a rectangular area around shapes in the canvas. This option does not change the way a single shape is selected when using click or tap. To avoid clashes, verify that the `selectable.key` and [`pannable.key`](/api/javascript/dataviz/ui/diagram#configuration-pannable.key) are different. The available values are:
+Defines the meta key when doing a visual selection through drawing a rectangular area around shapes in the canvas. This option does not change the way a single shape is selected when using click or tap. To avoid clashes, verify that the `selectable.key` and [`pannable.key`](/api/dataviz/ui/diagram#configuration-pannable.key) are different. The available values are:
 
 * "none" - No activation key, visual selection is disabled.
 * "ctrl" - The activation key will be `Ctrl`.
@@ -13298,7 +13298,7 @@ How to make shape text bold in Kendo UI Diagram? Control the text boldness or th
 
 ### shapeDefaults.content.template `String|Function`
 
-The [`template`](/api/javascript/kendo/methods/template) which renders the labels.
+The [`template`](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -13914,7 +13914,7 @@ How to allow users to remove shapes in a Kendo UI Diagram? Enable or disable the
 
 ### shapeDefaults.editable.tools `Array`|`Boolean`
 
-Specifies the toolbar tools. Provides all options that are supported for [`toolbar.items`](/api/javascript/ui/toolbar/configuration/items). If set to `false`, no edit tools will be displayed.
+Specifies the toolbar tools. Provides all options that are supported for [`toolbar.items`](/api/ui/toolbar/configuration/items). If set to `false`, no edit tools will be displayed.
 
 The predefined tools are:
 
@@ -15337,14 +15337,14 @@ How do I set the default shape type in Kendo UI Diagram? Configure default drawi
 
 A function that returns a visual element to render for a given shape. The following primitives can be used to construct a composite visual:
 
-* [Circle](/api/javascript/dataviz/diagram/circle)
-* [Rectangle](/api/javascript/dataviz/diagram/rectangle)
-* [Path](/api/javascript/dataviz/diagram/path)
-* [Line](/api/javascript/dataviz/diagram/line)
-* [Polyline](/api/javascript/dataviz/diagram/polyline)
-* [TextBlock](/api/javascript/dataviz/diagram/text_block)
-* [Image](/api/javascript/dataviz/diagram/image)
-* [Layout](/api/javascript/dataviz/diagram/layout)
+* [Circle](/api/dataviz/diagram/circle)
+* [Rectangle](/api/dataviz/diagram/rectangle)
+* [Path](/api/dataviz/diagram/path)
+* [Line](/api/dataviz/diagram/line)
+* [Polyline](/api/dataviz/diagram/polyline)
+* [TextBlock](/api/dataviz/diagram/text_block)
+* [Image](/api/dataviz/diagram/image)
+* [Layout](/api/dataviz/diagram/layout)
 
 > The origin of the visual bounding box has to be `(0, 0)`. If you have a complex path which coordinates cannot be easily adjusted, then position the element as demonstrated in [this](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/adjust-path-origin) example.
 
@@ -17892,7 +17892,7 @@ How to enable connection editing in Kendo UI Diagram shapes? Control the ability
 
 ### shapes.editable.tools `Array`
 
-Specifies the toolbar tools. Provides all options supported for [`toolbar.items`](/api/javascript/ui/toolbar/configuration/items). The predefined tools are:
+Specifies the toolbar tools. Provides all options supported for [`toolbar.items`](/api/ui/toolbar/configuration/items). The predefined tools are:
 
 * "edit" - The selected item can be edited.
 * "delete" - The selected items can be deleted.
@@ -18824,7 +18824,7 @@ How to change the fill opacity when hovering over shapes in a Kendo UI diagram? 
 
 ### shapes.id `String`
 
-The unique identifier for a Shape. The `id` value is used to identify shapes in connection configurations. The connection [`to`](/api/javascript/dataviz/ui/diagram/configuration/connections.to) and [`from`](/api/javascript/dataviz/ui/diagram/configuration/connections.from#connections.from) properties usually point to shape id values.
+The unique identifier for a Shape. The `id` value is used to identify shapes in connection configurations. The connection [`to`](/api/dataviz/ui/diagram/configuration/connections.to) and [`from`](/api/dataviz/ui/diagram/configuration/connections.from#connections.from) properties usually point to shape id values.
 
 
 <div class="meta-api-description">
@@ -18895,7 +18895,7 @@ How do I set a minimum height limit for shapes in Kendo UI Diagram? Set or confi
 
 ### shapes.minWidth `Number` *(default: 20)*
 
-Defines the minimum width the shape should have, that is, it cannot be resized to a value smaller than the given one. See example at [shapes.minHeight](/api/javascript/dataviz/ui/diagram/configuration/shapes.minheight).
+Defines the minimum width the shape should have, that is, it cannot be resized to a value smaller than the given one. See example at [shapes.minHeight](/api/dataviz/ui/diagram/configuration/shapes.minheight).
 
 
 <div class="meta-api-description">
@@ -19364,14 +19364,14 @@ A function returning a visual element to render for this shape.
 
 The following primitives can be used to construct a composite visual:
 
-* [Circle](/api/javascript/dataviz/diagram/circle)
-* [Rectangle](/api/javascript/dataviz/diagram/rectangle)
-* [Path](/api/javascript/dataviz/diagram/path)
-* [Line](/api/javascript/dataviz/diagram/line)
-* [Polyline](/api/javascript/dataviz/diagram/polyline)
-* [TextBlock](/api/javascript/dataviz/diagram/text_block)
-* [Image](/api/javascript/dataviz/diagram/image)
-* [Layout](/api/javascript/dataviz/diagram/layout)
+* [Circle](/api/dataviz/diagram/circle)
+* [Rectangle](/api/dataviz/diagram/rectangle)
+* [Path](/api/dataviz/diagram/path)
+* [Line](/api/dataviz/diagram/line)
+* [Polyline](/api/dataviz/diagram/polyline)
+* [TextBlock](/api/dataviz/diagram/text_block)
+* [Image](/api/dataviz/diagram/image)
+* [Layout](/api/dataviz/diagram/layout)
 
 > The origin of the visual bounding box has to be `(0, 0)`. If you have a complex path which coordinates cannot be easily adjusted, then position the element as demonstrated in [this](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/adjust-path-origin) example.
 
@@ -19527,7 +19527,7 @@ How to set the initial x-coordinate of shapes in a Kendo UI diagram? Set or adju
 
 ### shapes.y `Number` *(default: 0)*
 
-Defines the y-coordinate of the shape when added to the Diagram. Does not take effect if the Diagram is using a pre-defined layout. You can see an example at [shapes.x](/api/javascript/dataviz/ui/diagram/configuration/shapes.x)
+Defines the y-coordinate of the shape when added to the Diagram. Does not take effect if the Diagram is using a pre-defined layout. You can see an example at [shapes.x](/api/dataviz/ui/diagram/configuration/shapes.x)
 
 
 <div class="meta-api-description">
@@ -19670,7 +19670,7 @@ How do I set an ARIA label for a specific Kendo UI Diagram shape? Configure the 
 
 ### template `String|Function` *(default: "")*
 
-The [`template`](/api/javascript/kendo/methods/template) which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. For an example, refer to the dataSource topic below.
+The [`template`](/api/kendo/methods/template) which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. For an example, refer to the dataSource topic below.
 
 
 <div class="meta-api-description">
@@ -19972,7 +19972,7 @@ How do I set the maximum zoom level for my Kendo UI diagram? Control the highest
 
 ### zoomMin `Number` *(default: 0.1)*
 
-The minimum zoom level in percentages. The user will not be allowed to zoom out past this level. You can see an example in [zoomMax](/api/javascript/dataviz/ui/diagram/configuration/zoommin).
+The minimum zoom level in percentages. The user will not be allowed to zoom out past this level. You can see an example in [zoomMax](/api/dataviz/ui/diagram/configuration/zoommin).
 
 
 <div class="meta-api-description">
@@ -20766,7 +20766,7 @@ The target definition of the connection. This can be a Shape, a Connector or a P
 
 ##### options `Object`
 
-The options of the new connection. See [connections](/api/javascript/dataviz/ui/diagram#configuration-connections) options.
+The options of the new connection. See [connections](/api/dataviz/ui/diagram#configuration-connections) options.
 
 #### Example - connecting two shapes using the Auto-connector
 
@@ -21611,10 +21611,10 @@ A diagram item to edit.
 ### exportImage
 
 Exports the diagram content as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The full content of the diagram will be exported in 1:1 scale.
-If exporting the current view is desired then the [kendo.drawing.drawDOM](/api/javascript/drawing/methods/drawdom)
+If exporting the current view is desired then the [kendo.drawing.drawDOM](/api/drawing/methods/drawdom)
 method should be called on a container element.
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
@@ -21683,7 +21683,7 @@ for more details.
 ### exportPDF
 
 Exports the diagram content as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -21733,10 +21733,10 @@ Parameters for the exported PDF file.
 ### exportSVG
 
 Exports the diagram content as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The full content of the diagram will be exported in 1:1 scale.
-If exporting the current view is desired then the [kendo.drawing.drawDOM](/api/javascript/drawing/methods/drawdom)
+If exporting the current view is desired then the [kendo.drawing.drawDOM](/api/drawing/methods/drawdom)
 method should be called on a container element.
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
@@ -22298,7 +22298,7 @@ How can I automatically reposition nodes in my Kendo UI Diagram after editing gr
 
 ##### options `Object`
 
-The layout options. See [options.layout](/api/javascript/dataviz/ui/diagram#configuration-layout) for a full reference.
+The layout options. See [options.layout](/api/dataviz/ui/diagram#configuration-layout) for a full reference.
 
 #### Example - apply a layout dynamically
 

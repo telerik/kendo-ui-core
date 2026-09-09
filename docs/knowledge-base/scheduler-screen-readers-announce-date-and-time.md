@@ -27,7 +27,7 @@ How can I generate the `aria-label` to make the screen readers announce both the
 
 ## Solution
 
-Modify the `aria-label` attribute of the currently selected Scheduler slot by handling the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/change) event of the Scheduler.
+Modify the `aria-label` attribute of the currently selected Scheduler slot by handling the [`change`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/events/change) event of the Scheduler.
 
 ```js
 change: function(e) {
@@ -133,4 +133,4 @@ The following example demonstrates the implementation of the suggested approach.
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

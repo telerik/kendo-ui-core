@@ -188,4 +188,4 @@ The horizontal mode does not support alternating rendering and collapsing of eve
 ## See Also
 
 * [Horizontal Orientation of the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/horizontal)
-* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)
+* [JavaScript API Reference of the Timeline](/api/ui/timeline)

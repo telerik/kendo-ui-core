@@ -92,4 +92,4 @@ In this case, the establishment of a connection to the service and the binding o
 ## See Also
 
 * [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
-* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
+* [JavaScript API Reference of the Chat](/api/ui/chat)

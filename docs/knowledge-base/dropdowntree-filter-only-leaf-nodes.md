@@ -81,4 +81,4 @@ How can I perform filtering only on the leaf nodes of Kendo DropDownTree?
 
 ## See Also
 
-* [API Reference of the DropDownTree](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree).
+* [API Reference of the DropDownTree](https://docs.telerik.com/kendo-ui/api/ui/dropdowntree).

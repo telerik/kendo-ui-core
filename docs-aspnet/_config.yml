@@ -1377,8 +1377,8 @@ defaults:
         title_prefix: "ASP.NET Core Template Component"
 
 type_links:
-    "kendo.Class": "/api/javascript/class"
-    "kendo.data.DataSource": "/api/javascript/data/datasource"
+    "kendo.Class": "/api/class"
+    "kendo.data.DataSource": "/api/data/datasource"
     "Array": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
     "Blob": "https://developer.mozilla.org/en/docs/Web/API/Blob"
     "File": "https://developer.mozilla.org/en-US/docs/Web/API/File"

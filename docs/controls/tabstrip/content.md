@@ -38,8 +38,8 @@ By default, the content containers of the TabStrip are scrollable. As a result, 
 
 Depending on the browser, the scroll position of the content may be reset upon changing the active tab. To persist the scroll position:
 
-1. Use the [`select`](/api/javascript/ui/tabstrip/events/select) event to save the current scroll position.
-1. Use the [`activate`](/api/javascript/ui/tabstrip/events/activate) event to restore it.
+1. Use the [`select`](/api/ui/tabstrip/events/select) event to save the current scroll position.
+1. Use the [`activate`](/api/ui/tabstrip/events/activate) event to restore it.
 
 For a complete example, refer to the article on [saving the scroll position of the TabStrip content](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/save-content-scroll-position).
 
@@ -47,4 +47,4 @@ For a complete example, refer to the article on [saving the scroll position of t
 
 * [Loading TabStrip Content with AJAX (Demo)](https://demos.telerik.com/kendo-ui/tabstrip/ajax)
 * [Scrollable Tabs in TabStrip (Demo)](https://demos.telerik.com/kendo-ui/tabstrip/scrollable-tabs)
-* [JavaScript API Reference of the TabStrip](/api/javascript/ui/tabstrip)
+* [JavaScript API Reference of the TabStrip](/api/ui/tabstrip)

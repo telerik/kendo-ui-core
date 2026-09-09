@@ -52,7 +52,7 @@ To replicate the [**ColumnMenu** demo](https://demos.telerik.com/kendo-ui/grid/c
 
 The described behavior is expected because when the filter has to be removed, the user is expected to click the **Clear** button next to the **Filter** button.
 
-In this scenario, use the [`ColumnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event to attach an event handler to the **Filter** button and, if the value of the text box is an empty string, to clear the filters with the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method.
+In this scenario, use the [`ColumnMenuInit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnmenuinit) event to attach an event handler to the **Filter** button and, if the value of the text box is an empty string, to clear the filters with the [`filter`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/filter) method.
 
 ```dojo
 <div id="example">

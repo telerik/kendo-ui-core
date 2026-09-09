@@ -27,4 +27,4 @@ The CircularProgressBar delivers functionality for displaying and tracking the p
  
 * [CircularProgressBar Basic Usage (Demo)](https://demos.telerik.com/kendo-ui/circularprogressbar/basic-usage)
 * [Applying the CircularProgressBar API (Demo)](https://demos.telerik.com/kendo-ui/circularprogressbar/api)
-* [JavaScript API Reference of the CircularProgressBar](/api/javascript/ui/circularprogressbar)
+* [JavaScript API Reference of the CircularProgressBar](/api/ui/circularprogressbar)

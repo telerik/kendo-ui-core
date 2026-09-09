@@ -32,7 +32,7 @@ To enable PDF export in the Diagram:
 
 1. Include the Pako Deflate library in the page to enable compression.
 
-To enable PDF export in the Diagram through code, call the [`saveAsPdf`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram/methods/saveaspdf) method.
+To enable PDF export in the Diagram through code, call the [`saveAsPdf`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/diagram/methods/saveaspdf) method.
 
 ```HtmlHelper
 

@@ -26,7 +26,7 @@ How can I do that?
 
 ## Solution
 
-1. Handle the [`databound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/databound) event of the Scheduler.
+1. Handle the [`databound`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/events/databound) event of the Scheduler.
 1. Find each third cell in the first column and hide it.
 1. Find each third row in the Scheduler content and change its background color.
 
@@ -134,4 +134,4 @@ How can I do that?
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

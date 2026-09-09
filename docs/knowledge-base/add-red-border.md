@@ -156,5 +156,5 @@ The following example demonstrates how to achieve this behavior and add a red bo
 ## See Also
 
 * [Basic Usage of the jQuery Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
-* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
+* [JavaScript API Reference of the Validator](/api/ui/validator)
 * [Product Page of the Validator](https://www.telerik.com/kendo-jquery-ui/validator)

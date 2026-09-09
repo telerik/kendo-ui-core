@@ -35,4 +35,4 @@ To enable the popup or inline edit mode:
 ## See Also
 
 * [Popup Editing in the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/editing-popup)
-* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)
+* [TreeList JavaScript API Reference](/api/ui/treelist)

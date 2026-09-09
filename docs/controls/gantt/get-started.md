@@ -194,7 +194,7 @@ Among other functionalities, the Gantt supports editing and filtering. The editi
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Gantt](/api/javascript/ui/gantt)
+* [JavaScript API Reference of the jQuery Gantt](/api/ui/gantt)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -46,7 +46,7 @@ In this step, you will initialize the RadioButton from the `<input>` element. Al
 
 ## 3. Add a Label for the RadioButton
 
-Next, you can add a label next to the RadioButton by using the [`label`](/api/javascript/ui/radiobutton/configuration/label) option.
+Next, you can add a label next to the RadioButton by using the [`label`](/api/ui/radiobutton/configuration/label) option.
 
 ```html
    <input type="radio" id="radiobutton">
@@ -80,7 +80,7 @@ The RadioButton component allows you to define whether it will be enabled or dis
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery RadioButton](/api/javascript/ui/radiobutton)
+* [JavaScript API Reference of the jQuery RadioButton](/api/ui/radiobutton)
 * [Knowledge Base Section](/knowledge-base)
 
 

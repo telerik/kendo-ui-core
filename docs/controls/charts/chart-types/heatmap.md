@@ -78,7 +78,7 @@ The default marker type of a Heatmap is `rect`. You can change this value by usi
 The available built-in options are:
 
 - `rect`—The markers appear as rectangles.
-- `roundedRect`—The markers appear as rounded rectangles with a configurable [border radius](/api/javascript/dataviz/ui/chart/configuration/series.markers.borderRadius).
+- `roundedRect`—The markers appear as rounded rectangles with a configurable [border radius](/api/dataviz/ui/chart/configuration/series.markers.borderRadius).
 - `circle`—The markers appear as circles.
 - `triangle`—The markers appear as triangles.
 
@@ -92,4 +92,4 @@ The following image shows a sample Heatmap with circular markers.
 
 * [Overview of the Heatmap (Demo)](https://demos.telerik.com/kendo-ui/heatmap/index)
 * [Heatmap Markers (Demo)](https://demos.telerik.com/kendo-ui/heatmap/markers)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

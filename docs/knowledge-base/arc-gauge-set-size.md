@@ -108,5 +108,5 @@ If static dimensions are sufficient for your case and you prefer to set them in 
 ## See Also
 
 * [Overview of the jQuery ArcGauge](https://demos.telerik.com/kendo-ui/arc-gauge/index)
-* [JavaScript API Reference of the jQuery ArcGauge](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge)
+* [JavaScript API Reference of the jQuery ArcGauge](https://docs.telerik.com/kendo-ui/api/dataviz/ui/arcgauge)
 * [Product Page of the ArcGauge](https://www.telerik.com/kendo-jquery-ui/arcgauge)

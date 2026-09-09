@@ -8,7 +8,7 @@ component: expansionpanel
 
 # kendo.ui.ExpansionPanel
 
-Represents the Kendo UI ExpansionPanel widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ExpansionPanel widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

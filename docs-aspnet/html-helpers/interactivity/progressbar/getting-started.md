@@ -105,7 +105,7 @@ The ProgressBar exposes [events](/api/kendo.mvc.ui.fluent/progressbareventbuilde
 
 ## (Optional) Reference Existing ProgressBar Instances
 
-Referencing existing component instances allows you to build on top of their configuration. To reference an existing ProgressBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [ProgressBar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
+Referencing existing component instances allows you to build on top of their configuration. To reference an existing ProgressBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [ProgressBar client-side API](https://docs.telerik.com/kendo-ui/api/ui/scheduler#methods) to control its behavior.
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
@@ -115,7 +115,7 @@ Referencing existing component instances allows you to build on top of their con
     </script>
     ```
 
-1. Use the [ProgressBar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar#methods) to control the behavior of the widget. In this example, you will see how to adjust the value of ProgressBar programmatically.
+1. Use the [ProgressBar client-side API](https://docs.telerik.com/kendo-ui/api/ui/progressbar#methods) to control the behavior of the widget. In this example, you will see how to adjust the value of ProgressBar programmatically.
 
     ```JS script
         <script>
@@ -143,6 +143,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the ProgressBar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/progressbar/api)
-* [Client-Side API of the ProgressBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar)
+* [Client-Side API of the ProgressBar](https://docs.telerik.com/kendo-ui/api/ui/progressbar)
 * [Server-Side API of the ProgressBar](/api/progressbar)
 * [Knowledge Base Section](/knowledge-base)

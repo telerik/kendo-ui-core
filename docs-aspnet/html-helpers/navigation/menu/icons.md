@@ -190,7 +190,7 @@ You can define the position of the icons in the Menu items by using the `IconPos
 ## See Also
 
 * [Using the API of the Menu for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/api)
-* [Client-Side API of the Menu](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+* [Client-Side API of the Menu](https://docs.telerik.com/kendo-ui/api/ui/menu)
 * [Server-Side API of the Menu](/api/menu)
 {% if site.core %}
 * [Server-Side API of the Menu TagHelper](/api/taghelpers/menu)

@@ -62,4 +62,4 @@ The following example demonstrates how to load a PanelBar item content asynchron
 ## See Also
 
 * [Loading Content with AJAX in the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/ajax)
-* [JavaScript API Reference of the PanelBar](/api/javascript/ui/panelbar)
+* [JavaScript API Reference of the PanelBar](/api/ui/panelbar)

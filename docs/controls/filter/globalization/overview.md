@@ -18,4 +18,4 @@ For more information on using localization, internationalization, and right-to-l
 ## See Also
 
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the Filter](/api/javascript/ui/filter)
+* [JavaScript API Reference of the Filter](/api/ui/filter)

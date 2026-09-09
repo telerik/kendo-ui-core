@@ -100,4 +100,4 @@ The following example demonstrates how to add and render a checkbox column bound
 
 * [Basic Usage of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/index)
 * [Using the API of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/api)
-* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)
+* [TreeList JavaScript API Reference](/api/ui/treelist)

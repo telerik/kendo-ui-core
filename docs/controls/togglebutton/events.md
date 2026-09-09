@@ -9,7 +9,7 @@ position: 7
 
 # Events
 
-The ToggleButton exposes a [`toggle`](https://docs.telerik.com/kendo-ui/api/javascript/ui/togglebutton/events/toggle) event that you can handle when the selected state is altered. 
+The ToggleButton exposes a [`toggle`](https://docs.telerik.com/kendo-ui/api/ui/togglebutton/events/toggle) event that you can handle when the selected state is altered. 
 
 For a complete example on basic ToggleButton events, refer to the [demo on using the events of the ToggleButton](https://demos.telerik.com/kendo-ui/togglebutton/events).
 
@@ -42,4 +42,4 @@ The following example demonstrates how to subscribe to the `toggle` event.
 ## See Also
 
 * [Using the API of the ToggleButton widget for Kendo UI for jQuery (Demo)](https://demos.telerik.com/kendo-ui/togglebutton/api)
-* [ToggleButton Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/togglebutton)
+* [ToggleButton Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/togglebutton)

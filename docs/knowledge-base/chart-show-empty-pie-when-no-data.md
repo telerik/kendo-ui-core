@@ -33,7 +33,7 @@ When my dataset is empty the pie chart is not showing. I want to show a blank pi
 We have a [how-to article]({% slug howto_showemptymessage_whencharthasnodata_charts %}) which shows a similar case - when there is no data, an overlay is displayed.
 
 1. Modify the article above to use a circle with some text in using any CSS styles to alter it.
-1. Add a handler to the `dataBound` event of the chart and check if there is any data(the article uses the data source [`view()`](/api/javascript/data/datasource/methods/view) method).
+1. Add a handler to the `dataBound` event of the chart and check if there is any data(the article uses the data source [`view()`](/api/data/datasource/methods/view) method).
 1. If there is data, hide the overlay:
 
     ```

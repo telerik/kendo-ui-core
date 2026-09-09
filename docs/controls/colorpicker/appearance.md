@@ -25,7 +25,7 @@ The Kendo UI ColorPicker supports the following styling options:
 
 The `size` option controls how big or small the ColorPicker component looks. The structure of the class is `k-picker-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/colorpicker/configuration/size) option:
+The following values are available for the [`size`](/api/ui/colorpicker/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -57,7 +57,7 @@ Below is the HTML that is affected from the configuration. The changes are appli
 
 The `rounded` option controls how much border radius is applied to the tags for the selected items in the component. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/colorpicker/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/colorpicker/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -89,7 +89,7 @@ The changes are applied to the `span.k-colorpicker` wrapping element:
 
 The `fillMode` option controls how the color is applied. The structure of the class is `k-picker-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/colorpicker/configuration/fillMode) option:
+The following values are available for the [`fillMode`](/api/ui/colorpicker/configuration/fillMode) option:
 
 - `solid`
 - `flat`
@@ -122,4 +122,4 @@ The changes are applied to the `span.k-colorpicker` wrapping element:
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/appearance)
-* [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
+* [JavaScript API Reference of the ColorPicker](/api/ui/colorpicker)

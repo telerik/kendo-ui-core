@@ -113,7 +113,7 @@ The following example demonstrates how to create a [custom MVVM binding](/framew
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)
 * [Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})

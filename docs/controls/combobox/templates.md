@@ -132,4 +132,4 @@ The ComboBox displays the `noDataTemplate` in the popup when the data source is 
 ## See Also
 
 * [Customizing Templates in the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/template)
-* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [JavaScript API Reference of the ComboBox](/api/ui/combobox)

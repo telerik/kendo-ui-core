@@ -65,7 +65,7 @@ In this step, you will initialize the Dialog from the `<div>` element. When you 
 
 ## 3. Render Action Buttons
 
-The Dialog enables you to render action buttons for the user under its content by setting its [`action`](/api/javascript/ui/dialog/configuration/actions) configuration.
+The Dialog enables you to render action buttons for the user under its content by setting its [`action`](/api/ui/dialog/configuration/actions) configuration.
 
 ```html
     <div id="dialog"></div>
@@ -85,7 +85,7 @@ The Dialog enables you to render action buttons for the user under its content b
 
 ## 4. Add Open and Close Animations
 
-The Dialog enables you to change the default open and close [`animations`](/api/javascript/ui/dialog/configuration/animation) of the component.
+The Dialog enables you to change the default open and close [`animations`](/api/ui/dialog/configuration/animation) of the component.
 
 ```html
     <div id="dialog"></div>
@@ -113,7 +113,7 @@ The Dialog enables you to change the default open and close [`animations`](/api/
 
 ## 5. Show the Dialog on Button Click
 
-You can use the [`open`](/api/javascript/ui/dialog/methods/open) method of the Dialog to programmatically show the component.
+You can use the [`open`](/api/ui/dialog/methods/open) method of the Dialog to programmatically show the component.
 
 ```javascript
     $("#dialog").data("kendoDialog").open();
@@ -126,6 +126,6 @@ You can use the [`open`](/api/javascript/ui/dialog/methods/open) method of the D
 
 ## See Also 
 
-* [JavaScript API Reference of the jQuery Dialog](/api/javascript/ui/dialog)
+* [JavaScript API Reference of the jQuery Dialog](/api/ui/dialog)
 * [Knowledge Base Section](/knowledge-base)
 

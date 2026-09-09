@@ -180,4 +180,4 @@ To use this approach mobile devices (touch screens) you need to use the touch ev
 
 ## See Also
 
-* [API Reference of the Kendo UI Drawing Library](https://docs.telerik.com/kendo-ui/api/javascript/drawing)
+* [API Reference of the Kendo UI Drawing Library](https://docs.telerik.com/kendo-ui/api/drawing)

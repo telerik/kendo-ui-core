@@ -55,4 +55,4 @@ Each template is used together with its corresponding built-in or custom [notifi
 ## See Also
 
 * [Using Templates in the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/templates)
-* [JavaScript API Reference of the Notification](/api/javascript/ui/notification)
+* [JavaScript API Reference of the Notification](/api/ui/notification)

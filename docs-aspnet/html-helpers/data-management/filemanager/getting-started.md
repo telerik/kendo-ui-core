@@ -289,7 +289,7 @@ For more common helper methods, see the [Remote Binding Helper Methods](https://
 
 ## 5. Handle a FileManager Event
 
-The FileManager exposes different client-side events that you can handle and use to customize the component's functions. In this tutorial, you will use the `DataBound` event to toggle the `Preview` command by using the component's [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager).
+The FileManager exposes different client-side events that you can handle and use to customize the component's functions. In this tutorial, you will use the `DataBound` event to toggle the `Preview` command by using the component's [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/filemanager).
 
 
 ```HtmlHelper
@@ -376,6 +376,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the FileManager for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filemanager/api)
-* [FileManager Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager)
+* [FileManager Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/filemanager)
 * [FileManager Server-Side API](/api/filemanager)
 * [Knowledge Base Section](/knowledge-base)

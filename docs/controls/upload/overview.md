@@ -11,7 +11,7 @@ position: 1
 
 The Upload uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer efforts.
 
-The Upload provides a set of [default API configuration options](/api/javascript/ui/upload) that you can set during its initialization, for example, synchronous and asynchronous modes of operation, chunk upload of files, multiple files selection and removal, progress tracking and in-progress cancellation of the upload, and so on.
+The Upload provides a set of [default API configuration options](/api/ui/upload) that you can set during its initialization, for example, synchronous and asynchronous modes of operation, chunk upload of files, multiple files selection and removal, progress tracking and in-progress cancellation of the upload, and so on.
 
 > * The Upload does not currently support the upload of large files in chunks because the feature requires an additional Flash or Silverlight plugin to compensate for the missing API support in older browsers.
 > * The Upload works in `<input type="file" />` elements. Therefore, you can only upload files that are selected and exist in the file system. To upload files that are generated with JavaScript on the fly use Ajax requests.
@@ -34,7 +34,7 @@ The Upload provides a set of [default API configuration options](/api/javascript
 
 * [Getting Started with the Kendo UI Upload for jQuery]({% slug getting_started_kendoui_upload_widget %})
 * [Basic Usage of the Upload (Demo)](https://demos.telerik.com/kendo-ui/upload/index)
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)
 * [Browser Support]({% slug browsersupport_upload_widget %})
 
 ## See Also
@@ -43,4 +43,4 @@ The Upload provides a set of [default API configuration options](/api/javascript
 * [Using the Basic Events of the Upload (Demo)](https://demos.telerik.com/kendo-ui/upload/events)
 * [Binding the Upload over MVVM (Demo)](https://demos.telerik.com/kendo-ui/upload/mvvm)
 * [Applying the Upload API (Demo)](https://demos.telerik.com/kendo-ui/upload/api)
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

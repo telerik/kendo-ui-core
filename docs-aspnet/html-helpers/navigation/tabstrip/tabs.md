@@ -126,9 +126,9 @@ The following example demonstrates how to add a new TabStrip tab and position it
 
 ## Scrollable Tabs
 
-The TabStrip supports scrollable `top` and `bottom` tabs through `TabPosition()`. During initialization, the TabStrip checks if the tabs fit in the available horizontal space and if not, renders scroll buttons on the sides. By default, the scrollable tabs are enabled. To disable them, use the [`Scrollable(false)`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/configuration/scrollable) method of the Kendo UI for jQuery widget.
+The TabStrip supports scrollable `top` and `bottom` tabs through `TabPosition()`. During initialization, the TabStrip checks if the tabs fit in the available horizontal space and if not, renders scroll buttons on the sides. By default, the scrollable tabs are enabled. To disable them, use the [`Scrollable(false)`](https://docs.telerik.com/kendo-ui/api/ui/tabstrip/configuration/scrollable) method of the Kendo UI for jQuery widget.
 
-If the TabStrip has no fixed width and is placed in a fluid layout, it can re-check whether tab scrolling is necessary or no longer required. To enable this option, execute the [`resize()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/resize) method of the Kendo UI TabStrip for jQuery upon `window.resize`. The `resize` method will also render the right scroll button if the last and selected tab becomes invisible as a result of TabStrip shrinking.
+If the TabStrip has no fixed width and is placed in a fluid layout, it can re-check whether tab scrolling is necessary or no longer required. To enable this option, execute the [`resize()`](https://docs.telerik.com/kendo-ui/api/ui/widget/methods/resize) method of the Kendo UI TabStrip for jQuery upon `window.resize`. The `resize` method will also render the right scroll button if the last and selected tab becomes invisible as a result of TabStrip shrinking.
 
 ```HtmlHelper
     <div style="width: 150px;">

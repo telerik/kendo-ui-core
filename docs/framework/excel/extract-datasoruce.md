@@ -17,11 +17,11 @@ In this way you are able to extract the data that is stored in a [Kendo UI DataS
 
 To extract the DataSource to an Excel document (workbook):
 
-1. Instantiate a [Kendo UI DataSource](/api/javascript/data/datasource).
+1. Instantiate a [Kendo UI DataSource](/api/data/datasource).
 2. Create the rows header structure based on the DataSource data. Save it into an `array`.
-3. Fetch the remote data and by using the callback of the [`fetch`](/api/javascript/data/datasource/methods/fetch) method, loop through the items and push the data to the `rows` array.
-4. Instantiate a [`kendo.ooxml.Workbook`](/api/javascript/ooxml/workbook). The workbook has an array of sheets, where you can set their width and title, and set the `rows` property to the already created `rows` array.
-5. Call the [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
+3. Fetch the remote data and by using the callback of the [`fetch`](/api/data/datasource/methods/fetch) method, loop through the items and push the data to the `rows` array.
+4. Instantiate a [`kendo.ooxml.Workbook`](/api/ooxml/workbook). The workbook has an array of sheets, where you can set their width and title, and set the `rows` property to the already created `rows` array.
+5. Call the [`toDataURLAsync`](/api/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
 
 ## Creating Excel Workbooks
 

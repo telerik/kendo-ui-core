@@ -131,7 +131,7 @@ The following example demonstrates how to achieve the desired scenario.
 
             scheduler.wrapper.on("click", ".k-event", function(e) {
 							var uid = $(this).data("uid");
-              // https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/occurrenceByUid
+              // https://docs.telerik.com/kendo-ui/api/ui/scheduler/methods/occurrenceByUid
               var event = scheduler.occurrenceByUid(uid);
               var end = new Date(event.end);
 
@@ -148,4 +148,4 @@ The following example demonstrates how to achieve the desired scenario.
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

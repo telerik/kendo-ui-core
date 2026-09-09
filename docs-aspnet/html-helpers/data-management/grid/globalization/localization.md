@@ -219,7 +219,7 @@ The following example demonstrates how to implement the translation for the grou
 
 ## Pager Messages
 
-The following example demonstrates how to implement the translations of the pager messages in the Grid. For more information, refer to the [`messages`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager/configuration/messages) API reference.
+The following example demonstrates how to implement the translations of the pager messages in the Grid. For more information, refer to the [`messages`](https://docs.telerik.com/kendo-ui/api/ui/pager/configuration/messages) API reference.
 
 ```HtmlHelper
     .Pageable(pageable=> {

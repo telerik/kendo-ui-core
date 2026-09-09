@@ -51,7 +51,7 @@ In this step, you will initialize the ImageEditor from the `<div>` element.
 
 ## 3. Configure the Image's URL
 
-The ImageEditor enables you to set the URL (or base64 string) of the image that will be opened by using the [`imageUrl`](/api/javascript/ui/imageeditor/configuration/imageurl) property.
+The ImageEditor enables you to set the URL (or base64 string) of the image that will be opened by using the [`imageUrl`](/api/ui/imageeditor/configuration/imageurl) property.
 
 ```html
 <div id="imageEditor"></div>
@@ -74,7 +74,7 @@ The ImageEditor enables you to set the URL (or base64 string) of the image that 
 
 ## See Also 
 
-* [JavaScript API Reference of the ImageEditor](/api/javascript/ui/imageeditor)
+* [JavaScript API Reference of the ImageEditor](/api/ui/imageeditor)
 * [Knowledge Base Section](/knowledge-base)
 
 

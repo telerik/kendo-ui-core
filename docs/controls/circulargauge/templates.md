@@ -11,7 +11,7 @@ position: 5
 
 You can customize the content inside the center of the CircularGauge by using the center template.
 
-To render the center template of a CircularGauge, specify the [`centerTemplate`](/api/javascript/dataviz/ui/circulargauge/configuration/centertemplate).
+To render the center template of a CircularGauge, specify the [`centerTemplate`](/api/dataviz/ui/circulargauge/configuration/centertemplate).
 
 The following example demonstrates how to create a custom center template.
 
@@ -23,4 +23,4 @@ The following example demonstrates how to create a custom center template.
 ## See Also
 
 * [Basic Usage of the CircularGauge (Demo)](https://demos.telerik.com/kendo-ui/circular-gauge/index)
-* [JavaScript API Reference of the CircularGauge](/api/javascript/dataviz/ui/circulargauge)
+* [JavaScript API Reference of the CircularGauge](/api/dataviz/ui/circulargauge)

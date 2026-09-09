@@ -24,7 +24,7 @@ I have a {{ site.product }} Grid column that contains a [hyperlink](https://www.
 
 ## Solution
 
-The [`Workbook API`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.hyperlinks) exposes a configuration that enables you to set hyperlinks to specific cells.
+The [`Workbook API`](https://docs.telerik.com/kendo-ui/api/ooxml/workbook/configuration/sheets.hyperlinks) exposes a configuration that enables you to set hyperlinks to specific cells.
 
 To achieve the desired outcome:
 
@@ -217,9 +217,9 @@ To achieve the desired outcome:
 
 ## See Also
 
-* [Workbook API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook)
+* [Workbook API Reference](https://docs.telerik.com/kendo-ui/api/ooxml/workbook)
 * [Grid Server Export Demo](https://demos.telerik.com/{{ site.platform }}/grid/server-export)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [TagHelper API reference of the Grid](https://docs.telerik.com/aspnet-core/api/taghelpers/grid)

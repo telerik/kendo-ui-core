@@ -25,7 +25,7 @@ The following image demonstrates the export of the Spreadsheet data to Excel.
 
 ## API Export Reference
 
-The Spreadsheet client-side API includes the [`saveAsExcel`](/api/javascript/ui/spreadsheet/methods/saveasexcel) method for initiating the export via JavaScript. This method does not ask you to specify a file name. Instead, it sets the value in [`excel.fileName`](/api/javascript/ui/pivotgrid/configuration/excel#excelfilename).
+The Spreadsheet client-side API includes the [`saveAsExcel`](/api/ui/spreadsheet/methods/saveasexcel) method for initiating the export via JavaScript. This method does not ask you to specify a file name. Instead, it sets the value in [`excel.fileName`](/api/ui/pivotgrid/configuration/excel#excelfilename).
 
 ## Outputting the Result
 
@@ -34,4 +34,4 @@ Through its default configuration the Kendo UI for jQuery Spreadsheet exports th
 ## See Also
 
 * [Server-Side Import and Export in the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/server-side-import-export)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

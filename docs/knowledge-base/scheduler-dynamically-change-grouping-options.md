@@ -181,4 +181,4 @@ How can I change the displayed groups in a Kendo UI Scheduler to reflect the sel
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler).
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler).

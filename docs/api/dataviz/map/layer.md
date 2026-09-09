@@ -1,7 +1,7 @@
 ---
 title: Layer
 page_title: API reference for Kendo UI Map Layer
-previous_url: /api/javascript/dataviz/map/layer/shape
+previous_url: /api/dataviz/map/layer/shape
 res_type: api
 ---
 
@@ -50,7 +50,7 @@ How do I link a layer to its parent map in Kendo UI for jQuery? Configure the in
     </script>
 
 ### options `Object`
-The layer [`options`](/api/javascript/dataviz/ui/map/configuration/layers#related-properties).
+The layer [`options`](/api/dataviz/ui/map/configuration/layers#related-properties).
 
 
 <div class="meta-api-description">

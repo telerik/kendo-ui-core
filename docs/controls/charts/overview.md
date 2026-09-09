@@ -23,7 +23,7 @@ All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)
 |[Data binding]({% slug databinding_charts_widget %}) | You can populate the Kendo UI Chart with data.
 |[Export]({% slug exporting_kendoui_chart_widget %}) | The Chart enables you to export their content to PDF, SVG, or Image files.
 |[Appearance]({% slug appearance_charts_widget %}) | You can control the appearance of the Chart elements by using JavaScript style options.
-|[Axes]({% slug elements_kendoui_charts_widget %}) | The Chart enables you to configure its [`axes`](/api/javascript/dataviz/ui/chart/configuration/axisdefaults).
+|[Axes]({% slug elements_kendoui_charts_widget %}) | The Chart enables you to configure its [`axes`](/api/dataviz/ui/chart/configuration/axisdefaults).
 |[Data series]({% slug seriestypeofcharts_widget %}) | The Chart enables you to plot one or more data series of a specified type.
 |[Date series]({% slug dateseries_charts_widget %}) | You can control the display of dates in the Kendo UI Chart.
 |[Error bars]({% slug errorbars_charts_widget %}) | The Chart enables you to implement error bars which show the variability of data.
@@ -38,11 +38,11 @@ All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)
 
 * [Getting Started with the Kendo UI Chart for jQuery]({% slug getting_started_kendoui_chart_widget %})
 * [Basic Usage of the Chart (Demo)](https://demos.telerik.com/kendo-ui/charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)
 
 ## See Also
 
 * [Basic Usage of the Chart (Demo)](https://demos.telerik.com/kendo-ui/charts/index)
 * [Using the Basic Events of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/events)
 * [Applying the Chart API (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

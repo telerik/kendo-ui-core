@@ -55,7 +55,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 3. Add an Icon
 
-You can display an icon in the Button by configuring the [`icon`](/api/javascript/ui/button/configuration/icon). For more information about the variety of the icons supported by the Button, refer to the article on the [Icon Button]({% slug icons_button %}).
+You can display an icon in the Button by configuring the [`icon`](/api/ui/button/configuration/icon). For more information about the variety of the icons supported by the Button, refer to the article on the [Icon Button]({% slug icons_button %}).
 
 ```html
 <button id="btn">My Button</button>
@@ -69,7 +69,7 @@ You can display an icon in the Button by configuring the [`icon`](/api/javascrip
 
 ## 4. Add a Badge to the Button
 
-Now you can use the [`badge`](/api/javascript/ui/button/configuration/badge) option which allows you to display a Badge element over the Button.
+Now you can use the [`badge`](/api/ui/button/configuration/badge) option which allows you to display a Badge element over the Button.
 
 ```html
 <button id="btn">My Button</button>
@@ -93,7 +93,7 @@ Now you can use the [`badge`](/api/javascript/ui/button/configuration/badge) opt
 
 ## See Also
 
-* [JavaScript API Reference of the Button](/api/javascript/ui/button)
+* [JavaScript API Reference of the Button](/api/ui/button)
 * [Knowledge Base Section](/knowledge-base)
 
 

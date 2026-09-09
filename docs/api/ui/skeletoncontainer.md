@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.SkeletonContainer
 
-Represents the Kendo UI SkeletonContainer widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI SkeletonContainer widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

@@ -45,4 +45,4 @@ The OTPInput is a UI component that allows the user to enter a one-time password
 {% if site.core %}
 * [Server-Side API of the OTPInput TagHelper](/api/taghelpers/otpinput)
 {% endif %}
-* [Client-Side API of the OTPInput](https://docs.telerik.com/kendo-ui/api/javascript/ui/otpinput)
+* [Client-Side API of the OTPInput](https://docs.telerik.com/kendo-ui/api/ui/otpinput)

@@ -39,7 +39,7 @@ How can I apply geometric transformations during export while applying the Kendo
 
 The following example demonstrates how to produce a PNG image of a page section at 4x the original resolution and applies an uniform 2x scale on the X and Y dimensions. The operation is carried out while the content is still represented in a vector form and no loss of quality occurs.
 
-For more information, refer to the article on [transformation API](/api/javascript/geometry/transformation/methods/scale).
+For more information, refer to the article on [transformation API](/api/geometry/transformation/methods/scale).
 
 ```dojo
     <button type="button" class="export-img k-button">
@@ -111,5 +111,5 @@ For more information, refer to the article on [transformation API](/api/javascri
 
 ## See Also
 
-* [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
-* [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)
+* [JavaScript API Reference: kendo.drawing.surface](/api/drawing/surface)
+* [JavaScript API Reference: kendo.geometry.Transformation](/api/geometry/transformation)

@@ -68,7 +68,7 @@ After the basic initialization is completed, you can start adding additional con
 
 ## 3. Add the Items
 
-The buttons you will see in the RadioGroup are configured through the [`items`](/api/javascript/ui/radiogroup/configuration/items) option. It exposes various settings such as `attributes`, `cssClass`, `enabled`, and others. 
+The buttons you will see in the RadioGroup are configured through the [`items`](/api/ui/radiogroup/configuration/items) option. It exposes various settings such as `attributes`, `cssClass`, `enabled`, and others. 
 
 ```html
 <ul id="radiogroup"></ul>
@@ -102,7 +102,7 @@ The buttons you will see in the RadioGroup are configured through the [`items`](
 
 ## 4. Set the RadioGroup Value
 
-You can preset the value of the component using the [`value`](/api/javascript/ui/radiogroup/configuration/value) option.
+You can preset the value of the component using the [`value`](/api/ui/radiogroup/configuration/value) option.
 
 ```html
 <ul id="radiogroup"></ul>
@@ -140,6 +140,6 @@ You can preset the value of the component using the [`value`](/api/javascript/ui
 
 ## See Also
 
-* [JavaScript API Reference of the RadioGroup](/api/javascript/ui/radiogroup)
+* [JavaScript API Reference of the RadioGroup](/api/ui/radiogroup)
 * [Knowledge Base Section](/knowledge-base)
 

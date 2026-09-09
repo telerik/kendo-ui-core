@@ -111,7 +111,7 @@ For the complete implementation of the suggested approach, refer to the followin
 * [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
 {% endif %}
 ## See Also
-* [Client-Side API Reference of the TextArea for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/textarea)
+* [Client-Side API Reference of the TextArea for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/textarea)
 * [Server-Side API Reference of the TextArea for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/textarea)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

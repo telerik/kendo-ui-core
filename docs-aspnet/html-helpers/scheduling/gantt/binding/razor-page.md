@@ -331,7 +331,7 @@ For the complete project, refer to the [Gantt in Razor Pages example](https://gi
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Gantt](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [Client-Side API of the Gantt](https://docs.telerik.com/kendo-ui/api/ui/gantt)
 * [Server-Side HtmlHelper API of the Gantt](/api/gantt)
 * [Server-Side TagHelper API of the Gantt](/api/taghelpers/gantt)
 * [Knowledge Base Section](/knowledge-base)

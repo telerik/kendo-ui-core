@@ -25,7 +25,7 @@ The Drawer is a dismissible panel used for navigation in responsive web applicat
 
 * [Getting Started with the Kendo UI Drawer for jQuery]({% slug getting_started_kendoui_drawer_component %})
 * [Basic Usage of the jQuery Drawer (Demo)](https://demos.telerik.com/kendo-ui/drawer/index)
-* [JavaScript API Reference of the Drawer](/api/javascript/ui/drawer)
+* [JavaScript API Reference of the Drawer](/api/ui/drawer)
 
 ## See Also
 

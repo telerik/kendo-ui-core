@@ -95,4 +95,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the Captcha HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/api)
 * [Server-Side API of the Captcha](/api/captcha)
-* [Client-Side API of the Captcha](https://docs.telerik.com/kendo-ui/api/javascript/ui/captcha)
+* [Client-Side API of the Captcha](https://docs.telerik.com/kendo-ui/api/ui/captcha)

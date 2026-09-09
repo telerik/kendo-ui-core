@@ -13,7 +13,7 @@ The [cascading ComboBox](https://demos.telerik.com/kendo-ui/combobox/cascadingco
 
 ## Basic Configuration
 
-The child ComboBox cascades from the parent one if the [`cascadeFrom`](/api/javascript/ui/combobox#configuration) option is defined. The `cascadeFrom` option has to point to the parent ID.
+The child ComboBox cascades from the parent one if the [`cascadeFrom`](/api/ui/combobox#configuration) option is defined. The `cascadeFrom` option has to point to the parent ID.
 
 The child ComboBox takes the following actions during initialization:
 - Checks if the `cascadeFrom` property is set. If not, cascading is disabled.
@@ -80,7 +80,7 @@ This section lists the answers to the most frequently asked questions (FAQs) abo
 
 ### How can I preset the selected items when I use cascading ComboBoxes with autoBind: true?
 
-Set the value of the ComboBoxes&mdash;define it before initialization as demonstrated in the following example. You also can use the [`value`](/api/javascript/ui/combobox#configuration) option.
+Set the value of the ComboBoxes&mdash;define it before initialization as demonstrated in the following example. You also can use the [`value`](/api/ui/combobox#configuration) option.
 
 ```dojo
     <input id="parent" value="2" />
@@ -112,7 +112,7 @@ Set the value of the ComboBoxes&mdash;define it before initialization as demonst
 
 ### How can I preset the selected items when I use cascading ComboBoxes with load on demand?
 
-Set the [`value`](/api/javascript/ui/combobox#configuration) and [`text`](/api/javascript/ui/combobox#configuration) options.
+Set the [`value`](/api/ui/combobox#configuration) and [`text`](/api/ui/combobox#configuration) options.
 
 ```dojo
     <input id="parent" value="2" />
@@ -180,4 +180,4 @@ Check the format of the request parameters as displayed in the [**Initialize Cas
 
 ## See Also
 
-* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [JavaScript API Reference of the ComboBox](/api/ui/combobox)

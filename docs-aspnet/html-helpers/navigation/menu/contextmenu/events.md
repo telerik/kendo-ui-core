@@ -124,5 +124,5 @@ The following example demonstrates how to subscribe to the `select` event of a s
 
 * [Using the API of the Menu for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/api)
 * [Menu Server-Side API](/api/menu)
-* [Menu Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+* [Menu Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/menu)
 * [Knowledge Base Section](/knowledge-base)

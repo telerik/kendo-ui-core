@@ -13,7 +13,7 @@ As of the 2015 Q1 release, the PivotGrid provides a built-in PDF export function
 
 By default, PDF export is enabled when `kendo.all.min.js`, `kendo.web.min.js`, or a custom build that includes PDF scripts is loaded to the page.
 
-To initiate PDF export by using code, use the [`pdf` configuration option](/api/javascript/ui/pivotgrid/configuration/pdf). For the runnable project, refer to the demo on [exporting the PivotGrid to PDF](https://demos.telerik.com/aspnet-core/pivotgrid/pdf-export).
+To initiate PDF export by using code, use the [`pdf` configuration option](/api/ui/pivotgrid/configuration/pdf). For the runnable project, refer to the demo on [exporting the PivotGrid to PDF](https://demos.telerik.com/aspnet-core/pivotgrid/pdf-export).
 
 To customize the appearance of the exported PDF file, refer to the articles on the [PDF output by the Kendo UI Drawing library]({% slug customizingappearance_drawing %}).
 
@@ -21,5 +21,5 @@ To customize the appearance of the exported PDF file, refer to the articles on t
 
 * [Exporting the PivotGrid to PDF (Demo)](https://demos.telerik.com/aspnet-core/pivotgrid/pdf-export)
 * [PDF Export Known Limitations]({% slug supportedbrowsers_drawingapi %})
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)
 * [Knowledge Base Section](/knowledge-base)

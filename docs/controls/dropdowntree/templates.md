@@ -168,4 +168,4 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
 ## See Also
 
 * [Templates in the DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/templates)
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)
+* [JavaScript API Reference of the DropDownTree](/api/ui/dropdowntree)

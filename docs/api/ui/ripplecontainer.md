@@ -8,7 +8,7 @@ component: ripplecontainer
 
 # kendo.ui.RippleContainer
 
-Represents the Kendo UI RippleContainer widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI RippleContainer widget. Inherits from [Widget](/api/ui/widget).
 
 > The RippleContainer widget provides ripple effect for elements only with [the Sass-Based Material Theme](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes#sass-based-themes).
 

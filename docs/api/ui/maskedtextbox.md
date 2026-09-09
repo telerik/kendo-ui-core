@@ -8,7 +8,7 @@ component: maskedtextbox
 
 # kendo.ui.MaskedTextBox
 
-Represents the Kendo UI MaskedTextBox widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI MaskedTextBox widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -168,7 +168,7 @@ The function context (available through the keyword `this`) will be set to the w
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/maskedtextbox/methods/value) method **does not trigger** the `focusout` event of the input.
+> **Important:** The [value](/api/ui/maskedtextbox/methods/value) method **does not trigger** the `focusout` event of the input.
 This can affect the floating label functionality.
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#maskedtextbox").data("kendoMaskedTextBox").floatingLabel.refresh();`
 
@@ -264,7 +264,7 @@ How do I add an icon to the input field of a Kendo UI MaskedTextBox? Customize t
 
 ### prefixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+The [template](/api/kendo/methods/template) for the prefix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -458,7 +458,7 @@ How do I customize the suffix icon in Kendo UI MaskedTextBox? Configure or custo
 
 ### suffixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+The [template](/api/kendo/methods/template) for the suffix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -692,7 +692,7 @@ How to get the unmasked raw input text from a Kendo UI MaskedTextBox? Retrieve o
 Gets or sets the value of the MaskedTextBox.
 
 > **Important:** This method **does not trigger** the `focusout` event of the input.
-This can affect the [floating label functionality](/api/javascript/ui/maskedtextbox/configuration/label.floating).
+This can affect the [floating label functionality](/api/ui/maskedtextbox/configuration/label.floating).
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#maskedtextbox").data("kendoMaskedTextBox").floatingLabel.refresh();`
 
 

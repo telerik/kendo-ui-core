@@ -17,7 +17,7 @@ To change the look of the non-selected page number links, use the `LinkTemplate(
 
 ## See Also
 
-* [Pager Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager)
+* [Pager Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/pager)
 * [Pager Server-Side API](/api/pager)
 * [Pager Settings and Types]({% slug settings_pager_aspnet %})
 * [Responsive Pager]({% slug responsive_pager_aspnet  %})

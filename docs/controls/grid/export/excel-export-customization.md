@@ -17,8 +17,8 @@ This article demonstrates how to customize various aspects of the Excel export, 
 
 The Grid's Excel export functionality is powered by two main components:
 
-1. **The [excelExport](/api/javascript/ui/grid/events/excelexport) Event**&mdash;Triggered before the export begins, allowing you to access and modify the workbook object.
-2. **The [Workbook API](/api/javascript/ooxml/workbook)**&mdash;Provides a rich set of configuration options to customize sheets, rows, columns, and cells.
+1. **The [excelExport](/api/ui/grid/events/excelexport) Event**&mdash;Triggered before the export begins, allowing you to access and modify the workbook object.
+2. **The [Workbook API](/api/ooxml/workbook)**&mdash;Provides a rich set of configuration options to customize sheets, rows, columns, and cells.
 
 ### Accessing the Workbook
 
@@ -186,8 +186,8 @@ Customize the export process, file naming, and user interactions.
 ## See Also
 
 * [Excel Export Overview](slug:exporting_excel_kendoui_grid_widget)
-* [excelExport Event API Reference](/api/javascript/ui/grid/events/excelexport)
-* [Excel Configuration API Reference](/api/javascript/ui/grid/configuration/excel)
-* [Workbook API Reference](/api/javascript/ooxml/workbook)
+* [excelExport Event API Reference](/api/ui/grid/events/excelexport)
+* [Excel Configuration API Reference](/api/ui/grid/configuration/excel)
+* [Workbook API Reference](/api/ooxml/workbook)
 * [Excel Export Introduction](slug:introduction_excelexport_kendoui)
 * [Excel Export Appearance](slug:appearance_excelexport_kendoui)

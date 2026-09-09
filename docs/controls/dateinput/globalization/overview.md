@@ -22,4 +22,4 @@ For more information on using localization, internationalization, and right-to-l
 * [Localization Support by the DateInput (Demo)](https://demos.telerik.com/kendo-ui/dateinput/localization-globalization)
 * [RTL Support by the DateInput (Demo)](https://demos.telerik.com/kendo-ui/dateinput/right-to-left-support)
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the DateInput](/api/javascript/ui/dateinput)
+* [JavaScript API Reference of the DateInput](/api/ui/dateinput)

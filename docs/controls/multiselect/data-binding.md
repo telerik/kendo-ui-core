@@ -13,7 +13,7 @@ The MultiSelect enables you to initialize it by using the `<input>` or the `<sel
 
 For more information on initializing the MultiSelect through the `<option>` tag of an existing `<select>` element, refer to the [MultiSelect **Overview** article]({% slug overview_kendoui_multiselect_widget %}#initializing-the-multiselect).
 
-> When you configure the local or remote data source of the MultiSelect, enabling the paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_ddl_widget %}). In all other cases, enabling paging and setting `pageSize` is considered as incorrect configuration.
+> When you configure the local or remote data source of the MultiSelect, enabling the paging functionality and setting [`pageSize`](/api/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_ddl_widget %}). In all other cases, enabling paging and setting `pageSize` is considered as incorrect configuration.
 
 ## Basic Approaches for Initialization
 
@@ -107,4 +107,4 @@ The MultiSelect enables you to remove the values from its input area by using th
 ## See Also
 
 * [Binding the MultiSelect over MVVM (Demo)](https://demos.telerik.com/kendo-ui/multiselect/mvvm)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [JavaScript API Reference of the MultiSelect](/api/ui/multiselect)

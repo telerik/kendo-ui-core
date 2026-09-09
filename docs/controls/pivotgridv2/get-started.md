@@ -122,7 +122,7 @@ Lastly, you will initialize the container button from the `<div>` element with i
 
 With the above steps completed, you can now start populating the components with data. In this example, we are going to use an array of objects that is loaded from [this location](https://demos.telerik.com/kendo-ui/content/shared/js/countries-revenue.js).
 
-First, configure the [`dataSource`](https://docs.telerik.com/kendo-ui/api/javascript/data/pivotdatasourcev2) in the PivotGridV2 component. 
+First, configure the [`dataSource`](https://docs.telerik.com/kendo-ui/api/data/pivotdatasourcev2) in the PivotGridV2 component. 
 
 ```javascript
     var data = products; // The products are fetched from the above link.
@@ -201,7 +201,7 @@ The user can filter the data through both the PivotGridV2 headers and the PivotC
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery PivotGridV2](/api/javascript/ui/pivotgridv2)
+* [JavaScript API Reference of the jQuery PivotGridV2](/api/ui/pivotgridv2)
 * [Knowledge Base Section](/knowledge-base)
 
 

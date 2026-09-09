@@ -30,9 +30,9 @@ I want to be able to click on the expand/collapse icon of the parent task and se
 
 ## Solution
 
-1. [Attach an event handler](/api/javascript/data/model/methods/bind) to the [expand](/api/javascript/ui/treelist/methods/expand) and [collapse](/api/javascript/ui/treelist/methods/collapse) events of the built-in TreeList.
+1. [Attach an event handler](/api/data/model/methods/bind) to the [expand](/api/ui/treelist/methods/expand) and [collapse](/api/ui/treelist/methods/collapse) events of the built-in TreeList.
 1. Get a reference to the current row.
-1. Use the Gantt [select method](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/methods/select) to select the current row.
+1. Use the Gantt [select method](https://docs.telerik.com/kendo-ui/api/ui/gantt/methods/select) to select the current row.
 
 The following snippet binds both `expand` and `collapse` events and calls `gantt.select()` with the row that matches the expanded or collapsed task's UID.
 

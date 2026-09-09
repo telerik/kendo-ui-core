@@ -171,7 +171,7 @@ How can I create a dropdown cell (of type list) in the Spreadsheet component tha
 
 ## See Also
 
-* [Client-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [Client-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
 * [Server-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/spreadsheet)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/spreadsheet)

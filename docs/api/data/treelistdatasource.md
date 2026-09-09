@@ -7,14 +7,14 @@ res_type: api
 
 # kendo.data.TreeListDataSource
 
-The data source used by the [kendo.ui.TreeList](/api/javascript/ui/treelist) widget.
-Inherits from [kendo.data.DataSource](/api/javascript/data/datasource). The TreeListDataSource contains instances of the
-[kendo.data.TreeListModel](/api/javascript/data/treelistmodel) class.
+The data source used by the [kendo.ui.TreeList](/api/ui/treelist) widget.
+Inherits from [kendo.data.DataSource](/api/data/datasource). The TreeListDataSource contains instances of the
+[kendo.data.TreeListModel](/api/data/treelistmodel) class.
 
 
 ## Configuration
 
-See the [DataSource configuration](/api/javascript/data/datasource#configuration) for all inherited configuration options.
+See the [DataSource configuration](/api/data/datasource#configuration) for all inherited configuration options.
 
 ### schema `Object`
 
@@ -53,7 +53,7 @@ How do I set up the schema for tree-like data in a Kendo UI TreeList? Define and
 
 ### schema.model `Object`
 
-The model configuration of the TreeListDataSource. See [kendo.data.TreeListModel](/api/javascript/data/treelistmodel) for more info.
+The model configuration of the TreeListDataSource. See [kendo.data.TreeListModel](/api/data/treelistmodel) for more info.
 
 
 <div class="meta-api-description">
@@ -81,7 +81,7 @@ How do I configure data validation for nested items in a Kendo UI TreeList? Conf
 
 ## Methods
 
-See the [DataSource methods](/api/javascript/data/datasource#methods) for all inherited methods.
+See the [DataSource methods](/api/data/datasource#methods) for all inherited methods.
 
 ### load
 

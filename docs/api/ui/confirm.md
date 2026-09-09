@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.Confirm : kendo.ui.Dialog
 
-Represents the Kendo UI Confirm. Inherits from [Dialog](/api/javascript/ui/dialog).
+Represents the Kendo UI Confirm. Inherits from [Dialog](/api/ui/dialog).
 
 ## Configuration
 

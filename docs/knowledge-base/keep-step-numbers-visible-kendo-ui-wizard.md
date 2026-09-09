@@ -26,7 +26,7 @@ This KB article also answers the following questions:
 
 ## Solution
 
-To keep the step numbers visible for completed steps in the [Kendo UI Wizard](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard/events/activate), utilize custom logic inside the `activate` event handler. The following example demonstrates how to replace the check marks with the corresponding step numbers:
+To keep the step numbers visible for completed steps in the [Kendo UI Wizard](https://docs.telerik.com/kendo-ui/api/ui/wizard/events/activate), utilize custom logic inside the `activate` event handler. The following example demonstrates how to replace the check marks with the corresponding step numbers:
 
 ```javascript
 activate: function(e) {
@@ -65,7 +65,7 @@ This solution iterates through each element marked with a checkmark and replaces
 
 ## See Also
 
-- [Wizard Activate Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard/events/activate)
+- [Wizard Activate Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/wizard/events/activate)
 - [Wizard Overview (Demo)](https://demos.telerik.com/kendo-ui/wizard/index)
 
 ---

@@ -21,7 +21,7 @@ The event argument exposes the following relevant properties:
 | Property | Type | Description |
 | --- | --- | --- |
 | `e.sender` | Object | The component instance. |
-| `e.keyCode` | Number | The code of the pressed key. Use [`kendo.keys`](/api/javascript/kendo/fields/keys) constants for readable comparisons. |
+| `e.keyCode` | Number | The code of the pressed key. Use [`kendo.keys`](/api/kendo/fields/keys) constants for readable comparisons. |
 | `e.ctrlKey` | Boolean | `true` when `Ctrl` is held. |
 | `e.shiftKey` | Boolean | `true` when `Shift` is held. |
 | `e.altKey` | Boolean | `true` when `Alt` is held. |

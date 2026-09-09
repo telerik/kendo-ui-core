@@ -122,7 +122,7 @@ How can I send an anti-forgery token with the requests of a {{ site.product }} G
         }
     </script>
 ```
-The [`kendo.antiforgerytokens`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/antiforgerytokens) method returns an object that contains common CSRF tokens which are found on the page.
+The [`kendo.antiforgerytokens`](https://docs.telerik.com/kendo-ui/api/kendo/methods/antiforgerytokens) method returns an object that contains common CSRF tokens which are found on the page.
 
 ## More {{ site.framework }} Grid Resources
 
@@ -147,7 +147,7 @@ The [`kendo.antiforgerytokens`](https://docs.telerik.com/kendo-ui/api/javascript
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

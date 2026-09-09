@@ -213,7 +213,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Window JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/ui/window)
 * [Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
 * [Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
 * [Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})

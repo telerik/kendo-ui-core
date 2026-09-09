@@ -8,7 +8,7 @@ component: propertygrid
 
 # kendo.ui.PropertyGrid
 
-Represents the Kendo UI PropertyGrid component. Inherits from [TreeList](/api/javascript/ui/treelist).
+Represents the Kendo UI PropertyGrid component. Inherits from [TreeList](/api/ui/treelist).
 
 ## Configuration
 
@@ -442,7 +442,7 @@ How to enable Excel filter dropdowns in Kendo UI PropertyGrid export? Enable or 
 
 ### excel.forceProxy `Boolean` *(default: false)*
 
-If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/propertygrid#configuration-excel.proxyURL) even if the browser supports local file saving.
+If set to `true`, the content will be forwarded to [`proxyURL`](/api/ui/propertygrid#configuration-excel.proxyURL) even if the browser supports local file saving.
 
 
 <div class="meta-api-description">
@@ -667,7 +667,7 @@ Provides a way to specify a custom editing UI for the value of the property. To 
 > * The editing UI has to contain an element with a set `name` HTML attribute. The attribute value should be set to `value`.
 > * The validation settings that are defined in the `model.fields` configuration will not be applied automatically. In order for the validation to work, you (the developer) are responsible for attaching the corresponding validation attributes to the editor input. If the custom editor is a component, to avoid visual issues, you can [customize the tooltip position of the validation warning](/framework/validator/overview#customizing-the-tooltip-position).
 
-When used as `String`, defines the editor component type. Set the options for the component via the [items.editorOptions](/api/javascript/ui/propertygrid/configuration/items#editoroptions).For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditor)
+When used as `String`, defines the editor component type. Set the options for the component via the [items.editorOptions](/api/ui/propertygrid/configuration/items#editoroptions).For further info check the Form API: [`field`](/api/ui/form/configuration/items#itemseditor)
 
 
 <div class="meta-api-description">
@@ -694,7 +694,7 @@ How to override default editors in Kendo UI PropertyGrid with custom components?
 
 ### items.editorOptions `Object`
 
-Defines the component options for the custom property value UI editor that is set via the `items.editor` configuration. For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditoroptions).
+Defines the component options for the custom property value UI editor that is set via the `items.editor` configuration. For further info check the Form API: [`field`](/api/ui/form/configuration/items#itemseditoroptions).
 
 
 <div class="meta-api-description">
@@ -784,9 +784,9 @@ How do I set the correct editor for nullable fields in a Kendo UI PropertyGrid? 
 
 ### items.format `String`
 
-The format that is applied to the value before it is displayed. Takes the `{0:format}` form where `format` is a [standard number format](/api/javascript/kendo#standard-number-formats), [custom number format](/api/javascript/kendo#custom-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
+The format that is applied to the value before it is displayed. Takes the `{0:format}` form where `format` is a [standard number format](/api/kendo#standard-number-formats), [custom number format](/api/kendo#custom-number-formats), [standard date format](/api/kendo#standard-date-formats) or a [custom date format](/api/kendo#custom-date-formats).
 
-> The [`kendo.format`](/api/javascript/kendo/methods/format) function is used to format the value.
+> The [`kendo.format`](/api/kendo/methods/format) function is used to format the value.
 
 
 <div class="meta-api-description">
@@ -876,7 +876,7 @@ How to customize editor types for nested data model fields in a Kendo UI propert
 
 ### items.template `String|Function`
 
-The [`template`](/api/javascript/kendo/methods/template) which is rendered for the property's value.
+The [`template`](/api/kendo/methods/template) which is rendered for the property's value.
 
 
 <div class="meta-api-description">
@@ -1446,7 +1446,7 @@ How do I customize the PDF file name when exporting data from a Kendo UI Propert
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 
-If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/propertygrid#configuration-pdf.proxyURL) even if the browser supports the local saving of files.
+If set to `true`, the content will be forwarded to [`proxyURL`](/api/ui/propertygrid#configuration-pdf.proxyURL) even if the browser supports the local saving of files.
 
 
 <div class="meta-api-description">
@@ -1981,7 +1981,7 @@ How to enable automatic scrolling in Kendo UI property grid? Control the automat
 
 ### toolbar `String|Function|Array|Object`
 
-* If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole PropertyGrid toolbar and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
+* If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole PropertyGrid toolbar and the string value will be passed as an argument to a [`kendo.template()`](/api/kendo/methods/template) function.
 * If a `Function` value is assigned (it may be a `kendo.template()` function call or a generic function reference), then the return value of the function will be used to render the contents of the PropertyGrid toolbar.
 * If an `Array` value is assigned, it will be treated as the list of commands which are displayed in the PropertyGrid toolbar. Commands can be custom or built-in. The supported built-in commands are:
   * `search`&mdash;Adds a Search input to the ToolBar of the PropertyGrid. Search is performed by property name.
@@ -1994,7 +1994,7 @@ How to enable automatic scrolling in Kendo UI property grid? Control the automat
   * `pdf`&mdash;Exports the data in PDF format.
 * If an `Object` value is assigned, it will propagate these properties to the underlying Toolbar:
   * `items` - an array of commands as explained above
-  * `overflow` - an object that configures the overflow behavior of the toolbar. The same as [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) property
+  * `overflow` - an object that configures the overflow behavior of the toolbar. The same as [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) property
 
 
 <div class="meta-api-description">
@@ -2043,7 +2043,7 @@ How to customize the top toolbar in Kendo UI property grid component? Customize 
       });
     </script>
 
-Apart from the built-in tools, the PropertyGrid fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the component using the components available in the ToolBar itself. Note that all tools (commands) must have their name specified, as demonstrated in the next example:
+Apart from the built-in tools, the PropertyGrid fully exposes the [ToolBar.items API](/api/ui/toolbar/configuration/items). This way you can specify any custom tools in the component using the components available in the ToolBar itself. Note that all tools (commands) must have their name specified, as demonstrated in the next example:
 
 #### Example - add split button to the ToolBar
 
@@ -2177,7 +2177,7 @@ How do I customize the toolbar buttons in Kendo UI PropertyGrid? Configure and c
 
 ### toolbar.text `String`
 
-The text that is displayed by the command button. If not set, the PropertyGrid will use the [`name`](/api/javascript/ui/propertygrid#configuration-toolbar.name) option as the button text instead.
+The text that is displayed by the command button. If not set, the PropertyGrid will use the [`name`](/api/ui/propertygrid#configuration-toolbar.name) option as the button text instead.
 
 
 <div class="meta-api-description">
@@ -2351,7 +2351,7 @@ How do I customize the buttons in the PropertyGrid toolbar? Configure, define, o
 
 ### toolbar.items.text `String`
 
-The text that is displayed by the command button. If not set, the PropertyGrid will use the [`name`](/api/javascript/ui/propertygrid#configuration-toolbar.name) option as the button text instead.
+The text that is displayed by the command button. If not set, the PropertyGrid will use the [`name`](/api/ui/propertygrid#configuration-toolbar.name) option as the button text instead.
 
 
 <div class="meta-api-description">
@@ -2378,7 +2378,7 @@ How to customize the text on toolbar buttons in Kendo UI PropertyGrid? Configure
     </script>
 
 ### toolbar.overflow `Object`
-Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+Specifies [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) configuration for the toolbar.
 
 
 <div class="meta-api-description">
@@ -2612,7 +2612,7 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
 
 ### edit
 
-Switches the specified value cell in edit mode. Requires the [edit mode](/api/javascript/ui/propertygrid/configuration/editMode) to be enabled. Fires the [`beforeEdit`](/api/javascript/ui/propertygrid/events/beforeedit) and [`edit`](/api/javascript/ui/propertygrid/events/edit) events.
+Switches the specified value cell in edit mode. Requires the [edit mode](/api/ui/propertygrid/configuration/editMode) to be enabled. Fires the [`beforeEdit`](/api/ui/propertygrid/events/beforeedit) and [`edit`](/api/ui/propertygrid/events/edit) events.
 
 
 <div class="meta-api-description">
@@ -2658,7 +2658,7 @@ The object to which the PropertyGrid will bind to.
 
 ##### items `Array`
 
-An array of configuration options for the fields of the passed object. Refer to the [`items`](/api/javascript/ui/propertygrid/configuration/items) configuration option for further details.
+An array of configuration options for the fields of the passed object. Refer to the [`items`](/api/ui/propertygrid/configuration/items) configuration option for further details.
 
 #### Returns
 
@@ -2704,7 +2704,7 @@ An array of configuration options for the fields of the passed object. Refer to 
 
 ### resetState
 
-Cancels any changes in the values of the object's properties. Resets the object to the initial state or the latest state set via the [`saveState`](/api/javascript/ui/propertygrid/methods/savestate) method.
+Cancels any changes in the values of the object's properties. Resets the object to the initial state or the latest state set via the [`saveState`](/api/ui/propertygrid/methods/savestate) method.
 
 
 <div class="meta-api-description">
@@ -2737,7 +2737,7 @@ How do I revert property changes in Kendo UI PropertyGrid? Discard changes, undo
 
 ### saveAsExcel
 
-Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/propertygrid/events/excelexport) event.
+Initiates the Excel export. Also fires the [`excelExport`](/api/ui/propertygrid/events/excelexport) event.
 
 > Calling this method may trigger the built-in browser popup blocker. To avoid that, always call it as a response to an end-user action (for example, a button click).
 
@@ -2771,7 +2771,7 @@ How to export property grid data as Excel file using Kendo UI for jQuery? export
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [`pdfExport`](/api/javascript/ui/propertygrid/events/pdfexport) event.
+Initiates the PDF export and returns a promise. Also triggers the [`pdfExport`](/api/ui/propertygrid/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser popup blocker. To avoid that, call this method as a response to an end-user action (for example, a button click).
 
@@ -2782,7 +2782,7 @@ How to export property grid data as a PDF in Kendo UI for jQuery? Export propert
 
 #### Returns
 
-`Promise`&mdash;A promise that will be resolved when the export completes. The same promise is available in the [`pdfExport`](/api/javascript/ui/propertygrid/events/pdfexport) event arguments.
+`Promise`&mdash;A promise that will be resolved when the export completes. The same promise is available in the [`pdfExport`](/api/ui/propertygrid/events/pdfexport) event arguments.
 
 #### Example - manually initiate the PDF export
 
@@ -2809,7 +2809,7 @@ How to export property grid data as a PDF in Kendo UI for jQuery? Export propert
 
 ### saveState
 
-Updates the state of the object and clears all `dirty` flags. Calling the [`resetState`](/api/javascript/ui/propertygrid/methods/resetstate) method will revert any changes to that updated state.
+Updates the state of the object and clears all `dirty` flags. Calling the [`resetState`](/api/ui/propertygrid/methods/resetstate) method will revert any changes to that updated state.
 
 
 <div class="meta-api-description">
@@ -2908,7 +2908,7 @@ A DOM element or a jQuery object which represents the table row.
 
 ### toggleDetails
 
-Toggles the Details/Info box, when enabled. See the [`showDetails`](/api/javascript/ui/propertygrid/configuration/showdetails) configuration option for details on enabling/disabling the functionality.
+Toggles the Details/Info box, when enabled. See the [`showDetails`](/api/ui/propertygrid/configuration/showdetails) configuration option for details on enabling/disabling the functionality.
 
 
 <div class="meta-api-description">
@@ -3153,7 +3153,7 @@ How to handle save/cancel operations before cell closes in Kendo UI PropertyGrid
 
 ##### e.container `jQuery`
 
-The jQuery object that represents the edit container element. For more information, refer to the [`edit` event arguments](/api/javascript/ui/propertygrid/events/edit).
+The jQuery object that represents the edit container element. For more information, refer to the [`edit` event arguments](/api/ui/propertygrid/events/edit).
 
 ##### e.model `kendo.data.Model`
 
@@ -3374,7 +3374,7 @@ The array of data items that is used to create the Excel workbook.
 
 ##### e.workbook `Object`
 
-The Excel [`workbook` configuration object](/api/javascript/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will be reflected in the output Excel document.
+The Excel [`workbook` configuration object](/api/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will be reflected in the output Excel document.
 
 ##### e.preventDefault `Function`
 

@@ -95,7 +95,7 @@ To revert to the series colors from version 4.x, you can:
   $series-e: #ff5722;
   $series-f: #e91e63;
 
-- Use the [`seriesColors`](/api/javascript/dataviz/ui/chart/configuration/seriescolors) configuration setting for individual Chart instances:
+- Use the [`seriesColors`](/api/dataviz/ui/chart/configuration/seriescolors) configuration setting for individual Chart instances:
 
   var chartDefaultV4Colors =
   ['#ff6358', '#ffd246', '#78d237', '#28b4c8', '#2d73f5', '#aa46be'];
@@ -129,9 +129,9 @@ To revert to the series colors from version 4.x, you can:
 
 ### Using Pattern Fills
 
-In addition to solid colors, the Chart series can also be filled with repeating patterns by using the [`series.pattern`](/api/javascript/dataviz/ui/chart/configuration/series.pattern) configuration setting.
+In addition to solid colors, the Chart series can also be filled with repeating patterns by using the [`series.pattern`](/api/dataviz/ui/chart/configuration/series.pattern) configuration setting.
 
-> The pattern inherits the [`series.color`](/api/javascript/dataviz/ui/chart/configuration/series.color) as main color and accepts an optional `background` color.
+> The pattern inherits the [`series.color`](/api/dataviz/ui/chart/configuration/series.color) as main color and accepts an optional `background` color.
 
 The following customizable pattern fills are available:
 
@@ -254,5 +254,5 @@ You can also customize the chart's animation by taking advantage of the [Kendo M
 ## See Also
 
 - [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
-- [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+- [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)
 - [Kendo Motion System](https://www.telerik.com/design-system/docs/foundation/motion/)

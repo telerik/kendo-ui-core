@@ -64,7 +64,7 @@ To bind the DateInput to a property from the `PageModel`, follow the next steps:
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the DateInput](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput)
+* [Client-Side API of the DateInput](https://docs.telerik.com/kendo-ui/api/ui/dateinput)
 * [Server-Side HtmlHelper API of the DateInput](/api/dateinput)
 * [Server-Side TagHelper API of the DateInput](/api/taghelpers/dateinput)
 * [Knowledge Base Section](/knowledge-base)

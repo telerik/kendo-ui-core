@@ -17,7 +17,7 @@ To keep its value, the NumericTextBox uses a JavaScript `Number` object which ha
 
 This limitation comes from JavaScript and cannot be worked around in a feasible way. You are recommended to use an `<input>` element with server validation because some server languages can parse long numbers.
 
-On the other hand, if the user enters a number with a greater precision than is currently configured through the `decimals` property, the widget value will be rounded. For more details and examples, refer to the [API documentation on `decimals`](/api/javascript/ui/numerictextbox/configuration/decimals).
+On the other hand, if the user enters a number with a greater precision than is currently configured through the `decimals` property, the widget value will be rounded. For more details and examples, refer to the [API documentation on `decimals`](/api/ui/numerictextbox/configuration/decimals).
 
 ## Input Type
 
@@ -41,4 +41,4 @@ To render a numeric software keyboard, use either of the following workarounds:
 
 ## See Also
 
-* [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
+* [JavaScript API Reference of the NumericTextBox](/api/ui/numerictextbox)

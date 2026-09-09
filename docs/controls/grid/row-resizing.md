@@ -26,7 +26,7 @@ To enable the Drag and Drop functionality, set the `resizable.rows` property to 
 
 ## Multiple Rows
 
-The user can resize more than one row at the same time. To do so, set the [`selectable`](/api/javascript/ui/grid/configuration/selectable) property to `multiple row`. Once the user has made multiple selections, they can drag the resize handle on one of the rows and the resize will affect the rest of the selected elements automatically.
+The user can resize more than one row at the same time. To do so, set the [`selectable`](/api/ui/grid/configuration/selectable) property to `multiple row`. Once the user has made multiple selections, they can drag the resize handle on one of the rows and the resize will affect the rest of the selected elements automatically.
 
     $("#grid").kendoGrid({
         resizable: {
@@ -38,7 +38,7 @@ The user can resize more than one row at the same time. To do so, set the [`sele
 
 ## Row Resize Event
 
-The [`rowResize`](/api/javascript/ui/grid/events/rowResize) event fires when the user resizes one or more rows.
+The [`rowResize`](/api/ui/grid/events/rowResize) event fires when the user resizes one or more rows.
 
     $("#grid").kendoGrid({
         resizable: {
@@ -59,5 +59,5 @@ The [`rowResize`](/api/javascript/ui/grid/events/rowResize) event fires when the
 ## See Also
 
 * [Row Resizing in the Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/row-resizing)
-* [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/ui/grid)
 

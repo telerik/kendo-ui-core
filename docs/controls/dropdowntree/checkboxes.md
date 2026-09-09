@@ -42,4 +42,4 @@ You can remove the tags (items) through their **X** button which will automatica
 ## See Also
 
 * [Checkboxes in the DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/checkboxes)
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)
+* [JavaScript API Reference of the DropDownTree](/api/ui/dropdowntree)

@@ -271,7 +271,7 @@ You can reference the Timeline instances that you have created and build on top 
         var timeline = $("#timeline").data().kendoTimeline; // timeline is a reference to the existing timeline instance of the helper.
     </script>
     ```
-1. Use the [Timeline client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline#methods) to control the behavior of the widget. In this example, you will use the `open` method to open an event details of the Timeline.
+1. Use the [Timeline client-side API](https://docs.telerik.com/kendo-ui/api/ui/timeline#methods) to control the behavior of the widget. In this example, you will use the `open` method to open an event details of the Timeline.
     ```JS script
     <script>
         var timeline = $("#timeline").data().kendoTimeline; // timeline is a reference to the existing timeline instance of the helper.
@@ -292,6 +292,6 @@ You can continue experimenting with the code sample above by running it in the T
 * [Use Shared DataSource for the Timeline]({% slug shared_datasource_timeline_aspnetcore %})
 ## See Also
 * [Using the API of the Timeline for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/api)
-* [Client-Side API of the Timeline](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)
+* [Client-Side API of the Timeline](https://docs.telerik.com/kendo-ui/api/ui/timeline)
 * [Server-Side API of the Timeline](/api/timeline)
 * [Knowledge Base Section](/knowledge-base)

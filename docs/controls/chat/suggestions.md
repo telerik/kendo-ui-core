@@ -26,7 +26,7 @@ Message suggestions are persistent quick-reply options that appear below the cha
 
 ### Basic Configuration
 
-Configure message suggestions using the [`suggestions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestions) array in the Chat initialization:
+Configure message suggestions using the [`suggestions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/suggestions) array in the Chat initialization:
 
 ```javascript
 $("#chat").kendoChat({
@@ -43,7 +43,7 @@ $("#chat").kendoChat({
 
 ### Suggestions Behavior
 
-The [`suggestionsBehavior`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestionsbehavior) option controls what happens when a user clicks a message suggestion. The supported values are:
+The [`suggestionsBehavior`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/suggestionsbehavior) option controls what happens when a user clicks a message suggestion. The supported values are:
 
 - `"send"` (default)—The suggestion text is immediately sent as a message.
 - `"insert"`—The suggestion text is inserted into the message box input, allowing the user to edit it before sending.
@@ -77,7 +77,7 @@ The [`suggestionsBehavior`](https://www.telerik.com/kendo-jquery-ui/documentatio
 
 ### Suggestions Layout Mode
 
-The [`suggestionsLayoutMode`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestionslayoutmode) option controls how message suggestions are arranged visually. The supported values are:
+The [`suggestionsLayoutMode`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/suggestionslayoutmode) option controls how message suggestions are arranged visually. The supported values are:
 
 - `"scroll"` (default)—Suggestions are displayed in a horizontally scrollable row.
 - `"wrap"`—Suggestions wrap to multiple lines when they exceed the available width.
@@ -160,7 +160,7 @@ Implement the `suggestionClick` event to handle user interactions with message s
 
 ### Custom Suggestion Templates
 
-You can customize the appearance of suggestions using the [`suggestionTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestionTemplate) :
+You can customize the appearance of suggestions using the [`suggestionTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/suggestionTemplate) :
 
 ```dojo
     <div id="chat"></div>
@@ -213,7 +213,7 @@ Suggested actions are contextual buttons that appear with specific messages, typ
 
 ### Adding Suggested Actions to Messages
 
-Include suggested actions when posting messages using the [`suggestedActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestedActions) property:
+Include suggested actions when posting messages using the [`suggestedActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/suggestedActions) property:
 
 ```dojo
         <div id="chat"></div>
@@ -292,7 +292,7 @@ Suggested actions automatically trigger the `sendMessage` event when clicked:
 
 ### Custom Suggested Actions Templates
 
-You can customize the appearance of suggestions actions using the [`suggestiedActionTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestionTemplate). The `k-suggestions` class must be applied to the individual suggestion elements. The wrapping element must have the `ref-chat-suggestion-group` attribute.
+You can customize the appearance of suggestions actions using the [`suggestiedActionTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/suggestionTemplate). The `k-suggestions` class must be applied to the individual suggestion elements. The wrapping element must have the `ref-chat-suggestion-group` attribute.
 
 ```dojo
     <div id="chat"></div>
@@ -334,6 +334,6 @@ You can customize the appearance of suggestions actions using the [`suggestiedAc
 
 * [Suggestions (Demo)](https://demos.telerik.com/kendo-ui/chat/suggestions)
 * [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
-* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
+* [JavaScript API Reference of the Chat](/api/ui/chat)
 * [Chat Overview]({% slug overview_kendoui_chat_widget %})
 * [Chat Templates]({% slug templates_kendoui_chat %})

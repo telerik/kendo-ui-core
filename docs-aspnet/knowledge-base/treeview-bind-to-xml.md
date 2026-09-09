@@ -311,7 +311,7 @@ To see the complete example, refer to the [binding the TreeView to XML data](htt
 
 ## See Also
 
-* [Client-Side API Reference of the TreeView for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [Client-Side API Reference of the TreeView for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/treeview)
 * [Server-Side API Reference of the TreeView for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/treeview)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2024%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

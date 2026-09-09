@@ -13,7 +13,7 @@ The PanelBar enables you to dynamically add or remove items by using its API or 
 
 ## Using the API
 
-The [PanelBar API](/api/javascript/ui/panelbar) provides methods for dynamically adding or removing PanelBar items.
+The [PanelBar API](/api/ui/panelbar) provides methods for dynamically adding or removing PanelBar items.
 
 To add items, provide the new item as a JSON object along with a reference item. A reference item is a target PanelBar item HTML element that already exists in the PanelBar. The reference item will be used to determine the placement in the hierarchy of the new item. Any valid jQuery selector can be used to obtain a reference to the target item. For a runnable example, refer to the [demo on using the API of the PanelBar](https://demos.telerik.com/kendo-ui/panelbar/api).
 
@@ -67,4 +67,4 @@ The following example demonstrates how to use the `disable`, `expand`, and `sele
 
 * [Basic Usage of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/index)
 * [Using the API of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/api)
-* [JavaScript API Reference of the PanelBar](/api/javascript/ui/panelbar)
+* [JavaScript API Reference of the PanelBar](/api/ui/panelbar)

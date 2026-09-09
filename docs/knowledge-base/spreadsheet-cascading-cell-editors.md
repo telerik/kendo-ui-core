@@ -127,5 +127,5 @@ To achieve the desired scenario, refer to the following implementation:
 
 ## See Also
 
-* [Kendo UI for jQuery Spreadsheet API Reference](/api/javascript/ui/spreadsheet)
+* [Kendo UI for jQuery Spreadsheet API Reference](/api/ui/spreadsheet)
 * [Common Issues in Kendo UI for jQuery]({% slug troubleshooting_common_issues_kendoui %})

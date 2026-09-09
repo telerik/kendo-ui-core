@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.data.GanttDependencyDataSource
 
-The data source of the dependencies used by the [`kendo.ui.Gantt`](/api/javascript/ui/gantt) widget. Inherits from [`kendo.data.DataSource`](/api/framework/datasource). The `GanttDependencyDataSource` contains instances of the [`kendo.data.GanttDependency`](/api/framework/ganttdependency) class.
+The data source of the dependencies used by the [`kendo.ui.Gantt`](/api/ui/gantt) widget. Inherits from [`kendo.data.DataSource`](/api/framework/datasource). The `GanttDependencyDataSource` contains instances of the [`kendo.data.GanttDependency`](/api/framework/ganttdependency) class.
 
 ## Configuration
 

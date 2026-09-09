@@ -10,7 +10,7 @@ position: 7
 
 # Saving Files
 
-As of the 2014 Q3 release, you can save files on the client machine by using the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) method.
+As of the 2014 Q3 release, you can save files on the client machine by using the [`kendo.saveAs`](/api/kendo/methods/saveas) method.
 
 ## Getting Started
 
@@ -47,7 +47,7 @@ The following example demonstrates how to save a text file on the client by usin
 
 The `kendo.saveAs` will attempt to save the file using client-side API in browsers that support file creation (IE10+, Google Chrome and Firefox). If the browser does not implement an API for saving files, then `kendo.saveAs` could POST the content to a server-side proxy, which will stream the file back to the end user. The server-side proxy approach works in all [supported browsers]({% slug wbe_browserand_operating_system_support %}). Set the `proxyURL` option to enable the server proxy, as demonstrated below.
 
-When a proxy is used the `kendo.saveAs()` method includes any CSRF and anti-forgery tokens out of the box as long as they are present on the page. The logic internally uses the [`kendo.antiForgeryTokens()`](/api/javascript/kendo/methods/antiforgerytokens) method and adds that to the request data as it posts to the proxy.
+When a proxy is used the `kendo.saveAs()` method includes any CSRF and anti-forgery tokens out of the box as long as they are present on the page. The logic internally uses the [`kendo.antiForgeryTokens()`](/api/kendo/methods/antiforgerytokens) method and adds that to the request data as it posts to the proxy.
 
 ```
 <script>
@@ -235,4 +235,4 @@ public @ResponseBody void save(String fileName, String base64, String contentTyp
 
 * [Overview of the Excel Export Feature]({% slug introduction_excelexport_kendoui %})
 * [Overview of Kendo UI Drawing API](/framework/drawing/overview)
-* [JavaScript API Reference on PDF Export](/api/javascript/drawing/pdfoptions)
+* [JavaScript API Reference on PDF Export](/api/drawing/pdfoptions)

@@ -80,4 +80,4 @@ To achieve the desired scenario, use the following suggested implementation:
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Grid](/api/ui/grid)

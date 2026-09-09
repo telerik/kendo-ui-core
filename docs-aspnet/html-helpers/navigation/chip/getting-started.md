@@ -105,6 +105,6 @@ To display a label on the Chip, use the [`Label`](/api/kendo.mvc.ui.fluent/chipb
 ## See Also
 
 * [Using the API of the Chip for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chip/api)
-* [Client-Side API of the Chip HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chip)
+* [Client-Side API of the Chip HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/chip)
 * [Server-Side API of the Chip HtmlHelper for {{ site.framework }}](/api/chip)
 * [Knowledge Base Section](/knowledge-base)

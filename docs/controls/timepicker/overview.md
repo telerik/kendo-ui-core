@@ -33,9 +33,9 @@ The widget supports configurable options for setting its format, minimum and max
 
 * [Getting Started with the Kendo UI TimePicker for jQuery]({% slug getting_started_kendoui_timepicker_widget %})
 * [Overview of the TimePicker (Demo)](https://demos.telerik.com/kendo-ui/timepicker/index)
-* [JavaScript API Reference of the TimePicker](/api/javascript/ui/timepicker)
+* [JavaScript API Reference of the TimePicker](/api/ui/timepicker)
 ## See Also
 
 * [Overview of the TimePicker (Demo)](https://demos.telerik.com/kendo-ui/timepicker/index)
 * [Using the API of the TimePicker (Demo)](https://demos.telerik.com/kendo-ui/timepicker/api)
-* [JavaScript API Reference of the TimePicker](/api/javascript/ui/timepicker)
+* [JavaScript API Reference of the TimePicker](/api/ui/timepicker)

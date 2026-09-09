@@ -24,11 +24,11 @@ The paste operation supports two interaction modes:
 
 To enable the clipboard feature, configure the Grid with the following settings:
 
-* Add the [`allowCopy: true`](/api/javascript/ui/grid/configuration/allowcopy) option to allow copying the selected cells into the clipboard.
-* Add the [`allowPaste: true`](/api/javascript/ui/grid/configuration/allowpaste) option enable the paste operation.
+* Add the [`allowCopy: true`](/api/ui/grid/configuration/allowcopy) option to allow copying the selected cells into the clipboard.
+* Add the [`allowPaste: true`](/api/ui/grid/configuration/allowpaste) option enable the paste operation.
 * Make the Grid [selectable]({% slug selection_kendoui_grid_widget %}).
-* Enable the Grid keyboard navigation (add the [`navigatable: true`](/api/javascript/ui/grid/configuration/navigatable) option) because the pasting works through the `CTRL+V` keyboard shortcut.
-* Include the `paste` [`toolbar`](/api/javascript/ui/grid/configuration/toolbar) command to display a dropdown control with the paste modes.
+* Enable the Grid keyboard navigation (add the [`navigatable: true`](/api/ui/grid/configuration/navigatable) option) because the pasting works through the `CTRL+V` keyboard shortcut.
+* Include the `paste` [`toolbar`](/api/ui/grid/configuration/toolbar) command to display a dropdown control with the paste modes.
 
 The following example demonstrates how to configure the Grid clipboard functionality that allows you to copy and paste content from Excel to the Grid and the other way around.
 
@@ -91,7 +91,7 @@ When the Insert mode is enabled, the paste operation will create a new Grid row 
 
 ## Events
 
-The Data Grid exposes a [`paste`](/api/javascript/ui/grid/events/paste) event. The event fires after the user pastes data by using the built-in paste functionality and it contains the following event fields:
+The Data Grid exposes a [`paste`](/api/ui/grid/events/paste) event. The event fires after the user pastes data by using the built-in paste functionality and it contains the following event fields:
 
 * `items`&mdash;The pasted data from the last paste operation.
 * `type`&mdash;The Replace or Insert paste mode.
@@ -129,5 +129,5 @@ The following example demonstrates how to subscribe to the `paste` event.
 * [Copy to Excel by using the jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/copy-to-excel)
 * [Paste from Excel by using the jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/paste-from-excel)
 * [Select and Export to Excel by using the jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/selection-export)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

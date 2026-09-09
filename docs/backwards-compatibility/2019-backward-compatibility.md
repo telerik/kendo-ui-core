@@ -15,7 +15,7 @@ This article lists the breaking changes in the Kendo UI 2019 releases.
 
 **Draggable**
 
-As of the Kendo UI 2019 R3 SP1 release, setting [the holdToDrag option](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable/configuration/holdtodrag) to `false` does not cancel the [hold event](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable/events/hold).
+As of the Kendo UI 2019 R3 SP1 release, setting [the holdToDrag option](https://docs.telerik.com/kendo-ui/api/ui/draggable/configuration/holdtodrag) to `false` does not cancel the [hold event](https://docs.telerik.com/kendo-ui/api/ui/draggable/events/hold).
 
 ## Kendo UI 2019 R2 SP1
 
@@ -57,7 +57,7 @@ As of the Kendo UI 2019 R2 SP1 release, the recommended approach for moving tool
 
 **Scheduler**
 
-The mobile pane in which [the Adaptive Scheduler]({% slug adaptiverendering_kendoui_scheduler_widget %}) is placed does not automatically expand its height. Therefore, it is required to define an explicit pixel Scheduler height by setting [the height option](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/height). This change is part of the improved adaptive rendering of the widget.
+The mobile pane in which [the Adaptive Scheduler]({% slug adaptiverendering_kendoui_scheduler_widget %}) is placed does not automatically expand its height. Therefore, it is required to define an explicit pixel Scheduler height by setting [the height option](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/height). This change is part of the improved adaptive rendering of the widget.
 
 ## Kendo UI 2019 R1
 

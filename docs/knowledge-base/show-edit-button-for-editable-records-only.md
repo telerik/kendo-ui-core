@@ -39,7 +39,7 @@ How can I show edit buttons only for the editable records of the Kendo UI Grid f
 
 The following example demonstrates how to show the **Edit** buttons in the Grid only for records which meet certain criteria.
 
-> For Kendo UI releases 2017 R1 or later use the built-in [`columns.command.visible`](/api/javascript/ui/grid/configuration/columns.command#columns.command.visible) function of the Grid instead.
+> For Kendo UI releases 2017 R1 or later use the built-in [`columns.command.visible`](/api/ui/grid/configuration/columns.command#columns.command.visible) function of the Grid instead.
 
 ```dojo
     <div id="example" class="k-content">
@@ -120,4 +120,4 @@ The following example demonstrates how to show the **Edit** buttons in the Grid 
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

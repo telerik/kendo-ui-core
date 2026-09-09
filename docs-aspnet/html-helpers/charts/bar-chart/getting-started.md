@@ -309,11 +309,11 @@ The Bar Chart [exposes various events](/api/kendo.mvc.ui.fluent/charteventbuilde
 ```
 {% endif %}
 
-For more examples, refer to the [documentation of the Bar Chart client API Events](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events).
+For more examples, refer to the [documentation of the Bar Chart client API Events](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart#events).
 
 ## 6. (Optional) Reference Existing Bar Chart Instances
 
-To use the [client-side API of the Bar Chart](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart) and build on top of its initial configuration, you need a reference to the Bar Chart instance. Once you get a valid reference, you can call the respective API methods:
+To use the [client-side API of the Bar Chart](https://docs.telerik.com/kendo-ui/api/ui/chart) and build on top of its initial configuration, you need a reference to the Bar Chart instance. Once you get a valid reference, you can call the respective API methods:
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
@@ -323,7 +323,7 @@ To use the [client-side API of the Bar Chart](https://docs.telerik.com/kendo-ui/
         </script>
     ```
 
-1. Use the [client-side API of the Bar Chart](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart) to control the behavior of the widget. In this example, you will use the [`redraw`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/redraw) method to disable the Bar Chart.
+1. Use the [client-side API of the Bar Chart](https://docs.telerik.com/kendo-ui/api/ui/chart) to control the behavior of the widget. In this example, you will use the [`redraw`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/methods/redraw) method to disable the Bar Chart.
 
     ```JS
         <script>
@@ -355,6 +355,6 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Client-Side API of the Chart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Client-Side API of the Chart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart)
 * [Server-Side API of the Chart](/api/chart)
 * [Knowledge Base Section](/knowledge-base)

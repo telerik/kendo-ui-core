@@ -9,7 +9,7 @@ position: 4
 
 # Layout
 
-The RadioGroup widget supports two types of [`layout`](/api/javascript/ui/radiogroup/configuration/layout) - "horizontal" and "vertical". By default the radio buttons are rendered vertically.
+The RadioGroup widget supports two types of [`layout`](/api/ui/radiogroup/configuration/layout) - "horizontal" and "vertical". By default the radio buttons are rendered vertically.
 
 The following example shows how to set the RadioGroup layout:
 
@@ -27,4 +27,4 @@ The following example shows how to set the RadioGroup layout:
 ## See Also
 
 * [Layout of the RadioGroup (Demo)](https://demos.telerik.com/kendo-ui/radiogroup/layout)
-* [JavaScript API Reference of the RadioGroup](/api/javascript/ui/radiogroup)
+* [JavaScript API Reference of the RadioGroup](/api/ui/radiogroup)

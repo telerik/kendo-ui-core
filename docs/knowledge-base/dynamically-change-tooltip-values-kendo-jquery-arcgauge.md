@@ -28,7 +28,7 @@ ticketid: 1696114
 
 ## Description
 
-I want to create a tooltip for the [ArcGauge](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge) that dynamically changes its values based on the ArcGauge data. For example, when hovering over the blue section, the tooltip should show "65% utilized," and when hovering over the light grey section, it should show "35 %" The tooltip values must update dynamically as the ArcGauge values change.
+I want to create a tooltip for the [ArcGauge](https://docs.telerik.com/kendo-ui/api/dataviz/ui/arcgauge) that dynamically changes its values based on the ArcGauge data. For example, when hovering over the blue section, the tooltip should show "65% utilized," and when hovering over the light grey section, it should show "35 %" The tooltip values must update dynamically as the ArcGauge values change.
 
 This knowledge base article also answers the following questions:
 - How to add a tooltip to Kendo UI for jQuery ArcGauge?
@@ -149,6 +149,6 @@ The following example creates an ArcGauge paired with a Slider and a Tooltip. Th
 
 ## See Also
 
-- [ArcGauge Documentation](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge)
-- [Tooltip Configuration API](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip/configuration/filter)
-- [Tooltip Refresh Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip/methods/refresh)
+- [ArcGauge Documentation](https://docs.telerik.com/kendo-ui/api/dataviz/ui/arcgauge)
+- [Tooltip Configuration API](https://docs.telerik.com/kendo-ui/api/ui/tooltip/configuration/filter)
+- [Tooltip Refresh Method](https://docs.telerik.com/kendo-ui/api/ui/tooltip/methods/refresh)

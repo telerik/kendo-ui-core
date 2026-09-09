@@ -35,4 +35,4 @@ The template wraps the `value` in a `<div>` HTML element. The following example 
 ## See Also
 
 * [Customizing the Templates of the Calendar (Demo)](https://demos.telerik.com/kendo-ui/calendar/template)
-* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/ui/calendar)

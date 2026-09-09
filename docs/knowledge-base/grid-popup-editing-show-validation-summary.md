@@ -30,7 +30,7 @@ How can I display the validation summary instead of tooltips in the Grid popup e
 
 To achieve the desired scenario: 
 
-1. Add an [`edit`](/api/javascript/ui/grid/events/edit) event handler to generate the Validation summary and append it to a predefined HTML element in your popup editing window.
+1. Add an [`edit`](/api/ui/grid/events/edit) event handler to generate the Validation summary and append it to a predefined HTML element in your popup editing window.
 1. Hide the validation tooltip with CSS.
 
 
@@ -122,4 +122,4 @@ To achieve the desired scenario:
 
 * [Kendo UI for jQuery Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
 * [jQuery Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
-* [JavaScript API of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [JavaScript API of the Grid](https://docs.telerik.com/kendo-ui/api/ui/grid)

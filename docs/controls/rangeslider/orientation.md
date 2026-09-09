@@ -11,7 +11,7 @@ position: 4
 
 The RangeSlider supports two modes of orientation—horizontal and vertical.
 
-By default, the component is in horizontal mode. To change it to vertical mode, set the [orientation](/api/javascript/ui/rangeslider/configuration/orientation) property to `vertical`.
+By default, the component is in horizontal mode. To change it to vertical mode, set the [orientation](/api/ui/rangeslider/configuration/orientation) property to `vertical`.
 
 When in horizontal mode, the RangeSlider displays the smallest value at the start of the track and the largest value at the end. When in vertical mode, the component displays the smallest value at the bottom and the largest at the top.
 
@@ -30,4 +30,4 @@ When in horizontal mode, the RangeSlider displays the smallest value at the star
 
 ## See Also 
 
-* [JavaScript API Reference of the RangeSlider](/api/javascript/ui/rangeslider)
+* [JavaScript API Reference of the RangeSlider](/api/ui/rangeslider)

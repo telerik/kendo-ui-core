@@ -96,4 +96,4 @@ You can explicitly configure the docking behavior for a desired pane by using th
 
 ## See Also
 
-* [JavaScript API Reference of the DockManager](/api/javascript/ui/dockmanager)
+* [JavaScript API Reference of the DockManager](/api/ui/dockmanager)

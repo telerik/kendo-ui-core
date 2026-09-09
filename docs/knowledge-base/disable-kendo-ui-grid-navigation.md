@@ -80,4 +80,4 @@ Here is a runnable example to demonstrate the approach:
 ## See Also
 
 - [Kendo UI for jQuery Grid Overview](https://docs.telerik.com/kendo-ui/controls/grid/overview)
-- [Grid API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Grid API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid)

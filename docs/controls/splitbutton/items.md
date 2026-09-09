@@ -9,7 +9,7 @@ position: 3
 
 # Items
 
-The Kendo UI SplitButton provides a various set of options for its [items](/api/javascript/ui/splitbutton/configuration/items).
+The Kendo UI SplitButton provides a various set of options for its [items](/api/ui/splitbutton/configuration/items).
 
 The following example demonstrates how to configure the SplitButton items:
 
@@ -36,4 +36,4 @@ The following example demonstrates how to configure the SplitButton items:
 ## See Also
 
 * [Items of the SplitButton (Demo)](https://demos.telerik.com/kendo-ui/splitbutton/items)
-* [JavaScript API Reference of the SplitButton](/api/javascript/ui/splitbutton)
+* [JavaScript API Reference of the SplitButton](/api/ui/splitbutton)

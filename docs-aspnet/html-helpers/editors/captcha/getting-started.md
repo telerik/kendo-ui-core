@@ -204,7 +204,7 @@ You can reference the Captcha instances that you have created and build on top o
     </script>
     ```
 
-1. Use the [Captcha client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/captcha#methods) to control the behavior of the widget. In this example, you will use the `reset` method to refresh the captcha.
+1. Use the [Captcha client-side API](https://docs.telerik.com/kendo-ui/api/ui/captcha#methods) to control the behavior of the widget. In this example, you will use the `reset` method to refresh the captcha.
 
     ```JS script
     <script>
@@ -233,6 +233,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Captcha for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/api)
-* [Client-Side API of the Captcha](https://docs.telerik.com/kendo-ui/api/javascript/ui/captcha)
+* [Client-Side API of the Captcha](https://docs.telerik.com/kendo-ui/api/ui/captcha)
 * [Server-Side API of the Captcha](/api/captcha)
 * [Knowledge Base Section](/knowledge-base)

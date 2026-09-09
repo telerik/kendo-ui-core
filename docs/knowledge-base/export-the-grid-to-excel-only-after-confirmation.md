@@ -41,7 +41,7 @@ The Kendo UI Grid does not provide a built-in solution for achieving this behavi
 
 Apply custom logic on the `excelExport` event of the Grid. For more information, refer to:  
 
-* [https://docs.telerik.com/kendo-ui/api/javascript/ui/grid\/events/excelexport](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport)  
-* [https://docs.telerik.com/kendo-ui/api/javascript/ui/grid\/methods/saveasexcel](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveasexcel)  
+* [https://docs.telerik.com/kendo-ui/api/ui/grid\/events/excelexport](https://docs.telerik.com/kendo-ui/api/ui/grid/events/excelexport)  
+* [https://docs.telerik.com/kendo-ui/api/ui/grid\/methods/saveasexcel](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/saveasexcel)  
 
 [This Dojo example](https://dojo.telerik.com/eWogO) demonstrates the full implementation of the scenario. The used approach exports the file when the user confirms the action and prevents the default behavior when the user clicks **Cancel**.  

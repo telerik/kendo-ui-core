@@ -28,7 +28,7 @@ This sample demonstrates how to set minimum validation value when editing a Grid
 
 ## Solution
 
-This can be achieved using the [model configuration](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/schema#schema.model) on the Grid dataSource schema.
+This can be achieved using the [model configuration](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/schema#schema.model) on the Grid dataSource schema.
 
 ```dojo
  <div id="grid"></div>

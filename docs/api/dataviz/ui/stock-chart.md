@@ -1,7 +1,7 @@
 ---
 title: StockChart
 page_title: Configuration, methods and events of Kendo UI DataViz StockChart
-previous_url: /api/javascript/dataviz/stockchart, /api/dataviz/stockchart
+previous_url: /api/dataviz/stockchart, /api/dataviz/stockchart
 res_type: api
 ---
 
@@ -123,9 +123,9 @@ How to customize the category axis in Kendo UI StockChart navigator? Control and
 
 ### navigator.categoryAxis.autoBaseUnitSteps `Object`
 
-The discrete [navigator.categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-navigator-categoryAxis.baseUnitStep) values when
-either [navigator.categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-navigator-categoryAxis.baseUnit) is set to "fit" or
-[navigator.categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-navigator-categoryAxis.baseUnitStep) is set to "auto".
+The discrete [navigator.categoryAxis.baseUnitStep](/api/dataviz/ui/stock-chart#configuration-navigator-categoryAxis.baseUnitStep) values when
+either [navigator.categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-navigator-categoryAxis.baseUnit) is set to "fit" or
+[navigator.categoryAxis.baseUnitStep](/api/dataviz/ui/stock-chart#configuration-navigator-categoryAxis.baseUnitStep) is set to "auto".
 
 
 <div class="meta-api-description">
@@ -539,10 +539,10 @@ The supported values are:
 * "months"
 * "years"
 
-Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep)
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
+Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep)
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
 
-Series data is aggregated for the specified base unit using the [series.aggregate](/api/javascript/dataviz/ui/stock-chart#configuration-series.aggregate) function.
+Series data is aggregated for the specified base unit using the [series.aggregate](/api/dataviz/ui/stock-chart#configuration-series.aggregate) function.
 
 
 <div class="meta-api-description">
@@ -580,9 +580,9 @@ How do I adjust the time interval on a Kendo UI StockChart category axis? Adjust
 ### navigator.categoryAxis.baseUnitStep `Object` *(default: 1)*
 
 The step (interval) between categories in base units. Setting it to "auto" will set the step to such value
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
 
-This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit".
+This option is ignored if [categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit".
 
 
 <div class="meta-api-description">
@@ -620,8 +620,8 @@ How to adjust the spacing between data categories on a StockChart navigator's ca
 
 ### navigator.categoryAxis.color `String`
 
-The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb. Can be overridden by [categoryAxis.labels.color](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.labels.color) and
-[categoryAxis.line.color](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.line.color).
+The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb. Can be overridden by [categoryAxis.labels.color](/api/dataviz/ui/stock-chart#configuration-categoryAxis.labels.color) and
+[categoryAxis.line.color](/api/dataviz/ui/stock-chart#configuration-categoryAxis.line.color).
 
 
 <div class="meta-api-description">
@@ -660,7 +660,7 @@ How do I change the color of category axis labels in Kendo UI StockChart navigat
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [categoryAxis.crosshair.visible](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [categoryAxis.crosshair.visible](/api/dataviz/ui/stock-chart#configuration-categoryAxis.crosshair.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -833,7 +833,7 @@ How do I adjust the opacity of the navigator's category axis crosshair line in a
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](/api/dataviz/ui/stock-chart#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -1561,7 +1561,7 @@ How can I adjust the thickness of the crosshair line on a StockChart navigator c
 
 ### navigator.categoryAxis.field `String`
 
-The data item field which contains the category name. Requires the [dataSource](/api/javascript/dataviz/ui/stock-chart#configuration-dataSource) option to be set.
+The data item field which contains the category name. Requires the [dataSource](/api/dataviz/ui/stock-chart#configuration-dataSource) option to be set.
 
 
 <div class="meta-api-description">
@@ -1597,7 +1597,7 @@ If set to `true` the chart will position categories and series points on major t
 
 The default value is `false` except for "area" and "verticalArea".
 
-> This option is ignored if the [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) option is set to "bar", "column", "ohlc" or "candlestick".
+> This option is ignored if the [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) option is set to "bar", "column", "ohlc" or "candlestick".
 
 
 <div class="meta-api-description">
@@ -1926,7 +1926,7 @@ How do I customize date and time formatting for category axis labels in Kendo UI
 
 The format used to display the labels when the categories are dates. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
 
-> The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit). Setting the [categoryAxis.labels.format](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.labels.format) option will override the date formats.
+> The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit). Setting the [categoryAxis.labels.format](/api/dataviz/ui/stock-chart#configuration-categoryAxis.labels.format) option will override the date formats.
 
 
 <div class="meta-api-description">
@@ -1963,7 +1963,7 @@ How to customize date format in StockChart navigator category axis using dateFor
 
 ### navigator.categoryAxis.labels.dateFormats.days `String` *(default: "M/d")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "days".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "days".
 
 
 <div class="meta-api-description">
@@ -2000,7 +2000,7 @@ How do I customize the display format of day-based labels in a Kendo UI StockCha
 
 ### navigator.categoryAxis.labels.dateFormats.hours `String` *(default: "HH:mm")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "hours".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "hours".
 
 
 <div class="meta-api-description">
@@ -2037,7 +2037,7 @@ How do I customize the display format for hour labels on a stock chart navigator
 
 ### navigator.categoryAxis.labels.dateFormats.months `String` *(default: "MMM 'yy")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "months".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "months".
 
 
 <div class="meta-api-description">
@@ -2074,7 +2074,7 @@ How to format month labels in Kendo UI Stock Chart category axis? Customize and 
 
 ### navigator.categoryAxis.labels.dateFormats.weeks `String` *(default: "M/d")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "weeks".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "weeks".
 
 
 <div class="meta-api-description">
@@ -2111,7 +2111,7 @@ How to customize date formats for weekly labels on stock chart navigator categor
 
 ### navigator.categoryAxis.labels.dateFormats.years `String` *(default: "yyyy")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "years".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "years".
 
 
 <div class="meta-api-description">
@@ -3441,7 +3441,7 @@ How do I control the frequency of major category axis ticks in a Kendo UI StockC
 ### navigator.categoryAxis.max `Object`
 
 The last date displayed on the category date axis. By default, the minimum date is the same as the last category.
-This is often used in combination with the [categoryAxis.min](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.roundToBaseUnit) options to
+This is often used in combination with the [categoryAxis.min](/api/dataviz/ui/stock-chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.roundToBaseUnit) options to
 set up a fixed date range.
 
 
@@ -3475,8 +3475,8 @@ How to set maximum date on StockChart navigator category axis? Control and confi
 ### navigator.categoryAxis.maxDateGroups `Number` *(default: 10)*
 
 The maximum number of groups (categories) to display when
-[categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit" or
-[categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
+[categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit" or
+[categoryAxis.baseUnitStep](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
 
 
 <div class="meta-api-description">
@@ -3547,7 +3547,7 @@ How do I limit the number of category axis labels in a Kendo UI Stock Chart? Adj
 ### navigator.categoryAxis.min `Object`
 
 The first date displayed on the category date axis. By default, the minimum date is the same as the first category.
-This is often used in combination with the [categoryAxis.min](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.roundToBaseUnit) options to
+This is often used in combination with the [categoryAxis.min](/api/dataviz/ui/stock-chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.roundToBaseUnit) options to
 set up a fixed date range.
 
 
@@ -4295,7 +4295,7 @@ How do I reverse the category axis in Kendo UI StockChart navigator? Control the
 
 If set to `true` the chart will round the first and last date to the nearest base unit.
 
-The `roundToBaseUnit` option will be ignored if [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "ohlc" or "candlestick".
+The `roundToBaseUnit` option will be ignored if [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "ohlc" or "candlestick".
 
 
 <div class="meta-api-description">
@@ -4328,7 +4328,7 @@ How to configure Kendo UI StockChart navigator axis to snap dates to nearest tim
 
 The title configuration of the category axis.
 
-> The [categoryAxis.title.text](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.title.text) option must be set in order to display the title.
+> The [categoryAxis.title.text](/api/dataviz/ui/stock-chart#configuration-categoryAxis.title.text) option must be set in order to display the title.
 
 
 <div class="meta-api-description">
@@ -5188,7 +5188,7 @@ How do I configure the first day of the week for a weekly-based category axis in
 
 ### navigator.categoryAxis.weekStartDay `Number` *(default: kendo.days.Sunday)*
 
-The week start day when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "weeks".
+The week start day when [categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "weeks".
 
 The supported values are:
 
@@ -7926,7 +7926,7 @@ How do I adjust the padding above the navigator pane in a Kendo UI StockChart? C
 
 The title configuration of the navigator pane.
 
-> The [panes.title.text](/api/javascript/dataviz/ui/stock-chart#configuration-panes.title.text) option must be set in order to display the title.
+> The [panes.title.text](/api/dataviz/ui/stock-chart#configuration-panes.title.text) option must be set in order to display the title.
 
 
 <div class="meta-api-description">
@@ -8638,7 +8638,7 @@ How do I customize the chart type in the navigator's series of a stock chart wit
 
 The dash type of line chart.
 
-> The `dashType` option is taken into consideration only if the [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) option is set to "line".
+> The `dashType` option is taken into consideration only if the [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) option is set to "line".
 
 The following dash types are supported:
 
@@ -8920,7 +8920,7 @@ The data item field which contains the category name or date.
 
 > The points will be rendered in chronological order if the category is a date.
 
-> If specified, the [dateField](/api/javascript/dataviz/ui/stock-chart#configuration-dateField) option is used as a default.
+> If specified, the [dateField](/api/dataviz/ui/stock-chart#configuration-dateField) option is used as a default.
 
 
 <div class="meta-api-description">
@@ -12707,7 +12707,7 @@ The behavior for handling missing values. The supported values are:
 
 > The default value is "interpolate", except for "area" and stacked series which default to "zero".
 
-> The `missingValues` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area" and "line".
+> The `missingValues` option is supported when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "area" and "line".
 
 
 <div class="meta-api-description">
@@ -12777,7 +12777,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area", "line".
+> The `style` option is supported when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "area", "line".
 
 
 <div class="meta-api-description">
@@ -13126,9 +13126,9 @@ How do I adjust the spacing between data points in a Kendo UI stock chart naviga
 ### navigator.series.stack `Boolean|String|Object` *(default: false)*
 
 A boolean value indicating if the series should be stacked.
-A string value is interpreted as [navigator.series.stack.group](/api/javascript/dataviz/ui/stock-chart#configuration-series.stack.group).
+A string value is interpreted as [navigator.series.stack.group](/api/dataviz/ui/stock-chart#configuration-series.stack.group).
 
-> The `stack` options is supported when [navigator.series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [navigator.series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 > Stack settings of the first series are applied to the rest of the series.
 
@@ -13254,7 +13254,7 @@ How do I configure stacking in Kendo UI StockChart navigator series? Configure h
 
 Indicates that the series should be stacked in a group with the specified name.
 
-> The `group` option is supported when [navigator.series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar" or "column".
+> The `group` option is supported when [navigator.series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "bar" or "column".
 
 
 <div class="meta-api-description">
@@ -17256,9 +17256,9 @@ Specialized axis for displaying chronological data.
 
 ### categoryAxis.autoBaseUnitSteps `Object`
 
-The discrete [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) values when
-either [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit" or
-[categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
+The discrete [categoryAxis.baseUnitStep](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) values when
+either [categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit" or
+[categoryAxis.baseUnitStep](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
 
 
 <div class="meta-api-description">
@@ -17733,17 +17733,17 @@ The supported values are:
 * "weeks"
 * "years"
 
-Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep)
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
+Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep)
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
 
-Series data is aggregated for the specified base unit using the [series.aggregate](/api/javascript/dataviz/ui/stock-chart#configuration-series.aggregate) function.
+Series data is aggregated for the specified base unit using the [series.aggregate](/api/dataviz/ui/stock-chart#configuration-series.aggregate) function.
 
 ### categoryAxis.baseUnitStep `Object` *(default: 1)*
 
 The step (interval) between categories in base units. Setting it to "auto" will set the step to such value
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
 
-This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit".
+This option is ignored if [categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit".
 
 
 <div class="meta-api-description">
@@ -21222,7 +21222,7 @@ How do I adjust the width of the legend border in a Kendo UI StockChart? Adjust 
 
 The configuration of the Chart legend item.
 
-To override the marker configuration of individual series, use the [series.legendItem](/api/javascript/dataviz/ui/stock-chart#configuration-series.legendItem) settings of the series.
+To override the marker configuration of individual series, use the [series.legendItem](/api/dataviz/ui/stock-chart#configuration-series.legendItem) settings of the series.
 
 
 <div class="meta-api-description">
@@ -22127,7 +22127,7 @@ How to adjust opacity of line items in Kendo UI StockChart legend? Control or se
 
 The configuration of the Chart legend item markers.
 
-By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
+By default, the marker configuration will be the same as the [series.markers](/api/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
 
 
 <div class="meta-api-description">
@@ -25679,7 +25679,7 @@ How to make pane titles visible in Kendo UI StockChart? Control the display of p
     </script>
 
 ### pdf `Object`
-Configures the export settings for the [exportPDF](/api/javascript/dataviz/ui/stock-chart/methods/exportpdf) method.
+Configures the export settings for the [exportPDF](/api/dataviz/ui/stock-chart/methods/exportpdf) method.
 
 
 <div class="meta-api-description">
@@ -25809,7 +25809,7 @@ How do I set a custom date in Kendo UI StockChart PDF exports? Configure the exp
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](/api/javascript/dataviz/ui/stock-chart#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/dataviz/ui/stock-chart#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 
 <div class="meta-api-description">
@@ -26919,7 +26919,7 @@ The data item field which contains the category name or date.
 
 > The points will be rendered in chronological order if the category is a date.
 
-> If specified, the [dateField](/api/javascript/dataviz/ui/stock-chart#configuration-dateField) option is used as a default.
+> If specified, the [dateField](/api/dataviz/ui/stock-chart#configuration-dateField) option is used as a default.
 
 
 <div class="meta-api-description">
@@ -27019,7 +27019,7 @@ How do I configure target markers in Kendo UI StockChart series? Configure or se
 
 The name of the parent series of the trendline.
 
-> The `for` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to
+> The `for` option is supported when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to
 > "`linearTrendline`", "`exponentialTrendline`", "`logarithmicTrendline`", "`powerTrendline`", "`polynomialTrendline`" or "`movingAverageTrendline`".
 
 
@@ -27068,7 +27068,7 @@ How do I link a trendline to an existing series in a Kendo UI StockChart? Link a
 
 The trendline configuration options.
 
-> The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline", "powerTrendline" or "movingAverageTrendline".
+> The `trendline` option is supported when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline", "powerTrendline" or "movingAverageTrendline".
 
 
 <div class="meta-api-description">
@@ -27119,7 +27119,7 @@ How do I customize trendlines in Kendo UI StockChart? Configure and customize tr
 
 The trendline forecast settings. By default, the trendline does not display a forecast.
 
-> The `forecast` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline" or "powerTrendline" and the parent series are either [Date Series]({% slug dateseries_charts_widget %}), "scatter" or "scatterLine" series.
+> The `forecast` option is supported when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline" or "powerTrendline" and the parent series are either [Date Series]({% slug dateseries_charts_widget %}), "scatter" or "scatterLine" series.
 
 
 <div class="meta-api-description">
@@ -27361,7 +27361,7 @@ How do I adjust the polynomial order in Kendo UI StockChart trendlines? Control 
 
 The number of intervals to take when calculating averages. The value should be an integer greater than 2.
 
-> The period setting is supported only when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "movingAverageTrendline".
+> The period setting is supported only when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "movingAverageTrendline".
 
 
 <div class="meta-api-description">
@@ -29901,7 +29901,7 @@ How do I make the line indicator in my Kendo UI Stock Chart's legend less visibl
 
 The configuration of the Chart legend item markers.
 
-By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
+By default, the marker configuration will be the same as the [series.markers](/api/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
 
 
 <div class="meta-api-description">
@@ -30566,7 +30566,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area".
+> The `style` option is supported when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "area".
 
 
 <div class="meta-api-description">
@@ -30958,7 +30958,7 @@ The behavior for handling missing values. The supported values are:
 
 > The default value is "interpolate", except for "area" and stacked series which default to "zero".
 
-> The `missingValues` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area" and "line".
+> The `missingValues` option is supported when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "area" and "line".
 
 
 <div class="meta-api-description">
@@ -30996,7 +30996,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "line".
+> The `style` option is supported when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "line".
 
 
 <div class="meta-api-description">
@@ -31230,9 +31230,9 @@ How do I adjust the gap between data points in a Kendo UI StockChart? Control th
 ### series.stack `Boolean|String|Object` *(default: false)*
 
 A boolean value indicating if the series should be stacked.
-A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui/stock-chart#configuration-series.stack.group).
+A string value is interpreted as [series.stack.group](/api/dataviz/ui/stock-chart#configuration-series.stack.group).
 
-> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 
 <div class="meta-api-description">
@@ -31354,7 +31354,7 @@ How to group multiple data series in Kendo UI StockChart to stack visually? Cont
     });
     </script>
 
-> The `group` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar" or "column".
+> The `group` option is supported when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "bar" or "column".
 
 ### series.tooltip `Object`
 
@@ -34210,7 +34210,7 @@ How do I customize the transparency of lines in Kendo UI StockChart legend items
 
 The configuration of the Chart legend item markers.
 
-By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
+By default, the marker configuration will be the same as the [series.markers](/api/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
 
 
 <div class="meta-api-description">
@@ -34774,7 +34774,7 @@ How do I adjust the spacing between bars in a Kendo UI stock chart? Adjust or co
 
 A boolean value indicating if the series should be stacked.
 
-> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 
 <div class="meta-api-description">
@@ -42253,7 +42253,7 @@ How do I adjust the length of connector lines in a stock chart value axis? Adjus
 
 ### navigator `kendo.dataviz.Navigator`
 
-A reference to the Stock Chart built-in [navigator](/api/javascript/dataviz/navigator) instance (the lower widget pane). Obtain the instance to call the available [navigator methods](/api/javascript/dataviz/navigator).
+A reference to the Stock Chart built-in [navigator](/api/dataviz/navigator) instance (the lower widget pane). Obtain the instance to call the available [navigator methods](/api/dataviz/navigator).
 
 
 <div class="meta-api-description">
@@ -42331,7 +42331,7 @@ How do I properly remove a Kendo UI StockChart from my page to prevent memory le
 ### exportImage
 Exports the chart as an image.
 
-Inherited from [Chart.exportImage](/api/javascript/dataviz/ui/stock-chart#methods-exportImage)
+Inherited from [Chart.exportImage](/api/dataviz/ui/stock-chart#methods-exportImage)
 
 
 <div class="meta-api-description">
@@ -42386,7 +42386,7 @@ The height of the exported image. Defaults to the chart height.
 ### exportPDF
 Exports the chart as a PDF file.
 
-Inherited from [Chart.exportPDF](/api/javascript/dataviz/ui/stock-chart#methods-exportPDF)
+Inherited from [Chart.exportPDF](/api/dataviz/ui/stock-chart#methods-exportPDF)
 
 
 <div class="meta-api-description">
@@ -42435,7 +42435,7 @@ Parameters for the exported PDF file.
 ### exportSVG
 Exports the chart as an SVG document.
 
-Inherited from [Chart.exportSVG](/api/javascript/dataviz/ui/stock-chart#methods-exportSVG)
+Inherited from [Chart.exportSVG](/api/dataviz/ui/stock-chart#methods-exportSVG)
 
 
 <div class="meta-api-description">
@@ -42686,7 +42686,7 @@ converted to other formats using tools like [Inkscape](https://inkscape.org/en) 
 [ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/stock-chart/methods/exportsvg), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/dataviz/ui/stock-chart/methods/exportsvg), but will remain fully functional.
 
 
 <div class="meta-api-description">
@@ -42722,7 +42722,7 @@ How to get SVG markup for Kendo UI Stock Chart? Generate or retrieve the scalabl
 
 Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/stock-chart/methods/exportimage).
+> This method is deprecated and replaced by [exportImage](/api/dataviz/ui/stock-chart/methods/exportimage).
 
 
 <div class="meta-api-description">

@@ -29,7 +29,7 @@ How can I hide the expand icon for the detail template in a {{ site.product }} G
 ## Solution
 
 1. Traverse the rows of the parent Grid within the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event.
-1. To retrieve the data item, access the `<tr>` element by using the [`dataItem()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) client-side method of the Grid.
+1. To retrieve the data item, access the `<tr>` element by using the [`dataItem()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem) client-side method of the Grid.
 1. Conditionally hide the icon based on the `HasChildren` field.
 
 
@@ -220,7 +220,7 @@ For a full implementation of the aforementioned approach, refer to the [REPL exa
 * [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
 {% endif %}
 ## See Also
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [TagHelper API Reference of the Grid for {{ site.framework}}](https://docs.telerik.com/aspnet-core/api/taghelpers/grid)

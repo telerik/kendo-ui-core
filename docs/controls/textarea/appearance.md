@@ -28,7 +28,7 @@ The Kendo UI TextArea supports the following styling options:
 
 The `size` option controls how big or small the rendered `textarea` looks. The structure of the class is `k-input-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/textarea/configuration/size) option:
+The following values are available for the [`size`](/api/ui/textarea/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -57,7 +57,7 @@ The default size value is `medium` and it is applied to the wrapping span elemen
 
 The `rounded` option controls how much border radius is applied to the rendered `textarea`. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/textarea/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/textarea/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -87,7 +87,7 @@ The default rounded value is `medium` and it is applied to the wrapping span ele
 
 The `fillMode` option controls the way the color is applied to the rendered `textarea`. The structure of the class is `k-input-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/textarea/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/textarea/configuration/fillmode) option:
 
 - `solid`
 - `flat`
@@ -116,7 +116,7 @@ The default fillMode value is `solid` and it is applied to the wrapping span ele
 
 The `overflow` option controls the overflow behavior of the rendered `textarea`. The structure of the class is `k-overflow-{overflow}`.
 
-The following values are available for the [`overflow`](/api/javascript/ui/textarea/configuration/overflow) option:
+The following values are available for the [`overflow`](/api/ui/textarea/configuration/overflow) option:
 
 - `auto`
 - `hidden`
@@ -146,7 +146,7 @@ The default overflow value is `auto` and it is applied to the textarea element t
 
 The `resize` option controls the resizing behavior of the rendered `textarea`. The structure of the class is `k-resize-{resize}`.
 
-The following values are available for the [`resize`](/api/javascript/ui/textarea/configuration/resize) option:
+The following values are available for the [`resize`](/api/ui/textarea/configuration/resize) option:
 
 - `both`
 - `horizontal`
@@ -177,4 +177,4 @@ The default resize value is `none` and it is applied to the wrapping span elemen
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the TextArea](https://demos.telerik.com/kendo-ui/textarea/appearance)
-* [JavaScript API Reference of the TextArea](/api/javascript/ui/textarea)
+* [JavaScript API Reference of the TextArea](/api/ui/textarea)

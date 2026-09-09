@@ -163,7 +163,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Integrating the Avatar for {{ site.framework }} into a Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/avatar/gridintegration)
-* [Client-Side API of the Avatar](https://docs.telerik.com/kendo-ui/api/javascript/ui/avatar)
+* [Client-Side API of the Avatar](https://docs.telerik.com/kendo-ui/api/ui/avatar)
 * [Server-Side API of the Avatar HtmlHelper](/api/avatar)
 {% if site.core %}
 * [Server-Side API of the Avatar TagHelper](/api/taghelpers/avatar)

@@ -154,4 +154,4 @@ The structure of the class is `k-rounded-{size}`. The default rounded value of t
 ## See Also
 
 * [Appearance of the ToggleButton HtmlHelper for Kendo UI for jQuery (Demo)](https://demos.telerik.com/kendo-ui/togglebutton/appearance)
-* [ToggleButton Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/togglebutton)
+* [ToggleButton Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/togglebutton)

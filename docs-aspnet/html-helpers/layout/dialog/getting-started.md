@@ -195,7 +195,7 @@ You can reference the Dialog instances that you have created and build on top of
     </script>
     ```
 
-1. Use the [Dialog client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dialog#methods) to control the behavior of the widget. In this example, you will use the `toFront` method to bring the Dialog instance on top of any other open Dialogs.
+1. Use the [Dialog client-side API](https://docs.telerik.com/kendo-ui/api/ui/dialog#methods) to control the behavior of the widget. In this example, you will use the `toFront` method to bring the Dialog instance on top of any other open Dialogs.
 
     ```JS script
     <script>
@@ -227,6 +227,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Dialog for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dialog/api)
-* [Dialog Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dialog)
+* [Dialog Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/dialog)
 * [Server-Side API of the Dialog](/api/dialog)
 * [Knowledge Base Section](/knowledge-base)

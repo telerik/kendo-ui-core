@@ -49,7 +49,7 @@ The following example demonstrates how to access the `window` and `document` obj
 The Window provides built-in support for asynchronously loading its content from a URL. This URL is expected to return an HTML fragment that can be loaded in the content area of the Window.
 
 > * Loading full pages inside the Window with AJAX (pages with a `DOCTYPE`, `html`, `head`, and `body` tags) causes undesired side-effects such as breaking the DOM tree, deleting widget instances, and throwing Javascript errors.
-> * If you do not set dimensions for the Window, the Window will resize after the AJAX content is loaded and the position of the Window on the screen will change. To center the Window, either [`center`](/api/javascript/ui/window/methods/center) it in the [`refresh`](/api/javascript/ui/window/events/refresh) event handler or set explicit [dimensions](/api/javascript/ui/window/configuration/height).
+> * If you do not set dimensions for the Window, the Window will resize after the AJAX content is loaded and the position of the Window on the screen will change. To center the Window, either [`center`](/api/ui/window/methods/center) it in the [`refresh`](/api/ui/window/events/refresh) event handler or set explicit [dimensions](/api/ui/window/configuration/height).
 
 The following example demonstrates how to initialize the Window and configure its content loading.
 
@@ -93,4 +93,4 @@ To select only the Window content that is visible during printing and hide the r
 
 ## See Also
 
-* [JavaScript API Reference of the Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the Window](/api/ui/window)

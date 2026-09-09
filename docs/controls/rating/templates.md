@@ -78,4 +78,4 @@ The hovered template specifies the template which is used for rendering the hove
 
 ## See Also
 
-* [JavaScript API Reference of the Rating](/api/javascript/ui/rating)
+* [JavaScript API Reference of the Rating](/api/ui/rating)

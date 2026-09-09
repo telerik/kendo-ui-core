@@ -214,5 +214,5 @@ The following example shows a complete configuration of a StockChart with **Valu
 ## See Also
 
 * [Configuring Multiple Panes of the StockChart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/financial/panes)
-* [Client-Side API of the StockChart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart)
+* [Client-Side API of the StockChart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart)
 * [Server-Side API of the StockChart](/api/stockchart)

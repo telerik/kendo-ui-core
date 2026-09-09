@@ -24,7 +24,7 @@ How can I add a custom button to reset the inital data loaded in the From?
 
 ## Solution
 
-Configure a `buttonsTemplate` and add the html for the reset button. On click of the custom reset button, get a reference to the Form. Use the [setOptions](/api/javascript/ui/form/methods/setoptions) method to set the formData of the Form to the initial data.
+Configure a `buttonsTemplate` and add the html for the reset button. On click of the custom reset button, get a reference to the Form. Use the [setOptions](/api/ui/form/methods/setoptions) method to set the formData of the Form to the initial data.
 
 ```dojo
     <form id="myForm"></form>

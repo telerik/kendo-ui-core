@@ -27,10 +27,10 @@ To respond to cutting-end design practices and trends, the MediaPlayer component
 
 * [Getting Started with the Kendo UI MediaPlayer for jQuery]({% slug getting_started_kendoui_mediaplayer_component %})
 * [Basic Usage of the MediaPlayer (Demo)](https://demos.telerik.com/kendo-ui/mediaplayer/index)
-* [JavaScript API Reference of the MediaPlayer](/api/javascript/ui/mediaplayer)
+* [JavaScript API Reference of the MediaPlayer](/api/ui/mediaplayer)
 
 ## See Also
 
 * [Basic Usage of the MediaPlayer (Demo)](https://demos.telerik.com/kendo-ui/mediaplayer/index)
 * [Using the API of the MediaPlayer (Demo)](https://demos.telerik.com/kendo-ui/mediaplayer/api)
-* [JavaScript API Reference of the MediaPlayer](/api/javascript/ui/mediaplayer)
+* [JavaScript API Reference of the MediaPlayer](/api/ui/mediaplayer)

@@ -329,7 +329,7 @@ Below is a runnable example:
         }
     ```
 
-1. In case you need to add custom attributes the same as the custom classes, you could handle the [`select`](/api/javascript/ui/editor/events/select) event of the widget. In the event handler you could search for the custom classes, and add the needed attributes:
+1. In case you need to add custom attributes the same as the custom classes, you could handle the [`select`](/api/ui/editor/events/select) event of the widget. In the event handler you could search for the custom classes, and add the needed attributes:
     ```
         select: function(e){
             if(isInsert){
@@ -473,7 +473,7 @@ The described above is demonstrated in the below runnable example:
 
 ## See Also
 
-* [API Reference of the Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor](https://docs.telerik.com/kendo-ui/api/ui/editor)
 * [Editor Create Custom Editor Tool]({ slug % editor-custom-tool % })
 
 
@@ -731,5 +731,5 @@ Below is a runnable example:
 
 ## See Also
 
-* [API Reference of the Editor](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/editor)
+* [API Reference of the Editor](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/editor)
 * [Editor Create Custom Editor Tool](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/editor-custom-tool)

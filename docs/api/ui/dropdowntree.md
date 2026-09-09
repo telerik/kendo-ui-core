@@ -7,7 +7,7 @@ component: dropdowntree
 
 # kendo.ui.DropDownTree
 
-Represents the Kendo UI DropDownTree widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI DropDownTree widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -150,7 +150,7 @@ How to configure closing animation for Kendo DropDownTree popup? Configure or di
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -229,7 +229,7 @@ How to customize opening animation in Kendo UI DropDownTree? Customize and contr
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -340,9 +340,9 @@ How to prevent text wrapping in Kendo UI DropDownTree menus? Adjust popup width 
 
 ### checkAll `Boolean` *(default: false)*
 
-When this options is set to `true` and [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled, a tristate checkbox appears above the embedded treeview. Clicking that checkbox will check or uncheck all the loaded enabled items of the treeview.
+When this options is set to `true` and [checkboxes](/api/ui/dropdowntree/configuration/checkboxes) are enabled, a tristate checkbox appears above the embedded treeview. Clicking that checkbox will check or uncheck all the loaded enabled items of the treeview.
 
-> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/configuration/loadondemand) is set to 'false' because otherwise checkAll may not interact with all subnodes of the treeview.
+> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/ui/dropdowntree/configuration/loadondemand) is set to 'false' because otherwise checkAll may not interact with all subnodes of the treeview.
 
 
 <div class="meta-api-description">
@@ -363,7 +363,7 @@ How to enable master checkbox control for Kendo UI DropDownTree with checkboxes?
 
 ### checkAllTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the checkAll label. By default, the widget displays only a span element with text "Check all".
+The [template](/api/kendo/methods/template) used to render the checkAll label. By default, the widget displays only a span element with text "Check all".
 
 
 <div class="meta-api-description">
@@ -385,7 +385,7 @@ How can I customize the "Check all" option in a Kendo UI DropDownTree? Customize
 
 ### checkboxes `Boolean|Object`
 
-If `true` or an object, renders checkboxes beside each node. In this case the widget [value](/api/javascript/ui/dropdowntree/configuration/value) should be an array.
+If `true` or an object, renders checkboxes beside each node. In this case the widget [value](/api/ui/dropdowntree/configuration/value) should be an array.
 
 
 <div class="meta-api-description">
@@ -414,9 +414,9 @@ How to enable multiple selection with checkboxes in Kendo UI DropDownTree? Enabl
 Indicates whether checkboxes of child items should get checked when the checkbox of a parent item is checked. This
 also enables tri-state checkboxes with an indeterminate state.
 
-> Note: when [filter](/api/javascript/ui/dropdowntree/configuration/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario is not supported by the widget.
+> Note: when [filter](/api/ui/dropdowntree/configuration/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario is not supported by the widget.
 
-> When this property is enabled, it should be used with [loadOnDemand](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree/configuration/loadondemand) set to 'false'. Otherwise, after expand of a checked node (and load of its inner items) the value selected in the widget and the checked items in the drop-down will no longer be in sync. Currently, such scenario is not among the supported.
+> When this property is enabled, it should be used with [loadOnDemand](https://docs.telerik.com/kendo-ui/api/ui/dropdowntree/configuration/loadondemand) set to 'false'. Otherwise, after expand of a checked node (and load of its inner items) the value selected in the widget and the checked items in the drop-down will no longer be in sync. Currently, such scenario is not among the supported.
 
 
 <div class="meta-api-description">
@@ -474,7 +474,7 @@ How do I configure the input names for checkboxes in a Kendo UI DropDownTree? Co
 
 ### checkboxes.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the checkboxes. Can be used to allow posting of
+The [template](/api/kendo/methods/template) which renders the checkboxes. Can be used to allow posting of
 additional information along the TreeView checkboxes.
 
 The fields which can be used in the template are:
@@ -552,11 +552,11 @@ How to set up image URL field for nodes in a Kendo UI DropDownTree? Set or confi
 
 ### dataSource `Object|Array|kendo.data.HierarchicalDataSource`
 
-The data source of the widget which is used render nodes. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance.
+The data source of the widget which is used render nodes. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.HierarchicalDataSource](/api/data/hierarchicaldatasource) instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.HierarchicalDataSource](/api/data/hierarchicaldatasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/api/data/hierarchicaldatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -668,8 +668,8 @@ How do I customize the CSS classes for hierarchical nodes in a Kendo UI Dropdown
 Sets the field of the data item that provides the text content of the nodes.
 If an array, each level uses the field that is at the same index in the array, or the last item in the array.
 
-> **Important** In case when array is used, [filter](/api/javascript/ui/dropdowntree/configuration/filter) is not supported because
- [hierarchical data source](/api/javascript/data/hierarchicaldatasource) does not support filtering by different fields yet.
+> **Important** In case when array is used, [filter](/api/ui/dropdowntree/configuration/filter) is not supported because
+ [hierarchical data source](/api/data/hierarchicaldatasource) does not support filtering by different fields yet.
 
 
 <div class="meta-api-description">
@@ -782,7 +782,7 @@ How do I disable user input in a Kendo UI DropDownTree? Control whether the comp
 
 ### enforceMinLength `Boolean` *(default: false)*
 
-If set to `true` the widget will not show all items when the text of the search input cleared. By default, the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/javascript/ui/dropdowntree#configuration-minLength).
+If set to `true` the widget will not show all items when the text of the search input cleared. By default, the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/ui/dropdowntree#configuration-minLength).
 
 
 <div class="meta-api-description">
@@ -821,7 +821,7 @@ How to configure Kendo UI DropDownTree to show all items only when user enters a
 
 ### filter `String`*(default: "none")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/dropdowntree#configuration-dataTextField) option).
+The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/ui/dropdowntree#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 
@@ -898,7 +898,7 @@ How do I change the background color styling in a Kendo UI for jQuery DropDownTr
 
 ### footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+The [template](/api/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
 
 
 <div class="meta-api-description">
@@ -1018,7 +1018,7 @@ The function context (available through the keyword `this`) will be set to the w
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/dropdowntree/methods/value) method **does not trigger** the `focusout` event of the input.
+> **Important:** The [value](/api/ui/dropdowntree/methods/value) method **does not trigger** the `focusout` event of the input.
 This can affect the floating label functionality.
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#dropdowntree").data("kendoDropDownTree").label.floatingLabel.refresh();`
 
@@ -1305,7 +1305,7 @@ The text message shown in the filter input.
 
 The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
 
-> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/javascript/ui/dropdowntree/events/filtering) event for more details.
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/ui/dropdowntree/events/filtering) event for more details.
 
 
 <div class="meta-api-description">
@@ -1326,7 +1326,7 @@ How do I set the minimum number of characters required before searching in a Ken
 
 ### noDataTemplate `String|Function|Boolean` *(default: true)*
 
-The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The [template](/api/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
 > **Important** The popup will open when 'noDataTemplate' is defined
@@ -1368,7 +1368,7 @@ How to set a default text in Kendo UI DropDownTree when no item is selected? Con
 ### popup `Object`
 
 The options that will be used for the popup initialization. For more details about the available options
-refer to [Popup](/api/javascript/ui/popup) documentation.
+refer to [Popup](/api/ui/popup) documentation.
 
 
 <div class="meta-api-description">
@@ -1530,7 +1530,7 @@ How can I customize the header of a Kendo UI DropDownTree popup with custom HTML
 
 ### valueTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the value and the or the selected tags.
+The [template](/api/kendo/methods/template) used to render the value and the or the selected tags.
 
 
 <div class="meta-api-description">
@@ -1573,11 +1573,11 @@ How do I customize the display of selected items in a Kendo UI DropDownTree comp
 
 ### tagMode `String`*(default: "multiple")*
 
-The mode used to render the selected tags when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled. The available modes are:
+The mode used to render the selected tags when [checkboxes](/api/ui/dropdowntree/configuration/checkboxes) are enabled. The available modes are:
 - `multiple` - renders a tag for every selected value
 - `single` - renders only one tag that shows the number of the selected values
 
-> When tagMode is to `single` its message can be configured by setting [singleTag](/api/javascript/ui/dropdowntree/configuration/messages.singletag) message property.
+> When tagMode is to `single` its message can be configured by setting [singleTag](/api/ui/dropdowntree/configuration/messages.singletag) message property.
 
 
 <div class="meta-api-description">
@@ -1648,7 +1648,7 @@ How do I set the initial display text in a Kendo UI DropDownTree input when auto
 
 ### value `String|Array`
 
- Define the value of the widget. It accepts 'String' when it is in single selection mode and 'Array' when multiple selection is enabled via [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) property.
+ Define the value of the widget. It accepts 'String' when it is in single selection mode and 'Array' when multiple selection is enabled via [checkboxes](/api/ui/dropdowntree/configuration/checkboxes) property.
 
 
 <div class="meta-api-description">
@@ -1774,11 +1774,11 @@ How do I set different sizes for my Kendo UI dropdown tree menu? Control and cus
 
 ### dataSource `kendo.data.HierarchicalDataSource`
 
-The [data source](/api/javascript/data/hierarchicaldatasource) of the widget. Configured via the [dataSource](/api/javascript/ui/dropdowntree/configuration/datasource) option.
+The [data source](/api/data/hierarchicaldatasource) of the widget. Configured via the [dataSource](/api/ui/dropdowntree/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/dropdowntree/methods/setdatasource) method instead.
+> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/ui/dropdowntree/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -1823,7 +1823,7 @@ How can I dynamically change the appearance of my Kendo UI DropDownTree componen
     </script>
 
 ### tagList `jQuery`
-A jQuery object of the `ul` element, which holds the selected tags. It is only available when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'true'.
+A jQuery object of the `ul` element, which holds the selected tags. It is only available when [checkboxes](/api/ui/dropdowntree/configuration/checkboxes) is 'true'.
 
 
 <div class="meta-api-description">
@@ -1866,7 +1866,7 @@ How to access treeview container in Kendo UI dropdown tree? Access or manipulate
     </script>
 
 ### treeview `kendo.ui.TreeView`
-The internal [treeview](/api/javascript/ui/treeview) of the widget.
+The internal [treeview](/api/ui/treeview) of the widget.
 
 
 <div class="meta-api-description">
@@ -1984,7 +1984,7 @@ How do I programmatically set focus on the dropdown tree element in Kendo UI for
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI HierarchicalDataSource [view](/api/javascript/data/datasource/methods/view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI HierarchicalDataSource [view](/api/data/datasource/methods/view).
 
 
 <div class="meta-api-description">
@@ -2175,9 +2175,9 @@ Gets or sets the value of the DropDownTree.
 
 > **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
 
-> **Important:** This method **does not trigger** [change](/api/javascript/ui/dropdowntree/events/change) event.
+> **Important:** This method **does not trigger** [change](/api/ui/dropdowntree/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior by triggering the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior by triggering the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
     <input id="dropdowntree" />
 
@@ -2201,7 +2201,7 @@ How to programmatically update selected item in Kendo UI DropDownTree component?
 
 ##### value `Array|String`
 
-The value to set. A *String* value, when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'false', and an *Array* of items of the value field type (number or string), when `checkboxes` is true. To clear the value, pass an empty array.
+The value to set. A *String* value, when [checkboxes](/api/ui/dropdowntree/configuration/checkboxes) is 'false', and an *Array* of items of the value field type (number or string), when `checkboxes` is true. To clear the value, pass an empty array.
 
 #### Returns
 
@@ -2485,7 +2485,7 @@ The widget instance which fired the event.
 
 Triggered when a node is being selected by the user. Cancellable. When checkboxes are enabled, it is also triggered when a node is being deselected.
 
-> Note: We don't recommend using the 'select' event when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled because it is not triggered when the state of the checkbox is changed.
+> Note: We don't recommend using the 'select' event when [checkboxes](/api/ui/dropdowntree/configuration/checkboxes) are enabled because it is not triggered when the state of the checkbox is changed.
 
 
 <div class="meta-api-description">

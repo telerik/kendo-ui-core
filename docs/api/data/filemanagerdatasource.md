@@ -51,7 +51,7 @@ How do I configure the schema for Kendo UI FileManager to correctly identify fil
 
 The data item (model) configuration. See the [`DataSource.schema.model` configuration](/api/framework/datasource#configuration-schema.model) for all available options.
 
-> The model must inherit from [`kendo.data.FileEntry`](/api/javascript/data/fileentry).
+> The model must inherit from [`kendo.data.FileEntry`](/api/data/fileentry).
 
 
 <div class="meta-api-description">

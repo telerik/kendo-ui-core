@@ -23,9 +23,9 @@ The AppBar component is used mainly for navigation. At the same time, it is temp
 
 * [Getting Started with the Kendo UI AppBar for jQuery]({% slug getting_started_kendoui_appbar_widget %})
 * [Basic Usage of the AppBar (Demo)](https://demos.telerik.com/kendo-ui/appbar/index)
-* [JavaScript API Reference of the AppBar](/api/javascript/ui/appbar)
+* [JavaScript API Reference of the AppBar](/api/ui/appbar)
 
 ## See Also
 
 * [Overview of the AppBar (Demo)](https://demos.telerik.com/kendo-ui/appbar/index)
-* [JavaScript API Reference of the AppBar](/api/javascript/ui/appbar)
+* [JavaScript API Reference of the AppBar](/api/ui/appbar)

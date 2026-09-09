@@ -25,7 +25,7 @@ The Kendo UI Switch supports the following styling options:
 
 The `size` option controls how big or small the `switch` looks. The structure of the class is `k-switch-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/switch/configuration/size) option:
+The following values are available for the [`size`](/api/ui/switch/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -56,7 +56,7 @@ The option affects the `span.k-switch` element:
 
 The `trackRounded` option controls how much border radius is applied to track of the widget. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`trackRounded`](/api/javascript/ui/switch/configuration/trackRounded) option:
+The following values are available for the [`trackRounded`](/api/ui/switch/configuration/trackRounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -88,7 +88,7 @@ The option affects the `span` element that wraps the On/Off labels:
 
 The `thumbRounded` option controls how much border radius is applied to thumb of the widget. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`thumbRounded`](/api/javascript/ui/switch/configuration/thumbRounded) option:
+The following values are available for the [`thumbRounded`](/api/ui/switch/configuration/thumbRounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -122,4 +122,4 @@ The option affects the `span` element for the Switch handle:
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the Switch](https://demos.telerik.com/kendo-ui/switch/appearance)
-* [JavaScript API Reference of the Switch](/api/javascript/ui/switch)
+* [JavaScript API Reference of the Switch](/api/ui/switch)

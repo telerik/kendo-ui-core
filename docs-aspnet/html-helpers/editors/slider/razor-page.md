@@ -69,7 +69,7 @@ To bind the Slider to a property from the `PageModel`, follow the next steps:
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Slider](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/slider)
+* [Client-Side API of the Slider](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/slider)
 * [Server-Side HtmlHelper API of the Slider](/api/slider)
 * [Server-Side TagHelper API of the Slider](/api/taghelpers/slider)
 * [Knowledge Base Section](/knowledge-base)

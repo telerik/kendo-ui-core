@@ -46,4 +46,4 @@ Handle the [`Action`](/api/checkpoint/action) event and branch on `event.State`:
 {% if site.core %}
 * [Server-Side API of the Checkpoint TagHelper](/api/taghelpers/checkpoint)
 {% endif %}
-* [JavaScript API Reference of the Checkpoint](/api/javascript/ui/checkpoint)
+* [JavaScript API Reference of the Checkpoint](/api/ui/checkpoint)

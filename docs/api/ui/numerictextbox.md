@@ -8,7 +8,7 @@ component: numeric-textbox
 
 # kendo.ui.NumericTextBox
 
-Represents the Kendo UI NumericTextBox widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI NumericTextBox widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -55,7 +55,7 @@ How do I set up international number formatting in Kendo UI NumericTextBox? Conf
 
 Specifies the number precision applied to the widget value and when the NumericTextBox is focused. If not set, the precision defined by the current culture is used. If the user enters a number with a greater precision than is currently configured, the widget value will be rounded. For example, if `decimals` is `2` and the user inputs `12.346`, the value will become `12.35`. If `decimals` is `1` the user inputs `12.99`, the value will become `13.00`.
 
-Compare with the [`format`](/api/javascript/ui/numerictextbox#configuration-format) property.
+Compare with the [`format`](/api/ui/numerictextbox#configuration-format) property.
 
 
 <div class="meta-api-description">
@@ -139,7 +139,7 @@ How can I customize the appearance of a numeric input field in Kendo UI to have 
 
 Specifies the number format used when the widget is not focused. Check this page for all [valid number formats](/framework/globalization/intl/numberformatting).
 
-Compare with the [`decimals`](/api/javascript/ui/numerictextbox#configuration-decimals) property.
+Compare with the [`decimals`](/api/ui/numerictextbox#configuration-decimals) property.
 
 
 <div class="meta-api-description">
@@ -244,7 +244,7 @@ The function context (available through the keyword `this`) will be set to the w
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/numerictextbox/methods/value) method **does not trigger** the `focusout` event of the input.
+> **Important:** The [value](/api/ui/numerictextbox/methods/value) method **does not trigger** the `focusout` event of the input.
 This can affect the floating label functionality.
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#numerictextbox").data("kendoNumericTextBox").floatingLabel.refresh();`
 
@@ -375,7 +375,7 @@ How can I customize the prefix icon in a Kendo UI NumericTextBox? Configure and 
 
 ### prefixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+The [template](/api/kendo/methods/template) for the prefix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -606,7 +606,7 @@ How to add an icon suffix to a numeric input field in Kendo UI for jQuery? Confi
 
 ### suffixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+The [template](/api/kendo/methods/template) for the suffix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -951,7 +951,7 @@ The step value to set.
 Gets or sets the value of the NumericTextBox.
 
 > **Important:** This method **does not trigger** the `focusout` event of the input.
-This can affect the [floating label functionality](/api/javascript/ui/numerictextbox/configuration/label.floating).
+This can affect the [floating label functionality](/api/ui/numerictextbox/configuration/label.floating).
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#numerictextbox").data("kendoNumericTextBox").floatingLabel.refresh();`
 
 

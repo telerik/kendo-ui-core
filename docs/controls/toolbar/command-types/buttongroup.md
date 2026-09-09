@@ -57,4 +57,4 @@ The following example demonstrates how to define a ButtonGroup with mutually exc
 ## See Also
 
 * [Basic Usage of the ToolBar (Demo)](https://demos.telerik.com/kendo-ui/toolbar/index)
-* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/ui/toolbar)

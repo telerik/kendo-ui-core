@@ -22,10 +22,10 @@ The Loader component is a visual indicator that expresses an indeterminate wait 
 
 * [Getting Started with the Kendo UI Loader for jQuery]({% slug getting_started_kendoui_loader_widget %})
 * [Overview of the Loader (Demo)](https://demos.telerik.com/kendo-ui/loader/index)
-* [Using the API of the Loader (Demo)](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/loader)
+* [Using the API of the Loader (Demo)](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/loader)
 
 ## See Also
 
-* [JavaScript API Reference of the Loader](/api/javascript/ui/loader) 
+* [JavaScript API Reference of the Loader](/api/ui/loader) 
 * [Knowledge Base Section](/knowledge-base)
 * [jQuery Loader Product Page](https://www.telerik.com/kendo-jquery-ui/loader)

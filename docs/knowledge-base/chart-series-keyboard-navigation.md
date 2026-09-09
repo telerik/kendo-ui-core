@@ -38,7 +38,7 @@ The Kendo UI Chart is an [`svg`](https://developer.mozilla.org/en-US/docs/Web/SV
 The custom keyboard navigation works with the `ALT+W` key combination to move the highlight to the next series and the `ALT+S` key combination to move the highlight to the previous series. These key combinations do not interfere with the default behavior of the screen readers which use the `arrow keys`. You can choose any other key or key combination by modifying the code.
 
 1. Use the jQuery [`keydown`](https://api.jquery.com/keydown/) event to handle the keyboard input.
-1. Highlight the current series by using the [`toggleHighlight`](/api/javascript/dataviz/chart/chart_series/methods/togglehighlight) method.
+1. Highlight the current series by using the [`toggleHighlight`](/api/dataviz/chart/chart_series/methods/togglehighlight) method.
 1. Apply `aria-label` attributes to the `path` elements.
 1. Use a custom functionality to force screen readers to announce the series data.
 

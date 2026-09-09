@@ -9,7 +9,7 @@ position: 3
 
 # Events
 
-You can subscribe to all TreeMap [events](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/treemap#events).
+You can subscribe to all TreeMap [events](https://docs.telerik.com/kendo-ui/api/dataviz/ui/treemap#events).
 
 ## Handling Events by Handler Name
 
@@ -84,4 +84,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Basic Usage of the TreeMap for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treemap)
 * [TreeMap Server-Side API](/api/treemap)
-* [TreeMap Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treemap)
+* [TreeMap Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/treemap)

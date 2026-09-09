@@ -20,4 +20,4 @@ To work around the default behavior of the DateTimePicker and simulate a differe
 ## See Also
 
 * [Basic Usage of the DateTimePicker (Demo)](https://demos.telerik.com/kendo-ui/datetimepicker/index)
-* [JavaScript API Reference of the DateTimePicker](/api/javascript/ui/datetimepicker)
+* [JavaScript API Reference of the DateTimePicker](/api/ui/datetimepicker)

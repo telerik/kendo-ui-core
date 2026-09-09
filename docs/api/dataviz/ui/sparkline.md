@@ -6863,7 +6863,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "area".
+> The `style` option is supported when [series.type](/api/dataviz/ui/sparkline#configuration-series.type) is set to "area".
 
 
 <div class="meta-api-description">
@@ -7143,7 +7143,7 @@ The behavior for handling missing values. The supported values are:
 
 > The default value is "interpolate", except for "area" and stacked series which default to "zero".
 
-> The `missingValues` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "area", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
+> The `missingValues` option is supported when [series.type](/api/dataviz/ui/sparkline#configuration-series.type) is set to "area", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
 
 
 <div class="meta-api-description">
@@ -7172,7 +7172,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "line".
+> The `style` option is supported when [series.type](/api/dataviz/ui/sparkline#configuration-series.type) is set to "line".
 
 
 <div class="meta-api-description">
@@ -7393,9 +7393,9 @@ How do I adjust the gap between bars in a Kendo UI sparkline chart? Adjust spaci
 ### series.stack `Boolean|String|Object` *(default: false)*
 
 A Boolean value indicating if the series should be stacked.
-A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui/sparkline#configuration-series.stack.group).
+A string value is interpreted as [series.stack.group](/api/dataviz/ui/sparkline#configuration-series.stack.group).
 
-> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/dataviz/ui/sparkline#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 > Stack settings of the first series are applied to the rest of the series.
 
@@ -7444,7 +7444,7 @@ How do I configure my stacked sparkline chart to show absolute totals instead of
 
 Indicates that the series should be stacked in a group with the specified name.
 
-> The `group` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "bar" or "column".
+> The `group` option is supported when [series.type](/api/dataviz/ui/sparkline#configuration-series.type) is set to "bar" or "column".
 
 
 <div class="meta-api-description">
@@ -9673,7 +9673,7 @@ How to adjust the gap between bars in a Kendo UI sparkline chart? Adjust, set, o
 
 A Boolean value indicating if the series should be stacked.
 
-> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/dataviz/ui/sparkline#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 
 <div class="meta-api-description">
@@ -14969,7 +14969,7 @@ How do I safely remove a Kendo UI sparkline chart from my webpage? Remove or del
 ### exportImage
 Exports the chart as an image.
 
-Inherited from [Chart.exportImage](/api/javascript/dataviz/ui/chart/methods/exportimage)
+Inherited from [Chart.exportImage](/api/dataviz/ui/chart/methods/exportimage)
 
 
 <div class="meta-api-description">
@@ -15011,7 +15011,7 @@ The height of the exported image. Defaults to the chart height.
 ### exportPDF
 Exports the chart as a PDF file.
 
-Inherited from [Chart.exportPDF](/api/javascript/dataviz/ui/chart/methods/exportpdf)
+Inherited from [Chart.exportPDF](/api/dataviz/ui/chart/methods/exportpdf)
 
 
 <div class="meta-api-description">
@@ -15050,7 +15050,7 @@ Parameters for the exported PDF file.
 ### exportSVG
 Exports the chart as an SVG document.
 
-Inherited from [Chart.exportSVG](/api/javascript/dataviz/ui/chart/methods/exportsvg)
+Inherited from [Chart.exportSVG](/api/dataviz/ui/chart/methods/exportsvg)
 
 
 <div class="meta-api-description">
@@ -15179,7 +15179,7 @@ converted to other formats using tools like [Inkscape](https://inkscape.org/en) 
 [ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/sparkline/methods/exportsvg), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/dataviz/ui/sparkline/methods/exportsvg), but will remain fully functional.
 
 
 <div class="meta-api-description">
@@ -15208,7 +15208,7 @@ How to export Kendo UI sparkline chart as SVG file? Generate or retrieve a compl
 
 Returns a PNG image of the sparkline encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/sparkline/methods/exportimage).
+> This method is deprecated and replaced by [exportImage](/api/dataviz/ui/sparkline/methods/exportimage).
 
 
 <div class="meta-api-description">

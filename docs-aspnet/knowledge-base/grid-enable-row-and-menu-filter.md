@@ -29,7 +29,7 @@ How can I enable both the row and menu filter modes in the {{ site.product }} Gr
 
 ## Solution
 
-To achieve the desired behavior, change the options of the Grid and enable both the menu and row filter modes by using the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method.
+To achieve the desired behavior, change the options of the Grid and enable both the menu and row filter modes by using the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/setoptions) method.
 
 
 ```Razor Index.cshtml
@@ -89,7 +89,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Enabling the Menu and Row Filter Modes in the Grid](https://netcorerepl.telerik.com/GcPbQvbH48if6J6G15)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

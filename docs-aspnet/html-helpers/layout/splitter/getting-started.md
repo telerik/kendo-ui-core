@@ -193,7 +193,7 @@ You can reference the Splitter instances that you have created and build on top 
     </script>
     ```
 
-1. Use the [Splitter client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitter#methods) to control the behavior of the widget. In this example, you will use the `collapse` method to close a pane of the Splitter.
+1. Use the [Splitter client-side API](https://docs.telerik.com/kendo-ui/api/ui/splitter#methods) to control the behavior of the widget. In this example, you will use the `collapse` method to close a pane of the Splitter.
 
     ```JS script
     <script>
@@ -220,6 +220,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Splitter for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitter/api)
-* [Client-Side API of the Splitter](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitter)
+* [Client-Side API of the Splitter](https://docs.telerik.com/kendo-ui/api/ui/splitter)
 * [Server-Side API of the Splitter](/api/splitter)
 * [Knowledge Base Section](/knowledge-base)

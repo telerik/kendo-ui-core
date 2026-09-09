@@ -62,4 +62,4 @@ The following example demonstrates the solution to the sample issue.
 
 ## See Also
 
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [JavaScript API Reference of the MultiSelect](/api/ui/multiselect)

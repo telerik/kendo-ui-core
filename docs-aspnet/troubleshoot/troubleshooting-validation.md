@@ -60,7 +60,7 @@ If the above solution is not feasible, because a custom date format is used, the
     <script>
         kendo.ui.validator.rules.mvcdate = function (input) {
             //use the custom date format here
-            //kendo.parseDate - https://docs.telerik.com/kendo-ui/api/javascript/kendo#methods-parseDate
+            //kendo.parseDate - https://docs.telerik.com/kendo-ui/api/kendo#methods-parseDate
 
             return input.val() === "" || kendo.parseDate(input.val(), "dd/MM/yyyy") !== null;
         }

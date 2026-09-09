@@ -435,7 +435,7 @@ How to dynamically update color in Kendo UI color gradient control? Control, ret
 
 ### color
 
-Get or set the selected color. If no argument is given, this returns the currently selected color as a [`kendo.Color` object](/api/javascript/color).
+Get or set the selected color. If no argument is given, this returns the currently selected color as a [`kendo.Color` object](/api/color).
 
 
 <div class="meta-api-description">
@@ -582,5 +582,5 @@ If invoked cancels the default action that belongs to the keydown event.
             });
         </script>
 
-[parseColor]: /api/javascript/kendo#parseColor
-[Color]: /api/javascript/kendo#Color
+[parseColor]: /api/kendo#parseColor
+[Color]: /api/kendo#Color

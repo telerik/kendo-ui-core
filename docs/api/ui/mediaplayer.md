@@ -8,7 +8,7 @@ component: mediaplayer
 
 # kendo.ui.MediaPlayer
 
-Represents the Kendo UI MediaPlayer widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI MediaPlayer widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -468,7 +468,7 @@ How do I update the media information in a Kendo UI MediaPlayer widget? Retrieve
 
 ##### value `Object`
 
-The media configuration to load in the MediaPlayer. Accepts the same values as the [`media`](/api/javascript/ui/mediaplayer/configuration/media) option.
+The media configuration to load in the MediaPlayer. Accepts the same values as the [`media`](/api/ui/mediaplayer/configuration/media) option.
 
 #### Returns
 

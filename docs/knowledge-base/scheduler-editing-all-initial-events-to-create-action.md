@@ -28,7 +28,7 @@ Editing a jQuery Scheduler event causes all initial events to be sent to the cre
 
 ## Cause 
 
-This behavior can be experienced if the [`id` fields](/api/javascript/data/schedulerevent#fields-id) of all events are not set to valid and unique values during initial read.
+This behavior can be experienced if the [`id` fields](/api/data/schedulerevent#fields-id) of all events are not set to valid and unique values during initial read.
 
 ## Solution
 
@@ -38,4 +38,4 @@ Make sure the `id` fields of the Scheduler are properly configured and contain v
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

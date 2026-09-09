@@ -11,7 +11,7 @@ position: 9
 
 In essense, this implementation is not achieved directly through the ListView, but using the DataSource grouping capability:
 
-[Kendo UI DataSource group configuration](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group)
+[Kendo UI DataSource group configuration](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/group)
 
 ## Sample Explanation
 

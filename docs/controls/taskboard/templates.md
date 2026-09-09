@@ -172,4 +172,4 @@ The preview pane header template controls the rendering of the header of the pre
 ## See Also
 
 * [TaskBoard Templates (Demo)](https://demos.telerik.com/kendo-ui/taskboard/templates)
-* [JavaScript API Reference of the TaskBoard](/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the TaskBoard](/api/ui/taskboard)

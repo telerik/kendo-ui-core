@@ -48,4 +48,4 @@ The FlatColorPicker supports both RGB and HEX formats as input through its [`For
 ## See Also
 
 * [RGB and HEX formats of the FlatColorPicker (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/rgb-hex)
-* [JavaScript API Reference of the FlatColorPicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker)
+* [JavaScript API Reference of the FlatColorPicker](https://docs.telerik.com/kendo-ui/api/ui/flatcolorpicker)

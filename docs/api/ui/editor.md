@@ -8,7 +8,7 @@ component: editor
 
 # kendo.ui.Editor
 
-Represents the Kendo UI Editor widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Editor widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -3800,7 +3800,7 @@ How to set custom filename for PDF export from Kendo UI Editor? Specify or confi
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/editor#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/ui/editor#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 
 <div class="meta-api-description">
@@ -4344,7 +4344,7 @@ How do I set the maximum height of an editor in Kendo UI for jQuery? Control and
 
 If `resizable` is set to `true` the widget will detect changes in the viewport width and will hide the overflowing controls in the tool overflow popup.
 
-If `resizable.toolbar` is assigned an object, it will propagate the [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration to the Editor's toolbar.
+If `resizable.toolbar` is assigned an object, it will propagate the [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) configuration to the Editor's toolbar.
 
 > Tools are shown/hidden on tool group level. Tools with popup such as `fontName`, `fontSize`, `fontColor`, `backColor`, `formatting` and `createTable` will **not** be moved to the tool overflow popup and will be always visible.
 
@@ -4937,7 +4937,7 @@ How do I dynamically show/hide formatting tools in a Kendo UI editor based on us
 
 ### tools.palette `String|Array` *(default: "websafe")*
 
-Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palette) for "foreColor" and "backColor" tools. If you need to use the [color gradient](api/javascript/ui/colorgradient) view in the picker instead of the palette, set this value to null.
+Specifies the [color palette](/api/ui/colorpicker/configuration/palette) for "foreColor" and "backColor" tools. If you need to use the [color gradient](api/javascript/ui/colorgradient) view in the picker instead of the palette, set this value to null.
 
 
 <div class="meta-api-description">
@@ -4981,7 +4981,7 @@ How to customize the color picker palette in Kendo UI Editor? Configure or custo
 
 ### tools.columns `Number`
 
-Specifies the [colors columns](/api/javascript/ui/colorpicker/configuration/columns) for "foreColor" and "backColor" tools when list of colors are defined.
+Specifies the [colors columns](/api/ui/colorpicker/configuration/columns) for "foreColor" and "backColor" tools when list of colors are defined.
 
 
 <div class="meta-api-description">
@@ -5044,7 +5044,7 @@ The code below shows how to use a function template.
 
 ### tools.ui `Object`
 
-Apart from the built-in tools, the Editor fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
+Apart from the built-in tools, the Editor fully exposes the [ToolBar.items API](/api/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
 
 All tools must have their `name` specified. All custom tools with no name will have "custom" automatically assigned as their name. As a result only one of them will be placed in the Editor ToolBar.
 
@@ -8142,7 +8142,7 @@ How do I programmatically apply editing commands to selected text in a Kendo UI 
 
 ##### name `String`
 
-The name of the command to be executed. The available names match the list of [tools](/api/javascript/ui/editor#configuration-tools), plus `"undo"` and `"redo"`.
+The name of the command to be executed. The available names match the list of [tools](/api/ui/editor#configuration-tools), plus `"undo"` and `"redo"`.
 
 ##### params `String|Object` *(optional)*
 
@@ -8320,7 +8320,7 @@ How do I reinitialize the iframe environment after moving a Kendo UI editor? Tri
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/editor/events/pdfexport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/ui/editor/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
@@ -8330,7 +8330,7 @@ How to save Kendo UI editor content as PDF programmatically? Trigger exporting t
 </div>
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/editor/events/pdfexport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/ui/editor/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
 

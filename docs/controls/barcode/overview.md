@@ -29,4 +29,4 @@ All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)
 
 * [Basic Usage of the Barcode (Demo)](https://demos.telerik.com/kendo-ui/barcode/index)
 * [Using the API of the Barcode (Demo)](https://demos.telerik.com/kendo-ui/barcode/api)
-* [JavaScript API Reference of the Barcode](/api/javascript/dataviz/ui/barcode)
+* [JavaScript API Reference of the Barcode](/api/dataviz/ui/barcode)

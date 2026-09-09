@@ -56,4 +56,4 @@ To disable dates through using a function, set the return value for the date tha
 ## See Also
 
 * [Disabling Dates in the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/disable-dates)
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)

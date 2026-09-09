@@ -34,4 +34,4 @@ The following example demonstrates how to configure an on-screen keyboard for th
 
 ## See Also
 
-* [JavaScript API Reference of the OTPInput](/api/javascript/ui/otpinput)
+* [JavaScript API Reference of the OTPInput](/api/ui/otpinput)

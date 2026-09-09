@@ -82,7 +82,7 @@ The following example demonstrates how to make the Window behave as a sliding pa
 
 ## See Also
 
-* [Window JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/ui/window)
 * [Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
 * [Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})

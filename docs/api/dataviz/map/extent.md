@@ -237,7 +237,7 @@ How do I check if any points in my collection intersect with a defined spatial b
 #### Parameters
 
 ##### locations `Array`
-An array of [locations](/api/javascript/dataviz/map/location) to test for.
+An array of [locations](/api/dataviz/map/location) to test for.
 
 #### Returns
 
@@ -386,7 +386,7 @@ How do I get the corner points of a geographic area using Kendo UI map extent.ed
 
 #### Returns
 
-`Object` An object with `nw`, `ne`, `se` and `sw` [locations](/api/javascript/dataviz/map/location).
+`Object` An object with `nw`, `ne`, `se` and `sw` [locations](/api/dataviz/map/location).
 
 
 ### toArray
@@ -421,7 +421,7 @@ How do I convert a map extent into an array for spatial calculations in Kendo UI
 
 #### Returns
 
-`Array` An array with [NW, NE, SE, SW] [locations](/api/javascript/dataviz/map/location).
+`Array` An array with [NW, NE, SE, SW] [locations](/api/dataviz/map/location).
 
 
 ### overlaps

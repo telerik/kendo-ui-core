@@ -28,7 +28,7 @@ How can I exclude certain columns from the exported PDF file in a Kendo UI Grid?
 
 ## Solution
 
-> As of Kendo UI R1 2021, there is an [exportable](/api/javascript/ui/grid/configuration/columns.exportable) property which allows the developer to exclude columns from being exported.
+> As of Kendo UI R1 2021, there is an [exportable](/api/ui/grid/configuration/columns.exportable) property which allows the developer to exclude columns from being exported.
 
 Use either of the following approaches:
 
@@ -136,8 +136,8 @@ The following example demonstrates how to hide the last column during PDF Export
 
 ### Using the showColum() and hideColumn() Grid Methods
 
-1. Hide the columns by using the [`hideColumn`](/api/javascript/ui/grid/methods/hidecolumn) method within the [`pdfExport`](/api/javascript/ui/grid/events/pdfexport) event handler.
-1. When the export is done, display the hidden column by using the [`showColumn`](/api/javascript/ui/grid/methods/showcolumn) method.
+1. Hide the columns by using the [`hideColumn`](/api/ui/grid/methods/hidecolumn) method within the [`pdfExport`](/api/ui/grid/events/pdfexport) event handler.
+1. When the export is done, display the hidden column by using the [`showColumn`](/api/ui/grid/methods/showcolumn) method.
 
 ```dojo
     <div id="example">

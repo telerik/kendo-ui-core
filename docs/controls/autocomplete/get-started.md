@@ -57,7 +57,7 @@ In this step, you will initialize the AutoComplete from the `<input>` element. U
 
 ## 3. Specify the Data Source
 
-Here, you will specify a [`dataSource`](/api/javascript/ui/autocomplete/configuration/datasource) configuration for the component which is used to display the list of values.
+Here, you will specify a [`dataSource`](/api/ui/autocomplete/configuration/datasource) configuration for the component which is used to display the list of values.
 
 ```html
   <input id="autocomplete" />
@@ -77,7 +77,7 @@ Here, you will specify a [`dataSource`](/api/javascript/ui/autocomplete/configur
 
 ## 4. Apply Some Styling
 
-The AutoComplete provides several options that enable you to modify its appearance. In this example, you will apply a flat [`fillMode`](/api/javascript/ui/autocomplete/configuration/fillmode) configuration to the component.
+The AutoComplete provides several options that enable you to modify its appearance. In this example, you will apply a flat [`fillMode`](/api/ui/autocomplete/configuration/fillmode) configuration to the component.
 
 ```html
 <input id="autocomplete" />
@@ -97,7 +97,7 @@ The AutoComplete provides several options that enable you to modify its appearan
 
 ## 5. Configure the Label 
 
-The AutoComplete enables you to configure its label by using its [`label`](/api/javascript/ui/autocomplete/configuration/label) property.
+The AutoComplete enables you to configure its label by using its [`label`](/api/ui/autocomplete/configuration/label) property.
 
 ```html
 <input id="autocomplete" />
@@ -126,7 +126,7 @@ The AutoComplete enables you to configure its label by using its [`label`](/api/
 
 ## See Also 
 
-* [JavaScript API Reference of the jQuery AutoComplete](/api/javascript/ui/autocomplete)
+* [JavaScript API Reference of the jQuery AutoComplete](/api/ui/autocomplete)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -219,7 +219,7 @@ You can reference the Responsive Panel instances that you have created and build
         </script>
     ```
 
-1. Use the [Responsive Panel client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/responsivepanel#methods) to control the behavior of the component. In this example, you will use the `open()` and `close()` methods to programmatically toggle the Responsive Panel when a button is clicked.
+1. Use the [Responsive Panel client-side API](https://docs.telerik.com/kendo-ui/api/ui/responsivepanel#methods) to control the behavior of the component. In this example, you will use the `open()` and `close()` methods to programmatically toggle the Responsive Panel when a button is clicked.
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -268,7 +268,7 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Client-Side API of the Responsive Panel](https://docs.telerik.com/kendo-ui/api/javascript/ui/responsivepanel)
+* [Client-Side API of the Responsive Panel](https://docs.telerik.com/kendo-ui/api/ui/responsivepanel)
 * [Server-Side API of the Responsive Panel HtmlHelper](/api/responsivepanel)
 {% if site.core %}
 * [Server-Side API of the Responsive Panel TagHelper](/api/taghelpers/responsivepanel)

@@ -357,4 +357,4 @@ The following example shows how to render sprites for the TreeView items when th
 {% if site.core %}
 * [Server-Side API of the TreeView TagHelper](/api/taghelpers/treeview)
 {% endif %}
-* [Client-Side API of the TreeView](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [Client-Side API of the TreeView](https://docs.telerik.com/kendo-ui/api/ui/treeview)

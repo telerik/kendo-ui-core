@@ -468,7 +468,7 @@ Initialize the Chat and implement handlers for its [`SendMessage`](/api/kendo.mv
 ## See Also
 
 * [Basic Usage of the Chat for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/index)
-* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
+* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/ui/chat)
 * [Server-Side API of the Chat](/api/chat)
 {% if site.core %}
 * [Server-Side API of the Chat TagHelper](/api/taghelpers/chat)

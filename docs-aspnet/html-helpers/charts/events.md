@@ -72,6 +72,6 @@ The following examples demonstrates how to subscribe to events by a handler name
 
 ## See Also
 
-* [Client-Side API of the Chart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Client-Side API of the Chart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart)
 * [Server-Side API of the Chart](/api/chart)
 * [Knowledge Base Section](/knowledge-base)

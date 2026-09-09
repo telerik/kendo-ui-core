@@ -13,7 +13,7 @@ The Grid provides options for localizing its user interface by utilizing the ava
 
 ## Toolbar Messages
 
-The following example demonstrates how to implement the translation of the toolbar messages in the Grid. For more information, refer to the [`toolbar`](/api/javascript/ui/grid/configuration/toolbar) API reference.
+The following example demonstrates how to implement the translation of the toolbar messages in the Grid. For more information, refer to the [`toolbar`](/api/ui/grid/configuration/toolbar) API reference.
 
     toolbar: [
 		// name is the name of the available commands.
@@ -25,7 +25,7 @@ The following example demonstrates how to implement the translation of the toolb
 
 ## Menu Messages
 
-The following example demonstrates how to implement the message translation of the column menu in the Grid. For more information, refer to the [`columnMenu.messages`](/api/javascript/ui/grid/configuration/columnmenu.messages) API reference.  
+The following example demonstrates how to implement the message translation of the column menu in the Grid. For more information, refer to the [`columnMenu.messages`](/api/ui/grid/configuration/columnmenu.messages) API reference.  
 
     columnMenu: {
         messages: {
@@ -38,7 +38,7 @@ The following example demonstrates how to implement the message translation of t
 
 ## Command Messages
 
-The following example demonstrates how to implement the translation of the column command messages in the Grid. For more information, refer to the [`columns.command`](/api/javascript/ui/grid/configuration/columns.command) API reference.  
+The following example demonstrates how to implement the translation of the column command messages in the Grid. For more information, refer to the [`columns.command`](/api/ui/grid/configuration/columns.command) API reference.  
 
     columns: [
         { field: "FirstName", title: "First Name" },
@@ -60,7 +60,7 @@ The following example demonstrates how to implement the translation of the colum
 
 ## Filter Messages
 
-The following example demonstrates how to implement the translations of the filter menu and operator messages in the Grid. For more information, refer to the [`filterable`](/api/javascript/ui/grid/configuration/filterable.messages) API reference.  
+The following example demonstrates how to implement the translations of the filter menu and operator messages in the Grid. For more information, refer to the [`filterable`](/api/ui/grid/configuration/filterable.messages) API reference.  
 
   	filterable: {
   		messages: {
@@ -113,7 +113,7 @@ The following example demonstrates how to implement the translations of the filt
 
 ## Grouping Header Messages
 
-The following example demonstrates how to implement the translations of the group header messages in the Grid. For more information, refer to the [`groupable.messages`](/api/javascript/ui/grid/configuration/columnmenu.messages) API reference.
+The following example demonstrates how to implement the translations of the group header messages in the Grid. For more information, refer to the [`groupable.messages`](/api/ui/grid/configuration/columnmenu.messages) API reference.
 
     groupable: {
         messages: {
@@ -123,7 +123,7 @@ The following example demonstrates how to implement the translations of the grou
 
 ## Pager Messages
 
-The following example demonstrates how to implement the translations of the pager messages in the Grid. For more information, refer to the [`messages`](/api/javascript/ui/pager#messages-object) API reference.
+The following example demonstrates how to implement the translations of the pager messages in the Grid. For more information, refer to the [`messages`](/api/ui/pager#messages-object) API reference.
 
     pageable: {
         messages: {
@@ -308,4 +308,4 @@ The following example demonstrates a Grid with localized user interface for all 
 * [Localization Support by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/localization)
 * [RTL Support by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/right-to-left-support)
 * [Localization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

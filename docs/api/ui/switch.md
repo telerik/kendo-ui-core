@@ -8,7 +8,7 @@ component: switch
 
 # kendo.ui.Switch
 
-Represents the Kendo UI Switch. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Switch. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

@@ -31,12 +31,12 @@ How can I force the rows with `null` to appear at the end of the Grid?
 
 ## Solution
 
-Use a [`compare`](/api/javascript/data/datasource/configuration/sort#sortcompare) function to apply custom sorting to the data.
+Use a [`compare`](/api/data/datasource/configuration/sort#sortcompare) function to apply custom sorting to the data.
 
 You can apply the `compare` function to both:
 
-   - The DataSource [`sort`](/api/javascript/data/datasource/configuration/sort#sortcompare) configuration in order to have the data sorted initially.
-   - The Grid [`columns.sortable`](/api/javascript/ui/grid/configuration/columns.sortable#columnssortablecompare) configuration to allow the end-user to sort the dates by clicking on the Grid headers.
+   - The DataSource [`sort`](/api/data/datasource/configuration/sort#sortcompare) configuration in order to have the data sorted initially.
+   - The Grid [`columns.sortable`](/api/ui/grid/configuration/columns.sortable#columnssortablecompare) configuration to allow the end-user to sort the dates by clicking on the Grid headers.
 
 You can use the approach from the [following StackOverflow answer](https://stackoverflow.com/a/60907674) in order to sort the `null` dates at the bottom.
 

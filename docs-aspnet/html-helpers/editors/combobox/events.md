@@ -156,4 +156,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the ComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/api)
 * [Server-Side API of the ComboBox](/api/combobox)
-* [Client-Side API of the ComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [Client-Side API of the ComboBox](https://docs.telerik.com/kendo-ui/api/ui/combobox)

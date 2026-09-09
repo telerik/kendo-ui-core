@@ -93,4 +93,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the DateTimePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datetimepicker/api)
 * [DateTimePicker Server-Side API](/api/datetimepicker)
-* [DateTimePicker Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [DateTimePicker Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker)

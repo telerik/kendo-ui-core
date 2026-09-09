@@ -18,7 +18,7 @@ ticketid: 1661761
 
 ## Description
 
-I am seeing an issue with the [ResponsivePanel](https://docs.telerik.com/kendo-ui/api/javascript/ui/responsivepanel) component in Kendo UI for jQuery. There is a Kendo Menu inside the Responsive Panel, but when displaying the horizontal menu, it shows both horizontal and vertical scroll bars when hovering over a menu item. Additionally, the menu group item is not visible due to the Responsive Panel's height being limited to the initial height of the horizontal menu. This occurs because the Kendo UI framework sets the `overflow` to `auto`, which causes scrollbars to appear for the Responsive Panel.
+I am seeing an issue with the [ResponsivePanel](https://docs.telerik.com/kendo-ui/api/ui/responsivepanel) component in Kendo UI for jQuery. There is a Kendo Menu inside the Responsive Panel, but when displaying the horizontal menu, it shows both horizontal and vertical scroll bars when hovering over a menu item. Additionally, the menu group item is not visible due to the Responsive Panel's height being limited to the initial height of the horizontal menu. This occurs because the Kendo UI framework sets the `overflow` to `auto`, which causes scrollbars to appear for the Responsive Panel.
 
 This KB article also answers the following questions:
 - How can I prevent scrollbars from appearing in the Kendo UI Responsive Panel?
@@ -85,5 +85,5 @@ Below is a runnable example:
 
 ## See Also
 
-- [Kendo UI ResponsivePanel API](https://docs.telerik.com/kendo-ui/api/javascript/ui/responsivepanel)
-- [Kendo UI Menu API](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+- [Kendo UI ResponsivePanel API](https://docs.telerik.com/kendo-ui/api/ui/responsivepanel)
+- [Kendo UI Menu API](https://docs.telerik.com/kendo-ui/api/ui/menu)

@@ -79,7 +79,7 @@ In this step, you'll initialize the Drawer component from the `<div>` element.
 
 ## 3. Set the Position of the Drawer
 
-Now, you can set the [`position`](/api/javascript/ui/drawer/configuration/position) of the Drawer.
+Now, you can set the [`position`](/api/ui/drawer/configuration/position) of the Drawer.
 
 ```javascript
     $("#drawer").kendoDrawer({
@@ -89,7 +89,7 @@ Now, you can set the [`position`](/api/javascript/ui/drawer/configuration/positi
 
 ## 4. Enable the Mini Mode
 
-In this step, you'll enable the [`mini`](/api/javascript/ui/drawer/configuration/mini) mode which displays a smaller version of the Drawer when the component is collapsed.
+In this step, you'll enable the [`mini`](/api/ui/drawer/configuration/mini) mode which displays a smaller version of the Drawer when the component is collapsed.
 
 ```javascript
     $("#drawer").kendoDrawer({
@@ -99,7 +99,7 @@ In this step, you'll enable the [`mini`](/api/javascript/ui/drawer/configuration
 
 ## 5. Add Logic for Displaying and Hiding the Content
 
-Now you are ready to use the [`itemClick`](/api/javascript/ui/drawer/events/itemclick) event to hide the current and display new content when an item in the Drawer is clicked.
+Now you are ready to use the [`itemClick`](/api/ui/drawer/events/itemclick) event to hide the current and display new content when an item in the Drawer is clicked.
 
 ```javascript
     $("#drawer").kendoDrawer({
@@ -117,7 +117,7 @@ Now you are ready to use the [`itemClick`](/api/javascript/ui/drawer/events/item
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Drawer](/api/javascript/ui/drawer)
+* [JavaScript API Reference of the jQuery Drawer](/api/ui/drawer)
 * [Knowledge Base Section](/knowledge-base)
 
 

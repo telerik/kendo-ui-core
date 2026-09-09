@@ -102,4 +102,4 @@ Overview of the Image Type:
 * [Basic Usage of the QRCode (Demo)](https://demos.telerik.com/kendo-ui/qrcode/index)
 * [Using the API of the QRCode (Demo)](https://demos.telerik.com/kendo-ui/qrcode/api)
 * [Knowledge Base Section](/knowledge-base)
-* [JavaScript API Reference of the QRCode](/api/javascript/dataviz/ui/qrcode)
+* [JavaScript API Reference of the QRCode](/api/dataviz/ui/qrcode)

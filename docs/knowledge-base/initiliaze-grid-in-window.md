@@ -84,8 +84,8 @@ The example below demonstrates how to use the `activate` event when initializing
 ## See Also
 
 * [Initialize the Grid inside a Hidden Container](/web/grid/appearance#initialize-the-grid-inside-a-hidden-container)
-* [JavaScript API Reference: Configuration of Window Animations](/api/javascript/ui/window/configuration/animation)
-* [Window JavaScript Window API Reference](/api/javascript/ui/window)
+* [JavaScript API Reference: Configuration of Window Animations](/api/ui/window/configuration/animation)
+* [Window JavaScript Window API Reference](/api/ui/window)
 * [Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
 * [Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})

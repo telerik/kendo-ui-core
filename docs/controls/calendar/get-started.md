@@ -53,7 +53,7 @@ In this step, you'll initialize the Calendar component from the empty `<div>` el
 
 ## 3. Enable Selection
 
-You can enable the selection functionality by setting the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) property of the Calendar to `true`.
+You can enable the selection functionality by setting the [`selectable`](/api/ui/calendar/configuration/selectable) property of the Calendar to `true`.
 
 ```html
     <div id="calendar"></div>
@@ -66,7 +66,7 @@ You can enable the selection functionality by setting the [`selectable`](/api/ja
 
 ## 4. Enable Week Numbers
 
-You can enable the week column by setting the [`weekNumber`](/api/javascript/ui/calendar/configuration/weeknumber) property of the Calendar to `true`.
+You can enable the week column by setting the [`weekNumber`](/api/ui/calendar/configuration/weeknumber) property of the Calendar to `true`.
 
 ```html
     <div id="calendar"></div>
@@ -80,7 +80,7 @@ You can enable the week column by setting the [`weekNumber`](/api/javascript/ui/
 
 ## 5. Configure the Month Template
 
-You can change the appearance of the dates by using the [`month`](/api/javascript/ui/calendar/configuration/month) configuration.
+You can change the appearance of the dates by using the [`month`](/api/ui/calendar/configuration/month) configuration.
 
 ```html
     <div id="calendar"></div>
@@ -107,7 +107,7 @@ You can change the appearance of the dates by using the [`month`](/api/javascrip
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the jQuery Calendar](/api/ui/calendar)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -18,7 +18,7 @@ The [Kendo UI Drawing library (Drawing API)](https://demos.telerik.com/kendo-ui/
 The Kendo UI Drawing library:
 - Serves as a foundation of and as an extension point for the Kendo UI widgets which render data visualization such as Charts and Diagrams.
 - Is also a standalone component that is suitable for building custom visualizations.
-- Offers a [low-level API](/api/javascript/drawing)&mdash;a simple object model for building and manipulating visual scenes which can be rendered as SVG and PDF documents, Canvas elements, and PNG images.
+- Offers a [low-level API](/api/drawing)&mdash;a simple object model for building and manipulating visual scenes which can be rendered as SVG and PDF documents, Canvas elements, and PNG images.
 
 To build a scene, you can create drawing elements such as curves, images, and text. Scene elements are live and respond to changes of their appearance and geometry. To render scenes on and off screen, use the drawing surface. Surfaces encapsulate specific browser technologies such as SVG or Canvas.
 

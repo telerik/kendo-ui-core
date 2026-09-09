@@ -27,7 +27,7 @@ How can I show (bind) a model value in the DateRangePicker and submit it in a `P
 ## Solution
 
 1. To show the dates from the model in the DateRangePicker, configure the `.Range(r => r.Start().End())`.
-1. To submit the POST data, use the [`StartField`](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/configuration/startfield) and [`EndField`](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/configuration/endfield) settings of the DateRangePicker to set the names of the fields that are used in the query.
+1. To submit the POST data, use the [`StartField`](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker/configuration/startfield) and [`EndField`](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker/configuration/endfield) settings of the DateRangePicker to set the names of the fields that are used in the query.
 
 These two settings are needed because the DateRangePicker consists of two actual inputs.
 
@@ -92,7 +92,7 @@ public ActionResult Index(MyViewModel theUserInput)
 
 ## See Also
 
-* [Client-Side API Reference of the DateRangePicker for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker)
+* [Client-Side API Reference of the DateRangePicker for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker)
 * [Server-Side API Reference of the DateRangePicker for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/daterangepicker)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

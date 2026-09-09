@@ -87,4 +87,4 @@ The default line type of a Line Chart is solid. You can implement the dash line 
 ## See Also
 
 * [Basic Usage of the Line Chart (Demo)](https://demos.telerik.com/kendo-ui/line-charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

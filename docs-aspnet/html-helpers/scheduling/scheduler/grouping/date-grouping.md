@@ -73,4 +73,4 @@ By default, the resources will be grouped by date horizontally. To group the res
 {% if site.core %}
 * [Server-Side API of the Scheduler TagHelper](/api/taghelpers/scheduler)
 {% endif %}
-* [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

@@ -32,7 +32,7 @@ How can I filter the DropDownList data by multiple properties on the client-side
 
 1. Subscribe to the [`Filtering`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlisteventbuilder#filteringsystemstring) event.
 1. Prevent the default behavior of the `Filtering` event.
-1. Use the dataSource [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method to apply the custom filtering.
+1. Use the dataSource [`filter`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/filter) method to apply the custom filtering.
 
 ```Razor Index.cshtml
     @(Html.Kendo().DropDownList()
@@ -110,7 +110,7 @@ For the complete implementation of the suggested approach, refer to the followin
 ## See Also
 
 * [Telerik REPL: Filtering a DropDownList by Multiple Properties](https://netcorerepl.telerik.com/ccOqQLvn39tnt1Zy03)
-* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist)
 * [Server-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/dropdownlist)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

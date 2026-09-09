@@ -17,7 +17,7 @@ The prefix and suffix input adornments are elements positioned before and after 
 
 The prefix input adornment is located before the MultiColumnComboBox input field. It provides additional context to guide users when entering specific data, such as icons for currencies or unit indicators.
 
-To add a prefix before your MultiColumnComboBox input, use the [`prefixOptions`](/api/javascript/ui/multicolumncombobox/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
+To add a prefix before your MultiColumnComboBox input, use the [`prefixOptions`](/api/ui/multicolumncombobox/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
 
 * `Icon`&mdash;Inserts an icon before the MultiColumnComboBox element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content before the MultiColumnComboBox element.
@@ -56,7 +56,7 @@ The following example demonstrates how to set an icon as a prefix of the MultiCo
 
 The suffix input adornment is located after the MultiColumnComboBox input field. Usually, it offers direct functionality related to the entered data, such as toggles for password visibility, formatting options, or the ability to clear the input.
 
-To add a suffix after your MultiColumnComboBox input, use the [`suffixOptions`](/api/javascript/ui/multicolumncombobox/configuration/suffixoptions). `suffixOptions` provides the following options:
+To add a suffix after your MultiColumnComboBox input, use the [`suffixOptions`](/api/ui/multicolumncombobox/configuration/suffixoptions). `suffixOptions` provides the following options:
 
 * `Icon`&mdash;Adds an icon after the MultiColumnComboBox element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content after the MultiColumnComboBox element.
@@ -93,4 +93,4 @@ The following example demonstrates how to add an icon as a suffix of the MultiCo
 ## See Also
 
 * [MultiColumnComboBox Prefix and Suffix (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/prefix-suffix)
-* [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
+* [JavaScript API Reference of the MultiColumnComboBox](/api/ui/multicolumncombobox)

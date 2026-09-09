@@ -34,7 +34,7 @@ To achieve row hover functionality and retrieve column object values, follow the
 
 1. Subscribe to the [`DataBound`](/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event of the Grid.
 2. Within the event handler, bind the jQuery [`mouseenter`](https://api.jquery.com/mouseenter/) event to the table rows.
-3. Use the [`dataItem()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) client-side method of the Grid to get the data item associated with the hovered row.
+3. Use the [`dataItem()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem) client-side method of the Grid to get the data item associated with the hovered row.
 
 {% if site.core %}
 ```TagHelper
@@ -88,7 +88,7 @@ You can test this example using the following REPL sample: [Row Hover Event Exam
 {% endif %}
 
 ## See Also
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](/api/grid)
 {% if site.core %}* [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](/api/taghelpers/grid) {% endif %}
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

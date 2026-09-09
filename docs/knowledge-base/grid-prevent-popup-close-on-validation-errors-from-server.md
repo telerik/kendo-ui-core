@@ -28,9 +28,9 @@ I am returning errors from server and catch it in kendo datasource error event. 
 
 ## Solution
 
-1. Specify which part of the response contains the errors [`schema.errors`](/api/javascript/data/datasource/configuration/schema#schemaerrors).
-1. Add an [`error`](/api/javascript/data/datasource/events/error) handler in the data source. It will be triggered when the field which contains the errors is **present** in the response.
-1. Prevent the grid to bind with the [`one()`](/api/javascript/observable/methods/one) method. This will keep the popup open and notify the user that there are errors.
+1. Specify which part of the response contains the errors [`schema.errors`](/api/data/datasource/configuration/schema#schemaerrors).
+1. Add an [`error`](/api/data/datasource/events/error) handler in the data source. It will be triggered when the field which contains the errors is **present** in the response.
+1. Prevent the grid to bind with the [`one()`](/api/observable/methods/one) method. This will keep the popup open and notify the user that there are errors.
 
 ```
     error: function(e) {

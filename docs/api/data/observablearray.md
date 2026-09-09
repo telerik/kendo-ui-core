@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.data.ObservableArray
 
-The `ObservableArray` wraps an existing `Array` object with change-tracking capabilities. It is used by [Kendo UI MVVM](/framework/mvvm/overview) design pattern and the [`kendo.data.DataSource`](/framework/datasource/overview). Inherits from [`kendo.Observable`](/api/javascript/observable).
+The `ObservableArray` wraps an existing `Array` object with change-tracking capabilities. It is used by [Kendo UI MVVM](/framework/mvvm/overview) design pattern and the [`kendo.data.DataSource`](/framework/datasource/overview). Inherits from [`kendo.Observable`](/api/observable).
 
 ## Configuration
 
@@ -39,7 +39,7 @@ To create a new `ObservableArray`, use its constructor or the `kendo.observable`
     console.log(observable.people instanceof kendo.data.ObservableArray); // outputs "true"
     </script>
 
-> The `kendo.data.ObservableArray` wraps its items as [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) instances unless the items are of the primitive type.
+> The `kendo.data.ObservableArray` wraps its items as [`kendo.data.ObservableObject`](/api/data/observableobject) instances unless the items are of the primitive type.
 
 #### Example - an array of complex and primitive type
 
@@ -366,7 +366,7 @@ How to access the parent array of an item in a Kendo UI for jQuery observable co
 
 Removes the last item from an array and returns that item. An equivalent of [`Array.prototype.pop`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop).
 
-> The `pop` method raises the [`change`](/api/javascript/data/observablearray/events/change) event. The `action` field of the event argument is set to `"remove"`. The `items` field of the event argument is the array that contains the removed item.
+> The `pop` method raises the [`change`](/api/data/observablearray/events/change) event. The `action` field of the event argument is set to `"remove"`. The `items` field of the event argument is the array that contains the removed item.
 
 
 <div class="meta-api-description">
@@ -392,7 +392,7 @@ How do I remove and retrieve the last element from a Kendo UI observable array u
 
 Appends the given items to the array and returns the new length of the array. An equivalent of [`Array.prototype.push`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). The new items are wrapped as an `ObservableObject` if they are complex objects.
 
-> The `push` method raises the [`change`](/api/javascript/data/observablearray/events/change) event. The `action` field of the event argument is set to `"add"`. The `items` field of the event argument is the array that contains the appended items.
+> The `push` method raises the [`change`](/api/data/observablearray/events/change) event. The `action` field of the event argument is set to `"add"`. The `items` field of the event argument is the array that contains the appended items.
 
 
 <div class="meta-api-description">
@@ -583,7 +583,7 @@ The function that will be executed for every item.
 
 Changes an `ObservableArray` by adding new items while removing old items. An equivalent of [`Array.prototype.splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice).
 
-> The `splice` method raises the [`change`](/api/javascript/data/observablearray/events/change) event once or twice depending on the change. The `action` field of the event argument is set to `"add"` (if items are added) or `"remove` (if items are removed). The `items` field of the event argument is the array that contains the appended items or removed items. In the previous example, the `change` event will be triggered two times&mdash;the first one, because `baseball` is removed and, the second one, because `tennis` and `hockey` are added.
+> The `splice` method raises the [`change`](/api/data/observablearray/events/change) event once or twice depending on the change. The `action` field of the event argument is set to `"add"` (if items are added) or `"remove` (if items are removed). The `items` field of the event argument is the array that contains the appended items or removed items. In the previous example, the `change` event will be triggered two times&mdash;the first one, because `baseball` is removed and, the second one, because `tennis` and `hockey` are added.
 
 
 <div class="meta-api-description">
@@ -670,7 +670,7 @@ How do I convert an observable collection to a plain JavaScript array for serial
 
 Adds one or more items to the beginning of an `ObservableArray` and returns the new length. An equivalent of [`Array.prototype.unshift`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift).
 
-> The `unshift` method raises the [`change`](/api/javascript/data/observablearray/events/change) event. The `action` field of the event argument is set to `"add"`. The `items` field of the event argument is an array that contains the new items.
+> The `unshift` method raises the [`change`](/api/data/observablearray/events/change) event. The `action` field of the event argument is set to `"add"`. The `items` field of the event argument is an array that contains the new items.
 
 
 <div class="meta-api-description">

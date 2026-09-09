@@ -31,7 +31,7 @@ I need to remove the Column Reordering functionality from the column menu in the
 - How to disable specific options in the Grid's column menu?
 
 ## Solution
-To remove the Column Reordering option from the column menu in the Kendo UI Grid, utilize the [`columnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event. This event allows you to customize the column menu after it is initialized. By targeting the specific menu item for Column Reordering, you can hide or remove it from the menu.
+To remove the Column Reordering option from the column menu in the Kendo UI Grid, utilize the [`columnMenuInit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnmenuinit) event. This event allows you to customize the column menu after it is initialized. By targeting the specific menu item for Column Reordering, you can hide or remove it from the menu.
 
 Follow these steps to achieve the desired outcome:
 
@@ -79,6 +79,6 @@ For a practical demonstration, refer to the below Dojo demo.
 ```
 
 ## See Also
-- [Grid Column Menu Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columnmenu)
-- [ColumnMenuInit Event of Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit)
+- [Grid Column Menu Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columnmenu)
+- [ColumnMenuInit Event of Grid](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnmenuinit)
 - [Kendo UI Grid Overview](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)

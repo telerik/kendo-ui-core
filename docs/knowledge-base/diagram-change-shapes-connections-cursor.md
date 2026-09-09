@@ -33,7 +33,7 @@ Use either of the following approaches:
 * [Change the cursor dynamically](#changing-the-cursor-dynamically)
 * [Change the cursor when the Diagram is bound](#changing-the-cursor-when-the-diagram-is-bound)
 
-To prevent user interaction and display the widget as a static image, in the configuration of the Diagram set [`editable: false`](/api/javascript/dataviz/ui/diagram/configuration/editable) and [`selectable: false`](/api/javascript/dataviz/ui/diagram/configuration/selectable).
+To prevent user interaction and display the widget as a static image, in the configuration of the Diagram set [`editable: false`](/api/dataviz/ui/diagram/configuration/editable) and [`selectable: false`](/api/dataviz/ui/diagram/configuration/selectable).
 
 ### Changing the Cursor Dynamically
 
@@ -150,7 +150,7 @@ To dynamically change the cursor when a series or a connection is hovered:
 
 ### Changing the Cursor When the Diagram Is Bound
 
-Access all shapes and connections in the [`dataBound`](/api/javascript/dataviz/ui/diagram/events/databound) event of the Diagram and change their cursor.
+Access all shapes and connections in the [`dataBound`](/api/dataviz/ui/diagram/events/databound) event of the Diagram and change their cursor.
 
 ```dojo
     <div id="diagram"></div>

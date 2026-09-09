@@ -6,7 +6,7 @@ res_type: api
 
 # kendo.spreadsheet.Sheet
 
-Represents a sheet instance in the [Kendo UI Spreadsheet](/api/javascript/ui/spreadsheet) widget. Inherits from [Observable](/api/javascript/observable).
+Represents a sheet instance in the [Kendo UI Spreadsheet](/api/ui/spreadsheet) widget. Inherits from [Observable](/api/observable).
 
 ## Fields
 
@@ -59,7 +59,7 @@ How can I programmatically add custom shapes, images, or annotations to a Kendo 
 ##### drawing `Object`
 
 This can contain the same properties as you can pass to
-[`sheets.drawings`](/api/javascript/ui/spreadsheet#configuration-sheets.drawings)
+[`sheets.drawings`](/api/ui/spreadsheet#configuration-sheets.drawings)
 configuration options.
 
 #### Returns
@@ -274,11 +274,11 @@ If passed `true`, the method does not delete item from the DataSource.
 
 ### fromJSON
 
-Loads the sheet from an object in the format defined in the [sheet configuration](/api/javascript/ui/spreadsheet#configuration.sheets).
+Loads the sheet from an object in the format defined in the [sheet configuration](/api/ui/spreadsheet#configuration.sheets).
 
 > The configuration and cell values will be merged.
 >
-> **Note:** the Sheet objects are not resizable.  If you use this method you must make sure that the JSON does not contain more rows or columns than defined when the `Spreadsheet` object has been constructed.  To reload a full spreadsheet from JSON, we recommend using Spreadsheet's [fromJSON](/api/javascript/ui/spreadsheet/methods/fromjson) method.
+> **Note:** the Sheet objects are not resizable.  If you use this method you must make sure that the JSON does not contain more rows or columns than defined when the `Spreadsheet` object has been constructed.  To reload a full spreadsheet from JSON, we recommend using Spreadsheet's [fromJSON](/api/ui/spreadsheet/methods/fromjson) method.
 
 
 <div class="meta-api-description">
@@ -549,7 +549,7 @@ If passed `true`, the method does not insert item in the DataSource.
 
 ### range
 
-Returns a [Range](/api/javascript/spreadsheet/range) for the given range specification.
+Returns a [Range](/api/spreadsheet/range) for the given range specification.
 
 
 <div class="meta-api-description">
@@ -866,7 +866,7 @@ If passed, the method will toggle the display of the grid lines according to the
 
 
 ### toJSON
-Serializes the sheet in the format defined in the [sheet configuration](/api/javascript/ui/spreadsheet#configuration.sheets).
+Serializes the sheet in the format defined in the [sheet configuration](/api/ui/spreadsheet#configuration.sheets).
 
 
 <div class="meta-api-description">

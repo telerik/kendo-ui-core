@@ -191,7 +191,7 @@ Referencing existing component instances allows you to build on top of their con
         </script>
     ```
 
-1. Use the [SpeechToTextButton client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/speechtotextbutton#methods) to control the behavior of the component. In this example, you will see how to start and stop the speech recognition service dynamically (for example, when clicking a button).
+1. Use the [SpeechToTextButton client-side API](https://docs.telerik.com/kendo-ui/api/ui/speechtotextbutton#methods) to control the behavior of the component. In this example, you will see how to start and stop the speech recognition service dynamically (for example, when clicking a button).
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -251,7 +251,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the SpeechToTextButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/speechtotextbutton/api)
-* [Client-Side API of the SpeechToTextButton](https://docs.telerik.com/kendo-ui/api/javascript/ui/speechtotextbutton)
+* [Client-Side API of the SpeechToTextButton](https://docs.telerik.com/kendo-ui/api/ui/speechtotextbutton)
 * [Server-Side API of the SpeechToTextButton](/api/speechtotextbutton)
 {% if site.core %}
 * [Server-Side API of the SpeechToTextButton TagHelper](/api/taghelpers/speechtotextbutton)

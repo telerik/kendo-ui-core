@@ -9,7 +9,7 @@ position: 8
 
 # Sheet Resizing 
 
-As of the R1 2022 SP2 release, the Spreadsheet [Sheet](/api/javascript/spreadsheet/sheet) exposes a `resize` method that allows you to change the number of the rows and columns in the current sheet. 
+As of the R1 2022 SP2 release, the Spreadsheet [Sheet](/api/spreadsheet/sheet) exposes a `resize` method that allows you to change the number of the rows and columns in the current sheet. 
 
 The new functionality increases or decreases the size of the rows and columns after loading. The sheet automatically resizes after the user pastes more data than the current sheet size allows for and exposes flexible behavior when the user adds or deletes columns and rows from the toolbar.
 
@@ -20,7 +20,7 @@ The new functionality increases or decreases the size of the rows and columns af
 
 If the count of the rows or columns is programmatically set through the `resize` method, the user cannot revert the applied changes through the **Undo** or **Redo** toolbar options. In this case, **Undo** and **Redo** will take effect only if the user changes the number of the rows or columns with the **Insert New Row** or **Insert New Column**, or with **Delete Row** or **Delete Column** options.
 
-The example below demonstrates how to set the count of the rows and columns in the current active sheet by using the [`resize`](/api/javascript/spreadsheet/sheet/methods/resize) method. 
+The example below demonstrates how to set the count of the rows and columns in the current active sheet by using the [`resize`](/api/spreadsheet/sheet/methods/resize) method. 
 
 ```dojo
 <div id="spreadsheet"></div>
@@ -63,4 +63,4 @@ The implementation of the `resize` method changes aspects of the Spreadsheet beh
 ## See Also
 
 * [Spreadsheet Resize Sheet Demo](https://demos.telerik.com/kendo-ui/spreadsheet/resize)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

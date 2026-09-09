@@ -69,4 +69,4 @@ Configure the [cell validation](https://demos.telerik.com/kendo-ui/spreadsheet/v
 
 ## See Also
 
-* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)

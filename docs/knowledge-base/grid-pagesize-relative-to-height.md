@@ -124,5 +124,5 @@ This solution adjusts the pageSize of the Grid dataSource only when the window i
 
 ## See Also
 
-* [API Reference of the pageSize Method](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize)
+* [API Reference of the pageSize Method](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/pagesize)
 * [API Reference of the jQuery resize Event](https://api.jquery.com/resize/)

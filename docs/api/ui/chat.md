@@ -7,7 +7,7 @@ component: chat
 
 # kendo.ui.Chat
 
-Represents the Kendo UI Chat component. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Chat component. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -1454,7 +1454,7 @@ How to customize the appearance of file attachments in Kendo UI Chat? Control an
 
 ### headerItems `Array`
 
-Defines the collection of items that will be rendered in the Chat header. Each item represents a component or content that appears in the header area above the message list. The items follow the same structure as [AppBar items](/api/javascript/ui/appbar/configuration/items).
+Defines the collection of items that will be rendered in the Chat header. Each item represents a component or content that appears in the header area above the message list. The items follow the same structure as [AppBar items](/api/ui/appbar/configuration/items).
 
 <div class="meta-api-description">
 How do I customize the top section of the Kendo UI chat interface with header items? Configure and customize the top section of the chat interface by setting the arrangement and content of elements displayed above messages, including buttons, icons, titles, avatars, menus, or custom components. Control which controls and visual items appear in the chat header, define header elements similar to app bar items, manage interactive items like menus or actions, and tailor the header layout to include various components such as user avatars, navigation icons, or custom templates displayed above the message list. Adjust header controls for chat UI, specifying collections of interactive or static items to shape the chat’s top bar appearance and functionality.
@@ -5510,7 +5510,7 @@ The array of remaining files after removal.
 
 ### suggestionClick
 
-Fired when a user clicks a suggestion in the Chat. Global suggestions always trigger this event. Per-message `suggestedActions` trigger this event when `suggestionsBehavior` is set to `"insert"`; otherwise they flow through [`sendMessage`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/events/sendmessage).
+Fired when a user clicks a suggestion in the Chat. Global suggestions always trigger this event. Per-message `suggestedActions` trigger this event when `suggestionsBehavior` is set to `"insert"`; otherwise they flow through [`sendMessage`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/events/sendmessage).
 
 <div class="meta-api-description">
 How do I handle clicks on suggested messages in a Kendo UI Chat widget? Capture and process user interactions with suggested messages or actions in chat interfaces, enabling detection of clicks on suggestions to execute custom logic, insert chosen text, send predefined replies, or trigger related workflows. Configure event handlers to monitor selection of autocomplete options, recommendation taps, quick reply choices, or inline action picks, allowing control over default behaviors, engagement tracking, suggestion data retrieval, dynamic navigation, and contextual side effects within conversational UI components.

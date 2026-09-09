@@ -33,4 +33,4 @@ The following example demonstrates how to render a DateRangePicker with an initi
 ## See Also
 
 * [Basic Usage of the DateRangePicker (Demo)](https://demos.telerik.com/kendo-ui/daterangepicker/index)
-* [JavaScript API Reference of the DateRangePicker](/api/javascript/ui/daterangepicker)
+* [JavaScript API Reference of the DateRangePicker](/api/ui/daterangepicker)

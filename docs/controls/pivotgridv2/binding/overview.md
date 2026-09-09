@@ -31,4 +31,4 @@ For more information on binding the PivotGridV2 to local data, refer to the [Loc
 ## See Also
 
 * [Basic Usage of the PivotGridV2 (Demo)](https://demos.telerik.com/kendo-ui/pivotgridv2/index)
-* [PivotGridV2 JavaScript API Reference](/api/javascript/ui/pivotgridv2)
+* [PivotGridV2 JavaScript API Reference](/api/ui/pivotgridv2)

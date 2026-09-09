@@ -25,4 +25,4 @@ As a result, the appearance of the component is changed.
 
 ## See Also
 
-* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/ui/calendar)

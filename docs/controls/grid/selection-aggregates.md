@@ -27,10 +27,10 @@ The Grid supports the following built-in aggregates for all selected cells:
 
 ## Requirements
 
-* The Grid must be [`selectable`](/api/javascript/ui/grid/configuration/selectable) where the [`cellAgregates`] property is specified. The aggregates work with `cell`, `row`, and `checkbox` selection.
-* The [`schema.model.id`](/api/javascript/data/datasource/configuration/schema#schemamodel) field must be defined when the [`selectable`](/api/javascript/ui/grid/configuration/selectable) is set to `cell`.
+* The Grid must be [`selectable`](/api/ui/grid/configuration/selectable) where the [`cellAgregates`] property is specified. The aggregates work with `cell`, `row`, and `checkbox` selection.
+* The [`schema.model.id`](/api/data/datasource/configuration/schema#schemamodel) field must be defined when the [`selectable`](/api/ui/grid/configuration/selectable) is set to `cell`.
 
-The aggregates are configured inside the selectable configuration of the Grid through the [`cellAggregates`](/api/javascript/ui/grid/configuration/selectable.cellaggregates) property. 
+The aggregates are configured inside the selectable configuration of the Grid through the [`cellAggregates`](/api/ui/grid/configuration/selectable.cellaggregates) property. 
 
 ```
 selectable: { 
@@ -51,7 +51,7 @@ selectable: {
 
 The Grid allow you to render the selection aggregates in a built-in bar under the table cells - Status Bar.
 
-To show the selection aggregates in the Status Bar, define a template by using [`statusBarTemplate`](/api/javascript/ui/grid/configuration/statusBarTemplate), and return the desired HTML result.
+To show the selection aggregates in the Status Bar, define a template by using [`statusBarTemplate`](/api/ui/grid/configuration/statusBarTemplate), and return the desired HTML result.
 
 The following example demonstrates how to access the calculated cell aggregates and display them in an external `div` element.
 
@@ -118,7 +118,7 @@ The following example demonstrates how to access the calculated cell aggregates 
 
 ## Displaying Selection Aggregates Externally
 
-To display the aggregates within a custom element or component, handle the Grid [`change`](/api/javascript/ui/grid/events/change) event and access the precalculated aggregates from the exposed event data.
+To display the aggregates within a custom element or component, handle the Grid [`change`](/api/ui/grid/events/change) event and access the precalculated aggregates from the exposed event data.
 
 The following example demonstrates how to access the calculated cell aggregates and display them in an external `div` element.
 
@@ -201,4 +201,4 @@ The following example demonstrates how to access the calculated cell aggregates 
 * [Grid Checkbox Selection (Demo)](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
 * [Grid Selection & Export (Demo)](https://demos.telerik.com/kendo-ui/grid/selection-export)
 * [Grid Aggregates (Demo)](https://demos.telerik.com/kendo-ui/grid/aggregates)
-* [JavaScript API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/ui/grid)

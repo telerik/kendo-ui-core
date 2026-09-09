@@ -57,7 +57,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 3. Set the Minimum and Maximum Date
 
-The DateTimePicker can display only dates in a specific range through the supported [`min`](/api/javascript/ui/datetimepicker/configuration/min) and [`max`](/api/javascript/ui/datetimepicker/configuration/max) options.
+The DateTimePicker can display only dates in a specific range through the supported [`min`](/api/ui/datetimepicker/configuration/min) and [`max`](/api/ui/datetimepicker/configuration/max) options.
 
 ```html
 <input id="datetimepicker" />
@@ -73,7 +73,7 @@ The DateTimePicker can display only dates in a specific range through the suppor
 
 ## 4. Set the Format
 
-You can customize the format of the displayed date by setting the [`format`](/api/javascript/ui/datetimepicker/configuration/format) configuration of the DateTimePicker.
+You can customize the format of the displayed date by setting the [`format`](/api/ui/datetimepicker/configuration/format) configuration of the DateTimePicker.
 
 ```html
 <input id="datetimepicker" />
@@ -96,6 +96,6 @@ You can customize the format of the displayed date by setting the [`format`](/ap
 
 ## See Also 
 
-* [JavaScript API Reference of the jQuery DateTimePicker](/api/javascript/ui/datetimepicker)
+* [JavaScript API Reference of the jQuery DateTimePicker](/api/ui/datetimepicker)
 * [Knowledge Base Section](/knowledge-base)
 

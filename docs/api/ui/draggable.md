@@ -9,7 +9,7 @@ component: drag-and-drop
 
 # kendo.ui.Draggable
 
-Represents the Kendo UI Draggable widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Draggable widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -334,7 +334,7 @@ Suitable for touch oriented user interface, in order to avoid collision with the
 When set to `true`, the widget will be activated after the user taps and holds the finger on the element for a short amount of time.
 
 The *draggable* will also be activated by pressing, holding and lifting the finger without any movement. Dragging it afterwards will initiate the drag immediately.
-The activated mode can be canceled by calling [`cancelHold`](/api/javascript/ui/draggable/methods/cancelhold).
+The activated mode can be canceled by calling [`cancelHold`](/api/ui/draggable/methods/cancelhold).
 
 
 <div class="meta-api-description">
@@ -676,7 +676,7 @@ The `hold` event represents a jQuery `mousedown` event and contains all the even
 
 > **Important**
 >
-> As of the Kendo UI R3 2019 SP1 release, setting the holdToDrag option to `false` does not cancel the [hold event](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable/events/hold).
+> As of the Kendo UI R3 2019 SP1 release, setting the holdToDrag option to `false` does not cancel the [hold event](https://docs.telerik.com/kendo-ui/api/ui/draggable/events/hold).
 
 
 <div class="meta-api-description">

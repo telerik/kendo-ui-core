@@ -8,7 +8,7 @@ component: drawer
 
 # kendo.ui.Drawer
 
-Represents the Kendo UI Drawer widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Drawer widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

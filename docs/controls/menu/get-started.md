@@ -99,7 +99,7 @@ The Menu items can be loaded from a JSON array of data. To use this approach, co
 
 ## 4. Specify the DataTextField
 
-The [`dataTextField`](/api/javascript/ui/menu/configuration/datatextfield) configuration must point to a field in the `dataSource` data.
+The [`dataTextField`](/api/ui/menu/configuration/datatextfield) configuration must point to a field in the `dataSource` data.
 
 ```html
     <ul id="menu"></ul>
@@ -132,7 +132,7 @@ The [`dataTextField`](/api/javascript/ui/menu/configuration/datatextfield) confi
 
 ## 5. Modify the Animations
 
-The Menu enables you to modify the default open and close [`animations`](/api/javascript/ui/menu/configuration/animation).
+The Menu enables you to modify the default open and close [`animations`](/api/ui/menu/configuration/animation).
 
 ```html
     <ul id="menu"></ul>
@@ -173,6 +173,6 @@ The Menu enables you to modify the default open and close [`animations`](/api/ja
 
 ## See Also 
 
-* [JavaScript API Reference of the jQuery Menu](/api/javascript/ui/menu)
+* [JavaScript API Reference of the jQuery Menu](/api/ui/menu)
 * [Knowledge Base Section](/knowledge-base)
 

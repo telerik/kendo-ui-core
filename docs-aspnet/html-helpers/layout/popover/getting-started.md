@@ -124,7 +124,7 @@ You can reference the PopOver instances that you have created and build on top o
     </script>
     ```
 
-1. Use the [PopOver client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/popover#methods) to control the behavior of the component. In this example, you will use the `show()` method to show the PopOver dynamically (for example, when a button is clicked).
+1. Use the [PopOver client-side API](https://docs.telerik.com/kendo-ui/api/ui/popover#methods) to control the behavior of the component. In this example, you will use the `show()` method to show the PopOver dynamically (for example, when a button is clicked).
 
     ```HtmlHelper
         <span id="target">Popover target</span>
@@ -184,7 +184,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the PopOver for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/popover/api)
-* [Client-Side API of the PopOver](https://docs.telerik.com/kendo-ui/api/javascript/ui/popover)
+* [Client-Side API of the PopOver](https://docs.telerik.com/kendo-ui/api/ui/popover)
 * [Server-Side API of the PopOver HtmlHelper](/api/popover)
 {% if site.core %}
 * [Server-Side API of the PopOver TagHelper](/api/taghelpers/popover)

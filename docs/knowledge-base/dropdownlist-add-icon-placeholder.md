@@ -24,7 +24,7 @@ How can I add an icon in the DropDownList placeholder?
 
 ## Solution
 
-To display an icon in the DropDownList placeholder, set the [`optionLabelTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/optionlabeltemplate) option to an HTML string that includes the icon element. The template renders only when no value is selected.
+To display an icon in the DropDownList placeholder, set the [`optionLabelTemplate`](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/configuration/optionlabeltemplate) option to an HTML string that includes the icon element. The template renders only when no value is selected.
 
 ```dojo
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -48,4 +48,4 @@ To display an icon in the DropDownList placeholder, set the [`optionLabelTemplat
 
 ## See Also
 
-* [API Reference of the DropDownList](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [API Reference of the DropDownList](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist)

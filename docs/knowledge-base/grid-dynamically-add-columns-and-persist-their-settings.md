@@ -28,9 +28,9 @@ How can I add and remove columns to the jQuery Grid component dynamically by usi
 
 To achieve the desired scenario:
 
-1. In the [`dataBound`](/api/javascript/ui/grid/events/databound) event handler of the Grid, obtain the column configurations of the component with the initial Grid load.
-1. In the [`change`](/api/javascript/ui/multiselect/events/change) event handler of the MultiSelect, set the new columns configuration object.
-1. Call the [`setOptions()`](/api/javascript/ui/grid/methods/setoptions) method of the Grid with the new columns object.
+1. In the [`dataBound`](/api/ui/grid/events/databound) event handler of the Grid, obtain the column configurations of the component with the initial Grid load.
+1. In the [`change`](/api/ui/multiselect/events/change) event handler of the MultiSelect, set the new columns configuration object.
+1. Call the [`setOptions()`](/api/ui/grid/methods/setoptions) method of the Grid with the new columns object.
 
 ```dojo
     <label for="multiselect">Select Columns to display</label>
@@ -119,5 +119,5 @@ To achieve the desired scenario:
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Grid](/api/ui/grid)
 * [jQuery Grid Overview Demo](https://demos.telerik.com/kendo-ui/grid/index)

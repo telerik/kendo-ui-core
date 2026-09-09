@@ -40,7 +40,7 @@ To enable the PDF export:
     ```
     {% endif %}
 
-1. Create an external button that will trigger the export and handle its `click` event. Within the event handler, get a reference to the StockChart and call the [`exportPDF()`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart/methods/exportpdf) or [`saveAsPDF()`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/saveaspdf) client-side method.
+1. Create an external button that will trigger the export and handle its `click` event. Within the event handler, get a reference to the StockChart and call the [`exportPDF()`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/methods/exportpdf) or [`saveAsPDF()`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/methods/saveaspdf) client-side method.
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -71,5 +71,5 @@ To enable the PDF export:
 ## See Also
 
 * [Exporting the StockChart for {{ site.framework }} to PDF (Demo)](https://demos.telerik.com/{{ site.platform }}/financial/pdf-export)
-* [Client-Side API of the StockChart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart)
+* [Client-Side API of the StockChart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart)
 * [Server-Side API of the StockChart](/api/stockchart)

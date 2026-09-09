@@ -233,4 +233,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the ScrollView for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/api)
 * [ScrollView Server-Side API](/api/scrollview)
-* [ScrollView Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview)
+* [ScrollView Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/scrollview)
