@@ -27,7 +27,7 @@ How to get the correct selector and use it in the `size` method in order to set 
 ## Solution
 
 All the panes in the Splitters can be accessed by using the 'k-pane' class. However in a scenario with nested Splitters we could not be sure to which Splitter the respective pane belongs to.
-A possible approach is to search for the closest parent element with 'k-splitter' class and get a reference to the respective Splitter. Then, we could use the [`size`](/api/javascript/ui/splitter/methods/size) method as ususal.
+A possible approach is to search for the closest parent element with 'k-splitter' class and get a reference to the respective Splitter. Then, we could use the [`size`](/api/ui/splitter/methods/size) method as ususal.
 
 ### DatePicker
 
@@ -115,4 +115,4 @@ To check if a pane is collapsed, you can check if the pane has 'k-state-collapse
 
 ## See Also
 
-* [Splitter] API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitter)
+* [Splitter] API Reference](https://docs.telerik.com/kendo-ui/api/ui/splitter)

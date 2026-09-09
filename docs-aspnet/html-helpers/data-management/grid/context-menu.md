@@ -211,4 +211,4 @@ The following example demonstrates how to subscribe to the Grid's ContextMenu `O
 {% endif %}
 * [ContextMenu of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/context-menu)
 * [Server-Side API](/api/grid)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/grid)

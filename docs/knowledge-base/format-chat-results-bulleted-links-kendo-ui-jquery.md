@@ -28,7 +28,7 @@ ticketid: 1700697
 
 ## Description
 
-I want to format a result returned in [Kendo UI for jQuery Chat](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat) into a bulleted list with clickable links. These links should open in a new tab when clicked.
+I want to format a result returned in [Kendo UI for jQuery Chat](https://docs.telerik.com/kendo-ui/api/ui/chat) into a bulleted list with clickable links. These links should open in a new tab when clicked.
 
 This knowledge base article also answers the following questions:
 - How can I display search results as a bulleted list in Kendo UI for jQuery Chat?
@@ -37,11 +37,11 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-Use the [`messageTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/messagetemplate) configuration option to customize the display of messages in Kendo UI for jQuery Chat. This allows you to format the search results as an unordered list with clickable links that open in a new tab.
+Use the [`messageTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagetemplate) configuration option to customize the display of messages in Kendo UI for jQuery Chat. This allows you to format the search results as an unordered list with clickable links that open in a new tab.
 
 ### Steps
 
-1. Define a custom  [`messageTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/messagetemplate) that uses HTML to format the messages.
+1. Define a custom  [`messageTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagetemplate) that uses HTML to format the messages.
 2. Create an unordered list (`<ul>`) for displaying links.
 3. Use anchor (`<a>`) elements with the `target="_blank"` attribute to ensure that the links open in a new tab.
 
@@ -71,7 +71,7 @@ Here’s an updated example of the code:
                 },
                 {
                     title: "Kendo UI Chat API Reference",
-                    url: "https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat",
+                    url: "https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat",
                     description: "Detailed API documentation"
                 }
             ],
@@ -205,6 +205,6 @@ Here’s an updated example of the code:
 ## See Also
 
 - [Kendo UI for jQuery Chat Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/chat/overview)
-- [Kendo UI for jQuery Chat API](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/)
+- [Kendo UI for jQuery Chat API](https://docs.telerik.com/kendo-ui/api/ui/chat/)
 - [Kendo UI for jQuery Chat Quick Actions](https://www.telerik.com/kendo-jquery-ui/documentation/controls/chat/suggestions)
 ---

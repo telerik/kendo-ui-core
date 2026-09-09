@@ -425,7 +425,7 @@ You can reference the Wizard instances that you have created and build on top of
         </script>
    ```
 
-1. Use the [Wizard client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard#methods) to control the behavior of the control. In this example, you will use the `select` method to select the second step (index 1).
+1. Use the [Wizard client-side API](https://docs.telerik.com/kendo-ui/api/ui/wizard#methods) to control the behavior of the control. In this example, you will use the `select` method to select the second step (index 1).
 
    ```JS script
         <script>
@@ -444,6 +444,6 @@ You can reference the Wizard instances that you have created and build on top of
 ## See Also
 
 * [Using the Events of the Wizard for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/wizard/events)
-* [Client-Side API of the Wizard](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard)
+* [Client-Side API of the Wizard](https://docs.telerik.com/kendo-ui/api/ui/wizard)
 * [Server-Side API of the Wizard](/api/wizard)
 * [Knowledge Base Section](/knowledge-base)

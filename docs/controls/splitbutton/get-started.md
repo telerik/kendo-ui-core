@@ -50,7 +50,7 @@ In this step, you will initialize the SplitButton from the `<button>` element. A
 
 ## 3. Add Items for the SplitButton
 
-Next, you can configure the items in the popup by using the [`items`](/api/javascript/ui/splitbutton/configuration/items) option.
+Next, you can configure the items in the popup by using the [`items`](/api/ui/splitbutton/configuration/items) option.
 
 ```html
    <button id="splitbutton" type="button">Button</button>
@@ -68,7 +68,7 @@ Next, you can configure the items in the popup by using the [`items`](/api/javas
 
 ## 4. Add Icon to the SplitButton
 
-You can add an icon to the SplitButton by utilizing the [`icon`](/api/javascript/ui/splitbutton/configuration/icon) option.
+You can add an icon to the SplitButton by utilizing the [`icon`](/api/ui/splitbutton/configuration/icon) option.
 
 ```html
    <button id="splitbutton" type="button">Button</button>
@@ -93,7 +93,7 @@ You can add an icon to the SplitButton by utilizing the [`icon`](/api/javascript
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery SplitButton](/api/javascript/ui/splitbutton)
+* [JavaScript API Reference of the jQuery SplitButton](/api/ui/splitbutton)
 * [Knowledge Base Section](/knowledge-base)
 
 

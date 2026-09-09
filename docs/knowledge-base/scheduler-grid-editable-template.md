@@ -23,13 +23,13 @@ components: ["grid"]
 
 ## Description
 
-How can I add a Grid in the [editable template](/api/javascript/ui/scheduler/configuration/editable.template) of the Scheduler with an additionally dynamically bound row editor ?
+How can I add a Grid in the [editable template](/api/ui/scheduler/configuration/editable.template) of the Scheduler with an additionally dynamically bound row editor ?
 
 ## Solution
 
 1. In the edit template of the Scheduler add a Grid using the MVVM binder scenario (using data-role="grid").
 1. Add an empty 'rowEditor' container inside the edit template.
-1. Using the [`edit`](/api/javascript/ui/scheduler/events/edit) event of the Scheduler you can programmatically inject the detached row editor and create the temporary model for the binder.
+1. Using the [`edit`](/api/ui/scheduler/events/edit) event of the Scheduler you can programmatically inject the detached row editor and create the temporary model for the binder.
 
 
 ````dojo
@@ -144,4 +144,4 @@ $("#scheduler").kendoScheduler({
 
 ## See Also
 
-* [API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](/api/ui/scheduler)

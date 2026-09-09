@@ -31,8 +31,8 @@ How can I programmatically start my video at a specific place the first time it 
 
 To have a different start time when a video loads in a Kendo UI MediaPlayer:
 
-1. Use the [`seek` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer/methods/seek) the first time the [`play` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer/events/play) is fired.
-1. Utilize the [`one` method](https://docs.telerik.com/kendo-ui/api/javascript/observable/methods/one) of the Kendo UI observable to attach a handler for one-time execution.
+1. Use the [`seek` method](https://docs.telerik.com/kendo-ui/api/ui/mediaplayer/methods/seek) the first time the [`play` event](https://docs.telerik.com/kendo-ui/api/ui/mediaplayer/events/play) is fired.
+1. Utilize the [`one` method](https://docs.telerik.com/kendo-ui/api/observable/methods/one) of the Kendo UI observable to attach a handler for one-time execution.
 
 ```dojo
     <div id="mediaplayer" style="height:360px"></div>
@@ -59,6 +59,6 @@ To have a different start time when a video loads in a Kendo UI MediaPlayer:
 
 ## See Also
 
-* [API Reference of the seek Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer/methods/seek)
-* [API Reference of the play Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer/events/play)
-* [API Reference of the one Method](https://docs.telerik.com/kendo-ui/api/javascript/observable/methods/one)
+* [API Reference of the seek Method](https://docs.telerik.com/kendo-ui/api/ui/mediaplayer/methods/seek)
+* [API Reference of the play Method](https://docs.telerik.com/kendo-ui/api/ui/mediaplayer/events/play)
+* [API Reference of the one Method](https://docs.telerik.com/kendo-ui/api/observable/methods/one)

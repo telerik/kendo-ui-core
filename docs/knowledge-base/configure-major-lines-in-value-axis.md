@@ -40,9 +40,9 @@ How can I calculate and set the major unit for the values axis in the Chart?
 In this scenario, you also need to name the axis. The effective axis range is available in the `render` event handler.
 
 The API reference for the relevant methods and events that are used in the following example are:
-* The [`render` event](/api/javascript/dataviz/ui/chart/events/render)
-* The [`getAxis()` method](/api/javascript/dataviz/ui/chart/methods/getaxis)
-* The [`kendo.dataviz.ChartAxis` API](/api/javascript/dataviz/chart/chart_axis)
+* The [`render` event](/api/dataviz/ui/chart/events/render)
+* The [`getAxis()` method](/api/dataviz/ui/chart/methods/getaxis)
+* The [`kendo.dataviz.ChartAxis` API](/api/dataviz/chart/chart_axis)
 
 ```dojo
     <div class="clearfix" id="FirstChart"></div>
@@ -115,9 +115,9 @@ The API reference for the relevant methods and events that are used in the follo
             // Effective axis range is available in the render event
             //
             // See
-            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render
-            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/getAxis
-            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis
+            // https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/events/render
+            // https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/methods/getAxis
+            // https://docs.telerik.com/kendo-ui/api/dataviz/chart/chart_axis
             var range = e.sender.getAxis("value").range();
             var majorUnit = range.max / 3;
             var axis = e.sender.options.valueAxis;
@@ -141,7 +141,7 @@ The API reference for the relevant methods and events that are used in the follo
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

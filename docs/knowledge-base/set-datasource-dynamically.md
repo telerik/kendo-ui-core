@@ -134,7 +134,7 @@ The following example demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/ui/dropdownlist)
 * [Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
 * [Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
 * [Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})

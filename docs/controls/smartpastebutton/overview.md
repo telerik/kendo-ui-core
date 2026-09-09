@@ -217,5 +217,5 @@ The SmartPasteButton supports seamless integration with the following Kendo UI c
 
 * [SmartPasteButton API (Demo)](https://demos.telerik.com/kendo-ui/smartpastebutton/api)
 * [SmartPasteButton Appearance (Demo)](https://demos.telerik.com/kendo-ui/smartpastebutton/appearance)
-* [JavaScript API Reference of the SmartPasteButton](/api/javascript/ui/smartpastebutton)
+* [JavaScript API Reference of the SmartPasteButton](/api/ui/smartpastebutton)
 * [Knowledge Base Section](/knowledge-base)

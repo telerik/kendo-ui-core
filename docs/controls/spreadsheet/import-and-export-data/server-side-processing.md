@@ -19,4 +19,4 @@ The Spreadsheet also features built-in support for [Excel export]({% slug export
 ## See Also
 
 * [Server-Side Import and Export in the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/server-side-import-export)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

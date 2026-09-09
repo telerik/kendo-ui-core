@@ -97,4 +97,4 @@ To detect if the checkbox that is used to remove a row belongs to the header of 
 ## See Also
 
 * [Kendo UI Grid Checkbox Selection Demo.](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [Columns.selectable API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)
+* [Columns.selectable API Reference.](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.selectable)

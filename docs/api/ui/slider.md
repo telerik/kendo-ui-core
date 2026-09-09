@@ -8,7 +8,7 @@ component: slider
 
 # kendo.ui.Slider
 
-Represents the Kendo UI Slider widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Slider widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -82,7 +82,7 @@ How do I customize the tooltip for the increment button in a Kendo UI slider? Se
 The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
 handle must be focused). Note: `largeStep` will also set a large tick for every large step.
 
-Must be a positive number, larger than [smallStep](/api/javascript/ui/slider#configuration-smallStep).
+Must be a positive number, larger than [smallStep](/api/ui/slider#configuration-smallStep).
 
 
 <div class="meta-api-description">

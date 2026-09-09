@@ -35,7 +35,7 @@ Instead of enabling your users to download the PDF that the [Kendo UI Drawing li
 Combine the Drawing API with the [Kendo UI PDFViewer component](https://demos.telerik.com/kendo-ui/pdfviewer/index).
 
 1. Generate the PDF as usual through the ` kendo.drawing.drawDOM()` method.
-1. When the promise is resolved, in the `done` method, use the [`fromFile` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/methods/fromfile) of the PDFViewer component instead of `kendo.saveAs`.
+1. When the promise is resolved, in the `done` method, use the [`fromFile` method](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer/methods/fromfile) of the PDFViewer component instead of `kendo.saveAs`.
 
 ```dojo
 <script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.min.mjs" type="module"></script>

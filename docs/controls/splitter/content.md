@@ -36,4 +36,4 @@ The following example demonstrates how to load content for one pane asynchronous
 ## See Also
 
 * [Loading Content with AJAX in the Splitter (Demo)](https://demos.telerik.com/kendo-ui/splitter/ajax)
-* [JavaScript API Reference of the Splitter](/api/javascript/ui/splitter)
+* [JavaScript API Reference of the Splitter](/api/ui/splitter)

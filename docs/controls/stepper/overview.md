@@ -25,9 +25,9 @@ The Stepper is an intuitive UI component that visualizes progress by displaying 
 
 * [Getting Started with the Kendo UI Stepper for jQuery]({% slug getting_started_kendoui_stepper_widget %})
 * [Overview of the Stepper (Demo)](https://demos.telerik.com/kendo-ui/stepper/index)
-* [JavaScript API Reference of the Stepper](/api/javascript/ui/stepper)
+* [JavaScript API Reference of the Stepper](/api/ui/stepper)
 
 ## See Also
 
 * [Basic usage of the Stepper](https://demos.telerik.com/kendo-ui/stepper/index)
-* [JavaScript API Reference of the Stepper](/api/javascript/ui/stepper)
+* [JavaScript API Reference of the Stepper](/api/ui/stepper)

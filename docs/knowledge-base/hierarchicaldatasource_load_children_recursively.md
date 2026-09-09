@@ -37,7 +37,7 @@ function loadNode(node) {
     }
 }
 ```
-* In a separate function, iterate over all parent data items from the [`view`](/api/javascript/data/datasource/methods/view) of the HierarchicalDataSource and call the recursive function for each parent.
+* In a separate function, iterate over all parent data items from the [`view`](/api/data/datasource/methods/view) of the HierarchicalDataSource and call the recursive function for each parent.
 ```js
 function loadAllNodes() {
     for (var i = 0; i < dataSource.view().length; i++) {
@@ -45,7 +45,7 @@ function loadAllNodes() {
     }
 }
 ```
-* Call the second function in the [`fetch`](/api/javascript/data/datasource/methods/fetch) method of the HierarchicalDataSource to read the data items.
+* Call the second function in the [`fetch`](/api/data/datasource/methods/fetch) method of the HierarchicalDataSource to read the data items.
 ```js
 dataSource.fetch(function () {
     loadAllNodes();
@@ -117,4 +117,4 @@ The following example demonstrates the full implementation of the suggested appr
 ```
 
 ## See Also
-* [JavaScript API Reference of the HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource)
+* [JavaScript API Reference of the HierarchicalDataSource](/api/data/hierarchicaldatasource)

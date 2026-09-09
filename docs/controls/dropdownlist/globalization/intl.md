@@ -21,4 +21,4 @@ For more information, refer to:
 
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
 * [Formatting and Parsing of Dates and Numbers in Kendo UI for jQuery]({% slug dateformatting_kendoui_globalization %})
-* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/ui/dropdownlist)

@@ -9,7 +9,7 @@ position: 4
 
 # TimeDurationPicker Shortcuts
 
-The [`shortcuts`](/api/javascript/ui/timedurationpicker/configuration/shortcuts) configuration of the Kendo UI for jQuery TimeDurationPicker enables you to render custom button elements in the popup. 
+The [`shortcuts`](/api/ui/timedurationpicker/configuration/shortcuts) configuration of the Kendo UI for jQuery TimeDurationPicker enables you to render custom button elements in the popup. 
 
 These buttons can hold timeframe values. Upon clicking any of them, the value of the TimeDurationPicker will be updated with the value of the corresponding button. You have to specify the value of the `shortcuts` in milliseconds.
 
@@ -30,4 +30,4 @@ The following example showcases how to define a shortcut:
 ## See Also
 
 * [Shortcuts in the TimeDurationPicker (Demo)](https://demos.telerik.com/kendo-ui/timedurationpicker/shortcuts)
-* [JavaScript API Reference of the TimeDurationPicker](/api/javascript/ui/timedurationpicker)
+* [JavaScript API Reference of the TimeDurationPicker](/api/ui/timedurationpicker)

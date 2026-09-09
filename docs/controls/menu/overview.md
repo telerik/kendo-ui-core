@@ -33,7 +33,7 @@ The component provides rich styling for unordered lists of items, and can be use
 ## See Also
 
 * [Initializing the Menu from HTML]({% slug html_kendoui_menu_component %})
-* [JavaScript API Reference of the Menu](/api/javascript/ui/menu)
+* [JavaScript API Reference of the Menu](/api/ui/menu)
 * [Demo Page for the jQuery Menu](https://demos.telerik.com/kendo-ui/menu/index)
 * [jQuery Menu Product Page](https://www.telerik.com/kendo-jquery-ui/menu)
 * [Knowledge Base Section](/knowledge-base)

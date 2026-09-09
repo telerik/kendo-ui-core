@@ -21,11 +21,11 @@ components: ["daterangepicker"]
 
 ## Description
 
-This sample demonstrates how you can clear the values of the date range picker using the [range](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/methods/range) method.
+This sample demonstrates how you can clear the values of the date range picker using the [range](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker/methods/range) method.
 
 ## Solution
 
-To clear the selected range, call the [`range`](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/methods/range) method and pass `null` for both the `start` and `end` properties. The following example demonstrates a **Clear Range Picker** button that resets the DateRangePicker selection.
+To clear the selected range, call the [`range`](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker/methods/range) method and pass `null` for both the `start` and `end` properties. The following example demonstrates a **Clear Range Picker** button that resets the DateRangePicker selection.
 
 ```dojo
 

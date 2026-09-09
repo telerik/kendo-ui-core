@@ -76,7 +76,7 @@ The following example demonstrates how to subscribe to events by a template dele
 ## See Also
 
 * [Using the API of the Chart Wizard for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chartwizard/api)
-* [Client-Side API of the Chart Wizard](https://docs.telerik.com/kendo-ui/api/javascript/ui/chartwizard)
+* [Client-Side API of the Chart Wizard](https://docs.telerik.com/kendo-ui/api/ui/chartwizard)
 * [Server-Side API of the Chart Wizard](/api/chartwizard)
 {% if site.core %}
 * [Server-Side API of the Chart Wizard TagHelper](/api/taghelpers/chartwizard)

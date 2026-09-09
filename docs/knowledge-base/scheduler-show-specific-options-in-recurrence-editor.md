@@ -78,4 +78,4 @@ How can I display only some of the options in the Repeat DropDownList in the Rec
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler).
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler).

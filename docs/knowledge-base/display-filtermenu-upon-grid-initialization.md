@@ -29,7 +29,7 @@ How can I display FilterMenu for a certain column upon the initialization of the
 
 ## Solution
 
-- In the [`dataBound`](/api/javascript/ui/grid/events/databound) event of the Grid, find the FilterMenu component by using the name of the corresponding field. 
+- In the [`dataBound`](/api/ui/grid/events/databound) event of the Grid, find the FilterMenu component by using the name of the corresponding field. 
 
 ```js
 let titleFilterMenu = grid.thead.find("[data-field='Title']").data("kendoFilterMenu");
@@ -148,5 +148,5 @@ The following example demonstrates the full implementation of the suggested appr
 ```
 
 ## See Also
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [JavaScript API Reference of the FilterMenu](/api/javascript/ui/filtermenu)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
+* [JavaScript API Reference of the FilterMenu](/api/ui/filtermenu)

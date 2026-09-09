@@ -153,10 +153,10 @@ The next step is to create a basic [Form]({% slug htmlhelpers_form_aspnetcore_ov
 
 Now, you can implement the client-side logic that will validate the Form and display the Circular ProgressBar if all fields are completed successfully.
 
-* Prevent the default action of the Form [`Submit`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/formeventbuilder#submitsystemstring) event and call the [`validate()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/form/methods/validate) method to validate the fields when the Form is submitted. If method returns `true` (the Form is valid), add the following logic:
+* Prevent the default action of the Form [`Submit`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/formeventbuilder#submitsystemstring) event and call the [`validate()`](https://docs.telerik.com/kendo-ui/api/ui/form/methods/validate) method to validate the fields when the Form is submitted. If method returns `true` (the Form is valid), add the following logic:
     1. Use the jQuery [`show()`](http://api.jquery.com/show/) method to show the hidden container that holds the Circular ProgressBar.
-    1. Get a reference to the Circular ProgressBar and trigger its [`redraw()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/circularprogressbar/methods/redraw) method to redraw it when it is displayed.
-    1. Set the Circular ProgressBar value to `100` through its [`value()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/circularprogressbar/methods/value) method. As a result, the component will indicate the task completion.
+    1. Get a reference to the Circular ProgressBar and trigger its [`redraw()`](https://docs.telerik.com/kendo-ui/api/ui/circularprogressbar/methods/redraw) method to redraw it when it is displayed.
+    1. Set the Circular ProgressBar value to `100` through its [`value()`](https://docs.telerik.com/kendo-ui/api/ui/circularprogressbar/methods/value) method. As a result, the component will indicate the task completion.
 
     Also, you can set the [`opacity`](https://developer.mozilla.org/en-US/docs/Web/CSS/opacity) CSS property to the Form container during the progress loading for a better look and feel.
 
@@ -272,7 +272,7 @@ You can reference the Circular ProgressBar instance that you have created, [as d
         </script>
     ```
 
-1. Use the [Circular ProgressBar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/circularprogressbar#methods) to control the behavior of the widget. In this example, you will use the `setOptions()` method to change the current color of the Circular ProgressBar dynamically (for example, when a button is clicked), and the `redraw()` method to redraw the component with the updated color.
+1. Use the [Circular ProgressBar client-side API](https://docs.telerik.com/kendo-ui/api/ui/circularprogressbar#methods) to control the behavior of the widget. In this example, you will use the `setOptions()` method to change the current color of the Circular ProgressBar dynamically (for example, when a button is clicked), and the `redraw()` method to redraw the component with the updated color.
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -318,6 +318,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Circular ProgressBar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/circularprogressbar/api)
-* [Client-Side API of the Circular ProgressBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/circularprogressbar)
+* [Client-Side API of the Circular ProgressBar](https://docs.telerik.com/kendo-ui/api/ui/circularprogressbar)
 * [Server-Side API of the Circular ProgressBar](/api/circularprogressbar)
 * [Knowledge Base Section](/knowledge-base)

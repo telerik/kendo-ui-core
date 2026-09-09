@@ -17,7 +17,7 @@ For a runnable example, refer to the [demo on selection in the Grid](https://dem
 
 ## Getting Started
 
-To enable the selection functionality of the Grid, set the [`selectable`](/api/javascript/ui/grid/configuration/selectable) option to `true`. As a result, the default single-row selection functionality will be applied.
+To enable the selection functionality of the Grid, set the [`selectable`](/api/ui/grid/configuration/selectable) option to `true`. As a result, the default single-row selection functionality will be applied.
 
         $("#grid").kendoGrid({
             selectable: true,
@@ -37,13 +37,13 @@ The Grid supports the following select modes:
 * [Single-cell selection](#single-cell-selection)
 * [Multi-cell selection](#multi-cell-selection)
 
-> * The Grid does not support the simultaneous usage of the built-in checkbox-column selection and the selection which is enabled through the [`selectable`](/api/javascript/ui/grid/configuration/selectable) option.
-> * To persists the selection of rows in a Grid which is re-bound, that is, when paging, filtering, sorting, editing, or virtual scrolling occur, enable the [`persistSelection`](/api/javascript/ui/grid/configuration/persistselection) property. To persist the row selection and avoid the usage of the `persistSelection` property, refer to the knowledge base article on [persisting row selection during data operations]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
+> * The Grid does not support the simultaneous usage of the built-in checkbox-column selection and the selection which is enabled through the [`selectable`](/api/ui/grid/configuration/selectable) option.
+> * To persists the selection of rows in a Grid which is re-bound, that is, when paging, filtering, sorting, editing, or virtual scrolling occur, enable the [`persistSelection`](/api/ui/grid/configuration/persistselection) property. To persist the row selection and avoid the usage of the `persistSelection` property, refer to the knowledge base article on [persisting row selection during data operations]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
 > * The Grid will not scroll down as you try to select more elements that are outside of the visible view.
 
 ### Checkbox-Column Selection
 
-As of the R2 2017 SP1 release, the Grid provides an option for setting multiple selection through rendering a checkbox column. To enable the checkbox column selection, configure the [`columns.selectable`](/api/javascript/ui/grid/configuration/columns.selectable) property. Enabling the `selectable` property for a column will also render a checkbox in the header and will allow the selection and deselection of all rows on the current page.
+As of the R2 2017 SP1 release, the Grid provides an option for setting multiple selection through rendering a checkbox column. To enable the checkbox column selection, configure the [`columns.selectable`](/api/ui/grid/configuration/columns.selectable) property. Enabling the `selectable` property for a column will also render a checkbox in the header and will allow the selection and deselection of all rows on the current page.
 
     $("#grid").kendoGrid({
       columns: [
@@ -115,5 +115,5 @@ As of Kendo UI version R3 2023, the Selection functionality on mobile devices re
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

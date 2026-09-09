@@ -192,7 +192,7 @@ You can reference the DropDownButton instances that you have created and build o
     </script>
     ```
 
-1. Use the [DropDownButton client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton#methods) to control the behavior of the widget. In this example, you will use the `enable` method to control the state of the DropDownButton items.
+1. Use the [DropDownButton client-side API](https://docs.telerik.com/kendo-ui/api/ui/dropdownbutton#methods) to control the behavior of the widget. In this example, you will use the `enable` method to control the state of the DropDownButton items.
 
     ```JS script
     <script>
@@ -222,6 +222,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the DropDownButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/api)
-* [DropDownButton Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton)
+* [DropDownButton Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/dropdownbutton)
 * [Server-Side API of the DropDownButton](/api/dropdownbutton)
 * [Knowledge Base Section](/knowledge-base)

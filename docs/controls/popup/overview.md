@@ -21,8 +21,8 @@ The Popup provides options for [aligning and appending it to elements and positi
 
 ## Next Steps
 * [Getting Started with the Kendo UI Popup for jQuery]({% slug getting_started_kendoui_popup_component %})
-* [JavaScript API Reference of the Popup](/api/javascript/ui/popup)
+* [JavaScript API Reference of the Popup](/api/ui/popup)
 
 ## See Also
 
-* [JavaScript API Reference of the Popup](/api/javascript/ui/popup)
+* [JavaScript API Reference of the Popup](/api/ui/popup)

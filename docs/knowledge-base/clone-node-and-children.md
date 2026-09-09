@@ -39,17 +39,17 @@ How can I copy a node together with its children in the Kendo UI for jQuery Tree
 
 To achieve the desired behavior:
 
-1. Use the [`select`](/api/javascript/ui/treeview/methods/select) method of the TreeView to obtain the selected node as a jQuery object. The second example below uses a Context Menu instead.
+1. Use the [`select`](/api/ui/treeview/methods/select) method of the TreeView to obtain the selected node as a jQuery object. The second example below uses a Context Menu instead.
 
-1. Use the [`parent`](/api/javascript/ui/treeview/methods/parent) method to get the parent node of the selected node.
+1. Use the [`parent`](/api/ui/treeview/methods/parent) method to get the parent node of the selected node.
 
-1. Use the [`dataItem`](/api/javascript/ui/treeview/methods/dataitem) method to obtain the data item (Kendo UI Model), which corresponds to the selected node.
+1. Use the [`dataItem`](/api/ui/treeview/methods/dataitem) method to obtain the data item (Kendo UI Model), which corresponds to the selected node.
 
-1. Use the [`toJSON`](/api/javascript/data/model/methods/tojson) method of the Model to strip proprietary information from the data item and its children, and convert them to a plain JavaScript object.
+1. Use the [`toJSON`](/api/data/model/methods/tojson) method of the Model to strip proprietary information from the data item and its children, and convert them to a plain JavaScript object.
 
 1. (Optional) Deselect and collapse the cloned node before appending it to the TreeView.
 
-1. Use the [`append`](/api/javascript/ui/treeview/methods/append), [`insertAfter`](/api/javascript/ui/treeview/methods/insertafter), or [`insertBefore`](/api/javascript/ui/treeview/methods/insertbefore) method of the TreeView to add the cloned node to the desired location in the item structure of the widget. In this example, nodes are cloned at the same level.
+1. Use the [`append`](/api/ui/treeview/methods/append), [`insertAfter`](/api/ui/treeview/methods/insertafter), or [`insertBefore`](/api/ui/treeview/methods/insertbefore) method of the TreeView to add the cloned node to the desired location in the item structure of the widget. In this example, nodes are cloned at the same level.
 
 The following example demonstrates how to copy the selected node together with its children.
 
@@ -179,4 +179,4 @@ The following example provides a variation of the previous approach and demonstr
 
 * [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
 * [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
-* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)
+* [JavaScript API Reference of the TreeView](/api/ui/treeview)

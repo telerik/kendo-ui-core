@@ -78,10 +78,10 @@ As of Kendo UI R3 2022, you can initialize the ColorGradient from an `input` ele
 
 * [Getting Started with the Kendo UI ColorPalette for jQuery]({% slug getting_started_kendoui_colorpalette_widget %})
 * [Basic Usage of the ColorPalette (Demo)](https://demos.telerik.com/kendo-ui/colorpalette/index)
-* [JavaScript API Reference of the ColorPalette](/api/javascript/ui/colorpalette)
+* [JavaScript API Reference of the ColorPalette](/api/ui/colorpalette)
 
 ## See Also
 
 * [Overview of the ColorPalette (Demo)](https://demos.telerik.com/kendo-ui/colorpalette/index)
 * [Using the API of the ColorPalette (Demo)](https://demos.telerik.com/kendo-ui/colorpalette/api)
-* [JavaScript API Reference of the ColorPalette](/api/javascript/ui/colorpalette)
+* [JavaScript API Reference of the ColorPalette](/api/ui/colorpalette)

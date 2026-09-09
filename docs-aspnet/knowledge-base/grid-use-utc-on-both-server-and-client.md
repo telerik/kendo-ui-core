@@ -52,7 +52,7 @@ To apply the explicit transformation:
         }
     ```
 
-2. Use the [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/requestend) event of the DataSource to intercept and replace the incoming Date field with the time difference.
+2. Use the [`requestEnd`](https://docs.telerik.com/kendo-ui/api/data/datasource/events/requestend) event of the DataSource to intercept and replace the incoming Date field with the time difference.
 
     ```
         @(Html.Kendo().Grid<KendoUIMVC5.Models.Person>().Name("persons")
@@ -133,7 +133,7 @@ To explore the complete example, see the project on how to [use UTC time on both
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

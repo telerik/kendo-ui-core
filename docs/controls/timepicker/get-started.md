@@ -57,7 +57,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 3. Set the Minimum and Maximum Time 
 
-You can configure the TimePicker to display only dates in a specific range. Use the [`min`](/api/javascript/ui/timepicker/configuration/min) and [`max`](/api/javascript/ui/timepicker/configuration/max) options to set this range.
+You can configure the TimePicker to display only dates in a specific range. Use the [`min`](/api/ui/timepicker/configuration/min) and [`max`](/api/ui/timepicker/configuration/max) options to set this range.
 
 ```html
 <input id="timepicker" />
@@ -73,7 +73,7 @@ You can configure the TimePicker to display only dates in a specific range. Use 
 
 ## 4. Set the Format
 
-You can customize the format of the displayed time by setting the [`format`](/api/javascript/ui/timepicker/configuration/format) configuration of the TimePicker.
+You can customize the format of the displayed time by setting the [`format`](/api/ui/timepicker/configuration/format) configuration of the TimePicker.
 
 ```html
 <input id="timepicker" />
@@ -95,6 +95,6 @@ You can customize the format of the displayed time by setting the [`format`](/ap
 
 ## See Also 
 
-* [JavaScript API Reference of the jQuery TimePicker](/api/javascript/ui/timepicker)
+* [JavaScript API Reference of the jQuery TimePicker](/api/ui/timepicker)
 * [Knowledge Base Section](/knowledge-base)
 

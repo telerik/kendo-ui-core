@@ -33,13 +33,13 @@ How can I format the cell height to scale dynamically  during the export of the 
 To achieve the desired scenario:
 
 1. Handle the [`ExcelExport`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event of the Grid.
-1. Convert all the Grid items to a sanitized JSON format by using the [`toJSON`](https://docs.telerik.com/kendo-ui/api/javascript/data/observableobject/methods/tojson) client-side method.
+1. Convert all the Grid items to a sanitized JSON format by using the [`toJSON`](https://docs.telerik.com/kendo-ui/api/data/observableobject/methods/tojson) client-side method.
 1. Parse the model from the Excel Export's event data to a JSON object.
 1. Generate the column cells by using the previously obtained property names in a valid workbook format.
 1. Iterate through the JSON data and manually construct each of the row cells in a valid workbook format.
 1. Use the `rowHeight` formula to calculate the resizing.
 1. The `rowHeight` formula checks if the length of the `contentToWrap` string is bigger than a given number (27 in this case), and if it is, `rowHeight` is set to a number that we get from rounding up `(contentToWrap.length / 27) * 20` in order to get a dynamic resizing value, otherwise set the `rowHeight` to 20. 
-1. Create a [`Workbook`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook) and add the already created data to its sheets.
+1. Create a [`Workbook`](https://docs.telerik.com/kendo-ui/api/ooxml/workbook) and add the already created data to its sheets.
 1. Export.
 
 
@@ -199,7 +199,7 @@ To achieve the desired scenario:
 ## See Also
 
 * [Exporting to Excel (Overview)](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/export/excel-export)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * {% if site.core %} [Server-Side TagHelper API Reference of the Grid for ASP.NET Core](https://docs.telerik.com/aspnet-core/api/taghelpers/grid) {% endif %}
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})

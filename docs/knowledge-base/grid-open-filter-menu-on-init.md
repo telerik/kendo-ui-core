@@ -24,7 +24,7 @@ How can I programmatically open the filter menu and focus its input when the Gri
 
 ## Solution
 
-Use the [`dataBound`](/api/javascript/ui/grid/events/databound) event of the Grid to open the filter menu as soon as the Grid has finished loading.
+Use the [`dataBound`](/api/ui/grid/events/databound) event of the Grid to open the filter menu as soon as the Grid has finished loading.
 
 ```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>

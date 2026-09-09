@@ -96,7 +96,7 @@ The following example demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect JavaScript API Reference](/api/ui/multiselect)
 * [Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
 * [Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})

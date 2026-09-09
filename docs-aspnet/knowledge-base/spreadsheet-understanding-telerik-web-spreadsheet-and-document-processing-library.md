@@ -98,7 +98,7 @@ string value = converted{{ site.framework_short }}Worksheet
 
 ## See Also
 
-* [Client-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [Client-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
 * [Server-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/spreadsheet)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

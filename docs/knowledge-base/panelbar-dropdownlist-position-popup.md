@@ -29,7 +29,7 @@ If DropDownList/ComboBox component is included inside a Kendo PanelBar, the popu
 The described appearance may occur when the DropDownList/ComboBox is used inside the PanelBar content element, as styles are applied to the PanelBar that will affect also the nested widgets. However, in such scenarios:
 
 1. You can wrap the element from which the DropDownList/ComboBox is initialized.
-1. Then configure the [`appendTo`](/api/javascript/ui/dropdownlist/configuration/popup#popup.appendTo) option.
+1. Then configure the [`appendTo`](/api/ui/dropdownlist/configuration/popup#popup.appendTo) option.
 1. Set the `top` and `left` position of the animation container to `initial`.
 
 ```dojo
@@ -86,6 +86,6 @@ The described appearance may occur when the DropDownList/ComboBox is used inside
 
 ## See Also
 
-* [PanelBar API Reference](/api/javascript/ui/panelbar)
-* [DropDownList API Reference](/api/javascript/ui/dropdownlist)
-* [ComboBox API Reference](/api/javascript/ui/combobox)
+* [PanelBar API Reference](/api/ui/panelbar)
+* [DropDownList API Reference](/api/ui/dropdownlist)
+* [ComboBox API Reference](/api/ui/combobox)

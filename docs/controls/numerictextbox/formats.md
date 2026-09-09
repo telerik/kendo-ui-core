@@ -34,5 +34,5 @@ The following example demonstrates how to render a percentage NumericTextBox.
 
 ## See Also
 
-* [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
+* [JavaScript API Reference of the NumericTextBox](/api/ui/numerictextbox)
 * [Known Limitations in the NumericTextBox]({% slug limitations_numerictextbox %})

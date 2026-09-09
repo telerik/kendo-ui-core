@@ -140,7 +140,7 @@ A stepper control used with a vertical menu which is expanding and collapsing up
 
 ## See Also
 
-* [Client-Side API Reference of the Stepper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/stepper)
+* [Client-Side API Reference of the Stepper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/stepper)
 * [Server-Side API Reference of the Stepper for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/stepper)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

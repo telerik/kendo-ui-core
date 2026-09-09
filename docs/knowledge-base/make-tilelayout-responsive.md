@@ -27,7 +27,7 @@ How can I Make the columns of the TileLayout widget responsive?
 
 ## Solution
 
-You can use the [`setOptions()`] method of the TileLayout to update its [`columns`](/api/javascript/ui/tilelayout/configuration/columns) dynamically in the [`Window: resize event`](https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event)
+You can use the [`setOptions()`] method of the TileLayout to update its [`columns`](/api/ui/tilelayout/configuration/columns) dynamically in the [`Window: resize event`](https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event)
 
 
 ```dojo
@@ -139,6 +139,6 @@ You can use the [`setOptions()`] method of the TileLayout to update its [`column
 
 ## See Also
 
-* [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)
+* [JavaScript API Reference of the TileLayout](/api/ui/tilelayout)
 * [Documentation for the TileLayout](/controls/layout/tilelayout/overview)
 * [TileLayout demos](https://demos.telerik.com/kendo-ui/tilelayout/index)

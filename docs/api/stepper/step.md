@@ -6,7 +6,7 @@ res_type: api
 
 # kendo.stepper.Step
 
-Represents a step in the [Stepper](/api/javascript/ui/stepper) widget.
+Represents a step in the [Stepper](/api/ui/stepper) widget.
 
 ## Fields
 

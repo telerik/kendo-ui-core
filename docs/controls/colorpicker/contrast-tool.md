@@ -64,4 +64,4 @@ The example below demonstrates how to enable the contrast tool in the ColorPicke
 ## See Also
 
 * [Contrast Tool of the ColorPicker (Demo)](https://demos.telerik.com/kendo-ui/colorpicker/contrast-tool)
-* [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
+* [JavaScript API Reference of the ColorPicker](/api/ui/colorpicker)

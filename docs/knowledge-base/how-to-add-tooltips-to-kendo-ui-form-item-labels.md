@@ -28,9 +28,9 @@ When designing forms using Kendo UI, adding tooltips to form item labels can enh
 
 To add tooltips to form item labels, utilize the Kendo UI Tooltip component. Initialize the Tooltip on the Form element and set it to display on form inputs. Configure the Tooltip to show upon clicking and disable auto-hiding to keep the tooltips visible until manually closed.
 
-1. Initialize the Tooltip component on your Form element. Use the [`filter`](/api/javascript/ui/tooltip/configuration/filter) option to target form inputs specifically. 
+1. Initialize the Tooltip component on your Form element. Use the [`filter`](/api/ui/tooltip/configuration/filter) option to target form inputs specifically. 
 
-2. Use the [`autoHide`](/api/javascript/ui/tooltip/configuration/autohide) property set to `false` to keep the tooltip visible until the user closes it (if desired).
+2. Use the [`autoHide`](/api/ui/tooltip/configuration/autohide) property set to `false` to keep the tooltip visible until the user closes it (if desired).
 
 Here is an example of initializing a Tooltip for the Form:
 
@@ -103,7 +103,7 @@ Here is the full example:
 
 ## See Also
 
-- [Kendo UI Tooltip Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
-- [Kendo UI Form Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)
+- [Kendo UI Tooltip Documentation](https://docs.telerik.com/kendo-ui/api/ui/tooltip)
+- [Kendo UI Form Documentation](https://docs.telerik.com/kendo-ui/api/ui/form)
 - [Kendo UI Tooltip Overview (Demo)](https://demos.telerik.com/kendo-ui/tooltip/index)
 - [Kendo UI Form Overview (Demo)](https://demos.telerik.com/kendo-ui/form/index)

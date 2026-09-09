@@ -37,7 +37,7 @@ To achieve the desired result:
 1. To prevent the Kendo UI Slider from creating numerous times, declare a flag variable.
 1. Change the page of the Grid DataSource by handling the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/slidereventbuilder#changesystemstring) event of the Slider.
 
-> When you apply this approach, the [`page`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page) method of the Grid's DataSource will not fire.
+> When you apply this approach, the [`page`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/page) method of the Grid's DataSource will not fire.
 
 ```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
@@ -125,7 +125,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Change the Grid Pager to a Slider](https://netcorerepl.telerik.com/cnOGGPlA21RzEjkG12)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

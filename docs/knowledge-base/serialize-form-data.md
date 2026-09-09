@@ -37,7 +37,7 @@ How can I include a collection of form fields as [metadata]({% slug metadata_upl
 
 ## Solution
 
-The output from the commonly used [`jQuery.serializeArray`](https://api.jquery.com/serializeArray/) helper is not directly usable in the [`upload`](/api/javascript/ui/upload/events/upload) event and needs to be processed. The following example demonstrates how to achieve this.
+The output from the commonly used [`jQuery.serializeArray`](https://api.jquery.com/serializeArray/) helper is not directly usable in the [`upload`](/api/ui/upload/events/upload) event and needs to be processed. The following example demonstrates how to achieve this.
 
 
 
@@ -92,7 +92,7 @@ Content-Type: text/plain
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})
 

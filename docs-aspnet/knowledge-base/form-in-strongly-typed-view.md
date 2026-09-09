@@ -50,7 +50,7 @@ For the complete implementation on how to create a strongly typed form in a view
 
 ## See Also
 
-* [Client-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)
+* [Client-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/form)
 * [Server-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/form)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

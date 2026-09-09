@@ -30,7 +30,7 @@ How can I disable the selection of specific rows in the Grid?
 
 ## Solution
 
-1. Handle the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event of the Grid.
+1. Handle the [`change`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/change) event of the Grid.
 1. In the event handler, based on a condition, remove the `k-selected` class from the desired rows.
 
 ```dojo

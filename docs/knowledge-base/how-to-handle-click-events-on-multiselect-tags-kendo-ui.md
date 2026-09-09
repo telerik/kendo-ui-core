@@ -39,7 +39,7 @@ The [MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index) componen
 
 1. Attach a click event handler to the MultiSelect wrapper to detect clicks on tags.
 2. Use the event target to determine if a tag was clicked and to retrieve the tag's text.
-3. Add logic to disable the MultiSelect popup opening on chip click in the [`open`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/open) event handler.
+3. Add logic to disable the MultiSelect popup opening on chip click in the [`open`](https://docs.telerik.com/kendo-ui/api/ui/multiselect/events/open) event handler.
 
 ```dojo
      <select id="multiselect" multiple="multiple">
@@ -95,5 +95,5 @@ Replace the `alert` statement with the appropriate logic for redirecting to the 
 ## See Also
 
 - [MultiSelect Overview](https://docs.telerik.com/kendo-ui/controls/editors/multiselect/overview)
-- [API Reference of the MultiSelect](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+- [API Reference of the MultiSelect](https://docs.telerik.com/kendo-ui/api/ui/multiselect)
 

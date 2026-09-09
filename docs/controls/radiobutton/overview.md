@@ -29,4 +29,4 @@ The RadioButton allows you to provide radiobutton functionality to `<input />` e
 ## See Also
 
 * [Basic Usage of the RadioButton (Demo)](https://demos.telerik.com/kendo-ui/radiobutton/index)
-* [JavaScript API Reference of the RadioButton](/api/javascript/ui/radiobutton)
+* [JavaScript API Reference of the RadioButton](/api/ui/radiobutton)

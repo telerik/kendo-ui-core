@@ -30,7 +30,7 @@ How can I import XLSX (Excel) files with simple data into the Kendo UI Grid for 
 ## Solution
 
 1. First you need to handle the basic concept arround the spreadsheet data you are about to import. Excel can have sheets, merged rows, merged cells, formulas etc. The example here demonstrates how to import plain data, with no formulas and spreadsheet where the first row generates the columns for the Grid and the rest of the rows are the data.
-2. Editing the data can be done by enabling the [editable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/editable) configuration option of the Grid. You need to also assign an id for the schema model and consider the same id when importing the data from the Excel file.
+2. Editing the data can be done by enabling the [editable](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/editable) configuration option of the Grid. You need to also assign an id for the schema model and consider the same id when importing the data from the Excel file.
 
 > **Note** You can support merged cells, formals etc. by altering the logic for the import.
 

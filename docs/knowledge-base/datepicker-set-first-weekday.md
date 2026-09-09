@@ -37,7 +37,7 @@ How can I set the default weekday of the DatePicker in the Kendo UI for jQuery D
 
 ## Solution
 
-The following example demonstrates how to set the default weekday of the DatePicker by using the [`culture`](/api/javascript/kendo/methods/culture) method.
+The following example demonstrates how to set the default weekday of the DatePicker by using the [`culture`](/api/kendo/methods/culture) method.
 
 ```dojo
     <input id="datepicker" />

@@ -16,11 +16,11 @@ The Chart enables you to export their content to PDF, SVG, or Image files.
 
 > Starting with v2023.3.1115 the Pako library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
 
-To initiate the export to PDF, call the [`saveAsPdf`](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method. To enable compression, include the [Pako Deflate library](https://github.com/nodeca/pako) in the page.
+To initiate the export to PDF, call the [`saveAsPdf`](/api/dataviz/ui/chart/methods/saveaspdf) method. To enable compression, include the [Pako Deflate library](https://github.com/nodeca/pako) in the page.
 
 For more information, refer to the following resources:
 
-* [API configuration for exporting the Chart to PDF](/api/javascript/dataviz/ui/chart/configuration/pdf)
+* [API configuration for exporting the Chart to PDF](/api/dataviz/ui/chart/configuration/pdf)
 * [Exporting Charts to PDF (demo)](https://demos.telerik.com/kendo-ui/chart-api/pdf-export)
 
 The following example demonstrates how to enable the PDF export functionality of the Chart.
@@ -91,9 +91,9 @@ The following example demonstrates how to enable the PDF export functionality of
 The Chart allows you to retrieve Scalable Vector Graphics (SVG), Image (PNG) or PDF representation of its content as a `Base64`-encoded string. You can send this content to a service for further processing or to offer it as a file to the user. For more information, refer to [this online demo](https://demos.telerik.com/kendo-ui/chart-api/export).
 
 The advanced export functionality is delivered though the following methods:
-* [`exportPDF`](/api/javascript/dataviz/ui/chart/methods/exportpdf)
-* [`exportImage`](/api/javascript/dataviz/ui/chart/methods/exportimage)
-* [`exportSVG`](/api/javascript/dataviz/ui/chart/methods/exportsvg)
+* [`exportPDF`](/api/dataviz/ui/chart/methods/exportpdf)
+* [`exportImage`](/api/dataviz/ui/chart/methods/exportimage)
+* [`exportSVG`](/api/dataviz/ui/chart/methods/exportsvg)
 
 The following example demonstrates how to obtain an image from the Chart.
 
@@ -126,7 +126,7 @@ The following example demonstrates how to obtain an image from the Chart.
 
 ## Using Server Proxy
 
-Internet Explorer 9 and Safari do not support the saving of files and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the URL of the server proxy, set the [`proxyURL`](/api/javascript/ui/grid/configuration/pdf.proxyurl) option.
+Internet Explorer 9 and Safari do not support the saving of files and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the URL of the server proxy, set the [`proxyURL`](/api/ui/grid/configuration/pdf.proxyurl) option.
 
     <!-- Load Pako Deflate library to enable PDF compression -->
     <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
@@ -345,7 +345,7 @@ All [known limitations of the Drawing library]({% slug drawingofhtmlelements_dra
 The following limitations are the most important among the listed ones for exporting the Chart to PDF:
 
 * The maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in all viewers.
-* Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information, refer to the [`proxyUrl`](/api/javascript/ui/grid/configuration/pdf.proxyurl) API reference.
+* Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information, refer to the [`proxyUrl`](/api/ui/grid/configuration/pdf.proxyurl) API reference.
 
 ## Further Reading
 
@@ -355,4 +355,4 @@ The following limitations are the most important among the listed ones for expor
 ## See Also
 
 * [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

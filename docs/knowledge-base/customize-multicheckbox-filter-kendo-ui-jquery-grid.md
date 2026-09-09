@@ -35,7 +35,7 @@ I'm exploring the possibility of repurposing the MultiCheckBox Filter component 
 
 To customize the MultiCheckBox Filter popup and add custom buttons to it:
 
-1. Replace the default dataSource of the filterMenu checkboxes by using the dataSource `data` method. Refer to the official Telerik documentation for more details: [DataSource Data Method](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/data).
+1. Replace the default dataSource of the filterMenu checkboxes by using the dataSource `data` method. Refer to the official Telerik documentation for more details: [DataSource Data Method](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/data).
 
 2. Hide the default 'Filter' and 'Clear' buttons and add custom button elements to the popup actions. Implement this by emptying the `.k-actions` container and appending your custom 'Update' and 'Cancel' buttons.
 
@@ -184,5 +184,5 @@ A practical example demonstrating custom 'Update' and 'Cancel' buttons for speci
 ## See Also
 
 - [Kendo UI for jQuery Grid - Overview](https://docs.telerik.com/kendo-ui/controls/grid/overview)
-- [DataSource API Reference](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)
+- [DataSource API Reference](https://docs.telerik.com/kendo-ui/api/data/datasource)
 - [Use MultiSelect for Column Filtering in Kendo UI Grid](https://docs.telerik.com/kendo-ui/knowledge-base/multiselect-used-for-column-filtering)

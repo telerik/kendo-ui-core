@@ -27,7 +27,7 @@ ticketid: 1694847
 
 ## Description
 
-When implementing the add and remove functionality in the [Kendo UI for jQuery ListView](https://www.telerik.com/kendo-jquery-ui/documentation/controls/listview/overview), the [`add()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/listview/methods/add) and [`remove()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/listview/methods/remove) methods behave differently. The `add()` method inserts an empty item into the ListView and opens it in edit mode. The `remove()` method requires the jQuery object of the item to be removed.
+When implementing the add and remove functionality in the [Kendo UI for jQuery ListView](https://www.telerik.com/kendo-jquery-ui/documentation/controls/listview/overview), the [`add()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/listview/methods/add) and [`remove()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/listview/methods/remove) methods behave differently. The `add()` method inserts an empty item into the ListView and opens it in edit mode. The `remove()` method requires the jQuery object of the item to be removed.
 
 Additionally, for moving items between two ListViews or implementing drag-and-drop functionality, the Sortable component can be utilized. 
 

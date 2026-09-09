@@ -37,7 +37,7 @@ The example below demonstrates how to implement this using the [markdown-js](htt
 
 To show the message:
 
-1. Set a *messageTemplate* [`kendo.template`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/template)
+1. Set a *messageTemplate* [`kendo.template`](https://docs.telerik.com/kendo-ui/api/kendo/methods/template)
 1. In the Template render the Markdown to Html using the third-party library
 1. Show the message using the `renderMessage` method
 
@@ -76,4 +76,4 @@ To show the message:
 ## See also
 
 * [Kendo UI Templates Overview](https://docs.telerik.com/kendo-ui/framework/templates/overview)
-* [JavaScript API Reference of the Chat renderMessage method](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/methods/rendermessage)
+* [JavaScript API Reference of the Chat renderMessage method](https://docs.telerik.com/kendo-ui/api/ui/chat/methods/rendermessage)

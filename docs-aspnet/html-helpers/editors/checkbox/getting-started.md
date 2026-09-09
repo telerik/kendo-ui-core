@@ -150,7 +150,7 @@ You can reference the CheckBox instances that you have created and build on top 
              })
          </script>
     ```
-1. Set the check state of the component by using the [`check()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/checkbox/methods/check) client-side method.
+1. Set the check state of the component by using the [`check()`](https://docs.telerik.com/kendo-ui/api/ui/checkbox/methods/check) client-side method.
 
     ```JS script
         <script>
@@ -180,6 +180,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Basic Overview of the CheckBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/checkbox)
-* [Client-Side API of the CheckBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/checkbox)
+* [Client-Side API of the CheckBox](https://docs.telerik.com/kendo-ui/api/ui/checkbox)
 * [Server-Side API of the CheckBox for {{ site.framework }}](/api/checkbox)
 * [Knowledge Base Section](/knowledge-base)

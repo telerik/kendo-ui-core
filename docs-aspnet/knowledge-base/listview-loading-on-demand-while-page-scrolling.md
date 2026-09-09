@@ -161,7 +161,7 @@ What is happening here is the following:
 
 ## See Also
 
-* [Client-Side API Reference of the ListView for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
+* [Client-Side API Reference of the ListView for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/listview)
 * [Server-Side API Reference of the ListView for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/listview)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

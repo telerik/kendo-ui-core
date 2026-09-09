@@ -29,7 +29,7 @@ How can I display audio files within the {{ site.product }} Grid?
 
 ## Solution
 
-1. Utilize a [Column Template](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template)
+1. Utilize a [Column Template](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.template)
 1. Within the template, add the conventional [audio element](https://www.w3schools.com/html/html5_audio.asp) that is primarily utilized for displaying an audio file on a the web page.
 1.  Specify the file name and extension using the [Template Syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview#template-syntax).
 
@@ -73,7 +73,7 @@ For a complete implementation of the suggested approach, refer to the following 
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -53,7 +53,7 @@ In this step, you'll initialize the Splitter component from the parent `<div>` e
 
 ## 3. Set the Orientation of the Splitter
 
-Now, you can set the [`orientation`](/api/javascript/ui/splitter/configuration/orientation) of the Splitter.
+Now, you can set the [`orientation`](/api/ui/splitter/configuration/orientation) of the Splitter.
 
 ```javascript
     $("#splitter").kendoSplitter({
@@ -63,7 +63,7 @@ Now, you can set the [`orientation`](/api/javascript/ui/splitter/configuration/o
 
 ## 4. Configure the Panes
 
-In this step, you'll configure the [`panes`](/api/javascript/ui/splitter/configuration/panes) of the Splitter.
+In this step, you'll configure the [`panes`](/api/ui/splitter/configuration/panes) of the Splitter.
 
 ```javascript
       $("#splitter").kendoSplitter({
@@ -79,7 +79,7 @@ In this step, you'll configure the [`panes`](/api/javascript/ui/splitter/configu
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Splitter](/api/javascript/ui/splitter)
+* [JavaScript API Reference of the jQuery Splitter](/api/ui/splitter)
 * [Knowledge Base Section](/knowledge-base)
 
 

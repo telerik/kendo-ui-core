@@ -44,4 +44,4 @@ You can use multiple spacers to create an equal amount of space between several 
 ## See Also
 
 * [Basic Usage of the ToolBar (Demo)](https://demos.telerik.com/kendo-ui/toolbar/index)
-* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/ui/toolbar)

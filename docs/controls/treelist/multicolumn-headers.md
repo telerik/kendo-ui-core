@@ -39,4 +39,4 @@ The previous example will present the following output.
 ## See Also
 
 * [Rendering Multi-Column Headers in the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/multicolumnheaders)
-* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)
+* [TreeList JavaScript API Reference](/api/ui/treelist)

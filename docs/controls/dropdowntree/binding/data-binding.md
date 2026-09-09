@@ -68,4 +68,4 @@ The following example demonstrates how to create a DropDownTree and bind it to a
 
 * [Remote Data Binding by the DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/remote-data-binding)
 * [OData Binding by the DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/odata-binding)
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)
+* [JavaScript API Reference of the DropDownTree](/api/ui/dropdowntree)

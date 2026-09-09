@@ -112,7 +112,7 @@ As a verdict, I would highly recommend you to use Remote Data Binding because it
 {% endif %}
 * [Grid for {{ site.framework }} - Remote Data Binding Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/binding/ajax-binding)
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)

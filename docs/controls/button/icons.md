@@ -22,7 +22,7 @@ To visually enhance the Button:
 
 ## Icon
 
-The Buttons allows you to set an `svg` (default) or `font` icon through the ['icon'](/api/javascript/ui/button/configuration/icon) option. The option is intended to be used with the built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [icons list](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/).
+The Buttons allows you to set an `svg` (default) or `font` icon through the ['icon'](/api/ui/button/configuration/icon) option. The option is intended to be used with the built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [icons list](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/).
 
 The following example demonstrates how to use `svg` icons in the Button component.
 
@@ -149,4 +149,4 @@ To handle this issue, use either of the following approaches:
 ## See Also
 
 * [Adding Images to the Button (Demo)](https://demos.telerik.com/kendo-ui/button/images)
-* [JavaScript API Reference of the Button](/api/javascript/ui/button)
+* [JavaScript API Reference of the Button](/api/ui/button)

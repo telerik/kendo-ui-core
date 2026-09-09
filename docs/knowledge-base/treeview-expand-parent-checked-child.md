@@ -24,8 +24,8 @@ components: ["treeview"]
 When the data in the TreeView is loaded I would like to expand parent node automatically only if at least one child is checked.
 
 ## Solution
-1. You could subscribe to the [dataBound event](/api/javascript/ui/treeview/events/databound) of the TreeView and find all checked items. 
-1. Use the expand method to [expand](/api/javascript/ui/treeview/methods/expand) the TreeView to the checked node. 
+1. You could subscribe to the [dataBound event](/api/ui/treeview/events/databound) of the TreeView and find all checked items. 
+1. Use the expand method to [expand](/api/ui/treeview/methods/expand) the TreeView to the checked node. 
 
 ```dojo
     <div id="treeview-kendo"></div>

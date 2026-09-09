@@ -29,7 +29,7 @@ How can I create a custom ToolBar tool that has similar appearance to the [Grid`
 The Kendo UI ColumnMenu can not be used as a standalone component. If you need to have a similar functionality to the ColumnMenu in the ToolBar you can try utilizing the rest of the Kendo components to achieve it. 
 
 
-1. In the ToolBar [`items.template`](/api/javascript/ui/toolbar/configuration/items.template) add an element from which you can initialize a [`Kendo Popup`](/api/javascript/ui/popup).
+1. In the ToolBar [`items.template`](/api/ui/toolbar/configuration/items.template) add an element from which you can initialize a [`Kendo Popup`](/api/ui/popup).
 1. In the Popup component, you can add an [`ExpansionPanels`]({% slug overview_kendoui_expansionpanel_widget %}).
 1. Next, add the needed components such as CheckBox, CheckBoxGroup, DropDownList, Button, etc. 
 
@@ -108,4 +108,4 @@ The Kendo UI ColumnMenu can not be used as a standalone component. If you need t
 
 ## See Also
 
-* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/ui/toolbar)

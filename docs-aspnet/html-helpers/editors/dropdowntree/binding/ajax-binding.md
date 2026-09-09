@@ -127,5 +127,5 @@ The following example shows how to set up a DropDownTree to use Ajax data bindin
 ## See Also
 
 * [Remote Data Binding by the DropDownTree for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdowntree/remote-data-binding)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/dropdowntree)
 * [Server-Side API](/api/dropdowntree)

@@ -162,6 +162,6 @@ The following example demonstrates how to hide the year view in a Kendo UI DateT
 
 ## See Also
 
-* [DatePicker API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
-* [DateTimePicker API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
-* [Calendar API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [DatePicker API Reference](https://docs.telerik.com/kendo-ui/api/ui/datepicker)
+* [DateTimePicker API Reference](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker)
+* [Calendar API Reference](https://docs.telerik.com/kendo-ui/api/ui/calendar)

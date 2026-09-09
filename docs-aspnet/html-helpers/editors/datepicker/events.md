@@ -76,4 +76,4 @@ The following example demonstrates how to subscribe to [`Change`](/api/kendo.mvc
 
 * [Using the API of the DateInput HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dateinput/api)
 * [Server-Side API of the DateInput](/api/dateinput)
-* [Client-Side API of the DateInput](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput)
+* [Client-Side API of the DateInput](https://docs.telerik.com/kendo-ui/api/ui/dateinput)

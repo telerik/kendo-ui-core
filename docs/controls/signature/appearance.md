@@ -30,7 +30,7 @@ The following example demonstrates a Signature widget with custom appearance set
 
 ## Background Color
 
-To modify the background color of the Signature container, use its [`backgroundColor`](/api/javascript/ui/signature/configuration/backgroundcolor) property.
+To modify the background color of the Signature container, use its [`backgroundColor`](/api/ui/signature/configuration/backgroundcolor) property.
 
 ```html
 $("#signature").kendoSignature({
@@ -40,7 +40,7 @@ $("#signature").kendoSignature({
 
 ## Stroke Color
 
-You can also change the stroke color of the Signature by using its [`color`](/api/javascript/ui/signature/configuration/color) property.
+You can also change the stroke color of the Signature by using its [`color`](/api/ui/signature/configuration/color) property.
 
 ```html
 $("#signature").kendoSignature({
@@ -50,7 +50,7 @@ $("#signature").kendoSignature({
 
 ## Stroke Width
 
-To update the stroke width of the Signature, utilize its [`strokeWidth`](/api/javascript/ui/signature/configuration/strokewidth) property.
+To update the stroke width of the Signature, utilize its [`strokeWidth`](/api/ui/signature/configuration/strokewidth) property.
 
 ```html
 $("#signature").kendoSignature({
@@ -70,7 +70,7 @@ The Kendo UI Signature supports the following styling options:
 
 The `size` option controls how big or small the rendered Signature looks.
 
-The following values are available for the [`size`](/api/javascript/ui/signature/configuration/size) option:
+The following values are available for the [`size`](/api/ui/signature/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -92,7 +92,7 @@ $("#signature").kendoSignature({
 
 The `rounded` option controls how much border radius is applied to the rendered Signature.
 
-The following values are available for the [`rounded`](/api/javascript/ui/signature/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/signature/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -115,7 +115,7 @@ $("#signature").kendoSignature({
 
 The `fillMode` option controls the way the color is applied to the rendered Signature.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/signature/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/signature/configuration/fillmode) option:
 
 - `solid`
 - `flat`
@@ -137,5 +137,5 @@ $("#signature").kendoSignature({
 
 * [Demo Page for the Signature](https://demos.telerik.com/kendo-ui/signature/index)
 * [Signature Appearance(Demo)](https://demos.telerik.com/kendo-ui/signature/index)
-* [JavaScript API Reference of the Signature](/api/javascript/ui/signature)
+* [JavaScript API Reference of the Signature](/api/ui/signature)
 * [Knowledge Base Section](/knowledge-base)

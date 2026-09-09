@@ -111,4 +111,4 @@ The following example demonstrates how to initialize a Grid widget in a Single-P
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

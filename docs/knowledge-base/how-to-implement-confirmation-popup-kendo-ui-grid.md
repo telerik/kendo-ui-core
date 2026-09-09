@@ -36,7 +36,7 @@ This KB article also answers the following questions:
 
 ## Solution
 
-To achieve the desired functionality, handle the Grid's [`cancel`](/api/javascript/ui/grid/events/cancel) event. In the event handler, display a confirmation dialog using `window.confirm()`. If the user opts not to cancel the edit (clicks "Cancel" in the dialog), prevent the default action using `e.preventDefault()`.
+To achieve the desired functionality, handle the Grid's [`cancel`](/api/ui/grid/events/cancel) event. In the event handler, display a confirmation dialog using `window.confirm()`. If the user opts not to cancel the edit (clicks "Cancel" in the dialog), prevent the default action using `e.preventDefault()`.
 
 1. Subscribe to the Grid's `cancel` event. You can do this in the Grid's configuration:
 
@@ -132,6 +132,6 @@ For a practical implementation, refer to the below Dojo demo.
 ```
 ## See Also
 
-- [Grid Cancel Event Documentation](/api/javascript/ui/grid/events/cancel)
+- [Grid Cancel Event Documentation](/api/ui/grid/events/cancel)
 - [Kendo UI Grid Overview](/controls/data-management/grid/overview)
 - [Kendo UI Grid Popup Editing](/controls/grid/editing/popup)

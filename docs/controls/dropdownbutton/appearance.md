@@ -26,7 +26,7 @@ The Kendo UI DropDownButton supports the following styling options:
 
 The `size` option controls how big or small the rendered `button` looks. The structure of the class is `k-button-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/dropdownbutton/configuration/size) option:
+The following values are available for the [`size`](/api/ui/dropdownbutton/configuration/size) option:
 
 - `sm`—Small size.
 - `md`—Medium size.
@@ -45,7 +45,7 @@ The default `size` value is `medium` and it is applied to the button element thr
 
 The `fillMode` option controls the way the color is applied to the rendered `button`. The structure of the class is `k-button-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/dropdownbutton/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/dropdownbutton/configuration/fillmode) option:
 
 - `solid`
 - `outline`
@@ -65,7 +65,7 @@ The default `fillMode` value is `solid` and it is applied to the button element 
 
 As applying `themeColor` is closely related to the `fillMode` option, the structure of the class name for `themeColor` is a composite `k-button-{fillMode}-{themeColor}` setting.
 
-The following values are available for the [`themeColor`](/api/javascript/ui/dropdownbutton/configuration/themecolor) option:
+The following values are available for the [`themeColor`](/api/ui/dropdownbutton/configuration/themecolor) option:
 
 - `base`
 - `primary`
@@ -100,7 +100,7 @@ The default `themeColor` value is `base`. A button with default `fillMode` and `
 
 The `rounded` option controls how much border radius is applied to the rendered `button`. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/dropdownbutton/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/dropdownbutton/configuration/rounded) option:
 
 - `sm`—Small size.
 - `md`—Medium size.
@@ -125,4 +125,4 @@ To review the rendering of the component, refer to the HTML specifications in th
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the DropDownButton](https://demos.telerik.com/kendo-ui/dropdownbutton/appearance)
-* [JavaScript API Reference of the DropDownButton](/api/javascript/ui/dropdownbutton)
+* [JavaScript API Reference of the DropDownButton](/api/ui/dropdownbutton)

@@ -112,7 +112,7 @@ It also addresses the following important issues:
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Editing Functionality of the Grid]({% slug editing_kendoui_grid_widget %})
 * [Remote Data Binding of the Grid]({% slug remote_data_binding_grid %})
 * [Rendering and Dimensions of the Grid]({% slug width_kendoui_grid_widget %})

@@ -29,11 +29,11 @@ The Sortable does not support integration with the Kendo UI TreeList component.
 
 * [Getting Started with the Kendo UI Sortable for jQuery]({% slug getting_started_kendoui_sortable_widget %})
 * [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
-* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
+* [JavaScript API Reference of the Sortable](/api/ui/sortable)
 
 ## See Also
 
-* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
+* [JavaScript API Reference of the Sortable](/api/ui/sortable)
 * [Common Scenarios with the Sortable Component]({% slug scenarios_kendoui_sortable %})
 * [Demo Page for the jQuery Sortable](https://demos.telerik.com/kendo-ui/sortable/index)
 * [Knowledge Base Section](/knowledge-base)

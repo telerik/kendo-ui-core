@@ -34,11 +34,11 @@ In this case the server response of the create/destroy/update action is interpre
 
 Update the remote service in use, so it can return valid responses. Make sure the server response is formatted in the same way as the `read` action response:
 
-1. The `create` request&mdash;The Scheduler expects the created record to be returned to the client side with its [`id` field](/api/javascript/data/schedulerevent#fields-id) set to a unique value.
+1. The `create` request&mdash;The Scheduler expects the created record to be returned to the client side with its [`id` field](/api/data/schedulerevent#fields-id) set to a unique value.
 1. The `update/destroy` request&mdash;The Scheduler expects the server to return a valid response, so it can signify success. Such a response, for example, is the updated/deleted event formatted in the same way as the `read` action `[{id: 23, title: "some title", start:"2015-10-14T15:00:00.000Z", end:"2015-10-14T17:00:00.000Z" }]`.
 
 ## See Also
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

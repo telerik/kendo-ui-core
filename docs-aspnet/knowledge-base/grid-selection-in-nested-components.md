@@ -34,9 +34,9 @@ To achieve the desired scenario:
 
 1. Implement a custom command button in the Toolbar.
 1. Handle the [`Click`](https://api.jquery.com/click/) event of the custom command button.
-1. In the `Click` event handler, get the selected rows of the main Grid. Use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method for the case.
-1. Create a collection of the [`dataItems`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) by using the selected rows.
-1. [Open](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/open) the [Window](https://demos.telerik.com/aspnet-mvc/window).
+1. In the `Click` event handler, get the selected rows of the main Grid. Use the [`select`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/select) method for the case.
+1. Create a collection of the [`dataItems`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem) by using the selected rows.
+1. [Open](https://docs.telerik.com/kendo-ui/api/ui/window/methods/open) the [Window](https://demos.telerik.com/aspnet-mvc/window).
 1. For the content part of the Window, implement a div element for the {{ site.product }} [Wizard](https://demos.telerik.com/aspnet-mvc/wizard) component. Now you can initialize it.
 1. Implement the desired steps in the Wizard: Grid, Percent Input, and Stored Procedure.
 1. Use the collection from step 4 as a DataSource for the newly created Grid.
@@ -188,7 +188,7 @@ The following sample code represents the steps described above.
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

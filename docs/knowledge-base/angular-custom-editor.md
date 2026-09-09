@@ -101,7 +101,7 @@ The following example demonstrates how to create a custom editor in the [Data Gr
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)
 * [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
 * [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
 * [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

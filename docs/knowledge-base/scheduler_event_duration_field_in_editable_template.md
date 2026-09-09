@@ -25,7 +25,7 @@ How can I add a duration field in the editable template for the events of the Sc
 
 ## Solution
 
-* Use the SchedulerEvent [`duration()`](/api/javascript/data/schedulerevent/methods/duration) method to retrieve the event duration and display it as a custom element in the template for the editor. 
+* Use the SchedulerEvent [`duration()`](/api/data/schedulerevent/methods/duration) method to retrieve the event duration and display it as a custom element in the template for the editor. 
 
 ```js
 <script id="editor" type="text/x-kendo-template">
@@ -36,7 +36,7 @@ How can I add a duration field in the editable template for the events of the Sc
 </script>
 ```
 
-*  In the [`edit`](/api/javascript/ui/scheduler/events/edit) event handler of the Scheduler, bind the [`change`](/api/javascript/ui/datetimepicker/events/change) event handlers to the DateTimePicker components, in which match up the duration value once the value in the start and end DateTimePickers is changed.
+*  In the [`edit`](/api/ui/scheduler/events/edit) event handler of the Scheduler, bind the [`change`](/api/ui/datetimepicker/events/change) event handlers to the DateTimePicker components, in which match up the duration value once the value in the start and end DateTimePickers is changed.
 
 ```js
 edit: function(e){
@@ -45,7 +45,7 @@ edit: function(e){
 },
 ```
 
-* Send the value of the custom balance field when the event is edited and the duration is changed, by handling the [`save`](/api/javascript/ui/scheduler/events/save) event of the Scheduler and setting the value of the balance field.
+* Send the value of the custom balance field when the event is edited and the duration is changed, by handling the [`save`](/api/ui/scheduler/events/save) event of the Scheduler and setting the value of the balance field.
 
 ```js
 save: function(e){
@@ -158,4 +158,4 @@ The following example demonstrates a full implementation of the described approa
 ```
 
 ## See Also
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

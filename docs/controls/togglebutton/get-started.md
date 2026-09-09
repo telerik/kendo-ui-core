@@ -52,7 +52,7 @@ After the basic initialization is completed, you can start adding additional con
 
 ## 3. Add an Icon
 
-You can display an icon in the ToggleButton by configuring the [`icon`](/api/javascript/ui/button/configuration/icon). For more information about the variety of the icons supported by the ToggleButton, refer to the article on the [Icon ToggleButton]({% slug icons_button %}).
+You can display an icon in the ToggleButton by configuring the [`icon`](/api/ui/button/configuration/icon). For more information about the variety of the icons supported by the ToggleButton, refer to the article on the [Icon ToggleButton]({% slug icons_button %}).
 
 ```html
 <button id="btn">My ToggleButton</button>
@@ -66,7 +66,7 @@ You can display an icon in the ToggleButton by configuring the [`icon`](/api/jav
 
 ## 4. Add a Badge to the ToggleButton
 
-Now you can use the [`badge`](/api/javascript/ui/button/configuration/badge) option which allows you to display a Badge element over the ToggleButton.
+Now you can use the [`badge`](/api/ui/button/configuration/badge) option which allows you to display a Badge element over the ToggleButton.
 
 ```html
 <button id="btn">My ToggleButton</button>
@@ -89,7 +89,7 @@ Now you can use the [`badge`](/api/javascript/ui/button/configuration/badge) opt
 
 ## See Also
 
-* [JavaScript API Reference of the ToggleButton](/api/javascript/ui/togglebutton)
+* [JavaScript API Reference of the ToggleButton](/api/ui/togglebutton)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -28,7 +28,7 @@ The component is composed of an unordered list of items which represent tabs, an
 
 * [Getting Started with the Kendo UI TabStrip for jQuery]({% slug getting_started_kendoui_tabstrip_widget %})
 * [Basic Usage of the TabStrip (Demo)](https://demos.telerik.com/kendo-ui/tabstrip/index)
-* [JavaScript API Reference of the TabStrip](/api/javascript/ui/tabstrip)
+* [JavaScript API Reference of the TabStrip](/api/ui/tabstrip)
 
 ## See Also
 

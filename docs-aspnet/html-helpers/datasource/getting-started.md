@@ -277,7 +277,7 @@ To achieve the desired behavior, attach a handler in the declaration of the Data
 
 Optionally, you can pass additional parameters to the action by using the `Data` method of the Transport properties. To accomplish this, provide the name of a JavaScript function that will return a JavaScript object with the additional data.
 
-The custom parameter names must not match reserved words, which are used by the Kendo UI DataSource for jQuery for [sorting](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverSorting), [filtering](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering), [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverPaging), and [grouping](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping).
+The custom parameter names must not match reserved words, which are used by the Kendo UI DataSource for jQuery for [sorting](http://docs.telerik.com/kendo-ui/api/data/datasource#configuration-serverSorting), [filtering](http://docs.telerik.com/kendo-ui/api/data/datasource#configuration-serverFiltering), [paging](http://docs.telerik.com/kendo-ui/api/data/datasource#configuration-serverPaging), and [grouping](http://docs.telerik.com/kendo-ui/api/data/datasource#configuration-serverGrouping).
 
 The following code demonstrates how to add the additional parameters to the action method.
 
@@ -350,7 +350,7 @@ Referencing existing instances of a component allows you to build on top of thei
     </script>
     ```
 
-1. Use the [DataSource client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datasource#methods) to control the behavior of the widget. In this example, you will force the DataSource to send a new read request to the backend with the [`read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/read) method. Then, you will handle the returned promise to access the data item of the returned page with the [`view`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/view) method of the DataSource.
+1. Use the [DataSource client-side API](https://docs.telerik.com/kendo-ui/api/ui/datasource#methods) to control the behavior of the widget. In this example, you will force the DataSource to send a new read request to the backend with the [`read`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/read) method. Then, you will handle the returned promise to access the data item of the returned page with the [`view`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/view) method of the DataSource.
 
     ```JS script
     <script>
@@ -381,6 +381,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [DataSource for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datasource)
-* [DataSource client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datasource)
+* [DataSource client-side API](https://docs.telerik.com/kendo-ui/api/ui/datasource)
 * [DataSource server-side API](/api/datasource)
 * [Knowledge Base Section](/knowledge-base)

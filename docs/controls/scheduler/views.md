@@ -83,4 +83,4 @@ For a runnable example please refer to this [Create Custom Scheduler Views by In
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

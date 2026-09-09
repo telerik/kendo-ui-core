@@ -30,7 +30,7 @@ components: ["progressbar"]
 How can I show different colors in the Kendo UI ProgressBar based on the value?
 
 ## Solution
-Use the [change](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar/events/change) event which fires every time the value changes. After comparing the value, use the [progressWrapper](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar/fields/progresswrapper) to set the background and the border color. For example:
+Use the [change](https://docs.telerik.com/kendo-ui/api/ui/progressbar/events/change) event which fires every time the value changes. After comparing the value, use the [progressWrapper](https://docs.telerik.com/kendo-ui/api/ui/progressbar/fields/progresswrapper) to set the background and the border color. For example:
 
 ```javascript
 $("#progressbar").kendoProgressBar({
@@ -88,5 +88,5 @@ The following example initializes a ProgressBar and programmatically increments 
 ```
 
 ## See Also
-- [change](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar/events/change)
-- [progressWrapper](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar/fields/progresswrapper)
+- [change](https://docs.telerik.com/kendo-ui/api/ui/progressbar/events/change)
+- [progressWrapper](https://docs.telerik.com/kendo-ui/api/ui/progressbar/fields/progresswrapper)

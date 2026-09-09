@@ -171,4 +171,4 @@ The following table lists the available symbologies and their specifications sup
 ## See Also
 
 * [Basic Usage of the Barcode (Demo)](https://demos.telerik.com/kendo-ui/barcode/index)
-* [JavaScript API Reference of the Barcode](/api/javascript/dataviz/ui/barcode)
+* [JavaScript API Reference of the Barcode](/api/dataviz/ui/barcode)

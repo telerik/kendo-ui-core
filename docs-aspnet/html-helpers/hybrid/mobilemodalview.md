@@ -63,7 +63,7 @@ The ModalView presents a self-contained functionality in the context of the curr
 
 ## Events
 
-You can subscribe to all hybrid ModalView [events](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#events).
+You can subscribe to all hybrid ModalView [events](https://docs.telerik.com/kendo-ui/api/mobile/ui/view#events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -88,7 +88,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-You can reference a hybrid ModalView instance by using the code from the following example. Once a reference is established, use the [hybrid ModalView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#methods) to control its behavior.
+You can reference a hybrid ModalView instance by using the code from the following example. Once a reference is established, use the [hybrid ModalView client-side API](https://docs.telerik.com/kendo-ui/api/mobile/ui/view#methods) to control its behavior.
 
     @(Html.Kendo().MobileModalView()
             .Name("ModalView")

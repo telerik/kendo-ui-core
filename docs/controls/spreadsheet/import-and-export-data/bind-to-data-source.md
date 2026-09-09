@@ -11,9 +11,9 @@ position: 3
 
 The Spreadsheet supports binding individual sheets to a [Data Source](/framework/datasource/overview) instance which allows you to quickly bring data from external data sources into the Spreadsheet and edit it.  
 
-For a runnable example, refer to the demo on [binding the Spreadsheet to the DataSource](https://demos.telerik.com/kendo-ui/spreadsheet/datasource). The Spreadsheet DataSource from that example uses the [`read`](/api/javascript/data/datasource/configuration/transport.read) and [`submit`](/api/javascript/data/datasource/configuration/transport.submit) transport options. The `submit` option is required to properly handle a scenario in which the user creates, updates and deletes items simultaneously.
+For a runnable example, refer to the demo on [binding the Spreadsheet to the DataSource](https://demos.telerik.com/kendo-ui/spreadsheet/datasource). The Spreadsheet DataSource from that example uses the [`read`](/api/data/datasource/configuration/transport.read) and [`submit`](/api/data/datasource/configuration/transport.submit) transport options. The `submit` option is required to properly handle a scenario in which the user creates, updates and deletes items simultaneously.
 
-When using separate [`create`](/api/javascript/data/datasource/configuration/transport.create), [`update`](/api/javascript/data/datasource/configuration/transport.update) and [`destroy`](/api/javascript/data/datasource/configuration/transport.destroy) handlers, it is possible that one of them fails, while the others do not. That will result in a mismatch of the data state between the client (the Spreadsheet) and the remote source. The `submit` option handles all operations within a single request. It will not save any changes if any of the items is invalid.
+When using separate [`create`](/api/data/datasource/configuration/transport.create), [`update`](/api/data/datasource/configuration/transport.update) and [`destroy`](/api/data/datasource/configuration/transport.destroy) handlers, it is possible that one of them fails, while the others do not. That will result in a mismatch of the data state between the client (the Spreadsheet) and the remote source. The `submit` option handles all operations within a single request. It will not save any changes if any of the items is invalid.
 
 The following example demonstrates how to configure the Spreadsheet to use a DataSource.
 
@@ -143,7 +143,7 @@ The following example demonstrates how to configure the Spreadsheet to use a Dat
 
 Data Source binding switches the sheet to a special data-bound mode. It differs from the standard behavior in the following ways:
 
-* Column headers are inferred from the data item fields. Configure the column headers and ordering by using the [sheet `setDataSource` method](/api/javascript/spreadsheet/sheet/methods/setdatasource).
+* Column headers are inferred from the data item fields. Configure the column headers and ordering by using the [sheet `setDataSource` method](/api/spreadsheet/sheet/methods/setdatasource).
 * Cell styles, formulas, and formats are not persisted in the data source.
 * Row height and column width are not persisted in the data source.
 * Sorting and filtering are applied locally.
@@ -164,4 +164,4 @@ CRUD operations are also handled in a specific way:
 ## See Also
 
 * [Server-Side Import and Export in the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/server-side-import-export)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

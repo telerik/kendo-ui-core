@@ -128,4 +128,4 @@ The AutoComplete displays `noDataTemplate` in the popup when the data source is 
 ## See Also
 
 * [Customizing Templates in the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/template)
-* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)
+* [JavaScript API Reference of the AutoComplete](/api/ui/autocomplete)

@@ -24,13 +24,13 @@ How can I configure the Kendo UI for jQuery Gantt to support Day, Week, Month, a
 
 ## Solution
 
-The Gantt component supports multiple built-in views (`day`, `week`, `month`, `year`) via its [`views`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/configuration/views) configuration. To switch views programmatically, use the [`view`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/methods/view) method.
+The Gantt component supports multiple built-in views (`day`, `week`, `month`, `year`) via its [`views`](https://docs.telerik.com/kendo-ui/api/ui/gantt/configuration/views) configuration. To switch views programmatically, use the [`view`](https://docs.telerik.com/kendo-ui/api/ui/gantt/methods/view) method.
 
 The following approach demonstrates how to:
 
 1. Configure the Gantt with all four view types and set Month as the default using `selected: true`.
 2. Create custom view selector buttons outside the Gantt.
-3. Handle the [`navigate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/events/navigate) event to keep the custom buttons synchronized when the user switches views from the built-in view tabs.
+3. Handle the [`navigate`](https://docs.telerik.com/kendo-ui/api/ui/gantt/events/navigate) event to keep the custom buttons synchronized when the user switches views from the built-in view tabs.
 
 ### Initialize the Gantt with Views
 
@@ -147,7 +147,7 @@ For a runnable example, refer to this [Gantt Views dojo sample](https://dojo.tel
 
 ## See Also
 
-* [Gantt Views Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/configuration/views)
-* [Gantt view() Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/methods/view)
-* [Gantt Navigate Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/events/navigate)
+* [Gantt Views Configuration](https://docs.telerik.com/kendo-ui/api/ui/gantt/configuration/views)
+* [Gantt view() Method](https://docs.telerik.com/kendo-ui/api/ui/gantt/methods/view)
+* [Gantt Navigate Event](https://docs.telerik.com/kendo-ui/api/ui/gantt/events/navigate)
 * [Kendo UI for jQuery Gantt Demos](https://demos.telerik.com/kendo-ui/gantt)

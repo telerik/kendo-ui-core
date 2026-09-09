@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.FilterMenu
 
-Represents the Kendo UI FilterMenu widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI FilterMenu widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -102,12 +102,12 @@ How do I customize the subtitle in a Kendo UI adaptive filter menu? Set or modif
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the widget. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source of the widget. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -585,7 +585,7 @@ How do I customize the "or" label in Kendo UI filter menus? Customize, localize,
 
 ### messages.selectValue `String` *(default: "-Select value-")*
 
-The text of the DropDownList displayed in the filter menu for columns whose [values](/api/javascript/ui/filtermenu#configuration-columns.values) option is set.
+The text of the DropDownList displayed in the filter menu for columns whose [values](/api/ui/filtermenu#configuration-columns.values) option is set.
 
 
 <div class="meta-api-description">
@@ -1563,7 +1563,7 @@ How do I customize the label for "less than" date comparison in Kendo UI FilterM
 
 ### operators.enums `Object`
 
-The texts of the filter operators displayed for columns which have their [values](/api/javascript/ui/filtermenu#configuration-columns.values) option set.
+The texts of the filter operators displayed for columns which have their [values](/api/ui/filtermenu#configuration-columns.values) option set.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
@@ -1722,8 +1722,8 @@ How to customize "is not null" filter operator label in Kendo UI for jQuery? Cus
 ## Fields
 
 ### dataSource `kendo.data.DataSource`
-The [data source](/api/javascript/data/datasource) of the widget.
-Configured via the [dataSource](/api/javascript/ui/filtermenu#configuration-dataSource) option.
+The [data source](/api/data/datasource) of the widget.
+Configured via the [dataSource](/api/ui/filtermenu#configuration-dataSource) option.
 
 
 <div class="meta-api-description">

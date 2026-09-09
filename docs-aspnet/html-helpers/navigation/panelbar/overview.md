@@ -139,7 +139,7 @@ The following example demonstrates the basic configuration of the PanelBar.
 ## See Also
 
 * [Using the API of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/api)
-* [PanelBar Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+* [PanelBar Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/panelbar)
 * [PanelBarBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/panelbarbuilder)
 * [PanelBar Server-Side API](/api/panelbar)
 * [Knowledge Base Section](/knowledge-base)

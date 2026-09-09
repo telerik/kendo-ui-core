@@ -26,9 +26,9 @@ How can I select one item in the MultiSelect and then, if the shift button is he
 
 ## Solution
 
-* Set the [AutoClose(false)](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/autoclose) configuration.
+* Set the [AutoClose(false)](https://docs.telerik.com/kendo-ui/api/ui/multiselect/configuration/autoclose) configuration.
 
-* Set a handler for the [Select](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/select) event
+* Set a handler for the [Select](https://docs.telerik.com/kendo-ui/api/ui/multiselect/events/select) event
 
 ```Razor
 .Events(ev=>ev.Select("onSelect"))
@@ -63,7 +63,7 @@ window.onmousemove = function (e) {
     }
 ```
 
-* Use the [value()](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/methods/value) method to set the new value of the MultiSelect as you pass the temporary array as a parameter.
+* Use the [value()](https://docs.telerik.com/kendo-ui/api/ui/multiselect/methods/value) method to set the new value of the MultiSelect as you pass the temporary array as a parameter.
 
 Example:
 
@@ -156,7 +156,7 @@ Example:
 
 ## See Also
 
-* [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/multiselect)
 * [Server-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/multiselect)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

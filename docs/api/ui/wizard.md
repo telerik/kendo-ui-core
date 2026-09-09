@@ -7,7 +7,7 @@ component: wizard
 
 # kendo.ui.Wizard
 
-Represents the Kendo UI Wizard widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Wizard widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -33,7 +33,7 @@ How to enable or disable navigation buttons in Kendo UI Wizard? Control the disp
 
 ### contentPosition `String` *(default: "bottom")*
 
-Indicates the position of the step content element according to the [Stepper](/api/javascript/ui/stepper). WIth the default configuration ("bottom"), the Stepper will be horizontal and wil be rendered above the content. With the "left" configuration, the Stepper will be vertical and the step content will be rendered to the left from it. With the "right" configuration, the Stepper will be vertical and the step content will be rendered to the right from it.
+Indicates the position of the step content element according to the [Stepper](/api/ui/stepper). WIth the default configuration ("bottom"), the Stepper will be horizontal and wil be rendered above the content. With the "left" configuration, the Stepper will be vertical and the step content will be rendered to the left from it. With the "right" configuration, the Stepper will be vertical and the step content will be rendered to the right from it.
 
 
 <div class="meta-api-description">
@@ -297,7 +297,7 @@ How to configure wizard component to reload step content on revisit? Control rel
 
 ### stepper `Object`
 
-Provides configuration options for the [Stepper](/api/javascript/ui/stepper) instance of the **Wizard** widget.
+Provides configuration options for the [Stepper](/api/ui/stepper) instance of the **Wizard** widget.
 
 
 <div class="meta-api-description">
@@ -323,7 +323,7 @@ How to customize the step navigation in Kendo UI Wizard? Customize step navigati
 
 ### stepper.indicator `Boolean` *(default: true)*
 
-Specifies whether the [Stepper](/api/javascript/ui/stepper) instance will display the indicators of its steps.
+Specifies whether the [Stepper](/api/ui/stepper) instance will display the indicators of its steps.
 
 
 <div class="meta-api-description">
@@ -345,7 +345,7 @@ How to control step marker visibility in Kendo UI Wizard? Control the visibility
 
 ### stepper.label `Boolean` *(default: true)*
 
-Specifies whether the [Stepper](/api/javascript/ui/stepper) instance will display the labels of its steps.
+Specifies whether the [Stepper](/api/ui/stepper) instance will display the labels of its steps.
 
 
 <div class="meta-api-description">
@@ -367,7 +367,7 @@ How to hide step titles in Kendo UI Wizard stepper? Toggle visibility of step ti
 
 ### stepper.linear `Boolean` *(default: true)*
 
-Specifies whether the [Stepper](/api/javascript/ui/stepper) will allow non-linear navigation (selection of steps which are not immediately next to the current step).
+Specifies whether the [Stepper](/api/ui/stepper) will allow non-linear navigation (selection of steps which are not immediately next to the current step).
 
 
 <div class="meta-api-description">
@@ -389,7 +389,7 @@ How do I configure Kendo UI Wizard to enforce sequential step navigation? Config
 
 ### validateForms `Boolean | Object` *(default: true)*
 
-Indicates whether the Wizard will automatically validate any Kendo [Form](/api/javascript/ui/form) configured for a Step. Validation will be executed upon Step navigation.
+Indicates whether the Wizard will automatically validate any Kendo [Form](/api/ui/form) configured for a Step. Validation will be executed upon Step navigation.
 
 
 <div class="meta-api-description">
@@ -830,7 +830,7 @@ How do I enable or disable individual steps in a Kendo UI wizard? Configure, tog
 
 ### steps.form `Object`
 
-Defines the [Form](/api/javascript/ui/form) widget configuration, which will populate the **Wizard** step content.
+Defines the [Form](/api/ui/form) widget configuration, which will populate the **Wizard** step content.
 
 
 <div class="meta-api-description">
@@ -907,7 +907,7 @@ How do I customize the icons for each step in a Kendo UI Wizard? Display or conf
 
 ### steps.iconTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the icon in the Stepper step.
+The [template](/api/kendo/methods/template) used to render the icon in the Stepper step.
 
 The fields which can be used in the template are:
 
@@ -1017,7 +1017,7 @@ How to customize step titles in Kendo UI Wizard component? Set or customize the 
 
 ### activeStep
 
-Returns the currently active in the **Wizard** [`Step`](/api/javascript/wizard/step) instance.
+Returns the currently active in the **Wizard** [`Step`](/api/wizard/step) instance.
 
 
 <div class="meta-api-description">
@@ -1026,7 +1026,7 @@ How do I access the current step in a Kendo UI Wizard? Retrieve or access the cu
 
 #### Returns `kendo.stepper.Step`
 
-`Step` The currently active (selected) [`Step`](/api/javascript/wizard/step) instance.
+`Step` The currently active (selected) [`Step`](/api/wizard/step) instance.
 
 
 #### Example
@@ -1239,7 +1239,7 @@ How can I dynamically update the steps in a Kendo UI Wizard? Accessing and manag
 
 #### Returns `Array`
 
-`Array[Step]` The [Step](/api/javascript/wizard/step) instances available in the **Wizard** widget.
+`Array[Step]` The [Step](/api/wizard/step) instances available in the **Wizard** widget.
 
 #### Example
 
@@ -1276,7 +1276,7 @@ The **Wizard** instance that triggered the event.
 
 ##### e.step `kendo.wizard.Step`
 
-The [Step](/api/javascript/wizard/step) instance that has been selected.
+The [Step](/api/wizard/step) instance that has been selected.
 
 #### Example
 
@@ -1313,7 +1313,7 @@ The **Wizard** instance that triggered the event.
 
 ##### e.step `kendo.wizard.Step`
 
-The [Step](/api/javascript/wizard/step) instance that has been populated from remote.
+The [Step](/api/wizard/step) instance that has been populated from remote.
 
 #### Example
 
@@ -1355,11 +1355,11 @@ The original DOM event.
 
 ##### e.button `kendo.ui.Button`
 
-The [Button](/api/javascript/ui/button) instance that has been clicked in order raise the event.
+The [Button](/api/ui/button) instance that has been clicked in order raise the event.
 
 ##### e.forms `Array`
 
-An array of all Kendo UI [Form](/api/javascript/ui/form) widgets (if any) configured within the Wizard widget.
+An array of all Kendo UI [Form](/api/ui/form) widgets (if any) configured within the Wizard widget.
 
 #### Example
 
@@ -1404,7 +1404,7 @@ The returned status.
 
 ##### e.step `kendo.wizard.Step`
 
-The [Step](/api/javascript/wizard/step) instance that is attempted to be populated from remote.
+The [Step](/api/wizard/step) instance that is attempted to be populated from remote.
 
 #### Example
 
@@ -1446,7 +1446,7 @@ The original DOM event.
 
 ##### e.button `kendo.ui.Button`
 
-The [Button](/api/javascript/ui/button) instance that has been clicked in order raise the event.
+The [Button](/api/ui/button) instance that has been clicked in order raise the event.
 
 #### Example
 
@@ -1487,15 +1487,15 @@ The **Wizard** instance that triggered the event.
 
 ##### e.step `kendo.wizard.Step`
 
-The [Step](/api/javascript/wizard/step) instance that is about to be selected.
+The [Step](/api/wizard/step) instance that is about to be selected.
 
 ##### e.button `kendo.ui.Button`
 
-The [Button](/api/javascript/ui/button) instance that has been clicked in order to navigate to a new step. Not present if the selection is made using the Stepper widget.
+The [Button](/api/ui/button) instance that has been clicked in order to navigate to a new step. Not present if the selection is made using the Stepper widget.
 
 ##### e.stepper `kendo.ui.Stepper`
 
-The [Stepper](/api/javascript/ui/stepper) instance that has been clicked in order to navigate to a new step. Not present if the selection is made using one of the action Buttons.
+The [Stepper](/api/ui/stepper) instance that has been clicked in order to navigate to a new step. Not present if the selection is made using one of the action Buttons.
 
 ##### e.preventDefault `Function`
 
@@ -1524,7 +1524,7 @@ If invoked prevents the selection.
 
 ### formValidateFailed
 
-Fired when the **validateForms** configuration option is set to true (default), and the validation of the Kendo UI [Form](/api/javascript/ui/button) on the current **Wizard** step fails when the user tries to navigate to another step.
+Fired when the **validateForms** configuration option is set to true (default), and the validation of the Kendo UI [Form](/api/ui/button) on the current **Wizard** step fails when the user tries to navigate to another step.
 
 
 <div class="meta-api-description">
@@ -1539,11 +1539,11 @@ The **Wizard** instance that triggered the event.
 
 ##### e.form `kendo.ui.Form`
 
-The Kendo UI [Form](/api/javascript/ui/button) widgets which validation fails.
+The Kendo UI [Form](/api/ui/button) widgets which validation fails.
 
 ##### e.step `kendo.wizard.Step`
 
-The [Step](/api/javascript/wizard/step) where is placed the Form with failed validation.
+The [Step](/api/wizard/step) where is placed the Form with failed validation.
 
 #### Example
 

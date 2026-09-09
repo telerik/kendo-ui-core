@@ -9,9 +9,9 @@ position: 4
 
 # Sorting
 
-The PivotGrid supports sorting both in the OLAP and flat data-binding scenarios. To enable the sortable functionality, set the [`sortable`](/api/javascript/ui/pivotgrid/configuration/sortable) property to `true`.
+The PivotGrid supports sorting both in the OLAP and flat data-binding scenarios. To enable the sortable functionality, set the [`sortable`](/api/ui/pivotgrid/configuration/sortable) property to `true`.
 
-The PivotGrid supports sorting by the caption name of the members. The structure of the `sort` descriptor is similar to [the `sort` option of the `kendo.data.DataSource`](/api/javascript/data/datasource/configuration/sort) and contains the following options:
+The PivotGrid supports sorting by the caption name of the members. The structure of the `sort` descriptor is similar to [the `sort` option of the `kendo.data.DataSource`](/api/data/datasource/configuration/sort) and contains the following options:
 - `field`&mdash;The name of the dimension, for example, `[Date].[Calendar]`.
 - `dir`&mdash;The direction of the sorting.
 
@@ -23,4 +23,4 @@ To sort the PivotGrid rows and columns, click on the fields in the headers, the 
 
 * [Sorting a Dimension in the PivotGrid (Demo)]({% slug howto_sort_dimensions_pivotgrid %})
 * [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)

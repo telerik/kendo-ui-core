@@ -70,4 +70,4 @@ The following example demonstrates how to disable the hint by setting the `hint`
 ## See Also
 
 * [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
-* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
+* [JavaScript API Reference of the Sortable](/api/ui/sortable)

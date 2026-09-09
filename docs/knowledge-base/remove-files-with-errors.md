@@ -37,7 +37,7 @@ How can I remove files from the Kendo UI Upload when file validation fails?
 
 ## Solution
 
-The following example demonstrates how to remove files from the Kendo UI Upload when [the upload/remove data operation fails](/api/javascript/ui/upload) due to errors or failing validation.
+The following example demonstrates how to remove files from the Kendo UI Upload when [the upload/remove data operation fails](/api/ui/upload) due to errors or failing validation.
 
 
 ```dojo
@@ -77,7 +77,7 @@ The following example demonstrates how to remove files from the Kendo UI Upload 
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)
   * [Upload Error event](api/javascript/ui/upload/events/error)
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})

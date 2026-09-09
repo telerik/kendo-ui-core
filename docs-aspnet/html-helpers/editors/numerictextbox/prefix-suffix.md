@@ -102,4 +102,4 @@ The following example demonstrates how to insert HTML content after the NumericT
 
 * [Using the Prefix and Suffix of the NumericTextBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/numerictextbox/prefix-suffix)
 * [Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/numerictextbox)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox)

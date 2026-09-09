@@ -206,7 +206,7 @@ For more examples, refer to the [demo on using the events of the MultiColumnComb
 
 ## 4. (Optional) Reference Existing MultiColumnComboBox Instances
 
-To use the [client-side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox) and build on top of its initial configuration, you need a reference to the MultiColumnComboBox instance. Once you get a valid reference, you can call the respective API methods:
+To use the [client-side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox) and build on top of its initial configuration, you need a reference to the MultiColumnComboBox instance. Once you get a valid reference, you can call the respective API methods:
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
@@ -216,7 +216,7 @@ To use the [client-side API of the MultiColumnComboBox](https://docs.telerik.com
         </script>
     ```
 
-1. Use the [client-side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/methods/enable) method to disable the MultiColumnComboBox.
+1. Use the [client-side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox/methods/enable) method to disable the MultiColumnComboBox.
 
     ```JS script
         <script>
@@ -250,6 +250,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the MultiColumnComboBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/api)
-* [Client-Side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
+* [Client-Side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox)
 * [Server-Side API of the MultiColumnComboBox](/api/multicolumncombobox)
 * [Knowledge Base Section](/knowledge-base)

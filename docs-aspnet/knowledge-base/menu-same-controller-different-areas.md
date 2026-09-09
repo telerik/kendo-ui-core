@@ -79,7 +79,7 @@ For the complete implementation of the suggested approach, refer to [the ASP.NET
 
 ## See Also
 
-* [Client-Side API Reference of the Menu for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+* [Client-Side API Reference of the Menu for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/menu)
 * [Server-Side API Reference of the Menu for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/menu/api)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Menu for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/menu)

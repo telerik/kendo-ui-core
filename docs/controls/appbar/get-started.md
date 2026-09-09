@@ -96,7 +96,7 @@ In this step, you will initialize the AppBar from the empty `<div>` element. All
 
 ## 3. Add Content in the AppBar
 
-You fill the AppBar with content of your choice through the [`items`](/api/javascript/ui/appbar/configuration/items) configuration. In the item templates, you can define HTML that can be used to create other elements, such as a Kendo button or an icon.
+You fill the AppBar with content of your choice through the [`items`](/api/ui/appbar/configuration/items) configuration. In the item templates, you can define HTML that can be used to create other elements, such as a Kendo button or an icon.
 
 ```html
     <div id="appbar"></div>
@@ -164,7 +164,7 @@ You fill the AppBar with content of your choice through the [`items`](/api/javas
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery AppBar](/api/javascript/ui/appbar)
+* [JavaScript API Reference of the jQuery AppBar](/api/ui/appbar)
 * [Knowledge Base Section](/knowledge-base)
 
 

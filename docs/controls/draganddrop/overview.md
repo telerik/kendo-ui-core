@@ -26,11 +26,11 @@ Kendo UI for jQuery provides options to handle drag-and-drop scenarios by combin
 
 * [Getting Started with the Kendo UI Draggable for jQuery]({% slug getting_started_kendoui_draggable_widget %})
 * [Basic Usage of the jQuery Draggable (Demo)](https://demos.telerik.com/kendo-ui/dragdrop/index)
-* [JavaScript API Reference of the Draggable](/api/javascript/ui/draggable)
+* [JavaScript API Reference of the Draggable](/api/ui/draggable)
 
 ## See Also
 
 * [Basic Usage of the Drag-and-Drop (Demo)](https://demos.telerik.com/kendo-ui/dragdrop/index)
-* [API Reference of Draggable](/api/javascript/ui/draggable)
-* [API Reference of DropTarget](/api/javascript/ui/droptarget)
-* [API Reference of DropTargetArea](/api/javascript/ui/droptargetarea)
+* [API Reference of Draggable](/api/ui/draggable)
+* [API Reference of DropTarget](/api/ui/droptarget)
+* [API Reference of DropTargetArea](/api/ui/droptargetarea)

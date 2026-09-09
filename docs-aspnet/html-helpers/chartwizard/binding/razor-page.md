@@ -144,7 +144,7 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Chart Wizard](https://docs.telerik.com/kendo-ui/api/javascript/ui/chartwizard)
+* [Client-Side API of the Chart Wizard](https://docs.telerik.com/kendo-ui/api/ui/chartwizard)
 * [Server-Side HtmlHelper API of the Chart Wizard](/api/chartwizard)
 * [Server-Side TagHelper API of the Chart Wizard](/api/taghelpers/chartwizard)
 * [Knowledge Base Section](/knowledge-base)

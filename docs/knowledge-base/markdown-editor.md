@@ -41,7 +41,7 @@ You can transform the Kendo UI Editor widget into a Markdown editor by using thi
 
 ![Kendo UI for jQuery Markdown video](markdown_video.gif)
 
-The following example relies on the [`deserialization`](/api/javascript/ui/editor/configuration/deserialization) and [`serialization`](/api/javascript/ui/editor/configuration/serialization) options provided by the Kendo UI Editor. These are configured by applying custom options to call the methods that are necessary for the conversion from HTML to Markdown.
+The following example relies on the [`deserialization`](/api/ui/editor/configuration/deserialization) and [`serialization`](/api/ui/editor/configuration/serialization) options provided by the Kendo UI Editor. These are configured by applying custom options to call the methods that are necessary for the conversion from HTML to Markdown.
 
 The actual transformation from HTML to Markdown is not part of the Kendo UI Editor and can be accomplished by using third-party JS libraries. For the example, the following example applies the MIT licensed [markdown-js](https://github.com/evilstreak/markdown-js) and [html-md](https://www.npmjs.com/package/html-md) libraries. However, you might use any other library that best suits your project.
 
@@ -88,4 +88,4 @@ The following example demonstrates how transform the Kendo UI Editor widget into
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
 * [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

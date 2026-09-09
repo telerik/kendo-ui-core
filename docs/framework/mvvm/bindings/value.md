@@ -141,7 +141,7 @@ Again the second `option` is selected because its `value` is equal to the `selec
 
 ## Data-Bound Widgets and Value Binding
 
-Kendo UI `select` widgets, such as AutoComplete, DropDownList, ComboBox, and MultiSelect, have a built-in [auto-binding](/api/javascript/ui/dropdownlist/configuration/autobind) feature that defers the data loading. The `value` binding honors that option and behaves differently when the widget is forced to defer its loading.
+Kendo UI `select` widgets, such as AutoComplete, DropDownList, ComboBox, and MultiSelect, have a built-in [auto-binding](/api/ui/dropdownlist/configuration/autobind) feature that defers the data loading. The `value` binding honors that option and behaves differently when the widget is forced to defer its loading.
 
 Based on the `autoBind` configuration value, the following basic cases occur:
 
@@ -150,7 +150,7 @@ Based on the `autoBind` configuration value, the following basic cases occur:
 
 ### When Auto-Binding Is Enabled
 
-The `autoBind: true` is the default basic case configuration. When the [`autoBind` option](/api/javascript/ui/dropdownlist/configuration/autobind) is set to `true`, the `value` binding sets the widget value using its [`value`](/api/javascript/ui/dropdownlist/methods/value) method. If the data is not loaded, then the widget first loads the data.
+The `autoBind: true` is the default basic case configuration. When the [`autoBind` option](/api/ui/dropdownlist/configuration/autobind) is set to `true`, the `value` binding sets the widget value using its [`value`](/api/ui/dropdownlist/methods/value) method. If the data is not loaded, then the widget first loads the data.
 
     <select data-role="dropdownlist"
             data-value-field="id"
@@ -178,7 +178,7 @@ The `autoBind: true` is the default basic case configuration. When the [`autoBin
 
 ### When Auto-Binding Is Disabled
 
-When the [`autoBind` option](/api/javascript/ui/dropdownlist/configuration/autobind) is set to `false`, the `value` binding does not force the data loading, unless the `model` field is a [primitive value](#use-the-value-binding-with-a-select-widget-to-update-the-view-model-field-with-the-value-field-when-the-initial-value-is-null). in other words, if the `model` field, bound to the widget, is a complex object, then the `value` binding retrieves the [`dataValueField`](/api/javascript/ui/dropdownlist/configuration/datatextfield) and [`dataTextField`](/api/javascript/ui/dropdownlist/configuration/datavaluefield) values without forcing the widget to request its data. if the `model` field is a primitive value, however, then the binding forces the data loading, it calls the widget's [`value`](/api/javascript/ui/dropdownlist/methods/value) method.
+When the [`autoBind` option](/api/ui/dropdownlist/configuration/autobind) is set to `false`, the `value` binding does not force the data loading, unless the `model` field is a [primitive value](#use-the-value-binding-with-a-select-widget-to-update-the-view-model-field-with-the-value-field-when-the-initial-value-is-null). in other words, if the `model` field, bound to the widget, is a complex object, then the `value` binding retrieves the [`dataValueField`](/api/ui/dropdownlist/configuration/datatextfield) and [`dataTextField`](/api/ui/dropdownlist/configuration/datavaluefield) values without forcing the widget to request its data. if the `model` field is a primitive value, however, then the binding forces the data loading, it calls the widget's [`value`](/api/ui/dropdownlist/methods/value) method.
 
 The following example demonstrates a widget with the `autoBind: false` configuration when the object value does not force binding.
 
@@ -237,7 +237,7 @@ The following example demonstrates a widget with the `autoBind: false` when the 
 
 ## View-Model Fields with Primitive Value Fields 
 
-You can also use the `value` binding with a View-Model field which is of primitive type. By default, the `value` binding for the `select` widgets&mdash;AutoComplete, DropDownList, ComboBox, MultiSelect&mdash;uses the selected item from the data to update the View-Model field when the initial value is `null`. The `data-value-primitive` attribute, that sets the [`valuePrimitive`](/api/javascript/ui/dropdownlist/configuration/valueprimitive) option, can be used to specify that the View-Model field should be updated with the item value field instead.
+You can also use the `value` binding with a View-Model field which is of primitive type. By default, the `value` binding for the `select` widgets&mdash;AutoComplete, DropDownList, ComboBox, MultiSelect&mdash;uses the selected item from the data to update the View-Model field when the initial value is `null`. The `data-value-primitive` attribute, that sets the [`valuePrimitive`](/api/ui/dropdownlist/configuration/valueprimitive) option, can be used to specify that the View-Model field should be updated with the item value field instead.
 
 The following example demonstrates how to use the `value` binding with `select` to update the View-Model field with the value field when the initial value is `null`.
 

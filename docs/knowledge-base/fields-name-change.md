@@ -96,7 +96,7 @@ The following example demonstrates how to change the text displayed by the `[Dat
 
 ## See Also
 
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)
 * [Access MDX Query]({% slug howto_access_mdx_query_pivotgrid %})
 * [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})

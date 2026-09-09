@@ -12,7 +12,7 @@ component: charts
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -46,7 +46,7 @@ How to automatically fetch data for a Kendo UI chart on initialization? Control 
 
 ### axisDefaults `Object`
 
-The default options for all chart axes. Accepts the options supported by [categoryAxis](/api/javascript/dataviz/ui/chart#configuration-categoryAxis), [valueAxis](/api/javascript/dataviz/ui/chart#configuration-valueAxis), [xAxis](/api/javascript/dataviz/ui/chart#configuration-xAxis) and [yAxis](/api/javascript/dataviz/ui/chart#configuration-yAxis).
+The default options for all chart axes. Accepts the options supported by [categoryAxis](/api/dataviz/ui/chart#configuration-categoryAxis), [valueAxis](/api/dataviz/ui/chart#configuration-valueAxis), [xAxis](/api/dataviz/ui/chart#configuration-xAxis) and [yAxis](/api/dataviz/ui/chart#configuration-yAxis).
 
 
 <div class="meta-api-description">
@@ -117,7 +117,7 @@ How do I change the default color of all chart axis elements in Kendo UI for jQu
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [axisDefaults.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-axisDefaults.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [axisDefaults.crosshair.visible](/api/dataviz/ui/chart#configuration-axisDefaults.crosshair.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -236,7 +236,7 @@ How do I adjust the opacity of the chart's crosshair line in Kendo UI for jQuery
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [axisDefaults.crosshair.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-axisDefaults.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [axisDefaults.crosshair.tooltip.visible](/api/dataviz/ui/chart#configuration-axisDefaults.crosshair.tooltip.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -481,7 +481,7 @@ How to customize font settings for chart axis crosshair tooltip in Kendo UI? Con
 
 ### axisDefaults.crosshair.tooltip.format `String` *(default: "{0}")*
 
-The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the tooltip. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -663,7 +663,7 @@ How to adjust the vertical space above crosshair tooltips in a Kendo UI chart? A
 
 ### axisDefaults.crosshair.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
+The [template](/api/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -826,7 +826,7 @@ How do I change the font size of axis labels in a Kendo UI chart? Control and cu
 
 ### axisDefaults.labels.format `String` *(default: "{0}")*
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -1272,7 +1272,7 @@ How do I configure label frequency on Kendo UI Chart axes to reduce clutter? Adj
 
 ### axisDefaults.labels.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -2514,7 +2514,7 @@ How can I rotate the first category label on my Kendo UI chart's axis to a speci
 
 The title configuration of the axis.
 
-> The [axisDefaults.title.text](/api/javascript/dataviz/ui/chart#configuration-axisDefaults.title.text) option must be set in order to display the title.
+> The [axisDefaults.title.text](/api/dataviz/ui/chart#configuration-axisDefaults.title.text) option must be set in order to display the title.
 
 
 <div class="meta-api-description">
@@ -3242,15 +3242,15 @@ How do I customize the category axis in Kendo UI chart? Set and customize the ca
 
 ### categoryAxis.autoBaseUnitSteps `Object`
 
-The discrete [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep) values when
-either [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit" or
-[categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
+The discrete [categoryAxis.baseUnitStep](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep) values when
+either [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit" or
+[categoryAxis.baseUnitStep](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
 
 The axis will try to divide the active period into successively larger intervals.
 It will start from x-second intervals, where x is picked from the autoBaseUnitSteps.seconds array.
 Then it will move to minutes, seconds and so on.
 This will continue until the number of intervals is less than
-[maxDateGroups](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.maxDateGroups).
+[maxDateGroups](/api/dataviz/ui/chart#configuration-categoryAxis.maxDateGroups).
 
 
 <div class="meta-api-description">
@@ -3626,10 +3626,10 @@ The supported values are:
 * "months"
 * "years"
 
-Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep)
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.maxDateGroups).
+Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep)
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/dataviz/ui/chart#configuration-categoryAxis.maxDateGroups).
 
-Series data is aggregated for the specified base unit using the [series.aggregate](/api/javascript/dataviz/ui/chart#configuration-series.aggregate) function.
+Series data is aggregated for the specified base unit using the [series.aggregate](/api/dataviz/ui/chart#configuration-series.aggregate) function.
 
 
 <div class="meta-api-description">
@@ -3658,9 +3658,9 @@ How do I adjust the time interval granularity in Kendo UI chart category axis us
 ### categoryAxis.baseUnitStep `Number|String` *(default: 1)*
 
 The step (interval) between categories in base units. Setting it to "auto" will set the step to such value
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.maxDateGroups).
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/dataviz/ui/chart#configuration-categoryAxis.maxDateGroups).
 
-This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit".
+This option is ignored if [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit".
 
 
 <div class="meta-api-description">
@@ -3711,8 +3711,8 @@ How can I customize labels on my Kendo UI chart's category axis? Specify or cust
 
 ### categoryAxis.color `String`
 
-The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb. Can be overridden by [categoryAxis.labels.color](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.color) and
-[categoryAxis.line.color](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.line.color).
+The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb. Can be overridden by [categoryAxis.labels.color](/api/dataviz/ui/chart#configuration-categoryAxis.labels.color) and
+[categoryAxis.line.color](/api/dataviz/ui/chart#configuration-categoryAxis.line.color).
 
 
 <div class="meta-api-description">
@@ -3768,7 +3768,7 @@ How to customize default color styling for category axis in Kendo UI chart? Defi
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [categoryAxis.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [categoryAxis.crosshair.visible](/api/dataviz/ui/chart#configuration-categoryAxis.crosshair.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -3892,7 +3892,7 @@ How can I make the category axis crosshair in my Kendo UI chart less visible? Ad
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](/api/dataviz/ui/chart#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -4189,7 +4189,7 @@ How to style the font of category axis crosshair tooltip in Kendo UI chart? Conf
 
 ### categoryAxis.crosshair.tooltip.format `String` *(default: "{0}")*
 
-The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the tooltip. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -4411,7 +4411,7 @@ How do I position the crosshair tooltip in my Kendo UI chart category axis? Adju
 
 ### categoryAxis.crosshair.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
+The [template](/api/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -4804,7 +4804,7 @@ How to control category highlight visibility in Kendo UI chart? Control the disp
 
 ### categoryAxis.field `String`
 
-The data item field which contains the category name. Requires the [dataSource](/api/javascript/dataviz/ui/chart#configuration-dataSource) option to be set. **The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "\_"), and may not start with a digit.**
+The data item field which contains the category name. Requires the [dataSource](/api/dataviz/ui/chart#configuration-dataSource) option to be set. **The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "\_"), and may not start with a digit.**
 
 <div class="meta-api-description">
 How to configure category axis labels in Kendo UI chart using a specific data field? Set or configure the category axis labels by linking the chart’s category axis to a specific data field containing category names, enabling binding of axis labels to your dataset entries, data source, or data items; control which property or key in your data objects defines the category dimension for grouping, labeling, or classification on the chart axis, ensuring proper mapping between data fields and visual category ticks, with the field name formatted as a valid JavaScript identifier suitable for integration with data sources and dynamic datasets.
@@ -4834,7 +4834,7 @@ If set to `true` the chart will position categories and series points on major t
 
 The default value is `false` except for "area", "verticalArea", "rangeArea" and "verticalRangeArea".
 
-> This option is ignored if the [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) option is set to "bar", "column", "boxPlot", "ohlc", "candlestick" or "waterfall".
+> This option is ignored if the [series.type](/api/dataviz/ui/chart#configuration-series.type) option is set to "bar", "column", "boxPlot", "ohlc", "candlestick" or "waterfall".
 
 
 <div class="meta-api-description">
@@ -5159,15 +5159,15 @@ How do I customize date labels on my chart's category axis to display in differe
 
 ### categoryAxis.labels.dateFormats `Object`
 
-The format used to display labels for [date category axis](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.type).
+The format used to display labels for [date category axis](/api/dataviz/ui/chart#configuration-categoryAxis.type).
 The `{0}` placeholder represents the category value.
 
-The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit).
-Setting the [categoryAxis.labels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.format) option will override the date formats.
+The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit).
+Setting the [categoryAxis.labels.format](/api/dataviz/ui/chart#configuration-categoryAxis.labels.format) option will override the date formats.
 
-See also: [kendo.format](/api/javascript/kendo/methods/format).
+See also: [kendo.format](/api/kendo/methods/format).
 
-> Not supported for radar charts. Use [categoryAxis.labels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.format) instead.
+> Not supported for radar charts. Use [categoryAxis.labels.format](/api/dataviz/ui/chart#configuration-categoryAxis.labels.format) instead.
 
 
 <div class="meta-api-description">
@@ -5199,7 +5199,7 @@ How to format date labels on a time-based category axis in Kendo UI Chart? Contr
 
 ### categoryAxis.labels.dateFormats.days `String` *(default: "M/d")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "days".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "days".
 
 
 <div class="meta-api-description">
@@ -5232,7 +5232,7 @@ How to format date labels on category axis when grouping by days in Kendo UI Cha
 
 ### categoryAxis.labels.dateFormats.hours `String` *(default: "HH:mm")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "hours".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "hours".
 
 
 <div class="meta-api-description">
@@ -5266,7 +5266,7 @@ How to format hour labels on Kendo UI chart category axis? Configure and customi
 
 ### categoryAxis.labels.dateFormats.months `String` *(default: "MMM 'yy")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "months".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "months".
 
 
 <div class="meta-api-description">
@@ -5300,7 +5300,7 @@ How do I customize the display of month labels on a chart's category axis in Ken
 
 ### categoryAxis.labels.dateFormats.weeks `String` *(default: "M/d")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "weeks".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "weeks".
 
 
 <div class="meta-api-description">
@@ -5334,7 +5334,7 @@ How do I format week-based dates in Kendo UI chart category axis labels? Configu
 
 ### categoryAxis.labels.dateFormats.years `String` *(default: "yyyy")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "years".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "years".
 
 
 <div class="meta-api-description">
@@ -5394,7 +5394,7 @@ How to customize font styles for category axis labels in a Kendo UI Chart? Contr
 
 ### categoryAxis.labels.format `String` *(default: "{0}")*
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -5905,7 +5905,7 @@ How do I control the frequency of category axis labels in a Kendo UI chart? Adju
 
 ### categoryAxis.labels.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -6657,7 +6657,7 @@ How to control tick density on a categorical axis in Kendo UI chart? Adjust or c
 ### categoryAxis.max `Object`
 
 The last date displayed on the category date axis. By default, the minimum date is the same as the last category.
-This is often used in combination with the [categoryAxis.min](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.roundToBaseUnit) options to
+This is often used in combination with the [categoryAxis.min](/api/dataviz/ui/chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.roundToBaseUnit) options to
 set up a fixed date range.
 
 
@@ -6684,8 +6684,8 @@ How do I set the maximum value for a date-based category axis in Kendo UI chart?
 ### categoryAxis.maxDateGroups `Number` *(default: 10)*
 
 The maximum number of groups (categories) to display when
-[categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit" or
-[categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
+[categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit" or
+[categoryAxis.baseUnitStep](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
 
 
 <div class="meta-api-description">
@@ -6715,7 +6715,7 @@ How to limit date groups on a Kendo UI chart axis? Configure the upper limit on 
 
 ### categoryAxis.maxDivisions `Number`
 
-The maximum number of ticks, labels and grid lines to display. Applicable for date category axis. You can combine this property with a bigger value of the [maxDateGroups](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.maxdategroups) property to increase the number of rendered data points in the Chart without drawing too many labels, ticks, and grid lines.
+The maximum number of ticks, labels and grid lines to display. Applicable for date category axis. You can combine this property with a bigger value of the [maxDateGroups](/api/dataviz/ui/chart/configuration/categoryaxis.maxdategroups) property to increase the number of rendered data points in the Chart without drawing too many labels, ticks, and grid lines.
 
 
 <div class="meta-api-description">
@@ -6794,7 +6794,7 @@ How to limit the number of tick marks on a category axis in Kendo UI Chart? Adju
 ### categoryAxis.min `Object`
 
 The first date displayed on the category date axis. By default, the minimum date is the same as the first category.
-This is often used in combination with the [categoryAxis.min](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.roundToBaseUnit) options to
+This is often used in combination with the [categoryAxis.min](/api/dataviz/ui/chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.roundToBaseUnit) options to
 set up a fixed date range.
 
 
@@ -7280,7 +7280,7 @@ How can I control minor tick marks on a chart's category axis in Kendo UI for jQ
 
 ### categoryAxis.name `String` *(default: "primary")*
 
-The unique axis name. Used to associate a series with a category axis using the [series.categoryAxis](/api/javascript/dataviz/ui/chart#configuration-series.categoryAxis) option.
+The unique axis name. Used to associate a series with a category axis using the [series.categoryAxis](/api/dataviz/ui/chart#configuration-series.categoryAxis) option.
 
 > **Important**
 >
@@ -7422,7 +7422,7 @@ How do I set the starting position of a highlighted region in Kendo UI for jQuer
 
 The label configuration of the plotband.
 
-> The [categoryAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.plotbands#categoryaxisplotbandslabeltext) option must be set in order to display the plotband label.
+> The [categoryAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/categoryaxis.plotbands#categoryaxisplotbandslabeltext) option must be set in order to display the plotband label.
 
 
 <div class="meta-api-description">
@@ -8696,15 +8696,15 @@ How do I set the language preferences for date ranges on a Kendo UI Chart catego
 
 ### categoryAxis.rangeLabels.dateFormats `Object`
 
-The format used to display date range labels for [date category axis](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.type).
+The format used to display date range labels for [date category axis](/api/dataviz/ui/chart#configuration-categoryAxis.type).
 The `{0}` placeholder represents the category value.
 
-The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit).
-Setting the [categoryAxis.rangeLabels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.rangeLabels.format) option will override the date formats.
+The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit).
+Setting the [categoryAxis.rangeLabels.format](/api/dataviz/ui/chart#configuration-categoryAxis.rangeLabels.format) option will override the date formats.
 
-See also: [kendo.format](/api/javascript/kendo/methods/format).
+See also: [kendo.format](/api/kendo/methods/format).
 
-> Not supported for radar charts. Use [categoryAxis.rangeLabels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.rangeLabels.format) instead.
+> Not supported for radar charts. Use [categoryAxis.rangeLabels.format](/api/dataviz/ui/chart#configuration-categoryAxis.rangeLabels.format) instead.
 
 
 <div class="meta-api-description">
@@ -8750,7 +8750,7 @@ How to format date ranges in chart category axes with Kendo UI for jQuery? Custo
 
 ### categoryAxis.rangeLabels.dateFormats.days `String` *(default: "M/d")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "days".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "days".
 
 
 <div class="meta-api-description">
@@ -8796,7 +8796,7 @@ How do I customize daily label formats in Kendo UI chart's category axis when us
 
 ### categoryAxis.rangeLabels.dateFormats.hours `String` *(default: "HH:mm")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "hours".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "hours".
 
 
 <div class="meta-api-description">
@@ -8842,7 +8842,7 @@ How do I customize hour labels on a Kendo UI chart's x-axis? Customize hourly ti
 
 ### categoryAxis.rangeLabels.dateFormats.months `String` *(default: "MMM 'yy")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "months".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "months".
 
 
 <div class="meta-api-description">
@@ -8888,7 +8888,7 @@ How to customize month labels in Kendo UI chart category axis? Customize and con
 
 ### categoryAxis.rangeLabels.dateFormats.weeks `String` *(default: "M/d")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "weeks".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "weeks".
 
 
 <div class="meta-api-description">
@@ -8934,7 +8934,7 @@ How to customize date format for weekly category axis labels in Kendo UI chart? 
 
 ### categoryAxis.rangeLabels.dateFormats.years `String` *(default: "yyyy")*
 
-The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "years".
+The format used when [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "years".
 
 
 <div class="meta-api-description">
@@ -9024,7 +9024,7 @@ How do I change the font style of category axis range labels in a Kendo UI chart
 
 ### categoryAxis.rangeLabels.format `String`
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format used to display the labels. Uses [kendo.format](/api/kendo/methods/format).
 
 
 <div class="meta-api-description">
@@ -9725,7 +9725,7 @@ How to set rotation angle for category axis range labels in Kendo UI Chart? Set 
 
 ### categoryAxis.rangeLabels.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -9957,7 +9957,7 @@ How do I reverse the order of category labels in a Kendo UI chart axis? Control 
 
 If set to `true` the chart will round the first and last date to the nearest base unit.
 
-The `roundToBaseUnit` option will be ignored if [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "boxPlot", "ohlc", "candlestick" or "waterfall".
+The `roundToBaseUnit` option will be ignored if [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "boxPlot", "ohlc", "candlestick" or "waterfall".
 
 
 <div class="meta-api-description">
@@ -10253,7 +10253,7 @@ How can I adjust the starting angle of category labels in a Kendo UI chart? Adju
 
 The title configuration of the category axis.
 
-> The [categoryAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.title.text) option must be set in order to display the title.
+> The [categoryAxis.title.text](/api/dataviz/ui/chart#configuration-categoryAxis.title.text) option must be set in order to display the title.
 
 
 
@@ -11055,7 +11055,7 @@ How to show or hide category axis in Kendo UI chart? Control the display and vis
 
 ### categoryAxis.weekStartDay `Number` *(default: kendo.days.Sunday)*
 
-The week start day when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "weeks".
+The week start day when [categoryAxis.baseUnit](/api/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "weeks".
 
 The supported values are:
 
@@ -11666,7 +11666,7 @@ How to change font family of category axis note labels in Kendo UI chart? Adjust
 
 ### categoryAxis.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -11756,7 +11756,7 @@ How do I rotate note labels on a Kendo UI chart's category axis? Adjust, set, or
 
 ### categoryAxis.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the notes label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -12595,7 +12595,7 @@ How to customize font for data note labels on category axis in Kendo UI chart? C
 
 ### categoryAxis.notes.data.label.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -12691,7 +12691,7 @@ How do I rotate data labels on the category axis notes in a Kendo UI chart? Adju
 
 ### categoryAxis.notes.data.label.format `String` *(default: "{0}")*
 
-The format used to display the note label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the note label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -13331,12 +13331,12 @@ How do I set the width of the chart plotting area in Kendo UI for jQuery? Set, a
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the chart which is used to display the series. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source of the chart which is used to display the series. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -13425,7 +13425,7 @@ How do I customize legend items in Kendo UI Chart? Control the display, visibili
 
 ### legend.align `String` *(default: "center")*
 
-The legend horizontal alignment when the [legend.position](/api/javascript/dataviz/ui/chart#configuration-legend.position) is "top" or "bottom" and the vertical alignment when the [legend.position](/api/javascript/dataviz/ui/chart#configuration-legend.position) is "left" or "right".
+The legend horizontal alignment when the [legend.position](/api/dataviz/ui/chart#configuration-legend.position) is "top" or "bottom" and the vertical alignment when the [legend.position](/api/dataviz/ui/chart#configuration-legend.position) is "left" or "right".
 
 The supported values are:
 
@@ -13801,7 +13801,7 @@ How do I adjust the transparency of highlighted legend items in a Kendo UI chart
 
 ### legend.height `Number`
 
-The legend height when the [legend.orientation](/api/javascript/dataviz/ui/chart#configuration-legend.orientation) is set to "vertical".
+The legend height when the [legend.orientation](/api/dataviz/ui/chart#configuration-legend.orientation) is set to "vertical".
 
 
 <div class="meta-api-description">
@@ -13997,7 +13997,7 @@ How do I customize the font for inactive legend items in a Kendo UI chart? Adjus
 
 ### legend.inactiveItems.labels.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -14049,7 +14049,7 @@ How to customize inactive legend item labels in Kendo UI Chart? Customize or con
 
 The configuration of the Chart legend item.
 
-To override the marker configuration of individual series, use the [series.legendItem](/api/javascript/dataviz/ui/chart#configuration-series.legendItem) settings of the series.
+To override the marker configuration of individual series, use the [series.legendItem](/api/dataviz/ui/chart#configuration-series.legendItem) settings of the series.
 
 
 <div class="meta-api-description">
@@ -14756,7 +14756,7 @@ How to change the transparency of line symbols in Kendo UI chart legend? Adjust 
 
 The configuration of the Chart legend item markers.
 
-By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+By default, the marker configuration will be the same as the [series.markers](/api/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
 
 
 <div class="meta-api-description">
@@ -15548,7 +15548,7 @@ How do I adjust the top padding for legend labels in a Kendo UI chart? Control t
 
 ### legend.labels.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -15967,7 +15967,7 @@ The supported values are:
 
 * "right" - the legend is positioned on the right.
 
-* "custom" - the legend is positioned using [legend.offsetX](/api/javascript/dataviz/ui/chart#configuration-legend.offsetX) and [legend.offsetY](/api/javascript/dataviz/ui/chart#configuration-legend.offsetY).
+* "custom" - the legend is positioned using [legend.offsetX](/api/dataviz/ui/chart#configuration-legend.offsetX) and [legend.offsetY](/api/dataviz/ui/chart#configuration-legend.offsetY).
 
 
 <div class="meta-api-description">
@@ -16018,7 +16018,7 @@ How do I reverse the order of legend items in a Kendo UI chart? Control or confi
 
 ### legend.spacing `Number`
 
-The spacing between the labels in pixels when the [legend.orientation](/api/javascript/dataviz/ui/chart#configuration-legend.orientation) is "horizontal".
+The spacing between the labels in pixels when the [legend.orientation](/api/dataviz/ui/chart#configuration-legend.orientation) is "horizontal".
 
 
 <div class="meta-api-description">
@@ -16728,7 +16728,7 @@ How do I hide the legend in Kendo UI chart? Toggle the display of the chart’s 
 
 ### legend.width `Number`
 
-The legend width when the [legend.orientation](/api/javascript/dataviz/ui/chart#configuration-legend.orientation) is set to "horizontal".
+The legend width when the [legend.orientation](/api/dataviz/ui/chart#configuration-legend.orientation) is set to "horizontal".
 
 
 <div class="meta-api-description">
@@ -16868,7 +16868,7 @@ How to display a message when there's no data in a Kendo UI chart? Control the d
 
 ### noData.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which is rendered when no series are defined, or all series are empty.
+The [template](/api/kendo/methods/template) which is rendered when no series are defined, or all series are empty.
 
 The message overlays the entire Chart with the exception of the Title and Subtitle.
 
@@ -18771,7 +18771,7 @@ How do I adjust the spacing above content in Kendo UI chart panes using Chart.pa
 
 The title configuration of the chart pane.
 
-> The [panes.title.text](/api/javascript/dataviz/ui/chart#configuration-panes.title.text) option must be set in order to display the title.
+> The [panes.title.text](/api/dataviz/ui/chart#configuration-panes.title.text) option must be set in order to display the title.
 
 
 <div class="meta-api-description">
@@ -19636,7 +19636,7 @@ How do I lock panning on specific axes in a Kendo UI chart? Configure and contro
     </script>
 
 ### pdf `Object`
-Configures the export settings for the [saveAsPDF](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method.
+Configures the export settings for the [saveAsPDF](/api/dataviz/ui/chart/methods/saveaspdf) method.
 
 
 <div class="meta-api-description">
@@ -19767,7 +19767,7 @@ How to customize timestamp in Kendo UI chart PDF export? Control or customize th
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](/api/javascript/dataviz/ui/chart#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/dataviz/ui/chart#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 
 <div class="meta-api-description">
@@ -20862,7 +20862,7 @@ The supported values are:
 
 If set to true, the Chart automatically scales down to fit the content area. Applicable for the Pie and Donut series.
 
-> The `autoFit` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "pie" or "donut".
+> The `autoFit` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "pie" or "donut".
 
 
 <div class="meta-api-description">
@@ -20911,7 +20911,7 @@ How do I prevent pie chart slices from overlapping in Kendo UI? Adjust or enable
 
 The name of the value axis to use.
 
-> The `axis` option is supported for scatter plots. See [xAxis](/api/javascript/dataviz/ui/chart#configuration-series.xAxis) and [yAxis](/api/javascript/dataviz/ui/chart#configuration-series.yAxis) for scatter plots.
+> The `axis` option is supported for scatter plots. See [xAxis](/api/dataviz/ui/chart#configuration-series.xAxis) and [yAxis](/api/dataviz/ui/chart#configuration-series.yAxis) for scatter plots.
 
 
 <div class="meta-api-description">
@@ -20938,7 +20938,7 @@ How to configure series axis in Kendo UI chart? Configure or set the numeric axi
 
 The border of the chart series.
 
-> The `border` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "donut", "pie", "bubble", "boxPlot", "candlestick", "ohlc" or "candlestick".
+> The `border` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "donut", "pie", "bubble", "boxPlot", "candlestick", "ohlc" or "candlestick".
 
 
 <div class="meta-api-description">
@@ -21147,7 +21147,7 @@ How to set up category labels in Kendo UI chart series? Set or configure the fie
 
 The data field containing the close value.
 
-> The `closeField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
+> The `closeField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
 
 
 <div class="meta-api-description">
@@ -21238,7 +21238,7 @@ How can I dynamically set the color for each data point in a Kendo UI chart seri
 
 The data item field which contains the series color.
 
-> The `colorField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type)
+> The `colorField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type)
 is set to "bar", "column", "rangeBar", "rangeColumn", "bubble", "donut", "pie", "candlestick", "ohlc" or "waterfall".
 
 
@@ -21265,8 +21265,8 @@ How do I dynamically assign colors to series in Kendo UI chart based on data fie
 
 The label connectors options.
 
-> The `connectors` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie" and
-[series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) is set to `true`.
+> The `connectors` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie" and
+[series.labels.visible](/api/dataviz/ui/chart#configuration-series.labels.visible) is set to `true`.
 
 
 <div class="meta-api-description">
@@ -21373,7 +21373,7 @@ How can I adjust the thickness of connector lines in a Kendo UI chart series? Ad
 
 The data item field containing the current value.
 
-> The `currentField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
+> The `currentField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
 
 
 <div class="meta-api-description">
@@ -21398,7 +21398,7 @@ How do I link my chart series to a specific field in my data source? Configure o
 
 The dash type of line chart.
 
-> The `dashType` option is taken into consideration only if the [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) option is set to "line".
+> The `dashType` option is taken into consideration only if the [series.type](/api/dataviz/ui/chart#configuration-series.type) option is set to "line".
 
 The following dash types are supported:
 
@@ -21433,9 +21433,9 @@ The array of data items which represent the series data.
 
 Can be set to :
 
-* Array of objects. Each point is bound to the field specified via the [series.field](/api/javascript/dataviz/ui/chart#configuration-series.field) option.
-* Array of numbers. Supported when the [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) option is set to "area", "bar", "column", "donut", "pie", "line" or "waterfall".
-* Array of arrays of numbers. Supported when the [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) option is set to "bubble", "scatter", "scatterLine", "ohlc", "rangeBar", "rangeArea" or polar series.
+* Array of objects. Each point is bound to the field specified via the [series.field](/api/dataviz/ui/chart#configuration-series.field) option.
+* Array of numbers. Supported when the [series.type](/api/dataviz/ui/chart#configuration-series.type) option is set to "area", "bar", "column", "donut", "pie", "line" or "waterfall".
+* Array of arrays of numbers. Supported when the [series.type](/api/dataviz/ui/chart#configuration-series.type) option is set to "bubble", "scatter", "scatterLine", "ohlc", "rangeBar", "rangeArea" or polar series.
     * Bubble series need arrays of three values - X value, Y value and Size value e.g. `[1, 1, 10]`
     * Scatter and scatter line series need arrays of two values - X value and Y value
     * OHLC and candlestick series need arrays of four values - open, high, low and close
@@ -21496,7 +21496,7 @@ How to configure data points for a Kendo UI chart series? Set or configure the d
 
 The series color when the open value is greater than the close value.
 
-> The `downColor` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick".
+> The `downColor` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "candlestick".
 
 
 <div class="meta-api-description">
@@ -21524,7 +21524,7 @@ How do I customize the color of bearish candlesticks in a Kendo UI chart? Config
 
 The data field containing the color applied when the open value is greater than the close value.
 
-> The `downColorField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick".
+> The `downColorField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "candlestick".
 
 
 <div class="meta-api-description">
@@ -21687,7 +21687,7 @@ How to configure drilldown series data in Kendo UI Chart? Configure dynamic dril
 
 The space in pixels between the different segments of the funnel and pyramid charts.
 
-> The `segmentSpacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
+> The `segmentSpacing` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
 
 
 <div class="meta-api-description">
@@ -21715,7 +21715,7 @@ How do I adjust the gap between segments in a funnel chart series in Kendo UI fo
 
 ### series.summaryField `String` *(default: "summary")*
 
-The data item field which contains the summary type for [waterfall](/api/javascript/dataviz/ui/chart#configuration-series.type) series.
+The data item field which contains the summary type for [waterfall](/api/dataviz/ui/chart#configuration-series.type) series.
 Summary columns are optional and can be one of two types:
 
 * "runningTotal" - Displays the sum of all items since the last "runningTotal" point.
@@ -21754,7 +21754,7 @@ How do I configure Kendo UI chart series to display running totals with summary 
 
 `neckRatio` specifies the ratio top-base/bottom-base of the whole chart. neckRatio set to three means the top base is three times smaller than the bottom base.
 
-> The `neckRatio` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" and dynamicSlope set to `false`.
+> The `neckRatio` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "funnel" and dynamicSlope set to `false`.
 
 
 <div class="meta-api-description">
@@ -21782,7 +21782,7 @@ How to adjust funnel chart neck width ratio with Kendo UI Chart series property?
 
 ### series.dynamicSlope `Boolean` *(default: false)*
 
-> The `dynamicSlope` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
+> The `dynamicSlope` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "funnel".
 
 When set to true the ratio of the bases of each segment is calculated based on the ratio of currentDataItem.value/nextDataItem.value
 The last element is always created like a rectangle since there is no following element.
@@ -21814,7 +21814,7 @@ How to enable dynamic slope in Kendo UI chart series? Enable variable funnel seg
 
 ### series.dynamicHeight `Boolean` *(default: true)*
 
-> The `dynamicHeight` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
+> The `dynamicHeight` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
 
 When set to `false` all segments become with the same height, otherwise the height of each segment is based on its value.
 
@@ -21846,7 +21846,7 @@ How to enable dynamic sizing for segments in Kendo UI funnel chart series? Contr
 
 The error bars of the chart series.
 
-> The `errorBars` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line", "area", "scatter", "scatterLine" or "bubble".
+> The `errorBars` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line", "area", "scatter", "scatterLine" or "bubble".
 
 
 <div class="meta-api-description">
@@ -21872,7 +21872,7 @@ How to customize error bars in Kendo UI chart series? Control and customize erro
 
 The error bars value.
 
-> The `value` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line" or "area".
+> The `value` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line" or "area".
 
 The following value types are supported:
 
@@ -21957,9 +21957,9 @@ How to customize error bar appearance in Kendo UI chart series? Customize error 
 
 ### series.errorBars.xValue `String|Number|Array|Function`
 
-The xAxis error bars value. See the [series.errorBars.value option](/api/javascript/dataviz/ui/chart#configuration-series.errorBars.value) for a list of the supported value types.
+The xAxis error bars value. See the [series.errorBars.value option](/api/dataviz/ui/chart#configuration-series.errorBars.value) for a list of the supported value types.
 
-> The `xValue` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `xValue` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 
 <div class="meta-api-description">
@@ -21983,9 +21983,9 @@ How to set the magnitude of horizontal error bars in a Kendo UI chart series? Co
 
 ### series.errorBars.yValue `String|Number|Array|Function`
 
-The yAxis error bars value. See the [series.errorBars.value option](/api/javascript/dataviz/ui/chart#configuration-series.errorBars.value) for a list of the supported value types.
+The yAxis error bars value. See the [series.errorBars.value option](/api/dataviz/ui/chart#configuration-series.errorBars.value) for a list of the supported value types.
 
-> The `yValue` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `yValue` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 
 <div class="meta-api-description">
@@ -22151,9 +22151,9 @@ How to customize the line style for error bars in Kendo UI chart series? Set or 
 
 ### series.errorLowField `String` *(default: "errorLow")*
 
-The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) low value.
+The data item field which contains the [series.errorBars](/api/dataviz/ui/chart#configuration-series.errorBars) low value.
 
-> The `errorLowField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line" or "area".
+> The `errorLowField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line" or "area".
 
 
 <div class="meta-api-description">
@@ -22176,9 +22176,9 @@ How do I set up error bars with lower error values in a Kendo UI chart using the
 
 ### series.errorHighField `String` *(default: "errorHigh")*
 
-The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) high value.
+The data item field which contains the [series.errorBars](/api/dataviz/ui/chart#configuration-series.errorBars) high value.
 
-> The `errorHighField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line" or "area".
+> The `errorHighField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line" or "area".
 
 
 <div class="meta-api-description">
@@ -22201,9 +22201,9 @@ How to configure error bars in Kendo UI chart series with a specified upper limi
 
 ### series.xErrorLowField `String` *(default: "xErrorLow")*
 
-The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) xAxis low value.
+The data item field which contains the [series.errorBars](/api/dataviz/ui/chart#configuration-series.errorBars) xAxis low value.
 
-> The `xErrorLowField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `xErrorLowField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 
 <div class="meta-api-description">
@@ -22226,9 +22226,9 @@ How to configure lower bound of horizontal error bars in Kendo UI chart series? 
 
 ### series.xErrorHighField `String` *(default: "xErrorHigh")*
 
-The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) xAxis high value.
+The data item field which contains the [series.errorBars](/api/dataviz/ui/chart#configuration-series.errorBars) xAxis high value.
 
-> The `xErrorHighField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `xErrorHighField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 
 <div class="meta-api-description">
@@ -22251,9 +22251,9 @@ How do I configure the high value for horizontal error bars on a Kendo UI chart'
 
 ### series.yErrorLowField `String` *(default: "yErrorLow")*
 
-The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) yAxis low value.
+The data item field which contains the [series.errorBars](/api/dataviz/ui/chart#configuration-series.errorBars) yAxis low value.
 
-> The `yErrorLowField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `yErrorLowField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 
 <div class="meta-api-description">
@@ -22276,9 +22276,9 @@ How do I set the lower bound of error bars on the y-axis in a Kendo UI chart usi
 
 ### series.yErrorHighField `String` *(default: "yErrorHigh")*
 
-The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) yAxis high value.
+The data item field which contains the [series.errorBars](/api/dataviz/ui/chart#configuration-series.errorBars) yAxis high value.
 
-> The `yErrorHighField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `yErrorHighField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 
 <div class="meta-api-description">
@@ -22303,7 +22303,7 @@ How to specify the upper y-axis error value in Kendo UI chart series data? Confi
 
 The data item field which contains a boolean value indicating whether the sector is exploded.
 
-> The `explodeField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
+> The `explodeField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
 
 
 <div class="meta-api-description">
@@ -22360,7 +22360,7 @@ How do I specify which field in my data source to display in each series of a Ke
 
 The name of the parent series of the trendline.
 
-> The `for` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to
+> The `for` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to
 > "`linearTrendline`", "`exponentialTrendline`", "`logarithmicTrendline`", "`powerTrendline`", "`polynomialTrendline`" or "`movingAverageTrendline`".
 
 
@@ -22464,7 +22464,7 @@ How do I set the target value for a Kendo UI chart series using the toField prop
 
 The trendline configuration options.
 
-> The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to
+> The `trendline` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to
 > "`linearTrendline`", "`exponentialTrendline`", "`logarithmicTrendline`", "`powerTrendline`", "`polynomialTrendline`" or "`movingAverageTrendline`".
 
 
@@ -22517,7 +22517,7 @@ How to configure trendlines in Kendo UI Chart series? Enable, configure, and cus
 
 The trendline forecast settings. By default, the trendline does not display a forecast.
 
-> The `forecast` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline" or "powerTrendline" and the parent series are either [Date Series]({% slug dateseries_charts_widget %}), "scatter" or "scatterLine" series.
+> The `forecast` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline" or "powerTrendline" and the parent series are either [Date Series]({% slug dateseries_charts_widget %}), "scatter" or "scatterLine" series.
 
 
 <div class="meta-api-description">
@@ -22630,7 +22630,7 @@ How to configure forecast after trendline in Kendo UI chart? Adjust or configure
 
 The order (degree) of the Polynomial trendline. The default value is 2.
 
-> The period setting is supported only when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "polynomialTrendline".
+> The period setting is supported only when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "polynomialTrendline".
 
 Accepted values are from 2 to 6:
 * 2: a Quadratic polynomial trendline with a single extreme point (minimum or maximum) point.
@@ -22689,7 +22689,7 @@ How do I adjust the complexity of a trendline in a Kendo UI chart by changing it
 
 The number of intervals to take when calculating averages. The value should be an integer greater than 2.
 
-> The period setting is supported only when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "movingAverageTrendline".
+> The period setting is supported only when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "movingAverageTrendline".
 
 
 <div class="meta-api-description">
@@ -23475,9 +23475,9 @@ How to identify outliers in Kendo UI chart series using the `outliersField` prop
 
 The distance between categories expressed as a percentage of the bar width.
 
-See the related [spacing](/api/javascript/dataviz/ui/chart#configuration-series.spacing) setting.
+See the related [spacing](/api/dataviz/ui/chart#configuration-series.spacing) setting.
 
-> The `gap` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc", "radarColumn" or "waterfall".
+> The `gap` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc", "radarColumn" or "waterfall".
 
 
 <div class="meta-api-description">
@@ -23512,7 +23512,7 @@ How do I adjust the gap between grouped data categories in a Kendo UI chart? Con
 
 The data field containing the high value.
 
-> The `highField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
+> The `highField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
 
 
 <div class="meta-api-description">
@@ -23568,7 +23568,7 @@ How do I customize highlight effects in Kendo UI Chart series? Control and custo
 
 The border of the highlighted chart series. The color is computed automatically from the base point color.
 
-> The `border` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut", "bubble", "pie", "candlestick" or "ohlc".
+> The `border` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "donut", "bubble", "pie", "candlestick" or "ohlc".
 
 
 <div class="meta-api-description">
@@ -23677,7 +23677,7 @@ How can I adjust the thickness of the highlight border around a chart series in 
 
 The highlight color. Accepts a valid CSS color string, including hex and rgb.
 
-> The `color` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
+> The `color` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
 
 
 <div class="meta-api-description">
@@ -23728,7 +23728,7 @@ How to set transparency for inactive series in Kendo UI chart? Control the trans
 
 The line of the highlighted chart series. The color is computed automatically from the base point color.
 
-> The `line` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
+> The `line` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
 
 
 <div class="meta-api-description">
@@ -24049,7 +24049,7 @@ How to change color of highlighted markers in Kendo UI chart series? Adjust or c
 
 The opacity of the highlighted points.
 
-> The `opacity` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bubble", "pie" or "donut".
+> The `opacity` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bubble", "pie" or "donut".
 
 
 <div class="meta-api-description">
@@ -24150,7 +24150,7 @@ The available argument fields are:
 * series - the point series.
 * stackValue - the cumulative point value on the stack. Available only for stackable series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 * from - the "from" point highlight visual options. Available for "rangeArea" and "verticalRangeArea" series.
 * to - the "to" point highlight visual options. Available for "rangeArea" and "verticalRangeArea" series.
@@ -24188,7 +24188,7 @@ How to customize point highlight visual in Kendo UI chart series? Customize or o
 
 The radius of the donut hole in pixels.
 
-> The `holeSize` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut".
+> The `holeSize` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "donut".
 
 
 <div class="meta-api-description">
@@ -24213,7 +24213,7 @@ How do I adjust the size of the hollow center in a Kendo UI donut chart? Adjust 
 
 The chart series label configuration.
 
-> The chart displays the series labels when the [series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true`.
+> The chart displays the series labels when the [series.labels.visible](/api/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -24241,7 +24241,7 @@ How do I customize the labels in Kendo UI Chart series? Configure, control, and 
 
 ### series.labels.align `String`
 
-The label alignment when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut", "funnel", "pyramid" or "pie".
+The label alignment when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "donut", "funnel", "pyramid" or "pie".
 
 The supported values  for "donut" and "pie" are:
 
@@ -24528,7 +24528,7 @@ How do I change the color of series labels in a Kendo UI chart? Set or customize
 
 ### series.labels.distance `Number` *(default: 35)*
 
-The distance of the labels when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
+The distance of the labels when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
 
 
 <div class="meta-api-description">
@@ -24575,7 +24575,7 @@ How to customize font size and style for series labels in a Kendo UI chart? Adju
 
 ### series.labels.format `String|Function` *(default: "{0}")*
 
-The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format of the labels. Uses [kendo.format](/api/kendo/methods/format).
 
 Format placeholders:
 
@@ -24943,7 +24943,7 @@ How to rotate chart series label text in Kendo UI for jQuery? Adjust or set the 
 
 ### series.labels.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the chart series label.
+The [template](/api/kendo/methods/template) which renders the chart series label.
 
 The fields which can be used in the template are:
 
@@ -24953,7 +24953,7 @@ The fields which can be used in the template are:
 * series - the data series
 * stackValue - the cumulative point value on the stack. Available only for stackable series.
 * value - the point value. Can be a number or object containing each bound field.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
@@ -25050,7 +25050,7 @@ How can I customize the appearance of data point labels in a Kendo UI Chart? Cus
 
 The chart series **from** label configuration.
 
-> The chart displays the series **from** labels when the [series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true` or when the [series.labels.from.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.from.visible) option is set to `true`.
+> The chart displays the series **from** labels when the [series.labels.visible](/api/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true` or when the [series.labels.from.visible](/api/dataviz/ui/chart#configuration-series.labels.from.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -25323,7 +25323,7 @@ How do I change the font for "from" labels in Kendo UI chart series? Adjust or c
 
 ### series.labels.from.format `String|Function` *(default: "{0}")*
 
-The format of the **from** labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format of the **from** labels. Uses [kendo.format](/api/kendo/methods/format).
 
 
 <div class="meta-api-description">
@@ -25725,7 +25725,7 @@ How to position data labels on Kendo UI chart series points? Configure the place
 
 ### series.labels.from.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the chart series **from** label.
+The [template](/api/kendo/methods/template) which renders the chart series **from** label.
 
 The fields which can be used in the template are:
 
@@ -25797,7 +25797,7 @@ How to show starting data labels for series segments in a Kendo UI chart? Contro
 
 The chart series **to** label configuration.
 
-> The chart displays the series **to** labels when the [series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true` or when the [series.labels.to.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.to.visible) option is set to `true`.
+> The chart displays the series **to** labels when the [series.labels.visible](/api/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true` or when the [series.labels.to.visible](/api/dataviz/ui/chart#configuration-series.labels.to.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -26070,7 +26070,7 @@ How to customize font properties for "to" labels in Kendo UI chart series? Contr
 
 ### series.labels.to.format `String|Function` *(default: "{0}")*
 
-The format of the **to** labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format of the **to** labels. Uses [kendo.format](/api/kendo/methods/format).
 
 Format placeholders:
 
@@ -26476,7 +26476,7 @@ How do I position "to" value labels in a Kendo UI chart? Configure and control t
 
 ### series.labels.to.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the chart series **to** label.
+The [template](/api/kendo/methods/template) which renders the chart series **to** label.
 
 The fields which can be used in the template are:
 
@@ -27192,7 +27192,7 @@ How can I adjust the transparency of legend line markers in a Kendo UI chart ser
 
 The configuration of the Chart legend item markers.
 
-By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+By default, the marker configuration will be the same as the [series.markers](/api/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
 
 
 <div class="meta-api-description">
@@ -27582,7 +27582,7 @@ How to customize chart legend item markers in Kendo UI for jQuery? Customize or 
 
 The chart line configuration options.
 
-> The `line` option is supported when the [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) option is set to "area", "candlestick", "ohlc" or "waterfall".
+> The `line` option is supported when the [series.type](/api/dataviz/ui/chart#configuration-series.type) option is set to "area", "candlestick", "ohlc" or "waterfall".
 
 
 <div class="meta-api-description">
@@ -27691,11 +27691,11 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "area", "rangeArea", "polarArea" or "radarArea".
+> The `style` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "area", "rangeArea", "polarArea" or "radarArea".
 
-> The `step` value is supported only when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "area" or "rangeArea".
+> The `step` value is supported only when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "area" or "rangeArea".
 
-> For *line series*, use [series.style](/api/javascript/dataviz/ui/chart#configuration-series.style).
+> For *line series*, use [series.style](/api/dataviz/ui/chart#configuration-series.style).
 
 
 <div class="meta-api-description">
@@ -27724,7 +27724,7 @@ How do I customize the line style in Kendo UI Chart series? Customize how data p
 
 The data field containing the low value.
 
-> The `lowField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
+> The `lowField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
 
 
 <div class="meta-api-description">
@@ -27781,8 +27781,8 @@ How do I adjust the spacing between concentric donut chart rings in Kendo UI Cha
 
 The chart series marker configuration.
 
-> The chart displays the series labels when the [series.markers.visible](/api/javascript/dataviz/ui/chart#configuration-series.markers.visible) option is set to `true`.
-> The `markers` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "area", "rangeArea", "line", "scatter", "scatterLine", "radarLine", "radarArea", "polarLine", "polarScatter" or "polarArea".
+> The chart displays the series labels when the [series.markers.visible](/api/dataviz/ui/chart#configuration-series.markers.visible) option is set to `true`.
+> The `markers` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "area", "rangeArea", "line", "scatter", "scatterLine", "radarLine", "radarArea", "polarLine", "polarScatter" or "polarArea".
 
 
 <div class="meta-api-description">
@@ -28844,7 +28844,7 @@ How do I control the layering of chart series markers in Kendo UI for jQuery? Se
 
 ### series.outliers `Object`
 
-The chart series outliers configuration. Applies to **mild** outliers. Also check [`series.extremes`](/api/javascript/dataviz/ui/chart#configuration-series.extremes).
+The chart series outliers configuration. Applies to **mild** outliers. Also check [`series.extremes`](/api/dataviz/ui/chart#configuration-series.extremes).
 
 
 <div class="meta-api-description">
@@ -29086,7 +29086,7 @@ How can I rotate outlier markers in my Kendo UI chart? Adjust or configure the r
 
 ### series.extremes `Object`
 
-The chart series extremes configuration. Applies to **extreme** outliers. Also check [`series.outliers`](/api/javascript/dataviz/ui/chart#configuration-series.outliers).
+The chart series extremes configuration. Applies to **extreme** outliers. Also check [`series.outliers`](/api/dataviz/ui/chart#configuration-series.outliers).
 
 
 <div class="meta-api-description">
@@ -29384,7 +29384,7 @@ The behavior for handling missing values. The supported values are:
 
 > The default value is "interpolate", except for "area" and stacked series which default to "zero".
 
-> The `missingValues` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "area", "rangeArea", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
+> The `missingValues` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "area", "rangeArea", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
 
 
 <div class="meta-api-description">
@@ -29413,9 +29413,9 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "line", "scatterLine", "radarLine" or "polarLine".
+> The `style` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "line", "scatterLine", "radarLine" or "polarLine".
 
-> The `step` value is only supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "line".
+> The `step` value is only supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "line".
 
 > The `smooth` options is not supported for stacked area series with missing values.
 
@@ -29457,7 +29457,7 @@ How do I customize the label for each series in a Kendo UI chart? Specify or cus
     });
     </script>
 
-The name can also be a [template](/api/javascript/kendo/methods/template) which sets the name of the series when bound to grouped data source.
+The name can also be a [template](/api/kendo/methods/template) which sets the name of the series when bound to grouped data source.
 
 The fields which can be used in the template are:
 
@@ -29616,7 +29616,7 @@ How do I control the transparency of chart data series in Kendo UI? Adjust the t
 
 The data field containing the open value.
 
-> The `openField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
+> The `openField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
 
 
 <div class="meta-api-description">
@@ -29695,7 +29695,7 @@ How to enable gradient shading effects on Kendo UI chart series? Configure and e
 
 The padding around the chart (equal on all sides).
 
-> The `padding` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
+> The `padding` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
 
 
 <div class="meta-api-description">
@@ -29718,7 +29718,7 @@ How do I set uniform padding around donut and pie chart series in Kendo UI for j
 
 The configuration options of the series pattern.
 
-> The pattern inherits the [`series.color`](/api/javascript/dataviz/ui/chart/configuration/series.color) as main color and accepts an optional `background` color.
+> The pattern inherits the [`series.color`](/api/dataviz/ui/chart/configuration/series.color) as main color and accepts an optional `background` color.
 
 
 <div class="meta-api-description">
@@ -29913,7 +29913,7 @@ How do I change the thickness of pattern lines in Kendo UI Chart series? Adjust 
 
 The data item field which contains the series pattern configuration for individual chart segments.
 
-> The `patternField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type)
+> The `patternField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type)
 is set to `"pie"`, `"donut"`, `"funnel"`, `"heatmap"`, or `"pyramid"`.
 
 
@@ -30003,9 +30003,9 @@ How do I dynamically control bubble sizes in Kendo UI chart series? Configure th
 
 The distance between series points within a category. Expressed as a percentage of the bar width.
 
-See the related [gap](/api/javascript/dataviz/ui/chart#configuration-series.gap) setting.
+See the related [gap](/api/dataviz/ui/chart#configuration-series.gap) setting.
 
-> The `spacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc" or "radarColumn".
+> The `spacing` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc" or "radarColumn".
 
 
 <div class="meta-api-description">
@@ -30031,9 +30031,9 @@ How to adjust spacing between bar series in Kendo UI chart? Adjust the distance 
 ### series.stack `Boolean|String|Object` *(default: false)*
 
 A boolean value indicating if the series should be stacked.
-A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui/chart#configuration-series.stack.group).
+A string value is interpreted as [series.stack.group](/api/dataviz/ui/chart#configuration-series.stack.group).
 
-> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" or "radarColumn". All series in the stack must be of the same type.
+> The `stack` options is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" or "radarColumn". All series in the stack must be of the same type.
 
 > Stack settings of the first series are inherited as a default value by the rest of the series, in case they are not overridden.
 
@@ -30082,7 +30082,7 @@ How to configure stacked chart behavior in Kendo UI for jQuery? Configure how mu
 
 Indicates that the series should be stacked in a group with the specified name.
 
-> The `group` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar" or "column".
+> The `group` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar" or "column".
 
 
 <div class="meta-api-description">
@@ -30131,7 +30131,7 @@ How do I set the starting angle for a pie chart in Kendo UI? Configure the initi
 
 The data item field containing the target value.
 
-> The `currentField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
+> The `currentField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
 
 
 <div class="meta-api-description">
@@ -30158,7 +30158,7 @@ How to map target value for bullet chart series in Kendo UI for jQuery? Bind or 
 
 The configuration options of the target
 
-> The `target` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
+> The `target` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
 
 
 <div class="meta-api-description">
@@ -30414,7 +30414,7 @@ How to change the width of target lines in Kendo UI chart series? Adjust the thi
 
 The chart series tooltip configuration options.
 
-> The chart series tooltip is displayed when the [series.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-series.tooltip.visible) option is set to `true`.
+> The chart series tooltip is displayed when the [series.tooltip.visible](/api/dataviz/ui/chart#configuration-series.tooltip.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -30601,7 +30601,7 @@ How do I customize the font of tooltips in Kendo UI chart series? Control and cu
 
 ### series.tooltip.format `String`
 
-The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format of the labels. Uses [kendo.format](/api/kendo/methods/format).
 
 Format placeholders:
 
@@ -30794,7 +30794,7 @@ How do I adjust the top padding in Kendo UI chart series tooltips? Adjust the ve
 
 ### series.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
+The [template](/api/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -30802,7 +30802,7 @@ The fields which can be used in the template are:
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
 * series - the data series
 * value - the point value (either a number or an object)
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 
@@ -30863,9 +30863,9 @@ The supported values are:
 * [`bar`](/controls/charts/chart-types/bar-charts)
 * [`bubble`](/controls/charts/chart-types/bubble-charts)
 * [`bullet`](/controls/charts/chart-types/bullet-charts)
-* [`candlestick`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.candlestick)
+* [`candlestick`](/api/dataviz/ui/chart/configuration/seriesdefaults.candlestick)
 * [`column`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.column)
-* [`donut`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.donut)
+* [`donut`](/api/dataviz/ui/chart/configuration/seriesdefaults.donut)
 * [`funnel`](/controls/charts/chart-types/funnel-charts)
 * [`pyramid`](/controls/charts/chart-types/pyramid-charts)
 * [`heatmap`](/controls/charts/chart-types/heatmap)
@@ -30877,7 +30877,7 @@ The supported values are:
 * [`powerTrendline`](/controls/charts/elements/trendlines)
 * [`polynomialTrendline`](/controls/charts/elements/trendlines)
 * [`movingAverageTrendline`](/controls/charts/elements/trendlines)
-* [`ohlc`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
+* [`ohlc`](/api/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
 * [`pie`](/controls/charts/chart-types/pie-charts)
 * [`polarArea`](https://demos.telerik.com/kendo-ui/polar-charts/polar-area)
 * [`polarLine`](https://demos.telerik.com/kendo-ui/polar-charts/index)
@@ -30889,12 +30889,12 @@ The supported values are:
 * [`rangeBar`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
 * [`rangeColumn`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
 * [`scatter`](/controls/charts/chart-types/scatter-charts)
-* [`scatterLine`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.scatterline)
+* [`scatterLine`](/api/dataviz/ui/chart/configuration/seriesdefaults.scatterline)
 * [`verticalArea`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalarea)
 * [`verticalBoxPlot`](https://demos.telerik.com/kendo-ui/box-plot-charts/vertical)
 * [`verticalBullet`](/controls/charts/chart-types/bullet-charts)
-* [`verticalLine`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalline)
-* [`verticalRangeArea`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalrangearea)
+* [`verticalLine`](/api/dataviz/ui/chart/configuration/seriesdefaults.verticalline)
+* [`verticalRangeArea`](/api/dataviz/ui/chart/configuration/seriesdefaults.verticalrangearea)
 * [`waterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/index)
 
 Different chart types expect data in specific formats:
@@ -31616,7 +31616,7 @@ How can I hide series names in my Kendo UI chart legend? Control the display of 
 
 The data item field which indicates whether to show the point category name in the legend.
 
-> The `visibleInLegendField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel", "pyramid", "donut" or "pie".
+> The `visibleInLegendField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "funnel", "pyramid", "donut" or "pie".
 
 
 <div class="meta-api-description">
@@ -31656,7 +31656,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * sender - the chart instance.
 * series - the point series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 * radius - the segment radius. Available for donut and pie series.
 * innerRadius - the segment inner radius. Available for donut series.
@@ -31891,7 +31891,7 @@ How do I adjust the whisker line thickness in a Kendo UI chart? Adjust or set th
 
 The line width.
 
-> The `width` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "line", "scatterLine", "radarLine" or "polarLine".
+> The `width` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "line", "scatterLine", "radarLine" or "polarLine".
 
 
 <div class="meta-api-description">
@@ -31914,7 +31914,7 @@ How do I adjust the line thickness of chart series in Kendo UI? Adjust, set, or 
 
 The name of the X axis to use.
 
-> The `xAxis` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bubble", "scatter", "scatterLine" or polar series.
+> The `xAxis` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bubble", "scatter", "scatterLine" or polar series.
 
 For polar series the xAxis range is expressed in degrees.
 
@@ -31951,7 +31951,7 @@ How do I configure which X-axis to use in a scatter chart with multiple horizont
 
 The data item field containing the X value.
 
-> The `xField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bubble", "scatter", "scatterLine" or polar series.
+> The `xField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bubble", "scatter", "scatterLine" or polar series.
 
 
 <div class="meta-api-description">
@@ -32012,7 +32012,7 @@ How to link multiple series to specific Y-axes in a Kendo UI chart? Assigning a 
 
 The data item field containing the Y value.
 
-> The `yField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bubble", "scatter" or "scatterLine".
+> The `yField` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bubble", "scatter" or "scatterLine".
 
 
 <div class="meta-api-description">
@@ -32695,7 +32695,7 @@ How to customize the font of data point annotation labels in a Kendo UI chart se
 
 ### series.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -32797,7 +32797,7 @@ How to rotate series note labels on Kendo UI Chart? Adjust or set the angle, til
 
 ### series.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 
 <div class="meta-api-description">
@@ -33164,7 +33164,7 @@ The default options for all series.
 
 ### seriesDefaults.area `Object`
 
-The area chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The area chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -33190,7 +33190,7 @@ How do I customize default styles for an area chart series in Kendo UI? Set and 
 
 ### seriesDefaults.bar `Object`
 
-The bar chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The bar chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -33329,7 +33329,7 @@ How do I adjust the width of the border around chart series in Kendo UI for jQue
 
 ### seriesDefaults.bubble `Object`
 
-The bubble chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The bubble chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -33354,7 +33354,7 @@ How to customize default appearance of bubble series in Kendo UI chart? Set defa
 
 ### seriesDefaults.candlestick `Object`
 
-The candlestick chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The candlestick chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -33379,7 +33379,7 @@ How to customize default appearance of candlestick series in Kendo UI chart? Set
 
 ### seriesDefaults.column `Object`
 
-The column chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The column chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -33404,7 +33404,7 @@ How to customize default properties for column series in Kendo UI charts? Set an
 
 ### seriesDefaults.donut `Object`
 
-The donut chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The donut chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -33429,7 +33429,7 @@ How to customize default settings for donut chart series in Kendo UI Chart? Set 
 
 ### seriesDefaults.dynamicSlope `Boolean` *(default: false)*
 
-> The `dynamicSlope` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
+> The `dynamicSlope` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "funnel".
 
 When set to true the ratio of the bases of each segment is calculated based on the ratio of currentDataItem.value/nextDataItem.value
 The last element is always created like a rectangle since there is no following element.
@@ -33460,7 +33460,7 @@ How do I make my Kendo UI funnel chart segments automatically adjust width based
 
 ### seriesDefaults.dynamicHeight `Boolean` *(default: true)*
 
-> The `dynamicHeight` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
+> The `dynamicHeight` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
 
 When set to `false` all segments become with the same height, otherwise the height of each segment is based on its value.
 
@@ -33866,7 +33866,7 @@ How to adjust spacing between grouped categories in Kendo UI chart series? Contr
 
 The chart series label configuration.
 
-> The chart displays the series labels when the [seriesDefaults.labels.visible](/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.labels.visible) option is set to `true`.
+> The chart displays the series labels when the [seriesDefaults.labels.visible](/api/dataviz/ui/chart#configuration-seriesDefaults.labels.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -34174,7 +34174,7 @@ How can I customize the font of series labels in a Kendo UI chart? Adjust the ty
 
 ### seriesDefaults.labels.format `String` *(default: "{0}")*
 
-The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format of the labels. Uses [kendo.format](/api/kendo/methods/format).
 
 
 <div class="meta-api-description">
@@ -34532,7 +34532,7 @@ How can I rotate data labels in Kendo UI chart series? Adjust or configure the a
 
 ### seriesDefaults.labels.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the chart series label.
+The [template](/api/kendo/methods/template) which renders the chart series label.
 
 The fields which can be used in the template are:
 
@@ -34541,7 +34541,7 @@ The fields which can be used in the template are:
 * percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
@@ -34644,7 +34644,7 @@ How do I customize the appearance of chart series labels in Kendo UI for jQuery?
 
 The chart series **from** label configuration.
 
-> The chart displays the series labels when the [seriesDefaults.labels.visible](/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.labels.visible) option is set to `true` or when the [seriesDefaults.labels.from.visible](/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.labels.from.visible) option is set to `true`.
+> The chart displays the series labels when the [seriesDefaults.labels.visible](/api/dataviz/ui/chart#configuration-seriesDefaults.labels.visible) option is set to `true` or when the [seriesDefaults.labels.from.visible](/api/dataviz/ui/chart#configuration-seriesDefaults.labels.from.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -34898,7 +34898,7 @@ How do I customize the font for "from" labels in a Kendo UI chart series? Config
 
 ### seriesDefaults.labels.from.format `String` *(default: "{0}")*
 
-The format of the **from** labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format of the **from** labels. Uses [kendo.format](/api/kendo/methods/format).
 
 
 <div class="meta-api-description">
@@ -35233,7 +35233,7 @@ How do I adjust the space above the starting point labels in Kendo UI chart seri
 
 ### seriesDefaults.labels.from.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the chart series **from** label.
+The [template](/api/kendo/methods/template) which renders the chart series **from** label.
 
 The fields which can be used in the template are:
 
@@ -35242,7 +35242,7 @@ The fields which can be used in the template are:
 * percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
@@ -35304,7 +35304,7 @@ How to show starting value labels on chart series in Kendo UI for jQuery? Contro
 
 The chart series **to** label configuration.
 
-> The chart displays the series labels when the [seriesDefaults.labels.visible](/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.labels.visible) option is set to `true` or when the [seriesDefaults.labels.to.visible](/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.labels.to.visible) option is set to `true`.
+> The chart displays the series labels when the [seriesDefaults.labels.visible](/api/dataviz/ui/chart#configuration-seriesDefaults.labels.visible) option is set to `true` or when the [seriesDefaults.labels.to.visible](/api/dataviz/ui/chart#configuration-seriesDefaults.labels.to.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -35543,7 +35543,7 @@ How to customize font styles for "to" labels in Kendo UI chart series? Adjust an
 
 ### seriesDefaults.labels.to.format `String` *(default: "{0}")*
 
-The format of the **to** labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format of the **to** labels. Uses [kendo.format](/api/kendo/methods/format).
 
 
 <div class="meta-api-description">
@@ -35866,7 +35866,7 @@ How do I adjust the vertical spacing above range endpoint labels in Kendo UI cha
 
 ### seriesDefaults.labels.to.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the chart series **to** label.
+The [template](/api/kendo/methods/template) which renders the chart series **to** label.
 
 
 <div class="meta-api-description">
@@ -35898,7 +35898,7 @@ The fields which can be used in the template are:
 * percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
@@ -35931,7 +35931,7 @@ How do I show or hide endpoint labels on chart series in Kendo UI for jQuery? Co
 
 ### seriesDefaults.line `Object`
 
-The line chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The line chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -36585,7 +36585,7 @@ How to set transparency for line symbols in Kendo UI chart legend? Control and c
 
 The configuration of the Chart legend item markers.
 
-By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+By default, the marker configuration will be the same as the [series.markers](/api/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
 
 
 <div class="meta-api-description">
@@ -36997,7 +36997,7 @@ How do I customize the appearance of chart legend markers in Kendo UI for jQuery
 
 ### seriesDefaults.ohlc `Object`
 
-The ohlc chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The ohlc chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -37079,7 +37079,7 @@ How to customize the default gradient effect on chart series in Kendo UI for jQu
 
 ### seriesDefaults.pie `Object`
 
-The pie chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The pie chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -37104,7 +37104,7 @@ How do I set default styles for pie chart slices in Kendo UI for jQuery? Set def
 
 ### seriesDefaults.rangeArea `Object`
 
-The range area chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The range area chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -37129,7 +37129,7 @@ How to customize default visual styles for range area charts in Kendo UI? Config
 
 ### seriesDefaults.scatter `Object`
 
-The scatter chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The scatter chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -37156,7 +37156,7 @@ How to set default marker size in Kendo UI chart scatter series? Control and cus
 
 ### seriesDefaults.scatterLine `Object`
 
-The scatterLine chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The scatterLine chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -37185,7 +37185,7 @@ How do I customize default styles for scatter line charts in Kendo UI chart widg
 
 The space between the chart series as proportion of the series width.
 
-> The `spacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc" and "candlestick".
+> The `spacing` option is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc" and "candlestick".
 
 
 <div class="meta-api-description">
@@ -37211,7 +37211,7 @@ How to set spacing between bars in a Kendo UI chart? Adjust or configure the gap
 
 A boolean value indicating if the series should be stacked.
 
-> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 
 <div class="meta-api-description">
@@ -37295,9 +37295,9 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [seriesDefaults.type](/api/javascript/dataviz/ui/chart#configuration-seriesdefaults.type) is set to "line", "scatterLine", "radarLine" or "polarLine".
+> The `style` option is supported when [seriesDefaults.type](/api/dataviz/ui/chart#configuration-seriesdefaults.type) is set to "line", "scatterLine", "radarLine" or "polarLine".
 
-> The `step` value is only supported when [seriesDefaults.type](/api/javascript/dataviz/ui/chart#configuration-seriesdefaults.type) is set to "line".
+> The `step` value is only supported when [seriesDefaults.type](/api/dataviz/ui/chart#configuration-seriesdefaults.type) is set to "line".
 
 > The `smooth` options is not supported for stacked area series with missing values.
 
@@ -37334,9 +37334,9 @@ The supported values are:
 * [`bar`](/controls/charts/chart-types/bar-charts)
 * [`bubble`](/controls/charts/chart-types/bubble-charts)
 * [`bullet`](/controls/charts/chart-types/bullet-charts)
-* [`candlestick`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.candlestick)
+* [`candlestick`](/api/dataviz/ui/chart/configuration/seriesdefaults.candlestick)
 * [`column`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.column)
-* [`donut`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.donut)
+* [`donut`](/api/dataviz/ui/chart/configuration/seriesdefaults.donut)
 * [`funnel`](/controls/charts/chart-types/funnel-charts)
 * [`pyramid`](/controls/charts/chart-types/pyramid-charts)
 * [`heatmap`](/controls/charts/chart-types/heatmap)
@@ -37348,7 +37348,7 @@ The supported values are:
 * [`powerTrendline`](/controls/charts/elements/trendlines)
 * [`polynomialTrendline`](/controls/charts/elements/trendlines)
 * [`movingAverageTrendline`](/controls/charts/elements/trendlines)
-* [`ohlc`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
+* [`ohlc`](/api/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
 * [`pie`](/controls/charts/chart-types/pie-charts)
 * [`polarArea`](https://demos.telerik.com/kendo-ui/polar-charts/polar-area)
 * [`polarLine`](https://demos.telerik.com/kendo-ui/polar-charts/index)
@@ -37360,12 +37360,12 @@ The supported values are:
 * [`rangeBar`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
 * [`rangeColumn`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
 * [`scatter`](/controls/charts/chart-types/scatter-charts)
-* [`scatterLine`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.scatterline)
+* [`scatterLine`](/api/dataviz/ui/chart/configuration/seriesdefaults.scatterline)
 * [`verticalArea`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalarea)
 * [`verticalBoxPlot`](https://demos.telerik.com/kendo-ui/box-plot-charts/vertical)
 * [`verticalBullet`](/controls/charts/chart-types/bullet-charts)
-* [`verticalLine`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalline)
-* [`verticalRangeArea`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalrangearea)
+* [`verticalLine`](/api/dataviz/ui/chart/configuration/seriesdefaults.verticalline)
+* [`verticalRangeArea`](/api/dataviz/ui/chart/configuration/seriesdefaults.verticalrangearea)
 * [`waterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/index)
 
 
@@ -37392,7 +37392,7 @@ How to set default series type in Kendo UI chart? Configure the default visualiz
 
 The chart series tooltip configuration options.
 
-> The chart series tooltip is displayed when the [seriesDefaults.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-series.tooltip.visible) option is set to `true`.
+> The chart series tooltip is displayed when the [seriesDefaults.tooltip.visible](/api/dataviz/ui/chart#configuration-series.tooltip.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -37579,7 +37579,7 @@ How to customize font styles in Kendo UI chart series tooltips? Adjust text appe
 
 ### seriesDefaults.tooltip.format `String`
 
-The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format of the labels. Uses [kendo.format](/api/kendo/methods/format).
 
 Format placeholders:
 
@@ -37771,7 +37771,7 @@ How to adjust the vertical spacing above the tooltip content in a Kendo UI chart
 
 ### seriesDefaults.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
+The [template](/api/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -37779,7 +37779,7 @@ The fields which can be used in the template are:
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
 * series - the data series
 * value - the point value (either a number or an object)
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 
@@ -37836,7 +37836,7 @@ How to show or hide default tooltips in Kendo UI Chart series? Control the displ
 
 ### seriesDefaults.verticalArea `Object`
 
-The verticalArea chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The verticalArea chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -37861,7 +37861,7 @@ How do I configure default settings for vertical area chart series in Kendo UI f
 
 ### seriesDefaults.verticalLine `Object`
 
-The verticalLine chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The verticalLine chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -37886,7 +37886,7 @@ How to configure default settings for vertical line series in Kendo UI chart? Co
 
 ### seriesDefaults.verticalRangeArea `Object`
 
-The verticalRangeArea chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
+The verticalRangeArea chart series options. Accepts all values supported by the [series](/api/dataviz/ui/chart#configuration-series) option.
 
 
 <div class="meta-api-description">
@@ -37923,7 +37923,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * sender - the chart instance.
 * series - the point series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 * radius - the segment radius. Available for donut and pie series.
 * innerRadius - the segment inner radius. Available for donut series.
@@ -38588,7 +38588,7 @@ How do I change the font of annotation labels on a chart series in Kendo UI for 
 
 ### seriesDefaults.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -38696,7 +38696,7 @@ How do I rotate annotation labels in Kendo UI chart series? Adjust the angle or 
 
 ### seriesDefaults.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 
 <div class="meta-api-description">
@@ -40319,7 +40319,7 @@ How do I hide the title of a Kendo UI chart? Toggle the visibility of the chart 
 
 The chart series tooltip configuration options.
 
-> The chart series tooltip is displayed when the [tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-series.tooltip.visible) option is set to `true`.
+> The chart series tooltip is displayed when the [tooltip.visible](/api/dataviz/ui/chart#configuration-series.tooltip.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -40516,7 +40516,7 @@ How do I customize the font of tooltips in Kendo UI Chart? Adjust or customize t
 
 ### tooltip.format `String`
 
-The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format of the labels. Uses [kendo.format](/api/kendo/methods/format).
 
 Format placeholders:
 
@@ -40747,7 +40747,7 @@ How to configure Kendo UI Chart tooltips to display combined data from multiple 
 
 ### tooltip.sharedTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the shared tooltip.
+The [template](/api/kendo/methods/template) which renders the shared tooltip.
 
 The fields which can be used in the template are:
 
@@ -40787,7 +40787,7 @@ How to customize the tooltip in Kendo UI for jQuery Chart? Customize or set a sh
 
 ### tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
+The [template](/api/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -40795,7 +40795,7 @@ The fields which can be used in the template are:
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
 * series - the data series
 * value - the point value (either a number or an object)
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 
@@ -40972,7 +40972,7 @@ How do I change the color of axis lines and labels in a Kendo UI chart? Set or c
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [valueAxis.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-valueAxis.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [valueAxis.crosshair.visible](/api/dataviz/ui/chart#configuration-valueAxis.crosshair.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -41093,7 +41093,7 @@ How do I adjust the transparency of the crosshair line on a Kendo UI chart's val
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [valueAxis.crosshair.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-valueAxis.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [valueAxis.crosshair.tooltip.visible](/api/dataviz/ui/chart#configuration-valueAxis.crosshair.tooltip.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -41379,7 +41379,7 @@ How can I customize the font of crosshair tooltips on a value axis in Kendo UI C
 
 ### valueAxis.crosshair.tooltip.format `String` *(default: "{0}")*
 
-The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the value value.
+The format used to display the tooltip. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the value value.
 
 
 <div class="meta-api-description">
@@ -41594,7 +41594,7 @@ How to position the tooltip near the crosshair on a Kendo UI chart's value axis?
 
 ### valueAxis.crosshair.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
+The [template](/api/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -42013,7 +42013,7 @@ How do I change the font style of value axis labels in a Kendo UI chart? Adjust 
 
 ### valueAxis.labels.format `String` *(default: "{0}")*
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -42489,7 +42489,7 @@ How to set interval for value axis labels in Kendo UI chart? Control the frequen
 
 ### valueAxis.labels.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -43025,7 +43025,7 @@ How to control the spacing of major grid lines in a Kendo UI chart's value axis?
 ### valueAxis.majorUnit `Number`
 
 The interval between major divisions.
-If the [valueAxis.type](/api/javascript/dataviz/ui/chart#configuration-valueAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
+If the [valueAxis.type](/api/dataviz/ui/chart#configuration-valueAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
 
 
 <div class="meta-api-description">
@@ -43086,7 +43086,7 @@ How do I set the maximum value on a Kendo UI chart's value axis? Control or conf
 
 ### valueAxis.min `Number` *(default: 0)*
 
-The minimum value of the axis. Under certain conditions, the [narrowRange](/api/javascript/dataviz/ui/chart/configuration/valueaxis.narrowrange) setting can overwrite this setting. To give priority to the `min` setting of your choice, set `valueAxis.narrowRange` to `false`.
+The minimum value of the axis. Under certain conditions, the [narrowRange](/api/dataviz/ui/chart/configuration/valueaxis.narrowrange) setting can overwrite this setting. To give priority to the `min` setting of your choice, set `valueAxis.narrowRange` to `false`.
 
 
 <div class="meta-api-description">
@@ -43770,8 +43770,8 @@ How can I control the frequency of minor tick marks on a Kendo UI chart's value 
 
 ### valueAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5 of the [valueAxis.majorUnit](/api/javascript/dataviz/ui/chart#configuration-valueAxis.majorUnit).
-If the [valueAxis.type](/api/javascript/dataviz/ui/chart#configuration-valueAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
+The interval between minor divisions. It defaults to 1/5 of the [valueAxis.majorUnit](/api/dataviz/ui/chart#configuration-valueAxis.majorUnit).
+If the [valueAxis.type](/api/dataviz/ui/chart#configuration-valueAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 
 <div class="meta-api-description">
@@ -43812,7 +43812,7 @@ How do I adjust the interval for minor ticks on a Kendo UI chart value axis? Adj
 
 ### valueAxis.name `String` *(default: "primary")*
 
-The unique axis name. Used to associate a series with a value axis using the [series.axis](/api/javascript/dataviz/ui/chart#configuration-series.axis) option.
+The unique axis name. Used to associate a series with a value axis using the [series.axis](/api/dataviz/ui/chart#configuration-series.axis) option.
 
 
 <div class="meta-api-description">
@@ -43844,7 +43844,7 @@ How do I set a custom name for a value axis in a Kendo UI chart? Assign a unique
 ### valueAxis.narrowRange `Boolean` *(default: true)*
 
 If set to `true` the Chart will narrow the value axis range in order to display data points in better detail.
-Setting it to `false` will force the automatic axis range to start from 0 or the explicitly specified [valueAxis.min](/api/javascript/dataviz/ui/chart/configuration/valueaxis.min) value.
+Setting it to `false` will force the automatic axis range to start from 0 or the explicitly specified [valueAxis.min](/api/dataviz/ui/chart/configuration/valueaxis.min) value.
 
 
 <div class="meta-api-description">
@@ -43989,7 +43989,7 @@ How do I set the starting point of a highlighted range on my chart's value axis 
 
 The label configuration of the plotband.
 
-> The [valueAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/valueAxis.plotbands#valueaxisplotbandslabeltext) option must be set in order to display the plotband label.
+> The [valueAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/valueAxis.plotbands#valueaxisplotbandslabeltext) option must be set in order to display the plotband label.
 
 
 <div class="meta-api-description">
@@ -44851,7 +44851,7 @@ How do I flip the value axis on my Kendo UI chart to display values in reverse o
 
 The title configuration of the value axis.
 
-> The [valueAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-valueAxis.title.text) option must be set in order to display the title.
+> The [valueAxis.title.text](/api/dataviz/ui/chart#configuration-valueAxis.title.text) option must be set in order to display the title.
 
 
 
@@ -46150,7 +46150,7 @@ How do I style the labels for value axis notes in a Kendo UI chart? Adjust the t
 
 ### valueAxis.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -46240,7 +46240,7 @@ How do I rotate value axis note labels in Kendo UI chart? Adjust, set, or contro
 
 ### valueAxis.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 
 <div class="meta-api-description">
@@ -47075,7 +47075,7 @@ How to customize font settings for value axis note labels in Kendo UI chart? Adj
 
 ### valueAxis.notes.data.label.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -47171,7 +47171,7 @@ How do I rotate labels on value axis notes in a Kendo UI chart? Adjust or set th
 
 ### valueAxis.notes.data.label.format `String` *(default: "{0}")*
 
-The format used to display the note label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the note label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 
 <div class="meta-api-description">
@@ -47483,7 +47483,7 @@ How do I change the stacking order of my chart's value axis? Adjust or set the l
 
 ### xAxis `Array`
 
-The X-axis configuration options of the scatter chart X-axis. Supports all [valueAxis](/api/javascript/dataviz/ui/chart#configuration-valueAxis) options.
+The X-axis configuration options of the scatter chart X-axis. Supports all [valueAxis](/api/dataviz/ui/chart#configuration-valueAxis) options.
 
 
 <div class="meta-api-description">
@@ -47654,7 +47654,7 @@ How can I change the color of the horizontal axis in a Kendo UI Chart? Adjust th
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [xAxis.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-xAxis.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [xAxis.crosshair.visible](/api/dataviz/ui/chart#configuration-xAxis.crosshair.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -47771,7 +47771,7 @@ How to make the crosshair line on my chart semi-transparent? Adjust and configur
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [xAxis.crosshair.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-xAxis.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [xAxis.crosshair.tooltip.visible](/api/dataviz/ui/chart#configuration-xAxis.crosshair.tooltip.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -48057,7 +48057,7 @@ How do I customize the font of the x-axis crosshair tooltip in a Kendo UI chart?
 
 ### xAxis.crosshair.tooltip.format `String` *(default: "{0}")*
 
-The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the value value.
+The format used to display the tooltip. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the value value.
 
 
 <div class="meta-api-description">
@@ -48271,7 +48271,7 @@ How do I customize the position of the x-axis crosshair tooltip in a Kendo UI ch
 
 ### xAxis.crosshair.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
+The [template](/api/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -48701,9 +48701,9 @@ How to set up cultural date formats for Kendo UI chart x-axis labels? Configure 
 
 ### xAxis.labels.dateFormats `Object`
 
-The format used to display the labels when the x values are dates. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels when the x values are dates. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
-> The chart will choose the appropriate format for the current [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit). Setting the [categoryAxis.labels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.format) option will override the date formats.
+> The chart will choose the appropriate format for the current [xAxis.baseUnit](/api/dataviz/ui/chart#configuration-xAxis.baseUnit). Setting the [categoryAxis.labels.format](/api/dataviz/ui/chart#configuration-categoryAxis.labels.format) option will override the date formats.
 
 
 <div class="meta-api-description">
@@ -48738,7 +48738,7 @@ How to customize date format on Kendo UI chart's x-axis? Control and customize t
 
 ### xAxis.labels.dateFormats.days `String` *(default: "M/d")*
 
-The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "days".
+The format used when [xAxis.baseUnit](/api/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "days".
 
 
 <div class="meta-api-description">
@@ -48774,7 +48774,7 @@ How do I customize the date format for day labels on a Kendo UI chart's x-axis? 
 
 ### xAxis.labels.dateFormats.hours `String` *(default: "HH:mm")*
 
-The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "hours".
+The format used when [xAxis.baseUnit](/api/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "hours".
 
 
 <div class="meta-api-description">
@@ -48810,7 +48810,7 @@ How do I customize the time labels on an hourly chart in Kendo UI for jQuery? Cu
 
 ### xAxis.labels.dateFormats.months `String` *(default: "MMM 'yy")*
 
-The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "months".
+The format used when [xAxis.baseUnit](/api/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "months".
 
 
 <div class="meta-api-description">
@@ -48846,7 +48846,7 @@ How to customize month labels on chart horizontal axis in Kendo UI? Configure th
 
 ### xAxis.labels.dateFormats.weeks `String` *(default: "M/d")*
 
-The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "weeks".
+The format used when [xAxis.baseUnit](/api/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "weeks".
 
 
 <div class="meta-api-description">
@@ -48881,7 +48881,7 @@ How to customize week dates on chart x-axis labels in Kendo UI for jQuery? Custo
 
 ### xAxis.labels.dateFormats.years `String` *(default: "yyyy")*
 
-The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "years".
+The format used when [xAxis.baseUnit](/api/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "years".
 
 
 <div class="meta-api-description">
@@ -48941,7 +48941,7 @@ How to change font size of x-axis labels in a Kendo UI chart? Adjust, configure,
 
 ### xAxis.labels.format `String`
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -49449,7 +49449,7 @@ How to set x-axis label frequency in Kendo UI Chart? Configure the x-axis label 
 
 ### xAxis.labels.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -50633,8 +50633,8 @@ How to skip certain major tick marks on the x-axis in a Kendo UI Chart? Configur
 ### xAxis.majorUnit `Number`
 
 The interval between major divisions.
-If this is a date axis the value represents the number of [xAxis.baseUnits](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) between major divisions.
-If the [xAxis.type](/api/javascript/dataviz/ui/chart#configuration-xAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
+If this is a date axis the value represents the number of [xAxis.baseUnits](/api/dataviz/ui/chart#configuration-xAxis.baseUnit) between major divisions.
+If the [xAxis.type](/api/dataviz/ui/chart#configuration-xAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
 
 
 <div class="meta-api-description">
@@ -50734,8 +50734,8 @@ How do I set the minimum value for the horizontal axis in a Kendo UI chart? Cont
 
 ### xAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5 of the [xAxis.majorUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.majorUnit).
-If the [xAxis.type](/api/javascript/dataviz/ui/chart#configuration-xAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
+The interval between minor divisions. It defaults to 1/5 of the [xAxis.majorUnit](/api/dataviz/ui/chart#configuration-xAxis.majorUnit).
+If the [xAxis.type](/api/dataviz/ui/chart#configuration-xAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 
 <div class="meta-api-description">
@@ -50763,7 +50763,7 @@ How do I adjust the interval of minor tick marks in a Kendo UI chart's x-axis? A
 
 ### xAxis.name `String` *(default: "primary")*
 
-The unique axis name. Used to associate a series with a x axis using the [series.xAxis](/api/javascript/dataviz/ui/chart#configuration-series.xAxis) option.
+The unique axis name. Used to associate a series with a x axis using the [series.xAxis](/api/dataviz/ui/chart#configuration-series.xAxis) option.
 
 
 <div class="meta-api-description">
@@ -50942,7 +50942,7 @@ How to set the starting position of an x-axis plot band in a Kendo UI chart? Spe
 
 The label configuration of the plotband.
 
-> The [xAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/xAxis.plotbands#xAxisplotbandslabeltext) option must be set in order to display the plotband label.
+> The [xAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/xAxis.plotbands#xAxisplotbandslabeltext) option must be set in order to display the plotband label.
 
 
 <div class="meta-api-description">
@@ -51823,7 +51823,7 @@ How do I adjust the starting angle of the horizontal axis in a Kendo UI polar ch
 
 The title configuration of the scatter chart x axis.
 
-> The [xAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-xAxis.title.text) option must be set in order to display the title.
+> The [xAxis.title.text](/api/dataviz/ui/chart#configuration-xAxis.title.text) option must be set in order to display the title.
 
 
 <div class="meta-api-description">
@@ -53175,7 +53175,7 @@ How do I customize the font of x-axis notes in a Kendo UI chart? Customize the f
 
 ### xAxis.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -53270,7 +53270,7 @@ How do I rotate x-axis labels in Kendo UI charts? Adjust, set, or configure the 
 
 ### xAxis.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 
 <div class="meta-api-description">
@@ -54125,7 +54125,7 @@ How do I customize the font of data note labels on my chart's x-axis? Set or cus
 
 ### xAxis.notes.data.label.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -54226,7 +54226,7 @@ How can I adjust the angle of x-axis note labels in a Kendo UI chart? Adjust the
 
 ### xAxis.notes.data.label.format `String` *(default: "{0}")*
 
-The format used to display the note label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the note label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 
 <div class="meta-api-description">
@@ -54500,7 +54500,7 @@ How to customize appearance of x-axis annotations in Kendo UI chart? Customize t
 
 ### yAxis `Array`
 
-The y axis configuration options of the scatter chart. Supports all [valueAxis](/api/javascript/dataviz/ui/chart#configuration-valueAxis) options.
+The y axis configuration options of the scatter chart. Supports all [valueAxis](/api/dataviz/ui/chart#configuration-valueAxis) options.
 
 
 <div class="meta-api-description">
@@ -54671,7 +54671,7 @@ How do I change the color of the vertical axis in a Kendo UI chart? Adjust the v
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [yAxis.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-yAxis.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [yAxis.crosshair.visible](/api/dataviz/ui/chart#configuration-yAxis.crosshair.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -54788,7 +54788,7 @@ How do I adjust the transparency of the vertical axis crosshair line in a Kendo 
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [yAxis.crosshair.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-yAxis.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [yAxis.crosshair.tooltip.visible](/api/dataviz/ui/chart#configuration-yAxis.crosshair.tooltip.visible) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -55074,7 +55074,7 @@ How do I customize the font of the y-axis crosshair tooltip in a Kendo UI chart?
 
 ### yAxis.crosshair.tooltip.format `String` *(default: "{0}")*
 
-The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the value value.
+The format used to display the tooltip. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the value value.
 
 
 <div class="meta-api-description">
@@ -55288,7 +55288,7 @@ How to position the tooltip on the y-axis crosshair in a Kendo UI chart? Control
 
 ### yAxis.crosshair.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
+The [template](/api/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -55708,9 +55708,9 @@ How to set culture for y-axis labels in Kendo UI Chart? Configure or customize t
 
 ### yAxis.labels.dateFormats `Object`
 
-The format used to display the labels when the x values are dates. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels when the x values are dates. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
-> The chart will choose the appropriate format for the current [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit). Setting the [categoryAxis.labels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.format) option will override the date formats.
+> The chart will choose the appropriate format for the current [yAxis.baseUnit](/api/dataviz/ui/chart#configuration-yAxis.baseUnit). Setting the [categoryAxis.labels.format](/api/dataviz/ui/chart#configuration-categoryAxis.labels.format) option will override the date formats.
 
 
 <div class="meta-api-description">
@@ -55745,7 +55745,7 @@ How do I customize date formats on y-axis labels in Kendo UI chart? Control and 
 
 ### yAxis.labels.dateFormats.days `String` *(default: "M/d")*
 
-The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "days".
+The format used when [yAxis.baseUnit](/api/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "days".
 
 
 <div class="meta-api-description">
@@ -55781,7 +55781,7 @@ How to format daily dates on a Kendo UI chart's y-axis when grouped by days? Con
 
 ### yAxis.labels.dateFormats.hours `String` *(default: "HH:mm")*
 
-The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "hours".
+The format used when [yAxis.baseUnit](/api/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "hours".
 
 
 <div class="meta-api-description">
@@ -55817,7 +55817,7 @@ How do I customize time formatting for hourly data labels on a chart's y-axis in
 
 ### yAxis.labels.dateFormats.months `String` *(default: "MMM 'yy")*
 
-The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "months".
+The format used when [yAxis.baseUnit](/api/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "months".
 
 
 <div class="meta-api-description">
@@ -55853,7 +55853,7 @@ How to format month labels on y-axis in Kendo UI chart? Configure display format
 
 ### yAxis.labels.dateFormats.weeks `String` *(default: "M/d")*
 
-The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "weeks".
+The format used when [yAxis.baseUnit](/api/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "weeks".
 
 
 <div class="meta-api-description">
@@ -55888,7 +55888,7 @@ How to format week numbers in y-axis labels for a Kendo UI chart? Customize and 
 
 ### yAxis.labels.dateFormats.years `String` *(default: "yyyy")*
 
-The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "years".
+The format used when [yAxis.baseUnit](/api/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "years".
 
 
 <div class="meta-api-description">
@@ -55948,7 +55948,7 @@ How to change font size of y-axis labels in Kendo UI Chart? Control and customiz
 
 ### yAxis.labels.format `String`
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -56431,7 +56431,7 @@ How to adjust y-axis label frequency in Kendo UI chart? Adjust the frequency and
 
 ### yAxis.labels.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -57617,8 +57617,8 @@ How to control tick density on y-axis in Kendo UI chart? Control the frequency a
 ### yAxis.majorUnit `Number`
 
 The interval between major divisions.
-If this is a date axis the value represents the number of [xAxis.baseUnits](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) between major divisions.
-If the [yAxis.type](/api/javascript/dataviz/ui/chart#configuration-yAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
+If this is a date axis the value represents the number of [xAxis.baseUnits](/api/dataviz/ui/chart#configuration-xAxis.baseUnit) between major divisions.
+If the [yAxis.type](/api/dataviz/ui/chart#configuration-yAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
 
 
 <div class="meta-api-description">
@@ -57718,8 +57718,8 @@ How do I set the minimum value on the y-axis of a Kendo UI chart? Configure the 
 
 ### yAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5 of the [yAxis.majorUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.majorUnit).
-If the [yAxis.type](/api/javascript/dataviz/ui/chart#configuration-yAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
+The interval between minor divisions. It defaults to 1/5 of the [yAxis.majorUnit](/api/dataviz/ui/chart#configuration-yAxis.majorUnit).
+If the [yAxis.type](/api/dataviz/ui/chart#configuration-yAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 
 <div class="meta-api-description">
@@ -57747,7 +57747,7 @@ How do I adjust the spacing of minor grid lines in a Kendo UI chart's vertical a
 
 ### yAxis.name `String` *(default: "primary")*
 
-The unique axis name. Used to associate a series with a y axis using the [series.yAxis](/api/javascript/dataviz/ui/chart#configuration-series.yAxis) option.
+The unique axis name. Used to associate a series with a y axis using the [series.yAxis](/api/dataviz/ui/chart#configuration-series.yAxis) option.
 
 
 <div class="meta-api-description">
@@ -57926,7 +57926,7 @@ How do I set the starting point of a highlighted range in my Kendo UI Chart's y-
 
 The label configuration of the plotband.
 
-> The [yAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/yAxis.plotbands#yAxisplotbandslabeltext) option must be set in order to display the plotband label.
+> The [yAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/yAxis.plotbands#yAxisplotbandslabeltext) option must be set in order to display the plotband label.
 
 
 <div class="meta-api-description">
@@ -58787,7 +58787,7 @@ How do I invert the y-axis in a Kendo UI chart? Control the vertical axis direct
 
 The title configuration of the scatter chart y axis.
 
-> The [yAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-yAxis.title.text) option must be set in order to display the title.
+> The [yAxis.title.text](/api/dataviz/ui/chart#configuration-yAxis.title.text) option must be set in order to display the title.
 
 
 <div class="meta-api-description">
@@ -60132,7 +60132,7 @@ How do I customize the font for notes on my chart's y-axis? Adjust and configure
 
 ### yAxis.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -60226,7 +60226,7 @@ How do I rotate axis labels in Kendo UI Chart to prevent overlap? Adjust and con
 
 ### yAxis.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 
 <div class="meta-api-description">
@@ -61076,7 +61076,7 @@ How do I customize the font of y-axis note data labels in a Kendo UI chart? Cust
 
 ### yAxis.notes.data.label.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -61177,7 +61177,7 @@ How do I rotate labels on y-axis notes in a Kendo UI chart? Adjust or configure 
 
 ### yAxis.notes.data.label.format `String` *(default: "{0}")*
 
-The format used to display the note label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the note label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 
 <div class="meta-api-description">
@@ -61641,11 +61641,11 @@ How to lock axis during zoom in Kendo UI chart? Manage zoom behavior during sele
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/dataviz/ui/chart/configuration/datasource) option.
+The [data source](/api/data/datasource) of the widget. Configured via the [dataSource](/api/dataviz/ui/chart/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/dataviz/ui/chart/methods/setdatasource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/dataviz/ui/chart/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -61689,7 +61689,7 @@ How do I update the data in my Kendo UI Chart dynamically? Manage and configure 
 
 The [configuration](#configuration) options with which the chart is initialized.
 
-> Call the [refresh](/api/javascript/dataviz/ui/chart/methods/refresh) method after modifying the `options` field.
+> Call the [refresh](/api/dataviz/ui/chart/methods/refresh) method after modifying the `options` field.
 
 
 <div class="meta-api-description">
@@ -61711,7 +61711,7 @@ How can I dynamically change the series type in a Kendo UI chart? Configure or m
     </script>
 
 ### surface `kendo.drawing.Surface`
-The drawing surface of the Chart. See [Drawing API](https://docs.telerik.com/kendo-ui/api/javascript/drawing).
+The drawing surface of the Chart. See [Drawing API](https://docs.telerik.com/kendo-ui/api/drawing).
 
 
 <div class="meta-api-description">
@@ -61732,7 +61732,7 @@ How do I access the drawing area of a Kendo UI chart to add custom graphics? Acc
         });
 
         function onShapeMouseEnter(e) {
-            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/surface/events/mouseenter
+            // https://docs.telerik.com/kendo-ui/api/drawing/surface/events/mouseenter
 	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e);
         }
@@ -61767,7 +61767,7 @@ How do I properly clean up Kendo UI chart instances when replacing a chart dynam
 
 ### exportImage
 Exports the chart as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -61835,12 +61835,12 @@ for more details.
 
 ### exportPDF
 Exports the chart as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-The available configuration options can be found in the [PDFOptions](/api/javascript/drawing/pdfoptions) api.
+The available configuration options can be found in the [PDFOptions](/api/drawing/pdfoptions) api.
 
 
 <div class="meta-api-description">
@@ -61884,7 +61884,7 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the chart as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -61933,7 +61933,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 ### findAxisByName
 
-An alias for the existing [getAxis](/api/javascript/dataviz/ui/chart/methods/getaxis) method.
+An alias for the existing [getAxis](/api/dataviz/ui/chart/methods/getaxis) method.
 
 
 <div class="meta-api-description">
@@ -61970,7 +61970,7 @@ The axis name.
 
 ### findPaneByIndex
 
-Returns a [pane](/api/javascript/dataviz/chart/chart_pane) with specific index.
+Returns a [pane](/api/dataviz/chart/chart_pane) with specific index.
 
 
 <div class="meta-api-description">
@@ -62003,7 +62003,7 @@ The pane index.
 
 ### findPaneByName
 
-Returns a [pane](/api/javascript/dataviz/chart/chart_pane) with specific name.
+Returns a [pane](/api/dataviz/chart/chart_pane) with specific name.
 
 
 <div class="meta-api-description">
@@ -62034,7 +62034,7 @@ The pane name.
 
 ### findSeries
 
-Returns a [series](/api/javascript/dataviz/chart/chart_series) determined from the passed function. The function is called with the options of each series until it returns true.
+Returns a [series](/api/dataviz/chart/chart_series) determined from the passed function. The function is called with the options of each series until it returns true.
 
 
 <div class="meta-api-description">
@@ -62066,7 +62066,7 @@ The function that will be called for each series.
 
 ### findSeriesByIndex
 
-Returns a [series](/api/javascript/dataviz/chart/chart_series) with specific index.
+Returns a [series](/api/dataviz/chart/chart_series) with specific index.
 
 
 <div class="meta-api-description">
@@ -62096,7 +62096,7 @@ The series index.
 
 ### findSeriesByName
 
-Returns a [series](/api/javascript/dataviz/chart/chart_series) with specific name.
+Returns a [series](/api/dataviz/chart/chart_series) with specific name.
 
 
 <div class="meta-api-description">
@@ -62126,7 +62126,7 @@ The series name.
 
 ### getAxis
 
-Returns an [axis](/api/javascript/dataviz/chart/chart_axis) with specific name.
+Returns an [axis](/api/dataviz/chart/chart_axis) with specific name.
 
 
 <div class="meta-api-description">
@@ -62205,7 +62205,7 @@ How can I programmatically hide a tooltip on my Kendo UI chart? Close or dismiss
 
 ### plotArea
 
-Returns the chart [plotArea](/api/javascript/dataviz/chart/chart_plotarea).
+Returns the chart [plotArea](/api/dataviz/chart/chart_plotarea).
 
 
 <div class="meta-api-description">
@@ -62369,7 +62369,7 @@ What happens when I change the container size of a Kendo UI chart? Adjust chart 
 Defines whether the widget should proceed with resizing even if the element dimensions have not changed.
 
 ### saveAsPDF
-Saves the Chart as a PDF file using the options specified in [options.pdf](/api/javascript/dataviz/ui/chart#configuration-pdf).
+Saves the Chart as a PDF file using the options specified in [options.pdf](/api/dataviz/ui/chart#configuration-pdf).
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that always call it as a response to end-user action e.g. button click.
 
@@ -62475,7 +62475,7 @@ The chart settings to update.
 
 ### showTooltip
 
-Shows the chart tooltip for specific point or the shared tooltip for specific category. The method accepts a function which will be called for each [point](/api/javascript/dataviz/chart/chart_point) until the function returns `true`.
+Shows the chart tooltip for specific point or the shared tooltip for specific category. The method accepts a function which will be called for each [point](/api/dataviz/chart/chart_point) until the function returns `true`.
 
 
 <div class="meta-api-description">
@@ -62531,7 +62531,7 @@ converted to other formats using tools like [Inkscape](https://inkscape.org/en) 
 [ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/chart/methods/exportsvg), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/dataviz/ui/chart/methods/exportsvg), but will remain fully functional.
 
 
 <div class="meta-api-description">
@@ -62561,7 +62561,7 @@ How do I export Kendo UI chart as an SVG string? Generate or export a chart’s 
 
 Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/chart/methods/exportimage).
+> This method is deprecated and replaced by [exportImage](/api/dataviz/ui/chart/methods/exportimage).
 
 
 <div class="meta-api-description">
@@ -62633,7 +62633,7 @@ A string representing the series name or the category name or an object with the
 * value - the point value.
 * series - the point series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 ##### options.series `String`
@@ -63884,7 +63884,7 @@ Can be used, for example, to remove loading indicators.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
-> Calling [setOptions](/api/javascript/dataviz/ui/chart/methods/setoptions) in the event handler is not recommended and can cause an endless loop or a JavaScript error.
+> Calling [setOptions](/api/dataviz/ui/chart/methods/setoptions) in the event handler is not recommended and can cause an endless loop or a JavaScript error.
 
 
 <div class="meta-api-description">
@@ -64305,7 +64305,7 @@ The data point category
 
 A list of all points that are in the same category. Each item has the same fields - value, series, dataItem, etc.
 
-Defined only when a [shared tooltip](/api/javascript/dataviz/ui/chart#configuration-tooltip.shared) is in use.
+Defined only when a [shared tooltip](/api/dataviz/ui/chart#configuration-tooltip.shared) is in use.
 Available in versions 2014.3.1306 and later.
 
 ##### e.dataItem `Object`

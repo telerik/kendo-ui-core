@@ -32,7 +32,7 @@ Kendo UI for jQuery Scheduler
 
 ## Description
 
-I want to display week numbers in the header of the Kendo UI for jQuery [Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler) Timeline and Month views. This is not a built-in feature, but I need to calculate and show the week numbers dynamically.
+I want to display week numbers in the header of the Kendo UI for jQuery [Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler) Timeline and Month views. This is not a built-in feature, but I need to calculate and show the week numbers dynamically.
 
 This knowledge base article also answers the following questions:
 - How to add week numbers in Kendo UI Scheduler header?
@@ -47,7 +47,7 @@ To display week numbers in the Scheduler Timeline and Month views, use custom lo
 
 1. Initialize the Scheduler.
 2. Access the Scheduler's internal calendar.
-3. Set the [`weekNumber`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/calendar/configuration/weeknumber) option of the calendar to `true`.
+3. Set the [`weekNumber`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/calendar/configuration/weeknumber) option of the calendar to `true`.
 
 Here is the implementation:
 
@@ -243,5 +243,5 @@ You can see a live demonstration of the solution here:
 - [Scheduler Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/scheduler/overview)
 - [Custom Views in Scheduler](https://www.telerik.com/kendo-jquery-ui/documentation/controls/scheduler/views#custom-views)
 - [Create Custom Scheduler Views by Inheriting Built-In Views](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/custom-view)
-- [Kendo UI Scheduler API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/scheduler)
-- [Kendo UI Calendar API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/calendar)
+- [Kendo UI Scheduler API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/scheduler)
+- [Kendo UI Calendar API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/calendar)

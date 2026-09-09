@@ -76,9 +76,9 @@ Example:
 - `data-auto-play="false"` disables automatic playback.  
 - `data-media` specifies the media content, including the title and source URL.  
 - `data-navigatable="true"` enables keyboard navigation.  
-- `data-bind="events: { ready: onPlayerReady }"` binds the [`ready`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/mediaplayer/events/ready) event to the respective handler function.  
+- `data-bind="events: { ready: onPlayerReady }"` binds the [`ready`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/mediaplayer/events/ready) event to the respective handler function.  
 
 ## See Also  
 - [Kendo UI for jQuery MediaPlayer Overview](https://docs.telerik.com/kendo-ui/controls/media/mediaplayer/overview)  
 - [MVVM Overview](https://www.telerik.com/kendo-jquery-ui/documentation/framework/mvvm/overview)  
-- [Kendo UI for jQuery MediaPlayer API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer)  
+- [Kendo UI for jQuery MediaPlayer API Reference](https://docs.telerik.com/kendo-ui/api/ui/mediaplayer)  

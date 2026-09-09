@@ -168,5 +168,5 @@ For disabling the Edit functionality set the `Editable` configuration to `false`
 ## See Also
 
 * [Editing in the OrgChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart/editing)
-* [JavaScript API Reference of the OrgChart](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart)
+* [JavaScript API Reference of the OrgChart](https://docs.telerik.com/kendo-ui/api/ui/orgchart)
 * [A REPL example of disabled editing of an OrgChart](https://netcorerepl.telerik.com/wHvlPRbz45LXGqZX00)

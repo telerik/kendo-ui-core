@@ -49,4 +49,4 @@ The following example demonstrates how to combine effects which run on different
 ## See Also
 
 * [Basic Usage of FX (Demo)](https://demos.telerik.com/kendo-ui/fx/expand)
-* [JavaScript API Reference of FX](/api/javascript/effects/common)
+* [JavaScript API Reference of FX](/api/effects/common)

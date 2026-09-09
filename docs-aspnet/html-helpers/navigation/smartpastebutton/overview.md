@@ -149,7 +149,7 @@ The SmartPasteButton can be used next to common editors and with the Telerik UI 
 * [Basic Usage of the SmartPasteButton (Demo)](https://demos.telerik.com/{{ site.platform }}/smartpastebutton)
 * [SmartPasteButton Events (Demo)](https://demos.telerik.com/{{ site.platform }}/smartpastebutton/events)
 * [SmartPasteButton Appearance (Demo)](https://demos.telerik.com/{{ site.platform }}/smartpastebutton/appearance)
-* [JavaScript API Reference of the SmartPasteButton](https://docs.telerik.com/kendo-ui/api/javascript/ui/smartpastebutton)
+* [JavaScript API Reference of the SmartPasteButton](https://docs.telerik.com/kendo-ui/api/ui/smartpastebutton)
 
 ## See Also
 

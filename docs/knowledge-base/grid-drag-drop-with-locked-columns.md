@@ -31,7 +31,7 @@ I have a grid that uses frozen/locked columns and has drag and drop functionalit
 
 The Kendo UI Grid with [locked columns]({% slug locked_columns_kendoui_grid_widget %}) creates two tables. To initialize the drag and drop over the locked table, we need to use the lockedTable element.
 
-1. Initialize the sortable over the [`lockedTable`](/api/javascript/ui/grid/fields/lockedtable) element.
+1. Initialize the sortable over the [`lockedTable`](/api/ui/grid/fields/lockedtable) element.
 2. Get the corresponding cells from the unlocked content table by looking for the row with the same data-uid to show the full row as the hint.
 
     ```

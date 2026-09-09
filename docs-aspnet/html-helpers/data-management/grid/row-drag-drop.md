@@ -107,7 +107,7 @@ Additionally, the row drag clue will be `N items selected` where `N` is the numb
 
 ## Drag and Drop Rows between Grids
 
-You can move items from one instance of the Grid to another by handling the [`RowReorder` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/rowreorder) of the Grid. It fires on reordering for both Grid instances and allows you to access and modify their data sources. Both Grids must be bound to the same model.
+You can move items from one instance of the Grid to another by handling the [`RowReorder` event](https://docs.telerik.com/kendo-ui/api/ui/grid/events/rowreorder) of the Grid. It fires on reordering for both Grid instances and allows you to access and modify their data sources. Both Grids must be bound to the same model.
 
 > Dragging and dropping a row into an empty Grid requires a custom implementation that adds a placeholder row to the target Grid.
 
@@ -316,4 +316,4 @@ When the [`Multiple` selection]({% slug htmlhelpers_grid_aspnetcore_selection%}#
 * [Row Drag and Drop by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/drag-drop)
 * [Grid Events]({% slug grid_events %})
 * [Server-Side API](/api/grid)
-* [Grid Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Grid Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/grid)

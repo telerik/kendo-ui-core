@@ -31,7 +31,7 @@ Code is provided by [OF360](https://of360.fr).
 ## Solution
 
 The functionality relies on the following concepts:
-* The [`edit`](/api/javascript/ui/grid/events/edit) event handler of the Grid provides a reference to the DOM element of the edit container.
+* The [`edit`](/api/ui/grid/events/edit) event handler of the Grid provides a reference to the DOM element of the edit container.
 * The Kendo UI widgets have a `data-role` HTML attribute rendered for the DOM element. This attribute holds the widget object.
 
 For brevity, the following demo does not include the configuration for the Data Source transport. However, for the [CRUD operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}) to work properly, they require a transport configuration.
@@ -292,4 +292,4 @@ $("#dropdownlistDay").kendoDropDownList({
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

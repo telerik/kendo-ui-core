@@ -7,8 +7,8 @@ res_type: api
 
 # kendo.data.Model
 
-`Model` inherits from the [`ObservableObject`](/api/javascript/data/observableobject) and extends it with fields and methods which enable it to define a schema. The
-[DataSource](/api/javascript/data/datasource) contains instances of the `Model` when the [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) setting is specified.
+`Model` inherits from the [`ObservableObject`](/api/data/observableobject) and extends it with fields and methods which enable it to define a schema. The
+[DataSource](/api/data/datasource) contains instances of the `Model` when the [`schema.model`](/api/data/datasource/configuration/schema#schemamodel) setting is specified.
 
 ## Fields
 
@@ -122,7 +122,7 @@ How do I specify the unique identifier field in Kendo UI for jQuery data source?
 
 ### uid
 
-The unique identifier of the `Model`. Inherited from `ObservableObject`. For more information, refer to the [`uid`](/api/javascript/data/observableobject#fields-uid) API reference.
+The unique identifier of the `Model`. Inherited from `ObservableObject`. For more information, refer to the [`uid`](/api/data/observableobject#fields-uid) API reference.
 
 
 <div class="meta-api-description">
@@ -172,7 +172,7 @@ How to determine if a Kendo UI datasource model has unsaved changes? Detect if d
 
 ### bind
 
-Attaches a handler to an event. For more information and examples, refer to the [`bind`](/api/javascript/observable/methods/bind) API reference.
+Attaches a handler to an event. For more information and examples, refer to the [`bind`](/api/observable/methods/bind) API reference.
 
 
 <div class="meta-api-description">
@@ -313,7 +313,7 @@ Specifies the field of the original record whose value is used to populate the M
 
 ##### options.fields.fieldName.validation `Object`
 
-Specifies the validation options which will be used by the [Kendo UI Validator](/api/javascript/ui/validator).
+Specifies the validation options which will be used by the [Kendo UI Validator](/api/ui/validator).
 
 #### Example - define the fields of a model
 
@@ -392,7 +392,7 @@ The field that will be checked.
 
 ### get
 
-Gets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/javascript/data/observableobject/methods/get) API reference.
+Gets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/data/observableobject/methods/get) API reference.
 
 
 <div class="meta-api-description">
@@ -453,7 +453,7 @@ How do I check if a data record is new in Kendo UI for jQuery? Check if a data r
 
 ### set
 
-Sets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/javascript/data/observableobject/methods/set) API reference.
+Sets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/data/observableobject/methods/set) API reference.
 
 
 <div class="meta-api-description">
@@ -491,7 +491,7 @@ How can I dynamically update model fields in Kendo UI for jQuery? Update or assi
 
 ### toJSON
 
-Creates a plain JavaScript object which contains all fields of the `Model`. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`toJSON`](/api/javascript/data/observableobject/methods/tojson) API reference.
+Creates a plain JavaScript object which contains all fields of the `Model`. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`toJSON`](/api/data/observableobject/methods/tojson) API reference.
 
 
 <div class="meta-api-description">
@@ -532,7 +532,7 @@ How do I convert a Kendo UI Datasource model instance to a JSON object? Convert 
 
 ### change
 
-Fires when a field value is updated through the `set` method. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`change`](/api/javascript/data/observableobject/events/change) API reference.
+Fires when a field value is updated through the `set` method. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`change`](/api/data/observableobject/events/change) API reference.
 
 
 <div class="meta-api-description">
@@ -571,7 +571,7 @@ How to detect changes in Kendo UI for jQuery data model fields? Detect and handl
 
 ### get
 
-Fires when the `get` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/javascript/data/observableobject/events/get) API reference.
+Fires when the `get` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/data/observableobject/events/get) API reference.
 
 
 <div class="meta-api-description">
@@ -604,7 +604,7 @@ How can I set up event listeners to track when a data model property is accessed
 
 ### set
 
-Fires when the `set` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/javascript/data/observableobject/events/set) API reference.
+Fires when the `set` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/data/observableobject/events/set) API reference.
 
 
 <div class="meta-api-description">

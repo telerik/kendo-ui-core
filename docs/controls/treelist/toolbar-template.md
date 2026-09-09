@@ -9,13 +9,13 @@ position: 4
 
 # Toolbar Templates
 
-The Kendo UI TreeList provides full control over the rendering of its Toolbar content by using the [`Kendo UI Templates`](/framework/templates/overview). The [`toolbar.template`](/api/javascript/ui/treelist/configuration/toolbar#toolbaritemstemplate) configuration enables you to specify your own layout instead of using the built-in buttons.
+The Kendo UI TreeList provides full control over the rendering of its Toolbar content by using the [`Kendo UI Templates`](/framework/templates/overview). The [`toolbar.template`](/api/ui/treelist/configuration/toolbar#toolbaritemstemplate) configuration enables you to specify your own layout instead of using the built-in buttons.
 
 ## Setting a Toolbar Template as a Function
 
-The [`template`](/api/javascript/ui/treelist/configuration/toolbar#toolbaritemstemplate) toolbar configuration enables you to pass a function and build an HTML chunk.
+The [`template`](/api/ui/treelist/configuration/toolbar#toolbaritemstemplate) toolbar configuration enables you to pass a function and build an HTML chunk.
 
-The following example demonstrates how to set the template as a function that is returned by [`kendo.template`](/api/javascript/kendo/methods/template).
+The following example demonstrates how to set the template as a function that is returned by [`kendo.template`](/api/kendo/methods/template).
 
 ```dojo
     <div id="treelist"></div>
@@ -49,7 +49,7 @@ The following example demonstrates how to set the template as a function that is
 
 ## Setting a Toolbar Template as a String
 
-The [`template`](/api/javascript/ui/treelist/configuration/toolbar#toolbartemplate) toolbar configuration enables you to create HTML chunks by passing directly a string.
+The [`template`](/api/ui/treelist/configuration/toolbar#toolbartemplate) toolbar configuration enables you to create HTML chunks by passing directly a string.
 
 The following example demonstrates how to set the template as a string.
 
@@ -88,4 +88,4 @@ The following example demonstrates how to set the template as a string.
 
 * [Using Toolbar Templates in the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/toolbar-template)
 * [Introduction on Templates]({% slug overview_kendoui_templatescomponent %})
-* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
+* [JavaScript API Reference of the TreeList](/api/ui/treelist)

@@ -63,4 +63,4 @@ In `stretch` mode:
 ## See Also
 
 * [Basic Usage of the SegmentedControl (Demo)](https://demos.telerik.com/kendo-ui/segmentedcontrol/index)
-* [JavaScript API Reference of the SegmentedControl](/api/javascript/ui/segmentedcontrol)
+* [JavaScript API Reference of the SegmentedControl](/api/ui/segmentedcontrol)

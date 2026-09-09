@@ -39,4 +39,4 @@ You can subscribe to the events by the handler name.
 
 ## See Also
 
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)

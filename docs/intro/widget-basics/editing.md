@@ -21,23 +21,23 @@ The following components support editing:
 ## Getting Started
 
 The Kendo UI components that support editing provide the following common configuration options:
-- `editable`&mdash;Controls whether the editing is enabled or not. For instance, the editing functionality in the Kendo UI Grid component is disabled by default. For detailed information, refer to [the API article on editing of the Grid](/api/javascript/ui/grid/configuration/editable).
+- `editable`&mdash;Controls whether the editing is enabled or not. For instance, the editing functionality in the Kendo UI Grid component is disabled by default. For detailed information, refer to [the API article on editing of the Grid](/api/ui/grid/configuration/editable).
 - `editable.template`&mdash;Allows you to define a custom editor template.
 
-> Some components provide additional `editable` options. For more details, refer to the particular component API documentation. For example, the Grid component can disable the `remove` functionality by using the [`editable.destroy`](/api/javascript/ui/grid/configuration/editable.destroy) option.
+> Some components provide additional `editable` options. For more details, refer to the particular component API documentation. For example, the Grid component can disable the `remove` functionality by using the [`editable.destroy`](/api/ui/grid/configuration/editable.destroy) option.
 
 The Kendo UI components that support editing provide the following common events:
 - `edit`&mdash;Triggered before the editor form is shown. The UI elements are already bound to the model.
 - `save`&mdash;Triggered before the model is saved. The editor form is still open.
 - `remove`&mdash;Triggered before the model is removed.
 
-> * Only the Scheduler and the Gantt support the preventing of the [`edit`](/api/javascript/ui/scheduler/events/edit), [`save`](/api/javascript/ui/scheduler/events/save), and [`remove`](/api/javascript/ui/scheduler/events/remove) events.
+> * Only the Scheduler and the Gantt support the preventing of the [`edit`](/api/ui/scheduler/events/edit), [`save`](/api/ui/scheduler/events/save), and [`remove`](/api/ui/scheduler/events/remove) events.
 > * The components use only one editor form. It applies the same editor template for the `create` and `update` actions.
 
 To enable the editing feature of the component:
 
 1. Configure the [CRUD](/framework/datasource/crud) (Create, Read, Update, Destroy) data operation actions of the DataSource.
-2. Define the model fields by using the [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) option.
+2. Define the model fields by using the [`schema.model`](/api/data/datasource/configuration/schema#schemamodel) option.
 3. Enable the `editable` option.
 
 For more information on setting up editing in Kendo UI, refer to the [article on editing of the Grid]({% slug editing_kendoui_grid_widget %}). The approaches are largely applicable to the other Kendo UI components which support the editing.
@@ -48,7 +48,7 @@ You can [build editor forms](#building-editor-forms) and [bind specific models t
 
 ### Building Editor Forms
 
-A Kendo UI component builds an editor form dynamically based on the [`schema.model`](/api/javascript/data/model/methods/define) structure and more specifically the `fields` collection.
+A Kendo UI component builds an editor form dynamically based on the [`schema.model`](/api/data/model/methods/define) structure and more specifically the `fields` collection.
 
 > * Define the `id` field of the data items in `schema.model.id`. This ensures the correct adding, editing, and deleting of items.
 > * Define the datatype of the fields to take advantage of the built-in editors, filterable UI and correct sorting, filtering and grouping.
@@ -58,12 +58,12 @@ The following table lists the available data types.
 Data Type | Editor | Parser
 :-------: | :--------: | :------------------:
 `string`| `<input type="text" class="k-input k-textbox" name="fieldName" data-bind="value:fieldName">` | Internal method. String conversion.
-`number`| [`kendo.ui.NumericTextBox`](/controls/numerictextbox/overview) | [`kendo.parseFloat()`](/api/javascript/kendo/methods/parsefloat)
-`date` | [`kendo.ui.DatePicker`](/controls/datepicker/overview) | [`kendo.parseDate()`](/api/javascript/kendo/methods/parsedate)
+`number`| [`kendo.ui.NumericTextBox`](/controls/numerictextbox/overview) | [`kendo.parseFloat()`](/api/kendo/methods/parsefloat)
+`date` | [`kendo.ui.DatePicker`](/controls/datepicker/overview) | [`kendo.parseDate()`](/api/kendo/methods/parsedate)
 `boolean` | `<input type="checkbox" name="fieldName" data-type="boolean" data-bind="checked:fieldName">`| Internal method. Boolean conversion.
 `object` |  `<input type="text" class="k-input k-textbox" name="fieldName" data-bind="value:fieldName">` | Not processed. The value is passed as is.
 
-The following example demonstrates how to declare the fields definitions through the DataSource [`schema.model `](/api/javascript/data/datasource/configuration/schema#schemamodel).
+The following example demonstrates how to declare the fields definitions through the DataSource [`schema.model `](/api/data/datasource/configuration/schema#schemamodel).
 
         schema: {
             model: {
@@ -100,13 +100,13 @@ The following example demonstrates how to declare the fields definitions through
             }
         }
 
-> The Kendo UI Scheduler has [a static model structure](/api/javascript/data/schedulerevent#fields) and it follows only the predefined model fields list. To edit the additional fields, use [a custom editor template]({% slug howto_customize_editand_event_templates_scheduler %}).
+> The Kendo UI Scheduler has [a static model structure](/api/data/schedulerevent#fields) and it follows only the predefined model fields list. To edit the additional fields, use [a custom editor template]({% slug howto_customize_editand_event_templates_scheduler %}).
 
 The auto-generated editor form is bound to the model through the [Kendo UI MVVM pattern]({% slug overview_mvvmpattern_kendoui %}). The component also allows you to override this form by using a custom editor template.
 
 Once the form is created, the component performs the following actions:
 
-1. [Binds](/api/javascript/kendo/methods/bind) the editor fields to the model.
+1. [Binds](/api/kendo/methods/bind) the editor fields to the model.
 2. Triggers the `edit` event.
 3. Shows the editor form.
 4. Updates the model based on the changes made in the editors.
@@ -122,7 +122,7 @@ This connection respects the following rules:
 
 - On initial load, the editor form is populated using the model values.
 - The model is updated when the related `editor` triggers a `change` event. The `value binding` gets its value and populates the model field.
-- The form editors are updated when the [`ObservableObject` API](/api/javascript/data/observableobject) is used. Use the [`set` method](/api/javascript/data/observableobject/methods/set) if you want to update the corresponding UI editors. If this API is omitted, the editors do not change.
+- The form editors are updated when the [`ObservableObject` API](/api/data/observableobject) is used. Use the [`set` method](/api/data/observableobject/methods/set) if you want to update the corresponding UI editors. If this API is omitted, the editors do not change.
 
 ## Common Scenarios
 
@@ -167,7 +167,7 @@ You can access a specific editor element from the editor form by using the `edit
 
 To modify the `model` by updating the relevant editor, trigger the `change` event manually. In this way, you notify the `value` binding of the change and the model is updated accordingly.
 
-> The Kendo UI components provide the [`trigger` method](/api/javascript/observable/methods/trigger) which must be used to trigger the `change` event.
+> The Kendo UI components provide the [`trigger` method](/api/observable/methods/trigger) which must be used to trigger the `change` event.
 
 ### Adding Editors without Using MVVM Bindings
 
@@ -191,15 +191,15 @@ Wire the `edit` event of the component. You will get the model from the passed a
         var model = e.model;
     }
 
-> The Scheduler passes the `e.event` field instead of the `model` one. The event is an instance of the [`SchedulerEvent`](/api/javascript/data/schedulerevent) class. For more details, see the corresponding `edit` event API documentation of the respective Kendo UI component.
+> The Scheduler passes the `e.event` field instead of the `model` one. The event is an instance of the [`SchedulerEvent`](/api/data/schedulerevent) class. For more details, see the corresponding `edit` event API documentation of the respective Kendo UI component.
 
 ### Accessing Models by UID
 
-Every model has a unique identifier. It is applied to the HTML element that holds the editor form. You are able to recognize that element by the `data-uid` HTML attribute. Use that `uid` value to get the model from the DataSource of the component by using [`getByUid` method](/api/javascript/data/datasource/methods/getbyuid).
+Every model has a unique identifier. It is applied to the HTML element that holds the editor form. You are able to recognize that element by the `data-uid` HTML attribute. Use that `uid` value to get the model from the DataSource of the component by using [`getByUid` method](/api/data/datasource/methods/getbyuid).
 
 ### Identifying New Models
 
-To differentiate between the `create` and `update` actions, use the [`Model.isNew()` method](/api/javascript/data/model/methods/isnew).
+To differentiate between the `create` and `update` actions, use the [`Model.isNew()` method](/api/data/model/methods/isnew).
 
 ## Troubleshooting
 
@@ -210,11 +210,11 @@ This section provides solutions for common issues you might encounter while conf
 **Description** A common scenario is to modify the model in the `edit` event of the component which will be prevented if the initial (default) value of the model field is invalid. In this case, the attached UI validation prevents any additional model modifications until the value is updated from the editor form.
 
 **Cause** The following actions that occur during a model update create the issue:
-* A model field is updated using the [`set` method](/api/javascript/data/observableobject/methods/set).
+* A model field is updated using the [`set` method](/api/data/observableobject/methods/set).
 * The model gets the new value, compares it to the current one and, if they are different, the new value is ready to be set.
 * UI validation is triggered. Note that it uses the editor element value to perform the validation check. However, it is invalid and hence the new value that we try to set is ignored.
 
-**Solution** Define a valid `defaultValue` by using the [`schema.model.fields.defaultValue` option](/api/javascript/data/model/methods/define).
+**Solution** Define a valid `defaultValue` by using the [`schema.model.fields.defaultValue` option](/api/data/model/methods/define).
 
 ## See Also
 

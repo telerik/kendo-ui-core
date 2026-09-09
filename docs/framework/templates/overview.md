@@ -27,7 +27,7 @@ The Kendo UI Templates focus on providing essential template features for common
 * [Getting Started with Inline Templates]({% slug getting_started_inline_templates %})
 * [Getting Started with External Templates]({% slug getting_started_external_templates %})
 * [Templates Essentials]({% slug essentials_templates %})
-* [Templates JavaScript API Reference](/api/javascript/kendo/methods/template)
+* [Templates JavaScript API Reference](/api/kendo/methods/template)
 * [Templates Demos](https://demos.telerik.com/kendo-ui/templates/index)
 * [Knowledge Base](https://docs.telerik.com/kendo-ui/knowledge-base)
 

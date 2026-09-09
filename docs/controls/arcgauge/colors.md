@@ -11,7 +11,7 @@ position: 3
 
 The ArcGauge enables you to set different colors depending on the current value.
 
-To configure the range colors, set the [`colors`](/api/javascript/dataviz/ui/arcgauge/configuration/colors)  option.
+To configure the range colors, set the [`colors`](/api/dataviz/ui/arcgauge/configuration/colors)  option.
 
     $("#gauge").kendoArcGauge({
         value: 30,
@@ -35,4 +35,4 @@ To configure the range colors, set the [`colors`](/api/javascript/dataviz/ui/arc
 ## See Also
 
 * [Using Colors in the ArcGauge (Demo)](https://demos.telerik.com/kendo-ui/arc-gauge/colors)
-* [JavaScript API Reference of the ArcGauge](/api/javascript/dataviz/ui/arcgauge)
+* [JavaScript API Reference of the ArcGauge](/api/dataviz/ui/arcgauge)

@@ -87,7 +87,7 @@ To receive metadata from the `save` handler:
     return Json(new object() { foo = "bar" });
     ```
 
-2. Declare a handler for the [`success` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/success) and process the response.
+2. Declare a handler for the [`success` event](https://docs.telerik.com/kendo-ui/api/ui/upload/events/success) and process the response.
 
     ```JS
     function onSuccess(e) {

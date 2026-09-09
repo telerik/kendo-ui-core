@@ -99,7 +99,7 @@ When you use JSZip in scenarios where the packages are loaded from NPM, explicit
 
 ## 2. Instantiate a Workbook
 
-First, instantiate a [`kendo.ooxml.Workbook`](/api/javascript/ooxml/workbook).
+First, instantiate a [`kendo.ooxml.Workbook`](/api/ooxml/workbook).
 
 ```javascript
     var workbook = new kendo.ooxml.Workbook({});
@@ -151,7 +151,7 @@ The workbook has an array of sheets. Sheets have rows and rows have cells.
 
 ## 4. Convert the Workbook to Data URI
 
-Call the [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
+Call the [`toDataURLAsync`](/api/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
 
 ```javascript
       workbook.toDataURLAsync().then(function(dataURL) {
@@ -161,7 +161,7 @@ Call the [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasyn
 
 ## 5. Save the Generated Excel File
 
-Call the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) method to save the Excel file on the client machine.
+Call the [`kendo.saveAs`](/api/kendo/methods/saveas) method to save the Excel file on the client machine.
 
 ```javascript
       workbook.toDataURLAsync().then(function(dataURL) {

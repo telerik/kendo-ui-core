@@ -140,7 +140,7 @@ The following example demonstrates how to implement the suggested approach.
 
 ### Using the Image Setting
 
-The following example shows how to implement the desired scenario by using the [`kendo.dataviz.diagram.Image`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/diagram/image) setting.
+The following example shows how to implement the desired scenario by using the [`kendo.dataviz.diagram.Image`](https://docs.telerik.com/kendo-ui/api/dataviz/diagram/image) setting.
 
 ```pseudo
 
@@ -233,5 +233,5 @@ The following example shows how to implement the desired scenario by using the [
 
 * [Overview of the Kendo UI for jQuery Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [Using the API of the jQuery Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/api)
-* [JavaScript API Reference of the jQuery Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the jQuery Diagram](/api/dataviz/ui/diagram)
 * [jQuery Diagram Product Page](https://www.telerik.com/kendo-jquery-ui/diagram)

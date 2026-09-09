@@ -27,9 +27,9 @@ All graphics render on the client by using the [Scalable Vector Graphics (SVG)](
 
 * [Getting Started with the Kendo UI CircularGauge for jQuery]({% slug getting_started_kendoui_circulargauge_component %})
 * [Basic Usage of the CircularGauge (Demo)](https://demos.telerik.com/kendo-ui/circular-gauge/index)
-* [JavaScript API Reference of the CircularGauge](/api/javascript/dataviz/ui/circulargauge)
+* [JavaScript API Reference of the CircularGauge](/api/dataviz/ui/circulargauge)
 
 ## See Also
 
 * [Overview of the CircularGauge (Demo)](https://demos.telerik.com/kendo-ui/circular-gauge/index)
-* [JavaScript API Reference of the CircularGauge](/api/javascript/dataviz/ui/circulargauge)
+* [JavaScript API Reference of the CircularGauge](/api/dataviz/ui/circulargauge)

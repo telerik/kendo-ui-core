@@ -27,7 +27,7 @@ The Kendo UI Chip supports the following styling options:
 
 Specifies the gap between the Chips in the ChipList. The structure of the class is `k-chip-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/chiplist/configuration/size) option:
+The following values are available for the [`size`](/api/ui/chiplist/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -45,7 +45,7 @@ The default size value is `undefined` and it the default size appearance is cont
 
 The `itemSize` option controls how big or small the rendered `chip items` looks. The structure of the class is `k-chip-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/chiplist/configuration/itemsize) option:
+The following values are available for the [`size`](/api/ui/chiplist/configuration/itemsize) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -63,7 +63,7 @@ The default size value is `undefined` and it the default appearance is controlle
 
 The `fillMode` specifies the background and border styles of the Chip items in the ChipList. The structure of the class is `k-chip-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/chiplist/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/chiplist/configuration/fillmode) option:
 
 - `solid`
 - `outline`
@@ -82,7 +82,7 @@ The default `fillMode` value is `undefined` and it the default appearance is con
 
 The `themeColor` option controls the color that will be applied to the rendered Chip in the ChipList. As applying `items.themeColor` is closely related to the `fillMode`, the structure of the class name for the `themeColor` is composite—`k-chip-{fillMode}-{themeColor}`.
 
-The following values are available for the [`themeColor`](/api/javascript/ui/chip/configuration/themecolor) option:
+The following values are available for the [`themeColor`](/api/ui/chip/configuration/themecolor) option:
 
 - `base`
 - `info`
@@ -110,7 +110,7 @@ The default `items.themeColor` value is `base`. A Chip with a default `fillMode`
 
 The `rounded` option controls how much border radius is applied to the rendered Chips inside the ChipList. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/chiplist/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/chiplist/configuration/rounded) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -136,4 +136,4 @@ To review the rendering of the component, refer to the HTML specifications in th
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the ChipList](https://demos.telerik.com/kendo-ui/chiplist/appearance)
-* [JavaScript API Reference of the ChipList](/api/javascript/ui/chiplist)
+* [JavaScript API Reference of the ChipList](/api/ui/chiplist)

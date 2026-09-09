@@ -1231,4 +1231,4 @@ How can I print the Kendo UI Scheduler on multiple pages when agenda view is sel
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

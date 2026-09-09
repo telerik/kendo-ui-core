@@ -37,7 +37,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To customize the drag handle appearance in the Kendo UI for jQuery Grid, use the [`dataBound`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/databound) event to replace the default content of the `.k-drag-cell` element.
+To customize the drag handle appearance in the Kendo UI for jQuery Grid, use the [`dataBound`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/databound) event to replace the default content of the `.k-drag-cell` element.
 
 1. Use the `dataBound` event of the Grid to access the drag handle elements.
 2. Replace the default content of the `.k-drag-cell` element with custom content.
@@ -86,4 +86,4 @@ In this example:
 ## See Also
 
 - [Kendo UI for jQuery Grid Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/overview) 
-- [Kendo UI for jQuery Grid API](/api/javascript/ui/grid) 
+- [Kendo UI for jQuery Grid API](/api/ui/grid) 

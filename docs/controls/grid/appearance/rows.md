@@ -15,7 +15,7 @@ The Grid enables you to handle the appearance of its rows by [using the `id` of 
 
 To get a table row in the Grid by the ID of the data item:
 
-1. Make sure the [ID field is defined in the model configuration](/api/javascript/data/model) of the data source of the Grid.
+1. Make sure the [ID field is defined in the model configuration](/api/data/model) of the data source of the Grid.
 2. Retrieve the row model, the model UID, and the Grid table row consecutively.
 
         var rowModel = gridObject.dataSource.get(10249); // get method of the Kendo UI dataSource object
@@ -26,7 +26,7 @@ To get a table row in the Grid by the ID of the data item:
 
 You can manually add a table row with a user-friendly message when the DataSource does not return any data, for example, as a result of filtering. For more information, refer to the article on [row templates]({% slug row_templates_kendoui_grid_widget %}).
 
-The following example demonstrates how to add a table row in the [`dataBound`](/api/javascript/ui/grid/events/databound) event handler of the Grid.
+The following example demonstrates how to add a table row in the [`dataBound`](/api/ui/grid/events/databound) event handler of the Grid.
 
     function onGridDataBound(e) {
         if (!e.sender.dataSource.view().length) {
@@ -75,4 +75,4 @@ However, if your project requires you to avoid the `hover` state, use either of 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

@@ -205,6 +205,6 @@ The sample includes:
 
 * [FileManager Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/filemanager/overview)
 * [FileManager Data Binding](https://www.telerik.com/kendo-jquery-ui/documentation/controls/filemanager/binding/overview)
-* [JavaScript API Reference of the FileManager](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/filemanager)
+* [JavaScript API Reference of the FileManager](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/filemanager)
 * [Azure Blob Storage Documentation](https://learn.microsoft.com/azure/storage/blobs/)
 * [Create an Azure Storage Account](https://learn.microsoft.com/azure/storage/common/storage-account-create?tabs=azure-portal)

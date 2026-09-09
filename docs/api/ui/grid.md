@@ -8,7 +8,7 @@ component: grid
 
 # kendo.ui.Grid
 
-Represents the Kendo UI Grid widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Grid widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -4329,7 +4329,7 @@ The status of the request as returned from [`jQuery.ajax`](https://api.jquery.co
 
 ### ai.aiAssistantWindow.restore
 
-Triggered when the AI Assistant Window is restored to its previous state(maximized or minimized) by pressing the restore button, or when the [`restore()`](/api/javascript/ui/window/methods/restore) method is called.
+Triggered when the AI Assistant Window is restored to its previous state(maximized or minimized) by pressing the restore button, or when the [`restore()`](/api/ui/window/methods/restore) method is called.
 
 
 <div class="meta-api-description">
@@ -4473,7 +4473,7 @@ How to allow users to paste plain text into Kendo UI Grid cells? Control whether
 
 ### altRowTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the alternating table rows. Be default the grid renders a table row (`<tr>`) for every data source item.
+The [template](/api/kendo/methods/template) which renders the alternating table rows. Be default the grid renders a table row (`<tr>`) for every data source item.
 
 > The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `${uid}`. The grid uses the `uid` data attribute to determine the data to which a table row is bound to.
 > Set the `class` of the table row to `k-alt` to get the default "alternating" look and feel.
@@ -4496,7 +4496,7 @@ How to customize alternating rows in Kendo UI Grid? Control and customize altern
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false`, the Grid will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/javascript/data/datasource/methods/fetch) method of the [dataSource](/api/javascript/ui/grid/fields/datasource) instance. In such scenarios data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
+If set to `false`, the Grid will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/data/datasource/methods/fetch) method of the [dataSource](/api/ui/grid/fields/datasource) instance. In such scenarios data binding will occur when the [change](/api/data/datasource/events/change) event of the
 dataSource instance is fired. By default, `autoBind` is set to `true` and the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -4773,7 +4773,7 @@ The "destroy" built-in command removes the data item to which the current table 
 
 Custom commands are supported by specifying the [click](columns.command.click) option.
 
-> The built-in "edit" and "destroy" commands work *only* if editing is enabled via the [editable](/api/javascript/ui/grid/configuration/editable) option. The "edit" command supports "inline" and "popup" editing modes.
+> The built-in "edit" and "destroy" commands work *only* if editing is enabled via the [editable](/api/ui/grid/configuration/editable) option. The "edit" command supports "inline" and "popup" editing modes.
 
 
 <div class="meta-api-description">
@@ -5396,10 +5396,10 @@ How to dynamically hide show command buttons in Kendo UI Grid based on row data?
 
 ### columns.dataSource `Object|kendo.data.DataSource`
 
-The data source of the values for the foreign key columns. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source of the values for the foreign key columns. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-> **Note:** When the dataSource property is set one should also set the [dataTextField](/api/javascript/ui/grid/configuration/columns.datatextfield) and [dataValueField](/api/javascript/ui/grid/configuration/columns.datavaluefield).
+> **Note:** When the dataSource property is set one should also set the [dataTextField](/api/ui/grid/configuration/columns.datatextfield) and [dataValueField](/api/ui/grid/configuration/columns.datavaluefield).
 
 
 <div class="meta-api-description">
@@ -5507,7 +5507,7 @@ How do I configure Kendo UI Grid to link column values to related data by mappin
 
 ### columns.draggable `Boolean` *(default: false)*
 
-If set to `true` a draghandle will be rendered and the user could reorder the rows by dragging the row via the drag handle. If the [selectable](/api/javascript/ui/grid/configuration/selectable) option is enabled for rows only selected rows will can be dragged and reordered.
+If set to `true` a draghandle will be rendered and the user could reorder the rows by dragging the row via the drag handle. If the [selectable](/api/ui/grid/configuration/selectable) option is enabled for rows only selected rows will can be dragged and reordered.
 
 > Note that the reordering operation is only a client-side operation and it does not reflect the order of any data that is bound to the server.
 
@@ -5572,7 +5572,7 @@ Provides a way to specify a custom editing UI for the column. Use the `container
 
 > Validation settings defined in the `model.fields` configuration will **not** be applied automatically. In order the validation to work, **the developer is responsible for attaching the corresponding validation attributes to the editor input** the `data-bind` attribute is whitespace sensitive. In case the custom editor is a widget, the developer should [customize the validation warning tooltip position](/framework/validator/overview#customizing-the-tooltip-position) in order to avoid visual issues.
 
-When used as `String`, defines the editor widget type. For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditor)
+When used as `String`, defines the editor widget type. For further info check the Form API: [`field`](/api/ui/form/configuration/items#itemseditor)
 
 
 <div class="meta-api-description">
@@ -5704,7 +5704,7 @@ The editor component size.
 
 ### columns.editorOptions `Object`
 
-Defines the widget configuration when one is initialized as editor for the column (or the widget defined in `items.editor`). For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditoroptions).
+Defines the widget configuration when one is initialized as editor for the column (or the widget defined in `items.editor`). For further info check the Form API: [`field`](/api/ui/form/configuration/items#itemseditoroptions).
 
 
 <div class="meta-api-description">
@@ -5888,7 +5888,7 @@ How to bind grid columns in Kendo UI to specific data fields for sorting and fil
 ### columns.filterable `Boolean|Object` *(default: true)*
 
 If set to `true` a filter menu will be displayed for this column when filtering is enabled. If set to `false` the filter menu will not be displayed. By default a filter menu is displayed
-for all columns when filtering is enabled via the [filterable](/api/javascript/ui/grid/configuration/filterable) option.
+for all columns when filtering is enabled via the [filterable](/api/ui/grid/configuration/filterable) option.
 
 Can be set to a JavaScript object which represents the filter menu configuration.
 
@@ -5957,13 +5957,13 @@ How do I customize the filter input type in each column header cell of a Kendo U
 
 ### columns.filterable.cell.dataSource `Object|kendo.data.DataSource`
 
-Specifies a custom dataSource for the AutoComplete when the type of the column is `string`. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance.
+Specifies a custom dataSource for the AutoComplete when the type of the column is `string`. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [`kendo.data.DataSource`](/api/data/datasource) instance.
 
 It is not recommended that you use the same `dataSource` instance for the Grid and the AutoComplete because it causes negative side effects.
 
 If the `dataSource` options is missing, a new cloned instance of the Grid's dataSource will be used.
 
-If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance, the widget will use that instance and will _not_ initialize a new one.
+If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/data/datasource) instance, the widget will use that instance and will _not_ initialize a new one.
 
 
 <div class="meta-api-description">
@@ -6131,7 +6131,7 @@ How to set custom width for filter input in Kendo UI Grid column header? Adjust 
 
 ### columns.filterable.cell.suggestionOperator `String` *(default: "startswith")*
 
-Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource/configuration/filter#filteroperator) option.
+Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/data/datasource/configuration/filter#filteroperator) option.
 
 > This operator is completely independent from the operator used for the filtering on this column. For more inforamtion, check [`operator`](columns.filterable.cell.operator).
 
@@ -6818,7 +6818,7 @@ How do I add custom CSS classes to the footer cell of a Kendo UI grid column? Cu
 The table footer cell will look like this: `<td class="table-footer-cell" style="text-align: right; font-size: 14px">Min: 30 Max: 33</td>`.
 
 ### columns.footerTemplate `String|Function`
-The [template](/api/javascript/kendo/methods/template) which renders the footer table cell for the column.
+The [template](/api/kendo/methods/template) which renders the footer table cell for the column.
 
 The fields which can be used in the template are:
 
@@ -6829,7 +6829,7 @@ The fields which can be used in the template are:
 * sum - the value of the "sum" aggregate (if specified)
 * data - provides access to all available aggregates, e.g. `data.fieldName1.sum` or `data.fieldName2.average`
 
-> If the grid is bound using [source binding](/framework/mvvm/bindings/source), it will initially be assigned with an empty [dataSource](/api/javascript/data/datasource) without any aggregates. In order to avoid a JavaScript error for an undefined aggregate when the footer is rendered with the empty dataSource, you should check if the field is defined in the template data before accessing the value. If no groups are specified for the actual dataSource, then you will also need to use the field name to access the aggregate value.
+> If the grid is bound using [source binding](/framework/mvvm/bindings/source), it will initially be assigned with an empty [dataSource](/api/data/datasource) without any aggregates. In order to avoid a JavaScript error for an undefined aggregate when the footer is rendered with the empty dataSource, you should check if the field is defined in the template data before accessing the value. If no groups are specified for the actual dataSource, then you will also need to use the field name to access the aggregate value.
 
 
 <div class="meta-api-description">
@@ -6917,7 +6917,7 @@ Takes the form "{0:format}" where "format" can be a:
 * [default date format](/globalization/intl/dateformatting#default-date-formats)
 * [custom date format](/globalization/intl/dateformatting#custom-date-formats)
 
-> The [kendo.format](/api/javascript/kendo/methods/format) function is used to format the value.
+> The [kendo.format](/api/kendo/methods/format) function is used to format the value.
 
 
 <div class="meta-api-description">
@@ -6988,7 +6988,7 @@ How to format date columns in Kendo UI Grid? Control and customize how data appe
 
 ### columns.groupable `Boolean|Object` *(default: true)*
 
-If set to `false` the user will not be able to group the grid by this column (requires Grid [`groupable`](/api/javascript/ui/grid/configuration/groupable) property to be enabled). By default all columns are groupable.
+If set to `false` the user will not be able to group the grid by this column (requires Grid [`groupable`](/api/ui/grid/configuration/groupable) property to be enabled). By default all columns are groupable.
 
 
 <div class="meta-api-description">
@@ -7071,7 +7071,7 @@ How to customize sorting behavior in grouped Grid columns using Kendo UI for jQu
 
 ### columns.groupable.sort.compare `Function`
 
-A JavaScript function which is used to compare the groups (refer to [`sortable.compare`](/api/javascript/ui/grid/configuration/columns.sortable#columns.sortable.compare) for comparing the items of the groups). It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+A JavaScript function which is used to compare the groups (refer to [`sortable.compare`](/api/ui/grid/configuration/columns.sortable#columns.sortable.compare) for comparing the items of the groups). It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
 
 
@@ -7181,7 +7181,7 @@ How to set sorting direction for grouped columns in Kendo UI Grid? Control or co
 
 Introduced in the Kendo UI 2018 R3 release.
 
-The [template](/api/javascript/kendo/methods/template) which renders the content for specific column in the group header when the grid is grouped by the column [field](columns.field).
+The [template](/api/kendo/methods/template) which renders the content for specific column in the group header when the grid is grouped by the column [field](columns.field).
 
 > **Note:** The columns.groupHeaderTemplate has a higher priority than columns.groupHeaderColumnTemplate. If columns.groupHeaderTemplate is defined for the current group column it will take precedence over the columns.groupHeaderColumnTemplate setting of the currently first visible column. See [Group Templates](/web/grid/Templates/group-templates) for more details on how this can be useful.
 
@@ -7251,7 +7251,7 @@ How to customize the group header in Kendo UI Grid when grouping by a specific c
 
 ### columns.groupHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the group header when the grid is grouped by the column [field](columns.field). By default the name of the field
+The [template](/api/kendo/methods/template) which renders the group header when the grid is grouped by the column [field](columns.field). By default the name of the field
 and the current group value is displayed.
 
 The fields which can be used in the template are:
@@ -7366,7 +7366,7 @@ How to customize group header template in Kendo UI Grid? Configure and customize
 
 ### columns.groupFooterTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the group footer for the corresponding column. By default the group footer is not displayed. The group footer will always appear as long as at least one column has a defined groupFooterTemplate.
+The [template](/api/kendo/methods/template) which renders the group footer for the corresponding column. By default the group footer is not displayed. The group footer will always appear as long as at least one column has a defined groupFooterTemplate.
 
 The fields which can be used in the template are:
 
@@ -7461,7 +7461,7 @@ How to add custom CSS classes to Kendo UI Grid column headers? Customize and con
 
 ### columns.headerTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the column header content. By default the value of the [title](columns.title) column option
+The [template](/api/kendo/methods/template) which renders the column header content. By default the value of the [title](columns.title) column option
 is displayed in the column header cell.
 
 > If sorting is enabled, the column header content will be wrapped in a `<span>` element.
@@ -7628,7 +7628,7 @@ How do I control column movement between locked and unlocked sections in a Kendo
 
 If set to `true` a pin/unpin icon button will be rendered in the column cells, allowing users to pin or unpin individual rows by clicking it. Clicking the icon opens a menu with options to pin the row to the top, pin to the bottom, or unpin it.
 
-> **Important:** The [`pinnable`](/api/javascript/ui/grid/configuration/pinnable) option on the Grid must also be set to enable row pinning.
+> **Important:** The [`pinnable`](/api/ui/grid/configuration/pinnable) option on the Grid must also be set to enable row pinning.
 
 
 <div class="meta-api-description">
@@ -7663,7 +7663,7 @@ How do I add a pin button column to a Kendo UI Grid? Add a visual pin icon or bu
 
 Sets the condition that needs to be satisfied for a column to remain visible. The property accepts valid strings for the [`matchMedia`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) browser API (assuming it is supported by the browser) and toggles the visibility of the columns based on the media queries.
 
-The [`hidden`](/api/javascript/ui/grid/configuration/columns.hidden) option takes precedence over `media`. This option cannot be used with [`minScreenWidth`](/api/javascript/ui/grid/configuration/columns.minscreenwidth) at the same time.
+The [`hidden`](/api/ui/grid/configuration/columns.hidden) option takes precedence over `media`. This option cannot be used with [`minScreenWidth`](/api/ui/grid/configuration/columns.minscreenwidth) at the same time.
 
 Also accepts the device identifiers that are [available in Bootstrap 4](https://v4-alpha.getbootstrap.com/layout/grid/#grid-options):
 
@@ -7700,7 +7700,7 @@ How to hide grid columns based on screen size using media queries in Kendo UI fo
 
 The pixel screen width below which the user will not be able to resize the column via the UI.
 
-> This option is meaningful when the grid is set as [resizable](/api/javascript/ui/grid/configuration/resizable).
+> This option is meaningful when the grid is set as [resizable](/api/ui/grid/configuration/resizable).
 
 
 <div class="meta-api-description">
@@ -7726,7 +7726,7 @@ How to set minimum width for resizable columns in Kendo UI Grid? Set a minimum p
 
 ### columns.minScreenWidth `Number`
 
-The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/grid/configuration/columns.hidden) setting,
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/ui/grid/configuration/columns.hidden) setting,
 so the two should not be used at the same time.
 
 
@@ -7782,9 +7782,9 @@ How can I make specific columns in my Kendo UI Grid resizable? Control whether s
 
 ### columns.selectable `Boolean` *(default: false)*
 
-If set to `true` the grid will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page. The [`change`](/api/javascript/ui/grid/events/change) event is fired when a row is selected.
+If set to `true` the grid will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page. The [`change`](/api/ui/grid/events/change) event is fired when a row is selected.
 
-> Setting the [`columns.selectable`](/api/javascript/ui/grid/configuration/columns.selectable) to `true` overrides the [`selectable.mode`](/api/javascript/ui/grid/configuration/selectable.mode) configuration property if it is set to `"single"`.
+> Setting the [`columns.selectable`](/api/ui/grid/configuration/columns.selectable) to `true` overrides the [`selectable.mode`](/api/ui/grid/configuration/selectable.mode) configuration property if it is set to `"single"`.
 
 More about the Grid Selection feature you can find in [this documentation article](/controls/grid/selection).
 
@@ -7809,7 +7809,7 @@ How to enable multi-row selection in Kendo UI Grid? Enable or configure multi-ro
 ### columns.sortable `Boolean|Object` *(default: true)*
 
 If set to `true` the user can click the column header and sort the grid by the column [field](columns.field) when sorting is enabled. If set to `false` sorting will
-be disabled for this column. By default all columns are sortable if sorting is enabled via the [sortable](/api/javascript/ui/grid/configuration/sortable) option.
+be disabled for this column. By default all columns are sortable if sorting is enabled via the [sortable](/api/ui/grid/configuration/sortable) option.
 
 
 <div class="meta-api-description">
@@ -7857,7 +7857,7 @@ How to allow users to remove sorting from column headers in Kendo UI Grid? Enabl
 
 A JavaScript function which is used to compare the values. It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
-> The compare function works only when [`serverSorting`](/api/javascript/data/datasource/configuration/serversorting) is set to **false**.
+> The compare function works only when [`serverSorting`](/api/data/datasource/configuration/serversorting) is set to **false**.
 
 The basic function implementation is as follows (pseudo-code):
 ```pseudo
@@ -7995,7 +7995,7 @@ How to enable sticky columns in a Kendo UI Grid? Control the ability to pin or u
 
 ### columns.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the column content. The grid renders table rows (`<tr>`) which represent the data source items.
+The [template](/api/kendo/methods/template) which renders the column content. The grid renders table rows (`<tr>`) which represent the data source items.
 Each table row consists of table cells (`<td>`) which represent the grid columns. By default the HTML-encoded value of the [field](columns.field) is displayed in the column.
 
 > Use the `template` to customize the way the column displays its value.
@@ -8073,7 +8073,7 @@ The width of the column. Numeric values are treated as pixels. The width option 
 
 **For more important information, please refer to [Column Widths](/controls/grid/columns/widths)**.
 
-Grid options, including column widths, can be set programmatically after Grid initialization with the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method.
+Grid options, including column widths, can be set programmatically after Grid initialization with the [`setOptions`](/api/ui/grid/methods/setoptions) method.
 
 
 <div class="meta-api-description">
@@ -8237,7 +8237,7 @@ How do I enable column management features in Kendo UI Grid's header? Control th
 
 If set to `auto` and the filterMenu will use adaptive rendering.
 
-> The Adaptive Rendering of the Column Menu is available only for `modern`[componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype)
+> The Adaptive Rendering of the Column Menu is available only for `modern`[componentType](/api/ui/grid/configuration/columnmenu.componenttype)
 
 
 <div class="meta-api-description">
@@ -8272,7 +8272,7 @@ How can I make the column menu in Kendo UI Grid adapt to different screen sizes?
 
 ### columnMenu.autoSize `Boolean` *(default: false)*
 
-If set to `true` the column menu would allow the user to fit one or all columns to the width of their content. This setting is available only when the `tabbed` [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is used.
+If set to `true` the column menu would allow the user to fit one or all columns to the width of their content. This setting is available only when the `tabbed` [componentType](/api/ui/grid/configuration/columnmenu.componenttype) is used.
 
 
 <div class="meta-api-description">
@@ -8476,7 +8476,7 @@ How to customize group title in Kendo UI Grid column menu? Customize or configur
 
 ### columnMenu.filterable `Boolean` *(default: true)*
 
-If set to `true` the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if filtering is enabled via the [filterable](/api/javascript/ui/grid/configuration/filterable).
+If set to `true` the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if filtering is enabled via the [filterable](/api/ui/grid/configuration/filterable).
 
 
 <div class="meta-api-description">
@@ -8569,7 +8569,7 @@ How to clear all filters in Kendo UI Grid column menu? Enable a single action to
 
 ### columnMenu.sortable `Boolean` *(default: true)*
 
-If set to `true` the column menu would allow the user to sort the grid by the column field. By default the column menu allows the user to sort if sorting is enabled via the [sortable](/api/javascript/ui/grid/configuration/sortable) option.
+If set to `true` the column menu would allow the user to sort the grid by the column field. By default the column menu allows the user to sort if sorting is enabled via the [sortable](/api/ui/grid/configuration/sortable) option.
 
 > If this option is set to `false` the user could still sort by clicking the column header cell.
 
@@ -8637,7 +8637,7 @@ How can I customize column menu messages in Kendo UI Grid? Configure and customi
 
 The text of the button which applies the columns filter.
 
-> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern` or `tabbed`.
+> The button is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu.componenttype) is set to `modern` or `tabbed`.
 
 
 <div class="meta-api-description">
@@ -8672,7 +8672,7 @@ How do I customize the label for the apply button in Kendo UI Grid's column menu
 
 The text of the autosize single column option.
 
-> The autosize option is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `tabbed`.
+> The autosize option is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu.componenttype) is set to `tabbed`.
 
 
 <div class="meta-api-description">
@@ -8708,7 +8708,7 @@ How can I customize the "Auto-size column" menu item in a Kendo UI Grid? Control
 
 The text of the autosize single column option.
 
-> The autosize option is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `tabbed`.
+> The autosize option is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu.componenttype) is set to `tabbed`.
 
 
 <div class="meta-api-description">
@@ -9139,7 +9139,7 @@ How do I customize the "Ungroup Column" option in Kendo UI Grid column menu? Cus
 
 The text of the button which resets the columns filter.
 
-> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern` or `tabbed`.
+> The button is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu.componenttype) is set to `modern` or `tabbed`.
 
 
 <div class="meta-api-description">
@@ -10983,7 +10983,7 @@ How do I configure custom actions in the Kendo UI Grid header context menu? Conf
 
 ### contextMenu.close `Function`
 
-Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.  [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.  [ContextMenu Events](/api/ui/contextmenu#events).
 
 
 <div class="meta-api-description">
@@ -11014,7 +11014,7 @@ How to prevent grid context menu from closing on click event? Control and manage
 
 ### contextMenu.open `Function`
 
-Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu. [ContextMenu Events](/api/ui/contextmenu#events).
 
 
 <div class="meta-api-description">
@@ -11045,7 +11045,7 @@ How to prevent context menu from opening in Kendo UI Grid? Control or intercept 
 
 ### contextMenu.activate `Function`
 
-Fires when a sub menu or the ContextMenu gets opened and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+Fires when a sub menu or the ContextMenu gets opened and its animation finished. [ContextMenu Events](/api/ui/contextmenu#events).
 
 
 <div class="meta-api-description">
@@ -11076,7 +11076,7 @@ How to hook into events when Kendo UI Grid context menu is fully open? Trigger c
 
 ### contextMenu.deactivate `Function`
 
-Fires when a sub menu or the ContextMenu gets closed and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+Fires when a sub menu or the ContextMenu gets closed and its animation finished. [ContextMenu Events](/api/ui/contextmenu#events).
 
 
 <div class="meta-api-description">
@@ -11107,7 +11107,7 @@ How to execute code when Kendo UI Grid context menu closes? Trigger functions or
 
 ### contextMenu.select `Function`
 
-Fires when a menu item gets selected. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+Fires when a menu item gets selected. [ContextMenu Events](/api/ui/contextmenu#events).
 
 
 <div class="meta-api-description">
@@ -11138,11 +11138,11 @@ How can I customize the actions triggered when users select items from a Kendo U
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the Grid holds the items that will be rendered inside the widget. An item can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance.
+The data source of the Grid holds the items that will be rendered inside the widget. An item can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [kendo.data.DataSource](/api/data/datasource) instance.
 
-If the `dataSource` option is set to a JavaScript object or array, the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance by using that value as a data source configuration.
+If the `dataSource` option is set to a JavaScript object or array, the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance by using that value as a data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 > For live demos and more complex configurations, refer to the article on [binding the Grid to local data](https://demos.telerik.com/kendo-ui/grid/local-data-binding) and [binding the Grid to remote data](https://demos.telerik.com/kendo-ui/grid/remote-data-binding).
 
@@ -11217,7 +11217,7 @@ How do I configure the data source for a Kendo UI Grid? Configure and control th
 
 ### detailTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the detail rows.
+The [template](/api/kendo/methods/template) which renders the detail rows.
 Check [Detail Template](https://demos.telerik.com/kendo-ui/grid/detailtemplate) for a live demo.
 
 > The detail template content cannot be wider than the total width of all master columns, unless the detail template is scrollable.
@@ -11254,7 +11254,7 @@ Can be set to a JavaScript object which represents the editing configuration.
 
 > The "inline" and "popup" editing modes are triggered by the "edit" column command. Thus it is required to have a column with an "edit" command.
 >
-> The "incell" editing mode combined with DataSource `autoSync: true` setting is not supported when using server-side grouping in the Grid. To be able to save edited values on each change, you can disable server-side grouping or trigger a DataSource `sync()` manually inside the [`cellClose` event](/api/javascript/ui/grid/events/cellclose).
+> The "incell" editing mode combined with DataSource `autoSync: true` setting is not supported when using server-side grouping in the Grid. To be able to save edited values on each change, you can disable server-side grouping or trigger a DataSource `sync()` manually inside the [`cellClose` event](/api/ui/grid/events/cellclose).
 
 
 <div class="meta-api-description">
@@ -11327,7 +11327,7 @@ Can be set to a string which will be used as the confirmation text.
 
 Can be set to a function which will be called, passing the model instance, to return the confirmation text.
 
-This and all Grid [`configuration properties`](/api/javascript/ui/grid#configuration) can be set (enabled/disabled) after the grid has been initialized with the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method.
+This and all Grid [`configuration properties`](/api/ui/grid#configuration) can be set (enabled/disabled) after the grid has been initialized with the [`setOptions`](/api/ui/grid/methods/setoptions) method.
 
 
 <div class="meta-api-description">
@@ -11697,13 +11697,13 @@ How do I configure different editing modes for cells in a Kendo UI grid? Control
 
 ### editable.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders popup editor.
+The [template](/api/kendo/methods/template) which renders popup editor.
 
 The template should contain elements whose `name` HTML attributes are set as the editable fields. This is how the grid will know
 which field to update. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
 
 > Use the `role` data attribute to initialize Kendo UI widgets in the template. Check [data attribute initialization](/framework/data-attribute-initialization) for more info.
-> The validation that is set in [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) is not mapped automatically. As a result, when you use the `editable.template` option, you have to add the validation for every element manually.
+> The validation that is set in [`schema.model`](/api/data/datasource/configuration/schema#schemamodel) is not mapped automatically. As a result, when you use the `editable.template` option, you have to add the validation for every element manually.
 
 To change the size of the popup editor you can follow the approach outlined in [this article](/knowledge-base/grid-adjust-popup-size).
 
@@ -11884,7 +11884,7 @@ How to disable all editing functions in Kendo UI Grid? Configure the grid to dis
 
 Configures the Kendo UI Window instance, which is used when the Grid edit mode is `"popup"`. The configuration is optional.
 
-For more information, please refer to the [Window configuration API](/api/javascript/ui/window).
+For more information, please refer to the [Window configuration API](/api/ui/window).
 
 
 <div class="meta-api-description">
@@ -13053,7 +13053,7 @@ How can I configure Kendo UI Grid to allow users to filter columns through a dro
 The text of the filter operators displayed in the filter menu.
 
 > * If `operators` are defined manually, the default messages will be overridden too. To control the `operators` and still use the default messages, retrieve them from the `FilterCell` prototype - `kendo.ui.FilterCell.fn.options.operators.{type}`, where the type can be `"string"`, `"date"`, `"number"`, and `"enums"`.
-> * If the same options are specific to a column, it is possible to use the [column filterable configuration of the Grid](/api/javascript/ui/grid/configuration/columns.filterable.operators).
+> * If the same options are specific to a column, it is possible to use the [column filterable configuration of the Grid](/api/ui/grid/configuration/columns.filterable.operators).
 > * In multiple Grids, it is possible to override the filterable options of the Kendo UI FilterMenu before the Grids are initialized. Then the new filter options will be available for all Grids without further configurations.
 
 
@@ -14613,7 +14613,7 @@ How can I keep footer rows visible in Kendo UI Grid when groups are collapsed? c
 
 ### groupable.stickyHeaders `Boolean` *(default: false)*
 
-When enabled the group header rows will stick to the top of the scrollable content area while scrolling through the group's data rows. Requires the [`scrollable`](/api/javascript/ui/grid/configuration/scrollable) option to be enabled.
+When enabled the group header rows will stick to the top of the scrollable content area while scrolling through the group's data rows. Requires the [`scrollable`](/api/ui/grid/configuration/scrollable) option to be enabled.
 
 
 <div class="meta-api-description">
@@ -14648,7 +14648,7 @@ How do I make group headers stick to the top of the grid while scrolling? Enable
 
 ### groupable.stickyFooters `Boolean` *(default: false)*
 
-When enabled the group footer rows will stick to the bottom of the scrollable content area while scrolling through the group's data rows. Requires the [`scrollable`](/api/javascript/ui/grid/configuration/scrollable) option to be enabled. The columns must have a [`groupFooterTemplate`](/api/javascript/ui/grid/configuration/columns.groupfootertemplate) defined.
+When enabled the group footer rows will stick to the bottom of the scrollable content area while scrolling through the group's data rows. Requires the [`scrollable`](/api/ui/grid/configuration/scrollable) option to be enabled. The columns must have a [`groupFooterTemplate`](/api/ui/grid/configuration/columns.groupfootertemplate) defined.
 
 
 <div class="meta-api-description">
@@ -14734,7 +14734,7 @@ How do I configure sorting for grouped data in a Kendo UI Grid? Control, configu
 
 ### groupable.sort.compare `Function`
 
-A JavaScript function which is used to compare the groups (refer to [`sortable`](/api/javascript/ui/grid/configuration/sortable) for sorting the items of the groups). It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+A JavaScript function which is used to compare the groups (refer to [`sortable`](/api/ui/grid/configuration/sortable) for sorting the items of the groups). It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
 
 <div class="meta-api-description">
@@ -16406,7 +16406,7 @@ If set to `true` and the grid is viewed on mobile browser it will use adaptive r
 
 Can be set to a string `phone` which will force the widget to use adaptive rendering regardless of browser type.
 
-> Avoid using the `mobile` option as it will be deprecated. Use the [`adaptiveMode`](/api/javascript/ui/grid/configuration/adaptivemode) configuration option instead.
+> Avoid using the `mobile` option as it will be deprecated. Use the [`adaptiveMode`](/api/ui/grid/configuration/adaptivemode) configuration option instead.
 
 > Important: With the mobile rendering, we recommend to set up the `height` option as well. Without setting an explicit height, every view of the grid might have a different height.
 
@@ -16511,7 +16511,7 @@ How do I display a "no records found" message in my Kendo UI Grid? Control displ
 
 ### noRecords.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which is rendered when current view contains no records.
+The [template](/api/kendo/methods/template) which is rendered when current view contains no records.
 
 
 <div class="meta-api-description">
@@ -16569,7 +16569,7 @@ If set to `true` the grid will display a pager. By default paging is disabled.
 
 Can be set to a JavaScript object which represents the pager configuration.
 
-> Don't forget to set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/grid/configuration/datasource) settings. If an already existing datasource instance is passed to the grid, then the [`pagesize`](/api/javascript/data/datasource/configuration/pagesize) option should be set in the dataSource's settings and not in the `pageable` settings.
+> Don't forget to set a [`pageSize`](/api/data/datasource/configuration/pagesize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/ui/grid/configuration/datasource) settings. If an already existing datasource instance is passed to the grid, then the [`pagesize`](/api/data/datasource/configuration/pagesize) option should be set in the dataSource's settings and not in the `pageable` settings.
 
 
 <div class="meta-api-description">
@@ -16806,7 +16806,7 @@ How to customize pagination messages in Kendo UI Grid? Control and customize pag
 
 ### pageable.messages.display `String` *(default: "{0} - {1} of {2} items")*,
 
-The pager info text. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The pager info text. Uses [kendo.format](/api/kendo/methods/format).
 
 Contains three placeholders:
 - {0} - the first data item index
@@ -16907,7 +16907,7 @@ How to customize the page number input label in Kendo UI Grid? Customize or loca
 
 ### pageable.messages.of `String` *(default: "of {0}")*,
 
-The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
+The label displayed before the pager input. Uses [kendo.format](/api/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
 
 
 <div class="meta-api-description">
@@ -17373,7 +17373,7 @@ How to hide previousNext buttons in a pageable Kendo UI Grid? Configure navigati
 
 ### pageable.refresh `Boolean` *(default: false)*
 
-If set to `true` the pager will display the refresh button. Clicking the refresh button will [refresh](/api/javascript/ui/grid/methods/refresh) the grid. By default the refresh button is not displayed.
+If set to `true` the pager will display the refresh button. Clicking the refresh button will [refresh](/api/ui/grid/methods/refresh) the grid. By default the refresh button is not displayed.
 
 
 <div class="meta-api-description">
@@ -18348,7 +18348,7 @@ Enables row pinning for the Grid. When enabled, rows can be pinned to the top or
 
 The `pinnable` option can be set to `true` to enable the feature without initially pinned rows, or to an object specifying which rows to pin by their ID values.
 
-> **Important:** The data source must define an [`schema.model.id`](/api/javascript/data/datasource/configuration/schema#schemamodel) field for row pinning to work.
+> **Important:** The data source must define an [`schema.model.id`](/api/data/datasource/configuration/schema#schemamodel) field for row pinning to work.
 
 
 <div class="meta-api-description">
@@ -18450,7 +18450,7 @@ How do I initially pin rows to the bottom of a Kendo UI Grid? Specify which rows
 
 Controls where rows can be pinned. When set to `"top"` or `"bottom"`, the pin column renders a single toggle icon instead of a context menu, allowing rows to be pinned or unpinned with a single click. When set to `"both"` (the default), the pin column shows a context menu with options to pin to the top, pin to the bottom, or unpin.
 
-The context menu items in the [`contextMenu`](/api/javascript/ui/grid/configuration/contextmenu) are also updated accordingly when `pinRowLocation` is set to a single location.
+The context menu items in the [`contextMenu`](/api/ui/grid/configuration/contextmenu) are also updated accordingly when `pinRowLocation` is set to a single location.
 
 <div class="meta-api-description">
 How do I restrict the pin location of rows in a Kendo UI Grid? Control whether rows can be pinned to the top only, bottom only, or both locations in a data grid, configure single-click pinning behavior that removes the pin context menu and directly pins rows to the specified location, set up a simplified pin toggle that pins or unpins rows with one click instead of choosing from a context menu, and define which pinning positions are available in the grid pin column and body context menu.
@@ -18510,7 +18510,7 @@ How do I restrict the pin location of rows in a Kendo UI Grid? Control whether r
 
 ### pinnable.isRowPinnable `Function`
 
-A function that determines whether a specific row can be pinned. The function receives an object with a `dataItem` field containing the data item for the row, and must return a boolean value. When the function returns `false` for a row, the pin column renders an empty cell without a pin icon, the pin column context menu does not open for that row, and the [`pinRows`](/api/javascript/ui/grid/methods/pinrows) method does not pin the row. Unpinning is always allowed regardless of this function's return value.
+A function that determines whether a specific row can be pinned. The function receives an object with a `dataItem` field containing the data item for the row, and must return a boolean value. When the function returns `false` for a row, the pin column renders an empty cell without a pin icon, the pin column context menu does not open for that row, and the [`pinRows`](/api/ui/grid/methods/pinrows) method does not pin the row. Unpinning is always allowed regardless of this function's return value.
 
 <div class="meta-api-description">
 How do I prevent specific rows from being pinned in a Kendo UI Grid? Control which rows are eligible for pinning or freezing in a data grid by providing a callback function that evaluates each row and returns whether it can be pinned, conditionally disable pinning for certain data items based on business rules, hide pin icons for non-pinnable rows, prevent the pin context menu from appearing on restricted rows, and block programmatic pinning via the API for rows that should not be fixed to the top or bottom of the grid.
@@ -18617,7 +18617,7 @@ Sets a value indicating whether the selection will be persisted when sorting, pa
 
 > **Note:** Selection persistence works only for row selection.
 >
-> In order for selection persistence to work correctly, you need to define an ID field in [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel).
+> In order for selection persistence to work correctly, you need to define an ID field in [`schema.model`](/api/data/datasource/configuration/schema#schemamodel).
 >
 > Selection persistence does not work for new items when the Grid DataSource is in offline mode. In offline mode, newly added items do not have IDs, which are required for selection persistence to work.
 
@@ -18714,7 +18714,7 @@ How do I enable column reordering in a Kendo UI Grid using JavaScript? Enable dr
 
 ### reorderable.rows `Boolean|Object` *(default:false)*
 
-If set to `true` the user could reorder the rows by dragging them. By default reordering for rows is disabled. If the [selectable](/api/javascript/ui/grid/configuration/selectable) option is enabled for rows only selected rows will can be dragged and reordered.
+If set to `true` the user could reorder the rows by dragging them. By default reordering for rows is disabled. If the [selectable](/api/ui/grid/configuration/selectable) option is enabled for rows only selected rows will can be dragged and reordered.
 
 > Note that the reordering operation is only a client-side operation and it does not reflect the order of any data that is bound to the server.
 
@@ -18875,7 +18875,7 @@ How to enable dynamic row height adjustments in Kendo UI Grid? Control and confi
 
 ### rowTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders rows. Be default renders a table row (`<tr>`) for every data source item.
+The [template](/api/kendo/methods/template) which renders rows. Be default renders a table row (`<tr>`) for every data source item.
 
 > There are a few important things to keep in mind when using `rowTemplate`.
 >
@@ -18950,7 +18950,7 @@ Can also be set to the following string values:
 - "columns" - enables virtualization of columns.
 - "rows, columns" - enables virtualization of both rows and columns.
 
-> For columns virtualization to work, define [widths for the columns](/api/javascript/ui/grid/configuration/columns.width). For additional information about the configuration of this functionality, visit the [Virtual Scrolling]({% slug virtual_scrolling_kendoui_grid_widget %}) documentation article.
+> For columns virtualization to work, define [widths for the columns](/api/ui/grid/configuration/columns.width). For additional information about the configuration of this functionality, visit the [Virtual Scrolling]({% slug virtual_scrolling_kendoui_grid_widget %}) documentation article.
 
 Check [Virtualization of local data](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data), [Virtualization of remote data](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) and [Colums Virtualization](https://demos.telerik.com/kendo-ui/grid/column-virtualization) for live demos.
 
@@ -19108,7 +19108,7 @@ How do I configure which fields in my Kendo UI Grid are searchable? Configure se
 
 ### search.fields.operator `String`
 
-Defines the operator for the field to be used in the filter expression: [filter](/api/javascript/data/datasource/configuration/filter).
+Defines the operator for the field to be used in the filter expression: [filter](/api/data/datasource/configuration/filter).
 
 <div class="meta-api-description">
 How do I configure the comparison operator in Kendo UI Grid search fields to match values with specific criteria? Configure and customize the comparison operator applied when filtering data within grid search fields, enabling control over how search values are matched against dataset entries using operators like equals, contains, starts with, greater than, less than, or custom comparison logic. Adjust or set the filter operator to refine the search behavior, specify the type of matching or comparison criteria, and optimize filter expressions for data queries. This includes selecting or changing comparison modes during grid setup to influence filtering operations, search queries, and result matching, ensuring precise or broad data filtering based on the selected operator logic.
@@ -19309,7 +19309,7 @@ How to enable checkbox selection in Kendo UI Grid with cell aggregation? Configu
 
 When set to `true`, the user can drag to select multiple Grid rows or cells.
 
-> Applies only for [multiple row or multiple cell selection](/api/javascript/ui/grid/configuration/selectable.mode).
+> Applies only for [multiple row or multiple cell selection](/api/ui/grid/configuration/selectable.mode).
 
 
 <div class="meta-api-description">
@@ -21549,7 +21549,7 @@ How do I configure column widths in a stacked Kendo UI grid layout? Configure th
 
 ### statusBarTemplate `Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the Status Bar/Aggregates Bar.
+The [template](/api/kendo/methods/template) which renders the Status Bar/Aggregates Bar.
 
 
 <div class="meta-api-description">
@@ -21587,7 +21587,7 @@ How do I customize the appearance of my Kendo UI grid's status bar? Control and 
 ### toolbar `String|Function|Array|Object`
 
 If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole grid Toolbar,
-and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
+and the string value will be passed as an argument to a [`kendo.template()`](/api/kendo/methods/template) function.
 
 If a `Function` value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.
 
@@ -21599,11 +21599,11 @@ The "cancel" built-in command reverts any data changes done by the end user.
 
 The "create" command adds an empty data item to the grid.
 
-The "save" command persists any data changes done by the end user. When executed fires [`saveChanges`](/api/javascript/ui/grid/events/savechanges) grid event.
+The "save" command persists any data changes done by the end user. When executed fires [`saveChanges`](/api/ui/grid/events/savechanges) grid event.
 
-The "excel" command exports the grid data in MS Excel format. Fires [`excelExport`](/api/javascript/ui/grid/events/excelexport) grid event.
+The "excel" command exports the grid data in MS Excel format. Fires [`excelExport`](/api/ui/grid/events/excelexport) grid event.
 
-The "pdf" command exports the grid data in PDF format. Fires [`pdfExport`](/api/javascript/ui/grid/events/pdfexport) grid event.
+The "pdf" command exports the grid data in PDF format. Fires [`pdfExport`](/api/ui/grid/events/pdfexport) grid event.
 
 The "search" command renders the built-in search panel for the grid.
 
@@ -21611,7 +21611,7 @@ The "columns" command renders a global column menu.
 
 The "columns" command generates a button to open a [global columns menu]({% slug columnmenu_kendoui_grid_widget %}).
 
-The "paste" command enables the user to switch between the "replace" and "insert" modes of the paste functionality. The [`allowPaste`](/api/javascript/ui/grid/configuration/allowpaste) configuration must enabled for the dropdown to appear.
+The "paste" command enables the user to switch between the "replace" and "insert" modes of the paste functionality. The [`allowPaste`](/api/ui/grid/configuration/allowpaste) configuration must enabled for the dropdown to appear.
 
 The "sort" command enables the user to use the sorting functionallity of the grid.
 
@@ -21627,7 +21627,7 @@ The "smartBox" command renders the smart search box tool in the toolbar.
 
 * If an `Object` value is assigned, it will propagate these properties to the underlying Toolbar:
   * `items` - an array of commands as explained above
-  * `overflow` - an object that configures the overflow behavior of the toolbar. The same as [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) property
+  * `overflow` - an object that configures the overflow behavior of the toolbar. The same as [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) property
 
 
 <div class="meta-api-description">
@@ -21719,7 +21719,7 @@ How to customize the toolbar in Kendo UI Grid with custom commands? Configure an
     });
     </script>
 
-Apart from the built-in tools, the Grid fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
+Apart from the built-in tools, the Grid fully exposes the [ToolBar.items API](/api/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
 
 #### Example
 
@@ -21784,15 +21784,15 @@ An array collection of items to be rendered in the toolbar. Each item will be tr
 
 - The "update" command save the changes to the dataItem that is being currenly edited.
 
-- The "destroy" command removes the selected item. To work as expected, the grid should be [selectable](/api/javascript/ui/grid/configuration/selectable). If multiple selection is enabled, the item which will be remoed is the last selected one.
+- The "destroy" command removes the selected item. To work as expected, the grid should be [selectable](/api/ui/grid/configuration/selectable). If multiple selection is enabled, the item which will be remoed is the last selected one.
 
-- The "edit" command triggers the edit state of currently selected item. To work as expected, the grid should be [selectable](/api/javascript/ui/grid/configuration/selectable). If multiple selection is enabled, the item which will be edited is the last selected one.
+- The "edit" command triggers the edit state of currently selected item. To work as expected, the grid should be [selectable](/api/ui/grid/configuration/selectable). If multiple selection is enabled, the item which will be edited is the last selected one.
 
-- The "save" command persists any data changes done by the end user. When executed fires [`saveChanges`](/api/javascript/ui/grid/events/savechanges) grid event.
+- The "save" command persists any data changes done by the end user. When executed fires [`saveChanges`](/api/ui/grid/events/savechanges) grid event.
 
-- The "excel" command exports the grid data in MS Excel format. Fires [`excelExport`](/api/javascript/ui/grid/events/excelexport) grid event.
+- The "excel" command exports the grid data in MS Excel format. Fires [`excelExport`](/api/ui/grid/events/excelexport) grid event.
 
-- The "pdf" command exports the grid data in PDF format. Fires [`pdfExport`](/api/javascript/ui/grid/events/pdfexport) grid event.
+- The "pdf" command exports the grid data in PDF format. Fires [`pdfExport`](/api/ui/grid/events/pdfexport) grid event.
 
 - The "search" command renders the built-in search panel for the grid.
 
@@ -21800,7 +21800,7 @@ An array collection of items to be rendered in the toolbar. Each item will be tr
 
 - The "columns" command generates a button to open a [global columns menu]({% slug columnmenu_kendoui_grid_widget %}).
 
-- The "paste" command enables the user to switch between the "replace" and "insert" modes of the paste functionality. The [`allowPaste`](/api/javascript/ui/grid/configuration/allowpaste) configuration must enabled for the dropdown to appear.
+- The "paste" command enables the user to switch between the "replace" and "insert" modes of the paste functionality. The [`allowPaste`](/api/ui/grid/configuration/allowpaste) configuration must enabled for the dropdown to appear.
 
 - The "sort" command enables the user to use the sorting functionallity of the grid.
 
@@ -21923,7 +21923,7 @@ How do I customize the names of toolbar buttons in a Kendo UI Grid? Configure or
 
 ### toolbar.items.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button.
+The [template](/api/kendo/methods/template) which renders the command. By default renders a button.
 
 > Check [Toolbar template](https://demos.telerik.com/kendo-ui/grid/toolbar-template) for a live demo.
 
@@ -22069,7 +22069,7 @@ How to customize toolbar button icon in Kendo UI Grid? Adjust or configure the t
     </script>
 
 ### toolbar.overflow `Object`
-Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+Specifies [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) configuration for the toolbar.
 
 
 <div class="meta-api-description">
@@ -22349,7 +22349,7 @@ How to show inactive tools in Kendo UI grid toolbar? Configure the visibility an
 
 ### toolbar.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button.
+The [template](/api/kendo/methods/template) which renders the command. By default renders a button.
 
 
 <div class="meta-api-description">
@@ -22472,7 +22472,7 @@ How can I set a fixed width for my Kendo UI Grid? Control and configure the hori
 
 ### columns `Array`
 
-The columns of the grid initialized from the [columns](/api/javascript/ui/grid/configuration/columns) option. every item from the `columns` array has the same fields as the corresponding [columns](/api/javascript/ui/grid/configuration/columns) option.
+The columns of the grid initialized from the [columns](/api/ui/grid/configuration/columns) option. every item from the `columns` array has the same fields as the corresponding [columns](/api/ui/grid/configuration/columns) option.
 
 
 <div class="meta-api-description">
@@ -22502,11 +22502,11 @@ How to dynamically modify column headers in Kendo UI grid after initialization? 
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/grid/configuration/datasource) option.
+The [data source](/api/data/datasource) of the widget. Configured via the [dataSource](/api/ui/grid/configuration/datasource) option.
 
 > Changes to the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/grid/methods/setdatasource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/ui/grid/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -22613,7 +22613,7 @@ How to access and manipulate the footer section of a Kendo UI grid? Obtain and c
 
 ### pager `kendo.ui.Pager`
 
-The [Pager widget](/api/javascript/ui/pager) attached to the Grid.
+The [Pager widget](/api/ui/pager) attached to the Grid.
 
 
 <div class="meta-api-description">
@@ -22879,7 +22879,7 @@ How to access the frozen columns section of a Kendo UI grid? Retrieve or interac
 
 Adds an empty data item to the grid. In "incell" and "inline" editing mode a table row will be appended. Popup window will be displayed in "popup" editing mode.
 
-Fires the [edit](/api/javascript/ui/grid/events/edit) event.
+Fires the [edit](/api/ui/grid/events/edit) event.
 
 
 <div class="meta-api-description">
@@ -22931,11 +22931,11 @@ How to automatically resize grid columns to fit their content width in Kendo UI 
 
 ##### column `Number|String|Object`
 
-The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection.
+The index of the column, or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/ui/grid/fields/columns) collection.
 
 When using multicolumn headers, using an index is not allowed. In such scenarios, please use a field name or a column object as a method argument.
 
-> The method ignores and does not resize [hidden](/api/javascript/ui/grid/configuration/columns.hidden) columns.
+> The method ignores and does not resize [hidden](/api/ui/grid/configuration/columns.hidden) columns.
 >
 > Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](slug://width_kendoui_grid_widget), according to their content.
 >
@@ -23004,9 +23004,9 @@ When using multicolumn headers, using an index is not allowed. In such scenarios
 
 Applies the minimum possible width for all columns, so that all text fits without wrapping.
 
-> The method ignores and does not resize [hidden](/api/javascript/ui/grid/configuration/columns.hidden) columns.
+> The method ignores and does not resize [hidden](/api/ui/grid/configuration/columns.hidden) columns.
 >
-> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns ([autoFitColumn](/api/javascript/ui/grid/methods/autoFitColumn)) that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](slug://width_kendoui_grid_widget), according to their content.
+> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns ([autoFitColumn](/api/ui/grid/methods/autoFitColumn)) that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](slug://width_kendoui_grid_widget), according to their content.
 >
 > Use `autoFitColumns` only after the Grid has been databound. Executing the method immediately after Grid initialization makes no sense and can lead to undesired behavior.
 
@@ -23019,7 +23019,7 @@ How can I automatically adjust column widths in my Kendo UI Grid to fit varying 
 
 ##### columns `Array` *optional*
 
-A set of column objects obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection. If parameter is not provided all Grid columns will be auto-fitted.
+A set of column objects obtained from the [columns](/api/ui/grid/fields/columns) collection. If parameter is not provided all Grid columns will be auto-fitted.
 
 #### Example - autofit all collumns
 
@@ -23208,9 +23208,9 @@ A string, DOM element or jQuery object which represents the table cell. A string
 
 ### clearSelection
 
-Clears the currently selected table rows or cells (depending on the current selection [mode](/api/javascript/ui/grid/configuration/selectable)).
+Clears the currently selected table rows or cells (depending on the current selection [mode](/api/ui/grid/configuration/selectable)).
 
-> By default clearSelection will clear the selected rows on the current page only when [persistSelection](/api/javascript/ui/grid/configuration/persistselection) is enabled. In order to clear all selected rows follow the approach in [this Knowledge Base article](https://docs.telerik.com/kendo-ui/knowledge-base/clear-selection-all-pages-grid).
+> By default clearSelection will clear the selected rows on the current page only when [persistSelection](/api/ui/grid/configuration/persistselection) is enabled. In order to clear all selected rows follow the approach in [this Knowledge Base article](https://docs.telerik.com/kendo-ui/knowledge-base/clear-selection-all-pages-grid).
 
 
 <div class="meta-api-description">
@@ -23240,9 +23240,9 @@ How do I clear selected rows in a Kendo UI grid? Clear or reset the currently se
 
 ### closeCell
 
-Stops editing the table cell which is in edit mode. Requires "incell" [edit mode](/api/javascript/ui/grid/configuration/editable.mode).
+Stops editing the table cell which is in edit mode. Requires "incell" [edit mode](/api/ui/grid/configuration/editable.mode).
 
-> When keyboard navigation is used, the Grid [`table`](/api/javascript/ui/grid/fields/table) must be focused programmatically after calling `closeCell`.
+> When keyboard navigation is used, the Grid [`table`](/api/ui/grid/fields/table) must be focused programmatically after calling `closeCell`.
 
 
 <div class="meta-api-description">
@@ -23456,7 +23456,7 @@ DOM element or jQuery object which represents the navigatable cell.
 
 ### dataItem
 
-Returns the data item to which the specified table row is bound. The data item is a [Kendo UI Model](/api/javascript/data/model) instance.
+Returns the data item to which the specified table row is bound. The data item is a [Kendo UI Model](/api/data/model) instance.
 
 > When using the **Grid's MVC wrapper**, the Grid must be **Ajax-bound** for the dataItem() method to work.
 When using server binding, the dataSource instance does not contain the serialized data items.
@@ -23474,7 +23474,7 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 #### Returns
 
-`kendo.data.ObservableObject` the data item to which the specified table row is bound. [More information about the ObservableObject type...](/api/javascript/data/observableobject)
+`kendo.data.ObservableObject` the data item to which the specified table row is bound. [More information about the ObservableObject type...](/api/data/observableobject)
 
 #### Example - get the data item to which the first table row is bound
 
@@ -23523,7 +23523,7 @@ What is the purpose of calling destroy on a Kendo UI Grid instance? Clean up and
 
 ### disableEditing
 
-Toggle off the Grid's editing capabilities. Requires [editable](/api/javascript/ui/grid/configuration/editable) to be enabled.
+Toggle off the Grid's editing capabilities. Requires [editable](/api/ui/grid/configuration/editable) to be enabled.
 
 
 <div class="meta-api-description">
@@ -23562,9 +23562,9 @@ How to disable runtime editing in Kendo UI Grid? Control or disable runtime edit
 
 ### editCell
 
-Switches the specified table cell in edit mode. Requires "incell" [edit mode](/api/javascript/ui/grid/configuration/editable.mode).
+Switches the specified table cell in edit mode. Requires "incell" [edit mode](/api/ui/grid/configuration/editable.mode).
 
-Fires the [edit](/api/javascript/ui/grid/events/edit) event.
+Fires the [edit](/api/ui/grid/events/edit) event.
 
 
 <div class="meta-api-description">
@@ -23603,9 +23603,9 @@ The jQuery object which represents the table cell.
 
 ### editRow
 
-Switches the specified table row in edit mode. Requires "inline" or "popup" [edit mode](/api/javascript/ui/grid/configuration/editable.mode).
+Switches the specified table row in edit mode. Requires "inline" or "popup" [edit mode](/api/ui/grid/configuration/editable.mode).
 
-Fires the [edit](/api/javascript/ui/grid/events/edit) event.
+Fires the [edit](/api/ui/grid/events/edit) event.
 
 
 <div class="meta-api-description">
@@ -23645,7 +23645,7 @@ The jQuery object which represents the table row.
 
 ### enableEditing
 
-Toggle on the Grid's editing capabilities. Requires [editable](/api/javascript/ui/grid/configuration/editable) to be enabled.
+Toggle on the Grid's editing capabilities. Requires [editable](/api/ui/grid/configuration/editable) to be enabled.
 
 
 <div class="meta-api-description">
@@ -23863,7 +23863,7 @@ If set to true, the exported items will include the column headers.
 Retrieves the options that are currently enabled or disabled on the Grid, also gives the current state of the dataSource.
 Use this method if you want to save the state of the Grid into a variable. It is also possible to extract and store only some of the Grid options.
 
-> Please refer to the [`setOptions()`](/api/javascript/ui/grid/methods/setoptions) method documentation for more important information.
+> Please refer to the [`setOptions()`](/api/ui/grid/methods/setoptions) method documentation for more important information.
 
 
 <div class="meta-api-description">
@@ -23971,34 +23971,34 @@ An array of command objects. Each command must have a `type` property and corres
 >
 > Each command can include an optional `message` property that will be displayed in the AI Assistant output view when using the built-in AI Assistant.
 
-- `GridSort` - Apply sorting to a column (requires [sortable](/api/javascript/ui/grid/configuration/sortable) to be enabled)
+- `GridSort` - Apply sorting to a column (requires [sortable](/api/ui/grid/configuration/sortable) to be enabled)
   ```javascript
   { type: "GridSort", sort: { field: "columnName", dir: "asc" }, message: "sort message" }
   ```
-- `GridClearSort` - Clear all sorting (requires [sortable](/api/javascript/ui/grid/configuration/sortable) to be enabled)
+- `GridClearSort` - Clear all sorting (requires [sortable](/api/ui/grid/configuration/sortable) to be enabled)
   ```javascript
   { type: "GridClearSort", message: "clear sort message" }
   ```
 
-- `GridFilter` - Apply filtering (requires [filterable](/api/javascript/ui/grid/configuration/filterable) to be enabled)
+- `GridFilter` - Apply filtering (requires [filterable](/api/ui/grid/configuration/filterable) to be enabled)
   ```javascript
   { type: "GridFilter", filter: { field: "columnName", operator: "eq", value: "someValue" }, message: "filter message" }
   ```
-- `GridClearFilter` - Clear all filters (requires [filterable](/api/javascript/ui/grid/configuration/filterable) to be enabled)
+- `GridClearFilter` - Clear all filters (requires [filterable](/api/ui/grid/configuration/filterable) to be enabled)
   ```javascript
   { type: "GridClearFilter", message: "clear filter message" }
   ```
 
-- `GridGroup` - Apply grouping (requires [groupable](/api/javascript/ui/grid/configuration/groupable) to be enabled)
+- `GridGroup` - Apply grouping (requires [groupable](/api/ui/grid/configuration/groupable) to be enabled)
   ```javascript
   { type: "GridGroup", group: { field: "columnName", dir: "asc" }, message: "group message" }
   ```
-- `GridClearGroup` - Clear grouping (requires [groupable](/api/javascript/ui/grid/configuration/groupable) to be enabled)
+- `GridClearGroup` - Clear grouping (requires [groupable](/api/ui/grid/configuration/groupable) to be enabled)
   ```javascript
   { type: "GridClearGroup", message: "clear group message" }
   ```
 
-- `GridSelect` - Select rows based on filter criteria (requires [selectable](/api/javascript/ui/grid/configuration/selectable) to be enabled)
+- `GridSelect` - Select rows based on filter criteria (requires [selectable](/api/ui/grid/configuration/selectable) to be enabled)
   ```javascript
   {
     type: "GridSelect",
@@ -24012,7 +24012,7 @@ An array of command objects. Each command must have a `type` property and corres
     message: "select message"
   }
   ```
-- `GridClearSelect` - Clear selection (requires [selectable](/api/javascript/ui/grid/configuration/selectable) to be enabled)
+- `GridClearSelect` - Clear selection (requires [selectable](/api/ui/grid/configuration/selectable) to be enabled)
   ```javascript
   { type: "GridClearSelect", message: "clear select message" }
   ```
@@ -24044,7 +24044,7 @@ An array of command objects. Each command must have a `type` property and corres
   ```javascript
   { type: "GridColumnShow", id: "column-uid", message: "column shown message" }
   ```
-- `GridColumnResize` - Resize a column (requires [resizable](/api/javascript/ui/grid/configuration/resizable) to be enabled)
+- `GridColumnResize` - Resize a column (requires [resizable](/api/ui/grid/configuration/resizable) to be enabled)
   ```javascript
   { type: "GridColumnResize", id: "column-uid", size: "20%", message: "column resize message" }
   ```
@@ -24056,12 +24056,12 @@ An array of command objects. Each command must have a `type` property and corres
   ```javascript
   { type: "GridColumnUnlock", id: "column-uid", message: "column unlocked message" }
   ```
-- `GridColumnReorder` - Reorder a column (requires [reorderable](/api/javascript/ui/grid/configuration/reorderable) to be enabled)
+- `GridColumnReorder` - Reorder a column (requires [reorderable](/api/ui/grid/configuration/reorderable) to be enabled)
   ```javascript
   { type: "GridColumnReorder", id: "column-uid", position: 2, message: "column moved message" }
   ```
 
-- `GridPage` - Navigate to a specific page (requires [pageable](/api/javascript/ui/grid/configuration/pageable) to be enabled)
+- `GridPage` - Navigate to a specific page (requires [pageable](/api/ui/grid/configuration/pageable) to be enabled)
   ```javascript
   { type: "GridPage", page: 2, message: "page changed message" }
   ```
@@ -24079,7 +24079,7 @@ An array of command objects. Each command must have a `type` property and corres
   { type: "GridExportExcel", fileName: "report.xlsx", message: "excel export message" }
   ```
 
-> When using the built-in Grid AI Assistant (configured via the [`ai`](/api/javascript/ui/grid/configuration/ai) option), the Grid automatically sends column metadata to your AI service and processes responses using `handleAIResponse`. For custom integrations, you'll need to call this method manually with properly formatted command objects.
+> When using the built-in Grid AI Assistant (configured via the [`ai`](/api/ui/grid/configuration/ai) option), the Grid automatically sends column metadata to your AI service and processes responses using `handleAIResponse`. For custom integrations, you'll need to call this method manually with properly formatted command objects.
 >
 > The Grid only executes commands for features that are enabled.
 
@@ -24257,7 +24257,7 @@ How to programmatically hide columns in Kendo UI Grid? Dynamically control colum
 
 ##### column `Number|String|Object|Array`
 
-The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection, or array of indexes, or array of fields, or array of column objects obtained from the collection of columns, or array of mixed values.
+The index of the column, or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/ui/grid/fields/columns) collection, or array of indexes, or array of fields, or array of column objects obtained from the collection of columns, or array of mixed values.
 
 When using multicolumn headers, using an index will hide a top-level column together with all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
 
@@ -24341,7 +24341,7 @@ When using multicolumn headers, using an index will hide a top-level column toge
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view) (e.g. the ones on the current page).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/data/datasource/methods/view) (e.g. the ones on the current page).
 
 
 <div class="meta-api-description">
@@ -24390,7 +24390,7 @@ How can I lock specific columns in my Kendo UI Grid so they remain visible durin
 
 ##### column `Number|String`
 
-The index of the column or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound.
+The index of the column or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound.
 
 > In order to use this method, the grid must be initialized with at least one locked column, and should have unlocked columns left after the target column is locked.
 
@@ -24599,9 +24599,9 @@ How do I update Kendo Grid data in jQuery after modifying an in-memory item? Tri
 
 Removes the specified table row from the grid. Also removes the corresponding data item from the data source.
 
-Executing of `removeRow` triggers the default execution of the Grid delete mechanism. If the Grid data source is configured with destroy remote data operation a delete request will be performed. If the `editable` configuration is set to `true`, a confirmation dialog will appear before removing the row. You can disable it from the [`editable.confirmation`](/api/javascript/ui/grid/configuration/editable.confirmation) setting.
+Executing of `removeRow` triggers the default execution of the Grid delete mechanism. If the Grid data source is configured with destroy remote data operation a delete request will be performed. If the `editable` configuration is set to `true`, a confirmation dialog will appear before removing the row. You can disable it from the [`editable.confirmation`](/api/ui/grid/configuration/editable.confirmation) setting.
 
-Fires the [remove](/api/javascript/ui/grid/events/remove) event.
+Fires the [remove](/api/ui/grid/events/remove) event.
 
 
 <div class="meta-api-description">
@@ -24747,7 +24747,7 @@ Initiates the CSV export.
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
-> This method does not fire the [`csvExport`](/api/javascript/ui/grid/events/csvexport) event.
+> This method does not fire the [`csvExport`](/api/ui/grid/events/csvexport) event.
 
 
 <div class="meta-api-description">
@@ -24777,7 +24777,7 @@ How to export Kendo UI grid data as a CSV file? Trigger or initiate on-demand ex
 
 ### saveAsExcel
 
-Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event.
+Initiates the Excel export. Also fires the [`excelExport`](/api/ui/grid/events/excelexport) event.
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
@@ -24809,11 +24809,11 @@ How to export Kendo UI grid data as an Excel file? Trigger or initiate on-demand
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/grid/events/pdfexport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/ui/grid/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
-> The [pdfExport](/api/javascript/ui/grid/events/pdfexport) event handler could be used to dynamically modify the to-be-exported PDF file.
+> The [pdfExport](/api/ui/grid/events/pdfexport) event handler could be used to dynamically modify the to-be-exported PDF file.
 
 
 <div class="meta-api-description">
@@ -24822,7 +24822,7 @@ How to programmatically export Kendo Grid data as a PDF file? Export, generate, 
 
 #### Returns
 
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/grid/events/pdfexport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/ui/grid/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
 
@@ -24848,9 +24848,9 @@ How to programmatically export Kendo Grid data as a PDF file? Export, generate, 
 
 ### saveChanges
 
-Saves any pending changes by calling the [sync](/api/javascript/data/datasource/methods/sync) method.
+Saves any pending changes by calling the [sync](/api/data/datasource/methods/sync) method.
 
-Fires the [saveChanges](/api/javascript/ui/grid/events/savechanges) event.
+Fires the [saveChanges](/api/ui/grid/events/savechanges) event.
 
 
 <div class="meta-api-description">
@@ -24989,11 +24989,11 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
 
 `jQuery` the selected table rows or cells.
 
-> The `select` method will not trigger the [`change event`](/api/javascript/ui/grid/events/change). In older versions of Kendo UI, the select method would trigger the [`change event`](/api/javascript/ui/grid/events/change), however this behavior was not intended. Refer to the second example for a workaround.
+> The `select` method will not trigger the [`change event`](/api/ui/grid/events/change). In older versions of Kendo UI, the select method would trigger the [`change event`](/api/ui/grid/events/change), however this behavior was not intended. Refer to the second example for a workaround.
 
 > In case of using frozen (locked) columns and row selection, the `select` method will return **two** table row elements for each selected item. Each pair of table row elements that correspond to the same data item, will have the same `data-uid` attribute value. One of the table rows will be a descendant of `div.k-grid-content-locked` and the other one will be a descendant of `div.k-grid-content`.
 
-> In order to clear the currently selected row, use the [clearSelection() method](/api/javascript/ui/grid/methods/clearselection).
+> In order to clear the currently selected row, use the [clearSelection() method](/api/ui/grid/methods/clearselection).
 
 #### Example - select the first and second table rows
 
@@ -25073,7 +25073,7 @@ Gets an array that holds the id field values of the selected rows.
 
 > There are a few important things to keep in mind when using `selectedKeyNames`.
 >
-> * **In order for the method to return the selected IDs you need to define an ID field in [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel).**
+> * **In order for the method to return the selected IDs you need to define an ID field in [`schema.model`](/api/data/datasource/configuration/schema#schemamodel).**
 > * **The selected IDs are sorted in ascending order inside the `selectedKeyNames` array.**
 
 
@@ -25234,11 +25234,11 @@ A jQuery object or array of jQuery objects which represents the table row(s) or 
 
 `jQuery` the selected table rows or cells.
 
-> The `highlight` method will not trigger the [`change event`](/api/javascript/ui/grid/events/change).
+> The `highlight` method will not trigger the [`change event`](/api/ui/grid/events/change).
 
 > In case of using frozen (locked) columns, the `highlight` method will return **two** table row elements for each highlighted item. Each pair of table row elements that correspond to the same data item, will have the same `data-uid` attribute value. One of the table rows will be a descendant of `div.k-grid-content-locked` and the other one will be a descendant of `div.k-grid-content`.
 
-> In order to clear the currently selected row, use the [clearHighlight() method](/api/javascript/ui/grid/methods/clearhighlight).
+> In order to clear the currently selected row, use the [clearHighlight() method](/api/ui/grid/methods/clearhighlight).
 
 #### Example - highlight the first table row
 
@@ -25325,8 +25325,8 @@ How do I programmatically clear selections in the Kendo UI Grid? Remove or reset
 
 ### setOptions
 
-Sets the [`options`](/api/javascript/ui/grid#configuration) of the Grid. Use this method if you want to enable/disable a particular feature/option or to load
-the complete state obtained previously with the [`getOptions`](/api/javascript/ui/grid/methods/getoptions) method.
+Sets the [`options`](/api/ui/grid#configuration) of the Grid. Use this method if you want to enable/disable a particular feature/option or to load
+the complete state obtained previously with the [`getOptions`](/api/ui/grid/methods/getoptions) method.
 
 When `setOptions` is called, the Grid widget will be destroyed and recreated. If the widget is bound to remote data, a new read request will be made.
 
@@ -25342,7 +25342,7 @@ When `setOptions` is called, the Grid widget will be destroyed and recreated. If
 > This is because the server templates are rendered server-side and do not have corresponding configuration options included in the JavaScript initialization statement that creates the
 > Grid object client-side. As a result, the templates will be lost once the `setOptions()` method is invoked.
 > There are two options to avoid the issue - use JavaScript initialization instead of an MVC wrapper, or add template configuration to the retrieved Grid state with the JavaScript
-> equivalent syntax (e.g. [`headerTemplate`](/api/javascript/ui/grid/configuration/columns.headertemplate) and [`toolbar`](/api/javascript/ui/grid/configuration/toolbar)).
+> equivalent syntax (e.g. [`headerTemplate`](/api/ui/grid/configuration/columns.headertemplate) and [`toolbar`](/api/ui/grid/configuration/toolbar)).
 
 
 <div class="meta-api-description">
@@ -25399,7 +25399,7 @@ How can I dynamically show hidden columns in a Kendo UI Grid? Enable displaying 
 
 ##### column `Number|String|Object|Array`
 
-The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection, or array of indexes, or array of fields, or array of column objects obtained from the collection of columns, or array of mixed values.
+The index of the column, or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/ui/grid/fields/columns) collection, or array of indexes, or array of fields, or array of column objects obtained from the collection of columns, or array of mixed values.
 
 When using multicolumn headers, using an index will hide a top-level column together with all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
 
@@ -25495,7 +25495,7 @@ How do I pin specific columns in a Kendo UI Grid to prevent them from scrolling 
 
 ##### column `Number|String`
 
-The index of the column or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound.
+The index of the column or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound.
 
 #### Example - stick a column
 
@@ -25526,7 +25526,7 @@ How to dynamically unlock columns in Kendo UI Grid? Enable dynamic column unfree
 
 ##### column `Number|String`
 
-The index of the column or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound.
+The index of the column or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound.
 
 > In order to use this method, the grid must be initialized with at least one locked column, and there should be locked columns left after the target column is unlocked.
 
@@ -25550,7 +25550,7 @@ The index of the column or the [field](/api/javascript/ui/grid/configuration/col
     grid.unlockColumn("name");
     </script>
 
-To unlock a column when it is the only one locked use the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method of the Grid.
+To unlock a column when it is the only one locked use the [`setOptions`](/api/ui/grid/methods/setoptions) method of the Grid.
 
 #### Example - unlock the last locked column
 
@@ -25637,7 +25637,7 @@ How do I unpin a column in Kendo UI grid? Enable developers to unpin, unfreeze, 
 
 ##### column `Number|String`
 
-The index of the column or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound.
+The index of the column or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound.
 
 #### Example - unstick a column
 
@@ -25672,7 +25672,7 @@ How to cancel editing in a Kendo UI Grid before it starts? Handle or intercept t
 
 ##### e.model `kendo.data.Model`
 
-The data item which is going to be edited. Use its [isNew](/api/javascript/data/model/methods/isnew) method to check if the data item is new (created) or not (edited).
+The data item which is going to be edited. Use its [isNew](/api/data/model/methods/isnew) method to check if the data item is new (created) or not (edited).
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -25758,7 +25758,7 @@ The widget instance which fired the event.
 
 ### cancel
 
-Fired when the user clicks the "cancel" button (in inline or popup [editing mode](/api/javascript/ui/grid/configuration/editable.mode)) or closes the popup window.
+Fired when the user clicks the "cancel" button (in inline or popup [editing mode](/api/ui/grid/configuration/editable.mode)) or closes the popup window.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
@@ -25771,7 +25771,7 @@ How do I handle edit cancellations in a Kendo UI Grid? Detect user actions that 
 
 ##### e.container `jQuery`
 
-The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](/api/javascript/ui/grid/events/edit).
+The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](/api/ui/grid/events/edit).
 
 ##### e.model `kendo.data.Model`
 
@@ -25855,7 +25855,7 @@ What event is triggered when an inline edit session in a Kendo UI grid cell ends
 
 ##### e.container `jQuery`
 
-The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](/api/javascript/ui/grid/events/edit).
+The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](/api/ui/grid/events/edit).
 
 ##### e.model `kendo.data.Model`
 
@@ -25931,11 +25931,11 @@ The widget instance which fired the event.
 
 ### change
 
-Fired when the user selects or deselects a table row or cell in the grid. To retrieve the selected elements, use the [`select`](/api/javascript/ui/grid/methods/select) method.
+Fired when the user selects or deselects a table row or cell in the grid. To retrieve the selected elements, use the [`select`](/api/ui/grid/methods/select) method.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
-The event will be fired only when the Grid is [`selectable`](/api/javascript/ui/grid/configuration/selectable).
+The event will be fired only when the Grid is [`selectable`](/api/ui/grid/configuration/selectable).
 
 
 <div class="meta-api-description">
@@ -26051,7 +26051,7 @@ The calculated cell aggregates. Available if `selectable.cellAggregates` is enab
 
 Fired when the user is about to select a table row or cell.
 
-The event will be fired only when the Grid is [`selectable`](/api/javascript/ui/grid/configuration/selectable).
+The event will be fired only when the Grid is [`selectable`](/api/ui/grid/configuration/selectable).
 
 
 <div class="meta-api-description">
@@ -26111,7 +26111,7 @@ How do I detect when a column is hidden in Kendo UI Grid? Detect when a grid col
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
+A JavaScript object which represents the [column](/api/ui/grid/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -26176,7 +26176,7 @@ How to detect column locking in Kendo UI Grid? Detect when a column is locked or
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
+A JavaScript object which represents the [column](/api/ui/grid/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -26401,7 +26401,7 @@ How do I detect when columns in my Kendo UI Grid are reordered by the user? Dete
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
+A JavaScript object which represents the [column](/api/ui/grid/configuration/columns) configuration.
 
 ##### e.newIndex `Number`
 
@@ -26474,7 +26474,7 @@ How can I detect when a user resizes columns in my Kendo UI Grid? Detect changes
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
+A JavaScript object which represents the [column](/api/ui/grid/configuration/columns) configuration.
 
 ##### e.newWidth `Number`
 
@@ -26547,7 +26547,7 @@ What triggers the columnShow event in Kendo UI Grid? Detect when a column become
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
+A JavaScript object which represents the [column](/api/ui/grid/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -26612,7 +26612,7 @@ What triggers the columnStick event in Kendo UI Grid? Detect when a user pins, s
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
+A JavaScript object which represents the [column](/api/ui/grid/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -26673,7 +26673,7 @@ How do I detect when a user unlocks a column in a Kendo UI Grid? Detect when a g
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
+A JavaScript object which represents the [column](/api/ui/grid/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -26740,7 +26740,7 @@ How can I detect when a column is un-stuck in Kendo UI Grid? Capture and respond
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
+A JavaScript object which represents the [column](/api/ui/grid/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -27402,7 +27402,7 @@ How can I capture the edit event in Kendo UI Grid for jQuery? Capture and respon
 
 ##### e.container `jQuery`
 
-The jQuery object of the edit container element, which wraps the editing UI. Depending on the [Grid edit mode](/api/javascript/ui/grid/configuration/editable.mode), the container is different:
+The jQuery object of the edit container element, which wraps the editing UI. Depending on the [Grid edit mode](/api/ui/grid/configuration/editable.mode), the container is different:
 
 * "incell" edit mode - the container element is a table cell
 * "inline" edit mode - the container is a table row
@@ -27411,7 +27411,7 @@ e.g. to [attach additional events](/intro/installation/events-and-methods#bind-t
 
 ##### e.model `kendo.data.Model`
 
-The data item which is going to be edited. Use its [isNew](/api/javascript/data/model/methods/isnew) method to check if the data item is new (created) or not (edited).
+The data item which is going to be edited. Use its [isNew](/api/data/model/methods/isnew) method to check if the data item is new (created) or not (edited).
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -27615,7 +27615,7 @@ The array of data items used to create the Excel workbook. Available since versi
 
 ##### e.workbook `kendo.ooxml.Workbook`
 
-The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will reflect in the output Excel document.
+The Excel [workbook configuration object](/api/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will reflect in the output Excel document.
 
 > When the Kendo UI Grid is configured for excel export, the workbook is extended internally with a `fileName` property which is used when the file is saved. The default name is "Export.xlsx". See the example below which shows how to change the name of the exported document.
 
@@ -28168,7 +28168,7 @@ The widget instance which fired the event.
 
 > Important: This event is available with the Q3 2015 SP1 release.
 
-Fired when [navigatable](/api/javascript/ui/grid/configuration/navigatable) is enabled and the user change current item with either
+Fired when [navigatable](/api/ui/grid/configuration/navigatable) is enabled and the user change current item with either
 mouse or keyboard interaction.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
@@ -28391,7 +28391,7 @@ If invoked the grid will not save the generated file.
 A promise that will be resolved when the export completes.
 
 The promise [progress handler](https://api.jquery.com/deferred.progress/) will be called periodically with the following arguments:
-* page - The current page content. An instance of [drawing.Group](/api/javascript/drawing/group)
+* page - The current page content. An instance of [drawing.Group](/api/drawing/group)
 * pageNumber - The current page number
 * progress - Number if the range 0 to 1, indicating the progress of the current export operation
 * totalPages - The total number of pages
@@ -28573,7 +28573,7 @@ The jQuery object representing the table row being reordered.
 
 Available when multiple rows are dragged - the jQuery object representing the selected and dragged rows.
 
-> When you Drap and Drop multiple items from one instance of the Grid to another the selected and dragged rows are available by the selected rows of the external Grid via the [`select`](/api/javascript/ui/grid/methods/select) method.
+> When you Drap and Drop multiple items from one instance of the Grid to another the selected and dragged rows are available by the selected rows of the external Grid via the [`select`](/api/ui/grid/methods/select) method.
 
 `selectedRows = externalGrid.select();`
 
@@ -28903,7 +28903,7 @@ The data item to which the table row is bound. If `e.model.id` is null, then a n
 
 ##### e.container `jQuery`
 
-The jQuery object representing the current edit container element. More information is available in the [edit event arguments' description](/api/javascript/ui/grid/events/edit).
+The jQuery object representing the current edit container element. More information is available in the [edit event arguments' description](/api/ui/grid/events/edit).
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -28911,11 +28911,11 @@ The widget instance which fired the event.
 
 ##### e.values `Object`
 
-The values entered by the user. **Available only when the [editable.mode](/api/javascript/ui/grid/configuration/editable.mode) option is set to "incell".**
+The values entered by the user. **Available only when the [editable.mode](/api/ui/grid/configuration/editable.mode) option is set to "incell".**
 
 ##### e.preventDefault `Function`
 
-If invoked, prevents the save action. In "incell" [editable.mode](/api/javascript/ui/grid/configuration/editable.mode) the edited table cell will exit edit mode. In "inline" and "popup" edit modes, the edit form will remain open.
+If invoked, prevents the save action. In "incell" [editable.mode](/api/ui/grid/configuration/editable.mode) the edited table cell will exit edit mode. In "inline" and "popup" edit modes, the edit form will remain open.
 
 #### Example - subscribe to the "save" event during initialization
 
@@ -29005,7 +29005,7 @@ How do I save multiple changes in a Kendo UI grid using the saveChanges event? C
 
 ##### e.preventDefault `Function`
 
-If invoked the grid will not call the [sync](/api/javascript/data/datasource/methods/sync) method of the data source.
+If invoked the grid will not call the [sync](/api/data/datasource/methods/sync) method of the data source.
 
 ##### e.sender `kendo.ui.Grid`
 

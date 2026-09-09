@@ -230,7 +230,7 @@ For a full example, refer to the [PivotGridV2 Local Binding demo](https://demos.
 
 ## Known Limitations
 
-When the PivotGridV2 is bound to a flat data structure, the component processes the data on the client (browser) and creates a client cube representation [(configuration)](https://docs.telerik.com/kendo-ui/api/javascript/data/pivotdatasource/configuration/schema#schemacube). The PivotGridV2 relies on the processing power of the browser to project the data and produce the required categorized data output. The PivotGridV2 does not restrict the maximum amount of data that you can load into it, but there are limitations related to the browser's capability to handle the loaded dataset.
+When the PivotGridV2 is bound to a flat data structure, the component processes the data on the client (browser) and creates a client cube representation [(configuration)](https://docs.telerik.com/kendo-ui/api/data/pivotdatasource/configuration/schema#schemacube). The PivotGridV2 relies on the processing power of the browser to project the data and produce the required categorized data output. The PivotGridV2 does not restrict the maximum amount of data that you can load into it, but there are limitations related to the browser's capability to handle the loaded dataset.
 
 The symptoms for an overloaded browser are:
 - The browser is loading extremely slowly or gets unresponsive for a long time.
@@ -242,4 +242,4 @@ If you observe any of these symptoms, this means you have hit the processing lim
 
 * [OLAP Cube Fundamentals]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals %})
 * [OLAP Cube Setup]({% slug htmlhelpers_pivotgridv2_aspnetcore_olap_cube_setup %})
-* [PivotConfiguratorV2 JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotconfiguratorv2)
+* [PivotConfiguratorV2 JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/ui/pivotconfiguratorv2)

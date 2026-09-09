@@ -64,4 +64,4 @@ The `Change` event fires when the user selects a different segment. The event ha
 
 * [Using the API of the SegmentedControl for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/segmentedcontrol/api)
 * [SegmentedControl Server-Side API for {{ site.framework }}](/api/segmentedcontrol)
-* [SegmentedControl Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/segmentedcontrol)
+* [SegmentedControl Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/segmentedcontrol)

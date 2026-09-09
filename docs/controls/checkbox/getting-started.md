@@ -67,7 +67,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 4. Configure the CheckBox Label
 
-The CheckBox allows you to configure the text of the label rendered next to the box through the [label](/api/javascript/ui/checkbox/configuration/label).
+The CheckBox allows you to configure the text of the label rendered next to the box through the [label](/api/ui/checkbox/configuration/label).
 
 ```html
 <input id="checkbox"/>
@@ -109,7 +109,7 @@ You can specify whether the CheckBox will be checked by default or not.
 
 ## See Also
 
-* [JavaScript API Reference of the CheckBox](/api/javascript/ui/checkbox)
+* [JavaScript API Reference of the CheckBox](/api/ui/checkbox)
 * [Knowledge Base Section](/knowledge-base)
 
 

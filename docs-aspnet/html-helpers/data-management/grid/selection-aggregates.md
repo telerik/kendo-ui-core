@@ -303,4 +303,4 @@ The following example demonstrates how to access the calculated cell aggregates 
 * [Grid Checkbox Selection (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/selection)
 * [Grid Aggregates (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/aggregates)
 * [API Reference of the Grid](https://docs.telerik.com/{{ site.platform }}/api/grid)
-* [JavaScript API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/ui/grid)

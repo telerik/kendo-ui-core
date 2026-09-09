@@ -65,4 +65,4 @@ The following example demonstrates the solution to the above issue.
 
 * [Basic Usage of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/index)
 * [Using the API of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/api)
-* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [JavaScript API Reference of the ComboBox](/api/ui/combobox)

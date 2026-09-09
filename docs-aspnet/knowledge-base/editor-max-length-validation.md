@@ -101,7 +101,7 @@ To validate the Editor value, use the [Kendo UI for jQuery Validator](https://do
 
 ## See Also
 
-* [Client-Side API Reference of the Editor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [Client-Side API Reference of the Editor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/editor)
 * [Server-Side API Reference of the Editor for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/editor)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Editor for {{ site.framework }}](https://docs.telerik.com/aspnet-core/api/taghelpers/editor)

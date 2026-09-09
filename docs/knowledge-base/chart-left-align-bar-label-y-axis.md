@@ -31,12 +31,12 @@ How can I align the category axis labels of the Kendo UI Bar Chart to the left?
 
 Use the Kendo UI Drawing API to customize the appearance of the labels in the Bar Chart. You can adjust the following suggested approach to your preferences:
 
-1. Create a new function within the [`categoryAxis.labels.visual` configuration](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual).
-1. Initialize a new [`kendo.drawing.Group` object](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group).
-1. Set the appearance of the label with the [`kendo.drawing.Text`](https://docs.telerik.com/kendo-ui/api/javascript/drawing/text) element.
-1. [Configure the rectangle](https://docs.telerik.com/kendo-ui/api/javascript/geometry/rect) which will hold the text.
-1. [Use the `kendo.drawing.align` method](https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align) to set the alignment within the rectangle.
-1. [Append the elements together within the group](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group/methods/append), and return the results.
+1. Create a new function within the [`categoryAxis.labels.visual` configuration](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual).
+1. Initialize a new [`kendo.drawing.Group` object](https://docs.telerik.com/kendo-ui/api/drawing/group).
+1. Set the appearance of the label with the [`kendo.drawing.Text`](https://docs.telerik.com/kendo-ui/api/drawing/text) element.
+1. [Configure the rectangle](https://docs.telerik.com/kendo-ui/api/geometry/rect) which will hold the text.
+1. [Use the `kendo.drawing.align` method](https://docs.telerik.com/kendo-ui/api/drawing/methods/align) to set the alignment within the rectangle.
+1. [Append the elements together within the group](https://docs.telerik.com/kendo-ui/api/drawing/group/methods/append), and return the results.
 
     ```javascript
               labels: {
@@ -91,9 +91,9 @@ The following example demonstrates the full implementation of the suggested appr
 
 ## See Also
 
-* [API Reference of categoryAxis.labels.visual](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual)
-* [API Reference of kendo.drawing.Group](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group)
-* [API Reference of kendo.drawing.Text](https://docs.telerik.com/kendo-ui/api/javascript/drawing/text)
-* [API Reference of kendo.geometry.Rect](https://docs.telerik.com/kendo-ui/api/javascript/geometry/rect)
-* [API Reference of align](https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align)
-* [API Reference of append](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group/methods/append)
+* [API Reference of categoryAxis.labels.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual)
+* [API Reference of kendo.drawing.Group](https://docs.telerik.com/kendo-ui/api/drawing/group)
+* [API Reference of kendo.drawing.Text](https://docs.telerik.com/kendo-ui/api/drawing/text)
+* [API Reference of kendo.geometry.Rect](https://docs.telerik.com/kendo-ui/api/geometry/rect)
+* [API Reference of align](https://docs.telerik.com/kendo-ui/api/drawing/methods/align)
+* [API Reference of append](https://docs.telerik.com/kendo-ui/api/drawing/group/methods/append)

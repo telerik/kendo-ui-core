@@ -270,7 +270,7 @@ You can reference the ColorPalette instances that you have created and build on 
         </script>
    ```
 
-1. Use the [ColorPalette client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette#methods) to control the behavior of the component. In this example, you will use the `enable` method to disable the control dynamically (for example, when a button is clicked).
+1. Use the [ColorPalette client-side API](https://docs.telerik.com/kendo-ui/api/ui/colorpalette#methods) to control the behavior of the component. In this example, you will use the `enable` method to disable the control dynamically (for example, when a button is clicked).
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -314,6 +314,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the ColorPalette for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpalette/api)
-* [Client-Side API of the ColorPalette](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette)
+* [Client-Side API of the ColorPalette](https://docs.telerik.com/kendo-ui/api/ui/colorpalette)
 * [Server-Side API of the ColorPalette](/api/colorpalette)
 * [Knowledge Base Section](/knowledge-base)

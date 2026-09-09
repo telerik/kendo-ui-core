@@ -233,5 +233,5 @@ An Upload widget configured in such way offers support for multiple file selecti
 
 * [Using the API of the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/api)
 * [Server-Side API for {{ site.framework }}](/api/upload)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/upload)
 * [Knowledge Base Section](/knowledge-base)

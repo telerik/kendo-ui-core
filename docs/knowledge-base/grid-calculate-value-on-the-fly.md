@@ -24,7 +24,7 @@ How can I update the value of the calculated field as the users make changes?
 
 ## Solution
 
-1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) event of the Grid. In the event handler, get a reference to the editors for the respective fields.
+1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/edit) event of the Grid. In the event handler, get a reference to the editors for the respective fields.
 1. In the `change` event of the editors, get the new value and use it to calculate the result.
 
 ```dojo

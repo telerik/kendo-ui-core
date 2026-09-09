@@ -76,4 +76,4 @@ The following example demonstrates how to handle the `Change` event by a templat
 ## See Also
 
 * [ColorPalette Server-Side API for {{ site.framework}}](/api/colorpalette)
-* [ColorPalette Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette)
+* [ColorPalette Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/colorpalette)

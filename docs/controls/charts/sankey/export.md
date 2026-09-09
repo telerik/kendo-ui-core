@@ -11,22 +11,22 @@ position: 4
 
 The KendoReact Sankey diagram allows you to export its contents as an Image, SVG, or PDF file.
 
-Regardless of the required export format, you can use the [`exportVisual`](/api/javascript/dataviz/ui/sankey/methods/exportVisual) method to export the visuals of the Sankey component. The component exports the visuals as an Image, SVG, or PDF by using the [Drawing]({% slug overview_kendoui_drawingapi %}) library and saves them using the [`saveAs`](/api/javascript/kendo/methods/saveas) method.
+Regardless of the required export format, you can use the [`exportVisual`](/api/dataviz/ui/sankey/methods/exportVisual) method to export the visuals of the Sankey component. The component exports the visuals as an Image, SVG, or PDF by using the [Drawing]({% slug overview_kendoui_drawingapi %}) library and saves them using the [`saveAs`](/api/kendo/methods/saveas) method.
 
 ## Export to Image
 
-Export the Sankey visual as an Image by using the [`exportImage`](/api/javascript/dataviz/ui/sankey/methods/exportImage) method and save it using the [`saveAs`](/api/javascript/kendo/methods/saveas) method.
+Export the Sankey visual as an Image by using the [`exportImage`](/api/dataviz/ui/sankey/methods/exportImage) method and save it using the [`saveAs`](/api/kendo/methods/saveas) method.
 
 By default, the exported image is of the same size as the Sankey DOM element. If required, you can export the file to a different resolution. If you change the image size, the image quality will not be affected because the rendering of the Sankey chart is based on vector graphics.
 
 ## Export to SVG
 
-Export the Sankey visual as an SVG by using the [`exportSVG`](/api/javascript/dataviz/ui/sankey/methods/exportSVG) method and save it using the [`saveAs`](/api/javascript/kendo/methods/saveas) method.
+Export the Sankey visual as an SVG by using the [`exportSVG`](/api/dataviz/ui/sankey/methods/exportSVG) method and save it using the [`saveAs`](/api/kendo/methods/saveas) method.
 
 
 ## Export to PDF
 
-Export the Sankey visual as a PDF by using the [`exportPDF`](/api/javascript/dataviz/ui/sankey/methods/exportPDF) method and save it using the [`saveAs`](/api/javascript/kendo/methods/saveas) method.
+Export the Sankey visual as a PDF by using the [`exportPDF`](/api/dataviz/ui/sankey/methods/exportPDF) method and save it using the [`saveAs`](/api/kendo/methods/saveas) method.
 
 
 ### Fitting to Paper Size
@@ -38,7 +38,7 @@ If the rendered Sankey Diagram is bigger than the exported PDF paper size, then 
 
 ## Customize the Export
 
-You can customize the export using the [`exportVisual`](/api/javascript/dataviz/ui/sankey/methods/exportVisual) method. The following options are available:
+You can customize the export using the [`exportVisual`](/api/dataviz/ui/sankey/methods/exportVisual) method. The following options are available:
 - `width`&mdash;Set the width of the exported visual.
 - `height`&mdash;Set the height of the exported visual.
 - `options`&mdash;Sankey options to be used for the exported visual.
@@ -69,4 +69,4 @@ You can customize the export using the [`exportVisual`](/api/javascript/dataviz/
 ## See Also
 
 * [Sankey Export(Demo)](https://demos.telerik.com/kendo-ui/sankey-charts/export)
-* [JavaScript API Reference of the Sankey](/api/javascript/dataviz/ui/sankey)
+* [JavaScript API Reference of the Sankey](/api/dataviz/ui/sankey)

@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.data.PivotDataSourceV2
 
-The data source used by the [`kendo.ui.PivotGridV2`](/api/javascript/ui/pivotgridv2) widget. Inherits from [`kendo.data.DataSource`](/api/framework/datasource).
+The data source used by the [`kendo.ui.PivotGridV2`](/api/ui/pivotgridv2) widget. Inherits from [`kendo.data.DataSource`](/api/framework/datasource).
 
 ## Configuration
 
@@ -666,7 +666,7 @@ How to dynamically change column layout in Kendo UI Pivot Grid? Access, modify, 
 
 ##### val `Array`
 
-The columns configuration. Accepts the same values as the [`columns`](/api/javascript/data/pivotdatasourcev2#configuration-columns) option.
+The columns configuration. Accepts the same values as the [`columns`](/api/data/pivotdatasourcev2#configuration-columns) option.
 
 #### Returns
 
@@ -816,7 +816,7 @@ How to customize aggregation settings in Kendo UI PivotGridV2? Configure and ret
 
 ##### val `Array`
 
-The measures configuration. Accepts the same values as the [`measures`](/api/javascript/data/pivotdatasourcev2#configuration-measures-values) option.
+The measures configuration. Accepts the same values as the [`measures`](/api/data/pivotdatasourcev2#configuration-measures-values) option.
 
 #### Returns
 
@@ -907,7 +907,7 @@ How do I configure row definitions in Kendo UI Pivot Grid V2? Configure, retriev
 
 ##### val `Array`
 
-The rows configuration. Accepts the same values as the [`row`](/api/javascript/data/pivotdatasourcev2#configuration-rows) option.
+The rows configuration. Accepts the same values as the [`row`](/api/data/pivotdatasourcev2#configuration-rows) option.
 
 #### Returns
 

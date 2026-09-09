@@ -37,7 +37,7 @@ How can I implement a tooltip for the shapes of the Kendo UI for jQuery Diagram?
 
 ## Solution
 
-The following example demonstrates how to use the [drawing tooltip options](/api/javascript/drawing/tooltip-options) to show a tooltip for the shapes.
+The following example demonstrates how to use the [drawing tooltip options](/api/drawing/tooltip-options) to show a tooltip for the shapes.
 
 > The tooltip options are available as of the Kendo UI Q2 2016 (2016.2.x) release.
 
@@ -175,7 +175,7 @@ The following example demonstrates how to use the [drawing tooltip options](/api
 ## See Also
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)
 * [Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [Wrap Text]({% slug howto_wraptext_diagram %})

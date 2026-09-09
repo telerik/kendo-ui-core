@@ -30,7 +30,7 @@ To control the sorting in the Grid, use the [`Sortable`](/api/kendo.mvc.ui.fluen
 ```
 {% endif %} 
 
-> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be sortable. To enable sorting on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/aspnet-core/knowledge-base/grid-enable-operations-for-object-column).
+> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.field) can be sortable. To enable sorting on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/aspnet-core/knowledge-base/grid-enable-operations-for-object-column).
 
 ## Sort Modes
 

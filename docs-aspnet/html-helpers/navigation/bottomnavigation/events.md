@@ -101,4 +101,4 @@ For a complete example on basic BottomNavigation events, refer to the [demo on u
 
 * [Using the API of the BottomNavigation for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/api)
 * [BottomNavigation Server-Side API](/api/bottomnavigation)
-* [BottomNavigation Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/bottomnavigation)
+* [BottomNavigation Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/bottomnavigation)

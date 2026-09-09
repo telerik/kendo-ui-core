@@ -171,4 +171,4 @@ The following example demonstrates how to subscribe to events by using a templat
 
 * [Using the API of the Timeline for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/api)
 * [Timeline Server-Side API](/api/timeline)
-* [Timeline Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)
+* [Timeline Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/timeline)

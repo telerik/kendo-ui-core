@@ -484,4 +484,4 @@ The following example overrides `Sheet.prototype.select` to block selection on d
 
 ## See Also
 
-* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)

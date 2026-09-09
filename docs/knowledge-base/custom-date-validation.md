@@ -83,4 +83,4 @@ The following example demonstrates how to achieve the desired scenario.
 ## See Also
 
 * [Using the API of the DateTimePicker (Demo)](https://demos.telerik.com/kendo-ui/datetimepicker/api)
-* [JavaScript API Reference of the DateTimePicker](/api/javascript/ui/datetimepicker)
+* [JavaScript API Reference of the DateTimePicker](/api/ui/datetimepicker)

@@ -36,7 +36,7 @@ This KB article also answers the following questions:
 
 ## Solution
 
-To customize the grouping column in the Scheduler with custom HTML, such as adding buttons or links, utilize the [groupHeaderTemplate](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/group#groupheadertemplate) configuration option. This option allows the insertion of custom HTML content into the group header cells based on specific conditions or for specific resources.
+To customize the grouping column in the Scheduler with custom HTML, such as adding buttons or links, utilize the [groupHeaderTemplate](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/group#groupheadertemplate) configuration option. This option allows the insertion of custom HTML content into the group header cells based on specific conditions or for specific resources.
 
 Below is an example demonstrating how to add a custom button to the group header cell for a specific resource using the `groupHeaderTemplate` configuration:
 
@@ -57,6 +57,6 @@ For a practical implementation of this solution, refer to this [example](https:/
 
 ## See Also
 
-- [Scheduler Group Header Template Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/group#groupheadertemplate)
+- [Scheduler Group Header Template Configuration](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/group#groupheadertemplate)
 - [Scheduler Overview](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview)
 - [Templates Overview](https://docs.telerik.com/kendo-ui/framework/templates/overview)

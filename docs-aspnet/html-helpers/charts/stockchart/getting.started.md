@@ -317,7 +317,7 @@ To use the client-side API of the StockChart and build on top of its initial con
         </script>
     ```
 
-1. Use the [StockChart client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart#methods) to control the behavior of the widget. In this example, you will use the [`exportPDF()`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart/methods/exportpdf) method to export the StockChart to a PDF file programmatically.
+1. Use the [StockChart client-side API](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart#methods) to control the behavior of the widget. In this example, you will use the [`exportPDF()`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/methods/exportpdf) method to export the StockChart to a PDF file programmatically.
 
     ```JS script
         <script>
@@ -337,6 +337,6 @@ To use the client-side API of the StockChart and build on top of its initial con
 ## See Also
 
 * [Basic Usage of the StockChart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/financial)
-* [Client-Side API of the StockChart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart)
+* [Client-Side API of the StockChart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart)
 * [Server-Side API of the StockChart](/api/stockchart)
 * [Knowledge Base Section](/knowledge-base)

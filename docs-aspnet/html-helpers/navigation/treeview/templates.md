@@ -87,4 +87,4 @@ The following example demonstrates how to display a custom checkbox for each of 
 
 * [Templates of the {{ site.product }} TreeView (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/templates)
 * [Server-Side API Reference of the TreeView for {{ site.product }}](/api/treeview)
-* [Client-Side API Reference of the TreeView for {{ site.product }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [Client-Side API Reference of the TreeView for {{ site.product }}](https://docs.telerik.com/kendo-ui/api/ui/treeview)

@@ -33,7 +33,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To create a TreeView with just one level of hierarchy and prevent the creation of nested items during drag-and-drop operations, handle the TreeView's [`drop`](/api/javascript/ui/treeview/events/drop) event. In the event handler, use the [`level`](/api/javascript/data/node/methods/level) method to determine the level of the targeted node. If the level is not 0 (indicating it's not a root-level item), prevent the drop operation.
+To create a TreeView with just one level of hierarchy and prevent the creation of nested items during drag-and-drop operations, handle the TreeView's [`drop`](/api/ui/treeview/events/drop) event. In the event handler, use the [`level`](/api/data/node/methods/level) method to determine the level of the targeted node. If the level is not 0 (indicating it's not a root-level item), prevent the drop operation.
 
 Below is an example that demonstrates how to configure the TreeView component to achieve this behavior.
 
@@ -118,6 +118,6 @@ In this code, the `drop` event handler checks the level of the node where an ite
 ## See Also
 
 - [Kendo UI for jQuery TreeView Overview](https://docs.telerik.com/kendo-ui/controls/treeview/overview)
-- [TreeView API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
-- [Handling the Drop Event in TreeView](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/events/drop)
-- [Node Level Method in TreeView](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/level)
+- [TreeView API Reference](https://docs.telerik.com/kendo-ui/api/ui/treeview)
+- [Handling the Drop Event in TreeView](https://docs.telerik.com/kendo-ui/api/ui/treeview/events/drop)
+- [Node Level Method in TreeView](https://docs.telerik.com/kendo-ui/api/data/node/methods/level)

@@ -115,4 +115,4 @@ The following example demonstrates how to subscribe to events by using a templat
 
 * [Using the API of the Upload for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/api)
 * [Upload Server-Side API for {{site.framework}}](/api/upload)
-* [Upload Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Upload Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/upload)

@@ -37,7 +37,7 @@ How can I select the whole input value when on focus in the Kendo UI for jQuery 
 
 ## Solution
 
-> As of the 2020 R3 release, selecting the whole NumericTextBox input value on `focus` is available out of the box. For more information, refer to the [`selectOnFocus`](/api/javascript/ui/numerictextbox/configuration/selectonfocus) property.
+> As of the 2020 R3 release, selecting the whole NumericTextBox input value on `focus` is available out of the box. For more information, refer to the [`selectOnFocus`](/api/ui/numerictextbox/configuration/selectonfocus) property.
 
 The following example demonstrates how to achieve the desired scenario.
 
@@ -70,7 +70,7 @@ $(function () {
 
 ## See Also
 
-* [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
+* [NumericTextBox JavaScript API Reference](/api/ui/numerictextbox)
 * [Change Text Color]({% slug howto_change_text_color_numerictextbox %})
 * [Persist Old Value]({% slug howto_persist_old_value_numerictextbox %})
 * [Use Custom Culture Script]({% slug howto_use_custom_culture_script_numerictextbox %})

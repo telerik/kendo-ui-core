@@ -9,7 +9,7 @@ position: 3
 
 # Load on Demand
 
-The Kendo UI for jQuery DropDownTree supports loading child nodes on demand by setting the [`loadOnDemand`](/api/javascript/ui/dropdowntree/configuration/loadondemand) property to `true`.
+The Kendo UI for jQuery DropDownTree supports loading child nodes on demand by setting the [`loadOnDemand`](/api/ui/dropdowntree/configuration/loadondemand) property to `true`.
 
 This feature demonstrates how the DropDownTree can efficiently handle large hierarchical datasets by fetching child data lazily when parent groups get expanded. This approach improves initial load performance by only loading the data that is actually needed.
 
@@ -17,7 +17,7 @@ When load on demand is enabled, the component will automatically request child d
 
 ## Basic Configuration
 
-To enable load on demand, set the [`loadOnDemand`](/api/javascript/ui/dropdowntree/configuration/loadondemand) property to `true` in the DropDownTree configuration. The following example demonstrates a basic setup with remote data binding and load on demand functionality.
+To enable load on demand, set the [`loadOnDemand`](/api/ui/dropdowntree/configuration/loadondemand) property to `true` in the DropDownTree configuration. The following example demonstrates a basic setup with remote data binding and load on demand functionality.
 
 ```dojo
     <input id="dropdowntree" />
@@ -52,9 +52,9 @@ To enable load on demand, set the [`loadOnDemand`](/api/javascript/ui/dropdowntr
 
 ## Value Mapper Configuration
 
-When using load on demand with pre-selected values, you may need to implement a [`valueMapper`](/api/javascript/ui/dropdowntree/configuration/loadondemand.valuemapper) function to resolve the selected values to their corresponding data items. The [`valueMapper`](/api/javascript/ui/dropdowntree/configuration/loadondemand.valuemapper) is particularly useful when you have initial values that need to be displayed but the corresponding data items are not yet loaded due to the lazy loading nature of load on demand.
+When using load on demand with pre-selected values, you may need to implement a [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand.valuemapper) function to resolve the selected values to their corresponding data items. The [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand.valuemapper) is particularly useful when you have initial values that need to be displayed but the corresponding data items are not yet loaded due to the lazy loading nature of load on demand.
 
-The following example demonstrates how to configure a [`valueMapper`](/api/javascript/ui/dropdowntree/configuration/loadondemand.valuemapper) function that fetches the data items for the selected values from the server.
+The following example demonstrates how to configure a [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand.valuemapper) function that fetches the data items for the selected values from the server.
 
 ```dojo
   <input id="dropdowntree" />   
@@ -112,7 +112,7 @@ The following example demonstrates how to configure a [`valueMapper`](/api/javas
     </script>
 ```
 
-The [`valueMapper`](/api/javascript/ui/dropdowntree/configuration/loadondemand.valuemapper) function receives an `options` object with the following properties:
+The [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand.valuemapper) function receives an `options` object with the following properties:
 
 * `value`: An array of the selected values that need to be resolved to data items.
 * `success`: A callback function that should be called with the resolved data items.
@@ -132,4 +132,4 @@ Load on demand provides several performance advantages:
 
 * [Load on Demand DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/load-on-demand)
 * [Remote Data Binding by the DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/remote-data-binding)
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)
+* [JavaScript API Reference of the DropDownTree](/api/ui/dropdowntree)

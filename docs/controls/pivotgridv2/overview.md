@@ -26,10 +26,10 @@ Compared to the legacy PivotGrid, the new PivotGridV2 offers a brand new design,
 
 * [Getting Started with the Kendo UI PivotGridV2 for jQuery]({% slug getting_started_kendoui_pivotgridv2_widget %})
 * [Demo Page for the PivotGridV2](https://demos.telerik.com/kendo-ui/pivotgridv2/index)
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgridv2)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgridv2)
 
 ## See Also
 
 * [Demo Page for the jQuery PivotGridV2](https://demos.telerik.com/kendo-ui/pivotgridv2/index)
-* [PivotGridV2 JavaScript API Reference](/api/javascript/ui/pivotgridv2)
+* [PivotGridV2 JavaScript API Reference](/api/ui/pivotgridv2)
 * [Knowledge Base Section](/knowledge-base)

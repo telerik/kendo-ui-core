@@ -8,7 +8,7 @@ component: listview
 
 # kendo.ui.ListView
 
-Represents the Kendo UI ListView widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ListView widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -37,7 +37,7 @@ How do I set an accessible label for list content in Kendo UI ListView? Set or c
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source does not make more than one request to the remote service.
@@ -146,12 +146,12 @@ How do I customize the container element in Kendo UI ListView? Control or custom
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the widget which is used render table rows. Can be a JavaScript object which represents a valid [kendo.data.DataSource](/api/javascript/data/datasource) configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source of the widget which is used render table rows. Can be a JavaScript object which represents a valid [kendo.data.DataSource](/api/data/datasource) configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -743,9 +743,9 @@ How do I adjust the spacing between grid cells in a Kendo UI ListView? Adjust an
 
 ### scrollable `String`
 
-Accepts `endless` to enable the endless scrolling functionality. In endless scrolling mode the [height](/api/javascript/ui/listview/configuration/height) should be configured to display a scrollbar. Scrolling to the end of the scrollbar will load more items (equal to the pageSize number) and append them to the listview DOM element utill all items are loaded and displayed.
+Accepts `endless` to enable the endless scrolling functionality. In endless scrolling mode the [height](/api/ui/listview/configuration/height) should be configured to display a scrollbar. Scrolling to the end of the scrollbar will load more items (equal to the pageSize number) and append them to the listview DOM element utill all items are loaded and displayed.
 
-If set to any other value the listview will display a scrollbar when the content exceeds the listview [height](/api/javascript/ui/listview/configuration/height) value.
+If set to any other value the listview will display a scrollbar when the content exceeds the listview [height](/api/ui/listview/configuration/height) value.
 
 
 <div class="meta-api-description">
@@ -794,7 +794,7 @@ If set to `true` the ListView will display a pager. By default paging is disable
 
 Can be set to a JavaScript object which represents the pager configuration.
 
-> Don't forget to set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/listview/configuration/datasource) settings. If an already existing datasource instance is passed to the ListView, then the [`pagesize`](/api/javascript/data/datasource/configuration/pagesize) option should be set in the dataSource's settings and not in the `pageable` settings.
+> Don't forget to set a [`pageSize`](/api/data/datasource/configuration/pagesize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/ui/listview/configuration/datasource) settings. If an already existing datasource instance is passed to the ListView, then the [`pagesize`](/api/data/datasource/configuration/pagesize) option should be set in the dataSource's settings and not in the `pageable` settings.
 
 
 <div class="meta-api-description">
@@ -1055,7 +1055,7 @@ How to customize pagination messages in Kendo UI ListView? Customize, configure,
 
 ### pageable.messages.display `String` *(default: "{0} - {1} of {2} items")*,
 
-The pager info text. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The pager info text. Uses [kendo.format](/api/kendo/methods/format).
 
 Contains three placeholders:
 - {0} - the first data item index
@@ -1180,7 +1180,7 @@ How do I customize the page number input prompt in a pageable ListView? Control 
 
 ### pageable.messages.of `String` *(default: "of {0}")*,
 
-The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
+The label displayed before the pager input. Uses [kendo.format](/api/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
 
 
 <div class="meta-api-description">
@@ -1813,7 +1813,7 @@ How do I enable previous and next buttons in Kendo UI ListView? Control paginati
 
 ### pageable.refresh `Boolean` *(default: false)*
 
-If set to `true` the pager will display the refresh button. Clicking the refresh button will [refresh](/api/javascript/ui/listview/methods/refresh) the ListView.
+If set to `true` the pager will display the refresh button. Clicking the refresh button will [refresh](/api/ui/listview/methods/refresh) the ListView.
 
 
 <div class="meta-api-description">
@@ -2066,11 +2066,11 @@ How to customize alternating item templates in Kendo UI ListView? Customize rend
 
 ### dataSource `kendo.data.DataSource`
 
-The [DataSource](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/listview/configuration/datasource) option.
+The [DataSource](/api/data/datasource) of the widget. Configured via the [dataSource](/api/ui/listview/configuration/datasource) option.
 
 > Changes of the DataSource will be reflected in the widget.
 
-> **Important:** Assigning a new DataSource would have no effect. Use the [setDataSource](/api/javascript/ui/listview/methods/setdatasource) method instead.
+> **Important:** Assigning a new DataSource would have no effect. Use the [setDataSource](/api/ui/listview/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -2239,7 +2239,7 @@ How do I cancel editing in Kendo UI ListView? Stop editing the current item in a
 
 ### clearSelection
 
-Clears ListView selected items and triggers the [`change` event](/api/javascript/ui/listview/events/change).
+Clears ListView selected items and triggers the [`change` event](/api/ui/listview/events/change).
 
 
 <div class="meta-api-description">
@@ -2298,7 +2298,7 @@ A string, DOM element or jQuery object which represents the ListView item. A str
 
 #### Returns
 
-`kendo.data.ObservableObject` The data item to which the specified ListView item is bound. More information about the ObservableObject type in [kendo.data.ObservableObject](/api/javascript/data/observableobject).
+`kendo.data.ObservableObject` The data item to which the specified ListView item is bound. More information about the ObservableObject type in [kendo.data.ObservableObject](/api/data/observableobject).
 
 #### Example - get the data item to which the first ListView item is bound
 
@@ -2383,7 +2383,7 @@ How do I properly destroy and clean up a Kendo UI ListView component to avoid me
 
 ### edit
 
-Puts the specified ListView item in edit mode. Fires the [edit](/api/javascript/ui/listview/events/edit) event.
+Puts the specified ListView item in edit mode. Fires the [edit](/api/ui/listview/events/edit) event.
 
 
 <div class="meta-api-description">
@@ -2458,7 +2458,7 @@ A jQuery object which represents the item to be edited.
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/data/datasource/methods/view).
 
 
 <div class="meta-api-description">
@@ -2529,7 +2529,7 @@ How do I manually update the listview in Kendo UI to reflect changes in my under
 
 ### remove
 
-Removes the specified item from the ListView. Triggers [remove](/api/javascript/ui/listview/events/remove) event and if not prevented calls the DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
+Removes the specified item from the ListView. Triggers [remove](/api/ui/listview/events/remove) event and if not prevented calls the DataSource [sync](/api/data/datasource/methods/sync) method.
 
 
 <div class="meta-api-description">
@@ -2585,7 +2585,7 @@ jQuery object which represents the item to be removed.
 
 ### save
 
-Saves the currently edited ListView item. Triggers the [save](/api/javascript/ui/listview/events/save) event. If the `save` event is not prevented and validation succeeds the ListView will call the DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
+Saves the currently edited ListView item. Triggers the [save](/api/ui/listview/events/save) event. If the `save` event is not prevented and validation succeeds the ListView will call the DataSource [sync](/api/data/datasource/methods/sync) method.
 
 
 <div class="meta-api-description">
@@ -3160,7 +3160,7 @@ The model to be edited.
 
 ### remove
 
-Fires before the list view item is put in edit mode. If the event is not prevented, the ListView will call the DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
+Fires before the list view item is put in edit mode. If the event is not prevented, the ListView will call the DataSource [sync](/api/data/datasource/methods/sync) method.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 

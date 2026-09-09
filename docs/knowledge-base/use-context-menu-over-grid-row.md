@@ -65,7 +65,7 @@ The following example demonstrates how to achieve the desired scenario.
 ```
 
 For more information, refer to:  
-* [https://docs.telerik.com/kendo-ui/api/javascript/ui/grid\/methods/dataitem](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem)  
-* [https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu\/events/select](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/events/select)  
+* [https://docs.telerik.com/kendo-ui/api/ui/grid\/methods/dataitem](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem)  
+* [https://docs.telerik.com/kendo-ui/api/ui/contextmenu\/events/select](https://docs.telerik.com/kendo-ui/api/ui/contextmenu/events/select)  
 
 

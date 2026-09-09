@@ -152,7 +152,7 @@ However, you can achieve a similar outcome in a Kendo UI Chart by using the [Dra
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

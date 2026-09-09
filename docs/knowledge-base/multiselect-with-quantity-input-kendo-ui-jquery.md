@@ -27,7 +27,7 @@ ticketid: 1717800
 
 ## Description
 
-There is no single Kendo UI for jQuery component that provides both MultiSelect and quantity input functionality out of the box. However, it is possible to create a custom solution by combining the [Kendo UI for jQuery MultiSelect](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect) for item selection and the [Kendo UI for jQuery NumericTextBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox) for quantity input. This approach allows you to track selected items and their corresponding quantities, displaying a summary of the selection.
+There is no single Kendo UI for jQuery component that provides both MultiSelect and quantity input functionality out of the box. However, it is possible to create a custom solution by combining the [Kendo UI for jQuery MultiSelect](https://docs.telerik.com/kendo-ui/api/ui/multiselect) for item selection and the [Kendo UI for jQuery NumericTextBox](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox) for quantity input. This approach allows you to track selected items and their corresponding quantities, displaying a summary of the selection.
 
 This knowledge base article also answers the following questions:
 - How to implement a dropdown with quantity input using Kendo UI for jQuery?
@@ -155,6 +155,6 @@ This setup demonstrates how to combine the MultiSelect and NumericTextBox to ach
 
 ## See Also
 
-- [Kendo UI for jQuery MultiSelect Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
-- [Kendo UI for jQuery NumericTextBox Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox)
+- [Kendo UI for jQuery MultiSelect Documentation](https://docs.telerik.com/kendo-ui/api/ui/multiselect)
+- [Kendo UI for jQuery NumericTextBox Documentation](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox)
 - [Kendo UI for jQuery Getting Started](https://docs.telerik.com/kendo-ui/getting-started/)

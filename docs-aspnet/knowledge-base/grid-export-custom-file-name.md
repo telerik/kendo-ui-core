@@ -25,7 +25,7 @@ components: ["general"]
 How can I add the current date and time to the Excel export filename of the Grid when working with the {{ site.product }} components?
 
 ## Solution
-Use the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event which has the workbook in its event data to rename it.
+Use the [`excelExport`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/excelexport) event which has the workbook in its event data to rename it.
 
 With the help of the [`kendo.toString()`](https://docs.telerik.com/kendo-ui/globalization/intl/dateformatting) method or another way to format the date, concatenate the date to the filename.
 
@@ -82,7 +82,7 @@ With the help of the [`kendo.toString()`](https://docs.telerik.com/kendo-ui/glob
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

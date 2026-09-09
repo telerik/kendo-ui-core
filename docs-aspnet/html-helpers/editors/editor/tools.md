@@ -418,7 +418,7 @@ To extend the Editor with a custom tool:
     ```
     {% endif %}
 
-1. Within an event handler in the custom tool, execute the required command by using the [`exec()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/methods/exec) method.
+1. Within an event handler in the custom tool, execute the required command by using the [`exec()`](https://docs.telerik.com/kendo-ui/api/ui/editor/methods/exec) method.
 
     ```JS
     <script>

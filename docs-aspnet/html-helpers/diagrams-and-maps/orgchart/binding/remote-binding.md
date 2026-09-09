@@ -103,4 +103,4 @@ The following example demonstrates how to bind the OrgChart to remote data.
 ## See Also
 
 * [Server-Side API](/api/orgchart)
-* [JavaScript API Reference of the OrgChart](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart)
+* [JavaScript API Reference of the OrgChart](https://docs.telerik.com/kendo-ui/api/ui/orgchart)

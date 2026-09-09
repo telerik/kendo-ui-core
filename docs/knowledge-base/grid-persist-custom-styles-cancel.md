@@ -28,7 +28,7 @@ How can I preserve the appearance even when the editing is canceled?
 
 The observed behavior is due to that the row re-renders once the _`Cancel`_ button is clicked, thus the classes added in the `databound` event handler are cleared. To have the same styles applied after the _`Cancel`_ button is clicked you can:
  
-1. Handle the [`cancel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/cancel) event of the Grid.
+1. Handle the [`cancel`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/cancel) event of the Grid.
 1. In the event handler, you can check if a custom class is applied, retrieve it and apply it again.
 
 ```dojo

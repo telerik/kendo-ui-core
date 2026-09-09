@@ -16,4 +16,4 @@ For the complete example, refer to the [demo on adding images to the TabStrip](h
 ## See Also
 
 * [Adding Images to the TabStrip Tabs (Demo)](https://demos.telerik.com/kendo-ui/tabstrip/images)
-* [JavaScript API Reference of the TabStrip](/api/javascript/ui/tabstrip)
+* [JavaScript API Reference of the TabStrip](/api/ui/tabstrip)

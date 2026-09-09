@@ -32,7 +32,7 @@ Is there a way to change the Switch message **OK** button and **Cancel** button 
 
 ## Solution
 
-The Kendo UI Switch can be set as a [`ClientTemplate`](https://docs.telerik.com/aspnet-mvc/helpers/data-management/grid/faq#how-can-i-use-kendo-ui-widgets-inside-grid-client-column-templates) inside a Kendo UI Grid.  The [switch's messages](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch/configuration/messages) can be configured within the razor or changed during the [`DataBound` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) using the `setOptions` method.  
+The Kendo UI Switch can be set as a [`ClientTemplate`](https://docs.telerik.com/aspnet-mvc/helpers/data-management/grid/faq#how-can-i-use-kendo-ui-widgets-inside-grid-client-column-templates) inside a Kendo UI Grid.  The [switch's messages](https://docs.telerik.com/kendo-ui/api/ui/switch/configuration/messages) can be configured within the razor or changed during the [`DataBound` event](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) using the `setOptions` method.  
 
 ```Razor
     @(Html.Kendo().Grid<SwitchInGridMessageChange.Models.OrderViewModel>()
@@ -103,7 +103,7 @@ The Kendo UI Switch can be set as a [`ClientTemplate`](https://docs.telerik.com/
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

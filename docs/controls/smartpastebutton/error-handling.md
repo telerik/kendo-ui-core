@@ -165,5 +165,5 @@ For a complete example that demonstrates form validation behavior when clipboard
 * [Events]({% slug events_kendoui_smartpastebutton_widget %})
 * [AI Service Integration]({% slug ai_service_integration_kendoui_smartpastebutton_widget %})
 * [Overview]({% slug overview_kendoui_smartpastebutton_widget %})
-* [JavaScript API Reference of the SmartPasteButton](/api/javascript/ui/smartpastebutton)
+* [JavaScript API Reference of the SmartPasteButton](/api/ui/smartpastebutton)
 * [Knowledge Base Section](/knowledge-base)

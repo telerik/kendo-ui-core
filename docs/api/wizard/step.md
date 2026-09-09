@@ -6,7 +6,7 @@ res_type: api
 
 # kendo.wizard.Step
 
-Represents a step in the [Wizard](/api/javascript/ui/wizard) widget.
+Represents a step in the [Wizard](/api/ui/wizard) widget.
 
 ## Fields
 
@@ -51,7 +51,7 @@ How do I access and manipulate buttons in a Kendo UI wizard step? Access, retrie
 
 #### Returns `Array`
 
-`Array[Button]` The [Button](/api/javascript/ui/button) instances available in the current **Step**.
+`Array[Button]` The [Button](/api/ui/button) instances available in the current **Step**.
 
 ### load
 

@@ -230,7 +230,7 @@ To see a full implementation of the aforementioned approach refer to the followi
 {% endif %}
 
 ## See Also
-* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
 * [Server-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/scheduler)
 {% if site.core %}
 * [TagHelper API reference of the Scheduler](https://docs.telerik.com/aspnet-core/api/taghelpers/scheduler)

@@ -143,4 +143,4 @@ To see how the following example works, filter the date column in a range. As a 
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

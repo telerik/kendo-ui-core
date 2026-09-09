@@ -192,7 +192,7 @@ public class SplitterIndexModel : PageModel
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Splitter](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/splitter)
+* [Client-Side API of the Splitter](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/splitter)
 * [Server-Side HtmlHelper API of the Splitter](/api/splitter)
 * [Server-Side TagHelper API of the Splitter](/api/taghelpers/splitter)
 * [Knowledge Base Section](/knowledge-base)

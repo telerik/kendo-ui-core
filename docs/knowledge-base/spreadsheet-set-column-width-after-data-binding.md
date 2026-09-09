@@ -23,11 +23,11 @@ You want to know how to set the column width after a sheet is data-bound in the 
 
 To achieve this behavior, you can follow these steps:
 
-1. Attach a handler function to the [dataBound](/api/javascript/ui/spreadsheet/events/databound) event of the Spreadsheet.
-2. Inside the event handler function, access the [active sheet](/api/javascript/ui/spreadsheet/methods/activesheet).
-3. Get the [range](/api/javascript/spreadsheet/sheet/methods/range) of the column you want to auto-fit the width.
+1. Attach a handler function to the [dataBound](/api/ui/spreadsheet/events/databound) event of the Spreadsheet.
+2. Inside the event handler function, access the [active sheet](/api/ui/spreadsheet/methods/activesheet).
+3. Get the [range](/api/spreadsheet/sheet/methods/range) of the column you want to auto-fit the width.
 4. Find the longest value in the column and calculate its width.
-5. Apply the calculated width to the column using the [columnWidth](/api/javascript/spreadsheet/sheet/methods/columnwidth) method.
+5. Apply the calculated width to the column using the [columnWidth](/api/spreadsheet/sheet/methods/columnwidth) method.
 
 Below is a runnable example of how to implement this logic:
 

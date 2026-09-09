@@ -31,7 +31,7 @@ How can I connect a Scheduler HtmlHelper with the Google Calendar?
 1. Declare the specification for the region of the calendar.
 1. Concatenate the steps above to use the complete resul Url.
 1. Fetch the url to get the result response.
-1. Add the needed properties of the events of the calendar to the [dataSource](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/fields/datasource) of the Scheduler.
+1. Add the needed properties of the events of the calendar to the [dataSource](https://docs.telerik.com/kendo-ui/api/ui/scheduler/fields/datasource) of the Scheduler.
 
 ```JavaScript
 	$(document).ready(function () {
@@ -77,4 +77,4 @@ For the complete implementation on how to connect a Telerik UI Scheduler with th
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

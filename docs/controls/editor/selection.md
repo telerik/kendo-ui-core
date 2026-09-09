@@ -17,7 +17,7 @@ The Editor works with standard [`range`](https://developer.mozilla.org/en/docs/W
 To set the Editor selection:
 
 1. Create a `Range` object that specifies the desired selection.
-1. Pass `Range` to the [`selectRange`](/api/javascript/ui/editor/methods/selectrange) method.
+1. Pass `Range` to the [`selectRange`](/api/ui/editor/methods/selectrange) method.
 
 The following example demonstrates how to set the Editor selections. The second parameter of the `setStart` and `setEnd` methods works differently with the `Element` and `Text` nodes.
 
@@ -103,4 +103,4 @@ The following example shows how to implement a custom tool in a DropDownList wit
 ## See Also
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

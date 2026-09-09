@@ -24,7 +24,7 @@ How can I add a custom command that will enable the user to add comments in the 
 
 ## Solution
 
-1. In the [`cardMenu`](/api/javascript/ui/taskboard/configuration/cardmenu) define a button for the custom command.
+1. In the [`cardMenu`](/api/ui/taskboard/configuration/cardmenu) define a button for the custom command.
 1. Add comments list as a resource.
 1. Extend the TaskBoard commands and implement adding of new items to the commands resources.
 
@@ -114,4 +114,4 @@ How can I add a custom command that will enable the user to add comments in the 
 
 ## See Also
 
-* [TaskBoard API Reference](/api/javascript/ui/taskboard)
+* [TaskBoard API Reference](/api/ui/taskboard)

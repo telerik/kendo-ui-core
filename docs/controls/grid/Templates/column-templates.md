@@ -85,4 +85,4 @@ The following example demonstrates how to set the template as a function which r
 * [Using Row Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/rowtemplate)
 * [Using Detail-Row Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/detailtemplate)
 * [Using Toolbar Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/toolbar-template)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

@@ -31,8 +31,8 @@ How can I validate a JSON string inside a Kendo UI TextArea?
 
 1. Create a `form` element and place the `textarea` and `button` elements inside it.
 1. Initialize a [`Kendo Validator`](https://demos.telerik.com/kendo-ui/validator/index) on the `form` element.
-1. Create a custom validation [`rule`](/api/javascript/ui/validator/configuration/rules). Perform a check to determine if the JSON inside the form is valid or not.
-1. Define an error [`message`](/api/javascript/ui/validator/configuration/messages) for the custom rule.
+1. Create a custom validation [`rule`](/api/ui/validator/configuration/rules). Perform a check to determine if the JSON inside the form is valid or not.
+1. Define an error [`message`](/api/ui/validator/configuration/messages) for the custom rule.
 
 ```dojo
 <h3>The following example is in VALID json format, you can copy and paste it in the textarea to test it.</h3>

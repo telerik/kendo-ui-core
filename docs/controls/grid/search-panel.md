@@ -11,9 +11,9 @@ The Grid component has built-in search functionality that you can use through ei
 
 ## SmartBox Search
 
-The Grid search functionality is available in the [AI Smart Box](slug:ai_toolbar_tool_kendoui_grid). The Smart Box Search mode uses the same Grid [`search`](/api/javascript/ui/grid/configuration/search) configuration, including [`search.fields`](/api/javascript/ui/grid/configuration/search.fields) and field operators.
+The Grid search functionality is available in the [AI Smart Box](slug:ai_toolbar_tool_kendoui_grid). The Smart Box Search mode uses the same Grid [`search`](/api/ui/grid/configuration/search) configuration, including [`search.fields`](/api/ui/grid/configuration/search.fields) and field operators.
 
-To enable it, add the Smart Box tool to the Grid toolbar and configure the [`smartBox.searchSettings`](/api/javascript/ui/grid/configuration/smartbox.searchsettings) option.
+To enable it, add the Smart Box tool to the Grid toolbar and configure the [`smartBox.searchSettings`](/api/ui/grid/configuration/smartbox.searchsettings) option.
 
 ```javascript
     $("#grid").kendoGrid({
@@ -93,8 +93,8 @@ The following example demonstrates how to specify the operator for the field tha
 ### See Also
 
 * [Search Panel in the KendoUI Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/search-panel)
-* [JavaScript API Reference of the KendoUI Grid](/api/javascript/ui/grid)
-* [Grid Search API](/api/javascript/ui/grid/configuration/search)
-* [Grid SmartBox API](/api/javascript/ui/grid/configuration/smartbox)
+* [JavaScript API Reference of the KendoUI Grid](/api/ui/grid)
+* [Grid Search API](/api/ui/grid/configuration/search)
+* [Grid SmartBox API](/api/ui/grid/configuration/smartbox)
 * [AI Smart Box](slug:ai_toolbar_tool_kendoui_grid)
 * [Smart Grid Overview](slug:overview_smart_grid)

@@ -62,9 +62,9 @@ Here is an example of how you can implement this logic:
     </script>
 ```
 
-To programmatically toggle the state of the ExpansionPanel, use the `toggle()` method. For more information, refer to the [toggle() method documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel/methods/toggle).
+To programmatically toggle the state of the ExpansionPanel, use the `toggle()` method. For more information, refer to the [toggle() method documentation](https://docs.telerik.com/kendo-ui/api/ui/expansionpanel/methods/toggle).
 
 ## See Also
 
-- [Kendo UI ExpansionPanel Toggle Method Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel/methods/toggle)
+- [Kendo UI ExpansionPanel Toggle Method Documentation](https://docs.telerik.com/kendo-ui/api/ui/expansionpanel/methods/toggle)
 - [Kendo UI ExpansionPanel Overview](https://docs.telerik.com/kendo-ui/controls/navigation/expansionpanel/overview)

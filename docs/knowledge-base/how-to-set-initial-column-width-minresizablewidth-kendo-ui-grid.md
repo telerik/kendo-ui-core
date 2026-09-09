@@ -27,20 +27,20 @@ ticketid: 1668462
 
 ## Description
 
-When working with the Kendo UI [Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/), I noticed the columns' initial width does not match the [`minResizableWidth`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.minresizablewidth) setting. I want the initial column width to be set according to the `minResizableWidth` value.
+When working with the Kendo UI [Grid](https://docs.telerik.com/kendo-ui/api/ui/grid/), I noticed the columns' initial width does not match the [`minResizableWidth`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.minresizablewidth) setting. I want the initial column width to be set according to the `minResizableWidth` value.
 
 This KB article also answers the following questions:
 - How to dynamically adjust the Kendo UI Grid column width to the minimum resizable width on initialization?
 
 ## Solution
 
-The [`minResizableWidth`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.minresizablewidth) option in the Kendo UI Grid configures the minimum width that a column can be resized to, not its initial width. To set a column's initial width to its `minResizableWidth`, apply the [`width`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.width) configuration option or adjust the width programmatically after the Grid initialization.
+The [`minResizableWidth`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.minresizablewidth) option in the Kendo UI Grid configures the minimum width that a column can be resized to, not its initial width. To set a column's initial width to its `minResizableWidth`, apply the [`width`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.width) configuration option or adjust the width programmatically after the Grid initialization.
 
 To adjust the width of the first column to its `minResizableWidth`, use the following approach:
 
-- Handle the [`dataBound`[(https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event of the Grid.
+- Handle the [`dataBound`[(https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event of the Grid.
 - Retrieves the Grid instance and check the configured `minResizableWidth`.
-- Use the [`resizeColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/resizecolumn) to apply the width.
+- Use the [`resizeColumn`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/resizecolumn) to apply the width.
 
 ```javascript
 dataBound: function(e){
@@ -127,6 +127,6 @@ $.each(grid.columns, function(index) {
 
 ## See Also
 
-- [Grid Configuration - Columns.minResizableWidth](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.minresizablewidth)
-- [Grid Configuration - Columns.width](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.width)
+- [Grid Configuration - Columns.minResizableWidth](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.minresizablewidth)
+- [Grid Configuration - Columns.width](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.width)
 - [Kendo UI Grid Overview](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)

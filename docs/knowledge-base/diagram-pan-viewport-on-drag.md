@@ -30,7 +30,7 @@ I have a large diagram that I would like to pan the viewport when a user drags a
 
 ## Solution
 
-1. Add a handler to the [`drag`](/api/javascript/dataviz/ui/diagram/events/drag) event
+1. Add a handler to the [`drag`](/api/dataviz/ui/diagram/events/drag) event
 1. Use the current pan and add the new point dependent on the direction in which the dragging is taking place
 
   	```

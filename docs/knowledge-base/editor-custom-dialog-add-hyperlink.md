@@ -99,6 +99,6 @@ How can I create custom Window in Editor to add a hyperlink with custom class na
 
 ## See Also
 
-* [API Reference of the Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor](https://docs.telerik.com/kendo-ui/api/ui/editor)
 * [Editor Create Custom Editor Tool]({ slug % editor-custom-tool % })
 * [Extend Editor Insert Hyperlink Dialog]({ slug % editor-extend-hyperlink-command-custom-class % })

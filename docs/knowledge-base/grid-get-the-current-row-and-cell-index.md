@@ -33,7 +33,7 @@ The incorrect focus on mobile devices is a [known issue](https://github.com/tele
 
 ## Suggested Workarounds
 
-1. Add a `touchstart` and `click` event handlers to the [`tbody`](/api/javascript/ui/grid/fields/tbody) element of the Grid.
+1. Add a `touchstart` and `click` event handlers to the [`tbody`](/api/ui/grid/fields/tbody) element of the Grid.
 1. Get the current cell with jQuery.
 
 ```

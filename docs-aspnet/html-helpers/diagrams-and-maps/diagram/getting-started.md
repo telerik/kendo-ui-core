@@ -384,7 +384,7 @@ In the `DiagramData` controller, declare the CRUD actions. Use the names of the 
 
 ## 5. Handle a Diagram Event
 
-The Diagram exposes a variety of client-side events that you can explicitly handle to alter the components's built-in functionality as per your requirements. In this tutorial, you will use the [DataBound](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/diagrameventbuilder#databoundsystemstring) event to bring in the previously declared shapes within the boundaries of the component by using the [bringIntoView()](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram/methods/bringintoview) client-side method.
+The Diagram exposes a variety of client-side events that you can explicitly handle to alter the components's built-in functionality as per your requirements. In this tutorial, you will use the [DataBound](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/diagrameventbuilder#databoundsystemstring) event to bring in the previously declared shapes within the boundaries of the component by using the [bringIntoView()](https://docs.telerik.com/kendo-ui/api/dataviz/ui/diagram/methods/bringintoview) client-side method.
 
 ```HtmlHelper
     @(Html.Kendo().Diagram<OrgChartShape, OrgChartConnection>()
@@ -556,7 +556,7 @@ Referencing existing instances allows you to build on top of their configuration
     </script>
     ```
 
-1. Use the [Diagram client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram) to control the behavior of the widget. In this example, you will bring the Diagram into focus by using the `focus` method.
+1. Use the [Diagram client-side API](https://docs.telerik.com/kendo-ui/api/dataviz/ui/diagram) to control the behavior of the widget. In this example, you will bring the Diagram into focus by using the `focus` method.
 
     ```JS script
     <script>
@@ -574,6 +574,6 @@ Referencing existing instances allows you to build on top of their configuration
 ## See Also
 
 * [Using the API of the Diagram for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/diagram/api)
-* [Diagram Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram)
+* [Diagram Client-Side API](https://docs.telerik.com/kendo-ui/api/dataviz/ui/diagram)
 * [Diagram Server-Side API](/api/diagram)
 * [Knowledge Base Section](/knowledge-base)

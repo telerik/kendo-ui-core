@@ -39,7 +39,7 @@ How can I save the scroll position of the content in a Kendo UI for jQuery TabSt
 
 The scroll position of the TabStrip content might be reset when the user changes the active tab. This depends on the browser behavior. 
 
-To persist the scroll position, use the [`select`](/api/javascript/ui/tabstrip/events/select) event to save the current scroll position, and the [`activate`](/api/javascript/ui/tabstrip/events/activate) event to restore it.
+To persist the scroll position, use the [`select`](/api/ui/tabstrip/events/select) event to save the current scroll position, and the [`activate`](/api/ui/tabstrip/events/activate) event to restore it.
 
 
 
@@ -83,7 +83,7 @@ To persist the scroll position, use the [`select`](/api/javascript/ui/tabstrip/e
 
 ## See Also
 
-* [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
+* [TabStrip JavaScript API Reference](/api/ui/tabstrip)
 * [Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})
 * [Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
 * [Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})

@@ -30,14 +30,14 @@ How can I export each group in a separate Excel sheet with the Kendo UI Grid?
 
 > This approach does not work with nested groups.
 
-1. Utilize the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event of the Grid.
+1. Utilize the [`excelExport`](/api/ui/grid/events/excelexport) event of the Grid.
 1. Verify that the data is currently grouped and prevent the default export behavior.
 1. Retrieve the generated excel rows and columns, and define two empty arrays. One for the rows and one for the sheets.
 1. Iterate over each row and push it to the rows array.
 1. If you reach a row with the type `group-footer`, it means that the current row is the end of the group. Create a new sheet object with the current array of rows and the retrieved columns.
 1. Push the sheet to the sheets array. Since the new group must be on a separate sheet, empty the array of rows and push the header row to it. Continue with the iteration until a `group-footer` row is reached once again. Repeat the same process until all rows have been processed.
-1. Once all of the sheets have been generated and pushed to the array, create a new [`workbook`](/api/javascript/ooxml/workbook) object.
-1. Use the [`saveAs`](/api/javascript/kendo/methods/saveas) method to save the generated excel file.
+1. Once all of the sheets have been generated and pushed to the array, create a new [`workbook`](/api/ooxml/workbook) object.
+1. Use the [`saveAs`](/api/kendo/methods/saveas) method to save the generated excel file.
 
 ```dojo
 <div id="grid"></div>

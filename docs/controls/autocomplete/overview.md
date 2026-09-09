@@ -27,4 +27,4 @@ The AutoComplete provides suggestions depending on the typed text and allows mul
 
 * [Basic Usage of the Kendo UI for jQuery AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/index)
 * [Using the API of the jQuery AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/api)
-* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)
+* [JavaScript API Reference of the AutoComplete](/api/ui/autocomplete)

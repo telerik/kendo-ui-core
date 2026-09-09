@@ -25,13 +25,13 @@ components: ["grid"]
 
 ## Description
 
-How can I hide the Grid columns inside the [`detailTemplate`](/api/javascript/ui/grid/configuration/detailtemplate) when the width of the browser window becomes too small?
+How can I hide the Grid columns inside the [`detailTemplate`](/api/ui/grid/configuration/detailtemplate) when the width of the browser window becomes too small?
 
 ## Solution
 
 1. Define the thresholds at which each individual column will be hidden. Refer to the `getThresholds` function in the example below.
-1. Set these thresholds to the Grid by using the [`columns.media`](/api/javascript/ui/grid/configuration/columns.media) configuration. Refer to the `setThresholds` function in the example below.
-1. Attach handlers for the [`dataBound`](/api/javascript/ui/grid/events/databound), [`columnHide`](/api/javascript/ui/grid/events/columnhide), and [`columnShow`](/api/javascript/ui/grid/events/columnshow) events to the Grid. The `columnHide` and `columnShow` handlers are responsible for hiding and showing the columns inside the `detailTemplate`. The `dataBound` handler is responsible for initializing the `detailTemplate`.
+1. Set these thresholds to the Grid by using the [`columns.media`](/api/ui/grid/configuration/columns.media) configuration. Refer to the `setThresholds` function in the example below.
+1. Attach handlers for the [`dataBound`](/api/ui/grid/events/databound), [`columnHide`](/api/ui/grid/events/columnhide), and [`columnShow`](/api/ui/grid/events/columnshow) events to the Grid. The `columnHide` and `columnShow` handlers are responsible for hiding and showing the columns inside the `detailTemplate`. The `dataBound` handler is responsible for initializing the `detailTemplate`.
 1. Handle the `resize` event of the JavaScript `window` object. If the Grid doesn't have any hidden columns when the browser window is resized, collapse all detail rows.
 1. Use `CSS` to conditionally display the hierarchy column.
 

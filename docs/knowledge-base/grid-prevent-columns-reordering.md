@@ -31,8 +31,8 @@ How can I prevent a specific column to be reordered in the Kendo UI Grid?
 
 The Kendo UI Grid does not provide a built-in solution for achieving this behavior. However, you can still work around the issue.
 
-1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event handler, save the column in a global variable.
-1. In the [`columnReorder`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnreorder) event handler, use the [`reorderColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/reordercolumn) method to position the column in the desired spot.
+1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event handler, save the column in a global variable.
+1. In the [`columnReorder`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnreorder) event handler, use the [`reorderColumn`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/reordercolumn) method to position the column in the desired spot.
 
 ```dojo
 <div id="grid"></div>

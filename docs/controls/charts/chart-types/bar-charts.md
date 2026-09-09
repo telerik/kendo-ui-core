@@ -65,4 +65,4 @@ Setting the `type` property on the `series` object to `"bar"` renders horizontal
 ## See Also
 
 * [Basic Usage of the Bar Chart (Demo)](https://demos.telerik.com/kendo-ui/bar-charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

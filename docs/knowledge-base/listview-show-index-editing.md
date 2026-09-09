@@ -18,7 +18,7 @@ components: ["listview"]
 I want to show the index of an item when editing in the Kendo UI ListView.
 
 ## Solution
-To display the index of an item in the Kendo UI ListView, you can [create a template function](/api/javascript/ui/listview/configuration/template) within the [editTemplate](/api/javascript/ui/listview/configuration/edittemplate) that returns the [index from the ListView's dataSource](/api/javascript/data/datasource/methods/indexof). Here is an example:
+To display the index of an item in the Kendo UI ListView, you can [create a template function](/api/ui/listview/configuration/template) within the [editTemplate](/api/ui/listview/configuration/edittemplate) that returns the [index from the ListView's dataSource](/api/data/datasource/methods/indexof). Here is an example:
 
 ```html
 EditTemplate

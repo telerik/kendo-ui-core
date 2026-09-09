@@ -29,7 +29,7 @@ How can I navigate the virtual scrolling of the Kendo UI Grid with the **Up** an
 
 ## Solution
 
-1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event handler, add `tabindex` to the child `div` of the `.k-scrollbar-vertical` container.
+1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event handler, add `tabindex` to the child `div` of the `.k-scrollbar-vertical` container.
 1. Handle the [`click`](https://api.jquery.com/click/) event of the table of the Grid.
 1. In the `click` event handler, [`focus`](https://api.jquery.com/focus/) the child `div` of the `.k-scrollbar-vertical` container.
 

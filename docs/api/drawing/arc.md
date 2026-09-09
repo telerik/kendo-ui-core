@@ -91,7 +91,7 @@ How to set custom arc size and stroke style when creating a Kendo UI drawing sha
 
 ### clip `kendo.drawing.Path`
 The element clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element/configuration/clip)
+Inherited from [Element.clip](/api/drawing/element/configuration/clip)
 
 
 <div class="meta-api-description">
@@ -122,7 +122,7 @@ How to restrict the visible portion of an arc shape in Kendo UI for jQuery? Cont
 
 ### cursor `String`
 The element cursor.
-Inherited from [Element.cursor](/api/javascript/drawing/element/configuration/cursor)
+Inherited from [Element.cursor](/api/drawing/element/configuration/cursor)
 
 
 <div class="meta-api-description">
@@ -185,7 +185,7 @@ How do I customize the fill style of an arc in Kendo UI for jQuery? Set and cust
 
 ### opacity `Number`
 The element opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element/configuration/opacity)
+Inherited from [Element.opacity](/api/drawing/element/configuration/opacity)
 
 
 <div class="meta-api-description">
@@ -284,7 +284,7 @@ How do I customize the tooltip for a DrawingArc in Kendo UI? Customize interacti
 
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
-Inherited from [Element.transform](/api/javascript/drawing/element/configuration/transform)
+Inherited from [Element.transform](/api/drawing/element/configuration/transform)
 
 
 <div class="meta-api-description">
@@ -316,7 +316,7 @@ How to adjust the position and rotation of an arc shape in Kendo UI for jQuery d
 
 ### visible `Boolean`
 A flag, indicating if the element is visible.
-Inherited from [Element.visible](/api/javascript/drawing/element/configuration/visible)
+Inherited from [Element.visible](/api/drawing/element/configuration/visible)
 
 
 <div class="meta-api-description">
@@ -354,7 +354,7 @@ How to show or hide an arc shape in Kendo UI drawing interface? Toggle, enable, 
 
 ### bbox
 Returns the bounding box of the element with transformations applied.
-Inherited from [Element.bbox](/api/javascript/drawing/element/methods/bbox)
+Inherited from [Element.bbox](/api/drawing/element/methods/bbox)
 
 
 <div class="meta-api-description">
@@ -389,7 +389,7 @@ How do I get the bounding box of an arc shape in Kendo UI for jQuery after apply
 
 ### clip
 Gets or sets the element clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element/methods/clip)
+Inherited from [Element.clip](/api/drawing/element/methods/clip)
 
 
 <div class="meta-api-description">
@@ -436,7 +436,7 @@ The element clipping path.
 
 ### clippedBBox
 Returns the bounding box of the element with clipping and transformations applied.
-Inherited from [Element.clippedBBox](/api/javascript/drawing/element/methods/clippedbbox)
+Inherited from [Element.clippedBBox](/api/drawing/element/methods/clippedbbox)
 
 
 <div class="meta-api-description">
@@ -566,7 +566,7 @@ The new geometry to use.
 
 
 ### fill
-Sets the shape [fill](/api/javascript/drawing/arc/configuration/fill).
+Sets the shape [fill](/api/drawing/arc/configuration/fill).
 
 
 <div class="meta-api-description">
@@ -603,10 +603,10 @@ How do I change the color of an arc in a Kendo UI drawing? Set or update the col
 #### Parameters
 
 ##### color `String`
-The [fill color](/api/javascript/drawing/fill-options/fields/color) to set.
+The [fill color](/api/drawing/fill-options/fields/color) to set.
 
 ##### opacity `Number` *optional*
-The [fill opacity](/api/javascript/drawing/fill-options/fields/opacity) to set.
+The [fill opacity](/api/drawing/fill-options/fields/opacity) to set.
 
 #### Returns
 `kendo.drawing.Arc` The current instance to allow chaining.
@@ -614,7 +614,7 @@ The [fill opacity](/api/javascript/drawing/fill-options/fields/opacity) to set.
 
 ### opacity
 Gets or sets the element opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element/methods/opacity)
+Inherited from [Element.opacity](/api/drawing/element/methods/opacity)
 
 If set, the stroke and fill opacity will be multiplied by the element opacity.
 
@@ -663,7 +663,7 @@ The element opacity. Ranges from 0 (completely transparent) to 1 (completely opa
 
 
 ### stroke
-Sets the shape [stroke](/api/javascript/drawing/arc/configuration/stroke).
+Sets the shape [stroke](/api/drawing/arc/configuration/stroke).
 
 
 <div class="meta-api-description">
@@ -700,13 +700,13 @@ How to change the color of an arc's stroke in Kendo UI for jQuery Drawing API? C
 #### Parameters
 
 ##### color `String`
-The [stroke color](/api/javascript/drawing/stroke-options/fields/color) to set.
+The [stroke color](/api/drawing/stroke-options/fields/color) to set.
 
 ##### width `Number` *optional*
-The [stroke width](/api/javascript/drawing/stroke-options/fields/width) to set.
+The [stroke width](/api/drawing/stroke-options/fields/width) to set.
 
 ##### opacity `Number` *optional*
-The [stroke opacity](/api/javascript/drawing/stroke-options/fields/opacity) to set.
+The [stroke opacity](/api/drawing/stroke-options/fields/opacity) to set.
 
 #### Returns
 `kendo.drawing.Arc` The current instance to allow chaining.
@@ -714,7 +714,7 @@ The [stroke opacity](/api/javascript/drawing/stroke-options/fields/opacity) to s
 
 ### transform
 Gets or sets the transformation of the element.
-Inherited from [Element.transform](/api/javascript/drawing/element/methods/transform)
+Inherited from [Element.transform](/api/drawing/element/methods/transform)
 
 
 <div class="meta-api-description">
@@ -761,7 +761,7 @@ The transformation to apply to the element.
 
 ### visible
 Gets or sets the visibility of the element.
-Inherited from [Element.visible](/api/javascript/drawing/element/methods/visible)
+Inherited from [Element.visible](/api/drawing/element/methods/visible)
 
 
 <div class="meta-api-description">

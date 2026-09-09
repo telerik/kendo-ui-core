@@ -204,6 +204,6 @@ For a full implementation of the Add/Remove functionality please refer to the of
 ## See Also
 
 * [Overview of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
-* [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)
+* [JavaScript API Reference of the TileLayout](/api/ui/tilelayout)
 * [Resizing]({% slug resizing_kendoui_tilelayout_widget %})
 * [Containers]({% slug containers_kendoui_tilelayout_widget %})

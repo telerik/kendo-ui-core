@@ -27,7 +27,7 @@ ticketid: 1709803
 
 ## Description
 
-When using the [Kendo UI for jQuery MultiSelect](https://www.telerik.com/kendo-jquery-ui/documentation/controls/multiselect/overview), the dropdown scrolls to the most recently selected item by default. However, if custom logic is implemented in the [`change`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect/events/change) event to clear the filter text, it disrupts this behavior and causes the list to scroll to the top. This article explains how to clear the filter text while maintaining the selection position.
+When using the [Kendo UI for jQuery MultiSelect](https://www.telerik.com/kendo-jquery-ui/documentation/controls/multiselect/overview), the dropdown scrolls to the most recently selected item by default. However, if custom logic is implemented in the [`change`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect/events/change) event to clear the filter text, it disrupts this behavior and causes the list to scroll to the top. This article explains how to clear the filter text while maintaining the selection position.
 
 This knowledge base article also answers the following questions:
 
@@ -37,7 +37,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To achieve the desired behavior, implement a customized logic in the [`change`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect/events/change) event handler combined with a helper function to scroll to the last selected item. Follow these steps:
+To achieve the desired behavior, implement a customized logic in the [`change`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect/events/change) event handler combined with a helper function to scroll to the last selected item. Follow these steps:
 
 1. Add the `change` event handler to clear the filter text and manage the scroll position.
 
@@ -238,5 +238,5 @@ Below is a runnable example with the above implemented.
 ## See Also
 
 - [Kendo UI for jQuery MultiSelect Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/multiselect/overview)
-- [MultiSelect Configuration API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect#configuration)
-- [Handling Events in Kendo UI for jQuery MultiSelect](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect#events)
+- [MultiSelect Configuration API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect#configuration)
+- [Handling Events in Kendo UI for jQuery MultiSelect](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect#events)

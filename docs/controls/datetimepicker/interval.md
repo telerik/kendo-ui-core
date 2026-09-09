@@ -15,7 +15,7 @@ Depending on the [Component Type](% slug componenttypes_timepicker %), you can s
 
 ## Setting the Interval in Classic Render Mode
 
-When the [`componentType`](/api/javascript/ui/datetimepicker/configuration/componenttype) configuration is set to `classic`, the interval is specified in minutes (numeric values).
+When the [`componentType`](/api/ui/datetimepicker/configuration/componenttype) configuration is set to `classic`, the interval is specified in minutes (numeric values).
 
 ```dojo
     <input id="datetimepicker" />
@@ -31,7 +31,7 @@ When the [`componentType`](/api/javascript/ui/datetimepicker/configuration/compo
 
 ## Setting the Interval in Modern Render Mode
 
-When the [`componentType`](/api/javascript/ui/datetimepicker/configuration/componenttype) configuration is set to `modern`, the interval is specified as an object of hours, minutes, and seconds.
+When the [`componentType`](/api/ui/datetimepicker/configuration/componenttype) configuration is set to `modern`, the interval is specified as an object of hours, minutes, and seconds.
 
 ```dojo
     <input id="datetimepicker" />
@@ -51,4 +51,4 @@ When the [`componentType`](/api/javascript/ui/datetimepicker/configuration/compo
 
 ## See Also
 
-* [JavaScript API Reference of the DateTimePicker](/api/javascript/ui/datetimepicker)
+* [JavaScript API Reference of the DateTimePicker](/api/ui/datetimepicker)

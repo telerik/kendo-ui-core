@@ -61,7 +61,7 @@ I have a Telerik UI Data Grid for ASP.NET MVC with regular filters and local fil
 
 To allow the application of both filter types, wrap the custom filter in an additional filter with the `"OR"` criteria.
 
-For the complete implementation of the approach, refer to [this runnable example](https://dojo.telerik.com/AgIgO/17), which applies the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method of the DataSource.
+For the complete implementation of the approach, refer to [this runnable example](https://dojo.telerik.com/AgIgO/17), which applies the [`filter`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/filter) method of the DataSource.
 
 ## See Also
 

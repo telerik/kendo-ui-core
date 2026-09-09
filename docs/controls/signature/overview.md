@@ -11,7 +11,7 @@ position: 0
 
 The Kendo UI for jQuery Signature enables the user to create handwritten signatures.
 
-The value of the drawn Signature is stored as a base64 string, which you can use to [re-display the signature](https://www.w3docs.com/snippets/html/how-to-display-base64-images-in-html.html) as an `img` HTML element. You can also retrieve the base64 string of the control by using the [`value`](/api/javascript/ui/signature/methods/value) method.
+The value of the drawn Signature is stored as a base64 string, which you can use to [re-display the signature](https://www.w3docs.com/snippets/html/how-to-display-base64-images-in-html.html) as an `img` HTML element. You can also retrieve the base64 string of the control by using the [`value`](/api/ui/signature/methods/value) method.
 
 [Kendo UI for jQuery Signature Overview](images/signature-overview.png)
 
@@ -25,7 +25,7 @@ The value of the drawn Signature is stored as a base64 string, which you can use
 
 * [Getting Started with the Kendo UI Signature for jQuery]({% slug getting_started_kendoui_signature_widget %})
 * [Basic Usage of the Signature (Demo)](https://demos.telerik.com/kendo-ui/signature/index)
-* [JavaScript API Reference of the Signature](/api/javascript/ui/signature)
+* [JavaScript API Reference of the Signature](/api/ui/signature)
 
 ## See Also
 

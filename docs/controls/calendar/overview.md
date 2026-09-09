@@ -32,7 +32,7 @@ The component also supports custom templates for its Month view and configuratio
 
 * [Getting Started with the Kendo UI Calendar for jQuery]({% slug getting_started_kendoui_calendar_component %})
 * [Basic Usage of the jQuery Calendar (Demo)](https://demos.telerik.com/kendo-ui/calendar/index)
-* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/ui/calendar)
 
 ## See Also
 

@@ -29,7 +29,7 @@ How can I customize the null option's text in the Checkbox filter menu?
 
 ## Solution
 
-You can add the [columns.filterable.itemTemplate](/api/javascript/ui/grid/configuration/columns.filterable.itemtemplate) option and either change the text or completely hide the null value as an option:
+You can add the [columns.filterable.itemTemplate](/api/ui/grid/configuration/columns.filterable.itemtemplate) option and either change the text or completely hide the null value as an option:
 
 ## Hide the null option from the filter menu
 

@@ -34,7 +34,7 @@ How can I create Stacked and Grouped Chart series that are grouped to remote dat
 To implement this scenario:
 
 1. Assign an unique Group ID value to each **Gender** / **Age Group** combination.
-1. Set the stack name for each series to match the **Gender** field in the [`dataBound` event](/api/javascript/dataviz/ui/chart/events/databound).
+1. Set the stack name for each series to match the **Gender** field in the [`dataBound` event](/api/dataviz/ui/chart/events/databound).
 
 To see the same scenario for inline data, refer to the [Bar Charts / Stacked and grouped bars demo](https://demos.telerik.com/kendo-ui/bar-charts/grouped-stacked-bar).
 
@@ -73,7 +73,7 @@ The following example demonstrates how to implement the steps previously describ
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

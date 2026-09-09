@@ -30,7 +30,7 @@ How can I change globally the min and max values for all Kendo UI DatePickers?
 
 ## Solution
 
-To globally set the [`min`](/api/javascript/ui/datepicker/configuration/min) and [`max`](/api/javascript/ui/datepicker/configuration/max) configurations for all Kendo UI DatePickers, add the following script.
+To globally set the [`min`](/api/ui/datepicker/configuration/min) and [`max`](/api/ui/datepicker/configuration/max) configurations for all Kendo UI DatePickers, add the following script.
 
 ```
 <script>

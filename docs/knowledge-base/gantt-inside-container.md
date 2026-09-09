@@ -38,7 +38,7 @@ The Gantt was initialized in a hidden (`display: none;`) container.
     .Deferred()
     )
     ```
-1. Initialize the widget on the first [`activate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar/events/activate) event of the PanelBarItem that contains it.
+1. Initialize the widget on the first [`activate`](https://docs.telerik.com/kendo-ui/api/ui/panelbar/events/activate) event of the PanelBarItem that contains it.
 
     ```JavaScript
     function onActivate(e) {
@@ -54,4 +54,4 @@ The Gantt was initialized in a hidden (`display: none;`) container.
 
 ## See Also
 
-* [API Reference of the Gantt](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [API Reference of the Gantt](https://docs.telerik.com/kendo-ui/api/ui/gantt)

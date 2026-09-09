@@ -69,4 +69,4 @@ The following example demonstrates how to bind the ListBox to a remote data serv
 ## See Also
 
 * [Basic Usage of the ListBox (Demo)](https://demos.telerik.com/kendo-ui/listbox/index)
-* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
+* [JavaScript API Reference of the ListBox](/api/ui/listbox)

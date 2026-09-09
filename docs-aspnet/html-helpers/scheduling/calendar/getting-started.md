@@ -164,7 +164,7 @@ You can reference the Calendar instances that you have created and build on top 
     </script>
     ```
 
-1. Use the [Calendar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar#methods) to control the behavior of the widget. In this example, you will use the `view` method to access the calendar active view.
+1. Use the [Calendar client-side API](https://docs.telerik.com/kendo-ui/api/ui/calendar#methods) to control the behavior of the widget. In this example, you will use the `view` method to access the calendar active view.
 
     ```JS script
     <script>
@@ -193,6 +193,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Calendar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/calendar/api)
-* [Client-Side API of the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [Client-Side API of the Calendar](https://docs.telerik.com/kendo-ui/api/ui/calendar)
 * [Server-Side API of the Calendar](/api/calendar)
 * [Knowledge Base Section](/knowledge-base)

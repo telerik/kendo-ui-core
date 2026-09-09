@@ -200,7 +200,7 @@ You can reference the PanelBar instances that you have created and build on top 
     </script>
     ```
 
-1. Use the [PanelBar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar#methods) to control the behavior of the widget. In this example, you will use the `expand` method to expand a parent item.
+1. Use the [PanelBar client-side API](https://docs.telerik.com/kendo-ui/api/ui/panelbar#methods) to control the behavior of the widget. In this example, you will use the `expand` method to expand a parent item.
 
     ```JS script
     <script>
@@ -231,6 +231,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the PanelBar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/api)
-* [Client-Side API of the PanelBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+* [Client-Side API of the PanelBar](https://docs.telerik.com/kendo-ui/api/ui/panelbar)
 * [Server-Side API of the PanelBar](/api/panelbar)
 * [Knowledge Base Section](/knowledge-base)

@@ -166,7 +166,7 @@ You can reference the MultiViewCalendar instances that you have created and buil
     </script>
     ```
 
-1. Use the [MultiViewCalendar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the multiviewcalendar.
+1. Use the [MultiViewCalendar client-side API](https://docs.telerik.com/kendo-ui/api/ui/multiviewcalendar#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the multiviewcalendar.
 
     ```JS script
     <script>
@@ -195,6 +195,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the MultiViewCalendar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar/api)
-* [Client-Side API of the MultiViewCalendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [Client-Side API of the MultiViewCalendar](https://docs.telerik.com/kendo-ui/api/ui/multiviewcalendar)
 * [Server-Side API of the MultiViewCalendar](/api/multiviewcalendar)
 * [Knowledge Base Section](/knowledge-base)

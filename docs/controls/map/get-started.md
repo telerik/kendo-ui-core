@@ -60,7 +60,7 @@ When the basic initialization is completed, you can start adding additional conf
 
 ## 3. Set the Map Layers
 
-In this step, you need to configure the Map [`layers`](/api/javascript/dataviz/ui/map/configuration/layers). Layers serve to organize the information rendered in the component. For more details, check [the layers documentation page]({% slug maplayers_mapwidget %}).
+In this step, you need to configure the Map [`layers`](/api/dataviz/ui/map/configuration/layers). Layers serve to organize the information rendered in the component. For more details, check [the layers documentation page]({% slug maplayers_mapwidget %}).
 
 ```html
     <div id="map"></div>
@@ -78,7 +78,7 @@ In this step, you need to configure the Map [`layers`](/api/javascript/dataviz/u
 
 ## 4. (Optional) Set the Map Center
 
-Next, you can set the coordinates to center the Map to a specific location. You can pass latitude and longitude as parameters for the [`center`](/api/javascript/dataviz/ui/map/configuration/center) option. 
+Next, you can set the coordinates to center the Map to a specific location. You can pass latitude and longitude as parameters for the [`center`](/api/dataviz/ui/map/configuration/center) option. 
 
 ```html
     <div id="map"></div>
@@ -98,7 +98,7 @@ Next, you can set the coordinates to center the Map to a specific location. You 
 
 ## 5. (Optional) Set the Markers
 
-You can display a marker over a specific Point of Interest. Similar to the `layers` configuration, you can pass latitude and longitude as parameters to the [`markers`](/api/javascript/dataviz/ui/map/configuration/markers) configuration. You can also set a tooltip for the marker.
+You can display a marker over a specific Point of Interest. Similar to the `layers` configuration, you can pass latitude and longitude as parameters to the [`markers`](/api/dataviz/ui/map/configuration/markers) configuration. You can also set a tooltip for the marker.
 
 ```html
     <div id="map"></div>
@@ -130,7 +130,7 @@ You can display a marker over a specific Point of Interest. Similar to the `laye
 
 ## See Also 
 
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
+* [JavaScript API Reference of the Map](/api/dataviz/ui/map)
 * [Knowledge Base Section](/knowledge-base)
 
 

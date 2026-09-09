@@ -29,7 +29,7 @@ A Grid allows the user to hide or show columns through its column menu but how c
 
 ## Solution
 
-1. Use the [`columnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event of the Grid and add a `hidden` CSS class to the desired element or elements by using jQuery.
+1. Use the [`columnMenuInit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnmenuinit) event of the Grid and add a `hidden` CSS class to the desired element or elements by using jQuery.
 2. Set `display: none` to the element by targeting it with the added class `hidden`.
 
 ```
@@ -108,6 +108,6 @@ The following example demonstrates the full implementation of the suggested appr
 
 ## See Also
 
-* [API Reference of the columnMenuInit Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit)
+* [API Reference of the columnMenuInit Event](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnmenuinit)
 * [Change the Column Names inside the Column Menu of the Grid](https://docs.telerik.com/kendo-ui/knowledge-base/grid-column-menu-change-text)
 * [Include Hidden Columns in PDF Export](https://docs.telerik.com/kendo-ui/knowledge-base/grid-include-hidden-columns-to-exported-pdf)

@@ -18,7 +18,7 @@ components: ["grid"]
 I want to open the filter dropdown of a Kendo Grid to the left side using jQuery. How can I achieve this?
 
 ## Solution
-To open the filter dropdown of a Kendo Grid to the left side, you can handle the [columnMenuOpen](/api/javascript/ui/grid/events/columnmenuopen) event of the Grid. In the event handler, you can get a reference to the Kendo Menu and set its [direction](/api/javascript/ui/menu/configuration/direction) configuration option to the needed direction.
+To open the filter dropdown of a Kendo Grid to the left side, you can handle the [columnMenuOpen](/api/ui/grid/events/columnmenuopen) event of the Grid. In the event handler, you can get a reference to the Kendo Menu and set its [direction](/api/ui/menu/configuration/direction) configuration option to the needed direction.
 
 ```javascript
 columnMenuInit: function(e){

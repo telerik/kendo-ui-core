@@ -7,7 +7,7 @@ component: badge
 
 # kendo.ui.Badge
 
-Represents the Kendo UI Badge widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Badge widget. Inherits from [Widget](/api/ui/widget).
 
 
 
@@ -24,7 +24,7 @@ Specifies position of the badge relative to its container. Valid position option
 * `bottom start`: positions the badge at bottom left corner of the container; bottom right in RTL mode.
 * `bottom end`: positions the badge at bottom right corner of the container; bottom right in RTL mode.
 
-`align` works in conjunction with [`position`](/api/javascript/ui/badge/configuration/position).
+`align` works in conjunction with [`position`](/api/ui/badge/configuration/position).
 
 Note: when using align, make sure the badge container has [css position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) other than `static` and allows [overflow content](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow).
 
@@ -139,7 +139,7 @@ Specifies position of the badge relative to the edge of the container. Valid opt
 * `inside`: the badge is entirely positioned inside the container.
 * `outside`: the badge is entirely positioned oustide the container.
 
-Note: position configuration, other than `inline`, requires the badge to be aligned. See [`align`](/api/javascript/ui/badge/configuration/align) for more details.
+Note: position configuration, other than `inline`, requires the badge to be aligned. See [`align`](/api/ui/badge/configuration/align) for more details.
 
 
 <div class="meta-api-description">
@@ -205,7 +205,7 @@ How do I adjust the size of a Kendo UI badge component? Adjust the visual scale 
 
 ### template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the badge.
+The [template](/api/kendo/methods/template) which renders the content of the badge.
 
 
 <div class="meta-api-description">
@@ -365,7 +365,7 @@ How do I dynamically change the icon on a Kendo UI badge? Configure, update, or 
 
 ##### icon `String`
 
-See [`badge.options.icon`](/api/javascript/ui/badge/configuration/icon) for valid options.
+See [`badge.options.icon`](/api/ui/badge/configuration/icon) for valid options.
 
 #### Example
 
@@ -383,7 +383,7 @@ Set badge icon after initialization.
 
 ### rounded
 
-Sets / gets the badge rounding. See [`badge.options.rounded`](/api/javascript/ui/badge/configuration/rounded) for valid options.
+Sets / gets the badge rounding. See [`badge.options.rounded`](/api/ui/badge/configuration/rounded) for valid options.
 
 
 <div class="meta-api-description">
@@ -505,7 +505,7 @@ How to dynamically change the color of a Kendo UI badge element? Configure, modi
 
 ##### themeColor `String`
 
-See [`badge.options.themeColor`](/api/javascript/ui/badge/configuration/themecolor) for valid options.
+See [`badge.options.themeColor`](/api/ui/badge/configuration/themecolor) for valid options.
 
 #### Example
 

@@ -14,7 +14,7 @@ All Kendo UI components (widgets) are registered as [jQuery plugins](http://lear
 
 The jQuery plugin method is formed by the component name in Pascal Case that is prefixed with `kendo` as in `kendoGrid` and `kendoListView`. To avoid collisions with their desktop counterparts, the methods for the hybrid UI components are prefixed with `Mobile` as in `kendoMobileTabStrip`, `kendoMobileButton`, and `kendoMobileListView`.
 
-Some Kendo UI components have specific requirements about the element types on which they are instantiated. For more details and working examples, refer to the source code in the [respective component demo](https://demos.telerik.com/kendo-ui/) and [API reference](/api/javascript/kendo).
+Some Kendo UI components have specific requirements about the element types on which they are instantiated. For more details and working examples, refer to the source code in the [respective component demo](https://demos.telerik.com/kendo-ui/) and [API reference](/api/kendo).
 
 > * Avoid initializing several different Kendo UI components from the same DOM element because duplicate initialization might lead to undesired side effects.
 > * It is strongly recommended to initialize the Kendo UI components from HTML elements which are part of the DOM tree. Creating components from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) might cause undesired side effects or lead to JavaScript errors.
@@ -109,9 +109,9 @@ To check whether a component instance already exists for a certain DOM element, 
 
 ## Component Configuration
 
-To configure a Kendo UI component, pass a configuration object (key/value pairs) as an argument to the jQuery plugin method. The supported configuration options and events for each component are listed in the [API reference](/api/javascript/kendo) of the respective component. The configuration object might also contain event handlers that will be bound to the corresponding component events.
+To configure a Kendo UI component, pass a configuration object (key/value pairs) as an argument to the jQuery plugin method. The supported configuration options and events for each component are listed in the [API reference](/api/kendo) of the respective component. The configuration object might also contain event handlers that will be bound to the corresponding component events.
 
-The following example demonstrates how to set the [`height`](/api/javascript/ui/grid/configuration/height), [`columns`](/api/javascript/ui/grid/configuration/columns), and [`dataSource`](/api/javascript/ui/grid/configuration/datasource) configuration options of the Grid component.
+The following example demonstrates how to set the [`height`](/api/ui/grid/configuration/height), [`columns`](/api/ui/grid/configuration/columns), and [`dataSource`](/api/ui/grid/configuration/datasource) configuration options of the Grid component.
 
 ```
     <div id="grid"></div>

@@ -29,7 +29,7 @@ Kendo UI for jQuery ListBox
 
 ## Description
 
-When using the [Kendo UI for jQuery ListBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox) to reorder items through drag-and-drop or toolbar controls, the expected order of items is not reflected in the data retrieved from the `view()` method. This issue arises because the `view()` method does not account for the reordered state of items.
+When using the [Kendo UI for jQuery ListBox](https://docs.telerik.com/kendo-ui/api/ui/listbox) to reorder items through drag-and-drop or toolbar controls, the expected order of items is not reflected in the data retrieved from the `view()` method. This issue arises because the `view()` method does not account for the reordered state of items.
 
 Additionally, filtering items in the ListBox may require converting a string array to JSON objects for compatibility with the filtering functionality.
 
@@ -81,7 +81,7 @@ $("#GrupyTenantUpdSearchAll").on("input", function(e) {
 
 ### Saving Reordered Items
 
-After retrieving reordered items, ensure their persistence by saving them to the backend or updating the data source. Use the [`splice()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/data/observablearray/methods/splice) method to insert items at the desired index or the [`insert()`](/api/javascript/data/datasource/methods/insert) method for Kendo DataSource.
+After retrieving reordered items, ensure their persistence by saving them to the backend or updating the data source. Use the [`splice()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/data/observablearray/methods/splice) method to insert items at the desired index or the [`insert()`](/api/data/datasource/methods/insert) method for Kendo DataSource.
 
 Example for saving reordered items:
 ```javascript
@@ -98,6 +98,6 @@ Ensure drag-and-drop functionality triggers the reorder event and updates the co
 
 ## See Also
 
-- [ListBox API Documentation](/api/javascript/ui/listbox)
+- [ListBox API Documentation](/api/ui/listbox)
 - [ListBox Filtering Example](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/listbox-how-to-filter-items)
 - [Reordering Items in ListBox](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/list-box-reordering-not-working)

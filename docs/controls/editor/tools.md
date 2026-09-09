@@ -106,4 +106,4 @@ To extend the Editor with a custom tool:
 ## See Also
 
 * [Using the Tools of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/all-tools)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

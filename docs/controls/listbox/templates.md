@@ -36,4 +36,4 @@ The ListBox supports the use of [templates]({% slug overview_kendoui_templatesco
 ## See Also
 
 * [Using Templates in the ListBox (Demo)](https://demos.telerik.com/kendo-ui/listbox/templates)
-* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
+* [JavaScript API Reference of the ListBox](/api/ui/listbox)

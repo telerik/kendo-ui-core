@@ -134,4 +134,4 @@ The UrlTemplate placeholders (zoom, x, y) are automatically populated by the Map
 
 * [Azure Tile Map (Demo)](https://demos.telerik.com/{{ site.platform }}/map/azure)
 * [Map Server-Side API](/api/map)
-* [Map Client-Side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/map)
+* [Map Client-Side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/map)

@@ -33,7 +33,7 @@ By design, when the Grid is initialized inside a hidden container, its layout ma
 > You can apply the same approach when integrating the Grid into a PanelBar or Window components, which also act as hidden containers for the Grid.
 
 1. Handle the `Activate` event of the TabStrip.
-1. Get a reference to the Grid and call the [`resize()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/resize) method when the Grid becomes visible.
+1. Get a reference to the Grid and call the [`resize()`](https://docs.telerik.com/kendo-ui/api/kendo/methods/resize) method when the Grid becomes visible.
 
     ```HtmlHelper
         @(Html.Kendo().TabStrip()
@@ -94,7 +94,7 @@ For a runnable example based on the code above, refer to the [REPL example on di
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)

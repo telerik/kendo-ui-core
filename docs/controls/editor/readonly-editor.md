@@ -9,7 +9,7 @@ position: 3
 
 # Read-Only Editor
 
-You can render the Editor in its read-only state by removing the `contenteditable` attribute of the [`body`](/api/javascript/ui/editor#fields-body) element.
+You can render the Editor in its read-only state by removing the `contenteditable` attribute of the [`body`](/api/ui/editor#fields-body) element.
 
 Even though the Editor is read-only, the hyperlinks in its content are active and the user can click them and navigate to the respective page. To disable hyperlinks in the read-only Editor, prevent the clicking of hyperlinks.
 
@@ -25,4 +25,4 @@ Even though the Editor is read-only, the hyperlinks in its content are active an
 ## See Also
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

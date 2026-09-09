@@ -368,7 +368,7 @@ Utilize the `MessageActions()` configuration to define the actions that will app
 
 ## 7. Handle Message Events
 
-Handle the `SendMessage` event and implement custom logic that checks if the submitted message contains any of the predefined quick-actions and posts the respective reply using the [`postMessage()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/methods/postmessage) client-side method.
+Handle the `SendMessage` event and implement custom logic that checks if the submitted message contains any of the predefined quick-actions and posts the respective reply using the [`postMessage()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/methods/postmessage) client-side method.
 
 ```HtmlHelper
 @model List<ChatMessage>
@@ -476,7 +476,7 @@ Referencing existing component instances allows you to build on top of their con
         </script>
     ```
 
-1. Use the [Chat client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat#methods) to control the behavior of the component. In this example, you will clear the message history of the Chat (for example, when a button is clicked).
+1. Use the [Chat client-side API](https://docs.telerik.com/kendo-ui/api/ui/chat#methods) to control the behavior of the component. In this example, you will clear the message history of the Chat (for example, when a button is clicked).
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -519,7 +519,7 @@ For more information on referencing specific helper instances, see the [Methods 
 ## See Also
 
 * [Using the API of the Chat for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/api)
-* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
+* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/ui/chat)
 * [Server-Side API of the Chat](/api/chat)
 {% if site.core %}
 * [Server-Side API of the Chat TagHelper](/api/taghelpers/chat)

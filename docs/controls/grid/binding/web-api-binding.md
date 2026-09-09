@@ -509,5 +509,5 @@ The server should return data in the following format:
 ## See Also
 
 * [Grid Overview](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-* [DataSource Configuration](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)
+* [DataSource Configuration](https://docs.telerik.com/kendo-ui/api/data/datasource)
 * [Server-Side Processing](https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/binding/ajax-binding)

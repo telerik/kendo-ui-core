@@ -73,4 +73,4 @@ To check for validation errors and prevent the selection, use the `select` event
 
 ## See Also
 
-* [API Reference of the TabStrip](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)
+* [API Reference of the TabStrip](https://docs.telerik.com/kendo-ui/api/ui/tabstrip)

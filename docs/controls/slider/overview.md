@@ -30,4 +30,4 @@ The Slider can either present one handle and two opposing buttons for selecting 
 
 * [Basic Usage of the Slider (Demo)](https://demos.telerik.com/kendo-ui/slider/index)
 * [Using the API of the Slider (Demo)](https://demos.telerik.com/kendo-ui/slider/api)
-* [JavaScript API Reference of the Slider](/api/javascript/ui/slider)
+* [JavaScript API Reference of the Slider](/api/ui/slider)

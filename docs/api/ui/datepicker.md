@@ -8,7 +8,7 @@ component: date-time-pickers
 
 # kendo.ui.DatePicker
 
-Represents the Kendo UI DatePicker widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI DatePicker widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -152,7 +152,7 @@ How to customize the close animation of a Kendo UI DatePicker widget? Set or cus
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -221,7 +221,7 @@ How do I customize the opening animation of a Kendo UI date picker? Control and 
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -329,7 +329,7 @@ How can I configure Kendo UI datepicker to automatically correct invalid date co
 ### autoFill `Boolean`*(default: false)*
 
  When enabled, the DatePicker will autofill the rest of the date to the current date when the component loses focus. For example, entering only the date, month or year portion of the date and blurring the component, the missing sections will be automatically completed.
- Requires a [DateInput](/api/javascript/ui/dateinput) for editing the value.
+ Requires a [DateInput](/api/ui/dateinput) for editing the value.
 
 
 <div class="meta-api-description">
@@ -395,7 +395,7 @@ How do I change the date format for a Kendo UI DatePicker to match US English cu
 
 ### dateInput `Boolean`*(default: false)*
 
- Specifies if the DatePicker will use [DateInput](/api/javascript/ui/dateinput) for editing value
+ Specifies if the DatePicker will use [DateInput](/api/ui/dateinput) for editing value
 
 
 <div class="meta-api-description">
@@ -413,7 +413,7 @@ How to enable manual date input in Kendo UI DatePicker control? Control inline d
 
 ### dates `Array`
 
-Specifies a list of dates, which will be passed to the [month content](/api/javascript/ui/datepicker/configuration/month#monthcontent).
+Specifies a list of dates, which will be passed to the [month content](/api/ui/datepicker/configuration/month#monthcontent).
 
 
 <div class="meta-api-description">
@@ -536,7 +536,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 ### footer `String|Function|Boolean`
 
- The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
+ The [template](/api/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
 
 
 <div class="meta-api-description">
@@ -688,7 +688,7 @@ The function context (available through the keyword `this`) will be set to the w
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/datepicker/methods/value) method **does not trigger** the `focusout` event of the datepicker.
+> **Important:** The [value](/api/ui/datepicker/methods/value) method **does not trigger** the `focusout` event of the datepicker.
 This can affect the floating label functionality.
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#datepicker").data("kendoDatePicker").label.floatingLabel.refresh();`
 
@@ -1109,7 +1109,7 @@ How to customize appearance of out-of-range months in a Kendo UI DatePicker? Con
 ### popup `Object`
 
 The options that will be used for the popup initialization. For more details about the available options
-refer to [Popup](/api/javascript/ui/popup) documentation.
+refer to [Popup](/api/ui/popup) documentation.
 
 
 <div class="meta-api-description">
@@ -1361,7 +1361,7 @@ How do I set the default date in a Kendo UI DatePicker? Set, get, configure, or 
 ## Fields
 
 ### options `Object`
-An object, which holds the options of the widget. The options object holds all available [DatePicker configuration fields](/api/javascript/ui/datepicker#configuration).
+An object, which holds the options of the widget. The options object holds all available [DatePicker configuration fields](/api/ui/datepicker#configuration).
 
 
 <div class="meta-api-description">
@@ -1617,7 +1617,7 @@ How can I programmatically open the Kendo UI date picker calendar? Trigger or in
 
 ### setOptions
 
-Changes the initial DatePicker configuration by updating the options object. The options object holds all available [DatePicker configuration fields](/api/javascript/ui/datepicker#configuration).
+Changes the initial DatePicker configuration by updating the options object. The options object holds all available [DatePicker configuration fields](/api/ui/datepicker#configuration).
 
 **Value Behavior**
 
@@ -1674,9 +1674,9 @@ The value to set.
 
 `Date` The value of the DatePicker.
 
-> * This method **does not trigger** [change](/api/javascript/ui/datepicker/events/change) event.
+> * This method **does not trigger** [change](/api/ui/datepicker/events/change) event.
 This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
     <input id="datepicker" />
     <script>

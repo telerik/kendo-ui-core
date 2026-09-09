@@ -85,4 +85,4 @@ The following example demonstrates how to insert a button after the TextBox elem
 
 * [Using the Prefix and Suffix of the TextBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textbox/prefix-suffix)
 * [Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/textbox)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/textbox)

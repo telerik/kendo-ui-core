@@ -8,7 +8,7 @@ component: progressbar
 
 # kendo.ui.ProgressBar
 
-Represents the Kendo UI ProgressBar widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ProgressBar widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

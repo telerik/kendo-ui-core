@@ -63,4 +63,4 @@ The following example demonstrates how to add a custom tool to the toolbar.
 ## See Also
 
 * [Overview Kendo UI TaskBoard (Demo)](https://demos.telerik.com/kendo-ui/taskboard/index)
-* [JavaScript API Reference of the Kendo UI TaskBoard](/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the Kendo UI TaskBoard](/api/ui/taskboard)

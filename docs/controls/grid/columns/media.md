@@ -11,8 +11,8 @@ position: 11
 
 The Kendo UI Grid provides the built-in functionality to condtionally make a column visible, based on the width of the Browser window.
 
-> * The [hidden](/api/javascript/ui/grid/configuration/columns.hidden) option takes precedence over `media`.
-> * The `media` option cannot be used with [minScreenWidth](/api/javascript/ui/grid/configuration/columns.minscreenwidth) at the same time.
+> * The [hidden](/api/ui/grid/configuration/columns.hidden) option takes precedence over `media`.
+> * The `media` option cannot be used with [minScreenWidth](/api/ui/grid/configuration/columns.minscreenwidth) at the same time.
 
 ## Configuration
 
@@ -51,4 +51,4 @@ Set the `media` property of the column to a [valid string](#accepted-values).
 ## See Also
 
 * [Knowledge Base](/knowledge-base)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

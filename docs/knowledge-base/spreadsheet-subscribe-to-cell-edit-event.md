@@ -55,4 +55,4 @@ Utilize the `select` event of the Spreadsheet to subscribe to the `activate` eve
 
 ## See Also
 
-* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)

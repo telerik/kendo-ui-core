@@ -78,7 +78,7 @@ The following example demonstrates how to achieve this behavior. Note that the t
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

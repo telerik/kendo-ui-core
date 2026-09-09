@@ -751,7 +751,7 @@ Referencing existing instances allows you to build on top of their configuration
     </script>
     ```
 
-1. Use the [Gantt client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt#methods) to control the behavior of the widget. In this example, you will programmatically select the `month` view of the Gantt by using the `view` method.
+1. Use the [Gantt client-side API](https://docs.telerik.com/kendo-ui/api/ui/gantt#methods) to control the behavior of the widget. In this example, you will programmatically select the `month` view of the Gantt by using the `view` method.
 
     ```JS script
     <script>
@@ -771,6 +771,6 @@ For more information on referencing specific helper instances, see the [Methods 
 ## See Also
 
 * [Using the API of the Gantt for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/api)
-* [Client-Side API of the Gantt](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [Client-Side API of the Gantt](https://docs.telerik.com/kendo-ui/api/ui/gantt)
 * [Server-Side API of the Gantt](/api/gantt)
 * [Knowledge Base Section](/knowledge-base)

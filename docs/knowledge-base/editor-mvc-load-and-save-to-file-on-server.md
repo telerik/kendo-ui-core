@@ -86,7 +86,7 @@ To implement the approach:
     	)
     ````
 
-1. Send the [`encodedValue`](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/methods/encodedvalue) of the Editor to the server.
+1. Send the [`encodedValue`](https://docs.telerik.com/kendo-ui/api/ui/editor/methods/encodedvalue) of the Editor to the server.
 
     ````JavaScript
     	function onClick() {
@@ -125,5 +125,5 @@ To implement the approach:
 
 ## See Also
 
-* [Kendo UI Editor JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [Kendo UI Editor JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/ui/editor)
 * [Telerik DocumentProcessing Library](https://docs.telerik.com/devtools/document-processing/introduction)

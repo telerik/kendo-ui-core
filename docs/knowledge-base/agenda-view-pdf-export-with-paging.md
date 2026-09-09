@@ -1239,5 +1239,5 @@ To achieve the desired scenario, use the [drawing API]({% slug multipagecontent_
 
 * [Basic Usage of the jQuery Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the jQuery Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)
 * [Product Page of the Scheduler](https://www.telerik.com/kendo-jquery-ui/scheduler)

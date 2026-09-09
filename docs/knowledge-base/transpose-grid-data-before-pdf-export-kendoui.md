@@ -29,7 +29,7 @@ This KB article also answers the following questions:
 
 To transpose the Grid data on the exported PDF, while keeping the Grid display unchanged, follow the steps below. This solution utilizes a custom function to transpose the Grid's data source and then exports it using the Grid's PDF export functionality.
 
-1. Prepare a regular Kendo UI [Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) with your data and include a PDF export option.
+1. Prepare a regular Kendo UI [Grid](https://docs.telerik.com/kendo-ui/api/ui/grid) with your data and include a PDF export option.
 
 2. Use the Grid's PDF export event to manipulate the data. Implement a function that transposes the data from rows to columns. This function should create a new instance of the Grid with transposed data which will be exported to PDF.
 
@@ -168,5 +168,5 @@ Full example:
 
 ## See Also
 
-- [Kendo UI Grid API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Kendo UI Grid API Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid)
 - [Kendo UI Grid PDF Export Documentation](https://docs.telerik.com/kendo-ui/controls/grid/export/pdf-export)

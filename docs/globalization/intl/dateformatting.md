@@ -12,9 +12,9 @@ position: 3
 
 The purpose of date formatting is to convert the `Date` object to a human readable string by using the culture-specific settings.
 
-The [`kendo.format`](/api/javascript/kendo/methods/format) and [`kendo.toString`](/api/javascript/kendo/methods/tostring) methods support standard and custom date formats.
+The [`kendo.format`](/api/kendo/methods/format) and [`kendo.toString`](/api/kendo/methods/tostring) methods support standard and custom date formats.
 
-The following runnable example demonstrates how to convert a JavaScript `Date` object to a string by using the [`kendo.toString`](/api/javascript/kendo/methods/tostring) method:
+The following runnable example demonstrates how to convert a JavaScript `Date` object to a string by using the [`kendo.toString`](/api/kendo/methods/tostring) method:
 
 ```dojo
     <!-- Add the de-DE culture file -->
@@ -78,7 +78,7 @@ The following table lists the default Kendo UI date format specifiers.
 
 | Specifier     | Result  |
 |:---           |:---     |
-|`standard`     |Retrieved from the used Kendo UI culture script that is defined with the [`kendo.culture`](/api/javascript/kendo/methods/culture) method.
+|`standard`     |Retrieved from the used Kendo UI culture script that is defined with the [`kendo.culture`](/api/kendo/methods/culture) method.
 |`d`            | Renders a short date pattern (`"M/d/yyyy"` for en-US). For example, `kendo.toString(new Date(2000, 10, 6), "d") -> 10/6/2000`.
 |`D`            |Renders a long date pattern (`"dddd, MMMM dd, yyyy"` for en-US). For example, `kendo.toString(new Date(2000, 10, 6), "D") -> Monday, November 06, 2000`.
 |`F`            |Renders a full date/time pattern (`"dddd, MMMM dd, yyyy h:mm:ss tt"` for en-US). For example, `kendo.toString(new Date(2000, 10, 6), "F") -> Monday, November 06, 2000 12:00:00 AM`.

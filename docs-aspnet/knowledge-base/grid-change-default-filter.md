@@ -27,7 +27,7 @@ When selecting a search filter in the Grid, it defaults to 'Equal To'. I want to
 
 ## Solution
 
-To change the default search filter from 'Equal To' to 'Contains', use the Grid's [FilterMenuOpen](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuopen) event. In the event handler, implement a delay to ensure the filter popup has opened. Then, for the desired field (e.g., "ShipName"), find the Operator DropDownList and select the 'Contains' option. Finally, trigger the DropDownList's [Change](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/change) event.
+To change the default search filter from 'Equal To' to 'Contains', use the Grid's [FilterMenuOpen](https://docs.telerik.com/kendo-ui/api/ui/grid/events/filtermenuopen) event. In the event handler, implement a delay to ensure the filter popup has opened. Then, for the desired field (e.g., "ShipName"), find the Operator DropDownList and select the 'Contains' option. Finally, trigger the DropDownList's [Change](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/events/change) event.
 
 Below is an example demonstrating this approach:
 
@@ -62,7 +62,7 @@ This method ensures that whenever the filter menu opens for the specified field,
 
 ## See Also
 
-- [Grid FilterMenuOpen Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuopen)
-- [DropDownList Select Method Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/methods/select)
-- [DropDownList Change Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/change)
+- [Grid FilterMenuOpen Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/events/filtermenuopen)
+- [DropDownList Select Method Documentation](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/methods/select)
+- [DropDownList Change Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/events/change)
 - [Grid Overview](https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/overview)

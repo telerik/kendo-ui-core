@@ -118,4 +118,4 @@ The example below demonstrates how to align the action buttons at the start edge
 {% if site.core %}
 * [Server-Side API of the ActionSheet TagHelper](/api/taghelpers/actionsheet)
 {% endif %}
-* [Client-Side API of the ActionSheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet)
+* [Client-Side API of the ActionSheet](https://docs.telerik.com/kendo-ui/api/ui/actionsheet)

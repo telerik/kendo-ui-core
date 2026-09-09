@@ -7,7 +7,7 @@ component: notification
 
 # kendo.ui.Notification
 
-Represents a Kendo UI Notification Widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents a Kendo UI Notification Widget. Inherits from [Widget](/api/ui/widget).
 
 > **Important**
 >
@@ -75,7 +75,7 @@ How to customize notification animations in Kendo UI for jQuery? Control and cus
 
 ### appendTo `String|Element|jQuery` *(default: null)*
 
-Defines the element to which the notifications will be appended or prepended (depending on the [stacking](/api/javascript/ui/notification#configuration-stacking) direction).
+Defines the element to which the notifications will be appended or prepended (depending on the [stacking](/api/ui/notification#configuration-stacking) direction).
 
 
 <div class="meta-api-description">
@@ -447,7 +447,7 @@ How do I link specific templates to different notification types in Kendo UI? Co
     $("#notification").getKendoNotification().show("This is an info message", "info");
     </script>
 
-See the [example above](/api/javascript/ui/notification#configuration-templates).
+See the [example above](/api/ui/notification#configuration-templates).
 
 ### templates.template `String` *(default: "")*
 
@@ -480,7 +480,7 @@ How do I customize the layout of individual notifications in Kendo UI for jQuery
     }, "custom");
     </script>
 
-See the [example above](/api/javascript/ui/notification#configuration-templates).
+See the [example above](/api/ui/notification#configuration-templates).
 
 ### title `String` *(default: null)*
 
@@ -534,7 +534,7 @@ How can I set the width of a Kendo UI notification message in pixels? Adjust, co
 
 ### error
 
-This is a shorthand method for [`show(data, "error")`](/api/javascript/ui/notification/methods/show)
+This is a shorthand method for [`show(data, "error")`](/api/ui/notification/methods/show)
 
 #### Parameters
 
@@ -569,7 +569,7 @@ How to display error messages with Kendo UI for jQuery notification? Display or 
 Returns a jQuery collection of all visible notifications, displayed by the given widget instance. Each item in the collection is a `div.k-notification` element.
 
 This method is useful for quick removal of all visible messages before showing new ones. After obtaining all visible messages, **remove** them from the DOM
-instead of [hiding](/api/javascript/ui/notification/methods/hide) them, unless animations are disabled. This is because animations are asynchronous and the new messages
+instead of [hiding](/api/ui/notification/methods/hide) them, unless animations are disabled. This is because animations are asynchronous and the new messages
 will be shown on the wrong places before the old ones have been hidden. Another thing to keep in mind is that when using
 [**popup**](/web/notification/overview#popup-messages) notification messages, you should remove the [**parent**](/web/notification/overview#html-output)
 of each member of the collection, returned by the `getNotifications()` method. In this case the parent will be a `div.k-animation-container` element.
@@ -625,7 +625,7 @@ How do I access all currently visible notification messages in Kendo UI for jQue
 Hides all notifications from the given widget instance.
 
 If you intend to use this method to dispose of all visible messages before showing new ones,
-then use the [`getNotifications()`](/api/javascript/ui/notification/methods/getnotifications) method instead, unless animations are disabled.
+then use the [`getNotifications()`](/api/ui/notification/methods/getnotifications) method instead, unless animations are disabled.
 
 
 <div class="meta-api-description">
@@ -646,7 +646,7 @@ How do I programmatically close all visible notifications in Kendo UI for jQuery
 
 ### info
 
-This is a shorthand method for [`show(data, "info")`](/api/javascript/ui/notification/methods/show)
+This is a shorthand method for [`show(data, "info")`](/api/ui/notification/methods/show)
 
 
 <div class="meta-api-description">
@@ -695,11 +695,11 @@ How do I programmatically show a notification in Kendo UI with custom animation?
 
 **Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
 
-> **Important** The content **will not** be HTML-encoded. Use the [showText](/api/javascript/ui/notification/methods/showtext) if you only intend to show plain text.
+> **Important** The content **will not** be HTML-encoded. Use the [showText](/api/ui/notification/methods/showtext) if you only intend to show plain text.
 
 ##### type `String`
 
-The notification type. Predefined type values include `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"` and `"inverse"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
+The notification type. Predefined type values include `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"` and `"inverse"`. Custom types should match the types from the [template configuration](/api/ui/notification#configuration-templates).
 If this argument is not supplied, then `"base"` is assumed.
 
 ##### safe `Boolean`
@@ -780,7 +780,7 @@ Controls the HTML encoding. When the value is `true` the content is HTML-encoded
 
 Displays a plain-text notification.
 
-This is a safer version of the [show](/api/javascript/ui/notification/methods/show) method that assumes that you want to encode any markup passed in as a message.
+This is a safer version of the [show](/api/ui/notification/methods/show) method that assumes that you want to encode any markup passed in as a message.
 
 
 <div class="meta-api-description">
@@ -797,7 +797,7 @@ How do I prevent XSS attacks when displaying plain-text notifications in Kendo U
 
 ##### type `String`
 
-The notification type. Predefined type values include `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"` and `"inverse"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
+The notification type. Predefined type values include `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"` and `"inverse"`. Custom types should match the types from the [template configuration](/api/ui/notification#configuration-templates).
 If this argument is not supplied, then `"base"` is assumed.
 
 #### Example - Use the showText method to display a string
@@ -843,7 +843,7 @@ If this argument is not supplied, then `"base"` is assumed.
 
 ### success
 
-This is a shorthand method for [`show(data, "success")`](/api/javascript/ui/notification/methods/show)
+This is a shorthand method for [`show(data, "success")`](/api/ui/notification/methods/show)
 
 
 <div class="meta-api-description">
@@ -876,7 +876,7 @@ How do I trigger a success notification in Kendo UI for jQuery? Display or trigg
 
 ### warning
 
-This is a shorthand method for [`show(data, "warning")`](/api/javascript/ui/notification/methods/show)
+This is a shorthand method for [`show(data, "warning")`](/api/ui/notification/methods/show)
 
 
 <div class="meta-api-description">

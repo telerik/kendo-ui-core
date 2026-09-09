@@ -23,9 +23,9 @@ When dynamically setting the maximum value for a Kendo UI Slider, you may encoun
 
 To resolve this issue, follow these steps:
 
-1. Adjust the [smallStep](/api/javascript/ui/slider/configuration/smallstep) and [largeStep](/api/javascript/ui/slider/configuration/largestep) configurations to ensure the slider ticks fit within the space of the component.
-2. Set the [min](/api/javascript/ui/slider/configuration/min) and [max](/api/javascript/ui/slider/configuration/max) options of the slider to the desired values.
-3. Set the [value](/api/javascript/ui/slider/configuration/value) option to the maximum value you want to display on the slider.
+1. Adjust the [smallStep](/api/ui/slider/configuration/smallstep) and [largeStep](/api/ui/slider/configuration/largestep) configurations to ensure the slider ticks fit within the space of the component.
+2. Set the [min](/api/ui/slider/configuration/min) and [max](/api/ui/slider/configuration/max) options of the slider to the desired values.
+3. Set the [value](/api/ui/slider/configuration/value) option to the maximum value you want to display on the slider.
 
 Here's an example of how to apply these changes in JavaScript:
 

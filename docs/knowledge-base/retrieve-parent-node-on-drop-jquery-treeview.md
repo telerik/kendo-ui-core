@@ -30,7 +30,7 @@ TreeView for Kendo UI for jQuery
 
 ## Description
 
-I want to correctly identify the parent node under which a dragged node is dropped in the [Kendo UI for jQuery TreeView](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview). The `e.dropTarget` does not provide the parent node but rather the element the node is dropped over. Similarly, the `e.destinationNode` represents the related node based on the drop operation. Understanding drop positions like "before," "after," and "over" is critical to determine the new parent node.
+I want to correctly identify the parent node under which a dragged node is dropped in the [Kendo UI for jQuery TreeView](https://docs.telerik.com/kendo-ui/api/ui/treeview). The `e.dropTarget` does not provide the parent node but rather the element the node is dropped over. Similarly, the `e.destinationNode` represents the related node based on the drop operation. Understanding drop positions like "before," "after," and "over" is critical to determine the new parent node.
 
 This knowledge base article also answers the following questions:
 - How do I find the parent node after dropping a node in jQuery TreeView?
@@ -39,7 +39,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To retrieve the correct parent node of a dropped node in the Kendo UI for jQuery TreeView, in the [drop](/api/javascript/ui/treeview/events/drop) event handler, use the `e.dropPosition` and `e.destinationNode`. Based on the drop position, determine if the node is dropped inside another node ("over") or as a sibling ("before" or "after"). For sibling operations, utilize the [`parentNode()`](/api/javascript/data/node/methods/parentnode) method of the TreeView.
+To retrieve the correct parent node of a dropped node in the Kendo UI for jQuery TreeView, in the [drop](/api/ui/treeview/events/drop) event handler, use the `e.dropPosition` and `e.destinationNode`. Based on the drop position, determine if the node is dropped inside another node ("over") or as a sibling ("before" or "after"). For sibling operations, utilize the [`parentNode()`](/api/data/node/methods/parentnode) method of the TreeView.
 
 Follow these steps:
 
@@ -112,6 +112,6 @@ You can test this functionality using the following runnable example:
 
 ## See Also
 
-- [Kendo UI for jQuery TreeView API Overview](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
-- [Node ParentNode Method](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/parentnode) 
+- [Kendo UI for jQuery TreeView API Overview](https://docs.telerik.com/kendo-ui/api/ui/treeview)
+- [Node ParentNode Method](https://docs.telerik.com/kendo-ui/api/data/node/methods/parentnode) 
 - [Drag-and-Drop Functionality in TreeView](https://docs.telerik.com/kendo-ui/controls/navigation/treeview/drag-drop)

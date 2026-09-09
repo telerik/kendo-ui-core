@@ -15,7 +15,7 @@ In this article, you will find information about the styling options and renderi
 
 The `size` option controls how big or small the FlatColorPicker component looks. The structure of the class is `k-flatcolorpicker-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/flatcolorpicker/configuration/size) option:
+The following values are available for the [`size`](/api/ui/flatcolorpicker/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -45,4 +45,4 @@ Below is the HTML that is affected from the configuration. The changes are appli
 
 ## See Also
 
-* [JavaScript API Reference of the FlatColorPicker](/api/javascript/ui/flatcolorpicker)
+* [JavaScript API Reference of the FlatColorPicker](/api/ui/flatcolorpicker)

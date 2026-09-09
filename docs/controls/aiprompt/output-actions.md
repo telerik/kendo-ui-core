@@ -15,7 +15,7 @@ You can use the [built-in actions](#built-in-actions) or define [custom actions]
 
 ## Built-in Actions
 
-The AIPrompt supports the following built-in [`outputActions`](/api/javascript/ui/aiprompt/configuration/outputactions):
+The AIPrompt supports the following built-in [`outputActions`](/api/ui/aiprompt/configuration/outputactions):
 
 * `copy`&mdash;Copies the output content to the clipboard. The action is displayed by default.
 * `retry`&mdash;Regenerates the output using the same prompt and settings. The action is displayed by default.
@@ -83,4 +83,4 @@ The example below shows how to define custom output actions and handle their `cl
 * [Output Actions in the AIPrompt for jQuery (Demo)](https://demos.telerik.com/kendo-ui/aiprompt/output-actions)
 * [Configuring the AIPrompt Templates]({% slug templates_aiprompt_component %})
 * [Getting Started with the AIPrompt]({% slug getting_started_kendoui_aiprompt_component %})
-* [JavaScript API Reference of the AIPrompt](/api/javascript/ui/aiprompt)
+* [JavaScript API Reference of the AIPrompt](/api/ui/aiprompt)

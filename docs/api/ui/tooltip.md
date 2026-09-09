@@ -7,7 +7,7 @@ component: tooltip
 
 # kendo.ui.Tooltip
 
-Represents the Kendo UI Tooltip. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Tooltip. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -585,7 +585,7 @@ How do I adjust the spacing between my Kendo UI tooltip and its target element? 
 
 ### popup `kendo.ui.Popup`
 
-Contains the Kendo UI [`Popup`](/api/javascript/ui/popup) instance which manages the showing and hiding of the tooltips at the appropriate position. The `popup` field can be used to apply custom CSS classes and styles, or any other attributes to the [`element` or `wrapper`](/intro/widget-basics/wrapper-element) settings of the Popup.
+Contains the Kendo UI [`Popup`](/api/ui/popup) instance which manages the showing and hiding of the tooltips at the appropriate position. The `popup` field can be used to apply custom CSS classes and styles, or any other attributes to the [`element` or `wrapper`](/intro/widget-basics/wrapper-element) settings of the Popup.
 
 
 <div class="meta-api-description">

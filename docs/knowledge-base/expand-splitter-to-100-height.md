@@ -228,4 +228,4 @@ The following example demonstrates a Kendo UI Splitter with a calculated height.
 
 * [Basic Usage of the Splitter (Demo)](https://demos.telerik.com/kendo-ui/splitter/index)
 * [Using the API of the Splitter (Demo)](https://demos.telerik.com/kendo-ui/splitter/api)
-* [JavaScript API Reference of the Splitter](/api/javascript/ui/splitter)
+* [JavaScript API Reference of the Splitter](/api/ui/splitter)

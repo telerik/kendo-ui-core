@@ -81,4 +81,4 @@ The following example demonstrates the suggested approach by displaying the **Un
 
 ## See Also
 
-* [API Reference of the groupHeaderTemplate Property](/api/javascript/ui/grid/configuration/columns.groupheadertemplate#columns.groupHeaderTemplate)
+* [API Reference of the groupHeaderTemplate Property](/api/ui/grid/configuration/columns.groupheadertemplate#columns.groupHeaderTemplate)

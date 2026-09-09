@@ -25,9 +25,9 @@ How can I retrieve the dataItem of the selected node in Kendo UI for jQuery Drop
 
 ## Solution
 
-1. Handle the [`select`](/api/javascript/ui/dropdowntree/events/select) event of the DropDownTree.
+1. Handle the [`select`](/api/ui/dropdowntree/events/select) event of the DropDownTree.
 1. In the event handler you can access the embedded TreeView.
-1. Then, you can use the TreeView [`dataItem`](/api/javascript/ui/treeview/methods/dataitem) method.
+1. Then, you can use the TreeView [`dataItem`](/api/ui/treeview/methods/dataitem) method.
 
 ```dojo
     <input id="dropdowntree"/>
@@ -61,4 +61,4 @@ How can I retrieve the dataItem of the selected node in Kendo UI for jQuery Drop
 
 ## See Also
 
-* [DropDownTree API Reference](/api/javascript/ui/dropdowntree)
+* [DropDownTree API Reference](/api/ui/dropdowntree)

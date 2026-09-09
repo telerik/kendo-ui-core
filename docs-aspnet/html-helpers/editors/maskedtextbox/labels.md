@@ -89,7 +89,7 @@ The following example demonstrates how to set a Floating Label for a MaskedTextB
 
 If set to `true`, the component will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox/methods/value) client-side method **does not trigger** the `focusout` event of the input.
+> **Important:** The [value](https://docs.telerik.com/kendo-ui/api/ui/maskedtextbox/methods/value) client-side method **does not trigger** the `focusout` event of the input.
 This could affect the floating label functionality.
 You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#maskedtextbox").data("kendoMaskedTextBox").floatingLabel.refresh();`
 

@@ -242,7 +242,7 @@ To create an AI chat service that connects to the Chat, follow the steps below:
       - `onError`: clears the current AI message reference and stops the generating indicator;
       - `onAbort`: calls `completeStream()` to finalize whatever content was received before cancellation;
 
-    * `download` event&mdash;Fires when a download action is triggered, either from the **Download All** button or from a file menu download action. Within the event handler, iterate through each file in the message, convert the file URL to a downloadable blob, and trigger a browser download using [`kendo.saveAs()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/kendo/methods/saveas) method.
+    * `download` event&mdash;Fires when a download action is triggered, either from the **Download All** button or from a file menu download action. Within the event handler, iterate through each file in the message, convert the file URL to a downloadable blob, and trigger a browser download using [`kendo.saveAs()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/kendo/methods/saveas) method.
 
     ```html
     <div id="chat"></div>
@@ -457,4 +457,4 @@ For the complete example, visit the [AI Integration Demo of the Chat component](
 ## See Also
 
 * [Person-to-Bot Conversation using the Chat for jQuery (Demo)](https://demos.telerik.com/kendo-ui/chat/person-to-bot)
-* [JavaScript API Reference of the Chat](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
+* [JavaScript API Reference of the Chat](https://docs.telerik.com/kendo-ui/api/ui/chat)

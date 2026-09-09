@@ -188,4 +188,4 @@ The Avatar allows you to specify whether or not to render an additional border a
 ## See Also
 
 * [Appearance of the Avatar (Demo)](https://demos.telerik.com/{{ site.platform }}/avatar/appearance)
-* [JavaScript API Reference of the Avatar](https://docs.telerik.com/kendo-ui/api/javascript/ui/avatar)
+* [JavaScript API Reference of the Avatar](https://docs.telerik.com/kendo-ui/api/ui/avatar)

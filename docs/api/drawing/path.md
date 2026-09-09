@@ -103,7 +103,7 @@ How to convert arcs into editable path curves in Kendo UI for jQuery drawingapi?
 The source arc to trace.
 
 ##### options `Object` *optional*
-The [configuration](/api/javascript/drawing/path#configuration) options for the path.
+The [configuration](/api/drawing/path#configuration) options for the path.
 
 #### Returns
 `kendo.drawing.Path` The newly constructed path.
@@ -144,10 +144,10 @@ How do I create a path in Kendo UI with an array of x,y coordinates? Generate a 
 #### Parameters
 
 ##### points `Array`
-Array of [kendo.geometry.Point](/api/javascript/geometry/point) objects or [x, y] arrays.
+Array of [kendo.geometry.Point](/api/geometry/point) objects or [x, y] arrays.
 
 ##### options `Object` *optional*
-The [configuration](/api/javascript/drawing/path#configuration) options for the path.
+The [configuration](/api/drawing/path#configuration) options for the path.
 
 #### Returns
 `kendo.drawing.Path` The newly constructed path.
@@ -190,7 +190,7 @@ How to create a vector path from a rectangle in Kendo UI for jQuery? Generate a 
 The source rectangle to trace.
 
 ##### options `Object` *optional*
-The [configuration](/api/javascript/drawing/path#configuration) options for the path.
+The [configuration](/api/drawing/path#configuration) options for the path.
 
 #### Returns
 `kendo.drawing.Path` The newly constructed path.
@@ -228,7 +228,7 @@ How can I convert SVG path strings into drawable shapes in Kendo UI for jQuery? 
 The path encoded in [SVG Path Data format](https://www.w3.org/TR/SVG/paths.html#PathData).
 
 ##### options `Object` *optional*
-The [configuration](/api/javascript/drawing/path#configuration) options for the path.
+The [configuration](/api/drawing/path#configuration) options for the path.
 
 #### Returns
 `kendo.drawing.MultiPath` A path matching the supplied SVG data.
@@ -237,7 +237,7 @@ The [configuration](/api/javascript/drawing/path#configuration) options for the 
 
 ### clip `kendo.drawing.Path`
 The element clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element#configuration-clip)
+Inherited from [Element.clip](/api/drawing/element#configuration-clip)
 
 
 <div class="meta-api-description">
@@ -276,7 +276,7 @@ How do I set a clipping region for a Kendo UI drawing path? Control, define, or 
 
 ### cursor `String`
 The element cursor.
-Inherited from [Element.cursor](/api/javascript/drawing/element#configuration-cursor)
+Inherited from [Element.cursor](/api/drawing/element#configuration-cursor)
 
 
 <div class="meta-api-description">
@@ -338,7 +338,7 @@ How to set different fill colors for vector shapes in Kendo UI DrawingPath? Cont
 
 ### opacity `Number`
 The element opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-opacity)
+Inherited from [Element.opacity](/api/drawing/element#configuration-opacity)
 
 
 <div class="meta-api-description">
@@ -435,7 +435,7 @@ How to customize tooltip for a vector path in Kendo UI DrawingPath? Customize ho
 
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
-Inherited from [Element.transform](/api/javascript/drawing/element#configuration-transform)
+Inherited from [Element.transform](/api/drawing/element#configuration-transform)
 
 
 <div class="meta-api-description">
@@ -475,7 +475,7 @@ How to apply transformations to a vector path in Kendo UI for jQuery drawingapi?
 
 ### visible `Boolean`
 A flag, indicating if the element is visible.
-Inherited from [Element.visible](/api/javascript/drawing/element#configuration-visible)
+Inherited from [Element.visible](/api/drawing/element#configuration-visible)
 
 
 <div class="meta-api-description">
@@ -516,7 +516,7 @@ How do I control the visibility of a drawing path in Kendo UI for jQuery? Contro
 ## Fields
 
 ### segments `Array`
-A collection of the path [segments](/api/javascript/drawing/segment).
+A collection of the path [segments](/api/drawing/segment).
 
 
 <div class="meta-api-description">
@@ -550,7 +550,7 @@ How can I dynamically add new segments to an existing drawing path in Kendo UI f
 
 ### bbox
 Returns the bounding box of the element with transformations applied.
-Inherited from [Element.bbox](/api/javascript/drawing/element#methods-bbox)
+Inherited from [Element.bbox](/api/drawing/element#methods-bbox)
 
 
 <div class="meta-api-description">
@@ -584,7 +584,7 @@ How to get bounding box of transformed vector graphics in Kendo UI? Calculate or
 
 ### clip
 Gets or sets the element clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element#methods-clip)
+Inherited from [Element.clip](/api/drawing/element#methods-clip)
 
 
 <div class="meta-api-description">
@@ -629,7 +629,7 @@ The element clipping path.
 
 ### clippedBBox
 Returns the bounding box of the element with clipping and transformations applied.
-Inherited from [Element.clippedBBox](/api/javascript/drawing/element#methods-clippedBBox)
+Inherited from [Element.clippedBBox](/api/drawing/element#methods-clippedBBox)
 
 
 <div class="meta-api-description">
@@ -785,7 +785,7 @@ The curve end point.
 
 
 ### fill
-Sets the shape [fill](/api/javascript/drawing/path#configuration-fill).
+Sets the shape [fill](/api/drawing/path#configuration-fill).
 
 
 <div class="meta-api-description">
@@ -814,10 +814,10 @@ How do I dynamically change the fill color of a shape in Kendo UI's drawing API?
 #### Parameters
 
 ##### color `String`
-The [fill color](/api/javascript/drawing/fill-options#fields-color) to set.
+The [fill color](/api/drawing/fill-options#fields-color) to set.
 
 ##### opacity `Number` *optional*
-The [fill opacity](/api/javascript/drawing/fill-options#fields-opacity) to set.
+The [fill opacity](/api/drawing/fill-options#fields-opacity) to set.
 
 #### Returns
 `kendo.drawing.Path` The current instance to allow chaining.
@@ -906,7 +906,7 @@ Optional if the first parameter is a Point/Array.
 
 ### opacity
 Gets or sets the element opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element#methods-opacity)
+Inherited from [Element.opacity](/api/drawing/element#methods-opacity)
 
 If set, the stroke and fill opacity will be multiplied by the element opacity.
 
@@ -954,7 +954,7 @@ The element opacity. Ranges from 0 (completely transparent) to 1 (completely opa
 
 
 ### stroke
-Sets the shape [stroke](/api/javascript/drawing/path#configuration-stroke).
+Sets the shape [stroke](/api/drawing/path#configuration-stroke).
 
 
 <div class="meta-api-description">
@@ -984,13 +984,13 @@ How do I change the color of a shape's outline in Kendo UI for jQuery? Adjust or
 #### Parameters
 
 ##### color `String`
-The [stroke color](/api/javascript/drawing/stroke-options#fields-color) to set.
+The [stroke color](/api/drawing/stroke-options#fields-color) to set.
 
 ##### width `Number` *optional*
-The [stroke width](/api/javascript/drawing/stroke-options#fields-width) to set.
+The [stroke width](/api/drawing/stroke-options#fields-width) to set.
 
 ##### opacity `Number` *optional*
-The [stroke opacity](/api/javascript/drawing/stroke-options#fields-opacity) to set.
+The [stroke opacity](/api/drawing/stroke-options#fields-opacity) to set.
 
 #### Returns
 `kendo.drawing.Path` The current instance to allow chaining.
@@ -998,7 +998,7 @@ The [stroke opacity](/api/javascript/drawing/stroke-options#fields-opacity) to s
 
 ### transform
 Gets or sets the transformation of the element.
-Inherited from [Element.transform](/api/javascript/drawing/element#methods-transform)
+Inherited from [Element.transform](/api/drawing/element#methods-transform)
 
 
 <div class="meta-api-description">
@@ -1051,7 +1051,7 @@ The transformation to apply to the element.
 
 ### visible
 Gets or sets the visibility of the element.
-Inherited from [Element.visible](/api/javascript/drawing/element#methods-visible)
+Inherited from [Element.visible](/api/drawing/element#methods-visible)
 
 
 <div class="meta-api-description">

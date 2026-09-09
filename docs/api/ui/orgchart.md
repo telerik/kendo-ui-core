@@ -7,13 +7,13 @@ component: OrgChart
 
 # kendo.ui.OrgChart
 
-Represents the Kendo UI OrgChart widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI OrgChart widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
 ### cardsColors `Array` *(default: null)*
 
-An array of strings defining the cards top-border color for each level starting from the top level. If not set, the colors from the [Kendo Chart](/api/javascript/dataviz/ui/chart) series will be used.
+An array of strings defining the cards top-border color for each level starting from the top level. If not set, the colors from the [Kendo Chart](/api/dataviz/ui/chart) series will be used.
 
 
 
@@ -39,9 +39,9 @@ How do I customize the top-border colors in Kendo UI OrgChart cards by level? Se
 
 ### dataSource `Object|Array|kendo.data.OrgChartDataSource`
 
-The data source of the widget which is used to render the OrgChart items. Can be a JavaScript object which represents a valid [`kendo.data.OrgChartDataSource`](/api/javascript/data/orgchartdatasource) configuration, a JavaScript array, or an existing [`kendo.data.OrgChartDataSource`](/api/javascript/data/orgchartdatasource) instance.
+The data source of the widget which is used to render the OrgChart items. Can be a JavaScript object which represents a valid [`kendo.data.OrgChartDataSource`](/api/data/orgchartdatasource) configuration, a JavaScript array, or an existing [`kendo.data.OrgChartDataSource`](/api/data/orgchartdatasource) instance.
 
-* If the `dataSource` option is set to a JavaScript object or an array, the widget will initialize a new [`kendo.data.OrgChartDataSource`](/api/javascript/data/orgchartdatasource) instance and will use that value as the DataSource configuration.
+* If the `dataSource` option is set to a JavaScript object or an array, the widget will initialize a new [`kendo.data.OrgChartDataSource`](/api/data/orgchartdatasource) instance and will use that value as the DataSource configuration.
 * If the `dataSource` option is an existing `kendo.data.OrgChartDataSource` instance, the widget will use that instance and will not initialize a new one.
 
 
@@ -212,7 +212,7 @@ How to enable inline editing for name, title, and avatar fields in Kendo UI OrgC
 
 ### editable.form `Object` *(default: true)*
 
-A [kendo.ui.Form](/api/javascript/ui/form) configuration object that allows customization of the Form on the pop-up editor.
+A [kendo.ui.Form](/api/ui/form) configuration object that allows customization of the Form on the pop-up editor.
 
 
 <div class="meta-api-description">

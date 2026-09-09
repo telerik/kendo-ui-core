@@ -54,7 +54,7 @@ Initialize the SegmentedControl from the `<div>` element. All configuration opti
 
 ## 3. Add Items
 
-Use the [`items`](/api/javascript/ui/segmentedcontrol/configuration/items) option to define the selectable segments. Each item requires a `text` and a `value`.
+Use the [`items`](/api/ui/segmentedcontrol/configuration/items) option to define the selectable segments. Each item requires a `text` and a `value`.
 
 ```html
 <div id="segmentedControl"></div>
@@ -72,7 +72,7 @@ Use the [`items`](/api/javascript/ui/segmentedcontrol/configuration/items) optio
 
 ## 4. Add Icons
 
-Use the [`icon`](/api/javascript/ui/segmentedcontrol/configuration/items.icon) option on each item to display a Kendo UI theme icon alongside the label.
+Use the [`icon`](/api/ui/segmentedcontrol/configuration/items.icon) option on each item to display a Kendo UI theme icon alongside the label.
 
 ```html
 <div id="segmentedControl"></div>
@@ -90,7 +90,7 @@ Use the [`icon`](/api/javascript/ui/segmentedcontrol/configuration/items.icon) o
 
 ## 5. Set a Default Selection
 
-Use [`selectedValue`](/api/javascript/ui/segmentedcontrol/configuration/selectedvalue) to pre-select one of the items when the component first renders.
+Use [`selectedValue`](/api/ui/segmentedcontrol/configuration/selectedvalue) to pre-select one of the items when the component first renders.
 
 ```html
 <div id="segmentedControl"></div>
@@ -109,7 +109,7 @@ Use [`selectedValue`](/api/javascript/ui/segmentedcontrol/configuration/selected
 
 ## 6. Handle the Change Event
 
-Subscribe to the [`change`](/api/javascript/ui/segmentedcontrol/events/change) event to execute custom logic when the user selects a different segment.
+Subscribe to the [`change`](/api/ui/segmentedcontrol/events/change) event to execute custom logic when the user selects a different segment.
 
 ```html
 <div id="segmentedControl"></div>
@@ -136,5 +136,5 @@ Subscribe to the [`change`](/api/javascript/ui/segmentedcontrol/events/change) e
 
 ## See Also
 
-* [JavaScript API Reference of the SegmentedControl](/api/javascript/ui/segmentedcontrol)
+* [JavaScript API Reference of the SegmentedControl](/api/ui/segmentedcontrol)
 * [Knowledge Base Section](/knowledge-base)

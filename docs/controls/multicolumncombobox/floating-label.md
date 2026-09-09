@@ -11,7 +11,7 @@ position: 11
 
 A floating label is a placeholder text for form or input fields, which floats above that field and remains visible once the user starts interacting with that field. 
 
-To implement a [floating label in the Kendo UI for jQuery MultiColumnComboBox](/api/javascript/ui/multicolumncombobox/configuration/label), define it either as a string or from a function.
+To implement a [floating label in the Kendo UI for jQuery MultiColumnComboBox](/api/ui/multicolumncombobox/configuration/label), define it either as a string or from a function.
 
 The following example demonstrates how to set the floating label as a string:
 
@@ -73,4 +73,4 @@ The following example demonstrates how to set the floating label from a function
 ## See Also
 
 * [Floating Label (Demo) of the MultiColumnComboBox](https://demos.telerik.com/kendo-ui/multicolumncombobox/floating-label)
-* [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
+* [JavaScript API Reference of the MultiColumnComboBox](/api/ui/multicolumncombobox)

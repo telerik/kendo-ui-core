@@ -31,9 +31,9 @@ Currently, the component is not supported in Internet Explorer as the browser do
 
 * [Getting Started with the Kendo UI TileLayout for jQuery]({% slug getting_started_kendoui_tilelayout_widget %})
 * [Basic Usage of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
-* [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)
+* [JavaScript API Reference of the TileLayout](/api/ui/tilelayout)
 
 ## See Also
 
 * [Overview of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
-* [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)
+* [JavaScript API Reference of the TileLayout](/api/ui/tilelayout)

@@ -25,7 +25,7 @@ How can I prevent the default behavior of the Enter key in the Editor widget?
 
 ## Solution
 
-* You can handle the [`execute`](/api/javascript/ui/editor/events/execute) event of the Editor component and prevent the default behavior of the executing command, corresponding to the event of the Enter button - "insertParagraph".
+* You can handle the [`execute`](/api/ui/editor/events/execute) event of the Editor component and prevent the default behavior of the executing command, corresponding to the event of the Enter button - "insertParagraph".
 
 The following example demonstrates how to achieve the desired scenario: 
 ```dojo
@@ -43,4 +43,4 @@ The following example demonstrates how to achieve the desired scenario:
 
 ## See Also
 * [jQuery Editor Events (Demo)](https://demos.telerik.com/kendo-ui/editor/events)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

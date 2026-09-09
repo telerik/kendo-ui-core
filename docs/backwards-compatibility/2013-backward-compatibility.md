@@ -20,7 +20,7 @@ The `kendo.support.pointers` now only shows support for Internet Explorer (IE) 1
 
 **Splitter**
 
-* The internal `trigger("resize")` method, which has been provided as a workaround in certain scenarios, no longer works. It is now replaced with the [`resize()`](/api/javascript/kendo/methods/resize) public API method, which is now available in all Kendo UI widgets. For more information, refer to [`kendo.resize()`](/api/javascript/kendo/methods/resize).
+* The internal `trigger("resize")` method, which has been provided as a workaround in certain scenarios, no longer works. It is now replaced with the [`resize()`](/api/kendo/methods/resize) public API method, which is now available in all Kendo UI widgets. For more information, refer to [`kendo.resize()`](/api/kendo/methods/resize).
 
 * The `layoutChange` event is now obsolete and will be removed in the future. Use the `resize` event instead.
 

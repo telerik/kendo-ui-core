@@ -54,4 +54,4 @@ To disable dates by using a function, set the return value for the date that wil
 ## See Also
 
 * [Disabling Dates in the Calendar (Demo)](https://demos.telerik.com/kendo-ui/calendar/disable-dates)
-* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/ui/calendar)

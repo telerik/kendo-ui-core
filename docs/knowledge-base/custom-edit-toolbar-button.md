@@ -128,4 +128,4 @@ The following example demonstrates how to create a custom **Edit** button in the
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

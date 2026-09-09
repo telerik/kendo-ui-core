@@ -301,7 +301,7 @@ To use the client-side API of the ToolBar and build on top of its initial config
     </script>
     ```
 
-1. Use the [ToolBar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar#methods) to control the behavior of the widget. In this example, you will use the `hide` method to hide one of the button tools in the ToolBar.
+1. Use the [ToolBar client-side API](https://docs.telerik.com/kendo-ui/api/ui/toolbar#methods) to control the behavior of the widget. In this example, you will use the `hide` method to hide one of the button tools in the ToolBar.
 
     ```JS script
     <script>
@@ -333,6 +333,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the ToolBar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar/api)
-* [Client-Side API of the ToolBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)
+* [Client-Side API of the ToolBar](https://docs.telerik.com/kendo-ui/api/ui/toolbar)
 * [Server-Side API of the ToolBar](/api/toolbar)
 * [Knowledge Base Section](/knowledge-base)

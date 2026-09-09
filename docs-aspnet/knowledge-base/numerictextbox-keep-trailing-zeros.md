@@ -90,7 +90,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 
 ## See Also
 
-* [Client-Side API Reference of the NumericTextBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript//ui/numerictextbox)
+* [Client-Side API Reference of the NumericTextBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api//ui/numerictextbox)
 * [Server-Side API Reference of the NumericTextBox for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/numerictextbox)
 * [Telerik REPL: Keeping Trailing Zeros in the NumericTextBox](https://netcorerepl.telerik.com/cxaSaSPq400vRo8o25)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})

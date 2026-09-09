@@ -37,7 +37,7 @@ How can I use the event template to render events with a specific background col
 
 ## Solution
 
-1. Add a CSS class to the wrapper element in the [`eventTemplate`](/api/javascript/ui/scheduler/configuration/eventtemplate) and use it to style the events.
+1. Add a CSS class to the wrapper element in the [`eventTemplate`](/api/ui/scheduler/configuration/eventtemplate) and use it to style the events.
 
 The following example demonstrates how to achieve the desired scenario.
 
@@ -150,4 +150,4 @@ The following example demonstrates how to achieve the desired scenario.
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

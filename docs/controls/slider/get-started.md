@@ -48,7 +48,7 @@ In this step, you will initialize the Slider from the `<input>` element. All set
 
 ## 3. Add Min and Max Values
 
-Next, you can define the [minimal](/api/javascript/ui/slider/configuration/min) and [maximum](/api/javascript/ui/slider/configuration/max) values that will be rendered in the Slider.
+Next, you can define the [minimal](/api/ui/slider/configuration/min) and [maximum](/api/ui/slider/configuration/max) values that will be rendered in the Slider.
 
 ```html
    <input id="slider">
@@ -63,7 +63,7 @@ Next, you can define the [minimal](/api/javascript/ui/slider/configuration/min) 
 
 ## 4. Add the Steps Options
 
-Next, you can configure the [`smallStep`](/api/javascript/ui/slider/configuration/smallstep) and [`largeStep`](/api/javascript/ui/slider/configuration/largestep) options. The `smallStep` determines the small ticks in the Slider and how the value will be changed when using the keyboard. The `largeStep` determines the large ticks for each large step and how the value changes when you interact with the `PageUp` and `PageDown` keys. 
+Next, you can configure the [`smallStep`](/api/ui/slider/configuration/smallstep) and [`largeStep`](/api/ui/slider/configuration/largestep) options. The `smallStep` determines the small ticks in the Slider and how the value will be changed when using the keyboard. The `largeStep` determines the large ticks for each large step and how the value changes when you interact with the `PageUp` and `PageDown` keys. 
 
 ```html
    <input id="slider">
@@ -85,7 +85,7 @@ Next, you can configure the [`smallStep`](/api/javascript/ui/slider/configuratio
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Slider](/api/javascript/ui/slider)
+* [JavaScript API Reference of the jQuery Slider](/api/ui/slider)
 * [Knowledge Base Section](/knowledge-base)
 
 

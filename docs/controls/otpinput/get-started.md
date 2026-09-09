@@ -58,7 +58,7 @@ In this step, you will initialize the OTPInput from the `<input>` element. Upon 
 
 ## 3. Configure the Items
 
-The OTPInput's [items option](/api/javascript/ui/otpinput/configuration/items) can be configured either as a number or as an array. The latter allows you to configure the items in groups with a specified length.
+The OTPInput's [items option](/api/ui/otpinput/configuration/items) can be configured either as a number or as an array. The latter allows you to configure the items in groups with a specified length.
 
 ```html
 <input id="otpinput" />
@@ -82,7 +82,7 @@ The OTPInput's [items option](/api/javascript/ui/otpinput/configuration/items) c
 
 ## 4. Configure the Placeholder
 
-You can configure a [placeholder](/api/javascript/ui/otpinput/configuration/placeholder) which will be displayed when the OTPInput items have no value.
+You can configure a [placeholder](/api/ui/otpinput/configuration/placeholder) which will be displayed when the OTPInput items have no value.
 
 ```html
 <input id="otpinput" />
@@ -107,7 +107,7 @@ You can configure a [placeholder](/api/javascript/ui/otpinput/configuration/plac
 
 ## 5. Set the Type
 
-The OTPInput supports three [types](/api/javascript/ui/otpinput/configuration/type)&mdash;`text`(default), `number`, and `password`. In the example, the type is changed to `number` so only numeric values can be entered.
+The OTPInput supports three [types](/api/ui/otpinput/configuration/type)&mdash;`text`(default), `number`, and `password`. In the example, the type is changed to `number` so only numeric values can be entered.
 
 ```html
 <input id="otpinput" />
@@ -138,6 +138,6 @@ The OTPInput supports three [types](/api/javascript/ui/otpinput/configuration/ty
 
 ## See Also 
 
-* [JavaScript API Reference of the OTPInput](/api/javascript/ui/otpinput)
+* [JavaScript API Reference of the OTPInput](/api/ui/otpinput)
 * [Knowledge Base Section](/knowledge-base)
 

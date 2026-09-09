@@ -11,7 +11,7 @@ component: map
 ## Fields
 
 ### layers `Array`
-The [Map layers](/api/javascript/dataviz/map/layer) ordered by index.
+The [Map layers](/api/dataviz/map/layer) ordered by index.
 
 
 <div class="meta-api-description">
@@ -2174,7 +2174,7 @@ The URL template for tile layers. Template variables:
 * x - X coordinate of the tile
 * y - Y coordinate of the tile
 * zoom - zoom level
-* subdomain - Subdomain for this tile. See [subdomains](/api/javascript/dataviz/ui/map/configuration/layers.subdomains)
+* subdomain - Subdomain for this tile. See [subdomains](/api/dataviz/ui/map/configuration/layers.subdomains)
 
 
 <div class="meta-api-description">
@@ -2736,7 +2736,7 @@ How do I change the language of Bing map tiles in Kendo UI for jQuery? Set or co
 The data item field which contains the marker (symbol) location.
 The field should be an array with two numbers - latitude and longitude in decimal degrees.
 
-Requires the [dataSource](/api/javascript/dataviz/ui/map#configuration-layers-dataSource) option to be set.
+Requires the [dataSource](/api/dataviz/ui/map#configuration-layers-dataSource) option to be set.
 
 Only applicable to "marker" and "bubble" layers.
 
@@ -2821,7 +2821,7 @@ How to adjust the size of map image tiles in Kendo UI Map? Adjust the pixel dime
 ### layers.titleField `String` *(default: "title")*
 
 The data item field which contains the marker title.
-Requires the [dataSource](/api/javascript/dataviz/ui/map#configuration-layers-dataSource) option to be set.
+Requires the [dataSource](/api/dataviz/ui/map#configuration-layers-dataSource) option to be set.
 
 
 <div class="meta-api-description">
@@ -4047,7 +4047,7 @@ The URL template for tile layers. Template variables:
 * x - X coordinate of the tile
 * y - Y coordinate of the tile
 * zoom - zoom level
-* subdomain - Subdomain for this tile. See [subdomains](/api/javascript/dataviz/ui/map/configuration/layers.subdomains)
+* subdomain - Subdomain for this tile. See [subdomains](/api/dataviz/ui/map/configuration/layers.subdomains)
 
 
 <div class="meta-api-description">
@@ -5625,7 +5625,7 @@ How to control when tooltips appear on map markers in Kendo UI for jQuery? Custo
 The minimum zoom level.
 Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).
 
-> The map [zoom](/api/javascript/dataviz/ui/map#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
+> The map [zoom](/api/dataviz/ui/map#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
 
 
 <div class="meta-api-description">
@@ -5651,7 +5651,7 @@ How do I set the minimum zoom level for a Kendo UI map to prevent users from zoo
 The maximum zoom level.
 Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).
 
-> The map [zoom](/api/javascript/dataviz/ui/map#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
+> The map [zoom](/api/dataviz/ui/map#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
 
 
 <div class="meta-api-description">
@@ -6049,7 +6049,7 @@ The DOM or jQuery mouse event.
 Retrieves relative (view) coordinates that correspond to this mouse event.
 Layer elements positioned on these coordinates will appear under the mouse cursor.
 
-View coordinates are no longer valid after a map [reset](/api/javascript/dataviz/ui/map/events/reset).
+View coordinates are no longer valid after a map [reset](/api/dataviz/ui/map/events/reset).
 
 
 <div class="meta-api-description">
@@ -6519,7 +6519,7 @@ How do I programmatically adjust the zoom level of a Kendo UI map? Adjust or ret
 ##### level `Number`
 
 The new zoom level. The value is clamped to the
- [[minZoom](/api/javascript/dataviz/ui/map#configuration-minZoom), [maxZoom](/api/javascript/dataviz/ui/map#configuration-maxZoom)] interval.
+ [[minZoom](/api/dataviz/ui/map#configuration-minZoom), [maxZoom](/api/dataviz/ui/map#configuration-maxZoom)] interval.
 
 #### Returns
 
@@ -6757,7 +6757,7 @@ The source widget instance.
 Fired when a marker has been created and is about to be displayed.
 Cancelling the event will prevent the marker from being shown.
 
-Use [markerActivate](/api/javascript/dataviz/ui/map/events/markeractivate) if you need to access the marker DOM element.
+Use [markerActivate](/api/dataviz/ui/map/events/markeractivate) if you need to access the marker DOM element.
 
 > Markers are automatically created for GeoJSON Point geometries. If the markerCreated event is cancelled a regular shape (circle) will be created instead.
 

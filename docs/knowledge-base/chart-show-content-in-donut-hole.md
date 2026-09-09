@@ -32,7 +32,7 @@ How can I place and center multiple lines of text inside the center of a Kendo U
 
 Make a custom drawing on top of the Donut Chart and show the multi-line text and other content in its center.
 
-1. Use the [`series.visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) function to store the position and size of the Donut Chart center.
+1. Use the [`series.visual`](/api/dataviz/ui/chart/configuration/series.visual) function to store the position and size of the Donut Chart center.
 
     ```
     // global variables
@@ -57,7 +57,7 @@ Make a custom drawing on top of the Donut Chart and show the multi-line text and
 
     ```
 
-1. In the [`render`](/api/javascript/dataviz/ui/chart/events/render) event of the Chart, draw your custom content on top of the Chart by using the [Kendo UI Drawing library](/framework/drawing/overview).
+1. In the [`render`](/api/dataviz/ui/chart/events/render) event of the Chart, draw your custom content on top of the Chart by using the [Kendo UI Drawing library](/framework/drawing/overview).
 
     ```
             render: function(e){
@@ -66,7 +66,7 @@ Make a custom drawing on top of the Donut Chart and show the multi-line text and
 
               // Render the text
               //
-              // https://docs.telerik.com/kendo-ui/api/javascript/drawing/text
+              // https://docs.telerik.com/kendo-ui/api/drawing/text
               var heading = new kendo.drawing.Text('45.2%', [0, 0], {
                 font: '22px Verdana,Arial,sans-serif'
               });
@@ -84,7 +84,7 @@ Make a custom drawing on top of the Donut Chart and show the multi-line text and
 
               // Reflow the text in the bounding box
               //
-              // https://docs.telerik.com/kendo-ui/api/javascript/drawing/layout
+              // https://docs.telerik.com/kendo-ui/api/drawing/layout
               var layout = new kendo.drawing.Layout(bbox, {
                 alignContent: 'center',
                 alignItems: 'center',
@@ -97,7 +97,7 @@ Make a custom drawing on top of the Donut Chart and show the multi-line text and
 
               // Draw it on the Chart drawing surface
               //
-              // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/fields/surface
+              // https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/fields/surface
               e.sender.surface.draw(layout);
             }
     ```
@@ -164,7 +164,7 @@ The following example demonstrates how to render three differently styled lines 
 
             // Render the text
             //
-            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/text
+            // https://docs.telerik.com/kendo-ui/api/drawing/text
             var heading = new kendo.drawing.Text('45.2%', [0, 0], {
               font: '22px Verdana,Arial,sans-serif'
             });
@@ -182,7 +182,7 @@ The following example demonstrates how to render three differently styled lines 
 
             // Reflow the text in the bounding box
             //
-            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/layout
+            // https://docs.telerik.com/kendo-ui/api/drawing/layout
             var layout = new kendo.drawing.Layout(bbox, {
               alignContent: 'center',
               alignItems: 'center',
@@ -195,7 +195,7 @@ The following example demonstrates how to render three differently styled lines 
 
             // Draw it on the Chart drawing surface
             //
-            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/fields/surface
+            // https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/fields/surface
             e.sender.surface.draw(layout);
           }
         });
@@ -209,4 +209,4 @@ The following example demonstrates how to render three differently styled lines 
 
 ## See Also
 
-* [Kendo UI Drawing API Reference](/api/javascript/drawing/text)
+* [Kendo UI Drawing API Reference](/api/drawing/text)

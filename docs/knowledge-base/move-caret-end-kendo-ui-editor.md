@@ -27,7 +27,7 @@ ticketid: 1669031
 
 ## Description
 
-I want to move the focus and the caret to the end of the content within the [Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor) for Progress® Kendo UI®. How can I achieve this?
+I want to move the focus and the caret to the end of the content within the [Editor](https://docs.telerik.com/kendo-ui/api/ui/editor) for Progress® Kendo UI®. How can I achieve this?
 
 This KB article also answers the following questions:
 - How to append text and move the caret to its end in the Kendo UI Editor?
@@ -41,7 +41,7 @@ To set the focus and move the caret to the end of the content in the Kendo UI Ed
 1. Use the Editor's API to append text to the current content.
 2. Create a range object and use it to select the content of the Editor.
 3. Collapse the range to the end to move the caret position after the appended text.
-4. Finally, use the [`selectRange`](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/methods/selectrange) method of the Editor to apply the range and move the caret.
+4. Finally, use the [`selectRange`](https://docs.telerik.com/kendo-ui/api/ui/editor/methods/selectrange) method of the Editor to apply the range and move the caret.
 
 Here is a sample code snippet demonstrating the process:
 
@@ -73,4 +73,4 @@ This code sets up a basic Kendo UI Editor and a button. When the button is click
 ## See Also
 
 - [Official Kendo UI Editor Documentation](https://docs.telerik.com/kendo-ui/controls/editor/overview)
-- [Editor API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+- [Editor API Reference](https://docs.telerik.com/kendo-ui/api/ui/editor)

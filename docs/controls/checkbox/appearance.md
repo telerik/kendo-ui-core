@@ -25,7 +25,7 @@ The Kendo UI CheckBox supports the following styling options:
 
 The `size` option controls how big or small the rendered CheckBox looks. The structure of the applied class is `k-checkbox-{size}`.
 
-The available [`size`](/api/javascript/ui/checkbox/configuration/size) values are:
+The available [`size`](/api/ui/checkbox/configuration/size) values are:
 
 - `small`
 - `medium` (Default)
@@ -46,7 +46,7 @@ The example below shows a basic configuration and how to set the size to "small"
 ### Rounded
 
 The rounded option controls how much border radius is applied to the rendered `input` element.
-The available [`rounded`](/api/javascript/ui/checkbox/configuration/rounded) values are:
+The available [`rounded`](/api/ui/checkbox/configuration/rounded) values are:
 
 - `small`—Renders a checkbox with small border radius.
 - `medium` (default)—Renders a checkbox with medium border radius.
@@ -72,4 +72,4 @@ The following example demonstrates how the `rounded` option can be set to `full`
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Basic Usage of the CheckBox (Demo)](https://demos.telerik.com/kendo-ui/checkbox/index)
-* [JavaScript API Reference of the CheckBox](/api/javascript/ui/checkbox)
+* [JavaScript API Reference of the CheckBox](/api/ui/checkbox)

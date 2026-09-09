@@ -34,7 +34,7 @@ This knowledge base article also answers the following questions:
 - How to format dates in the Gantt chart tooltip to exclude time information?
 
 ## Solution
-To customize the tooltip content in the Gantt chart and display dates without the time component, use a [`tooltip template`](/api/javascript/ui/gantt/configuration/tooltip#tooltiptemplate). In the template, format the dates according to your preference, excluding time. The following example demonstrates how to format the start date of a task to display only the date part:
+To customize the tooltip content in the Gantt chart and display dates without the time component, use a [`tooltip template`](/api/ui/gantt/configuration/tooltip#tooltiptemplate). In the template, format the dates according to your preference, excluding time. The following example demonstrates how to format the start date of a task to display only the date part:
 
 ```javascript
 template: ({ task, title }) => `Title: ${kendo.htmlEncode(task.title)}\

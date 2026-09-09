@@ -67,4 +67,4 @@ The following example demonstrates how to configure the PDFViewer to use PDF.js 
 ## See Also
 
 * [Basic Usage of the Kendo UI for jQuery PDFViewer (Demo)](https://demos.telerik.com/kendo-ui/pdfviewer/index)
-* [JavaScript API Reference of the PDFViewer](/api/javascript/ui/pdfviewer)
+* [JavaScript API Reference of the PDFViewer](/api/ui/pdfviewer)

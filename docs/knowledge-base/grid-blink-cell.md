@@ -119,5 +119,5 @@ How can I make some of the Grid cells blink by changing their background color i
 
 ## See Also
 
-* [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
+* [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound)
 * [Overview of the Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview)

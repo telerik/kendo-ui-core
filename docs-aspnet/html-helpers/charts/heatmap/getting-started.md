@@ -395,11 +395,11 @@ The HeatMap [inherits its various events for the Chart component](/api/kendo.mvc
 ```
 {% endif %}
 
-For more examples, refer to the [documentation of the HeatMap client API Events](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events).
+For more examples, refer to the [documentation of the HeatMap client API Events](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart#events).
 
 ## 7. (Optional) Reference Existing HeatMap Instances
 
-To use the [client-side API of the HeatMap](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart) and build on top of its initial configuration, you need a reference to the HeatMap instance. Once you get a valid reference, you can call the respective API methods:
+To use the [client-side API of the HeatMap](https://docs.telerik.com/kendo-ui/api/ui/chart) and build on top of its initial configuration, you need a reference to the HeatMap instance. Once you get a valid reference, you can call the respective API methods:
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
@@ -409,7 +409,7 @@ To use the [client-side API of the HeatMap](https://docs.telerik.com/kendo-ui/ap
         </script>
     ```
 
-1. Use the [client-side API of the HeatMap](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart) to control the behavior of the widget. In this example, you will use the [`redraw`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/redraw) method to redraw the HeatMap in the DOM.
+1. Use the [client-side API of the HeatMap](https://docs.telerik.com/kendo-ui/api/ui/chart) to control the behavior of the widget. In this example, you will use the [`redraw`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/methods/redraw) method to redraw the HeatMap in the DOM.
 
     ```JS script
         <script>
@@ -442,6 +442,6 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Client-Side API of the Chart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Client-Side API of the Chart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart)
 * [Server-Side API of the Chart](/api/chart)
 * [Knowledge Base Section](/knowledge-base)

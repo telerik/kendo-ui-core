@@ -29,7 +29,7 @@ How can I change the placeholder text of a Kendo UI ComboBox after it has alread
 
 ## Solution
 
-To set the placeholder text of the Kendo UI ComboBox, refer to its [`input` element](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/fields/input) and change the [`placeholder` attribute by using jQuery](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#The_placeholder_attribute).
+To set the placeholder text of the Kendo UI ComboBox, refer to its [`input` element](https://docs.telerik.com/kendo-ui/api/ui/combobox/fields/input) and change the [`placeholder` attribute by using jQuery](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#The_placeholder_attribute).
 
 ```javascript
      var comboBox = $("#combobox").data("kendoComboBox");
@@ -56,5 +56,5 @@ The following example demonstrates the full implementation of the suggested appr
 
 ## See Also
 
-* [API Reference of the input Element](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/fields/input)
+* [API Reference of the input Element](https://docs.telerik.com/kendo-ui/api/ui/combobox/fields/input)
 * [Official MDN Web Documentation of the placeholder Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#The_placeholder_attribute)

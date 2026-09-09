@@ -46,7 +46,7 @@ The View represents a screen in the mobile Application.
 
 ## Events
 
-You can subscribe to all hybrid View [events](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#events).
+You can subscribe to all hybrid View [events](https://docs.telerik.com/kendo-ui/api/mobile/ui/view#events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -65,7 +65,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-You can reference a hybrid View instance by using the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid View client-side API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#methods) to control its behavior.
+You can reference a hybrid View instance by using the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid View client-side API](https://docs.telerik.com/kendo-ui/api/mobile/ui/view#methods) to control its behavior.
 
     @(Html.Kendo().MobileView()
             .Name("MobileView")

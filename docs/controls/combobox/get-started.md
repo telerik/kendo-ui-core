@@ -57,7 +57,7 @@ In this step, you will initialize the ComboBox from the `<input>` element. Upon 
 
 ## 3. Specify the Data Source
 
-Here, you will specify a [`dataSource`](/api/javascript/ui/combobox/configuration/datasource) configuration for the component which is used to display the list of values.
+Here, you will specify a [`dataSource`](/api/ui/combobox/configuration/datasource) configuration for the component which is used to display the list of values.
 
 ```html
   <input id="combobox" />
@@ -77,7 +77,7 @@ Here, you will specify a [`dataSource`](/api/javascript/ui/combobox/configuratio
 
 ## 4. Apply Some Styling
 
-The ComboBox provides several options that enable you to modify its appearance. In this example, you will apply a flat [`fillMode`](/api/javascript/ui/combobox/configuration/fillmode) configuration to the component.
+The ComboBox provides several options that enable you to modify its appearance. In this example, you will apply a flat [`fillMode`](/api/ui/combobox/configuration/fillmode) configuration to the component.
 
 ```html
 <input id="combobox" />
@@ -97,7 +97,7 @@ The ComboBox provides several options that enable you to modify its appearance. 
 
 ## 5. Configure the Label 
 
-The ComboBox enables you to configure its label by using its [`label`](/api/javascript/ui/combobox/configuration/label) property.
+The ComboBox enables you to configure its label by using its [`label`](/api/ui/combobox/configuration/label) property.
 
 ```html
 <input id="combobox" />
@@ -126,7 +126,7 @@ The ComboBox enables you to configure its label by using its [`label`](/api/java
 
 ## See Also 
 
-* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [JavaScript API Reference of the ComboBox](/api/ui/combobox)
 * [Knowledge Base Section](/knowledge-base)
 
 

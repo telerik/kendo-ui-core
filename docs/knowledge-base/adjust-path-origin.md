@@ -69,7 +69,7 @@ The following example demonstrates how to position any path at the origin of the
 ## See Also
 
 * [Basic Usage of the jQuery Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)
 * [Implement Local Data Diagram Editing]({% slug howto_editlocaladata_diagram %})
 * [Render External Content in Diagram Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [Wrap Diagram Text]({% slug howto_wraptext_diagram %})

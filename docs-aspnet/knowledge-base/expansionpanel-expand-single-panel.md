@@ -29,7 +29,7 @@ How can I allow the user to expand a single panel at a time when using multiple 
 
 ## Solution
 
-1. Handle the `click` event of each Expansion Panel on the page, select the clicked panel, and call the [`toggle()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel/methods/toggle) method of the Expansion Panel to toggle the rest of the panels.
+1. Handle the `click` event of each Expansion Panel on the page, select the clicked panel, and call the [`toggle()`](https://docs.telerik.com/kendo-ui/api/ui/expansionpanel/methods/toggle) method of the Expansion Panel to toggle the rest of the panels.
 
     ```HtmlHelper
         @(Html.Kendo().ExpansionPanel()
@@ -122,7 +122,7 @@ For a runnable example based on the code above, refer to the [REPL example on ex
 
 ## See Also
 
-* [Client-Side API Reference of the Expansion Panel for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel)
+* [Client-Side API Reference of the Expansion Panel for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/expansionpanel)
 * [Server-Side API Reference of the Expansion Panel for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/expansionpanel)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Expansion Panel for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/expansionpanel)

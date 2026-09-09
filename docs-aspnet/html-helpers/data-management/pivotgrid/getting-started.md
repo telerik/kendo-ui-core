@@ -268,7 +268,7 @@ You can reference the PivotGrid instances that you have created and build on top
         </script>
     ```
 
-1. Use the [PivotGrid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgrid#methods) to control the behavior of the component. In this example, you will use the `saveAsExcel()` method to export the PivotGrid data to Excel (for example, when a button is clicked).
+1. Use the [PivotGrid client-side API](https://docs.telerik.com/kendo-ui/api/ui/pivotgrid#methods) to control the behavior of the component. In this example, you will use the `saveAsExcel()` method to export the PivotGrid data to Excel (for example, when a button is clicked).
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -315,7 +315,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the templates of the PivotGrid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pivotgrid/templates)
-* [Client-Side API of the PivotGrid](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgrid)
+* [Client-Side API of the PivotGrid](https://docs.telerik.com/kendo-ui/api/ui/pivotgrid)
 * [Server-Side API of the PivotGrid](/api/pivotgrid)
 {% if site.core %}
 * [Server-Side API of the PivotGrid TagHelper](/api/taghelpers/pivotgrid)

@@ -61,7 +61,7 @@ The following example demonstrates how to define a single series of type `"pie"`
 
 ## Auto-Fit Labels
 
-Use the Series [autoFit option](/api/javascript/dataviz/ui/chart/configuration/series.autofit) to avoid clipping of the labels' content.
+Use the Series [autoFit option](/api/dataviz/ui/chart/configuration/series.autofit) to avoid clipping of the labels' content.
 
 ```dojo
     <div id="chart" style="width: 200px;"></div>
@@ -131,4 +131,4 @@ The Pie Chart supports the following gradient options:
 ## See Also
 
 * [Basic Usage of the Pie Chart (Demo)](https://demos.telerik.com/kendo-ui/pie-charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

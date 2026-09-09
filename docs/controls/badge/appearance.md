@@ -15,7 +15,7 @@ For a live example, visit the [Appearance Demo of the Badge](https://demos.teler
 
 ## Rounded
 
-The available [`rounded`](/api/javascript/ui/badge/configuration/rounded) values are:
+The available [`rounded`](/api/ui/badge/configuration/rounded) values are:
 
 - "full" (default)—Renders a circle shape badge.
 - "small"—Renders a badge with small border radius.
@@ -43,7 +43,7 @@ The Badge allows you to specify predefined theme colors.
 
 > Starting with the [**2026 Q1**](slug:breakingchanges2026_kendoui) release, the Badge component renders with the `primary` appearance by default. Because appearance defaults are now theme-controlled, the `themeColor` option will be `undefined` when not set, but the theme applies the primary styling. To preserve the previous (secondary) look, explicitly set `themeColor: 'secondary'`.
 
-The available [themeColor](/api/javascript/ui/badge/configuration/themeColor) values are:
+The available [themeColor](/api/ui/badge/configuration/themeColor) values are:
 
 - "primary" (Default)—Applies coloring based on the primary theme color.
 - "base"-Applies base theme color.
@@ -68,9 +68,9 @@ The available [themeColor](/api/javascript/ui/badge/configuration/themeColor) va
 
 ## Size
 
-The Badge allows you to configure the size. To specify a size, set the [`size`](/api/javascript/ui/badge/configuration/size) property.
+The Badge allows you to configure the size. To specify a size, set the [`size`](/api/ui/badge/configuration/size) property.
 
-The available [`size`](/api/javascript/ui/badge/configuration/size) values are:
+The available [`size`](/api/ui/badge/configuration/size) values are:
 
 - "small"
 - "medium" (Default)
@@ -93,9 +93,9 @@ The example below demonstrates how to set the `size` option to "large":
 
 ## FillMode
 
-The Badge enables you to set styling options and create solid or outline badges by setting the [`fill`](/api/javascript/ui/badge/configuration/fillmode) property.
+The Badge enables you to set styling options and create solid or outline badges by setting the [`fill`](/api/ui/badge/configuration/fillmode) property.
 
-The available [fill](/api/javascript/ui/badge/configuration/fillmode) values are:
+The available [fill](/api/ui/badge/configuration/fillmode) values are:
 
 - "solid" (Default)
 - "outline"
@@ -117,4 +117,4 @@ The example below demonstrates how to set the `fill` option to "outline":
 ## See Also
 
 * [Basic Usage of the Badge (Demo)](https://demos.telerik.com/kendo-ui/badge/index)
-* [JavaScript API Reference of the Badge](/api/javascript/ui/badge)
+* [JavaScript API Reference of the Badge](/api/ui/badge)

@@ -13,14 +13,14 @@ By default, the paging functionality of the ListView is disabled.
 
 To enable it, use either of the following approaches:
 
-* (Available as of the R3 2021 release) Use the built-in paging functionality by setting the [`pageable`](/api/javascript/ui/listview/configuration/pageable) property.
+* (Available as of the R3 2021 release) Use the built-in paging functionality by setting the [`pageable`](/api/ui/listview/configuration/pageable) property.
 * Use the [Kendo UI Pager](/controls/pager/overview) component.
 
 ## Using the Built-in Paging Functionality
 
 Enabling the built-in paging renders the Pager as part of the ListView component.
 
-To enable paging, set [`pageable`](/api/javascript/ui/listview/configuration/pageable) to `true`. For more information about the `pageable` properties, refer to the [API documentation](/api/javascript/ui/listview/configuration/pageable#related-properties).
+To enable paging, set [`pageable`](/api/ui/listview/configuration/pageable) to `true`. For more information about the `pageable` properties, refer to the [API documentation](/api/ui/listview/configuration/pageable#related-properties).
 
 The following example demonstrates how to implement the suggested approach.
 
@@ -169,4 +169,4 @@ $("#listView").kendoListView({
 ## See Also
 
 * [Basic Usage of the ListView (Demo)](https://demos.telerik.com/kendo-ui/listview/index)
-* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
+* [JavaScript API Reference of the ListView](/api/ui/listview)

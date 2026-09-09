@@ -37,7 +37,7 @@ The series data to be set.
 
 ### findPoint
 
-Finds a series [point](/api/javascript/dataviz/chart/chart_point). The method accepts a function which will be called for each point until the function returns `true`.
+Finds a series [point](/api/dataviz/chart/chart_point). The method accepts a function which will be called for each point until the function returns `true`.
 
 
 <div class="meta-api-description">
@@ -83,7 +83,7 @@ An optional function that can be used to filter the points.
 
 ### toggleHighlight
 
-Toggles the highlight for the entire series or for specific [point(s)](/api/javascript/dataviz/chart/chart_point).
+Toggles the highlight for the entire series or for specific [point(s)](/api/dataviz/chart/chart_point).
 
 
 <div class="meta-api-description">
@@ -98,7 +98,7 @@ A value indicating whether the highlight should be shown or hidden.
 
 ##### filter `Function|Array`
 
-A function that will is used to filter the highlighted points or an Array holding the [point(s)](/api/javascript/dataviz/chart/chart_point) that should be highlighted.
+A function that will is used to filter the highlighted points or an Array holding the [point(s)](/api/dataviz/chart/chart_point) that should be highlighted.
 
 #### Example - highlight the series points
     series.toggleHighlight(true);

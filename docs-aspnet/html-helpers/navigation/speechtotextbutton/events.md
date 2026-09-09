@@ -72,7 +72,7 @@ The following example demonstrates how to subscribe to events by a template dele
 ## See Also
 
 * [Using the API of the SpeechToTextButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/speechtotextbutton/api)
-* [Client-Side API of the SpeechToTextButton](https://docs.telerik.com/kendo-ui/api/javascript/ui/speechtotextbutton)
+* [Client-Side API of the SpeechToTextButton](https://docs.telerik.com/kendo-ui/api/ui/speechtotextbutton)
 * [Server-Side API of the SpeechToTextButton](/api/speechtotextbutton)
 {% if site.core %}
 * [Server-Side API of the SpeechToTextButton TagHelper](/api/taghelpers/speechtotextbutton)

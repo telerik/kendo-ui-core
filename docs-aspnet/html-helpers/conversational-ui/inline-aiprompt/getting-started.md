@@ -223,7 +223,7 @@ Referencing existing component instances allows you to build on top of their con
         </script>
     ```
 
-1.  Use the [InlineAIPrompt client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/inlineaiprompt#methods) to control the behavior of the widget. In this example, you will see how to change the current active view (for example, when a button is clicked).
+1.  Use the [InlineAIPrompt client-side API](https://docs.telerik.com/kendo-ui/api/ui/inlineaiprompt#methods) to control the behavior of the widget. In this example, you will see how to change the current active view (for example, when a button is clicked).
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -274,7 +274,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the InlineAIPrompt for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/inlineaiprompt/api)
-* [Client-Side API of the InlineAIPrompt](https://docs.telerik.com/kendo-ui/api/javascript/ui/inlineaiprompt)
+* [Client-Side API of the InlineAIPrompt](https://docs.telerik.com/kendo-ui/api/ui/inlineaiprompt)
 * [Server-Side API of the InlineAIPrompt](/api/inlineaiprompt)
 {% if site.core %}
 * [Server-Side API of the InlineAIPrompt TagHelper](/api/taghelpers/inlineaiprompt)

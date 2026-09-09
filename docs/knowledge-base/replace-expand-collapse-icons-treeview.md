@@ -28,7 +28,7 @@ ticketid: 1690579
 
 ## Description
 
-I want to customize the expand/collapse icons in the [Kendo UI TreeView](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview) to display plus and minus icons instead of the default arrows. The icons revert back to the default arrows after expand or collapse actions, even though I have implemented code to change them in the `dataBound`, `collapse`, and `expand` events.
+I want to customize the expand/collapse icons in the [Kendo UI TreeView](https://docs.telerik.com/kendo-ui/api/ui/treeview) to display plus and minus icons instead of the default arrows. The icons revert back to the default arrows after expand or collapse actions, even though I have implemented code to change them in the `dataBound`, `collapse`, and `expand` events.
 
 This knowledge base article also answers the following questions:
 - How to change the expand/collapse icons in Kendo UI TreeView?
@@ -171,5 +171,5 @@ Additionally, the icons need to be initially changed after the creation of the c
 
 ## See Also
 
-- [Kendo UI TreeView API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview) 
-- [TreeView Events](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/events)
+- [Kendo UI TreeView API](https://docs.telerik.com/kendo-ui/api/ui/treeview) 
+- [TreeView Events](https://docs.telerik.com/kendo-ui/api/ui/treeview/events)

@@ -53,7 +53,7 @@ In this step, you will initialize the Textarea from the `<textarea>` element. Up
 
 ## 3. Apply Stylings to the TextArea
 
-The TextArea provides several options that enable you to modify its appearance. The following example demonstrates how to apply a [`fillMode`](https://docs.telerik.com/kendo-ui/api/javascript/ui/textarea/configuration/fillmode) to the component.
+The TextArea provides several options that enable you to modify its appearance. The following example demonstrates how to apply a [`fillMode`](https://docs.telerik.com/kendo-ui/api/ui/textarea/configuration/fillmode) to the component.
 
 ```html
 <textarea id="textarea"></textarea>
@@ -69,7 +69,7 @@ The TextArea provides several options that enable you to modify its appearance. 
 
 ## 4. Configure the Label of the TextArea
 
-The TextArea enables you to configure the label by using the [`label`](https://docs.telerik.com/kendo-ui/api/javascript/ui/textarea/configuration/label) property.
+The TextArea enables you to configure the label by using the [`label`](https://docs.telerik.com/kendo-ui/api/ui/textarea/configuration/label) property.
 
 ```html
 <textarea id="textarea"></textarea>
@@ -93,7 +93,7 @@ The TextArea enables you to configure the label by using the [`label`](https://d
 
 ## See Also 
 
-* [JavaScript API Reference of the TextArea](/api/javascript/ui/textarea)
+* [JavaScript API Reference of the TextArea](/api/ui/textarea)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -7,13 +7,13 @@ component: listbox
 
 # kendo.ui.ListBox
 
-Represents the Kendo UI ListBox widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ListBox widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false`, the widget will not bind to the data source during initialization. In this case, the data binding will occur when the [`change`](/api/javascript/data/datasource/events/change) event of the data source is fired. By default, the ListBox will bind to the data source that is specified in the configuration.
+If set to `false`, the widget will not bind to the data source during initialization. In this case, the data binding will occur when the [`change`](/api/data/datasource/events/change) event of the data source is fired. By default, the ListBox will bind to the data source that is specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source does not make more than one request to the remote service.
 
@@ -41,8 +41,8 @@ How does autoBind affect data loading in Kendo UI ListBox? Control whether the l
 
  The `id` of the target ListBox to which items from the source ListBox will be transferred and vice versa. If you have to transfer items from the target ListBox over its toolbar, then you also need to set its `connectWith` option.
 
-> * It is not recommended to set the same `connectWith` option on two or more ListBoxes because the behavior of the `transferFrom` and `transferAllFrom` [tools](/api/javascript/ui/listbox/configuration/toolbar#toolbartools) is not deterministic.
-> * Configuring a bi-directional relationship between two ListBoxes results in duplicated behavior of their `transferTo` and `transferFrom` options, and `transferAllTo` and `transferAllFrom` tools. If your project does not require such behavior, remove some of the relationships from the [tools](/api/javascript/ui/listbox/configuration/toolbar#toolbartools) option.
+> * It is not recommended to set the same `connectWith` option on two or more ListBoxes because the behavior of the `transferFrom` and `transferAllFrom` [tools](/api/ui/listbox/configuration/toolbar#toolbartools) is not deterministic.
+> * Configuring a bi-directional relationship between two ListBoxes results in duplicated behavior of their `transferTo` and `transferFrom` options, and `transferAllTo` and `transferAllFrom` tools. If your project does not require such behavior, remove some of the relationships from the [tools](/api/ui/listbox/configuration/toolbar#toolbartools) option.
 
 
 <div class="meta-api-description">
@@ -115,11 +115,11 @@ How to enable linking between two Kendo UI listbox components? Enable linking or
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the widget which is used render ListBox items. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance.
+The data source of the widget which is used render ListBox items. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [`kendo.data.DataSource`](/api/data/datasource) instance.
 
-If the `dataSource` option is set to a JavaScript object or array, the widget initializes a new [`kendo.data.DataSource`](/api/javascript/data/datasource) instance by using that value as the data source configuration.
+If the `dataSource` option is set to a JavaScript object or array, the widget initializes a new [`kendo.data.DataSource`](/api/data/datasource) instance by using that value as the data source configuration.
 
-If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance, the widget uses that instance and does _not_ initialize a new one.
+If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/data/datasource) instance, the widget uses that instance and does _not_ initialize a new one.
 
 
 <div class="meta-api-description">
@@ -844,10 +844,10 @@ The built-in tools are:
 - `"moveUp"` - Moves up the selected ListBox items.
 - `"moveDown"` - Moves down the selected ListBox items.
 - `"remove"` - Removes the selected ListBox items.
-- `"transferTo"` - Moves the selected items from the current ListBox to the target that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option.
-- `"transferFrom"` - Moves the selected items from the ListBox that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option to the current ListBox.
-- `"transferAllTo"` - Moves all items from the current ListBox to the target that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option.
-- `"transferAllFrom"` - Moves all items from the ListBox that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option to the current ListBox.
+- `"transferTo"` - Moves the selected items from the current ListBox to the target that is defined in the [`connectWith`](/api/ui/listbox/configuration/connectwith) option.
+- `"transferFrom"` - Moves the selected items from the ListBox that is defined in the [`connectWith`](/api/ui/listbox/configuration/connectwith) option to the current ListBox.
+- `"transferAllTo"` - Moves all items from the current ListBox to the target that is defined in the [`connectWith`](/api/ui/listbox/configuration/connectwith) option.
+- `"transferAllFrom"` - Moves all items from the ListBox that is defined in the [`connectWith`](/api/ui/listbox/configuration/connectwith) option to the current ListBox.
 
 
 <div class="meta-api-description">
@@ -1101,7 +1101,7 @@ Indicates whether the items should be enabled or disabled.
 
 ### items
 
-Obtains an array of the DOM elements which correspond to the data items from the [`view`](/api/javascript/data/datasource/methods/view) method of the Kendo UI DataSource.
+Obtains an array of the DOM elements which correspond to the data items from the [`view`](/api/data/datasource/methods/view) method of the Kendo UI DataSource.
 
 
 <div class="meta-api-description">
@@ -1132,7 +1132,7 @@ How do I access individual items in a Kendo UI ListBox? Retrieve or access the r
 
 ### refresh
 
-Reloads the data and repaints the ListBox. Triggers the [`dataBound`](/api/javascript/ui/listbox/events/databound) event.
+Reloads the data and repaints the ListBox. Triggers the [`dataBound`](/api/ui/listbox/events/databound) event.
 
 
 <div class="meta-api-description">

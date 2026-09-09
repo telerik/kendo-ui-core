@@ -88,4 +88,4 @@ The following example demonstrates how to subscribe to events by a template dele
 {% if site.core %}
 * [DataSource Server-Side TagHelper API for ASP.NET Core](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/datasource)
 {% endif %}
-* [DataSource Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)
+* [DataSource Client-Side API](https://docs.telerik.com/kendo-ui/api/data/datasource)

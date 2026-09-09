@@ -24,4 +24,4 @@ The Drawer provides gesture support. It also features the mini mode which makes 
 ## See Also
 
 * [Basic Usage of the Drawer (Demo)](https://demos.telerik.com/kendo-ui/drawer/index)
-* [JavaScript API Reference of the Drawer](/api/javascript/ui/drawer)
+* [JavaScript API Reference of the Drawer](/api/ui/drawer)

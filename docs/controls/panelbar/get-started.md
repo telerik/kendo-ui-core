@@ -87,7 +87,7 @@ In this step, you'll initialize the PanelBar component from the `<ul>` element t
 
 ## 3. Set the Expand Mode
 
-The [`expandMode`](/api/javascript/ui/panelbar/configuration/expandmode) configuration enables you to specify if the user can expand multiple items at once or not.
+The [`expandMode`](/api/ui/panelbar/configuration/expandmode) configuration enables you to specify if the user can expand multiple items at once or not.
 
 ```javascript
       $("#panelbar").kendoPanelBar({
@@ -97,7 +97,7 @@ The [`expandMode`](/api/javascript/ui/panelbar/configuration/expandmode) configu
 
 ## 4. Configure the Animations
 
-You can now configure the expand and collapse [animations](/api/javascript/ui/panelbar/configuration/animation) of the PanelBar component.
+You can now configure the expand and collapse [animations](/api/ui/panelbar/configuration/animation) of the PanelBar component.
 
 ```javascript
       $("#panelbar").kendoPanelBar({
@@ -121,7 +121,7 @@ You can now configure the expand and collapse [animations](/api/javascript/ui/pa
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery PanelBar](/api/javascript/ui/panelbar)
+* [JavaScript API Reference of the jQuery PanelBar](/api/ui/panelbar)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -36,7 +36,7 @@ The example below shows how to change the tooltip of the refresh button and the 
 
 ## See Also
 
-* [Pager Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager)
+* [Pager Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/pager)
 * [Pager Server-Side API](/api/pager)
 * [Pager Settings and Types]({% slug settings_pager_aspnet %})
 * [Responsive Pager]({% slug responsive_pager_aspnet  %})

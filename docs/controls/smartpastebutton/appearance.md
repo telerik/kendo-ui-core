@@ -350,5 +350,5 @@ $("#iconTextButton").kendoSmartPasteButton({
 * [Appearance of the SmartPasteButton (Demo)](https://demos.telerik.com/kendo-ui/smartpastebutton/appearance)
 * [Getting Started with the SmartPasteButton]({% slug getting_started_kendoui_smartpastebutton_widget %})
 * [SmartPasteButton Events]({% slug events_kendoui_smartpastebutton_widget %})
-* [JavaScript API Reference of the SmartPasteButton](/api/javascript/ui/smartpastebutton)
+* [JavaScript API Reference of the SmartPasteButton](/api/ui/smartpastebutton)
 * [Knowledge Base Section](/knowledge-base)

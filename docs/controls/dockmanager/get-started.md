@@ -213,7 +213,7 @@ Here you will define the nested panes for the DockManager.
 
 ## See Also 
 
-* [JavaScript API Reference of the DockManager](/api/javascript/ui/dockmanager)
+* [JavaScript API Reference of the DockManager](/api/ui/dockmanager)
 * [Knowledge Base Section](/knowledge-base)
 
 

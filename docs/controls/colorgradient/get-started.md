@@ -53,7 +53,7 @@ In this step, you will initialize the ColorGradient from the `<div>` element.
 
 ## 3. Apply Configuration Settings to the ColorGradient
 
-Here, you will apply some settings as [`opacity`](/api/javascript/ui/colorgradient/configuration/opacity), [`input`](/api/javascript/ui/colorgradient/configuration/input), [`format`](/api/javascript/ui/colorgradient/configuration/format), and [`formats`](/api/javascript/ui/colorgradient/configuration/formats).
+Here, you will apply some settings as [`opacity`](/api/ui/colorgradient/configuration/opacity), [`input`](/api/ui/colorgradient/configuration/input), [`format`](/api/ui/colorgradient/configuration/format), and [`formats`](/api/ui/colorgradient/configuration/formats).
 
 ```dojo
     <div id="colorgradient"></div>
@@ -119,7 +119,7 @@ Here, you will apply some settings as [`opacity`](/api/javascript/ui/colorgradie
 
 ## See Also 
 
-* [JavaScript API Reference of the ColorGradient](/api/javascript/ui/colorgradient)
+* [JavaScript API Reference of the ColorGradient](/api/ui/colorgradient)
 * [Knowledge Base Section](/knowledge-base)
 
 

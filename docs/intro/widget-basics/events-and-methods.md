@@ -56,9 +56,9 @@ To get a reference to the specific component instance, either use the jQuery `da
 
 ## Calling the Methods
 
-After the component instance is available, you can call its methods by using the standard JavaScript method syntax. The complete list and examples of the component methods and method parameters is available in the [API reference](/api/javascript/kendo) section.
+After the component instance is available, you can call its methods by using the standard JavaScript method syntax. The complete list and examples of the component methods and method parameters is available in the [API reference](/api/kendo) section.
 
-The following example demonstrates how to call the [`focus`](/api/javascript/ui/autocomplete/methods/focus) method of the AutoComplete.
+The following example demonstrates how to call the [`focus`](/api/ui/autocomplete/methods/focus) method of the AutoComplete.
 
 ```
         <p>Animal: <input id="animal" /></p>
@@ -143,7 +143,7 @@ All Kendo UI components provide the `bind` and the `one` method. Both methods at
 
 ## Using Event Handler Arguments
 
-Each Kendo UI component passes a single argument to the event handler&mdash;the so-called "event object". It has one or more fields which contain specific information for the event. All event objects have a `sender` field which provides a reference to the component instance that triggered the event. Passing additional custom event arguments to the handler is not supported. The full list and examples of the component events and the fields in the event objects is available in the [API reference](/api/javascript/kendo) section.
+Each Kendo UI component passes a single argument to the event handler&mdash;the so-called "event object". It has one or more fields which contain specific information for the event. All event objects have a `sender` field which provides a reference to the component instance that triggered the event. Passing additional custom event arguments to the handler is not supported. The full list and examples of the component events and the fields in the event objects is available in the [API reference](/api/kendo) section.
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -164,7 +164,7 @@ Each Kendo UI component passes a single argument to the event handler&mdash;the 
 
 ## Preventing Events
 
-Some component events can be prevented by calling the `preventDefault` method of the event object. The result of the event prevention is specific for each event and is documented in the [API reference](/api/javascript/kendo).
+Some component events can be prevented by calling the `preventDefault` method of the event object. The result of the event prevention is specific for each event and is documented in the [API reference](/api/kendo).
 
 ```
     <p>Animal: <input id="animal" /></p>

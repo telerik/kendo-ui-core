@@ -30,7 +30,7 @@ It provides the capability of adding custom content to the chart using the [Kend
 
 This allows you to create shapes like rectangles and circles with the option to add desired customizations like color and borders:
 
-[Kendo Drawing API](https://docs.telerik.com/kendo-ui/api/javascript/drawing)
+[Kendo Drawing API](https://docs.telerik.com/kendo-ui/api/drawing)
 
 Check the full implementation in this live REPL sample:
 

@@ -15,7 +15,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 ## Template
 
-You can define a [`template`](/api/javascript/ui/orgchart/configuration/template) to customize the node appearance.
+You can define a [`template`](/api/ui/orgchart/configuration/template) to customize the node appearance.
 
 ```dojo
     <div id="orgchart"></div>
@@ -57,4 +57,4 @@ The `groupHeaderTemplate` manages the way the labels in a grouped OrgChart are d
 ## See Also
 
 * [Using Templates in the OrgChart (Demo)](https://demos.telerik.com/kendo-ui/orgchart/templates)
-* [JavaScript API Reference of the OrgChart](/api/javascript/ui/orgchart)
+* [JavaScript API Reference of the OrgChart](/api/ui/orgchart)

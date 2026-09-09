@@ -74,4 +74,4 @@ To enable the horizontal resources grouping, add the [`Group()`](/api/kendo.mvc.
 {% if site.core %}
 * [Server-Side API of the Scheduler TagHelper](/api/taghelpers/scheduler)
 {% endif %}
-* [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

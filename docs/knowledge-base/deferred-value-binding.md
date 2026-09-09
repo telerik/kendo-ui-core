@@ -128,7 +128,7 @@ The following example demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
+* [ComboBox JavaScript API Reference](/api/ui/combobox)
 * [Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
 * [Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [Make Visible Input Readonly]({% slug howto_make_visible_inputs_readonly_combobox %})

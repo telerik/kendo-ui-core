@@ -32,4 +32,4 @@ QR codes take a piece of information from a transitory media, place it into the 
 
 * [Basic Usage of the QRCode (Demo)](https://demos.telerik.com/kendo-ui/qrcode/index)
 * [Using the API of the QRCode (Demo)](https://demos.telerik.com/kendo-ui/qrcode/api)
-* [JavaScript API Reference of the QRCode](/api/javascript/dataviz/ui/qrcode)
+* [JavaScript API Reference of the QRCode](/api/dataviz/ui/qrcode)

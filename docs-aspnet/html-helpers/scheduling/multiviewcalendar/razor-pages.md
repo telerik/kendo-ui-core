@@ -50,7 +50,7 @@ public class IndexModel : PageModel
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the MultiViewCalendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [Client-Side API of the MultiViewCalendar](https://docs.telerik.com/kendo-ui/api/ui/multiviewcalendar)
 * [Server-Side HtmlHelper API of the MultiViewCalendar](/api/multiviewcalendar)
 * [Server-Side TagHelper API of the MultiViewCalendar](/api/taghelpers/multiviewcalendar)
 * [Knowledge Base Section](/knowledge-base)

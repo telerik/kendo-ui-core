@@ -34,7 +34,7 @@ How to dynamically change if a field is required in PopUp Edit Mode of a {{ site
 The example below is implemented as per the following steps:
 
 1. Use a DataAnnotation attribute for the DropDownList to point to the desired Editor Template for the field.
-1. Handle the [`Change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/change) Event of the DropDownList.
+1. Handle the [`Change`](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/events/change) Event of the DropDownList.
 1. In the Event handler, get the input field that will be set as required or non-required, depending on the value of the DropDownList.
 1. Use jQuery to set the required property to true or false.
 
@@ -102,7 +102,7 @@ For more examples on Grid editing, see the following demos:
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

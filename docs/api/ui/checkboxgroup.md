@@ -8,7 +8,7 @@ component: checkboxgroup
 
 # kendo.ui.CheckBoxGroup
 
-Represents the Kendo UI CheckBoxGroup. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI CheckBoxGroup. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

@@ -84,7 +84,7 @@ To achieve this behavior, access the generated [MDX Query](https://en.wikipedia.
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery PivotGrid](/api/javascript/ui/pivotgrid)
+* [JavaScript API Reference of the jQuery PivotGrid](/api/ui/pivotgrid)
 * [Change the Data Source of the PivotGrid Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [Drill Down Navigation Always Starting from PivotGrid Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
 * [Expand Multiple PivotGrid Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})

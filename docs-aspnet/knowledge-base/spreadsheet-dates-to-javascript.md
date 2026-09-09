@@ -25,7 +25,7 @@ component: spreadsheet
 
 ## Description
 
-I access a range of cells in my Spreadsheet and utilize the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/value) method of the Range's API to extract the date values of the range. However, I get numbers that are not usable in JavaScript. How can I format these dates to JavaScript?
+I access a range of cells in my Spreadsheet and utilize the [`value`](https://docs.telerik.com/kendo-ui/api/spreadsheet/range/methods/value) method of the Range's API to extract the date values of the range. However, I get numbers that are not usable in JavaScript. How can I format these dates to JavaScript?
 
 ## Solution
 
@@ -83,7 +83,7 @@ To explore the complete behavior, see the Telerik REPL example on how to [format
 
 ## See Also
 
-* [Client-Side API Reference of the Spreadsheet's Range for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range)
+* [Client-Side API Reference of the Spreadsheet's Range for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/spreadsheet/range)
 * [Server-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/spreadsheet)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

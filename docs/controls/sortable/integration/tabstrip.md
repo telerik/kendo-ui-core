@@ -15,7 +15,7 @@ You can use the [Kendo UI Sortable wisget](https://demos.telerik.com/kendo-ui/so
 
 * [Overview of the Kendo UI Sortable component]({% slug overview_kendoui_sortable_widget %})
 * [Overview of Kendo UI TabStrip component]({% slug overview_kendoui_tabstrip_widget %})
-* [API reference of the Kendo UI DataSource component](/api/javascript/data/datasource#methods)
+* [API reference of the Kendo UI DataSource component](/api/data/datasource#methods)
 
 ## Reordering of Sortable Items
 
@@ -47,7 +47,7 @@ To reorder the tabs of a TabStrip, initialize the Sortable on the `ul.k-tabstrip
         }
     });
 
-To avoid visual glitches, activate the current tab at the `start` event handler of the Sortable. For more information on the Sortable events, refer to the [Sortable API](/api/javascript/ui/sortable#events) and the [demo on integrating the Sortable with the TabStrip](https://demos.telerik.com/kendo-ui/sortable/integration-tabstrip).
+To avoid visual glitches, activate the current tab at the `start` event handler of the Sortable. For more information on the Sortable events, refer to the [Sortable API](/api/ui/sortable#events) and the [demo on integrating the Sortable with the TabStrip](https://demos.telerik.com/kendo-ui/sortable/integration-tabstrip).
 
     start: function(e) {
         $("#tabstrip").data("kendoTabStrip").activateTab(e.item);
@@ -69,4 +69,4 @@ After a tab is sorted, update its order in the TabStrip.
 ## See Also
 
 * [TabStrip Integration of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/integration-tabstrip)
-* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
+* [JavaScript API Reference of the Sortable](/api/ui/sortable)

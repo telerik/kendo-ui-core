@@ -67,5 +67,5 @@ The following example demonstrates how to configure a DropDownTree with three le
 ## See Also
 
 * [Local Data Binding by the DropDownTree for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdowntree/local-data-binding)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/dropdowntree)
 * [Server-Side API](/api/dropdowntree)

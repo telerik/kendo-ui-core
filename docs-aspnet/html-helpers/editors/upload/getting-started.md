@@ -263,7 +263,7 @@ You can reference the Upload instances that you have created and build on top of
         </script>
    ```
 
-1. Use the [Upload client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload#methods) to control the behavior of the control. In this example, you will use the `removeAllFiles` method to remove all of the uploaded files by sending a remove request to the specified handler.
+1. Use the [Upload client-side API](https://docs.telerik.com/kendo-ui/api/ui/upload#methods) to control the behavior of the control. In this example, you will use the `removeAllFiles` method to remove all of the uploaded files by sending a remove request to the specified handler.
 
     ```JS script
         <script>
@@ -285,6 +285,6 @@ You can reference the Upload instances that you have created and build on top of
 ## See Also
 
 * [Using the API of the Upload for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/api)
-* [Client-Side API of the Upload](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Client-Side API of the Upload](https://docs.telerik.com/kendo-ui/api/ui/upload)
 * [Server-Side API of the Upload](/api/upload)
 * [Knowledge Base Section](/knowledge-base)

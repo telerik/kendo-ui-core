@@ -11,14 +11,14 @@ position: 2
 
 The Rating allows you to control the selection of its items.
 
-To configure the [`selection`](/api/javascript/ui/rating/configuration/selection) option, use either of the following settings:
+To configure the [`selection`](/api/ui/rating/configuration/selection) option, use either of the following settings:
 
 * `continuous`&mdash;Allows the selection of all items from the start to the end.
 * `single`&mdash;Allows the selection of a single item.
 
 ## Continuous Selection
 
-The continuous selection is the default selection mode of the Rating. If not configured, the Rating will automatically set the [`selection`](/api/javascript/ui/rating/configuration/selection) option to `"continuous"`.
+The continuous selection is the default selection mode of the Rating. If not configured, the Rating will automatically set the [`selection`](/api/ui/rating/configuration/selection) option to `"continuous"`.
 
 ```dojo
    <input id="rating" name="rating">
@@ -34,7 +34,7 @@ The continuous selection is the default selection mode of the Rating. If not con
 
 ## Single Selection
 
-To configure the single selection mode, set the [`selection`](/api/javascript/ui/rating/configuration/selection) option to `"single"`.
+To configure the single selection mode, set the [`selection`](/api/ui/rating/configuration/selection) option to `"single"`.
 
 ```dojo
     <input id="rating" name="rating">
@@ -51,4 +51,4 @@ To configure the single selection mode, set the [`selection`](/api/javascript/ui
 ## See Also
 
 * [Selection by the Rating (Demo)](https://demos.telerik.com/kendo-ui/rating/selection)
-* [JavaScript API Reference of the Rating](/api/javascript/ui/rating)
+* [JavaScript API Reference of the Rating](/api/ui/rating)

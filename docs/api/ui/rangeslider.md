@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.RangeSlider
 
-Represents the Kendo UI RangeSlider widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI RangeSlider widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

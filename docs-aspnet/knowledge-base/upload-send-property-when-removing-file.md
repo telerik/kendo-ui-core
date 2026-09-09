@@ -164,7 +164,7 @@ How can I pass a View Model property `Id` to the server when the user removes a 
 
 ## See Also
 
-* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/upload)
 * [Server-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/upload)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/upload)

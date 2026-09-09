@@ -9,7 +9,7 @@ position: 5
 
 # Window Configuration
 
-To configure the Chart Wizard Window utilize the [window](/api/javascript/ui/chartwizard/configuration/window) object and set the options provided by the nested [Window](/api/javascript/ui/window) component.
+To configure the Chart Wizard Window utilize the [window](/api/ui/chartwizard/configuration/window) object and set the options provided by the nested [Window](/api/ui/window) component.
 
 The following example demonstrates how to customize the ChartWizard window.
 
@@ -41,5 +41,5 @@ The following example demonstrates how to customize the ChartWizard window.
 
 * [Window Configuration of the ChartWizard (Demo)](https://demos.telerik.com/kendo-ui/chartwizard/window-configuration)
 * [Using the API of the ChartWizard (Demo)](https://demos.telerik.com/kendo-ui/chartwizard/api)
-* [JavaScript API Reference of the ChartWizard](/api/javascript/ui/chartwizard)
-* [JavaScript API Reference of the Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the ChartWizard](/api/ui/chartwizard)
+* [JavaScript API Reference of the Window](/api/ui/window)

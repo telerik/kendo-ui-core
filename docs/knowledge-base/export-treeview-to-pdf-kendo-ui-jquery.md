@@ -34,9 +34,9 @@ The Kendo UI for jQuery TreeView component does not have a built-in feature for 
 
 1. Ensure that all nodes of the TreeView you wish to export are expanded. This is necessary because the export process requires all elements to be visible in the DOM.
 
-2. Utilize the `kendo.drawing.drawDOM` method to convert the TreeView's DOM element into a drawing scene. Refer to the [Kendo Drawing documentation](https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/drawdom) for more details on this method.
+2. Utilize the `kendo.drawing.drawDOM` method to convert the TreeView's DOM element into a drawing scene. Refer to the [Kendo Drawing documentation](https://docs.telerik.com/kendo-ui/api/drawing/methods/drawdom) for more details on this method.
 
-3. Use the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) function to save the generated drawing scene as a PDF file.
+3. Use the [`kendo.saveAs`](/api/kendo/methods/saveas) function to save the generated drawing scene as a PDF file.
 
 Below is a sample runnable example demonstrating how to export the TreeView to PDF:
 
@@ -126,5 +126,5 @@ Below is a sample runnable example demonstrating how to export the TreeView to P
 
 - [Kendo UI for jQuery TreeView Overview](https://docs.telerik.com/kendo-ui/controls/treeview/overview)
 - [Kendo UI Drawing Overview](https://docs.telerik.com/kendo-ui/framework/drawing/overview)
-- [Kendo UI Drawing API](https://docs.telerik.com/kendo-ui/api/javascript/drawing)
-- [Kendo UI TreeView API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+- [Kendo UI Drawing API](https://docs.telerik.com/kendo-ui/api/drawing)
+- [Kendo UI TreeView API](https://docs.telerik.com/kendo-ui/api/ui/treeview)

@@ -72,7 +72,7 @@ Technically, you can use the `spriteCssClass` to achieve the same result as `ico
 
 ## Image Icons
 
-Image icons are applied over the `imageUrl` property and are displayed as an `img` element. You can use [`imageUrl`](/api/javascript/ui/splitbutton/configuration/imageurl) to set an image for the default button, and the [`items.imageUrl`](/api/javascript/ui/splitbutton/configuration/items) to set the image for each item in the dropdown.
+Image icons are applied over the `imageUrl` property and are displayed as an `img` element. You can use [`imageUrl`](/api/ui/splitbutton/configuration/imageurl) to set an image for the default button, and the [`items.imageUrl`](/api/ui/splitbutton/configuration/items) to set the image for each item in the dropdown.
 
 ## Font Icons
 
@@ -122,4 +122,4 @@ To handle this issue, use either of the following approaches:
 ## See Also
 
 * [Icons in the SplitButton (Demo)](https://demos.telerik.com/kendo-ui/splitbutton/icons)
-* [JavaScript API Reference of the SplitButton](/api/javascript/ui/splitbutton)
+* [JavaScript API Reference of the SplitButton](/api/ui/splitbutton)

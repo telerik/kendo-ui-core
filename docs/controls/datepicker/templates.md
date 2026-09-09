@@ -11,17 +11,17 @@ position: 12
 
 The DatePicker provides options for using and customizing its templates.  
 
-To customize the cell template in the **Month** view, use the [`month.content`](/api/javascript/ui/datepicker/configuration/month) property. The calendar of the DatePicker loops over each cell and sets its HTML by using the month content template. You can implement a dynamic template by using the [`dates`](/api/javascript/ui/datepicker/configuration/dates) option which is passed as an argument to the `month.content` template. For the complete example, refer to the [demo on customizing the templates of the DatePicker](https://demos.telerik.com/kendo-ui/datepicker/template).
+To customize the cell template in the **Month** view, use the [`month.content`](/api/ui/datepicker/configuration/month) property. The calendar of the DatePicker loops over each cell and sets its HTML by using the month content template. You can implement a dynamic template by using the [`dates`](/api/ui/datepicker/configuration/dates) option which is passed as an argument to the `month.content` template. For the complete example, refer to the [demo on customizing the templates of the DatePicker](https://demos.telerik.com/kendo-ui/datepicker/template).
 
-To modify the footer template of the DatePicker calendar, use the [`footerTemplate`](/api/javascript/ui/datepicker/configuration/footer) property. To remove the footer, set it to `footerTemplate:false`.
+To modify the footer template of the DatePicker calendar, use the [`footerTemplate`](/api/ui/datepicker/configuration/footer) property. To remove the footer, set it to `footerTemplate:false`.
 
-To modify the week column template, use the [`month.weekNumber`](/api/javascript/ui/datepicker/configuration/month) property.
+To modify the week column template, use the [`month.weekNumber`](/api/ui/datepicker/configuration/month) property.
 
-The dates which are out of the `min` and `max` range are rendered as empty. To change their template, use the [`month.empty`](/api/javascript/ui/datepicker/configuration/month#monthempty) option.
+The dates which are out of the `min` and `max` range are rendered as empty. To change their template, use the [`month.empty`](/api/ui/datepicker/configuration/month#monthempty) option.
 
 For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug jquery_datepicker_accessibility %}#wai-aria).
 
 ## See Also
 
 * [Customizing the Templates (Demo)](https://demos.telerik.com/kendo-ui/datepicker/template)
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)

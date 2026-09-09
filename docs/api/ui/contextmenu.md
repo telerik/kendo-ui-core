@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.ContextMenu
 
-Represents the Kendo UI ContextMenu widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ContextMenu widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -446,7 +446,7 @@ How to inherit styles from anchor element in Kendo UI context menu? Configure th
 
 ### dataSource `Object|Array|kendo.data.HierarchicalDataSource`
 
-The data source of the widget which is used to render its items. Can be a JSON object/Array/[kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) that contains an item or an Array of items to be rendered.
+The data source of the widget which is used to render its items. Can be a JSON object/Array/[kendo.data.HierarchicalDataSource](/api/data/hierarchicaldatasource) that contains an item or an Array of items to be rendered.
 Refer to the example below for a list of the supported properties.
 
 
@@ -1140,7 +1140,7 @@ If called without arguments, will close the ContextMenu. If passed an item, it w
 `kendo.ui.ContextMenu` Returns the ContextMenu object to support chaining.
 
 ### destroy
-Prepares the component for safe removal from the DOM. Detaches all event handlers and removes `jQuery.data` attributes to avoid memory leaks. Calls the [`destroy`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/widget/methods/destroy) method of any child Kendo components.
+Prepares the component for safe removal from the DOM. Detaches all event handlers and removes `jQuery.data` attributes to avoid memory leaks. Calls the [`destroy`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/widget/methods/destroy) method of any child Kendo components.
 
 If a new ContextMenu component should be created afterwards, use a new `<ul>` for that, as the old one no longer exists.
 

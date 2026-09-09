@@ -14,7 +14,7 @@ The FileManager provides different data-binding options.
 * [Local data binding]({% slug localdata_kendoui_filemanager_widget %})
 * [Remote data binding]({% slug remotedata_kendoui_filemanager_widget %})
 
-The Component uses an extended [HierarchicalDataSource]({% slug overview_hierarchical_datasourcecomponent %}) - FileManagerDataSource and an extended [Node](/api/javascript/ui/filemanager) - FileEntry. 
+The Component uses an extended [HierarchicalDataSource]({% slug overview_hierarchical_datasourcecomponent %}) - FileManagerDataSource and an extended [Node](/api/ui/filemanager) - FileEntry. 
 
 The FileManager uses the following built-in `filemanager` schema:
 

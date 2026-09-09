@@ -92,7 +92,7 @@ To get a reference to a helper instance, you may also use the `getKendo<WidgetNa
 
 ### The JavaScript Method Syntax
 
-After the helper instance is available, you can call its methods by using the standard JavaScript method syntax. The complete list and examples of the widget methods and method parameters is available in the [API reference](https://docs.telerik.com/kendo-ui/api/javascript/kendo) section. If the code which will return a helper instance returns `undefined`, then the helper is not yet initialized. Such a problem may occur, for example, if an instance is referenced from code that was executed earlier than the `document.ready` handler.
+After the helper instance is available, you can call its methods by using the standard JavaScript method syntax. The complete list and examples of the widget methods and method parameters is available in the [API reference](https://docs.telerik.com/kendo-ui/api/kendo) section. If the code which will return a helper instance returns `undefined`, then the helper is not yet initialized. Such a problem may occur, for example, if an instance is referenced from code that was executed earlier than the `document.ready` handler.
 
 ```HtmlHelper
     @(Html.Kendo().AutoComplete()
@@ -213,7 +213,7 @@ All helpers provide the `bind` and the `one` method. Both methods attach event h
 
 ### Using Event Handler Arguments
 
-Each helper passes a single argument to the event handler&mdash;the so-called "event object". Usually, it has one or more fields which contain specific information for the event. All event objects have a `sender` field which provides a reference to the helper instance that triggered the event. Passing additional custom event arguments to the handler is not supported. The full list and examples of the widget events and the fields in the event objects is available in the [API reference](https://docs.telerik.com/kendo-ui/api/javascript/kendo) section.
+Each helper passes a single argument to the event handler&mdash;the so-called "event object". Usually, it has one or more fields which contain specific information for the event. All event objects have a `sender` field which provides a reference to the helper instance that triggered the event. Passing additional custom event arguments to the handler is not supported. The full list and examples of the widget events and the fields in the event objects is available in the [API reference](https://docs.telerik.com/kendo-ui/api/kendo) section.
 
 ```HtmlHelper
     @(Html.Kendo().AutoComplete()
@@ -251,7 +251,7 @@ Each helper passes a single argument to the event handler&mdash;the so-called "e
 
 ### Preventing Events
 
-Certain helper events can be prevented by calling the `preventDefault` method of the event object. The effect of the event prevention is specific for each event and is documented in the [API reference](https://docs.telerik.com/kendo-ui/api/javascript/kendo).
+Certain helper events can be prevented by calling the `preventDefault` method of the event object. The effect of the event prevention is specific for each event and is documented in the [API reference](https://docs.telerik.com/kendo-ui/api/kendo).
 
 ```HtmlHelper
     @(Html.Kendo().AutoComplete()
@@ -332,7 +332,7 @@ To unbind from a specific event, keep a reference to the event handler function 
 
 ## Known Limitations
 
-Telerik UI for {{ site.framework }} does not fire an event when the corresponding API method is invoked. For example, the `Select` event of the [PanelBar helper]({% slug htmlhelpers_panelbar_aspnetcore %}) is not fired if you call the [`select` method through the API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar/methods/select).
+Telerik UI for {{ site.framework }} does not fire an event when the corresponding API method is invoked. For example, the `Select` event of the [PanelBar helper]({% slug htmlhelpers_panelbar_aspnetcore %}) is not fired if you call the [`select` method through the API](https://docs.telerik.com/kendo-ui/api/ui/panelbar/methods/select).
 
 ## See Also
 

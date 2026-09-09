@@ -7,7 +7,7 @@ component: ChainOfThought
 
 # kendo.ui.ChainOfThought
 
-Represents the Kendo UI ChainOfThought widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ChainOfThought widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

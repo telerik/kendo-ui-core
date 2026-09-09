@@ -118,4 +118,4 @@ As of {{ site.product }} R2 SP1 2023, the Gantt TreeList's Column Menu provides 
 * [Basic Usage of the Gantt TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
 {% endif %}
 * [Server-Side API](/api/gantt)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/gantt)

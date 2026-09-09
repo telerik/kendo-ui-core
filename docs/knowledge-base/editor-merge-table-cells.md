@@ -129,4 +129,4 @@ Register two new custom tools that merge cells horizontally and vertically.
 
 ## See Also
 
-* [API Reference of the Editor](/api/javascript/ui/editor)
+* [API Reference of the Editor](/api/ui/editor)

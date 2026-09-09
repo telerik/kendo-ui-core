@@ -16,5 +16,5 @@ To persist the settings that were previously applied to its structure, use the `
 ## See Also
 
 * [State Persistence by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/persist-state)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

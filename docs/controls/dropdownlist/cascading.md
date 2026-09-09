@@ -13,7 +13,7 @@ The [cascading DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/cas
 
 ## Basic Concepts and Requirements
 
-The child DropDownList cascades from the parent one if the [`cascadeFrom`](/api/javascript/ui/dropdownlist/configuration/cascadefrom) option is defined. The `cascadeFrom` option has to point to the parent `ID`.
+The child DropDownList cascades from the parent one if the [`cascadeFrom`](/api/ui/dropdownlist/configuration/cascadefrom) option is defined. The `cascadeFrom` option has to point to the parent `ID`.
 
 The child DropDownList takes the following actions during initialization:
 - Checks if the `cascadeFrom` property is set. If not, cascading is disabled.
@@ -67,4 +67,4 @@ The MVVM [`value`]({% slug valuebinding_mvvm_kendoui %}) binding updates the `mo
 ## See Also
 
 * [Cascading DropDownLists (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/cascadingdropdownlist)
-* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/ui/dropdownlist)

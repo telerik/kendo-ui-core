@@ -76,5 +76,5 @@ The following example pairs a DatePicker with a Scheduler that has a daily recur
 
 ## See Also
 
-* [Kendo Scheduler API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
-* [Kendo DatePicker API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [Kendo Scheduler API Reference](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
+* [Kendo DatePicker API Reference](https://docs.telerik.com/kendo-ui/api/ui/datepicker)

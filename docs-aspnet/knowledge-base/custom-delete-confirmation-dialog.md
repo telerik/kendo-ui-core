@@ -36,7 +36,7 @@ To achieve this behavior, use the Window Component, a Kendo UI template, and the
 1. Add a custom `Delete` command to the Grid.
 2. Define a Kendo Template to show a customized message based on the `dataItem` being deleted.
 3. In the handler of the custom command's `click` event, initialize a Window and set its content.
-4. Attach another `click` event to the confirmation button, then use the Grid's DataSource [remove method](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/remove) to delete the item.
+4. Attach another `click` event to the confirmation button, then use the Grid's DataSource [remove method](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/remove) to delete the item.
 
 
 Refer to [this REPL sample](https://netcorerepl.telerik.com/cGuMPwON29unf7PH26) to review the behavior of the snippet below.
@@ -164,7 +164,7 @@ Refer to [this REPL sample](https://netcorerepl.telerik.com/cGuMPwON29unf7PH26) 
 ## See Also
 
 * [Telerik REPL: Customizing the Confirmation Dialog in the {{ site.product }} Grid](https://netcorerepl.telerik.com/cGuMPwON29unf7PH26)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

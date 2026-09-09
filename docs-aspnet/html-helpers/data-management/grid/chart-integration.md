@@ -249,5 +249,5 @@ To create different types of charts from the Grid row and cell selection, procee
 {% if site.core %}
 * [Server-Side TagHelper API of the Grid for {{ site.framework }}](/api/taghelpers/grid)
 {% endif %}
-* [Client-Side API of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [Client-Side API of the Chart Wizard](https://docs.telerik.com/kendo-ui/api/javascript/ui/chartwizard)
+* [Client-Side API of the Grid](https://docs.telerik.com/kendo-ui/api/ui/grid)
+* [Client-Side API of the Chart Wizard](https://docs.telerik.com/kendo-ui/api/ui/chartwizard)

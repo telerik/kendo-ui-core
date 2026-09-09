@@ -194,7 +194,7 @@ In addition to the route parameters, the route callback will receive a `key:valu
 
 If the `Back` key button is pressed, the object of the query string parameter includes a `_back: true` field to indicate the back action.
 
-> To globally detect back navigation in the `Router`, use its [`back` event](/api/javascript/router/events/back).
+> To globally detect back navigation in the `Router`, use its [`back` event](/api/router/events/back).
 
 The following example demonstrates how to detect `Back` button press in a route.
 

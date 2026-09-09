@@ -8,7 +8,7 @@ component: panelbar
 
 # kendo.ui.PanelBar
 
-Represents the Kendo UI PanelBar widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI PanelBar widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -288,7 +288,7 @@ How do I customize the animation effects for expanding items in a Kendo UI Panel
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source does not make more than one request to the remote service.
@@ -415,11 +415,11 @@ How do I configure Kendo UI PanelBar to display images from a data source? Set o
 
 ### dataSource `Object|Array|kendo.data.HierarchicalDataSource`
 
-The data source of the widget which is used render nodes. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance.
+The data source of the widget which is used render nodes. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.HierarchicalDataSource](/api/data/hierarchicaldatasource) instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.HierarchicalDataSource](/api/data/hierarchicaldatasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/api/data/hierarchicaldatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">

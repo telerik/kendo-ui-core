@@ -34,7 +34,7 @@ To achieve the desired scenario:
 
 1. Specify a custom class for the custom command by using the [`.HtmlAttributes()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridactioncolumnbuilder?#htmlattributessystemobject) configuration option.
 1. To traverse through each of the rows, handle the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder?#databoundsystemstring) event of the Grid.
-1. Within the handler, obtain the currently traversed row's data item instance by using the client-side [`.dataItem()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method the Grid provides. To get the respective custom command button for the associated row, use the previously specified custom class.
+1. Within the handler, obtain the currently traversed row's data item instance by using the client-side [`.dataItem()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem) method the Grid provides. To get the respective custom command button for the associated row, use the previously specified custom class.
 1. Provide a unique id for the badges that you will create.
 1. Based on the value of a data item field, append a child element inside the Button. From the Button, initialize a Badge control. 
 
@@ -97,7 +97,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 
 ## See Also
 
-* [Client-Side API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid](https://docs.telerik.com/{{ site.platform }}/api/grid)
 
 
@@ -125,7 +125,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Adding Badge to a Custom Command in the Grid for {{ site.framework }}](https://netcorerepl.telerik.com/cGlQvqvR164D3E7V21)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

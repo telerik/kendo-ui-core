@@ -27,7 +27,7 @@ ticketid: 1682162
 
 ## Description
 
-When using the [Kendo UI TabStrip](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip) component, a heavy gray border appears around the selected or focused tab. This style is applied by default to enhance accessibility but may not suit certain design preferences or themes, such as bootstrap-3 or classic themes. To remove this border, custom CSS can be applied.
+When using the [Kendo UI TabStrip](https://docs.telerik.com/kendo-ui/api/ui/tabstrip) component, a heavy gray border appears around the selected or focused tab. This style is applied by default to enhance accessibility but may not suit certain design preferences or themes, such as bootstrap-3 or classic themes. To remove this border, custom CSS can be applied.
 
 This knowledge base article also answers the following questions:
 - How to change the appearance of a selected tab in Kendo UI TabStrip?
@@ -112,5 +112,5 @@ This solution applies to all themes, including bootstrap-3 and classic themes.
 ## See Also
 
 - [Kendo UI TabStrip Documentation](https://docs.telerik.com/kendo-ui/controls/tabstrip/overview)
-- [Kendo UI TabStrip API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)
+- [Kendo UI TabStrip API Documentation](https://docs.telerik.com/kendo-ui/api/ui/tabstrip)
 

@@ -130,4 +130,4 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 * [Using the API of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/api)
 * [PanelBar Server-Side API](/api/panelbar)
-* [PanelBar Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+* [PanelBar Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/panelbar)

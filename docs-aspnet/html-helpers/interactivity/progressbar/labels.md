@@ -85,4 +85,4 @@ You can display informative labels for the ProgressBar using one of these option
 
 * [Custom Label of the ProgressBar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/progressbar/customlabel)
 * [Server-Side API of the ProgressBar](/api/progressbar)
-* [Client-Side API of the ProgressBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar)
+* [Client-Side API of the ProgressBar](https://docs.telerik.com/kendo-ui/api/ui/progressbar)

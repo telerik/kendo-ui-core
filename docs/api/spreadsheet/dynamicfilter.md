@@ -6,7 +6,7 @@ res_type: api
 
 # kendo.spreadsheet.DynamicFilter
 
-Represents a filter applied to a column of a given [range](/api/javascript/spreadsheet/range). It may be used to filter dates and numbers for relative values, like `belowAverage`, `yesterday`, etc.
+Represents a filter applied to a column of a given [range](/api/spreadsheet/range). It may be used to filter dates and numbers for relative values, like `belowAverage`, `yesterday`, etc.
 
 ## Methods
 

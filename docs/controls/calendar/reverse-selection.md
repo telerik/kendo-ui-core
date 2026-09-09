@@ -9,7 +9,7 @@ position: 10
 
 # Reverse Selection
 
-Starting with Kendo UI R2 2024, the Calendar provides an [`allowReverse`](/api/javascript/ui/calendar/configuration/allowreverse) selection. It allows you to pick an end date which is before the selected start date when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) option is set to `range`.
+Starting with Kendo UI R2 2024, the Calendar provides an [`allowReverse`](/api/ui/calendar/configuration/allowreverse) selection. It allows you to pick an end date which is before the selected start date when the [`selectable`](/api/ui/calendar/configuration/selectable) option is set to `range`.
 
 ```dojo
     <div id="calendar"></div>
@@ -21,9 +21,9 @@ Starting with Kendo UI R2 2024, the Calendar provides an [`allowReverse`](/api/j
         });
     </script>
 ```
-> When range selection is configured, the [`showOtherMonthDays`](/api/javascript/ui/calendar/configuration/showothermonthdays) needs to be set to `false`.
+> When range selection is configured, the [`showOtherMonthDays`](/api/ui/calendar/configuration/showothermonthdays) needs to be set to `false`.
 
 ## See Also
 
 * [Reverse Selection Demo of the Calendar](https://demos.telerik.com/kendo-ui/calendar/reverse-selection)
-* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/ui/calendar)

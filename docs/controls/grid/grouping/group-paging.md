@@ -14,7 +14,7 @@ By default, the groups are rendered collapsed and each row signifies one item fr
 
 ## Getting Started
 
-To enable group paging, set the dataSource [`groupPaging`](/api/javascript/data/datasource/configuration/group#groupPaging) option to `true`, add a [`group`](/api/javascript/data/datasource/configuration/group) and a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) to see the result.
+To enable group paging, set the dataSource [`groupPaging`](/api/data/datasource/configuration/group#groupPaging) option to `true`, add a [`group`](/api/data/datasource/configuration/group) and a [`pageSize`](/api/data/datasource/configuration/pagesize) to see the result.
 
     $("#grid").kendoGrid({
          dataSource: new kendo.data.DataSource({
@@ -61,7 +61,7 @@ The grid data source will send the following additional parameters: `take`, `ski
 - If the currently expanded row does not have subgroups, only one request is sent with the `filter` parameter containing the group and subgroup value for which the items are requested. 
 - If the currently expanded row has subgroups, an additional request is sent with the `includeSubGroupCount` parameter prompting that the response must include the total of items in the sub group
 
-For more information about the response when using server grouping, check the [`schema.groups`](/api/javascript/data/datasource/configuration/schema#schemagroups) and the article for the data source grouping [here](https://www.telerik.com/kendo-jquery-ui/documentation/framework/datasource/datasource-operations#server-grouping).
+For more information about the response when using server grouping, check the [`schema.groups`](/api/data/datasource/configuration/schema#schemagroups) and the article for the data source grouping [here](https://www.telerik.com/kendo-jquery-ui/documentation/framework/datasource/datasource-operations#server-grouping).
 
 Alternatively, you can use the ASP.NET MVC or Core server-side extensions which perform all the data operations and group paging out of the box when used with the `aspnetmvc-ajax` and `webapi` transport type.
 
@@ -77,6 +77,6 @@ The expanded state of groups is preserved during paging only, but not if sort or
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Virtual Scrolling of the Grid]({% slug virtual_scrolling_kendoui_grid_widget %})
 * [Grid Group Paging of Remote Data (Demo)](https://demos.telerik.com/kendo-ui/grid/grouppaging)

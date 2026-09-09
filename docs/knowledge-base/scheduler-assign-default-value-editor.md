@@ -39,7 +39,7 @@ How can I prevent having 'None' as an option and as a default value in the Dropd
 		}
 	```
 
-1. Set the 'defaultValue' in the [schema.model.fields.fieldName](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/schema#schemamodel).
+1. Set the 'defaultValue' in the [schema.model.fields.fieldName](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/schema#schemamodel).
 
 	```javascript
 		schema: {
@@ -50,7 +50,7 @@ How can I prevent having 'None' as an option and as a default value in the Dropd
 	```
 
 
-1. By default, the 'nullable' parameter is set to false as seen in the [Model.define](https://docs.telerik.com/kendo-ui/api/javascript/data/model/methods/define) method. You can also set the 'nullable' parameter to false.
+1. By default, the 'nullable' parameter is set to false as seen in the [Model.define](https://docs.telerik.com/kendo-ui/api/data/model/methods/define) method. You can also set the 'nullable' parameter to false.
 
 	```javascript
 		schema: {
@@ -153,5 +153,5 @@ The following example initializes a Scheduler with remote data, sets `defaultVal
 
 ## See Also
 
-- [schema.model - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/schema#schemamodel)
-- [Model.define - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/data/model/methods/define)
+- [schema.model - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/schema#schemamodel)
+- [Model.define - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/data/model/methods/define)

@@ -261,7 +261,7 @@ How do I customize the closing animation of tooltips in Kendo UI for jQuery? Adj
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -374,7 +374,7 @@ How can I customize the animation effect when opening a tooltip on a Kendo UI su
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">

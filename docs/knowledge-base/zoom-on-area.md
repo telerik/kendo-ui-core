@@ -37,7 +37,7 @@ How can I center the map view on a specified area in the Kendo UI for jQuery Map
 
 ## Solution
 
-To define the area, use a set of markers. You can use any list of locations. Then, you need to build an [`extent`](/api/javascript/dataviz/map/extent) that encompasses all locations and [set it on the map as a visible area](/api/javascript/dataviz/ui/map/methods/extent).
+To define the area, use a set of markers. You can use any list of locations. Then, you need to build an [`extent`](/api/dataviz/map/extent) that encompasses all locations and [set it on the map as a visible area](/api/dataviz/ui/map/methods/extent).
 
 ```dojo
 <button id="center">Center on markers</button>
@@ -92,4 +92,4 @@ To define the area, use a set of markers. You can use any list of locations. The
 
 * [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
 * [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
+* [JavaScript API Reference of the Map](/api/dataviz/ui/map)

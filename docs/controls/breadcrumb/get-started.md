@@ -65,7 +65,7 @@ In this step, you will initialize the Breadcrumb from the `<nav>` element. When 
 
 ## 3. Specify the Items
 
-Here, you will specify a list of [`items`](/api/javascript/ui/breadcrumb/configuration/items) to be rendered in Breadcrumb. 
+Here, you will specify a list of [`items`](/api/ui/breadcrumb/configuration/items) to be rendered in Breadcrumb. 
 
 ```dojo
     <nav id="breadcrumb"></nav>
@@ -98,7 +98,7 @@ Here, you will specify a list of [`items`](/api/javascript/ui/breadcrumb/configu
 
 ## 4. Customize the Breadcrumb
 
-In this step, you will apply Breadcrumb configuration settings, such as [`size`](/api/javascript/ui/breadcrumb/configuration/size) and [`rootIcon`](/api/javascript/ui/breadcrumb/configuration/rooticon).
+In this step, you will apply Breadcrumb configuration settings, such as [`size`](/api/ui/breadcrumb/configuration/size) and [`rootIcon`](/api/ui/breadcrumb/configuration/rooticon).
 
 ```dojo
     <nav id="breadcrumb"></nav>
@@ -138,7 +138,7 @@ In this step, you will apply Breadcrumb configuration settings, such as [`size`]
 
 ## See Also 
 
-* [JavaScript API Reference of the Breadcrumb](/api/javascript/ui/breadcrumb)
+* [JavaScript API Reference of the Breadcrumb](/api/ui/breadcrumb)
 * [Knowledge Base Section](/knowledge-base)
 
 

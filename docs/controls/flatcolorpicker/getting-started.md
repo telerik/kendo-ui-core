@@ -48,7 +48,7 @@ In this step, you will initialize the FlatColorPicker from the `<div>` element.
 
 ## 3. Apply Configuration Settings
 
-Here, you will apply some settings such as [`clearButton`](/api/javascript/ui/flatcolorpicker/configuration/clearbutton), [`buttons`](/api/javascript/ui/flatcolorpicker/configuration/buttons), and [`opacity`](/api/javascript/ui/flatcolorpicker/configuration/opacity).
+Here, you will apply some settings such as [`clearButton`](/api/ui/flatcolorpicker/configuration/clearbutton), [`buttons`](/api/ui/flatcolorpicker/configuration/buttons), and [`opacity`](/api/ui/flatcolorpicker/configuration/opacity).
 
 ```dojo
     <div id="flatcolorpicker"></div>
@@ -70,7 +70,7 @@ Here, you will apply some settings such as [`clearButton`](/api/javascript/ui/fl
 
 ## See Also 
 
-* [JavaScript API Reference of the FlatColorPicker](/api/javascript/ui/flatcolorpicker)
+* [JavaScript API Reference of the FlatColorPicker](/api/ui/flatcolorpicker)
 * [Knowledge Base Section](/knowledge-base)
 
 

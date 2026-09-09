@@ -328,8 +328,8 @@ How do I update the data source for Kendo UI map markers? Assign, configure, or 
 #### Parameters
 
 ##### dataSource `Object`
-A live [DataSource](/api/javascript/data/datasource) instance
-or its [configuration](/api/javascript/data/datasource#configuration) object.
+A live [DataSource](/api/data/datasource) instance
+or its [configuration](/api/data/datasource#configuration) object.
 
 ### show
 Shows the layer, if not visible.

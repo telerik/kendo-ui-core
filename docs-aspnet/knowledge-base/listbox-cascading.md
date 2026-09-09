@@ -83,7 +83,7 @@ I would suggest to pass the selected dataItems from listbox 1 in the `Read().Dat
 
 ## See Also
 
-* [Client-Side API Reference of the ListBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
+* [Client-Side API Reference of the ListBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/listbox)
 * [Server-Side API Reference of the ListBox for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/listbox)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

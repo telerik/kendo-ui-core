@@ -35,8 +35,8 @@ How can I achieve a global search by date columns via the Search Panel?
 Search Panel works with strings, whereas the date type is an object. 
 To accomplish date type searching: 
 
-1. Add an additional field within the [`model`](/api/javascript/data/datasource/configuration/schema#schemamodel), that will represent a formatted date.
-2. Use the newly created field in [`search.fields`](/api/javascript/ui/grid/configuration/search.fields) configuration.
+1. Add an additional field within the [`model`](/api/data/datasource/configuration/schema#schemamodel), that will represent a formatted date.
+2. Use the newly created field in [`search.fields`](/api/ui/grid/configuration/search.fields) configuration.
 
 ```dojo
 

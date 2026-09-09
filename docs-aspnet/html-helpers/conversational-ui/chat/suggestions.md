@@ -170,7 +170,7 @@ Suggested actions are contextual buttons that appear with specific messages, typ
 
 ### Adding Suggested Actions to Messages
 
-To include suggested actions when posting messages, you need to post the message programmatically by setting the desired suggestions using the [`suggestedActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestedActions) client-side property:
+To include suggested actions when posting messages, you need to post the message programmatically by setting the desired suggestions using the [`suggestedActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/suggestedActions) client-side property:
 
 ```HtmlHelper
 @(Html.Kendo().Chat()

@@ -28,7 +28,7 @@ How can I hide the **Total** column summaries in the jQuery PivotGridV2?
 
 ## Solution
 
-To achieve the desired scenario, use the [`dataBound`](/api/javascript/ui/pivotgridv2/events/databound) event handler to target and hide the required elements.
+To achieve the desired scenario, use the [`dataBound`](/api/ui/pivotgridv2/events/databound) event handler to target and hide the required elements.
 
 ```dojo
 <div id="pivotgrid"></div>
@@ -61,6 +61,6 @@ To achieve the desired scenario, use the [`dataBound`](/api/javascript/ui/pivotg
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery PivotGridV2](/api/javascript/ui/pivotgridv2)
+* [JavaScript API Reference of the jQuery PivotGridV2](/api/ui/pivotgridv2)
 * [Kendo UI for jQuery PivotGridV2 Overview (Demo)](https://demos.telerik.com/kendo-ui/pivotgridv2/index)
 * [Product Page of the jQuery PivotGridV2](https://www.telerik.com/kendo-jquery-ui/pivotgrid-v2)

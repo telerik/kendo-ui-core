@@ -71,7 +71,7 @@ The `localDataSource` variable in the example is a DataSource that is initialize
 
 ## 3. Get the Returned Data Items
 
-Now, you will access the returned data items by using the [`view`](/api/javascript/data/datasource/methods/view) method of the DataSource. You can also retrieve them through [`data()`](/api/javascript/data/datasource/methods/data).
+Now, you will access the returned data items by using the [`view`](/api/data/datasource/methods/view) method of the DataSource. You can also retrieve them through [`data()`](/api/data/datasource/methods/data).
 
 Note that when the DataSource is bound to a Kendo UI widget or chart, the explicit invocation may not be necessary. By default, the widgets automatically bind to an associated DataSource. To override this built-in behavior, use the `autoBind` configuration.
 
@@ -84,7 +84,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 4. Add Sorting
 
-As a final step, you will sort the items in the DataSource by using the [`sort`](/api/javascript/data/datasource/configuration/sort) configuration option.
+As a final step, you will sort the items in the DataSource by using the [`sort`](/api/data/datasource/configuration/sort) configuration option.
 
 ```
 	var localDataSource = new kendo.data.DataSource({ 
@@ -104,6 +104,6 @@ This is it! Now you are ready to dive more deeply into the DataSource component,
 ## See Also 
 
 * [Getting Started with the Remote DataSource Binding]({% slug getting_started_kendoui_remote_data_binding %})
-* [JavaScript API Reference of the DataSource](/api/javascript/data/datasource)
+* [JavaScript API Reference of the DataSource](/api/data/datasource)
 * [Knowledge Base Section](/knowledge-base)
 

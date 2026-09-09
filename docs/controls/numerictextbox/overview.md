@@ -30,7 +30,7 @@ By default, the widget renders **Spin** buttons which increase or decrease the v
 
 * [Getting Started with the Kendo UI NumericTextBox for jQuery]({% slug getting_started_kendoui_numerictextbox_widget %})
 * [Demo Page for the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/index)
-* [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
+* [JavaScript API Reference of the NumericTextBox](/api/ui/numerictextbox)
 
 ## See Also
 
@@ -38,5 +38,5 @@ By default, the widget renders **Spin** buttons which increase or decrease the v
 * [Using the Basic Events of the NumericTextBox (Demo)](https://demos.telerik.com/kendo-ui/numerictextbox/events)
 * [Binding the NumericTextBox over MVVM (Demo)](https://demos.telerik.com/kendo-ui/numerictextbox/mvvm)
 * [Applying the NumericTextBox API (Demo)](https://demos.telerik.com/kendo-ui/numerictextbox/api)
-* [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
+* [JavaScript API Reference of the NumericTextBox](/api/ui/numerictextbox)
 * [Known Limitations in the NumericTextBox]({% slug limitations_numerictextbox %})

@@ -32,7 +32,7 @@ How to add a custom popup editor for a column in the {{ site.product }} Grid?
 1. Create a Window and integrate an editor through the [`.Content()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/windowbuilder#contentsystemaction) configuration method.
 1. Decorate the Editor with the `data-bind` attribute for the corresponding field that will be edited.
 1. Add a button to the cell by creating a column template through the [`.ClientTemplateId()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clienttemplateidsystemstring) configuration option.
-1. To open the window, handle the `click` event of the button. To bind the editor to the current data item, use the [`bind()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/bind) method.
+1. To open the window, handle the `click` event of the button. To bind the editor to the current data item, use the [`bind()`](https://docs.telerik.com/kendo-ui/api/kendo/methods/bind) method.
 
 ```Razor Index.cshtml
     // Window
@@ -143,7 +143,7 @@ For the complete implementation of the suggested approach, refer to the followin
 ## See Also
 
 * [Telerik REPL: Adding Custom Column Popup Editor](https://netcorerepl.telerik.com/GmuhlHvr25ivNIAS51)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

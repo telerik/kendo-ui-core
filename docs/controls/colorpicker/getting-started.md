@@ -52,7 +52,7 @@ In this step, you will initialize the ColorPicker from the `<input>` element.
 
 ## 3. Apply Configuration Settings
 
-Here, you will apply some settings such as [`views`](/api/javascript/ui/colorpicker/configuration/views), [`preview`](/api/javascript/ui/colorpicker/configuration/preview), [`format`](/api/javascript/ui/colorgradient/configuration/format), and [`palette`](/api/javascript/ui/colorpicker/configuration/palette).
+Here, you will apply some settings such as [`views`](/api/ui/colorpicker/configuration/views), [`preview`](/api/ui/colorpicker/configuration/preview), [`format`](/api/ui/colorgradient/configuration/format), and [`palette`](/api/ui/colorpicker/configuration/palette).
 
 ```dojo
     <input type="color" id="colorpicker" />
@@ -75,7 +75,7 @@ Here, you will apply some settings such as [`views`](/api/javascript/ui/colorpic
 
 ## See Also 
 
-* [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
+* [JavaScript API Reference of the ColorPicker](/api/ui/colorpicker)
 * [Knowledge Base Section](/knowledge-base)
 
 

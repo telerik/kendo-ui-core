@@ -40,5 +40,5 @@ Currently, the Kendo UI `PivotDataSource` has limited support for [binding to fl
 ## See Also
 
 * [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
-* [JavaScript API Reference of the PivotGrid](/api/javascript/ui/pivotgrid)
+* [JavaScript API Reference of the PivotGrid](/api/ui/pivotgrid)
 * [Knowledge Base Section](/knowledge-base)

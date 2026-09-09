@@ -13,7 +13,7 @@ The Kendo UI for jQuery Chat component provides media handling capabilities that
 
 ## File Attachments
 
-The Chat component has built-in file upload functionality that allows users to attach files to their messages. When the [`fileAttachment`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/fileattachment) options is enabled, a file attachment button appears in the message input area, and users can select files which are automatically included with their messages. By default the option is enabled. 
+The Chat component has built-in file upload functionality that allows users to attach files to their messages. When the [`fileAttachment`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/fileattachment) options is enabled, a file attachment button appears in the message input area, and users can select files which are automatically included with their messages. By default the option is enabled. 
 
 ```dojo
     <div id="chat"></div>
@@ -26,7 +26,7 @@ The Chat component has built-in file upload functionality that allows users to a
 
 ### File Actions
 
-The Chat component allows you to configure the actions available for file attachments using the [`fileActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/fileactions) option:
+The Chat component allows you to configure the actions available for file attachments using the [`fileActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/fileactions) option:
 
 ```dojo
 <div id="chat"></div>
@@ -57,12 +57,12 @@ $("#chat").kendoChat({
 
 When users interact with file actions, the following events are fired:
 
-- [`fileActionClick`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/events/fileactionclick)&mdash;Emitted when a file action is clicked. Returns a FileActionEvent object.
-- [`download`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/events/download)&mdash;Emitted specifically for download actions. 
+- [`fileActionClick`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/events/fileactionclick)&mdash;Emitted when a file action is clicked. Returns a FileActionEvent object.
+- [`download`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/events/download)&mdash;Emitted specifically for download actions. 
 
 ## Speech-to-Text
 
-The Chat component includes speech-to-text functionality that allows users to input messages using voice commands. Enable this feature by setting the [`speechToText`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/speechtotext) option to `true`, which adds a microphone button to the message input area. The functionality is enabled by default.
+The Chat component includes speech-to-text functionality that allows users to input messages using voice commands. Enable this feature by setting the [`speechToText`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/speechtotext) option to `true`, which adds a microphone button to the message input area. The functionality is enabled by default.
 
 ```javascript
 $("#chat").kendoChat({
@@ -74,4 +74,4 @@ $("#chat").kendoChat({
 
 * [Chat Overview]({% slug overview_kendoui_chat_widget %})
 * [Chat Templates]({% slug templates_kendoui_chat %})
-* [JavaScript API Reference](/api/javascript/ui/chat)
+* [JavaScript API Reference](/api/ui/chat)

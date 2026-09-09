@@ -15,10 +15,10 @@ To enable grouping by using aggregate functions, use the `aggregates`, `groupFoo
 
 ## Known Limitations
 
-The [`columns.aggregates`](/api/javascript/ui/grid/configuration/columns.aggregates) configuration needs to be included if the Grid has its [`groupable`](/api/javascript/ui/grid/configuration/groupable) property enabled, otherwise the `groupFooterTemplate` and `groupHeaderTemplate` won't function properly.
+The [`columns.aggregates`](/api/ui/grid/configuration/columns.aggregates) configuration needs to be included if the Grid has its [`groupable`](/api/ui/grid/configuration/groupable) property enabled, otherwise the `groupFooterTemplate` and `groupHeaderTemplate` won't function properly.
 
 ## See Also
 
 * [Grouping with Aggregates by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/aggregates)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Group Templates](https://docs.telerik.com/aspnet-mvc/helpers/grid/templating/client-detail-template)

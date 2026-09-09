@@ -123,4 +123,4 @@ The example below demonstrates how to enable the contrast tool in the ColorGradi
 
 * [Contrast Tool of the ColorGradient (Demo)](https://demos.telerik.com/{{ site.platform }}/colorgradient/contrast-tool)
 * [Server-Side API](/api/colorgradient)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorgradient)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/colorgradient)

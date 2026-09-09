@@ -39,4 +39,4 @@ For more information, refer to the article on [hierarchical Data Source](/api/fr
 ## See Also
 
 * [Basic Usage of the TreeMap (Demo)](https://demos.telerik.com/kendo-ui/treemap/index)
-* [JavaScript API Reference of the TreeMap](/api/javascript/dataviz/ui/treemap)
+* [JavaScript API Reference of the TreeMap](/api/dataviz/ui/treemap)

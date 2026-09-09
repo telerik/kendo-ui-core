@@ -116,4 +116,4 @@ You can drag and drop the markers within the visible area of the Map. The locati
 
 * [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
 * [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
+* [JavaScript API Reference of the Map](/api/dataviz/ui/map)

@@ -41,12 +41,12 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To change the text of the built-in "reorderRow" ContextMenu item while keeping its submenu functionality, use DOM manipulation after the ContextMenu is rendered. Utilize the [`open`](/api/javascript/ui/contextmenu/events/open) event of the ContextMenu component to update the text dynamically.
+To change the text of the built-in "reorderRow" ContextMenu item while keeping its submenu functionality, use DOM manipulation after the ContextMenu is rendered. Utilize the [`open`](/api/ui/contextmenu/events/open) event of the ContextMenu component to update the text dynamically.
 
 ### Steps
 
 1. Get a reference to the Grid's ContextMenu.
-2. Use the [`open`](/api/javascript/ui/contextmenu/events/open) event to locate the built-in "reorderRow" menu item.
+2. Use the [`open`](/api/ui/contextmenu/events/open) event to locate the built-in "reorderRow" menu item.
 3. Replace its text while preserving the submenu functionality.
 
 ### Code Example
@@ -133,4 +133,4 @@ You can see a working example of this solution in the following Dojo:
 ## See Also
 
 - [Kendo UI for jQuery Grid Overview](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-- [Kendo UI ContextMenu API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu)
+- [Kendo UI ContextMenu API Documentation](https://docs.telerik.com/kendo-ui/api/ui/contextmenu)

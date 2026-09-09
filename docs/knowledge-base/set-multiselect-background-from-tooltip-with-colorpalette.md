@@ -27,9 +27,9 @@ components: ["multiselect"]
 Is it possible to assign a color to the MultiSelect tags from a ToolTip as we can find it in software like Asana or Trello?
 
 ## Solution
-1. Add a ToolTip to the MultiSelect's container. Use the [`filter`](/api/javascript/ui/tooltip/configuration/filter) method to target the tags. 
-1. Set an Html element as [`content`](/api/javascript/ui/tooltip/configuration/content) of the ToolTip. In the Tooltip's [`show`](/api/javascript/ui/tooltip/methods/show) event handler initialize a ColorPalette from the Html element in the Tooltip's `content`. 
-1. Capture the [`change`](/api/javascript/ui/colorpalette/events/change) event of the ColorPalette and set the new color as the background of the Tag that showed the Tooltip. Then [`hide`](/api/javascript/ui/tooltip/events/hide) the Tooltip. 
+1. Add a ToolTip to the MultiSelect's container. Use the [`filter`](/api/ui/tooltip/configuration/filter) method to target the tags. 
+1. Set an Html element as [`content`](/api/ui/tooltip/configuration/content) of the ToolTip. In the Tooltip's [`show`](/api/ui/tooltip/methods/show) event handler initialize a ColorPalette from the Html element in the Tooltip's `content`. 
+1. Capture the [`change`](/api/ui/colorpalette/events/change) event of the ColorPalette and set the new color as the background of the Tag that showed the Tooltip. Then [`hide`](/api/ui/tooltip/events/hide) the Tooltip. 
 
 ```dojo
  <div id="container">

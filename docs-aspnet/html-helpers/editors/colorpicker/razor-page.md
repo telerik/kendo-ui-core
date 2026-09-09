@@ -65,7 +65,7 @@ For the complete project, refer to the [ColorPicker in Razor Pages example](http
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the ColorPicker](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/colorpicker)
+* [Client-Side API of the ColorPicker](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/colorpicker)
 * [Server-Side HtmlHelper API of the ColorPicker](/api/colorpicker)
 * [Server-Side TagHelper API of the ColorPicker](/api/taghelpers/colorpicker)
 * [Knowledge Base Section](/knowledge-base)

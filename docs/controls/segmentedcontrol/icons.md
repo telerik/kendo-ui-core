@@ -31,7 +31,7 @@ Set the `text` property on each item to show a visible label inside the button.
 
 ## Icons from the Kendo UI Theme
 
-Use the [`icon`](/api/javascript/ui/segmentedcontrol/configuration/items.icon) property to render a named icon from the built-in Kendo UI icon set inside a segment button. When no `text` is provided, the item's `value` is used as the button's accessible label.
+Use the [`icon`](/api/ui/segmentedcontrol/configuration/items.icon) property to render a named icon from the built-in Kendo UI icon set inside a segment button. When no `text` is provided, the item's `value` is used as the button's accessible label.
 
 ```html
 <div id="segmentedControl"></div>
@@ -68,7 +68,7 @@ Combine `icon` and `text` to display both inside the same segment button.
 
 ## Custom Icon Classes
 
-Use [`iconClass`](/api/javascript/ui/segmentedcontrol/configuration/items.iconclass) to append one or more CSS class names to the icon element. This allows you to apply custom styles or integrate icons from external icon libraries.
+Use [`iconClass`](/api/ui/segmentedcontrol/configuration/items.iconclass) to append one or more CSS class names to the icon element. This allows you to apply custom styles or integrate icons from external icon libraries.
 
 ```html
 <div id="segmentedControl"></div>
@@ -86,4 +86,4 @@ Use [`iconClass`](/api/javascript/ui/segmentedcontrol/configuration/items.iconcl
 ## See Also
 
 * [Basic Usage of the SegmentedControl (Demo)](https://demos.telerik.com/kendo-ui/segmentedcontrol/index)
-* [JavaScript API Reference of the SegmentedControl](/api/javascript/ui/segmentedcontrol)
+* [JavaScript API Reference of the SegmentedControl](/api/ui/segmentedcontrol)

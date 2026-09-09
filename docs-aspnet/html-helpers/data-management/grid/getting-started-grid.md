@@ -345,7 +345,7 @@ Referencing existing instances allows you to build on top of their configuration
     </script>
     ```
 
-1. Use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods) to control the behavior of the widget. In this example, you will hide one of the Grid columns by using `hideColumn` method.
+1. Use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/ui/grid#methods) to control the behavior of the widget. In this example, you will hide one of the Grid columns by using `hideColumn` method.
 
     ```JS script
     <script>
@@ -368,6 +368,6 @@ For more information on referencing specific helper instances, see the [Methods 
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
 * [Using the API of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/api)
-* [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Grid client-side API](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Grid server-side API](/api/grid)
 * [Knowledge Base Section](/knowledge-base)

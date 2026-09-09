@@ -176,4 +176,4 @@ The following example demonstrates how to enable remote binding for the TaskBoar
 
 * [Local Data Binding in the TaskBoard (Demo)](https://demos.telerik.com/kendo-ui/taskboard/local-data-binding)
 * [Remote Data Binding in the TaskBoard (Demo)](https://demos.telerik.com/kendo-ui/taskboard/remote-data-binding)
-* [TaskBoard JavaScript API Reference](/api/javascript/ui/taskboard)
+* [TaskBoard JavaScript API Reference](/api/ui/taskboard)

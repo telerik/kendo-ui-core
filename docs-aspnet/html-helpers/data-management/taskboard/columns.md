@@ -168,4 +168,4 @@ The following example demonstrates how to use the `ColumnSettings` configuration
 ## See Also
 
 * [Kendo UI TaskBoard Cards]({% slug htmlhelpers_taskboard_aspnetcore_cards %})
-* [JavaScript API Reference of the TaskBoard](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the TaskBoard](https://docs.telerik.com/kendo-ui/api/ui/taskboard)

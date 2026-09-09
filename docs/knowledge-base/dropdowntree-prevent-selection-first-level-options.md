@@ -19,7 +19,7 @@ I want to prevent the user from selecting the first level options in a DropDownT
 ## Solution
 To prevent the selection of first level options in a DropDownTree with checkboxes, follow these steps:
 
-1. Add a [select event](/api/javascript/ui/dropdowntree/events/select) handler to the DropDownTree. In the event handler, check the number of `ul` parents of the selected node. If there is only one `ul` element, prevent the selection of the item.
+1. Add a [select event](/api/ui/dropdowntree/events/select) handler to the DropDownTree. In the event handler, check the number of `ul` parents of the selected node. If there is only one `ul` element, prevent the selection of the item.
 
 ```javascript
 $("#dropdowntree").kendoDropDownTree({
@@ -33,7 +33,7 @@ $("#dropdowntree").kendoDropDownTree({
 });
 ```
 
-2. Define the [checkboxes.template](/api/javascript/ui/dropdowntree/configuration/checkboxes.template) using a function. In the function, check if the item is on the root level. If it is, hide the checkbox; otherwise, define the checkbox element according to your preference.
+2. Define the [checkboxes.template](/api/ui/dropdowntree/configuration/checkboxes.template) using a function. In the function, check if the item is on the root level. If it is, hide the checkbox; otherwise, define the checkbox element according to your preference.
 
 ```javascript
 $("#dropdowntree").kendoDropDownTree({
@@ -53,4 +53,4 @@ $("#dropdowntree").kendoDropDownTree({
 Please refer to the [Progress Kendo UI Dojo](https://dojo.telerik.com/EJuWuwaB) for a live example demonstrating the above solution.
 
 ## See Also
-- [DropDownTree Documentation](/api/javascript/ui/dropdowntree)
+- [DropDownTree Documentation](/api/ui/dropdowntree)

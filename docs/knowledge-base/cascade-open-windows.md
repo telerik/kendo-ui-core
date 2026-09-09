@@ -80,7 +80,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Window JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/ui/window)
 * [Post to Iframe]({% slug howto_posttoiframe_window %})
 * [Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
 * [Use Custom Action Icons]({% slug howto_customactionicons_window %})

@@ -8,7 +8,7 @@ component: qrcode
 
 # kendo.dataviz.ui.QRCode
 
-Represents the Kendo UI QRCode widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI QRCode widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -172,7 +172,7 @@ How do I control the error correction level in Kendo UI's QR code generation? Ad
 
 The overlay configuration which alows you to choose from predefined layouts or insert a custom image.
 
-> **Note:** Always test if the code reads correctly with the overlay. Depending on the length of the value and the size of the overlay, you might need to raise the [errorCorrection](/api/javascript/dataviz/ui/qrcode/configuration/errorcorrection) to "M" or "H".
+> **Note:** Always test if the code reads correctly with the overlay. Depending on the length of the value and the size of the overlay, you might need to raise the [errorCorrection](/api/dataviz/ui/qrcode/configuration/errorcorrection) to "M" or "H".
 
 
 <div class="meta-api-description">
@@ -400,7 +400,7 @@ How do I properly dispose of a Kendo UI QR code instance to prevent memory leaks
 
 ### exportImage
 Exports the QRCode as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -443,7 +443,7 @@ The height of the exported image. Defaults to the QRCode height.
 
 ### exportPDF
 Exports the QRCode as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -480,7 +480,7 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the QRCode as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -521,7 +521,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Returns a PNG image of the qrcode encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/qrcode/methods/exportimage).
+> This method is deprecated and replaced by [exportImage](/api/dataviz/ui/qrcode/methods/exportimage).
 
 
 <div class="meta-api-description">
@@ -571,7 +571,7 @@ How to get QR code image as base64 encoded string in Kendo UI for jQuery? Genera
 
 Redraws the QR code using the current value and options.
 
-> The [`setOptions`](/api/javascript/dataviz/ui/qrcode/methods/setoptions) method sets new options to the QRCode and redraws it att he same time. Calling `redraw()` int his case is not necessary.
+> The [`setOptions`](/api/dataviz/ui/qrcode/methods/setoptions) method sets new options to the QRCode and redraws it att he same time. Calling `redraw()` int his case is not necessary.
 
 
 <div class="meta-api-description">
@@ -632,7 +632,7 @@ How to dynamically change QR code settings in Kendo UI for jQuery? Update or mod
 
 ##### options `Object`
 
-An object with the new options. All [configuration](/api/javascript/dataviz/ui/qrcode#configuration) options can be set.
+An object with the new options. All [configuration](/api/dataviz/ui/qrcode#configuration) options can be set.
 
 #### Example
 
@@ -659,7 +659,7 @@ An object with the new options. All [configuration](/api/javascript/dataviz/ui/q
 Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the qrcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
 [ImageMagick](https://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/qrcode/methods/exportsvg), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/dataviz/ui/qrcode/methods/exportsvg), but will remain fully functional.
 
 
 <div class="meta-api-description">

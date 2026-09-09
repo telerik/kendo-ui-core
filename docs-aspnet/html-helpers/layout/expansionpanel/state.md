@@ -106,4 +106,4 @@ You can disable the ExpansionPanel visual animations that appear when the user e
 ## See Also
 
 * [ExpansionPanel Server-Side API for {{ site.framework}}](/api/expansionpanel)
-* [ExpansionPanel Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel)
+* [ExpansionPanel Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/expansionpanel)

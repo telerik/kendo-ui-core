@@ -73,7 +73,7 @@ The OrgChart uses an OrgChart dataSource instance.
 > * Define the `id` field of the data items in `schema.model.id`. This ensures the correct adding, editing, and deleting of items.
 > * Define the model fields.
 
-For more information on the DataSource schema configuration, refer to [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel).
+For more information on the DataSource schema configuration, refer to [`schema.model`](/api/data/datasource/configuration/schema#schemamodel).
 
 The following example demonstrates how to configure the OrgChart DataSource for CRUD (Create, Read, Update, Destroy) data operations.
 
@@ -121,4 +121,4 @@ The following example demonstrates how to set the `editable` configuration.
 ## See Also
 
 * [Editing of the OrgChart (Demo)](https://demos.telerik.com/kendo-ui/orgchart/editing)
-* [JavaScript API Reference of the OrgChart](/api/javascript/ui/orgchart)
+* [JavaScript API Reference of the OrgChart](/api/ui/orgchart)

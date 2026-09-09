@@ -21,7 +21,7 @@ The following sections provide step-by-step instructions and examples on getting
 
 1. Include the JSZip script on the page. For more information, refer to the article with the [requirements]({% slug introduction_excelexport_kendoui %}#requirements).
 
-1. Set the [selectable](/api/javascript/ui/grid/configuration/selectable) option of the grid to `multiple, cell`.
+1. Set the [selectable](/api/ui/grid/configuration/selectable) option of the grid to `multiple, cell`.
 
 ### Initializing a ContextMenu
 
@@ -85,7 +85,7 @@ The following sections provide step-by-step instructions and examples on getting
 
 ### Copying Selected Data
 
-To enable users to copy the selected data, call the [`copySelectionToClipboard`](/api/javascript/ui/grid/methods/copyselectiontoclipboard) method.
+To enable users to copy the selected data, call the [`copySelectionToClipboard`](/api/ui/grid/methods/copyselectiontoclipboard) method.
 
 ```javascript
     function copySelected() {
@@ -113,7 +113,7 @@ To enable users to copy the selected data, call the [`copySelectionToClipboard`]
 
 ### Exporting Selected Data to Excel
 
-To enable users to export the selected data, call the [`exportSelectedToExcel`](/api/javascript/ui/grid/methods/exportselectedtoexcel) method.
+To enable users to export the selected data, call the [`exportSelectedToExcel`](/api/ui/grid/methods/exportselectedtoexcel) method.
 
 ```javascript
     function exportSelected() {
@@ -148,7 +148,7 @@ To enable users to export the selected data to a Kendo UI Chart:
         <div id="chart-container"></div>
     ```
 
-1. Call the [`getSelectedData`](/api/javascript/ui/grid/methods/getselecteddata) method and initialize a Chart component with the data.
+1. Call the [`getSelectedData`](/api/ui/grid/methods/getselecteddata) method and initialize a Chart component with the data.
 
     ```javascript
             function exportToChart() {
@@ -220,4 +220,4 @@ The following selection types are supported:
 ## See Also
 
 * [Copying and Exporting the selected data to Excel (Demo)](https://demos.telerik.com/kendo-ui/grid/selection-export)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

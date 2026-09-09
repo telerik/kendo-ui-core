@@ -10,7 +10,7 @@ position: 1
 
 # Getting Started with the Drawing Library
 
-This guide demonstrates how to use the Kendo UI for jQuery Drawing library to draw shapes on the screen. The following scene consists of a [`Path`](/api/javascript/drawing/path) (the violet border), [`Text`](/api/javascript/drawing/text), and an [`Image`](/api/javascript/drawing/image).
+This guide demonstrates how to use the Kendo UI for jQuery Drawing library to draw shapes on the screen. The following scene consists of a [`Path`](/api/drawing/path) (the violet border), [`Text`](/api/drawing/text), and an [`Image`](/api/drawing/image).
 
 After the completion of this guide, you will achieve the following result:
 
@@ -74,20 +74,20 @@ The following example demonstrates how to import the two namespaces.
     var draw = kendo.drawing;
 
 The `kendo.geometry` namespace contains primitives, such as:
-* [`Point`](/api/javascript/geometry/point)
-* [`Rect`](/api/javascript/geometry/rect)
-* [`Size`](/api/javascript/geometry/size)
+* [`Point`](/api/geometry/point)
+* [`Rect`](/api/geometry/rect)
+* [`Size`](/api/geometry/size)
 
 The `kendo.drawing` namespace contains elements, such as:
-* [`Path`](/api/javascript/drawing/path)
-* [`Image`](/api/javascript/drawing/image)
-* [`Group`](/api/javascript/drawing/group)
+* [`Path`](/api/drawing/path)
+* [`Image`](/api/drawing/image)
+* [`Group`](/api/drawing/group)
 
 ## 2. Drawing the Path
 
-A [`Path`](/api/javascript/drawing/path) element is used for drawing straight lines, curves, or a combination of both.
+A [`Path`](/api/drawing/path) element is used for drawing straight lines, curves, or a combination of both.
 
-1. Set the stroke width and color control of the line appearance. The [`configuration`](/api/javascript/drawing/path#configuration) object can contain other appearance options as well.
+1. Set the stroke width and color control of the line appearance. The [`configuration`](/api/drawing/path#configuration) object can contain other appearance options as well.
 
         var path = new draw.Path({
             stroke: {
@@ -98,7 +98,7 @@ A [`Path`](/api/javascript/drawing/path) element is used for drawing straight li
 
 1. Construct the path by issuing the following commands.
 
-  Set the line initial position with the [`moveTo()`](/api/javascript/drawing/path/methods/moveto) method. To draw the three sides, use the [`lineTo()`](/api/javascript/drawing/path/methods/lineto) method. The last [`close()`](/api/javascript/drawing/path/methods/close) method closes the path and draws a straight line to the initial position. Since this is a rectangle, use the alternative [`fromRect`](/api/javascript/drawing/path#fromrect) static method.
+  Set the line initial position with the [`moveTo()`](/api/drawing/path/methods/moveto) method. To draw the three sides, use the [`lineTo()`](/api/drawing/path/methods/lineto) method. The last [`close()`](/api/drawing/path/methods/close) method closes the path and draws a straight line to the initial position. Since this is a rectangle, use the alternative [`fromRect`](/api/drawing/path#fromrect) static method.
 
         var borderRect = new geom.Rect(
             new geom.Point(0, 0),
@@ -113,9 +113,9 @@ A [`Path`](/api/javascript/drawing/path) element is used for drawing straight li
 
 ## 3. Drawing the Image
 
-The [`Image`](/api/javascript/drawing/image) element draws a bitmap image from a given URL.
+The [`Image`](/api/drawing/image) element draws a bitmap image from a given URL.
 
-1. Define the image position and size as a [`Rect`](/api/javascript/geometry/rect). Any method that expects `Point` and `Size` also accepts `[x, y]` and `[width, height]` arrays.
+1. Define the image position and size as a [`Rect`](/api/geometry/rect). Any method that expects `Point` and `Size` also accepts `[x, y]` and `[width, height]` arrays.
 
         var imageRect = new geom.Rect(
             new geom.Point(5, 5),
@@ -133,9 +133,9 @@ The [`Image`](/api/javascript/drawing/image) element draws a bitmap image from a
 
 ## 4. Drawing the Text
 
-The [`Text`](/api/javascript/drawing/text) element draws a single line of text.
+The [`Text`](/api/drawing/text) element draws a single line of text.
 
-Set the appearance options, such as the font, by using [`configuration`](/api/javascript/drawing/text#configuration). The `Point` defines the position of the top left corner.
+Set the appearance options, such as the font, by using [`configuration`](/api/drawing/text#configuration). The `Point` defines the position of the top left corner.
 
         var text = new draw.Text(
             "Diego Roel",
@@ -147,7 +147,7 @@ Set the appearance options, such as the font, by using [`configuration`](/api/ja
 
 It is convenient to treat a group of shapes as a single entity so that you can set the position of all elements at once.
 
-1. Create a [`Group`](/api/javascript/drawing/group) element and append the rest of the elements as children. The transformation will apply to all group children.
+1. Create a [`Group`](/api/drawing/group) element and append the rest of the elements as children. The transformation will apply to all group children.
 
         var group = new draw.Group();
         group.append(path, image, text);
@@ -160,7 +160,7 @@ It is convenient to treat a group of shapes as a single entity so that you can s
 
 ## 6. Rendering the Scene
 
-To render the scene, use the [`Surface.create`](/api/javascript/drawing/surface#create) method. It selects an implementation that matches the capabilities of the browser. The default output is an SVG with a fallback to Canvas.
+To render the scene, use the [`Surface.create`](/api/drawing/surface#create) method. It selects an implementation that matches the capabilities of the browser. The default output is an SVG with a fallback to Canvas.
 
         <div id="surface" style="width: 250px; height: 165px;"></div>
         <script>
@@ -171,7 +171,7 @@ To render the scene, use the [`Surface.create`](/api/javascript/drawing/surface#
 ## Next Steps 
 
 * [Drawing HTML Elements Overview]({% slug drawingofhtmlelements_drawingapi %})
-* [API Reference for the Drawing Surface](/api/javascript/drawing/surface)
+* [API Reference for the Drawing Surface](/api/drawing/surface)
 * [Demo Page for the Drawing Library](https://demos.telerik.com/kendo-ui/drawing/index)
 
 ## See Also 

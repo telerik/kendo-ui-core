@@ -170,8 +170,8 @@ To achieve the desired scenario:
 
 ## See Also
 
-* [JavaScript API Reference of the Menu](/api/javascript/ui/menu)
-* [JavaScript API Reference of the AppBar](/api/javascript/ui/appbar)
+* [JavaScript API Reference of the Menu](/api/ui/menu)
+* [JavaScript API Reference of the AppBar](/api/ui/appbar)
 * [jQuery Menu Overview (Demo)](https://demos.telerik.com/kendo-ui/menu/index)
 * [jQuery AppBar Overview (Demo)](https://demos.telerik.com/kendo-ui/appbar/index)
 * [Product Page of the jQuery Menu](https://www.telerik.com/kendo-jquery-ui/menu)

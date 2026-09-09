@@ -35,11 +35,11 @@ How to populate Spreadsheet remote dataSource conditionally by dynamically chang
 1. Initialize the Speadsheet 
 1. Define the loadData() function and in it
     1. set the parameter to be equal to a local variable url  
-	1. define a [new `kendo.data.DataSource`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#kendodatadatasource)
+	1. define a [new `kendo.data.DataSource`](https://docs.telerik.com/kendo-ui/api/data/datasource#kendodatadatasource)
 	1. get the `activeSheet`, then get its `_rows`.`_count` and `_columns`.`_count`
 	1. use the `sheet.range(0,0,rowsCount,columnsCount).clear()` to clear any leftover data from the Spreadsheet
-	1. pass the local url variable to the Speadsheet's [transport.read.url](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read#transportreadurl)
-    1. finally in the loadData() use [setDataSource](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/setdatasource) to set the dataSource of the [activeSheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/activesheet) to be  equal to the `kendo.data.DataSource`
+	1. pass the local url variable to the Speadsheet's [transport.read.url](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/transport.read#transportreadurl)
+    1. finally in the loadData() use [setDataSource](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet/methods/setdatasource) to set the dataSource of the [activeSheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/methods/activesheet) to be  equal to the `kendo.data.DataSource`
 
 ```dojo
  <div id="dropdownlist" style="margin-bottom: 5px"></div>
@@ -141,8 +141,8 @@ How to populate Spreadsheet remote dataSource conditionally by dynamically chang
 
 
 ## See Also
-* [JavaScript API Reference of the DropDown](/api/javascript/ui/dropdownlist)
-* [JavaScript API Reference of the DataSource](/api/javascript/data/datasource)
-* [JavaScript API Reference of the Spreadsheet](/api/javascript/ui/spreadsheet)
-* [JavaScript API Reference of the Spreadsheet's Sheet](/api/javascript/ui/spreadsheet/configuration/sheets)
+* [JavaScript API Reference of the DropDown](/api/ui/dropdownlist)
+* [JavaScript API Reference of the DataSource](/api/data/datasource)
+* [JavaScript API Reference of the Spreadsheet](/api/ui/spreadsheet)
+* [JavaScript API Reference of the Spreadsheet's Sheet](/api/ui/spreadsheet/configuration/sheets)
 * [jQuery API Reference of the AJAX method](https://api.jquery.com/jquery.ajax/)

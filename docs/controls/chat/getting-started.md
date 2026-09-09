@@ -197,7 +197,7 @@ Initialize the Chat from the `<div>` element with basic configuration.
 
 ## 3. Configure Data Source
 
-Add a [`dataSource`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/datasource) to populate the chat with existing messages. The data source can contain message history and conversation data.
+Add a [`dataSource`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/datasource) to populate the chat with existing messages. The data source can contain message history and conversation data.
 
 ```
 <div id="chat"></div>
@@ -232,7 +232,7 @@ Add a [`dataSource`](https://www.telerik.com/kendo-jquery-ui/documentation/api/j
 
 ## 4. Add Message Suggestions
 
-Configure quick-reply [`suggestions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestions) that appear below the message input for common responses.
+Configure quick-reply [`suggestions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/suggestions) that appear below the message input for common responses.
 
 ```
 <div id="chat"></div>
@@ -265,7 +265,7 @@ Configure quick-reply [`suggestions`](https://www.telerik.com/kendo-jquery-ui/do
 
 ## 5. Set Component Dimensions
 
-Configure the [`width`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/width) and [`height`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/height) of the Chat component to fit your layout requirements.
+Configure the [`width`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/width) and [`height`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/height) of the Chat component to fit your layout requirements.
 
 ```
 <div id="chat"></div>
@@ -289,7 +289,7 @@ Configure the [`width`](https://www.telerik.com/kendo-jquery-ui/documentation/ap
 
 ## 6. Configure Header Toolbar
 
-Use the [`headerItems`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/headerItems) configuration option to customize the Chat header appearance and functionality.
+Use the [`headerItems`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/headerItems) configuration option to customize the Chat header appearance and functionality.
 
 ```
 <div id="chat"></div>
@@ -315,7 +315,7 @@ Use the [`headerItems`](https://www.telerik.com/kendo-jquery-ui/documentation/ap
 
 ## 7. Configure Context Menu Actions
 
-The Chat component provides and option to customize and set up context menu actions that appear when users right-click on messages. Utilize the [`messageActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/messageactions) configuration option and configure the actions that will appear in the messages context menu.
+The Chat component provides and option to customize and set up context menu actions that appear when users right-click on messages. Utilize the [`messageActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messageactions) configuration option and configure the actions that will appear in the messages context menu.
 
 ```
 <div id="chat"></div>
@@ -399,7 +399,7 @@ Implement event handlers for sending messages and user interactions.
 
 ## See Also 
 
-* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
+* [JavaScript API Reference of the Chat](/api/ui/chat)
 * [Chat Templates]({% slug templates_kendoui_chat %})
 * [Chat Suggestions]({% slug suggestions_kendoui_chat %})
 * [Demo Page for the Chat](https://demos.telerik.com/kendo-ui/chat/index)

@@ -29,7 +29,7 @@ How can I check and uncheck all checkboxes for all nodes in a Kendo UI TreeView 
 
 ## Solution
 
-Use the jQuery library and trigger the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/events/change) event.  
+Use the jQuery library and trigger the [`change`](https://docs.telerik.com/kendo-ui/api/ui/treeview/events/change) event.  
 
 ```
 //Uncheck All Nodes

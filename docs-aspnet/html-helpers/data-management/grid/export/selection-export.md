@@ -136,7 +136,7 @@ The following sections provide step-by-step instructions and examples on getting
 
 ### Copying Selected Data
 
-To enable users to copy the selected data, call the [`copySelectionToClipboard`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/copyselectiontoclipboard) method.
+To enable users to copy the selected data, call the [`copySelectionToClipboard`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/copyselectiontoclipboard) method.
 
 ```javascript
     function copySelected() {
@@ -164,7 +164,7 @@ To enable users to copy the selected data, call the [`copySelectionToClipboard`]
 
 ### Exporting Selected Data to Excel
 
-To enable users to export the selected data, call the [`exportSelectedToExcel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/exportselectedtoexcel) method.
+To enable users to export the selected data, call the [`exportSelectedToExcel`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/exportselectedtoexcel) method.
 
 ```javascript
     function exportSelected() {
@@ -191,7 +191,7 @@ To enable users to export the selected data, call the [`exportSelectedToExcel`](
 
 ### Exporting Selected Data to Chart
 
-To enable users to export the selected data to a Kendo UI Chart, call the [`getSelectedData`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/getselecteddata) method and initialize a Chart widget with the data.
+To enable users to export the selected data to a Kendo UI Chart, call the [`getSelectedData`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/getselecteddata) method and initialize a Chart widget with the data.
 
 1. Add an empty div before initializing the Grid.
 

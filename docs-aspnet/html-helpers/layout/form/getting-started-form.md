@@ -318,7 +318,7 @@ public ActionResult Index(){
 
 ## (Optional) Reference Existing Form Instances
 
-Referencing existing component instances allows you to build on top of their configuration. To reference an existing Form instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Form client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/form#methods) to control its behavior.
+Referencing existing component instances allows you to build on top of their configuration. To reference an existing Form instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Form client-side API](https://docs.telerik.com/kendo-ui/api/ui/form#methods) to control its behavior.
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
@@ -328,7 +328,7 @@ Referencing existing component instances allows you to build on top of their con
     </script>
     ```
 
-1. Use the [Form client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/form#methods) to control the behavior of the widget. In this example, you will see how to clear the form programmatically.
+1. Use the [Form client-side API](https://docs.telerik.com/kendo-ui/api/ui/form#methods) to control the behavior of the widget. In this example, you will see how to clear the form programmatically.
 
     ```JS script
         <script>
@@ -348,6 +348,6 @@ Referencing existing component instances allows you to build on top of their con
 ## See Also
 
 * [Using the API of the Form for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/form/api)
-* [Client-Side API of the Form](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)
+* [Client-Side API of the Form](https://docs.telerik.com/kendo-ui/api/ui/form)
 * [Server-Side API of the Form](/api/form)
 * [Knowledge Base Section](/knowledge-base)

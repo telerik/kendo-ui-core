@@ -128,7 +128,7 @@ To bind the TreeMap to a data set received from a remote endpoint within a Razor
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the TreeMap](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/treemap)
+* [Client-Side API of the TreeMap](https://docs.telerik.com/kendo-ui/api/dataviz/ui/treemap)
 * [Server-Side HtmlHelper API of the TreeMap](/api/treemap)
 * [Server-Side TagHelper API of the TreeMap](/api/taghelpers/treemap)
 * [Knowledge Base Section](/knowledge-base)

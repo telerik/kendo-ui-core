@@ -150,6 +150,6 @@ The following values are available for the `Rounded` option:
 
 * [Appearance of the ToggleButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/togglebutton/appearance)
 * [ToggleButton Server-Side API](/api/togglebutton)
-* [ToggleButton Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/togglebutton)
+* [ToggleButton Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/togglebutton)
 
 

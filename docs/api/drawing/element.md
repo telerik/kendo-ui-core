@@ -43,7 +43,7 @@ How do I set initial settings for a Kendo UI drawing component using the options
 The clipping path for this element.
 
 The path instance will be monitored for changes.
-It can be replaced by calling the [clip](/api/javascript/drawing/element/methods/clip) method.
+It can be replaced by calling the [clip](/api/drawing/element/methods/clip) method.
 
 
 <div class="meta-api-description">

@@ -11,7 +11,7 @@ position: 3
 
 The MultiColumnComboBox enables you to bind it to local data arrays and remote data services.
 
-> When you configure the local or remote data source of the MultiColumnComboBox, enabling the paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_multicolumncombobox_widget %}). In all other cases, do not enable the paging functionality or set the `pageSize`.
+> When you configure the local or remote data source of the MultiColumnComboBox, enabling the paging functionality and setting [`pageSize`](/api/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_multicolumncombobox_widget %}). In all other cases, do not enable the paging functionality or set the `pageSize`.
 
 ## Binding to Local Data
 
@@ -75,4 +75,4 @@ Remote data binding is useful for larger datasets so that the items are loaded o
 
 * [Basic Usage of the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/index)
 * [Using the API of the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/api)
-* [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
+* [JavaScript API Reference of the MultiColumnComboBox](/api/ui/multicolumncombobox)

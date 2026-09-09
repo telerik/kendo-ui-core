@@ -37,7 +37,7 @@ How can I extract data from the Kendo UI for jQuery Spreadsheet and render it in
 
 ## Solution
 
-The following example demonstrates how to extract the Spreadsheet data and populate a Kendo UI Chart with it. The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/sheet/events/change) event.
+The following example demonstrates how to extract the Spreadsheet data and populate a Kendo UI Chart with it. The Chart is updated on sheet upon a [`change`](/api/spreadsheet/sheet/events/change) event.
 
 ```dojo
 <style>
@@ -108,7 +108,7 @@ The following example demonstrates how to extract the Spreadsheet data and popul
 
     function bindChart(chart, sheet, range) {
         // Change will fire when the sheet data changes
-        // https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/events/change
+        // https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet/events/change
         sheet.bind("change", function(e) {
             if (e.recalc) {
                update();
@@ -924,4 +924,4 @@ The following example demonstrates how to extract the Spreadsheet data and popul
 ## See Also
 
 * [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

@@ -49,7 +49,7 @@ To configure the Barcode, pass the configuration options as attributes:
 
 * The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
 
-* You can select the appropriate encoding (symbology) from the [available options](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode/configuration/type). Specify it by passing an `enum` value to the encoding method.
+* You can select the appropriate encoding (symbology) from the [available options](https://docs.telerik.com/kendo-ui/api/dataviz/ui/barcode/configuration/type). Specify it by passing an `enum` value to the encoding method.
 
 ```HtmlHelper
     @(Html.Kendo().Barcode()

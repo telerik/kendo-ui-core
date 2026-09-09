@@ -8,7 +8,7 @@ component: smartpastebutton
 
 # kendo.ui.SmartPasteButton
 
-Represents the Kendo UI SmartPasteButton widget. Inherits from [Button](/api/javascript/ui/button).
+Represents the Kendo UI SmartPasteButton widget. Inherits from [Button](/api/ui/button).
 
 The SmartPasteButton enables users to paste unstructured text and have it intelligently distributed into relevant form fields using AI processing.
 

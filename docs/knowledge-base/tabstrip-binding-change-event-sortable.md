@@ -17,9 +17,9 @@ components: ["sortable"]
 I want to fire the change event whenever the user reorders the tabs in the Kendo UI TabStrip. I have enabled the sortable property, but the change event does not seem to get fired when the user moves the tab.
 
 ## Solution
-To [bind the change event](https://docs.telerik.com/kendo-ui/api/javascript/ui/sortable/events/change) when the Kendo UI TabStrip is sorted, follow these steps:
+To [bind the change event](https://docs.telerik.com/kendo-ui/api/ui/sortable/events/change) when the Kendo UI TabStrip is sorted, follow these steps:
 
-1. Initialize the TabStrip with the [`sortable` property](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/configuration/sortable) set to `true`:
+1. Initialize the TabStrip with the [`sortable` property](https://docs.telerik.com/kendo-ui/api/ui/tabstrip/configuration/sortable) set to `true`:
 ```javascript
 $("#tabstrip").kendoTabStrip({
   sortable: true

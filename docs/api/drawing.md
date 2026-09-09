@@ -58,7 +58,7 @@ Converts the given DOM element to a [Drawing API](/framework/drawing/overview) s
 
 The operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 
-The promise will be resolved with the root [Group](/api/javascript/drawing/group) of the scene.
+The promise will be resolved with the root [Group](/api/drawing/group) of the scene.
 
 
 <div class="meta-api-description">

@@ -247,7 +247,7 @@ To use the client-side API of the OrgChart and build on top of its initial confi
         </script>
     ```
 
-1. Use the [OrgChart client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart#methods) to control the behavior of the widget. In this example, you will use the [`items`](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart/methods/items) method to access the element of the first node use the [`expand`](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart/methods/expand) method to expand it programmatically.
+1. Use the [OrgChart client-side API](https://docs.telerik.com/kendo-ui/api/ui/orgchart#methods) to control the behavior of the widget. In this example, you will use the [`items`](https://docs.telerik.com/kendo-ui/api/ui/orgchart/methods/items) method to access the element of the first node use the [`expand`](https://docs.telerik.com/kendo-ui/api/ui/orgchart/methods/expand) method to expand it programmatically.
 
     ```JS script
         <script>
@@ -280,6 +280,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the OrgChart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart/api)
-* [Client-Side API of the OrgChart](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart)
+* [Client-Side API of the OrgChart](https://docs.telerik.com/kendo-ui/api/ui/orgchart)
 * [Server-Side API of the OrgChart](/api/orgchart)
 * [Knowledge Base Section](/knowledge-base)

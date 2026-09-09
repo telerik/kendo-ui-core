@@ -117,4 +117,4 @@ The following example demonstrates how you can subscribe to the `open` event of 
 
 ## See Also
 
-* [JavaScript API Reference of the ActionSheet](/api/javascript/ui/actionsheet)
+* [JavaScript API Reference of the ActionSheet](/api/ui/actionsheet)

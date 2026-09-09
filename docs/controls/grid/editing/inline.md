@@ -21,4 +21,4 @@ To enable inline editing operations, set the `editable` option of the Grid to `i
 ## See Also
 
 * [Inline Editing by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/editing-inline)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

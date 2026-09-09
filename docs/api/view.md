@@ -234,7 +234,7 @@ When is the best time to initialize Kendo UI widgets in a dynamically rendered S
 
 ### transitionStart
 
-Fires when the view transition starts. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](/api/javascript/layout#methods-showIn) method.
+Fires when the view transition starts. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](/api/layout#methods-showIn) method.
 
 
 <div class="meta-api-description">
@@ -260,7 +260,7 @@ How to detect when a Kendo UI view starts appearing or disappearing in jQuery? D
 
 ### transitionEnd
 
-Fires after the view transition container has its `k-fx-end` class set. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](/api/javascript/layout#methods-showIn) method.
+Fires after the view transition container has its `k-fx-end` class set. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](/api/layout#methods-showIn) method.
 
 
 <div class="meta-api-description">

@@ -7,14 +7,14 @@ res_type: api
 
 # kendo.data.OrgChartDataSource
 
-The data source used by the [kendo.ui.OrgChart](/api/javascript/ui/orgchart) widget.
-Inherits from [kendo.data.TreeListDataSource](/api/javascript/data/treelistdatasource). The OrgChartDataSource contains instances of the
-[kendo.data.OrgChartModel](/api/javascript/data/orgchartmodel) class.
+The data source used by the [kendo.ui.OrgChart](/api/ui/orgchart) widget.
+Inherits from [kendo.data.TreeListDataSource](/api/data/treelistdatasource). The OrgChartDataSource contains instances of the
+[kendo.data.OrgChartModel](/api/data/orgchartmodel) class.
 
 
 ## Configuration
 
-See the [TreeListDataSource configuration](/api/javascript/data/treelistdatasource#configuration) for all inherited configuration options.
+See the [TreeListDataSource configuration](/api/data/treelistdatasource#configuration) for all inherited configuration options.
 
 ### schema `Object`
 
@@ -51,7 +51,7 @@ How do I configure the OrgChartDataSource schema to correctly map my hierarchica
 
 ### schema.model `Object`
 
-The model configuration of the OrgChartDataSource. See [kendo.data.OrgChartModel](/api/javascript/data/orgchartmodel) for more info.
+The model configuration of the OrgChartDataSource. See [kendo.data.OrgChartModel](/api/data/orgchartmodel) for more info.
 
 
 <div class="meta-api-description">
@@ -79,7 +79,7 @@ How to configure data model for hierarchical organizational chart in Kendo UI Or
 
 ## Methods
 
-See the [TreeListDataSource methods](/api/javascript/data/treelistdatasource#methods) for all inherited methods.
+See the [TreeListDataSource methods](/api/data/treelistdatasource#methods) for all inherited methods.
 
 
 ### groupedItemsTree

@@ -11,7 +11,7 @@ position: 14
 
 The Grid enables you to save the custom settings of the user and restore them after the user logs back at some future moment.
 
-To persist the settings that were previously applied to its structure, use the [`getOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/getoptions) and [`setOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) methods of the Grid. These methods allow you to serialize the current state of the Grid if needed and recover that state later. For a runnable example, refer to the [demo on persisting the state of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/persist-state).
+To persist the settings that were previously applied to its structure, use the [`getOptions()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/getoptions) and [`setOptions()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/setoptions) methods of the Grid. These methods allow you to serialize the current state of the Grid if needed and recover that state later. For a runnable example, refer to the [demo on persisting the state of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/persist-state).
 
 By design, the `getOptions()` method retrieves the current Grid settings along with the current state of the DataSource options. To restore particular Grid or DataSource options, you can extract only the desired options from the object returned by `getOptions()`.
 

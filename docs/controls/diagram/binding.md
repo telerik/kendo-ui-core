@@ -88,4 +88,4 @@ The following example demonstrates how to reproduce the same Diagram with ellips
 ## See Also
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)

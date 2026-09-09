@@ -24,4 +24,4 @@ The following example demonstrates how to create a RadioGroup and bind it to an 
 ## See Also
 
 * [Basic Usage of the RadioGroup (Demo)](https://demos.telerik.com/kendo-ui/radiogroup/index)
-* [JavaScript API Reference of the RadioGroup](/api/javascript/ui/radiogroup)
+* [JavaScript API Reference of the RadioGroup](/api/ui/radiogroup)

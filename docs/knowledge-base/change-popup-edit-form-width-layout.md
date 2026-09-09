@@ -33,8 +33,8 @@ How can I adjust the width and height of the popup edit form in the Kendo UI Gri
 
 To adjust the dimensions of the popup edit form:
 
-1. Configure the popup window dimensions using the [`editable.window`](/api/javascript/ui/grid/configuration/editable.window) configuration.
-2. Use the [`edit`](/api/javascript/ui/grid/events/edit) event to customize the form container width if needed.
+1. Configure the popup window dimensions using the [`editable.window`](/api/ui/grid/configuration/editable.window) configuration.
+2. Use the [`edit`](/api/ui/grid/events/edit) event to customize the form container width if needed.
 
 The following example demonstrates how to set custom dimensions for the popup edit window in the Grid.
 
@@ -114,4 +114,4 @@ The following example demonstrates how to set custom dimensions for the popup ed
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

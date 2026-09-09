@@ -37,7 +37,7 @@ How can I draw a checkbox that matches the visible state of the Chart series?
 
 ## Solution
 
-The [`legend.item.visual`](/api/javascript/dataviz/ui/chart/configuration/legend.item#legenditemvisual) can be overridden to render custom text, images, and shapes.
+The [`legend.item.visual`](/api/dataviz/ui/chart/configuration/legend.item#legenditemvisual) can be overridden to render custom text, images, and shapes.
 
 For example, you might need to draw a checkbox that matches the visible state of the series. In this case, the checkbox is represented by using an [Unicode Ballot Box symbol](https://en.wikipedia.org/wiki/Checkbox#Unicode).
 
@@ -62,7 +62,7 @@ The following example demonstrates how to customize the appearance of the legend
 
               // A layout will hold the checkbox and the default visual
               //
-              // https://docs.telerik.com/kendo-ui/api/javascript/drawing/layout
+              // https://docs.telerik.com/kendo-ui/api/drawing/layout
               var layout = new kendo.drawing.Layout(rect, {
                 spacing: 5,
                 alignItems: "center"
@@ -70,7 +70,7 @@ The following example demonstrates how to customize the appearance of the legend
 
               // Cheat a bit by rendering the checkbox using the Unicode ballot symbol
               //
-              // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+              // https://docs.telerik.com/kendo-ui/api/dataviz/drawing/text
               var cbSymbol = e.active ? "☑" : "☐";
               var cb = new kendo.drawing.Text(cbSymbol, [0, 0], {
                 fill: {
@@ -98,7 +98,7 @@ The following example demonstrates how to customize the appearance of the legend
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

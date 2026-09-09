@@ -116,7 +116,7 @@ In this step, you will initialize the TreeView component from the `ul` element t
 
 ## 3. Enable Dragging and Dropping for Items
 
-The TreeView provides you with the [`dragAndDrop`](/api/javascript/ui/treeview/configuration/draganddrop) configuration that enables the end user to restructure the items by dragging and dropping them.
+The TreeView provides you with the [`dragAndDrop`](/api/ui/treeview/configuration/draganddrop) configuration that enables the end user to restructure the items by dragging and dropping them.
 
 ```javascript
       $(document).ready(function() {
@@ -128,7 +128,7 @@ The TreeView provides you with the [`dragAndDrop`](/api/javascript/ui/treeview/c
 
 ## 4. Change the Animations
 
-Now, you can change the default animations for expanding and collapsing the TreeView items. To set the animations, use the [`animation`](/api/javascript/ui/treeview/configuration/animation) configuration.
+Now, you can change the default animations for expanding and collapsing the TreeView items. To set the animations, use the [`animation`](/api/ui/treeview/configuration/animation) configuration.
 
 ```javascript
       $(document).ready(function() {
@@ -155,7 +155,7 @@ Now, you can change the default animations for expanding and collapsing the Tree
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery TreeView](/api/javascript/ui/treeview)
+* [JavaScript API Reference of the jQuery TreeView](/api/ui/treeview)
 * [Knowledge Base Section](/knowledge-base)
 
 

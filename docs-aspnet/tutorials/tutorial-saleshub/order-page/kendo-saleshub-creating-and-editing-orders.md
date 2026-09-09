@@ -183,7 +183,7 @@ the extensions that the grid will be bound against `OrderDetailViewModel`'s.
 Here we set up each column for the Grid. Calling `Filterable(false)` allows you to selectively choose when a column cannot be filtered by the user.
 
 Calling `ClientFooterTemplate` allows you to specify a footer which is displayed for the specified column. In our case these footer templates
-make use of the [DataSource aggregates](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/aggregate) that we set up, later on, in our DataSource. As the
+make use of the [DataSource aggregates](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/aggregate) that we set up, later on, in our DataSource. As the
 client footer templates are bound client-side we use [Kendo's template syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview#template-syntax) to tell it which aggregate
 to display the result of (in our case we only bind against a `sum` aggregate).
 

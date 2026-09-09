@@ -27,4 +27,4 @@ The following example demonstrates how to integrate the DateInput with the DateP
 
 * [Basic Usage of the DateInput (Demo)](https://demos.telerik.com/kendo-ui/dateinput/index)
 * [Using the API of the DateInput (Demo)](https://demos.telerik.com/kendo-ui/dateinput/api)
-* [JavaScript API Reference of the DateInput](/api/javascript/ui/dateinput)
+* [JavaScript API Reference of the DateInput](/api/ui/dateinput)

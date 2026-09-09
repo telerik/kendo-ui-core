@@ -26,11 +26,11 @@ components: ["grid"]
 
 ## Description
 
-How can I enable the [`filter`](/api/javascript/ui/dropdownlist/configuration/filter) of the foreign key column DropDownListEditor?
+How can I enable the [`filter`](/api/ui/dropdownlist/configuration/filter) of the foreign key column DropDownListEditor?
 
 ## Solution
 
-You can add the `filter` option on the [`edit`](/api/javascript/ui/grid/events/edit) event of the Kendo UI Grid when the automatically generated Kendo UI DropDownList is initialized.
+You can add the `filter` option on the [`edit`](/api/ui/grid/events/edit) event of the Kendo UI Grid when the automatically generated Kendo UI DropDownList is initialized.
 
 ```dojo
 	 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>

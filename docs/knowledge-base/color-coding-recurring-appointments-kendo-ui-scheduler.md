@@ -36,7 +36,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To color code recurring appointments, use the [`occurrencesInRange`](/api/javascript/ui/scheduler/methods/occurrencesinrange) method to retrieve recurring events within the current view and apply custom styling to their elements.
+To color code recurring appointments, use the [`occurrencesInRange`](/api/ui/scheduler/methods/occurrencesinrange) method to retrieve recurring events within the current view and apply custom styling to their elements.
 
 ### Implementation Using `occurrencesInRange`
 
@@ -128,7 +128,7 @@ Below is a runnable example:
 
 ### Alternative Approach Using Templates
 
-You can also use the [`eventTemplate`](/api/javascript/ui/scheduler/configuration/eventtemplate) configuration to define custom templates for events, including recurring ones. This approach ensures consistent styling for all events.
+You can also use the [`eventTemplate`](/api/ui/scheduler/configuration/eventtemplate) configuration to define custom templates for events, including recurring ones. This approach ensures consistent styling for all events.
 
 Example using `eventTemplate`:
 
@@ -196,4 +196,4 @@ eventTemplate: "<div style='background-color: #: color #; color: white;'>#: titl
 ## See Also
 
 - [Kendo UI Scheduler Overview](https://docs.telerik.com/kendo-ui/controls/scheduler/overview)
-- [Scheduler API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+- [Scheduler API](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

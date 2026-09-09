@@ -10,7 +10,7 @@ position: 8
 
 # Disabling Hyperlinks
 
-By default, the [`drawDOM`](/api/javascript/drawing/methods/drawdom) method creates clickable hyperlinks in the generated PDF document.
+By default, the [`drawDOM`](/api/drawing/methods/drawdom) method creates clickable hyperlinks in the generated PDF document.
 
 You can disable this behavior with the `avoidLinks` option.
 

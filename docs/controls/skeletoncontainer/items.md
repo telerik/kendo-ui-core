@@ -81,4 +81,4 @@ The following example shows how to create a SkeletonContainer using a grid featu
 ## See Also
 
 * [Overview of the SkeletonContainer (Demo)](https://demos.telerik.com/kendo-ui/skeletoncontainer/index)
-* [JavaScript API Reference of the SkeletonContainer](/api/javascript/ui/skeletoncontainer)
+* [JavaScript API Reference of the SkeletonContainer](/api/ui/skeletoncontainer)

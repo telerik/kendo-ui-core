@@ -127,4 +127,4 @@ The following example demonstrates how to achieve the desired scenario.
 
 * [Basic Usage of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/index)
 * [Using the API of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/api)
-* [JavaScript API Reference of the PanelBar](/api/javascript/ui/panelbar)
+* [JavaScript API Reference of the PanelBar](/api/ui/panelbar)

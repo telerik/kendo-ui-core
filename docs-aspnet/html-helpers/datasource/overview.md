@@ -24,7 +24,7 @@ The DataSource is an abstraction for using local data or remote data. In most ca
 
 ## Initialize the DataSource
 
-The following example demonstrates how to define the DataSource. You can access the DataSource instance by `Name()` on the client and use the [API methods and events of the Kendo UI for jQuery DataSource widget](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource).
+The following example demonstrates how to define the DataSource. You can access the DataSource instance by `Name()` on the client and use the [API methods and events of the Kendo UI for jQuery DataSource widget](https://docs.telerik.com/kendo-ui/api/data/datasource).
 
 ```HtmlHelper
     @(Html.Kendo().DataSource<OrderViewModel>()
@@ -85,9 +85,9 @@ To use `DataSourceRequest` and `ToDataSourceResult()` with the DataSource TagHel
 
 You can declare the DataSource component configuration options by using the available methods&mdash;for example, you can define the page size, page, sort order, filter, group, aggregates, and the model. 
 
-> * To [sort](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/sort#sort) the data based on an object, set [the data field, by which the data items are sorted,](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/sort#sortfield) to a property of that object. 
-> * To [group](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) the data by an object, set [the group by data item field](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group#groupfield) to a property of that object.
-> * To [filter](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter) the data based on an object, set [the data item field, to which the filter operator is applied,](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter#filterfield) to a property of that object.
+> * To [sort](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/sort#sort) the data based on an object, set [the data field, by which the data items are sorted,](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/sort#sortfield) to a property of that object. 
+> * To [group](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/group) the data by an object, set [the group by data item field](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/group#groupfield) to a property of that object.
+> * To [filter](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/filter) the data based on an object, set [the data item field, to which the filter operator is applied,](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/filter#filterfield) to a property of that object.
 
 The configuration accepts the definition for all CRUD operations and facilitates the data sorting, filtering, and grouping.
 

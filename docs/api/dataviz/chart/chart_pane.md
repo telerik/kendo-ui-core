@@ -66,7 +66,7 @@ How do I customize the graphical container of a Kendo UI chart pane using the `v
 
 ### findAxisByName
 
-Returns an [axis](/api/javascript/dataviz/chart/chart_axis) from the pane with the specified name.
+Returns an [axis](/api/dataviz/chart/chart_axis) from the pane with the specified name.
 
 
 <div class="meta-api-description">
@@ -104,7 +104,7 @@ The axis name.
 
 ### series
 
-Returns an array with the pane [series](/api/javascript/dataviz/chart/chart_series).
+Returns an array with the pane [series](/api/dataviz/chart/chart_series).
 
 
 <div class="meta-api-description">

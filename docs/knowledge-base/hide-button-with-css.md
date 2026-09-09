@@ -55,7 +55,7 @@ The following example demonstrates how to hide the default button of the DatePic
 
 ## See Also
 
-* [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
+* [DatePicker JavaScript API Reference](/api/ui/datepicker)
 * [Create Date Masking]({% slug masks_kendoui_maskedtextbox_widget %})
 * [Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
 * [Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})

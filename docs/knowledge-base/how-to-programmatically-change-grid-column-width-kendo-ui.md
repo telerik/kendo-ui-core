@@ -12,7 +12,7 @@ ticketid: 1666957
 
 ## Description
 
-When working with the [Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) for Progress® Kendo UI®, you might need to programmatically change the width of one or more columns. This article demonstrates how to adjust column widths dynamically. This KB article also answers the following questions:
+When working with the [Grid](https://docs.telerik.com/kendo-ui/api/ui/grid) for Progress® Kendo UI®, you might need to programmatically change the width of one or more columns. This article demonstrates how to adjust column widths dynamically. This KB article also answers the following questions:
 - How to set column widths dynamically in a Kendo UI Grid?
 - Can I update Grid column settings after initialization?
 - How to use `setOptions()` method to modify Grid properties?
@@ -34,7 +34,7 @@ When working with the [Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui
 
 ## Solution
 
-To programmatically change the width of Grid columns, use the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method. This approach allows you to update the Grid's column widths after it has been initialized. Follow these steps:
+To programmatically change the width of Grid columns, use the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/setoptions) method. This approach allows you to update the Grid's column widths after it has been initialized. Follow these steps:
 
 1. Define a list with the desired widths for each column.
 
@@ -69,7 +69,7 @@ grid.setOptions({
 });
 ```
 
-Note: Use the `setOptions()` method with caution and avoid calling it inside event handlers like [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) to prevent endless loops.
+Note: Use the `setOptions()` method with caution and avoid calling it inside event handlers like [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) to prevent endless loops.
 
 When updating the Grid's columns using `setOptions()`, all other Grid options remain as initially defined. Only the specified options (in this case, column widths) are updated.
 
@@ -177,6 +177,6 @@ Explore a live example in the following Dojo demo:
 
 ## See Also
 
-- [Grid Overview](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-- [Grid setOptions() Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions)
-- [Grid DataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
+- [Grid Overview](https://docs.telerik.com/kendo-ui/api/ui/grid)
+- [Grid setOptions() Method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/setoptions)
+- [Grid DataBound Event](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound)

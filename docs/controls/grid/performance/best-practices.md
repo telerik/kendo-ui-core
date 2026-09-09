@@ -49,6 +49,6 @@ Internet Explorer slowly handles components which use too many DOM elements and 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Rendering and Dimensions of the Grid]({% slug width_kendoui_grid_widget %})
 * [Adaptive Rendering of the Grid]({% slug adaptive_rendering_kendoui_grid_widget %})

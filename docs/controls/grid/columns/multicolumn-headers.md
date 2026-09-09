@@ -47,6 +47,6 @@ The previous example results in the following output.
 ## See Also
 
 * [Implementing Multi-Column Headers in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/multicolumnheaders)
-* [Multicolumn Headers API Reference](/api/javascript/ui/grid/configuration/columns.columns)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [Multicolumn Headers API Reference](/api/ui/grid/configuration/columns.columns)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Kendo UI Knowledge Base](/knowledge-base)

@@ -62,7 +62,7 @@ In this step, you will initialize the MultiColumnComboBox from the `<input>` ele
 
 ## 3. Specify the Data Source
 
-Here, you will specify a [`dataSource`](/api/javascript/ui/autocomplete/configuration/datasource) instance and fetch the remote data.
+Here, you will specify a [`dataSource`](/api/ui/autocomplete/configuration/datasource) instance and fetch the remote data.
 
 ```dojo
     <input id="comboBox" />
@@ -110,7 +110,7 @@ In this step you will define the columns rendered in the table of the MultiColum
 
 ## 5. Define the Data Value Field and the Data Text Field
 
-The [`dataValueField`](/api/javascript/ui/multicolumncombobox/configuration/datavaluefield) specifies the field of the data item that provides the value for the component and the [`dataTextField`](/api/javascript/ui/multicolumncombobox/configuration/datatextfield) sets the field of the data item that provides the text content of the list items.
+The [`dataValueField`](/api/ui/multicolumncombobox/configuration/datavaluefield) specifies the field of the data item that provides the value for the component and the [`dataTextField`](/api/ui/multicolumncombobox/configuration/datatextfield) sets the field of the data item that provides the text content of the list items.
 
 ```dojo
     <input id="comboBox" />
@@ -144,7 +144,7 @@ The [`dataValueField`](/api/javascript/ui/multicolumncombobox/configuration/data
 
 ## See Also 
 
-* [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
+* [JavaScript API Reference of the MultiColumnComboBox](/api/ui/multicolumncombobox)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -163,7 +163,7 @@ For the complete project, refer to the [Diagram in Razor Pages example](https://
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Diagram](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram)
+* [Client-Side API of the Diagram](https://docs.telerik.com/kendo-ui/api/dataviz/ui/diagram)
 * [Server-Side HtmlHelper API of the Diagram](/api/diagram)
 * [Server-Side TagHelper API of the Diagram](/api/taghelpers/diagram)
 * [Knowledge Base Section](/knowledge-base)

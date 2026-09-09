@@ -32,7 +32,7 @@ How can I remove items from the {{ site.product }} DropDownList?
 To achieve the desired scenario:
 
 1. Create a `button` that will be responsible for removing an item in the DropDownList.
-1. To remove an item, handle `click` event of the previously created button and use the [`.remove()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/remove) configuration method of the DropDownList's DataSource.
+1. To remove an item, handle `click` event of the previously created button and use the [`.remove()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/remove) configuration method of the DropDownList's DataSource.
 
 ```Razor Index.cshtml
     <button class="k-button k-button-primary" id="remove">Remove Items</button>
@@ -98,7 +98,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Removing {{ site.product }} DropDownList Items](https://netcorerepl.telerik.com/QQOXbxbx53N2swP026)
-* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist)
 * [Server-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/dropdownlist)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

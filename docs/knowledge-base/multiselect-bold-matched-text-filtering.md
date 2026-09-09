@@ -32,11 +32,11 @@ How can I bold the part of each Kendo UI MultiSelect item that matches the curre
 This knowledge base article also answers the following questions:
 
 - How can I highlight the matching text in filtered MultiSelect items?
-- How can I use the current filter value inside a MultiSelect [`itemTemplate`](/api/javascript/ui/multiselect/configuration/itemtemplate)?
+- How can I use the current filter value inside a MultiSelect [`itemTemplate`](/api/ui/multiselect/configuration/itemtemplate)?
 
 ## Solution
 
-Use a custom formatting function and assign an [`itemTemplate`](/api/javascript/ui/multiselect/configuration/itemtemplate) after the MultiSelect is initialized. This approach lets the template use the current filter input value and wrap the matched text in a `<strong>` element.
+Use a custom formatting function and assign an [`itemTemplate`](/api/ui/multiselect/configuration/itemtemplate) after the MultiSelect is initialized. This approach lets the template use the current filter input value and wrap the matched text in a `<strong>` element.
 
 ```dojo
 <div id="example" role="application">
@@ -101,4 +101,4 @@ Use a custom formatting function and assign an [`itemTemplate`](/api/javascript/
 ## See Also
 
 - [Kendo UI MultiSelect Overview](/controls/multiselect/overview)
-- [MultiSelect API Documentation](/api/javascript/ui/multiselect)
+- [MultiSelect API Documentation](/api/ui/multiselect)

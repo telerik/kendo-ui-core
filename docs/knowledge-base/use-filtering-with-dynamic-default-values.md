@@ -135,4 +135,4 @@ As a result, the default category of the new record matches the current (filtere
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

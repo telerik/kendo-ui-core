@@ -85,4 +85,4 @@ To create and use a custom SVG icon within the Kendo UI for jQuery, follow these
 
 ## See Also
 - [Kendo UI Icons Overview](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web)
-- [Kendo UI Icons API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/ui/methods/icon)
+- [Kendo UI Icons API Documentation](https://docs.telerik.com/kendo-ui/api/ui/ui/methods/icon)

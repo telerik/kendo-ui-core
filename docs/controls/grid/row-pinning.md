@@ -15,12 +15,12 @@ The Kendo UI for jQuery Grid supports row pinning that keeps specific rows visib
 
 Before enabling row pinning, ensure the following requirements are met:
 
-* The DataSource [`schema model id`](/api/javascript/data/datasource/configuration/schema#schemamodel) field must be set. The Grid uses this identifier to track pinned rows across data operations.
-* The Grid must be [scrollable]({% slug scrolling_kendoui_grid_widget %})&mdash;Row pinning depends on scrollable Grid content to keep the pinned rows anchored at the top or bottom while the remaining rows scroll. Scrolling is enabled by default and can be configured through the [`scrollable`](/api/javascript/ui/grid/configuration/scrollable) option.
+* The DataSource [`schema model id`](/api/data/datasource/configuration/schema#schemamodel) field must be set. The Grid uses this identifier to track pinned rows across data operations.
+* The Grid must be [scrollable]({% slug scrolling_kendoui_grid_widget %})&mdash;Row pinning depends on scrollable Grid content to keep the pinned rows anchored at the top or bottom while the remaining rows scroll. Scrolling is enabled by default and can be configured through the [`scrollable`](/api/ui/grid/configuration/scrollable) option.
 
 ## Getting Started
 
-To enable row pinning, set the [`pinnable.pinRowLocation`](/api/javascript/ui/grid/configuration/pinnable.pinrowlocation) option. The available values are:
+To enable row pinning, set the [`pinnable.pinRowLocation`](/api/ui/grid/configuration/pinnable.pinrowlocation) option. The available values are:
 
 * `true`&mdash;Allows pinning rows to both the top and bottom of the Grid.
 * `"top"`&mdash;Allows pinning rows to the top of the Grid only.
@@ -55,7 +55,7 @@ The following example enables pinning to both the top and bottom of the Grid.
 
 ## Initially Pinned Rows
 
-To pin rows on initial load, populate the [`pinnable.top`](/api/javascript/ui/grid/configuration/pinnable.top) and [`pinnable.bottom`](/api/javascript/ui/grid/configuration/pinnable.bottom) arrays with data items before the Grid renders. This is useful for scenarios where you need to surface critical data immediately, such as out-of-stock inventory items or overstock alerts.
+To pin rows on initial load, populate the [`pinnable.top`](/api/ui/grid/configuration/pinnable.top) and [`pinnable.bottom`](/api/ui/grid/configuration/pinnable.bottom) arrays with data items before the Grid renders. This is useful for scenarios where you need to surface critical data immediately, such as out-of-stock inventory items or overstock alerts.
 
 ```dojo
 <div id="grid"></div>
@@ -86,7 +86,7 @@ To pin rows on initial load, populate the [`pinnable.top`](/api/javascript/ui/gr
 
 ## Controlling Pinnable Rows
 
-The [`isRowPinnable`](/api/javascript/ui/grid/configuration/pinnable.isrowpinnable) callback allows you to restrict which rows can be pinned. The callback receives the row data item and its index, and returns a boolean that determines whether the row displays the pin action.
+The [`isRowPinnable`](/api/ui/grid/configuration/pinnable.isrowpinnable) callback allows you to restrict which rows can be pinned. The callback receives the row data item and its index, and returns a boolean that determines whether the row displays the pin action.
 
 The following example allows pinning only for items with age greater than 30.
 
@@ -120,7 +120,7 @@ The following example allows pinning only for items with age greater than 30.
 
 ## Customizing Pinned Row Appearance
 
-The [`pinnedRowTemplate`](/api/javascript/ui/grid/configuration/pinnedrowtemplate) option accepts a function that customizes the rendering of pinned rows. The function receives an object with two fields: `dataItem` (the data item for the row) and `row` (the default HTML string for the row), and must return an HTML string. If not set, pinned rows use the same template as regular rows.
+The [`pinnedRowTemplate`](/api/ui/grid/configuration/pinnedrowtemplate) option accepts a function that customizes the rendering of pinned rows. The function receives an object with two fields: `dataItem` (the data item for the row) and `row` (the default HTML string for the row), and must return an HTML string. If not set, pinned rows use the same template as regular rows.
 
 ```dojo
     <div id="grid"></div>
@@ -185,8 +185,8 @@ As an alternative to the built-in pin column, you can use a context menu to offe
 
 To implement context-menu-based pinning:
 
-1. Enable the [`pinnable`](/api/javascript/ui/grid/configuration/pinnable) Grid option.
-1. Enable the [`contextMenu`](/api/javascript/ui/grid/configuration/contextmenu) option of the Grid.
+1. Enable the [`pinnable`](/api/ui/grid/configuration/pinnable) Grid option.
+1. Enable the [`contextMenu`](/api/ui/grid/configuration/contextmenu) option of the Grid.
 
 
 ```dojo
@@ -216,7 +216,7 @@ To implement context-menu-based pinning:
 
 ## See Also
 
-* [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/ui/grid)
 * [Row Pinning (Demo)](https://demos.telerik.com/kendo-ui/row-pinning)
 * [Row Drag & Drop (Demo)](https://demos.telerik.com/kendo-ui/grid/drag-drop)
 * [Row Resizing (Demo)](https://demos.telerik.com/kendo-ui/grid/row-resizing)

@@ -166,4 +166,4 @@ The MultiSelect component displays `noDataTemplate` in the popup when the data s
 ## See Also
 
 * [Customizing the Templates in the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/template)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [JavaScript API Reference of the MultiSelect](/api/ui/multiselect)

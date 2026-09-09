@@ -60,4 +60,4 @@ The Table Wizard allows you to set a table border size, color, and style. To app
 
 ## See Also
 
-* [API Reference of the Editor](/api/javascript/ui/editor)
+* [API Reference of the Editor](/api/ui/editor)

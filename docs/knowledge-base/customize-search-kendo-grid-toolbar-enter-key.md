@@ -27,7 +27,7 @@ ticketid: 1668767
 
 ## Description
 
-I want to customize the search option in the grid toolbar so that the search is triggered not by the change event but by pressing the Enter key. In my Grid, [`serverFiltering`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/serverfiltering) is enabled. This KB article also answers the following questions:
+I want to customize the search option in the grid toolbar so that the search is triggered not by the change event but by pressing the Enter key. In my Grid, [`serverFiltering`](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/serverfiltering) is enabled. This KB article also answers the following questions:
 
 - How to prevent the Kendo UI Grid from searching on every keypress?
 - How to make the Kendo UI Grid search work with the Enter key press?
@@ -35,10 +35,10 @@ I want to customize the search option in the grid toolbar so that the search is 
 
 ## Solution
 
-To customize the search functionality in the Kendo UI [Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) so that it triggers only on an Enter key press, especially when `serverFiltering` is enabled, follow these steps:
+To customize the search functionality in the Kendo UI [Grid](https://docs.telerik.com/kendo-ui/api/ui/grid) so that it triggers only on an Enter key press, especially when `serverFiltering` is enabled, follow these steps:
 
 1. Attach a handler to the `keydown` event of the search box.
-2. Check the pressed key. If it is not 'Enter', prevent the [`dataSource request`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/requeststart) from firing.
+2. Check the pressed key. If it is not 'Enter', prevent the [`dataSource request`](https://docs.telerik.com/kendo-ui/api/data/datasource/events/requeststart) from firing.
 3. If the user presses 'Enter', manually apply the filter.
 
 Here is the JavaScript code demonstrating the solution:
@@ -145,6 +145,6 @@ Below is a runnable example:
 
 ## See Also
 
-- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-- [DataSource serverFiltering Configuration](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/serverfiltering)
-- [DataSource requestStart Event](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/requeststart)
+- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid)
+- [DataSource serverFiltering Configuration](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/serverfiltering)
+- [DataSource requestStart Event](https://docs.telerik.com/kendo-ui/api/data/datasource/events/requeststart)

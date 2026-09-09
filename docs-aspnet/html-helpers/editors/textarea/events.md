@@ -77,4 +77,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the TextArea for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textarea/api)
 * [TextArea Server-Side API for {{ site.framework}}](/api/textarea)
-* [TextArea Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textarea)
+* [TextArea Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/textarea)

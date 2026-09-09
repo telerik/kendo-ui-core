@@ -18,7 +18,7 @@ ticketid: 1662969
 
 ## Description
 
-I want the Kendo UI [NumericTextBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox) to display only integers, without any decimal points. How can I achieve this?
+I want the Kendo UI [NumericTextBox](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox) to display only integers, without any decimal points. How can I achieve this?
 
 This KB article also answers the following questions:
 - How to configure NumericTextBox to prevent decimal input?
@@ -27,7 +27,7 @@ This KB article also answers the following questions:
 
 ## Solution
 
-To restrict the Kendo UI NumericTextBox to only accept and display integers, use the [`decimals`](/api/javascript/ui/numerictextbox/configuration/decimals), [`restrictDecimals`](/api/javascript/ui/numerictextbox/configuration/restrictdecimals), and  [`format`](/api/javascript/ui/numerictextbox/configuration/format) configuration options. Set `decimals` to `0` to prevent decimal inputs, `restrictDecimals` to `true` to ensure that no decimal points can be entered, and add the needed `format` with zero digits for decimals.
+To restrict the Kendo UI NumericTextBox to only accept and display integers, use the [`decimals`](/api/ui/numerictextbox/configuration/decimals), [`restrictDecimals`](/api/ui/numerictextbox/configuration/restrictdecimals), and  [`format`](/api/ui/numerictextbox/configuration/format) configuration options. Set `decimals` to `0` to prevent decimal inputs, `restrictDecimals` to `true` to ensure that no decimal points can be entered, and add the needed `format` with zero digits for decimals.
 
 Here is a sample configuration:
 
@@ -61,5 +61,5 @@ For an interactive example, refer to the example below:
 ## See Also
 
 - [Official NumericTextBox Documentation](https://docs.telerik.com/kendo-ui/controls/numerictextbox/overview)
-- [NumericTextBox API](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox)
+- [NumericTextBox API](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox)
 - [Number Formatting](https://docs.telerik.com/kendo-ui/globalization/intl/numberformatting)

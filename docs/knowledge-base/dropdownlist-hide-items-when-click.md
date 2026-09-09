@@ -25,8 +25,8 @@ How can I hide items when the DropDownList is opened through mouse click, but sh
 
 ## Solution
 
-1. Use [template](/api/javascript/ui/dropdownlist/configuration/template) and add a custom class on the items that needs to be hidden.
-2. Handle the [open](/api/javascript/ui/dropdownlist/events/open) event of the DropDownList. Depending on the event type hide or show the items. 
+1. Use [template](/api/ui/dropdownlist/configuration/template) and add a custom class on the items that needs to be hidden.
+2. Handle the [open](/api/ui/dropdownlist/events/open) event of the DropDownList. Depending on the event type hide or show the items. 
 
 ```dojo
     <script type="text/x-kendo-template" id="feedItemTemplate">     
@@ -68,4 +68,4 @@ How can I hide items when the DropDownList is opened through mouse click, but sh
 
 ## See Also
 
-* [API Reference of DropDownList](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [API Reference of DropDownList](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist)

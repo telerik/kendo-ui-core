@@ -34,7 +34,7 @@ The Dialog is a subset of the [Kendo UI for jQuery Window](https://www.telerik.c
 
 ## See Also
 
-* [JavaScript API Reference of the Dialog](/api/javascript/ui/dialog)
+* [JavaScript API Reference of the Dialog](/api/ui/dialog)
 * [Demo Page for the jQuery Dialog](https://demos.telerik.com/kendo-ui/dialog/index)
 * [Knowledge Base Section](/knowledge-base)
 * [jQuery Dialog Product Page](https://www.telerik.com/kendo-jquery-ui/dialog)

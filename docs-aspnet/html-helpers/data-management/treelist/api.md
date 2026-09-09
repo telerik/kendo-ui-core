@@ -13,7 +13,7 @@ The TreeList provides an API which enables you to use its methods, fields, and e
 
 ## Methods and Fields
 
-The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) and [fields](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#fields).
+The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/ui/treelist#methods) and [fields](https://docs.telerik.com/kendo-ui/api/ui/treelist#fields).
 
 ```HtmlHelper
     @(Html.Kendo().TreeList<dynamic>()
@@ -58,7 +58,7 @@ The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/ja
 
 ## Events
 
-The TreeList supports a set of [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) to which you can subscribe.
+The TreeList supports a set of [events](https://docs.telerik.com/kendo-ui/api/ui/treelist#methods) to which you can subscribe.
 
 To handle the events, either:
 * Specify the JavaScript function which will handle the event during the initialization of the widget, or

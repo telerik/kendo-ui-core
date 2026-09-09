@@ -138,4 +138,4 @@ Use `IconClass()` to append one or more CSS class names to the icon element. Thi
 
 * [SegmentedControl Overview (Demo)](https://demos.telerik.com/{{ site.platform }}/segmentedcontrol/index)
 * [SegmentedControl Server-Side API for {{ site.framework }}](/api/segmentedcontrol)
-* [SegmentedControl Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/segmentedcontrol)
+* [SegmentedControl Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/segmentedcontrol)

@@ -46,4 +46,4 @@ You can enable the reordering of the selected items by using any of the followin
 ## See Also
 
 * [Basic Usage of the ListBox (Demo)](https://demos.telerik.com/kendo-ui/listbox/index)
-* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
+* [JavaScript API Reference of the ListBox](/api/ui/listbox)

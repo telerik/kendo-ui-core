@@ -31,8 +31,8 @@ How can I get the selected rows in the {{ site.product }} Grid and send them thr
 ## Solution
 
 1. Create a button and handle its `click` event.
-1. Use the client-side [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method to get the selected row elements.
-1. Iterate through the selected rows, retrieve the respective data item through the [`dataItem()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method of the Grid, and store it in an array `selectedDataItems`.
+1. Use the client-side [`select()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/select) method to get the selected row elements.
+1. Iterate through the selected rows, retrieve the respective data item through the [`dataItem()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem) method of the Grid, and store it in an array `selectedDataItems`.
 1. Convert the data items into strings by using the [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
 1. Perform an asynchronous HTTP (Ajax) request to the server.
 1. Access the received data on the server.
@@ -106,7 +106,7 @@ How can I get the selected rows in the {{ site.product }} Grid and send them thr
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

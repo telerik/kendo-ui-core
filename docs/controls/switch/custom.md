@@ -34,4 +34,4 @@ The following example demonstrates how to customize the checked and unchecked me
 
 * [Basic Usage of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/index)
 * [Using the API of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/api)
-* [JavaScript API Reference of the Switch](/api/javascript/ui/switch)
+* [JavaScript API Reference of the Switch](/api/ui/switch)

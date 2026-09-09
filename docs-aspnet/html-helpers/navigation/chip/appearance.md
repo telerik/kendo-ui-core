@@ -158,4 +158,4 @@ To review the rendering of the component, refer to the HTML specifications in th
 {% if site.core %}
 * [Server-Side TagHelper API](/api/taghelpers/chip)
 {% endif %}
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/chip)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/chip)

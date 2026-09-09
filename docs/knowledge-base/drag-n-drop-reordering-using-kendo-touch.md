@@ -41,6 +41,6 @@ The example used to demonstrate how to implement reordering in the ListView by u
 
 ## See Also
 
-* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
+* [JavaScript API Reference of the ListView](/api/ui/listview)
 * [Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
 * [Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})

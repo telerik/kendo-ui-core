@@ -27,10 +27,10 @@ The Kendo UI PivotGrid represents multidimensional data in a cross-tabular forma
 
 * [Getting Started with the Kendo UI PivotGrid for jQuery]({% slug getting_started_kendoui_pivotgrid_widget %})
 * [Demo Page for the PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index)
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)
 
 ## See Also
 
 * [Demo Page for the jQuery PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index)
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)
 * [Knowledge Base Section](/knowledge-base)

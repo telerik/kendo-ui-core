@@ -14,15 +14,15 @@ The Kendo UI FX (Effects) instances provide a rich, extensible, and performance-
 Whenever possible, effects are hardware-accelerated through CSS transitions which makes them ideal for desktop and mobile devices. Unlike the CPU intensive JavaScript animations, animations that are implemented with CSS provide better frame rates and battery life. To show and hide certain parts of the user interface (UI), you can also play animations in reverse. For chaining and callbacks, the Kendo UI FX utilizes the [jQuery Deferred utility](https://api.jquery.com/category/deferred-object/).
 
 Kendo UI supports the following effects:
-- [FX Expand API Reference](/api/javascript/effects/expand) and [Demo](https://demos.telerik.com/kendo-ui/fx/expand)
-- [FX Fade API Reference](/api/javascript/effects/fade) and [Demo](https://demos.telerik.com/kendo-ui/fx/fade)
-- [FX Flip API Reference](/api/javascript/effects/flip) and [Demo](https://demos.telerik.com/kendo-ui/fx/flip)
-- [FX PageTurn API Reference](/api/javascript/effects/pageturn) and [Demo](https://demos.telerik.com/kendo-ui/fx/pageturn)
-- [FX SlideIn API Reference](/api/javascript/effects/slidein) and [Demo](https://demos.telerik.com/kendo-ui/fx/slidein)
-- [FX Tile API Reference](/api/javascript/effects/tile) and [Demo](https://demos.telerik.com/kendo-ui/fx/tile)
-- [FX Transfer API Reference](/api/javascript/effects/transfer) and [Demo](https://demos.telerik.com/kendo-ui/fx/transfer)
-- [FX Zoom API Reference](/api/javascript/effects/zoom) and [Demo](https://demos.telerik.com/kendo-ui/fx/zoom)
-- [FX Replace API Reference](/api/javascript/effects/replace) and [Demo](https://demos.telerik.com/kendo-ui/fx/replace)
+- [FX Expand API Reference](/api/effects/expand) and [Demo](https://demos.telerik.com/kendo-ui/fx/expand)
+- [FX Fade API Reference](/api/effects/fade) and [Demo](https://demos.telerik.com/kendo-ui/fx/fade)
+- [FX Flip API Reference](/api/effects/flip) and [Demo](https://demos.telerik.com/kendo-ui/fx/flip)
+- [FX PageTurn API Reference](/api/effects/pageturn) and [Demo](https://demos.telerik.com/kendo-ui/fx/pageturn)
+- [FX SlideIn API Reference](/api/effects/slidein) and [Demo](https://demos.telerik.com/kendo-ui/fx/slidein)
+- [FX Tile API Reference](/api/effects/tile) and [Demo](https://demos.telerik.com/kendo-ui/fx/tile)
+- [FX Transfer API Reference](/api/effects/transfer) and [Demo](https://demos.telerik.com/kendo-ui/fx/transfer)
+- [FX Zoom API Reference](/api/effects/zoom) and [Demo](https://demos.telerik.com/kendo-ui/fx/zoom)
+- [FX Replace API Reference](/api/effects/replace) and [Demo](https://demos.telerik.com/kendo-ui/fx/replace)
 
 ## Functionality and Features
 

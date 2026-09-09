@@ -25,7 +25,7 @@ How can I include the negative values in the label's total of a Stacked Column C
 
 ## Solution
 
-Use the [`series.labels.template`](/api/javascript/dataviz/ui/chart/configuration/series.labels.template) function to calculate and return the desired result.
+Use the [`series.labels.template`](/api/dataviz/ui/chart/configuration/series.labels.template) function to calculate and return the desired result.
 
 ```dojo
     <div id="chart"></div>
@@ -71,7 +71,7 @@ Use the [`series.labels.template`](/api/javascript/dataviz/ui/chart/configuratio
 
 ## See Also
 
-* [Kendo UI Chart API Reference](/api/javascript/dataviz/ui/chart)
+* [Kendo UI Chart API Reference](/api/dataviz/ui/chart)
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
 * [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})

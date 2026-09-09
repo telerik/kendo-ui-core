@@ -138,7 +138,7 @@ To see an extended example of the aforementioned approach, refer to the [REPL ex
 {% if site.core %}
 * [Telerik REPL (TagHelper): Copy Text from TextBox to Clipboard](https://netcorerepl.telerik.com/QSOnPoFC36r2eszS26)
 {% endif %}
-* [Client-Side API Reference of the TextBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox)
+* [Client-Side API Reference of the TextBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/textbox)
 * [Server-Side API Reference of the TextBox for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/textbox)
 {% if site.core %}
 * [TagHelper API Reference of the TextBox for {{ site.framework }}](https://docs.telerik.com/aspnet-core/api/taghelpers/textbox)

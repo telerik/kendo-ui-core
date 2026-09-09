@@ -9,7 +9,7 @@ position: 4
 
 # RGB and HEX Input Formats
 
-As of the end of 2021, the ColorPicker supports both RGB and HEX formats as input through its [formats](/api/javascript/ui/colorpicker/configuration/formats) configuration. To choose the default format, you can use the [format](/api/javascript/ui/colorpicker/configuration/format) option:
+As of the end of 2021, the ColorPicker supports both RGB and HEX formats as input through its [formats](/api/ui/colorpicker/configuration/formats) configuration. To choose the default format, you can use the [format](/api/ui/colorpicker/configuration/format) option:
 
 ```dojo
     <input id="rgb-picker" />
@@ -33,4 +33,4 @@ As of the end of 2021, the ColorPicker supports both RGB and HEX formats as in
 ## See Also
 
 * [RGB and HEX formats of the ColorPicker (Demo)](https://demos.telerik.com/kendo-ui/colorpicker/rgb-hex)
-* [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
+* [JavaScript API Reference of the ColorPicker](/api/ui/colorpicker)

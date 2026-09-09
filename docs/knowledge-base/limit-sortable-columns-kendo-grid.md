@@ -179,6 +179,6 @@ Below you will find a runnable example to try it out:
 
 ## See Also
 
-- [Grid Sortable Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/sortable)
-- [Grid API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-- [Grid Events Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/sort)
+- [Grid Sortable Configuration](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/sortable)
+- [Grid API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid)
+- [Grid Events Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/events/sort)

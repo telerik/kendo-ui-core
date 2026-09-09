@@ -19,13 +19,13 @@ components: ["daterangepicker"]
 </table>
 
 ## Description
-When using the [DateRangePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker) control, selecting an end date updates the start date field instead of the end date field. The goal is to ensure that when either the start or end date is selected, the corresponding field updates accurately, providing a seamless user experience.
+When using the [DateRangePicker](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker) control, selecting an end date updates the start date field instead of the end date field. The goal is to ensure that when either the start or end date is selected, the corresponding field updates accurately, providing a seamless user experience.
 
 This KB article also answers the following question:
 - What code changes are required to update the start and end dates correctly in DateRangePicker?
 
 ## Solution
-To achieve the desired behavior, implement custom logic using the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/events/change) and [`open`](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/events/open) events of the DateRangePicker. This solution involves tracking the selected start and end dates and updating them based on user interactions.
+To achieve the desired behavior, implement custom logic using the [`change`](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker/events/change) and [`open`](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker/events/open) events of the DateRangePicker. This solution involves tracking the selected start and end dates and updating them based on user interactions.
 
 1. **Initialize the DateRangePicker and define custom logic:**
 
@@ -67,6 +67,6 @@ $(document).ready(function() {
 Visit the dojo example at [https://dojo.telerik.com/NShpKjFe](https://dojo.telerik.com/NShpKjFe) to see the custom behavior in action.
 
 ## See Also
-- [DateRangePicker Change Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/events/change)
-- [DateRangePicker Open Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/events/open)
+- [DateRangePicker Change Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker/events/change)
+- [DateRangePicker Open Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker/events/open)
 - [Official Kendo UI DateRangePicker Documentation](https://docs.telerik.com/kendo-ui/controls/editors/daterangepicker/overview)

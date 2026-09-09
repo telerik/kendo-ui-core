@@ -15,7 +15,7 @@ The Loader component provides several predefined appearance options such as diff
 
 The Loader allows you to set different animations by using the `type` input property.
 
-The available [`types`](/api/javascript/ui/loader/configuration/type) values are:
+The available [`types`](/api/ui/loader/configuration/type) values are:
 * `pulsing` (Default)&mdash;Applies pulsing animation on the Loader.
 * `infinite-spinner`&mdash;Applies infinite-spinner animation on the Loader.
 * `converging-spinner`&mdash;Applies converging-spinner animation on the Loader.
@@ -59,7 +59,7 @@ The available [`types`](/api/javascript/ui/loader/configuration/type) values are
 
 The Loader allows you to specify predefined theme colors.
 
-The available [`themeColor`](/api/javascript/ui/loader/configuration/themecolor) values are:
+The available [`themeColor`](/api/ui/loader/configuration/themecolor) values are:
 
 * `primary` (Default)&mdash;Applies coloring based on primary theme color.
 * `base`&mdash;Applies coloring based on base theme color.
@@ -99,7 +99,7 @@ The available [`themeColor`](/api/javascript/ui/loader/configuration/themecolor)
 
 The Loader allows you to set different sizes.
 
-The available [`size`](/api/javascript/ui/loader/configuration/size) values are:
+The available [`size`](/api/ui/loader/configuration/size) values are:
 
 * `small`
 * `medium` (Default)
@@ -142,4 +142,4 @@ The available [`size`](/api/javascript/ui/loader/configuration/size) values are:
 
 ## See Also
 
-* [API Reference of the Loader Component](/api/javascript/ui/loader)
+* [API Reference of the Loader Component](/api/ui/loader)

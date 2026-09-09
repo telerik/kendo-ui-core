@@ -31,11 +31,11 @@ I want to use a search input to find data on the current page of the Grid. I als
 
 The search will work only with string values. Numbers and dates will also be treated as strings when a value is typed in the searchbox.
 
-1. Create a Grid [`toolbar.template`](/api/javascript/ui/grid/configuration/toolbar.template) with a search input and an icon for the column menu.
+1. Create a Grid [`toolbar.template`](/api/ui/grid/configuration/toolbar.template) with a search input and an icon for the column menu.
 1. Create a `div` element for the column menu. The purpose of the column menu is to allow the user to select which columns can be searched.
 1. Initialize the Grid.
-1. Attach an event handler to the [`dataBound`](/api/javascript/ui/grid/events/databound) event of the Grid.
-1. Inside the dataBound event, attach an [`input`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) event handler to the searchbox and initialize a [`kendo.ui.Popup`](/api/javascript/ui/popup) for the column menu.
+1. Attach an event handler to the [`dataBound`](/api/ui/grid/events/databound) event of the Grid.
+1. Inside the dataBound event, attach an [`input`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) event handler to the searchbox and initialize a [`kendo.ui.Popup`](/api/ui/popup) for the column menu.
 1. In the input event of the search box, get all the columns that are selected in the column menu (all by default).
 1. Iterate over the data of the Grid, and find any cell values that match the input in the search box. The search behavior is treated as `contains`.
 1. Iterate over the found items and highlight them with CSS.

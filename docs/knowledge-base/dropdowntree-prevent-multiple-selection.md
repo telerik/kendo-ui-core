@@ -82,4 +82,4 @@ How can I prevent multiple selection in the DropDownTree?
 
 ## See Also
 
-* [DropDownTree API Reference](/api/javascript/ui/dropdowntree)
+* [DropDownTree API Reference](/api/ui/dropdowntree)

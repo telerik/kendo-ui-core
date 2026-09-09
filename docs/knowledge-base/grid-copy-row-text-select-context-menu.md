@@ -35,10 +35,10 @@ How can I copy the contents of a row in the Kendo UI Grid by using a Kendo UI Co
          <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
       ```
 
-1. When you declare the Kendo UI ContextMenu, [target the row by using `"tr[role='row']"`](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/configuration/target).
-1. During the [`select` even of the ContextMenu](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/events/select):
+1. When you declare the Kendo UI ContextMenu, [target the row by using `"tr[role='row']"`](https://docs.telerik.com/kendo-ui/api/ui/contextmenu/configuration/target).
+1. During the [`select` even of the ContextMenu](https://docs.telerik.com/kendo-ui/api/ui/contextmenu/events/select):
   1. Reference the Kendo UI Grid.
-  1. Get the [`dataItem` from the target row](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem).
+  1. Get the [`dataItem` from the target row](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem).
   1. Specify the text which you want to copy by using `dataItem`.
   1. If the `item.id` is `"copyText"`, return a new `Clipboard` object which returns the `dataItem` text.
 
@@ -194,6 +194,6 @@ The following example demonstrates the full implementation of the suggested appr
 ## See Also
 
 * [API Reference of the clipboard.js Library](https://clipboardjs.com/)
-* [API Reference of target](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/configuration/target)
-* [API Reference of select](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/events/select)
-* [API Reference of dataItem](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem)
+* [API Reference of target](https://docs.telerik.com/kendo-ui/api/ui/contextmenu/configuration/target)
+* [API Reference of select](https://docs.telerik.com/kendo-ui/api/ui/contextmenu/events/select)
+* [API Reference of dataItem](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem)

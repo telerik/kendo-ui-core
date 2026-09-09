@@ -37,9 +37,9 @@ How can I render the header captions of the PivotGrid as anchors?
 
 ## Solution
 
-To render column and cell caption fields as anchors, use the [`columnHeaderTemplate`](/api/javascript/ui/pivotgrid/configuration/columnheadertemplate) or the [`dataCellTemplate`](/api/javascript/ui/pivotgrid/configuration/datacelltemplate) options respectively.
+To render column and cell caption fields as anchors, use the [`columnHeaderTemplate`](/api/ui/pivotgrid/configuration/columnheadertemplate) or the [`dataCellTemplate`](/api/ui/pivotgrid/configuration/datacelltemplate) options respectively.
 
-To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid/configuration/rowheadertemplate) option. The following example demonstrates how to achieve this behavior.
+To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/api/ui/pivotgrid/configuration/rowheadertemplate) option. The following example demonstrates how to achieve this behavior.
 
 ```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -102,7 +102,7 @@ To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/a
 
 ## See Also
 
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)
 * [Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
 * [Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})

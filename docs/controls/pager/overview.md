@@ -11,7 +11,7 @@ position: 0
 
 The [Kendo UI Pager component](https://demos.telerik.com/kendo-ui/pager/index) enables splitting a set of data into pages with flexible and intuitive UI.
 
-The user interface of the Pager is useful for paging data-bound components that have a [data source](/api/javascript/data/datasource) and do not have a built-in UI for paging such as the ListView or scenarios that require  paging options&mdash;for example, Kendo Templates with a data source.
+The user interface of the Pager is useful for paging data-bound components that have a [data source](/api/data/datasource) and do not have a built-in UI for paging such as the ListView or scenarios that require  paging options&mdash;for example, Kendo Templates with a data source.
 
  You can customize the page number templates or use an input for navigation to a specific page, toggle the visibility of previous and next buttons, include a pagesize dropdown and alter the information messages. The pager API also offers the ability to [localize its messages]({% slug localization_kendoui_pager_widget %}).
 
@@ -29,10 +29,10 @@ The user interface of the Pager is useful for paging data-bound components that 
 
 * [Getting Started with the Kendo UI Pager for jQuery]({% slug getting_started_kendoui_pager_widget %})
 * [Demo Page for the Pager](https://demos.telerik.com/kendo-ui/grid/index)
-* [JavaScript API Reference of the Pager](/api/javascript/ui/pager)
+* [JavaScript API Reference of the Pager](/api/ui/pager)
 
 ## See Also
 
 * [Demo Page for the Pager](https://demos.telerik.com/kendo-ui/pager/index)
 * [Pager Integration (Demo)](https://demos.telerik.com/kendo-ui/pager/integration)
-* [JavaScript API Reference of the Pager](/api/javascript/ui/pager)
+* [JavaScript API Reference of the Pager](/api/ui/pager)

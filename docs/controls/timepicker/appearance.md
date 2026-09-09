@@ -25,7 +25,7 @@ The Kendo UI TimePicker supports the following styling options:
 
 The `size` option controls how big or small the rendered `input` looks. The structure of the class is `k-input-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/timepicker/configuration/size) option:
+The following values are available for the [`size`](/api/ui/timepicker/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -43,7 +43,7 @@ The default size value is `medium` and it is applied to the wrapping span elemen
 
 The `rounded` option controls the border radius of the rendered `input`. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rouned`](/api/javascript/ui/timepicker/configuration/rounded) option:
+The following values are available for the [`rouned`](/api/ui/timepicker/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -64,7 +64,7 @@ The default rounded value is `medium` and it is applied to the wrapping span ele
 
 The `fillMode` option controls the way the color is applied to the rendered `input`. The structure of the class is `k-input-{fillMode}`
 
-The following values are available for the [`fillMode`](/api/javascript/ui/timepicker/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/timepicker/configuration/fillmode) option:
 
 - `solid`
 - `flat`
@@ -84,4 +84,4 @@ The default fillMode value is `solid` and it is applied to the wrapping span ele
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the TimePicker](https://demos.telerik.com/kendo-ui/timepicker/appearance)
-* [JavaScript API Reference of the TimePicker](/api/javascript/ui/timepicker)
+* [JavaScript API Reference of the TimePicker](/api/ui/timepicker)

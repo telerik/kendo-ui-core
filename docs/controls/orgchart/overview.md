@@ -31,4 +31,4 @@ It provides a tree-like structure where the user can edit the individual items, 
 * [Basic Usage of the OrgChart (Demo)](https://demos.telerik.com/kendo-ui/orgchart/index)
 * [Kendo UI OrgChart Data binding]({% slug databinding_kendoui_orgchart_widget %})
 * [Kendo UI OrgChart Grouping]({% slug grouping_kendoui_orgchart_widget %})
-* [JavaScript API Reference of the OrgChart](/api/javascript/ui/orgchart)
+* [JavaScript API Reference of the OrgChart](/api/ui/orgchart)

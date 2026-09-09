@@ -238,7 +238,7 @@ The ListView allows you to specify the HTML structure for each item by using a [
 
 ## 5. Configure Paging for the ListView
 
-The ListView allows you to display a specific amount of items per page. This improves the performance when large datasets must be rendered. To enable the paging functionality, specify a [`pageSize`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/pagesize) in the dataSource configuration and set the [`pageable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/configuration/pageable) property of the ListView to `true`.
+The ListView allows you to display a specific amount of items per page. This improves the performance when large datasets must be rendered. To enable the paging functionality, specify a [`pageSize`](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/pagesize) in the dataSource configuration and set the [`pageable`](https://docs.telerik.com/kendo-ui/api/ui/listview/configuration/pageable) property of the ListView to `true`.
 
 ```html
       <div id="listView"></div>
@@ -260,7 +260,7 @@ The ListView allows you to display a specific amount of items per page. This imp
 
 ## 6. Configure Scrolling for the ListView
 
-The ListView allows you to display a scrollbar inside the component so end-users don't have to scroll the entire page in their browser. To enable the scrolling functionality, set the [`scrollable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/configuration/scrollable) property to `true`.
+The ListView allows you to display a scrollbar inside the component so end-users don't have to scroll the entire page in their browser. To enable the scrolling functionality, set the [`scrollable`](https://docs.telerik.com/kendo-ui/api/ui/listview/configuration/scrollable) property to `true`.
 
 ```html
       <div id="listView"></div>
@@ -288,7 +288,7 @@ The ListView allows you to display a scrollbar inside the component so end-users
 
 ## See Also 
 
-* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
+* [JavaScript API Reference of the ListView](/api/ui/listview)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -71,7 +71,7 @@ How to customize circle appearance in Kendo UI Drawing API? Configure circle sha
 
 ### clip `kendo.drawing.Path`
 The element clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element/configuration/clip)
+Inherited from [Element.clip](/api/drawing/element/configuration/clip)
 
 
 <div class="meta-api-description">
@@ -106,7 +106,7 @@ How do I restrict the visible area of a circular drawing in Kendo UI for jQuery?
 
 ### cursor `String`
 The element cursor.
-Inherited from [Element.cursor](/api/javascript/drawing/element/configuration/cursor)
+Inherited from [Element.cursor](/api/drawing/element/configuration/cursor)
 
 
 <div class="meta-api-description">
@@ -161,7 +161,7 @@ How can I change the fill color of a circle in Kendo UI for jQuery drawingapi? C
 
 ### opacity `Number`
 The element opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element/configuration/opacity)
+Inherited from [Element.opacity](/api/drawing/element/configuration/opacity)
 
 
 <div class="meta-api-description">
@@ -247,7 +247,7 @@ How to customize tooltip content for circle shapes in Kendo UI drawing component
 
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
-Inherited from [Element.transform](/api/javascript/drawing/element/configuration/transform)
+Inherited from [Element.transform](/api/drawing/element/configuration/transform)
 
 
 <div class="meta-api-description">
@@ -278,7 +278,7 @@ How can I adjust the position and size of a circle in Kendo UI for jQuery's Draw
 
 ### visible `Boolean`
 A flag, indicating if the element is visible.
-Inherited from [Element.visible](/api/javascript/drawing/element/configuration/visible)
+Inherited from [Element.visible](/api/drawing/element/configuration/visible)
 
 
 <div class="meta-api-description">
@@ -312,7 +312,7 @@ How do I control the visibility of a circle shape in Kendo UI drawingapi? Contro
 
 ### bbox
 Returns the bounding box of the element with transformations applied.
-Inherited from [Element.bbox](/api/javascript/drawing/element/methods/bbox)
+Inherited from [Element.bbox](/api/drawing/element/methods/bbox)
 
 
 <div class="meta-api-description">
@@ -345,7 +345,7 @@ How to get the exact bounding box of a transformed circle in Kendo UI drawingapi
 
 ### clip
 Gets or sets the element clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element/methods/clip)
+Inherited from [Element.clip](/api/drawing/element/methods/clip)
 
 
 <div class="meta-api-description">
@@ -392,7 +392,7 @@ The element clipping path.
 
 ### clippedBBox
 Returns the bounding box of the element with clipping and transformations applied.
-Inherited from [Element.clippedBBox](/api/javascript/drawing/element/methods/clippedbbox)
+Inherited from [Element.clippedBBox](/api/drawing/element/methods/clippedbbox)
 
 
 <div class="meta-api-description">
@@ -509,7 +509,7 @@ The new geometry to use.
 
 
 ### fill
-Sets the shape [fill](/api/javascript/drawing/circle/configuration/fill).
+Sets the shape [fill](/api/drawing/circle/configuration/fill).
 
 
 <div class="meta-api-description">
@@ -519,10 +519,10 @@ How can I dynamically change the fill style of a circle in Kendo UI for jQuery? 
 #### Parameters
 
 ##### color `String`
-The [fill color](/api/javascript/drawing/fill-options/fields/color) to set.
+The [fill color](/api/drawing/fill-options/fields/color) to set.
 
 ##### opacity `Number` *optional*
-The [fill opacity](/api/javascript/drawing/fill-options/fields/opacity) to set.
+The [fill opacity](/api/drawing/fill-options/fields/opacity) to set.
 
 #### Returns
 `kendo.drawing.Circle` The current instance to allow chaining.
@@ -552,7 +552,7 @@ The [fill opacity](/api/javascript/drawing/fill-options/fields/opacity) to set.
 
 ### opacity
 Gets or sets the element opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element/methods/opacity)
+Inherited from [Element.opacity](/api/drawing/element/methods/opacity)
 
 If set, the stroke and fill opacity will be multiplied by the element opacity.
 
@@ -594,7 +594,7 @@ The element opacity. Ranges from 0 (completely transparent) to 1 (completely opa
 
 
 ### stroke
-Sets the shape [stroke](/api/javascript/drawing/circle/configuration/stroke).
+Sets the shape [stroke](/api/drawing/circle/configuration/stroke).
 
 
 <div class="meta-api-description">
@@ -604,13 +604,13 @@ How do I change the border color of a circle shape in Kendo UI for jQuery? Modif
 #### Parameters
 
 ##### color `String`
-The [stroke color](/api/javascript/drawing/stroke-options/fields/color) to set.
+The [stroke color](/api/drawing/stroke-options/fields/color) to set.
 
 ##### width `Number` *optional*
-The [stroke width](/api/javascript/drawing/stroke-options/fields/width) to set.
+The [stroke width](/api/drawing/stroke-options/fields/width) to set.
 
 ##### opacity `Number` *optional*
-The [stroke opacity](/api/javascript/drawing/stroke-options/fields/opacity) to set.
+The [stroke opacity](/api/drawing/stroke-options/fields/opacity) to set.
 
 #### Returns
 `kendo.drawing.Circle` The current instance to allow chaining.
@@ -640,7 +640,7 @@ The [stroke opacity](/api/javascript/drawing/stroke-options/fields/opacity) to s
 
 ### transform
 Gets or sets the transformation of the element.
-Inherited from [Element.transform](/api/javascript/drawing/element/methods/transform)
+Inherited from [Element.transform](/api/drawing/element/methods/transform)
 
 
 <div class="meta-api-description">
@@ -685,7 +685,7 @@ The transformation to apply to the element.
 
 ### visible
 Gets or sets the visibility of the element.
-Inherited from [Element.visible](/api/javascript/drawing/element/methods/visible)
+Inherited from [Element.visible](/api/drawing/element/methods/visible)
 
 
 <div class="meta-api-description">

@@ -27,7 +27,7 @@ The code snippet below showcases a small data sample from the [Remote Binding de
 { ProductID: 3, ProductName: "Aniseed Syrup", UnitPrice: "10.00"}]
 ```
 
-The following code snippet showcases how you can use the [`transport`](/api/javascript/data/pivotdatasourcev2/configuration/transport) option to read the data from the remote end point.
+The following code snippet showcases how you can use the [`transport`](/api/data/pivotdatasourcev2/configuration/transport) option to read the data from the remote end point.
 
 ```javascript
 $("#pivotgrid").kendoPivotGridV2({
@@ -44,7 +44,7 @@ $("#pivotgrid").kendoPivotGridV2({
 
 You can construct the PivotGridV2 table by using the fields from the sample data in the [previous section](#bind-the-data).
 
-   1. Configure the [`schema`](/api/javascript/data/pivotdatasource/configuration/schema#schemacube).
+   1. Configure the [`schema`](/api/data/pivotdatasource/configuration/schema#schemacube).
 
    ```javascript
             schema: {

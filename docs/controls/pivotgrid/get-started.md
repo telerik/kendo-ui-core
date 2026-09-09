@@ -108,7 +108,7 @@ Next, you will initialize the [PivotConfigurator](https://docs.telerik.com/kendo
 
 With the above steps completed, you can now start populating the components with data. In this example, we are going to use an array of objects that is loaded from [this location](https://demos.telerik.com/kendo-ui/content/shared/js/products.js).
 
-First, configure the [`dataSource`](https://docs.telerik.com/kendo-ui/api/javascript/data/pivotdatasource) in the PivotGrid component. 
+First, configure the [`dataSource`](https://docs.telerik.com/kendo-ui/api/data/pivotdatasource) in the PivotGrid component. 
 
 ```javascript
     var data = products; // The products are fetched from the above link.
@@ -189,7 +189,7 @@ The user can sort and filter the data through both the PivotGrid headers and the
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery PivotGrid](/api/javascript/ui/pivotgrid)
+* [JavaScript API Reference of the jQuery PivotGrid](/api/ui/pivotgrid)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -66,5 +66,5 @@ How can I enable the server-side grouping and sorting for the Kendo UI MultiSele
 
 ## See Also
 
-* [API Reference of the Kendo UI Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Kendo UI Editor](https://docs.telerik.com/kendo-ui/api/ui/editor)
 * [Telerik DocumentProcessing Library](https://docs.telerik.com/devtools/document-processing/introduction)

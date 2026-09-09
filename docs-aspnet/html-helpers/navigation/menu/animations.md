@@ -159,5 +159,5 @@ The example below shows how to configure the opening animation and use the `Reve
 {% if site.core %}
 * [Server-Side API of the Menu TagHelper](/api/taghelpers/menu)
 {% endif %}
-* [Client-Side API of the Menu](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+* [Client-Side API of the Menu](https://docs.telerik.com/kendo-ui/api/ui/menu)
 

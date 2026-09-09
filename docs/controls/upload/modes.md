@@ -65,12 +65,12 @@ The `save` handler is expected to return any of the following responses:
 
 ### Configuring the remove Handler
 
-The `remove` handler has to accept POST requests which can be configured through the [`removeVerb`](/api/javascript/ui/upload/configuration/async.removeverb) option. The requests will contain one or more text fields with the `"fileNames"` name&mdash;in the case of the previous example, change it to `"fileNames[]"` by using the `removeField` option.
+The `remove` handler has to accept POST requests which can be configured through the [`removeVerb`](/api/ui/upload/configuration/async.removeverb) option. The requests will contain one or more text fields with the `"fileNames"` name&mdash;in the case of the previous example, change it to `"fileNames[]"` by using the `removeField` option.
 
 The `remove` handler is expected to return any of the following responses:
 
 * An empty response to signify success.
-* A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the [`success`](/api/javascript/ui/upload/events/success) event handler.
+* A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the [`success`](/api/ui/upload/events/success) event handler.
 * Any other response to signify failure.
 
 ### Setting the Asynchronous Mode Fallback
@@ -80,4 +80,4 @@ When the Upload is placed inside a `form` and is configured for asynchronous ope
 ## See Also
 
 * [Setting the Upload in Its Asynchronous Mode of Operation (Demo)](https://demos.telerik.com/kendo-ui/upload/async)
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

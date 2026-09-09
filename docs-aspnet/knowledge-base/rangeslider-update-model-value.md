@@ -116,7 +116,7 @@ public ActionResult Submit(OrderViewModel model)
 
 ## See Also
 
-* [Client-Side API Reference of the Slider for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider)
+* [Client-Side API Reference of the Slider for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/slider)
 * [Server-Side API Reference of the Slider for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/slider)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Slider for {{ site.framework }}](https://docs.telerik.com/aspnet-core/api/taghelpers/slider)

@@ -243,4 +243,4 @@ When implementing column spanning in your forms, consider these recommendations:
 * [Form Layout]({% slug layout_form_widget %})
 * [Form Groups]({% slug groups_form_widget %})
 * [Form Items]({% slug items_form_widget %})
-* [JavaScript API Reference of the Form](/api/javascript/ui/form)
+* [JavaScript API Reference of the Form](/api/ui/form)

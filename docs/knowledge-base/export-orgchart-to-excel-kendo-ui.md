@@ -320,4 +320,4 @@ Refer to the below Dojo for a working example.
 
 - [Kendo UI OrgChart Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/orgchart/overview)
 - [Kendo UI Excel Export Documentation](https://docs.telerik.com/kendo-ui/framework/excel/introduction)
-- [Kendo UI saveAs Method](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/saveas)
+- [Kendo UI saveAs Method](https://docs.telerik.com/kendo-ui/api/kendo/methods/saveas)

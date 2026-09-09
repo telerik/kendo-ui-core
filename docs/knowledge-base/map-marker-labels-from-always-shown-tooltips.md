@@ -29,7 +29,7 @@ The map markers in the Kendo UI Map have tooltips which the user can display by 
 ## Solution
 
 1. Loop the markers.
-1. After the Map initializes, in its [events](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map#events), call the `.show()` method of their tooltips.
+1. After the Map initializes, in its [events](https://docs.telerik.com/kendo-ui/api/dataviz/ui/map#events), call the `.show()` method of their tooltips.
 
 ```dojo
 <div id="map"></div>

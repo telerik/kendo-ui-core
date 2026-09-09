@@ -20,7 +20,7 @@ Depending on whether scrolling is enabled, the columns of the Grid acquire diffe
     * When the horizontal space is insufficient, columns without a defined width shrink to a zero width.
     * Regardless of the cell content, the defined column widths are obeyed.
     * If the content of a cell cannot fit, the Grid will either wrap or clip it.
-    * During the resizing of columns, only the resized column and the [`table`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/fields/table) will change its widths.
+    * During the resizing of columns, only the resized column and the [`table`](https://docs.telerik.com/kendo-ui/api/ui/grid/fields/table) will change its widths.
     * When a column is resized or hidden, the Grid applies a pixel width to its `table` elements. This behavior helps maintain the widths of all remaining columns except for the column that is currently resized or hidden.
     * When all columns have pixel widths and their sum exceeds the width of the Grid, a horizontal scrollbar appears.
     * When all columns have pixel widths and their sum is less than the width of the Grid, the column widths are ignored and the browser expands all columns.

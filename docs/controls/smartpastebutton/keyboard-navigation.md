@@ -115,5 +115,5 @@ For a complete example, refer to the [demo on keyboard navigation of the SmartPa
 * [Events]({% slug events_kendoui_smartpastebutton_widget %})
 * [Overview]({% slug overview_kendoui_smartpastebutton_widget %})
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [JavaScript API Reference of the SmartPasteButton](/api/javascript/ui/smartpastebutton)
+* [JavaScript API Reference of the SmartPasteButton](/api/ui/smartpastebutton)
 * [Knowledge Base Section](/knowledge-base)

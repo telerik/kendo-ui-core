@@ -441,7 +441,7 @@ The Spreadsheet exposes numerous client-side events that you can handle to custo
 
 ## (Optional) Reference Existing Spreadsheet Instances
 
-Referencing existing component instances allows you to build on top of their configuration. To reference an existing Spreadsheet instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Spreadsheet client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
+Referencing existing component instances allows you to build on top of their configuration. To reference an existing Spreadsheet instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Spreadsheet client-side API](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet#methods) to control its behavior.
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
@@ -451,9 +451,9 @@ Referencing existing component instances allows you to build on top of their con
         </script>
     ```
 
-1. Use the [Spreadsheet client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#methods) to control the behavior of the widget.
+1. Use the [Spreadsheet client-side API](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet#methods) to control the behavior of the widget.
 
-    In this example, you will also see how to utilize the  [`Sheet API`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet) as well as the [`Range API`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range) to customize the behavior of the Spreadsheet.
+    In this example, you will also see how to utilize the  [`Sheet API`](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet) as well as the [`Range API`](https://docs.telerik.com/kendo-ui/api/spreadsheet/range) to customize the behavior of the Spreadsheet.
 
     ```JS script
         <script>
@@ -483,6 +483,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Basic Usage of the Spreadsheet for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet)
-* [Client-Side API of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [Client-Side API of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
 * [Server-Side API of the Spreadsheet](/api/spreadsheet)
 * [Knowledge Base Section](/knowledge-base)

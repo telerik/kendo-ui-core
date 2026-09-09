@@ -46,7 +46,7 @@ In this step, you will initialize the Loader from the `<span>` element. All sett
 
 ## 3. Set the Size
 
-The Loader provides a [`size`](/api/javascript/ui/loader/configuration/size) option that allows you to change its dimensions:
+The Loader provides a [`size`](/api/ui/loader/configuration/size) option that allows you to change its dimensions:
 
 ```html
    <span id="loader"></span> 
@@ -60,7 +60,7 @@ The Loader provides a [`size`](/api/javascript/ui/loader/configuration/size) opt
 
 ## 4. Set the Loader Type
 
-The component has a [`type`](/api/javascript/ui/loader/configuration/type) option which allows you to change the Loader icon:
+The component has a [`type`](/api/ui/loader/configuration/type) option which allows you to change the Loader icon:
 
 ```html
    <span id="loader"></span> 
@@ -80,7 +80,7 @@ The component has a [`type`](/api/javascript/ui/loader/configuration/type) optio
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Loader](/api/javascript/ui/loader)
+* [JavaScript API Reference of the jQuery Loader](/api/ui/loader)
 * [Knowledge Base Section](/knowledge-base)
 
 

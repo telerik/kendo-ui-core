@@ -107,7 +107,7 @@ Use the Pager HtmlHelper {% if site.core %}or TagHelper{% endif %} to configure 
 ## (Optional) Visualize the Data Items
 
 * Use a [Kendo template](https://docs.telerik.com/kendo-ui/framework/templates/overview) to configure the appearance of the data items.
-* Subscribe to the [`Change` event](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/change) of the DataSource to render any changes to the data.
+* Subscribe to the [`Change` event](https://docs.telerik.com/kendo-ui/api/data/datasource/events/change) of the DataSource to render any changes to the data.
 
 ```HtmlHelper
 <script type="text/x-kendo-tmpl" id="template">
@@ -289,7 +289,7 @@ Referencing existing instances allows you to build on top of their configuration
     </script>
     ```
 
-1. Use the [Pager client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager#methods) to control the behavior of the widget. In this example, you will hide one of the Pager columns by using `hideColumn` method.
+1. Use the [Pager client-side API](https://docs.telerik.com/kendo-ui/api/ui/pager#methods) to control the behavior of the widget. In this example, you will hide one of the Pager columns by using `hideColumn` method.
 
     ```JS script
     <script>
@@ -320,6 +320,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Pager for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pager)
-* [Pager client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager)
+* [Pager client-side API](https://docs.telerik.com/kendo-ui/api/ui/pager)
 * [Pager server-side API](/api/pager)
 * [Knowledge Base Section](/knowledge-base)

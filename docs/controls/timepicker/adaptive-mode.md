@@ -38,4 +38,4 @@ The following example demonstrates how to configure an on-screen keyboard for th
 
 ## See Also
 
-* [JavaScript API Reference of the TimePicker](/api/javascript/ui/timepicker)
+* [JavaScript API Reference of the TimePicker](/api/ui/timepicker)

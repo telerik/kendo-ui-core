@@ -139,7 +139,7 @@ How can I initialize a Kendo UI for jQuery Grid in a Kendo UI for jQuery TabStri
 ## See Also
 
 * [Initialize the Grid inside a Hidden Container](/web/grid/appearance#initialize-the-grid-inside-a-hidden-container)
-* [JavaScript API Reference: Configure TabStrip Animations](/api/javascript/ui/tabstrip/configuration/animation)
+* [JavaScript API Reference: Configure TabStrip Animations](/api/ui/tabstrip/configuration/animation)
 * [Save Content Scroll Position]({% slug howto_savecontentscrollposition_tabstrip %})
 * [Scroll TabStrip with Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})
 

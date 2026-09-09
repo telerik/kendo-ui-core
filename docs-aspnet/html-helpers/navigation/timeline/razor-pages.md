@@ -174,7 +174,7 @@ For the complete project, refer to the [Timeline in Razor Pages example](https:/
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Timeline](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)
+* [Client-Side API of the Timeline](https://docs.telerik.com/kendo-ui/api/ui/timeline)
 * [Server-Side HtmlHelper API of the Timeline](/api/timeline)
 * [Server-Side TagHelper API of the Timeline](/api/taghelpers/timeline)
 * [Knowledge Base Section](/knowledge-base)

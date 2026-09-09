@@ -8,7 +8,7 @@ component: dockmanager
 
 # kendo.ui.DockManager
 
-Represents the Kendo UI DockManager. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI DockManager. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

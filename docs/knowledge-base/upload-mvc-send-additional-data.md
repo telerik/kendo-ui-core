@@ -59,4 +59,4 @@ public class TestModel
 
 ## See Also
 
-* [API Reference of the Upload Widget](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [API Reference of the Upload Widget](https://docs.telerik.com/kendo-ui/api/ui/upload)

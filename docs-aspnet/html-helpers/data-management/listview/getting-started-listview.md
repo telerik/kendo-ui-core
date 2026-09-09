@@ -219,7 +219,7 @@ The ListView expects a mandatory `ClientTemplateId` configuration to render the 
 
 ## (Optional) Reference Existing ListView Instances
 
-Referencing existing component instances allows you to build on top of their configuration. To reference an existing ListView instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [ListView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods) to control its behavior.
+Referencing existing component instances allows you to build on top of their configuration. To reference an existing ListView instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [ListView client-side API](https://docs.telerik.com/kendo-ui/api/ui/listview#methods) to control its behavior.
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
@@ -229,7 +229,7 @@ Referencing existing component instances allows you to build on top of their con
     </script>
     ```
 
-1. Use the [ListView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods) to control the behavior of the component. In this example, you will see how to turn on the [`selectable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/configuration/selectable) configuration by using the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions) method. Then you can use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/select) method to programmatically select one of the items.
+1. Use the [ListView client-side API](https://docs.telerik.com/kendo-ui/api/ui/listview#methods) to control the behavior of the component. In this example, you will see how to turn on the [`selectable`](https://docs.telerik.com/kendo-ui/api/ui/listview/configuration/selectable) configuration by using the [`setOptions`](https://docs.telerik.com/kendo-ui/api/ui/widget/methods/setoptions) method. Then you can use the [`select`](https://docs.telerik.com/kendo-ui/api/ui/listview/methods/select) method to programmatically select one of the items.
 
     ```JS script
         <script>
@@ -258,6 +258,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the Events of the ListView for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listview/events)
-* [Client-Side API of the ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
+* [Client-Side API of the ListView](https://docs.telerik.com/kendo-ui/api/ui/listview)
 * [Server-Side API of the ListView](/api/listview)
 * [Knowledge Base Section](/knowledge-base)

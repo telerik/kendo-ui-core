@@ -90,5 +90,5 @@ The following example demonstrates how to subscribe to events by a template dele
 ## See Also
 
 * [Using the API of the OrgChart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart/api)
-* [Client-Side API of the OrgChart](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart)
+* [Client-Side API of the OrgChart](https://docs.telerik.com/kendo-ui/api/ui/orgchart)
 * [Server-Side API of the OrgChart](/api/orgchart)

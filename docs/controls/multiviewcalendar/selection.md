@@ -40,4 +40,4 @@ The following example demonstrates how to implement the range selection mode in 
 ## See Also
 
 * [Date Selection in the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/selection)
-* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
+* [JavaScript API Reference of the MultiViewCalendar](/api/ui/multiviewcalendar)

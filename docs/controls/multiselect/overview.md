@@ -39,7 +39,7 @@ The MultiSelect displays a list of options and allows for multiple selections fr
 
 ## See Also
 
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [JavaScript API Reference of the MultiSelect](/api/ui/multiselect)
 * [Demo Page for the jQuery MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index)
 * [Knowledge Base Section](/knowledge-base)
 * [jQuery MultiSelect Product Page](https://www.telerik.com/kendo-jquery-ui/multiselect)

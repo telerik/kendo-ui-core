@@ -122,7 +122,7 @@ Add more HTML elements inside the element from which the Sortable is initialized
 
 ## 4. Configure the Sortable Hint
 
-The Sortable component gives you the option to customize the [`hint`](/api/javascript/ui/sortable/configuration/hint) that is rendered by default. 
+The Sortable component gives you the option to customize the [`hint`](/api/ui/sortable/configuration/hint) that is rendered by default. 
 
 
 ```html
@@ -184,7 +184,7 @@ You can set what type of [`cursor`](api/javascript/ui/sortable/configuration/cur
 
 ## 6. Disable Items
 
-You can specify which of the items in the Sortable are [`disabled`](/api/javascript/ui/sortable/configuration/disabled) and can not be dragged. The disabled items are valid drop targets.
+You can specify which of the items in the Sortable are [`disabled`](/api/ui/sortable/configuration/disabled) and can not be dragged. The disabled items are valid drop targets.
 
 
 ```html
@@ -218,7 +218,7 @@ You can specify which of the items in the Sortable are [`disabled`](/api/javascr
 
 ## 7. Filter Valid Drop Targets
 
-Specify which of the items in the Sortable are valid drop targets by using the [`filter`](/api/javascript/ui/sortable/configuration/filter) configuration option. 
+Specify which of the items in the Sortable are valid drop targets by using the [`filter`](/api/ui/sortable/configuration/filter) configuration option. 
 
 
 ```html
@@ -260,7 +260,7 @@ Specify which of the items in the Sortable are valid drop targets by using the [
 
 ## See Also 
 
-* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
+* [JavaScript API Reference of the Sortable](/api/ui/sortable)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -9,9 +9,9 @@ position: 4
 
 # Export Options
 
-To export the charts of the ChartWizard component to PDF, PNG, or SVG formats, set the desired properties in the [`exportOptions`](/api/javascript/ui/chartwizard/configuration/exportoptions) object.
+To export the charts of the ChartWizard component to PDF, PNG, or SVG formats, set the desired properties in the [`exportOptions`](/api/ui/chartwizard/configuration/exportoptions) object.
 
-You can configure the parameters of the exported image by setting the image property to an [`exportOptions.image`](/api/javascript/ui/chartwizard/configuration/exportoptions.image) object and the exported PDF file by utilizing the [`exportOptions.pdf`](/api/javascript/ui/chartwizard/configuration/exportoptions.pdf) object.
+You can configure the parameters of the exported image by setting the image property to an [`exportOptions.image`](/api/ui/chartwizard/configuration/exportoptions.image) object and the exported PDF file by utilizing the [`exportOptions.pdf`](/api/ui/chartwizard/configuration/exportoptions.pdf) object.
 
 The following example demonstrates how to customize the export options of the component.
 
@@ -46,4 +46,4 @@ The following example demonstrates how to customize the export options of the co
 
 * [Export Options of the ChartWizard (Demo)](https://demos.telerik.com/kendo-ui/chartwizard/export-options)
 * [Using the API of the ChartWizard (Demo)](https://demos.telerik.com/kendo-ui/chartwizard/api)
-* [JavaScript API Reference of the ChartWizard](/api/javascript/ui/chartwizard)
+* [JavaScript API Reference of the ChartWizard](/api/ui/chartwizard)

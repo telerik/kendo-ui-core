@@ -29,7 +29,7 @@ It provides separate sections for days, months, years, hours, and minutes, and a
 
 * [Getting Started with the Kendo UI DateInput for jQuery]({% slug getting_started_kendoui_dateinput_component %})
 * [Overview of the DateInput (Demo)](https://demos.telerik.com/kendo-ui/dateinput/index)
-* [JavaScript API Reference of the DateInput](/api/javascript/ui/dateinput)
+* [JavaScript API Reference of the DateInput](/api/ui/dateinput)
 
 ## See Also
 

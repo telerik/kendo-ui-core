@@ -257,7 +257,7 @@ Referencing existing component instances allows you to build on top of their con
         </script>
     ```
 
-1. Use the [Chart Wizard client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/chartwizard#methods) to control the behavior of the component. In this example, you will see how to open the Chart Wizard (for example, when a button is clicked).
+1. Use the [Chart Wizard client-side API](https://docs.telerik.com/kendo-ui/api/ui/chartwizard#methods) to control the behavior of the component. In this example, you will see how to open the Chart Wizard (for example, when a button is clicked).
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -300,7 +300,7 @@ For more information on referencing specific helper instances, see the [Methods 
 ## See Also
 
 * [Using the API of the Chart Wizard for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chartwizard/api)
-* [Client-Side API of the Chart Wizard](https://docs.telerik.com/kendo-ui/api/javascript/ui/chartwizard)
+* [Client-Side API of the Chart Wizard](https://docs.telerik.com/kendo-ui/api/ui/chartwizard)
 * [Server-Side API of the Chart Wizard](/api/chartwizard)
 {% if site.core %}
 * [Server-Side API of the Chart Wizard TagHelper](/api/taghelpers/chartwizard)

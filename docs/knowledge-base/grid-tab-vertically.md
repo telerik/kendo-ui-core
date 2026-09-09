@@ -30,7 +30,7 @@ To achieve the desired scenario:
 1. Handle the [`keydown`](https://api.jquery.com/keydown/) table event.
 1. If the key is `Tab`, prevent the default behavior.
 1. Calculate the next cell based on the current position.
-1. Use the [`editCell`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/editcell) method of the Grid to change the cell.
+1. Use the [`editCell`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/editcell) method of the Grid to change the cell.
 
 ```dojo
 <div id="grid"></div>
@@ -139,7 +139,7 @@ To achieve the desired scenario:
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Grid](/api/ui/grid)
 * [jQuery Grid Overview Demo](https://demos.telerik.com/kendo-ui/grid/index)
 * [Vertically Tab Cells in Editable and Grouped Grids](/knowledge-base/grid-tab-vertically-grouping)
 * [Skip Non-Editable Cells When Tabbing](/knowledge-base/skip-non-editable-cells-when-tabbing)

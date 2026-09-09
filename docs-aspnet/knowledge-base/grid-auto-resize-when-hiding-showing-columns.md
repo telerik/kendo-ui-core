@@ -39,7 +39,7 @@ Enforce a `min-width` style to the table element using only CSS:
 
 1. Create a function to calculate the sum of widths of all visible columns `getAllColumnsWidth(e)`.
 
-1. Call a method that sets the Grid's width, use [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound), [`columnShow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnshow), and [`columnHide`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnhide) events.
+1. Call a method that sets the Grid's width, use [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound), [`columnShow`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnshow), and [`columnHide`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnhide) events.
 
 ```View
 
@@ -151,7 +151,7 @@ function onDataBound(e) {
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

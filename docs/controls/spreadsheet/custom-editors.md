@@ -116,4 +116,4 @@ The `edit` method provides a complete flexibility. As an example, you can use a 
 ## See Also
 
 * [Implementing Custom Cell Editors in the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/custom-editors)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

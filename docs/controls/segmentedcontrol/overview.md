@@ -23,7 +23,7 @@ The SegmentedControl renders a group of buttons that allow the user to select a 
 
 * [Getting Started with the Kendo UI SegmentedControl for jQuery]({% slug getting_started_kendoui_segmentedcontrol_widget %})
 * [Basic Usage of the SegmentedControl (Demo)](https://demos.telerik.com/kendo-ui/segmentedcontrol/index)
-* [JavaScript API Reference of the SegmentedControl](/api/javascript/ui/segmentedcontrol)
+* [JavaScript API Reference of the SegmentedControl](/api/ui/segmentedcontrol)
 
 ## See Also
 

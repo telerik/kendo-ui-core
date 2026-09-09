@@ -31,21 +31,21 @@ Kendo UI for jQuery Grid
 
 ## Description
 
-I want to use the [DropDownTree](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree) with checkboxes and CheckAll functionality to filter a Kendo UI for jQuery Grid. I need guidance on how to configure the DropDownTree as a custom filter and manually handle the filtering logic based on its selection.
+I want to use the [DropDownTree](https://docs.telerik.com/kendo-ui/api/ui/dropdowntree) with checkboxes and CheckAll functionality to filter a Kendo UI for jQuery Grid. I need guidance on how to configure the DropDownTree as a custom filter and manually handle the filtering logic based on its selection.
 
 This knowledge base article also answers the following questions:
 - How to use Kendo UI for jQuery DropDownTree as a Grid filter?
-- How to implement [checkAll](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dropdowntree/configuration/checkall) functionality in DropDownTree for Grid filtering?
+- How to implement [checkAll](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdowntree/configuration/checkall) functionality in DropDownTree for Grid filtering?
 - How to handle filtering a Grid manually based on DropDownTree value?
 
 ## Solution
 
 To achieve this functionality, follow these steps:
 
-1. Use the [`columns.filterable.ui`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/columns.filterable.ui) option of the Kendo Grid to implement the DropDownTree as a filter popup.
+1. Use the [`columns.filterable.ui`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/columns.filterable.ui) option of the Kendo Grid to implement the DropDownTree as a filter popup.
 2. Replace the original filter input element with a DropDownTree container element.
-3. Configure the DropDownTree with [`checkboxes`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dropdowntree/configuration/checkboxes) and [`checkAll`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dropdowntree/configuration/checkall) enabled.
-4. Handle the [`change`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dropdowntree/events/change) event of the DropDownTree to filter the Grid manually.
+3. Configure the DropDownTree with [`checkboxes`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdowntree/configuration/checkboxes) and [`checkAll`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdowntree/configuration/checkall) enabled.
+4. Handle the [`change`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdowntree/events/change) event of the DropDownTree to filter the Grid manually.
 
 ### Example Code
 
@@ -316,6 +316,6 @@ Below you will find a runnable example
 
 ## See Also
 
-- [JavaScript API Reference of the DropDownTree](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
-- [JavaScript API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [JavaScript API Reference of the DropDownTree](https://docs.telerik.com/kendo-ui/api/ui/dropdowntree)
+- [JavaScript API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/ui/grid)
 - [Grid Filter Menu Customization (Demo)](https://demos.telerik.com/kendo-ui/grid/filter-menu-customization)

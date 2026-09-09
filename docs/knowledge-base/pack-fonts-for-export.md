@@ -57,5 +57,5 @@ For more information, refer to [the project on GitHub](https://github.com/teleri
 
 ## See Also
 
-* [PDF Options JavaScript API Reference](/api/javascript/drawing/pdfoptions)
+* [PDF Options JavaScript API Reference](/api/drawing/pdfoptions)
 * [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})

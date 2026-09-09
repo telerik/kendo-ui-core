@@ -49,7 +49,7 @@ In this step, you will initialize the BottomNavigation from the `<nav>` element.
 
 ## 3. Specify the Items
 
-Here, you will specify the [`items`](/api/javascript/ui/bottomnavigation/configuration/items) of the BottomNavigation.
+Here, you will specify the [`items`](/api/ui/bottomnavigation/configuration/items) of the BottomNavigation.
 
 ```dojo
   <nav id="bottomnavigation"></nav>
@@ -72,7 +72,7 @@ Here, you will specify the [`items`](/api/javascript/ui/bottomnavigation/configu
 
 ## See Also 
 
-* [JavaScript API Reference of the BottomNavigation](/api/javascript/ui/bottomnavigation)
+* [JavaScript API Reference of the BottomNavigation](/api/ui/bottomnavigation)
 * [Knowledge Base Section](/knowledge-base)
 
 

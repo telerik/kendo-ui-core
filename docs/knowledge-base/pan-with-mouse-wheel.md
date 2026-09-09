@@ -39,9 +39,9 @@ How can I pan the Kendo UI Diagram when scrolling with the mouse?
 
 To achieve this behavior:
 
-1. Handle the [`zoomStart` event](/api/javascript/dataviz/ui/diagram/events/zoomstart) of the Kendo UI Diagram.
+1. Handle the [`zoomStart` event](/api/dataviz/ui/diagram/events/zoomstart) of the Kendo UI Diagram.
 2. Get the delta from the arguments, that is `e.meta.delta`.
-3. Pan the Diagram with the new coordinates by using the [`pan` method](/api/javascript/dataviz/ui/diagram/methods/pan).
+3. Pan the Diagram with the new coordinates by using the [`pan` method](/api/dataviz/ui/diagram/methods/pan).
 
 ```dojo
 
@@ -76,7 +76,7 @@ $("#diagram").kendoDiagram({
 ## See Also
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)
 * [Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [Wrap Text]({% slug howto_wraptext_diagram %})

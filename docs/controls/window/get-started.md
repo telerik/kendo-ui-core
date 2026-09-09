@@ -59,7 +59,7 @@ In this step, you will initialize the Window from the `<div>` element. When you 
 
 ## 3. Set the Title 
 
-You can use the [`title`](/api/javascript/ui/window/configuration/title) field to set the header text in the Window component.
+You can use the [`title`](/api/ui/window/configuration/title) field to set the header text in the Window component.
 
 ```html
 <div id="window">
@@ -84,5 +84,5 @@ You can use the [`title`](/api/javascript/ui/window/configuration/title) field t
 
 ## See Also 
 
-* [JavaScript API Reference of the Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the Window](/api/ui/window)
 * [Knowledge Base Section](/knowledge-base)

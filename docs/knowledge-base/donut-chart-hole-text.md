@@ -39,8 +39,8 @@ How can I display some content in the center of a Kendo UI Donut Chart?
 
 To achieve this behavior:
 
-1. Locate the center point of the Donut Chart. For more information, refer to the [`series.visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) API call.
-2. Plot `Text` or other `Shapes` to achieve this behavior by using the [`render` event](/api/javascript/dataviz/ui/chart/events/render).
+1. Locate the center point of the Donut Chart. For more information, refer to the [`series.visual`](/api/dataviz/ui/chart/configuration/series.visual) API call.
+2. Plot `Text` or other `Shapes` to achieve this behavior by using the [`render` event](/api/dataviz/ui/chart/events/render).
 
 The following example demonstrates how to place some text in the center of a Kendo UI Donut Chart.
 
@@ -112,21 +112,21 @@ The following example demonstrates how to place some text in the center of a Ken
             // The center and radius are populated by now.
             // We can ask a circle geometry to calculate the bounding rectangle for us.
             //
-            // https://docs.telerik.com/kendo-ui/api/javascript/geometry/circle/methods/bbox
+            // https://docs.telerik.com/kendo-ui/api/geometry/circle/methods/bbox
             var circleGeometry = new geom.Circle(center, radius);
             var bbox = circleGeometry.bbox();
 
             // Render the text
             //
-            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+            // https://docs.telerik.com/kendo-ui/api/dataviz/drawing/text
             var text = new draw.Text("Foo & Bar", [0, 0], {
               font: "18px Verdana,Arial,sans-serif"
             });
 
             // Align the text in the bounding box
             //
-            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align
-            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/vAlign
+            // https://docs.telerik.com/kendo-ui/api/drawing/methods/align
+            // https://docs.telerik.com/kendo-ui/api/drawing/methods/vAlign
             draw.align([text], bbox, "center");
             draw.vAlign([text], bbox, "center");
 
@@ -228,7 +228,7 @@ Alternatively, you can position an overlay using CSS. The following example demo
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

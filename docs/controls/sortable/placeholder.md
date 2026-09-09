@@ -13,7 +13,7 @@ The placeholder is the element which indicates where the dragged item will be pl
 
 By default, the placeholder is a clone of the dragged element with a removed `id` attribute and having its `visibility` set to `hidden` so that it forms a visual gap. You can change the default placeholder of the Sortable by setting the `placeholder` configuration option
 
-> The placeholder element is appended to the Sortable DOM element container. As a result, jQuery `index` method returns unexpected results while dragging. To get the index of a given item in the Sortable collection, use the [`indexOf`](/api/javascript/ui/sortable/methods/indexof) method of the component.
+> The placeholder element is appended to the Sortable DOM element container. As a result, jQuery `index` method returns unexpected results while dragging. To get the index of a given item in the Sortable collection, use the [`indexOf`](/api/ui/sortable/methods/indexof) method of the component.
 
 ## Getting Started
 
@@ -61,4 +61,4 @@ By default, the Sortable uses the mouse cursor to determine the place of the dro
 ## See Also
 
 * [Positioning the Placeholder of the Sortable by Axis (Demo)](https://demos.telerik.com/kendo-ui/sortable/constraints)
-* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
+* [JavaScript API Reference of the Sortable](/api/ui/sortable)

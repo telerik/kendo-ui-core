@@ -139,7 +139,7 @@ To use the client-side API of the Stepper and build on top of its initial config
     </script>
     ```
 
-1. Use the [Stepper client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/stepper#methods) to control the behavior of the widget. In this example, you will use the `next` method to selects the step which is immediately after the currently selected step.
+1. Use the [Stepper client-side API](https://docs.telerik.com/kendo-ui/api/ui/stepper#methods) to control the behavior of the widget. In this example, you will use the `next` method to selects the step which is immediately after the currently selected step.
 
     ```JS script
     <script>
@@ -171,6 +171,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Stepper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/stepper/api)
-* [Client-Side API of the Stepper](https://docs.telerik.com/kendo-ui/api/javascript/ui/stepper)
+* [Client-Side API of the Stepper](https://docs.telerik.com/kendo-ui/api/ui/stepper)
 * [Server-Side API of the Stepper](/api/stepper)
 * [Knowledge Base Section](/knowledge-base)

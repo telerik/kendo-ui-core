@@ -24,10 +24,10 @@ The FlatColorPicker component provides a rich interface to choose a color from P
 
 * [Getting Started with the Kendo UI FlatColorPicker for jQuery]({% slug getting_started_kendoui_flatcolorpicker_widget %})
 * [Overview of the FlatColorPicker (Demo)](https://demos.telerik.com/kendo-ui/flatcolorpicker/index)
-* [JavaScript API Reference of the FlatColorPicker](/api/javascript/ui/flatcolorpicker)
+* [JavaScript API Reference of the FlatColorPicker](/api/ui/flatcolorpicker)
 
 ## See Also
 
 * [Basic Usage of the FlatColorPicker (Demo)](https://demos.telerik.com/kendo-ui/flatcolorpicker/index)
 * [Using the API of the FlatColorPicker (Demo)](https://demos.telerik.com/kendo-ui/flatcolorpicker/api)
-* [JavaScript API Reference of the FlatColorPicker](/api/javascript/ui/flatcolorpicker)
+* [JavaScript API Reference of the FlatColorPicker](/api/ui/flatcolorpicker)

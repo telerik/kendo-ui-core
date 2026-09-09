@@ -76,4 +76,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the MaskedTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/api)
 * [MaskedTextBox Server-Side API](/api/maskedtextbox)
-* [MaskedTextBox Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox)
+* [MaskedTextBox Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/maskedtextbox)

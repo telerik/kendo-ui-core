@@ -39,7 +39,7 @@ How can I open [alert, prompt, and confirmation Kendo UI Dialogs]({%slug overvie
 
 The easiest way to achieve this behavior is to use the dedicated methods which are exposed through the Kendo UI API. However, this configuration enables you to change only the message without providing you the control over the Dialog itself&mdash;for example, over the title.
 
-The following example demonstrates a possible way to implement your own methods that open customized instances of the alert, prompt, and confirmation Dialogs. This is achieved by using the [`kendo.ui.Alert`](/api/javascript/ui/alert), [`kendo.ui.Prompt`](/api/javascript/ui/prompt), and [`kendo.ui.Confirm`](/api/javascript/ui/confirm) configuration options.
+The following example demonstrates a possible way to implement your own methods that open customized instances of the alert, prompt, and confirmation Dialogs. This is achieved by using the [`kendo.ui.Alert`](/api/ui/alert), [`kendo.ui.Prompt`](/api/ui/prompt), and [`kendo.ui.Confirm`](/api/ui/confirm) configuration options.
 
 ````dojo
     <button id="alertBtn" >myalert</button>
@@ -98,4 +98,4 @@ The following example demonstrates a possible way to implement your own methods 
 
 * [Basic Usage of the Dialog (Demo)](https://demos.telerik.com/kendo-ui/dialog/index)
 * [Using the API of the Dialog (Demo)](https://demos.telerik.com/kendo-ui/dialog/api)
-* [JavaScript API Reference of the Dialog](/api/javascript/ui/dialog)
+* [JavaScript API Reference of the Dialog](/api/ui/dialog)

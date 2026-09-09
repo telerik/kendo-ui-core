@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.DateTimePicker
 
-Represents the Kendo UI DateTimePicker widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI DateTimePicker widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -154,7 +154,7 @@ How do I customize the animation when closing a Kendo UI DateTimePicker popup? C
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -224,7 +224,7 @@ How to customize the opening animation effect for Kendo UI DateTimePicker popup?
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -389,7 +389,7 @@ How to configure DateTimePicker to allow free-text date entry instead of structu
 
 ### dates `Array`
 
-Specifies a list of dates, which will be passed to the [month template](/api/javascript/ui/datetimepicker#configuration-month.content) of the DateView.
+Specifies a list of dates, which will be passed to the [month template](/api/ui/datetimepicker#configuration-month.content) of the DateView.
 All dates, which match the date portion of the selected date will be used to re-bind the TimeView.
 
 
@@ -558,7 +558,7 @@ How do I customize the color fill style in a Kendo UI DateTimePicker? Configure 
 
 ### footer `String`
 
- The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
+ The [template](/api/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
 
 
 <div class="meta-api-description">
@@ -697,7 +697,7 @@ The function context (available through the keyword `this`) will be set to the w
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/datetimepicker/methods/value) method **does not trigger** the `focusout` event of the datetimepicker.
+> **Important:** The [value](/api/ui/datetimepicker/methods/value) method **does not trigger** the `focusout` event of the datetimepicker.
 This can affect the floating label functionality.
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#datetimepicker").data("kendoDateTimePicker").label.floatingLabel.refresh();`
 
@@ -1151,7 +1151,7 @@ How to customize calendar cells for out-of-range dates in a month view of Kendo 
 ### popup `Object`
 
 The options that will be used for the popup initialization. For more details about the available options
-refer to [Popup](/api/javascript/ui/popup) documentation.
+refer to [Popup](/api/ui/popup) documentation.
 
 
 <div class="meta-api-description">
@@ -1442,7 +1442,7 @@ How do I set the initial date and time value in a Kendo UI DateTimePicker contro
 ## Fields
 
 ### options `Object`
-An object, which holds the [`configuration options`](/api/javascript/ui/datetimepicker#configuration) of the widget.
+An object, which holds the [`configuration options`](/api/ui/datetimepicker#configuration) of the widget.
 
 
 <div class="meta-api-description">
@@ -1842,9 +1842,9 @@ The time value to set for a DateTimePicker, expressed as a Date object or as a s
 
 `Date` The time value of a DateTimePicker.
 
-> * This method **does not trigger** [change](/api/javascript/ui/datetimepicker/events/change) event.
+> * This method **does not trigger** [change](/api/ui/datetimepicker/events/change) event.
 This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
     <input id="datetimepicker" />
     <script>

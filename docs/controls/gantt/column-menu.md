@@ -11,9 +11,9 @@ position: 8
 
 The Gantt provides a built-in option for triggering column operations through a menu.
 
-To enable the Column Menu implementation, use [`columnMenu:true`](/api/javascript/ui/gantt/configuration/columnmenu). As a result, the column headers of the Gantt's TreeList render a column menu, which allows the user to sort, filter, reorder, or change the visibility of a column. The column menu also detects when a specific column operation is disabled through the column definition and does not render the corresponding UI. For a runnable example, refer to the [demo on configuring the Columns in the Gantt](https://demos.telerik.com/kendo-ui/gantt/columns).
+To enable the Column Menu implementation, use [`columnMenu:true`](/api/ui/gantt/configuration/columnmenu). As a result, the column headers of the Gantt's TreeList render a column menu, which allows the user to sort, filter, reorder, or change the visibility of a column. The column menu also detects when a specific column operation is disabled through the column definition and does not render the corresponding UI. For a runnable example, refer to the [demo on configuring the Columns in the Gantt](https://demos.telerik.com/kendo-ui/gantt/columns).
 
-For more information about the available configuration properties, see the [Column Menu API reference](/api/javascript/ui/gantt/configuration/columnmenu).
+For more information about the available configuration properties, see the [Column Menu API reference](/api/ui/gantt/configuration/columnmenu).
 
 ## Column Reordering
 
@@ -79,5 +79,5 @@ As of Kendo UI R2 SP1 2023, the Gantt TreeList's Column Menu provides an option 
 
 ## See Also
 
-* [JavaScript API Reference of the Gantt](/api/javascript/ui/gantt)
+* [JavaScript API Reference of the Gantt](/api/ui/gantt)
 * [Kendo UI Knowledge Base](/knowledge-base)

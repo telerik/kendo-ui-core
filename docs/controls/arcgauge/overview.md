@@ -26,10 +26,10 @@ All graphics render on the client by using the [Scalable Vector Graphics (SVG)](
 
 * [Getting Started with the Kendo UI ArcGauge for jQuery]({% slug getting_started_kendoui_arcgauge_component %})
 * [Basic Usage of the ArcGauge (Demo)](https://demos.telerik.com/kendo-ui/arc-gauge/index)
-* [JavaScript API Reference of the ArcGauge](/api/javascript/dataviz/ui/arcgauge)
+* [JavaScript API Reference of the ArcGauge](/api/dataviz/ui/arcgauge)
 
 
 ## See Also
 
 * [Overview of the ArcGauge (Demo)](https://demos.telerik.com/kendo-ui/arc-gauge/index)
-* [JavaScript API Reference of the ArcGauge](/api/javascript/dataviz/ui/arcgauge)
+* [JavaScript API Reference of the ArcGauge](/api/dataviz/ui/arcgauge)

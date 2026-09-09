@@ -34,7 +34,7 @@ To achieve the desired scenario:
 1. Extend the default search logic by creating an array that will store both the default and search filters.
 1. If there are any search filters, push the search expression to the combined array.
 1. If there are other Grid filters, push the rest of them to the array.
-1. Filter the data source of the Grid with the combined array by using the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method.
+1. Filter the data source of the Grid with the combined array by using the [`filter`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/filter) method.
 
 The following example demonstrates the full implementation of the approach.
 

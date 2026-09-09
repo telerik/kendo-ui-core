@@ -22,15 +22,15 @@ The `drawing.drawDOM` allows you to create multi-page PDF content, specify manua
 To render a multiple-page PDF file, pass `multiPage: true` to the `Group` object, which you pass to `exportPDF` (master group). This group is then expected to contain in turn only `Group` shapes, one for each page (page groups). The PDF options that you pass to the master group apply to each page group, unless the page group overrides them.
 
 You can override the following options:
-- [`paperSize`](/api/javascript/drawing/pdfoptions/fields/papersize)
-- [`margin`](/api/javascript/drawing/pdfoptions/fields/margin)
-- [`landscape`](/api/javascript/drawing/pdfoptions/fields/landscape)
+- [`paperSize`](/api/drawing/pdfoptions/fields/papersize)
+- [`margin`](/api/drawing/pdfoptions/fields/margin)
+- [`landscape`](/api/drawing/pdfoptions/fields/landscape)
 
 > If the `paperSize` option for the master group is set to `"auto"` and the page groups do not override it, the paper size for each individual page is determined by its corresponding group. This means that the pages of the final document might be of different sizes.
 
 ## Automatic Page Breaking
 
-The `drawDOM` method supports automatic page breaking. To automatically implement the page breaks, set the [`paperSize`](/api/javascript/drawing/pdfoptions/fields/papersize) and [`margin`](/api/javascript/drawing/pdfoptions/fields/margin) options. You will still be able to apply the `forcePageBreak` configuration to manually specify the break points.
+The `drawDOM` method supports automatic page breaking. To automatically implement the page breaks, set the [`paperSize`](/api/drawing/pdfoptions/fields/papersize) and [`margin`](/api/drawing/pdfoptions/fields/margin) options. You will still be able to apply the `forcePageBreak` configuration to manually specify the break points.
 
 ```dojo
     <div id="grid"></div>

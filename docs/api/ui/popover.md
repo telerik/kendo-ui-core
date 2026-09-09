@@ -7,7 +7,7 @@ component: popover
 
 # kendo.ui.Popover
 
-Represents the Kendo UI Popover. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Popover. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -510,7 +510,7 @@ How do I set the height of a Kendo UI popover? Adjust, set, or control the verti
 
 Defines a value indicating whether the popover will show/hide only when clicking on the target element.
 
-> **Note:** **toggleOnClick** is supported only when [`showOn`](/api/javascript/ui/popover/configuration/showOn)* is set to **click**.
+> **Note:** **toggleOnClick** is supported only when [`showOn`](/api/ui/popover/configuration/showOn)* is set to **click**.
 
 
 <div class="meta-api-description">
@@ -662,7 +662,7 @@ How do I adjust the distance between a Kendo UI popover and its anchor point? Ad
 
 ### popup `kendo.ui.Popup`
 
-Contains the Kendo UI [`Popup`](/api/javascript/ui/popup) instance which manages the showing and hiding of the popovers at the appropriate position. The `popup` field can be used to apply custom CSS classes and styles, or any other attributes to the [`element` or `wrapper`](/intro/widget-basics/wrapper-element) settings of the Popup.
+Contains the Kendo UI [`Popup`](/api/ui/popup) instance which manages the showing and hiding of the popovers at the appropriate position. The `popup` field can be used to apply custom CSS classes and styles, or any other attributes to the [`element` or `wrapper`](/intro/widget-basics/wrapper-element) settings of the Popup.
 
 The `Popup` instance is available only once the Popover is shown.
 

@@ -131,7 +131,7 @@ The auto layout requires you to disable the scrolling functionality of the Grid.
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)
 * [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))
 * [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
 * [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})

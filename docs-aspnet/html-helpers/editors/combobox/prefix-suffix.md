@@ -179,4 +179,4 @@ The following example demonstrates how to add a button as a suffix of the ComboB
 
 * [Using the Prefix and Suffix of the ComboBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/prefix-suffix)
 * [Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/combobox)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/combobox)

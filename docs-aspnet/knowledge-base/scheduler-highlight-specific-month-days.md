@@ -32,7 +32,7 @@ How can I highlight dynamically specific dates within the Scheduler month view o
 1. Create an array of dates, which must be highlighted within the month view.
 1. Check if the current view is the month view.
 1. Select the Scheduler month table with jQuery and loop through the `td` elements.
-1. Get the time slot of the current table cell to access the `startDate` field by using the [`slotByElement()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/slotbyelement) method.
+1. Get the time slot of the current table cell to access the `startDate` field by using the [`slotByElement()`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/methods/slotbyelement) method.
 1. Check if the `startDate` matches the dates from the external collection of dates and add a custom `highlightedDay` class to the table cell element.
 1. Add the desired background color to the `highlightedDay` with CSS.
 
@@ -153,7 +153,7 @@ For a runnable example based on the code above, refer to the [REPL example on hi
 
 ## See Also
 
-* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
 * [Server-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/scheduler)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/scheduler)

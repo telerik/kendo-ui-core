@@ -93,7 +93,7 @@ The Grid's DataSource supports [`Count()` aggregate]({% slug htmlhelper_datasour
             var aggregateResult = 0;
 
             if (appliedFilters != null) { // Check if the Grid is filtered.
-                var dataQuery = new kendo.data.Query(allGridData); // Create a Query (https://docs.telerik.com/kendo-ui/api/javascript/data/query).
+                var dataQuery = new kendo.data.Query(allGridData); // Create a Query (https://docs.telerik.com/kendo-ui/api/data/query).
                 var filteredData = dataQuery.filter(appliedFilters).data; // Get a copy of the filtered data according to the applied filter expression.
                 aggregateResult = getAggregates(filteredData); // Pass the filtered records to the getAggregates() function to calculate the distinct values count.
             } else {
@@ -162,7 +162,7 @@ For a runnable example based on the code above, refer to the [REPL example on di
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)

@@ -39,7 +39,7 @@ How can I add some custom symbols to the Bubble layer of the Kendo UI for jQuery
 
 The Bubble Layer allows you to define the way symbols are rendered.
 
-This approach works by defining a [`symbol`](/api/javascript/dataviz/ui/map/configuration/layers.symbol) function that uses the [Drawing API]({% slug overview_kendoui_drawingapi %}) to define the shape. The symbol is typically a [Group](/api/javascript/drawing/group) of shapes.
+This approach works by defining a [`symbol`](/api/dataviz/ui/map/configuration/layers.symbol) function that uses the [Drawing API]({% slug overview_kendoui_drawingapi %}) to define the shape. The symbol is typically a [Group](/api/drawing/group) of shapes.
 
 The following example demonstrates how to render 200-kilometer lines in West-East direction as a symbol. Note that the lines get longer the farther you go North, which is due to that fact that the example uses the [Mercator Projection](https://en.wikipedia.org/wiki/Mercator_projection).
 
@@ -79,18 +79,18 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
             var location = e.location;
 
             // Find locations 100km west and east of center.
-            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/map/location/methods/destination
+            // https://docs.telerik.com/kendo-ui/api/dataviz/map/location/methods/destination
             // Actual distance can be bound to e.dataItem fields
             var l1 = location.destination(100000, 270);
             var l2 = location.destination(100000, 90);
 
             // View the (screen) coordinates for the locations.
-            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/methods/locationToView
+            // https://docs.telerik.com/kendo-ui/api/dataviz/ui/map/methods/locationToView
             var p1 = map.locationToView(l1);
             var p2 = map.locationToView(l2);
 
             // Draw the lines.
-            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/circle
+            // https://docs.telerik.com/kendo-ui/api/dataviz/drawing/circle
             var path = new draw.Path({
               stroke: {
                 width: 2,
@@ -115,4 +115,4 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
 
 * [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
 * [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
+* [JavaScript API Reference of the Map](/api/dataviz/ui/map)

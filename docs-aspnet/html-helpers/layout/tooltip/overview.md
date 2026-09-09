@@ -93,7 +93,7 @@ For a complete example on basic Tooltip events, refer to the [demo on using the 
 
 ## Referencing Existing Instances
 
-To reference an existing Tooltip instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Tooltip client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip#methods) to control its behavior.
+To reference an existing Tooltip instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Tooltip client-side API](https://docs.telerik.com/kendo-ui/api/ui/tooltip#methods) to control its behavior.
 
 ```
     // Place the following after your Telerik UI Tooltip for {{ site.framework }} declaration.
@@ -113,5 +113,5 @@ To reference an existing Tooltip instance, use the [`jQuery.data()`](https://api
 * [Tooltip in Razor Pages]({% slug htmlhelpers_tooltip_aspnetcore_razor_page %})
 {% endif %}
 * [Using the API of the Tooltip HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tooltip/api)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/tooltip)
 * [Server-Side API](/api/tooltip)

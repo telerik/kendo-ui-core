@@ -84,7 +84,7 @@ In this step, you will initialize the FileManager from the `<div>` element.
 
 ## 3. Specify the Data Source
 
-Here, you will specify a [`dataSource`](/api/javascript/ui/filemanager/configuration/datasource) instance and fetch the remote data.
+Here, you will specify a [`dataSource`](/api/ui/filemanager/configuration/datasource) instance and fetch the remote data.
 
 ```dojo
     <div id="filemanager"></div>
@@ -169,7 +169,7 @@ In this step, you will define the items that will be included in the Toolbar of 
 
 ## 5. Set the Upload URL
 
-By using the [`uploadUrl`](/api/javascript/ui/filemanager/configuration/uploadurl), you can set the path to the endpoint that will be used for the built-in Upload component in the ToolBar.
+By using the [`uploadUrl`](/api/ui/filemanager/configuration/uploadurl), you can set the path to the endpoint that will be used for the built-in Upload component in the ToolBar.
 
 ```dojo
     <div id="filemanager"></div>
@@ -219,8 +219,8 @@ By using the [`uploadUrl`](/api/javascript/ui/filemanager/configuration/uploadur
 
 ## 6. Define Template
 
-You can customize the preview pane through the [`noFileTemplate`](/api/javascript/ui/filemanager/configuration/previewpane.nofiletemplate), 
-[`singleFileTemplate`](/api/javascript/ui/filemanager/configuration/previewpane.singlefiletemplate), and [`multipleFilesTemplate`](/api/javascript/ui/filemanager/configuration/previewpane.multipleFilesTemplate).
+You can customize the preview pane through the [`noFileTemplate`](/api/ui/filemanager/configuration/previewpane.nofiletemplate), 
+[`singleFileTemplate`](/api/ui/filemanager/configuration/previewpane.singlefiletemplate), and [`multipleFilesTemplate`](/api/ui/filemanager/configuration/previewpane.multipleFilesTemplate).
 
 The following example demonstrates how to configure the `noFileTemplate`:
 
@@ -279,7 +279,7 @@ The following example demonstrates how to configure the `noFileTemplate`:
 
 ## See Also 
 
-* [JavaScript API Reference of the FileManager](/api/javascript/ui/filemanager)
+* [JavaScript API Reference of the FileManager](/api/ui/filemanager)
 * [Knowledge Base Section](/knowledge-base)
 
 

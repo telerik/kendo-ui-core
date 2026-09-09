@@ -160,7 +160,7 @@ You can reference the TextBox instances that you have created and build on top o
     </script>
     ```
 
-1. Use the [TextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox#methods) to control the behavior of the widget. In this example, you will use the `value()` method to change its current content.
+1. Use the [TextBox client-side API](https://docs.telerik.com/kendo-ui/api/ui/textbox#methods) to control the behavior of the widget. In this example, you will use the `value()` method to change its current content.
 
     ```JS script
     <script>
@@ -189,6 +189,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the TextBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textbox/api)
-* [Client-Side API of the TextBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox)
+* [Client-Side API of the TextBox](https://docs.telerik.com/kendo-ui/api/ui/textbox)
 * [Server-Side API of the TextBox](/api/textbox)
 * [Knowledge Base Section](/knowledge-base)

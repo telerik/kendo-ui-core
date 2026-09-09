@@ -30,7 +30,7 @@ components: ["scheduler"]
 By default, the resource object includes a specific set of fields (title, value, color, etc.). My resources dataSource returns those fields, but also includes other customer fields (a, b, x, y, z for example). Is there a way to use these values in the groupHeaderTemplate? 
 
 ## Solution
-* Crate a [`groupHeaderTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/group#groupheadertemplate) with the additional custom fields:
+* Crate a [`groupHeaderTemplate`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/group#groupheadertemplate) with the additional custom fields:
 
 ```
 <script id="groupHeaderTemplate" type="text/x-kendo-template">
@@ -71,4 +71,4 @@ By default, the resource object includes a specific set of fields (title, value,
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

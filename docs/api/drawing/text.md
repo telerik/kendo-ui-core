@@ -68,7 +68,7 @@ How do I specify the exact coordinates for the upper-left corner of text in Kend
     </script>
 
 ### options `Object`
-Represents an object containing the configuration options. All of the options are available in [Configuration](/api/javascript/drawing/text#configuration).
+Represents an object containing the configuration options. All of the options are available in [Configuration](/api/drawing/text#configuration).
 
 
 <div class="meta-api-description">
@@ -97,7 +97,7 @@ How do I customize the appearance of text in Kendo UI for jQuery drawingapi? Set
 
 ### clip `kendo.drawing.Path`
 The element clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element#configuration-clip)
+Inherited from [Element.clip](/api/drawing/element#configuration-clip)
 
 
 <div class="meta-api-description">
@@ -125,7 +125,7 @@ How do I mask text overflow with Kendo UI's drawingapi clip property? Set or adj
 
 ### cursor `String`
 The element cursor.
-Inherited from [Element.cursor](/api/javascript/drawing/element#configuration-cursor)
+Inherited from [Element.cursor](/api/drawing/element#configuration-cursor)
 
 
 <div class="meta-api-description">
@@ -208,7 +208,7 @@ How do I customize the font used in Kendo UI drawingapi elements? Control and co
 
 ### opacity `Number`
 The element opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-opacity)
+Inherited from [Element.opacity](/api/drawing/element#configuration-opacity)
 
 
 <div class="meta-api-description">
@@ -234,7 +234,7 @@ How to set transparency level for text elements in Kendo UI drawingapi? Adjust t
     </script>
 
 ### stroke `kendo.drawing.StrokeOptions`
-The [stroke options](/api/javascript/drawing/stroke-options/) of the text.
+The [stroke options](/api/drawing/stroke-options/) of the text.
 
 
 <div class="meta-api-description">
@@ -284,7 +284,7 @@ How to customize the tooltip display in Kendo UI drawing shapes? Control and cus
 
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
-Inherited from [Element.transform](/api/javascript/drawing/element#configuration-transform)
+Inherited from [Element.transform](/api/drawing/element#configuration-transform)
 
 
 <div class="meta-api-description">
@@ -310,7 +310,7 @@ How to rotate text in Kendo UI for jQuery dynamically? Control text appearance b
 
 ### visible `Boolean`
 A flag, indicating if the element is visible.
-Inherited from [Element.visible](/api/javascript/drawing/element#configuration-visible)
+Inherited from [Element.visible](/api/drawing/element#configuration-visible)
 
 
 <div class="meta-api-description">
@@ -342,7 +342,7 @@ How do I control the visibility of text in Kendo UI for jQuery drawingapi? Manag
 
 ### bbox
 Returns the bounding box of the element with transformations applied.
-Inherited from [Element.bbox](/api/javascript/drawing/element#methods-bbox)
+Inherited from [Element.bbox](/api/drawing/element#methods-bbox)
 
 
 <div class="meta-api-description">
@@ -374,7 +374,7 @@ How do I get the actual position of a scaled and rotated text element in Kendo U
 
 ### clip
 Gets or sets the element clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element#methods-clip)
+Inherited from [Element.clip](/api/drawing/element#methods-clip)
 
 
 <div class="meta-api-description">
@@ -411,7 +411,7 @@ The element clipping path.
 
 ### clippedBBox
 Returns the bounding box of the element with clipping and transformations applied.
-Inherited from [Element.clippedBBox](/api/javascript/drawing/element#methods-clippedBBox)
+Inherited from [Element.clippedBBox](/api/drawing/element#methods-clippedBBox)
 
 
 <div class="meta-api-description">
@@ -517,7 +517,7 @@ The new text content to set.
 
 
 ### fill
-Sets the text [fill](/api/javascript/drawing/text#configuration-fill).
+Sets the text [fill](/api/drawing/text#configuration-fill).
 
 
 <div class="meta-api-description">
@@ -545,10 +545,10 @@ How do I change the fill color of text elements dynamically in Kendo UI for jQue
 #### Parameters
 
 ##### color `String`
-The [fill color](/api/javascript/drawing/fill-options#fields-color) to set.
+The [fill color](/api/drawing/fill-options#fields-color) to set.
 
 ##### opacity `Number` *optional*
-The [fill opacity](/api/javascript/drawing/fill-options#fields-opacity) to set.
+The [fill opacity](/api/drawing/fill-options#fields-opacity) to set.
 
 #### Returns
 `kendo.drawing.Text` The current instance to allow chaining.
@@ -556,7 +556,7 @@ The [fill opacity](/api/javascript/drawing/fill-options#fields-opacity) to set.
 
 ### opacity
 Gets or sets the element opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element#methods-opacity)
+Inherited from [Element.opacity](/api/drawing/element#methods-opacity)
 
 If set, the stroke and fill opacity will be multiplied by the element opacity.
 
@@ -628,7 +628,7 @@ The new position of the text upper left corner.
 
 
 ### stroke
-Sets the text [stroke](/api/javascript/drawing/text#configuration-stroke).
+Sets the text [stroke](/api/drawing/text#configuration-stroke).
 
 
 <div class="meta-api-description">
@@ -657,13 +657,13 @@ How to dynamically change the outline color of text in a Kendo UI drawing elemen
 #### Parameters
 
 ##### color `String`
-The [stroke color](/api/javascript/drawing/stroke-options#fields-color) to set.
+The [stroke color](/api/drawing/stroke-options#fields-color) to set.
 
 ##### width `Number` *optional*
-The [stroke width](/api/javascript/drawing/stroke-options#fields-width) to set.
+The [stroke width](/api/drawing/stroke-options#fields-width) to set.
 
 ##### opacity `Number` *optional*
-The [stroke opacity](/api/javascript/drawing/stroke-options#fields-opacity) to set.
+The [stroke opacity](/api/drawing/stroke-options#fields-opacity) to set.
 
 #### Returns
 `kendo.drawing.Text` The current instance to allow chaining.
@@ -671,7 +671,7 @@ The [stroke opacity](/api/javascript/drawing/stroke-options#fields-opacity) to s
 
 ### transform
 Gets or sets the transformation of the element.
-Inherited from [Element.transform](/api/javascript/drawing/element#methods-transform)
+Inherited from [Element.transform](/api/drawing/element#methods-transform)
 
 
 <div class="meta-api-description">
@@ -708,7 +708,7 @@ The transformation to apply to the element.
 
 ### visible
 Gets or sets the visibility of the element.
-Inherited from [Element.visible](/api/javascript/drawing/element#methods-visible)
+Inherited from [Element.visible](/api/drawing/element#methods-visible)
 
 
 <div class="meta-api-description">

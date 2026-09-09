@@ -32,7 +32,7 @@ How can a new workbook's sheet be added with a single column of formatted cells 
 
 ## Solution
 
-A column can be added with [cell formatting](/framework/excel/appearance) during the [excelExport event](/api/javascript/ui/grid/events/excelexport) by defining an array for the rows, and configuring the cells appearance.
+A column can be added with [cell formatting](/framework/excel/appearance) during the [excelExport event](/api/ui/grid/events/excelexport) by defining an array for the rows, and configuring the cells appearance.
 
 ```javascript
   //set empty rows array
@@ -124,6 +124,6 @@ Then, push a [new workbook sheet](/framework/excel/sheets), and set the [workboo
 
 ## See Also
 
-- [JavaScript API Reference of the Kendo ooxml.Workbook](/api/javascript/ooxml/workbook)
+- [JavaScript API Reference of the Kendo ooxml.Workbook](/api/ooxml/workbook)
 - [jQuery Kendo UI Excel Export Overview](/framework/excel/introduction)
 - [jQuery Grid Export to Excel(Demo)](https://demos.telerik.com/kendo-ui/grid/excel-export)

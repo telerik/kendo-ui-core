@@ -106,4 +106,4 @@ The urlTemplate placeholders (zoom, x, y) are automatically populated by the Map
 ## See Also
 
 * [Azure Tile Map(Demo)](https://demos.telerik.com/kendo-ui/map/azure)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
+* [JavaScript API Reference of the Map](/api/dataviz/ui/map)

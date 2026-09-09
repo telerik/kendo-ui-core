@@ -8,7 +8,7 @@ component: toolbar
 
 # kendo.ui.ToolBar
 
-Represents the Kendo UI ToolBar. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ToolBar. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

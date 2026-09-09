@@ -9,7 +9,7 @@ position: 2
 
 # Keyboard Navigation
 
-To enable the Pager's keyboard navigation, set the [navigatable](/api/javascript/ui/pager/configuration/navigatable) property to `true`.
+To enable the Pager's keyboard navigation, set the [navigatable](/api/ui/pager/configuration/navigatable) property to `true`.
 
 For a complete example, refer to the [demo on the Pager's keyboard navigation feature](https://demos.telerik.com/kendo-ui/pager/keyboard-navigation).
 

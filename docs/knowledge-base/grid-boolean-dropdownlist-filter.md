@@ -55,7 +55,7 @@ When you initialize a DropDownList widget in the filtering UI, the column will n
           }
     ```
 
-1. Use the [`filterMenuInit`](/api/javascript/ui/grid/events/filtermenuinit) event of the Grid to replace the default filter label with more appropriate text.
+1. Use the [`filterMenuInit`](/api/ui/grid/events/filtermenuinit) event of the Grid to replace the default filter label with more appropriate text.
 
     ```
           function onFilterMenuInit(e){
@@ -66,7 +66,7 @@ When you initialize a DropDownList widget in the filtering UI, the column will n
           }
     ```
 
-1. Use the [`filter`](/api/javascript/ui/grid/events/filter) event of the Grid to replace the string value in the generated filter expression with its Boolean equivalent.
+1. Use the [`filter`](/api/ui/grid/events/filter) event of the Grid to replace the string value in the generated filter expression with its Boolean equivalent.
 
     ```
           function onFilter(e){

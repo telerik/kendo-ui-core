@@ -38,7 +38,7 @@ This knowledge base article also answers the following questions:
 
 To integrate buttons and checkboxes within a single DropDownButton component, and to prevent the dropdown from closing when checkbox items are clicked, follow the steps below:
 
-1. Utilize the `itemTemplate` configuration of the [DropDownButton](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton/configuration/itemtemplate) to customize the items within the dropdown. This template allows for the inclusion of both buttons and checkboxes.
+1. Utilize the `itemTemplate` configuration of the [DropDownButton](https://docs.telerik.com/kendo-ui/api/ui/dropdownbutton/configuration/itemtemplate) to customize the items within the dropdown. This template allows for the inclusion of both buttons and checkboxes.
 
 2. To prevent the dropdown from closing when certain items are clicked (e.g., checkboxes), handle the `click` event for these specific items and use a flag (`preventClose`) to control the closing behavior within the `close` event handler of the dropdown.
 
@@ -154,5 +154,5 @@ Full example:
 ## See Also
 
 - [Kendo UI for jQuery DropDownButton Overview](https://docs.telerik.com/kendo-ui/controls/navigation/dropdownbutton/overview)
-- [DropDownButton ItemTemplate Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton/configuration/itemtemplate)
+- [DropDownButton ItemTemplate Configuration](https://docs.telerik.com/kendo-ui/api/ui/dropdownbutton/configuration/itemtemplate)
 

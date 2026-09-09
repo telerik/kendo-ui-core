@@ -587,7 +587,7 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
 In order for a component to support [`value` binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value), you need to:
 
 * Add a `value` method to the component, which sets the current `widget` value and returns the current value if no arguments are passed.
-* [Trigger](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/trigger) the component `change` event when the `widget` value is changed.
+* [Trigger](https://docs.telerik.com/kendo-ui/api/ui/widget/methods/trigger) the component `change` event when the `widget` value is changed.
 
 The following examples demonstrate how to create a simple input v that selects the value on focus.
 

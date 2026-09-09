@@ -106,5 +106,5 @@ The ChipList component treats the avatar as an icon. To display an avatar, pass 
 ## See Also
 
 * [Applying the ChipList API (Demo)](https://demos.telerik.com/{{ site.platform }}/chiplist/api)
-* [JavaScript API Reference of the ChipList HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chiplist#methods)
+* [JavaScript API Reference of the ChipList HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/chiplist#methods)
 * [Server-Side API of the ChipList HtmlHelper for {{ site.framework }}](/api/chiplist)

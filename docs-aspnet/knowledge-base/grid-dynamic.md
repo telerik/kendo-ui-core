@@ -571,7 +571,7 @@ The following example shows how to create a dynamic Grid in a Razor Pages scenar
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the HtmlHelper Grid for {{ site.framework }}](/api/grid)
 * [Server-Side API Reference of the TagHelper Grid for {{ site.framework }}](/api/taghelpers/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})

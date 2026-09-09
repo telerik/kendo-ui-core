@@ -139,4 +139,4 @@ The `FillMode` specifies how the theme colors are applied to the component. The 
 
 ## See Also
 
-* [Badge Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/badge)
+* [Badge Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/badge)

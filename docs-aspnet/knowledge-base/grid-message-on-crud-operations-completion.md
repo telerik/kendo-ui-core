@@ -32,10 +32,10 @@ I have a Grid with CRUD operations. Once the `Controller` processes the request,
 To show a message when a `create`, `update`, or `delete` operation is performed in the Grid:
 
 1. Define a global `successfullOperation` variable to hold the text of the type of the operation.
-2. Subscribe and handle the [`RequestEnd` event](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/requestend) of the Grid's DataSource. There, set the value of the global variable.
-3. Subscribe to the [`Error` event](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/error) of the Grid's DataSource.
+2. Subscribe and handle the [`RequestEnd` event](https://docs.telerik.com/kendo-ui/api/data/datasource/events/requestend) of the Grid's DataSource. There, set the value of the global variable.
+3. Subscribe to the [`Error` event](https://docs.telerik.com/kendo-ui/api/data/datasource/events/error) of the Grid's DataSource.
 4. In the handler, set the value of the `successfulOperation` to be an empty string in case an `Error` event is thrown and the operation failes.
-5. Subscribe to the [`DataBound` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) of the Grid.
+5. Subscribe to the [`DataBound` event](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) of the Grid.
 6. In the `onDataBound` handler, check whether the global variable is set. If set, show the message.
 
 ```HtmlHelper
@@ -111,7 +111,7 @@ To explore the complete behavior, see the Telerik REPL example on how to [displa
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

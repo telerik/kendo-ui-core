@@ -6,7 +6,7 @@ res_type: api
 
 # kendo.drawing.Image : kendo.drawing.Element
 
-Draws a bitmap image with a given source URL into the specified [rectangle](/api/javascript/geometry/rect).
+Draws a bitmap image with a given source URL into the specified [rectangle](/api/geometry/rect).
 
 #### Example - draw an image
 
@@ -75,7 +75,7 @@ How do I set the position and size of an image in a Kendo UI drawing area using 
 
 ### clip `kendo.drawing.Path`
 The element clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element#configuration-clip)
+Inherited from [Element.clip](/api/drawing/element#configuration-clip)
 
 
 <div class="meta-api-description">
@@ -102,7 +102,7 @@ How to apply clipping shapes to a Kendo UI drawing image? Set or configure the v
 
 ### cursor `String`
 The element cursor.
-Inherited from [Element.cursor](/api/javascript/drawing/element#configuration-cursor)
+Inherited from [Element.cursor](/api/drawing/element#configuration-cursor)
 
 
 <div class="meta-api-description">
@@ -126,7 +126,7 @@ How to change cursor style when hovering over an image in a Kendo UI drawing? Co
 
 ### opacity `Number`
 The element opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-opacity)
+Inherited from [Element.opacity](/api/drawing/element#configuration-opacity)
 
 
 <div class="meta-api-description">
@@ -175,7 +175,7 @@ How to customize the tooltip for image shapes in Kendo UI drawingapi? Control an
 
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
-Inherited from [Element.transform](/api/javascript/drawing/element#configuration-transform)
+Inherited from [Element.transform](/api/drawing/element#configuration-transform)
 
 
 <div class="meta-api-description">
@@ -200,7 +200,7 @@ How to apply transformations to an image element in Kendo UI for jQuery? Control
 
 ### visible `Boolean`
 A flag, indicating if the element is visible.
-Inherited from [Element.visible](/api/javascript/drawing/element#configuration-visible)
+Inherited from [Element.visible](/api/drawing/element#configuration-visible)
 
 
 <div class="meta-api-description">
@@ -230,7 +230,7 @@ How do I control the visibility of an image in a Kendo UI drawing element? Set o
 
 ### bbox
 Returns the bounding box of the element with transformations applied.
-Inherited from [Element.bbox](/api/javascript/drawing/element#methods-bbox)
+Inherited from [Element.bbox](/api/drawing/element#methods-bbox)
 
 
 <div class="meta-api-description">
@@ -260,7 +260,7 @@ How do I get the exact bounding box coordinates of a transformed image in Kendo 
 
 ### clip
 Gets or sets the element clipping path.
-Inherited from [Element.clip](/api/javascript/drawing/element#methods-clip)
+Inherited from [Element.clip](/api/drawing/element#methods-clip)
 
 
 <div class="meta-api-description">
@@ -298,7 +298,7 @@ The element clipping path.
 
 ### clippedBBox
 Returns the bounding box of the element with clipping and transformations applied.
-Inherited from [Element.clippedBBox](/api/javascript/drawing/element#methods-clippedBBox)
+Inherited from [Element.clippedBBox](/api/drawing/element#methods-clippedBBox)
 
 
 <div class="meta-api-description">
@@ -367,7 +367,7 @@ The point that should be checked.
 
 ### opacity
 Gets or sets the element opacity.
-Inherited from [Element.opacity](/api/javascript/drawing/element#methods-opacity)
+Inherited from [Element.opacity](/api/drawing/element#methods-opacity)
 
 
 <div class="meta-api-description">
@@ -482,7 +482,7 @@ The new image rectangle.
 
 ### transform
 Gets or sets the transformation of the element.
-Inherited from [Element.transform](/api/javascript/drawing/element#methods-transform)
+Inherited from [Element.transform](/api/drawing/element#methods-transform)
 
 
 <div class="meta-api-description">
@@ -519,7 +519,7 @@ The transformation to apply to the element.
 
 ### visible
 Gets or sets the visibility of the element.
-Inherited from [Element.visible](/api/javascript/drawing/element#methods-visible)
+Inherited from [Element.visible](/api/drawing/element#methods-visible)
 
 
 <div class="meta-api-description">

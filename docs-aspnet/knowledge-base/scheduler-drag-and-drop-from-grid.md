@@ -105,7 +105,7 @@ How can I implement a Drag and Drop functionality to allow the user to move even
     ```
     {% endif %}
 
-1. Handle the [`DataBound`](/api/kendo.mvc.ui.fluent/schedulereventbuilder#databoundsystemstring) event of the Scheduler and call the `createDropArea()` function that creates the [drop target area](https://docs.telerik.com/kendo-ui/api/javascript/ui/droptargetarea) for the events that will be dropped into the current view.
+1. Handle the [`DataBound`](/api/kendo.mvc.ui.fluent/schedulereventbuilder#databoundsystemstring) event of the Scheduler and call the `createDropArea()` function that creates the [drop target area](https://docs.telerik.com/kendo-ui/api/ui/droptargetarea) for the events that will be dropped into the current view.
 
     ```HtmlHelper
         @(Html.Kendo().Scheduler<Telerik.Examples.Mvc.Areas.SchedulerDragAndDrop.Models.MeetingViewModel>()
@@ -164,7 +164,7 @@ How can I implement a Drag and Drop functionality to allow the user to move even
             }
         </script>
     ```
-1. Within the [`$(document).ready()`](https://learn.jquery.com/using-jquery-core/document-ready/) function, get a reference to the Grid and use the [Kendo UI for jQuery Draggable](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable) widget to allow the row elements to be moved.
+1. Within the [`$(document).ready()`](https://learn.jquery.com/using-jquery-core/document-ready/) function, get a reference to the Grid and use the [Kendo UI for jQuery Draggable](https://docs.telerik.com/kendo-ui/api/ui/draggable) widget to allow the row elements to be moved.
 
     ```JS
     <script type="text/javascript">
@@ -231,7 +231,7 @@ For a runnable example, refer to the [ASP.NET MVC application](https://github.co
 
 ## See Also
 
-* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
 * [Server-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/scheduler)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/scheduler)

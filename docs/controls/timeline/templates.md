@@ -111,4 +111,4 @@ The following example demonstrates how to customize the template of the Timeline
 ## See Also
 
 * [Templates in the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/templates)
-* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)
+* [JavaScript API Reference of the Timeline](/api/ui/timeline)

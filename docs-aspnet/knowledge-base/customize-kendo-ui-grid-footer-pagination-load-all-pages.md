@@ -35,17 +35,17 @@ To customize the pagination drop-down in the {{ site.product }} Grid Grid footer
 <div id="customPager"></div>
 ```
 
-3. In the [`document.ready`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/datasource) scope, retrieve the [`dataSource`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/datasource) instance of the {{ site.product }} Grid Grid.
+3. In the [`document.ready`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/datasource) scope, retrieve the [`dataSource`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/datasource) instance of the {{ site.product }} Grid Grid.
 
-4. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) Event of the Grid.
+4. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) Event of the Grid.
 
-5. In the Event handler, Use the [`totalPages`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/totalpages) method of the `dataSource` to get the page count of the Grid.
+5. In the Event handler, Use the [`totalPages`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/totalpages) method of the `dataSource` to get the page count of the Grid.
 
 6. Implement a DropDownList using the custom div element from step 2, with items ranging from 1 to the page count obtained in step 4.
 
-7. Attach a [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/change) event handler to the DropDownList.
+7. Attach a [`change`](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/events/change) event handler to the DropDownList.
 
-8. In the event handler, retrieve the current value of the DropDownList and set it as the current page of the Grid using the [`page`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page) method of the `dataSource`.
+8. In the event handler, retrieve the current value of the DropDownList and set it as the current page of the Grid using the [`page`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/page) method of the `dataSource`.
 
 Here is an example implementation:
 
@@ -117,7 +117,7 @@ function onChange() {
 
 ## See Also
 
-* [Client-Side API Reference of the Grid  for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid  for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid  for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik REPL: Change the Grid Pager to a Slider](https://netcorerepl.telerik.com/cnOGGPlA21RzEjkG12)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})

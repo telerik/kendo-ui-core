@@ -29,7 +29,7 @@ How can I select a range of dates in the Kendo Calendar widget?
 
 ## Solution
 
-Once the user chooses both the end and start dates, select the dates in the selected range by using the [`selectDates` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/methods/selectdates).
+Once the user chooses both the end and start dates, select the dates in the selected range by using the [`selectDates` method](https://docs.telerik.com/kendo-ui/api/ui/calendar/methods/selectdates).
 
 ```dojo
     <label>Start:</label>
@@ -89,6 +89,6 @@ Once the user chooses both the end and start dates, select the dates in the sele
 
 ## See Also
 
-* [API Reference of the DatePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
-* [API Reference of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
-* [API Reference of the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the DatePicker](https://docs.telerik.com/kendo-ui/api/ui/datepicker)
+* [API Reference of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker)
+* [API Reference of the Calendar](https://docs.telerik.com/kendo-ui/api/ui/calendar)

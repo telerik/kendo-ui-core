@@ -39,4 +39,4 @@ The below example demonstrates the overflowing feature.
 
 ## See Also
 
-* [JavaScript API Reference of the Breadcrumb](/api/javascript/ui/breadcrumb)
+* [JavaScript API Reference of the Breadcrumb](/api/ui/breadcrumb)

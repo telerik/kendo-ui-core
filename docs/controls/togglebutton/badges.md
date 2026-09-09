@@ -11,7 +11,7 @@ position: 4
 
 The ToggleButton can incorporate a [Badge](https://docs.telerik.com/kendo-ui/controls/badge/overview) to enhance the meaning of the text content.
 
-The ToggleButton provides the `badge` setting for configuring the ToggleButton's Badge. The [API](https://docs.telerik.com/kendo-ui/api/javascript/ui/badge) exposes several methods that you can use to customize the appearance of the Badge:
+The ToggleButton provides the `badge` setting for configuring the ToggleButton's Badge. The [API](https://docs.telerik.com/kendo-ui/api/ui/badge) exposes several methods that you can use to customize the appearance of the Badge:
 
 * `shape`&mdash;Specifies the shape of the badge. The default value is `rounded`.
 * `size`&mdash;Sets the proportions of the badge. The default size is `medium`

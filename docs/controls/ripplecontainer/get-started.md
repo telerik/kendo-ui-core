@@ -66,7 +66,7 @@ Next, set the contents of the RippleContainer. The ripple effect will be applied
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery RippleContainer](/api/javascript/ui/ripplecontainer)
+* [JavaScript API Reference of the jQuery RippleContainer](/api/ui/ripplecontainer)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -82,4 +82,4 @@ The following example demonstrates how to implement [a custom MVVM binding]({% s
 
 * [Basic Usage of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
 * [Using the API of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/api)
-* [JavaScript API Reference of the MaskedTextBox](/api/javascript/ui/maskedtextbox)
+* [JavaScript API Reference of the MaskedTextBox](/api/ui/maskedtextbox)

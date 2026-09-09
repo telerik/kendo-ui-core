@@ -130,9 +130,9 @@ The kendo.ui.imageeditor namespace exposes the ImageEditorCommand class that cou
 
 ## Loading Images in the ImageEditor
 
-If [imageUrl](/api/javascript/ui/imageeditor/configuration/imageurl) configuration option is used to set a predefined image for the ImageEditor and the image is hosted on another domain, the image editing tools will be disabled. If loading of an image from another domain is required, either using the [imageUrl](/api/javascript/ui/imageeditor/configuration/imageurl) configuration option or the [drawImage](/api/javascript/ui/imageeditor/methods/drawimage) method, provide the image as base64string. When the image is loaded from the same domain make sure a relative path to the image is used or the image is provided as base64string.
+If [imageUrl](/api/ui/imageeditor/configuration/imageurl) configuration option is used to set a predefined image for the ImageEditor and the image is hosted on another domain, the image editing tools will be disabled. If loading of an image from another domain is required, either using the [imageUrl](/api/ui/imageeditor/configuration/imageurl) configuration option or the [drawImage](/api/ui/imageeditor/methods/drawimage) method, provide the image as base64string. When the image is loaded from the same domain make sure a relative path to the image is used or the image is provided as base64string.
 
 ## See Also
 
 * [Overview of the ImageEditor (Demo)](https://demos.telerik.com/kendo-ui/imageeditor/index)
-* [JavaScript API Reference of the ImageEditor](/api/javascript/ui/imageeditor)
+* [JavaScript API Reference of the ImageEditor](/api/ui/imageeditor)

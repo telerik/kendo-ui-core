@@ -26,9 +26,9 @@ The Rating allows to intuitively rate by selecting number of items stars from a 
 
 * [Getting Started with the Kendo UI Rating for jQuery]({% slug getting_started_kendoui_rating_widget %})
 * [Demo Page for the Rating](https://demos.telerik.com/kendo-ui/rating/index)
-* [JavaScript API Reference of the Rating](/api/javascript/ui/rating)
+* [JavaScript API Reference of the Rating](/api/ui/rating)
 
 ## See Also
 
 * [Basic Usage of the Rating (Demo)](https://demos.telerik.com/kendo-ui/rating/index)
-* [JavaScript API Reference of the Rating](/api/javascript/ui/rating)
+* [JavaScript API Reference of the Rating](/api/ui/rating)

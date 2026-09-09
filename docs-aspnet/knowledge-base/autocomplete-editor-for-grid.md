@@ -122,7 +122,7 @@ The AutoComplete editor will provide a convenient list of options to hint the us
     ```
     {% endif %}
 
-1. Handle the [`Change`](/api/kendo.mvc.ui.fluent/datasourceeventbuilder#changesystemstring) event of the Grid's DataSource and update the **Person** field of the respective record when its current value is changed through the AutoComplete editor. Then, trigger the [`closeCell()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/closecell) method of the Grid to exit edit mode.
+1. Handle the [`Change`](/api/kendo.mvc.ui.fluent/datasourceeventbuilder#changesystemstring) event of the Grid's DataSource and update the **Person** field of the respective record when its current value is changed through the AutoComplete editor. Then, trigger the [`closeCell()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/closecell) method of the Grid to exit edit mode.
 
     ```JS
     <script type="text/javascript">

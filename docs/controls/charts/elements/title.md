@@ -9,7 +9,7 @@ slug: title_features_charts
 
 # Title
 
-To configure the Chart title, use the [`title`](/api/javascript/dataviz/ui/chart/configuration/title) option.
+To configure the Chart title, use the [`title`](/api/dataviz/ui/chart/configuration/title) option.
 
 By default, the Chart displays no title.
 
@@ -38,7 +38,7 @@ The following example demonstrates how to configure the title font and alignment
 
 ## Title Position
 
-To control the position of the title, use the [`position`](/api/javascript/dataviz/ui/chart/configuration/title#titleposition) options of the `title` property.
+To control the position of the title, use the [`position`](/api/dataviz/ui/chart/configuration/title#titleposition) options of the `title` property.
 
 The following example demonstrates how to display the title at the bottom of the Chart:
 
@@ -66,7 +66,7 @@ The following example demonstrates how to display the title at the bottom of the
 
 # Subtitle
 
-The Kendo UI Chart supports configuring an additional subtitle via the [`subtitle`](/api/javascript/dataviz/ui/chart/configuration/subtitle) option.
+The Kendo UI Chart supports configuring an additional subtitle via the [`subtitle`](/api/dataviz/ui/chart/configuration/subtitle) option.
 
 By default, the subtitle is displayed below the main title.
 
@@ -94,4 +94,4 @@ The following example demonstrates how to configure a subtitle:
 ## See Also
 
 * [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

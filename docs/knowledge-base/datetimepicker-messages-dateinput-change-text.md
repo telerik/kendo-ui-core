@@ -29,8 +29,8 @@ How can I configure the messages of the date input in the Kendo UI DateTimePicke
 
 ## Solution
 
-1. Reference the date input by using the [`setOptions` method of the DateTimePicker](/api/javascript/ui/datetimepicker/methods/setoptions).
-1. Change its [`messages`](/api/javascript/ui/dateinput/configuration/messages).
+1. Reference the date input by using the [`setOptions` method of the DateTimePicker](/api/ui/datetimepicker/methods/setoptions).
+1. Change its [`messages`](/api/ui/dateinput/configuration/messages).
 
 ```dojo
     <input id="datetimepicker" title="datetimepicker" style="width: 100%;" />
@@ -59,5 +59,5 @@ How can I configure the messages of the date input in the Kendo UI DateTimePicke
 
 ## See Also
 
-* [setOptions - Documentation and API Reference ](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/setoptions)
-* [messages - Documentation and API Reference ](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput/configuration/messages)
+* [setOptions - Documentation and API Reference ](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker/methods/setoptions)
+* [messages - Documentation and API Reference ](https://docs.telerik.com/kendo-ui/api/ui/dateinput/configuration/messages)

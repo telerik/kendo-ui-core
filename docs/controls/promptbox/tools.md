@@ -15,7 +15,7 @@ These tools include the Action Button for submitting prompts, the File Select Bu
 
 ## Action Button
 
-The action button submits the prompt. Customize its [appearance]({% slug appearance_kendoui_promptbox %}) and behavior by setting the [`actionButton`](/api/javascript/ui/promptbox/configuration/actionbutton) option.
+The action button submits the prompt. Customize its [appearance]({% slug appearance_kendoui_promptbox %}) and behavior by setting the [`actionButton`](/api/ui/promptbox/configuration/actionbutton) option.
 
 The button supports loading state for better user feedback during prompt submission and icon customizations for each state.
 
@@ -30,7 +30,7 @@ The button supports loading state for better user feedback during prompt submiss
 
 ## Speech-to-Text Button
 
-The speech-to-text button enables you to input prompts with voice commands. Customize its [appearance]({% slug appearance_kendoui_promptbox %}) and behavior by setting the [`speechToTextButton`](/api/javascript/ui/promptbox/configuration/speechtotextbutton) option to a configuration object. The button provides visual feedback during the speech recognition process.
+The speech-to-text button enables you to input prompts with voice commands. Customize its [appearance]({% slug appearance_kendoui_promptbox %}) and behavior by setting the [`speechToTextButton`](/api/ui/promptbox/configuration/speechtotextbutton) option to a configuration object. The button provides visual feedback during the speech recognition process.
 
 ```javascript
     $("#promptbox").kendoPromptBox({
@@ -42,9 +42,9 @@ The speech-to-text button enables you to input prompts with voice commands. Cust
 
 ## File Select Button
 
-The file select button allows you to attach files to prompts. Customize its [appearance]({% slug appearance_kendoui_promptbox %}), behavior and file restrictions by setting the [`fileSelectButton`](/api/javascript/ui/promptbox/configuration/fileselectbutton) option.
+The file select button allows you to attach files to prompts. Customize its [appearance]({% slug appearance_kendoui_promptbox %}), behavior and file restrictions by setting the [`fileSelectButton`](/api/ui/promptbox/configuration/fileselectbutton) option.
 
-To enable file attachments in the PromptBox, set the [`fileSelectButton`](/api/javascript/ui/promptbox/configuration/fileselectbutton) option to `true` or use a configuration object for further customization.
+To enable file attachments in the PromptBox, set the [`fileSelectButton`](/api/ui/promptbox/configuration/fileselectbutton) option to `true` or use a configuration object for further customization.
 
 ```javascript
     $("#promptbox").kendoPromptBox({
@@ -100,4 +100,4 @@ You can restrict the allowed file types for attachments by setting the `allowedE
 ## See Also
 
 * [PromptBox Adornments]({% slug adornments_kendoui_promptbox %})
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)

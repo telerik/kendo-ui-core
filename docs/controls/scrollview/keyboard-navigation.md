@@ -11,7 +11,7 @@ position: 3
 
 The keyboard navigation of the ScrollView is always available.
 
-To enable it, use the [`navigatable`](/api/javascript/ui/scrollview/configuration/navigatable) property. For a complete example, refer to the [demo on using the keyboard navigation of the ScrollView](https://demos.telerik.com/kendo-ui/scrollview/keyboard-navigation).
+To enable it, use the [`navigatable`](/api/ui/scrollview/configuration/navigatable) property. For a complete example, refer to the [demo on using the keyboard navigation of the ScrollView](https://demos.telerik.com/kendo-ui/scrollview/keyboard-navigation).
 
 The ScrollView supports the following keyboard shortcuts:
 

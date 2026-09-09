@@ -14,7 +14,7 @@ You can configure the way the RangeSlider divides its range and updates the valu
 
 ## Small Steps
 
-To define the small step of the RangeSlider, use the [smallStep](/api/javascript/ui/rangeslider/configuration/smallstep) property. Based on the `min` and `max` values, the RangeSlider splits the track into equal ticks.
+To define the small step of the RangeSlider, use the [smallStep](/api/ui/rangeslider/configuration/smallstep) property. Based on the `min` and `max` values, the RangeSlider splits the track into equal ticks.
 
 When the handles are dragged, the RangeSlider value changes with small steps. The `smallStep` property accepts both `integer` and `float` values.
 
@@ -35,7 +35,7 @@ When the handles are dragged, the RangeSlider value changes with small steps. Th
 
 ## Large Step
 
-To define the large step of the RangeSlider, use the [largeStep](/api/javascript/ui/rangeslider/configuration/largestep) property. The property specifies that every n<sup>th</sup> step will render a large tick and a label. The `largeStep` value determines the step with which the RangeSlider will be updated when the Page Up and Page Down arrow keys are pressed. Must be a positive integer.
+To define the large step of the RangeSlider, use the [largeStep](/api/ui/rangeslider/configuration/largestep) property. The property specifies that every n<sup>th</sup> step will render a large tick and a label. The `largeStep` value determines the step with which the RangeSlider will be updated when the Page Up and Page Down arrow keys are pressed. Must be a positive integer.
 
 ```dojo
     <div id="rangeSlider">
@@ -56,4 +56,4 @@ To define the large step of the RangeSlider, use the [largeStep](/api/javascript
 ## See Also 
 
 * [Orientation in the Kendo UI RangeSlider for jQuery]({% slug orientation_rangeslider_widget %})
-* [JavaScript API Reference of the RangeSlider](/api/javascript/ui/rangeslider)
+* [JavaScript API Reference of the RangeSlider](/api/ui/rangeslider)

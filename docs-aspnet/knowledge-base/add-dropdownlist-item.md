@@ -33,7 +33,7 @@ How can I add a new item if it doesn't exist when working with the {{ site.produ
 1. Set the filter type for the DropDownList through the [`.Filter()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlistbuilder#nodatatemplateidsystemstring).
 1. Specify a [`NoDataTemplate`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlistbuilder#nodatatemplatesystemstring) which will display an add confirmation dialog.
 1. Inside the template, create a button and attach a handler that passes both the widget `id` and input `value`.
-1. [`Sync`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/sync) the data to update the records.
+1. [`Sync`](https://docs.telerik.com/kendo-ui/api/data/datasource/events/sync) the data to update the records.
 
 ```Razor Index.cshtml
     @using Telerik.Examples.Mvc.Models
@@ -176,7 +176,7 @@ For the complete implementation of the suggested approach, refer to [this GitHub
 
 ## See Also
 
-* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist)
 * [Server-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/dropdownlist)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

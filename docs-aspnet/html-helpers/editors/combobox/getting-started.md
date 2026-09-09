@@ -285,7 +285,7 @@ To use the client-side API of the ComboBox and build on top of its initial confi
         </script>
     ```
 
-1. Use the [ComboBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#methods) to control the behavior of the control. In this example, you will use the `value` method to select an item.
+1. Use the [ComboBox client-side API](https://docs.telerik.com/kendo-ui/api/ui/combobox#methods) to control the behavior of the control. In this example, you will use the `value` method to select an item.
 
     ```JS script
         <script>
@@ -315,6 +315,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the ComboBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/api)
-* [Client-Side API of the ComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [Client-Side API of the ComboBox](https://docs.telerik.com/kendo-ui/api/ui/combobox)
 * [Server-Side API of the ComboBox](/api/combobox)
 * [Knowledge Base Section](/knowledge-base)

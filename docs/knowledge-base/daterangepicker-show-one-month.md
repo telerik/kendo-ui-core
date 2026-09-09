@@ -28,7 +28,7 @@ ticketid: 1699094
 
 ## Description
 
-I want the Kendo UI for jQuery [DateRangePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker) to display only one month when opened instead of two months. This behavior is needed to simplify the selection view for users.
+I want the Kendo UI for jQuery [DateRangePicker](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker) to display only one month when opened instead of two months. This behavior is needed to simplify the selection view for users.
 
 This knowledge base article also answers the following questions:
 - How to customize DateRangePicker to show one month only?
@@ -37,7 +37,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To achieve this behavior, handle the [`open`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/daterangepicker/events/open) event of the DateRangePicker. In the event handler, customize the internal MultiViewCalendar by setting its [`views`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiviewcalendar/configuration/views) option to `1`. Use the following code snippet:
+To achieve this behavior, handle the [`open`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/daterangepicker/events/open) event of the DateRangePicker. In the event handler, customize the internal MultiViewCalendar by setting its [`views`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiviewcalendar/configuration/views) option to `1`. Use the following code snippet:
 
 ```javascript
 $("#daterangepicker").kendoDateRangePicker({
@@ -83,6 +83,6 @@ This will ensure that only one month is displayed when the DateRangePicker is op
 
 ## See Also
 
-- [DateRangePicker API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/daterangepicker)
-- [MultiViewCalendar API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+- [DateRangePicker API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/daterangepicker)
+- [MultiViewCalendar API](https://docs.telerik.com/kendo-ui/api/ui/multiviewcalendar)
 - [DateRangePicker Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/daterangepicker/overview)

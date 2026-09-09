@@ -31,7 +31,7 @@ ticketid: 1698589
 In Kendo UI for jQuery [Scheduler](https://www.telerik.com/kendo-jquery-ui/documentation/controls/scheduler/overview), the `scrollToHour` function may fail to scroll to the correct time slot after a programmatic `scheduler.dataSource.read()` refresh. This issue occurs due to differences in slot rendering between data refreshes and view switches, especially on high-DPI monitors with display scaling. The issue is more prominent when using intervals smaller than 60 minutes, such as 30, 15, or 10 minutes.
 
 This knowledge base article also answers the following questions:
-- How to fix scrollToHour not working after [`scheduler.dataSource.read()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/data/datasource/methods/read)?
+- How to fix scrollToHour not working after [`scheduler.dataSource.read()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/data/datasource/methods/read)?
 - How to calculate the correct scroll position for different time slot intervals in Kendo Scheduler?
 - Why does scrollToHour behave inconsistently after data refresh in Kendo Scheduler?
 
@@ -41,7 +41,7 @@ Follow these steps to fix the scrollToHour functionality.
 
 ### Updated scrollToHour Function
 
-Use the following updated `scrollToHour` function to calculate the correct scroll position based on [`majorTick`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/scheduler/configuration/majortick) and [`minorTickCount`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/scheduler/configuration/minortickcount) options.
+Use the following updated `scrollToHour` function to calculate the correct scroll position based on [`majorTick`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/scheduler/configuration/majortick) and [`minorTickCount`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/scheduler/configuration/minortickcount) options.
 
 ```javascript
 function scrollToHour(targetHour) {
@@ -236,5 +236,5 @@ The following example renders a Scheduler with a **Read** button. Clicking the b
 ## See Also
 
 - [Kendo UI Scheduler Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/scheduler/overview)
-- [Scheduler Configuration Options](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/scheduler#configuration)
-- [Scheduler View Options](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/scheduler)
+- [Scheduler Configuration Options](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/scheduler#configuration)
+- [Scheduler View Options](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/scheduler)

@@ -151,6 +151,6 @@ The following values are available for the `Rounded` option:
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance of the Button HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/appearance)
 * [Button Server-Side API](/api/button)
-* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/button)
+* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/button)
 
 

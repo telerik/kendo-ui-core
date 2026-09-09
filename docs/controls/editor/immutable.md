@@ -17,7 +17,7 @@ Although the immutable elements can not be modified, they can be removed. The ac
 
 ## Enabling Immutable Elements
 
-To define the immutable elements in the content area, set the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To make the Editor prevent the user from editing this element, you also need to enable the [`immutables`](/api/javascript/ui/editor/configuration/immutables) option.
+To define the immutable elements in the content area, set the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To make the Editor prevent the user from editing this element, you also need to enable the [`immutables`](/api/ui/editor/configuration/immutables) option.
 
 ```dojo
     <textarea id="editor">
@@ -34,7 +34,7 @@ To define the immutable elements in the content area, set the [`contenteditable`
 
 ## Serializing Immutables
 
-The [`immutables.serialization`](/api/javascript/ui/editor/configuration/immutables#immutablesserialization) option enables you to control the HTML representation of the immutable elements in the **viewHtml** dialog.
+The [`immutables.serialization`](/api/ui/editor/configuration/immutables#immutablesserialization) option enables you to control the HTML representation of the immutable elements in the **viewHtml** dialog.
 
 The `immutables.serialization` configuration option accepts the following parameters:
 
@@ -103,7 +103,7 @@ The `immutables.serialization` configuration option accepts the following parame
 
 ## Deserializing Immutables
 
-The [`immutables.deserialization`](/api/javascript/ui/editor/configuration/immutables#immutablesdeserialization) does the opposite of the `immutables.serialization` one&mdash;it takes the HTML representation from the **viewHtml** dialog and alters the immutable DOM element based on the logic implemented in the callback function.
+The [`immutables.deserialization`](/api/ui/editor/configuration/immutables#immutablesdeserialization) does the opposite of the `immutables.serialization` one&mdash;it takes the HTML representation from the **viewHtml** dialog and alters the immutable DOM element based on the logic implemented in the callback function.
 
 The following example demonstrates how to use the `immutables.serialization` and `immutables.deserialization` options to expose the CSS `text-align` property in the **viewHtml** dialog so that the user is able to change it from the HTML code.
 
@@ -130,7 +130,7 @@ The following example demonstrates how to use the `immutables.serialization` and
 
 To decorate all `contenteditable="false"` elements and improve user experience (UX), use a CSS rule.
 
-* If you use the [classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), add the CSS rule to an external CSS file adjoined to the [stylesheet collection](/api/javascript/ui/editor/configuration/stylesheets) of the Editor.
+* If you use the [classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), add the CSS rule to an external CSS file adjoined to the [stylesheet collection](/api/ui/editor/configuration/stylesheets) of the Editor.
 * If you use the [inline mode]({% slug overview_kendoui_editor_widget %}#inline-mode), place the CSS rule on the page as demonstrated in the following example.
 
 ```dojo
@@ -166,4 +166,4 @@ The immutable elements will be removed when one of the following actions is perf
 ## See Also
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

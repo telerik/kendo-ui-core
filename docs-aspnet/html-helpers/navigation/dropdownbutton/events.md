@@ -83,4 +83,4 @@ For a complete example on basic DropDownButton events, refer to the [demo on usi
 
 * [Using the API of the DropDownButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/api)
 * [DropDownButton Server-Side API](/api/dropdownbutton)
-* [DropDownButton Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton)
+* [DropDownButton Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/dropdownbutton)

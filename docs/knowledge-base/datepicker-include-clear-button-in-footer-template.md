@@ -30,7 +30,7 @@ components: ["timepicker"]
 How can I add a clear button to the footer of a Kendo UI DatePicker?
 
 ## Solution
-The clear button can be appended to the [Kendo UI DatePicker's footer](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/footer) during the [Open event](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/events/open).  
+The clear button can be appended to the [Kendo UI DatePicker's footer](https://docs.telerik.com/kendo-ui/api/ui/datepicker/configuration/footer) during the [Open event](https://docs.telerik.com/kendo-ui/api/ui/datepicker/events/open).  
 
 ```javascript
      function onOpen(e) {
@@ -94,5 +94,5 @@ The following example demonstrates two DatePicker instances, each with a **Clear
 ```
 
 ## See Also
-* [footer Configuration - API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/footer)
-* [open Event - API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/events/open)
+* [footer Configuration - API Reference](https://docs.telerik.com/kendo-ui/api/ui/datepicker/configuration/footer)
+* [open Event - API Reference](https://docs.telerik.com/kendo-ui/api/ui/datepicker/events/open)

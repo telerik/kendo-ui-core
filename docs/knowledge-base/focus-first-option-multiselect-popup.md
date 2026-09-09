@@ -39,7 +39,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To focus the first option in the MultiSelect popup when it opens, handle the [`open`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect/events/open) event. Use a small timeout to ensure the popup is fully rendered, and programmatically set the first item as the current one.
+To focus the first option in the MultiSelect popup when it opens, handle the [`open`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect/events/open) event. Use a small timeout to ensure the popup is fully rendered, and programmatically set the first item as the current one.
 
 1. Attach an `open` event handler to the MultiSelect.
 2. In the handler, ensure all list items are cleared of focus and hover states.
@@ -98,5 +98,5 @@ Below is a runnable example:
 ## See Also
 
 - [Kendo UI for jQuery MultiSelect Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/multiselect/overview)
-- [Kendo UI for jQuery MultiSelect API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+- [Kendo UI for jQuery MultiSelect API Reference](https://docs.telerik.com/kendo-ui/api/ui/multiselect)
 - [Kendo UI for jQuery MultiSelect Overview (Demo)](https://demos.telerik.com/kendo-ui/multiselect/index)

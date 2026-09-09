@@ -15,7 +15,7 @@ The Telerik UI for {{ site.framework }} MediaPlayer enables you to create your o
 
 Players usually feature a different video based on user action. To implement your own **Playlist** structures, change the source of the MediaPlayer dynamically. For a runnable example, refer to the [demo on creating your own playlists in the MediaPlayer](https://demos.telerik.com/{{ site.platform }}/mediaplayer/playlist) which uses the ListView to create a list that holds the videos right next to the MediaPlayer element.
 
-To change the existing source of the MediaPlayer, use the MediaPlayer client-side [`media()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer/methods/media) method.
+To change the existing source of the MediaPlayer, use the MediaPlayer client-side [`media()`](https://docs.telerik.com/kendo-ui/api/ui/mediaplayer/methods/media) method.
 
 ```
     <script>

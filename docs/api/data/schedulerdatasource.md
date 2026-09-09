@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.data.SchedulerDataSource
 
-The data source used by the [kendo.ui.Scheduler](/api/javascript/ui/scheduler) widget.
+The data source used by the [kendo.ui.Scheduler](/api/ui/scheduler) widget.
 Inherits from [kendo.data.DataSource](/api/framework/datasource). The SchedulerDataSource contains instances of the
 [kendo.data.SchedulerEvent](/api/framework/schedulerevent) class.
 
@@ -121,7 +121,7 @@ How do I customize the event model schema in Kendo UI Scheduler's data source? D
 ### schema.timezone `String`
 
 The timezone which the data source will use to convert the scheduler event dates. By default the current system timezone is used.
-If the data source is initialized by the scheduler, its [timezone](/api/javascript/ui/scheduler/configuration/timezone) option will be used.
+If the data source is initialized by the scheduler, its [timezone](/api/ui/scheduler/configuration/timezone) option will be used.
 
 The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
 

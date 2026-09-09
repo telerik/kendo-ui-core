@@ -26,4 +26,4 @@ The following example demonstrates how to asynchronously load content to the Too
 ## See Also
 
 * [Loading Content with AJAX in the Tooltip (Demo)](https://demos.telerik.com/kendo-ui/tooltip/ajax)
-* [JavaScript API Reference of the Tooltip](/api/javascript/ui/tooltip)
+* [JavaScript API Reference of the Tooltip](/api/ui/tooltip)

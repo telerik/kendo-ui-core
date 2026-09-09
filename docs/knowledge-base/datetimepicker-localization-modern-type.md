@@ -29,7 +29,7 @@ This sample demonstrates how to implement Globalization and Localization for Ken
 ## Solution
 
 The first step is to include the culture resource script for the given language:
-https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/configuration/culture
+https://docs.telerik.com/kendo-ui/api/ui/datetimepicker/configuration/culture
 
 More info you can find here:
 https://docs.telerik.com/kendo-ui/framework/globalization/overview

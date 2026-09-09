@@ -26,7 +26,7 @@ How to drag and drop to reorder selected items and popup items in MultiSelect?
 
 ## Solution
 
-- Use [`Kendo Sortable`](/api/javascript/ui/sortable) for the selected items in MultiSelect:
+- Use [`Kendo Sortable`](/api/ui/sortable) for the selected items in MultiSelect:
 
 ```
     required.tagList.kendoSortable({
@@ -46,7 +46,7 @@ How to drag and drop to reorder selected items and popup items in MultiSelect?
     });
 ```
 
-- Use [`Kendo Sortable`](/api/javascript/ui/sortable) for the list elements in the MultiSelect popup. 
+- Use [`Kendo Sortable`](/api/ui/sortable) for the list elements in the MultiSelect popup. 
 
 ```
     $(required.list).children().find("ul").kendoSortable({
@@ -181,4 +181,4 @@ You can find the full example below:
 
 ## See Also
 
-* [MultiSelect API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect API Reference](/api/ui/multiselect)

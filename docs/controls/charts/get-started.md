@@ -77,9 +77,9 @@ In this step, you will initialize the Chart from the `<div>` element.
 
 ## 3. Add the Series Configuration
 
-Once the basic initialization is completed, you can start adding additional configurations to the Chart. The first and most important configuration is the [`series`](/api/javascript/dataviz/ui/chart/configuration/series).
+Once the basic initialization is completed, you can start adding additional configurations to the Chart. The first and most important configuration is the [`series`](/api/dataviz/ui/chart/configuration/series).
 
-You can combine several different [Chart types]({% slug overview_charttypes_charts %}) by configuring multiple [`series.types`](/api/javascript/dataviz/ui/chart/configuration/series.type) in the same component configuration.
+You can combine several different [Chart types]({% slug overview_charttypes_charts %}) by configuring multiple [`series.types`](/api/dataviz/ui/chart/configuration/series.type) in the same component configuration.
 
 ```html
     <div id="chart"></div>
@@ -107,7 +107,7 @@ You can combine several different [Chart types]({% slug overview_charttypes_char
 
 ## 4. Add the CategoryAxis Configuration
 
-The [`categoryAxis`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis) enables you to provide category names for each data point in the `series`.
+The [`categoryAxis`](/api/dataviz/ui/chart/configuration/categoryaxis) enables you to provide category names for each data point in the `series`.
 
 ```html
     <div id="chart"></div>
@@ -138,7 +138,7 @@ The [`categoryAxis`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis
 
 ## 5. Add the Title Configuration
 
-The [`title`](/api/javascript/dataviz/ui/chart/configuration/title#title) configuration enables you to render a text that will appear outside of the Chart.
+The [`title`](/api/dataviz/ui/chart/configuration/title#title) configuration enables you to render a text that will appear outside of the Chart.
 
 ```html
     <div id="chart"></div>
@@ -172,7 +172,7 @@ The [`title`](/api/javascript/dataviz/ui/chart/configuration/title#title) config
 
 ## 6. Add the Legend Configuration
 
-The [`legend`](/api/javascript/dataviz/ui/chart/configuration/legend) configuration renders each `series.name` alongside the `series.color`.
+The [`legend`](/api/dataviz/ui/chart/configuration/legend) configuration renders each `series.name` alongside the `series.color`.
 
 ```html
     <div id="chart"></div>
@@ -209,7 +209,7 @@ The [`legend`](/api/javascript/dataviz/ui/chart/configuration/legend) configurat
 
 ## 7. Add Labels to the Value Axis
 
-The [`valueAxis.labels`](/api/javascript/dataviz/ui/chart/configuration/valueaxis.labels) configuration enables you to change the appearance of the labels on the value axis.
+The [`valueAxis.labels`](/api/dataviz/ui/chart/configuration/valueaxis.labels) configuration enables you to change the appearance of the labels on the value axis.
 
 ```html
     <div id="chart"></div>
@@ -251,7 +251,7 @@ The [`valueAxis.labels`](/api/javascript/dataviz/ui/chart/configuration/valueaxi
 
 ## 8. Add the Tooltip Configuration
 
-The Chart [`tooltip`](/api/javascript/dataviz/ui/chart/configuration/tooltip#tooltip) is displayed when you hover over a series' data point. You can configure the text displayed in the tooltip by specifying a [`template`](/api/javascript/dataviz/ui/chart/configuration/tooltip#tooltiptemplate).
+The Chart [`tooltip`](/api/dataviz/ui/chart/configuration/tooltip#tooltip) is displayed when you hover over a series' data point. You can configure the text displayed in the tooltip by specifying a [`template`](/api/dataviz/ui/chart/configuration/tooltip#tooltiptemplate).
 
 ```html
     <div id="chart"></div>
@@ -302,7 +302,7 @@ The Chart [`tooltip`](/api/javascript/dataviz/ui/chart/configuration/tooltip#too
 
 ## See Also 
 
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)
 * [Knowledge Base Section](/knowledge-base)
 
 

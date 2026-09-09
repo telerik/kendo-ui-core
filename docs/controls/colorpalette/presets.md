@@ -96,4 +96,4 @@ The example below demonstrates how to use the presets and add custom palettes:
 ## See Also
 
 * [Palette Presets of the ColorPalette (Demo)](https://demos.telerik.com/kendo-ui/colorpalette/palette-presets)
-* [JavaScript API Reference of the ColorPalette](/api/javascript/ui/colorpalette)
+* [JavaScript API Reference of the ColorPalette](/api/ui/colorpalette)

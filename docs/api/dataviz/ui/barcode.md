@@ -617,7 +617,7 @@ How do I set the width of a barcode in Kendo UI for jQuery? Adjust or set the ho
 
 ### exportImage
 Exports the barcode as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -661,7 +661,7 @@ The height of the exported image. Defaults to the barcode height.
 
 ### exportPDF
 Exports the barcode as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -699,7 +699,7 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the barcode as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
+The result can be saved using [kendo.saveAs](/api/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -741,7 +741,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Returns a PNG image of the barcode encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/barcode/methods/exportimage).
+> This method is deprecated and replaced by [exportImage](/api/dataviz/ui/barcode/methods/exportimage).
 
 
 <div class="meta-api-description">
@@ -834,7 +834,7 @@ How do I update the Kendo UI barcode to resize automatically when its container 
 
 > **Important**
 >
-> If a fixed width is set using the [width](/api/javascript/dataviz/ui/barcode#configuration-width) option, the [resize](/api/javascript/dataviz/ui/barcode/methods/resize) method will not adjust the widget to match the size of the container. In this case, update both the container's width and the widget's width to the appropriate value.
+> If a fixed width is set using the [width](/api/dataviz/ui/barcode#configuration-width) option, the [resize](/api/dataviz/ui/barcode/methods/resize) method will not adjust the widget to match the size of the container. In this case, update both the container's width and the widget's width to the appropriate value.
 
 #### Example
 
@@ -862,7 +862,7 @@ Defines whether the widget should proceed with resizing even if the element dime
 Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the barcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
 [ImageMagick](https://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/barcode/methods/exportsvg), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/dataviz/ui/barcode/methods/exportsvg), but will remain fully functional.
 
 
 <div class="meta-api-description">

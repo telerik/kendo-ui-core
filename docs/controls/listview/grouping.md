@@ -11,7 +11,7 @@ position: 5
 
 The ListView supports grouping through the DataSource grouping capability. When grouping is enabled, the ListView template is applied once per group rather than once per item.
 
-For more information on DataSource grouping configuration, refer to the [Kendo UI DataSource group configuration](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group).
+For more information on DataSource grouping configuration, refer to the [Kendo UI DataSource group configuration](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/group).
 
 ## Sample Explanation
 

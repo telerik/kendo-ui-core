@@ -89,4 +89,4 @@ The following example demonstrates how to bind two {{ site.product }} widgets to
 ## See Also
 
 * [Bindig to a Shared DataSource (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/shared-datasource)
-* [JavaScript API Reference of the Timeline](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)
+* [JavaScript API Reference of the Timeline](https://docs.telerik.com/kendo-ui/api/ui/timeline)

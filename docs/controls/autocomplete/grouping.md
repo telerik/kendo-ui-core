@@ -16,4 +16,4 @@ For more information, refer to the article on [performing grouping in the ComboB
 ## See Also
 
 * [Grouping in the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/grouping)
-* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)
+* [JavaScript API Reference of the AutoComplete](/api/ui/autocomplete)

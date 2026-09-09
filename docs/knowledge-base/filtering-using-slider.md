@@ -100,6 +100,6 @@ The following example demonstrates how to achieve this behavior and display the 
 
 ## See Also
 
-* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
+* [JavaScript API Reference of the ListView](/api/ui/listview)
 * [Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
 * [Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})

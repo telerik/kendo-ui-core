@@ -37,12 +37,12 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To disable the auto-increment behavior during drag-and-copy in Kendo UI for jQuery Spreadsheet, use the [`changing`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/spreadsheet/events/changing) event to override the default AutoFill logic. Follow these steps:
+To disable the auto-increment behavior during drag-and-copy in Kendo UI for jQuery Spreadsheet, use the [`changing`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/spreadsheet/events/changing) event to override the default AutoFill logic. Follow these steps:
 
-1. Attach a listener to the [`changing`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/spreadsheet/events/changing) event of the Spreadsheet widget.
+1. Attach a listener to the [`changing`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/spreadsheet/events/changing) event of the Spreadsheet widget.
 2. Detect if the change type is "autoFill".
 3. Prevent the default AutoFill behavior using `e.preventDefault()`.
-4. Copy the original values to the target [`range`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/spreadsheet/range) without incrementing.
+4. Copy the original values to the target [`range`](https://www.telerik.com/kendo-jquery-ui/documentation/api/spreadsheet/range) without incrementing.
 
 Use the following code snippet:
 
@@ -192,5 +192,5 @@ The full implementation is demonstrated in the example below:
 ## See Also
 
 - [Kendo UI for jQuery Spreadsheet Overview](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)
-- [Spreadsheet API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-- [Spreadsheet Range API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/spreadsheet/range)
+- [Spreadsheet API Documentation](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
+- [Spreadsheet Range API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/spreadsheet/range)

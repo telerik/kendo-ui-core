@@ -41,7 +41,7 @@ Here are the required steps to achieve the custom scenario:
     ```Razor
         .Events(e=>e.DataBound("onDataBound")) 
     ```
-3. When the Grid initializes make sure to enable both its Menu and Row filtering with the [setOptions method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions).
+3. When the Grid initializes make sure to enable both its Menu and Row filtering with the [setOptions method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/setoptions).
     ```JS
         $(document).ready(function(){
             var grid = $("#grid").data("kendoGrid");
@@ -102,7 +102,7 @@ Review the behavior in [this Telerik REPL example](https://netcorerepl.telerik.c
 {% endif %}
 
 ## See Also
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [TagHelper API Reference of the Grid](https://docs.telerik.com/aspnet-core/api/taghelpers/grid)

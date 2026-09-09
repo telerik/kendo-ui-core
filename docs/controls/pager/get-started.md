@@ -85,7 +85,7 @@ The below example shows how you can bind the Pager to a DataSource.
 
 ## 4. Set the Page Sizes of the Pager
 
-The [`PageSizes`](/api/javascript/ui/pager/configuration/pagesizes) configuration allows you to change the number of displayed items. As a result, the Pager renders a dropdown with the options you have configured. The example below shows one possible way to set the `pageSizes`. It uses a template to visualize the items and demonstrate the Page Size feature. 
+The [`PageSizes`](/api/ui/pager/configuration/pagesizes) configuration allows you to change the number of displayed items. As a result, the Pager renders a dropdown with the options you have configured. The example below shows one possible way to set the `pageSizes`. It uses a template to visualize the items and demonstrate the Page Size feature. 
 
 ```dojo
     <div class="contests-wrapper">
@@ -134,6 +134,6 @@ The [`PageSizes`](/api/javascript/ui/pager/configuration/pagesizes) configuratio
 
 ## See Also 
 
-* [JavaScript API Reference of the Pager](/api/javascript/ui/pager)
+* [JavaScript API Reference of the Pager](/api/ui/pager)
 * [Knowledge Base Section](/knowledge-base)
 

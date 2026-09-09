@@ -25,7 +25,7 @@ The Kendo UI OTPInput supports the following styling options:
 
 The `size` option controls how big or small the items of the OTPInput look. The structure of the class to the wrapping `span` of the separate `input` elements is `k-input-{size}`. The structure of the global `div` wrapping element is `k-otp-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/otpinput/configuration/size) option:
+The following values are available for the [`size`](/api/ui/otpinput/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -43,7 +43,7 @@ The default rounded value is `medium` and it is applied to the wrapping `span` e
 
 The `rounded` option controls the border radius of the rendered `input` elements. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rouned`](/api/javascript/ui/otpinput/configuration/rounded) option:
+The following values are available for the [`rouned`](/api/ui/otpinput/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -64,7 +64,7 @@ The default rounded value is `medium` and it is applied to the wrapping `span` e
 
 The `fillMode` option controls the way the color is applied to the rendered `input` elements. The structure of the class is `k-input-{fillMode}`
 
-The following values are available for the [`fillMode`](/api/javascript/ui/otpinput/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/otpinput/configuration/fillmode) option:
 
 - `solid`
 - `flat`
@@ -84,4 +84,4 @@ The default fillMode value is `solid` and it is applied to the wrapping `span` e
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the OTPInput](https://demos.telerik.com/kendo-ui/otpinput/appearance)
-* [JavaScript API Reference of the OTPInput](/api/javascript/ui/otpinput)
+* [JavaScript API Reference of the OTPInput](/api/ui/otpinput)

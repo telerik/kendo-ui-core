@@ -23,10 +23,10 @@ I want to add a new item at the bottom of a Kendo UI ListView instead of at the 
 
 You can achieve this by using the following approach:
 
-1. Get the [ListView's dataSource](/api/javascript/ui/listview/fields/datasource), the [last item in the view](/api/javascript/data/datasource/methods/view), and [its index](/api/javascript/data/datasource/methods/indexof).
-2. Place the new item in the appropriate position based on the [dataSource's total](/api/javascript/data/datasource/methods/total).
-3. [Insert the new item](/api/javascript/data/datasource/methods/insert) at the calculated [index in the dataSource](/api/javascript/data/datasource/methods/indexof).
-4. [Edit the newly inserted item](/api/javascript/ui/listview/methods/edit) at the bottom of the page.
+1. Get the [ListView's dataSource](/api/ui/listview/fields/datasource), the [last item in the view](/api/data/datasource/methods/view), and [its index](/api/data/datasource/methods/indexof).
+2. Place the new item in the appropriate position based on the [dataSource's total](/api/data/datasource/methods/total).
+3. [Insert the new item](/api/data/datasource/methods/insert) at the calculated [index in the dataSource](/api/data/datasource/methods/indexof).
+4. [Edit the newly inserted item](/api/ui/listview/methods/edit) at the bottom of the page.
 
 Here's an example implemented in JavaScript:
 

@@ -30,5 +30,5 @@ To achieve this behavior, use the `activate` event to resize the Grid according 
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
-* [JavaScript API Reference of the Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)
+* [JavaScript API Reference of the Window](/api/ui/window)

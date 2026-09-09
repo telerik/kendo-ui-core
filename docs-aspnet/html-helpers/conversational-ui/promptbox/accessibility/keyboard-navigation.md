@@ -36,4 +36,4 @@ The PromptBox supports the following keyboard shortcuts by default:
 
 * [PromptBox Modes]({% slug htmlhelpers_promptbox_modes_aspnetcore %})
 * [PromptBox Accessibility]({% slug htmlhelpers_promptbox_accessibility_aspnetcore %})
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)

@@ -19,17 +19,17 @@ For a runnable example, refer to the [demo on exporting the Grid to PDF](https:/
 To enable PDF export:
 
 1. Include the corresponding toolbar command and set the export settings.
-    * [Toolbar configuration](/api/javascript/ui/grid/configuration/toolbar)
-    * [PDF export configuration](/api/javascript/ui/grid/configuration/pdf)
+    * [Toolbar configuration](/api/ui/grid/configuration/toolbar)
+    * [PDF export configuration](/api/ui/grid/configuration/pdf)
 1. Include the Pako Deflate library in the page to enable compression.
 
 > Starting with v2023.3.1115 the Pako library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
 
-To initiate PDF export through code, call the [`saveAsPdf`](/api/javascript/ui/grid/methods/saveaspdf) method.
+To initiate PDF export through code, call the [`saveAsPdf`](/api/ui/grid/methods/saveaspdf) method.
 
 > * By default, Kendo UI Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
 > * The Grid uses the current column order, visibility, and dimensions to generate the PDF file.
-> * When the Grid is exported to PDF, the [`dataBound`](/api/javascript/ui/grid/events/databound) event is fired. This is needed as the Grid has to page itself in order to allow the drawing mechanism to copy the content. This also allows modifying the content of the Grid before it is exported to PDF.
+> * When the Grid is exported to PDF, the [`dataBound`](/api/ui/grid/events/databound) event is fired. This is needed as the Grid has to page itself in order to allow the drawing mechanism to copy the content. This also allows modifying the content of the Grid before it is exported to PDF.
 
 The following example demonstrates how to enable the PDF export functionality of the Grid.
 
@@ -73,7 +73,7 @@ With regard to its PDF export, the Grid enables you to:
 
 ### Exporting All Pages
 
-By default, the Kendo UI Grid exports only the current page of data. To export all pages, set the [`allPages`](/api/javascript/ui/grid/configuration/pdf.allpages) option to `true`.
+By default, the Kendo UI Grid exports only the current page of data. To export all pages, set the [`allPages`](/api/ui/grid/configuration/pdf.allpages) option to `true`.
 
 > When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make multiple `"read"` requests for all data. There will be a request for each page with data. If the data items are too many, the browser may become unresponsive. In such cases, use server-side export.
 
@@ -103,7 +103,7 @@ By default, the Kendo UI Grid exports only the current page of data. To export a
 
 ### Fitting Content to Paper Size
 
-By default, the [paper size](/api/javascript/ui/grid/configuration/pdf.papersize) of the exported document is determined by the size of the Grid on the screen. This implies that the document can contain pages with different dimensions if the size of the Grid is not uniform for each data page. For detailed information on the conversion from screen to document units, refer to the article on [dimensions and CSS units]({% slug dimensionscssunits_drawing %}).
+By default, the [paper size](/api/ui/grid/configuration/pdf.papersize) of the exported document is determined by the size of the Grid on the screen. This implies that the document can contain pages with different dimensions if the size of the Grid is not uniform for each data page. For detailed information on the conversion from screen to document units, refer to the article on [dimensions and CSS units]({% slug dimensionscssunits_drawing %}).
 
 You can specify a paper size that will be applied to the whole document. The content will be scaled to fit the specified paper size. The automatic scale factor can be overridden, for example, to make room for additional page elements. To use all available space, the Grid will:
 - Adjust the column widths to fill the page so try to avoid setting width on all columns.
@@ -225,7 +225,7 @@ The Grid allows you to specify a page template and use the template to position 
 
 ### Using Server Proxy
 
-Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the server proxy URL, set the [`proxyURL`](/api/javascript/ui/grid/configuration/pdf.proxyurl) option.
+Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the server proxy URL, set the [`proxyURL`](/api/ui/grid/configuration/pdf.proxyurl) option.
 
 ```dojo
     <div id="grid"></div>
@@ -340,7 +340,7 @@ The following example demonstrates how to handle custom fonts.
 
 ## Exclude Column From Exporting
 
-In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
+In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.exportable) setting.
 
 It can also be set to an Object containing different values for Excel and PDF exporting modes, providing separate options for each:
 
@@ -377,7 +377,7 @@ columns: [
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Editing Functionality of the Grid]({% slug editing_kendoui_grid_widget %})
 * [Rendering and Dimensions of the Grid]({% slug width_kendoui_grid_widget %})
 * [Localization of Messages in the Grid]({% slug localization_kendoui_grid_widget %})

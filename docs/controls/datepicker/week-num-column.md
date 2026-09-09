@@ -11,7 +11,7 @@ position: 9
 
 The DatePicker provides options for rendering a column which displays the number of the weeks within the current **Month** view.
 
-To render the week number column set the [`weekNumber`](/api/javascript/ui/datepicker/configuration/weeknumber) property to `true`.
+To render the week number column set the [`weekNumber`](/api/ui/datepicker/configuration/weeknumber) property to `true`.
 
 ```dojo
         <input id="datepicker" value="10/10/2011" />
@@ -25,4 +25,4 @@ To render the week number column set the [`weekNumber`](/api/javascript/ui/datep
 ## See Also
 
 * [Rendering Week Number Columns in the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/week-column)
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)

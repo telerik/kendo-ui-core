@@ -77,5 +77,5 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## See Also
 
-* [Client-Side API of the TileLayout](https://docs.telerik.com/kendo-ui/api/javascript/ui/tilelayout)
+* [Client-Side API of the TileLayout](https://docs.telerik.com/kendo-ui/api/ui/tilelayout)
 * [Server-Side API of the TileLayout](/api/tilelayout)

@@ -7,7 +7,7 @@ component: sortable
 
 # kendo.ui.Sortable
 
-Represents the Kendo UI Sortable. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Sortable. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

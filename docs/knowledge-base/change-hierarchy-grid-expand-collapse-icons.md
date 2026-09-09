@@ -42,7 +42,7 @@ To achieve the desired scenario:
 ```
 
 
-2. To add text to the icons, write custom logic in the [`dataBound`](/api/javascript/ui/grid/events/databound), [`detailExpand`](/api/javascript/ui/grid/events/detailexpand), and [`detailCollapse`](/api/javascript/ui/grid/events/detailcollapse) event handlers.
+2. To add text to the icons, write custom logic in the [`dataBound`](/api/ui/grid/events/databound), [`detailExpand`](/api/ui/grid/events/detailexpand), and [`detailCollapse`](/api/ui/grid/events/detailcollapse) event handlers.
 
 
 The following example demonstrates the full implementation of the suggested approach.
@@ -158,6 +158,6 @@ The following example demonstrates the full implementation of the suggested appr
 ```
 ## See Also
 
-* [Kendo UI for jQuery Grid API Reference](/api/javascript/ui/grid)
+* [Kendo UI for jQuery Grid API Reference](/api/ui/grid)
 * [Kendo UI for jQuery Hierarchical Grid Demo](https://demos.telerik.com/kendo-ui/grid/hierarchy)
 * [Common Issues in Kendo UI for jQuery]({% slug troubleshooting_common_issues_kendoui %})

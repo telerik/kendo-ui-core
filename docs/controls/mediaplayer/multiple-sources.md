@@ -32,4 +32,4 @@ When you add multiple sources for the video, an **HD** button is automatically d
 
 * [Basic Usage of the MediaPlayer (Demo)](https://demos.telerik.com/kendo-ui/mediaplayer/index)
 * [Using the API of the MediaPlayer (Demo)](https://demos.telerik.com/kendo-ui/mediaplayer/api)
-* [JavaScript API Reference of the MediaPlayer](/api/javascript/ui/mediaplayer)
+* [JavaScript API Reference of the MediaPlayer](/api/ui/mediaplayer)

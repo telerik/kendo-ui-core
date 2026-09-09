@@ -32,15 +32,15 @@ I want to display "(BLANK)" for blank items in the [Kendo UI for jQuery MultiSel
 This knowledge base article also answers the following questions:
 - How to customize selected blank items in Kendo UI for jQuery MultiSelect?
 - How to display "(BLANK)" in Kendo UI for jQuery MultiSelect?
-- How to use [`tagTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect/configuration/tagtemplate) to change display text for selected blank items?
+- How to use [`tagTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect/configuration/tagtemplate) to change display text for selected blank items?
 
 ## Solution
 
-To achieve this, use the [`tagTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect/configuration/tagtemplate) configuration in the MultiSelect. The `tagTemplate` controls how selected items are displayed as chips. Additionally, use the `itemTemplate` configuration to optionally show "(BLANK)" in the dropdown list.
+To achieve this, use the [`tagTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect/configuration/tagtemplate) configuration in the MultiSelect. The `tagTemplate` controls how selected items are displayed as chips. Additionally, use the `itemTemplate` configuration to optionally show "(BLANK)" in the dropdown list.
 
 1. Initialize the MultiSelect with your data source.
 2. Use the `tagTemplate` to check if the `dataTextField` value is empty and display "(BLANK)".
-3. Optionally, use [`itemTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect/configuration/itemtemplate) to display "(BLANK)" in the dropdown list.
+3. Optionally, use [`itemTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect/configuration/itemtemplate) to display "(BLANK)" in the dropdown list.
 
 Example code:
 
@@ -102,5 +102,5 @@ The selected item's value remains as an empty string (`""`).
 
 ## See Also
 
-- [MultiSelect API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect)
-- [MultiSelect tagTemplate Configuration](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect/configuration/tagtemplate)
+- [MultiSelect API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect)
+- [MultiSelect tagTemplate Configuration](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect/configuration/tagtemplate)

@@ -404,7 +404,7 @@ You can reference the ContextMenu instances that you have created and build on t
         </script>
     ```
 
-1. Use the [ContextMenu client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable one of the Context Menu items.
+1. Use the [ContextMenu client-side API](https://docs.telerik.com/kendo-ui/api/ui/contextmenu#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable one of the Context Menu items.
 
     ```JS script
         <script>
@@ -434,6 +434,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Menu for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/api)
-* [Client-Side API of the ContextMenu](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu)
+* [Client-Side API of the ContextMenu](https://docs.telerik.com/kendo-ui/api/ui/contextmenu)
 * [Server-Side API of the ContextMenu](/api/contextmenu)
 * [Knowledge Base Section](/knowledge-base)

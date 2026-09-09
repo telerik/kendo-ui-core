@@ -26,7 +26,7 @@ How can I remove the loading spinner from the {{ site.product }} Grid?
 
 ## Solution
 
-1. Configure handler for the [`RequestStart`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/requeststart) event.
+1. Configure handler for the [`RequestStart`](https://docs.telerik.com/kendo-ui/api/data/datasource/events/requeststart) event.
 2. Use a jQuery selector to get the div with the `k-loading-image` class.
 3. Use the [`hide`](https://api.jquery.com/hide/) jQuery method.
 
@@ -87,7 +87,7 @@ Example:
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

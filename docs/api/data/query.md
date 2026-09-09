@@ -223,7 +223,7 @@ How can I use filter in Kendo UI for jQuery to only retrieve records from my Dat
 
 ##### expression `Object`
 
-The filter configuration. Accepts the same values as the [filter](/api/javascript/data/datasource/configuration/filter) option (**check there for more examples**).
+The filter configuration. Accepts the same values as the [filter](/api/data/datasource/configuration/filter) option (**check there for more examples**).
 
 #### Returns
 
@@ -264,7 +264,7 @@ How do I group data in my Kendo UI for jQuery grid by multiple fields using the 
 
 ##### descriptor `Object`
 
-The grouping configuration. Accepts the same values as the [group](/api/javascript/data/datasource/configuration/group) option.
+The grouping configuration. Accepts the same values as the [group](/api/data/datasource/configuration/group) option.
 
 #### Returns
 
@@ -307,7 +307,7 @@ The data items collection
 
 ##### options `Object`
 
-Accepts the same values as the [DataSource query](/api/javascript/data/datasource/methods/query) method.
+Accepts the same values as the [DataSource query](/api/data/datasource/methods/query) method.
 
 #### Returns
 

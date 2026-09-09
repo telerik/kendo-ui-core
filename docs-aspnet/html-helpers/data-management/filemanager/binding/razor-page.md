@@ -185,7 +185,7 @@ For the complete project, refer to the [FileManager in Razor Pages example](http
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the FileManager](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager)
+* [Client-Side API of the FileManager](https://docs.telerik.com/kendo-ui/api/ui/filemanager)
 * [Server-Side HtmlHelper API of the FileManager](/api/filemanager)
 * [Server-Side TagHelper API of the FileManager](/api/taghelpers/filemanager)
 * [Knowledge Base Section](/knowledge-base)

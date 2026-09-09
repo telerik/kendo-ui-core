@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.SpeechToTextButton
 
-Represents the Kendo UI SpeechToTextButton component. Inherits from [Button](/api/javascript/ui/button).
+Represents the Kendo UI SpeechToTextButton component. Inherits from [Button](/api/ui/button).
 
 The SpeechToTextButton is an extension of the Kendo UI Button that provides a user-friendly interface for capturing audio and converting it to text. It can be configured to use the browser's built-in Web Speech API or integrated with other third-party speech recognition services.
 

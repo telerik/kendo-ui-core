@@ -29,7 +29,7 @@ I have focused a NumericTextBox input but after switching to a different browser
 1. Attach the [`focusin`](https://developer.mozilla.org/en-US/docs/Web/API/Element/focusin_event) JavaScript event to the input elements and save the last focused element.
 1. Add an event listener to the [`visibilitychange`](https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event) JavaScript event.
 1. Check if the last focused element before switching the tab was a Kendo UI NumericTextBox.
-1. If the above condition is `true`, call the [`focus`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/methods/focus) method of the NumericTextBox.
+1. If the above condition is `true`, call the [`focus`](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox/methods/focus) method of the NumericTextBox.
 
 ```dojo
 <input id="numeric" />

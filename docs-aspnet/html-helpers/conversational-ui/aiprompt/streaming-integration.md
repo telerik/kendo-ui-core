@@ -286,7 +286,7 @@ For the complete example, visit the [Overview Demo of the AIPrompt component](ht
 ## See Also
 
 * [Integration with Microsoft.Extensions.AI]({% slug integration_microsoft_extensions_ai %})
-* [Client-Side API of the AIPrompt](https://docs.telerik.com/kendo-ui/api/javascript/ui/aiprompt)
+* [Client-Side API of the AIPrompt](https://docs.telerik.com/kendo-ui/api/ui/aiprompt)
 * [Server-Side API of the AIPrompt HtmlHelper](/api/aiprompt)
 {% if site.core %}
 * [Server-Side API of the AIPrompt TagHelper](/api/taghelpers/aiprompt)

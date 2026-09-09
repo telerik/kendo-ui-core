@@ -80,4 +80,4 @@ Leave [`Expandable`](/api/reasoning/expandable) enabled so users who do not need
 {% if site.core %}
 * [Server-Side API of the Reasoning TagHelper](/api/taghelpers/reasoning)
 {% endif %}
-* [JavaScript API Reference of the Reasoning](/api/javascript/ui/reasoning)
+* [JavaScript API Reference of the Reasoning](/api/ui/reasoning)

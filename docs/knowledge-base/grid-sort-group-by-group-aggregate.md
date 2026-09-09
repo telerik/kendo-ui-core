@@ -29,7 +29,7 @@ I have a Kendo Grid with monthly sales data, grouped by customer. I was trying t
 
 ## Solution
 
-The Kendo UI DataSource group configuration has a [`compare`](/api/javascript/data/datasource/configuration/group#groupcompare) function that can be used to sort the groups order:
+The Kendo UI DataSource group configuration has a [`compare`](/api/data/datasource/configuration/group#groupcompare) function that can be used to sort the groups order:
 
 ```
     dir: "asc",

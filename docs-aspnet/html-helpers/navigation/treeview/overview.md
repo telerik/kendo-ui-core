@@ -153,7 +153,7 @@ public class HierarchicalViewModel
 ```
 {% endif %}
 
-> Do not use the names of the [`kendo.data.Node` fields and methods](https://docs.telerik.com/kendo-ui/api/javascript/data/node) (for example, `children`) as fields in the TreeView data.
+> Do not use the names of the [`kendo.data.Node` fields and methods](https://docs.telerik.com/kendo-ui/api/data/node) (for example, `children`) as fields in the TreeView data.
 
 ## Basic Configuration
 
@@ -275,7 +275,7 @@ The following example demonstrates how to configure the TreeView to bind to remo
 ```
 {% endif %}
 
-> Do not use the names of the [`kendo.data.Node` fields and methods](https://docs.telerik.com/kendo-ui/api/javascript/data/node) (for example, `children`) as fields in the TreeView data.
+> Do not use the names of the [`kendo.data.Node` fields and methods](https://docs.telerik.com/kendo-ui/api/data/node) (for example, `children`) as fields in the TreeView data.
 
 ## Functionality and Features
 

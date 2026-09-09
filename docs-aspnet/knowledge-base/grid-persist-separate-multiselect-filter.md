@@ -34,9 +34,9 @@ How to reload the filtered state of a {{ site.product }} Grid applied from separ
 The example below is implemented as per the following steps:
 
 1. Implement a custom **Apply Filters** button along with the MultiSelect components that are separated from the Grid.
-1. Use the [`Click`](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) event of the custom **Apply Filters** button.
-1. In the Event handler, get the [`values`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/methods/value) of the MultiSelects.
-1. Implement a custom logic creating a filter for the [DataSource](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/datasource) of the {{ site.product }} Grid by using the values of the MultiSelect components (step 2) and main logic `OR`.
+1. Use the [`Click`](https://docs.telerik.com/kendo-ui/api/ui/button/events/click) event of the custom **Apply Filters** button.
+1. In the Event handler, get the [`values`](https://docs.telerik.com/kendo-ui/api/ui/multiselect/methods/value) of the MultiSelects.
+1. Implement a custom logic creating a filter for the [DataSource](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/datasource) of the {{ site.product }} Grid by using the values of the MultiSelect components (step 2) and main logic `OR`.
 1. Apply the filter from the previous step.
 1. Save the values of the MultiSelect components to variables in the `SessionStorage`.
 1. For the `document.ready` scope (when returning to the application page), check if the `SessionStorage` has any saved values for the MultiSelect components. If it has, use them to filter the Grid.
@@ -217,7 +217,7 @@ The following examples demonstrates the steps described above.
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

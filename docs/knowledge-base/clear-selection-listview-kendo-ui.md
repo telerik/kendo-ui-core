@@ -123,7 +123,7 @@ Below is an example how to implement this functionality:
 
 You can check this Dojo example for a complete example.
 
-For more details on the ListView component and its API, refer to the official [ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview) documentation.
+For more details on the ListView component and its API, refer to the official [ListView](https://docs.telerik.com/kendo-ui/api/ui/listview) documentation.
 
 ## Notes
 
@@ -132,5 +132,5 @@ For more details on the ListView component and its API, refer to the official [L
 
 ## See Also
 
-- [Official ListView Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
-- [ListView Selection API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/clearselection)
+- [Official ListView Documentation](https://docs.telerik.com/kendo-ui/api/ui/listview)
+- [ListView Selection API](https://docs.telerik.com/kendo-ui/api/ui/listview/methods/clearselection)

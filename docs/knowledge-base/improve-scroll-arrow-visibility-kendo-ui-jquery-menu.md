@@ -161,5 +161,5 @@ To enhance the visibility of scroll arrows in the Kendo UI for jQuery Menu:
 
 ## See Also
 
-- [Kendo UI for jQuery Menu API](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+- [Kendo UI for jQuery Menu API](https://docs.telerik.com/kendo-ui/api/ui/menu)
 - [Kendo UI for jQuery Menu Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/menu/overview)

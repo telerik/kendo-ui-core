@@ -8,7 +8,7 @@ component: radiobutton
 
 # kendo.ui.RadioButton
 
-Represents the Kendo UI RadioButton. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI RadioButton. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

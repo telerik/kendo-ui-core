@@ -64,5 +64,5 @@ The desired result can be achieved by following the steps below:
 ## More {{ site.framework }} DataSource Resources
 
 * [{{ site.framework }} DataSource Documentation]({%slug htmlhelpers_datasource_aspnetcore %})
-* [Client-Side API Reference of the DataSource for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)
+* [Client-Side API Reference of the DataSource for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/data/datasource)
 * [Server-Side API Reference of the DataSource for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/datasource)

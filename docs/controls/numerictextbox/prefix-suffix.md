@@ -17,7 +17,7 @@ The prefix and suffix input adornments are elements positioned before and after 
 
 The prefix input adornment is located before the NumericTextBox input field. It provides additional context to guide users when entering specific data, such as icons for currencies or unit indicators.
 
-To add a prefix before your NumericTextBox input, use the [`prefixOptions`](/api/javascript/ui/numerictextbox/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
+To add a prefix before your NumericTextBox input, use the [`prefixOptions`](/api/ui/numerictextbox/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
 
 * `Icon`&mdash;Inserts an icon before the NumericTextBox element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content before the NumericTextBox element.
@@ -48,7 +48,7 @@ The following example demonstrates how to add a DropDownList component before th
 
 The suffix input adornment is located after the NumericTextBox input field. Usually, it offers direct functionality related to the entered data, such as toggles for password visibility, formatting options, or the ability to clear the input.
 
-To add a suffix after your NumericTextBox input, use the [`suffixOptions`](/api/javascript/ui/numerictextbox/configuration/suffixoptions). `suffixOptions` provides the following options:
+To add a suffix after your NumericTextBox input, use the [`suffixOptions`](/api/ui/numerictextbox/configuration/suffixoptions). `suffixOptions` provides the following options:
 
 * `Icon`&mdash;Adds an icon after the NumericTextBox element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content after the NumericTextBox element.
@@ -72,4 +72,4 @@ The following example demonstrates how to insert HTML content after the NumericT
 ## See Also
 
 * [NumericTextBox Prefix and Suffix (Demo)](https://demos.telerik.com/kendo-ui/numerictextbox/prefix-suffix)
-* [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
+* [JavaScript API Reference of the NumericTextBox](/api/ui/numerictextbox)

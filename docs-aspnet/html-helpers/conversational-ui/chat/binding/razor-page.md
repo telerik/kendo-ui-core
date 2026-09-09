@@ -322,7 +322,7 @@ To connect the Chat to a data set retrieved from a remote endpoint in a Razor Pa
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
+* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/ui/chat)
 * [Server-Side HtmlHelper API of the Chat](/api/chat)
 * [Server-Side TagHelper API of the Chat](/api/taghelpers/chat)
 * [Knowledge Base Section](/knowledge-base)

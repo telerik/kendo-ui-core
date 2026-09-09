@@ -12,13 +12,13 @@ position: 1
 
 All web Kendo UI components (widgets) keep references to the `element` and `wrapper` DOM objects and all hybrid Kendo UI components keep references to the `element` DOM object only.
 
-* [`element`](/api/javascript/ui/widget#fields-element) is the object from which the component is initialized.
+* [`element`](/api/ui/widget#fields-element) is the object from which the component is initialized.
 
   Depending on the component, `element` can be visible (for example, in the AutoComplete, Calendar, and DatePicker), or hidden (for example, in the DropDownList and Upload). A reference to this element is also returned by the initialization statement.
 
   While obtaining a reference to the `element` of the component from the `widget` object is a relatively rare scenario, it is helpful when you want to avoid hardcoding IDs in jQuery selectors.
 
-* [`wrapper`](/api/javascript/ui/widget#fields-wrapper) is the outermost object which is a part of the component.
+* [`wrapper`](/api/ui/widget#fields-wrapper) is the outermost object which is a part of the component.
 
   Depending on the component and scenario, `wrapper` might be the same as `element`. For example, if the Grid is initialized from a `<div>`, the two references match; if the Grid is initialized from a `<table>`, then `element` points to `<table>` while `wrapper` points to `<div>`.
 

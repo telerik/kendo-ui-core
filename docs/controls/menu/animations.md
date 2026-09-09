@@ -30,4 +30,4 @@ The following example demonstrates how to change Menu animation and open behavio
 ## See Also
 
 * [Using Animations in the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/animation)
-* [JavaScript API Reference of the Menu](/api/javascript/ui/menu)
+* [JavaScript API Reference of the Menu](/api/ui/menu)

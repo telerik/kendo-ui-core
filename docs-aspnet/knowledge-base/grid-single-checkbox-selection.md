@@ -29,7 +29,7 @@ I want to remove the master checkbox of the built-in checkbox column in the Tele
 1. Remove the master checkbox by adding an empty header template to the column.
 2. Subscribe for the [`click`](https://api.jquery.com/click/) event of the checkboxes by using a jQuery selector.
 3. In the `click` event handler, get the row and the row classes by using the [`closest`](https://api.jquery.com/closest/) jQuery method.
-4. Based on the row classes, use the [`clearSelection`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/clearselection) method of the Grid.
+4. Based on the row classes, use the [`clearSelection`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/clearselection) method of the Grid.
 
 ```View
 
@@ -127,7 +127,7 @@ $(document).ready(function () {
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

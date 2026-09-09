@@ -28,8 +28,8 @@ How can I set a predefined filter value for the NumericTextBox inputs?
 
 ## Solution
 
-1. In the [`filterMenuOpen`](/api/javascript/ui/grid/events/filtermenuopen) event handler, get the instances of the NumericTextBox inputs.
-1. Update their values with the [`value`](/api/javascript/ui/numerictextbox/methods/value) method and trigger the [`change`](/api/javascript/ui/numerictextbox/events/change) event.
+1. In the [`filterMenuOpen`](/api/ui/grid/events/filtermenuopen) event handler, get the instances of the NumericTextBox inputs.
+1. Update their values with the [`value`](/api/ui/numerictextbox/methods/value) method and trigger the [`change`](/api/ui/numerictextbox/events/change) event.
 
 ```dojo
     <div id="grid"></div>
@@ -86,6 +86,6 @@ How can I set a predefined filter value for the NumericTextBox inputs?
 ```
 ## See Also
 
-* [Kendo UI Grid API Reference](/api/javascript/ui/grid)
-* [Kendo UI NumericTextBox API Reference](/api/javascript/ui/numerictextbox)
+* [Kendo UI Grid API Reference](/api/ui/grid)
+* [Kendo UI NumericTextBox API Reference](/api/ui/numerictextbox)
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})

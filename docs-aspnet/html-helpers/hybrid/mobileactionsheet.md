@@ -61,7 +61,7 @@ The ActionSheet displays a set of choices related to a task the user initiates.
 
 ## Events
 
-You can subscribe to all hybrid ActionSheet [events](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/actionsheet#events).
+You can subscribe to all hybrid ActionSheet [events](https://docs.telerik.com/kendo-ui/api/mobile/ui/actionsheet#events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -87,7 +87,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-You can reference a hybrid ActionSheet instance by using the code from the following example. Once a reference is established, use the [hybrid ActionSheet client-side API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/actionsheet#methods) to control its behavior.
+You can reference a hybrid ActionSheet instance by using the code from the following example. Once a reference is established, use the [hybrid ActionSheet client-side API](https://docs.telerik.com/kendo-ui/api/mobile/ui/actionsheet#methods) to control its behavior.
 
     @(Html.Kendo().MobileActionSheet()
         .Name("inboxActions")

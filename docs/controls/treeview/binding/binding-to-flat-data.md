@@ -17,7 +17,7 @@ To convert flat data into hierarchical structure, use either of the following ap
 * [Initial preprocessing of all data](#initial-all-data-pre-processing)
 * [Incremental data filtering](#incremental-data-filtering)
 
-> Do not use the names of the [`kendo.data.Node` fields and methods](/api/javascript/data/node) (for example, `children`) as fields in the TreeView data.
+> Do not use the names of the [`kendo.data.Node` fields and methods](/api/data/node) (for example, `children`) as fields in the TreeView data.
 
 ## Initial All-Data Pre-Processing
 
@@ -123,4 +123,4 @@ The following example demonstrates how to filter data incrementally.
 
 * [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
 * [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
-* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)
+* [JavaScript API Reference of the TreeView](/api/ui/treeview)

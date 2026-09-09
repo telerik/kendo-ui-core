@@ -16,4 +16,4 @@ In this article, you will find information about the rendering of the Kendo UI S
 ## See Also
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
-* [JavaScript API Reference of the Slider](/api/javascript/ui/slider)
+* [JavaScript API Reference of the Slider](/api/ui/slider)

@@ -31,7 +31,7 @@ In some scenarios, you might want to change the default icons of the column menu
 </table>
 
 ## Solution
-To change the icon of the column menu button on the headers in the Kendo UI for jQuery Grid, use the [`kendo.ui.icon`](https://docs.telerik.com/kendo-ui/api/javascript/ui/ui/methods/icon) method to target the element containing the SVG icon and replace it with the desired icon.
+To change the icon of the column menu button on the headers in the Kendo UI for jQuery Grid, use the [`kendo.ui.icon`](https://docs.telerik.com/kendo-ui/api/ui/ui/methods/icon) method to target the element containing the SVG icon and replace it with the desired icon.
 
 ### Changing the Column Menu Icon
 To replace the main column menu icon, target the `.k-grid-column-menu .k-svg-i-more-vertical` class and use the desired icon name. Here is how you can change the icon to a 'filter' icon:
@@ -49,4 +49,4 @@ kendo.ui.icon($('.k-grid-filter-menu .k-svg-i-filter'), { icon: 'star' });
 
 ## See Also
 - [Kendo UI for jQuery Grid Overview](https://docs.telerik.com/kendo-ui/controls/grid/overview)
-- [Kendo UI Icon Method Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/ui/methods/icon)
+- [Kendo UI Icon Method Documentation](https://docs.telerik.com/kendo-ui/api/ui/ui/methods/icon)

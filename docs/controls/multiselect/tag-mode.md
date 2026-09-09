@@ -16,4 +16,4 @@ For the runnable example on setting the summary-tag mode, refer to the [demo on 
 ## See Also
 
 * [Implementing the Tag Mode in the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/tag-mode)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [JavaScript API Reference of the MultiSelect](/api/ui/multiselect)

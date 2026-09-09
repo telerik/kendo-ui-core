@@ -721,7 +721,7 @@ How to adjust the thickness of connector lines in Kendo UI diagram? Adjusting th
 
 ### connections `Array`
 
-An array of [Connections](/api/javascript/dataviz/diagram/connection) that originate or terminate in this connector.
+An array of [Connections](/api/dataviz/diagram/connection) that originate or terminate in this connector.
 
 
 <div class="meta-api-description">
@@ -760,7 +760,7 @@ How to access and manipulate connections in Kendo UI for jQuery diagram? Access 
 
 ### shape `kendo.dataviz.diagram.Shape`
 
-The [Shape](/api/javascript/dataviz/diagram/shape) that owns the connector.
+The [Shape](/api/dataviz/diagram/shape) that owns the connector.
 
 
 <div class="meta-api-description">

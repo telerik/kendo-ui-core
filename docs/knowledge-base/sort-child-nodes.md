@@ -119,4 +119,4 @@ The following example demonstrates how to programmatically change the order of a
 
 * [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
 * [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
-* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)
+* [JavaScript API Reference of the TreeView](/api/ui/treeview)

@@ -11,7 +11,7 @@ position: 2
 
 You can localize the tooltip texts from the MediaPlayer interface through the `messages` configuration options.
 
-For a complete list of [localizable messages](/api/javascript/ui/mediaplayer/configuration/messages), refer to the [MediaPlayer API documentation](/api/javascript/ui/mediaplayer).
+For a complete list of [localizable messages](/api/ui/mediaplayer/configuration/messages), refer to the [MediaPlayer API documentation](/api/ui/mediaplayer).
 
 Similar to all Kendo UI widgets, the MediaPlayer allows you to add script files and implement [global localization]({% slug overview_localization_kendoui %}) for your application.
 
@@ -35,4 +35,4 @@ Similar to all Kendo UI widgets, the MediaPlayer allows you to add script files 
 ## See Also
 
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the MediaPlayer](/api/javascript/ui/mediaplayer)
+* [JavaScript API Reference of the MediaPlayer](/api/ui/mediaplayer)

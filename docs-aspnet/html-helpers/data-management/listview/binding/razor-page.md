@@ -276,7 +276,7 @@ To bind the ListView to a property from the `PageModel`, follow the next steps:
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
+* [Client-Side API of the ListView](https://docs.telerik.com/kendo-ui/api/ui/listview)
 * [Server-Side HtmlHelper API of the ListView](/api/listview)
 * [Server-Side TagHelper API of the ListView](/api/taghelpers/listview)
 * [Knowledge Base Section](/knowledge-base)

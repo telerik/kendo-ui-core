@@ -142,5 +142,5 @@ Prior to Kendo UI 2020 R3, the Scheduler RecurrenceEditor used a DropDownList. R
 
 ## See Also
 
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)
 * [JavaScript API Reference of the ButtonGroup](api/javascript/ui/buttongroup)

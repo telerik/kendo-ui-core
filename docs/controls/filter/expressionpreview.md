@@ -9,7 +9,7 @@ position: 4
 
 # Expression preview
 
-The Filter enables you to visualize the filter expression that will be applied to the datasource by setting the [`expressionpreview`](/api/javascript/ui/filter/configuration/expressionpreview) field to true. Additionaly you can format the value of the filter in the expression preview using the `fields.previewFormat` setting.
+The Filter enables you to visualize the filter expression that will be applied to the datasource by setting the [`expressionpreview`](/api/ui/filter/configuration/expressionpreview) field to true. Additionaly you can format the value of the filter in the expression preview using the `fields.previewFormat` setting.
 
 The following example demonstrates how to enable the expression preview and format the values of the filter
 
@@ -59,4 +59,4 @@ The following example demonstrates how to enable the expression preview and form
 
 * [Basic Usage of the Filter (Demo)](https://demos.telerik.com/kendo-ui/filter/index)
 * [Persisting the State of the Filter (Demo)](https://demos.telerik.com/kendo-ui/filter/persist-state)
-* [JavaScript API Reference of the Filter](/api/javascript/ui/filter)
+* [JavaScript API Reference of the Filter](/api/ui/filter)

@@ -50,7 +50,7 @@ In this step, you will initialize the ToolBar from the `<div>` element. All sett
 
 ## 3. Set the Size of the ToolBar
 
-The ToolBar allows you to change its size. The following example demonstrates how to apply a different [`size`](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/size) to the component.
+The ToolBar allows you to change its size. The following example demonstrates how to apply a different [`size`](https://docs.telerik.com/kendo-ui/api/ui/toolbar/configuration/size) to the component.
 
 ```html
 <div id="toolbar"></div>
@@ -64,7 +64,7 @@ The ToolBar allows you to change its size. The following example demonstrates ho
 
 ## 4. Configure the Items of the ToolBar
 
-The ToolBar enables you to configure its items by using the [`items`](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/items) property.
+The ToolBar enables you to configure its items by using the [`items`](https://docs.telerik.com/kendo-ui/api/ui/toolbar/configuration/items) property.
 
 ```html
 <div id="toolbar"></div>
@@ -88,7 +88,7 @@ The ToolBar enables you to configure its items by using the [`items`](https://do
 
 ## See Also 
 
-* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/ui/toolbar)
 * [Knowledge Base Section](/knowledge-base)
 
 

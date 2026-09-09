@@ -92,7 +92,7 @@ function onDrilldownLevelChange(e) {
 
 ## See Also
 
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/chart)

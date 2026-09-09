@@ -42,7 +42,7 @@ The suggested approach applies to the following scenario:
 
 To fulfil the scenario, use the following suggested approach:
 
-1. Handle the [`Sortable.change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/sortable/events/change) event.
+1. Handle the [`Sortable.change`](https://docs.telerik.com/kendo-ui/api/ui/sortable/events/change) event.
 1. Reset the DataSource of the source ListView under some conditions.
 
 The following example demonstrates how to implement two ListBox widgets where the user can copy items instead of moving them by dragging from the left ListBox to the right one.
@@ -165,6 +165,6 @@ The following example demonstrates how to implement two ListBox widgets where th
 
 ## See Also
 
-* [API Reference of the ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
-* [API Reference of the Draggable](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable)
-* [API Reference of the DropTarget](https://docs.telerik.com/kendo-ui/api/javascript/ui/droptarget)
+* [API Reference of the ListView](https://docs.telerik.com/kendo-ui/api/ui/listview)
+* [API Reference of the Draggable](https://docs.telerik.com/kendo-ui/api/ui/draggable)
+* [API Reference of the DropTarget](https://docs.telerik.com/kendo-ui/api/ui/droptarget)

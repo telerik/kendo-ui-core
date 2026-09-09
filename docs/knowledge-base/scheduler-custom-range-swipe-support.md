@@ -173,5 +173,5 @@ The following example will show you how you can create a custom view in the Sche
 
 ## See Also
 
-* [Scheduler API Reference](/api/javascript/ui/scheduler)
-* [DataSource API Reference)](/api/javascript/data/datasource)
+* [Scheduler API Reference](/api/ui/scheduler)
+* [DataSource API Reference)](/api/data/datasource)

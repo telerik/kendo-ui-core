@@ -29,8 +29,8 @@ How to show and hide the aggregates in the {{ site.product }} Grid?
 
 ## Solution
 
-1. Hook up for the event that, when triggered, will toggle the aggregates. The example below uses the [`Change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch/events/change) event of the [Switch](https://demos.telerik.com/aspnet-core/switch) component.
-1. Show or hide the aggregates based on a condition. To set up the aggregates, you can use the [`aggregate`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/aggregate) method of the [DataSource](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource). To show or hide the aggregates, you can change the value of the template. The example below uses the [`footerTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.footertemplate) of the Grid in which the aggregate values are displayed.
+1. Hook up for the event that, when triggered, will toggle the aggregates. The example below uses the [`Change`](https://docs.telerik.com/kendo-ui/api/ui/switch/events/change) event of the [Switch](https://demos.telerik.com/aspnet-core/switch) component.
+1. Show or hide the aggregates based on a condition. To set up the aggregates, you can use the [`aggregate`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/aggregate) method of the [DataSource](https://docs.telerik.com/kendo-ui/api/data/datasource). To show or hide the aggregates, you can change the value of the template. The example below uses the [`footerTemplate`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.footertemplate) of the Grid in which the aggregate values are displayed.
 
 ```Razor Index.cshtml
     @(Html.Kendo().Switch()
@@ -107,7 +107,7 @@ For the complete implementation of the suggested approach, refer to the followin
 ## See Also
 
 * [Telerik REPL: Show or Hide Grid Aggregates](https://netcorerepl.telerik.com/cGECaibw09Q1ou3W10)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

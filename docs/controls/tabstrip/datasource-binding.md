@@ -9,7 +9,7 @@ position: 6
 
 # DataSource Binding
 
-The TabStrip [`dataSource`](/api/javascript/ui/tabstrip/configuration/datasource) allows you to configure various features of the component related to the content and its visual representation. You can define multiple fields such as `text`, `content`, and `icon` from the list of [Kendo Icons](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/), etc.
+The TabStrip [`dataSource`](/api/ui/tabstrip/configuration/datasource) allows you to configure various features of the component related to the content and its visual representation. You can define multiple fields such as `text`, `content`, and `icon` from the list of [Kendo Icons](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/), etc.
 
 The example below shows the more commonly used fields in the TabStrip `dataSource`:
 
@@ -76,4 +76,4 @@ You can also define `actions` which will render buttons inside the tabs. Below y
 ## See Also
 
 * [DataSource Binding (Demo)](https://demos.telerik.com/kendo-ui/tabstrip/datasource-binding) 
-* [JavaScript API Reference of the TabStrip](/api/javascript/ui/tabstrip)
+* [JavaScript API Reference of the TabStrip](/api/ui/tabstrip)

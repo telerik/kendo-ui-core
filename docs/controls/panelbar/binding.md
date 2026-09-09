@@ -78,4 +78,4 @@ As of the Kendo UI R1 2017 release, the PanelBar provides a built-in functionali
 
 * [Local Data Binding of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/local-data-binding)
 * [Remote Data Binding of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/remote-data-binding)
-* [JavaScript API Reference of the PanelBar](/api/javascript/ui/panelbar)
+* [JavaScript API Reference of the PanelBar](/api/ui/panelbar)

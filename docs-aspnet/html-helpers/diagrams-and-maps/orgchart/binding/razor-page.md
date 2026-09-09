@@ -188,7 +188,7 @@ To connect the OrgChart to a data set retrieved from a remote endpoint in a Razo
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the OrgChart](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart)
+* [Client-Side API of the OrgChart](https://docs.telerik.com/kendo-ui/api/ui/orgchart)
 * [Server-Side HtmlHelper API of the OrgChart](/api/orgchart)
 * [Server-Side TagHelper API of the OrgChart](/api/taghelpers/orgchart)
 * [Knowledge Base Section](/knowledge-base)

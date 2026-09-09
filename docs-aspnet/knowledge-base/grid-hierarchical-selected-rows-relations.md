@@ -49,7 +49,7 @@ I have a parent and a child Grid configured with a [Detail Template]({% slug cli
         </script>
     ```
 
-2. Within the event handler of the parent Grid, get all selected rows by using the [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method, iterate the rows, access their [`dataItems`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem), and use the row Id to select the child Grid of each selected row. Then select all child Grid rows.
+2. Within the event handler of the parent Grid, get all selected rows by using the [`select()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/select) method, iterate the rows, access their [`dataItems`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem), and use the row Id to select the child Grid of each selected row. Then select all child Grid rows.
 
     ```JavaScript
         function onChangeParent(e){
@@ -105,7 +105,7 @@ The suggested example will work only for detail rows that have been expanded and
 * [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
 {% endif %}
 ## See Also
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

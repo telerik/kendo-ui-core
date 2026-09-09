@@ -61,7 +61,7 @@ The following example demonstrates how you can subscribe to the `ExpandMember` a
 
 ## See Also
 
-* [Client-Side API of the PivotGridV2](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgridv2)
+* [Client-Side API of the PivotGridV2](https://docs.telerik.com/kendo-ui/api/ui/pivotgridv2)
 * [Server-Side API of the PivotGridV2 HtmlHelper](/api/pivotgridv2)
 {% if site.core %}
 * [Server-Side API of the PivotGridV2 TagHelper](/api/taghelpers/pivotgridv2)

@@ -81,7 +81,7 @@ I have a `.xlsx` file on the server and need to load it by default in the Spread
     ```
     {% endif %}
 
-3. Set up an Ajax request to the <b>ReadFile</b> Action method and consume the JSON of the response with the use of the [`fromJSON()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/fromjson) method.
+3. Set up an Ajax request to the <b>ReadFile</b> Action method and consume the JSON of the response with the use of the [`fromJSON()`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/methods/fromjson) method.
 
     ```JavaScript
         function readFile(){
@@ -120,7 +120,7 @@ Review the complete implementation and test the behavior at our [Examples repo i
 * [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
 {% endif %}
 ## See Also
-* [Client-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [Client-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
 * [Server-Side API Reference of the Spreadsheet for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/spreadsheet)
 * [Understanding Telerik.Web.Spreadsheet and Document Processing Library Spreadsheet Workbook and Worksheets](https://docs.telerik.com/aspnet-core/knowledge-base/spreadsheet-understanding-telerik-web-spreadsheet-and-document-processing-library)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})

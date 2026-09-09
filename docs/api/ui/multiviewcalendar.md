@@ -8,13 +8,13 @@ component: multiViewCalendar
 
 # kendo.ui.MultiViewCalendar
 
-Represents the Kendo UI MultiViewCalendar widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI MultiViewCalendar widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
 ### allowReverse `Boolean` *(default: false)*
 
-Enables the user to select an end date that is before the start date. This option is available only when the [`selectable`](/api/javascript/ui/multiviewcalendar/configuration/selectable) configuration is set to **range**.
+Enables the user to select an end date that is before the start date. This option is available only when the [`selectable`](/api/ui/multiviewcalendar/configuration/selectable) configuration is set to **range**.
 
 
 <div class="meta-api-description">
@@ -173,7 +173,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 ### footer `String|Function`
 
- The [template](/api/javascript/kendo/methods/template) which renders the footer. If false, the footer will not be rendered.
+ The [template](/api/kendo/methods/template) which renders the footer. If false, the footer will not be rendered.
 
 
 <div class="meta-api-description">
@@ -521,7 +521,7 @@ How can I configure date selection modes in Kendo UI's MultiViewCalendar control
 
 Specifies which dates to be selected when the multiViewCalendar is initialized.
 
-> **Important:** This configuration option requires the [selectable](/api/javascript/ui/multiviewcalendar/configuration/selectable): "multiple" option to be set.
+> **Important:** This configuration option requires the [selectable](/api/ui/multiviewcalendar/configuration/selectable): "multiple" option to be set.
 
 
 <div class="meta-api-description">
@@ -622,7 +622,7 @@ How to set initial date selection in Kendo UI MultiViewCalendar? Control, config
 
 When this configuration is enabled, the MultiViewCalendar will render days from the previous and next months in the current views.
 
-> The `showOtherMonthDays` configuration is not compatible with the [`range`](/api/javascript/ui/multiviewcalendar/configuration/selectable) selection. It is advised that this property is set to **false** when `selectable` is set to **range**.
+> The `showOtherMonthDays` configuration is not compatible with the [`range`](/api/ui/multiviewcalendar/configuration/selectable) selection. It is advised that this property is set to **false** when `selectable` is set to **range**.
 
 
 <div class="meta-api-description">
@@ -900,7 +900,7 @@ A list of the dates to be selected.
 
 `Array` The currently selected dates.
 
-> **Important:** This method requires the [selectable](/api/javascript/ui/multiviewcalendar/configuration/selectable): "multiple" option to be set.
+> **Important:** This method requires the [selectable](/api/ui/multiviewcalendar/configuration/selectable): "multiple" option to be set.
 
 #### Example - gets the selected dates of the widget
 
@@ -949,7 +949,7 @@ The range to set. It should have a start and end properties with the respective 
 
 `Object` The selected range of the multiViewCalendar. The object has a start and end properties.
 
-> **Important:** This method requires the [selectable](/api/javascript/ui/multiviewcalendar/configuration/selectable): "range" option to be set.
+> **Important:** This method requires the [selectable](/api/ui/multiviewcalendar/configuration/selectable): "range" option to be set.
 
 #### Example - gets the selected range for the widget
 

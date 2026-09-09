@@ -15,9 +15,9 @@ The Kendo UI for jQuery Chat allows you to customize the PromptBox area with ado
 
 You can configure the following PromptBox adornment template options:
 
-* [`messageBox.startAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/messagebox.startaffixtemplate)&mdash;Renders content before the message input.
-* [`messageBox.endAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/messagebox.endaffixtemplate)&mdash;Renders content after the message input.
-* [`messageBox.topAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/messagebox.topaffixtemplate)&mdash;Renders content above the message input.
+* [`messageBox.startAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagebox.startaffixtemplate)&mdash;Renders content before the message input.
+* [`messageBox.endAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagebox.endaffixtemplate)&mdash;Renders content after the message input.
+* [`messageBox.topAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagebox.topaffixtemplate)&mdash;Renders content above the message input.
 
 ## Configuring Start and End Adornments
 
@@ -78,5 +78,5 @@ Use `topAffixTemplate` to render additional controls such as model selectors or 
 * [Chat Overview]({% slug overview_kendoui_chat_widget %})
 * [AutoScroll Threshold]({% slug autoscroll_threshold_kendoui_chat %})
 * [Chat Templates]({% slug templates_kendoui_chat %})
-* [Chat API Reference](/api/javascript/ui/chat)
+* [Chat API Reference](/api/ui/chat)
 * [PromptBox Adornments Demo](https://demos.telerik.com/kendo-ui/chat/adornments)

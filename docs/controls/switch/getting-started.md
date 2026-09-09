@@ -72,7 +72,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 4. Configure the Switch Labels 
 
-The Switch allows you to configure the text of the checked/unchecked states through its [messages option](/api/javascript/ui/switch/configuration/messages).
+The Switch allows you to configure the text of the checked/unchecked states through its [messages option](/api/ui/switch/configuration/messages).
 
 ```html
 <input id="switch"/>
@@ -99,7 +99,7 @@ The Switch allows you to configure the text of the checked/unchecked states thro
 
 ## See Also
 
-* [JavaScript API Reference of the Switch](/api/javascript/ui/switch)
+* [JavaScript API Reference of the Switch](/api/ui/switch)
 * [Knowledge Base Section](/knowledge-base)
 
 

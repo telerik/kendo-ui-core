@@ -136,4 +136,4 @@ You can implement a custom layout for the Switch by using the available [Sass va
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance of the Switch HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/switch/appearance)
 * [Switch Server-Side API](/api/switch)
-* [Switch Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch)
+* [Switch Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/switch)

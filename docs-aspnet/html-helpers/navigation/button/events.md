@@ -45,4 +45,4 @@ For a complete example on basic Button events, refer to the [demo on using the e
 
 * [Using the API of the Button HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/api)
 * [Button Server-Side API](/api/button)
-* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/button)
+* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/button)

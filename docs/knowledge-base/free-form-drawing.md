@@ -82,5 +82,5 @@ The following example demonstrates how to implement a free-form drawing surface 
 
 ## See Also
 
-* [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
-* [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)
+* [JavaScript API Reference: kendo.drawing.surface](/api/drawing/surface)
+* [JavaScript API Reference: kendo.geometry.Transformation](/api/geometry/transformation)

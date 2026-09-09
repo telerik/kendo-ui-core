@@ -8,7 +8,7 @@ component: textarea
 
 # kendo.ui.TextArea
 
-Represents the Kendo UI TextArea widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI TextArea widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -166,7 +166,7 @@ The function context (available through the keyword `this`) will be set to the w
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/textarea/methods/value) method **does not trigger** the `focusout` event of the textarea.
+> **Important:** The [value](/api/ui/textarea/methods/value) method **does not trigger** the `focusout` event of the textarea.
 This can affect the floating label functionality.
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#description").data("kendoTextArea").floatingLabel.refresh();`
 
@@ -271,7 +271,7 @@ How do I customize the prefix label in a Kendo UI for jQuery textarea? Set or cu
 
 ### prefixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+The [template](/api/kendo/methods/template) for the prefix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -459,7 +459,7 @@ How do I customize the icon at the end of a Kendo UI textarea? Customize or conf
 
 ### suffixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+The [template](/api/kendo/methods/template) for the suffix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -673,12 +673,12 @@ If set to `true`, the widget will not allow user input. If set to `false`, the w
 
 Gets or sets the value of the widget.
 
-> **Important:** This method **does not trigger** the [change](/api/javascript/ui/textarea/events/change) event.
+> **Important:** This method **does not trigger** the [change](/api/ui/textarea/events/change) event.
 This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior triggering the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior triggering the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
 > **Important:** This method **does not trigger** the `focusout` event of the textarea.
-This can affect the [floating label functionality](/api/javascript/ui/textarea/configuration/label.floating).
+This can affect the [floating label functionality](/api/ui/textarea/configuration/label.floating).
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#textarea").data("kendoTextArea").floatingLabel.refresh();`
 
 

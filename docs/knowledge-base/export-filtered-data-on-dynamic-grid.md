@@ -39,8 +39,8 @@ How can I export to Excel filtered Grid data when columns and data fields inform
 ## Solution
 
 1. Generate the rows to be exported based on the generated columns for the Grid.
-2. Create a new [`workbook`](/api/javascript/ooxml/workbook) object and add the generated rows there.
-3. Use the [`saveAs`](/api/javascript/kendo/methods/saveas) method to save the generated excel file.
+2. Create a new [`workbook`](/api/ooxml/workbook) object and add the generated rows there.
+3. Use the [`saveAs`](/api/kendo/methods/saveas) method to save the generated excel file.
 
 ```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -196,4 +196,4 @@ How can I export to Excel filtered Grid data when columns and data fields inform
 
 * [Create Grids with Dynamic Columns and Data Types]({% slug howto_createdynamiccolumnsdatatypes_grid %})
 * [Dynamic Aggregates in a Dynamic Grid]({% slug grid-dynamic-aggregates %})
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

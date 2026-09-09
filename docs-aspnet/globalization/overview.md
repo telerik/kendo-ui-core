@@ -14,9 +14,9 @@ Globalization is the process of designing and developing an application that wor
 
 It combines localization (the translation of component messages) with internationalization (their adaptation to a specific culture). Cultures require and define particular information for their number formats, week and month names, date and time formats, and so on.
 
-All Kendo UI widgets and their {{ site.framework }} server-side wrappers which support date or number formatting depend also on the [current culture](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/culture). Usually, such components are more complex (for example, the [Grid]({% slug globalization_grid_aspnetcore %}), [ListView]({% slug globalization_htmlhelpers_listview %}), [Charts]({% slug htmlhelpers_charts_aspnetcore %}), and so on).
+All Kendo UI widgets and their {{ site.framework }} server-side wrappers which support date or number formatting depend also on the [current culture](https://docs.telerik.com/kendo-ui/api/kendo/methods/culture). Usually, such components are more complex (for example, the [Grid]({% slug globalization_grid_aspnetcore %}), [ListView]({% slug globalization_htmlhelpers_listview %}), [Charts]({% slug htmlhelpers_charts_aspnetcore %}), and so on).
 
-The following {{ site.product }} helpers depend on the [current culture](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/culture):
+The following {{ site.product }} helpers depend on the [current culture](https://docs.telerik.com/kendo-ui/api/kendo/methods/culture):
 
 * [Calendar]({% slug globalization_calendar_aspnetcore %})
 * [DateInput]({% slug globalization_dateinput_aspnetcore %})
@@ -68,7 +68,7 @@ To use a culture that is different from the default `en-US` one in {{ site.produ
     ```
 {% endif %}
 
-1. Set the current culture by calling the [`kendo.culture`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/culture) method. You have to add the script block after the culture JavaScript file. As a result, all {{ site.product }} helpers will use the `es-ES` culture for parsing and formatting dates and numbers.
+1. Set the current culture by calling the [`kendo.culture`](https://docs.telerik.com/kendo-ui/api/kendo/methods/culture) method. You have to add the script block after the culture JavaScript file. As a result, all {{ site.product }} helpers will use the `es-ES` culture for parsing and formatting dates and numbers.
 
     ```JavaScript
         <script>
@@ -149,7 +149,7 @@ To make the helpers use the same culture as the culture set on the server side:
     ```
 {% endif %}
 
-1. Set the current culture by calling the [`kendo.culture`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/culture) method. You have to add the script block after the culture JavaScript file.
+1. Set the current culture by calling the [`kendo.culture`](https://docs.telerik.com/kendo-ui/api/kendo/methods/culture) method. You have to add the script block after the culture JavaScript file.
 
     > Set the client-side culture before initializing any helpers that rely on it.
 

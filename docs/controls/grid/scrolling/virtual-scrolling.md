@@ -64,10 +64,10 @@ If the total number of items is large and the scrolling is fast, the table of th
 
 There are several requirements that are needed for the Virtual Scrolling to function correctly:
 
- * The Grid must have a defined [`height`](/api/javascript/ui/grid/configuration/height).
+ * The Grid must have a defined [`height`](/api/ui/grid/configuration/height).
  * The Grid must be visible when it is initialized.
- * The DataSource must have a defined [`pageSize`](/api/javascript/data/datasource/configuration/pagesize).
- * The DataSource must have a defined [`total`](/api/javascript/data/datasource/configuration/schema#schematotal) when [Remote Binding](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) is used.
+ * The DataSource must have a defined [`pageSize`](/api/data/datasource/configuration/pagesize).
+ * The DataSource must have a defined [`total`](/api/data/datasource/configuration/schema#schematotal) when [Remote Binding](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) is used.
 
 Additional information about the limitations of virtual scrolling can be found in the [Known Limitations](#known-limitations) section of the article.
 
@@ -106,10 +106,10 @@ On mobile devices where a scrollbar that can be grabbed and dragged is not visib
     * Initialize the Grid while its element is still visible.
     * Initialize the Grid in a suitable event of the parent component - for example, in the `activate` event of the TabStrip.
 * Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to one or two million records. The exact number of records depends on the browser and the row height. If you use a row count that is larger than the browser can handle, unexpected component behavior or JavaScript errors might occur. In such cases, revert to standard paging.
-* Refreshing or replacing the Grid data in the virtual mode has to be accompanied by resetting the position of the virtual scrollbar to zero&mdash;for example, by using `$('#GridID .k-scrollbar').scrollTop(0);`. In some scenarios, you might also need to call the [`refresh()` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/refresh).
+* Refreshing or replacing the Grid data in the virtual mode has to be accompanied by resetting the position of the virtual scrollbar to zero&mdash;for example, by using `$('#GridID .k-scrollbar').scrollTop(0);`. In some scenarios, you might also need to call the [`refresh()` method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/refresh).
 * Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
 * When the Grid is `navigatable`, keyboard navigation supports only the `Up Arrow` and `Down Arrow` keys. The `Page Up` and `Page Down` key scrolling is not supported.
-* The new [`persistSelection`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/persistselection) can work with the single selection functionality by using the following [example]({% slug grid-virtual-scrolling-with-persist-single-selection %}). The multiple selection functionality is not recommended as the old page is removed from the DOM when scrolling occurs. This can break the selection as the DOM elements do not exist after the scrolling reaches the new page.
+* The new [`persistSelection`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/persistselection) can work with the single selection functionality by using the following [example]({% slug grid-virtual-scrolling-with-persist-single-selection %}). The multiple selection functionality is not recommended as the old page is removed from the DOM when scrolling occurs. This can break the selection as the DOM elements do not exist after the scrolling reaches the new page.
 
 ## KB Articles on Scrolling
 
@@ -120,4 +120,4 @@ On mobile devices where a scrollbar that can be grabbed and dragged is not visib
 
 * [Virtualization of Local Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data)
 * [Virtualization of Remote Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

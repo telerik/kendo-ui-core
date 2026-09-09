@@ -27,11 +27,11 @@ The Kendo UI TaskBoard allows you to organize items and keep track of their stat
 
 * [Getting Started with the Kendo UI TaskBoard for jQuery]({% slug getting_started_kendoui_taskboard_widget %})
 * [Basic Usage of the TaskBoard (Demo)](https://demos.telerik.com/kendo-ui/taskboard/index)
-* [JavaScript API Reference of the TaskBoard](/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the TaskBoard](/api/ui/taskboard)
 
 ## See Also
 
 * [Basic Usage of the TaskBoard (Demo)](https://demos.telerik.com/kendo-ui/taskboard/index)
 * [Kendo UI TaskBoard Columns]({% slug columns_kendoui_taskboard_widget %})
 * [Kendo UI TaskBoard Cards]({% slug cards_kendoui_taskboard_widget %})
-* [JavaScript API Reference of the TaskBoard](/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the TaskBoard](/api/ui/taskboard)

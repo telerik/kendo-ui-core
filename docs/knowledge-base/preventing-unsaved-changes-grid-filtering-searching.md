@@ -70,9 +70,9 @@ $(document).ready(function () {
 ```
 
 ### Key Points
-1. Attach the `onFilter` function to the Grid’s [`filter`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/filter) event.
+1. Attach the `onFilter` function to the Grid’s [`filter`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/filter) event.
 2. Add a `keydown` event handler to the search box.
-3. Use the [`.hasChanges()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/data/datasource/methods/haschanges) method to check for unsaved edits.
+3. Use the [`.hasChanges()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/data/datasource/methods/haschanges) method to check for unsaved edits.
 4. Prompt the user and cancel the operation if necessary.
 
 ## See Also

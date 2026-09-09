@@ -17,7 +17,7 @@ The GanttList of the Gantt extends the TreeList widget and offers its functional
 
 * [TreeList Documentation](https://docs.telerik.com/kendo-ui/controls/treelist/overview)
 * [TreeList Demos](https://demos.telerik.com/kendo-ui/treelist/index)
-* [TreeList Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [TreeList Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/treelist)
 
 The following features of the TreeList are currently not supported by the GanttList.
 
@@ -55,4 +55,4 @@ The Timeline section visualizes the tasks and diplays start and end dates, progr
 * [Basic Usage of the Gantt TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
 {% endif %}
 * [Using the API of the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/api)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/gantt)

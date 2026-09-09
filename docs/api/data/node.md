@@ -15,7 +15,7 @@ See the [`Model` fields](/api/framework/model#fields) for all inherited fields.
 
 ### children
 
-The child `kendo.data.HierarchicalDataSource` of the node. This field is initialized lazily if the `hasChildren` field is set or when the [`load`](/api/javascript/data/node/methods/load) or [`append`](/api/javascript/data/node/methods/append) methods were called.
+The child `kendo.data.HierarchicalDataSource` of the node. This field is initialized lazily if the `hasChildren` field is set or when the [`load`](/api/data/node/methods/load) or [`append`](/api/data/node/methods/append) methods were called.
 
 
 <div class="meta-api-description">

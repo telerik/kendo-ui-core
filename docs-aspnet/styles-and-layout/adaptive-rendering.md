@@ -164,7 +164,7 @@ The following example demonstrates how to customize the default breakpoints of t
 ```
 {% endif %}
 
-Often, you may need to dynamically adjust the appearance of the components based on the current screen size. In such cases, you can utilize the <a href="https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/mediaquery" target="_blank">`kendo.mediaQuery()`</a> client-side method, which allows you to handle media queries using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList" target="_blank">MediaQueryList object</a>. 
+Often, you may need to dynamically adjust the appearance of the components based on the current screen size. In such cases, you can utilize the <a href="https://docs.telerik.com/kendo-ui/api/kendo/methods/mediaquery" target="_blank">`kendo.mediaQuery()`</a> client-side method, which allows you to handle media queries using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList" target="_blank">MediaQueryList object</a>. 
 
 The following example showcases how to dynamically manage the orientation of the [Menu]({% slug htmlhelpers_menu_aspnetcore%}) component depending on the screen size:
 

@@ -14,11 +14,11 @@ The Kendo UI Grid for jQuery provides consistency to the customer experience on 
 
 For example, when you filter or edit data on mobile, Kendo UI slides in a new screen for the user, which is a departure from the desktop-like inline and popup behaviors. 
 
-> Avoid using the `mobile` option as it will be deprecated. Use the [`adaptiveMode`](/api/javascript/ui/grid/configuration/adaptivemode) configuration option instead. To learn more, see the [Adaptive Tools article]({% slug adaptive_tools_kendoui_grid_component %}).
+> Avoid using the `mobile` option as it will be deprecated. Use the [`adaptiveMode`](/api/ui/grid/configuration/adaptivemode) configuration option instead. To learn more, see the [Adaptive Tools article]({% slug adaptive_tools_kendoui_grid_component %}).
 
 ## Enabling Responsive Design
 
-To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid/configuration/mobile) property to `true` or `"phone"`:
+To enable the adaptive rendering feature, set the [`mobile`](/api/ui/grid/configuration/mobile) property to `true` or `"phone"`:
 
 * If set to `true`, the component will use adaptive rendering when viewed on a mobile browser.
 * If set to `"phone"`, the component will be forced to use adaptive rendering regardless of the browser type.
@@ -128,7 +128,7 @@ When in adaptive mode, the Grid generates auxiliary markup which needs to be rem
 
 To manually destroy the Grid:
 
-1. Call [`kendo.destroy()`](/api/javascript/kendo/methods/destroy) over the closest `.k-pane-wrapper` ancestor which is created around the Grid component.
+1. Call [`kendo.destroy()`](/api/kendo/methods/destroy) over the closest `.k-pane-wrapper` ancestor which is created around the Grid component.
 1. Remove the whole `.k-pane-wrapper` element from the DOM.
 
 To re-create the Grid, insert a new `<div>` at the same place where the previous Grid `<div>` was initially placed.
@@ -136,5 +136,5 @@ To re-create the Grid, insert a new `<div>` at the same place where the previous
 ## See Also
 
 * [Implementing Responsive Columns in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/responsive-columns)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

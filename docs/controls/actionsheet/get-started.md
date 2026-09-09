@@ -76,7 +76,7 @@ In this step, you will initialize the ActionSheet from the empty `<div>` element
 
 ## 3. Add Action Items
 
-You can add all the action items you need through the [`items`](/api/javascript/ui/actionsheet/configuration/items) configuration.
+You can add all the action items you need through the [`items`](/api/ui/actionsheet/configuration/items) configuration.
 
 ```html
     <div id="actionsheet"></div>
@@ -124,7 +124,7 @@ You can add all the action items you need through the [`items`](/api/javascript/
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery ActionSheet](/api/javascript/ui/actionsheet)
+* [JavaScript API Reference of the jQuery ActionSheet](/api/ui/actionsheet)
 * [Knowledge Base Section](/knowledge-base)
 
 

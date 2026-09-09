@@ -19,4 +19,4 @@ For more information, refer to:
 
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
 * [RTL Support in Kendo UI for jQuery]({% slug right_toleft_languages_accessibility_support %})
-* [JavaScript API Reference of the FileManager](/api/javascript/ui/filemanager)
+* [JavaScript API Reference of the FileManager](/api/ui/filemanager)

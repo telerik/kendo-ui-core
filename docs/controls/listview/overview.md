@@ -30,9 +30,9 @@ The ListView can be bound to local JSON data or to remote data by using the Kend
 
 * [Getting Started with the Kendo UI ListView for jQuery]({% slug getting_started_kendoui_listview_widget %})
 * [Basic Usage of the ListView (Demo)](https://demos.telerik.com/kendo-ui/listview/index)
-* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
+* [JavaScript API Reference of the ListView](/api/ui/listview)
 
 ## See Also
 
 * [Basic Usage of the ListView (Demo)](https://demos.telerik.com/kendo-ui/listview/index)
-* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
+* [JavaScript API Reference of the ListView](/api/ui/listview)

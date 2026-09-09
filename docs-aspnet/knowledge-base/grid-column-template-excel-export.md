@@ -35,7 +35,7 @@ To export the content of the Column Templates:
 {% else %}
 1. Subscribe to the [`ExcelExport` Event](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring)  of the Grid.
 {% endif %}
-1. In the handler get the first sheet of the [workbook](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration). This allows you to modify its rows later.
+1. In the handler get the first sheet of the [workbook](https://docs.telerik.com/kendo-ui/api/ooxml/workbook#configuration). This allows you to modify its rows later.
 1. Access the Grid's client-side instance that is available in the event's content. Then get the column by its index.
 1. Evaluate the template.
 1. Get the `dataItems` set that is currently loaded in the Grid.
@@ -113,7 +113,7 @@ To learn more about the Kendo UI templating engine, see the [Kendo UI Templates 
 ## See Also
 
 * [Telerik REPL: Exporting Grid Column Templates to Excel](https://netcorerepl.telerik.com/GGajGWPJ51YAIs9257)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

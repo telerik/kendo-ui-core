@@ -308,6 +308,6 @@ The Drag-and-Drop components do not automatically change the data-bound componen
 ## See Also
 
 * [Using the Events of the Drag-and-Drop (Demo)](https://demos.telerik.com/kendo-ui/dragdrop/events)
-* [API Reference of Draggable](/api/javascript/ui/draggable)
-* [API Reference of DropTarget](/api/javascript/ui/droptarget)
-* [API Reference of DropTargetArea](/api/javascript/ui/droptargetarea)
+* [API Reference of Draggable](/api/ui/draggable)
+* [API Reference of DropTarget](/api/ui/droptarget)
+* [API Reference of DropTargetArea](/api/ui/droptargetarea)

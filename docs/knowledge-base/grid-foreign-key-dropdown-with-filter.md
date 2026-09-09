@@ -26,11 +26,11 @@ components: ["grid"]
 
 ## Description
 
-How can I have a [`filter`](/api/javascript/ui/dropdownlist/configuration/filter) textbox in the dropdown list editor in the Grid foreign key column?
+How can I have a [`filter`](/api/ui/dropdownlist/configuration/filter) textbox in the dropdown list editor in the Grid foreign key column?
 
 ## Solution
 
-You may add the filter option in the [`edit`](/api/javascript/ui/grid/events/edit) event of the Kendo UI Grid when the automatically generated Kendo UI DropDownList is initialized.
+You may add the filter option in the [`edit`](/api/ui/grid/events/edit) event of the Kendo UI Grid when the automatically generated Kendo UI DropDownList is initialized.
 
 ```
   edit: function(e){

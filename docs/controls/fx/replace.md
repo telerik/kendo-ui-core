@@ -171,4 +171,4 @@ The following example demonstrates the Kendo UI multi-element iOS transition.
 ## See Also
 
 * [Basic Usage of FX (Demo)](https://demos.telerik.com/kendo-ui/fx/expand)
-* [JavaScript API Reference of FX](/api/javascript/effects/common)
+* [JavaScript API Reference of FX](/api/effects/common)

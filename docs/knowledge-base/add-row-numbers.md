@@ -25,7 +25,7 @@ How can I implement row numbers in a Kendo UI Grid?
 
 ## Solution
 
-To achieve the desired scenario, use the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize()`](/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
+To achieve the desired scenario, use the [`page()`](/api/data/datasource/methods/page) and [`pageSize()`](/api/data/datasource/methods/pagesize) methods of the Data Source.
 
 ```dojo
   <div id="grid"></div>
@@ -67,7 +67,7 @@ To achieve the desired scenario, use the [`page()`](/api/javascript/data/datasou
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Data Grid](/api/ui/grid)
 * [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
 * [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
 * [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

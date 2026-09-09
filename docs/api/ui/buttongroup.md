@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.ButtonGroup
 
-Represents the Kendo UI ButtonGroup widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ButtonGroup widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -137,7 +137,7 @@ How can I add custom attributes to individual buttons within a Kendo UI ButtonGr
 
 ### items.badge `Boolean|String|Number|Object`
 
-If set to true a default overlay badge will be displayed. If set to a string, an ovelay with content set to the specified string will be displayed. Can be set to a JavaScript object which represents the configuration of the [`Badge widget`](/api/javascript/ui/badge).
+If set to true a default overlay badge will be displayed. If set to a string, an ovelay with content set to the specified string will be displayed. Can be set to a JavaScript object which represents the configuration of the [`Badge widget`](/api/ui/badge).
 
 
 <div class="meta-api-description">
@@ -179,7 +179,7 @@ How to add custom badges to individual buttons in a ButtonGroup control? Configu
 
 Specifies position of the badge relative to button. Valid position options are: `top start`, `top end`, `bottom start`, `bottom end`.
 
-`items.badge.align` works in conjunction with [`items.badge.position`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgeposition).
+`items.badge.align` works in conjunction with [`items.badge.position`](/api/ui/buttongroup/configuration/items#itemsbadgeposition).
 
 
 <div class="meta-api-description">
@@ -354,7 +354,7 @@ How do I prevent button badges from showing extremely large numbers in Kendo UI 
 
 Specifies position of the badge relative to the edge of the button. Valid placemnt options are: `inline`, `edge`, `inside`, `outside`.
 
-Note: position configuration, other than `inline` requires the badge to be aligned. See [`items.badge.align`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgealign) for more details.
+Note: position configuration, other than `inline` requires the badge to be aligned. See [`items.badge.align`](/api/ui/buttongroup/configuration/items#itemsbadgealign) for more details.
 
 
 <div class="meta-api-description">
@@ -491,7 +491,7 @@ How do I adjust the size of badges in a Kendo UI ButtonGroup? Adjust the size, s
 
 ### items.badge.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the badge.
+The [template](/api/kendo/methods/template) which renders the content of the badge.
 
 
 <div class="meta-api-description">

@@ -8,13 +8,13 @@ component: calendar
 
 # kendo.ui.Calendar
 
-Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
 ### allowReverse `Boolean` *(default: false)*
 
-Enables the user to select an end date that is before the start date. This option is available only when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration is set to **range**.
+Enables the user to select an end date that is before the start date. This option is available only when the [`selectable`](/api/ui/calendar/configuration/selectable) configuration is set to **range**.
 
 
 <div class="meta-api-description">
@@ -195,7 +195,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 ### footer `String|Function`
 
- The [template](/api/javascript/kendo/methods/template) which renders the footer. If false, the footer will not be rendered.
+ The [template](/api/kendo/methods/template) which renders the footer. If false, the footer will not be rendered.
 
 
 <div class="meta-api-description">
@@ -599,7 +599,7 @@ How to enable multiple date selection in Kendo UI Calendar widget? Enable or con
 
 Specifies which dates to be selected when the calendar is initialized.
 
-> **Important:** This configuration option requires the [selectable](/api/javascript/ui/calendar/configuration/selectable): "multiple" option to be set.
+> **Important:** This configuration option requires the [selectable](/api/ui/calendar/configuration/selectable): "multiple" option to be set.
 
 
 <div class="meta-api-description">
@@ -679,7 +679,7 @@ How do I programmatically set the selected date on a Kendo UI calendar? Configur
 
 ### range `Object`*(default: { start: null, end: null })*
 
-Specifies an initial range selection. This option is available only when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration is set to `range`. 
+Specifies an initial range selection. This option is available only when the [`selectable`](/api/ui/calendar/configuration/selectable) configuration is set to `range`. 
 
 
 <div class="meta-api-description">
@@ -742,7 +742,7 @@ How do I set the maximum date limit for date range selection in a Kendo UI calen
 
 When this configuration is enabled, the calendar will render days from the previous and next months in the current view.
 
-> The `showOtherMonthDays` configuration is not compatible with the [`range`](/api/javascript/ui/calendar/configuration/selectable) selection. It is advised that this property is set to **false** when `selectable` is set to **range**.
+> The `showOtherMonthDays` configuration is not compatible with the [`range`](/api/ui/calendar/configuration/selectable) selection. It is advised that this property is set to **false** when `selectable` is set to **range**.
 
 
 <div class="meta-api-description">
@@ -1005,7 +1005,7 @@ How do I navigate up to a higher calendar view in Kendo UI? Control or trigger n
 
 Gets/Sets the selected dates for the calendar.
 
-> **Important:** This method requires the [selectable](/api/javascript/ui/calendar/configuration/selectable): "multiple" option to be set.
+> **Important:** This method requires the [selectable](/api/ui/calendar/configuration/selectable): "multiple" option to be set.
 
 
 <div class="meta-api-description">
@@ -1059,7 +1059,7 @@ The range to set. It should have a start and end properties with the respective 
 
 `Object` The selected range of the calendar. The object has a start and end properties.
 
-> **Important:** This method requires the [selectable](/api/javascript/ui/calendar/configuration/selectable): "range" option to be set.
+> **Important:** This method requires the [selectable](/api/ui/calendar/configuration/selectable): "range" option to be set.
 
 #### Example - gets the selected range for the widget
 

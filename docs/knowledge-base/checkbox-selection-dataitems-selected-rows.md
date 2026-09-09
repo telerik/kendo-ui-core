@@ -33,11 +33,11 @@ How can I create a shopping list by using the selected Grid rows and a Kendo UI 
 
 To get the `dataItem` for each selected row:
 
-1. In the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event handler, get and save the rows in a variable by using the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method.
+1. In the [`change`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/change) event handler, get and save the rows in a variable by using the [`select`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/select) method.
 1. Loop through the rows by using the [`each`](https://api.jquery.com/each/) jQuery method.
-1. Get every row data by using the [`dataItem`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method.
+1. Get every row data by using the [`dataItem`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem) method.
 1. Push the `dataItem` to an array.
-1. Add the selected items to the ListBox component by using the [`data`](/api/javascript/data/datasource/methods/data) method.
+1. Add the selected items to the ListBox component by using the [`data`](/api/data/datasource/methods/data) method.
 
 ```dojo
     <div id="example">
@@ -119,10 +119,10 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 
 ## Get the Selected Rows Data Across All Grid Pages
 
-1. Get the `id` field values of the selected rows through the [`selectedKeyNames()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/selectedkeynames) method.
+1. Get the `id` field values of the selected rows through the [`selectedKeyNames()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/selectedkeynames) method.
 2. Traverse the Grid data to match the data items holding these `id` values.
 3. Push the `dataItems` of the selected rows to an array.
-4. Add the selected items to the ListBox component by using the [`data`](/api/javascript/data/datasource/methods/data) method.
+4. Add the selected items to the ListBox component by using the [`data`](/api/data/datasource/methods/data) method.
 
 ```dojo
     <div id="example">
@@ -210,4 +210,4 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
 * [Grid Checkbox Selection Demo](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)
+* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.selectable)

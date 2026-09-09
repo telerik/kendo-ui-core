@@ -28,5 +28,5 @@ To define the desired earliest and latest available time in the built-in TimePic
 
 ## See Also
 
-* [JavaScript API Reference of the DateTimePicker](/api/javascript/ui/datetimepicker)
+* [JavaScript API Reference of the DateTimePicker](/api/ui/datetimepicker)
 * [Demo Page for the jQuery DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/index)

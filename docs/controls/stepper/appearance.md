@@ -13,7 +13,7 @@ The Stepper is rendered horizontally with an indictor element and a label for ea
 
 ## Orientation
 
-The orientation of the Stepper could be configured via the [`orientation`](/api/javascript/ui/stepper/configuration/orientation) configuration property.
+The orientation of the Stepper could be configured via the [`orientation`](/api/ui/stepper/configuration/orientation) configuration property.
 
 The following example demonstrates how to initialize a vertical Stepper from an existing `<nav>` element.
 
@@ -39,7 +39,7 @@ The following example demonstrates how to initialize a vertical Stepper from an 
 
 ## Layout
 
-By default both the label and indicator of each Step are displayed. The Stepper layout could be configured via the [`label`](/api/javascript/ui/stepper/configuration/label) and [`indicator`](/api/javascript/ui/stepper/configuration/indicator) configuration properties.
+By default both the label and indicator of each Step are displayed. The Stepper layout could be configured via the [`label`](/api/ui/stepper/configuration/label) and [`indicator`](/api/ui/stepper/configuration/indicator) configuration properties.
 
 The following example demonstrates how to initialize a Stepper from an existing `<nav>` element with only indicator elements displayed.
 
@@ -67,4 +67,4 @@ The following example demonstrates how to initialize a Stepper from an existing 
 ## See Also
 
 * [Basic usage of the Stepper](https://demos.telerik.com/kendo-ui/stepper/index)
-* [JavaScript API Reference of the Stepper](/api/javascript/ui/stepper)
+* [JavaScript API Reference of the Stepper](/api/ui/stepper)

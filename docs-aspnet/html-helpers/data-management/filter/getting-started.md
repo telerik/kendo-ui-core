@@ -44,7 +44,7 @@ Use the Calendar HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
 * The `MainLogic()` configuration method defines the value of the logical operator at the root level of the filter expression.
 * The `ApplyButton` will display a button which when clicked will apply filtering over the datasource.
 * The `Fields` is an array of JavaScript objects that hold information about the filter field, it's editor, default values used for filter and etc.
-* The `FilterExpression` is An object which represents a filter expression which the [`kendo.data.DataSource`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource) can use to filter the data.
+* The `FilterExpression` is An object which represents a filter expression which the [`kendo.data.DataSource`](https://docs.telerik.com/kendo-ui/api/data/datasource) can use to filter the data.
 
 ```HtmlHelper
 @using Kendo.Mvc
@@ -259,7 +259,7 @@ You can reference the Filter instances that you have created and build on top of
         var filterInstance = $("#filter").data("kendoFilter"); // filterInstance is a reference to the existing Filter instance of the helper.
     </script>
     ```
-1. Use the [Filter client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter#methods) to control the behavior of the widget. In this example, you will use the `applyFilter` method to apply the generated filter to the dataSource.
+1. Use the [Filter client-side API](https://docs.telerik.com/kendo-ui/api/ui/filter#methods) to control the behavior of the widget. In this example, you will use the `applyFilter` method to apply the generated filter to the dataSource.
     ```JS script
     <script>
         var filterInstance = $("#filter").data("kendoFilter"); // filterInstance is a reference to the existing Filter instance of the helper.
@@ -279,6 +279,6 @@ You can continue experimenting with the code sample above by running it in the T
 * [Persisting the State of the Filter]({% slug htmlhelpers_filter_aspnetcore_store_settings %})
 ## See Also
 * [Basic Usage of the Filter for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filter)
-* [Client-Side API of the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter)
+* [Client-Side API of the Calendar](https://docs.telerik.com/kendo-ui/api/ui/filter)
 * [Server-Side API of the Calendar](/api/filter)
 * [Knowledge Base Section](/knowledge-base)

@@ -38,4 +38,4 @@ The following example demonstrates how to configure an on-screen keyboard for th
 
 ## See Also
 
-* [JavaScript API Reference of the DateRangePicker](/api/javascript/ui/daterangepicker)
+* [JavaScript API Reference of the DateRangePicker](/api/ui/daterangepicker)

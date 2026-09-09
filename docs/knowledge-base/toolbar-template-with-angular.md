@@ -80,7 +80,7 @@ The following example demonstrates how to create a custom ToolBar template in An
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)
 * [Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
 * [Change Languages Dynamically]({% slug howto_dynamic_language_change %})
 * [Create Custom Editors]({% slug howto_create_custom_editors_grid %})

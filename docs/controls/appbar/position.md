@@ -32,4 +32,4 @@ The `positionMode` option defines the position of the component relative to its 
 ## See Also
 
 * [Positioning of the AppBar (Demo)](https://demos.telerik.com/kendo-ui/appbar/position)
-* [JavaScript API Reference of the AppBar](/api/javascript/ui/appbar)
+* [JavaScript API Reference of the AppBar](/api/ui/appbar)

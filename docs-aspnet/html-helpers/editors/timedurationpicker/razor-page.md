@@ -83,7 +83,7 @@ To bind the TimeDurationPicker to a property from the `PageModel`, follow the ne
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the TimeDurationPicker](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/timedurationpicker)
+* [Client-Side API of the TimeDurationPicker](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/timedurationpicker)
 * [Server-Side HtmlHelper API of the TimeDurationPicker](/api/timedurationpicker)
 * [Server-Side TagHelper API of the TimeDurationPicker](/api/taghelpers/timedurationpicker)
 * [Knowledge Base Section](/knowledge-base)

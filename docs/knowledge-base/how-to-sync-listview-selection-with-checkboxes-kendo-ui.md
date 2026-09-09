@@ -27,7 +27,7 @@ ticketid: 1668686
 
 ## Description
 
-When using a [ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview) with checkboxes for each item, it's required to sync the checkbox state with the item selection state. Specifically, the need is to select ListView items when their corresponding checkboxes are checked, and to check these checkboxes when items are selected. This KB article also answers the following questions:
+When using a [ListView](https://docs.telerik.com/kendo-ui/api/ui/listview) with checkboxes for each item, it's required to sync the checkbox state with the item selection state. Specifically, the need is to select ListView items when their corresponding checkboxes are checked, and to check these checkboxes when items are selected. This KB article also answers the following questions:
 - How can I toggle ListView item selection with checkboxes?
 - How to synchronize ListView selection with checkbox states?
 
@@ -35,9 +35,9 @@ When using a [ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/list
 
 To synchronize the selection state between ListView items and checkboxes, follow these steps:
 
-1. Set the [`selectable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/configuration/selectable) option of the ListView to `"multiple"` to allow multiple items to be selected.
+1. Set the [`selectable`](https://docs.telerik.com/kendo-ui/api/ui/listview/configuration/selectable) option of the ListView to `"multiple"` to allow multiple items to be selected.
 
-2. Use the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/events/change) event of the ListView to check checkboxes based on the currently selected items. In the event handler, deselect all checkboxes, then check the checboxes based on the selected state of the items using the `k-selected` class.
+2. Use the [`change`](https://docs.telerik.com/kendo-ui/api/ui/listview/events/change) event of the ListView to check checkboxes based on the currently selected items. In the event handler, deselect all checkboxes, then check the checboxes based on the selected state of the items using the `k-selected` class.
 
     ```javascript
     change: function(e) {
@@ -62,7 +62,7 @@ To synchronize the selection state between ListView items and checkboxes, follow
     });
     ```
 
-4. To retrieve the selected items, use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/select) method of the ListView. This can be triggered by an external action, such as clicking a 'Get Selected' button.
+4. To retrieve the selected items, use the [`select`](https://docs.telerik.com/kendo-ui/api/ui/listview/methods/select) method of the ListView. This can be triggered by an external action, such as clicking a 'Get Selected' button.
 
 The implementation above ensures that selecting a ListView item checks its checkbox and checking a checkbox selects the ListView item, maintaining synchronization between the two.
 
@@ -125,4 +125,4 @@ For a practical demonstration, refer to the example below:
 ## See Also
 
 - [ListView Overview](https://docs.telerik.com/kendo-ui/controls/listview/overview)
-- [ListView API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
+- [ListView API](https://docs.telerik.com/kendo-ui/api/ui/listview)

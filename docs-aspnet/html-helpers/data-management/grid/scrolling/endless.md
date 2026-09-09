@@ -61,9 +61,9 @@ If the Grid displays hierarchical data and an item gets expanded, it will not be
 
 ## Using with DataSource Operations
 
-When a filter, sort, or group is applied through the [`DataSource` methods](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods) and not through the Grid UI, the scroll position will not be automatically reset.
+When a filter, sort, or group is applied through the [`DataSource` methods](https://docs.telerik.com/kendo-ui/api/data/datasource#methods) and not through the Grid UI, the scroll position will not be automatically reset.
 
-In such cases, you have to manually update the scroll position and [`pageSize`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/pagesize).
+In such cases, you have to manually update the scroll position and [`pageSize`](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/pagesize).
 
 ```HtmlHelper
     @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()

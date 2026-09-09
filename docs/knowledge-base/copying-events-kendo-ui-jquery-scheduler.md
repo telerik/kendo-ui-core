@@ -102,6 +102,6 @@ Both approaches resolve the issue with copying events, ensuring correct behavior
 
 ## See Also
 
-- [Kendo UI Scheduler API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/scheduler)
+- [Kendo UI Scheduler API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/scheduler)
 - [Clone Events Using Ctrl Key Knowledge Base Article](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/clone-events-on-ctrl-and-click)
-- [SchedulerEvent Clone API](https://docs.telerik.com/kendo-ui/api/javascript/data/schedulerevent/methods/clone)
+- [SchedulerEvent Clone API](https://docs.telerik.com/kendo-ui/api/data/schedulerevent/methods/clone)

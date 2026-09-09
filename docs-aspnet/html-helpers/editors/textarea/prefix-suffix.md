@@ -98,4 +98,4 @@ The following example demonstrates how to add an icon after the TextArea element
 
 * [Using the Prefix and Suffix of the TextArea for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textarea/prefix-suffix)
 * [Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/textarea)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textarea)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/textarea)

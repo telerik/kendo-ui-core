@@ -28,7 +28,7 @@ How can I show a Kendo UI Spreadsheet in a view-only (read-only) mode so that th
 Apply either of the following approaches:
 
 * Use a Kendo UI Grid or a `table` element.
-* Subscribe to the [`render`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/events/render) event of the Spreadsheet and disable all cells across all sheets as demonstrated in the following example.
+* Subscribe to the [`render`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/events/render) event of the Spreadsheet and disable all cells across all sheets as demonstrated in the following example.
 
 ```dojo
 <div id="example">
@@ -460,5 +460,5 @@ Apply either of the following approaches:
 
 ## See Also
 
- * [API Reference of the Kendo UI Spreadsheet for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
- * [`Range` API Reference](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range)
+ * [API Reference of the Kendo UI Spreadsheet for jQuery](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
+ * [`Range` API Reference](https://docs.telerik.com/kendo-ui/api/spreadsheet/range)

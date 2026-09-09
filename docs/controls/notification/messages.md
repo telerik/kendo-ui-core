@@ -17,7 +17,7 @@ By default, the Notification creates popups which overlay the other page content
 
 You can independently control positioning and stacking. If you do not define any stacking settings, based on the position settings, the popups will stack upwards or downwards. For example, popups displayed at the top of the viewport will stack downwards and vice versa. The automatic settings of the stacking functionality comply with a common preference among users. However, you can render leftward or rightward stacking by explicitly defining the respective settings.
 
-Popups are [pinned](/api/javascript/ui/notification/configuration/position#positionpinned) by default and they do not change their position when users scroll the page. The pinned functionality is achieved by applying a `position:fixed` style to the popups. To enable the popups to move together with the scrolled page, use the `position:absolute` style.
+Popups are [pinned](/api/ui/notification/configuration/position#positionpinned) by default and they do not change their position when users scroll the page. The pinned functionality is achieved by applying a `position:fixed` style to the popups. To enable the popups to move together with the scrolled page, use the `position:absolute` style.
 
 If the popup content is expected to vary and stacking is likely to occur, explicitly define dimensions. In this way, the popups are aligned and look better when stacked next to one another.
 
@@ -73,7 +73,7 @@ The following example demonstrates how to enable static notifications.
 
 ## Rendering Different Messages for Single Notifications
 
-A single Notification instance can display different messages with different settings, for example, messages related to automatic hiding or hide timeouts. To apply the desired configuration options, use the [`setOptions`](/api/javascript/ui/widget/methods/setoptions) method. The new options will apply to all messages displayed later on. To restore or change the widget settings again, use `setOptions` as many times as necessary.
+A single Notification instance can display different messages with different settings, for example, messages related to automatic hiding or hide timeouts. To apply the desired configuration options, use the [`setOptions`](/api/ui/widget/methods/setoptions) method. The new options will apply to all messages displayed later on. To restore or change the widget settings again, use `setOptions` as many times as necessary.
 
     <span id="notification"></span>
     <script>
@@ -94,4 +94,4 @@ A single Notification instance can display different messages with different set
 
 * [Basic Usage of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/index)
 * [Using the API of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/api)
-* [JavaScript API Reference of the Notification](/api/javascript/ui/notification)
+* [JavaScript API Reference of the Notification](/api/ui/notification)

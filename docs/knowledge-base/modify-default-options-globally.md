@@ -69,7 +69,7 @@ The following example demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
+* [DatePicker JavaScript API Reference](/api/ui/datepicker)
 * [Create Date Masking]({% slug masks_kendoui_maskedtextbox_widget %})
 * [Hide the Default Button]({% slug howto_hide_default_button_datepicker %})
 * [Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})

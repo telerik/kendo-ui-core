@@ -156,7 +156,7 @@ The Scheduler allows you to assign predefined resources to the events.
 
 ## 6. Add Event Template
 
-To customize the appearance of the events, use the [`eventTemplate`](/api/javascript/ui/scheduler/configuration/eventtemplate) option of the Scheduler.
+To customize the appearance of the events, use the [`eventTemplate`](/api/ui/scheduler/configuration/eventtemplate) option of the Scheduler.
 
 ```html
 <div id="scheduler"></div>
@@ -204,7 +204,7 @@ To customize the appearance of the events, use the [`eventTemplate`](/api/javasc
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the jQuery Scheduler](/api/ui/scheduler)
 * [Knowledge Base Section](/knowledge-base)
 
 

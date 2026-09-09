@@ -50,7 +50,7 @@ After the completion of this guide, you will be able to sort, filter, and log th
 
 When you bind the DataSource to remote data, the component requires information about the URLs of the web service, the request type, and the response data type. A `transport` configuration must identify the protocols, the URLs of the endpoints, and the serialization formats for any or all CRUD (Create, Read, Update, Destroy) data operations.
 
-The example below demonstrates how to use the [`transport.read`](/api/javascript/data/datasource/configuration/transport.read) option to retrieve the data from a remote endpoint.
+The example below demonstrates how to use the [`transport.read`](/api/data/datasource/configuration/transport.read) option to retrieve the data from a remote endpoint.
 
 
 ```
@@ -63,7 +63,7 @@ The example below demonstrates how to use the [`transport.read`](/api/javascript
 
 ## 2. Configure the Schema Model
 
-Configuring the schema is optional. When the response is more complex than a plain array of objects, you have to configure a [`schema`](/api/javascript/data/datasource/configuration/schema).
+Configuring the schema is optional. When the response is more complex than a plain array of objects, you have to configure a [`schema`](/api/data/datasource/configuration/schema).
 
 ```
     var dataSource = new kendo.data.DataSource({
@@ -95,7 +95,7 @@ To load the data provided by the `Orders` endpoint, call the `.read()` or `fetch
 
 ## 4. Get the Returned Data Items
 
-Now, you will access the returned data items by using the [`view`](/api/javascript/data/datasource/methods/view) method of the DataSource. You can also retrieve them through [`data()`](/api/javascript/data/datasource/methods/data).
+Now, you will access the returned data items by using the [`view`](/api/data/datasource/methods/view) method of the DataSource. You can also retrieve them through [`data()`](/api/data/datasource/methods/data).
 
 Note that when the DataSource is bound to a Kendo UI widget or chart, the explicit invocation may not be necessary. By default, the widgets automatically bind to an associated DataSource. To override this built-in behavior, use the `autoBind` configuration.
 
@@ -109,9 +109,9 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 5. Add Sorting 
 
-You will now sort the items in the DataSource by using the [`sort`](/api/javascript/data/datasource/configuration/sort) configuration option.
+You will now sort the items in the DataSource by using the [`sort`](/api/data/datasource/configuration/sort) configuration option.
 
-The following example demonstrates how to enable the client-side sorting of the DataSource. To sort the data on the server, enable the [`serverSorting`](/api/javascript/data/datasource/configuration/serversorting) option.
+The following example demonstrates how to enable the client-side sorting of the DataSource. To sort the data on the server, enable the [`serverSorting`](/api/data/datasource/configuration/serversorting) option.
 
 ```
 	var dataSource = new kendo.data.DataSource({
@@ -134,9 +134,9 @@ The following example demonstrates how to enable the client-side sorting of the 
 
 ## 6. Add Filtering 
 
-You can filter the items in the DataSource by using the [`filter`](/api/javascript/data/datasource/configuration/filter) configuration option. 
+You can filter the items in the DataSource by using the [`filter`](/api/data/datasource/configuration/filter) configuration option. 
 
-The example below demonstrates how to enable the client-side filtering of the DataSource. To sort the data on the server, enable the [`serverFiltering`](/api/javascript/data/datasource/configuration/serverfiltering) option.
+The example below demonstrates how to enable the client-side filtering of the DataSource. To sort the data on the server, enable the [`serverFiltering`](/api/data/datasource/configuration/serverfiltering) option.
 
 ```
 	var dataSource = new kendo.data.DataSource({
@@ -168,6 +168,6 @@ This is it! Now you are ready to dive more deeply into the DataSource component 
 
 ## See Also 
 
-* [JavaScript API Reference of the DataSource](/api/javascript/data/datasource)
+* [JavaScript API Reference of the DataSource](/api/data/datasource)
 * [Knowledge Base Section](/knowledge-base)
 

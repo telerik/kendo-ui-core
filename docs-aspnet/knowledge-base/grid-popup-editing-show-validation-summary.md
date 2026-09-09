@@ -37,7 +37,7 @@ The {{ site.product }} Grid configured for Popup editing uses a Validator that s
 You can show a validation summary with a few lines of JavaScript.
 
 1. Handle the [`Edit`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#editsystemstring) event of the Grid.
-1. Get a reference to the [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/validator/overview) and update its options by using the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/validator/methods/setoptions) method.
+1. Get a reference to the [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/validator/overview) and update its options by using the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/ui/validator/methods/setoptions) method.
 
 ```HtmlHelper
     @(Html.Kendo().Grid <OrderViewModel>()
@@ -112,7 +112,7 @@ For more information on validation, refer to the following articles:
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

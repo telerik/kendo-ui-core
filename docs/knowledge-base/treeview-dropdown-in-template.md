@@ -146,4 +146,4 @@ How can I place DropDownLists in the `<script>` of the TreeView template which w
 
 ## See Also
 
-* [API Reference of the TreeView](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview).
+* [API Reference of the TreeView](https://docs.telerik.com/kendo-ui/api/ui/treeview).

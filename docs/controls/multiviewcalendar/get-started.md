@@ -48,7 +48,7 @@ In this step, you'll initialize the MultiViewCalendar component from the empty `
 
 ## 3. Set the Date Format
 
-The [`format`](/api/javascript/ui/multiviewcalendar/configuration/format) option allows you to specify the format of the date when using the [`value`](/api/javascript/ui/multiviewcalendar/methods/value) method.
+The [`format`](/api/ui/multiviewcalendar/configuration/format) option allows you to specify the format of the date when using the [`value`](/api/ui/multiviewcalendar/methods/value) method.
 
 ```html
   <div id="multiviewcalendar"></div>
@@ -61,7 +61,7 @@ The [`format`](/api/javascript/ui/multiviewcalendar/configuration/format) option
 
 ## 4. Set the Selected Date
 
-You can preselect a date by using the [`value`](/api/javascript/ui/multiviewcalendar/configuration/value) option.
+You can preselect a date by using the [`value`](/api/ui/multiviewcalendar/configuration/value) option.
 
 ```html
   <div id="multiviewcalendar"></div>
@@ -75,7 +75,7 @@ You can preselect a date by using the [`value`](/api/javascript/ui/multiviewcale
 
 ## 5. Configure a Footer Template
 
-You can set a footer for the MultiViewCalendar by using the [`footer`](/api/javascript/ui/multiviewcalendar/configuration/footer) option.
+You can set a footer for the MultiViewCalendar by using the [`footer`](/api/ui/multiviewcalendar/configuration/footer) option.
 
 ```html
     <div id="multiviewcalendar"></div>
@@ -95,7 +95,7 @@ You can set a footer for the MultiViewCalendar by using the [`footer`](/api/java
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
+* [JavaScript API Reference of the jQuery MultiViewCalendar](/api/ui/multiviewcalendar)
 * [Knowledge Base Section](/knowledge-base)
 
 

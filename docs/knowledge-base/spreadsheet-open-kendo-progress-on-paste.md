@@ -53,5 +53,5 @@ Implement a jQuery `paste` event handler. To attach the event, use the `render` 
 
 ## See Also
 
-* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-* [API Reference of the Progress Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/ui/methods/progress)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
+* [API Reference of the Progress Method](https://docs.telerik.com/kendo-ui/api/ui/ui/methods/progress)

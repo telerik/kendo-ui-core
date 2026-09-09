@@ -8,18 +8,18 @@ component: pivotgrid
 
 # kendo.ui.PivotGrid
 
-Represents the Kendo UI PivotGrid widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI PivotGrid widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
 ### dataSource `Object|kendo.data.PivotDataSource`
 
-The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.PivotDataSource](/api/javascript/data/pivotdatasource)
+The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.PivotDataSource](/api/data/pivotdatasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object the widget will initialize a new [kendo.data.PivotDataSource](/api/javascript/data/pivotdatasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object the widget will initialize a new [kendo.data.PivotDataSource](/api/data/pivotdatasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/javascript/data/pivotdatasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/data/pivotdatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -90,7 +90,7 @@ How do I bind data to a Kendo UI PivotGrid? Connect or bind the pivot grid to a 
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -301,7 +301,7 @@ How to enable column filters in exported Excel pivot grids? Control enabling or 
     </script>
 
 ### excel.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgrid#configuration-excel.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/ui/pivotgrid#configuration-excel.proxyURL) even if the browser supports saving files locally.
 
 
 <div class="meta-api-description">
@@ -701,7 +701,7 @@ How to customize the file name when exporting PivotGrid data as a PDF? Configure
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgrid#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/ui/pivotgrid#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 
 <div class="meta-api-description">
@@ -1611,14 +1611,14 @@ How do I set the height of a Kendo UI PivotGrid? Set or adjust the vertical size
 
 ### columnHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the column header cell. By default it renders the *caption* of the tuple member.
+The [template](/api/kendo/methods/template) which renders the content of the column header cell. By default it renders the *caption* of the tuple member.
 
 The fields which can be used in the template are:
 
 * member - the member of the corresponding column header cell
 * tuple - the tuple of the corresponding column header cell
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema#schemaaxes).
+For information about the tuple structure check this [link](/api/data/pivotdatasource/configuration/schema#schemaaxes).
 
 
 <div class="meta-api-description">
@@ -1665,7 +1665,7 @@ How to customize column header layout in Kendo UI PivotGrid? Customize and contr
 
 ### dataCellTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.
+The [template](/api/kendo/methods/template) which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.
 
 The fields which can be used in the template are:
 
@@ -1674,8 +1674,8 @@ The fields which can be used in the template are:
 * measure - the value of the data cell measure
 * dataItem - the data item itself
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema#schemaaxes).
-About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema#schemadata).
+For information about the tuple structure check this [link](/api/data/pivotdatasource/configuration/schema#schemaaxes).
+About the data item structure review this [help topic](/api/data/pivotdatasource/configuration/schema#schemadata).
 
 
 <div class="meta-api-description">
@@ -1724,7 +1724,7 @@ How to customize data cell rendering in Kendo UI PivotGrid? Control and customiz
 
 ### kpiStatusTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the `KPI Status` value. By default renders "open", "hold" and "denied" status icons.
+The [template](/api/kendo/methods/template) which renders the content of the `KPI Status` value. By default renders "open", "hold" and "denied" status icons.
 
 The fields which can be used in the template are:
 
@@ -1733,8 +1733,8 @@ The fields which can be used in the template are:
 * measure - the value of the data cell measure
 * dataItem - the data item itself
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema#schemaaxes).
-About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema#schemadata).
+For information about the tuple structure check this [link](/api/data/pivotdatasource/configuration/schema#schemaaxes).
+About the data item structure review this [help topic](/api/data/pivotdatasource/configuration/schema#schemadata).
 
 
 <div class="meta-api-description">
@@ -1781,7 +1781,7 @@ How to customize KPI status display in PivotGrid using kpiStatusTemplate? Custom
 
 ### kpiTrendTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the `KPI Trend` value. By default renders "increase", "decrease" and "equal" status icons.
+The [template](/api/kendo/methods/template) which renders the content of the `KPI Trend` value. By default renders "increase", "decrease" and "equal" status icons.
 
 The fields which can be used in the template are:
 
@@ -1790,8 +1790,8 @@ The fields which can be used in the template are:
 * measure - the value of the data cell measure
 * dataItem - the data item itself
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema#schemaaxes).
-About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema#schemadata).
+For information about the tuple structure check this [link](/api/data/pivotdatasource/configuration/schema#schemaaxes).
+About the data item structure review this [help topic](/api/data/pivotdatasource/configuration/schema#schemadata).
 
 
 <div class="meta-api-description">
@@ -1838,14 +1838,14 @@ How to customize trend display in a Kendo UI PivotGrid using kpiTrendTemplate? C
 
 ### rowHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the row header cell. By default it renders the *caption* of the tuple member.
+The [template](/api/kendo/methods/template) which renders the content of the row header cell. By default it renders the *caption* of the tuple member.
 
 The fields which can be used in the template are:
 
 * member - the member of the corresponding row header cell
 * tuple - the tuple of the corresponding row header cell
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema#schemaaxes).
+For information about the tuple structure check this [link](/api/data/pivotdatasource/configuration/schema#schemaaxes).
 
 
 <div class="meta-api-description">
@@ -2902,11 +2902,11 @@ How do I change the "not equal" filter operator label in a Kendo UI PivotGrid fi
 
 ### dataSource `kendo.data.PivotDataSource`
 
-The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](/api/javascript/ui/pivotgrid/configuration/datasource) option.
+The [data source](/api/data/pivotdatasource) of the widget. Configured via the [dataSource](/api/ui/pivotgrid/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/pivotgrid/methods/setdatasource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/ui/pivotgrid/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -3243,7 +3243,7 @@ The data source to which the widget should be bound.
 
 ### saveAsExcel
 
-Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/pivotgrid/events/excelexport) event.
+Initiates the Excel export. Also fires the [`excelExport`](/api/ui/pivotgrid/events/excelexport) event.
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
@@ -3290,7 +3290,7 @@ How do I export Kendo UI PivotGrid data to an Excel file programmatically? Expor
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/pivotgrid/events/pdfexport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/ui/pivotgrid/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
@@ -3300,7 +3300,7 @@ How do I export a Kendo UI PivotGrid to PDF programmatically? Trigger PDF export
 </div>
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/pivotgrid/events/pdfexport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/ui/pivotgrid/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
 
@@ -3720,7 +3720,7 @@ The path to the field that will be collapsed.
 
 ### excelExport
 
-Fired when [`saveAsExcel`](/api/javascript/ui/pivotgrid/methods/saveasexcel) method is called.
+Fired when [`saveAsExcel`](/api/ui/pivotgrid/methods/saveasexcel) method is called.
 
 
 <div class="meta-api-description">
@@ -3739,7 +3739,7 @@ The array of data items used to create the Excel workbook.
 
 ##### e.workbook `Object`
 
-The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will reflect in the output Excel document.
+The Excel [workbook configuration object](/api/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will reflect in the output Excel document.
 
 ##### e.preventDefault `Function`
 

@@ -220,7 +220,7 @@ You can reference the PivotGridV2 instances that you have created and build on t
         </script>
     ```
 
-1. Use the [PivotGridV2 client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgridv2#methods) to control the behavior of the component. In this example, you will use the `saveAsPDF()` method to export the PivotGridV2 data to PDF (for example, when a button is clicked).
+1. Use the [PivotGridV2 client-side API](https://docs.telerik.com/kendo-ui/api/ui/pivotgridv2#methods) to control the behavior of the component. In this example, you will use the `saveAsPDF()` method to export the PivotGridV2 data to PDF (for example, when a button is clicked).
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -267,7 +267,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Binding the PivotGridV2 for {{ site.framework }} to Local Data (Demo)](https://demos.telerik.com/{{ site.platform }}/pivotgridv2/local-flat-data-binding)
-* [Client-Side API of the PivotGridV2](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgridv2)
+* [Client-Side API of the PivotGridV2](https://docs.telerik.com/kendo-ui/api/ui/pivotgridv2)
 * [Server-Side API of the PivotGridV2](/api/pivotgridv2)
 {% if site.core %}
 * [Server-Side API of the PivotGridV2 TagHelper](/api/taghelpers/pivotgridv2)

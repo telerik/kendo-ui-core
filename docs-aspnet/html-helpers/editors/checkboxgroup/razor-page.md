@@ -110,7 +110,7 @@ For the complete project, refer to the [CheckBoxGroup in Razor Pages example](ht
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the CheckBoxGroup](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/checkboxgroup)
+* [Client-Side API of the CheckBoxGroup](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/checkboxgroup)
 * [Server-Side HtmlHelper API of the CheckBoxGroup](/api/checkboxgroup)
 * [Server-Side TagHelper API of the CheckBoxGroup](/api/taghelpers/checkboxgroup)
 * [Knowledge Base Section](/knowledge-base)

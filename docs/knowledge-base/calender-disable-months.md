@@ -37,7 +37,7 @@ The Kendo UI Calendar does not have a year template. As a result, to disable the
 
 You can stop the click from propagating and triggering a change with the [`e.stopImmediatePropagation()`](https://api.jquery.com/event.stopimmediatepropagation/) method.
 
-The Calendar exposes a [`navigate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/events/navigate) event which is suitable for implementing disabled months in the year view if the users will be allowed to navigate to other views.
+The Calendar exposes a [`navigate`](https://docs.telerik.com/kendo-ui/api/ui/calendar/events/navigate) event which is suitable for implementing disabled months in the year view if the users will be allowed to navigate to other views.
 
 ```dojo
 <div id="monthpicker"></div>

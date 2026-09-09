@@ -39,8 +39,8 @@ How can I apply changes that are visible in the Chart content that is exported i
 
 1. Create a empty `div` element that will be used to generate the Chart with the desired options on the export
 2. Generate the new Chart with the desired options
-3. In the [`render`](api/javascript/dataviz/ui/chart/events/render) event export the new Char with the [`saveAsPDF()`](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method
-4. Remove the new Chart from the DOM with [`destroy()`](/api/javascript/dataviz/ui/chart/methods/destroy) method and remove the div element.
+3. In the [`render`](api/javascript/dataviz/ui/chart/events/render) event export the new Char with the [`saveAsPDF()`](/api/dataviz/ui/chart/methods/saveaspdf) method
+4. Remove the new Chart from the DOM with [`destroy()`](/api/dataviz/ui/chart/methods/destroy) method and remove the div element.
 
 The following example demonstrates how to achieve this behavior.
 
@@ -166,7 +166,7 @@ The following example demonstrates how to achieve this behavior.
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Chart JavaScript API Reference](/api/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})

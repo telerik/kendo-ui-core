@@ -16,7 +16,7 @@ For a complete example of how to handle all ListView events triggered by user in
 
 ## Subscribing to Events
 
-The following example demonstrates how to subscribe to the [`DataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/events/databound) event.
+The following example demonstrates how to subscribe to the [`DataBound`](https://docs.telerik.com/kendo-ui/api/ui/listview/events/databound) event.
 
 ```HtmlHelper
     @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
@@ -70,4 +70,4 @@ The following example demonstrates how to subscribe to the [`DataBound`](https:/
 ## See Also
 
 * [Server-Side API of the ListView](/api/listview)
-* [Client-Side API of the ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
+* [Client-Side API of the ListView](https://docs.telerik.com/kendo-ui/api/ui/listview)

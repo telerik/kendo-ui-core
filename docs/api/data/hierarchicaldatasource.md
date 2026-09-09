@@ -409,7 +409,7 @@ How do I apply filters to hierarchical data in Kendo UI for jQuery? Configure or
 
 ##### value `Object` *(optional)*
 
-The filter configuration. Accepts the same values as the [`filter`](/api/javascript/data/hierarchicaldatasource#configuration-filter) option.
+The filter configuration. Accepts the same values as the [`filter`](/api/data/hierarchicaldatasource#configuration-filter) option.
 
 #### Returns
 

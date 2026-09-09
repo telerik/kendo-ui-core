@@ -107,7 +107,7 @@ To display a responsive Window:
         // Set "responsive" size, you may want to .center() on $(window).resize because the relative position between the window and the viewport will change.
         // The constraints above apply, however, and are most useful when the window is resizable by the end user. The example here demonstrates that you can use them
         // but in the provided configuration they may not be needed. You can find the full set of options the widget can take in the following article:
-        // https://docs.telerik.com/kendo-ui/api/javascript/ui/window.
+        // https://docs.telerik.com/kendo-ui/api/ui/window.
 
         opts.height = "90%";
         opts.width = "90%";
@@ -144,4 +144,4 @@ To prevent the content from being too small on mobile devices, use a `@media` qu
 
 ## See Also
 
-* [API Reference of the Kendo UI Window for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/window)
+* [API Reference of the Kendo UI Window for jQuery](https://docs.telerik.com/kendo-ui/api/ui/window)

@@ -27,7 +27,7 @@ The ChipList is a container for two or more individual Chip components. They rep
 
 * [Getting Started with the Kendo UI ChipList for jQuery]({% slug getting_started_kendoui_chiplist_widget %})
 * [Basic Usage of the ChipList (Demo)](https://demos.telerik.com/kendo-ui/chiplist/index)
-* [JavaScript API Reference of the ChipList](/api/javascript/ui/chiplist)
+* [JavaScript API Reference of the ChipList](/api/ui/chiplist)
 
 ## See Also
 

@@ -32,10 +32,10 @@ It supports the selection and navigation between dates as well as data templates
 
 * [Getting Started with the Kendo UI MultiViewCalendar for jQuery]({% slug getting_started_kendoui_multiviewcalendar_component %})
 * [Basic Usage of the jQuery MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/index)
-* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
+* [JavaScript API Reference of the MultiViewCalendar](/api/ui/multiviewcalendar)
 
 ## See Also
 
 * [Basic Usage of the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/index)
 * [Using the API of the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/api)
-* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
+* [JavaScript API Reference of the MultiViewCalendar](/api/ui/multiviewcalendar)

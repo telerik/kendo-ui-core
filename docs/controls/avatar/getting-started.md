@@ -46,7 +46,7 @@ In this step, you will initialize the Avatar from the `<div>` element.
 
 ## 3. Apply Configuration and Styling Settings
 
-Here, you will apply configuration settings, such as [`type`](/api/javascript/ui/avatar/configuration/type) and [`icon`](/api/javascript/ui/avatar/configuration/icon) and styling settings like [`size`](/api/javascript/ui/avatar/configuration/size).
+Here, you will apply configuration settings, such as [`type`](/api/ui/avatar/configuration/type) and [`icon`](/api/ui/avatar/configuration/icon) and styling settings like [`size`](/api/ui/avatar/configuration/size).
 
 ```dojo
     <div id="avatar-icon"></div>
@@ -66,7 +66,7 @@ Here, you will apply configuration settings, such as [`type`](/api/javascript/ui
 
 ## See Also 
 
-* [JavaScript API Reference of the Avatar](/api/javascript/ui/avatar)
+* [JavaScript API Reference of the Avatar](/api/ui/avatar)
 * [Knowledge Base Section](/knowledge-base)
 
 

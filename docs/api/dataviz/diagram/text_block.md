@@ -1,6 +1,6 @@
 ---
 title: TextBlock
-previous_url: /api/javascript/dataviz/diagram/text-block, /api/javascript/dataviz/diagram/text-block
+previous_url: /api/dataviz/diagram/text-block, /api/dataviz/diagram/text-block
 res_type: api
 ---
 

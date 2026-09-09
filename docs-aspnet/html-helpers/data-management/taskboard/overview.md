@@ -175,7 +175,7 @@ The following example demonstrates how to initialize the TaskBoard.
 ## See Also
 
 * [Using the API of the TaskBoard for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/api)
-* [Client-side API of the TaskBoard](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [Client-side API of the TaskBoard](https://docs.telerik.com/kendo-ui/api/ui/taskboard)
 * [Server-Side HtmlHelper API of the TaskBoard](/api/taskboard)
 {% if site.core %}
 * [Server-Side TagHelper API of the TaskBoard](/api/taghelpers/taskboard)

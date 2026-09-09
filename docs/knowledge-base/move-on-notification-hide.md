@@ -40,8 +40,8 @@ How can I move the remaining visible notifications after some have been hidden a
 The idea is to use static notification messages inside a positioned container. This approach creates the impression that popup notification messages are used. The position settings, which are normally applied to the Notification widget, have to be replaced by appropriate CSS styles that are applied to the container of the static messages.
 
 The following example is based on the following API and widget functionality:
-* [`appendTo`](/api/javascript/ui/notification/configuration/appendto)
-* [`stacking`](/api/javascript/ui/notification/configuration/stacking)
+* [`appendTo`](/api/ui/notification/configuration/appendto)
+* [`stacking`](/api/ui/notification/configuration/stacking)
 * [Positioning and stacking of messages]({% slug positionstacking_kendoui_notification %})
 * [Changing the auto-hide timeout on the fly]({% slug positionstacking_kendoui_notification %}#rendering-different-messages-for-single-notifications)
 
@@ -98,4 +98,4 @@ The following example is based on the following API and widget functionality:
 
 * [Basic Usage of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/index)
 * [Using the API of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/api)
-* [JavaScript API Reference of the Notification](/api/javascript/ui/notification)
+* [JavaScript API Reference of the Notification](/api/ui/notification)

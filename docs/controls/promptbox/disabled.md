@@ -35,5 +35,5 @@ To disable a specific button, use the `enabled` option within the button configu
 
 ## See Also
 
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)
 * [PromptBox Appearance]({% slug appearance_kendoui_promptbox %})

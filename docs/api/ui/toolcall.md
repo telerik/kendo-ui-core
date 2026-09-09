@@ -7,7 +7,7 @@ component: ToolCall
 
 # kendo.ui.ToolCall
 
-Represents the Kendo UI ToolCall widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ToolCall widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

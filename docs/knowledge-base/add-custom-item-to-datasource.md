@@ -42,11 +42,11 @@ How can I save an entered custom item to the remote data source of the Kendo UI 
 To achieve the desired scenario:
 
 * Configure the ComboBox DataSource for [`create`](/framework/datasource/crud) operations.
-* Use the [`change` event](/api/javascript/ui/combobox/events/change) of the ComboBox to detect when a custom text is typed.
-* In the `change` handler, check what the [index of the selected item](/api/javascript/ui/combobox/methods/select ) is or retrieve the [current data item](/api/javascript/ui/combobox/methods/dataitem).
-* If the selected index is `-1` (minus one), or if the data item is `null`, obtain the custom user input with the [`text()`](/api/javascript/ui/combobox/methods/text) method.
-* [Add](/api/javascript/data/datasource/methods/add) a new data item to the ComboBox [`dataSource`](/api/javascript/ui/combobox/fields/datasource ). This will trigger a request to the remote service if [`autoSync`](/api/javascript/data/datasource/configuration/autosync) is set to `true`. Otherwise, [`sync()`](/api/javascript/data/datasource/methods/sync) manually.
-* Before adding the new data item, attach a [one-time](/intro/widget-basics/events-and-methods#events) [`dataBound`](/api/javascript/ui/combobox/events/databound) handler and in that handler, use the [`text()`](/api/javascript/ui/combobox/methods/text) method to re-apply the custom user input. In the example below, this is as an existing data item.
+* Use the [`change` event](/api/ui/combobox/events/change) of the ComboBox to detect when a custom text is typed.
+* In the `change` handler, check what the [index of the selected item](/api/ui/combobox/methods/select ) is or retrieve the [current data item](/api/ui/combobox/methods/dataitem).
+* If the selected index is `-1` (minus one), or if the data item is `null`, obtain the custom user input with the [`text()`](/api/ui/combobox/methods/text) method.
+* [Add](/api/data/datasource/methods/add) a new data item to the ComboBox [`dataSource`](/api/ui/combobox/fields/datasource ). This will trigger a request to the remote service if [`autoSync`](/api/data/datasource/configuration/autosync) is set to `true`. Otherwise, [`sync()`](/api/data/datasource/methods/sync) manually.
+* Before adding the new data item, attach a [one-time](/intro/widget-basics/events-and-methods#events) [`dataBound`](/api/ui/combobox/events/databound) handler and in that handler, use the [`text()`](/api/ui/combobox/methods/text) method to re-apply the custom user input. In the example below, this is as an existing data item.
 
 
 ```dojo
@@ -119,7 +119,7 @@ To achieve the desired scenario:
 
 ## See Also
 
-* [JavaScript API Reference of the Kendo UI for jQuery ComboBox](/api/javascript/ui/combobox)
+* [JavaScript API Reference of the Kendo UI for jQuery ComboBox](/api/ui/combobox)
 * [Bypass ComboBox Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
 * [Configure Deferred ComboBox Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
 * [Define Virtual ComboBox Configuration Declaratively]({% slug howto_define_virtual_option_combobox %})

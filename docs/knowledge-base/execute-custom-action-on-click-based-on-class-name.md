@@ -126,7 +126,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Menu JavaScript API Reference](/api/javascript/ui/menu)
+* [Menu JavaScript API Reference](/api/ui/menu)
 * [Create Split Button]({% slug howto_createa_split_button_menu %})
 * [Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
 

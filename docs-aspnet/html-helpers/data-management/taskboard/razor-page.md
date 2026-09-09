@@ -302,7 +302,7 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the TaskBoard](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [Client-Side API of the TaskBoard](https://docs.telerik.com/kendo-ui/api/ui/taskboard)
 * [Server-Side HtmlHelper API of the TaskBoard](/api/taskboard)
 * [Server-Side TagHelper API of the TaskBoard](/api/taghelpers/taskboard)
 * [Knowledge Base Section](/knowledge-base)

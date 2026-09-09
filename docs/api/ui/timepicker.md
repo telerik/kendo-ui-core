@@ -8,7 +8,7 @@ component: date-time-pickers
 
 # kendo.ui.TimePicker
 
-Represents the Kendo UI TimePicker. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI TimePicker. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -133,7 +133,7 @@ How do I customize the closing animation of a Kendo UI timepicker popup? Control
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -204,7 +204,7 @@ How to customize the opening animation of the Kendo UI TimePicker's calendar pop
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -359,7 +359,7 @@ How do I enable editable time values in Kendo UI TimePicker? configure date and 
 
  Specifies a list of dates, which are shown in the time drop-down list. If not set, the TimePicker will auto-generate the available times.
 
- > This configuration works only with the [`classic component type`](/api/javascript/ui/timepicker/configuration/componenttype).
+ > This configuration works only with the [`classic component type`](/api/ui/timepicker/configuration/componenttype).
 
 
 
@@ -535,7 +535,7 @@ get instance.
 If set to `true`, the widget will be wrapped in a container that will allow the fl
 oating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/timepicker/methods/value) meth
+> **Important:** The [value](/api/ui/timepicker/methods/value) meth
 od **does not trigger** the `focusout` event of the timepicker.
 This can affect the floating label functionality.
 To overcome this behavior, manually invoke the `refresh` method of the Floating La
@@ -1075,7 +1075,7 @@ How do I configure custom parsing patterns for time input strings in a Kendo UI 
 ### popup `Object`
 
 The options that will be used for the popup initialization. For more details about the available options
-refer to [Popup](/api/javascript/ui/popup) documentation.
+refer to [Popup](/api/ui/popup) documentation.
 
 
 <div class="meta-api-description">
@@ -1589,9 +1589,9 @@ The time value to set for a TimePicker, expressed as a Date object or as a strin
 
 `Date` The time value of a TimePicker.
 
-> * This method **does not trigger** [change](/api/javascript/ui/timepicker/events/change) event.
+> * This method **does not trigger** [change](/api/ui/timepicker/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
     <input id="timepicker" />
     <script>

@@ -27,7 +27,7 @@ The TextArea converts a `<textarea>` element into a styled textarea.
 
 * [Getting Started with the Kendo UI TextArea for jQuery]({% slug getting_started_kendoui_textarea %})
 * [Overview of the TextArea (Demo)](https://demos.telerik.com/kendo-ui/textarea/index)
-* [JavaScript API Reference of the TextArea](/api/javascript/ui/textarea)
+* [JavaScript API Reference of the TextArea](/api/ui/textarea)
 
 ## See Also
 
@@ -35,4 +35,4 @@ The TextArea converts a `<textarea>` element into a styled textarea.
 * [Using the Basic Events of the TextArea (Demo)](https://demos.telerik.com/kendo-ui/textarea/events)
 * [Binding the TextArea over MVVM (Demo)](https://demos.telerik.com/kendo-ui/textarea/mvvm)
 * [Applying the TextArea API (Demo)](https://demos.telerik.com/kendo-ui/textarea/api)
-* [JavaScript API Reference of the TextArea](/api/javascript/ui/textarea)
+* [JavaScript API Reference of the TextArea](/api/ui/textarea)

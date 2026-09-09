@@ -49,4 +49,4 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 * [Using the API of the TextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textbox/api)
 * [TextBox Server-Side API](/api/textbox)
-* [TextBox Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox)
+* [TextBox Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/textbox)

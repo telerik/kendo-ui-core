@@ -48,7 +48,7 @@ export const __meta__ = {
         TABINDEX = "tabindex",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
-        MSG_INVALID_OPTION_LABEL = "The `optionLabel` option is not valid due to missing fields. Define a custom optionLabel as shown here http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#configuration-optionLabel",
+        MSG_INVALID_OPTION_LABEL = "The `optionLabel` option is not valid due to missing fields. Define a custom optionLabel as shown here http://docs.telerik.com/kendo-ui/api/ui/dropdownlist#configuration-optionLabel",
         OPEN = "open",
         CLOSE = "close";
 

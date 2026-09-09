@@ -23,4 +23,4 @@ For more information on using localization, internationalization, and right-to-l
 <!-- * [Localization Support by the Grid (Demo)](https://demos.telerik.com/kendo-ui/filemanager/localization) -->
 <!-- * [RTL Support by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/right-to-left-support) -->
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

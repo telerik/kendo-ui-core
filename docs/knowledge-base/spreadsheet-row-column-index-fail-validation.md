@@ -26,7 +26,7 @@ How to get the row and column index of the cell when the validation in the Sprea
 
 ## Solution
 
-Subscribe to the Spreadsheet [`change`](/api/javascript/ui/spreadsheet/events/change) event. In the event handler find the current `range`. Check the `validation` value for each cell.
+Subscribe to the Spreadsheet [`change`](/api/ui/spreadsheet/events/change) event. In the event handler find the current `range`. Check the `validation` value for each cell.
 
 ### DatePicker
 
@@ -124,4 +124,4 @@ The following example demonstrates how to get the row and column index of the ce
 
 ## See Also
 
-* [Spreadsheet] API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [Spreadsheet] API Reference](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)

@@ -73,4 +73,4 @@ The following example demonstrates how to access an existing PivotConfigurator i
 ## See Also
 
 * [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)

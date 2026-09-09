@@ -28,11 +28,11 @@ How can I persist the multi-checkbox filter in the Data Grid when the multi-chec
 
 ## Solution
 
-Calling [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method does not persist the multi-checkbox filter when the filter references an external DataSource.
+Calling [`setOptions`](/api/ui/grid/methods/setoptions) method does not persist the multi-checkbox filter when the filter references an external DataSource.
 
 To work around this issue, use either of the following approaches:
 
-* Declare the DataSource directly inside the [`columns.filterable.dataSource`](/api/javascript/ui/grid/configuration/columns.filterable.datasource) property:
+* Declare the DataSource directly inside the [`columns.filterable.dataSource`](/api/ui/grid/configuration/columns.filterable.datasource) property:
 
 	```dojo
 	    <div class="box-col">
@@ -288,6 +288,6 @@ To work around this issue, use either of the following approaches:
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Data Grid](/api/ui/grid)
 * [jQuery Data Grid Overview Demo](https://demos.telerik.com/kendo-ui/grid/index)
 * [Persist the State of the Data Grid and the Function Handlers](/knowledge-base/grid-persist-state-with-functions)

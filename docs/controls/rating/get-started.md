@@ -48,7 +48,7 @@ In this step, you will initialize the Rating from the `<input>` element. All set
 
 ## 3. Set the Min and Max Options
 
-You can define the values of the first and the last items through the [`min`](/api/javascript/ui/rating/configuration/min) and [`max`](/api/javascript/ui/rating/configuration/max) options.
+You can define the values of the first and the last items through the [`min`](/api/ui/rating/configuration/min) and [`max`](/api/ui/rating/configuration/max) options.
 
 ```html
 <input id="rating" />
@@ -86,7 +86,7 @@ You can set the value of the Rating upon initialization.
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Rating](/api/javascript/ui/rating)
+* [JavaScript API Reference of the jQuery Rating](/api/ui/rating)
 * [Knowledge Base Section](/knowledge-base)
 
 

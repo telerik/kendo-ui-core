@@ -287,7 +287,7 @@ You can reference the TabStrip instances that you have created and build on top 
     </script>
     ```
 
-1. Use the [TabStrip client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip#methods) to control the behavior of the widget. In this example, you will use the `select` method to select an item.
+1. Use the [TabStrip client-side API](https://docs.telerik.com/kendo-ui/api/ui/tabstrip#methods) to control the behavior of the widget. In this example, you will use the `select` method to select an item.
 
     ```JS script
     <script>
@@ -315,6 +315,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the TabStrip for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tabstrip/api)
-* [TabStrip Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)
+* [TabStrip Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/tabstrip)
 * [Server-Side API of the TabStrip](/api/tabstrip)
 * [Knowledge Base Section](/knowledge-base)

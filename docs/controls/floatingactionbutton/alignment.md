@@ -9,14 +9,14 @@ position: 3
 
 # Alignment 
 
-The Kendo UI FloatingActionButton exposes the [`align`](/api/javascript/ui/floatingactionbutton/configuration/align),[`alignOffset`](/api/javascript/ui/floatingactionbutton/configuration/alignoffset) and [`positionMode`](/api/javascript/ui/floatingactionbutton/configuration/positionmode) configuration options. These three options work together and allow you to position the FloatingActionButton component precisely as per the application requirements.
+The Kendo UI FloatingActionButton exposes the [`align`](/api/ui/floatingactionbutton/configuration/align),[`alignOffset`](/api/ui/floatingactionbutton/configuration/alignoffset) and [`positionMode`](/api/ui/floatingactionbutton/configuration/positionmode) configuration options. These three options work together and allow you to position the FloatingActionButton component precisely as per the application requirements.
 
 
 * [Alignment Demo for the FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/alignment) 
 
 ## Align
 
-The [`align`](/api/javascript/ui/floatingactionbutton/configuration/align) configuration option specifies position of the FloatingActionButton relative to its container. When using this option it is important to ensure that the FloatingActionButton container has a [CSS position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) other than `static` and allows [overflow content](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow). For available positions refer to the [FloatingActionButton `align` API section](/api/javascript/ui/floatingactionbutton/configuration/align)
+The [`align`](/api/ui/floatingactionbutton/configuration/align) configuration option specifies position of the FloatingActionButton relative to its container. When using this option it is important to ensure that the FloatingActionButton container has a [CSS position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) other than `static` and allows [overflow content](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow). For available positions refer to the [FloatingActionButton `align` API section](/api/ui/floatingactionbutton/configuration/align)
 
 ```
     <div id="fab"></div>
@@ -32,7 +32,7 @@ The [`align`](/api/javascript/ui/floatingactionbutton/configuration/align) confi
 
 ## AlignOffset
 
-The [`alignOffset`](/api/javascript/ui/floatingactionbutton/configuration/alignoffset) configuration option specifies the horizontal and vertical offset of the FloatingActionButton relative to the `align` configuration defined.
+The [`alignOffset`](/api/ui/floatingactionbutton/configuration/alignoffset) configuration option specifies the horizontal and vertical offset of the FloatingActionButton relative to the `align` configuration defined.
 
 ```
     <div id="fab"></div>
@@ -52,7 +52,7 @@ The [`alignOffset`](/api/javascript/ui/floatingactionbutton/configuration/aligno
 
 ## PositonMode
 
-The [`positionMode`](/api/javascript/ui/floatingactionbutton/configuration/positionmode) configuration option specifies the CSS position of the FloatingActionButton in the document. You can position the FloatingActionButton relative to the closest ancestor or position it relative to the viewport.
+The [`positionMode`](/api/ui/floatingactionbutton/configuration/positionmode) configuration option specifies the CSS position of the FloatingActionButton in the document. You can position the FloatingActionButton relative to the closest ancestor or position it relative to the viewport.
 
 ```
     <div id="fab"></div>
@@ -74,4 +74,4 @@ The [`positionMode`](/api/javascript/ui/floatingactionbutton/configuration/posit
 ## See Also
 
 * [Alignment Demo of the FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/alignment)
-* [JavaScript API Reference of the FloatingActionButton](/api/javascript/ui/floatingactionbutton)
+* [JavaScript API Reference of the FloatingActionButton](/api/ui/floatingactionbutton)

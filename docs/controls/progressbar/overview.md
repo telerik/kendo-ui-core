@@ -27,4 +27,4 @@ The ProgressBar delivers rich functionality for displaying and tracking the prog
  
 * [Events of the ProgressBar (Demo)](https://demos.telerik.com/kendo-ui/progressbar/events)
 * [Applying the ProgressBar API (Demo)](https://demos.telerik.com/kendo-ui/progressbar/api)
-* [JavaScript API Reference of the ProgressBar](/api/javascript/ui/progressbar)
+* [JavaScript API Reference of the ProgressBar](/api/ui/progressbar)

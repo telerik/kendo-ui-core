@@ -165,11 +165,11 @@ Apart from that, we made changes in the positioning styles of the component. Unt
 
 **Spreadsheet**
 
-* The tabs in the Spreadsheet are now rendered via [`Kendo Menu`](/api/javascript/ui/menu) instead of a [`Kendo TabStrip`](/api/javascript/ui/tabstrip).
-* The rendering of the SheetsBar at the bottom is unified with the rendering of a [`Kendo UI TabStrip`](/api/javascript/ui/tabstrip).
+* The tabs in the Spreadsheet are now rendered via [`Kendo Menu`](/api/ui/menu) instead of a [`Kendo TabStrip`](/api/ui/tabstrip).
+* The rendering of the SheetsBar at the bottom is unified with the rendering of a [`Kendo UI TabStrip`](/api/ui/tabstrip).
 * The `Add New Sheet` tool in the SheetsBar is now created from `<button>` element instead of `<a role="button"\>`.
 * The `Quick Access` section in the top toolbar is removed and the `Undo` and `Redo` buttons are moved in the Home tab.
-* The tools in the [`toolbar`](/api/javascript/ui/spreadsheet/configuration/toolbar#toolbar) are now splitted into six separate tabs - File, Home, Insert, Format, Data and View.
+* The tools in the [`toolbar`](/api/ui/spreadsheet/configuration/toolbar#toolbar) are now splitted into six separate tabs - File, Home, Insert, Format, Data and View.
 * Replaced `k-icon k-i-undo` with `k-icon k-i-reset`.
 * Replaced `k-icon k-i-redo` with `k-icon k-i-reload`.
 * Default values for `rowHeight` and `headerHeight` were set to 30 pixels.

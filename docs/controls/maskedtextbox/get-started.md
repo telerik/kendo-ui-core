@@ -76,7 +76,7 @@ To change the appearance of the component, use the `fillMode`, `rounded`, and `s
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery MaskedTextBox](/api/javascript/ui/maskedtextbox)
+* [JavaScript API Reference of the jQuery MaskedTextBox](/api/ui/maskedtextbox)
 * [Knowledge Base Section](/knowledge-base)
 
 

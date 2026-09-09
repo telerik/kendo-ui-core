@@ -196,7 +196,7 @@ How do I change the font weight of connection labels in a Kendo UI diagram? Adju
 
 ### content.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 

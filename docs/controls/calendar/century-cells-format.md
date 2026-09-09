@@ -14,7 +14,7 @@ Starting with Kendo UI suite R2 2024, the Calendar component provides two format
 * `long` (default)&mdash;Shows decades in the `YYYY-YYYY` format (for example: `2010-2019`).
 * `short`&mdash;Shows only the starting year of the decade (for example: `2010`).
 
-To change the way decades display in the Calendar century view, you can use [`centuryCellsFormat`](/api/javascript/ui/calendar/configuration/centurycellsformat).
+To change the way decades display in the Calendar century view, you can use [`centuryCellsFormat`](/api/ui/calendar/configuration/centurycellsformat).
 
 The following example shows how to change the display format for decades in the Century view.
 
@@ -32,4 +32,4 @@ The following example shows how to change the display format for decades in the 
 ## See Also
 
 * [Century Cells Format Demo of the Calendar](https://demos.telerik.com/kendo-ui/calendar/century-cells-format)
-* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/ui/calendar)

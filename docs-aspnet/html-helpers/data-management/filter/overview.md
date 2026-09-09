@@ -174,5 +174,5 @@ public class SampleData
 * [Basic Usage of the Filter TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/filter/tag-helper)
 * [Filter in Razor Pages]({% slug razorpages_filterhelper_aspnetcore %})
 {% endif %}
-* [Filter Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter)
+* [Filter Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/filter)
 * [Filter Server-Side API](/api/filter)

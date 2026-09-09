@@ -100,4 +100,4 @@ How can I highlight work hours in the Kendo UI Scheduler?
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

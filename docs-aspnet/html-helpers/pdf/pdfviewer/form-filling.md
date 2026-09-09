@@ -109,5 +109,5 @@ Currently, the [Telerik and Kendo UI themes]({% slug sassbasedthemes_overview %}
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the PDFViewer for {{ site.framework }}](/api/taghelpers/pdfviewer)
 {% endif %}
-* [Client-Side API Reference of the PDFViewer](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
+* [Client-Side API Reference of the PDFViewer](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer)
 

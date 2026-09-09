@@ -129,7 +129,7 @@ Selecting the first item using the `DataBound` event was a good start. Next we'l
     		...
         </script>
 
-1. Add a function named `getSelectedEmployee` that returns the selected employee from the `EmployeeList` using the unique `uid` that the Kendo UI DataSource generates for each dataItem with the [`getByUid()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/getbyuid) method.
+1. Add a function named `getSelectedEmployee` that returns the selected employee from the `EmployeeList` using the unique `uid` that the Kendo UI DataSource generates for each dataItem with the [`getByUid()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/getbyuid) method.
 
     	function getSelectedEmployee() {
         	var employeeList = $("#EmployeesList").data("kendoListView"),
@@ -137,7 +137,7 @@ Selecting the first item using the `DataBound` event was a good start. Next we'l
     		return employee;
     	}
 
-1. Add a function named `updateEmployeeAvatar` that binds the selected employee data to the `employeeAvatarTemplate` and places the template's content in the `employee-about` element. The [`kendo.template()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/template) method allows us to bind the data to the HTML. 
+1. Add a function named `updateEmployeeAvatar` that binds the selected employee data to the `employeeAvatarTemplate` and places the template's content in the `employee-about` element. The [`kendo.template()`](https://docs.telerik.com/kendo-ui/api/kendo/methods/template) method allows us to bind the data to the HTML. 
 
     	function updateEmployeeAvatar() {
             var employee = getSelectedEmployee(),

@@ -9,9 +9,9 @@ position: 4
 
 # Index
 
-You can configure the initially selected index of the Kendo UI ButtonGroup by using its [`index`](/api/javascript/ui/buttongroup/configuration/index) property.
+You can configure the initially selected index of the Kendo UI ButtonGroup by using its [`index`](/api/ui/buttongroup/configuration/index) property.
 
-You can also select an index through the [`select`](/api/javascript/ui/buttongroup/methods/select) method with a Integer argument.
+You can also select an index through the [`select`](/api/ui/buttongroup/methods/select) method with a Integer argument.
 
 The following example demonstrates how to select a button by its index.
 
@@ -37,4 +37,4 @@ The following example demonstrates how to select a button by its index.
 ## See Also
 
 * [Basic Usage of the ButtonGroup (Demo)](https://demos.telerik.com/kendo-ui/buttongroup/index)
-* [JavaScript API Reference of the ButtonGroup](/api/javascript/ui/buttongroup)
+* [JavaScript API Reference of the ButtonGroup](/api/ui/buttongroup)

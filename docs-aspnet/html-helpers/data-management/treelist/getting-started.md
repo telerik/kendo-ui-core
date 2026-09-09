@@ -296,7 +296,7 @@ To use the client-side API of the TreeList and build on top of its initial confi
     </script>
     ```
 
-1. Use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) to control the behavior of the widget. In this example, you will use the `autoFitColumn` method to apply the minimum possible width to the second column of the TreeList.
+1. Use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/ui/treelist#methods) to control the behavior of the widget. In this example, you will use the `autoFitColumn` method to apply the minimum possible width to the second column of the TreeList.
 
     ```JS script
     <script>
@@ -328,6 +328,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the TreeList for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/api)
-* [Client-Side API of the TreeList](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [Client-Side API of the TreeList](https://docs.telerik.com/kendo-ui/api/ui/treelist)
 * [Server-Side API of the TreeList](/api/treelist)
 * [Knowledge Base Section](/knowledge-base)

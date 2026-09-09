@@ -121,7 +121,7 @@ The example below shows how to bind two Grids to the same DataSource and allow t
     ```
     {% endif %}
 
-1. Within the `$(document).ready()` function, access the main DataSource and handle once its [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/requestend) event to access the data when it is received from the server. Use the [`data()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/data) method to set the received data to the additional DataSources that are used by the Grids.
+1. Within the `$(document).ready()` function, access the main DataSource and handle once its [`requestEnd`](https://docs.telerik.com/kendo-ui/api/data/datasource/events/requestend) event to access the data when it is received from the server. Use the [`data()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/data) method to set the received data to the additional DataSources that are used by the Grids.
 
     ```JS scripts
     <script>
@@ -160,7 +160,7 @@ The example below shows how to bind two Grids to the same DataSource and allow t
 
 ## See Also
 
-* [Client-Side API Reference of the DataSource for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)
+* [Client-Side API Reference of the DataSource for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/data/datasource)
 * [Server-Side API Reference of the DataSource for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/datasource)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the DataSource for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/datasource)

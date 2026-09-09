@@ -25,7 +25,7 @@ How can I implement a functionality for inserting a new column when exporting th
 
 ## Solution
 
-* In the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event handler, you can use the JavaScript `splice()` method for inserting rows/columns to the exported Grid data:
+* In the [`excelExport`](/api/ui/grid/events/excelexport) event handler, you can use the JavaScript `splice()` method for inserting rows/columns to the exported Grid data:
 
 ```js
 excelExport: function(e) {
@@ -106,7 +106,7 @@ function simpleHtmlDecode(encodedStr) {
 ```
 
 ## See Also
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [JavaScript API Reference of the Workbook](/api/javascript/ooxml/workbook)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
+* [JavaScript API Reference of the Workbook](/api/ooxml/workbook)
 
 

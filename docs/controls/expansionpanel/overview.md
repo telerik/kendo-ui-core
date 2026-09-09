@@ -13,7 +13,7 @@ The Kendo UI ExpansionPanel is a layout component that provides the user with an
 
 ## Functionality and Features
 
-* [Default State]({% slug state_kendoui_expansionpanel_widget %})&mdash;The Kendo UI ExpansionPanel allows you to configure its default state by using the [`disabled`](/api/javascript/ui/expansionpanel/configuration/disabled), [`expanded`](/api/javascript/ui/expansionpanel/configuration/expanded), [`toggleable`](/api/javascript/ui/expansionpanel/configuration/toggleable), and [`animation`](/api/javascript/ui/expansionpanel/configuration/animation) properties.
+* [Default State]({% slug state_kendoui_expansionpanel_widget %})&mdash;The Kendo UI ExpansionPanel allows you to configure its default state by using the [`disabled`](/api/ui/expansionpanel/configuration/disabled), [`expanded`](/api/ui/expansionpanel/configuration/expanded), [`toggleable`](/api/ui/expansionpanel/configuration/toggleable), and [`animation`](/api/ui/expansionpanel/configuration/animation) properties.
 * [Keyboard Navigation]({% slug keynav_kendoui_expansionpanel_widget %})&mdash;The Kendo UI ExpansionPanel comes with keyboard navigation that is always available and requires no configuration.
 
 ## Next Steps
@@ -25,4 +25,4 @@ The Kendo UI ExpansionPanel is a layout component that provides the user with an
 ## See Also
 
 * [Basic Usage of the ExpansionPanel (Demo)](https://demos.telerik.com/kendo-ui/expansionpanel/index)
-* [JavaScript API Reference of the ExpansionPanel](/api/javascript/ui/expansionpanel)
+* [JavaScript API Reference of the ExpansionPanel](/api/ui/expansionpanel)

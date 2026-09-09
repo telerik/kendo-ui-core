@@ -91,7 +91,7 @@ For a complete example on the Captcha's events, refer to the [demo on using the 
 
 ## Referencing Existing Instances
 
-To reference an existing Captcha instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Captcha client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/captcha#methods) to control its behavior.
+To reference an existing Captcha instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Captcha client-side API](https://docs.telerik.com/kendo-ui/api/ui/captcha#methods) to control its behavior.
 
 ```
     // Place the following after your Telerik UI Captcha for {{ site.framework }} declaration.

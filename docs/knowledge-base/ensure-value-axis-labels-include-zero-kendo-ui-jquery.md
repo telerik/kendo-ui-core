@@ -37,7 +37,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To ensure the label for 0 appears on the value axis, use the [`majorUnit`](/api/javascript/dataviz/ui/chart/configuration/valueaxis.majorunit#valueaxismajorunit) property and a custom `labels.template` function. Customize the template to check if the value is part of the series data or explicitly render the label for 0.
+To ensure the label for 0 appears on the value axis, use the [`majorUnit`](/api/dataviz/ui/chart/configuration/valueaxis.majorunit#valueaxismajorunit) property and a custom `labels.template` function. Customize the template to check if the value is part of the series data or explicitly render the label for 0.
 
 ### Example Code
 
@@ -104,6 +104,6 @@ You can see an example in the next Dojo demo.
 
 ## See Also
 
-- [Value Axis Major Unit API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart/configuration/valueaxis.majorunit#valueaxismajorunit)
-- [Value Axis Labels Template API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart/configuration/valueaxis.labels#valueaxislabelstemplate)
+- [Value Axis Major Unit API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/valueaxis.majorunit#valueaxismajorunit)
+- [Value Axis Labels Template API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/valueaxis.labels#valueaxislabelstemplate)
 - [Kendo UI Chart Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/overview)

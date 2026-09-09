@@ -25,11 +25,11 @@ How can I add add a row above the selected row in the Grid?
 
 ## Solution
 
-1. To achieve such behavior you can add a custom button in the toolbar using the Grid [toolbar template](/api/javascript/ui/grid/configuration/toolbar.template) option.
+1. To achieve such behavior you can add a custom button in the toolbar using the Grid [toolbar template](/api/ui/grid/configuration/toolbar.template) option.
 
 2. Find the index of the currently selected Grid row.
 
-3. Then, you could use the [dataSource insert](/api/javascript/data/datasource/methods/insert) method.
+3. Then, you could use the [dataSource insert](/api/data/datasource/methods/insert) method.
 
 ```dojo
   <div id="grid"></div>

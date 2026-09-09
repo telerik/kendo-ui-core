@@ -34,7 +34,7 @@ Centering a marker in the visible view of the map, including when zooming or pan
 
 ## Solution
 
-To center a marker in the Kendo UI Map and keep it centered during zoom and pan operations, use the [center()](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/methods/center) method of the map. This method allows you to set or get the center of the map. To maintain the centered marker when the map is zoomed or panned, apply logic inside the [`zoomEnd`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/events/zoomend) and [`panEnd`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/events/panend) event handlers of the map.
+To center a marker in the Kendo UI Map and keep it centered during zoom and pan operations, use the [center()](https://docs.telerik.com/kendo-ui/api/dataviz/ui/map/methods/center) method of the map. This method allows you to set or get the center of the map. To maintain the centered marker when the map is zoomed or panned, apply logic inside the [`zoomEnd`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/map/events/zoomend) and [`panEnd`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/map/events/panend) event handlers of the map.
 
 Below is the JavaScript code that demonstrates how to implement this functionality:
 
@@ -90,7 +90,7 @@ This script first clears any existing markers and places a new marker at the cen
 
 ## See Also
 
-- [Kendo UI Map Center Method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/methods/center)
-- [Kendo UI Map zoomEnd Event](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/events/zoomend)
-- [Kendo UI Map panEnd Event](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/events/panend)
+- [Kendo UI Map Center Method](https://docs.telerik.com/kendo-ui/api/dataviz/ui/map/methods/center)
+- [Kendo UI Map zoomEnd Event](https://docs.telerik.com/kendo-ui/api/dataviz/ui/map/events/zoomend)
+- [Kendo UI Map panEnd Event](https://docs.telerik.com/kendo-ui/api/dataviz/ui/map/events/panend)
 - [Kendo UI Map Documentation](https://docs.telerik.com/kendo-ui/controls/map/overview)

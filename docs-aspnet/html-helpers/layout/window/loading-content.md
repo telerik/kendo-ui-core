@@ -105,7 +105,7 @@ In some scenarios, it is required to configure the Window to load dynamic conten
     }
     ```
 
-To refresh or change the Window's content on the client, once the Window has been initialized, you can use the [Client-side API of the Window](https://docs.telerik.com/kendo-ui/api/javascript/ui/window) and the [refresh method](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/refresh).
+To refresh or change the Window's content on the client, once the Window has been initialized, you can use the [Client-side API of the Window](https://docs.telerik.com/kendo-ui/api/ui/window) and the [refresh method](https://docs.telerik.com/kendo-ui/api/ui/window/methods/refresh).
 ## See Also
 
 * [Server-Side API](/api/window)

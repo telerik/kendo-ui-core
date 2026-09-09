@@ -15,7 +15,7 @@ The jQuery Chat component delivers powerful message interaction features that al
 
 Right-click functionality on chat messages reveals a context menu with actionable options for enhanced user productivity. This feature streamlines message management by providing instant access to common operations without disrupting the conversation flow.
 
-Built-in options include Reply, Copy, Pin, and Delete, while the [`messageActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/messageactions) configuration allows you to add custom operations tailored to your application's workflow requirements.
+Built-in options include Reply, Copy, Pin, and Delete, while the [`messageActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messageactions) configuration allows you to add custom operations tailored to your application's workflow requirements.
 
 ```dojo
 <div id="chat"></div>
@@ -78,7 +78,7 @@ Built-in options include Reply, Copy, Pin, and Delete, while the [`messageAction
 
 Interactive toolbar buttons appear on individual messages to offer immediate access to frequently used operations. These action buttons enhance user efficiency by eliminating the need for multiple clicks or menu navigation when performing routine message tasks.
 
-Configure toolbar actions using the [`messageToolbarActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/messagetoolbaractions) property and implement response logic through the [`toolbarAction`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/events/toolbaraction) event handler for seamless user interactions.
+Configure toolbar actions using the [`messageToolbarActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagetoolbaractions) property and implement response logic through the [`toolbarAction`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/events/toolbaraction) event handler for seamless user interactions.
 
 ```dojo
 <div id="chat"></div>
@@ -136,7 +136,7 @@ Configure toolbar actions using the [`messageToolbarActions`](https://www.teleri
 
 ## Per-User Message Settings
 
-The Chat component supports configuring different message display settings for the current user (author) and other participants (receivers) through the [`authorMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/authormessagesettings) and [`receiverMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/receivermessagesettings) options. These settings allow you to create asymmetric chat layouts, such as WhatsApp-style interfaces where the author's messages hide the avatar and username while receiver messages display both.
+The Chat component supports configuring different message display settings for the current user (author) and other participants (receivers) through the [`authorMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/authormessagesettings) and [`receiverMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/receivermessagesettings) options. These settings allow you to create asymmetric chat layouts, such as WhatsApp-style interfaces where the author's messages hide the avatar and username while receiver messages display both.
 
 Each settings object supports the following properties:
 
@@ -249,7 +249,7 @@ Visual customization options enable you to tailor message presentation to align 
 
 ### Expandable Message Content
 
-Long message content can be made collapsible to optimize screen real estate while maintaining access to full information. Users can toggle between expanded and collapsed states by clicking on messages, creating a cleaner interface for extensive conversations. Enable the [`allowMessageCollapse`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/allowmessagecollapse) option to allow the users to collapse the messages. 
+Long message content can be made collapsible to optimize screen real estate while maintaining access to full information. Users can toggle between expanded and collapsed states by clicking on messages, creating a cleaner interface for extensive conversations. Enable the [`allowMessageCollapse`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/allowmessagecollapse) option to allow the users to collapse the messages. 
 
 ```dojo
 <div id="chat"></div>
@@ -321,7 +321,7 @@ $("#chat").kendoChat({
 
 ## Message Status
 
-The Chat component supports displaying delivery status indicators for messages through the [`messageStatusSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/messagestatussettings) option. You can configure custom icons, text labels, and CSS classes for each delivery state—`"sent"`, `"delivered"`, `"seen"`, and `"failed"`:
+The Chat component supports displaying delivery status indicators for messages through the [`messageStatusSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagestatussettings) option. You can configure custom icons, text labels, and CSS classes for each delivery stateï¿½`"sent"`, `"delivered"`, `"seen"`, and `"failed"`:
 
 ```dojo
 <div id="chat"></div>
@@ -361,7 +361,7 @@ The Chat component supports displaying delivery status indicators for messages t
 
 ## Failed Messages and Retry
 
-Messages can be marked as failed by setting the `failed` property to `true`. When a message is in a failed state, the Chat renders a retry button that, when clicked, fires the [`resendMessage`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/events/resendmessage) event. Use this event to re-attempt message delivery:
+Messages can be marked as failed by setting the `failed` property to `true`. When a message is in a failed state, the Chat renders a retry button that, when clicked, fires the [`resendMessage`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/events/resendmessage) event. Use this event to re-attempt message delivery:
 
 ```dojo
 <div id="chat"></div>
@@ -374,7 +374,7 @@ Messages can be marked as failed by setting the `failed` property to `true`. Whe
             data: [
                 {
                     id: 1, authorId: 1, authorName: "You",
-                    text: "This message failed to send — click retry to resend.",
+                    text: "This message failed to send ï¿½ click retry to resend.",
                     timestamp: new Date(), failed: true
                 }
             ]
@@ -408,7 +408,7 @@ chat.loading(false);
 ## See Also 
 
 * [Per-User Settings (Demo)](https://demos.telerik.com/kendo-ui/chat/per-user-settings)
-* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
+* [JavaScript API Reference of the Chat](/api/ui/chat)
 * [Chat Templates]({% slug templates_kendoui_chat %})
 * [Chat Suggestions]({% slug suggestions_kendoui_chat %})
 * [File Uploads and Media]({% slug media_kendoui_chat %})

@@ -18,4 +18,4 @@ For more information, refer to the article on [virtualizing the ComboBox]({% slu
 ## See Also
 
 * [Virtualization in the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/virtualization)
-* [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
+* [JavaScript API Reference of the MultiColumnComboBox](/api/ui/multicolumncombobox)

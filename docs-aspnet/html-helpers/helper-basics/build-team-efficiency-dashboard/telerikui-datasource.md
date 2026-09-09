@@ -26,10 +26,10 @@ The Kendo UI DataSource has many abilities and responsibilities, among which to:
 - Process serialization formats to and from a remote endpoint.
 - [Synchronize updates, create, update, delete](https://docs.telerik.com/kendo-ui/framework/datasource/crud) to and from a remote endpoint.
 - [Maintain an in-memory cache of data, including changes](https://docs.telerik.com/kendo-ui/framework/datasource/offline) for updating to a remote endpoint.
-- Calculate and maintain [aggregates](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/aggregate), [sorting order](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/sort) and [paging](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page).
-- Provide a query mechanism via [filter expressions](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter).
+- Calculate and maintain [aggregates](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/aggregate), [sorting order](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/sort) and [paging](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/page).
+- Provide a query mechanism via [filter expressions](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/filter).
 
-For detailed information on the capabilities of the [DataSource](https://docs.telerik.com/kendo-ui/framework/datasource/overview), refer to its [configuration API methods, and events](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource), and [demos](https://demos.telerik.com/kendo-ui/datasource/index).
+For detailed information on the capabilities of the [DataSource](https://docs.telerik.com/kendo-ui/framework/datasource/overview), refer to its [configuration API methods, and events](https://docs.telerik.com/kendo-ui/api/data/datasource), and [demos](https://demos.telerik.com/kendo-ui/datasource/index).
 
 At this point the dashboard is showing all invoice data. Let's use the `EmployeeList` list view and `StatsFrom`/`StatsTo` date pickers to filter the invoice grid by invoking the grid's datasource.
 

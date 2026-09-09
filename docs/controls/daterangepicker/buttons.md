@@ -13,7 +13,7 @@ Starting with Kendo UI R2 R2024, the DateRangePicker exposes two buttons. Below 
 
 ## Calendar Button
 
-The [`calendarButton`](/api/javascript/ui/daterangepicker/configuration/calendarbutton) changes the opening behavior of the DateRangePicker. By default, the component opens when you click the input fields. When `calendarButton` is set to `true`, the DateRangePicker opens when you click the calendar icon located next to the input fields.
+The [`calendarButton`](/api/ui/daterangepicker/configuration/calendarbutton) changes the opening behavior of the DateRangePicker. By default, the component opens when you click the input fields. When `calendarButton` is set to `true`, the DateRangePicker opens when you click the calendar icon located next to the input fields.
 
 ```dojo
     <div id="daterangepicker"></div>
@@ -26,7 +26,7 @@ The [`calendarButton`](/api/javascript/ui/daterangepicker/configuration/calendar
 
 ## Clear Button
 
-The [`clearButton`](/api/javascript/ui/daterangepicker/configuration/clearbutton) allows you to clear the selected range. The example below shows how to enable the button.
+The [`clearButton`](/api/ui/daterangepicker/configuration/clearbutton) allows you to clear the selected range. The example below shows how to enable the button.
 
 ```dojo
     <div id="daterangepicker"></div>
@@ -41,4 +41,4 @@ The [`clearButton`](/api/javascript/ui/daterangepicker/configuration/clearbutton
 ## See Also
 
 * [Buttons Demo of the DateRangePicker](https://demos.telerik.com/kendo-ui/daterangepicker/buttons)
-* [JavaScript API Reference of the DateRangePicker](/api/javascript/ui/daterangepicker)
+* [JavaScript API Reference of the DateRangePicker](/api/ui/daterangepicker)

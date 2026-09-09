@@ -20,7 +20,7 @@ Kendo UI provides an OLAP service dll that can be used for testing and is hosted
 
 ## Flat Data
 
-When the PivotGrid is bound to a flat-data structure, it processes the data on the client (browser) and creates a client cube representation [(configuration)](/api/javascript/data/pivotdatasource/configuration/schema#schemacube). This means that the component uses the processing power of the browser to project the data and produces the required categorized data output. Even though the PivotGrid does not restrict the maximum data amount bound to itself, the data has limits that are directly related to the browser capability to handle the loaded dataset.
+When the PivotGrid is bound to a flat-data structure, it processes the data on the client (browser) and creates a client cube representation [(configuration)](/api/data/pivotdatasource/configuration/schema#schemacube). This means that the component uses the processing power of the browser to project the data and produces the required categorized data output. Even though the PivotGrid does not restrict the maximum data amount bound to itself, the data has limits that are directly related to the browser capability to handle the loaded dataset.
 
 The symptoms for an overloaded browser are:
 - The browser is extremely slowly loading or unresponsive for a long time.
@@ -37,4 +37,4 @@ For runnable examples on binding the PivotGrid to flat data, refer to the follow
 ## See Also
 
 * [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
-* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/ui/pivotgrid)

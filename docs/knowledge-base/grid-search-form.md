@@ -29,9 +29,9 @@ I want to implement a search form that accepts search criteria before populating
 
 The most common way of implementing such functionality is the following:
 
-1. Set the [`autoBind`](/api/javascript/ui/grid/configuration/autobind) Kendo UI Grid property to `false`
+1. Set the [`autoBind`](/api/ui/grid/configuration/autobind) Kendo UI Grid property to `false`
 1. Add a click handler to some button to be executed when the filter criteria is submitted
-1. Get the Kendo UI Grid instance and filter the data source with the [`filter()`](/api/javascript/data/datasource/methods/filter) method.
+1. Get the Kendo UI Grid instance and filter the data source with the [`filter()`](/api/data/datasource/methods/filter) method.
 
 ```dojo
     <div id="example">

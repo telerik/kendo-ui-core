@@ -25,7 +25,7 @@ When export the Grid to Excel I would like to add an empty column on a specific 
 
 ## Solution
 
-1. In the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event handler you can use the JavaScript `splice` method to add rows/columns to the exported data.
+1. In the [`excelExport`](/api/ui/grid/events/excelexport) event handler you can use the JavaScript `splice` method to add rows/columns to the exported data.
 
 ```dojo
     <div id="grid"></div>
@@ -80,4 +80,4 @@ When export the Grid to Excel I would like to add an empty column on a specific 
 
 ## See Also
 
-* [Grid API Reference](/api/javascript/ui/grid)
+* [Grid API Reference](/api/ui/grid)

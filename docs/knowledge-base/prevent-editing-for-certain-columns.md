@@ -98,4 +98,4 @@ The following example demonstrates how to prevent editing for a record based on 
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

@@ -102,10 +102,10 @@ Here is an example of how you can set it up:
         </script>
 ```
 
-Remember to use the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/databound) event to adjust the legend colors to match the series colors. This step is necessary because the legend colors are not automatically synced with the dynamic series colors.
+Remember to use the [`dataBound`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/events/databound) event to adjust the legend colors to match the series colors. This step is necessary because the legend colors are not automatically synced with the dynamic series colors.
 
 ## See Also
 
 - [Official Kendo UI for jQuery Chart Documentation](https://docs.telerik.com/kendo-ui/controls/charts/overview/)
-- [Kendo UI for jQuery Chart Series Colors Documentation](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.color)
-- [Kendo UI for jQuery Chart dataBound API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/databound)
+- [Kendo UI for jQuery Chart Series Colors Documentation](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.color)
+- [Kendo UI for jQuery Chart dataBound API Documentation](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/events/databound)

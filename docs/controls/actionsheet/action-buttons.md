@@ -13,7 +13,7 @@ Starting with the 2025 Q2 release, the ActionSheet allows configuring the orient
 
 ## Orientation
 
-By default, the ActionSheet component displays the action buttons in `horizontal` orientation, but also allows you to set their visualization to `vertical`. You can control this behavior with the [`actionButtonsOrientation`](/api/javascript/ui/actionsheet/configuration/actionbuttonsorientation) configuration option.  
+By default, the ActionSheet component displays the action buttons in `horizontal` orientation, but also allows you to set their visualization to `vertical`. You can control this behavior with the [`actionButtonsOrientation`](/api/ui/actionsheet/configuration/actionbuttonsorientation) configuration option.  
 
 To configure the orientation of the action buttons, set the `actionButtonsOrientation` option to one of the following values:
 
@@ -75,7 +75,7 @@ The example below demonstrates the action buttons appearance in both `horizontal
 
 ## Alignment
 
-The ActionSheet component supports multiple types of [`actionButtonsAlignment`](/api/javascript/ui/actionsheet/configuration/actionbuttonsalignment). By default, the action buttons are rendered `stretched`. This alignment of the action buttons works only when the `actionButtonsOrientation` is set to `horizontal` mode. The supported values are:
+The ActionSheet component supports multiple types of [`actionButtonsAlignment`](/api/ui/actionsheet/configuration/actionbuttonsalignment). By default, the action buttons are rendered `stretched`. This alignment of the action buttons works only when the `actionButtonsOrientation` is set to `horizontal` mode. The supported values are:
 
 * `stretched`
 * `justify`
@@ -140,4 +140,4 @@ The example below demonstrates all alignments:
 ## See Also
 
 * [Overview of the ActionSheet (Demo)](https://demos.telerik.com/kendo-ui/actionsheet/index)
-* [JavaScript API Reference of the ActionSheet](/api/javascript/ui/actionsheet)
+* [JavaScript API Reference of the ActionSheet](/api/ui/actionsheet)

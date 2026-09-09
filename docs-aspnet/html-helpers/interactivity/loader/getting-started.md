@@ -84,7 +84,7 @@ You can reference the Loader instances that you have created and build on top of
              })
          </script>
     ```
-1. Use the [Loader client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/loader#methods) to control the behavior of the Loader. In this example, you will hide the Loader by using the [`hide()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/loader/methods/hide) client-side method.
+1. Use the [Loader client-side API](https://docs.telerik.com/kendo-ui/api/ui/loader#methods) to control the behavior of the Loader. In this example, you will hide the Loader by using the [`hide()`](https://docs.telerik.com/kendo-ui/api/ui/loader/methods/hide) client-side method.
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -137,7 +137,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Loader Color Variations {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/loader/color-variations)
-* [Client-Side API of the Loader](https://docs.telerik.com/kendo-ui/api/javascript/ui/loader)
+* [Client-Side API of the Loader](https://docs.telerik.com/kendo-ui/api/ui/loader)
 * [Server-Side API of the Loader](/api/loader)
 {% if site.core %}
 * [Server-Side TagHelper API of the Loader](/api/taghelpers/loader)

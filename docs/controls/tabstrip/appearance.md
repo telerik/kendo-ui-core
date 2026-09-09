@@ -24,7 +24,7 @@ The Kendo UI TabStrip supports the following styling options:
 
 The `tabSize` option controls how big or small the rendered `tabstrip` looks. 
 
-The following values are available for the [`size`](/api/javascript/ui/tabstrip/configuration/size) option:
+The following values are available for the [`size`](/api/ui/tabstrip/configuration/size) option:
 
 - `small`—small size
 - `medium`—medium size
@@ -35,7 +35,7 @@ The default tab size value is `medium`.
 
 ### Tabs Alignment
 
-You can control the alignment of the tabs by setting the `tabAlignment` property of the TabStrip. The following values are available for the [`tabAlignment`](/api/javascript/ui/tabstrip/configuration/tabalignment) option:
+You can control the alignment of the tabs by setting the `tabAlignment` property of the TabStrip. The following values are available for the [`tabAlignment`](/api/ui/tabstrip/configuration/tabalignment) option:
 
 - `start`
 - `end`
@@ -50,4 +50,4 @@ The default alignment of the tabs is `start`.
 ## See Also
 
 * [Appearance Demo of the TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/appearance)
-* [JavaScript API Reference of the TabStrip](/api/javascript/ui/tabstrip)
+* [JavaScript API Reference of the TabStrip](/api/ui/tabstrip)

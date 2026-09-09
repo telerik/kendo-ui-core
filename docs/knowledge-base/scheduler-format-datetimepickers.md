@@ -28,9 +28,9 @@ How can I set a custom format to the DateTimePickers displayed in Scheduler edit
 
 In order to change the date format in the edit popup you can:
 
-1. Handle the [`edit`](/api/javascript/ui/scheduler/events/edit) event of the widget.
+1. Handle the [`edit`](/api/ui/scheduler/events/edit) event of the widget.
 1. In the edit event handler get a reference to the start and end DateTimePickers.
-1. Use the [`setOptions`](/api/javascript/ui/datetimepicker/methods/setoptions) method to set a new [`format`](/api/javascript/ui/datetimepicker/configuration/format).
+1. Use the [`setOptions`](/api/ui/datetimepicker/methods/setoptions) method to set a new [`format`](/api/ui/datetimepicker/configuration/format).
 1. Change the format set in `'data-format'` attribute in order for the validation to know the correct format.
 
 ```dojo
@@ -93,4 +93,4 @@ In order to change the date format in the edit popup you can:
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

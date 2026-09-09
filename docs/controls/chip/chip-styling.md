@@ -26,7 +26,7 @@ The Kendo UI Chip supports the following styling options:
 
 The `size` option controls how big or small the rendered `chip` looks. The structure of the class is `k-chip-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/chip/configuration/size) option:
+The following values are available for the [`size`](/api/ui/chip/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -44,7 +44,7 @@ The default size value is `undefined` and the default appearance is controlled b
 
 The `fillMode` option controls the way the color is applied to the rendered `div`. The structure of the class is `k-chip-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/chip/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/chip/configuration/fillmode) option:
 
 - `solid`
 - `outline`
@@ -60,7 +60,7 @@ The default fillMode value is `solid` and it is applied to the rendered div elem
 
 The `themeColor` option controls the color that will be applied to the rendered Chip. As applying `themeColor` is closely related to the `fillMode`, the structure of the class name for the `themeColor` is composite - `k-chip-{fillMode}-{themeColor}`.
 
-The following values are available for the [`themeColor`](/api/javascript/ui/chip/configuration/themecolor) option:
+The following values are available for the [`themeColor`](/api/ui/chip/configuration/themecolor) option:
 
 - `base`
 - `info`
@@ -84,7 +84,7 @@ The default `themeColor` value is `base`. A Chip with default `fillMode` and `th
 
 The `rounded` option controls how much border radius is applied to the rendered Chip. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/chip/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/chip/configuration/rounded) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -108,4 +108,4 @@ To review the rendering of the component, refer to the HTML specifications in th
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the Chip](https://demos.telerik.com/kendo-ui/chip/appearance)
-* [JavaScript API Reference of the Chip](/api/javascript/ui/chip)
+* [JavaScript API Reference of the Chip](/api/ui/chip)

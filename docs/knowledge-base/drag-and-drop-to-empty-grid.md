@@ -26,7 +26,7 @@ How can I drag and drop rows to a Kendo UI Grid for jQuery when the Grid is empt
 
 To achieve this scenario, add a fake row to the empty Grid. Once the user drops a real row from the other Grid, remove the fake one.
 
-You can add the new item always to the bottom of the Grid by replacing the [`insert()`](/api/javascript/data/datasource/methods/insert) method with the [`add()`](/api/javascript/data/datasource/methods/add) method without specifying the index where the item will be placed.
+You can add the new item always to the bottom of the Grid by replacing the [`insert()`](/api/data/datasource/methods/insert) method with the [`add()`](/api/data/datasource/methods/add) method without specifying the index where the item will be placed.
 
 ```dojo
    <div class="k-d-flex k-flex-wrap">
@@ -174,6 +174,6 @@ You can add the new item always to the bottom of the Grid by replacing the [`ins
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)
 * [Dragging and Dropping the Data Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/drag-drop)
 * [Product Page of the Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

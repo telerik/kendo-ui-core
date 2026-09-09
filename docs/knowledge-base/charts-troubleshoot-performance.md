@@ -59,7 +59,7 @@ Switching to Canvas rendering improves the performance of the widgets, especiall
 
 ### Canvas Rendering in Inline Binding
 
-When you use a DataSource binding, all data items are wrapped in [`Observable`](/api/javascript/data/observableobject) instances to track changes. Generally, such behavior is unnecessary for the Chart and might become an issue if you have a large number of data points&mdash;5,000 and more. In this case, you can use [inline binding]({% slug databinding_charts_widget %}).
+When you use a DataSource binding, all data items are wrapped in [`Observable`](/api/data/observableobject) instances to track changes. Generally, such behavior is unnecessary for the Chart and might become an issue if you have a large number of data points&mdash;5,000 and more. In this case, you can use [inline binding]({% slug databinding_charts_widget %}).
 
 ```dojo
     <div id="chart"></div>

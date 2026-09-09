@@ -61,7 +61,7 @@ The supported aggregates are:
 * `"min"` - Number and Date.
 * `"sum"` - Only for Number.
 
-> The data source calculates aggregates client-side unless the [`serverAggregates`](/api/javascript/data/datasource#configuration-serverAggregates) option is set to `true`.
+> The data source calculates aggregates client-side unless the [`serverAggregates`](/api/data/datasource#configuration-serverAggregates) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -155,7 +155,7 @@ How do I specify which field in my data source to use for aggregation operations
 
 ### autoSync `Boolean` *(default: false)*
 
-If set to `true`, the data source would automatically save any changed data items by calling the [`sync`](/api/javascript/data/datasource/methods/sync) method. By default, changes are not automatically saved.
+If set to `true`, the data source would automatically save any changed data items by calling the [`sync`](/api/data/datasource/methods/sync) method. By default, changes are not automatically saved.
 
 
 <div class="meta-api-description">
@@ -191,7 +191,7 @@ How to enable automatic saving of modified data in Kendo UI DataSource? Enable a
 If set to `true`, the data source will batch CRUD operation requests. For example, updating two data items would cause one HTTP request instead of two. By default, the data source
 makes an HTTP request for every CRUD operation.
 
-> The changed data items are sent as `models` by default. This can be changed via the [`parameterMap`](/api/javascript/data/datasource#configuration-transport.parameterMap) option.
+> The changed data items are sent as `models` by default. This can be changed via the [`parameterMap`](/api/data/datasource#configuration-transport.parameterMap) option.
 
 
 <div class="meta-api-description">
@@ -228,9 +228,9 @@ How to combine multiple create, update, and delete actions in a single server re
 
 ### data `Array|String`
 
-The array of data items which the data source contains. The data source will wrap those items as [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) is set).
+The array of data items which the data source contains. The data source will wrap those items as [`kendo.data.ObservableObject`](/api/data/observableobject) or [`kendo.data.Model`](/api/data/model) (if [`schema.model`](/api/data/datasource/configuration/schema#schemamodel) is set).
 
-Can be set to a string value if the [`schema.type`](/api/javascript/data/datasource#configuration-schema.type) option is set to `"xml"`.
+Can be set to a string value if the [`schema.type`](/api/data/datasource#configuration-schema.type) option is set to `"xml"`.
 
 > A field in the DataSource cannot be named "data". The latter should be considered a limitation.
 
@@ -288,7 +288,7 @@ How do I set data for a Kendo UI DataSource? Set or bind the collection of data 
 
 The filters which are applied over the data items. By default, no filter is applied.
 
-> The data source filters the data items client-side unless the [`serverFiltering`](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [`serverFiltering`](/api/data/datasource#configuration-serverFiltering) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -453,7 +453,7 @@ How can I make Kendo UI's DataSource filter case-insensitive? Configure case-ins
 
 ### filter.filters `Array`
 
-The nested filter expressions. Supports the same options as [`filter`](/api/javascript/data/datasource#configuration-filter). Filters can be nested indefinitely.
+The nested filter expressions. Supports the same options as [`filter`](/api/data/datasource#configuration-filter). Filters can be nested indefinitely.
 
 
 <div class="meta-api-description">
@@ -584,7 +584,7 @@ What is the comparison method used in Kendo UI DataSource filtering operations? 
 
 ### filter.value `Object`
 
-The value to which the [`field`](/api/javascript/data/datasource#configuration-filter.field) is compared. The value has to be of the same type as the field.
+The value to which the [`field`](/api/data/datasource#configuration-filter.field) is compared. The value has to be of the same type as the field.
 
 > By design, the `"\n"` is removed from the filter before the filtering is performed. That is why an `"\n"` identifier from the filter will not match data items whose corresponding fields contain new lines.
 
@@ -616,7 +616,7 @@ How do I configure the value for filtering data with Kendo UI's DataSource? Spec
 
 The grouping configuration of the data source. If set, the data items will be grouped when the data source is populated. By default, grouping is not applied.
 
-> The data source groups the data items client-side unless the [`serverGrouping`](/api/javascript/data/datasource#configuration-serverGrouping) option is set to `true`.
+> The data source groups the data items client-side unless the [`serverGrouping`](/api/data/datasource#configuration-serverGrouping) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -822,7 +822,7 @@ How do I specify which field to aggregate when using the `group.aggregates` sett
 
 ### group.compare `Function`
 
-A JavaScript function which is used to compare the groups (refer to [`sort.compare`](/api/javascript/data/datasource#configuration-sort.compare) for comparing the items of the groups). It has the same signature as the [compare function accepted by `Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+A JavaScript function which is used to compare the groups (refer to [`sort.compare`](/api/data/datasource#configuration-sort.compare) for comparing the items of the groups). It has the same signature as the [compare function accepted by `Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
 
 <div class="meta-api-description">
@@ -977,7 +977,7 @@ How does Kendo UI's groupPaging option affect page navigation with grouped data?
 
 ### inPlaceSort `Boolean` *(default: false)*
 
-If set to `true`, the original `Array` used as [`data`](/api/javascript/data/datasource#configuration-data) will be sorted when sorting operation is performed. This setting supported only with local data, bound to a JavaScript array via the [`data`](/api/javascript/data/datasource#configuration-data) option.
+If set to `true`, the original `Array` used as [`data`](/api/data/datasource#configuration-data) will be sorted when sorting operation is performed. This setting supported only with local data, bound to a JavaScript array via the [`data`](/api/data/datasource#configuration-data) option.
 
 
 <div class="meta-api-description">
@@ -1055,9 +1055,9 @@ How do I configure offline data caching in Kendo UI DataSource? Control and conf
 
 ### page `Number`
 
-The page of data which the data source will return when the [`view`](/api/javascript/data/datasource/methods/view) method is invoked or request from the remote service.
+The page of data which the data source will return when the [`view`](/api/data/datasource/methods/view) method is invoked or request from the remote service.
 
-> The data source will page the data items client-side unless the [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging) option is set to `true`.
+> The data source will page the data items client-side unless the [`serverPaging`](/api/data/datasource#configuration-serverPaging) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -1090,7 +1090,7 @@ How do I set the current page index for client-side pagination in Kendo UI DataS
 
 The number of data items per page. The property has no default value. Therefore, to use paging, make sure some `pageSize` value is set.
 
-> The data source will page the data items client-side unless the [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging) option is set to `true`.
+> The data source will page the data items client-side unless the [`serverPaging`](/api/data/datasource#configuration-serverPaging) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -1164,7 +1164,7 @@ How to map data from a remote server response in Kendo UI DataSource? Configure 
 
 The field from the response which contains the aggregate results. Can be set to a function which is called to return the aggregate results from the response.
 
-> The `aggregates` option is used only when the [`serverAggregates`](/api/javascript/data/datasource#configuration-serverAggregates) option is set to `true`.
+> The `aggregates` option is used only when the [`serverAggregates`](/api/data/datasource#configuration-serverAggregates) option is set to `true`.
 
 The result of the function should be a JavaScript object which contains the aggregate results for every field in the following format:
 
@@ -1249,7 +1249,7 @@ How do I configure Kendo UI DataSource to handle server-returned aggregate summa
 
 The field from the server response which contains the data items. Can be set to a function which is called to return the data items for the response.
 
-> The `data` option will not be used if the data source is grouped and set for [`serverGrouping`](/api/javascript/data/datasource#configuration-serverGrouping).
+> The `data` option will not be used if the data source is grouped and set for [`serverGrouping`](/api/data/datasource#configuration-serverGrouping).
 
 
 <div class="meta-api-description">
@@ -1321,7 +1321,7 @@ How do I configure Kendo UI's DataSource to extract data from a server response?
 
 ### schema.errors `Function|String` *(default: "errors")*
 
-The field from the server response which contains server-side errors. Can be set to a function which is called to return the errors for response. If there are any errors, the [`error`](/api/javascript/data/datasource/events/error) event will be fired.
+The field from the server response which contains server-side errors. Can be set to a function which is called to return the errors for response. If there are any errors, the [`error`](/api/data/datasource/events/error) event will be fired.
 
 ```pseudo
     <div id="grid"></div>
@@ -1410,7 +1410,7 @@ How to configure Kendo UI DataSource to detect errors in server responses? Confi
 
 The field from the server response which contains the groups. Can be set to a function which is called to return the groups from the response.
 
-> The `groups` option is used only when the [`serverGrouping`](/api/javascript/data/datasource#configuration-serverGrouping) option is set to `true`.
+> The `groups` option is used only when the [`serverGrouping`](/api/data/datasource#configuration-serverGrouping) option is set to `true`.
 
 The result should have the following format:
 
@@ -1486,9 +1486,9 @@ How do I configure Kendo UI's DataSource to handle hierarchical grouping data fr
 
 The data item (model) configuration.
 
-If set to an object, the [`Model.define`](/api/javascript/data/model/methods/define) method will be used to initialize the data source model.
+If set to an object, the [`Model.define`](/api/data/model/methods/define) method will be used to initialize the data source model.
 
-If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance, the data source will use that instance and will **not** initialize a new one.
+If set to an existing [`kendo.data.Model`](/api/data/model) instance, the data source will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -1613,7 +1613,7 @@ The initially parsed server response that may need additional modifications.
 The field from the server response which contains the total number of data items. Can be set to a function which is called to return the total number of data items for the response.
 
 > * The `schema.total` setting may be omitted when the Grid is bound to a plain `Array` (that is, the data items' collection is not a value of a field in the server response). In this case, the `length` of the response `Array` will be used.
-> * The `schema.total` must be set if the [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging) option is set to `true` or the [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) option is used.
+> * The `schema.total` must be set if the [`serverPaging`](/api/data/datasource#configuration-serverPaging) option is set to `true` or the [`schema.data`](/api/data/datasource#configuration-schema.data) option is used.
 
 
 <div class="meta-api-description">
@@ -1703,7 +1703,7 @@ How do I configure my Kendo UI DataSource to parse JSON responses from a server?
 
 If set to `true`, the data source will leave the aggregate calculation to the remote service. By default, the data source calculates aggregates client-side.
 
-> Configure [`schema.aggregates`](/api/javascript/data/datasource#configuration-schema.aggregates) if you set `serverAggregates` to `true`.
+> Configure [`schema.aggregates`](/api/data/datasource#configuration-schema.aggregates) if you set `serverAggregates` to `true`.
 
 For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
 
@@ -1733,7 +1733,7 @@ How to enable server-side aggregation in Kendo UI for jQuery DataSource? Enable 
 
 If set to `true`, the data source will leave the filtering implementation to the remote service. By default, the data source performs filtering client-side.
 
-By default, the [`filter`](/api/javascript/data/datasource#configuration-filter) is sent to the server following jQuery [conventions](https://api.jquery.com/jQuery.param/).
+By default, the [`filter`](/api/data/datasource#configuration-filter) is sent to the server following jQuery [conventions](https://api.jquery.com/jQuery.param/).
 
 For example, the filter `{ logic: "and", filters: [ { field: "name", operator: "startswith", value: "Jane" } ] }` is sent as:
 
@@ -1742,7 +1742,7 @@ For example, the filter `{ logic: "and", filters: [ { field: "name", operator: "
 *  `filter[filters][0][operator]: startswith`
 *  `filter[filters][0][value]: Jane`
 
-Use the [`parameterMap`](/api/javascript/data/datasource#configuration-transport.parameterMap) option to send the filter option in a different format.
+Use the [`parameterMap`](/api/data/datasource#configuration-transport.parameterMap) option to send the filter option in a different format.
 
 For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
 
@@ -1767,14 +1767,14 @@ How to configure server-side filtering in Kendo UI DataSource? Control whether f
 
 If set to `true`, the data source will leave the grouping implementation to the remote service. By default, the data source performs grouping client-side.
 
-By default, the [`group`](/api/javascript/data/datasource#configuration-group) is sent to the server following jQuery [conventions](https://api.jquery.com/jQuery.param/).
+By default, the [`group`](/api/data/datasource#configuration-group) is sent to the server following jQuery [conventions](https://api.jquery.com/jQuery.param/).
 
 For example, the group `{ field: "category", dir: "desc" }` is sent as:
 
 *  `group[0][field]: category`
 *  `group[0][dir]: desc`
 
-Use the [`parameterMap`](/api/javascript/data/datasource#configuration-transport.parameterMap) option to send the group option in a different format.
+Use the [`parameterMap`](/api/data/datasource#configuration-transport.parameterMap) option to send the group option in a different format.
 
 For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
 
@@ -1799,7 +1799,7 @@ How to implement server-side grouping in Kendo UI DataSource for large datasets?
 
 If set to `true`, the data source will leave the data item paging implementation to the remote service. By default, the data source performs paging client-side.
 
-> Configure [`schema.total`](/api/javascript/data/datasource#configuration-schema.total) if you set `serverPaging` to `true`. In addition, [`pageSize`](/api/javascript/data/datasource#configuration-pageSize) should be set no matter if paging is performed client-side or server-side.
+> Configure [`schema.total`](/api/data/datasource#configuration-schema.total) if you set `serverPaging` to `true`. In addition, [`pageSize`](/api/data/datasource#configuration-pageSize) should be set no matter if paging is performed client-side or server-side.
 
 The following options are sent to the server when server paging is enabled:
 
@@ -1810,7 +1810,7 @@ The following options are sent to the server when server paging is enabled:
 
 The `skip` and `take` values are automatically calculated based on the current `page` and `pageSize`. This means that a dataSource with `page` = 3 and `pageSize` = 20 will generate a request that has `skip` = 40 and `take` = 20.
 
-Use the [`parameterMap`](/api/javascript/data/datasource#configuration-transport.parameterMap) option to send the paging options in a different format.
+Use the [`parameterMap`](/api/data/datasource#configuration-transport.parameterMap) option to send the paging options in a different format.
 
 For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
 
@@ -1855,14 +1855,14 @@ How to configure remote pagination in Kendo UI for jQuery DataSource? Enable rem
 
 If set to `true`, the data source will leave the data item sorting implementation to the remote service. By default, the data source performs sorting client-side.
 
-By default, the [`sort`](/api/javascript/data/datasource#configuration-sort) is sent to the server following jQuery [conventions](https://api.jquery.com/jQuery.param/).
+By default, the [`sort`](/api/data/datasource#configuration-sort) is sent to the server following jQuery [conventions](https://api.jquery.com/jQuery.param/).
 
 For example, the sort `{ field: "age", dir: "desc" }` is sent as:
 
 * `sort[0][field]: age`
 * `sort[0][dir]: desc`
 
-Use the [`parameterMap`](/api/javascript/data/datasource#configuration-transport.parameterMap) option to send the paging options in a different format.
+Use the [`parameterMap`](/api/data/datasource#configuration-transport.parameterMap) option to send the paging options in a different format.
 
 For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
 
@@ -1887,7 +1887,7 @@ How do I configure Kendo UI for jQuery to sort data on the server-side? Control 
 
 The sort order which will be applied over the data items. By default, the data items are not sorted.
 
-> The data source sorts the data items client-side unless the [`serverSorting`](/api/javascript/data/datasource#configuration-serverSorting) option is set to `true`.
+> The data source sorts the data items client-side unless the [`serverSorting`](/api/data/datasource#configuration-serverSorting) option is set to `true`.
 
 
 <div class="meta-api-description">
@@ -2045,7 +2045,7 @@ The configuration used to load and save the data items. A data source is remote 
 
 Remote data sources load and save data items from and to a remote end-point (also known as remote service or server). The `transport` option describes the remote service configuration - URL, HTTP verb, HTTP headers, and others. The `transport` option can also be used to implement custom data loading and saving.
 
-Local data sources are bound to a JavaScript array via the [`data`](/api/javascript/data/datasource#configuration-data) option.
+Local data sources are bound to a JavaScript array via the [`data`](/api/data/datasource#configuration-data) option.
 
 
 <div class="meta-api-description">
@@ -2071,7 +2071,7 @@ How to configure remote endpoints for data loading in Kendo UI DataSource transp
 
 ### transport.batch `Object`
 
-> Configurable for the [odata-v4 data source `type`](/api/javascript/data/datasource/configuration/type) in [`batch`](/api/javascript/data/datasource/configuration/batch) mode.
+> Configurable for the [odata-v4 data source `type`](/api/data/datasource/configuration/type) in [`batch`](/api/data/datasource/configuration/batch) mode.
 
 The object can contain all the available [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/) options.
 
@@ -2115,7 +2115,7 @@ How do I configure the batch transport for my Kendo UI DataSource to handle mult
 
 ### transport.batch.url `String|Function`
 
-> This option is configurable for the [odata-v4 data source `type`](/api/javascript/data/datasource/configuration/type) in [`batch`](/api/javascript/data/datasource/configuration/batch) mode.
+> This option is configurable for the [odata-v4 data source `type`](/api/data/datasource/configuration/type) in [`batch`](/api/data/datasource/configuration/batch) mode.
 
 The [odata-v4 batch `endpoint`](https://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398359) to which the request is sent.
 
@@ -2202,7 +2202,7 @@ How do I prevent repeated network calls with Kendo UI's DataSource? Control cach
 
 ### transport.create `Object|String|Function`
 
-The configuration used when the data source saves newly created data items. Those are items added to the data source via the [`add`](/api/javascript/data/datasource/methods/add) or [`insert`](/api/javascript/data/datasource/methods/insert) methods.
+The configuration used when the data source saves newly created data items. Those are items added to the data source via the [`add`](/api/data/datasource/methods/add) or [`insert`](/api/data/datasource/methods/insert) methods.
 
 > The data source uses [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/) to make an HTTP request to the remote service. The value configured via `transport.create` is passed to [`jQuery.ajax`](https://api.jquery.com/jquery.ajax/#jQuery-ajax-settings). This means that you can set all options supported by `jQuery.ajax` via `transport.create` except the `success` and `error` callback functions which are used by the transport.
 
@@ -2328,7 +2328,7 @@ How to set the content type for create requests in Kendo UI DataSource? Set or c
 
 ### transport.create.data `Object|Function`
 
-Additional parameters that are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](/api/javascript/data/datasource#configuration-serverSorting), [filtering](/api/javascript/data/datasource#configuration-serverFiltering), [paging](/api/javascript/data/datasource#configuration-serverPaging), and [grouping](/api/javascript/data/datasource#configuration-serverGrouping).
+Additional parameters that are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](/api/data/datasource#configuration-serverSorting), [filtering](/api/data/datasource#configuration-serverFiltering), [paging](/api/data/datasource#configuration-serverPaging), and [grouping](/api/data/datasource#configuration-serverGrouping).
 
 Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
@@ -2488,7 +2488,7 @@ How do I specify the URL for creating new records with Kendo UI DataSource trans
 
 ### transport.destroy `Object|String|Function`
 
-The configuration used when the data source destroys data items. Those are items removed from the data source via the [`remove`](/api/javascript/data/datasource/methods/remove) method.
+The configuration used when the data source destroys data items. Those are items removed from the data source via the [`remove`](/api/data/datasource/methods/remove) method.
 
 > The data source uses [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) to make an HTTP request to the remote service. The value configured via `transport.destroy` is passed to `jQuery.ajax`. This means that you can set all options supported by `jQuery.ajax` via `transport.destroy` except the `success` and `error` callback functions which are used by the transport.
 
@@ -2627,7 +2627,7 @@ How do I set the content type for delete requests in a Kendo UI DataSource? Set 
 
 ### transport.destroy.data `Object|Function`
 
-Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](/api/javascript/data/datasource#configuration-serverSorting), [filtering](/api/javascript/data/datasource#configuration-serverFiltering), [paging](/api/javascript/data/datasource#configuration-serverPaging), and [grouping](/api/javascript/data/datasource#configuration-serverGrouping).
+Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](/api/data/datasource#configuration-serverSorting), [filtering](/api/data/datasource#configuration-serverFiltering), [paging](/api/data/datasource#configuration-serverPaging), and [grouping](/api/data/datasource#configuration-serverGrouping).
 
 Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
@@ -2802,7 +2802,7 @@ The function which converts the request parameters to a format suitable for the 
 > * The `parameterMap` method is often used to encode the parameters in JSON format.
 > * The `parameterMap` function will not be called when using custom functions for the read, update, create, and destroy operations.
 
-If a [`transport.read.data`](/api/javascript/data/datasource#configuration-transport.read.data) function is used together with `parameterMap`, remember to preserve the result from the data function that will be received in the `parameterMap` arguments. An example is provided below. Generally, the `parameterMap` function is designed to transform the request payload, not to add new parameters to it.
+If a [`transport.read.data`](/api/data/datasource#configuration-transport.read.data) function is used together with `parameterMap`, remember to preserve the result from the data function that will be received in the `parameterMap` arguments. An example is provided below. Generally, the `parameterMap` function is designed to transform the request payload, not to add new parameters to it.
 
 ```pseudo
 transport: {
@@ -2834,39 +2834,39 @@ The parameters which will be sent to the remote service. The value specified in 
 
 ##### data.aggregate `Array`
 
-The current aggregate configuration as set via the [`aggregate`](/api/javascript/data/datasource#configuration-aggregate) option. Available if the [`serverAggregates`](/api/javascript/data/datasource#configuration-serverAggregates) option is set to `true` and the data source makes a `"read"` request.
+The current aggregate configuration as set via the [`aggregate`](/api/data/datasource#configuration-aggregate) option. Available if the [`serverAggregates`](/api/data/datasource#configuration-serverAggregates) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.group `Array`
 
-The current grouping configuration as set via the [`group`](/api/javascript/data/datasource#configuration-group) option. Available if the [`serverGrouping`](/api/javascript/data/datasource#configuration-serverGrouping) option is set to `true` and the data source makes a `"read"` request.
+The current grouping configuration as set via the [`group`](/api/data/datasource#configuration-group) option. Available if the [`serverGrouping`](/api/data/datasource#configuration-serverGrouping) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.filter `Object`
 
-The current filter configuration as set via the [`filter`](/api/javascript/data/datasource#configuration-filter) option. Available if the [`serverFiltering`](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true` and the data source makes a `"read"` request.
+The current filter configuration as set via the [`filter`](/api/data/datasource#configuration-filter) option. Available if the [`serverFiltering`](/api/data/datasource#configuration-serverFiltering) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.models `Array`
 
-All changed data items. Available if there are any data item changes and the [`batch`](/api/javascript/data/datasource#configuration-batch) option is set to `true`.
+All changed data items. Available if there are any data item changes and the [`batch`](/api/data/datasource#configuration-batch) option is set to `true`.
 
 ##### data.page `Number`
 
-The current page. Available if the [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
+The current page. Available if the [`serverPaging`](/api/data/datasource#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.pageSize `Number`
 
-The current page size as set via the [`pageSize`](/api/javascript/data/datasource#configuration-pageSize) option. Available if the [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
+The current page size as set via the [`pageSize`](/api/data/datasource#configuration-pageSize) option. Available if the [`serverPaging`](/api/data/datasource#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.skip `Number`
 
-The number of data items to skip. Available if the [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
+The number of data items to skip. Available if the [`serverPaging`](/api/data/datasource#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.sort `Array`
 
-The current sort configuration as set via the [`sort`](/api/javascript/data/datasource#configuration-sort) option. Available if the [`serverSorting`](/api/javascript/data/datasource#configuration-serverSorting) option is set to `true` and the data source makes a `"read"` request.
+The current sort configuration as set via the [`sort`](/api/data/datasource#configuration-sort) option. Available if the [`serverSorting`](/api/data/datasource#configuration-serverSorting) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.take `Number`
 
-The number of data items to return (the same as `data.pageSize`). Available if the [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
+The number of data items to return (the same as `data.pageSize`). Available if the [`serverPaging`](/api/data/datasource#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
 
 ##### type `String`
 
@@ -3163,7 +3163,7 @@ How do I set the content type for read operations in Kendo UI's DataSource? Set,
 
 ### transport.read.data `Object|Function`
 
-Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](/api/javascript/data/datasource#configuration-serverSorting), [filtering](/api/javascript/data/datasource#configuration-serverFiltering), [paging](/api/javascript/data/datasource#configuration-serverPaging), and [grouping](/api/javascript/data/datasource#configuration-serverGrouping).
+Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](/api/data/datasource#configuration-serverSorting), [filtering](/api/data/datasource#configuration-serverFiltering), [paging](/api/data/datasource#configuration-serverPaging), and [grouping](/api/data/datasource#configuration-serverGrouping).
 
 Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
@@ -3307,7 +3307,7 @@ How do I configure the URL for reading data remotely in a Kendo UI DataSource? C
 
 ### transport.signalr `Object`
 
-The configuration used when [`type`](/api/javascript/data/datasource#configuration-type) is set to `"signalr"`. Configures the SignalR settings - hub, connection promise, server, and client hub methods.
+The configuration used when [`type`](/api/data/datasource#configuration-type) is set to `"signalr"`. Configures the SignalR settings - hub, connection promise, server, and client hub methods.
 
 A live demo is available at [demos.telerik.com/kendo-ui](https://demos.telerik.com/kendo-ui/grid/signalr).
 
@@ -3900,7 +3900,7 @@ The `transport.create`, `transport.update`, and `transport.delete` operations wi
     </script>
 ```
 
-> This function will only be invoked when the DataSource is in its [batch mode](/api/javascript/data/datasource#configuration-batch).
+> This function will only be invoked when the DataSource is in its [batch mode](/api/data/datasource#configuration-batch).
 
 
 <div class="meta-api-description">
@@ -4103,7 +4103,7 @@ How do I set the content type for update operations in Kendo UI DataSource? Set 
 ### transport.update.data `Object|Function`
 
 Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for
-[sorting](/api/javascript/data/datasource#configuration-serverSorting), [filtering](/api/javascript/data/datasource#configuration-serverFiltering), [paging](/api/javascript/data/datasource#configuration-serverPaging), and [grouping](/api/javascript/data/datasource#configuration-serverGrouping).
+[sorting](/api/data/datasource#configuration-serverSorting), [filtering](/api/data/datasource#configuration-serverFiltering), [paging](/api/data/datasource#configuration-serverPaging), and [grouping](/api/data/datasource#configuration-serverGrouping).
 
 Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
@@ -4260,7 +4260,7 @@ How to configure the update URL for Kendo UI DataSource? Configure the endpoint 
 
 ### type `String`
 
-If set, the data source will use a predefined [`transport`](/api/javascript/data/datasource#configuration-transport) and/or [`schema`](/api/javascript/data/datasource#configuration-schema).
+If set, the data source will use a predefined [`transport`](/api/data/datasource#configuration-transport) and/or [`schema`](/api/data/datasource#configuration-schema).
 
 The supported values are:
 
@@ -4306,7 +4306,7 @@ How do I dynamically add new records to my Kendo UI data source? Insert or appen
 
 ##### model `Object|kendo.data.Model`
 
-Either a [`kendo.data.Model`](/api/javascript/data/model) instance or JavaScript object containing the data item field values.
+Either a [`kendo.data.Model`](/api/data/model) instance or JavaScript object containing the data item field values.
 
 #### Returns
 
@@ -4370,7 +4370,7 @@ How do I calculate summary statistics on specific columns in my Kendo UI DataSou
 
 ##### value `Object|Array`
 
-The aggregate configuration. Accepts the same values as the [`aggregate`](/api/javascript/data/datasource#configuration-aggregate) option.
+The aggregate configuration. Accepts the same values as the [`aggregate`](/api/data/datasource#configuration-aggregate) option.
 
 #### Returns
 
@@ -4467,7 +4467,7 @@ The zero-based index of the data item.
 #### Returns
 
 `kendo.data.ObservableObject`&mdash;The data item at the specified index. Returns `undefined` if a data item is not found at the specified index.
-Returns a `kendo.data.Model` instance if the [schema.model](/api/javascript/data/datasource#configuration-schema.model) option is set.
+Returns a `kendo.data.Model` instance if the [schema.model](/api/data/datasource#configuration-schema.model) option is set.
 
 #### Example - get a data item
     <script>
@@ -4489,7 +4489,7 @@ Returns a `kendo.data.Model` instance if the [schema.model](/api/javascript/data
 
 ### cancelChanges
 
-Cancels any pending changes in the data source. Deleted data items are restored, new data items are removed, and updated data items are restored to their initial state. Every data item [`uid`](/api/javascript/data/model#fields-uid) will be reset.
+Cancels any pending changes in the data source. Deleted data items are restored, new data items are removed, and updated data items are restored to their initial state. Every data item [`uid`](/api/data/model#fields-uid) will be reset.
 
 > A `change` event will be triggered only when all changes are reverted and will not be triggered when reverting changes for a single model instance.
 
@@ -4563,17 +4563,17 @@ The optional data item (model). If specified, only the changes of this data item
 
 Gets or sets the data items of the data source.
 
-If the data source is bound to a remote service (via the [`transport`](/api/javascript/data/datasource#configuration-transport) option), the `data` method will return the service response.
-Every item from the response is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) option is set).
+If the data source is bound to a remote service (via the [`transport`](/api/data/datasource#configuration-transport) option), the `data` method will return the service response.
+Every item from the response is wrapped in a [`kendo.data.ObservableObject`](/api/data/observableobject) or [`kendo.data.Model`](/api/data/model) (if the [`schema.model`](/api/data/datasource/configuration/schema#schemamodel) option is set).
 
-If the data source is bound to a JavaScript array (via the [`data`](/api/javascript/data/datasource#configuration-data) option), the `data` method will return the items of that array.
-Every item from the array is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) option is set).
+If the data source is bound to a JavaScript array (via the [`data`](/api/data/datasource#configuration-data) option), the `data` method will return the items of that array.
+Every item from the array is wrapped in a [`kendo.data.ObservableObject`](/api/data/observableobject) or [`kendo.data.Model`](/api/data/model) (if the [`schema.model`](/api/data/datasource/configuration/schema#schemamodel) option is set).
 
-If the data source is grouped (via the [`group`](/api/javascript/data/datasource#configuration-group) option or the [group](/api/javascript/data/datasource/methods/group) method) and the [`serverGrouping`](/api/javascript/data/datasource#configuration-serverGrouping) is set to `true`, the `data` method will return the group items.
+If the data source is grouped (via the [`group`](/api/data/datasource#configuration-group) option or the [group](/api/data/datasource/methods/group) method) and the [`serverGrouping`](/api/data/datasource#configuration-serverGrouping) is set to `true`, the `data` method will return the group items.
 
-> The [`schema.model`](/api/javascript/data/datasource#configuration-schema.model) configuration will not be used to parse the set data items. The data should be parsed in advance and the values should be provided in the correct type - date values should be JavaScript Date objects, numeric values should be JavaScript numbers, and others.
+> The [`schema.model`](/api/data/datasource#configuration-schema.model) configuration will not be used to parse the set data items. The data should be parsed in advance and the values should be provided in the correct type - date values should be JavaScript Date objects, numeric values should be JavaScript numbers, and others.
 
-Compare with the [`view`](/api/javascript/data/datasource/methods/view) method, which will return the data items that correspond to the current page, filter, sort and group configuration.
+Compare with the [`view`](/api/data/datasource/methods/view) method, which will return the data items that correspond to the current page, filter, sort and group configuration.
 
 
 <div class="meta-api-description">
@@ -4588,7 +4588,7 @@ The data items which will replace the current ones in the data source. If omitte
 
 #### Returns
 
-`kendo.data.ObservableArray`&mdash;The data items of the data source. Returns an empty array if the data source was not populated with data items via the [`read`](/api/javascript/data/datasource/methods/read), [`fetch`](/api/javascript/data/datasource/methods/fetch), or [`query`](/api/javascript/data/datasource/methods/query) methods.
+`kendo.data.ObservableArray`&mdash;The data items of the data source. Returns an empty array if the data source was not populated with data items via the [`read`](/api/data/datasource/methods/read), [`fetch`](/api/data/datasource/methods/fetch), or [`query`](/api/data/datasource/methods/query) methods.
 
 #### Example - get the data items when bound to an array
 
@@ -4654,7 +4654,7 @@ The data items which will replace the current ones in the data source. If omitte
 
 ### fetch
 
-Reads the data items from a remote service (if the [`transport`](/api/javascript/data/datasource#configuration-transport) option is set) or from a JavaScript array (if the [`data`](/api/javascript/data/datasource#configuration-data) option is set).
+Reads the data items from a remote service (if the [`transport`](/api/data/datasource#configuration-transport) option is set) or from a JavaScript array (if the [`data`](/api/data/datasource#configuration-data) option is set).
 
 > The `fetch` method makes a request to the remote service only the first time it is called if the dataSource is not configured for server operations.
 
@@ -4728,7 +4728,7 @@ The optional function which is executed when the remote request is finished. The
 
 Gets or sets the filter configuration.
 
-A list of the supported operators you can find in this filter [operator configuration article](/api/javascript/data/datasource/configuration/filter#filteroperator).
+A list of the supported operators you can find in this filter [operator configuration article](/api/data/datasource/configuration/filter#filteroperator).
 
 
 <div class="meta-api-description">
@@ -4739,7 +4739,7 @@ How do I configure filtering criteria for my Kendo UI DataSource? Configure, set
 
 ##### value `Object` *(optional)*
 
-The filter configuration. Accepts the same values as the [`filter`](/api/javascript/data/datasource#configuration-filter) option (**check there for more examples**).
+The filter configuration. Accepts the same values as the [`filter`](/api/data/datasource#configuration-filter) option (**check there for more examples**).
 
 #### Returns
 
@@ -4781,9 +4781,9 @@ The filter configuration. Accepts the same values as the [`filter`](/api/javascr
 
 ### get
 
-Gets the data item (model) with the specified [`id`](/api/javascript/data/model#fields-id).
+Gets the data item (model) with the specified [`id`](/api/data/model#fields-id).
 
-> The `get` method requires the [`schema.model`](/api/javascript/data/datasource#configuration-schema.model) option to be set and the `id` of the model to be specified. The `get` method will look for items only on the current page if [`serverPaging`](/api/javascript/data/datasource/configuration/serverpaging) is enabled.
+> The `get` method requires the [`schema.model`](/api/data/datasource#configuration-schema.model) option to be set and the `id` of the model to be specified. The `get` method will look for items only on the current page if [`serverPaging`](/api/data/datasource/configuration/serverpaging) is enabled.
 
 
 <div class="meta-api-description">
@@ -4821,7 +4821,7 @@ The id of the model to look for.
 
 ### getByUid
 
-Gets the data item (model) with the specified [`uid`](/api/javascript/data/model#fields-uid).
+Gets the data item (model) with the specified [`uid`](/api/data/model#fields-uid).
 
 
 <div class="meta-api-description">
@@ -4876,7 +4876,7 @@ How do I configure data grouping settings in Kendo UI for jQuery? configure or r
 
 ##### value `Object|Array`
 
-The grouping configuration. Accepts the same values as the [`group`](/api/javascript/data/datasource#configuration-group) option.
+The grouping configuration. Accepts the same values as the [`group`](/api/data/datasource#configuration-group) option.
 
 #### Returns
 
@@ -4932,7 +4932,7 @@ The grouping configuration. Accepts the same values as the [`group`](/api/javasc
 
 Checks if the data items have changed.
 
-> Requires an [`ID` field] to be configured in [`schema.model.id`](/api/javascript/data/datasource#configuration-schema.model). Otherwise, will always return `true`.
+> Requires an [`ID` field] to be configured in [`schema.model.id`](/api/data/datasource#configuration-schema.model). Otherwise, will always return `true`.
 
 
 <div class="meta-api-description">
@@ -5016,7 +5016,7 @@ The zero-based index at which the data item will be inserted.
 
 ##### model `Object|kendo.data.ObservableObject|kendo.data.Model`
 
-Either a [`kendo.data.Model`](/api/javascript/data/model) instance or a JavaScript object containing the field values.
+Either a [`kendo.data.Model`](/api/data/model) instance or a JavaScript object containing the field values.
 
 #### Returns
 
@@ -5482,7 +5482,7 @@ The data item or data items to append to the data source.
 
 Updates the specified data items without marking them as "dirty". The data source will not sync data items appended via `pushUpdate`. If the data items are not found (using `schema.model.id`), they will be appended.
 
-> The difference between `pushUpdate` and updating items via their [`set`](/api/javascript/data/observableobject/methods/set) method is that items updated via [`set`](/api/javascript/data/observableobject/methods/set) are synced with the remote service.
+> The difference between `pushUpdate` and updating items via their [`set`](/api/data/observableobject/methods/set) method is that items updated via [`set`](/api/data/observableobject/methods/set) are synced with the remote service.
 
 
 <div class="meta-api-description">
@@ -5566,27 +5566,27 @@ The query options which should be applied.
 
 ##### options.aggregate `Array` *(optional)*
 
-The aggregate configuration. Accepts the same values as the [`aggregate`](/api/javascript/data/datasource#configuration-aggregate) option. The `query` method will request the remote service if the [`serverAggregates`](/api/javascript/data/datasource#configuration-serverAggregates) option is set to `true`.
+The aggregate configuration. Accepts the same values as the [`aggregate`](/api/data/datasource#configuration-aggregate) option. The `query` method will request the remote service if the [`serverAggregates`](/api/data/datasource#configuration-serverAggregates) option is set to `true`.
 
 ##### options.filter `Object|Array` *(optional)*
 
-The filter configuration. Accepts the same values as the [`filter`](/api/javascript/data/datasource#configuration-filter) option. The `query` method will request the remote service if the [`serverFiltering`](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true`.
+The filter configuration. Accepts the same values as the [`filter`](/api/data/datasource#configuration-filter) option. The `query` method will request the remote service if the [`serverFiltering`](/api/data/datasource#configuration-serverFiltering) option is set to `true`.
 
 ##### options.group `Object|Array` *(optional)*
 
-The grouping configuration. Accepts the same values as the [`filter`](/api/javascript/data/datasource#configuration-filter) option. The `query` method will request the remote service if the [`serverGrouping`](/api/javascript/data/datasource#configuration-serverGrouping) option is set to `true`.
+The grouping configuration. Accepts the same values as the [`filter`](/api/data/datasource#configuration-filter) option. The `query` method will request the remote service if the [`serverGrouping`](/api/data/datasource#configuration-serverGrouping) option is set to `true`.
 
 ##### options.page `Number` *(optional)*
 
-The page of data to return. The `query` method will request the remote service if the [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging) option is set to `true`.
+The page of data to return. The `query` method will request the remote service if the [`serverPaging`](/api/data/datasource#configuration-serverPaging) option is set to `true`.
 
 ##### options.pageSize `Number` *(optional)*
 
-The number of data items to return. The `query` method will request the remote service if the [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging) option is set to `true`.
+The number of data items to return. The `query` method will request the remote service if the [`serverPaging`](/api/data/datasource#configuration-serverPaging) option is set to `true`.
 
 ##### options.sort `Object|Array` *(optional)*
 
-The sort configuration. Accepts the same values as the [`sort`](/api/javascript/data/datasource#configuration-sort) option. The `query` method will request the remote service if the [`serverSorting`](/api/javascript/data/datasource#configuration-serverSorting) option is set to `true`.
+The sort configuration. Accepts the same values as the [`sort`](/api/data/datasource#configuration-sort) option. The `query` method will request the remote service if the [`serverSorting`](/api/data/datasource#configuration-serverSorting) option is set to `true`.
 
 #### Returns
 
@@ -5642,9 +5642,9 @@ The sort configuration. Accepts the same values as the [`sort`](/api/javascript/
 
 ### read
 
-Reads data items from a [remote/custom transport](/framework/datasource/crud) (if the [`transport`](/api/javascript/data/datasource#configuration-transport) option is set) or from a JavaScript array (if the [`data`](/api/javascript/data/datasource#configuration-data) option is set).
+Reads data items from a [remote/custom transport](/framework/datasource/crud) (if the [`transport`](/api/data/datasource#configuration-transport) option is set) or from a JavaScript array (if the [`data`](/api/data/datasource#configuration-data) option is set).
 
-> The `read` method always makes a request to the remote service unless the Data Source is [offline](/api/javascript/data/datasource/methods/online).
+> The `read` method always makes a request to the remote service unless the Data Source is [offline](/api/data/datasource/methods/online).
 
 
 <div class="meta-api-description">
@@ -5655,7 +5655,7 @@ How to refresh data in Kendo UI DataSource using the read method? Retrieve, fetc
 
 ##### data `Object` *(optional)*
 
-Optional data to pass to the remote service. If you need to filter, it is better to use the [`filter()`](/api/javascript/data/datasource/methods/filter) method or the [`query()`](/api/javascript/data/datasource/methods/query) method with a `filter` parameter.
+Optional data to pass to the remote service. If you need to filter, it is better to use the [`filter()`](/api/data/datasource/methods/filter) method or the [`query()`](/api/data/datasource/methods/query) method with a `filter` parameter.
 
 #### Returns
 
@@ -5778,7 +5778,7 @@ How to implement sorting in Kendo UI DataSource? Configure, set, or retrieve the
 
 ##### value `Object|Array`
 
-The sort configuration. Accepts the same values as the [`sort`](/api/javascript/data/datasource#configuration-sort) option.
+The sort configuration. Accepts the same values as the [`sort`](/api/data/datasource#configuration-sort) option.
 
 #### Returns
 
@@ -5822,9 +5822,9 @@ Saves any data item changes.
 
 The `sync` method will request the remote service if:
 
-* The [`transport.create`](/api/javascript/data/datasource#configuration-transport.create) option is set and the data source contains new data items.
-* The [`transport.destroy`](/api/javascript/data/datasource#configuration-transport.destroy) option is set and data items have been removed from the data source.
-* The [`transport.update`](/api/javascript/data/datasource#configuration-transport.update) option is set and the data source contains updated data items.
+* The [`transport.create`](/api/data/datasource#configuration-transport.create) option is set and the data source contains new data items.
+* The [`transport.destroy`](/api/data/datasource#configuration-transport.destroy) option is set and data items have been removed from the data source.
+* The [`transport.update`](/api/data/datasource#configuration-transport.update) option is set and the data source contains updated data items.
 
 
 <div class="meta-api-description">
@@ -5872,7 +5872,7 @@ How do I programmatically push local data changes to a remote server using Kendo
     </script>
 
 ### total
-Gets the total number of data items. Uses [`schema.total`](/api/javascript/data/datasource#configuration-schema.total) if the [`transport.read`](/api/javascript/data/datasource#configuration-transport.read) option is set.
+Gets the total number of data items. Uses [`schema.total`](/api/data/datasource#configuration-schema.total) if the [`transport.read`](/api/data/datasource#configuration-transport.read) option is set.
 
 
 <div class="meta-api-description">
@@ -5881,8 +5881,8 @@ How to calculate total records in Kendo UI DataSource? Retrieve or calculate the
 
 #### Returns
 
-`Number`&mdash;The total number of data items. Returns the `length` of the array returned by the [`data`](/api/javascript/data/datasource/methods/data) method if `schema.total` or `transport.read` are not set.
-Returns `0` if the data source was not populated with data items via the [`read`](/api/javascript/data/datasource/methods/read), [`fetch`](/api/javascript/data/datasource/methods/read), or [`query`](/api/javascript/data/datasource/methods/query) methods.
+`Number`&mdash;The total number of data items. Returns the `length` of the array returned by the [`data`](/api/data/datasource/methods/data) method if `schema.total` or `transport.read` are not set.
+Returns `0` if the data source was not populated with data items via the [`read`](/api/data/datasource/methods/read), [`fetch`](/api/data/datasource/methods/read), or [`query`](/api/data/datasource/methods/query) methods.
 
 #### Example - get the total number of data items
 
@@ -5931,9 +5931,9 @@ How do I get the total number of pages in a Kendo UI DataSource when using pagin
 
 ### view
 
-Returns the data items which correspond to the **current** page, filter, sort, and group configuration. Compare with the [`data`](/api/javascript/data/datasource/methods/data) method, which will return data items from **all** pages, if **local** data binding and paging are used.
+Returns the data items which correspond to the **current** page, filter, sort, and group configuration. Compare with the [`data`](/api/data/datasource/methods/data) method, which will return data items from **all** pages, if **local** data binding and paging are used.
 
-To ensure that data is available this method should be used within the [`change`](/api/javascript/data/datasource/events/change) event handler or the [`fetch`](/api/javascript/data/datasource/methods/fetch) method.
+To ensure that data is available this method should be used within the [`change`](/api/data/datasource/events/change) event handler or the [`fetch`](/api/data/datasource/methods/fetch) method.
 
 
 <div class="meta-api-description">
@@ -5942,7 +5942,7 @@ How to get only the visible records in Kendo UI DataSource after applying filter
 
 #### Returns
 
-`kendo.data.ObservableArray`&mdash;The data items. Returns groups if the data items are grouped (via the [`group`](/api/javascript/data/datasource#configuration-group) option or the [`group`](/api/javascript/data/datasource/methods/group) method).
+`kendo.data.ObservableArray`&mdash;The data items. Returns groups if the data items are grouped (via the [`group`](/api/data/datasource#configuration-group) option or the [`group`](/api/data/datasource/methods/group) method).
 
 #### Example - get the paged and sorted data items
 
@@ -6077,7 +6077,7 @@ Fired when a request to the remote service fails.
 
 The event handler function context (available via the `this` keyword) will be set to the data source instance.
 
-> If the [`schema.errors`](/api/javascript/data/datasource#configuration-schema.errors) option is set and the server response contains that field, then the `error` event will be fired. The
+> If the [`schema.errors`](/api/data/datasource#configuration-schema.errors) option is set and the server response contains that field, then the `error` event will be fired. The
 `errors` field of the event argument will contain the errors returned by the server.
 
 
@@ -6363,7 +6363,7 @@ Set to:
 
 ### sync
 
-Fired after the data source saves data item changes. The data source saves the data item changes when the [`sync`](/api/javascript/data/datasource/methods/sync) method is called.
+Fired after the data source saves data item changes. The data source saves the data item changes when the [`sync`](/api/data/datasource/methods/sync) method is called.
 
 The event handler function context (available via the `this` keyword) will be set to the data source instance.
 

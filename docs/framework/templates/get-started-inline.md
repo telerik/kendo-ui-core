@@ -36,7 +36,7 @@ First, create the inline template by setting up a JavaScript string.
 
 ## 2. Compile the Template
 
-Next, compile the inline template to a function that builds HTML by using the Kendo UI [`template`](/api/javascript/kendo/methods/template) method.
+Next, compile the inline template to a function that builds HTML by using the Kendo UI [`template`](/api/kendo/methods/template) method.
     
 ```
     var data = { firstName: "Todd", age: 16 };
@@ -63,7 +63,7 @@ This is it! Now you are ready to dive more deeply into the Kendo UI Templates, l
 
 * [Getting Started with the External Templates]({% slug getting_started_external_templates %})
 * [Templates Performance]({% slug performance_kendoui_templatescomponent %})
-* [Templates JavaScript API Reference](/api/javascript/kendo/methods/template)
+* [Templates JavaScript API Reference](/api/kendo/methods/template)
 * [Knowledge Base Section](/knowledge-base)
 
 

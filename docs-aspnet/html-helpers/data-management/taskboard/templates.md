@@ -165,4 +165,4 @@ The following example shows a preview pane header template.
 ## See Also
 
 * [TaskBoard Templates (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/templates)
-* [JavaScript API Reference of the TaskBoard](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the TaskBoard](https://docs.telerik.com/kendo-ui/api/ui/taskboard)

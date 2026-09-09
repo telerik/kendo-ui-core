@@ -137,7 +137,7 @@ For the complete project, refer to the [TreeView in Razor Pages example](https:/
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the TreeView](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [Client-Side API of the TreeView](https://docs.telerik.com/kendo-ui/api/ui/treeview)
 * [Server-Side HtmlHelper API of the TreeView](/api/treeview)
 * [Server-Side TagHelper API of the TreeView](/api/taghelpers/treeview)
 * [Knowledge Base Section](/knowledge-base)

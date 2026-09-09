@@ -30,10 +30,10 @@ It supports the display of scheduled events in different views&mdash;single days
 
 * [Getting Started with the Kendo UI Scheduler for jQuery]({% slug getting_started_kendoui_scheduler_widget %})
 * [Demo Page for the Scheduler](https://demos.telerik.com/kendo-ui/scheduler/index)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)
 
 ## See Also
 
 * [Overview of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
 * [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](/api/ui/scheduler)

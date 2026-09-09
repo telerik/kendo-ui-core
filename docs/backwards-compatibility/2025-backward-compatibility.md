@@ -38,11 +38,11 @@ Starting with the **2025.3.825** Kendo UI for jQuery version, the Chat component
 
 **AIPrompt**
 
-* The **showOutputRating** property is deprecated as there is now [`outputActions`](/api/javascript/ui/aiprompt/configuration/outputactions) configuration option that is more flexible.
+* The **showOutputRating** property is deprecated as there is now [`outputActions`](/api/ui/aiprompt/configuration/outputactions) configuration option that is more flexible.
 
-* The **outputRatingChange** event is deprecated. Use [`outputAction`](/api/javascript/ui/aiprompt/events/outputaction) event instead.
+* The **outputRatingChange** event is deprecated. Use [`outputAction`](/api/ui/aiprompt/events/outputaction) event instead.
 
-* The **outputCopy** event is deprecated. Use [`outputAction`](/api/javascript/ui/aiprompt/events/outputaction) event instead.
+* The **outputCopy** event is deprecated. Use [`outputAction`](/api/ui/aiprompt/events/outputaction) event instead.
 
 * The `k-prompt-suggestion` class on the `role='listitem'` element has been replaced with the `k-suggestion` class.
 
@@ -54,7 +54,7 @@ Starting with Q2 2025, the Pager provides an adaptive mode that enhances its res
 
 The adaptive mode introduces several notable changes to the default Pager behavior:
 
-* **Input Behavior Change**: When the [`input`](/api/javascript/ui/pager/configuration/input) option is set to `true`, the Pager now renders a NumericTextBox in place of numerical buttons for pages, rather than displaying a textbox next to the arrow buttons.
+* **Input Behavior Change**: When the [`input`](/api/ui/pager/configuration/input) option is set to `true`, the Pager now renders a NumericTextBox in place of numerical buttons for pages, rather than displaying a textbox next to the arrow buttons.
 
 * **No Numeric Buttons**: When `input` is `true`, numerical page buttons are not rendered at all.
 

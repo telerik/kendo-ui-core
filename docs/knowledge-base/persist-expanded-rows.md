@@ -131,4 +131,4 @@ The following example demonstrates how to persist the expanded rows in a Grid af
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

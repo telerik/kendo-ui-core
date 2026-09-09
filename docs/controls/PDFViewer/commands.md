@@ -9,7 +9,7 @@ position: 5
 
 # Commands
 
-The PDFViewer component provides the following commands that can be executed using the [execute](/api/javascript/ui/pdfviewer/methods/execute) method: 
+The PDFViewer component provides the following commands that can be executed using the [execute](/api/ui/pdfviewer/methods/execute) method: 
 
 * OpenCommand;
 * PageChangeCommand;
@@ -102,4 +102,4 @@ The example below demonstrates the usage of the commands:
 ## See Also
 
 * [Basic Usage of the PDFViewer (Demo)](https://demos.telerik.com/kendo-ui/pdfviewer/index)
-* [JavaScript API Reference of the PDFViewer](/api/javascript/ui/pdfviewer)
+* [JavaScript API Reference of the PDFViewer](/api/ui/pdfviewer)

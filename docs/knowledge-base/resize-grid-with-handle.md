@@ -179,4 +179,4 @@ The handler will be shown only at the bottom-right corner of the Grid after hove
 
 ## See Also
 
-* [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
+* [Kendo UI Grid JavaScript API Reference](/api/ui/grid)

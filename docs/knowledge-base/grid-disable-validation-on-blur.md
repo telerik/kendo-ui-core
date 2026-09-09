@@ -29,7 +29,7 @@ How can I disable the validation on blur within a Kendo Grid?
 
 ## Solution
 
-Remove the set event handler of the currently edited model within the [edit event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) handler.
+Remove the set event handler of the currently edited model within the [edit event](https://docs.telerik.com/kendo-ui/api/ui/grid/events/edit) handler.
 
 ```dojo
     <div id="example">

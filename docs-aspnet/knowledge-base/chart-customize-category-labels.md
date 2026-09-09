@@ -32,11 +32,11 @@ How can I customize the Category Axis labels of the Telerik UI for {{ site.frame
 Use the [Kendo UI Drawing API](https://docs.telerik.com/kendo-ui/framework/drawing/overview) to customize the appearance of the labels in the {{ site.framework }} Bar Chart. You can adjust the suggested approach to your preferences through the following steps:
 
 1. Create a new function and pass its reference through the [Visual()](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/chartcategoryaxislabelssettingsbuilder#visualsystemstring) configuration method for the labels of the category axis.
-1. Initialize a new [`kendo.drawing.Group` object](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group).
-1. Set the appearance of the label with the [`kendo.drawing.Text`](https://docs.telerik.com/kendo-ui/api/javascript/drawing/text) element.
-1. [Configure the rectangle](https://docs.telerik.com/kendo-ui/api/javascript/geometry/rect) which will hold the text.
-1. Use the [`kendo.drawing.align`](https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align) method to set the alignment within the rectangle.
-1. [Append the elements together within the group](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group/methods/append), and return the results.
+1. Initialize a new [`kendo.drawing.Group` object](https://docs.telerik.com/kendo-ui/api/drawing/group).
+1. Set the appearance of the label with the [`kendo.drawing.Text`](https://docs.telerik.com/kendo-ui/api/drawing/text) element.
+1. [Configure the rectangle](https://docs.telerik.com/kendo-ui/api/geometry/rect) which will hold the text.
+1. Use the [`kendo.drawing.align`](https://docs.telerik.com/kendo-ui/api/drawing/methods/align) method to set the alignment within the rectangle.
+1. [Append the elements together within the group](https://docs.telerik.com/kendo-ui/api/drawing/group/methods/append), and return the results.
 
 ```Razor Index.cshtml
     @(Html.Kendo().Chart()
@@ -112,7 +112,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Customize the Category Labels of the Bar Chart](https://netcorerepl.telerik.com/cRYFEKlh02kX4pEE00)
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

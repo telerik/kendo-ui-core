@@ -881,7 +881,7 @@ The following components no longer render default appearance classes:
 
 #### Notification
 
-> tip Starting with **2026 Q1** version when no `type` parameter is passed the the [`show()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/notification/methods/show) method, the Notification will be displayed with default colors. Previously, the default value of the `type` property was `info`. If you need to acheive the previous behavior you can use the approaches demonstrated below:
+> tip Starting with **2026 Q1** version when no `type` parameter is passed the the [`show()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/notification/methods/show) method, the Notification will be displayed with default colors. Previously, the default value of the `type` property was `info`. If you need to acheive the previous behavior you can use the approaches demonstrated below:
 
 ```
 var notification = $("#notification").data("kendoNotification");

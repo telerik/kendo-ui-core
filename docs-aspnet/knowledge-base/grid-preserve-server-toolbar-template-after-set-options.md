@@ -25,11 +25,11 @@ components: ["general"]
 
 ## Description
 
-How can I preserve the server toolbar template of the Grid when using the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method to persist the current Grid settings?
+How can I preserve the server toolbar template of the Grid when using the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/setoptions) method to persist the current Grid settings?
 
 ## Solution
 
-You have to preserve the server toolbar template of the Grid because of the existing limitations of the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method.
+You have to preserve the server toolbar template of the Grid because of the existing limitations of the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/setoptions) method.
 
 1. Define the Grid and the template:
 
@@ -147,7 +147,7 @@ To review the complete example, refer to the [project on how to preserve the ser
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
 

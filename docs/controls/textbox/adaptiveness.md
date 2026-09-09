@@ -28,4 +28,4 @@ The following example demonstrates how to configure an on-screen keyboard for th
 
 ## See Also
 
-* [JavaScript API Reference of the TextArea](/api/javascript/ui/textarea)
+* [JavaScript API Reference of the TextArea](/api/ui/textarea)

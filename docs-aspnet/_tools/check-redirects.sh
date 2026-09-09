@@ -11,25 +11,25 @@ err_count=0
 # List of URLs to check: <from> <to>
 urls="
 /kendo-ui/api/wrappers/jsp /kendo-ui/api/jsp/actionsheet/item
-/kendo-ui/api/web/grid /kendo-ui/api/javascript/ui/grid
-/kendo-ui/api/mobile/application /kendo-ui/api/javascript/mobile/application
-/kendo-ui/api/mobile/scrollview /kendo-ui/api/javascript/mobile/ui/scrollview
-/kendo-ui/api/framework/fx/common /kendo-ui/api/javascript/effects/common
-/kendo-ui/api/framework/class /kendo-ui/api/javascript/class
-/kendo-ui/api/framework/color /kendo-ui/api/javascript/color
-/kendo-ui/api/framework/kendo /kendo-ui/api/javascript/kendo
-/kendo-ui/api/framework/layout /kendo-ui/api/javascript/layout
-/kendo-ui/api/framework/router /kendo-ui/api/javascript/router
-/kendo-ui/api/framework/binder /kendo-ui/api/javascript/data/binder
-/kendo-ui/api/framework/datasource /kendo-ui/api/javascript/data/datasource
-/kendo-ui/api/framework/node /kendo-ui/api/javascript/data/node
-/kendo-ui/api/dataviz/chart /kendo-ui/api/javascript/dataviz/ui/chart
-/kendo-ui/api/dataviz/diagram /kendo-ui/api/javascript/dataviz/ui/diagram
-/kendo-ui/api/javascript/dataviz/chart /kendo-ui/api/javascript/dataviz/ui/chart
-/kendo-ui/api/javascript/dataviz/diagram /kendo-ui/api/javascript/dataviz/ui/diagram
-/kendo-ui/api/dataviz/map/layer /kendo-ui/api/javascript/dataviz/map/layer
-/kendo-ui/api/javascript/dataviz/drawing/group /kendo-ui/api/javascript/drawing/group
-/kendo-ui/api/javascript/dataviz/geometry/point /kendo-ui/api/javascript/geometry/point
+/kendo-ui/api/web/grid /kendo-ui/api/ui/grid
+/kendo-ui/api/mobile/application /kendo-ui/api/mobile/application
+/kendo-ui/api/mobile/scrollview /kendo-ui/api/mobile/ui/scrollview
+/kendo-ui/api/framework/fx/common /kendo-ui/api/effects/common
+/kendo-ui/api/framework/class /kendo-ui/api/class
+/kendo-ui/api/framework/color /kendo-ui/api/color
+/kendo-ui/api/framework/kendo /kendo-ui/api/kendo
+/kendo-ui/api/framework/layout /kendo-ui/api/layout
+/kendo-ui/api/framework/router /kendo-ui/api/router
+/kendo-ui/api/framework/binder /kendo-ui/api/data/binder
+/kendo-ui/api/framework/datasource /kendo-ui/api/data/datasource
+/kendo-ui/api/framework/node /kendo-ui/api/data/node
+/kendo-ui/api/dataviz/chart /kendo-ui/api/dataviz/ui/chart
+/kendo-ui/api/dataviz/diagram /kendo-ui/api/dataviz/ui/diagram
+/kendo-ui/api/dataviz/chart /kendo-ui/api/dataviz/ui/chart
+/kendo-ui/api/dataviz/diagram /kendo-ui/api/dataviz/ui/diagram
+/kendo-ui/api/dataviz/map/layer /kendo-ui/api/dataviz/map/layer
+/kendo-ui/api/dataviz/drawing/group /kendo-ui/api/drawing/group
+/kendo-ui/api/dataviz/geometry/point /kendo-ui/api/geometry/point
 /kendo-ui/web/styles-and-layout/appearance-styling /kendo-ui/styles-and-layout/appearance-styling
 /kendo-ui/web/grid/overview /kendo-ui/controls/data-management/grid/overview
 /kendo-ui/web/treelist/overview /kendo-ui/controls/data-management/treelist/overview
@@ -65,12 +65,12 @@ urls="
 /kendo-ui/aspnet-mvc/tutorial-kendo-music-store/kendo-music-store-intro /kendo-ui/aspnet-mvc/tutorials/tutorial-kendo-music-store/kendo-music-store-intro
 /kendo-ui/aspnet-mvc/tutorial-saleshub/kendo-saleshub-intro /kendo-ui/aspnet-mvc/tutorials/tutorial-saleshub/kendo-saleshub-intro
 /kendo-ui/ /kendo-ui/introduction
-/kendo-ui/api/javascript/ui/RangeSlider /kendo-ui/api/javascript/ui/rangeslider
-/kendo-ui/api/javascript/ui/Splitter /kendo-ui/api/javascript/ui/splitter
-/kendo-ui/api/framework/validator /kendo-ui/api/javascript/ui/validator
+/kendo-ui/api/ui/RangeSlider /kendo-ui/api/ui/rangeslider
+/kendo-ui/api/ui/Splitter /kendo-ui/api/ui/splitter
+/kendo-ui/api/framework/validator /kendo-ui/api/ui/validator
 /kendo-ui/controls/data-management/grid/introduction /kendo-ui/controls/data-management/grid/overview
-/kendo-ui/api/javascript/mobile/ui/ButtonGroup /kendo-ui/api/javascript/mobile/ui/buttongroup
-/kendo-ui/api/javascript/mobile/ui/TabStrip /kendo-ui/api/javascript/mobile/ui/tabstrip
+/kendo-ui/api/mobile/ui/ButtonGroup /kendo-ui/api/mobile/ui/buttongroup
+/kendo-ui/api/mobile/ui/TabStrip /kendo-ui/api/mobile/ui/tabstrip
 "
 
 #Make `for` iterate over new lines

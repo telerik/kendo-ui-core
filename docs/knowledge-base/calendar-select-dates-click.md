@@ -31,7 +31,7 @@ How can I select or deselect multiple dates only by clicking them and without us
 
 1. Prevent the default click action for the Calendar dates.
 1. Get the clicked date and add it to a collection of the selected dates.
-1. Set the selected dates for the Calendar by using the [`selectDates`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/configuration/selectdates) method.
+1. Set the selected dates for the Calendar by using the [`selectDates`](https://docs.telerik.com/kendo-ui/api/ui/calendar/configuration/selectdates) method.
 
 ```dojo
 <div id="calendar"></div>
@@ -85,6 +85,6 @@ How can I select or deselect multiple dates only by clicking them and without us
 
 ## See Also
 
-* [API Reference of the DatePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
-* [API Reference of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
-* [API Reference of the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the DatePicker](https://docs.telerik.com/kendo-ui/api/ui/datepicker)
+* [API Reference of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker)
+* [API Reference of the Calendar](https://docs.telerik.com/kendo-ui/api/ui/calendar)

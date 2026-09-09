@@ -113,4 +113,4 @@ namespace Kendo.Controllers
 
 * [Overview of the Kendo UI for jQuery Captcha Demo](https://demos.telerik.com/kendo-ui/captcha/index)
 * [Using the API of the Captcha](https://demos.telerik.com/kendo-ui/captcha/api)
-* [JavaScript API Reference of the Captcha](/api/javascript/ui/captcha)
+* [JavaScript API Reference of the Captcha](/api/ui/captcha)

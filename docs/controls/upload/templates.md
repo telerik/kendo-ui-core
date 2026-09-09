@@ -16,4 +16,4 @@ For a runnable example, refer to the [demo on using templates in the Upload](htt
 ## See Also
 
 * [Using Templates in the Upload](https://demos.telerik.com/kendo-ui/upload/templates)
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

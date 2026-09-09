@@ -33,8 +33,8 @@ To bind a Boolean field of the `Model` to a Grid column with always active check
 
 1. Use the [`ClientTemplate`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clienttemplatesystemstring) property of the column to configure a checkbox input that is checked based on the value of the column.
 2. Handle the `click` event of the input.
-3. In the handler, get the HTML parent row of the clicked input and pass it to the [`dataItem` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) to access the `dataItem` of the row.
-3. Utilize the [`set` method](https://docs.telerik.com/kendo-ui/api/javascript/data/model/methods/set) of the [`kendo.data.Model`](https://docs.telerik.com/kendo-ui/api/javascript/data/model) to programmatically change the value of the `dataItem` Boolean field.
+3. In the handler, get the HTML parent row of the clicked input and pass it to the [`dataItem` method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/dataitem) to access the `dataItem` of the row.
+3. Utilize the [`set` method](https://docs.telerik.com/kendo-ui/api/data/model/methods/set) of the [`kendo.data.Model`](https://docs.telerik.com/kendo-ui/api/data/model) to programmatically change the value of the `dataItem` Boolean field.
 
   > If in the `Model` configuration of the DataSource the field is configured to be non-editable, the `set` method won't have effect.
 
@@ -114,7 +114,7 @@ To explore the complete behavior, see the Telerik REPL example on how to [displa
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

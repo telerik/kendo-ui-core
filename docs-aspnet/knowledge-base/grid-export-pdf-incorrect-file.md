@@ -66,7 +66,7 @@ Add the `WebComponentsIcons` font that is used for the Kendo UI font icons.
 ## See Also
 
 * [PDF Export (Overview)](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/export/pdf-export)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * {% if site.core %} 
 [Server-Side TagHelper API Reference of the Grid for ASP.NET Core](https://docs.telerik.com/aspnet-core/api/taghelpers/grid) 

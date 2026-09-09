@@ -13,7 +13,7 @@ The Kendo UI Grid supports sticky group headers and footers. When the user scrol
 
 ## Getting Started
 
-To enable sticky group headers, set the [`groupable.stickyHeaders`](/api/javascript/ui/grid/configuration/groupable.stickyheaders) option to `true`. To enable sticky group footers, set the [`groupable.stickyFooters`](/api/javascript/ui/grid/configuration/groupable.stickyfooters) option to `true`. The Grid must have the [`scrollable`](/api/javascript/ui/grid/configuration/scrollable) option enabled and a [`height`](/api/javascript/ui/grid/configuration/height) set for the sticky behavior to work.
+To enable sticky group headers, set the [`groupable.stickyHeaders`](/api/ui/grid/configuration/groupable.stickyheaders) option to `true`. To enable sticky group footers, set the [`groupable.stickyFooters`](/api/ui/grid/configuration/groupable.stickyfooters) option to `true`. The Grid must have the [`scrollable`](/api/ui/grid/configuration/scrollable) option enabled and a [`height`](/api/ui/grid/configuration/height) set for the sticky behavior to work.
 
     $("#grid").kendoGrid({
         height: 400,
@@ -48,11 +48,11 @@ The sticky groups functionality works with:
 * **Nested groups**&mdash;When the Grid is grouped by multiple fields, sticky headers and footers are rendered for each grouping level.
 * **Locked (frozen) columns**&mdash;Sticky group rows span both the locked and scrollable sections of the Grid.
 * **Virtual scrolling**&mdash;Sticky headers and footers are supported when the Grid uses virtual scrolling (`scrollable: { virtual: true }`).
-* **Keyboard navigation**&mdash;When the Grid is [`navigatable`](/api/javascript/ui/grid/configuration/navigatable), the sticky group headers and footers can be focused and navigated with the keyboard.
+* **Keyboard navigation**&mdash;When the Grid is [`navigatable`](/api/ui/grid/configuration/navigatable), the sticky group headers and footers can be focused and navigated with the keyboard.
 
 ## Runtime Toggle
 
-You can enable or disable the sticky behavior at runtime by calling the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method:
+You can enable or disable the sticky behavior at runtime by calling the [`setOptions`](/api/ui/grid/methods/setoptions) method:
 
     var grid = $("#grid").data("kendoGrid");
     grid.setOptions({
@@ -67,4 +67,4 @@ You can enable or disable the sticky behavior at runtime by calling the [`setOpt
 * [Sticky Groups Demo](https://demos.telerik.com/kendo-ui/grid/sticky-groups)
 * [Grouping Overview]({% slug grouping_kendoui_grid_widget %})
 * [Grouping with Aggregates]({% slug aggregates_kendoui_grid_widget %})
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

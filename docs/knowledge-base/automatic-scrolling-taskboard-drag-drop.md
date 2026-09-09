@@ -41,12 +41,12 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-Automatic scrolling of TaskBoard during drag-and-drop is not supported out of the box. Implement custom logic using the [`move`](/api/javascript/ui/taskboard/events/move) event of the TaskBoard and programmatically modify the scroll position using the `scrollLeft()` method.
+Automatic scrolling of TaskBoard during drag-and-drop is not supported out of the box. Implement custom logic using the [`move`](/api/ui/taskboard/events/move) event of the TaskBoard and programmatically modify the scroll position using the `scrollLeft()` method.
 
 ### Steps to Implement Automatic Scrolling:
 
 1. Subscribe to the `move` event of the TaskBoard.  
-   Refer to the [move event documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/taskboard/events/move).
+   Refer to the [move event documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/taskboard/events/move).
 
 2. Within the event handler, programmatically update the scroll position of the TaskBoard's container using the `scrollLeft()` method. The logic calculates the offset to focus the hidden column.
 
@@ -170,6 +170,6 @@ Explore the full implementation in the example below
 ## See Also
 
 - [TaskBoard Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/taskboard/overview)  
-- [TaskBoard API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/taskboard)  
+- [TaskBoard API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/taskboard)  
 - [scrollLeft() jQuery API](https://api.jquery.com/scrollLeft/)  
 

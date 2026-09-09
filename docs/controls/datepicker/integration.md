@@ -11,7 +11,7 @@ position: 11
 
 The DatePicker provides integration options with the [Kendo UI for jQuery DateInput]({% slug overview_kendoui_dateinput_widget %}) for the input element it renders.
 
-To use the DateInput as the input element in a DatePicker, enable the [`dateInput`](/api/javascript/ui/datepicker/configuration/dateinput) property of the DatePicker.
+To use the DateInput as the input element in a DatePicker, enable the [`dateInput`](/api/ui/datepicker/configuration/dateinput) property of the DatePicker.
 
 ```dojo
     <input id="datepicker" />
@@ -44,4 +44,4 @@ When the AutoFill functionality is enabled you can complete any of the date segm
 
 ## See Also
 
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)

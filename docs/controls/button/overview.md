@@ -38,4 +38,4 @@ However, note that due to the special and individual behavior of clickable eleme
 
 * [Binding the Button over MVVM (Demo)](https://demos.telerik.com/kendo-ui/button/mvvm)
 * [Applying the Button API (Demo)](https://demos.telerik.com/kendo-ui/button/api)
-* [JavaScript API Reference of the Button](/api/javascript/ui/button)
+* [JavaScript API Reference of the Button](/api/ui/button)

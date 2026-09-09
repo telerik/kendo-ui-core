@@ -13,7 +13,7 @@ The Pager has two types:
 - `numeric`
 - `input`
 
-The Pager is `numeric` by default. To configure the number of buttons that will be shown in a numeric pager, use the [`buttonCount`](/api/javascript/ui/pager/configuration/buttoncount) option. To configure the pager to accept only use input, set the [`numeric`](/api/javascript/ui/pager/configuration/numeric) to `false` and the [`input`](/api/javascript/ui/pager/configuration/input) to `true`.
+The Pager is `numeric` by default. To configure the number of buttons that will be shown in a numeric pager, use the [`buttonCount`](/api/ui/pager/configuration/buttoncount) option. To configure the pager to accept only use input, set the [`numeric`](/api/ui/pager/configuration/numeric) to `false` and the [`input`](/api/ui/pager/configuration/input) to `true`.
 
 The following example shows how to enable the `input` pager type
 
@@ -51,15 +51,15 @@ The following example shows how to enable the `input` pager type
 
 The following settings enable you to determine which built-in pager elements will be rendered:
 
-- [`pageSizes`](/api/javascript/ui/pager/configuration/pagesizes) - renders the dropdown that allows the user to change the page size.
-- [`refresh`](/api/javascript/ui/pager/configuration/refresh) - renders a refresh button
-- [`previousNext`](/api/javascript/ui/pager/configuration/previousnext) - toggles the visibility of buttons for navigating to the first, last, previous and next pages
-- [`info`](/api/javascript/ui/pager/configuration/info) - toggles the visibility of the current pager information
+- [`pageSizes`](/api/ui/pager/configuration/pagesizes) - renders the dropdown that allows the user to change the page size.
+- [`refresh`](/api/ui/pager/configuration/refresh) - renders a refresh button
+- [`previousNext`](/api/ui/pager/configuration/previousnext) - toggles the visibility of buttons for navigating to the first, last, previous and next pages
+- [`info`](/api/ui/pager/configuration/info) - toggles the visibility of the current pager information
 
 
 ## See Also
 
-* [JavaScript API Reference of the Pager](/api/javascript/ui/pager)
+* [JavaScript API Reference of the Pager](/api/ui/pager)
 * [Responsive Pager]({% slug responsive_kendoui_pager_widget  %})
 * [Pager Templates]({% slug templates_kendoui_pager_widget %})
 * [Globalization and Messages]({% slug globalization_kendoui_pager_widget %})

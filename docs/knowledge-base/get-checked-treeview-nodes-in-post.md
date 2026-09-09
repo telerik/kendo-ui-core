@@ -25,15 +25,15 @@ When the user tries to select a TreeView node, it seems that all TreeView nodes 
 
 ## Cause
 
-* If the [`checkboxes.checkChildren`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/configuration/checkboxes#checkboxes.checkChildren) property is set to `true`, the TreeView checks all child nodes. To enable the TreeView to check only the current node, set `checkboxes.checkChildren` to `false` or remove it.
-* Checkboxes participate in the `POST` of a `<form>` through their [`name`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/configuration/checkboxes#checkboxes.name) property&mdash; if a checkbox is checked, its `name` is present in the `POST` data.
+* If the [`checkboxes.checkChildren`](https://docs.telerik.com/kendo-ui/api/ui/treeview/configuration/checkboxes#checkboxes.checkChildren) property is set to `true`, the TreeView checks all child nodes. To enable the TreeView to check only the current node, set `checkboxes.checkChildren` to `false` or remove it.
+* Checkboxes participate in the `POST` of a `<form>` through their [`name`](https://docs.telerik.com/kendo-ui/api/ui/treeview/configuration/checkboxes#checkboxes.name) property&mdash; if a checkbox is checked, its `name` is present in the `POST` data.
 
 ## Solution
 
 Apply either of the following approaches:
 
 * Use JavaScript to loop through the nodes on the client and collect the checked ones. Then put them in a hidden field, or serialize or send them to the server. For the full implementation of this approach, refer to the [example on collecting the checked TreeView nodes](https://demos.telerik.com/kendo-ui/treeview/checkboxes).
-* Distinguish checkboxes by generating unique names with the [`checkbox.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/configuration/checkboxes#checkboxes.template).
+* Distinguish checkboxes by generating unique names with the [`checkbox.template`](https://docs.telerik.com/kendo-ui/api/ui/treeview/configuration/checkboxes#checkboxes.template).
 
 The following example demonstrates a template that mimics the default TreeView template with classes for appearance and an `aria-label` attribute for accessibility.
 

@@ -59,5 +59,5 @@ For a practical implementation, refer to this [example](https://dojo.telerik.com
 ## See Also
 
 - [Kendo UI for jQuery Grid Documentation](https://docs.telerik.com/kendo-ui/controls/grid/overview)
-- [Column Menu](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) Event of the Kendo UI Grid
-- [DropDownList Value Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/methods/value) in the Kendo UI API Documentation
+- [Column Menu](https://docs.telerik.com/kendo-ui/api/ui/grid/events/columnmenuinit) Event of the Kendo UI Grid
+- [DropDownList Value Method](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist/methods/value) in the Kendo UI API Documentation

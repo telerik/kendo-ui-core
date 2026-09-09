@@ -29,13 +29,13 @@ How can I clear all filters for all Grid columns?
 
 ## Solution
 
-Set the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter) object of the Grid dataSource as empty by using the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method.
+Set the [`filter`](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/filter) object of the Grid dataSource as empty by using the [`filter`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/filter) method.
 
 ```js
     $("#grid").data("kendoGrid").dataSource.filter({});
 ```
 
-The following example demonstrates how to use a [`click`](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) event of an external Kendo UI Button.
+The following example demonstrates how to use a [`click`](https://docs.telerik.com/kendo-ui/api/ui/button/events/click) event of an external Kendo UI Button.
 
 ```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -96,4 +96,4 @@ The following example demonstrates how to use a [`click`](https://docs.telerik.c
 ## See Also
 
 * [Demo on Filtering Grid Rows](https://demos.telerik.com/kendo-ui/grid/filter-row)
-* [API Reference of the Filterable Functionality](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/filterable)
+* [API Reference of the Filterable Functionality](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/filterable)

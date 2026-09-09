@@ -11,7 +11,7 @@ position: 3
 
 A floating label is a placeholder text for form or input fields, which floats above that field and remains visible once the user starts interacting with that field. 
 
-To implement a [floating label in the Kendo UI for jQuery DateInput](/api/javascript/ui/dateinput/configuration/label), define it either as a string or from a function.
+To implement a [floating label in the Kendo UI for jQuery DateInput](/api/ui/dateinput/configuration/label), define it either as a string or from a function.
 
 The following example demonstrates how to set the floating label as a string:
 
@@ -51,4 +51,4 @@ The following example demonstrates how to set the floating label from a function
 ## See Also
 
 * [Floating Label (Demo) of the DateInput](https://demos.telerik.com/kendo-ui/dateinput/floating-label)
-* [JavaScript API Reference of the DateInput](/api/javascript/ui/dateinput)
+* [JavaScript API Reference of the DateInput](/api/ui/dateinput)

@@ -127,4 +127,4 @@ The following example demonstrates how to add a button as a suffix of the AutoCo
 
 * [Using the Prefix and Suffix of the AutoComplete for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/prefix-suffix)
 * [Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/autocomplete)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/autocomplete)

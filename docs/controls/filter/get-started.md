@@ -127,7 +127,7 @@ You can use a remote data source instead of an array of local data. The local ar
 
 ## 4. Add an Initial Expression
 
-The Filter allows you to configure an initial filter expression through the [expression](/api/javascript/ui/filter/configuration/expression) configuration. Since an initial filter is applied, you will need to immediately call the `applyFilter()` method.
+The Filter allows you to configure an initial filter expression through the [expression](/api/ui/filter/configuration/expression) configuration. Since an initial filter is applied, you will need to immediately call the `applyFilter()` method.
 
 ```html
 <div id="filter"></div>
@@ -234,7 +234,7 @@ You can use the Filter together with a number of Kendo UI for jQuery components.
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Filter](/api/javascript/ui/filter)
+* [JavaScript API Reference of the jQuery Filter](/api/ui/filter)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -26,7 +26,7 @@ The Breadcrumb is an intuitive UI component that allows navigation within a fold
 
 * [Getting Started with the Kendo UI Breadcrumb for jQuery]({% slug getting_started_kendoui_Breadcrumb_component %})
 * [Overview of the Breadcrumb (Demo)](https://demos.telerik.com/kendo-ui/breadcrumb/index)
-* [JavaScript API Reference of the Breadcrumb](/api/javascript/ui/breadcrumb)
+* [JavaScript API Reference of the Breadcrumb](/api/ui/breadcrumb)
 
 ## See Also
 

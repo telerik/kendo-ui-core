@@ -22,4 +22,4 @@ Because the FileManager internally uses the Kendo UI Grid, you can refer to its 
 ## See Also
 
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the Grid](/api/javascript/ui/filemanager)
+* [JavaScript API Reference of the Grid](/api/ui/filemanager)

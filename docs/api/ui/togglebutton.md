@@ -7,7 +7,7 @@ component: togglebutton
 
 # kendo.ui.ToggleButton
 
-Represents the Kendo UI ToggleButton widget. Inherits from [Button](/api/javascript/ui/button).
+Represents the Kendo UI ToggleButton widget. Inherits from [Button](/api/ui/button).
 
 
 ## Configuration

@@ -110,7 +110,7 @@ In this step, you will initialize the AIPrompt from the `<div>` element. When yo
 
 ## 3. Configure the Views 
 
-Here, you will specify which [`views`](/api/javascript/ui/aiprompt/configuration/views) will be displayed in the component. For the purposes of this guide, we will include two item collections for the prompt suggestions and the items in the command view.
+Here, you will specify which [`views`](/api/ui/aiprompt/configuration/views) will be displayed in the component. For the purposes of this guide, we will include two item collections for the prompt suggestions and the items in the command view.
 
 ```html
   <div id="aiprompt"></div>
@@ -315,7 +315,7 @@ In a similar fashion, if you wish to execute a command to process the generated 
 
 ## See Also 
 
-* [JavaScript API Reference of the jQuery AIPrompt](/api/javascript/ui/aiprompt)
+* [JavaScript API Reference of the jQuery AIPrompt](/api/ui/aiprompt)
 * [Knowledge Base Section](/knowledge-base)
 
 

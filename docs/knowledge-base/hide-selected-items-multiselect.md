@@ -36,7 +36,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To hide selected items from the dropdown list in the [MultiSelect](/controls/multiselect/overview) component, use the [`open`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/multiselect/events/open) event to dynamically filter the dropdown list each time it is shown. The following code demonstrates this approach:
+To hide selected items from the dropdown list in the [MultiSelect](/controls/multiselect/overview) component, use the [`open`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/multiselect/events/open) event to dynamically filter the dropdown list each time it is shown. The following code demonstrates this approach:
 
 ```javascript
 open: function(e) {
@@ -111,5 +111,5 @@ $("#multiSelect").kendoMultiSelect({
 ## See Also
 
 - [MultiSelect Overview Documentation](/controls/multiselect/overview)
-- [Open Event API Reference](/api/javascript/ui/multiselect/events/open)
-- [Filtering in Kendo UI DataSource](/api/javascript/data/datasource/methods/filter)
+- [Open Event API Reference](/api/ui/multiselect/events/open)
+- [Filtering in Kendo UI DataSource](/api/data/datasource/methods/filter)

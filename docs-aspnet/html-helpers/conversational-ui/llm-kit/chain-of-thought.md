@@ -67,4 +67,4 @@ If the default row layout does not meet your needs, provide a custom template fo
 {% if site.core %}
 * [Server-Side API of the ChainOfThought TagHelper](/api/taghelpers/chainofthought)
 {% endif %}
-* [JavaScript API Reference of the ChainOfThought](/api/javascript/ui/chainofthought)
+* [JavaScript API Reference of the ChainOfThought](/api/ui/chainofthought)

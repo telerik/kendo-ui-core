@@ -8,7 +8,7 @@ component: tabstrip
 
 # kendo.ui.TabStrip
 
-Represents the Kendo UI TabStrip. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI TabStrip. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -473,12 +473,12 @@ How do I dynamically set image URLs for tabs in a Kendo UI tab strip? Configure 
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the widget which is used to display the items. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source of the widget which is used to display the items. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -1303,7 +1303,7 @@ How to set tab alignment in Kendo UI for jQuery? Control the horizontal placemen
 ### tabPosition `String`*(default: "top")*
 
 Specifies the position of the widget tabs. Valid values are `"top"` (default), `"left"`, `"right"` and `"bottom"`.
-A [**fade animation**](/api/javascript/ui/tabstrip#configuration-animation) is highly recommended with any of the non-default tab position settings.
+A [**fade animation**](/api/ui/tabstrip#configuration-animation) is highly recommended with any of the non-default tab position settings.
 
 
 <div class="meta-api-description">

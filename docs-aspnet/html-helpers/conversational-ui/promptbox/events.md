@@ -72,4 +72,4 @@ You can subscribe to the events by the handler name.
 {% if site.core %}
 * [Server-Side API of the PromptBox TagHelper](/api/taghelpers/promptbox)
 {% endif %}
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)

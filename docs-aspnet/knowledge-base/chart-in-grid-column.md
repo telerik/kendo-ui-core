@@ -31,7 +31,7 @@ How can I initialize a Chart into a specified [Grid]({% slug htmlhelpers_grid_as
 1. Declare the Grid component.
 1. Use the [`Template()`](/api/kendo.mvc.ui.fluent/gridcolumnfactory#templatesystemstring) option of the Grid column to define the Charts.
 1. Handle the [`DataBinding`](/api/kendo.mvc.ui.fluent/grideventbuilder#databindingsystemstring) and [`DataBound`](/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) events of the Grid.
-1. Within the event handlers, call the [`destroy`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/destroy) method and the jQuery [`eval`](https://www.w3schools.com/jsref/jsref_eval.asp#:~:text=The%20eval()%20method%20evaluates,eval()%20executes%20the%20statements.) method to render the Charts. By design, the script tags are not automatically evaluated inside the Grid column template, so the scripts must be evaluated manually in the `DataBound` event of the Grid..
+1. Within the event handlers, call the [`destroy`](https://docs.telerik.com/kendo-ui/api/kendo/methods/destroy) method and the jQuery [`eval`](https://www.w3schools.com/jsref/jsref_eval.asp#:~:text=The%20eval()%20method%20evaluates,eval()%20executes%20the%20statements.) method to render the Charts. By design, the script tags are not automatically evaluated inside the Grid column template, so the scripts must be evaluated manually in the `DataBound` event of the Grid..
 
 
 ```HtmlHelper
@@ -182,7 +182,7 @@ For the complete implementation of the suggested approach, refer to [the project
 
 ## See Also
 
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart)
 * [Telerik UI for {{ site.framework }} Grid Templates](https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/templates/overview)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 {% if site.core %}

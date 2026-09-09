@@ -61,7 +61,7 @@ In this step, you will initialize the OrgChart from the `<div>` element.
 
 ## 3. Specify the Data Source
 
-Here, you will specify a [`dataSource`](/api/javascript/ui/orgchart/configuration/datasource) instance.
+Here, you will specify a [`dataSource`](/api/ui/orgchart/configuration/datasource) instance.
 
 ```dojo
     <div id="orgchart"></div>
@@ -121,7 +121,7 @@ The OrgChart allows you to specify colors for the displayed cards. In this step,
 
 ## See Also 
 
-* [JavaScript API Reference of the OrgChart](/api/javascript/ui/orgchart)
+* [JavaScript API Reference of the OrgChart](/api/ui/orgchart)
 * [Knowledge Base Section](/knowledge-base)
 
 

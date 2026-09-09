@@ -40,4 +40,4 @@ Turn off the Opera Dragonfly debugging tool because it interferes with the uploa
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

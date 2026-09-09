@@ -28,7 +28,7 @@ How can I relocate the expand column of the Grid?
 
 ## Solution
 
-Within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event, rearrange the columns by using jQuery.
+Within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event, rearrange the columns by using jQuery.
 
 ```dojo
   <style>

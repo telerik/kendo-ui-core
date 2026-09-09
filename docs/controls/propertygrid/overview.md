@@ -28,6 +28,6 @@ The Kendo UI for jQuery PropertyGrid is a user interface component that provides
 ## See Also
 
 * [Overview of the PropertyGrid (Demo)](https://demos.telerik.com/kendo-ui/propertygrid/index)
-* [JavaScript API Reference of the PropertyGrid](/api/javascript/ui/propertygrid)
+* [JavaScript API Reference of the PropertyGrid](/api/ui/propertygrid)
 
 

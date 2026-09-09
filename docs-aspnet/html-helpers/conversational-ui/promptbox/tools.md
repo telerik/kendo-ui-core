@@ -157,4 +157,4 @@ You can restrict the allowed file types for attachments by setting the `AllowedE
 {% if site.core %}
 * [Server-Side API of the PromptBox TagHelper](/api/taghelpers/promptbox)
 {% endif %}
-* [JavaScript API Reference of the PromptBox](/api/javascript/ui/promptbox)
+* [JavaScript API Reference of the PromptBox](/api/ui/promptbox)

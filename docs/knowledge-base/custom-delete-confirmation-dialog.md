@@ -143,4 +143,4 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

@@ -37,7 +37,7 @@ To enable PDF export:
 
 > Starting with v2023.3.1115 the Pako library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
 
-To initiate PDF export, press the **Toolbar** button or use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) and call the [`saveAsPdf`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveaspdf) method.
+To initiate PDF export, press the **Toolbar** button or use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/ui/grid) and call the [`saveAsPdf`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/saveaspdf) method.
 
 > * By default, the Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
 > * The Grid uses the current column order, visibility, and dimensions to generate the PDF file.
@@ -421,7 +421,7 @@ The following example demonstrates how to handle custom fonts.
 
 ## Exclude Column From Exporting
 
-In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
+In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.exportable) setting.
 
 ```HtmlHelper
 columns.Bound(p => p.ProductName).Exportable(false);

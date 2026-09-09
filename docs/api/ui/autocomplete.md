@@ -8,7 +8,7 @@ component: autocomplete
 
 # kendo.ui.AutoComplete
 
-Represents the Kendo UI AutoComplete widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI AutoComplete widget. Inherits from [Widget](/api/ui/widget).
 
 > **Important:** The Kendo UI AutoComplete should be created from an *input* HTML element.
 
@@ -162,7 +162,7 @@ How do I control the speed at which the AutoComplete dropdown closes? Adjust the
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -233,7 +233,7 @@ How to adjust the animation duration of an autocomplete dropdown? Set or adjust 
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -279,12 +279,12 @@ How do I prevent label wrapping in Kendo UI Autocomplete dropdown? Control autom
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the widget which is used to display suggestions for the current value. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source of the widget which is used to display suggestions for the current value. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -408,7 +408,7 @@ How can I disable AutoComplete suggestions on my Kendo UI for jQuery autocomplet
 
 ### enforceMinLength `Boolean` *(default: false)*
 
-If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/javascript/ui/autocomplete#configuration-minLength).
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/ui/autocomplete#configuration-minLength).
 
 
 <div class="meta-api-description">
@@ -484,7 +484,7 @@ How do I configure AutoComplete to only show suggestions that start with the use
 
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
 
 <div class="meta-api-description">
@@ -512,7 +512,7 @@ How do I customize the fixed group headers in Kendo UI Autocomplete dropdowns? C
 
 ### footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+The [template](/api/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
 
 
 <div class="meta-api-description">
@@ -647,7 +647,7 @@ The function context (available through the keyword `this`) will be set to the w
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
-> **Important:** The [value](/api/javascript/ui/autocomplete/methods/value) method **does not trigger** the `focusout` event of the input.
+> **Important:** The [value](/api/ui/autocomplete/methods/value) method **does not trigger** the `focusout` event of the input.
 This can affect the floating label functionality.
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#autocomplete").data("kendoAutoComplete").label.floatingLabel.refresh();`
 
@@ -675,7 +675,7 @@ How to enable floating labels in Kendo UI AutoComplete? Enable floating label be
 
 ### groupTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
 
 
 <div class="meta-api-description">
@@ -849,7 +849,7 @@ How do I customize the "no data" message in a Kendo UI AutoComplete dropdown? Cu
 
 The minimum number of characters the user must type before a search is performed. Set to higher value than `1` if the search could match a lot of items.
 
-> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/javascript/ui/autocomplete/events/filtering) event for more details.
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/ui/autocomplete/events/filtering) event for more details.
 
 
 <div class="meta-api-description">
@@ -871,7 +871,7 @@ What is the minimum number of characters needed to trigger autocomplete suggesti
 
 ### noDataTemplate `String|Function|Boolean` *(default: true)*
 
-The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The [template](/api/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
 > **Important** The popup will open when 'noDataTemplate' is defined
@@ -925,7 +925,7 @@ The Kendo UI AutoComplete widget could also use the value of the `placeholder` H
 ### popup `Object`
 
 The options that will be used for the popup initialization. For more details about the available options
-refer to [Popup](/api/javascript/ui/popup) documentation.
+refer to [Popup](/api/ui/popup) documentation.
 
 
 <div class="meta-api-description">
@@ -1002,7 +1002,7 @@ How to set an icon as a prefix in Kendo UI AutoComplete input field? Configure o
 
 ### prefixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+The [template](/api/kendo/methods/template) for the prefix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -1203,7 +1203,7 @@ How do I customize the suffix icon in an autocomplete input? Configure or custom
 
 ### suffixOptions.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+The [template](/api/kendo/methods/template) for the suffix adornment of the component.
 
 
 <div class="meta-api-description">
@@ -1302,7 +1302,7 @@ How do I customize the header of a Kendo UI Autocomplete dropdown? Configure a c
 
 ### template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the suggestions. By default the widget displays only the text of the suggestion (configured via `dataTextField`).
+The [template](/api/kendo/methods/template) used to render the suggestions. By default the widget displays only the text of the suggestion (configured via `dataTextField`).
 
 
 <div class="meta-api-description">
@@ -1654,11 +1654,11 @@ How do I map virtual item indexes to server-side identifiers in Kendo UI Autocom
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/autocomplete/configuration/datasource) option.
+The [data source](/api/data/datasource) of the widget. Configured via the [dataSource](/api/ui/autocomplete/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/autocomplete/methods/setdatasource) method instead.
+> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/ui/autocomplete/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -1878,7 +1878,7 @@ How can I programmatically set focus on an autocomplete input field? Activate ke
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view) (e.g. the ones that match the user's last filtering input).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/data/datasource/methods/view) (e.g. the ones that match the user's last filtering input).
 
 
 <div class="meta-api-description">
@@ -1990,9 +1990,9 @@ Selects the item provided as an argument and updates the value of the widget.
 > **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 
-> **Important:** This method **does not trigger** [change](/api/javascript/ui/autocomplete/events/change) event.
+> **Important:** This method **does not trigger** [change](/api/ui/autocomplete/events/change) event.
 This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
     <input id="autocomplete" />
     <script>
@@ -2088,9 +2088,9 @@ The value to set.
 
 Gets or sets the value of the widget.
 
-> **Important:** This method **does not trigger** [change](/api/javascript/ui/autocomplete/events/change) event.
+> **Important:** This method **does not trigger** [change](/api/ui/autocomplete/events/change) event.
 This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
     <input id="autocomplete" />
     <script>
@@ -2284,7 +2284,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource/configuration/serverfiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/data/datasource/configuration/serverfiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 

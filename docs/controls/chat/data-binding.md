@@ -15,7 +15,7 @@ The Chat component is ideal for building customer support interfaces, AI-powered
 
 ## Standard Data Binding
 
-The Chat component binds to data through the [`dataSource`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/datasource) configuration option, which accepts an array of message objects or a Kendo UI DataSource instance. Each message object contains properties that define the message content, author information, timestamp, and visual presentation.
+The Chat component binds to data through the [`dataSource`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/datasource) configuration option, which accepts an array of message objects or a Kendo UI DataSource instance. Each message object contains properties that define the message content, author information, timestamp, and visual presentation.
 
 The standard message format includes essential properties for displaying chat conversations:
 
@@ -53,7 +53,7 @@ $("#chat").kendoChat({
 
 ## Render Long Conversations with Endless Scrolling
 
-Use the [`scrollMode`](/api/javascript/ui/chat#configuration-scrollMode) option together with a `kendo.data.DataSource` that defines the batch size through `pageSize`. When `scrollMode` is set to `"endless"`, the Chat renders only the latest `dataSource.pageSize()` messages on initial load. Scrolling near the top loads older batches, and scrolling near the bottom while a historical batch is active loads newer batches. The floating scroll-to-bottom button returns the view to the latest batch.
+Use the [`scrollMode`](/api/ui/chat#configuration-scrollMode) option together with a `kendo.data.DataSource` that defines the batch size through `pageSize`. When `scrollMode` is set to `"endless"`, the Chat renders only the latest `dataSource.pageSize()` messages on initial load. Scrolling near the top loads older batches, and scrolling near the bottom while a historical batch is active loads newer batches. The floating scroll-to-bottom button returns the view to the latest batch.
 
 With local data, the Chat can still render the batch that contains a pinned or replied-to message when that message falls outside the current batch. With server-paged data sources, off-batch reference navigation depends on the final remote endless contract described after the example.
 
@@ -105,8 +105,8 @@ The Chat also supports endless scrolling with a server-paged Kendo UI DataSource
 - Older and newer history requests send explicit `startIndex`, `endIndex`, and `pageSize` values. `startIndex` is zero-based and inclusive, `endIndex` is exclusive, and the latest window is the one where `endIndex === total`.
 - Jump requests send `targetMessageId` and `pageSize`, and the server chooses the returned frame.
 - Default DataSource paging parameters such as `page`, `skip`, and `take` may still appear on the wire and must be ignored by the endless endpoint.
-- Provide [`pinnedMessages`](/api/javascript/ui/chat#configuration-pinnedMessages) to render pinned banners for targets that are outside the current remote window. The last item in the array wins for the banner, and partial items are allowed when they contain enough data to identify the target and render the banner.
-- Provide [`referenceResolver`](/api/javascript/ui/chat#configuration-referenceResolver) for off-batch reply previews. The resolver receives `{ value, success, error }` and must return enough data to identify the target and render the reply preview.
+- Provide [`pinnedMessages`](/api/ui/chat#configuration-pinnedMessages) to render pinned banners for targets that are outside the current remote window. The last item in the array wins for the banner, and partial items are allowed when they contain enough data to identify the target and render the banner.
+- Provide [`referenceResolver`](/api/ui/chat#configuration-referenceResolver) for off-batch reply previews. The resolver receives `{ value, success, error }` and must return enough data to identify the target and render the reply preview.
 - Remote endless mode does not support `autoBind: false`, manual `dataSource.read()`, or manual `dataSource.fetch()`.
 
 > Warning: Every remote endless response must return `total`, `startIndex`, and `endIndex`, and the returned item count must equal `endIndex - startIndex`.
@@ -164,10 +164,10 @@ $("#chat").kendoChat({
 ## See Also
 
 * [Data Binding Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/data-binding)
-* [Chat API Reference: scrollMode](/api/javascript/ui/chat#configuration-scrollMode)
-* [Chat API Reference: pageSize](/api/javascript/ui/chat#configuration-pageSize)
-* [Chat API Reference: pinnedMessages](/api/javascript/ui/chat#configuration-pinnedMessages)
-* [Chat API Reference: referenceResolver](/api/javascript/ui/chat#configuration-referenceResolver)
-* [Chat API Reference: referencedMessageClick](/api/javascript/ui/chat#events-referencedMessageClick)
-* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
+* [Chat API Reference: scrollMode](/api/ui/chat#configuration-scrollMode)
+* [Chat API Reference: pageSize](/api/ui/chat#configuration-pageSize)
+* [Chat API Reference: pinnedMessages](/api/ui/chat#configuration-pinnedMessages)
+* [Chat API Reference: referenceResolver](/api/ui/chat#configuration-referenceResolver)
+* [Chat API Reference: referencedMessageClick](/api/ui/chat#events-referencedMessageClick)
+* [JavaScript API Reference of the Chat](/api/ui/chat)
 * [Chat Overview]({% slug overview_kendoui_chat_widget %})

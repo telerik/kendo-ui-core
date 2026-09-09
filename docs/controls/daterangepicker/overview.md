@@ -37,4 +37,4 @@ It allows the user to select a date range from a calendar or through a direct in
 
 * [Basic Usage of the DateRangePicker (Demo)](https://demos.telerik.com/kendo-ui/daterangepicker/index)
 * [Using the API of the DateRangePicker (Demo)](https://demos.telerik.com/kendo-ui/daterangepicker/api)
-* [JavaScript API Reference of the DateRangePicker](/api/javascript/ui/daterangepicker)
+* [JavaScript API Reference of the DateRangePicker](/api/ui/daterangepicker)

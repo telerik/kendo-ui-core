@@ -124,4 +124,4 @@ The following example demonstrates how to subscribe to events by using a templat
 
 * [Using the API of the Splitter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitter/api)
 * [Splitter Server-Side API](/api/splitter)
-* [Splitter Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitter)
+* [Splitter Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/splitter)

@@ -29,7 +29,7 @@ Then, in the popup window, you can select or drag in a file from the file system
 
 ## Configuring the Spreadsheet to Initially Display an Image
 
-1. To properly configure the Spreadsheet to display an image on one its sheets, add a definition for the image to the Spreadsheet [`images`](/api/javascript/ui/spreadsheet/configuration/images) field. In the `images` object each image should be specified with unique key (property name) holding as value the image URL. The image URLs can be either [data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs), in which case the images are fully contained in the definition, or can be external URLs.
+1. To properly configure the Spreadsheet to display an image on one its sheets, add a definition for the image to the Spreadsheet [`images`](/api/ui/spreadsheet/configuration/images) field. In the `images` object each image should be specified with unique key (property name) holding as value the image URL. The image URLs can be either [data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs), in which case the images are fully contained in the definition, or can be external URLs.
 
     ```
         images: {
@@ -37,7 +37,7 @@ Then, in the popup window, you can select or drag in a file from the file system
         }
     ```
 
-1. Reference that image and place it accordingly using the [`drawings`](/api/javascript/ui/spreadsheet/configuration/sheets.drawings) array of the respective sheet.
+1. Reference that image and place it accordingly using the [`drawings`](/api/ui/spreadsheet/configuration/sheets.drawings) array of the respective sheet.
 
   The drawing definition has to contain:
 
@@ -75,7 +75,7 @@ The following example demonstrates how to configure the Spreadsheet to display a
 The Spreadsheet Sheet API exposes a method that allows you to programmatically add an image to the Spreadsheet and place it on a sheet.
 
 1. Create a new `kendo.spreadsheet.Drawing` object. The configuration of the `Drawing` object is the same as the one described in the example from the previous section.
-1. Pass the `Drawing` to the [`sheet.addDrawing()`](/api/javascript/spreadsheet/sheet/methods/adddrawing).
+1. Pass the `Drawing` to the [`sheet.addDrawing()`](/api/spreadsheet/sheet/methods/adddrawing).
 
     > When you use the export functionality of the Spreadsheet together with images, note the following:
     > * Images are supported only for client-side import and export. When you engage server-side import or export, no images will be loaded or exported.
@@ -119,4 +119,4 @@ The Spreadsheet Sheet API exposes a method that allows you to programmatically a
 ## See Also
 
 * [Adding Images to the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/images)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/ui/spreadsheet)

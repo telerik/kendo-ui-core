@@ -31,7 +31,7 @@ How can I navigate to a new browser tab when a user clicks on a Kendo UI Menu it
 
 To open a new tab with a specific URL when a user clicks on a Menu item, use either of the following approaches:
 
-* Utilize the [`select` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu/events/select) to determine if the item has a `target` attribute. If it does, use [`window.open`](https://developer.mozilla.org/en-US/docs/Web/API/Window/open) method.
+* Utilize the [`select` event](https://docs.telerik.com/kendo-ui/api/ui/menu/events/select) to determine if the item has a `target` attribute. If it does, use [`window.open`](https://developer.mozilla.org/en-US/docs/Web/API/Window/open) method.
 
     ```javascript
         select: function(e){
@@ -83,7 +83,7 @@ To open a new tab with a specific URL when a user clicks on a Menu item, use eit
         </script>
     ```
 
-* During the [`open` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu/events/open), determine if the `target` attribute was set to `"_blank"` for the menu item. If not, find the `k-link` class and set the target.
+* During the [`open` event](https://docs.telerik.com/kendo-ui/api/ui/menu/events/open), determine if the `target` attribute was set to `"_blank"` for the menu item. If not, find the `k-link` class and set the target.
 
     ```javascript
           open: function(e) {
@@ -127,5 +127,5 @@ To open a new tab with a specific URL when a user clicks on a Menu item, use eit
 
 ## See Also
 
-* [API Reference of the select Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu/events/select)
+* [API Reference of the select Event](https://docs.telerik.com/kendo-ui/api/ui/menu/events/select)
 * [Official MDN Web Documentation of Window.open()](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)

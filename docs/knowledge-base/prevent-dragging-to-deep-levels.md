@@ -79,4 +79,4 @@ The following example demonstrates how to handle the `drag` event to achieve thi
 
 * [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
 * [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
-* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)
+* [JavaScript API Reference of the TreeView](/api/ui/treeview)

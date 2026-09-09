@@ -66,7 +66,7 @@ In this step, you'll initialize the ChartWizard component from the parent `<div>
 
 ## 3. Bind the ChartWizard Component to Its Data
 
-The array containing the [`data`](/api/javascript/ui/chartwizard/configuration/datasource) consists of single or multiple arrays of Objects, which have the `field` and `value` properties.
+The array containing the [`data`](/api/ui/chartwizard/configuration/datasource) consists of single or multiple arrays of Objects, which have the `field` and `value` properties.
 
 ```javascript
     $("#chartwizard").kendoChartWizard({            
@@ -109,7 +109,7 @@ You can configure the paper size as well as the size of the exported image.
 
 ## 5. Configure the Window Options
 
-You can use the configuration options of the nested [Window](/api/javascript/ui/window) component to customize the appearance of the ChartWizard window.
+You can use the configuration options of the nested [Window](/api/ui/window) component to customize the appearance of the ChartWizard window.
 
 ```javascript
         $("#chartwizard").kendoChartWizard({
@@ -145,7 +145,7 @@ You can use the configuration options of the nested [Window](/api/javascript/ui/
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery ChartWizard](/api/javascript/ui/chartwizard)
+* [JavaScript API Reference of the jQuery ChartWizard](/api/ui/chartwizard)
 * [Knowledge Base Section](/knowledge-base)
 
 

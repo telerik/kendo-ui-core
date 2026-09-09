@@ -21,16 +21,16 @@ Server filtering is based on the filtering capability and configuration of the D
 
 To configure the server filtering feature in the DropDownList:
 
-1. Configure the [`serverFiltering`](/api/javascript/data/datasource/configuration/serverfiltering) option of the DataSource component.
-1. Define the [`filter`](/api/javascript/ui/dropdownlist/configuration/filter) property of the DropDownList.
+1. Configure the [`serverFiltering`](/api/data/datasource/configuration/serverfiltering) option of the DataSource component.
+1. Define the [`filter`](/api/ui/dropdownlist/configuration/filter) property of the DropDownList.
 
 For a runnable example, refer to the [demo on server filtering in the DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/serverfiltering).
 
 ## Advantages
 
-Displaying a subset of the whole data is useful to apply for large datasets which contain thousands of records. In such cases, define a minimum filter length by using the [`minLength`](/api/javascript/ui/dropdownlist/configuration/minlength) option. For example, if you set `minLength` to `3`, the DropDownList will not start filtering the dataset until the user enters at least three characters.
+Displaying a subset of the whole data is useful to apply for large datasets which contain thousands of records. In such cases, define a minimum filter length by using the [`minLength`](/api/ui/dropdownlist/configuration/minlength) option. For example, if you set `minLength` to `3`, the DropDownList will not start filtering the dataset until the user enters at least three characters.
 
-Server filtering also enables you to bind the DropDownList to just one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text which boosts the loading time of the widget. To apply this approach, send the selected value to the server and return only the matching data item. Use the [`data`](/api/javascript/data/datasource/configuration/transport.read#transportreaddata) callback of the DataSource.
+Server filtering also enables you to bind the DropDownList to just one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text which boosts the loading time of the widget. To apply this approach, send the selected value to the server and return only the matching data item. Use the [`data`](/api/data/datasource/configuration/transport.read#transportreaddata) callback of the DataSource.
 
 ```javascript
 data: function() {
@@ -44,4 +44,4 @@ data: function() {
 ## See Also
 
 * [Server Filtering by the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/serverfiltering)
-* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/ui/dropdownlist)

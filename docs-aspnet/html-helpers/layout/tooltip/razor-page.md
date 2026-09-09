@@ -103,7 +103,7 @@ public class TooltipIndexModel : PageModel
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Tooltip](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/tooltip)
+* [Client-Side API of the Tooltip](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/tooltip)
 * [Server-Side HtmlHelper API of the Tooltip](/api/tooltip)
 * [Server-Side TagHelper API of the Tooltip](/api/taghelpers/tooltip)
 * [Knowledge Base Section](/knowledge-base)

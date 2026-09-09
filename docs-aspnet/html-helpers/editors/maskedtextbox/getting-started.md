@@ -161,7 +161,7 @@ You can reference the MaskedTextBox instances that you have created and build on
     </script>
     ```
 
-1. Use the [MaskedTextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox#methods) to control the behavior of the widget. In this example, you will use the `value` method to select an item.
+1. Use the [MaskedTextBox client-side API](https://docs.telerik.com/kendo-ui/api/ui/maskedtextbox#methods) to control the behavior of the widget. In this example, you will use the `value` method to select an item.
 
     ```JS script
     <script>
@@ -189,6 +189,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the MaskedTextBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/api)
-* [Client-Side API of the MaskedTextBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox)
+* [Client-Side API of the MaskedTextBox](https://docs.telerik.com/kendo-ui/api/ui/maskedtextbox)
 * [Server-Side API of the MaskedTextBox](/api/maskedtextbox)
 * [Knowledge Base Section](/knowledge-base)

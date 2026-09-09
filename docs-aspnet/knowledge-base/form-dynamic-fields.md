@@ -36,7 +36,7 @@ This example demonstrates how to add/remove fields dynamically in the "Phones" F
 
 1. Create a 'Add Phone" button and insert it in the Form when the page is loaded (function "insertAddPhoneButton()").
 1. Append a button to each "Phone" field to make it removable (function "insertRemovePhoneButton()"). 
-1. Handle the "click" event of the "Add Phone" button to insert a new Form field. Update the Form with the new item and the Form data by using the [`setOptions()` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/form/methods/setoptions).
+1. Handle the "click" event of the "Add Phone" button to insert a new Form field. Update the Form with the new item and the Form data by using the [`setOptions()` method](https://docs.telerik.com/kendo-ui/api/ui/form/methods/setoptions).
 1. Handle the "click" event of the remove button to remove the specified "Phone" input.
 
 
@@ -203,7 +203,7 @@ For a runnable example based on the code above, refer to the [REPL example on dy
 ## See Also
 
 * [Telerik REPL: Dynamically Adding and Removing Form Items](https://netcorerepl.telerik.com/cGaqQMPU08cIofKs54)
-* [Client-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)
+* [Client-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/form)
 * [Server-Side API Reference of the Form for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/form)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

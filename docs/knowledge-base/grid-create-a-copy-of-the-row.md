@@ -35,6 +35,6 @@ How can I create a copy of a Grid row when the user clicks a button?
 
 For more information on how to implement the suggested approach, refer to the following examples:
 * [https://dojo.telerik.com/Oveja](https://dojo.telerik.com/Oveja)  
-* [https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/addrow](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/addrow)  
-* [https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/closecell](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/closecell)  
-* [https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command.click](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command.click)  
+* [https://docs.telerik.com/kendo-ui/api/ui/grid/methods/addrow](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/addrow)  
+* [https://docs.telerik.com/kendo-ui/api/ui/grid/methods/closecell](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/closecell)  
+* [https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.command.click](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.command.click)  

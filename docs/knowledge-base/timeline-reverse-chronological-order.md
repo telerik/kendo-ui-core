@@ -28,7 +28,7 @@ How can I display the Timeline events in reverse chronological order?
 
 ## Solution
 
-Utilize the [`sort`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/sort) configuration of the DataSource and sort the date field in descending order.
+Utilize the [`sort`](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/sort) configuration of the DataSource and sort the date field in descending order.
 
 ```
     sort: { field: "date", dir: "desc" }

@@ -245,12 +245,12 @@ public ActionResult Remove(string[] fileNames)
 
 The `save` handler has to accept `POST` requests. The requests will contain one or more files with the same name as the `input`&mdash;for example, `"files[]"` in the previous `Controller` example. The handler is expected to return any of the following responses:
 * An empty response to signify success.
-* A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the [`success`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/success) event handler, again to signify success.
+* A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the [`success`](https://docs.telerik.com/kendo-ui/api/ui/upload/events/success) event handler, again to signify success.
 * Any other response to signify failure.
 
 The `remove` handler has to accept `POST` requests. The requests will contain one or more text fields with the `"fileNames[]"` name. The handler is expected to return any of the following responses:
 * An empty response to signify success.
-* A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the [`success`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/success) event handler, again to signify success.
+* A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the [`success`](https://docs.telerik.com/kendo-ui/api/ui/upload/events/success) event handler, again to signify success.
 * Any other response to signify failure.
 
 ### Asynchronous Mode Fallback

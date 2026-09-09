@@ -101,4 +101,4 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 * [Basic Usage of the RadioButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiobutton)
 * [PDFViewer Server-Side API](/api/radiobutton)
-* [PDFViewer Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/radiobutton)
+* [PDFViewer Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/radiobutton)

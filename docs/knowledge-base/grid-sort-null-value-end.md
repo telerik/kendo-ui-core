@@ -30,7 +30,7 @@ components: ["grid"]
 How do I show the null values at the end of the Grid when I sort it in any order?
 
 ## Solution
-Use the following custom function in the [columns.sortable.compare](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.sortable#columnssortablecompare) configuration.
+Use the following custom function in the [columns.sortable.compare](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.sortable#columnssortablecompare) configuration.
 
 ```javascript
   columns: [{
@@ -111,4 +111,4 @@ The following example initializes a Grid with a sortable Name column that uses t
 ```
 ## See Also
 
-- [columns.sortable.compare](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.sortable#columnssortablecompare) configuration
+- [columns.sortable.compare](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.sortable#columnssortablecompare) configuration

@@ -17,7 +17,7 @@ The prefix and suffix input adornments are elements positioned before and after 
 
 The prefix input adornment is located before the TextArea input field. It provides additional context to guide users when entering specific data, such as icons for currencies or unit indicators.
 
-To add a prefix before your TextArea input, use the [`prefixOptions`](/api/javascript/ui/textarea/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
+To add a prefix before your TextArea input, use the [`prefixOptions`](/api/ui/textarea/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
 
 * `Icon`&mdash;Inserts an icon before the TextArea element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content before the TextArea element.
@@ -42,7 +42,7 @@ The following example demonstrates how to add two icons before the TextArea elem
 
 The suffix input adornment is located after the TextArea input field. Usually, it offers direct functionality related to the entered data, such as toggles for password visibility, formatting options, or the ability to clear the input.
 
-To add a suffix after your TextArea input, use the [`suffixOptions`](/api/javascript/ui/textarea/configuration/suffixoptions). `suffixOptions` provides the following options:
+To add a suffix after your TextArea input, use the [`suffixOptions`](/api/ui/textarea/configuration/suffixoptions). `suffixOptions` provides the following options:
 
 * `Icon`&mdash;Adds an icon after the TextArea element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content after the TextArea element.
@@ -66,4 +66,4 @@ The following example demonstrates how to add an icon after the TextArea element
 ## See Also
 
 * [TextArea Prefix and Suffix (Demo)](https://demos.telerik.com/kendo-ui/textarea/prefix-suffix)
-* [JavaScript API Reference of the TextArea](/api/javascript/ui/textarea)
+* [JavaScript API Reference of the TextArea](/api/ui/textarea)

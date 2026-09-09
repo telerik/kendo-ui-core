@@ -25,7 +25,7 @@ How can I manually alter the headers of the columns in a Spreadsheet which is po
 
 ## Solution
 
-Handle the first [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/requestend) event of the DataSource.
+Handle the first [`requestEnd`](https://docs.telerik.com/kendo-ui/api/data/datasource/events/requestend) event of the DataSource.
 
 ```dojo
 <div id="spreadsheet" style="width: 100%"></div>
@@ -124,5 +124,5 @@ Handle the first [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript
 
 ## See Also
 
-* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-* [API Reference of the DataSource](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
+* [API Reference of the DataSource](https://docs.telerik.com/kendo-ui/api/data/datasource)

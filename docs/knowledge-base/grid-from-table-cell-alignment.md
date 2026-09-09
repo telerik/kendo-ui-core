@@ -217,6 +217,6 @@ To achieve the desired scenario, use the CSS [`:nth-child selectors`](https://ww
 
 ## See Also
 
-* [Kendo UI for jQuery Grid API Reference](/api/javascript/ui/grid)
+* [Kendo UI for jQuery Grid API Reference](/api/ui/grid)
 * [Kendo UI for jQuery Grid Initialization from a Table Demo](https://demos.telerik.com/kendo-ui/grid/from-table)
 * [Common Issues in Kendo UI for jQuery]({% slug troubleshooting_common_issues_kendoui %})

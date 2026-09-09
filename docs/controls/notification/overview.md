@@ -31,4 +31,4 @@ However, if the Notification element is intended to contain static (non-popup) n
 * [Getting Started with the Kendo UI Notification for jQuery]({% slug getting_started_kendoui_notification_component %})
 * [Basic Usage of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/index)
 * [Using the API of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/api)
-* [JavaScript API Reference of the Notification](/api/javascript/ui/notification)
+* [JavaScript API Reference of the Notification](/api/ui/notification)

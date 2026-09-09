@@ -35,9 +35,9 @@ How can I export multiple Grids to the same Excel file?
 The example below relies on the following key steps:
 
 1. Create an external button to export the data when it is clicked.
-1. Use the client-side [`saveAsExcel` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveasexcel) to trigger the data export of each Grid.
+1. Use the client-side [`saveAsExcel` method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/saveasexcel) to trigger the data export of each Grid.
 1. Handle the [`ExcelExport`](/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event of the two Grids and prevent their default action.
-1. Create a new Workbook by using the sheets of the Grids Workbooks and save it through the [`kendo.saveAs()` method](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/saveas).
+1. Create a new Workbook by using the sheets of the Grids Workbooks and save it through the [`kendo.saveAs()` method](https://docs.telerik.com/kendo-ui/api/kendo/methods/saveas).
 
 ```Razor Index.cshtml
     //Export to Excel Button
@@ -174,7 +174,7 @@ For a runnable example based on the code above, refer to the REPL project on [ex
 
 * [Telerik REPL: Exporting Multiple Grids to Excel](https://netcorerepl.telerik.com/wcYKwCPR52YDsbfP56)
 * [Exporting to Excel (Overview)](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/export/excel-export)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -460,11 +460,11 @@ The Grid provides built-in helper methods that simplify working with AI service 
     </thead>
     <tbody>
         <tr>
-            <td><a href="https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/methods/getairequest"><code>getAIRequest()</code></a></td>
+            <td><a href="https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/methods/getairequest"><code>getAIRequest()</code></a></td>
             <td>Generates the request body for your AI service based on the user's prompt. Returns a <a href="slug:smart_ext_core_grid#request-structure"><code>GridAIRequest</code></a> object containing the <code>role</code> (defaults to <code>"user"</code>), <code>contents</code> array with the prompt text, and <code>columns</code> array with Grid column information.</td>
         </tr>
         <tr>
-            <td><a href="https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/methods/handleairesponse"><code>handleAIResponse()</code></a></td>
+            <td><a href="https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/methods/handleairesponse"><code>handleAIResponse()</code></a></td>
             <td>Processes the <a href="slug:smart_ext_core_grid#response-structure"><code>GridAIResponse</code></a> returned by your AI service and automatically applies all supported Grid operations including data operations, column management, selection, highlighting, and export.</td>
         </tr>
     </tbody>
@@ -480,20 +480,20 @@ The AI Assistant tools provide events for enhanced control over the AI interacti
 <TabStrip>
 <TabStripTab title="AI Smart Box">
 
-- [`AiAssistantPromptRequest`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/smartbox.aiassistantpromptrequest)&mdash;Emits before the SmartBox tool sends the AI request in AI Assistant mode.
-- [`AiAssistantCancelRequest`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/smartbox.aiassistantcancelrequest)&mdash;Emits when the user clicks the cancel button in AI Assistant mode.
-- [`AiAssistantResponseSuccess`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/smartbox.aiassistantresponsesuccess)&mdash;Emits when the SmartBox tool completes the AI request successfully.
-- [`AiAssistantResponseError`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/smartbox.aiassistantresponseerror)&mdash;Emits when the SmartBox tool completes the AI request with an error.
-- [`Open`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/smartbox.open)&mdash;Emits when the SmartBox tool opens.
-- [`Close`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/smartbox.close)&mdash;Emits when the SmartBox tool closes.
+- [`AiAssistantPromptRequest`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/smartbox.aiassistantpromptrequest)&mdash;Emits before the SmartBox tool sends the AI request in AI Assistant mode.
+- [`AiAssistantCancelRequest`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/smartbox.aiassistantcancelrequest)&mdash;Emits when the user clicks the cancel button in AI Assistant mode.
+- [`AiAssistantResponseSuccess`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/smartbox.aiassistantresponsesuccess)&mdash;Emits when the SmartBox tool completes the AI request successfully.
+- [`AiAssistantResponseError`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/smartbox.aiassistantresponseerror)&mdash;Emits when the SmartBox tool completes the AI request with an error.
+- [`Open`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/smartbox.open)&mdash;Emits when the SmartBox tool opens.
+- [`Close`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/smartbox.close)&mdash;Emits when the SmartBox tool closes.
 
 </TabStripTab>
 <TabStripTab title="AI Toolbar Assistant">
 
 - [`PromptRequest`](/api/kendo.mvc.ui.fluent/aiprompteventbuilder#promptrequestsystemstring)&mdash;Triggered when the prompt view Generate output button is clicked.
 - [`PromptResponse`](/api/kendo.mvc.ui.fluent/aiprompteventbuilder#promptresponsesystemfunc)&mdash;Triggered when the AI service response is received.
-- [`PromptRequestCancel`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/smartbox.aiassistantresponsesuccess)&mdash;Emits when a prompt request is cancelled.
-- [`CommandExecute`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/smartbox.aiassistantresponseerror)&mdash;Emits when a command item from the Commands view is clicked.
+- [`PromptRequestCancel`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/smartbox.aiassistantresponsesuccess)&mdash;Emits when a prompt request is cancelled.
+- [`CommandExecute`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/smartbox.aiassistantresponseerror)&mdash;Emits when a command item from the Commands view is clicked.
 
 </TabStripTab>
 </TabStrip>

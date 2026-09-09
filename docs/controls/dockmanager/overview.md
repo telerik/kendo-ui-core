@@ -22,7 +22,7 @@ The Dock Manager is a UI component that replicates the docks, along with their b
 
 * [Getting Started with the Kendo UI DockManager for jQuery]({% slug getting_started_kendoui_dockmanager_component %})
 * [Overview of the DockManager (Demo)](https://demos.telerik.com/kendo-ui/dockmanager/index)
-* [JavaScript API Reference of the DockManager](/api/javascript/ui/dockmanager)
+* [JavaScript API Reference of the DockManager](/api/ui/dockmanager)
 
 ## See Also
 

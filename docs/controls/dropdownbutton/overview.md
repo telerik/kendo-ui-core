@@ -33,4 +33,4 @@ The Kendo UI for jQuery DropDownButton widget combines a button with a drop-down
 * [Using the Basic Events of the DropDownButton (Demo)](https://demos.telerik.com/kendo-ui/dropdownbutton/events)
 * [Binding the DropDownButton over MVVM (Demo)](https://demos.telerik.com/kendo-ui/dropdownbutton/mvvm)
 * [Applying the DropDownButton API (Demo)](https://demos.telerik.com/kendo-ui/dropdownbutton/api)
-* [JavaScript API Reference of the DropDownButton](/api/javascript/ui/dropdownbutton)
+* [JavaScript API Reference of the DropDownButton](/api/ui/dropdownbutton)

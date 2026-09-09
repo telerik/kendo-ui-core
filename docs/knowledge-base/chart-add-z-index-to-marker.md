@@ -31,7 +31,7 @@ How can I change the default stacking order of series in Chart?
 
 1. On dataBound, execute a JavaScript function for setting the options of the series.
 2. Iterate by series.
-3. Conditionally set the [`z-index`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.zindex) to the required series.
+3. Conditionally set the [`z-index`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.zindex) to the required series.
 
 ```dojo
 <div id="content" class="k-content">

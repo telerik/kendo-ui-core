@@ -57,4 +57,4 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 * [Using the API of the Dialog for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dialog/api)
 * [Button Server-Side API](/api/dialog)
-* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dialog)
+* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/dialog)

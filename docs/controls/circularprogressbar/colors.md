@@ -11,7 +11,7 @@ position: 3
 
 The CircularProgressBar allows you to specify an array of colors that will indicate specific ranges of the progress. For example, the CircularProgressBar will be red in the 0%-25% range; orange in the 25%-50% range; yellow in the 50%-75% range; green in the 75%-100% range.
 
-To configure the colors, use the [`colors`](/api/javascript/ui/circularprogressbar/configuration/colors) option.
+To configure the colors, use the [`colors`](/api/ui/circularprogressbar/configuration/colors) option.
 
 The following example showcases a CircularProgressBar that changes its colors based on the current value:
 
@@ -59,4 +59,4 @@ The following example showcases a CircularProgressBar that changes its colors ba
 ## See Also
 
 * [Colors in the CircularProgressBar (Demo)](https://demos.telerik.com/kendo-ui/circularprogressbar/colors) 
-* [JavaScript API Reference of the CircularProgressBar](/api/javascript/ui/circularprogressbar)
+* [JavaScript API Reference of the CircularProgressBar](/api/ui/circularprogressbar)

@@ -47,7 +47,7 @@ In this step, you will initialize the QRCode from the `<div>` element. All setti
 
 ## 3. Set the Value of the QRCode
 
-You can configure the initial value of the component by using the [`value`](/api/javascript/dataviz/ui/qrcode/configuration/value) option.
+You can configure the initial value of the component by using the [`value`](/api/dataviz/ui/qrcode/configuration/value) option.
 
 ```html
    <div id="qrcode"></div>
@@ -61,7 +61,7 @@ You can configure the initial value of the component by using the [`value`](/api
 
 ## 4. Set the Error Correction
 
-The QRCode provides you with an option to set [`error correction`](/api/javascript/dataviz/ui/qrcode/configuration/errorcorrection) level used to encode the value.
+The QRCode provides you with an option to set [`error correction`](/api/dataviz/ui/qrcode/configuration/errorcorrection) level used to encode the value.
 
 ```html
    <div id="qrcode"></div>
@@ -75,7 +75,7 @@ The QRCode provides you with an option to set [`error correction`](/api/javascri
 
 ## 5. Change the QRCode Colors
 
-You can customize the QRCode appearance by setting the [`color`](/api/javascript/dataviz/ui/qrcode/configuration/color) and [`background`](/api/javascript/dataviz/ui/qrcode/configuration/background) color option.
+You can customize the QRCode appearance by setting the [`color`](/api/dataviz/ui/qrcode/configuration/color) and [`background`](/api/dataviz/ui/qrcode/configuration/background) color option.
 
 ```html
    <div id="qrcode"></div>
@@ -96,7 +96,7 @@ You can customize the QRCode appearance by setting the [`color`](/api/javascript
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery QRCode](/api/javascript/dataviz/ui/qrcode)
+* [JavaScript API Reference of the jQuery QRCode](/api/dataviz/ui/qrcode)
 * [Knowledge Base Section](/knowledge-base)
 
 

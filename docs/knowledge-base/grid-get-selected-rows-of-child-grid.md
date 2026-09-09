@@ -29,7 +29,7 @@ How can I access the selected rows of a nested grid in my hierarchical Grid?
 ## Solution
 
 1. Add a unique `Id` to each child Grid.
-2. In the [`detailExpand`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event handler, save the `Id` of the expanded child Grid.
+2. In the [`detailExpand`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/detailexpand) event handler, save the `Id` of the expanded child Grid.
 3. Use the saved `Id` to access the child Grid.
 
 ```dojo

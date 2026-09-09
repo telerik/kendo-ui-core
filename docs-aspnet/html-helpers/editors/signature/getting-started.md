@@ -133,7 +133,7 @@ You can reference the Signature instances that you have created and build on top
     </script>
     ```
 
-1. Use the [Signature client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/signature#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the Signature.
+1. Use the [Signature client-side API](https://docs.telerik.com/kendo-ui/api/ui/signature#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the Signature.
 
     ```JS script
     <script>
@@ -160,6 +160,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Signature for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/signature/api)
-* [Client-Side API of the Signature](https://docs.telerik.com/kendo-ui/api/javascript/ui/signature)
+* [Client-Side API of the Signature](https://docs.telerik.com/kendo-ui/api/ui/signature)
 * [Server-Side API of the Signature](/api/signature)
 * [Knowledge Base Section](/knowledge-base)

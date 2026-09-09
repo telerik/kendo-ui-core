@@ -226,4 +226,4 @@ The following example demonstrates how the Loader can be used as a building bloc
 
 * [Integration of the Loader HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/loader/integration)
 * [Loader Server-Side API](/api/loader)
-* [Loader Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/loader)
+* [Loader Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/loader)

@@ -90,7 +90,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Window JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/ui/window)
 * [Add Close Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
 * [Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
 * [Initialize the Grid]({% slug initialize_thegrid_window_widget %})

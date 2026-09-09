@@ -32,9 +32,9 @@ I am using in-cell batch editing.  We would like to display a warning message if
 
 ## Solution
 
-You can use the Kendo UI Grid [`save`](/api/javascript/ui/grid/events/save) event and the event data that it reveals and then open the cell for editing with the [`editCell()`](/api/javascript/ui/grid/methods/editcell) method:
+You can use the Kendo UI Grid [`save`](/api/ui/grid/events/save) event and the event data that it reveals and then open the cell for editing with the [`editCell()`](/api/ui/grid/methods/editcell) method:
 
-- Using [`kendo.alert()`](/api/javascript/kendo/methods/alert)
+- Using [`kendo.alert()`](/api/kendo/methods/alert)
 
 ```
     save: function(e) {

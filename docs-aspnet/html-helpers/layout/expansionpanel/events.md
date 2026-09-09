@@ -79,4 +79,4 @@ The following example demonstrates how to subscribe to events by a template dele
 ## See Also
 
 * [ExpansionPanel Server-Side API for {{ site.framework}}](/api/expansionpanel)
-* [ExpansionPanel Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel)
+* [ExpansionPanel Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/expansionpanel)

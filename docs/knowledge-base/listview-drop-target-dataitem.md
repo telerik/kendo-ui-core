@@ -31,10 +31,10 @@ I have defined a ListView as the target of a drag-drop operation. I have found m
 
 We can use the `clientX` and `clientY` and see what is under the mouse. The only trouble is that at that moment in time, the draggable hint is under the mouse, so we need to hide it to reveal the ListView item target:
 
-1. Add a [`drop`](/api/javascript/ui/droptarget/events/drop) event handler in the DropTarget definition.
+1. Add a [`drop`](/api/ui/droptarget/events/drop) event handler in the DropTarget definition.
 1. Hide the draggable hint
 1. Get the element under the cursor
-1. Use the [`dataItem()`](/api/javascript/ui/listview/methods/dataitem) method to obtain the dataItem bound to the target item
+1. Use the [`dataItem()`](/api/ui/listview/methods/dataitem) method to obtain the dataItem bound to the target item
 
   ```
     drop: function (e) {

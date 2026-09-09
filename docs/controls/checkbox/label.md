@@ -14,7 +14,7 @@ You can use the `label` option to specify the content of the label. To set the c
 
 ## Set the Label Text
 
-To customize the text of the label, use the [`label`](/api/javascript/ui/checkbox/configuration/label) option.
+To customize the text of the label, use the [`label`](/api/ui/checkbox/configuration/label) option.
 
 ```dojo
     <input id="checkbox" />
@@ -45,4 +45,4 @@ The example below demonstrates how an HTML string can be rendered as a CheckBox 
 ## See Also
 
 * [Basic Usage of the CheckBox (Demo)](https://demos.telerik.com/kendo-ui/checkbox/index)
-* [JavaScript API Reference of the CheckBox](/api/javascript/ui/checkbox)
+* [JavaScript API Reference of the CheckBox](/api/ui/checkbox)

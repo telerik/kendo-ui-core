@@ -34,4 +34,4 @@ The ButtonGroup is a container for two or more Buttons. Each Button in the compo
 
 * [Demo Page for the ButtonGroup](https://demos.telerik.com/kendo-ui/buttongroup/index)
 * [Using the API of the ButtonGroup (Demo)](https://demos.telerik.com/kendo-ui/buttongroup/api)
-* [JavaScript API Reference of the ButtonGroup](/api/javascript/ui/buttongroup)
+* [JavaScript API Reference of the ButtonGroup](/api/ui/buttongroup)

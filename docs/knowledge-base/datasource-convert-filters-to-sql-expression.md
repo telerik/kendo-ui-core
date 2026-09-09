@@ -36,11 +36,11 @@ How can I convert the DataSource filters to an SQL expression?
 1. Loop through the datasource filters.
 1. Check if there are nested filters and use recursion to extract them.
 1. Retrieve a mapping by using the operator of the current filter.
-1. Check the type of the value. If it is a date, use the [`kendo.toString`](/api/javascript/kendo/methods/tostring) method to format it in the correct SQL datetime format.
-1. Use the [`kendo.format`](/api/javascript/kendo/methods/format) method to replace the placeholders in the mapping string with the field and value of the current filter.
+1. Check the type of the value. If it is a date, use the [`kendo.toString`](/api/kendo/methods/tostring) method to format it in the correct SQL datetime format.
+1. Use the [`kendo.format`](/api/kendo/methods/format) method to replace the placeholders in the mapping string with the field and value of the current filter.
 1. Finally, combine all of the filter strings into a single string.
 
-Once the SQL expression is generated, you can use a number of different approaches to send the string back to the server for further processing. For example, the [`data`](/api/javascript/data/datasource/configuration/transport.read#transportreaddata) option of the [`transport`](/api/javascript/data/datasource/configuration/transport) configurations.
+Once the SQL expression is generated, you can use a number of different approaches to send the string back to the server for further processing. For example, the [`data`](/api/data/datasource/configuration/transport.read#transportreaddata) option of the [`transport`](/api/data/datasource/configuration/transport) configurations.
 
 The following example showcases the complete solution integrated with a Kendo UI Grid:
 

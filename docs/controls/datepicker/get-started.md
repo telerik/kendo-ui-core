@@ -58,7 +58,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 3. Set the Minimum and Maximum Date
 
-The DatePicker can display only dates in a specific range by configuring the [`min`](/api/javascript/ui/datepicker/configuration/min) and [`max`](/api/javascript/ui/datepicker/configuration/max) options.
+The DatePicker can display only dates in a specific range by configuring the [`min`](/api/ui/datepicker/configuration/min) and [`max`](/api/ui/datepicker/configuration/max) options.
 
 ```html
 <input id="datePicker" />
@@ -74,7 +74,7 @@ The DatePicker can display only dates in a specific range by configuring the [`m
 
 ## 4. Add a Week Column
 
-The [`weekNumber`](/api/javascript/ui/datepicker/configuration/weeknumber) configuration allows you to display the week of the year on the left side of the calendar.
+The [`weekNumber`](/api/ui/datepicker/configuration/weeknumber) configuration allows you to display the week of the year on the left side of the calendar.
 
 ```html
 <input id="datePicker" />
@@ -91,7 +91,7 @@ The [`weekNumber`](/api/javascript/ui/datepicker/configuration/weeknumber) confi
 
 ## 5. Set the Format
 
-You can customize the format of the displayed date by setting the [`format`](/api/javascript/ui/datepicker/configuration/format) configuration of the DatePicker.
+You can customize the format of the displayed date by setting the [`format`](/api/ui/datepicker/configuration/format) configuration of the DatePicker.
 
 ```html
 <input id="datePicker" />
@@ -114,6 +114,6 @@ You can customize the format of the displayed date by setting the [`format`](/ap
 
 ## See Also 
 
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)
 * [Knowledge Base Section](/knowledge-base)
 

@@ -169,4 +169,4 @@ Hopefully this post helps highlight the value of CORS and how it can be used wit
 * [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
 * [Offline Support]({% slug offlinesupport_kendoui_datasourcecomponent %})
 * [CRUD Data Operations]({% slug cruddataoperations_kendoui_datasourcecomponent %})
-* [DataSource JavaScript API Reference](/api/javascript/data/datasource)
+* [DataSource JavaScript API Reference](/api/data/datasource)

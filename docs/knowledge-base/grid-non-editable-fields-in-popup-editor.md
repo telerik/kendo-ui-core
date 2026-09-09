@@ -26,7 +26,7 @@ I upgraded the Kendo UI for jQuery library to version `2022.2.802` and I no long
 
 ## Solution
 
-The R2 2022 SP2 release of Kendo UI integrated the Kendo UI for jQuery Form inside the Grid's popup editor. By default, the non-editable fields from the `dataSource` are not visible in the Form editor. To add them back to the Grid popup, utilize the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) event of the Grid and manually append them to the container.
+The R2 2022 SP2 release of Kendo UI integrated the Kendo UI for jQuery Form inside the Grid's popup editor. By default, the non-editable fields from the `dataSource` are not visible in the Form editor. To add them back to the Grid popup, utilize the [`edit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/edit) event of the Grid and manually append them to the container.
 
 The following example demonstrates how to append the non-editable `age` and `salary` fields to the popup template.
 

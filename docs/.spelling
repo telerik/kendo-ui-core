@@ -2583,15 +2583,15 @@ ogr2ogr
 Mapshaper
 200-kilometer
 ngModel
- ./api/javascript/class.md
+ ./api/class.md
 fn
- ./api/javascript/dataviz/map/bing-layer.md
+ ./api/dataviz/map/bing-layer.md
 dev.virtualearth.net
- ./api/javascript/dataviz/map/marker.md
+ ./api/dataviz/map/marker.md
 span.k
- ./api/javascript/dataviz/navigator.md
+ ./api/dataviz/navigator.md
 v.2016.2.517
- ./api/javascript/dataviz/ui/barcode.md
+ ./api/dataviz/ui/barcode.md
 Code11
 Code39Extended
 Code93
@@ -2605,7 +2605,7 @@ MSImod10
 MSImod11
 MSImod1010
 MSImod1110
- ./api/javascript/dataviz/ui/chart.md
+ ./api/dataviz/ui/chart.md
 n-th
 OpenWeatherMap
 ArcGIS

@@ -7,7 +7,7 @@ component: Citation
 
 # kendo.ui.Citation
 
-Represents the Kendo UI Citation widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Citation widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

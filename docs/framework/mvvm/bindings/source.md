@@ -55,7 +55,7 @@ The following example is an unsupported instance of a template with multiple fir
 
 ## Source Binding to Arrays of Objects
 
-> Source binding requires the result set to be either an [`ObservableArray`](/api/javascript/data/observablearray) or a list of [`ObservableObject`](/api/javascript/data/observableobject) instances.
+> Source binding requires the result set to be either an [`ObservableArray`](/api/data/observablearray) or a list of [`ObservableObject`](/api/data/observableobject) instances.
 
 The following example will output three `li` elements&mdash;one for every item in the `products` array.
 

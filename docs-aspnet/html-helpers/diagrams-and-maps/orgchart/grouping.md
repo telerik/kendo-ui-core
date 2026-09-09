@@ -95,4 +95,4 @@ The following example demonstrates how to group the OrgChart nodes by the `Group
 ## See Also
 
 * [Grouping in the OrgChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart/grouping)
-* [JavaScript API Reference of the OrgChart](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart)
+* [JavaScript API Reference of the OrgChart](https://docs.telerik.com/kendo-ui/api/ui/orgchart)

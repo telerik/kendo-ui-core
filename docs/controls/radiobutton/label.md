@@ -14,7 +14,7 @@ You can use the `label` option to specify the content of the label. To set the c
 
 ## Set the Label Text
 
-To customize the text of the label, use the [`label`](/api/javascript/ui/radiobutton/configuration/label) option.
+To customize the text of the label, use the [`label`](/api/ui/radiobutton/configuration/label) option.
 
 ```dojo
     <input id="radiobutton" />
@@ -50,4 +50,4 @@ The example below demonstrates both scenarios.
 ## See Also
 
 * [Basic Usage of the RadioButton (Demo)](https://demos.telerik.com/kendo-ui/radiobutton/index)
-* [JavaScript API Reference of the RadioButton](/api/javascript/ui/radiobutton)
+* [JavaScript API Reference of the RadioButton](/api/ui/radiobutton)

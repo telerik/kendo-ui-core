@@ -185,7 +185,7 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the PivotGrid](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgrid)
+* [Client-Side API of the PivotGrid](https://docs.telerik.com/kendo-ui/api/ui/pivotgrid)
 * [Server-Side HtmlHelper API of the PivotGrid](/api/pivotgrid)
 * [Server-Side TagHelper API of the PivotGrid](/api/taghelpers/pivotgrid)
 * [Knowledge Base Section](/knowledge-base)

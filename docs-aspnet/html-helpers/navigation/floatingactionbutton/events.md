@@ -95,4 +95,4 @@ The following example demonstrates how to subscribe to the FloatingActionButton 
 
 * [Using the API of the FloatingActionButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/api)
 * [FloatingActionButton Server-Side API](/api/floatingactionbutton)
-* [FloatingActionButton Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/floatingactionbutton)
+* [FloatingActionButton Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/floatingactionbutton)

@@ -79,7 +79,7 @@ In this step, you will initialize the TaskBoard from the `<div>` element.
 
 ## 3. Specify the Data Source
 
-Here, you will specify the [`dataSource`](/api/javascript/ui/taskboard/configuration/datasource) of the TaskBoard and pass some local data.
+Here, you will specify the [`dataSource`](/api/ui/taskboard/configuration/datasource) of the TaskBoard and pass some local data.
 
 ```dojo
     <div id="taskBoard"></div>
@@ -117,7 +117,7 @@ Here, you will specify the [`dataSource`](/api/javascript/ui/taskboard/configura
 
 ## 4. Set the Desired Columns
 
-In this step, you will specify the [`columns`](/api/javascript/ui/taskboard/configuration/columns) of the TaskBoard.
+In this step, you will specify the [`columns`](/api/ui/taskboard/configuration/columns) of the TaskBoard.
 
 ```dojo
     <div id="taskBoard"></div>
@@ -160,7 +160,7 @@ In this step, you will specify the [`columns`](/api/javascript/ui/taskboard/conf
 
 ## 5. Specify Fields for Status, Order and Category of the Card
 
-Here, you will specify [`dataStatusField`](/api/javascript/ui/taskboard/configuration/datastatusfield), [`dataOrderField`](/api/javascript/ui/taskboard/configuration/dataorderfield), and [`dataCategoryField`](/api/javascript/ui/taskboard/configuration/dataCategoryField) properties.
+Here, you will specify [`dataStatusField`](/api/ui/taskboard/configuration/datastatusfield), [`dataOrderField`](/api/ui/taskboard/configuration/dataorderfield), and [`dataCategoryField`](/api/ui/taskboard/configuration/dataCategoryField) properties.
 
 ```dojo
     <div id="taskBoard"></div>
@@ -212,7 +212,7 @@ Here, you will specify [`dataStatusField`](/api/javascript/ui/taskboard/configur
 
 ## See Also 
 
-* [JavaScript API Reference of the TaskBoard](/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the TaskBoard](/api/ui/taskboard)
 * [Knowledge Base Section](/knowledge-base)
 
 

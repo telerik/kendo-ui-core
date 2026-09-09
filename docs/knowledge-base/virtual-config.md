@@ -37,7 +37,7 @@ How can I define the `virtual` configuration option of the Kendo UI ComboBox wid
 
 ## Solution
 
-The following example demonstrates how to define the [`virtual`](/api/javascript/ui/combobox/configuration/virtual) option of the Kendo UI ComboBox widget by using the `data-*` attribute.
+The following example demonstrates how to define the [`virtual`](/api/ui/combobox/configuration/virtual) option of the Kendo UI ComboBox widget by using the `data-*` attribute.
 
 
 ```dojo
@@ -131,7 +131,7 @@ The following example demonstrates how to define the [`virtual`](/api/javascript
 
 ## See Also
 
-* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
+* [ComboBox JavaScript API Reference](/api/ui/combobox)
 * [Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
 * [Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
 * [Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})

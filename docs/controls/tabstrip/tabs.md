@@ -20,7 +20,7 @@ The TabStrip provides options for enhancing the behavior of its tabs.
 
 ## Dynamic Tabs
 
-The [TabStrip API](/api/javascript/ui/tabstrip) provides methods for dynamically adding or removing TabStrip tabs. To dynamically add a tab, provide the new item as a JSON object along with a reference item. A reference item is a target TabStrip tab HTML element that already exists in the TabStrip. The reference item will be used to determine the placement in the hierarchy of the new tab. To obtain a reference to the target item, you can use any valid jQuery selector. For an example, refer to the [demo on using the TabStrip API](https://demos.telerik.com/kendo-ui/tabstrip/api).
+The [TabStrip API](/api/ui/tabstrip) provides methods for dynamically adding or removing TabStrip tabs. To dynamically add a tab, provide the new item as a JSON object along with a reference item. A reference item is a target TabStrip tab HTML element that already exists in the TabStrip. The reference item will be used to determine the placement in the hierarchy of the new tab. To obtain a reference to the target item, you can use any valid jQuery selector. For an example, refer to the [demo on using the TabStrip API](https://demos.telerik.com/kendo-ui/tabstrip/api).
 
 The following example demonstrates how to add a new TabStrip tab.
 
@@ -43,9 +43,9 @@ The following example demonstrates how to add a new TabStrip tab.
 
 ## Scrollable Tabs
 
-Starting with the Kendo UI 2015 Q2 (2015.2.624) release, the TabStrip supports scrollable tabs for the `"top"` and `"bottom"` options of the `tabPosition` configuration. By default, during initialization the component checks if the tabs fit in the available horizontal space. If they do not fit, the TabStrip renders scroll buttons on its sides. To disable this behavior, [use the `scrollable` option](/api/javascript/ui/tabstrip/configuration/scrollable). The TabStrip also allows you to control the position of the displayed arrow buttons. You can use the [`scrollable.scrollButtonsPosition`](/api/javascript/ui/tabstrip/configuration/scrollable#scrollBbuttonsposition) option and choose between `start`, `around`, and `end` values. You can also control the buttons' visibility by utilizing the [`scrollable.scrollButtons`](/api/javascript/ui/tabstrip/configuration/scrollable#scrollBbuttons) configuration.
+Starting with the Kendo UI 2015 Q2 (2015.2.624) release, the TabStrip supports scrollable tabs for the `"top"` and `"bottom"` options of the `tabPosition` configuration. By default, during initialization the component checks if the tabs fit in the available horizontal space. If they do not fit, the TabStrip renders scroll buttons on its sides. To disable this behavior, [use the `scrollable` option](/api/ui/tabstrip/configuration/scrollable). The TabStrip also allows you to control the position of the displayed arrow buttons. You can use the [`scrollable.scrollButtonsPosition`](/api/ui/tabstrip/configuration/scrollable#scrollBbuttonsposition) option and choose between `start`, `around`, and `end` values. You can also control the buttons' visibility by utilizing the [`scrollable.scrollButtons`](/api/ui/tabstrip/configuration/scrollable#scrollBbuttons) configuration.
 
-If the TabStrip has no fixed width and is placed in a fluid layout, you can set it to check again whether or not the tab scrolling is required. To enable tab scrolling in fluid containers, use the [`resize()` method](/using-kendo-in-responsive-web-pages#individual-widget-resizing)&mdash;for example, in `window.resize`. If the tab which was last selected becomes invisible because of the TabStrip shrinking, `resize` will also show the right scroll button. For more information, refer to the [TabStrip API](/api/javascript/ui/tabstrip).
+If the TabStrip has no fixed width and is placed in a fluid layout, you can set it to check again whether or not the tab scrolling is required. To enable tab scrolling in fluid containers, use the [`resize()` method](/using-kendo-in-responsive-web-pages#individual-widget-resizing)&mdash;for example, in `window.resize`. If the tab which was last selected becomes invisible because of the TabStrip shrinking, `resize` will also show the right scroll button. For more information, refer to the [TabStrip API](/api/ui/tabstrip).
 
 For a complete example, refer to the [demo on implementing scrollable tabs in the TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/scrollable-tabs).
 
@@ -190,4 +190,4 @@ Starting with Kendo UI for jQuery R2 2025, you can configure closable tabs in th
 * [Implementing Sortable and Closable Tabs in the TabStrip (Demo)](https://demos.telerik.com/kendo-ui/tabstrip/sortable-closable)
 * [Positioning the Tabs of the TabStrip (Demo)](https://demos.telerik.com/kendo-ui/tabstrip/tab-position)
 * [Using the TabStrip API (Demo)](https://demos.telerik.com/kendo-ui/tabstrip/api)
-* [JavaScript API Reference of the TabStrip](/api/javascript/ui/tabstrip)
+* [JavaScript API Reference of the TabStrip](/api/ui/tabstrip)

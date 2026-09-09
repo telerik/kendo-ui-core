@@ -34,10 +34,10 @@ How do I turn off the transport read from firing when I need to expand the first
 
 To load the Kendo UI TreeList expanded initially up to a certain point(level in the hierarchy) the following steps will help you achieve it:
 
-1. Set the Kendo UI TreeList [`autoBind`](/api/javascript/ui/treelist/configuration/autobind) property to `false` initially
-1. Make a read request (the custom call which will return the initial data) using the dataSource [`read()`](/api/javascript/data/datasource/methods/read) method
-1. Use the Kendo UI TreeListDataSource [`load()`](/api/javascript/data/treelistdatasource/methods/load) method to load the root
-1. Use the Kendo UI TreeList [`expand()`](/api/javascript/ui/treelist/methods/expand) method to expand only the items which are in the view() - this will not make a request for non-loaded items
+1. Set the Kendo UI TreeList [`autoBind`](/api/ui/treelist/configuration/autobind) property to `false` initially
+1. Make a read request (the custom call which will return the initial data) using the dataSource [`read()`](/api/data/datasource/methods/read) method
+1. Use the Kendo UI TreeListDataSource [`load()`](/api/data/treelistdatasource/methods/load) method to load the root
+1. Use the Kendo UI TreeList [`expand()`](/api/ui/treelist/methods/expand) method to expand only the items which are in the view() - this will not make a request for non-loaded items
 
 ```
     dataSource.read().then(function() {

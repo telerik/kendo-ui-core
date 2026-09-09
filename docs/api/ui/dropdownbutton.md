@@ -8,7 +8,7 @@ component: dropdownbutton
 
 # kendo.ui.DropDownButton
 
-Represents the Kendo UI DropDownButton widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI DropDownButton widget. Inherits from [Widget](/api/ui/widget).
 
 
 ## Configuration
@@ -504,7 +504,7 @@ How can I customize the appearance of dropdown menu items in Kendo UI for jQuery
 ### popup `Object`
 
 The options that will be used for the popup initialization. For more details about the available options
-refer to [Popup](/api/javascript/ui/popup) documentation.
+refer to [Popup](/api/ui/popup) documentation.
 
 
 <div class="meta-api-description">
@@ -613,7 +613,7 @@ How do I adjust the size of a Kendo UI DropdownButton? Adjust the overall dimens
 ### spriteCssClass `String`
 
 Defines a CSS class (or multiple classes separated by spaces), which will be used for applying a background image to a `span` element inside the **DropDownButton**.
-In case you want to use an icon from the Kendo UI theme sprite background image, it is easier to use the [`icon` property](/api/javascript/ui/button#configuration-icon).
+In case you want to use an icon from the Kendo UI theme sprite background image, it is easier to use the [`icon` property](/api/ui/button#configuration-icon).
 
 The `span` element can be added automatically by the widget, or an existing element can be used, if it has a `k-sprite` CSS class applied.
 

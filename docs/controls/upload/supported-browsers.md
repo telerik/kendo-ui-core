@@ -24,4 +24,4 @@ The following table lists each Kendo UI feature as supported by the respective b
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

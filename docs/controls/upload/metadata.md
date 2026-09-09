@@ -57,7 +57,7 @@ To receive metadata from the `save` handler:
             echo json_encode($data);
         ?>
 
-2. Declare a handler for the [`success` event](/api/javascript/ui/upload/events/success) and process the response.
+2. Declare a handler for the [`success` event](/api/ui/upload/events/success) and process the response.
 
         function onSuccess(e) {
             alert("Status: " + e.response.status);
@@ -75,4 +75,4 @@ To receive metadata from the `save` handler:
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

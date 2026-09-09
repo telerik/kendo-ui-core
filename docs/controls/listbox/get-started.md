@@ -135,7 +135,7 @@ By default, the ListBox toolbar isn't rendered. To display the toolbar with arro
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery ListBox](/api/javascript/ui/listbox)
+* [JavaScript API Reference of the jQuery ListBox](/api/ui/listbox)
 * [Knowledge Base Section](/knowledge-base)
 
 

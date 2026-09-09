@@ -30,7 +30,7 @@ components: ["grid"]
 What is the best way to set the pager's appearance to be shown only as horizontally?  How can I make it so the Grid's pager doesn't change?
 
 ## Solution
-The pager can be set to always display as horizontal by changing the [pageable.responsive property](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/pageable.responsive) to false.
+The pager can be set to always display as horizontal by changing the [pageable.responsive property](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/pageable.responsive) to false.
 
 ```javascript
       $("#grid").kendoGrid({
@@ -68,4 +68,4 @@ The following example initializes a Grid with `pageable.responsive` set to `fals
 ```
 
 ## See Also
-* [pageable.responsive - API Reference/Kendo UI Grid for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/pageable.responsive)
+* [pageable.responsive - API Reference/Kendo UI Grid for jQuery](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/pageable.responsive)

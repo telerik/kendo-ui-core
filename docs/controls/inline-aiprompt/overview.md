@@ -25,9 +25,9 @@ The component provides a lightweight, focused interface for sending prompts and 
 
 * [Getting Started with the Kendo UI InlineAIPrompt for jQuery]({% slug getting_started_kendoui_inlineaiprompt_component %})
 * [Demo Page for the InlineAIPrompt](https://demos.telerik.com/kendo-ui/inline-aiprompt/index)
-* [JavaScript API Reference of the InlineAIPrompt](/api/javascript/ui/inlineaiprompt)
+* [JavaScript API Reference of the InlineAIPrompt](/api/ui/inlineaiprompt)
 
 ## See Also
 
 * [Overview of the InlineAIPrompt (Demo)](https://demos.telerik.com/kendo-ui/inline-aiprompt/index)
-* [JavaScript API Reference of the InlineAIPrompt](/api/javascript/ui/inlineaiprompt)
+* [JavaScript API Reference of the InlineAIPrompt](/api/ui/inlineaiprompt)

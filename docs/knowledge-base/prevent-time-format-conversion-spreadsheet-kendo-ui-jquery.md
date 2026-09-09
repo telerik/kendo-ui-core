@@ -36,9 +36,9 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To ensure that the data is pasted correctly as plain text, override the Spreadsheet's [`paste`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/events/paste) event. Use custom logic to identify values containing ":" and explicitly format these cells as text. Follow these steps:
+To ensure that the data is pasted correctly as plain text, override the Spreadsheet's [`paste`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/events/paste) event. Use custom logic to identify values containing ":" and explicitly format these cells as text. Follow these steps:
 
-1. Handle the [`paste`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/events/paste) event of the Spreadsheet.
+1. Handle the [`paste`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/events/paste) event of the Spreadsheet.
 2. Prevent the default paste behavior using `e.preventDefault()`.
 3. Iterate through the pasted data and apply text formatting (`"@"`) to cells with values containing ":".
 4. Insert the values into the cells manually.
@@ -179,6 +179,6 @@ Test the solution using the example below:
 
 ## See Also
 
-- [Kendo UI for jQuery Spreadsheet API](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+- [Kendo UI for jQuery Spreadsheet API](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
 - [Kendo UI for jQuery Spreadsheet Cell Formatting](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/formatting)
 - [Knowledge Base Article: Pasting Values Only in Kendo UI for jQuery Spreadsheet](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/spreadsheet-paste-only-values)

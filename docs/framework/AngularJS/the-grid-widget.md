@@ -21,7 +21,7 @@ This article outlines some of the specifics for setting and using the Grid with 
 
 ## Avoiding the Evaluation of Title Expressions
 
-AngularJS evaluates a template expression which is placed as [`column.title`](/api/javascript/ui/grid/configuration/columns.title) content. To avoid this behavior, set a [`ng-non-bindable`](https://docs.angularjs.org/api/ng/directive/ngNonBindable) attribute through the [`headerAttributes`](/api/javascript/ui/grid/configuration/columns.headerattributes) so that AngularJS skips the expression evaluation.
+AngularJS evaluates a template expression which is placed as [`column.title`](/api/ui/grid/configuration/columns.title) content. To avoid this behavior, set a [`ng-non-bindable`](https://docs.angularjs.org/api/ng/directive/ngNonBindable) attribute through the [`headerAttributes`](/api/ui/grid/configuration/columns.headerattributes) so that AngularJS skips the expression evaluation.
 
 ```
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

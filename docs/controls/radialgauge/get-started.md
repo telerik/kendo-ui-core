@@ -90,10 +90,10 @@ In this step, you will initialize the RadialGauge from the `<div>` element.
 
 ## 3. Add the Pointers
 
-The RadialGauge allows you to add multiple [`pointers`](/api/javascript/dataviz/ui/radialgauge/configuration/pointer). In this step, you will:
+The RadialGauge allows you to add multiple [`pointers`](/api/dataviz/ui/radialgauge/configuration/pointer). In this step, you will:
 
 * Add two pointers.
-* Configure the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/pointer#pointervalue) and [`color`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/pointer#pointercolor) of the pointers.
+* Configure the [`value`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/radialgauge/configuration/pointer#pointervalue) and [`color`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/radialgauge/configuration/pointer#pointercolor) of the pointers.
 
 
 ```dojo
@@ -116,14 +116,14 @@ The RadialGauge allows you to add multiple [`pointers`](/api/javascript/dataviz/
 
 ## 4. Customize the Scale
 
-The Kendo UI for jQuery RadialGauge provide multiple configuration option that can be used to customize the appearance of the scales. You can set the intervals between the units, change the colors of the minor and major ticks, set margins, border colors, etc. To see the full list of the RadialGauge scale configuration option open the [RadialGauge API](/api/javascript/dataviz/ui/radialgauge/configuration/scale).
+The Kendo UI for jQuery RadialGauge provide multiple configuration option that can be used to customize the appearance of the scales. You can set the intervals between the units, change the colors of the minor and major ticks, set margins, border colors, etc. To see the full list of the RadialGauge scale configuration option open the [RadialGauge API](/api/dataviz/ui/radialgauge/configuration/scale).
 The Kendo UI for jQuery RadialGauge provides multiple configuration options that you can use to customize the appearance of the scales. You can:
 
  * Set the intervals between the units.
  * Change the colors of the minor and major ticks.
  * Set margins, border colors, etc. 
  
- To see the full list of the RadialGauge scale configuration options, see the [RadialGauge API](/api/javascript/dataviz/ui/radialgauge/configuration/scale).
+ To see the full list of the RadialGauge scale configuration options, see the [RadialGauge API](/api/dataviz/ui/radialgauge/configuration/scale).
 
 In this step, you will add scale labels and style the major and minor ticks.
 
@@ -169,7 +169,7 @@ In this step, you will add scale labels and style the major and minor ticks.
 
 ## 5. Customize the Scale Colors
 
-Here, you will specify the [`colors of the scale ranges`](/api/javascript/dataviz/ui/radialgauge/configuration/scale.ranges). 
+Here, you will specify the [`colors of the scale ranges`](/api/dataviz/ui/radialgauge/configuration/scale.ranges). 
 
 ```dojo
     <div id="radial-gauge"></div>
@@ -233,7 +233,7 @@ Here, you will specify the [`colors of the scale ranges`](/api/javascript/datavi
 
 ## See Also 
 
-* [JavaScript API Reference of the RadialGauge](/api/javascript/dataviz/ui/radialgauge)
+* [JavaScript API Reference of the RadialGauge](/api/dataviz/ui/radialgauge)
 * [Knowledge Base Section](/knowledge-base)
 
 

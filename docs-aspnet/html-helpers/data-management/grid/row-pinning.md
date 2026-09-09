@@ -329,4 +329,4 @@ As an alternative to the built-in pin column, you can use the built-in context m
 * [Row Pinning in the {{ site.product }} Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/row-pinning)
 * [Grid Events]({% slug grid_events %})
 * [Server-side API](/api/grid)
-* [Client-side API of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-side API of the Grid](https://docs.telerik.com/kendo-ui/api/ui/grid)

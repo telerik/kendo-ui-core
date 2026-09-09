@@ -151,5 +151,5 @@ The following example demonstrates how to select a row on any page of a client-s
 
 ## See Also
 
-* [kendo.data.Query](/api/javascript/data/query)
-* [Grid API reference](/api/javascript/ui/grid)
+* [kendo.data.Query](/api/data/query)
+* [Grid API reference](/api/ui/grid)

@@ -27,7 +27,7 @@ ticketid: 1688253
 
 ## Description
 
-I want to add buttons within the [Kendo UI DateRangePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/overview) that allow users to select specific time periods, such as "Today", "Last 7 Days", or "This Month". However, the DateRangePicker does not provide built-in options for adding custom buttons or templates for this functionality.
+I want to add buttons within the [Kendo UI DateRangePicker](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker/overview) that allow users to select specific time periods, such as "Today", "Last 7 Days", or "This Month". However, the DateRangePicker does not provide built-in options for adding custom buttons or templates for this functionality.
 
 This knowledge base article also answers the following questions:
 - How can I customize the footer of Kendo UI DateRangePicker?
@@ -36,11 +36,11 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To achieve the desired behavior, handle the [`open`](/api/javascript/ui/daterangepicker/methods/open) event of the DateRangePicker only the first time it is fired. Use this event to append custom buttons to the footer using the `.k-calendar-footer` class. Then, initialize the appended elements as buttons and implement custom logic for each.
+To achieve the desired behavior, handle the [`open`](/api/ui/daterangepicker/methods/open) event of the DateRangePicker only the first time it is fired. Use this event to append custom buttons to the footer using the `.k-calendar-footer` class. Then, initialize the appended elements as buttons and implement custom logic for each.
 
 ### Steps
 
-1. Use the [`one`](/api/javascript/observable/methods/one) method to ensure the `open` event is handled only once.
+1. Use the [`one`](/api/observable/methods/one) method to ensure the `open` event is handled only once.
 2. Append custom button elements to the `.k-calendar-footer` container in the event handler.
 3. Initialize the appended elements as Kendo UI buttons.
 4. Add functionality to each button to set predefined date ranges using the `range` method.
@@ -117,5 +117,5 @@ The following example appends **Today**, **Last 7 Days**, and **This Month** but
 
 - [Kendo UI DateRangePicker Overview](https://docs.telerik.com/kendo-ui/controls/daterangepicker/overview)
 - [Kendo UI Button Overview](https://docs.telerik.com/kendo-ui/controls/button/overview)
-- [Kendo UI DateRangePicker API](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker)
-- [Kendo UI Button API](https://docs.telerik.com/kendo-ui/api/javascript/ui/button)
+- [Kendo UI DateRangePicker API](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker)
+- [Kendo UI Button API](https://docs.telerik.com/kendo-ui/api/ui/button)

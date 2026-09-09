@@ -256,7 +256,7 @@ For a complete and autonomous example of the aforementioned approach, refer to t
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Dynamic Batch Editing GitHub Example](https://github.com/telerik/ui-for-aspnet-core-examples/commit/1b91810db11092c7e605da2129dafa1e7184f9b1)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/aspnet-core/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})

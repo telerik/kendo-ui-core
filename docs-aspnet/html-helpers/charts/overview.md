@@ -78,11 +78,11 @@ The Chart contains the following [building block elements]({% slug htmlhelpers_c
 
 | Element | Description |
 |---------|-------------|
-| Title | The Chart provides extensive configuration options for its title. [See the client-side properties for the `Title` of the Chart component](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/title). |
-| Legend | The Chart provides extensive configuration options for its legend. [See the client-side properties for the `Legend` of the Chart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/legend). |
-| Chart area | The chart area represents the entire visible area of the Chart. [See the client-side properties for the `Chart Area` of the Chart component](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/chartarea). | 
-| Plot Area | The plot area displays the series in the Chart. [See the client-side properties for the `Plot Area ` of the Chart component](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/plotarea). |
-| Axis defaults | The Chart provides default options that are valid for all Chart axes. This element accepts the options supported by [`categoryAxis`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis), [`valueAxis`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/valueaxis), [`xAxis`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/xaxis), and [`yAxis`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-yAxis). |
+| Title | The Chart provides extensive configuration options for its title. [See the client-side properties for the `Title` of the Chart component](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/title). |
+| Legend | The Chart provides extensive configuration options for its legend. [See the client-side properties for the `Legend` of the Chart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/legend). |
+| Chart area | The chart area represents the entire visible area of the Chart. [See the client-side properties for the `Chart Area` of the Chart component](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/chartarea). | 
+| Plot Area | The plot area displays the series in the Chart. [See the client-side properties for the `Plot Area ` of the Chart component](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/plotarea). |
+| Axis defaults | The Chart provides default options that are valid for all Chart axes. This element accepts the options supported by [`categoryAxis`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis), [`valueAxis`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/valueaxis), [`xAxis`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/xaxis), and [`yAxis`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart#configuration-yAxis). |
 | Series | The Chart provides various configuration options for its series. The series type is determined by the value of the type field. If a type value is missing, the type is assumed to be the one specified in `seriesDefaults`. |    
 
 ## Basic Configuration
@@ -330,7 +330,7 @@ The Telerik UI for {{ site.framework }} Chart supports an extensive set of serie
 
 ## Referencing Existing Instances
 
-To reference an existing Chart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Chart client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#methods) to control its behavior.
+To reference an existing Chart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Chart client-side API](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart#methods) to control its behavior.
 
 ```JavaScript
     // Place the following after the Chart for {{ site.framework }} declaration.

@@ -37,7 +37,7 @@ How can I expand a selected node in the Kendo UI for jQuery TreeView?
 
 ## Solution
 
-The TreeView enables you to expand the selected node when `loadOnDemand` is set to `true`. To achieve the desired scenario, load the child nodes asynchronously in the child data source by using the [`load()`](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/load) method of the node.
+The TreeView enables you to expand the selected node when `loadOnDemand` is set to `true`. To achieve the desired scenario, load the child nodes asynchronously in the child data source by using the [`load()`](https://docs.telerik.com/kendo-ui/api/data/node/methods/load) method of the node.
 
 ```dojo
 <div id="container">
@@ -157,4 +157,4 @@ The TreeView enables you to expand the selected node when `loadOnDemand` is set 
 
 * [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
 * [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
-* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)
+* [JavaScript API Reference of the TreeView](/api/ui/treeview)

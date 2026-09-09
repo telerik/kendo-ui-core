@@ -27,10 +27,10 @@ It provides a tree-list section where the user can edit, sort and reorder the ta
 
 * [Getting Started with the Kendo UI Gantt for jQuery]({% slug getting_started_kendoui_gantt_widget %})
 * [Demo Page for the Gantt](https://demos.telerik.com/kendo-ui/gantt/index)
-* [JavaScript API Reference of the Gantt](/api/javascript/ui/gantt)
+* [JavaScript API Reference of the Gantt](/api/ui/gantt)
 
 ## See Also
 
 * [Basic Usage of the Gantt (Demo)](https://demos.telerik.com/kendo-ui/gantt/index)
 * [Using the API of the Gantt (Demo)](https://demos.telerik.com/kendo-ui/gantt/api)
-* [JavaScript API Reference of the Gantt](/api/javascript/ui/gantt)
+* [JavaScript API Reference of the Gantt](/api/ui/gantt)

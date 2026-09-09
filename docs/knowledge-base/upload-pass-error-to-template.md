@@ -88,5 +88,5 @@ How can I pass the message from a validation error to the custom file template o
 
 ## See Also
 
-* [API Reference of the Upload](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [API Reference of the Upload](https://docs.telerik.com/kendo-ui/api/ui/upload)
 * [Validation Demo of the Upload](https://demos.telerik.com/kendo-ui/upload/validation)

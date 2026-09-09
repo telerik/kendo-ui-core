@@ -10,7 +10,7 @@ res_type: api
 
 ### sheets `Array`
 
-The [`sheets`](/api/javascript/ooxml/workbook#configuration-sheets) of the workbook. Every sheet represents a page from the final Excel file.
+The [`sheets`](/api/ooxml/workbook#configuration-sheets) of the workbook. Every sheet represents a page from the final Excel file.
 
 
 <div class="meta-api-description">
@@ -104,7 +104,7 @@ How to set creation date and time for a Kendo UI workbook? Configure, set, or re
 
 ### images `Object` *(default: null)*
 
-An object containing any images used in the Spreadsheet.  The keys should be image ID-s (they are referenced by this ID in [`sheets.drawings`](/api/javascript/ooxml/workbook/configuration/sheets.drawings)) and the values should represent binary data.
+An object containing any images used in the Spreadsheet.  The keys should be image ID-s (they are referenced by this ID in [`sheets.drawings`](/api/ooxml/workbook/configuration/sheets.drawings)) and the values should represent binary data.
 
 
 <div class="meta-api-description">
@@ -189,7 +189,7 @@ How to embed images in Kendo UI workbook spreadsheet? Embed and manage pictures 
       }
     </script>
 
-Note, we can reference the same image ID in two different drawings. See the [`sheets.drawings`](/api/javascript/ooxml/workbook/configuration/sheets.drawings) property for more information about a drawing's properties.
+Note, we can reference the same image ID in two different drawings. See the [`sheets.drawings`](/api/ooxml/workbook/configuration/sheets.drawings) property for more information about a drawing's properties.
 
 ### rtl `Boolean` *(default: false)*
 
@@ -729,7 +729,7 @@ How do I set an image for a drawing in a Kendo UI Workbook sheet? Set or configu
 
 ### sheets.freezePane `Object`
 
-Deprecated in versions 2015.3 and later. Use [`frozenColumns`](/api/javascript/ooxml/workbook#configuration-sheets.frozenColumns) and [`frozenRows`](/api/javascript/ooxml/workbook#configuration-sheets.frozenRows) instead.
+Deprecated in versions 2015.3 and later. Use [`frozenColumns`](/api/ooxml/workbook#configuration-sheets.frozenColumns) and [`frozenRows`](/api/ooxml/workbook#configuration-sheets.frozenRows) instead.
 
 
 <div class="meta-api-description">
@@ -765,7 +765,7 @@ How do I freeze specific rows and columns in Kendo UI's Workbook? Control the ab
 
 ### sheets.freezePane.colSplit `Number` *(default: 0)*
 
-Deprecated in versions 2015.3 and later. Use [`frozenColumns`](/api/javascript/ooxml/workbook#configuration-sheets.frozenColumns) instead.
+Deprecated in versions 2015.3 and later. Use [`frozenColumns`](/api/ooxml/workbook#configuration-sheets.frozenColumns) instead.
 
 
 <div class="meta-api-description">
@@ -803,7 +803,7 @@ How do I lock multiple columns on the left side of a Kendo UI spreadsheet? Set o
 
 ### sheets.freezePane.rowSplit `Number` *(default: 0)*
 
-Deprecated in versions 2015.3 and later. Use [`frozenRows`](/api/javascript/ooxml/workbook#configuration-sheets.frozenRows) instead.
+Deprecated in versions 2015.3 and later. Use [`frozenRows`](/api/ooxml/workbook#configuration-sheets.frozenRows) instead.
 
 
 <div class="meta-api-description">
@@ -1792,7 +1792,7 @@ How to set font family in Kendo UI for jQuery spreadsheet cells? Control and cus
 
 ### sheets.rows.cells.fontName `String` *(default: "Calibri")*
 
-Deprecated in versions 2015.3 and later. Use [`fontFamily`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontFamily) instead.
+Deprecated in versions 2015.3 and later. Use [`fontFamily`](/api/ooxml/workbook#configuration-sheets.rows.cells.fontFamily) instead.
 
 
 <div class="meta-api-description">
@@ -1918,7 +1918,7 @@ How can I set an Excel formula in a Kendo UI Workbook cell? Configure or assign 
 
 ### sheets.rows.cells.hAlign `String`
 
-Deprecated in versions 2015.3 and later. Use [`textAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.textAlign) instead.
+Deprecated in versions 2015.3 and later. Use [`textAlign`](/api/ooxml/workbook#configuration-sheets.rows.cells.textAlign) instead.
 
 
 <div class="meta-api-description">
@@ -2139,7 +2139,7 @@ How to enable word wrap in individual cells of a Kendo UI workbook? Configure ce
 
 ### sheets.rows.cells.vAlign `String` *(default: "bottom")*
 
-Deprecated in versions 2015.3 and later. Use [`verticalAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.verticalAlign) instead.
+Deprecated in versions 2015.3 and later. Use [`verticalAlign`](/api/ooxml/workbook#configuration-sheets.rows.cells.verticalAlign) instead.
 
 
 <div class="meta-api-description">
@@ -2399,7 +2399,7 @@ How do I show grid lines in Kendo UI workbook spreadsheet sheets? Control the vi
 
 ### sheets.title `String`
 
-Deprecated in versions 2015.3 and later. Use [`name`](/api/javascript/ooxml/workbook#configuration-sheets.name) instead.
+Deprecated in versions 2015.3 and later. Use [`name`](/api/ooxml/workbook#configuration-sheets.name) instead.
 
 
 <div class="meta-api-description">
@@ -2436,7 +2436,7 @@ How can I set the title of a worksheet in Kendo UI for jQuery? Set or change the
 
 Creates an Excel file that represents the current workbook and returns it as a data URL.
 
-> The `toDataURL` method supports only JSZip 2.x versions. To use JSZip 3.x versions, call the [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) method instead.
+> The `toDataURL` method supports only JSZip 2.x versions. To use JSZip 3.x versions, call the [`toDataURLAsync`](/api/ooxml/workbook/methods/todataurlasync) method instead.
 
 
 <div class="meta-api-description">

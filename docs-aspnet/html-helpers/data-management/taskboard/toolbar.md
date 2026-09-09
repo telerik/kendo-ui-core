@@ -178,4 +178,4 @@ For more information on the available overflow options, refer to the [Appearance
 ## See Also
 
 * [Overview of the TaskBoard (Demo)](https://demos.telerik.com/kendo-ui/taskboard/index)
-* [JavaScript API Reference of the TaskBoard](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the TaskBoard](https://docs.telerik.com/kendo-ui/api/ui/taskboard)

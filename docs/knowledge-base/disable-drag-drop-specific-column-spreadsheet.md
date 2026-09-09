@@ -31,7 +31,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To disable drag and drop for a specific column in the Spreadsheet, handle the [changing](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/events/changing) event. Within the event handler, verify if the action is an auto-fill operation and if it originates from the column you wish to restrict. If both conditions are met, prevent the default behavior using `e.preventDefault()`. Below is an example that disables drag and drop for the second column (Column B).
+To disable drag and drop for a specific column in the Spreadsheet, handle the [changing](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/events/changing) event. Within the event handler, verify if the action is an auto-fill operation and if it originates from the column you wish to restrict. If both conditions are met, prevent the default behavior using `e.preventDefault()`. Below is an example that disables drag and drop for the second column (Column B).
 
 ```javascript
 changing: function(e){
@@ -50,5 +50,5 @@ Explore a live example where dragging column B does not change the Spreadsheet's
 
 ## See Also
 
-- [Spreadsheet Changing Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/events/changing)
+- [Spreadsheet Changing Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/events/changing)
 - [Kendo UI for jQuery Spreadsheet Overview](https://docs.telerik.com/kendo-ui/controls/spreadsheet/overview)

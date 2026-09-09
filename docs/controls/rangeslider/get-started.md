@@ -65,7 +65,7 @@ After the basic initialization is completed, you can start adding additional con
 
 ## 3. Set Min and Max Values
 
-Next, you can define the [min](/api/javascript/ui/rangeslider/configuration/min) and [max](/api/javascript/ui/rangeslider/configuration/max) values that will be rendered in the Slider.
+Next, you can define the [min](/api/ui/rangeslider/configuration/min) and [max](/api/ui/rangeslider/configuration/max) values that will be rendered in the Slider.
 
 ```html
 <div id="rangeSlider" style="width:600px">
@@ -84,7 +84,7 @@ Next, you can define the [min](/api/javascript/ui/rangeslider/configuration/min)
 
 ## 4. Set Small and Large Steps
 
-You can configure how the RangeSlider's range will be rendered in steps through the [smallStep](/api/javascript/ui/rangeslider/configuration/smallstep) and [largeStep](/api/javascript/ui/rangeslider/configuration/largestep) options. For more information, you can check the [Steps article]({% slug steps_rangeslider_widget %}).
+You can configure how the RangeSlider's range will be rendered in steps through the [smallStep](/api/ui/rangeslider/configuration/smallstep) and [largeStep](/api/ui/rangeslider/configuration/largestep) options. For more information, you can check the [Steps article]({% slug steps_rangeslider_widget %}).
 
 ```html
 <div id="rangeSlider" style="width:600px">
@@ -103,7 +103,7 @@ You can configure how the RangeSlider's range will be rendered in steps through 
 
 ## 5. Format the Tooltip
 
-You can also choose how the tooltip for the currently selected range will be formatted through the [tooltip.format](/api/javascript/ui/rangeslider/configuration/tooltip#tooltip.format) option.
+You can also choose how the tooltip for the currently selected range will be formatted through the [tooltip.format](/api/ui/rangeslider/configuration/tooltip#tooltip.format) option.
 
 ```html
     <div id="rangeSlider" style="width:600px">
@@ -130,6 +130,6 @@ You can also choose how the tooltip for the currently selected range will be for
 
 ## See Also
 
-* [JavaScript API Reference of the RangeSlider](/api/javascript/ui/rangeslider)
+* [JavaScript API Reference of the RangeSlider](/api/ui/rangeslider)
 * [Knowledge Base Section](/knowledge-base)
 

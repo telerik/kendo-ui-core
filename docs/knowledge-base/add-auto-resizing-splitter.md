@@ -82,7 +82,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Knendo UI for jQuery Window JavaScript API Reference](/api/javascript/ui/window)
+* [Knendo UI for jQuery Window JavaScript API Reference](/api/ui/window)
 * [Create Confirmation Dialogs by Using Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
 * [Post to Iframes in the Window]({% slug howto_posttoiframe_window %})
 * [Restrict Window Positioning]({% slug howto_restrictpositioning_window %})

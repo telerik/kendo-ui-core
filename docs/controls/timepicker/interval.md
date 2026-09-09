@@ -15,7 +15,7 @@ Depending on the [Component Type](% slug componenttypes_timepicker %), you can s
 
 ## Setting the Interval in Classic Render Mode
 
-When the [`componentType`](/api/javascript/ui/timepicker/configuration/componenttype) configuration is set to `classic`, the interval is specified in minutes (numeric values).
+When the [`componentType`](/api/ui/timepicker/configuration/componenttype) configuration is set to `classic`, the interval is specified in minutes (numeric values).
 
 ```dojo
     <input id="timepicker" />
@@ -31,7 +31,7 @@ When the [`componentType`](/api/javascript/ui/timepicker/configuration/component
 
 ## Setting the Interval in Modern Render Mode
 
-When the [`componentType`](/api/javascript/ui/timepicker/configuration/componenttype) configuration is set to `modern`, the interval is specified as an object of hours, minutes, and seconds.
+When the [`componentType`](/api/ui/timepicker/configuration/componenttype) configuration is set to `modern`, the interval is specified as an object of hours, minutes, and seconds.
 
 ```dojo
     <input id="timepicker" />
@@ -51,4 +51,4 @@ When the [`componentType`](/api/javascript/ui/timepicker/configuration/component
 
 ## See Also
 
-* [JavaScript API Reference of the TimePicker](/api/javascript/ui/timepicker)
+* [JavaScript API Reference of the TimePicker](/api/ui/timepicker)

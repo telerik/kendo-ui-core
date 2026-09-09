@@ -15,7 +15,7 @@ For a complete example, refer to the [demo on customizing the FloatingActionButt
 
 ## Item Templates
 
-The [`items.template`](/api/javascript/ui/floatingactionbutton/configuration/items.template) configuration options manages the way the speed dial action items of a FloatingActionButton are rendered.
+The [`items.template`](/api/ui/floatingactionbutton/configuration/items.template) configuration options manages the way the speed dial action items of a FloatingActionButton are rendered.
 
 ```
     <div id="fab"></div>
@@ -45,4 +45,4 @@ The [`items.template`](/api/javascript/ui/floatingactionbutton/configuration/ite
 ## See Also
 
 * [API Demo of the FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/api)
-* [JavaScript API Reference of the FloatingActionButton](/api/javascript/ui/floatingactionbutton)
+* [JavaScript API Reference of the FloatingActionButton](/api/ui/floatingactionbutton)

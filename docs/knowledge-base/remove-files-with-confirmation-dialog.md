@@ -37,7 +37,7 @@ How can I remove files in the Kendo UI Upload by displaying a custom confirmatio
 
 ## Solution
 
-The following example demonstrates how to display a custom confirmation dialog by utilizing the [`kendo.confirm()`](/api/javascript/kendo/methods/confirm) method.
+The following example demonstrates how to display a custom confirmation dialog by utilizing the [`kendo.confirm()`](/api/kendo/methods/confirm) method.
 
 
 
@@ -71,7 +71,7 @@ The following example demonstrates how to display a custom confirmation dialog b
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})
 

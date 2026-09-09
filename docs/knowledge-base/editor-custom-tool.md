@@ -88,4 +88,4 @@ Register a new tool for the Editor.
 
 ## See Also
 
-* [API Reference of the Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor](https://docs.telerik.com/kendo-ui/api/ui/editor)

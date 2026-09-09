@@ -28,8 +28,8 @@ I added [image previews before uploading]({% slug howto_add_image_preview %}) in
 
 ## Solution
 
-1. Add a Kendo Window on the page that is initially [hidden](/api/javascript/ui/window/configuration/visible).  
-1. When the preview icon is clicked, you can [open](/api/javascript/ui/window/methods/open) the Window and change its [content](/api/javascript/ui/window/methods/content#content) with the clicked image.
+1. Add a Kendo Window on the page that is initially [hidden](/api/ui/window/configuration/visible).  
+1. When the preview icon is clicked, you can [open](/api/ui/window/methods/open) the Window and change its [content](/api/ui/window/methods/content#content) with the clicked image.
 1. You can also set styles, thus the image to always be 100% of the width and height of the Window when it is resized.
 
 The following example demonstrates the full implementation of the described approach:
@@ -104,6 +104,6 @@ The following example demonstrates the full implementation of the described appr
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Upload](/api/javascript/ui/upload)
-* [JavaScript API Reference of the jQuery Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the jQuery Upload](/api/ui/upload)
+* [JavaScript API Reference of the jQuery Window](/api/ui/window)
 * [Add Image Previews before Uploading Files in the Upload]({% slug howto_add_image_preview %})

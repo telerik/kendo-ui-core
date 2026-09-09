@@ -11,7 +11,7 @@ position: 5
 
 When you bind the DropDownTree through the `dataSource` configuration option, each item can acquire specific properties.
 
-The following example demonstrates how to set the item properties of the DropDownTree. You can configure the `text`, `imageUrl`, `spriteCssClass`, and `url` fields through the [`datatextfield`](/api/javascript/ui/dropdowntree#configuration-dataTextField), [`dataimageurlfield`](/api/javascript/ui/dropdowntree#configuration-dataImageUrlField), [`dataspritecssclassfield`](/api/javascript/ui/dropdowntree#configuration-dataSpriteCssClassField), and [`dataurlfield`](/api/javascript/ui/dropdowntree#configuration-dataUrlField) options respectively.
+The following example demonstrates how to set the item properties of the DropDownTree. You can configure the `text`, `imageUrl`, `spriteCssClass`, and `url` fields through the [`datatextfield`](/api/ui/dropdowntree#configuration-dataTextField), [`dataimageurlfield`](/api/ui/dropdowntree#configuration-dataImageUrlField), [`dataspritecssclassfield`](/api/ui/dropdowntree#configuration-dataSpriteCssClassField), and [`dataurlfield`](/api/ui/dropdowntree#configuration-dataUrlField) options respectively.
 
     var item = {
         text: "Item text",
@@ -50,4 +50,4 @@ The following example demonstrates how to set the item properties of the DropDow
 
 ## See Also
 
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)
+* [JavaScript API Reference of the DropDownTree](/api/ui/dropdowntree)

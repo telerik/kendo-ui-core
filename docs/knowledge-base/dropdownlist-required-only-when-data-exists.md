@@ -26,7 +26,7 @@ In some cases, the DropDownList has to be mandatory only when it presents some d
 
 ## Solution
 
-Use the [`dataBound` event](/api/javascript/ui/dropdownlist/events/databound) of the DropDownList to toggle the `required` or `data-val-required` attribute that triggers the required field validation depending on the data source of the DropDownList.
+Use the [`dataBound` event](/api/ui/dropdownlist/events/databound) of the DropDownList to toggle the `required` or `data-val-required` attribute that triggers the required field validation depending on the data source of the DropDownList.
 
 The attributes that will be used depend on the validation mode you use. For example, the `required` attribute works in a generic HTML page and the `data-val-required` attribute works with the Unobtrusive Validation used in ASP.NET.
 

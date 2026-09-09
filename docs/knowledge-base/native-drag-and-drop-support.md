@@ -100,7 +100,7 @@ To see how the example works:
 
 ## See Also
 
-* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
+* [ComboBox JavaScript API Reference](/api/ui/combobox)
 * [Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
 * [Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
 * [Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})

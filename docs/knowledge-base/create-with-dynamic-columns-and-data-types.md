@@ -36,8 +36,8 @@ This article showcases how to dynamically generate the Kendo UI Grid by using th
 ## Solution
 
 1. Prefetch the dynamic Grid data by making an `ajax` request to the server.
-1. Create the [`dataSource.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) by using the first record in the response as a sample.
-1. Create the Grid [`columns`](/api/javascript/ui/grid/configuration/columns) by using the names of the fields returned in the server response.
+1. Create the [`dataSource.model`](/api/data/datasource/configuration/schema#schemamodel) by using the first record in the response as a sample.
+1. Create the Grid [`columns`](/api/ui/grid/configuration/columns) by using the names of the fields returned in the server response.
 1. Generate the Grid by using the model and columns that were created in the previous two steps.
 
 ```dojo
@@ -145,4 +145,4 @@ This article showcases how to dynamically generate the Kendo UI Grid by using th
 ## See Also
 
 * [Dynamic Aggregates in a Dynamic Grid]({% slug grid-dynamic-aggregates %})
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

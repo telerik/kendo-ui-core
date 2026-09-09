@@ -314,4 +314,4 @@ For more information on the available overflow options, refer to the [Appearance
 {% if site.core %}
 * [Server-Side API of the PropertyGrid TagHelper](/api/taghelpers/propertygrid)
 {% endif %}
-* [Client-Side API of the PropertyGrid](https://docs.telerik.com/kendo-ui/api/javascript/ui/propertygrid)
+* [Client-Side API of the PropertyGrid](https://docs.telerik.com/kendo-ui/api/ui/propertygrid)

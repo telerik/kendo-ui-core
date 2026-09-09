@@ -25,12 +25,12 @@ How can I add and remove columns to the jQuery Grid component dynamically?
 
 ## Solution
 
-The most straightforward way to achieve the desired scenario is to have [hidden columns](/api/javascript/ui/grid/configuration/columns.hidden) and allow the users to unhide them with the help of the [column menu](/api/javascript/ui/grid/configuration/columnmenu).
+The most straightforward way to achieve the desired scenario is to have [hidden columns](/api/ui/grid/configuration/columns.hidden) and allow the users to unhide them with the help of the [column menu](/api/ui/grid/configuration/columnmenu).
 
-An alternative option is to use the [`setOptions()`](/api/javascript/ui/grid/methods/setoptions) method with a custom UI, for example, a Kendo UI for jQuery MultiSelect that holds a collection of all the available columns: 
+An alternative option is to use the [`setOptions()`](/api/ui/grid/methods/setoptions) method with a custom UI, for example, a Kendo UI for jQuery MultiSelect that holds a collection of all the available columns: 
 
-1. In the [`change`](/api/javascript/ui/multiselect/events/change) event handler of the MultiSelect, get the current selection with the [`value()`](/api/javascript/ui/multiselect/methods/value) method.
-1. Call the [`setOptions()`](/api/javascript/ui/grid/methods/setoptions) method of the Grid with the selected items.
+1. In the [`change`](/api/ui/multiselect/events/change) event handler of the MultiSelect, get the current selection with the [`value()`](/api/ui/multiselect/methods/value) method.
+1. Call the [`setOptions()`](/api/ui/grid/methods/setoptions) method of the Grid with the selected items.
 
 ```dojo
     <label for="multiselect">Select Columns to display</label>

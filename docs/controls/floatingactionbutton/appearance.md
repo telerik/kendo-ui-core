@@ -27,7 +27,7 @@ The Kendo UI FloatingActionButton supports the following styling options:
 
 The `size` option controls how big or small the rendered FloatingActionButton looks. The structure of the class is `k-fab-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/floatingactionbutton/configuration/size) option:
+The following values are available for the [`size`](/api/ui/floatingactionbutton/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -56,7 +56,7 @@ The default size value is `medium` and it is applied to the wrapping span elemen
 
 The `fillMode` option controls the way the color is applied to the rendered FloatingActionButton. The structure of the class is `k-fab-{fillMode}`.
 
-You can set the [`fillMode`](/api/javascript/ui/floatingactionbutton/configuration/fillmode) either to `solid` or to *null*.
+You can set the [`fillMode`](/api/ui/floatingactionbutton/configuration/fillmode) either to `solid` or to *null*.
 
 The following example demonstrates how to configure the `fillMode` of the component through the component configuration:
 
@@ -80,7 +80,7 @@ The default fillMode value is `solid` and it is applied to the button element th
 
 The `themeColor` option controls the color that will be applied to the rendered FloatingActionButton. As applying `themeColor` is closely related to the `fillMode`, the structure of the class name for the `themeColor` is composite - `k-fab-{fillMode}-{themeColor}`.
 
-The following values are available for the [`themeColor`](/api/javascript/ui/floatingactionbutton/configuration/themecolor) option:
+The following values are available for the [`themeColor`](/api/ui/floatingactionbutton/configuration/themecolor) option:
 
 - `base`
 - `primary`
@@ -107,7 +107,7 @@ The default `themeColor` value is `primary`. A FloatingActionButton with default
 
 The `rounded` option controls how much border radius is applied to the rendered FloatingActionButton. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/floatingactionbutton/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/floatingactionbutton/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -158,7 +158,7 @@ The Material Design guidelines dictate that:
 
 ## Icons
 
-The [`icon`](/api/javascript/ui/floatingactionbutton/configuration/icon) configuration option specifies the name of an icon. The selected icon must be available in the Kendo UI theme that is rendered by the FloatingActionButton. For more details on the available Web Font icons see [`the Web Font Icons article`](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
+The [`icon`](/api/ui/floatingactionbutton/configuration/icon) configuration option specifies the name of an icon. The selected icon must be available in the Kendo UI theme that is rendered by the FloatingActionButton. For more details on the available Web Font icons see [`the Web Font Icons article`](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
 
 ```
     <div id="fab"></div>
@@ -180,4 +180,4 @@ The [`icon`](/api/javascript/ui/floatingactionbutton/configuration/icon) configu
 
 * [Basic Usage Demo of the FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/basic-usage)
 * [Appearance Demo of the FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/appearance)
-* [JavaScript API Reference of the FloatingActionButton](/api/javascript/ui/floatingactionbutton)
+* [JavaScript API Reference of the FloatingActionButton](/api/ui/floatingactionbutton)

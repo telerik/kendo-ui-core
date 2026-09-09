@@ -51,7 +51,7 @@ To customize the response appearance, handle the `ResponseTemplate` configuratio
 ## See Also
 
 * [Using the API of the InlineAIPrompt for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/inlineaiprompt/api)
-* [Client-Side API of the InlineAIPrompt](https://docs.telerik.com/kendo-ui/api/javascript/ui/inlineaiprompt)
+* [Client-Side API of the InlineAIPrompt](https://docs.telerik.com/kendo-ui/api/ui/inlineaiprompt)
 * [Server-Side API of the InlineAIPrompt](/api/inlineaiprompt)
 {% if site.core %}
 * [Server-Side API of the InlineAIPrompt TagHelper](/api/taghelpers/inlineaiprompt)

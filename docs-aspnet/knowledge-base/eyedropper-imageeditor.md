@@ -112,7 +112,7 @@ In the example below, clicking on the image retrieves the color of the pixel cli
 ## See Also
 
 * [Telerik REPL: Adding Eyedropper Functionality to the Image Editor](https://netcorerepl.telerik.com/GnaclaOV22ojLSse56)
-* [Client-Side API Reference of the Image Editor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor)
+* [Client-Side API Reference of the Image Editor for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/imageeditor)
 * [Server-Side API Reference of the Image Editor for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/imageeditor)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

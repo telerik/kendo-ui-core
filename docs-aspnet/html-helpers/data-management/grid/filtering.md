@@ -55,7 +55,7 @@ Each `Filterable` configuration of the columns allows the setting of a custom Da
 ```
 {% endif %}
 
-> Only columns [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be filterable. To enable filtering on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/aspnet-core/knowledge-base/grid-enable-operations-for-object-column).
+> Only columns [bound to a field](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.field) can be filterable. To enable filtering on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/aspnet-core/knowledge-base/grid-enable-operations-for-object-column).
 
 ## Filter Modes
 
@@ -83,7 +83,7 @@ To set the desired filter mode, use the `Filterable->Mode` property. You can ena
 
 ## Filter Operators
 
-* [List of the operators for the different data types](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/filterable.operators#related-properties)
+* [List of the operators for the different data types](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/filterable.operators#related-properties)
 
 ## See Also
 

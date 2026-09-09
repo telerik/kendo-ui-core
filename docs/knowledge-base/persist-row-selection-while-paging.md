@@ -19,7 +19,7 @@ previous_url: /controls/data-management/grid/how-to/Selection/persist-row-select
  </tr>
 </table>
 
-> * As of the 2017 R2 release, persisting the selection in the Grid is available out of the box. For more information, refer to the [`persistSelection`](/api/javascript/ui/grid/configuration/persistselection) property.
+> * As of the 2017 R2 release, persisting the selection in the Grid is available out of the box. For more information, refer to the [`persistSelection`](/api/ui/grid/configuration/persistselection) property.
 > * The suggested approach in this article requires you to define an `ID` field in `schema.model`.
 
 (Applicable to Kendo UI 2017.2.504 version and earlier) The following example demonstrates how to persist the row selection in a Grid while performing the paging, sorting, and filtering data operations.
@@ -113,4 +113,4 @@ previous_url: /controls/data-management/grid/how-to/Selection/persist-row-select
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

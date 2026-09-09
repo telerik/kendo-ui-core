@@ -80,7 +80,7 @@ See the suggested behavior in action in [this Telerik REPL example](https://netc
 
 ## See Also
 
-* [Client-Side API Reference of the DateTimePicker for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [Client-Side API Reference of the DateTimePicker for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker)
 * [Server-Side API Reference of the DateTimePicker for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/datetimepicker)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

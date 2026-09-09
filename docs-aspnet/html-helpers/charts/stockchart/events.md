@@ -70,7 +70,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## See Also
 
-* [Client-Side API of the StockChart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart)
+* [Client-Side API of the StockChart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart)
 * [Server-Side HtmlHelper API of the StockChart](/api/stockchart)
 {% if site.core %}
 * [Server-Side TagHelper API of the StockChart](/api/taghelpers/stockchart)

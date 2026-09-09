@@ -143,7 +143,7 @@ Another option is to manually add the `title` and `desc` elements to the `SVG` e
         </script>
     ```
 
-1. Load the HTML content to the [`kendo.template()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/template) method and render the template by using the `chartDetails` object.
+1. Load the HTML content to the [`kendo.template()`](https://docs.telerik.com/kendo-ui/api/kendo/methods/template) method and render the template by using the `chartDetails` object.
 1. Use jQuery to select the `svg` element inside the `div` of the Chart and prepend the `title` and `description` to the beginning of that element.
 
     ```JS

@@ -31,7 +31,7 @@ components: ["multiselect"]
  </tr>
 </table>
 
-> Starting with the **2026 Q3** release, the MultiSelect provides a built-in [`selectAll`](/api/javascript/ui/multiselect/configuration/selectall) option that renders a sticky header for selecting or deselecting all items. Consider using the built-in functionality instead of the custom approach shown below.
+> Starting with the **2026 Q3** release, the MultiSelect provides a built-in [`selectAll`](/api/ui/multiselect/configuration/selectall) option that renders a sticky header for selecting or deselecting all items. Consider using the built-in functionality instead of the custom approach shown below.
 
 ## Description
 
@@ -207,7 +207,7 @@ The following example demonstrates how to select all items by selecting the `ALL
 
 ## See Also
 
-* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect JavaScript API Reference](/api/ui/multiselect)
 * [Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
 * [Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})

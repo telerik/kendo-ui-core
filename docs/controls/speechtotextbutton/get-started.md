@@ -69,7 +69,7 @@ In this step, you will initialize the SpeechToTextButton from the `<button>` ele
 
 ## 3. Handle Speech Recognition Results
 
-Use the [`result`](/api/javascript/ui/speechtotextbutton/events/result) event to process speech recognition results.
+Use the [`result`](/api/ui/speechtotextbutton/events/result) event to process speech recognition results.
 
 ```html
     <button id="speechButton"></button>
@@ -88,7 +88,7 @@ Use the [`result`](/api/javascript/ui/speechtotextbutton/events/result) event to
 
 ## 4. Enable Continuous Recognition
 
-For scenarios where longer dictation is required, enable the [`continuous`](/api/javascript/ui/speechtotextbutton/configuration/continuous) option.
+For scenarios where longer dictation is required, enable the [`continuous`](/api/ui/speechtotextbutton/configuration/continuous) option.
 
 ```html
     <button id="speechButton"></button>
@@ -112,5 +112,5 @@ For scenarios where longer dictation is required, enable the [`continuous`](/api
 
 ## See Also
 
-* [JavaScript API Reference of the SpeechToTextButton](/api/javascript/ui/speechtotextbutton)
+* [JavaScript API Reference of the SpeechToTextButton](/api/ui/speechtotextbutton)
 * [Knowledge Base Section](/knowledge-base)

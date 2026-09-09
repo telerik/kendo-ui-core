@@ -33,4 +33,4 @@ The following example demonstrates how to render a DatePicker with an initially 
 ## See Also
 
 * [Range Selection in the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/rangeselection)
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/datepicker)

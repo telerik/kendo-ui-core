@@ -114,7 +114,7 @@ The following example shows how to set the `hint` of an item. The hint is displa
 
 ## Configure Editor
 
-With the `editor` option you can explicitly configure an editor to be used for a specific field. See the [editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/form/configuration/items#itemseditor) configuration option in the client-side API documentation, for a list of the supported editors.
+With the `editor` option you can explicitly configure an editor to be used for a specific field. See the [editor](https://docs.telerik.com/kendo-ui/api/ui/form/configuration/items#itemseditor) configuration option in the client-side API documentation, for a list of the supported editors.
 
 ```dojo
     <form id="form"></form>
@@ -274,4 +274,4 @@ For more information about using the Upload component with Form, including confi
 ## See Also
 
 * [Items configuration of the Form (Demo)](https://demos.telerik.com/kendo-ui/form/items)
-* [JavaScript API Reference of the Form](/api/javascript/ui/form)
+* [JavaScript API Reference of the Form](/api/ui/form)

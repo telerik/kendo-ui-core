@@ -15,7 +15,7 @@ The Kendo UI Drawer provides the built-in functionality to create a hierarchical
 
 To utilize the hierarchy functionality of the Kendo UI Drawer:
 
-1. Add list elements with data-role attribute `drawer-item` and class `hidden` to the drawer [`template`](/api/javascript/ui/drawer/configuration/template). Use the `data-level` attribute to specify the hierarchy level of each item.
+1. Add list elements with data-role attribute `drawer-item` and class `hidden` to the drawer [`template`](/api/ui/drawer/configuration/template). Use the `data-level` attribute to specify the hierarchy level of each item.
 
     ```javascript
     $("#drawer").kendoDrawer({
@@ -36,7 +36,7 @@ To utilize the hierarchy functionality of the Kendo UI Drawer:
 
     The hierarchy levels are determined by the Kendo themes and currently support levels from `0` to `5`. If no `data-level` attribute is specified, the Drawer will automatically set it to `0`. Setting `data-level='6'` or higher will have no visual effect as only levels 0-5 are styled by the themes.
 
-1. In the [`itemClick`](/api/javascript/ui/drawer/events/itemclick) event of the drawer handle the expansion and collapse of the hierarchical items.
+1. In the [`itemClick`](/api/ui/drawer/events/itemclick) event of the drawer handle the expansion and collapse of the hierarchical items.
 
     ```javascript
     $("#drawer").kendoDrawer({
@@ -66,4 +66,4 @@ To utilize the hierarchy functionality of the Kendo UI Drawer:
 ## See Also
 
 * [Drawer Hierarchy (Demo)](https://demos.telerik.com/kendo-ui/drawer/hierarchy)
-* [JavaScript API Reference of the Drawer](/api/javascript/ui/drawer)
+* [JavaScript API Reference of the Drawer](/api/ui/drawer)

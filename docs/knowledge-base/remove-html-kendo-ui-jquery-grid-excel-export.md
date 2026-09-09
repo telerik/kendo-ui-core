@@ -38,7 +38,7 @@ This knowledge base article also answers the following questions:
 
 To remove HTML tags during the Grid export to Excel, use the `excelExport` event. In this event, access the workbook object and apply custom logic to clean the HTML content.
 
-1. Initialize the Grid and define the [`excelExport`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/excelexport) event.
+1. Initialize the Grid and define the [`excelExport`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/excelexport) event.
 2. Iterate through the workbook sheets and rows to process the cells.
 3. Decode HTML content in the cells using a custom function.
 4. Optionally, apply formatting such as making footer rows bold.
@@ -154,5 +154,5 @@ Here is the complete implementation:
 ## See Also
 
 - [Kendo UI for jQuery Grid Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/overview)
-- [Excel Export Event](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/excelexport)
+- [Excel Export Event](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/excelexport)
 - [Excel Appearance Customization](https://www.telerik.com/kendo-jquery-ui/documentation/framework/excel/appearance)

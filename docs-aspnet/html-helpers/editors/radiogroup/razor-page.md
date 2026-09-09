@@ -79,7 +79,7 @@ To bind the RadioGroup to a property from the `PageModel`, follow the next steps
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the RadioGroup](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/radiogroup)
+* [Client-Side API of the RadioGroup](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/radiogroup)
 * [Server-Side HtmlHelper API of the RadioGroup](/api/radiogroup)
 * [Server-Side TagHelper API of the RadioGroup](/api/taghelpers/radiogroup)
 * [Knowledge Base Section](/knowledge-base)

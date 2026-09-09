@@ -9,13 +9,13 @@ position: 4
 
 # Scrolling to a Specific Item
 
-You can programmatically scroll the Grid component to a specific item by using the built-in [`scrollToItem()`](/api/javascript/ui/grid/methods/scrolltoitem) method.
+You can programmatically scroll the Grid component to a specific item by using the built-in [`scrollToItem()`](/api/ui/grid/methods/scrolltoitem) method.
 
-Using the [`scrollToItem()`](/api/javascript/ui/grid/methods/scrolltoitem) method requires you to configure the [`dataSource.Schema.model.id`](/api/javascript/data/datasource/configuration/schema#schemamodel).
+Using the [`scrollToItem()`](/api/ui/grid/methods/scrolltoitem) method requires you to configure the [`dataSource.Schema.model.id`](/api/data/datasource/configuration/schema#schemamodel).
 
 ## Scrolling to an Item by Passing the Id of the Item
 
-To scroll to a specific data item, pass the `id` of the item to the [`scrollToItem()`](/api/javascript/ui/grid/methods/scrolltoitem) method. 
+To scroll to a specific data item, pass the `id` of the item to the [`scrollToItem()`](/api/ui/grid/methods/scrolltoitem) method. 
 
     const grid = $("#grid").data("kendoGrid"); // Get an instance of the Grid.
     grid.scrollToItem(27); // Pass the id of the item to the method.
@@ -23,7 +23,7 @@ To scroll to a specific data item, pass the `id` of the item to the [`scrollToIt
 
 ## Scroll to an Item in Virtual Scrolling Grid
 
-You can scroll to an item that is not loaded yet in a [`Virtual Scrolling`]({% slug virtual_scrolling_kendoui_grid_widget %}) Grid by passing the `id` of the data item and a `callback` to the [`scrollToItem()`](/api/javascript/ui/grid/methods/scrolltoitem) method.
+You can scroll to an item that is not loaded yet in a [`Virtual Scrolling`]({% slug virtual_scrolling_kendoui_grid_widget %}) Grid by passing the `id` of the data item and a `callback` to the [`scrollToItem()`](/api/ui/grid/methods/scrolltoitem) method.
 
 The `callback` is an optional parameter, a function to be executed when virtual scrolling is enabled and the item to scroll is not loaded yet. The `callback` function must return the `index` of the item in the dataset.
 
@@ -47,4 +47,4 @@ The `callback` is an optional parameter, a function to be executed when virtual 
 
 * [Scroll to Item in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/scroll-to-item)
 * [Grid Virtual Scrolling Documentation]({% slug virtual_scrolling_kendoui_grid_widget %})
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

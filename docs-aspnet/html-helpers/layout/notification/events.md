@@ -92,4 +92,4 @@ The following example demonstrates how to subscribe to events by using a templat
 
 * [Using the API of the Notification HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/notification/api)
 * [Notification Server-Side API](/api/notification)
-* [Notification Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/notification)
+* [Notification Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/notification)

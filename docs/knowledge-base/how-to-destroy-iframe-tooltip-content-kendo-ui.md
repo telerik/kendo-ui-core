@@ -35,7 +35,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To remove or destroy the iframe content of a [Tooltip](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip) when it is hidden, handle the [`hide`](/api/javascript/ui/tooltip/events/hide) event of the Tooltip and modify the `src` attribute of the iframe to an empty string. Additionally, during the [`show`](/api/javascript/ui/tooltip/events/show) event, you can set the `src` attribute of the iframe to the desired URL.
+To remove or destroy the iframe content of a [Tooltip](https://docs.telerik.com/kendo-ui/api/ui/tooltip) when it is hidden, handle the [`hide`](/api/ui/tooltip/events/hide) event of the Tooltip and modify the `src` attribute of the iframe to an empty string. Additionally, during the [`show`](/api/ui/tooltip/events/show) event, you can set the `src` attribute of the iframe to the desired URL.
 
 Below is an example demonstrating how to implement this behavior:
 
@@ -70,6 +70,6 @@ In this solution, the `hide` event handler sets the `src` attribute of the ifram
 
 ## See Also
 
-- [Tooltip Hide Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip/events/hide)
-- [Tooltip Show Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip/events/show)
-- [Tooltip API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
+- [Tooltip Hide Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/tooltip/events/hide)
+- [Tooltip Show Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/tooltip/events/show)
+- [Tooltip API Reference](https://docs.telerik.com/kendo-ui/api/ui/tooltip)

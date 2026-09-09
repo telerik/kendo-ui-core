@@ -32,5 +32,5 @@ For more information about binding the Grid to data, refer to the articles on:
 ## See Also
 
 * [Local Data Binding of the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/local-data-binding)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

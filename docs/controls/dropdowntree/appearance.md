@@ -25,7 +25,7 @@ The Kendo UI DropDownTree supports the following styling options:
 
 The `size` option controls how big or small the DropDownTree looks. The structure of the class for a Single Selection DropDownTree is `k-picker-{size}`. The structure of the class in Multiple Selection mode is `k-input-{size}`. The option also affects the `span.k-chip` element through the `k-chip-{size}` class.
 
-The following values are available for the [`size`](/api/javascript/ui/dropdowntree/configuration/size) option:
+The following values are available for the [`size`](/api/ui/dropdowntree/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size (default)
@@ -71,7 +71,7 @@ The HTML when multiple selection is configured:
 
 The `rounded` option controls how much border radius is applied to the widget. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/dropdowntree/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/dropdowntree/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -120,7 +120,7 @@ The HTML when multiple selection is configured:
 
 The `fillMode` option controls how the color is applied to the widget. The structure of the class is `k-picker-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/dropdowntree/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/dropdowntree/configuration/fillmode) option:
 
 - `solid`
 - `flat`
@@ -217,4 +217,4 @@ You can enable the `popup` element to automatically adjust its width according t
 ## See Also
 
 * [Basic Usage of the DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/index)
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)
+* [JavaScript API Reference of the DropDownTree](/api/ui/dropdowntree)

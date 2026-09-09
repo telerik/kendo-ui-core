@@ -11,7 +11,7 @@ position: 3
 
 The LinearGauge enables you to customize the appearance of the scale by configuring the component's options.
 
-For example, you can change the appearance of the label and ticks, customize the ranges, and others. For the full list of options, refer to the [API reference of the LinearGauge](/api/javascript/dataviz/ui/lineargauge).
+For example, you can change the appearance of the label and ticks, customize the ranges, and others. For the full list of options, refer to the [API reference of the LinearGauge](/api/dataviz/ui/lineargauge).
 
 ```dojo
     <div id="gauge"></div>
@@ -51,4 +51,4 @@ For example, you can change the appearance of the label and ticks, customize the
 ## See Also
 
 * [Scale Options of the LinearGauge (Demo)](https://demos.telerik.com/kendo-ui/linear-gauge/scale-options)
-* [JavaScript API Reference of the LinearGauge](/api/javascript/dataviz/ui/lineargauge)
+* [JavaScript API Reference of the LinearGauge](/api/dataviz/ui/lineargauge)

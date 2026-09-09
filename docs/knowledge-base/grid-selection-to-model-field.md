@@ -239,4 +239,4 @@ The following example demonstrates how `SelectAll` that is located in the header
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

@@ -107,5 +107,5 @@ Here is a runnable example demonstrating this approach:
 ## See Also
 
 - [Kendo UI for jQuery Chart Documentation](https://docs.telerik.com/kendo-ui/controls/charts/overview)
-- [Kendo UI for jQuery Chart API](/api/javascript/dataviz/ui/chart)
+- [Kendo UI for jQuery Chart API](/api/dataviz/ui/chart)
 - [Kendo Drawing Overview Documentation](https://docs.telerik.com/kendo-ui/framework/drawing/overview)

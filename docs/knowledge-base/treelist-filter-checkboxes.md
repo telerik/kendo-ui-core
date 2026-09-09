@@ -28,9 +28,9 @@ How can I create a checkbox filter menu functionality in the Kendo UI TreeList?
 
 The following example demonstrates how to create a menu functionality based on a checkbox filter in a TreeList:
 
-1. Handle the [`filterMenuInit`](/api/javascript/ui/treelist/events/filtermenuinit) event.
+1. Handle the [`filterMenuInit`](/api/ui/treelist/events/filtermenuinit) event.
 1. Create checkbox for each item for the respective field and insert it to the filter popup.
-1. Use DataSource [`filter`](/api/javascript/data/datasource/methods/filter) method to filter the items based on the checkbox selection.
+1. Use DataSource [`filter`](/api/data/datasource/methods/filter) method to filter the items based on the checkbox selection.
 
 
 ```dojo
@@ -191,4 +191,4 @@ The following example demonstrates how to create a menu functionality based on a
 
 ## See Also
 
-* [API Reference of the TreeList](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist).
+* [API Reference of the TreeList](https://docs.telerik.com/kendo-ui/api/ui/treelist).

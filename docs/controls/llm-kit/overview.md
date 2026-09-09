@@ -72,8 +72,8 @@ The following example demonstrates how to initialize several LLM Kit components 
 
 ## See Also
 
-* [JavaScript API Reference of the Reasoning](/api/javascript/ui/reasoning)
-* [JavaScript API Reference of the ChainOfThought](/api/javascript/ui/chainofthought)
-* [JavaScript API Reference of the ToolCall](/api/javascript/ui/toolcall)
-* [JavaScript API Reference of the Checkpoint](/api/javascript/ui/checkpoint)
-* [JavaScript API Reference of the Citation](/api/javascript/ui/citation)
+* [JavaScript API Reference of the Reasoning](/api/ui/reasoning)
+* [JavaScript API Reference of the ChainOfThought](/api/ui/chainofthought)
+* [JavaScript API Reference of the ToolCall](/api/ui/toolcall)
+* [JavaScript API Reference of the Checkpoint](/api/ui/checkpoint)
+* [JavaScript API Reference of the Citation](/api/ui/citation)

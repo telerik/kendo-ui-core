@@ -25,4 +25,4 @@ To see the example on how to achieve this behavior, refer to [this project](http
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

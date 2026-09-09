@@ -64,7 +64,7 @@ The following example demonstrates how to render a month's full name.
 ```
 {% endif %}
 
-You can find more information about the available formatting options in our [Date Formatting](https://docs.telerik.com/kendo-ui/globalization/intl/dateformatting) article. At the client-side you are also able to format dates by using the Kendo UI [`kendo.toString`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/tostring) method.
+You can find more information about the available formatting options in our [Date Formatting](https://docs.telerik.com/kendo-ui/globalization/intl/dateformatting) article. At the client-side you are also able to format dates by using the Kendo UI [`kendo.toString`](https://docs.telerik.com/kendo-ui/api/kendo/methods/tostring) method.
 
 
 
@@ -72,4 +72,4 @@ You can find more information about the available formatting options in our [Dat
 
 * [Using the API of the DatePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datepicker/api)
 * [Server-Side API](/api/datepicker)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/datepicker)

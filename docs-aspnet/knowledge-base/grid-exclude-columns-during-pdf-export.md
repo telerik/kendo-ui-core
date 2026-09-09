@@ -42,8 +42,8 @@ For example refer to this [Telerik REPL Project](https://netcorerepl.telerik.com
 
 #### Using the `showColum()` and `hideColumn()` Grid Methods
 
-1. Hide the columns by using the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) method within the [`pdfExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/pdfexport) event handler.
-1. When the export is done, display the hidden column by using the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/showcolumn) method.
+1. Hide the columns by using the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/hidecolumn) method within the [`pdfExport`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/pdfexport) event handler.
+1. When the export is done, display the hidden column by using the [`showColumn`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/showcolumn) method.
 
 ```
 <script>
@@ -91,7 +91,7 @@ For example refer to this [Telerik REPL Project](https://netcorerepl.telerik.com
 
 * [Telerik REPL: Excluding Columns from the Exported PDF File by Using `k-pdf-export`](https://netcorerepl.telerik.com/mGEbbFlv24kGE8ul49)
 * [Telerik REPL: Excluding Columns from the Exported PDF File by Using `showColumn` and `hideColumn`](https://netcorerepl.telerik.com/mmYPvbvv29bLqpSd35)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

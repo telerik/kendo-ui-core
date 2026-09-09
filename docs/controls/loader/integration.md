@@ -140,4 +140,4 @@ The following example demonstrates how the Loader can be used as a building bloc
 
 ## See Also
 
-* [API Reference of the Loader Component](/api/javascript/ui/loader)
+* [API Reference of the Loader Component](/api/ui/loader)

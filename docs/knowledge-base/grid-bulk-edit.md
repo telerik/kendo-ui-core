@@ -222,6 +222,6 @@ To achieve the desired scenario, use the following implementation.
 
 ## See Also
 
-* [JavaScript API Reference of the Kendo UI for jQuery Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Kendo UI for jQuery Data Grid](/api/ui/grid)
 * [jQuery UI Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
 * [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})

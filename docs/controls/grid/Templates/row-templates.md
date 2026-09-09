@@ -140,4 +140,4 @@ A few requirements need to be met when the `rowTemplate` is used alongside a `de
 * [Using Detail-Row Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/detailtemplate)
 * [Using Toolbar Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/toolbar-template)
 * [Introduction on Templates]({% slug overview_kendoui_templatescomponent %})
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

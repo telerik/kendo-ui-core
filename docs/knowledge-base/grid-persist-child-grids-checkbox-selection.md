@@ -29,9 +29,9 @@ How can I persist the selected rows of the child Grids when I change the page of
 
 ## Solution
 
-1. Handle the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event of the child Grids.
+1. Handle the [`change`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/change) event of the child Grids.
 1. In the `change` event handler, use the internal `_selectedIds` property to save the selected IDs in a global array.
-1. Handle the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit) event of the master Grids.
+1. Handle the [`detailInit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/detailinit) event of the master Grids.
 1. In the `detailInit` event handler, assign the recorded data from the global array to the `_selectedIds` property of the relevant child Grid.
 
 ```dojo

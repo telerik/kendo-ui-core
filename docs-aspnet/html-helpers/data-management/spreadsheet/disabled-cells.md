@@ -61,7 +61,7 @@ You can set the state of a cell during the initialization of the Spreadsheet for
 
 ## Set Cell State after Initialization
 
-You can set the state of a cell or range of cells after the initialization by using the [kendo.spreadsheet.Range client-side API](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range) and the [enable](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/enable) method.
+You can set the state of a cell or range of cells after the initialization by using the [kendo.spreadsheet.Range client-side API](https://docs.telerik.com/kendo-ui/api/spreadsheet/range) and the [enable](https://docs.telerik.com/kendo-ui/api/spreadsheet/range/methods/enable) method.
 
 The following example demosntrates how to toggle the state of cell `A1` on button click:
 
@@ -82,6 +82,6 @@ $("#myButton").click(function () {
 ## See Also
 * [Disabled Cells of the Spreadsheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet/disabled-cells)
 * [Server-Side API](/api/spreadsheet)
-* [Spreadsheet Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-* [kendo.spreadsheet.Sheet Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet)
-* [kendo.spreadsheet.Range Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range)
+* [Spreadsheet Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
+* [kendo.spreadsheet.Sheet Client-Side API](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet)
+* [kendo.spreadsheet.Range Client-Side API](https://docs.telerik.com/kendo-ui/api/spreadsheet/range)

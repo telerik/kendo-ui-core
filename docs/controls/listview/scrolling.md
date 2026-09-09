@@ -13,7 +13,7 @@ By default, the scrolling functionality of the ListView is disabled.
 
 ## Getting Started
 
-To enable the scrolling functionality, set the `scrollable` property. If `scrollable` is set to `true` and the content exceeds the [height](/api/javascript/ui/listview/configuration/height) value of the ListView, the component will display a scrollbar.
+To enable the scrolling functionality, set the `scrollable` property. If `scrollable` is set to `true` and the content exceeds the [height](/api/ui/listview/configuration/height) value of the ListView, the component will display a scrollbar.
 
 ```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -42,7 +42,7 @@ The endless scrolling functionality enables the ListView to display large amount
 
 Endless scrolling also works with editing&mdash;when the ListView is in its endless scroll mode and an item is opened for editing, that item will remain opened even after a new page is requested.
 
-To enable endless scrolling, set the [`scrollable`](/api/javascript/ui/listview/configuration/scrollable) property to `endless`.
+To enable endless scrolling, set the [`scrollable`](/api/ui/listview/configuration/scrollable) property to `endless`.
 
 The ListView supports endless scrolling regardless of whether it is bound to local or remote data:
 * When bound to local data arrays, the ListView serializes all items to the client and while the user is scrolling, the component displays new items.
@@ -73,4 +73,4 @@ The ListView supports endless scrolling regardless of whether it is bound to loc
 ## See Also
 
 * [Basic Usage of the ListView (Demo)](https://demos.telerik.com/kendo-ui/listview/index)
-* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
+* [JavaScript API Reference of the ListView](/api/ui/listview)

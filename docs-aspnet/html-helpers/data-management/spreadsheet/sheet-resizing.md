@@ -9,7 +9,7 @@ position: 9
 
 # Sheet Resizing 
 
-As of the R1 2022 SP2 release, the API of the Spreadsheet [Sheet](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet) includes a `resize` method. You can use it to increase or decrease the number of rows and columns in the sheet, after the initialization of the Spreadsheet. If the user pastes data that exceeds the current sheet size, the sheet will automatically resize. The user can also add or delete columns and rows from the toolbar.
+As of the R1 2022 SP2 release, the API of the Spreadsheet [Sheet](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet) includes a `resize` method. You can use it to increase or decrease the number of rows and columns in the sheet, after the initialization of the Spreadsheet. If the user pastes data that exceeds the current sheet size, the sheet will automatically resize. The user can also add or delete columns and rows from the toolbar.
 
 > If you delete a row or a column through the `resize` method or by using the **Delete Row** or **Delete Column** toolbar tool, it will be removed even if it contains data. 
 
@@ -18,7 +18,7 @@ As of the R1 2022 SP2 release, the API of the Spreadsheet [Sheet](https://docs.t
 
 If you programmmatically set the number of rows or columns with the `resize` method, the user will not able to revert the applied changes through the **Undo** or **Redo** toolbar options. **Undo** and **Redo** will take effect, only if the user modifies the number of rows or columns through the **Insert New Row** or **Insert New Column**, or the **Delete Row** or **Delete Column** toolbar options.
 
-The example below shows how to set the number of rows and columns in the active sheet by using the [`resize`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/resize) API method. 
+The example below shows how to set the number of rows and columns in the active sheet by using the [`resize`](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet/methods/resize) API method. 
 
 ```HtmlHelper
 @(Html.Kendo().Spreadsheet()
@@ -76,5 +76,5 @@ The implementation of the `resize` method has led to the following changes in th
 
 ## See Also
 
-* [Spreadsheet JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-* [Sheet JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet)
+* [Spreadsheet JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
+* [Sheet JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet)

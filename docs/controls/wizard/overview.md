@@ -24,9 +24,9 @@ The Wizard displays content in sequential, stepwise order. Each step of the Kend
 
 * [Getting Started with the Kendo UI Wizard for jQuery]({% slug getting_started_kendoui_wizard_widget %})
 * [Overview of the Wizard (Demo)](https://demos.telerik.com/kendo-ui/wizard/index)
-* [JavaScript API Reference of the Wizard](/api/javascript/ui/wizard)
+* [JavaScript API Reference of the Wizard](/api/ui/wizard)
 
 ## See Also
 
 * [Overview of the Wizard](https://demos.telerik.com/kendo-ui/wizard/index)
-* [JavaScript API Reference of the Wizard](/api/javascript/ui/wizard)
+* [JavaScript API Reference of the Wizard](/api/ui/wizard)

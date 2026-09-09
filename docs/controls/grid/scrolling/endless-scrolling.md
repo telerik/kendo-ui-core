@@ -17,7 +17,7 @@ For runnable examples, refer to:
 
 ## Getting Started
 
-To enable endless scrolling, set the [`scrollable.endless`](/api/javascript/ui/grid/configuration/scrollable.endless) property to `true`.
+To enable endless scrolling, set the [`scrollable.endless`](/api/ui/grid/configuration/scrollable.endless) property to `true`.
 
 > For the functionality to work as expected there are two requirements:
 > - There needs to be a vertical scrollbar
@@ -57,9 +57,9 @@ If the Grid displays hierarchical data and an item gets expanded, it will not be
 
 ## Using with DataSource operations
 
-When a filter, sort, or group is applied through the [`DataSource methods`](/api/javascript/data/datasource#methods) rather than the Grid UI, the scroll position isn't automatically reset.
+When a filter, sort, or group is applied through the [`DataSource methods`](/api/data/datasource#methods) rather than the Grid UI, the scroll position isn't automatically reset.
 
-In such cases, the scroll position and [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) should be updated manually.
+In such cases, the scroll position and [`pageSize`](/api/data/datasource/configuration/pagesize) should be updated manually.
 
         $("#grid").kendoGrid({
             scrollable: {
@@ -92,4 +92,4 @@ In such cases, the scroll position and [`pageSize`](/api/javascript/data/datasou
 
 * [Endless Scrolling of Local Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-local)
 * [Endless Scrolling of Remote Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-remote)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

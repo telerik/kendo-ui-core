@@ -47,7 +47,7 @@ In this step, you will initialize the Barcode from the `<div>` element. All sett
 
 ## 3. Set the Value of the Barcode
 
-You can configure the initial value of the component by using the [`value`](/api/javascript/dataviz/ui/barcode/configuration/value) option.
+You can configure the initial value of the component by using the [`value`](/api/dataviz/ui/barcode/configuration/value) option.
 
 ```html
    <div id="barcode"></div>
@@ -61,7 +61,7 @@ You can configure the initial value of the component by using the [`value`](/api
 
 ## 4. Set the Encoding Type
 
-The Barcode provides an option to set the symbology the component will use. Use the [`type`](/api/javascript/dataviz/ui/barcode/configuration/type) configuration option to set the encoding.
+The Barcode provides an option to set the symbology the component will use. Use the [`type`](/api/dataviz/ui/barcode/configuration/type) configuration option to set the encoding.
 
 ```html
    <div id="barcode"></div>
@@ -77,7 +77,7 @@ The Barcode provides an option to set the symbology the component will use. Use 
 
 ## 5. Change the Barcode Colors
 
-You can customize the Barcode appearance by setting the [`color`](/api/javascript/dataviz/ui/barcode/configuration/color) and [`background`](/api/javascript/dataviz/ui/barcode/configuration/background) color option.
+You can customize the Barcode appearance by setting the [`color`](/api/dataviz/ui/barcode/configuration/color) and [`background`](/api/dataviz/ui/barcode/configuration/background) color option.
 
 ```html
    <div id="barcode"></div>
@@ -98,7 +98,7 @@ You can customize the Barcode appearance by setting the [`color`](/api/javascrip
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Barcode](/api/javascript/dataviz/ui/barcode)
+* [JavaScript API Reference of the jQuery Barcode](/api/dataviz/ui/barcode)
 * [Knowledge Base Section](/knowledge-base)
 
 

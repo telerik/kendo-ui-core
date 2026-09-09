@@ -30,7 +30,7 @@ How can I set a configurable limit to the number of the Grid rows that are expor
 
 ## Solution
 
-Split the array of the exported rows based on a value during the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event.  
+Split the array of the exported rows based on a value during the [`excelExport`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/excelexport) event.  
 
 ```dojo
 <div id="grid"></div>

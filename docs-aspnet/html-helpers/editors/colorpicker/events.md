@@ -130,5 +130,5 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the ColorPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/api)
 * [ColorPicker Server-Side API for {{ site.framework}}](/api/colorpicker)
-* [ColorPicker Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker)
+* [ColorPicker Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/colorpicker)
 

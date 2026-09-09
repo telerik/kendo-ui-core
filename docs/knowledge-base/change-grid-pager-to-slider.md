@@ -33,11 +33,11 @@ How can I change the default pager of the Kendo UI Grid to a slider?
 
 ## Solution
 
-1. Remove the default pager buttons on the first [`dataBound`](/api/javascript/ui/grid/events/databound) event.
+1. Remove the default pager buttons on the first [`dataBound`](/api/ui/grid/events/databound) event.
 1. Create a Kendo UI Slider in their place.
-1. Change the page of the Grid DataSource on the [`change`](/api/javascript/ui/slider/events/change) event of the Slider.
+1. Change the page of the Grid DataSource on the [`change`](/api/ui/slider/events/change) event of the Slider.
 
-> When you apply this approach, the [`page`](/api/javascript/data/datasource/methods/page) method of the Grid does not fire.
+> When you apply this approach, the [`page`](/api/data/datasource/methods/page) method of the Grid does not fire.
 
 ```dojo
 <div id="grid"></div>
@@ -99,4 +99,4 @@ How can I change the default pager of the Kendo UI Grid to a slider?
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

@@ -79,4 +79,4 @@ The following example demonstrates how to subscribe to events by a template dele
 ## See Also
 
 * [Wizard Server-Side API for {{ site.framework}}](/api/wizard)
-* [Wizard Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard)
+* [Wizard Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/wizard)

@@ -189,4 +189,4 @@ The `Icon()` configuration option accepts a name of an icon. The specified icon 
 {% if site.core %}
 * [Server-Side TagHelper API](/api/taghelpers/floatingactionbutton)
 {% endif %}
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/floatingactionbutton)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/floatingactionbutton)

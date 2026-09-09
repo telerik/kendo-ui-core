@@ -24,10 +24,10 @@ You can define its content either as static text or load it dynamically with AJA
 
 * [Getting Started with the Kendo UI Tooltip for jQuery]({% slug getting_started_kendoui_tooltip_widget %})
 * [Basic Usage of the Tooltip (Demo)](https://demos.telerik.com/kendo-ui/tooltip/index)
-* [JavaScript API Reference of the Tooltip](/api/javascript/ui/tooltip)
+* [JavaScript API Reference of the Tooltip](/api/ui/tooltip)
 
 ## See Also
 
 * [Basic Usage of the Tooltip (Demo)](https://demos.telerik.com/kendo-ui/tooltip/index)
 * [Using the API of the Tooltip (Demo)](https://demos.telerik.com/kendo-ui/tooltip/api)
-* [JavaScript API Reference of the Tooltip](/api/javascript/ui/tooltip)
+* [JavaScript API Reference of the Tooltip](/api/ui/tooltip)

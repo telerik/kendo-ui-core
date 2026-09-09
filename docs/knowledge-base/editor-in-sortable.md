@@ -24,7 +24,7 @@ Editor within Sortable loses it's content when dragged.
 
 ## Solution
 
-Because of the embedded `<iframe>` when changing the position of the Editor widget in the DOM, the widget will need its [refresh()](/api/javascript/ui/editor/methods/refresh) method to be called to properly display its content again. Here you could find a small sample demonstrating that.
+Because of the embedded `<iframe>` when changing the position of the Editor widget in the DOM, the widget will need its [refresh()](/api/ui/editor/methods/refresh) method to be called to properly display its content again. Here you could find a small sample demonstrating that.
 
 ```dojo
     <ul id="sortable">
@@ -60,4 +60,4 @@ Because of the embedded `<iframe>` when changing the position of the Editor widg
 
 ## See Also
 
-* [API Reference of the Editor](/api/javascript/ui/editor)
+* [API Reference of the Editor](/api/ui/editor)

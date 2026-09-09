@@ -51,7 +51,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 3. Add an Icon
 
-You can display an icon in the Badge by configuring the [icon](/api/javascript/ui/badge/configuration/icon). 
+You can display an icon in the Badge by configuring the [icon](/api/ui/badge/configuration/icon). 
 
 ```html
 <span id="badge">Badge</span>
@@ -65,7 +65,7 @@ You can display an icon in the Badge by configuring the [icon](/api/javascript/u
 
 ## 4. Set the theme color of the Badge.
 
-You can configure the Badge [themeColor](/api/javascript/ui/badge/configuration/themecolor).
+You can configure the Badge [themeColor](/api/ui/badge/configuration/themecolor).
 
 ```html
 <span id="badge">Badge</span>
@@ -83,7 +83,7 @@ You can configure the Badge [themeColor](/api/javascript/ui/badge/configuration/
 To refer to an existing Badge instance:
 
 1. Use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method.
-1. Once a reference is established, use the [Badge API](/api/javascript/ui/badge) to control its behavior.
+1. Once a reference is established, use the [Badge API](/api/ui/badge) to control its behavior.
 
         var badge = $("#badge").data("kendoBadge");
 
@@ -91,7 +91,7 @@ To refer to an existing Badge instance:
 ## See Also 
 
 * [Demo Page for the Badge](https://demos.telerik.com/kendo-ui/badge/index)
-* [JavaScript API Reference of the Badge](/api/javascript/ui/badge)
+* [JavaScript API Reference of the Badge](/api/ui/badge)
 * [Knowledge Base Section](/knowledge-base)
 
 

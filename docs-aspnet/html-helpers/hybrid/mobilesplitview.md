@@ -62,7 +62,7 @@ The SplitView represents a tablet-specific view that consists of two or more mob
 
 ## Events
 
-You can subscribe to all hybrid SplitView [events](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/splitview#events).
+You can subscribe to all hybrid SplitView [events](https://docs.telerik.com/kendo-ui/api/mobile/ui/splitview#events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -92,7 +92,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-You can reference a hybrid SplitView instance by using the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid SplitView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/splitview#methods) to control its behavior.
+You can reference a hybrid SplitView instance by using the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid SplitView client-side API](https://docs.telerik.com/kendo-ui/api/mobile/ui/splitview#methods) to control its behavior.
 
     @(Html.Kendo().MobileSplitView()
             .Name("MobileSplitView") //SplitView `id`

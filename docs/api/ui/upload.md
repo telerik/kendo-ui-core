@@ -8,7 +8,7 @@ component: upload
 
 # kendo.ui.Upload
 
-Represents the Kendo UI Upload. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Upload. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -83,7 +83,7 @@ How to enable batch upload mode in Kendo UI Upload widget? Configure upload oper
 
 When `async.chunkSize` is set, the selected files are uploaded chunk by chunk with the declared size. Each request sends a separate file blob and additional string metadata to the server. This metadata is in a stringified JSON format and contains the `fileName`, `relativePath`, `chunkIndex`, `contentType`, `totalFileSize`, `totalChunks`, and `uploadUid` properties. These properties enable the validation and combination of the file on the server side. The response also returns a JSON object with the `uploaded` and `fileUid` properties, which notifies the client what the next chunk is.
 
-> The `async.chunkSize` property is available only when [`async.batch`](/api/javascript/ui/upload#configuration-async.batch) is set to `false`.
+> The `async.chunkSize` property is available only when [`async.batch`](/api/ui/upload#configuration-async.batch) is set to `false`.
 
 
 <div class="meta-api-description">
@@ -107,7 +107,7 @@ How do I set the chunk size for Kendo UI's Upload widget to optimize asynchronou
 
 By default, the selected files are uploaded one after the other. When `async.concurrent` is set to `true`, all selected files start to upload simultaneously.
 
-> The `async.concurrent` property is available only when [`async.chunkSize`](/api/javascript/ui/upload#configuration-async.chunkSize) is set.
+> The `async.concurrent` property is available only when [`async.chunkSize`](/api/ui/upload#configuration-async.chunkSize) is set.
 
 
 <div class="meta-api-description">
@@ -155,7 +155,7 @@ How do I configure automatic retry delays for failed uploads in Kendo UI Upload?
 
 Sets the maximum number of attempts that are performed if an upload fails.
 
-> The `async.maxAutoRetries` property is available only when [`async.autoRetryAfter`](/api/javascript/ui/upload#configuration-async.autoRetryAfter) is set.
+> The `async.maxAutoRetries` property is available only when [`async.autoRetryAfter`](/api/ui/upload#configuration-async.autoRetryAfter) is set.
 
 
 <div class="meta-api-description">
@@ -1083,7 +1083,7 @@ How do I hide the file list in Kendo UI Upload component? Configure visibility o
 
 ### template `String|Function`
 
-Sets a [template](/api/javascript/kendo/methods/template) for rendering the files in the file list.
+Sets a [template](/api/kendo/methods/template) for rendering the files in the file list.
 
 The `template` data `Array` consists of:
 
@@ -1754,7 +1754,7 @@ Fires when the upload was cancelled while in progress.
 
 > The `cancel` event fires only when the Upload is in [async mode](/web/upload/modes#asynchronous-mode).
 
-> To remove the data of a file that has been canceled, manually call the `remove` handler. For more information refer to the limitation of the [`removeFile` method](/api/javascript/ui/upload/methods/removefile)
+> To remove the data of a file that has been canceled, manually call the `remove` handler. For more information refer to the limitation of the [`removeFile` method](/api/ui/upload/methods/removefile)
 
 
 <div class="meta-api-description">

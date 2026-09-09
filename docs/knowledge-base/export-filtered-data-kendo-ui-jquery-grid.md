@@ -106,5 +106,5 @@ This custom approach allows for the export of all grid data or only filtered res
 
 ## See Also
 - [Kendo UI for jQuery Grid Documentation](https://docs.telerik.com/kendo-ui/controls/grid/overview)
-- [Kendo UI for jQuery Grid excelExport Event API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport)
-- [Kendo UI DataSource filter() Method API](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter)
+- [Kendo UI for jQuery Grid excelExport Event API](https://docs.telerik.com/kendo-ui/api/ui/grid/events/excelexport)
+- [Kendo UI DataSource filter() Method API](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/filter)

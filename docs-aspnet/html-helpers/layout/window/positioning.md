@@ -84,4 +84,4 @@ To set a custom position of the Window, use the [`Position()`](https://docs.tele
 ## See Also
 
 * [Server-Side API](/api/window)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/window)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/window)

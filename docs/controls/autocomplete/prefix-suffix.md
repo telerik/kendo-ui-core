@@ -17,7 +17,7 @@ The prefix and suffix input adornments are elements positioned before and after 
 
 The prefix input adornment is located before the AutoComplete input field. It provides additional context to guide users when entering specific data, such as icons for currencies or unit indicators.
 
-To add a prefix before your AutoComplete input, use the [`prefixOptions`](/api/javascript/ui/autocomplete/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
+To add a prefix before your AutoComplete input, use the [`prefixOptions`](/api/ui/autocomplete/configuration/prefixoptions) configuration. `prefixOptions` provides the following options:
 
 * `Icon`&mdash;Inserts an icon before the AutoComplete element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content before the AutoComplete element.
@@ -44,7 +44,7 @@ The following example demonstrates how to set an icon as a prefix of the AutoCom
 
 ## Suffix
 
-The suffix input adornment is located after the AutoComplete input field. Usually, it offers direct functionality related to the entered data, such as toggles for password visibility, formatting options, or the ability to clear the input. Set up the Suffix functionality through the [`suffixOptions`](/api/javascript/ui/autocomplete/configuration/suffixoptions) configuration that provides the following options:
+The suffix input adornment is located after the AutoComplete input field. Usually, it offers direct functionality related to the entered data, such as toggles for password visibility, formatting options, or the ability to clear the input. Set up the Suffix functionality through the [`suffixOptions`](/api/ui/autocomplete/configuration/suffixoptions) configuration that provides the following options:
 
 * `Icon`&mdash;Adds an icon after the AutoComplete element. The option accepts the name of an existing icon in the Kendo UI theme or SVG content.
 * `Template`&mdash;Adds custom content after the AutoComplete element.
@@ -71,4 +71,4 @@ The following example demonstrates how to add an icon as a suffix of the AutoCom
 ## See Also
 
 * [AutoComplete Prefix and Suffix (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/prefix-suffix)
-* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)
+* [JavaScript API Reference of the AutoComplete](/api/ui/autocomplete)

@@ -34,4 +34,4 @@ The Kendo UI for jQuery SplitButton widget combines the functionality of a butto
 * [Using the Basic Events of the SplitButton (Demo)](https://demos.telerik.com/kendo-ui/splitbutton/events)
 * [Binding the SplitButton over MVVM (Demo)](https://demos.telerik.com/kendo-ui/splitbutton/mvvm)
 * [Applying the SplitButton API (Demo)](https://demos.telerik.com/kendo-ui/splitbutton/api)
-* [JavaScript API Reference of the SplitButton](/api/javascript/ui/splitbutton)
+* [JavaScript API Reference of the SplitButton](/api/ui/splitbutton)

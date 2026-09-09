@@ -254,7 +254,7 @@ You can reference the NumericTextBox instances that you have created and build o
     </script>
     ```
 
-1. Use the [NumericTextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox#methods) to control the behavior of the widget. In this example, you will use the `readonly` method to disable user input.
+1. Use the [NumericTextBox client-side API](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox#methods) to control the behavior of the widget. In this example, you will use the `readonly` method to disable user input.
 
     ```JS script
     <script>
@@ -283,6 +283,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the NumericTextBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/numerictextbox/api)
-* [NumericTextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox)
+* [NumericTextBox client-side API](https://docs.telerik.com/kendo-ui/api/ui/numerictextbox)
 * [NumericTextBox server-side API](/api/numerictextbox)
 * [Knowledge Base Section](/knowledge-base)

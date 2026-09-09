@@ -7,7 +7,7 @@ component: Checkpoint
 
 # kendo.ui.Checkpoint
 
-Represents the Kendo UI Checkpoint widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Checkpoint widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

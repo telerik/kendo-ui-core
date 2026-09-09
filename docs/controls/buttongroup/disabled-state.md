@@ -11,7 +11,7 @@ position: 2
 
 The ButtonGroup provides options for setting its enabled and disabled state.  
 
-To configure the ButtonGroup as initially disabled, use its [`enable`](/api/javascript/ui/buttongroup/configuration/enable) property. The ButtonGroup can also be disabled or enabled with JavaScript by using its [`enable`](/api/javascript/ui/buttongroup/methods/enable) method with a Boolean argument.
+To configure the ButtonGroup as initially disabled, use its [`enable`](/api/ui/buttongroup/configuration/enable) property. The ButtonGroup can also be disabled or enabled with JavaScript by using its [`enable`](/api/ui/buttongroup/methods/enable) method with a Boolean argument.
 
 The following example demonstrates how to enable and disable the ButtonGroup.
 
@@ -37,4 +37,4 @@ The following example demonstrates how to enable and disable the ButtonGroup.
 ## See Also
 
 * [Basic Usage of the ButtonGroup (Demo)](https://demos.telerik.com/kendo-ui/buttongroup/index)
-* [JavaScript API Reference of the ButtonGroup](/api/javascript/ui/buttongroup)
+* [JavaScript API Reference of the ButtonGroup](/api/ui/buttongroup)

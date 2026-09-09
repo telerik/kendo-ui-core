@@ -82,4 +82,4 @@ To specify the number of columns of the palette, set up the [`Columns()`](/api/k
 {% if site.core %}
 * [Server-Side API of the ColorPicker TagHelper](/api/taghelpers/colorpicker)
 {% endif %}
-* [Client-Side API of the ColorPicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker)
+* [Client-Side API of the ColorPicker](https://docs.telerik.com/kendo-ui/api/ui/colorpicker)

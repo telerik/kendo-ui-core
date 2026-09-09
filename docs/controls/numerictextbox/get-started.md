@@ -50,9 +50,9 @@ In this step, you will initialize the NumericTextBox from the `<input>` element.
 
 ## 3. Format the Displayed Value
 
-The NumericTextBox supports a variety of configurations. For a full list of all available options, visit the [NumericTextBox API Documentation](/api/javascript/ui/numerictextbox).
+The NumericTextBox supports a variety of configurations. For a full list of all available options, visit the [NumericTextBox API Documentation](/api/ui/numerictextbox).
 
-To apply a format to the rendered value, use the [`format`](/api/javascript/ui/numerictextbox/configuration/format) configuration.
+To apply a format to the rendered value, use the [`format`](/api/ui/numerictextbox/configuration/format) configuration.
 
 ```html
 <input id="numeric-textbox" />
@@ -71,6 +71,6 @@ To apply a format to the rendered value, use the [`format`](/api/javascript/ui/n
 
 ## See Also 
 
-* [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
+* [JavaScript API Reference of the NumericTextBox](/api/ui/numerictextbox)
 * [Knowledge Base Section](/knowledge-base)
 

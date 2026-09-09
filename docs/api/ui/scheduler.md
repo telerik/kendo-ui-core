@@ -8,14 +8,14 @@ component: scheduler
 
 # kendo.ui.Scheduler
 
-Represents the Kendo UI Scheduler widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Scheduler widget. Inherits from [Widget](/api/ui/widget).
 
 
 ## Configuration
 
 ### allDayEventTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the "all day" scheduler events.
+The [template](/api/kendo/methods/template) used to render the "all day" scheduler events.
 
 The fields which can be used in the template are:
 
@@ -73,7 +73,7 @@ How do I customize the display of all-day events in a Kendo UI Scheduler? Custom
 
 If set to `true` the scheduler will display a slot for "all day" events.
 
-> The option is a shorthand to the view's `allDaySlot` option. To define the `daySlot` visibility using a **data-** attribute set the [views.allDaySlot](/api/javascript/ui/scheduler#configuration-views.allDaySlot) option directly.
+> The option is a shorthand to the view's `allDaySlot` option. To define the `daySlot` visibility using a **data-** attribute set the [views.allDaySlot](/api/ui/scheduler#configuration-views.allDaySlot) option directly.
 
 
 <div class="meta-api-description">
@@ -100,8 +100,8 @@ How can I hide all-day event placeholders in my Kendo UI Scheduler? Control visi
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
-data source is fired. That will also apply for data sources for the [resources](/api/javascript/ui/scheduler/configuration/resources) used in the widget. By default the widget will bind to the data source specified in the configuration.
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/data/datasource/events/change) event of the
+data source is fired. That will also apply for data sources for the [resources](/api/ui/scheduler/configuration/resources) used in the widget. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
 
@@ -176,7 +176,7 @@ How often does the current time marker update in a Kendo UI Scheduler? Adjust th
 
 ### currentTimeMarker.useLocalTimezone `Boolean` *(default: true)*
 
-If set to `false` the "current time" marker would be displayed using the scheduler [timezone](/api/javascript/ui/scheduler/configuration/timezone).
+If set to `false` the "current time" marker would be displayed using the scheduler [timezone](/api/ui/scheduler/configuration/timezone).
 
 
 <div class="meta-api-description">
@@ -201,12 +201,12 @@ How to adjust current time indicator in Kendo UI Scheduler to reflect local syst
 
 ### dataSource `Object|Array|kendo.data.SchedulerDataSource`
 
-The data source of the widget which contains the scheduler events. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.SchedulerDataSource](/api/javascript/data/schedulerdatasource)
+The data source of the widget which contains the scheduler events. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.SchedulerDataSource](/api/data/schedulerdatasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.SchedulerDataSource](/api/javascript/data/schedulerdatasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.SchedulerDataSource](/api/data/schedulerdatasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.SchedulerDataSource](/api/javascript/data/schedulerdatasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.SchedulerDataSource](/api/data/schedulerdatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 > The Kendo UI Scheduler widget can be bound *only* to a `kendo.data.SchedulerDataSource`. An exception will be thrown if the `dataSource` option is set to a `kendo.data.DataSource` instance.
 
@@ -353,7 +353,7 @@ How to set initial displayed time period in Kendo UI Scheduler? Control and conf
 
 ### dateHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the date header cells.
+The [template](/api/kendo/methods/template) used to render the date header cells.
 
 By default the scheduler renders the date using a custom date format - "ddd M/dd".
 The "ddd" specifier represents the abbreviated name of the week day and will be localized using the current Kendo UI culture.
@@ -639,7 +639,7 @@ How do I allow users to resize events in Kendo UI Scheduler? Control the ability
 
 ### editable.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the editor.
+The [template](/api/kendo/methods/template) which renders the editor.
 
 The template should contain elements whose `name` HTML attributes are set as the editable fields. This is how the Scheduler will know
 which field to update. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
@@ -757,9 +757,9 @@ How do I allow users to edit events in a Kendo UI Scheduler? Enable or disable t
 
 Configures the Kendo UI Dialog instance that contains the desktop event editor. The configuration is optional.
 
-> The `window` property name is retained for backward compatibility. The supplied options are passed to a [Dialog](/api/javascript/ui/dialog) instance.
+> The `window` property name is retained for backward compatibility. The supplied options are passed to a [Dialog](/api/ui/dialog) instance.
 
-For more information, refer to the [Dialog configuration API](/api/javascript/ui/dialog#configuration).
+For more information, refer to the [Dialog configuration API](/api/ui/dialog#configuration).
 
 
 <div class="meta-api-description">
@@ -829,7 +829,7 @@ How to limit maximum visible time boundary for daily calendar view in Kendo UI S
 
 ### eventTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the scheduler events.
+The [template](/api/kendo/methods/template) used to render the scheduler events.
 
 The fields which can be used in the template are:
 
@@ -1019,7 +1019,7 @@ How to group events by resources in Kendo UI Scheduler? Manage and configure eve
 
 ### group.date `Boolean` *(default: false)*
 
-If set to `true` and the [group.resources](/api/javascript/ui/scheduler#configuration-group.resources) has some resources set the view is grouped by date.
+If set to `true` and the [group.resources](/api/ui/scheduler#configuration-group.resources) has some resources set the view is grouped by date.
 
 
 <div class="meta-api-description">
@@ -1165,7 +1165,7 @@ How do I configure the layout direction of grouped headers in a Kendo UI Schedul
 
 ### groupHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the group headers of scheduler day, week, workWeek and timeline views.
+The [template](/api/kendo/methods/template) used to render the group headers of scheduler day, week, workWeek and timeline views.
 
 The fields which can be used in the template are:
 
@@ -1275,7 +1275,7 @@ How can I adjust the time axis granularity in my Kendo UI Scheduler widget to di
 
 ### majorTimeHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the major ticks.
+The [template](/api/kendo/methods/template) used to render the major ticks.
 
 By default the scheduler renders the time using the current culture time format.
 
@@ -2645,7 +2645,7 @@ How do I customize the title of the event editor in Kendo UI Scheduler? Customiz
 
 ### messages.moreEventsPopover `Object`
 
-Configures the messages in the Month view overflow popover. These messages are processed only when the Month view has [moreEventsPopover](/api/javascript/ui/scheduler#configuration-views.moreEventsPopover) set to `true`.
+Configures the messages in the Month view overflow popover. These messages are processed only when the Month view has [moreEventsPopover](/api/ui/scheduler#configuration-views.moreEventsPopover) set to `true`.
 
 
 <div class="meta-api-description">
@@ -2674,7 +2674,7 @@ How do I customize the event overflow popover text in the Kendo UI Scheduler Mon
 
 ### messages.moreEventsPopover.eventsLabel `String` *(default: "Events")*
 
-The accessible label for the event list in the Month view overflow popover. The message is consumed only when the Month view has [moreEventsPopover](/api/javascript/ui/scheduler#configuration-views.moreEventsPopover) set to `true`.
+The accessible label for the event list in the Month view overflow popover. The message is consumed only when the Month view has [moreEventsPopover](/api/ui/scheduler#configuration-views.moreEventsPopover) set to `true`.
 
 
 <div class="meta-api-description">
@@ -2698,7 +2698,7 @@ How can I change the accessible events label in the Kendo UI Scheduler Month vie
 
 ### messages.moreEventsPopover.noEvents `String` *(default: "No events on this date.")*
 
-The text displayed when the Month view overflow popover has no events for the selected date. The message is consumed only when the Month view has [moreEventsPopover](/api/javascript/ui/scheduler#configuration-views.moreEventsPopover) set to `true`.
+The text displayed when the Month view overflow popover has no events for the selected date. The message is consumed only when the Month view has [moreEventsPopover](/api/ui/scheduler#configuration-views.moreEventsPopover) set to `true`.
 
 
 <div class="meta-api-description">
@@ -5284,7 +5284,7 @@ How to adjust the number of smaller time intervals in a Kendo UI Scheduler? Adju
 
 ### minorTimeHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the minor ticks.
+The [template](/api/kendo/methods/template) used to render the minor ticks.
 
 By default the scheduler renders a `"&nbsp;"`.
 
@@ -5504,7 +5504,7 @@ How often does Kendo UI update ongoing events in a Scheduler? Adjust how often t
 
 ### ongoingEvents.useLocalTimezone `Boolean` *(default: true)*
 
-If set to `false` the ongoing events will be highlighted in the scheduler [timezone](/api/javascript/ui/scheduler/configuration/timezone). That means only events that happen at the moment (according to their `start` and `end` data) will be highlighted. In order the highlight on the ongoing events to be visually in sync with the `currentTimeMarker` in the widget, the `useLocalTimezone` configuration options of both must be set to the same value. This way the highlighted ongoing events will be placed over the `currentTimeMarker`.
+If set to `false` the ongoing events will be highlighted in the scheduler [timezone](/api/ui/scheduler/configuration/timezone). That means only events that happen at the moment (according to their `start` and `end` data) will be highlighted. In order the highlight on the ongoing events to be visually in sync with the `currentTimeMarker` in the widget, the `useLocalTimezone` configuration options of both must be set to the same value. This way the highlighted ongoing events will be placed over the `currentTimeMarker`.
 
 
 <div class="meta-api-description">
@@ -5782,7 +5782,7 @@ How do I customize the file name when generating a PDF in Kendo UI Scheduler? Sp
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/scheduler#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/ui/scheduler#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 
 <div class="meta-api-description">
@@ -6303,7 +6303,7 @@ How do I customize the title in the exported Kendo UI Scheduler PDF? Control the
 
 ### recurrenceRuleLabelTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the recurrence trigger summary in the desktop event editor.
+The [template](/api/kendo/methods/template) used to render the recurrence trigger summary in the desktop event editor.
 
 The template data contains the following fields:
 
@@ -6454,12 +6454,12 @@ How to configure resource-specific color assignment in Kendo UI Scheduler? Confi
 
 ### resources.dataSource `Object|Array|kendo.data.DataSource`
 
-The data source which contains resource data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source which contains resource data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 
 <div class="meta-api-description">
@@ -6693,7 +6693,7 @@ How do I configure Kendo UI for jQuery Scheduler to identify resource IDs in eve
 
 ### resources.icon `String`
 
-The name of the icon displayed instead of the resource text label in the desktop event editor. When the option is not set, the editor displays the resource [title](/api/javascript/ui/scheduler#configuration-resources.title), or its existing field-name fallback.
+The name of the icon displayed instead of the resource text label in the desktop event editor. When the option is not set, the editor displays the resource [title](/api/ui/scheduler#configuration-resources.title), or its existing field-name fallback.
 
 
 <div class="meta-api-description">
@@ -6722,7 +6722,7 @@ How do I show an icon instead of a resource label in the Kendo UI Scheduler desk
 
 ### resources.multiple `Boolean` *(default: false)*
 
-If set to `true` the scheduler event can be assigned multiple instances of the resource. The scheduler event field specified via the [field](/api/javascript/ui/scheduler#configuration-resources.field) option will contain an array of resources.
+If set to `true` the scheduler event can be assigned multiple instances of the resource. The scheduler event field specified via the [field](/api/ui/scheduler#configuration-resources.field) option will contain an array of resources.
 By default only one resource instance can be assigned to an event.
 
 
@@ -6777,7 +6777,7 @@ How to assign multiple resources to a single event in Kendo UI Scheduler? Enable
 
 ### resources.name `String`
 
-The name of the resource used to distinguish resource. If not set the value of the [field](/api/javascript/ui/scheduler#configuration-resources.field) option is used.
+The name of the resource used to distinguish resource. If not set the value of the [field](/api/ui/scheduler#configuration-resources.field) option is used.
 
 
 <div class="meta-api-description">
@@ -6823,7 +6823,7 @@ How do I set the name of a resource in the Kendo UI Scheduler? Set or configure 
 
 ### resources.title `String`
 
-The user friendly title of the resource displayed in the scheduler edit form. If not set the value of the [field](/api/javascript/ui/scheduler#configuration-resources.field) option is used.
+The user friendly title of the resource displayed in the scheduler edit form. If not set the value of the [field](/api/ui/scheduler#configuration-resources.field) option is used.
 
 
 <div class="meta-api-description">
@@ -6867,7 +6867,7 @@ How to customize resource title in Kendo UI Scheduler? Customize, configure, or 
 
 ### resources.valuePrimitive `Boolean` *(default: true)*
 
-Set to `false` if the scheduler event field specified via the [field](/api/javascript/ui/scheduler#configuration-resources.field) option contains a resource data item.
+Set to `false` if the scheduler event field specified via the [field](/api/ui/scheduler#configuration-resources.field) option contains a resource data item.
 By default the scheduler expects that field to contain a primitive value (string, number) which corresponds to the "value" of the resource (specified via `dataValueField`).
 
 
@@ -6942,7 +6942,7 @@ How do I disable user selection of time slots in Kendo UI Scheduler? Control the
 
 If set to true the view will be initially shown in business hours mode. By default view is displayed in full day mode.
 
-> The `showWorkHours` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
+> The `showWorkHours` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 
 <div class="meta-api-description">
@@ -6968,7 +6968,7 @@ How to show only work hours in Kendo UI Scheduler by default? Control whether th
     });
     </script>
 
-To dynamically update the `showWorkHours` or any other option yo ucan use the [`setOptions`](/api/javascript/ui/widget/methods/setoptions) method.
+To dynamically update the `showWorkHours` or any other option yo ucan use the [`setOptions`](/api/ui/widget/methods/setoptions) method.
 
 ### snap `Boolean` *(default: true)*
 
@@ -7037,7 +7037,7 @@ The complete list of the supported timezones is available in the [List of IANA t
 
 > The **kendo.timezones.min.js** file must be included in order to use timezones other than "Etc/UTC".
 
-> The **timezone** option will not affect events if the widget's data source is initialized separately. In this case set the [schema.timezone](/api/javascript/data/schedulerdatasource/configuration/schema#schematimezone) option directly.
+> The **timezone** option will not affect events if the widget's data source is initialized separately. In this case set the [schema.timezone](/api/data/schedulerdatasource/configuration/schema#schematimezone) option directly.
 
 
 <div class="meta-api-description">
@@ -7148,7 +7148,7 @@ How to customize the toolbar in Kendo UI Scheduler to include export to PDF func
 
 When an object having an `items` field is used, that will entirely replace all tools in the Scheduler ToolBar (including the default ones). Hence, the developer will need to declare them manually in order make them appear in the component. The default order of the Scheduler tools is: `[ "pdf", [ "today", "previous", "next" ], "current", { type: "spacer" }, "search", "views" ]`. Note that if more than one view is defined, the last default tool is `views`, otherwise `views` is substituted by the `refresh` tool. Tools grouped in an array would produce a ButtonGroup in the ToolBar. Note that the `pdfMobile` and `search` tools should be explicitly enabled in order to be visible.
 
-By using the `items` field, you can specify any kind and number of custom tools that will be rendered in the ToolBar. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+By using the `items` field, you can specify any kind and number of custom tools that will be rendered in the ToolBar. You should define the custom tools via the [ToolBar items API](/api/ui/toolbar/configuration/items).
 
 #### Example - specify the toolbar items
 
@@ -7184,7 +7184,7 @@ By using the `items` field, you can specify any kind and number of custom tools 
 
 When the `items` field receives an array, it will entirely replace all tools in the Scheduler ToolBar (including the default once). Hence, the developer will need to declare them manually in order make them appear in the component. The default order of the Scheduler tools is: `[ "pdf", [ "today", "previous", "next" ], "current", { type: "spacer" }, "search", "views" ]`. Note that if more than one view is defined, the last default tool is `views`, otherwise `views` is substituted by the `refresh` tool. Tools grouped in an array would produce a ButtonGroup in the ToolBar. Note that the `pdfMobile` and `search` tools should be explicitly enabled in order to be visible.
 
-By using the `items` field, you can specify any kind and number of custom tools that will be rendered in the ToolBar. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+By using the `items` field, you can specify any kind and number of custom tools that will be rendered in the ToolBar. You should define the custom tools via the [ToolBar items API](/api/ui/toolbar/configuration/items).
 
 
 <div class="meta-api-description">
@@ -7252,7 +7252,7 @@ How do I customize the toolbar in Kendo UI Scheduler? Control, configure, and cu
 
 Will specify all tools rendered in the Scheduler ToolBar with its non-adaptive rendering. If not explicitly set here, the component will render its built-in tools in the following order: `[ "pdf", [ "today", "previous", "next" ], "current", { type: "spacer" }, "search", "views" ]`. Note that if more than one view is defined, the last default tool is `views`, otherwise `views` is substituted by the `refresh` tool. Tools grouped in an array would produce a ButtonGroup in the ToolBar. Note that the `pdf` and `search` tools should be explicitly enabled in order to be visible.
 
-By using the `items.desktop` field, you can specify any kind and number of custom tools that will be rendered in the ToolBar. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+By using the `items.desktop` field, you can specify any kind and number of custom tools that will be rendered in the ToolBar. You should define the custom tools via the [ToolBar items API](/api/ui/toolbar/configuration/items).
 
 
 <div class="meta-api-description">
@@ -7298,7 +7298,7 @@ Will specify all tools rendered in the Scheduler ToolBar with its adaptive rende
 - `main` (or upper) ToolBar contains the following built-in tools: `[ [ "pdfMobile", "calendar", "create" ], { type: "spacer" }, "search", "viewsMobile" ]`. Note that if more than one view is defined, the last default tool is `viewsMobile`, otherwise `viewsMobile` is substituted by the `refresh` tool. Tools grouped in an array would produce a ButtonGroup in the ToolBar. Note that the `pdfMobile` and `search` tools should be explicitly enabled in order to be visible;
 - `navigation` (or lower) ToolBar contains the following built-in tools: `[ "previousMobile", { type: "spacer" }, "currentMobile", { type: "spacer" }, "nextMobile" ]`;
 
-By using the `items.mobile` field, you can specify any kind and number of custom tools for the above two ToolBars. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+By using the `items.mobile` field, you can specify any kind and number of custom tools for the above two ToolBars. You should define the custom tools via the [ToolBar items API](/api/ui/toolbar/configuration/items).
 
 
 <div class="meta-api-description">
@@ -7355,7 +7355,7 @@ How do I customize the mobile toolbar in Kendo UI Scheduler? Control and customi
 
 Will specify all tools rendered in the main (upper) Scheduler ToolBar with its adaptive rendering. If not explicitly set here, the component will render its built-in tools in the following order: `[ [ "pdfMobile", "calendar", "create" ], { type: "spacer" }, "search", "viewsMobile" ]`. Note that if more than one view is defined, the last default tool is `viewsMobile`, otherwise `viewsMobile` is substituted by the `refresh` tool. Tools grouped in an array would produce a ButtonGroup in the ToolBar. Note that the `pdfMobile` and `search` tools should be explicitly enabled in order to be visible.
 
-By using the `items.mobile.main` field, you can specify any kind and number of custom tools for that ToolBar. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+By using the `items.mobile.main` field, you can specify any kind and number of custom tools for that ToolBar. You should define the custom tools via the [ToolBar items API](/api/ui/toolbar/configuration/items).
 
 
 <div class="meta-api-description">
@@ -7402,7 +7402,7 @@ How to customize main toolbar items in Kendo UI Scheduler for mobile devices? Co
 
 Will specify all tools rendered in the navigation (lower) Scheduler ToolBar with its adaptive rendering. If not explicitly set here, the component will render its built-in tools in the following order: `[ "previousMobile", { type: "spacer" }, "currentMobile", { type: "spacer" }, "nextMobile" ]`.
 
-By using the `items.mobile.navigation` field, you can specify any kind and number of custom tools for that ToolBar. You should define the custom tools via the [ToolBar items API](/api/javascript/ui/toolbar/configuration/items).
+By using the `items.mobile.navigation` field, you can specify any kind and number of custom tools for that ToolBar. You should define the custom tools via the [ToolBar items API](/api/ui/toolbar/configuration/items).
 
 
 <div class="meta-api-description">
@@ -7597,7 +7597,7 @@ How do I control the height of time slots in a Kendo UI Scheduler's month view? 
 
 ### views.allDayEventTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the "all day" scheduler events.
+The [template](/api/kendo/methods/template) used to render the "all day" scheduler events.
 
 The fields which can be used in the template are:
 
@@ -7607,7 +7607,7 @@ The fields which can be used in the template are:
 * start `Date` - the event start date
 * title `String` - the event title
 
-> The `allDayEventTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
+> The `allDayEventTemplate` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 
 <div class="meta-api-description">
@@ -7661,7 +7661,7 @@ How to customize all-day event display in Kendo UI Scheduler? Control and custom
 
 If set to `true` the scheduler will display a slot for "all day" events.
 
-> The `allDaySlot` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
+> The `allDaySlot` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 
 <div class="meta-api-description">
@@ -7693,7 +7693,7 @@ How to enable an all-day area in the Kendo UI Scheduler for jQuery? Control whet
 
 ### views.allDaySlotTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the all day slot cell.
+The [template](/api/kendo/methods/template) used to render the all day slot cell.
 
 The fields which can be used in the template are:
 
@@ -7701,7 +7701,7 @@ The fields which can be used in the template are:
 
 * resources() - returns the relevant resources for the current slot.
 
-> The `allDaySlotTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week" or "workWeek".
+> The `allDaySlotTemplate` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day", "week" or "workWeek".
 
 
 <div class="meta-api-description">
@@ -7770,7 +7770,7 @@ How do I customize the appearance of all-day time slots in a Kendo UI Scheduler 
 
 The width of the table columns in timeline views. Value is treated as pixels.
 
-> The `columnWidth` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth".
+> The `columnWidth` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth".
 
 
 <div class="meta-api-description">
@@ -7802,7 +7802,7 @@ How do I set the width of timeline columns in a Kendo Scheduler view? Set or con
 
 ### views.dateHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the date header cells.
+The [template](/api/kendo/methods/template) used to render the date header cells.
 
 By default the scheduler renders the date using a custom date format - "ddd M/dd".
 The "ddd" specifier, a.k.a abbreviated name of the week day, will be localized using the current Kendo UI culture.
@@ -7812,7 +7812,7 @@ The fields which can be used in the template are:
 
 * date - represents the major tick date.
 
-> The `dateHeaderTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
+> The `dateHeaderTemplate` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
 
 
 <div class="meta-api-description">
@@ -7844,7 +7844,7 @@ How can I customize the date header in Kendo UI Scheduler to display dates in a 
 
 ### views.dayTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the day slots in month view.
+The [template](/api/kendo/methods/template) used to render the day slots in month view.
 
 The fields which can be used in the template are:
 
@@ -7852,7 +7852,7 @@ The fields which can be used in the template are:
 
 * resources() - returns the relevant resources for the current slot.
 
-> The `dayTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "month".
+> The `dayTemplate` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "month".
 
 
 <div class="meta-api-description">
@@ -7921,7 +7921,7 @@ How can I customize the HTML for individual day cells in a Kendo UI Scheduler's 
 
 If set to `true` the user would be able to create new scheduler events and modify or delete existing ones.
 
-Overrides the [editable](/api/javascript/ui/scheduler#configuration-editable) option of the scheduler.
+Overrides the [editable](/api/ui/scheduler#configuration-editable) option of the scheduler.
 
 
 <div class="meta-api-description">
@@ -8088,13 +8088,13 @@ How to set the end time boundary for a Kendo UI Scheduler view? Set or adjust th
 
 ### views.eventDateTemplate
 
-The [template](/api/javascript/kendo/methods/template) used by the agenda view to render the date of the scheduler events.
+The [template](/api/kendo/methods/template) used by the agenda view to render the date of the scheduler events.
 
 The fields which can be used in the template are:
 
 * date `Date` - represents the event date.
 
-> The `eventDateTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "agenda".
+> The `eventDateTemplate` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "agenda".
 
 
 <div class="meta-api-description">
@@ -8128,7 +8128,7 @@ How to customize event date display in Kendo UI Scheduler's agenda view? Control
 
 The height of the scheduler event rendered in month and timeline views. In month view it could be set to a concrete number or to the string value "auto". When set to "auto" it will automatically set the views.adaptiveSlotHeight property to true.
 
-> The `eventHeight` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "month", "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth". The "auto" value is supported when views.type is set to "month" and it sets the views.adaptiveSlotHeight to true.
+> The `eventHeight` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "month", "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth". The "auto" value is supported when views.type is set to "month" and it sets the views.adaptiveSlotHeight to true.
 > The `eventHeight` option is not supported in resource grouping or date grouping scenarios.
 
 
@@ -8269,7 +8269,7 @@ How to set maximum visible events per day in Kendo UI Scheduler views? Control o
 
 ### views.eventTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used by the view to render the scheduler events.
+The [template](/api/kendo/methods/template) used by the view to render the scheduler events.
 
 The fields which can be used in the template are:
 
@@ -8328,7 +8328,7 @@ How to customize event layout in Kendo UI Scheduler? Control and customize the a
 
 ### views.eventTimeTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used by the agenda view to render the time of the scheduler events.
+The [template](/api/kendo/methods/template) used by the agenda view to render the time of the scheduler events.
 
 The fields which can be used in the template are:
 
@@ -8339,7 +8339,7 @@ The fields which can be used in the template are:
 * start `Date` - the event start date
 * title `String` - the event title
 
-> The `eventTimeTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "agenda".
+> The `eventTimeTemplate` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "agenda".
 
 
 <div class="meta-api-description">
@@ -8462,9 +8462,9 @@ How to group resources by multiple attributes in Kendo UI for jQuery Scheduler v
 
 ### views.group.date `Boolean` *(default: false)*
 
-If set to `true` and the [group.resources](/api/javascript/ui/scheduler#configuration-group.resources) has some resources set the view is grouped by date.
+If set to `true` and the [group.resources](/api/ui/scheduler#configuration-group.resources) has some resources set the view is grouped by date.
 
-Overrides the [date](/api/javascript/ui/scheduler#configuration-group.date) option of the scheduler.
+Overrides the [date](/api/ui/scheduler#configuration-group.date) option of the scheduler.
 
 
 <div class="meta-api-description">
@@ -8578,7 +8578,7 @@ How to control group header alignment in Kendo UI Scheduler? Control and configu
 
 The number of minutes represented by a major tick.
 
-> The `majorTick` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
+> The `majorTick` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 
 <div class="meta-api-description">
@@ -8610,7 +8610,7 @@ How do I set the interval for major ticks in a Kendo UI Scheduler? Control the t
 
 ### views.majorTimeHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the major ticks.
+The [template](/api/kendo/methods/template) used to render the major ticks.
 
 By default the scheduler renders the time using the current culture time format.
 
@@ -8618,7 +8618,7 @@ The fields which can be used in the template are:
 
 * date - represents the major tick date.
 
-> The `majorTimeHeaderTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
+> The `majorTimeHeaderTemplate` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
 
 
 <div class="meta-api-description">
@@ -8652,7 +8652,7 @@ How to customize major time headers in Kendo UI Scheduler views? Control and cus
 
 The number of time slots to display per major tick.
 
-> The `minorTickCount` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week" or "timeline".
+> The `minorTickCount` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day", "week" or "timeline".
 
 
 <div class="meta-api-description">
@@ -8684,7 +8684,7 @@ How do I control the number of smaller time segments in a Kendo UI Scheduler tim
 
 ### views.minorTimeHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the minor ticks.
+The [template](/api/kendo/methods/template) used to render the minor ticks.
 
 By default the scheduler renders a `"&nbsp;"`.
 
@@ -8692,7 +8692,7 @@ The fields which can be used in the template are:
 
 * date - represents the major tick date.
 
-> The `minorTimeHeaderTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
+> The `minorTimeHeaderTemplate` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 
 <div class="meta-api-description">
@@ -8726,7 +8726,7 @@ How can I customize the minor time headers in my Kendo UI Scheduler to display s
 
 Configures the number of months that will be displayed in the year view calendar.
 
-> The `months` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "year".
+> The `months` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "year".
 
 
 <div class="meta-api-description">
@@ -8761,7 +8761,7 @@ How do I configure the number of months displayed in a Kendo UI Scheduler year v
 
 Controls how event overflow is opened in the Month view. When set to `true`, clicking the more-events link opens a popover for the date. When set to `false`, clicking the link uses the legacy behavior and navigates to the Day view.
 
-> The `moreEventsPopover` option is supported only when `views.type` is set to `"month"`. The [messages.moreEventsPopover](/api/javascript/ui/scheduler#configuration-messages.moreEventsPopover) messages are processed only when this option is `true`.
+> The `moreEventsPopover` option is supported only when `views.type` is set to `"month"`. The [messages.moreEventsPopover](/api/ui/scheduler#configuration-messages.moreEventsPopover) messages are processed only when this option is `true`.
 
 
 <div class="meta-api-description">
@@ -8786,7 +8786,7 @@ How can I open event overflow in a popover instead of navigating from Month to D
 
 ### views.name `String`
 
-The name of the view. Typically, used to get the name of the currently selected view via the [view method](/api/javascript/ui/scheduler/methods/view).
+The name of the view. Typically, used to get the name of the currently selected view via the [view method](/api/ui/scheduler/methods/view).
 
 
 <div class="meta-api-description">
@@ -8852,7 +8852,7 @@ How to set default active view in Kendo UI Scheduler? Control which calendar or 
 
 ### views.selectedDateFormat `String`
 
-The format used to display the selected date. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format used to display the selected date. Uses [kendo.format](/api/kendo/methods/format).
 
 Contains two placeholders - "{0}" and "{1}" which represent the start and end date displayed by the view.
 
@@ -8886,7 +8886,7 @@ How do I customize the date format in Kendo UI Scheduler views? Control how the 
 
 ### views.selectedShortDateFormat `String`
 
-The format used to display the selected date when viewport is narrow, and the date is displayed in short ("d") format by default. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The format used to display the selected date when viewport is narrow, and the date is displayed in short ("d") format by default. Uses [kendo.format](/api/kendo/methods/format).
 
 
 <div class="meta-api-description">
@@ -8927,7 +8927,7 @@ How do I customize the short date format for selected dates in Kendo UI Schedule
 
 If set to true the view will be initially shown in business hours mode. By default view is displayed in full day mode.
 
-> The `showWorkHours` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
+> The `showWorkHours` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 
 <div class="meta-api-description">
@@ -8955,7 +8955,7 @@ How to show only work hours in Kendo UI Scheduler views? Control the initial dis
 
 ### views.slotTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) used to render the time slot cells.
+The [template](/api/kendo/methods/template) used to render the time slot cells.
 
 The fields which can be used in the template are:
 
@@ -8963,7 +8963,7 @@ The fields which can be used in the template are:
 
 * resources() - returns the relevant resources for the current slot.
 
-> The `slotTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week", "workWeek" or "timeline" views.
+> The `slotTemplate` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day", "week", "workWeek" or "timeline" views.
 
 
 <div class="meta-api-description">
@@ -9030,9 +9030,9 @@ How can I customize the appearance of individual time slots in a Kendo UI Schedu
 
 ### views.startDate `Date`
 
-Configures the start date of the year view. The Scheduler will display [12 months](/api/javascript/ui/scheduler#configuration-views.months) starting from the `startDate`.
+Configures the start date of the year view. The Scheduler will display [12 months](/api/ui/scheduler#configuration-views.months) starting from the `startDate`.
 
-> The `startDate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "year".
+> The `startDate` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "year".
 
 
 <div class="meta-api-description">
@@ -9128,9 +9128,9 @@ How to customize the display name for different views in Kendo UI Scheduler? Cus
 
 ### views.tooltipTemplate `String|Function`
 
-Configures the [template](/api/javascript/kendo/methods/template) used to render the Tooltip in the Scheduler year view.
+Configures the [template](/api/kendo/methods/template) used to render the Tooltip in the Scheduler year view.
 
-> The `tooltipTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "year".
+> The `tooltipTemplate` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "year".
 
 The fields which can be used in the template are:
 
@@ -9292,7 +9292,7 @@ How do I specify which days of the week are considered workdays in a Kendo UI Sc
 
 The start of working week (index based).
 
-> The `workWeekStart` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
+> The `workWeekStart` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 
 <div class="meta-api-description">
@@ -9323,7 +9323,7 @@ How do I configure the first day of the workweek for a Kendo UI Scheduler? Set o
 
 The end of working week (index based).
 
-> The `workWeekEnd` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
+> The `workWeekEnd` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 
 <div class="meta-api-description">
@@ -9468,7 +9468,7 @@ How to set end time of business hours in Kendo UI Scheduler? Set or adjust the e
 
 The start of working week (index based).
 
-> The `workWeekStart` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
+> The `workWeekStart` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 
 <div class="meta-api-description">
@@ -9497,7 +9497,7 @@ How do I set the start day of the work week in Kendo UI Scheduler? Set or config
 
 The end of working week (index based).
 
-> The `workWeekEnd` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
+> The `workWeekEnd` option is supported when [views.type](/api/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 
 <div class="meta-api-description">
@@ -9526,11 +9526,11 @@ How do I set the last working day of the week in a Kendo UI Scheduler? Control o
 
 ### dataSource `kendo.data.SchedulerDataSource`
 
-The [data source](/api/javascript/data/schedulerdatasource) of the widget. Configured via the [dataSource](/api/javascript/ui/scheduler/configuration/datasource) option.
+The [data source](/api/data/schedulerdatasource) of the widget. Configured via the [dataSource](/api/ui/scheduler/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/scheduler/methods/setdatasource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/ui/scheduler/methods/setdatasource) method instead.
 
 
 <div class="meta-api-description">
@@ -9602,7 +9602,7 @@ How to bind data to Kendo UI Scheduler? Connect, bind, or link the event collect
 
 ### resources `Array`
 
-The resources of the widget. Configured via the [resources](/api/javascript/ui/scheduler#configuration-resources) option.
+The resources of the widget. Configured via the [resources](/api/ui/scheduler#configuration-resources) option.
 
 
 <div class="meta-api-description">
@@ -9647,7 +9647,7 @@ How to update resource configurations in Kendo UI Scheduler after initialization
 
 ### calendar `kendo.ui.Calendar`
 
-The [Calendar widget](/api/javascript/ui/calendar) of the Scheduler. The toolbar Calendar widget allows navigation directly to the chosen date. It will only be available after it has been opened for the first time.
+The [Calendar widget](/api/ui/calendar) of the Scheduler. The toolbar Calendar widget allows navigation directly to the chosen date. It will only be available after it has been opened for the first time.
 
 
 <div class="meta-api-description">
@@ -9874,7 +9874,7 @@ The event which should be put in edit mode. Also accepts a string which is the `
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/data/datasource/methods/view).
 
 
 <div class="meta-api-description">
@@ -9919,7 +9919,7 @@ How can I access the individual event elements in my Kendo UI Scheduler? Retriev
 
 ### occurrenceByUid
 
-Gets the event occurrence with the specified [uid](/api/javascript/data/model#fields-uid).
+Gets the event occurrence with the specified [uid](/api/data/model#fields-uid).
 
 > This method can return an occurrence (not part of the data source's data) part of a recurring series.
 
@@ -10143,7 +10143,7 @@ How do I get a list of resources assigned to a specific time slot in Kendo UI Sc
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/scheduler/events/pdfexport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/ui/scheduler/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
@@ -10153,7 +10153,7 @@ How can I export my Kendo UI Scheduler view as a PDF file? Convert or export the
 </div>
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/scheduler/events/pdfexport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/ui/scheduler/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
 
@@ -10212,13 +10212,13 @@ How do I get or change the currently selected events in a Kendo UI Scheduler? Re
 
 ##### events `Array`
 
-The Uids of events which should be selected. List of the available events can be get using the [data](/api/javascript/ui/scheduler/methods/select) method.
+The Uids of events which should be selected. List of the available events can be get using the [data](/api/ui/scheduler/methods/select) method.
 
 ##### options `Object`
 
 ##### options.events `Array`
 
-The Uids of events which should be selected. List of the available events can be get using the [data](/api/javascript/ui/scheduler/methods/select) method.
+The Uids of events which should be selected. List of the available events can be get using the [data](/api/ui/scheduler/methods/select) method.
 
 ##### options.resources `Array`
 
@@ -10385,7 +10385,7 @@ How do I get the calendar time slot associated with a given DOM element in Kendo
 
 Gets or sets the current Scheduler view.
 
-To get the current Scheduler view name, use the [`viewName` method](/api/javascript/ui/scheduler/methods/viewname).
+To get the current Scheduler view name, use the [`viewName` method](/api/ui/scheduler/methods/viewname).
 
 
 <div class="meta-api-description">
@@ -10636,7 +10636,7 @@ The selection end date.
 
 ##### e.events `Array`
 
-A list of the selected [scheduler events](/api/javascript/data/schedulerevent).
+A list of the selected [scheduler events](/api/data/schedulerevent).
 
 ##### e.slots `Array`
 

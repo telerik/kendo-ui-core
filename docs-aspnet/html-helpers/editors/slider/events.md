@@ -91,7 +91,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## See Also
 
-* [Client-Side API of the Slider](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider)
+* [Client-Side API of the Slider](https://docs.telerik.com/kendo-ui/api/ui/slider)
 * [Server-Side API of the Slider HtmlHelper](/api/slider)
 {% if site.core %}
 * [Server-Side API of the Slider TagHelper](/api/taghelpers/slider)

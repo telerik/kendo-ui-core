@@ -86,4 +86,4 @@ For a complete example on basic Breadcrumb events, refer to the [demo on using t
 
 * [Using the API of the Breadcrumb HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/breadcrumb/api)
 * [Breadcrumb Server-Side API](/api/breadcrumb)
-* [Breadcrumb Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/breadcrumb)
+* [Breadcrumb Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/breadcrumb)

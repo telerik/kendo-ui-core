@@ -9,7 +9,7 @@ component: inlineaiprompt
 
 # kendo.ui.InlineAIPrompt
 
-Represents the Kendo UI InlineAIPrompt. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI InlineAIPrompt. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -219,7 +219,7 @@ How do I handle different AI service response formats with Kendo UI's InlineAIPr
 ### popup `Object`
 
 The options that will be used for the popup initialization. For more details about the available options
-refer to [Popup](/api/javascript/ui/popup) documentation.
+refer to [Popup](/api/ui/popup) documentation.
 
 
 <div class="meta-api-description">
@@ -290,7 +290,7 @@ How do I set the height of an AI prompt popup in Kendo UI for jQuery? Adjust or 
 
 ### popup.animation `Boolean | Object`
 
-Configures the opening and closing animations of the popup. The same limitations apply as the originating widget's [`animation`](/api/javascript/ui/popup/configuration/animation) configuration.
+Configures the opening and closing animations of the popup. The same limitations apply as the originating widget's [`animation`](/api/ui/popup/configuration/animation) configuration.
 
 
 <div class="meta-api-description">
@@ -313,7 +313,7 @@ How can I customize the animation effects for popup overlays in Kendo UI's Inlin
 
 ### popup.appendTo `String|jQuery` *(default: document.body)*
 
-Which element the popup will be appended to. The principles apply as per the widget's originating [`appendTo`](/api/javascript/ui/popup/configuration/appendto) configuration.
+Which element the popup will be appended to. The principles apply as per the widget's originating [`appendTo`](/api/ui/popup/configuration/appendto) configuration.
 
 
 <div class="meta-api-description">

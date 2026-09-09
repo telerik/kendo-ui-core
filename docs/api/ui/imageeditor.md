@@ -8,7 +8,7 @@ component: imageeditor
 
 # kendo.ui.ImageEditor
 
-Represents the Kendo UI ImageEditor. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ImageEditor. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -92,7 +92,7 @@ How do I set alternative text for an image editing canvas in Kendo UI ImageEdito
 
 ### saveAs `Object`
 
-Sets the saveAs options for the save command. Utilizes the [kendo.saveAs](/api/javascript/kendo/methods/saveas) method.
+Sets the saveAs options for the save command. Utilizes the [kendo.saveAs](/api/kendo/methods/saveas) method.
 
 
 <div class="meta-api-description">
@@ -240,7 +240,7 @@ How do I customize the tools available in the Kendo UI image editor toolbar? Con
         });
     </script>
 
-Apart from the built-in tools, the ImageEditor fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
+Apart from the built-in tools, the ImageEditor fully exposes the [ToolBar.items API](/api/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
 
 ### toolbar.items.type `String`
 Specifies the type of the button.
@@ -696,7 +696,7 @@ How do I assign a unique ID to each toolbar button in Kendo UI ImageEditor? Conf
 
 ### toolbar.click `Function`
 
-Fires when the user clicks a command button. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the user clicks a command button. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">
@@ -718,7 +718,7 @@ How to handle button clicks in Kendo UI ImageEditor toolbar? Capture and respond
 
 ### toolbar.close `Function`
 
-Fires when the SplitButton's popup closes. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the SplitButton's popup closes. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">
@@ -740,7 +740,7 @@ How can I handle close events for image editor toolbar dropdowns with Kendo UI? 
 
 ### toolbar.open `Function`
 
-Fires when the Split Button's popup opens. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the Split Button's popup opens. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">
@@ -762,7 +762,7 @@ How can I dynamically update the image editor's toolbar when its popup opens? De
 
 ### toolbar.toggle `Function`
 
-Fires when the user changes the checked state of a toggle button. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the user changes the checked state of a toggle button. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">
@@ -783,7 +783,7 @@ How can I detect when a toggle button is switched on/off in Kendo UI image edito
     </script>
 
 ### toolbar.overflow `Object`
-Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+Specifies [`Toolbar.overflow`](/api/ui/toolbar/configuration/overflow) configuration for the toolbar.
 
 
 <div class="meta-api-description">
@@ -912,7 +912,7 @@ How do I adjust the horizontal scroll step distance in Kendo UI ImageEditor's to
 
 ### toolbar.overflowClose `Function`
 
-Fires when the overflow popup container is about to close. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the overflow popup container is about to close. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">
@@ -934,7 +934,7 @@ How to handle closing of image editor toolbar overflow menu in Kendo UI for jQue
 
 ### toolbar.overflowOpen `Function`
 
-Fires when the overflow popup container is about to open. [Toolbar Events](/api/javascript/ui/toolbar#events).
+Fires when the overflow popup container is about to open. [Toolbar Events](/api/ui/toolbar#events).
 
 
 <div class="meta-api-description">

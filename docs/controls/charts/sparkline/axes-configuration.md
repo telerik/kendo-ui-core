@@ -94,7 +94,7 @@ To determine a default base, use the smallest duration between categories.
 
 #### Manual Configuration
 
-You can also manually specify the [`baseUnit`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.baseunit).
+You can also manually specify the [`baseUnit`](/api/dataviz/ui/chart/configuration/categoryaxis.baseunit).
 
 The following options are valid:
 
@@ -211,4 +211,4 @@ You can configure each axis to display bands with different colors for predefine
 ## See Also
 
 * [Basic Usage of the Sparkline (Demo)](https://demos.telerik.com/kendo-ui/sparklines/index)
-* [JavaScript API Reference of the Sparkline](/api/javascript/dataviz/ui/sparkline)
+* [JavaScript API Reference of the Sparkline](/api/dataviz/ui/sparkline)

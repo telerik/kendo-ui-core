@@ -27,8 +27,8 @@ How can I design the color and width of every stroke in Kendo UI Diagram?
 ## Solution
 
 1. Add an additional property to the data object in connectionDataSource.
-2. Use the [change event](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram/events/change) of the Diagram. 
-3. Loop through all strokes and set their color and width using the [redraw](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/diagram/shape/methods/redraw) method.
+2. Use the [change event](https://docs.telerik.com/kendo-ui/api/dataviz/ui/diagram/events/change) of the Diagram. 
+3. Loop through all strokes and set their color and width using the [redraw](https://docs.telerik.com/kendo-ui/api/dataviz/diagram/shape/methods/redraw) method.
 
 
 The following example demonstrates how to change the color and width of every stroke in Diagram:

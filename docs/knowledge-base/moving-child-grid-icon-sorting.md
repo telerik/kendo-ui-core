@@ -64,7 +64,7 @@ To move the child grid icon to a different column while keeping sorting function
    ```
 
 3. **Wire the custom button to the Grid's API**  
-   In the [`dataBound`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/events/databound) event, add a click handler for the custom expand button. Use the Kendo UI Grid's `expandRow` and `collapseRow` methods to toggle the detail rows.
+   In the [`dataBound`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/events/databound) event, add a click handler for the custom expand button. Use the Kendo UI Grid's `expandRow` and `collapseRow` methods to toggle the detail rows.
 
    ```javascript
    dataBound: function(ev) {
@@ -204,4 +204,4 @@ Below is a runnable example:
 ## See Also
 - [Kendo UI for jQuery Grid Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 - [Grid Hierarchy Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/grid/hierarchy)
-- [Kendo UI for jQuery Grid API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid)
+- [Kendo UI for jQuery Grid API](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid)

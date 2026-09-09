@@ -41,7 +41,7 @@ The easiest way to accomplish the desired behaviour would be to:
       overflow-x: scroll;
     } 
   ```
-1. For the height, we could use the [`dataBound`](/api/javascript/ui/pivotgrid/events/databound) event handler to assign it to row headers section so that it is equal to the grid content.
+1. For the height, we could use the [`dataBound`](/api/ui/pivotgrid/events/databound) event handler to assign it to row headers section so that it is equal to the grid content.
 
 ```
   function onDataBound(e){

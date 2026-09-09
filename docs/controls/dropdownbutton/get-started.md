@@ -49,7 +49,7 @@ In this step, you will initialize the DropDownButton from the `<button>` element
 
 ## 3. Add Items for the DropDownButton
 
-Next, you can configure the items in the popup by using the [`items`](/api/javascript/ui/dropdownbutton/configuration/items) option.
+Next, you can configure the items in the popup by using the [`items`](/api/ui/dropdownbutton/configuration/items) option.
 
 ```html
    <button id="dropdownbutton" type="button">Button</button>
@@ -73,7 +73,7 @@ Next, you can configure the items in the popup by using the [`items`](/api/javas
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery DropDownButton](/api/javascript/ui/dropdownbutton)
+* [JavaScript API Reference of the jQuery DropDownButton](/api/ui/dropdownbutton)
 * [Knowledge Base Section](/knowledge-base)
 
 

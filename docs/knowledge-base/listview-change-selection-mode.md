@@ -31,7 +31,7 @@ How can I allow the user to change the selection mode in the ListView based on a
 1. Handle the `change` event for the DropDownList or the other component that is used for changing the selection mode.
 1. Get the selected selection mode value.
 1. Call the `setOptions()` method with settings that configure the new selection mode.
-1. Call the [`refresh()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods-refresh) method for the ListView.
+1. Call the [`refresh()`](https://docs.telerik.com/kendo-ui/api/ui/listview#methods-refresh) method for the ListView.
 
 ```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>

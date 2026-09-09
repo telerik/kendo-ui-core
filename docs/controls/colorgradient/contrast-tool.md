@@ -97,4 +97,4 @@ The example below demonstrates how to enable the contrast tool in the ColorGradi
 ## See Also
 
 * [Contrast Tool of the ColorGradient (Demo)](https://demos.telerik.com/kendo-ui/colorgradient/contrast-tool)
-* [JavaScript API Reference of the ColorGradient](/api/javascript/ui/colorgradient)
+* [JavaScript API Reference of the ColorGradient](/api/ui/colorgradient)

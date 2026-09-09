@@ -128,5 +128,5 @@ To control when the Tooltip appears and disappears, use the `showAfter` and `hid
 
 ## See Also
 
-* [JavaScript API Reference of the Tooltip](/api/javascript/ui/tooltip)
+* [JavaScript API Reference of the Tooltip](/api/ui/tooltip)
 * [Knowledge Base Section](/knowledge-base)

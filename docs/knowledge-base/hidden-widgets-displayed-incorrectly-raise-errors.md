@@ -28,7 +28,7 @@ Hidden Kendo UI for jQuery widgets are rendered incorrectly or raise errors.
 
 ## Cause
 
-If you display widgets that have been in an initially hidden container, call their [`resize()`](/api/javascript/ui/widget/methods/resize) method after you show them. Initializing widgets on elements with the `style="display: none;"` configuration might cause errors, such as inability to calculate dimensions and positions or even throw errors. The reason for this behavior is that such calculations are not available for elements that are not rendered by the browser.
+If you display widgets that have been in an initially hidden container, call their [`resize()`](/api/ui/widget/methods/resize) method after you show them. Initializing widgets on elements with the `style="display: none;"` configuration might cause errors, such as inability to calculate dimensions and positions or even throw errors. The reason for this behavior is that such calculations are not available for elements that are not rendered by the browser.
 
 ## Solution
 

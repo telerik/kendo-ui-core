@@ -31,7 +31,7 @@ Setting a custom time for the `currentTimeMarker` in the Scheduler component inv
 - Can the custom time marker line extend into the time column?
 
 ## Solution
-To customize the [`currentTimeMarker`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/currenttimemarker) in the Scheduler, you need to implement custom logic within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/databound) event handler. The following steps guide you through creating and positioning a custom time marker:
+To customize the [`currentTimeMarker`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/currenttimemarker) in the Scheduler, you need to implement custom logic within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/events/databound) event handler. The following steps guide you through creating and positioning a custom time marker:
 
 1. Define a custom function to be executed on the Scheduler's `dataBound` event. This function calculates the position for the custom time marker based on a specified time.
 
@@ -100,6 +100,6 @@ Here is a runnable Dojo demo demonstrating these steps:
 ```
 
 ## See Also
-- [Scheduler DataBound Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/databound)
+- [Scheduler DataBound Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/scheduler/events/databound)
 - [Scheduler Overview](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview)
-- [Scheduler API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+- [Scheduler API Reference](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

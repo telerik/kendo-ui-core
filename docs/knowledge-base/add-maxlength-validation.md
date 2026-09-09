@@ -107,5 +107,5 @@ The following example demonstrates how to define custom Kendo UI validators to c
 
 * [Basic Usage of the jQuery Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
 * [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)
 * [Product Page of the jQuery Editor](https://www.telerik.com/kendo-jquery-ui/rich-text-editor)

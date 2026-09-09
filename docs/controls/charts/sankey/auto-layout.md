@@ -11,7 +11,7 @@ position: 5
 
 By default, the Kendo UI for jQuery Sankey Diagram rearranges the nodes and their corresponding links for better visual appearance and readability.
 
-If you want to display the nodes and links in a specific order, you can disable this feature by setting the [`disableAutoLayout`](/api/javascript/dataviz/ui/sankey/configuration/disableautolayout) property to `true`. In this case, the order of the nodes and links will be determined based on their order in the data that is passed to the [`data`](/api/javascript/dataviz/ui/sankey/configuration/data) property.
+If you want to display the nodes and links in a specific order, you can disable this feature by setting the [`disableAutoLayout`](/api/dataviz/ui/sankey/configuration/disableautolayout) property to `true`. In this case, the order of the nodes and links will be determined based on their order in the data that is passed to the [`data`](/api/dataviz/ui/sankey/configuration/data) property.
 
 The following example demonstrates how to disable the automatic layout feature by toggling the value of the `disableAutoLayout` property.
 
@@ -38,4 +38,4 @@ The following example demonstrates how to disable the automatic layout feature b
 
 ## See Also
 
-* [JavaScript API Reference of the Sankey](/api/javascript/dataviz/ui/sankey)
+* [JavaScript API Reference of the Sankey](/api/dataviz/ui/sankey)

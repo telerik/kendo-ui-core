@@ -38,7 +38,7 @@ How can I access an editor in the `edit` event handler of the Grid?
 ## Solution
 
 The functionality relies on the following concepts:
-* The [`edit`](/api/javascript/ui/grid/events/edit) event handler of the Grid provides a reference to the DOM element of the edit container.
+* The [`edit`](/api/ui/grid/events/edit) event handler of the Grid provides a reference to the DOM element of the edit container.
 * The Kendo UI widgets have a `data-role` HTML attribute rendered for the DOM element. This attribute holds the widget object.
 
 For brevity, the following demo does not include the configuration for the Data Source transport. However, for the [CRUD operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}) to work properly, they require a transport configuration.
@@ -88,7 +88,7 @@ For brevity, the following demo does not include the configuration for the Data 
                   // if the DropDownListwidget is found.
                   if (categoryDropDownList) {
                     // Use the DropDownList API based on the model values to accomplish your business requirement.
-                    // Link: https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist
+                    // Link: https://docs.telerik.com/kendo-ui/api/ui/dropdownlist
                     console.log("DropDownList", categoryDropDownList);
                   }
 
@@ -96,7 +96,7 @@ For brevity, the following demo does not include the configuration for the Data 
                   // Find the widget element and then the widget instance.
                   if (priceNumericTextBox) {
                     // Use the NumericTextBox API.
-                    // Link: https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox
+                    // Link: https://docs.telerik.com/kendo-ui/api/ui/numerictextbox
                     console.log("NumericTextBox", priceNumericTextBox);
                   }
                 }
@@ -122,4 +122,4 @@ For brevity, the following demo does not include the configuration for the Data 
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

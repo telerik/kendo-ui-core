@@ -25,7 +25,7 @@ Is it possible to select multiple items with two clicks? How to select multiple 
 
 ## Solution
 
-1. Subscribe to the text [`open`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/open) event of the MultiSelect.
+1. Subscribe to the text [`open`](https://docs.telerik.com/kendo-ui/api/ui/multiselect/events/open) event of the MultiSelect.
 1. In the `open` event handler bind a click event listener to the items using the `k-list` class. 
 
 ```dojo
@@ -100,4 +100,4 @@ Is it possible to select multiple items with two clicks? How to select multiple 
 
 ## See Also
 
-* [MultiSelect API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect API Reference](/api/ui/multiselect)

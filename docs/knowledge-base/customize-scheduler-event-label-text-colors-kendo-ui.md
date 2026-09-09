@@ -22,9 +22,9 @@ I am trying to customize the text color of event labels within the Scheduler, no
 
 ## Solution
 
-To customize the text color of event labels in the Scheduler, use a custom [`eventTemplate`](/api/javascript/ui/scheduler/configuration/eventtemplate) along with the [`dataBound`](/api/javascript/ui/scheduler/events/databound) event to apply styles dynamically. Since the Scheduler resources do not directly support setting the text color, this custom approach involves adding a template for the events and then using a class to apply the desired text color.
+To customize the text color of event labels in the Scheduler, use a custom [`eventTemplate`](/api/ui/scheduler/configuration/eventtemplate) along with the [`dataBound`](/api/ui/scheduler/events/databound) event to apply styles dynamically. Since the Scheduler resources do not directly support setting the text color, this custom approach involves adding a template for the events and then using a class to apply the desired text color.
 
-1. Define a custom [`eventTemplate`](/api/javascript/ui/scheduler/configuration/eventtemplate) for Scheduler events. In this template, assign a class to the event's text based on its resources or color:
+1. Define a custom [`eventTemplate`](/api/ui/scheduler/configuration/eventtemplate) for Scheduler events. In this template, assign a class to the event's text based on its resources or color:
 
 ```html
 <script id="event-template" type="text/x-kendo-template">    
@@ -39,7 +39,7 @@ To customize the text color of event labels in the Scheduler, use a custom [`eve
 </script>
 ```
 
-2. Use the [`dataBound`](/api/javascript/ui/scheduler/events/databound) event of the [Scheduler] to apply custom text colors based on the class added in the template:
+2. Use the [`dataBound`](/api/ui/scheduler/events/databound) event of the [Scheduler] to apply custom text colors based on the class added in the template:
 
 ```javascript
 dataBound: function(e){
@@ -103,4 +103,4 @@ dataBound: function(e){
 
 - [Scheduler Overview](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview)
 - [Scheduler Templates](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/custom-edit-and-event-templates)
-- [Scheduler dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/databound)
+- [Scheduler dataBound Event](https://docs.telerik.com/kendo-ui/api/ui/scheduler/events/databound)

@@ -27,7 +27,7 @@ How can I change the default behavior and prevent the appearance of the extra bl
 
 ## Solution
 
-On `Enter`, the Editor inserts a paragraph and paragraphs have a default margin set by the browsers. Therefore, to remove the extra row, [add a stylesheet to the content area of the Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/configuration/stylesheets).
+On `Enter`, the Editor inserts a paragraph and paragraphs have a default margin set by the browsers. Therefore, to remove the extra row, [add a stylesheet to the content area of the Editor](https://docs.telerik.com/kendo-ui/api/ui/editor/configuration/stylesheets).
 
 You can also set a similar paragraph rule to the whole content to provide a what-you-see-is-what-you-get styling.
 

@@ -61,7 +61,7 @@ When the Grid is in its adaptive rendering mode, it generates auxiliary markup w
 
 To manually destroy the Grid:
 
-1. Call the Kendo UI for jQuery [`kendo.destroy()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/destroy) method over the closest `.k-pane-wrapper` ancestor which is created around the Grid.
+1. Call the Kendo UI for jQuery [`kendo.destroy()`](https://docs.telerik.com/kendo-ui/api/kendo/methods/destroy) method over the closest `.k-pane-wrapper` ancestor which is created around the Grid.
 1. Remove the whole `.k-pane-wrapper` element from the DOM.
 
 ## See Also

@@ -56,7 +56,7 @@ In this step, you will initialize the Stepper from the empty `<nav>` element. Al
 
 ## 3. Add the Steps
 
-The component's [`steps`](/api/javascript/ui/stepper/configuration/steps) provide various options, such as icons, templates, labels, and others.
+The component's [`steps`](/api/ui/stepper/configuration/steps) provide various options, such as icons, templates, labels, and others.
 
 ```html
 <nav id="stepper"></nav>
@@ -85,7 +85,7 @@ The component's [`steps`](/api/javascript/ui/stepper/configuration/steps) provid
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Stepper](/api/javascript/ui/stepper)
+* [JavaScript API Reference of the jQuery Stepper](/api/ui/stepper)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -168,7 +168,7 @@ Use the `lockColumn` and `unlockColumn` methods. To make changes through a custo
 
 ## See Also
 
-* [API Reference of the lockColumn Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/lockcolumn)
-* [API Reference of the unlockColumn Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/unlockcolumn)
+* [API Reference of the lockColumn Method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/lockcolumn)
+* [API Reference of the unlockColumn Method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/unlockcolumn)
 * [Kendo UI Templates Overview](https://docs.telerik.com/kendo-ui/framework/templates/overview)
 * [Kendo UI Grid Toolbar Template Demo](https://demos.telerik.com/kendo-ui/grid/toolbar-template)

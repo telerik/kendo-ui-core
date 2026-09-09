@@ -127,4 +127,4 @@ To see how the following example functions, filter the column by using the Kendo
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

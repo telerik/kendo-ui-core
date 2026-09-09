@@ -328,7 +328,7 @@ You can reference the Badge instances that you have created and build on top of 
         </script>
     ```
 
-1. Use the [Badge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/badge#methods) to control the behavior of the widget. In this example, you will use the `text` method to change the text of the Badge dynamically (for example, when a button is clicked).
+1. Use the [Badge client-side API](https://docs.telerik.com/kendo-ui/api/ui/badge#methods) to control the behavior of the widget. In this example, you will use the `text` method to change the text of the Badge dynamically (for example, when a button is clicked).
 
     ```HtmlHelper
         @(Html.Kendo().Button()
@@ -379,6 +379,6 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Client-Side API of the Badge](https://docs.telerik.com/kendo-ui/api/javascript/ui/badge)
+* [Client-Side API of the Badge](https://docs.telerik.com/kendo-ui/api/ui/badge)
 * [Server-Side API of the Badge](/api/badge)
 * [Knowledge Base Section](/knowledge-base)

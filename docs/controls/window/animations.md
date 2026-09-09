@@ -16,4 +16,4 @@ For the complete example, refer to the [demo on adding animation to the Window](
 ## See Also
 
 * [Adding Animation Effects to the Window (Demo)](https://demos.telerik.com/kendo-ui/window/ajax)
-* [JavaScript API Reference of the Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the Window](/api/ui/window)

@@ -51,7 +51,7 @@ In this step, you will initialize the CheckBoxGroup from the `<ul>` element. All
 
 ## 3. Apply Configuration Settings
 
-Once the basic initialization is completed, you can start adding additional configurations to the CheckBoxGroup. The component allows you to configure properties such as [`items`](/api/javascript/ui/checkboxgroup/configuration/items), [`layout`](/api/javascript/ui/checkboxgroup/configuration/layout), and [`value`](/api/javascript/ui/checkboxgroup/configuration/value).
+Once the basic initialization is completed, you can start adding additional configurations to the CheckBoxGroup. The component allows you to configure properties such as [`items`](/api/ui/checkboxgroup/configuration/items), [`layout`](/api/ui/checkboxgroup/configuration/layout), and [`value`](/api/ui/checkboxgroup/configuration/value).
 
 ```html
    <ul id="checkboxgroup"></ul>
@@ -74,7 +74,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## See Also
 
-* [JavaScript API Reference of the CheckBoxGroup](/api/javascript/ui/checkboxgroup)
+* [JavaScript API Reference of the CheckBoxGroup](/api/ui/checkboxgroup)
 * [Knowledge Base Section](/knowledge-base)
 
 

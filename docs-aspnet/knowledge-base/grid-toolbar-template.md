@@ -120,7 +120,7 @@ Here is a [REPL example demonstrating the above with version 2021.3.914](https:/
 ## See Also
 
 * [Telerik REPL: Creating Custom Grid Toolbar Template](https://netcorerepl.telerik.com/wFFlaIlQ04WzH8VM43)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

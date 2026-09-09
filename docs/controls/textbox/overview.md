@@ -25,7 +25,7 @@ The TextBox converts an `<input>` element into a styled textbox.
 
 * [Getting Started with the Kendo UI TextBox for jQuery]({% slug getting_started_kendoui_textbox_widget %})
 * [Basic Usage of the TextBox (Demo)](https://demos.telerik.com/kendo-ui/textbox/index)
-* [JavaScript API Reference of the TextBox](/api/javascript/ui/textbox)
+* [JavaScript API Reference of the TextBox](/api/ui/textbox)
 
 ## See Also
 
@@ -33,4 +33,4 @@ The TextBox converts an `<input>` element into a styled textbox.
 * [Using the Basic Events of the TextBox (Demo)](https://demos.telerik.com/kendo-ui/textbox/events)
 * [Binding the TextBox over MVVM (Demo)](https://demos.telerik.com/kendo-ui/textbox/mvvm)
 * [Applying the TextBox API (Demo)](https://demos.telerik.com/kendo-ui/textbox/api)
-* [JavaScript API Reference of the TextBox](/api/javascript/ui/textbox)
+* [JavaScript API Reference of the TextBox](/api/ui/textbox)

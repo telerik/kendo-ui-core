@@ -17,7 +17,7 @@ For a live example, visit the [Appearance Demo of the RadioButton](https://demos
 
 The `size` option controls how big or small the rendered RadioButton looks. The structure of the applied class is `k-radio-{size}`.
 
-The available [`size`](/api/javascript/ui/radiobutton/configuration/size) values are:
+The available [`size`](/api/ui/radiobutton/configuration/size) values are:
 
 - `small`
 - `medium` (Default)
@@ -41,4 +41,4 @@ The example below shows a basic configuration and how to set size to "small" opt
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Basic Usage of the RadioButton (Demo)](https://demos.telerik.com/kendo-ui/radiobutton/index)
-* [JavaScript API Reference of the RadioButton](/api/javascript/ui/radiobutton)
+* [JavaScript API Reference of the RadioButton](/api/ui/radiobutton)

@@ -7,14 +7,14 @@ component: button
 
 # kendo.ui.Button
 
-Represents the Kendo UI Button widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Button widget. Inherits from [Widget](/api/ui/widget).
 
 
 ## Configuration
 
 ### badge `Boolean|String|Number|Object`
 
-If set to true a default overlay badge will be displayed. If set to a string, an ovelay with content set to the specified string will be displayed. Can be set to a JavaScript object which represents the configuration of the [`Badge widget`](/api/javascript/ui/badge).
+If set to true a default overlay badge will be displayed. If set to a string, an ovelay with content set to the specified string will be displayed. Can be set to a JavaScript object which represents the configuration of the [`Badge widget`](/api/ui/badge).
 
 
 <div class="meta-api-description">
@@ -43,7 +43,7 @@ How do I add a notification count to a Kendo UI button? Control and customize ov
 
 Specifies alignment of the badge relative to button. Valid position options are: `top start`, `top end`, `bottom start`, `bottom end`.
 
-`badge.align` works in conjunction with [`badge.position`](/api/javascript/ui/button/configuration/badge.position).
+`badge.align` works in conjunction with [`badge.position`](/api/ui/button/configuration/badge.position).
 
 
 <div class="meta-api-description">
@@ -155,7 +155,7 @@ How do I limit the maximum value shown on a button's badge in Kendo UI for jQuer
 
 Specifies position of the badge relative to the edge of the button. Valid placemnt options are: `inline`, `edge`, `inside`, `outside`.
 
-Note: position configuration, other than `inline`, requires the badge to be aligned. See [`badge.align`](/api/javascript/ui/button/configuration/badge.align) for more details.
+Note: position configuration, other than `inline`, requires the badge to be aligned. See [`badge.align`](/api/ui/button/configuration/badge.align) for more details.
 
 
 <div class="meta-api-description">
@@ -223,7 +223,7 @@ How do I change the size of a notification badge in Kendo UI for jQuery Button? 
 
 ### badge.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the content of the badge.
+The [template](/api/kendo/methods/template) which renders the content of the badge.
 
 
 <div class="meta-api-description">
@@ -470,7 +470,7 @@ How do I adjust the size of a Kendo UI button? Adjust the button’s size, dimen
 ### spriteCssClass `String`
 
 Defines a CSS class (or multiple classes separated by spaces), which will be used for applying a background image to a `span` element inside the **Button**.
-In case you want to use an icon from the Kendo UI theme sprite background image, it is easier to use the [`icon` property](/api/javascript/ui/button#configuration-icon).
+In case you want to use an icon from the Kendo UI theme sprite background image, it is easier to use the [`icon` property](/api/ui/button#configuration-icon).
 
 The `span` element can be added automatically by the widget, or an existing element can be used, if it has a `k-sprite` CSS class applied.
 

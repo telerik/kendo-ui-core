@@ -178,4 +178,4 @@ The DropDownList widget displays `noDataTemplate` in the popup when the data sou
 ## See Also
 
 * [Customizing the Templates in the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/template)
-* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/ui/dropdownlist)

@@ -56,7 +56,7 @@ How do I specify the end date of an event in Kendo UI for jQuery Scheduler? Spec
 
 ### endTimezone `String` *(default: undefined)*
 
-The timezone of the `end` date. If not specified the [timezone](/api/javascript/ui/scheduler/configuration/timezone) will be used.
+The timezone of the `end` date. If not specified the [timezone](/api/ui/scheduler/configuration/timezone) will be used.
 
 The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
 
@@ -245,7 +245,7 @@ How do I set the start date of an event in a Kendo UI Scheduler? Define, configu
 
 ### startTimezone `String` *(default: undefined)*
 
-The timezone of the `start` date. If not specified the [timezone](/api/javascript/ui/scheduler/configuration/timezone) will be used.
+The timezone of the `start` date. If not specified the [timezone](/api/ui/scheduler/configuration/timezone) will be used.
 
 The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
 

@@ -133,4 +133,4 @@ The following example demonstrates how to use a custom button that executes a cu
 ## See Also
 
 * [Kendo UI TaskBoard Columns]({% slug columns_kendoui_taskboard_widget %})
-* [JavaScript API Reference of the Kendo UI TaskBoard](/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the Kendo UI TaskBoard](/api/ui/taskboard)

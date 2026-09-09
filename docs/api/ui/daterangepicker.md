@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.DateRangePicker
 
-Represents the Kendo UI DateRangePicker widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI DateRangePicker widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -202,7 +202,7 @@ How do I set the culture for a Kendo UI DateRangePicker? Control and configure d
 
 ### dates `Array`
 
-Specifies a list of dates, which will be passed to the [month template](/api/javascript/ui/daterangepicker#configuration-month.content).
+Specifies a list of dates, which will be passed to the [month template](/api/ui/daterangepicker#configuration-month.content).
 
 
 <div class="meta-api-description">
@@ -374,7 +374,7 @@ How do I customize the appearance of a date range picker in Kendo UI for jQuery?
 
 ### footer `String|Function`
 
- The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
+ The [template](/api/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
 
 
 <div class="meta-api-description">

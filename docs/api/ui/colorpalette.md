@@ -16,7 +16,7 @@ a drop-down.
 ### palette `String|Array` *(default: "basic")*
 
 Specifies the color palette to display.
-It can be a string with comma-separated colors in hex representation, an array of [`kendo.Color` object](/api/javascript/color) objects or of strings that [parseColor](/api/javascript/kendo#parseColor) understands.  As a shortcut, you can pass "basic" to get the simple palette (this is the default) or "websafe" to get the Web-safe palette.
+It can be a string with comma-separated colors in hex representation, an array of [`kendo.Color` object](/api/color) objects or of strings that [parseColor](/api/kendo#parseColor) understands.  As a shortcut, you can pass "basic" to get the simple palette (this is the default) or "websafe" to get the Web-safe palette.
 
 
 <div class="meta-api-description">
@@ -168,7 +168,7 @@ How do I preselect a color in Kendo UI ColorPalette? Set or configure the initia
 
 Get or set the selected color. If no argument is given, this returns the currently selected color as a string in format `#FFFFFF`.
 
-If one argument is given, it selects the new color and updates the UI. The argument can be a string in **hex**, **rgb** or **rgba** format, or a [`kendo.Color` object](/api/javascript/color) object.
+If one argument is given, it selects the new color and updates the UI. The argument can be a string in **hex**, **rgb** or **rgba** format, or a [`kendo.Color` object](/api/color) object.
 
 > This method does not trigger the "change" event.
 
@@ -201,7 +201,7 @@ How do I update the currently selected color in Kendo UI ColorPalette without tr
 
 ### color
 
-Get or set the selected color. If no argument is given, this returns the currently selected color as a [`kendo.Color` object](/api/javascript/color).
+Get or set the selected color. If no argument is given, this returns the currently selected color as a [`kendo.Color` object](/api/color).
 
 
 <div class="meta-api-description">
@@ -344,4 +344,4 @@ If invoked cancels the default action that belongs to the keydown event.
       });
     </script>
 
-[Color]: /api/javascript/kendo#Color
+[Color]: /api/kendo#Color

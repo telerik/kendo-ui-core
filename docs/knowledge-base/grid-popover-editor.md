@@ -31,11 +31,11 @@ How can I open a Kendo UI for jQuery Popover when a Grid cell value is clicked a
 To achieve the desired scenario: 
 
 1. Define a template function that will be used for the Grid columns. This function will accept the `dataItem` of the row as well as the name of the column field.
-1. Assign the function to the Grid columns by using the [`columns.template`](/api/javascript/ui/grid/configuration/columns.template) configuration.
+1. Assign the function to the Grid columns by using the [`columns.template`](/api/ui/grid/configuration/columns.template) configuration.
 1. Initialize the Popover component.
-1. The [`header`](/api/javascript/ui/popover/configuration/header) for the Popover will be generated dynamically. The following example uses the title of the column as a title for the Popover.
-1. The [`body`](/api/javascript/ui/popover/configuration/body) of the Popover will depend on the type of components that you want to initialize inside the Popover. For example, for numeric columns, you will likely want to have an `input` element in the body because the NumericTextBox component is initialized from such.
-1. The column specific components will be initialized inside the [`show`](/api/javascript/ui/popover/events/show) event of the Popover. The example shows a possible initialization; however, you can implement your own logic if required.
+1. The [`header`](/api/ui/popover/configuration/header) for the Popover will be generated dynamically. The following example uses the title of the column as a title for the Popover.
+1. The [`body`](/api/ui/popover/configuration/body) of the Popover will depend on the type of components that you want to initialize inside the Popover. For example, for numeric columns, you will likely want to have an `input` element in the body because the NumericTextBox component is initialized from such.
+1. The column specific components will be initialized inside the [`show`](/api/ui/popover/events/show) event of the Popover. The example shows a possible initialization; however, you can implement your own logic if required.
 
 The following example demonstrates the full implementation of the suggested approach:
 

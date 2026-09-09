@@ -24,7 +24,7 @@ Streaming is particularly useful when:
 To enable streaming in the InlineAIPrompt component, follow these steps:
 
 
-1. Enable the [`isStreaming`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/inlineaiprompt/configuration/isstreaming) property of the InlineAIPrompt. This property controls whether the component displays the **Stop Generation** button and indicates that a response is being streamed.
+1. Enable the [`isStreaming`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/configuration/isstreaming) property of the InlineAIPrompt. This property controls whether the component displays the **Stop Generation** button and indicates that a response is being streamed.
 
     ```js
     $("#inlineaiprompt").kendoInlineAIPrompt({
@@ -33,7 +33,7 @@ To enable streaming in the InlineAIPrompt component, follow these steps:
     ```
 
 
-1. Handle the [`promptRequest`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/inlineaiprompt/events/promptrequest) event to start streaming. When the user clicks the **Send** button or presses Enter, the `promptRequest` event is fired.
+1. Handle the [`promptRequest`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/events/promptrequest) event to start streaming. When the user clicks the **Send** button or presses Enter, the `promptRequest` event is fired.
 
     ```js
     promptRequest: async function(ev) {
@@ -47,7 +47,7 @@ To enable streaming in the InlineAIPrompt component, follow these steps:
     ```
 
 
-1. Utilize the [`startStreaming`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/inlineaiprompt/methods/startstreaming), [`stopStreaming`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/inlineaiprompt/methods/stopstreaming) methods to start and stop the prompt animation for streaming. To update the prompt output content, use the [`updatePromptOutputContent`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/inlineaiprompt/methods/updatepromptoutputcontent)
+1. Utilize the [`startStreaming`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/methods/startstreaming), [`stopStreaming`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/methods/stopstreaming) methods to start and stop the prompt animation for streaming. To update the prompt output content, use the [`updatePromptOutputContent`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/methods/updatepromptoutputcontent)
 
     ```js
     promptRequest: async function(ev) {
@@ -80,4 +80,4 @@ To enable streaming in the InlineAIPrompt component, follow these steps:
 ## See Also
 
 * [Streaming Demo of the InlineAIPrompt](https://demos.telerik.com/kendo-ui/inline-aiprompt/streaming)
-* [JavaScript API Reference of the InlineAIPrompt](/api/javascript/ui/inlineaiprompt)
+* [JavaScript API Reference of the InlineAIPrompt](/api/ui/inlineaiprompt)

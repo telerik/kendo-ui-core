@@ -45,7 +45,7 @@ The following example demonstrates how to obtain these client-side objects of th
 
 > If you are using the 2017 R1 version or later, use the `.k-insertFile` and `.k-insertImage` classes to get the button elements.
 
-To attach events with [`bind()`](/intro/installation/events-and-methods#bind-to-events-after-widget-initialization) or to perform other customizations that may not be otherwise supported, use the API calls of the [ListView](/api/javascript/ui/listview), [Upload](/api/javascript/ui/upload) and [DropDownList](/api/javascript/ui/dropdownlist) widget objects after they are available.
+To attach events with [`bind()`](/intro/installation/events-and-methods#bind-to-events-after-widget-initialization) or to perform other customizations that may not be otherwise supported, use the API calls of the [ListView](/api/ui/listview), [Upload](/api/ui/upload) and [DropDownList](/api/ui/dropdownlist) widget objects after they are available.
 
 The following `transport` configurations are over-simplified and invalid.
 
@@ -135,4 +135,4 @@ The following `transport` configurations are over-simplified and invalid.
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
 * [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)

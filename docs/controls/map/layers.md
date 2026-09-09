@@ -11,7 +11,7 @@ position: 2
 
 The information that the Map renders is organized into layers.
 
-These layers are stacked from bottom to top in the order of definition and are oblivious of each other. To keep their content in sync, use the [events of the Map](/api/javascript/dataviz/ui/map#events).
+These layers are stacked from bottom to top in the order of definition and are oblivious of each other. To keep their content in sync, use the [events of the Map](/api/dataviz/ui/map#events).
 
 ## Getting Started
 
@@ -45,4 +45,4 @@ Raster maps are divided into images (tiles) for serving over the web. Tiles are 
 ## See Also
 
 * [Bubble Tile Layer in the Map (Demo)](https://demos.telerik.com/kendo-ui/map/bubble-layer)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
+* [JavaScript API Reference of the Map](/api/dataviz/ui/map)

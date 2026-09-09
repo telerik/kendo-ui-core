@@ -203,7 +203,7 @@ You can achieve this requirement using the following approach:
 
 ## See Also
 
-* [Client-Side API Reference of the Wizard for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard)
+* [Client-Side API Reference of the Wizard for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/wizard)
 * [Server-Side API Reference of the Wizard for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/wizard)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

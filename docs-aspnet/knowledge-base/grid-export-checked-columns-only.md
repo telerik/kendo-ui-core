@@ -34,9 +34,9 @@ To achieve the desired scenario:
 
 1. To handle the Excel export of the Grid, subscribe to the [`ExcelExport`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event.
 1. Enable the rows' persistence upon selection by using the [`.PersistSelection`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridbuilder#persistselectionsystemboolean) configuration method.
-1. Within the handler, obtain the fields of the columns that you are going to add by using the client-side [`.columns()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns) method the Grid provides and map them to a **key-value** pair by using the [`.map()`](https://api.jquery.com/jquery.map/) method. 
+1. Within the handler, obtain the fields of the columns that you are going to add by using the client-side [`.columns()`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns) method the Grid provides and map them to a **key-value** pair by using the [`.map()`](https://api.jquery.com/jquery.map/) method. 
 1. Push the cell headers from the previously obtained column fields.
-1. From there, get the selected Grid rows by using the built-in [`.selectedKeyNames()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/selectedkeynames) method, traverse through each of the items, and push their column values with the help of the previously obtained Grid column fields.
+1. From there, get the selected Grid rows by using the built-in [`.selectedKeyNames()`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/selectedkeynames) method, traverse through each of the items, and push their column values with the help of the previously obtained Grid column fields.
 1. Create a common function that will be responsible for creating the workbook document.
 
 ```Razor Index.cshtml
@@ -145,7 +145,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Exporting Checked Columns Only in the Grid](https://netcorerepl.telerik.com/cclcYfFd35PFgwhC55)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

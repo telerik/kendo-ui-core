@@ -7,7 +7,7 @@ component: Reasoning
 
 # kendo.ui.Reasoning
 
-Represents the Kendo UI Reasoning widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Reasoning widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

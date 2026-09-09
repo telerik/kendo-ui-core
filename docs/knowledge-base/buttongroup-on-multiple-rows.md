@@ -121,4 +121,4 @@ Use the `flex` property to change the rendering of the buttons in the ButtonGrou
 
 ## See Also
 
-* [API Reference of the ButtonGroup](https://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup)
+* [API Reference of the ButtonGroup](https://docs.telerik.com/kendo-ui/api/ui/buttongroup)

@@ -35,4 +35,4 @@ The following example demonstrates how to create a Calendar that allows the user
 ## See Also
 
 * [View Selection in the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/view-selection)
-* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
+* [JavaScript API Reference of the MultiViewCalendar](/api/ui/multiviewcalendar)

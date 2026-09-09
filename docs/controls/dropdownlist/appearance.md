@@ -25,7 +25,7 @@ The Kendo UI DropDownList supports the following styling options:
 
 The `size` option controls how big or small the DropDownList component looks. The structure of the class is `k-picker-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/dropdownlist/configuration/size) option:
+The following values are available for the [`size`](/api/ui/dropdownlist/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -57,7 +57,7 @@ Below is the HTML that is affected from the configuration. The changes are appli
 
 The `rounded` option controls how much border radius is applied to the tags for the selected items in the widget. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/dropdownlist/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/dropdownlist/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
@@ -90,7 +90,7 @@ The changes are applied to the `span.k-dropdownlist` wrapping element:
 
 The `fillMode` option controls how the color is applied. The structure of the class is `k-picker-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/dropdownlist/configuration/fillMode) option:
+The following values are available for the [`fillMode`](/api/ui/dropdownlist/configuration/fillMode) option:
 
 - `solid`
 - `flat`
@@ -124,4 +124,4 @@ The changes are applied to the `span.k-dropdownlist` wrapping element:
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/appearance)
-* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/ui/dropdownlist)

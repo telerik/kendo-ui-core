@@ -72,7 +72,7 @@ To bind the DateRangePicker to a property from the `PageModel`, follow the next 
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the DateRangePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker)
+* [Client-Side API of the DateRangePicker](https://docs.telerik.com/kendo-ui/api/ui/daterangepicker)
 * [Server-Side HtmlHelper API of the DateRangePicker](/api/daterangepicker)
 * [Server-Side TagHelper API of the DateRangePicker](/api/taghelpers/daterangepicker)
 * [Knowledge Base Section](/knowledge-base)

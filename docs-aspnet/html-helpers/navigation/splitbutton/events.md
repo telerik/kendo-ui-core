@@ -52,4 +52,4 @@ For a complete example on basic SplitButton events, refer to the [demo on using 
 
 * [Using the API of the SplitButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/api)
 * [SplitButton Server-Side API](/api/splitbutton)
-* [SplitButton Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitbutton)
+* [SplitButton Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/splitbutton)

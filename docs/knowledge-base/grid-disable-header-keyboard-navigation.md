@@ -21,7 +21,7 @@ I want to disable keyboard navigation specifically in the header of a Kendo UI G
 
 ## Solution
 
-To achieve the desired result, you can handle the [`navigate`](/api/javascript/ui/grid/events/navigate) event of the Grid and check if the [`current`](/api/javascript/ui/grid/methods/current) element is part of the Grid header. If it is, select a cell from the first row of the Grid data. 
+To achieve the desired result, you can handle the [`navigate`](/api/ui/grid/events/navigate) event of the Grid and check if the [`current`](/api/ui/grid/methods/current) element is part of the Grid header. If it is, select a cell from the first row of the Grid data. 
 
 Below you will find a runnable example:
 

@@ -50,7 +50,7 @@ In this step, you will initialize the FloatingActionButton from the `<button>` e
 
 ## 3. Add Items for the FloatingActionButton
 
-Next, you can configure the items in the popup by using the [`items`](/api/javascript/ui/floatingactionbutton/configuration/items) option.
+Next, you can configure the items in the popup by using the [`items`](/api/ui/floatingactionbutton/configuration/items) option.
 
 ```html
    <button id="fab" type="button">Button</button>
@@ -68,7 +68,7 @@ Next, you can configure the items in the popup by using the [`items`](/api/javas
 
 ## 4. Add Icon to the FloatingActionButton
 
-You can add an icon to the FloatingActionButton by utilizing the [`icon`](/api/javascript/ui/floatingactionbutton/configuration/icon) option.
+You can add an icon to the FloatingActionButton by utilizing the [`icon`](/api/ui/floatingactionbutton/configuration/icon) option.
 
 ```html
    <button id="fab" type="button"></button>
@@ -93,7 +93,7 @@ You can add an icon to the FloatingActionButton by utilizing the [`icon`](/api/j
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery FloatingActionButton](/api/javascript/ui/floatingactionbutton)
+* [JavaScript API Reference of the jQuery FloatingActionButton](/api/ui/floatingactionbutton)
 * [Knowledge Base Section](/knowledge-base)
 
 

@@ -9,7 +9,7 @@ position: 2
 
 # Ticks
 
-Along the track, the ticks of the RangeSlider indicate the values which result from each incremented predefined step. The component allows you to control the position of the ticks through the [tickPlacement](/api/javascript/ui/rangeslider/configuration/tickplacement) option. 
+Along the track, the ticks of the RangeSlider indicate the values which result from each incremented predefined step. The component allows you to control the position of the ticks through the [tickPlacement](/api/ui/rangeslider/configuration/tickplacement) option. 
 
 ```dojo
     <div id="rangeSlider">
@@ -27,4 +27,4 @@ Along the track, the ticks of the RangeSlider indicate the values which result f
 ## See Also 
 
 * [Steps in the Kendo UI RangeSlider for jQuery]({% slug steps_rangeslider_widget %})
-* [JavaScript API Reference of the RangeSlider](/api/javascript/ui/rangeslider)
+* [JavaScript API Reference of the RangeSlider](/api/ui/rangeslider)

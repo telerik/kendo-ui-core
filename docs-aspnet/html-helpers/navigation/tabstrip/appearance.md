@@ -243,6 +243,6 @@ Swimming has been recorded since prehistoric times.
 {% if site.core %}
 * [Server-Side API of the TabStrip TagHelper](/api/taghelpers/tabstrip)
 {% endif %}
-* [Client-Side API of the TabStrip](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)
+* [Client-Side API of the TabStrip](https://docs.telerik.com/kendo-ui/api/ui/tabstrip)
 
 

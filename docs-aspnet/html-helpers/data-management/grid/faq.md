@@ -242,7 +242,7 @@ The following example demonstrates how to use a JavaScript function in the `Clie
 
 ## How can I use Kendo UI widgets inside Grid client column templates?
 
-The `script` tags are not automatically evaluated inside a Grid client column template, so the included widgets are not initialized. The scripts must be evaluated manually in the [Grid's `dataBound` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound).
+The `script` tags are not automatically evaluated inside a Grid client column template, so the included widgets are not initialized. The scripts must be evaluated manually in the [Grid's `dataBound` event](https://docs.telerik.com/kendo-ui/api/ui/grid#events-dataBound).
 
 The following example demonstrates how to add a Kendo UI Menu inside a Grid column template. Note that the Menu requires the Grid cells to allow overflowing, which is disabled by default.
 {% if site.mvc %}
@@ -344,7 +344,7 @@ The following example demonstrates how to add a Kendo UI Menu inside a Grid colu
 
 ## How can I change the format of bound columns?
 
-Use the [`Format`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#formatsystemstring) method. the value should be a valid [`number`](https://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-number-formats) or [`date`](https://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-date-formats) format.
+Use the [`Format`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#formatsystemstring) method. the value should be a valid [`number`](https://docs.telerik.com/kendo-ui/api/kendo#standard-number-formats) or [`date`](https://docs.telerik.com/kendo-ui/api/kendo#standard-date-formats) format.
 
 The following example demonstrates how to specify the format of a bound column.
 
@@ -464,7 +464,7 @@ The following example demonstrates how to send additional data in an Ajax-bound 
 
 ## How can I reload data in Ajax-bound Grids?
 
-Use the [`read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#read) method of the DataSource.
+Use the [`read`](https://docs.telerik.com/kendo-ui/api/data/datasource#read) method of the DataSource.
 
 The following example demonstrates how to reload an Ajax-bound Grid.
 
@@ -535,7 +535,7 @@ public ActionResult Read([DataSourceRequest] DataSourceRequest request)
 
 ## How can I handle errors in Ajax binding mode?
 
-Use the [`error`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#error) event of the DataSource. Apply the `Error` method from the fluent API to specify the name of the JavaScript function which will handle the event.
+Use the [`error`](https://docs.telerik.com/kendo-ui/api/data/datasource#error) event of the DataSource. Apply the `Error` method from the fluent API to specify the name of the JavaScript function which will handle the event.
 
 The following example demonstrates how to handle errors in the Ajax binding mode.
 
@@ -879,7 +879,7 @@ To validate a number by using the Kendo UI NumericTextBox:
 ## How can I distinguish between Add and Edit mode?
 
 To distinguish between the insert and update modes, you can use the `isNew` method in combination with the edit event handler of the grid:
-[Grid Edit Event](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-edit)
+[Grid Edit Event](http://docs.telerik.com/kendo-ui/api/ui/grid#events-edit)
 
 Here is a basic sample for reference:
 

@@ -33,7 +33,7 @@ Currently, the Wizard and the Form do not deliver methods that disable all of th
 
 Therefore, the most straightforward way is to overlay the Wizard's Form:
 
-1. Subscribe to the [`Activate` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard/events/activate) of the component.
+1. Subscribe to the [`Activate` event](https://docs.telerik.com/kendo-ui/api/ui/wizard/events/activate) of the component.
 
     ```Razor
         .Events(ev => ev.Activate("onActivate"))
@@ -81,7 +81,7 @@ To explore the complete example, see the project on how to [display an overlay o
 
 ## See Also
 
-* [Client-Side API Reference of the Wizard's for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard)
+* [Client-Side API Reference of the Wizard's for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/wizard)
 * [Server-Side API Reference of the Wizard for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/wizard)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

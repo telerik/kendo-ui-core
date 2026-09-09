@@ -74,7 +74,7 @@ You can bind the DropDownTree to local and remote data. For further information,
 
 ## 4. Display Icons 
 
-By using the [`dataImageUrlField`](/api/javascript/ui/dropdowntree/configuration/dataimageurlfield) option, you can display icons next to the items. The field needs to be specified in the `items` array.
+By using the [`dataImageUrlField`](/api/ui/dropdowntree/configuration/dataimageurlfield) option, you can display icons next to the items. The field needs to be specified in the `items` array.
 
 ```html
 <input id="dropdowntree" />
@@ -93,7 +93,7 @@ By using the [`dataImageUrlField`](/api/javascript/ui/dropdowntree/configuration
 
 ## 5. Set the Tag Mode Option
 
-The DropDownTree supports both single and multiple (default) tag modes. The example below shows how to switch to single tag mode. The [`checkboxes`](/api/javascript/ui/dropdowntree/configuration/checkboxes) option must be enabled.
+The DropDownTree supports both single and multiple (default) tag modes. The example below shows how to switch to single tag mode. The [`checkboxes`](/api/ui/dropdowntree/configuration/checkboxes) option must be enabled.
 
 ```html
 <input id="dropdowntree" />
@@ -119,6 +119,6 @@ The DropDownTree supports both single and multiple (default) tag modes. The exam
 
 ## See Also 
 
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/datepicker)
+* [JavaScript API Reference of the DropDownTree](/api/ui/datepicker)
 * [Knowledge Base Section](/knowledge-base)
 

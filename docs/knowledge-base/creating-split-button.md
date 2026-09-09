@@ -88,7 +88,7 @@ The example below demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [Menu JavaScript API Reference](/api/javascript/ui/menu)
+* [Menu JavaScript API Reference](/api/ui/menu)
 * [Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
 * [Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
 

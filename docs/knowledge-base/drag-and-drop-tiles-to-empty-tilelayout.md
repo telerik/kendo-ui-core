@@ -573,4 +573,4 @@ How can I drag and drop new tiles after removing all of the tiles from the TileL
 
 ## See Also
 
-* [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)
+* [JavaScript API Reference of the TileLayout](/api/ui/tilelayout)

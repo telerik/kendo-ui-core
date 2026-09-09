@@ -13,7 +13,7 @@ The Kendo UI TileLayout widget tiles are configured by using an array of contain
 
 ## Dimensions
 
-Each tile can span across several rows and columns. The space that the tile takes up is determined by its container [`rowSpan`](/api/javascript/ui/tilelayout/configuration/containers.rowspan) and [`colSpan`](/api/javascript/ui/tilelayout/configuration/containers.colspan).
+Each tile can span across several rows and columns. The space that the tile takes up is determined by its container [`rowSpan`](/api/ui/tilelayout/configuration/containers.rowspan) and [`colSpan`](/api/ui/tilelayout/configuration/containers.colspan).
 
 ## Headers
 
@@ -21,11 +21,11 @@ The tiles can be configured with our without headers.
 
 > Headers are required if using the `reorderable` functionality of the widget.
 
-The headers render their content via the [`header.text`](/api/javascript/ui/tilelayout/configuration/containers.header.text) which is plain text or by utilizing a [`header.template`](/api/javascript/ui/tilelayout/configuration/containers.header.template).
+The headers render their content via the [`header.text`](/api/ui/tilelayout/configuration/containers.header.text) which is plain text or by utilizing a [`header.template`](/api/ui/tilelayout/configuration/containers.header.template).
 
 ## Body content
 
-The main tile content is rendered from the [`bodyTemplate`](/api/javascript/ui/tilelayout/configuration/containers.bodytemplate) that can also be plain text or a complex template with widgets in it.
+The main tile content is rendered from the [`bodyTemplate`](/api/ui/tilelayout/configuration/containers.bodytemplate) that can also be plain text or a complex template with widgets in it.
 
 ## Container Styles
 
@@ -52,6 +52,6 @@ To override any of the classes, add your own or remove some, insert the new defi
 ## See Also
 
 * [Overview of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
-* [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)
+* [JavaScript API Reference of the TileLayout](/api/ui/tilelayout)
 * [Resizing]({% slug resizing_kendoui_tilelayout_widget %})
 * [Reordering]({% slug reordering_kendoui_tilelayout_widget %})

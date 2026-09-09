@@ -70,7 +70,7 @@ To associate a tooltip with a Button in {{ site.product }}, follow the approach 
 
 ## See Also
 
-* [Client-Side API Reference of the Button for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/button)
+* [Client-Side API Reference of the Button for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/button)
 * [Server-Side API Reference of the Button for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/button)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

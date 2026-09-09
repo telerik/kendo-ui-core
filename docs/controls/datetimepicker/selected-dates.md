@@ -28,4 +28,4 @@ The DateTimePicker sets the value only if the entered date and time is valid and
 ## See Also
 
 * [Range Selection in the DateTimePicker (Demo)](https://demos.telerik.com/kendo-ui/datetimepicker/rangeselection)
-* [JavaScript API Reference of the DateTimePicker](/api/javascript/ui/datetimepicker)
+* [JavaScript API Reference of the DateTimePicker](/api/ui/datetimepicker)

@@ -29,11 +29,11 @@ How can I drag across empty Scheduler slots, keep the selected time range, and t
 
 ## Cause
 
-The Scheduler supports selecting slots when [`Selectable(true)`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/selectable) is enabled, but it does not provide a built-in command that creates an event from the current slot selection.
+The Scheduler supports selecting slots when [`Selectable(true)`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/selectable) is enabled, but it does not provide a built-in command that creates an event from the current slot selection.
 
 ## Solution
 
-Enable slot selection in the Scheduler with [`Selectable(true)`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/selectable), store the selected range in the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/change) event, and use a custom button to call [`addEvent()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/addevent) with that range.
+Enable slot selection in the Scheduler with [`Selectable(true)`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/selectable), store the selected range in the [`change`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/events/change) event, and use a custom button to call [`addEvent()`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/methods/addevent) with that range.
 
 ```Razor
 @(Html.Kendo().Scheduler<MeetingViewModel>()
@@ -83,7 +83,7 @@ Enable slot selection in the Scheduler with [`Selectable(true)`](https://docs.te
 
 ## See Also
 
-* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Client-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/scheduler)
 * [Server-Side API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/scheduler)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Scheduler for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/scheduler)

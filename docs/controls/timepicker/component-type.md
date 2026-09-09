@@ -27,4 +27,4 @@ As a result, the appearance of the widget is alternated.
 
 ## See Also
 
-* [JavaScript API Reference of the DatePicker](/api/javascript/ui/timepicker)
+* [JavaScript API Reference of the DatePicker](/api/ui/timepicker)

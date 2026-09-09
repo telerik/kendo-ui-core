@@ -34,7 +34,7 @@ The ComboBox displays a list of values, allowing for making a single selection f
 
 ## See Also
 
-* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [JavaScript API Reference of the ComboBox](/api/ui/combobox)
 * [Demo Page for the jQuery ComboBox](https://demos.telerik.com/kendo-ui/combobox/index)
 * [Knowledge Base Section](/knowledge-base)
 * [jQuery ComboBox Product Page](https://www.telerik.com/kendo-jquery-ui/combobox)

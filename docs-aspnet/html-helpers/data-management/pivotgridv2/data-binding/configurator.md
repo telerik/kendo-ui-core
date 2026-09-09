@@ -110,7 +110,7 @@ The following image demonstrates the output from the previous example.
 
 ## Referencing Existing Instances
 
-To reference an existing PivotConfigurator instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotConfigurator client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotconfiguratorv2#methods) to control its behavior.
+To reference an existing PivotConfigurator instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotConfigurator client-side API](https://docs.telerik.com/kendo-ui/api/ui/pivotconfiguratorv2#methods) to control its behavior.
 
 ```JS
 var pivotconfiguratorv2 = $("#pivotconfiguratorv2").data("kendoPivotConfiguratorV2");
@@ -120,4 +120,4 @@ var pivotconfiguratorv2 = $("#pivotconfiguratorv2").data("kendoPivotConfigurator
 
 * [OLAP Cube Fundamentals]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals %})
 * [OLAP Cube Setup]({% slug htmlhelpers_pivotgridv2_aspnetcore_olap_cube_setup %})
-* [PivotConfiguratorV2 JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotconfiguratorv2)
+* [PivotConfiguratorV2 JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/ui/pivotconfiguratorv2)

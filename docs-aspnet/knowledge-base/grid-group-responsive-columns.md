@@ -45,7 +45,7 @@ The ability to group the Grid is lost when the **responsive-column-template** is
     )
     ```
 
-2. In the **onChange** handler create an object from the selected [`values`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/methods/value) of the MultiSelect and push that into an array. Then pass that array to dataSource's [`group method`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/group).
+2. In the **onChange** handler create an object from the selected [`values`](https://docs.telerik.com/kendo-ui/api/ui/multiselect/methods/value) of the MultiSelect and push that into an array. Then pass that array to dataSource's [`group method`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/group).
 
     ```JavaScript
         function onChange(e){
@@ -110,7 +110,7 @@ To explore the complete behavior, see the Telerik REPL example on how to [enable
 {% if site.core %}
 * [Get Started with the Telerik REPL for ASP.NET Core](https://www.telerik.com/aspnet-core-ui/repl)
 {% endif %}
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

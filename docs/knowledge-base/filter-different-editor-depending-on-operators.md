@@ -26,7 +26,7 @@ How can I have different editors appear depending on the current operator of the
 
 ## Solution
 
-1. Bind the [`change`](/api/javascript/ui/filter/events/change) event to the `filterModel` of the component and identify the exact `Filter expression` from its items. 
+1. Bind the [`change`](/api/ui/filter/events/change) event to the `filterModel` of the component and identify the exact `Filter expression` from its items. 
 1. Find the `editor` of the expression, empty it and then append a new `input` element. 
 1. Check for the current operator of the `Filter expression` and initialize the corresponding component for the editor in the input element you appended.  
 
@@ -133,4 +133,4 @@ The following example demonstrates how to achieve the desired scenario:
 ```
 
 ## See Also
-* [JavaScript API Reference of the Filter](/api/javascript/ui/filter)
+* [JavaScript API Reference of the Filter](/api/ui/filter)

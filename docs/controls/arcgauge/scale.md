@@ -11,7 +11,7 @@ position: 4
 
 The ArcGauge enables you to customize the options of the scale.
 
-For example, you can change the start and end angle, the appearance of the label and ticks, customize the ranges, and others. For the full list of options, refer to the [API reference of the ArcGauge](/api/javascript/dataviz/ui/arcgauge).
+For example, you can change the start and end angle, the appearance of the label and ticks, customize the ranges, and others. For the full list of options, refer to the [API reference of the ArcGauge](/api/dataviz/ui/arcgauge).
 
     $("#gauge").kendoArcGauge({
         scale: {
@@ -29,4 +29,4 @@ For example, you can change the start and end angle, the appearance of the label
 ## See Also
 
 * [Basic Usage of the ArcGauge (Demo)](https://demos.telerik.com/kendo-ui/arc-gauge/index)
-* [JavaScript API Reference of the ArcGauge](/api/javascript/dataviz/ui/arcgauge)
+* [JavaScript API Reference of the ArcGauge](/api/dataviz/ui/arcgauge)

@@ -17,7 +17,7 @@ For a live example, visit the [Appearance Demo of the TreeView](https://demos.te
 
 The Kendo UI TreeView supports the `size` style option. The `size` option controls the overall size of the component. The structure of the class is `k-input-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/treeview/configuration/size) option:
+The following values are available for the [`size`](/api/ui/treeview/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -51,4 +51,4 @@ Below is the HTML that is affected from the configuration. The changes are appli
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the TreeView](https://demos.telerik.com/kendo-ui/treeview/appearance)
-* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)
+* [JavaScript API Reference of the TreeView](/api/ui/treeview)

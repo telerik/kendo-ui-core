@@ -69,7 +69,7 @@ The following example demonstrates a sample CSS declaration.
 
 ## Using Code
 
-1. To use the built-in [`defineFont`](/api/javascript/pdf/methods/definefont) method from the Drawing library, you have to call it before the PDF file is requested. The object you pass to the `defineFont` method has to map the font name or the style to a URL with the `TrueType` file. The same-origin policy applies and, unless [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is configured, you are not allowed to specify URLs of different origin (domain, protocol, and port).
+1. To use the built-in [`defineFont`](/api/pdf/methods/definefont) method from the Drawing library, you have to call it before the PDF file is requested. The object you pass to the `defineFont` method has to map the font name or the style to a URL with the `TrueType` file. The same-origin policy applies and, unless [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is configured, you are not allowed to specify URLs of different origin (domain, protocol, and port).
 
     ```
         // Import DejaVu Sans font for embedding

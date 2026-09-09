@@ -76,7 +76,7 @@ In this step, you will initialize the CircularProgressBar from the `<div>` eleme
 
 ## 3. Set the Value
 
-After the initialization, you can set the value of the component by using the [`value`](/api/javascript/ui/circularprogressbar/configuration/value) option.
+After the initialization, you can set the value of the component by using the [`value`](/api/ui/circularprogressbar/configuration/value) option.
  
 ```html
     <div id="circularprogressbar"></div>
@@ -90,7 +90,7 @@ After the initialization, you can set the value of the component by using the [`
 
 ## 4. Set the Colors Option
 
-Using the [`colors`](/api/javascript/ui/circularprogressbar/configuration/colors) option, you can change the color of the CircularProgressBar line based on the current value.
+Using the [`colors`](/api/ui/circularprogressbar/configuration/colors) option, you can change the color of the CircularProgressBar line based on the current value.
 
 ```html
     <div id="circularprogressbar"></div>
@@ -173,7 +173,7 @@ You can specify how the center of the CircularProgressBar will appear using a te
 ## See Also
  
 * [Indeterminate CircularProgressBar (Demo)](https://demos.telerik.com/kendo-ui/circularprogressbar/indeterminate)
-* [JavaScript API Reference of the CircularProgressBar](/api/javascript/ui/circularprogressbar)
+* [JavaScript API Reference of the CircularProgressBar](/api/ui/circularprogressbar)
 * [Knowledge Base Section](/knowledge-base)
 
 

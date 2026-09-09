@@ -13,7 +13,7 @@ You can configure the Calendar to display the week number and also use the week 
 
 ## Rendering of Week Numbers
 
-The [`weekNumber`](/api/javascript/ui/calendar/configuration/weeknumber) option enables the Calendar to display the week number on an annual base to the left side of month view and as a separate column.
+The [`weekNumber`](/api/ui/calendar/configuration/weeknumber) option enables the Calendar to display the week number on an annual base to the left side of month view and as a separate column.
 
 ```dojo
    <div id="calendar"></div>
@@ -58,4 +58,4 @@ You can use these properties in the template to make additional calculations.
 ## See Also
 
 * [Week Number Column in the Calendar (Demo)](https://demos.telerik.com/kendo-ui/calendar/week-column)
-* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/ui/calendar)

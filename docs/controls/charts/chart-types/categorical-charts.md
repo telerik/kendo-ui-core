@@ -82,7 +82,7 @@ To enable category highlighting, set the `highlight` option of the `categoryAxis
 
 The category and value axes provide options for displaying their labels either next to the axis or at the outer edges of the plot area. By default, the labels are positioned next to the axis.
 
-To change the label position, set the [`position`](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.position) option of the axis labels which provides the following available options:
+To change the label position, set the [`position`](/api/dataviz/ui/chart#configuration-categoryAxis.labels.position) option of the axis labels which provides the following available options:
 
 - (Default) When `position` is set to `"onAxis"` or `undefined`, the labels are positioned next to the axis.
 - When `position` is set to `"end"`, the labels are placed at the end of the crossing axis. Typically, this configuration positions the labels at the top or right end of the Chart unless the crossing axis was reversed.
@@ -183,4 +183,4 @@ The previous example results in the following output.
 - [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
 - [Basic Usage of the Bar Chart (Demo)](https://demos.telerik.com/kendo-ui/bar-charts/index)
 - [Basic Usage of the Line Chart (Demo)](https://demos.telerik.com/kendo-ui/line-charts/index)
-- [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+- [JavaScript API Reference of the Chart](/api/dataviz/ui/chart)

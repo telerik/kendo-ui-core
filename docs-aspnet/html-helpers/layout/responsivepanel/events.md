@@ -58,7 +58,7 @@ The following example demonstrates how to subscribe to the component events.
 
 ## See Also
 
-* [Client-Side API of the Responsive Panel](https://docs.telerik.com/kendo-ui/api/javascript/ui/responsivepanel)
+* [Client-Side API of the Responsive Panel](https://docs.telerik.com/kendo-ui/api/ui/responsivepanel)
 * [Server-Side API of the Responsive Panel HtmlHelper](/api/responsivepanel)
 {% if site.core %}
 * [Server-Side API of the Responsive Panel TagHelper](/api/taghelpers/responsivepanel)

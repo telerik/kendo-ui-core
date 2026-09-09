@@ -23,9 +23,9 @@ It also gives you the flexibility to customize its border radius, size, color, e
 
 * [Getting Started with the Kendo UI Chat for jQuery]({% slug getting_started_kendoui_avatar_component %})
 * [Overview of the Avatar (Demo)](https://demos.telerik.com/kendo-ui/avatar/index)
-* [JavaScript API Reference of the Avatar](/api/javascript/ui/avatar)
+* [JavaScript API Reference of the Avatar](/api/ui/avatar)
 
 ## See Also
 
 * [Overview of the Avatar (Demo)](https://demos.telerik.com/kendo-ui/avatar/index)
-* [JavaScript API Reference of the Avatar](/api/javascript/ui/avatar)
+* [JavaScript API Reference of the Avatar](/api/ui/avatar)

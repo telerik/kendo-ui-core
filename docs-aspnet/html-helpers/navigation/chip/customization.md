@@ -78,4 +78,4 @@ The `AvatarClass` property allows you to define a CSS class or multiple classes 
 
 * [Applying the Chip API (Demo)](https://demos.telerik.com/{{ site.platform }}/chip/api)
 * [Server-Side API of the Chip HtmlHelper for {{ site.framework }}](/api/chip)
-* [JavaScript API Reference of the Chip HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chip)
+* [JavaScript API Reference of the Chip HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/chip)

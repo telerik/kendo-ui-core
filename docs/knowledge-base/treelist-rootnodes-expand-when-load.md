@@ -30,7 +30,7 @@ components: ["treelist"]
 How can I expand all the root nodes of the Kendo UI TreeList when the component is loaded?
 
 ## Solution
-Use the [rootNodes](https://docs.telerik.com/kendo-ui/api/javascript/data/treelistdatasource/methods/rootnodes) method to get the array of all the root nodes and perform the [expand](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/expand) method on it. For example:
+Use the [rootNodes](https://docs.telerik.com/kendo-ui/api/data/treelistdatasource/methods/rootnodes) method to get the array of all the root nodes and perform the [expand](https://docs.telerik.com/kendo-ui/api/ui/treelist/methods/expand) method on it. For example:
 
 ```javascript
 var treelist1 = $("#treeList").data("kendoTreeList");
@@ -71,5 +71,5 @@ for(let i = 0; i < data.length; i++){
 ```
 
 ## See Also
-- [rootNodes](https://docs.telerik.com/kendo-ui/api/javascript/data/treelistdatasource/methods/rootnodes)
-- [expand](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/expand)
+- [rootNodes](https://docs.telerik.com/kendo-ui/api/data/treelistdatasource/methods/rootnodes)
+- [expand](https://docs.telerik.com/kendo-ui/api/ui/treelist/methods/expand)

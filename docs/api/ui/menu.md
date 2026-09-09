@@ -8,7 +8,7 @@ component: menu
 
 # kendo.ui.Menu
 
-Represents the Kendo UI Menu widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Menu widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -301,7 +301,7 @@ How do I configure Kendo UI menu to close automatically when an item is clicked?
 
 ### dataSource `Object|Array|kendo.data.HierarchicalDataSource`
 
-The data source of the widget which is used to render its items. Can be a JSON object/Arra/[kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) that contains an item or an Array of items to be rendered.
+The data source of the widget which is used to render its items. Can be a JSON object/Arra/[kendo.data.HierarchicalDataSource](/api/data/hierarchicaldatasource) that contains an item or an Array of items to be rendered.
 Refer to the example below for a list of the supported properties.
 
 

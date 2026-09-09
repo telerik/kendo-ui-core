@@ -70,7 +70,7 @@ In this step, you will initialize the ResponsivePanel from the `<nav>` element.
 
 ## 3. Apply Basic Configurations
 
-The ResponsivePanel provides several options that enable you to modify its behavior. The following example demonstrates how to apply a top [`orientation`](/api/javascript/ui/responsivepanel/configuration/orientation), a [`toggleButton`](/api/javascript/ui/responsivepanel/configuration/togglebutton), and a [`700`](/api/javascript/ui/responsivepanel/configuration/breakpoint) orientation to the component.
+The ResponsivePanel provides several options that enable you to modify its behavior. The following example demonstrates how to apply a top [`orientation`](/api/ui/responsivepanel/configuration/orientation), a [`toggleButton`](/api/ui/responsivepanel/configuration/togglebutton), and a [`700`](/api/ui/responsivepanel/configuration/breakpoint) orientation to the component.
 
 ```html
     <nav id="navigation">
@@ -98,7 +98,7 @@ The ResponsivePanel provides several options that enable you to modify its behav
 
 ## See Also 
 
-* [JavaScript API Reference of the jQuery ResponsivePanel](/api/javascript/ui/responsivepanel)
+* [JavaScript API Reference of the jQuery ResponsivePanel](/api/ui/responsivepanel)
 * [Knowledge Base Section](/knowledge-base)
 
 

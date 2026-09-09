@@ -41,4 +41,4 @@ The below example demonstrates how to configure the `Type()` configuration of th
 {% if site.core %}
 * [Server-Side API of the OTPInput TagHelper](/api/taghelpers/otpinput)
 {% endif %}
-* [Client-Side API of the OTPInput](https://docs.telerik.com/kendo-ui/api/javascript/ui/otpinput)
+* [Client-Side API of the OTPInput](https://docs.telerik.com/kendo-ui/api/ui/otpinput)

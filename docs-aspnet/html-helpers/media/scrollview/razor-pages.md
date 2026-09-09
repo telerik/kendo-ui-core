@@ -145,7 +145,7 @@ For the complete project, refer to the [ScrollView in Razor Pages example](https
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the ScrollView](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview)
+* [Client-Side API of the ScrollView](https://docs.telerik.com/kendo-ui/api/ui/scrollview)
 * [Server-Side HtmlHelper API of the ScrollView](/api/scrollview)
 * [Server-Side TagHelper API of the ScrollView](/api/taghelpers/scrollview)
 * [Knowledge Base Section](/knowledge-base)

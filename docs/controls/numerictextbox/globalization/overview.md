@@ -24,4 +24,4 @@ For more information on using localization, internationalization, and right-to-l
 
 * [RTL Support by the NumericTextBox (Demo)](https://demos.telerik.com/kendo-ui/numerictextbox/right-to-left-support)
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
+* [JavaScript API Reference of the NumericTextBox](/api/ui/numerictextbox)

@@ -77,7 +77,7 @@ How can I transfer items between ListBoxes by double-clicking the {{ site.produc
 
 ## See Also
 
-* [Client-Side API Reference of the ListBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
+* [Client-Side API Reference of the ListBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/listbox)
 * [Server-Side API Reference of the ListBox for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/listbox)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

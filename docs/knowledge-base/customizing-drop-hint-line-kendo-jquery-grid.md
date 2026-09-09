@@ -27,7 +27,7 @@ ticketid: 1716958
 
 ## Description
 
-I want to customize the appearance of the drop hint line (`.k-drop-hint`) when reordering rows in a [Kendo UI for jQuery Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/reorderable.rows). The default drop hint line can sometimes be hard to see, especially in wide grids with horizontal scrolling enabled, where it may go out of view. 
+I want to customize the appearance of the drop hint line (`.k-drop-hint`) when reordering rows in a [Kendo UI for jQuery Grid](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/reorderable.rows). The default drop hint line can sometimes be hard to see, especially in wide grids with horizontal scrolling enabled, where it may go out of view. 
 
 This knowledge base article also answers the following questions:
 - How to style the drop hint line in Kendo UI for jQuery Grid?
@@ -114,4 +114,4 @@ If the drop hint line is still out of view or not properly spanning the grid due
 ## See Also
 
 - [Kendo UI for jQuery Grid Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/overview)
-- [Reorderable Rows in Kendo UI Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/reorderable.rows)
+- [Reorderable Rows in Kendo UI Grid](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/reorderable.rows)

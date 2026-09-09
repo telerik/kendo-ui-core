@@ -110,4 +110,4 @@ To implement an AI Chat Assistant for your Grid, follow the steps below:
 * [Smart Extensions](slug:smart_ext_kendoui_grid)
 * [Chat Overview](slug:overview_kendoui_chat_widget)
 * [Grid Overview](slug:overview_kendoui_grid_widget)
-* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
+* [JavaScript API Reference of the Chat](/api/ui/chat)

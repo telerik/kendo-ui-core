@@ -32,7 +32,7 @@ The TreeList enables the display of self-referencing tabular data and supports l
 
 * [Getting Started with the Kendo UI TreeList for jQuery]({% slug getting_started_kendoui_treelist_component %})
 * [Basic Usage of the jQuery TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/index)
-* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
+* [JavaScript API Reference of the TreeList](/api/ui/treelist)
 
 ## See Also
 

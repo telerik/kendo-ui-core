@@ -49,4 +49,4 @@ The following example demonstrates how to set the filter of the DropDownTree.
 ## See Also
 
 * [Client-Side Filtering of the DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/client-filtering)
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)
+* [JavaScript API Reference of the DropDownTree](/api/ui/dropdowntree)

@@ -336,7 +336,7 @@ See the implementation details in the example below, where the JSON errors are a
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Form](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/form)
+* [Client-Side API of the Form](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/form)
 * [Server-Side HtmlHelper API of the Form](/api/form)
 * [Server-Side TagHelper API of the Form](/api/taghelpers/form)
 * [Knowledge Base Section](/knowledge-base)

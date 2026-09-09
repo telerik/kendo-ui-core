@@ -8,7 +8,7 @@ component: captcha
 
 # kendo.ui.Captcha
 
-Represents the Kendo UI Captcha. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Captcha. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

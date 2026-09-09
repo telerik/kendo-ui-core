@@ -26,7 +26,7 @@ The Kendo UI TextBox supports the following styling options:
 
 The `size` option controls how big or small the rendered `textbox` looks. The structure of the class is `k-input-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/textbox/configuration/size) option:
+The following values are available for the [`size`](/api/ui/textbox/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -42,7 +42,7 @@ The default size value is `medium` and it is applied to the wrapping span elemen
 
 ### Rounded
 
-The following values are available for the [`rouned`](/api/javascript/ui/textbox/configuration/rounded) option:
+The following values are available for the [`rouned`](/api/ui/textbox/configuration/rounded) option:
 
 - small(sm)
 - medium(md)
@@ -63,7 +63,7 @@ The default rounded value is `medium` and it is applied to the wrapping span ele
 
 The `fillMode` option controls the way the color is applied to the rendered `textbox`. The structure of the class is `k-input-{fillMode}`
 
-The following values are available for the [`fillMode`](/api/javascript/ui/textbox/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/textbox/configuration/fillmode) option:
 
 - solid
 - flat
@@ -83,4 +83,4 @@ The default fillMode value is `solid` and it is applied to the wrapping span ele
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the TextBox](https://demos.telerik.com/kendo-ui/textbox/appearance)
-* [JavaScript API Reference of the TextBox](/api/javascript/ui/textbox)
+* [JavaScript API Reference of the TextBox](/api/ui/textbox)

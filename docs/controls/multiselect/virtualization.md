@@ -26,11 +26,11 @@ In order for the virtualization to work properly, the MultiSelect requires you t
 
 To retrieve and display only a subset of the whole dataset, the virtualization feature combines data and user interface (UI) virtualization.
 
-The data virtualization of the MultiSelect uses the `DataSource` paging functionality and a remote data retrieval. In this way, the component retrieves only a specified data page instead of requesting the whole dataset at once. To ensure the proper functioning of the components, configure the `DataSource` paging correctly. For more information, refer to the [server paging](/api/javascript/data/datasource/configuration/serverpaging) configuration.
+The data virtualization of the MultiSelect uses the `DataSource` paging functionality and a remote data retrieval. In this way, the component retrieves only a specified data page instead of requesting the whole dataset at once. To ensure the proper functioning of the components, configure the `DataSource` paging correctly. For more information, refer to the [server paging](/api/data/datasource/configuration/serverpaging) configuration.
 
-The UI virtualization of the MultiSelect uses a specific strategy for reusing a list of DOM elements for displaying the corresponding data chunk. The number of these elements is determined based on the [`height`](/api/javascript/ui/multiselect/configuration/height) and [`itemHeight`](#itemheight) options. Once the number is calculated, the component creates those elements and starts reusing them to display the current data source page.
+The UI virtualization of the MultiSelect uses a specific strategy for reusing a list of DOM elements for displaying the corresponding data chunk. The number of these elements is determined based on the [`height`](/api/ui/multiselect/configuration/height) and [`itemHeight`](#itemheight) options. Once the number is calculated, the component creates those elements and starts reusing them to display the current data source page.
 
-The combined data and UI virtualization uses the calculated `pageSize` value based on the ([`height`](/api/javascript/ui/multiselect/configuration/height) / [`itemHeight`](#itemheight)) * 4 formula. That calculation is automatically done by the MultiSelect and if the defined `pageSize` value does not match the calculated `pageSize` value, the calculated value takes precedence. For example, if the `height` of the MultiSelect is `520px` and `itemHeight` is `26`, the `pageSize` will be set to `80`, because (520 / 26) * 4 equals `80`.
+The combined data and UI virtualization uses the calculated `pageSize` value based on the ([`height`](/api/ui/multiselect/configuration/height) / [`itemHeight`](#itemheight)) * 4 formula. That calculation is automatically done by the MultiSelect and if the defined `pageSize` value does not match the calculated `pageSize` value, the calculated value takes precedence. For example, if the `height` of the MultiSelect is `520px` and `itemHeight` is `26`, the `pageSize` will be set to `80`, because (520 / 26) * 4 equals `80`.
 
 > * Enabling the paging and setting the `pageSize` of the MultiSelect is efficient only when these features are used with virtualization.
 > * Defining incorrect `pageSize` values triggers multiple initial requests. To avoid that, use the formula to calculate the `pageSize` value.
@@ -51,7 +51,7 @@ The response for each virtualization request has to include the following fields
 * An array with the specified page of data.
 * The total count of all items that are present in the dataset of the `Total` field.
 
-You can specify the fields that contain the array of [data](/api/javascript/data/datasource/configuration/schema#schemadata) and the [total](/api/javascript/data/datasource/configuration/schema#schematotal) in the configuration of the data source schema. Once a page of data is received on the client, it will be cached, and if the user scrolls up through the list, no new requests will be made for earlier pages of data and the virtualization will happen on the client only.
+You can specify the fields that contain the array of [data](/api/data/datasource/configuration/schema#schemadata) and the [total](/api/data/datasource/configuration/schema#schematotal) in the configuration of the data source schema. Once a page of data is received on the client, it will be cached, and if the user scrolls up through the list, no new requests will be made for earlier pages of data and the virtualization will happen on the client only.
 
 > To prevent infinite requests for the last page of data, ensure that the `Total` count is reached. If it is not, the component will make requests until it receives the denoted total amount of unique items.
 
@@ -228,5 +228,5 @@ The `valueMapper` is expected to return a data item or a list of data items when
 ## See Also
 
 * [Virtualization by the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/virtualization)
-* [JavaScript API Reference of the DataSource](/api/javascript/data/datasource)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [JavaScript API Reference of the DataSource](/api/data/datasource)
+* [JavaScript API Reference of the MultiSelect](/api/ui/multiselect)

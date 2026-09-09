@@ -96,4 +96,4 @@ The following example demonstrates how to select multiple rows by using the chec
 ## See Also
 
 * [Select or Deselect All Rows with Select All Header Checkbox](/knowledge-base/select-deselect-all-checkbox)
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

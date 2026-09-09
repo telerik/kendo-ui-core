@@ -24,9 +24,9 @@ The Kendo UI for jQuery AIPrompt provides users with a modern interface to inter
 
 * [Getting Started with the Kendo UI AIPrompt for jQuery]({% slug getting_started_kendoui_aiprompt_component %})
 * [Demo Page for the AIPrompt](https://demos.telerik.com/kendo-ui/aiprompt/index)
-* [JavaScript API Reference of the AIPrompt](/api/javascript/ui/aiprompt)
+* [JavaScript API Reference of the AIPrompt](/api/ui/aiprompt)
 
 ## See Also
 
 * [Overview of the AIPrompt (Demo)](https://demos.telerik.com/kendo-ui/aiprompt/index)
-* [JavaScript API Reference of the AIPrompt](/api/javascript/ui/aiprompt)
+* [JavaScript API Reference of the AIPrompt](/api/ui/aiprompt)

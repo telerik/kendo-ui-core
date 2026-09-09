@@ -18,7 +18,7 @@ ticketid: 1655113
 
 ## Description
 
-When working with the [DropDownList](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist) in Kendo UI, you might want to add tooltips to enhance the user experience by providing additional information about the dropdown list or its items. This can be particularly useful when the DropDownList is used as a Grid popup editor. Tooltips can be added to the DropDownList itself and to each of its items when opened. This KB article also answers the following questions:
+When working with the [DropDownList](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist) in Kendo UI, you might want to add tooltips to enhance the user experience by providing additional information about the dropdown list or its items. This can be particularly useful when the DropDownList is used as a Grid popup editor. Tooltips can be added to the DropDownList itself and to each of its items when opened. This KB article also answers the following questions:
 - How to add a tooltip to the DropDownList component?
 - How to initialize tooltips for DropDownList items?
 - How to use Kendo UI Tooltip with DropDownList items?
@@ -27,7 +27,7 @@ When working with the [DropDownList](https://docs.telerik.com/kendo-ui/api/javas
 
 ### Adding a Tooltip to the DropDownList
 
-To add a tooltip to the DropDownList when it is used as a Grid popup editor, handle the [`edit`](/api/javascript/ui/grid/events/edit) event of the Grid. Within the event handler, find the element containing the DropDownList and add a `title` attribute or initialize Kendo Tooltip.
+To add a tooltip to the DropDownList when it is used as a Grid popup editor, handle the [`edit`](/api/ui/grid/events/edit) event of the Grid. Within the event handler, find the element containing the DropDownList and add a `title` attribute or initialize Kendo Tooltip.
 
 ```javascript
 edit: function(e){              
@@ -38,7 +38,7 @@ edit: function(e){
 
 ### Initializing Tooltips for DropDownList Items
 
-To add tooltips to the items when the DropDownList is opened, get a reference to the DropDownList component and bind to its [`open`](/api/javascript/ui/dropdownlist/events/open) event. In the open event handler, find the elements with the class 'k-list-item' and initialize the Tooltip:
+To add tooltips to the items when the DropDownList is opened, get a reference to the DropDownList component and bind to its [`open`](/api/ui/dropdownlist/events/open) event. In the open event handler, find the elements with the class 'k-list-item' and initialize the Tooltip:
 
 ```javascript
 $('input[name="Category"]').data('kendoDropDownList').bind('open', function(){                
@@ -134,6 +134,6 @@ Below you will find a runnable example:
 
 ## See Also
 
-- [Kendo UI DropDownList Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
-- [Kendo UI Tooltip Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
-- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Kendo UI DropDownList Documentation](https://docs.telerik.com/kendo-ui/api/ui/dropdownlist)
+- [Kendo UI Tooltip Documentation](https://docs.telerik.com/kendo-ui/api/ui/tooltip)
+- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid)

@@ -25,7 +25,7 @@ How can I prevent a specific Gantt column from reordering?
 
 ## Solution
 
-To achieve the desired scenario, use the [`reorderColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/reordercolumn) of the integrated TreeList to move the column back.
+To achieve the desired scenario, use the [`reorderColumn`](https://docs.telerik.com/kendo-ui/api/ui/treelist/methods/reordercolumn) of the integrated TreeList to move the column back.
 
 ```dojo
     <div id="gantt"></div>
@@ -62,5 +62,5 @@ To achieve the desired scenario, use the [`reorderColumn`](https://docs.telerik.
 
 ## See Also
 
-* [Kendo UI for jQuery Gantt API Reference](/api/javascript/ui/gantt)
+* [Kendo UI for jQuery Gantt API Reference](/api/ui/gantt)
 * [Common Issues in Kendo UI for jQuery]({% slug troubleshooting_common_issues_kendoui %})

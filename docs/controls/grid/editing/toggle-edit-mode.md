@@ -11,8 +11,8 @@ position: 6
 
 As of the R3 2024 release, the Grid allows you to enable read-only mode and disable its editing capabilities programmatically. You can reverse this and turn off read-only mode to allow editing when specific conditions are met.
 
-* To disable editing operations, invoke the [`disableEditing()`](/api/javascript/ui/grid/methods/disableediting) method.
-* To enable editing operations, call the [`enableEditing()`](/api/javascript/ui/grid/methods/enableediting) method.
+* To disable editing operations, invoke the [`disableEditing()`](/api/ui/grid/methods/disableediting) method.
+* To enable editing operations, call the [`enableEditing()`](/api/ui/grid/methods/enableediting) method.
 
 For a runnable example, refer to the [Grid Toggle Edit Mode demo](https://demos.telerik.com/kendo-ui/grid/toggle-edit-mode).
 
@@ -24,4 +24,4 @@ For a runnable example, refer to the [Grid Toggle Edit Mode demo](https://demos.
 ## See Also
 
 * [Grid Toggle Edit Mode (Demo)](https://demos.telerik.com/kendo-ui/grid/toggle-edit-mode)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/ui/grid)

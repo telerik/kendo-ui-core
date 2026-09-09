@@ -15,7 +15,7 @@ For a complete example, refer to the [demo on customizing the AIPrompt templates
 
 ## PromptSuggestion Template
 
-The [`promptSuggestionItemTemplate`](/api/javascript/ui/aiprompt/configuration/promptsuggestionitemtemplate) allows you to customize the appearance of the prompt suggestion items in the `prompt` view.
+The [`promptSuggestionItemTemplate`](/api/ui/aiprompt/configuration/promptsuggestionitemtemplate) allows you to customize the appearance of the prompt suggestion items in the `prompt` view.
 
 ```dojo
     <div id="aiprompt"></div>
@@ -66,4 +66,4 @@ The [`promptSuggestionItemTemplate`](/api/javascript/ui/aiprompt/configuration/p
 ## See Also
 
 * [Templates Demo of the AIPrompt](https://demos.telerik.com/kendo-ui/aiprompt/templates)
-* [JavaScript API Reference of the AIPrompt](/api/javascript/ui/aiprompt)
+* [JavaScript API Reference of the AIPrompt](/api/ui/aiprompt)

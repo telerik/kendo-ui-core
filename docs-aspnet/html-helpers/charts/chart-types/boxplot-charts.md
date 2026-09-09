@@ -190,8 +190,8 @@ You can change the orientation of the Box Plot Chart by setting the series type 
 Outliers are values that appear outside the range between lower and upper values (inner fences). Based on their distance from the inner fences, the outliers in a box plot are mild and extreme. The Box Plot Chart renders them by default as crosses (mild) and circles (extreme).
 
 You can configure the outliers separately and customize them by using:
-* [`series.outliers`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.outliers) for mild outliers.
-* [`series.extremes`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.extremes) for extreme outliers.
+* [`series.outliers`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.outliers) for mild outliers.
+* [`series.extremes`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.extremes) for extreme outliers.
 
 ## See Also
 

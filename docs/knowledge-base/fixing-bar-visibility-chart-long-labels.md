@@ -126,4 +126,4 @@ Apply these solutions based on your layout requirements and data structure.
 
 - [Kendo UI for jQuery Chart Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/overview)
 - [Handling Axis Labels in Kendo Chart](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/show-axis-labels-in-two-rows)
-- [Category Axis Configuration](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart/configuration/categoryaxis)
+- [Category Axis Configuration](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/categoryaxis)

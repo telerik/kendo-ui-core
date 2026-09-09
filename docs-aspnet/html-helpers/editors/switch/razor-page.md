@@ -64,7 +64,7 @@ For the complete project, refer to the [Switch in Razor Pages example](https://g
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the Switch](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/switch)
+* [Client-Side API of the Switch](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/switch)
 * [Server-Side HtmlHelper API of the Switch](/api/switch)
 * [Server-Side TagHelper API of the Switch](/api/taghelpers/switch)
 * [Knowledge Base Section](/knowledge-base)

@@ -30,7 +30,7 @@ How can I prevent the user from moving the initially added groups of the Grid, c
 
 1. Create a Grid with initial groups.
 1. Handle the [`Group`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#groupsystemstring) event of the Grid.
-1. Within the `Group` event handler, get the current Grid groups by using the [`group()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/group) method of the DataSource.
+1. Within the `Group` event handler, get the current Grid groups by using the [`group()`](https://docs.telerik.com/kendo-ui/api/data/datasource/methods/group) method of the DataSource.
 1. Check if the number of initial groups matches the number of current groups and if the first initial group matches the current first group and prevent the default event action if this condition is not met.
 
     ```HtmlHelper
@@ -113,7 +113,7 @@ For a runnable example based on the code above, refer to the [REPL example on pr
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)

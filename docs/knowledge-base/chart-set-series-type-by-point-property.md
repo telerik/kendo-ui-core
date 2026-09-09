@@ -37,7 +37,7 @@ How can I dynamically set the Chart series type after the data was bound and dep
 
 ## Solution
 
-Use the grouping capabilities of the Chart while setting the series [`type`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.type) on the `dataBound` event.
+Use the grouping capabilities of the Chart while setting the series [`type`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.type) on the `dataBound` event.
 
 ```dojo
 <div id="example">
@@ -118,5 +118,5 @@ Use the grouping capabilities of the Chart while setting the series [`type`](htt
 
 ## See Also
 
-* [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/databound)
+* [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/events/databound)
 * [Demo on Binding to Grouped Data Chart](https://demos.telerik.com/kendo-ui/line-charts/grouped-data)

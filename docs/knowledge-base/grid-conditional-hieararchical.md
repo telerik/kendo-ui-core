@@ -139,5 +139,5 @@ How can I show just a child Grid on certain elements in the hierarchical Grid?
 
 ## See Also
 
-* [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
+* [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound)
 * [API Reference of the jQuery remove Method](https://api.jquery.com/remove/)

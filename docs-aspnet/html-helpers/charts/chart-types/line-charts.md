@@ -280,4 +280,4 @@ You can also completely draw custom markers for the Line series through the `Vis
 * [Basic Usage of the Line Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/tag-helper)
 {% endif %}
 * [Server-Side API](/api/chart)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart)

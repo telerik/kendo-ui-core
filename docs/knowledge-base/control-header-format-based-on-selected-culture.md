@@ -84,4 +84,4 @@ The following example demonstrates how to achieve the desired behavior.
 
 ## See Also
 
-* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/ui/calendar)

@@ -11,15 +11,15 @@ position: 1
 
 The Spreadsheet component supports binding individual sheets to a [DataSource]({% slug htmlhelpers_datasource_aspnetcore%}) instance that allows you to load data from a remote endpoint into the Spreadsheet and edit it.    
 
-For a runnable example, refer to the demo on [binding the Spreadsheet component to a DataSource](https://demos.telerik.com/{{ site.platform }}/spreadsheet/datasource). The Spreadsheet DataSource from that demo uses the [`read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read) and [`submit`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.submit) transport options. The `submit` option is required to handle a scenario where the user creates, updates, and deletes items simultaneously.
+For a runnable example, refer to the demo on [binding the Spreadsheet component to a DataSource](https://demos.telerik.com/{{ site.platform }}/spreadsheet/datasource). The Spreadsheet DataSource from that demo uses the [`read`](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/transport.read) and [`submit`](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/transport.submit) transport options. The `submit` option is required to handle a scenario where the user creates, updates, and deletes items simultaneously.
 
-When using separate [`create`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.create), [`update`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.update), and [`destroy`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.destroy) handlers, one can fail while the others do not. That will result in a mismatch of the data state between the client (the Spreadsheet) and the remote source. The `submit` option handles all operations through a single request. The operation will not save any changes if a specified record is invalid.
+When using separate [`create`](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/transport.create), [`update`](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/transport.update), and [`destroy`](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/transport.destroy) handlers, one can fail while the others do not. That will result in a mismatch of the data state between the client (the Spreadsheet) and the remote source. The `submit` option handles all operations through a single request. The operation will not save any changes if a specified record is invalid.
 
 ## Specific Behavior
 
 The DataSource binding switches the sheet to a special data-bound mode. It differs from the standard behavior in the following ways:
 
-* Column headers are inferred from the data item fields. Configure the column headers and ordering by using the [`setDataSource()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/setdatasource) method of the sheet.
+* Column headers are inferred from the data item fields. Configure the column headers and ordering by using the [`setDataSource()`](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet/methods/setdatasource) method of the sheet.
 * Cell styles, formulas, and formats are not persisted in the DataSource.
 * Row height and column width are not persisted in the DataSource.
 * Sorting and filtering are applied locally.
@@ -251,7 +251,7 @@ For the complete project, refer to the [Spreadsheet in Razor Pages example](http
 {% if site.core %}
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
 {% endif %}
-* [Client-Side API of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [Client-Side API of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet)
 * [Server-Side HtmlHelper API of the Spreadsheet](/api/spreadsheet)
 {% if site.core %}
 * [Server-Side TagHelper API of the Spreadsheet](/api/taghelpers/spreadsheet)

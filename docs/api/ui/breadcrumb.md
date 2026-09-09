@@ -7,7 +7,7 @@ component: breadcrumb
 
 # kendo.ui.Breadcrumb
 
-Represents the Kendo UI Breadcrumb widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Breadcrumb widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 

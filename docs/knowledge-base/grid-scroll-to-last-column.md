@@ -24,7 +24,7 @@ How can I scroll the last column into view when a Grid with many columns is init
 
 ## Solution
 
-1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event of the Grid.
+1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event of the Grid.
 1. In the handler, get a reference of the last column and its offset.
 1. Call the [`scrollLeft`](https://api.jquery.com/scrollleft/) method with the acquired offset.
 

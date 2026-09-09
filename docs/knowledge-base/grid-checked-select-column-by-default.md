@@ -99,5 +99,5 @@ The following example demonstrates how to implement the suggested scenarios.
 ## See Also
 
 * [Kendo UI Demo on Grid Checkbox Selection](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference of columns.selectable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)
+* [API Reference of columns.selectable](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.selectable)
 * [Kendo UI Demo on Selecting All Rows on All Grid Pages](https://docs.telerik.com/kendo-ui/knowledge-base/checkbox-selection-select-all-rows-all-pages)

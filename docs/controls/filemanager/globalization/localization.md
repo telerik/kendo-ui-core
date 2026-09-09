@@ -9,7 +9,7 @@ position: 3
 
 # Localization
 
-Besides the inbuilt localization options available in the [Client API section](/api/javascript/ui/filemanager/configuration/messages), the FileManager provides options for localizing its user interface by utilizing the available configuration options of its composite components. Refer to the [Grid Localization]({% slug localization_kendoui_grid_widget %}) documentation article.
+Besides the inbuilt localization options available in the [Client API section](/api/ui/filemanager/configuration/messages), the FileManager provides options for localizing its user interface by utilizing the available configuration options of its composite components. Refer to the [Grid Localization]({% slug localization_kendoui_grid_widget %}) documentation article.
 
 
 ## See Also

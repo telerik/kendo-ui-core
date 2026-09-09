@@ -32,4 +32,4 @@ The `change` event of an input widget is triggered only by user action. DOM elem
 
 ## Solution
 
-To handle this issue, trigger the event manually by using the [`trigger` method](/api/javascript/ui/widget/methods/trigger).
+To handle this issue, trigger the event manually by using the [`trigger` method](/api/ui/widget/methods/trigger).

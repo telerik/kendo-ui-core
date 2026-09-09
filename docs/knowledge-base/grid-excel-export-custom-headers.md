@@ -33,11 +33,11 @@ Does the Grid export only the already existing data in it?
 
 ## Solution
 
-The Grid triggers an [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event which contains the workbook as part of the event data.
+The Grid triggers an [`excelExport`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/excelexport) event which contains the workbook as part of the event data.
 
 The example demonstrates how to export additional information to Excel by implementing the following actions:
 
-1. Change the name of the sheet by using the [`sheets.name`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.name) configuration property. For example, `sheets[0].name = "Orders";`.
+1. Change the name of the sheet by using the [`sheets.name`](https://docs.telerik.com/kendo-ui/api/ooxml/workbook/configuration/sheets.name) configuration property. For example, `sheets[0].name = "Orders";`.
 1. Insert a new row of cells which contains the custom headers at position `0`.
 1. Style the new headers with a new background color, font size, horizontal alignment, and row height.
 
@@ -124,6 +124,6 @@ The example demonstrates how to export additional information to Excel by implem
 
 ## See Also
 
-* [Workbook API reference](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook)
-* [Complete List of Configurable Cell Options](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells)
+* [Workbook API reference](https://docs.telerik.com/kendo-ui/api/ooxml/workbook)
+* [Complete List of Configurable Cell Options](https://docs.telerik.com/kendo-ui/api/ooxml/workbook/configuration/sheets.rows.cells)
 * [More Information on Appearance](https://docs.telerik.com/kendo-ui/framework/excel/appearance)

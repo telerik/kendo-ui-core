@@ -93,4 +93,4 @@ The following sample demonstrates how to create a custom data source based on th
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

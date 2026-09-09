@@ -33,7 +33,7 @@ How can I format the cell values of the Kendo UI Grid?
 
 ## Solution
 
-Set the [`format`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.format) option of the cells. For more information on the formats that are supported by Excel, refer to the page on [creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
+Set the [`format`](/api/ooxml/workbook/configuration/sheets.rows.cells.format) option of the cells. For more information on the formats that are supported by Excel, refer to the page on [creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
 
 The following example demonstrates how to format cell values of the Grid while exporting it to Excel.
 
@@ -113,4 +113,4 @@ The following example demonstrates how to set a custom format for `date` values.
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

@@ -43,7 +43,7 @@ The project is also available in the GitHub repository for the [Kendo UI example
 
 ## See Also
 
-* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect JavaScript API Reference](/api/ui/multiselect)
 * [Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
 * [Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})

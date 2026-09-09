@@ -52,7 +52,7 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## 3. Add Items with Labels
 
-You can add individual Chip items by passing objects to the [`items`](/api/javascript/ui/chiplist/configuration/items) array. For more information about the configurations of the different chips inside the ChipList, refer to the article on the [Customizing the ChipList]({% slug customization_kendoui_chiplist_widget %}).
+You can add individual Chip items by passing objects to the [`items`](/api/ui/chiplist/configuration/items) array. For more information about the configurations of the different chips inside the ChipList, refer to the article on the [Customizing the ChipList]({% slug customization_kendoui_chiplist_widget %}).
 
 ```html
 	<span id="chiplist"></span>
@@ -70,7 +70,7 @@ You can add individual Chip items by passing objects to the [`items`](/api/javas
 
 ## 4. Add Icons to the Chips inside the ChipList
 
-Now you can use the [`items.icon`](/api/javascript/ui/chiplist/configuration/items.icon) option which allows you to display a label on the Chips inside the ChipList.
+Now you can use the [`items.icon`](/api/ui/chiplist/configuration/items.icon) option which allows you to display a label on the Chips inside the ChipList.
 
 ```html
     <div id="chiplist"></div>
@@ -92,7 +92,7 @@ Now you can use the [`items.icon`](/api/javascript/ui/chiplist/configuration/ite
 
 ## See Also
 
-* [JavaScript API Reference of the ChipList](/api/javascript/ui/chiplist)
+* [JavaScript API Reference of the ChipList](/api/ui/chiplist)
 * [Knowledge Base Section](/knowledge-base)
 
 

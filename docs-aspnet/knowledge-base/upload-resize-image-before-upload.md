@@ -28,11 +28,11 @@ I am using the Upload for uploading photos that were taken with a phone. How can
 To achieve client-side resizing of images, use the `<canvas>` and `Image` elements for fetching a `blob` that will be part of the POST data to the server.
 
 1. Use the [async mode](https://demos.telerik.com/kendo-ui/upload/async) of the Upload.
-1. Disable the [automatic upload](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.autoupload).
-1. Hook to the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/select) event.
+1. Disable the [automatic upload](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async.autoupload).
+1. Hook to the [`select`](https://docs.telerik.com/kendo-ui/api/ui/upload/events/select) event.
 1. Use a timetout to start the resizing logic and prevent errors with the built-in Upload logic.
 1. When you have the resized blob, create a `File` from it and replace the data in the Kendo UI Upload with the new data (file and its size).
-1. Once resizing is done, initiate an upload through the [`upload`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/methods/upload) method so that the files reach the controller.
+1. Once resizing is done, initiate an upload through the [`upload`](https://docs.telerik.com/kendo-ui/api/ui/upload/methods/upload) method so that the files reach the controller.
 
 ```CSHTML
 @(Html.Kendo().Upload()
@@ -231,7 +231,7 @@ public class ResizeFileController : Controller
 
 ## See Also
 
-* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Client-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/upload)
 * [Server-Side API Reference of the Upload for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/upload)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

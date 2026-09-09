@@ -161,7 +161,7 @@ How do I adjust the size of a radial gradient in Kendo UI for jQuery? Adjust or 
 
 ### stops `Array`
 The color stops of the gradient.
-Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradient-stop) instances.
+Can contain either plain objects or [GradientStop](/api/drawing/gradient-stop) instances.
 
 
 <div class="meta-api-description">
@@ -200,7 +200,7 @@ How to specify color stops for a radial gradient in Kendo UI drawingapi? Configu
 
 ### stops `Array`
 The array of gradient color stops.
-Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
+Contains [GradientStop](/api/drawing/gradient-stop) instances.
 
 
 <div class="meta-api-description">
@@ -241,7 +241,7 @@ How do I customize the color stops in a Kendo UI RadialGradient? Adjust, configu
 
 ### addStop
 Adds a color stop to the gradient.
-Inherited from [Gradient.addStop](/api/javascript/drawing/gradient#methods-addStop)
+Inherited from [Gradient.addStop](/api/drawing/gradient#methods-addStop)
 
 
 <div class="meta-api-description">
@@ -399,7 +399,7 @@ The new radius of the gradient.
 
 ### removeStop
 Removes a color stop from the gradient.
-Inherited from [Gradient.removeStop](/api/javascript/drawing/gradient#methods-removeStop)
+Inherited from [Gradient.removeStop](/api/drawing/gradient#methods-removeStop)
 
 
 <div class="meta-api-description">

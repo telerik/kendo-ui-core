@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.data.OrgChartModel
 
-The `kendo.data.OrgChartModel` class represents a data item from the [kendo.data.OrgCharttDataSource](/api/javascript/data/orgchartdatasource). Inherits from [kendo.data.Model](/api/javascript/data/model).
+The `kendo.data.OrgChartModel` class represents a data item from the [kendo.data.OrgCharttDataSource](/api/data/orgchartdatasource). Inherits from [kendo.data.Model](/api/data/model).
 
 ## Configuration
 
@@ -217,7 +217,7 @@ Indicates whether an item has children. When the `hasChildren` field value is `t
 
 > When the user clicks on the expand icon, the Kendo UI OrgChart DataSource requests the children of the item by sending the parent item `id` as a request parameter, for example `&id=1`.
 
-> The parameter name can be changed with the [`paramaterMap`](/api/javascript/data/datasource/configuration/transport.parametermap) function.
+> The parameter name can be changed with the [`paramaterMap`](/api/data/datasource/configuration/transport.parametermap) function.
 
 
 <div class="meta-api-description">

@@ -28,4 +28,4 @@ The RadioGroup allows to style and provide radio buttons functionality to list e
 ## See Also
 
 * [Basic Usage of the RadioGroup (Demo)](https://demos.telerik.com/kendo-ui/radiogroup/index)
-* [JavaScript API Reference of the RadioGroup](/api/javascript/ui/radiogroup)
+* [JavaScript API Reference of the RadioGroup](/api/ui/radiogroup)

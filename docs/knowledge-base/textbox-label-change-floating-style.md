@@ -97,4 +97,4 @@ To achieve the desired behaviour, we will need both some JavaScript and CSS beca
 
 ## See Also
 
-* [API Reference of the change Event](/api/javascript/ui/textbox/events/change)
+* [API Reference of the change Event](/api/ui/textbox/events/change)

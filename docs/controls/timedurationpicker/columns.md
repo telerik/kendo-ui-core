@@ -9,7 +9,7 @@ position: 3
 
 # TimeDurationPicker Columns
 
-The Kendo UI for jQuery TimeDurationPicker [`columns`](/api/javascript/ui/timedurationpicker/configuration/columns) configuration is mandatory and must always be configured.
+The Kendo UI for jQuery TimeDurationPicker [`columns`](/api/ui/timedurationpicker/configuration/columns) configuration is mandatory and must always be configured.
 
 The `columns` configuration enables you to specify which time portion columns will be visible in the TimeDurationPicker popup. Additionally, the configuration also enables you to specify [format](#format), [min](#min), [max](#max) and [step](#step) values for each column individually.
 
@@ -86,4 +86,4 @@ The `step` configuration enables you to specify the step value of the column. Fo
 ## See Also
 
 * [Columns in the TimeDurationPicker (Demo)](https://demos.telerik.com/kendo-ui/timedurationpicker/columns)
-* [JavaScript API Reference of the TimeDurationPicker](/api/javascript/ui/timedurationpicker)
+* [JavaScript API Reference of the TimeDurationPicker](/api/ui/timedurationpicker)

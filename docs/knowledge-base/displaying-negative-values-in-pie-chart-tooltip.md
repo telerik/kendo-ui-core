@@ -38,7 +38,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To display the original negative values in the tooltips for Kendo UI Pie Charts, use the [`template`](/api/javascript/dataviz/ui/chart/configuration/tooltip#tooltiptemplate) option of the tooltip configuration. This allows direct access to the `dataItem` value, bypassing the default conversion to positive values.
+To display the original negative values in the tooltips for Kendo UI Pie Charts, use the [`template`](/api/dataviz/ui/chart/configuration/tooltip#tooltiptemplate) option of the tooltip configuration. This allows direct access to the `dataItem` value, bypassing the default conversion to positive values.
 
 ### Displaying Negative Values in Tooltips
 

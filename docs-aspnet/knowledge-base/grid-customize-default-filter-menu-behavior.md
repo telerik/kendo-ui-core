@@ -141,7 +141,7 @@ For a runnable example based on the code above, refer to [this REPL](https://net
 ## See Also
 
 * [Telerik REPL: Persist Filter Menu Value When a Grid Column is Filtered by a Single Value](https://netcorerepl.telerik.com/wckjQOGb25n0E3GK50)
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

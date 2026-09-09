@@ -21,9 +21,9 @@ I need to have both the standard filter and the Multi CheckBox filter in the Gri
 ## Solution
 To implement both a standard filter and a multi-filter on a column in Kendo UI Grid, follow these steps:
 
-1. Subscribe to the [filterMenuInit](/api/javascript/ui/grid/events/filtermenuinit) event of the Grid to apply custom filter logic.
+1. Subscribe to the [filterMenuInit](/api/ui/grid/events/filtermenuinit) event of the Grid to apply custom filter logic.
 2. Specify the column(s) with a custom filter menu.
-3. Insert the checkbox menu after the filter menu buttons as an HTML element with a specified `dataSource` and [template](/api/javascript/ui/listview/configuration/template).
+3. Insert the checkbox menu after the filter menu buttons as an HTML element with a specified `dataSource` and [template](/api/ui/listview/configuration/template).
 4. Bind an event handler to the click event of the "Filter" menu button and implement the custom filter logic.
 
 ```dojo
@@ -186,4 +186,4 @@ To implement both a standard filter and a multi-filter on a column in Kendo UI G
 ```
 
 ## See Also
-- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+- [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid)

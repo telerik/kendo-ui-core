@@ -31,7 +31,7 @@ How can I add a **Clear** button to the DateTimePicker?
 
 1. Add `span` with a clear icon to the component wrapper element.
 1. Handle the [`click`](https://api.jquery.com/click/) event of the `span`.
-1. Use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/value) method to set `value` to `null`.
+1. Use the [`value`](https://docs.telerik.com/kendo-ui/api/ui/datetimepicker/methods/value) method to set `value` to `null`.
 
 ```dojo
     <style>

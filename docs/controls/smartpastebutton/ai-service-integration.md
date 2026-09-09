@@ -183,5 +183,5 @@ $("#smartPasteButton").kendoSmartPasteButton({
 
 * [SmartPasteButton Events]({% slug events_kendoui_smartpastebutton_widget %})
 * [Getting Started with the SmartPasteButton]({% slug getting_started_kendoui_smartpastebutton_widget %})
-* [JavaScript API Reference of the SmartPasteButton](/api/javascript/ui/smartpastebutton)
+* [JavaScript API Reference of the SmartPasteButton](/api/ui/smartpastebutton)
 * [Knowledge Base Section](/knowledge-base)

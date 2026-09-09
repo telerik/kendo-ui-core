@@ -49,7 +49,7 @@ How do I configure the buttons in Kendo UI's FlatColorPicker? Control the visibi
 
 ### buttonsTemplate `String|Function` *(default: null)*
 
-Specifies the [template](/api/javascript/kendo/methods/template) which is used for rendering the action buttons.
+Specifies the [template](/api/kendo/methods/template) which is used for rendering the action buttons.
 
 > The `buttons` configuration option needs to be enabled.
 
@@ -707,7 +707,7 @@ How do I programmatically set and get the color value in a Kendo UI FlatColorPic
 
 ### color
 
-Get or set the selected color. If no argument is given, this returns the currently selected color as a [`kendo.Color` object](/api/javascript/color).
+Get or set the selected color. If no argument is given, this returns the currently selected color as a [`kendo.Color` object](/api/color).
 
 
 <div class="meta-api-description">
@@ -853,5 +853,5 @@ If invoked cancels the default action that belongs to the keydown event.
             });
         </script>
 
-[parseColor]: /api/javascript/kendo#parseColor
-[Color]: /api/javascript/kendo#Color
+[parseColor]: /api/kendo#parseColor
+[Color]: /api/kendo#Color

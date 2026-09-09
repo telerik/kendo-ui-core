@@ -155,7 +155,7 @@ For the complete implementation of how to integrate and use the MultiSelect in a
 
 ## See Also
 
-* [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/multiselect)
 * [Server-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/multiselect)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/multiselect)

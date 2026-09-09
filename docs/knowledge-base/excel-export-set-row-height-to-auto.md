@@ -25,7 +25,7 @@ How do I set the row height for wrapped cells?  The rows are keeping their defau
 
 ## Solution
 
-The Kendo UI OOXML Workbook rows cannot be set to use automatic height. Unless height is provided as a number, the default [row height](/api/javascript/ooxml/workbook/configuration/sheets.rows.height) will be used.
+The Kendo UI OOXML Workbook rows cannot be set to use automatic height. Unless height is provided as a number, the default [row height](/api/ooxml/workbook/configuration/sheets.rows.height) will be used.
 
 If you wish to have rows of different heights, you would need to calculate the row height of that particular row before pushing it to the rows array.
 

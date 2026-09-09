@@ -226,5 +226,5 @@ The `stopIcon` option determines which icon is displayed when the button is in t
 
 * [Getting Started with the SpeechToTextButton]({% slug getting_started_kendoui_speechtotextbutton_widget %})
 * [Overview of the SpeechToTextButton]({% slug overview_kendoui_speechtotextbutton_widget %})
-* [JavaScript API Reference of the SpeechToTextButton](/api/javascript/ui/speechtotextbutton)
+* [JavaScript API Reference of the SpeechToTextButton](/api/ui/speechtotextbutton)
 * [Knowledge Base Section](/knowledge-base)

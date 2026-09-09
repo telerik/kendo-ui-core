@@ -71,4 +71,4 @@ Custom template commands allow you to add other Kendo UI components in the ToolB
 
 ## See Also
 
-* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/ui/toolbar)

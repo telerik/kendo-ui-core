@@ -95,9 +95,9 @@ In this step, you will initialize the Grid from the empty `<div>` element.
 
 ## 3. Bind the TreeList to Data
 
-Once the basic initialization is completed, you can start adding additional configurations to the TreeList. The first and most important configuration is the [`kendo.data.TreeListDataSource`](/api/javascript/data/treelistdatasource).
+Once the basic initialization is completed, you can start adding additional configurations to the TreeList. The first and most important configuration is the [`kendo.data.TreeListDataSource`](/api/data/treelistdatasource).
 
-The TreeList renders its hierarchy based on the `parentId`-`id` relationship. The data objects contain both an `id` and a `parentId` field which describe the hierarchy of the items. You can change these field names by using the [`schema.model` definition](/api/javascript/data/datasource/configuration/schema#schema.model).
+The TreeList renders its hierarchy based on the `parentId`-`id` relationship. The data objects contain both an `id` and a `parentId` field which describe the hierarchy of the items. You can change these field names by using the [`schema.model` definition](/api/data/datasource/configuration/schema#schema.model).
 
 > The TreeList distinguishes the root items based on the `parentId`:
 > * If the `schema.model.fields.[parentIdField]` is nullable, root items will be the items whose `parentId` field values are `null`.
@@ -148,7 +148,7 @@ The TreeList renders its hierarchy based on the `parentId`-`id` relationship. Th
 
 ## 4. Configure the TreeList Columns
 
-The TreeList enables you to configure each individual column and apply a set of [column properties](/api/javascript/ui/treelist/configuration/columns#related-properties).
+The TreeList enables you to configure each individual column and apply a set of [column properties](/api/ui/treelist/configuration/columns#related-properties).
 
 ```javascript
       $("#treelist").kendoTreeList({
@@ -181,7 +181,7 @@ Among other functionalities, the TreeList supports editing and filtering. The [e
 
 ## See Also
 
-* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
+* [JavaScript API Reference of the TreeList](/api/ui/treelist)
 * [Knowledge Base Section](/knowledge-base)
 
 

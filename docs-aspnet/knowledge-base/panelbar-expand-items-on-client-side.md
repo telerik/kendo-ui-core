@@ -39,7 +39,7 @@ To expand the PanelBar items, you can use either of the following approaches:
 1. Wait until the document has loaded completely.
 1. Get the client-side instance of the PanelBar.
 1. Select the elements with the `.k-item` class.
-1. Iterate through the elements and pass each item to the [expand method](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar/methods/expand).
+1. Iterate through the elements and pass each item to the [expand method](https://docs.telerik.com/kendo-ui/api/ui/panelbar/methods/expand).
 
 ```JavaScript
      $(document).ready(function(){
@@ -117,7 +117,7 @@ For a runnable example, refer to the [Telerik REPL example of the recursive expa
 ## See Also
 
 * [Telerik REPL: Expanding PanelBar Items on the Client-Side](https://netcorerepl.telerik.com/mQaXmMFO50mvlnre08)
-* [Client-Side API Reference of the PanelBar for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+* [Client-Side API Reference of the PanelBar for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/panelbar)
 * [Server-Side API Reference of the PanelBar for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/panelbar)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

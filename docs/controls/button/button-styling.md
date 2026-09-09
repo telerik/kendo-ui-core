@@ -27,7 +27,7 @@ The Kendo UI Button supports the following styling options:
 
 The `size` option controls how big or small the rendered `button` looks. The structure of the class is `k-button-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/button/configuration/size) option:
+The following values are available for the [`size`](/api/ui/button/configuration/size) option:
 
 - `xs`—extra small size
 - `sm`—small size
@@ -46,7 +46,7 @@ The default size value is `undefined` and the default size appearance is control
 
 The `fillMode` option controls the way the color is applied to the rendered `button`. The structure of the class is `k-button-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/button/configuration/fillmode) option:
+The following values are available for the [`fillMode`](/api/ui/button/configuration/fillmode) option:
 
 - `solid`
 - `outline`
@@ -66,7 +66,7 @@ The default fillMode value is `solid` and is applied to the button element throu
 
 The `themeColor` option controls the color that will be applied to the rendered Button. As applying `themeColor` is closely related to the `fillMode`, the structure of the class name for the `themeColor` is composite - `k-button-{fillMode}-{themeColor}`.
 
-The following values are available for the [`themeColor`](/api/javascript/ui/button/configuration/themecolor) option:
+The following values are available for the [`themeColor`](/api/ui/button/configuration/themecolor) option:
 
 - `base`
 - `primary`
@@ -98,7 +98,7 @@ The default `themeColor` value is `base`. A button with default `fillMode` and `
 
 The `rounded` option controls the extent to which border radius is applied to the rendered `button`. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/button/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/ui/button/configuration/rounded) option:
 
 - `sm`—small size
 - `md`—medium size
@@ -120,4 +120,4 @@ The default rounded value is `undefined` and the default appearance is controlle
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the Button](https://demos.telerik.com/kendo-ui/button/appearance)
-* [JavaScript API Reference of the Button](/api/javascript/ui/button)
+* [JavaScript API Reference of the Button](/api/ui/button)

@@ -38,7 +38,7 @@ This knowledge base article also answers the following questions:
 
 To export data from a Kendo UI for jQuery Grid along with other inputs or labels on the page into a single Excel file follow these steps for implementation:
 
-1. Bind the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event to your Kendo UI for jQuery Grid.
+1. Bind the [`excelExport`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/excelexport) event to your Kendo UI for jQuery Grid.
 2. In the event handler, access the `e.workbook` object.
 3. Modify `e.workbook` to include data from the inputs or labels you wish to export along with the Grid data.
 4. Optionally, customize the appearance of the exported data, such as changing font colors or styles.
@@ -120,5 +120,5 @@ For a practical demonstration, refer to this example:
 ```
 ## See Also
 
-- [Kendo UI for jQuery Grid excelExport Event Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport)
+- [Kendo UI for jQuery Grid excelExport Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/events/excelexport)
 - [Kendo UI for jQuery Grid Overview](https://docs.telerik.com/kendo-ui/controls/grid/overview)

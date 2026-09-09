@@ -36,9 +36,9 @@ I need to display a chart with 365 days of data but want it zoomed by default to
 
 ## Solution
 
-To display a chart with 365 days of data initially zoomed to the last 30 days, configure the [`categoryAxis.min`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis.min) and [`categoryAxis.max`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis.max) options. These options control the initial zoom level by setting the visible date range on the chart. Here's how to set it up:
+To display a chart with 365 days of data initially zoomed to the last 30 days, configure the [`categoryAxis.min`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.min) and [`categoryAxis.max`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.max) options. These options control the initial zoom level by setting the visible date range on the chart. Here's how to set it up:
 
-1. Define the `categoryAxis` with a [`type`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis.type) of `"date"`.
+1. Define the `categoryAxis` with a [`type`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.type) of `"date"`.
 2. Set the `min` and `max` properties to define the visible date range. For example, to zoom in on December 1st to 31st, 2023:
 
 ```javascript
@@ -51,7 +51,7 @@ categoryAxis: {
 
 This configuration zooms the chart to display only the specified date range, while still allowing users to zoom in and out within the full 365 days of data. 
 
-If you need a more interactive approach, consider using the [Stock Chart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stockchart) with the Navigator enabled. This allows users to see that the chart displays a specific period and provides a visual way to adjust the zoom level.
+If you need a more interactive approach, consider using the [Stock Chart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stockchart) with the Navigator enabled. This allows users to see that the chart displays a specific period and provides a visual way to adjust the zoom level.
 
 For an example of how to configure the `categoryAxis.min` and `max`, refer to next Dojo demo.
 
@@ -200,6 +200,6 @@ For an interactive example using the [`Stock Chart`](https://docs.telerik.com/ke
 
 ## See Also
 
-- [Chart Configuration - API ](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+- [Chart Configuration - API ](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart)
 - [Overview of the Chart Component](https://docs.telerik.com/kendo-ui/controls/charts/chart/overview)
 - [Overview of the Stock Chart Component](https://docs.telerik.com/kendo-ui/controls/charts/stockchart/overview)

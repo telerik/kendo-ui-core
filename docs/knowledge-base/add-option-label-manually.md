@@ -79,7 +79,7 @@ The following example demonstrates how to achieve the desired scenario.
 
 ## See Also
 
-* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
+* [ComboBox JavaScript API Reference](/api/ui/combobox)
 * [Bypass ComboBox Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
 * [Configure Deferred ComboBox Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
 * [Define ComboBox Virtual Configuration Declaratively]({% slug howto_define_virtual_option_combobox %})

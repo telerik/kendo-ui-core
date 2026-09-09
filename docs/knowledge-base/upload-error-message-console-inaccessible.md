@@ -38,4 +38,4 @@ When a server error occurs, the complete server response is logged in the consol
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/ui/upload)

@@ -164,4 +164,4 @@ The AIPrompt provides options for configuring its views, toolbar items, and appe
 {% if site.core %}
 * [Server-Side API of the AIPrompt TagHelper](/api/taghelpers/aiprompt)
 {% endif %}
-* [Client-Side API of the AIPrompt](https://docs.telerik.com/kendo-ui/api/javascript/ui/aiprompt)
+* [Client-Side API of the AIPrompt](https://docs.telerik.com/kendo-ui/api/ui/aiprompt)

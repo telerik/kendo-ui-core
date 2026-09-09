@@ -35,7 +35,7 @@ extendedDateOperators["withinNext90Days"] = {
 };
 ```
 
-- Set the extented operators as the operators of the [`date`](/api/javascript/ui/filter/configuration/operators.date.custom) field in the configuration of the Filter.
+- Set the extented operators as the operators of the [`date`](/api/ui/filter/configuration/operators.date.custom) field in the configuration of the Filter.
 
 ```js
 fields: [
@@ -46,7 +46,7 @@ fields: [
 ]
 ```
 
-- Implement a [`handler`](/api/javascript/ui/filter/configuration/operators.date.custom.handler) for the new custom operator.
+- Implement a [`handler`](/api/ui/filter/configuration/operators.date.custom.handler) for the new custom operator.
 
 ```js
 function withinNext90DaysHandler(itemValue){
@@ -58,7 +58,7 @@ function withinNext90DaysHandler(itemValue){
 }
 ```
 
-- Remove the Filter `editor` by finding its container in the [`change`](/api/javascript/ui/filter/events/change) event of the `filterModel` and then emptying it only for the custom operator.
+- Remove the Filter `editor` by finding its container in the [`change`](/api/ui/filter/events/change) event of the `filterModel` and then emptying it only for the custom operator.
 
 ```js
 $("#filter").data("kendoFilter").filterModel.bind("change", function(e) {
@@ -157,4 +157,4 @@ The following example demonstrates the full implementation of the suggested appr
 ```
 
 ## See Also
-* [JavaScript API Reference of the Filter](/api/javascript/ui/filter)
+* [JavaScript API Reference of the Filter](/api/ui/filter)

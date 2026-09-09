@@ -138,4 +138,4 @@ The following example demonstrates how to use an [`errorTemplate`](/api/framewor
 ## See Also
 
 * [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
-* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
+* [JavaScript API Reference of the Validator](/api/ui/validator)

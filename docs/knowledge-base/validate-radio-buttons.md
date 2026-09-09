@@ -118,4 +118,4 @@ In scenario when the `validationSummary` is enabled a custom class can be added 
 ## See Also
 
 * [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
-* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
+* [JavaScript API Reference of the Validator](/api/ui/validator)

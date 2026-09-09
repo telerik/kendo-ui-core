@@ -19,5 +19,5 @@ The lack of restrictions over the dimensions for vertical expanding of the Windo
 
 ## See Also
 
-* [JavaScript API Reference of the Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the Window](/api/ui/window)
 * [Handling Window Content in iframes]({% slug content_window %}#handling-content-in-iframes)

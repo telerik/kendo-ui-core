@@ -37,7 +37,7 @@ How can I persist the collapsed state of grouped records in the Kendo UI Grid fo
 
 ## Solution
 
-The following example demonstrates how to persist the collapsed state of grouped records in a Grid. The approach utilizes the [collapseGroup](/api/javascript/ui/grid/methods/collapsegroup) method of the Grid.
+The following example demonstrates how to persist the collapsed state of grouped records in a Grid. The approach utilizes the [collapseGroup](/api/ui/grid/methods/collapsegroup) method of the Grid.
 
 ```dojo
       <button class="k-button" onclick="refreshGrid()">Refresh Grid</button>
@@ -137,4 +137,4 @@ The following example demonstrates how to persist the collapsed state of grouped
 
 ## See Also
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/ui/grid)

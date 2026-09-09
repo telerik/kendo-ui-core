@@ -21,11 +21,11 @@ components: ["multiselect"]
 
 ## Description
 
-I want to set [`autoClose`](/api/javascript/ui/multiselect/configuration/autoclose) option in MultiSelect to `false`. In this case when I filter the data in the popup and select an item, the filter value is not cleared. How can I manually clear the filter input in the MultiSelect?
+I want to set [`autoClose`](/api/ui/multiselect/configuration/autoclose) option in MultiSelect to `false`. In this case when I filter the data in the popup and select an item, the filter value is not cleared. How can I manually clear the filter input in the MultiSelect?
 
 ## Solution
 
-1. Handle the [`change`](/api/javascript/ui/multiselect/events/change) event of the MultiSelect widget. 
+1. Handle the [`change`](/api/ui/multiselect/events/change) event of the MultiSelect widget. 
 1. In the event handler you can clear the text value of the input and the filter value:
 
 
@@ -58,7 +58,7 @@ I want to set [`autoClose`](/api/javascript/ui/multiselect/configuration/autoclo
 
 ## See Also
 
-* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect JavaScript API Reference](/api/ui/multiselect)
 * [Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
 * [Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})

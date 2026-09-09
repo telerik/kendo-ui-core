@@ -42,4 +42,4 @@ In left-to-right layouts, shrinking the horizontal Menu will cause the border of
 {% if site.core %}
 * [Server-Side TagHelper API](/api/taghelpers/menu)
 {% endif %}
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/menu)

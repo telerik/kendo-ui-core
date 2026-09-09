@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.Popup
 
-Represents the Kendo UI Popup widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Popup widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -15,7 +15,7 @@ Represents the Kendo UI Popup widget. Inherits from [Widget](/api/javascript/ui/
 
 Configures the margins, which will be added to the popup size, if its position should end up being next to the viewport edges. By default, the adjustment amount in both dimensions is zero.
 
-The property takes effect only if [`collision`](/api/javascript/ui/popup#configuration-collision) is set to `"fit"` for the respective dimension (`width` or `height`).
+The property takes effect only if [`collision`](/api/ui/popup#configuration-collision) is set to `"fit"` for the respective dimension (`width` or `height`).
 
 
 <div class="meta-api-description">
@@ -107,7 +107,7 @@ How do I customize the closing animation of a Kendo UI popup? Set or customize t
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">
@@ -176,7 +176,7 @@ How do I customize the animation when opening a Kendo UI calendar popup? Control
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/javascript/effects/common)
+[Complete list of available animations](/api/effects/common)
 
 
 <div class="meta-api-description">

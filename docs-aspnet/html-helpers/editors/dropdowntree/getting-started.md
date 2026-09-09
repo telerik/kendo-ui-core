@@ -246,7 +246,7 @@ To use the client-side API of the DropDownTree and build on top of its initial c
     </script>
     ```
 
-1. Use the [DropDownTree client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree#methods) to control the behavior of the widget. In this example, you will use the `open` method to open the popup of the DropDownTree programmatically.
+1. Use the [DropDownTree client-side API](https://docs.telerik.com/kendo-ui/api/ui/dropdowntree#methods) to control the behavior of the widget. In this example, you will use the `open` method to open the popup of the DropDownTree programmatically.
 
     ```JS script
     <script>
@@ -278,6 +278,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the DropDownTree for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdowntree/api)
-* [Client-Side API of the DropDownTree](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
+* [Client-Side API of the DropDownTree](https://docs.telerik.com/kendo-ui/api/ui/dropdowntree)
 * [Server-Side API of the DropDownTree](/api/dropdowntree)
 * [Knowledge Base Section](/knowledge-base)

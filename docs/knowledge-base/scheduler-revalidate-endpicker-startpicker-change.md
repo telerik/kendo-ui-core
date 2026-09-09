@@ -26,7 +26,7 @@ How can I validate again the end date in the Scheduler editor, when the start da
 
 ## Solution
 
-1. Subscribe to the Scheduler [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/edit) event.
+1. Subscribe to the Scheduler [`edit`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/events/edit) event.
 1. Get reference to the start DatePicker and DateTimePicker and bind their change event.
 1. In the change event handler take reference to the respective End pickers. Set their value to the value entered in their input elements and trigger End picker change events to update the End field value.
 
@@ -135,4 +135,4 @@ How can I validate again the end date in the Scheduler editor, when the start da
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/ui/scheduler)

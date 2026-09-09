@@ -308,4 +308,4 @@ The following example demonstrates how to set the `Editable` configuration.
 ## See Also
 
 * [Editing of the TaskBoard (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/editing)
-* [JavaScript API Reference of the TaskBoard](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [JavaScript API Reference of the TaskBoard](https://docs.telerik.com/kendo-ui/api/ui/taskboard)

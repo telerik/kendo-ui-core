@@ -23,10 +23,10 @@ The Kendo UI for jQuery ColorGradient renders a gradient (a hue and an alpha sli
 
 * [Getting Started with the Kendo UI ColorGradient for jQuery]({% slug getting_started_kendoui_colorgradient_widget %})
 * [Basic Usage of the ColorGradient (Demo)](https://demos.telerik.com/kendo-ui/colorgradient/index)
-* [JavaScript API Reference of the ColorGradient](/api/javascript/ui/colorgradient)
+* [JavaScript API Reference of the ColorGradient](/api/ui/colorgradient)
 
 ## See Also
 
 * [Overview of the ColorGradient (Demo)](https://demos.telerik.com/kendo-ui/colorgradient/index)
 * [Using the API of the ColorGradient (Demo)](https://demos.telerik.com/kendo-ui/colorgradient/api)
-* [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorgradient)
+* [JavaScript API Reference of the ColorPicker](/api/ui/colorgradient)

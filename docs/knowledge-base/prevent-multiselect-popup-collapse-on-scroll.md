@@ -114,4 +114,4 @@ Below you will find a complete example to demonstrate the approach:
 ## See Also
 
 - [Official Documentation for Kendo UI MultiSelect](https://docs.telerik.com/kendo-ui/controls/editors/multiselect/overview)
-- [MultiSelect Open Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/open)
+- [MultiSelect Open Event](https://docs.telerik.com/kendo-ui/api/ui/multiselect/events/open)

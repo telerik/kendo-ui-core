@@ -37,7 +37,7 @@ How can I apply filter to both the parent and child Grids in Hierarchy?
 
 ## Solution
 
-It is possible to perform filtering over the parent Grid and the child Grid by ensuring the fetching of the filtered data for the parent Grid has finished. This is done by applying the filter to the child Grid in the [`dataBound`](/api/javascript/ui/grid/events/databound) event handler of the parent one.
+It is possible to perform filtering over the parent Grid and the child Grid by ensuring the fetching of the filtered data for the parent Grid has finished. This is done by applying the filter to the child Grid in the [`dataBound`](/api/ui/grid/events/databound) event handler of the parent one.
 
 ```dojo
     <button class="k-button" onclick="filter()">Filter Parent and Child</button>
@@ -141,5 +141,5 @@ It is possible to perform filtering over the parent Grid and the child Grid by e
 
 ## See Also
 
-* [API Reference of the Grid](/api/javascript/ui/grid)
-* [The dataBound Event of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
+* [API Reference of the Grid](/api/ui/grid)
+* [The dataBound Event of the Grid](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound)

@@ -28,10 +28,10 @@ The DropDownTree is available in the Kendo UI for jQuery suite as of the Kendo U
 
 * [Getting Started with the Kendo UI DropDownTree for jQuery]({% slug getting_started_kendoui_dropdowntree_widget %})
 * [Demo Page for the DropDownTree](https://demos.telerik.com/kendo-ui/dropdowntree/index)
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)
+* [JavaScript API Reference of the DropDownTree](/api/ui/dropdowntree)
 
 ## See Also
 
 * [Basic Usage of the DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/index)
 * [Using the API of the DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/api)
-* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)
+* [JavaScript API Reference of the DropDownTree](/api/ui/dropdowntree)

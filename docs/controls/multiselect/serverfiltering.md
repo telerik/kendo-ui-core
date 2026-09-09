@@ -21,16 +21,16 @@ Server filtering is based on the filtering capability and configuration of the D
 
 To configure the server filtering feature in the MultiSelect:
 
-1. Configure the [`serverFiltering`](/api/javascript/data/datasource/configuration/serverfiltering) option of the DataSource component.
-1. Define the [`filter`](/api/javascript/ui/multiselect/configuration/filter) property of the MultiSelect.
+1. Configure the [`serverFiltering`](/api/data/datasource/configuration/serverfiltering) option of the DataSource component.
+1. Define the [`filter`](/api/ui/multiselect/configuration/filter) property of the MultiSelect.
 
 For a runnable example, refer to the [demo on server filtering in the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/serverfiltering).
 
 ## Advantages
 
-Displaying a subset of the whole data is useful to apply for large datasets which contain thousands of records. In such cases, define a minimum filter length by using the [`minLength`](/api/javascript/ui/multiselect/configuration/minlength) option. For example, if you set `minLength` to `3`, the MultiSelect will not start filtering the dataset until the user enters at least three characters.
+Displaying a subset of the whole data is useful to apply for large datasets which contain thousands of records. In such cases, define a minimum filter length by using the [`minLength`](/api/ui/multiselect/configuration/minlength) option. For example, if you set `minLength` to `3`, the MultiSelect will not start filtering the dataset until the user enters at least three characters.
 
-Server filtering also enables you to bind the MultiSelect to just one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text which boosts the loading time of the component. To apply this approach, send the selected value to the server and return only the matching data item. Use the [`data`](/api/javascript/data/datasource/configuration/transport.read#transportreaddata) callback of the DataSource.
+Server filtering also enables you to bind the MultiSelect to just one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text which boosts the loading time of the component. To apply this approach, send the selected value to the server and return only the matching data item. Use the [`data`](/api/data/datasource/configuration/transport.read#transportreaddata) callback of the DataSource.
 
 ```javascript
 data: function() {
@@ -44,4 +44,4 @@ data: function() {
 ## See Also
 
 * [Server Filtering by the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/serverfiltering)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
+* [JavaScript API Reference of the MultiSelect](/api/ui/multiselect)

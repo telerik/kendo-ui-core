@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.Pager
 
-Represents the Kendo UI Pager widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Pager widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -159,7 +159,7 @@ How do I limit the number of page links shown in a Kendo UI pager? Configure or 
     </style>
 
 ### dataSource `Object|kendo.data.DataSource`
-Instance of kendo DataSource. See the [**kendo.data.DataSource**](/api/javascript/data/datasource).
+Instance of kendo DataSource. See the [**kendo.data.DataSource**](/api/data/datasource).
 
 This option is mandatory because the Pager is tightly connected with DataSource. The pager is UI widget for managing paging over the DataSource. The Pager gets values like page size or total count of items from DataSource.
 
@@ -621,7 +621,7 @@ How do I customize the button labels in Kendo UI pager? Adjust, configure, or lo
     </script>
 
 ### messages.display `String`*(default: "{0} - {1} of {2} items")*
-The pager info text. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The pager info text. Uses [kendo.format](/api/kendo/methods/format).
 
 Contains three placeholders:
 - {0} - the first data item index
@@ -850,7 +850,7 @@ How do I customize the label for the page size dropdown in Kendo UI Pager? Confi
     </script>
 
 ### messages.of `String`*(default: "of {0}")*,
-The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
+The label displayed before the pager input. Uses [kendo.format](/api/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
 
 
 <div class="meta-api-description">

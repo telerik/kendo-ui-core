@@ -8,7 +8,7 @@ component: window
 
 # kendo.ui.Window
 
-Represents the Kendo UI Window. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Window. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
@@ -194,7 +194,7 @@ How do I control the length of the opening animation for Kendo UI windows? Contr
 
 ### appendTo `Object|String` *(default: document.body)*
 
-The element to which the Window will be appended. It is beneficial to [use the Window together with a form](/web/window/overview#using-kendo-ui-window-with-a-form) which does not constrain the dragging of the Window within the specific element. For such scenarios, use the [`draggable.containment`](/api/javascript/ui/window/configuration/draggable.containment) setting.
+The element to which the Window will be appended. It is beneficial to [use the Window together with a form](/web/window/overview#using-kendo-ui-window-with-a-form) which does not constrain the dragging of the Window within the specific element. For such scenarios, use the [`draggable.containment`](/api/ui/window/configuration/draggable.containment) setting.
 
 > Appending the Window to an element styled with `overflow:hidden`, `overflow:auto`, or `overflow:scroll` may result in undesired behavior because the Window will not be displayed outside the  boundaries of the element. Unwanted scrollbars may appear as well.
 
@@ -382,7 +382,7 @@ How do I enable dragging for a Kendo UI window? Control whether a window or UI c
 
 ### draggable.containment `String|Element|jQuery` *default: ""*
 
-Defines the element in which the window will be able to move. The containment option overrides the [`appendTo`](/api/javascript/ui/window/configuration/draggable.containment) setting and attaches the Window to the specified DOM element. Accepts either a selector or an element.
+Defines the element in which the window will be able to move. The containment option overrides the [`appendTo`](/api/ui/window/configuration/draggable.containment) setting and attaches the Window to the specified DOM element. Accepts either a selector or an element.
 
 > The containment element has to be positioned, that is, its CSS `position` attribute has to be set to `relative`, `absolute`, or `fixed`.
 
@@ -613,7 +613,7 @@ How do I enable modal dialogs in a Kendo UI window? Control whether a window dis
 
 ### modal.preventScroll `Boolean` *(default: false)*
 
-Specifies whether the document will stop scrolling when a modal dialog is opened. Closing the modal dialog has to restore the initial document overflow. The `modal.preventScroll` setting will modify the overflow rule of the document and, therefore, cannot be used together with the [`containment`](/api/javascript/ui/window/configuration/draggable.containment) option.
+Specifies whether the document will stop scrolling when a modal dialog is opened. Closing the modal dialog has to restore the initial document overflow. The `modal.preventScroll` setting will modify the overflow rule of the document and, therefore, cannot be used together with the [`containment`](/api/ui/window/configuration/draggable.containment) option.
 
 > Multiple windows with different `preventScroll` settings are not supported.
 
@@ -655,7 +655,7 @@ How to pin a Kendo UI window in place while scrolling? Control whether a window 
 
 ### position `Object`
 
-A collection of one or two members which define the initial top and/or left position of the Window or the position of the [`containment` element](/api/javascript/ui/window/configuration/draggable.containment) on the page.
+A collection of one or two members which define the initial top and/or left position of the Window or the position of the [`containment` element](/api/ui/window/configuration/draggable.containment) on the page.
 
 
 <div class="meta-api-description">
@@ -758,7 +758,7 @@ How do I enable scrolling in a Kendo UI for jQuery Window widget? Control whethe
 
 The text in the title bar of the Window. If set to `false`, the Window will be displayed without a title bar.
 
-> The title bar buttons of the Window will not be displayed. Unless [`dragHandle`](/api/javascript/ui/window/configuration/draggable.draghandle) is configured, this will prevent the Window from dragging.
+> The title bar buttons of the Window will not be displayed. Unless [`dragHandle`](/api/ui/window/configuration/draggable.draghandle) is configured, this will prevent the Window from dragging.
 
 
 <div class="meta-api-description">
@@ -904,7 +904,7 @@ How do I set the size of a Kendo UI window to fit different screen sizes? Set or
 
 Centers the Window within the viewport.
 
-If the Window has no set dimensions and is centered before its content is loaded with Ajax, it might resize after the content is loaded. This will change the position of the widget on the screen and it will no longer be centered. If you need to center the Window, then either center it in its [`refresh`](/api/javascript/ui/window/events/refresh) event or set [explicit dimensions](/api/javascript/ui/window#configuration-height).
+If the Window has no set dimensions and is centered before its content is loaded with Ajax, it might resize after the content is loaded. This will change the position of the widget on the screen and it will no longer be centered. If you need to center the Window, then either center it in its [`refresh`](/api/ui/window/events/refresh) event or set [explicit dimensions](/api/ui/window#configuration-height).
 
 
 <div class="meta-api-description">
@@ -1098,7 +1098,7 @@ How do I programmatically minimize a Kendo UI window? Control collapsing a windo
 
 ### open
 
-Opens a Window and brings it on top of any other open Window instances by internally calling [`toFront`](/api/javascript/ui/window/methods/tofront).
+Opens a Window and brings it on top of any other open Window instances by internally calling [`toFront`](/api/ui/window/methods/tofront).
 
 
 <div class="meta-api-description">
@@ -1143,7 +1143,7 @@ How to keep the window pinned on screen when scrolling in Kendo UI for jQuery? C
 
 ### refresh
 
-Refreshes the content of a Window from a remote URL or from the initially defined [content template](/api/javascript/ui/window/configuration/content#contenttemplate).
+Refreshes the content of a Window from a remote URL or from the initially defined [content template](/api/ui/window/configuration/content#contenttemplate).
 
 > Passing `data` and non-`GET` requests cannot be sent to an `iframe` as they require a form with a `target` attribute.
 
@@ -1239,7 +1239,7 @@ How do I restore a Kendo UI window to its original size and location in jQuery? 
 
 Allows the Window to be configured with new options.
 
-If you change the [content url](/api/javascript/ui/window#configuration-content), call [`refresh`](/api/javascript/ui/window/methods/refresh) afterwards. Another option is to directly execute the `refresh` method with the new URL.
+If you change the [content url](/api/ui/window#configuration-content), call [`refresh`](/api/ui/window/methods/refresh) afterwards. Another option is to directly execute the `refresh` method with the new URL.
 
 Changing the size or the position of the Window is possible only if the widget is not maximized or minimized.
 
@@ -1305,7 +1305,7 @@ The title of the Window.
 
 ### toFront
 
-Increases the `z-index` style of a Window [`wrapper`](/intro/widget-basics/wrapper-element) to bring the instance on top of other open Windows. This method is executed automatically when the [`open`](/api/javascript/ui/window/methods/open) method is used.
+Increases the `z-index` style of a Window [`wrapper`](/intro/widget-basics/wrapper-element) to bring the instance on top of other open Windows. This method is executed automatically when the [`open`](/api/ui/window/methods/open) method is used.
 
 
 <div class="meta-api-description">
@@ -1753,7 +1753,7 @@ How do I detect when a user resizes the browser window using Kendo UI for jQuery
 
 ### restore
 
-Triggered when the Window is restored to its previous state(maximized or minimized) by pressing the restore button, or when the [`restore()`](/api/javascript/ui/window/methods/restore) method is called.
+Triggered when the Window is restored to its previous state(maximized or minimized) by pressing the restore button, or when the [`restore()`](/api/ui/window/methods/restore) method is called.
 
 
 <div class="meta-api-description">

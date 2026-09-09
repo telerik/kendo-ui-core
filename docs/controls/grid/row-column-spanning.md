@@ -14,7 +14,7 @@ The Row and Column spanning functionality allows to customize the appearance of 
 ## Row Spanning
 
 The Row spanning functionality of the Grid enables you to span a cell between multiple rows.
-You can use the [`attributes`](/api/javascript/ui/grid/configuration/columns.attributes) function and calculate the span of each cell. In the `attributes` function you can apply the `rowSpan` and `hidden` attributes to the cells.
+You can use the [`attributes`](/api/ui/grid/configuration/columns.attributes) function and calculate the span of each cell. In the `attributes` function you can apply the `rowSpan` and `hidden` attributes to the cells.
 
 The [`rowspan`](https://www.w3schools.com/tags/att_rowspan.asp) attribute defines the number of rows a table cell needs to span. 
 The [`hidden`](https://www.w3schools.com/tags/att_hidden.asp) attribute must be added to cells that should not be displayed when meets a condition.
@@ -78,7 +78,7 @@ The [`hidden`](https://www.w3schools.com/tags/att_hidden.asp) attribute must be 
 
 The Column spanning functionality enables you to span multiple columns in the Grid. 
 
-The Column spanning is available through the [`attributes`](/api/javascript/ui/grid/configuration/columns.attributes) Grid function where you can apply the `colSpan` and `hidden` attributes to the cells.
+The Column spanning is available through the [`attributes`](/api/ui/grid/configuration/columns.attributes) Grid function where you can apply the `colSpan` and `hidden` attributes to the cells.
 
 The [`colspan`](https://www.w3schools.com/tags/att_colspan.asp) attribute defines the number of columns a table cell needs to span. 
 The [`hidden`](https://www.w3schools.com/tags/att_hidden.asp) attribute must be added to cells that should not be displayed when meets a condition.
@@ -179,5 +179,5 @@ The following example demonstrates how to span "pass" and "country" columns if t
 ## See Also
 
 * [Row and Column Spanning in the Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/row-column-spanning)
-* [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/ui/grid)
 

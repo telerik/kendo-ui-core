@@ -115,6 +115,6 @@ To achieve this behavior:
 ## See Also
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
-* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
+* [JavaScript API Reference of the Diagram](/api/dataviz/ui/diagram)
 * [Pan with Mouse Wheel]({% slug howto_pan_with_mouse_wheel %})
 * [Drag and Drop on Existing Shapes]({% slug howto_draganddrop_onshapes_diagram %})

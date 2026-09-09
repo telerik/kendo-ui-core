@@ -26,7 +26,7 @@ How to show the characters count when editing a field in a row in the Grid for {
 
 ## Solution
 
-* Set a handler for the [`Edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) event.
+* Set a handler for the [`Edit`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/edit) event.
 
     ```Razor
      .Events(ev=>ev.Edit("onEdit"))
@@ -107,7 +107,7 @@ How to show the characters count when editing a field in a row in the Grid for {
 
 ## See Also
 
-* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

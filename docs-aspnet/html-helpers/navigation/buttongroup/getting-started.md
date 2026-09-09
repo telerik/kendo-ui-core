@@ -216,7 +216,7 @@ You can reference the ButtonGroup instances that you have created and build on t
     </script>
     ```
 
-1. Use the [ButtonGroup client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the button.
+1. Use the [ButtonGroup client-side API](https://docs.telerik.com/kendo-ui/api/ui/buttongroup#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the button.
 
     ```JS script
     <script>
@@ -247,6 +247,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the ButtonGroup for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/buttongroup/api)
-* [ButtonGroup Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup)
+* [ButtonGroup Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/buttongroup)
 * [Server-Side API of the ButtonGroup for {{ site.framework }}](/api/buttongroup)
 * [Knowledge Base Section](/knowledge-base)

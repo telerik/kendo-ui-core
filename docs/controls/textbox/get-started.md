@@ -53,7 +53,7 @@ In this step, you will initialize the TextBox from the `<input>` element. Upon i
 
 ## 3. Apply Stylings to the TextBox
 
-The TextBox provides several options that enable you to modify its appearance. The following example demonstrates how to apply a [`flat` `fillMode`](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox/configuration/fillmode) to the component.
+The TextBox provides several options that enable you to modify its appearance. The following example demonstrates how to apply a [`flat` `fillMode`](https://docs.telerik.com/kendo-ui/api/ui/textbox/configuration/fillmode) to the component.
 
 ```html
 <input id="textbox" />
@@ -68,7 +68,7 @@ The TextBox provides several options that enable you to modify its appearance. T
 
 ## 4. Configure the Label of the TextBox
 
-The TextBox enables you to configure the label by using the [`label`](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox/configuration/label) property.
+The TextBox enables you to configure the label by using the [`label`](https://docs.telerik.com/kendo-ui/api/ui/textbox/configuration/label) property.
 
 ```html
 <input id="textbox" />
@@ -92,7 +92,7 @@ The TextBox enables you to configure the label by using the [`label`](https://do
 
 ## See Also 
 
-* [JavaScript API Reference of the TextBox](/api/javascript/ui/textbox)
+* [JavaScript API Reference of the TextBox](/api/ui/textbox)
 * [Knowledge Base Section](/knowledge-base)
 
 

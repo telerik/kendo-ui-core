@@ -29,7 +29,7 @@ How can I display a specific aggregation by selecting it from a ContextMenu in t
 
 ## Solution
 
-- Add an empty span with custom class as a [`footerTemplate`](/api/javascript/ui/grid/configuration/columns.footertemplate) in each column of the Grid.
+- Add an empty span with custom class as a [`footerTemplate`](/api/ui/grid/configuration/columns.footertemplate) in each column of the Grid.
 
 ```js
 columns: [
@@ -41,7 +41,7 @@ columns: [
 ]
 ```
 
-- In the [`select`](/api/javascript/ui/contextmenu/events/select) event of the ContextMenu component find the current column index, the field of the selected column and the Grid [`aggregates`](/api/javascript/data/datasource/methods/aggregate#aggregates). 
+- In the [`select`](/api/ui/contextmenu/events/select) event of the ContextMenu component find the current column index, the field of the selected column and the Grid [`aggregates`](/api/data/datasource/methods/aggregate#aggregates). 
 
 ```js
  select: function(e){
@@ -176,5 +176,5 @@ The following example demonstrates the full implementation of the suggested appr
 ```
 
 ## See Also
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [JavaScript API Reference of the ContextMenu](/api/javascript/ui/contextmenu)
+* [JavaScript API Reference of the Grid](/api/ui/grid)
+* [JavaScript API Reference of the ContextMenu](/api/ui/contextmenu)

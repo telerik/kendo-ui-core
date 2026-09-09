@@ -224,7 +224,7 @@ The next step is to define the Card and the Button components—the ActionSheet 
 ```
 {% endif %}
 
-Handle the `Click` event of the Button and call the [`open()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet/methods/open) client-side method to open the ActionSheet.
+Handle the `Click` event of the Button and call the [`open()`](https://docs.telerik.com/kendo-ui/api/ui/actionsheet/methods/open) client-side method to open the ActionSheet.
 
 ```JS scripts
     <script>
@@ -235,7 +235,7 @@ Handle the `Click` event of the Button and call the [`open()`](https://docs.tele
     </script>
 ```
 
-Handle the `Click` event of each ActionSheet item and call the [`close()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet/methods/close) client-side method to close the ActionSheet when an item is selected.
+Handle the `Click` event of each ActionSheet item and call the [`close()`](https://docs.telerik.com/kendo-ui/api/ui/actionsheet/methods/close) client-side method to close the ActionSheet when an item is selected.
 
 ```JS scripts
     <script>
@@ -303,7 +303,7 @@ You can reference the ActionSheet instances that you have created and build on t
         </script>
     ```
 
-1. Use the [ActionSheet client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet#methods) to control the behavior of the component. In this example, you will enable the adaptive mode of the ActionSheet through the [`Adaptive()`](/api/kendo.mvc.ui.fluent/actionsheetbuilder#adaptivesystemboolean) option and use the `fullscreen()` method to set the ActionSheet in full-screen mode dynamically (for example, when a button is clicked).
+1. Use the [ActionSheet client-side API](https://docs.telerik.com/kendo-ui/api/ui/actionsheet#methods) to control the behavior of the component. In this example, you will enable the adaptive mode of the ActionSheet through the [`Adaptive()`](/api/kendo.mvc.ui.fluent/actionsheetbuilder#adaptivesystemboolean) option and use the `fullscreen()` method to set the ActionSheet in full-screen mode dynamically (for example, when a button is clicked).
 
 
     ```HtmlHelper
@@ -372,7 +372,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the ActionSheet for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/actionsheet/api)
-* [Client-Side API of the ActionSheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet)
+* [Client-Side API of the ActionSheet](https://docs.telerik.com/kendo-ui/api/ui/actionsheet)
 * [Server-Side API of the ActionSheet HtmlHelper](/api/actionsheet)
 {% if site.core %}
 * [Server-Side API of the ActionSheet TagHelper](/api/taghelpers/actionsheet)

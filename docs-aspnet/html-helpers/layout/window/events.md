@@ -87,4 +87,4 @@ The following example demonstrates how to subscribe to events by using a templat
 
 * [Using the API of the Window HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/window/api)
 * [Window Server-Side API](/api/window)
-* [Window Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/window)
+* [Window Client-Side API](https://docs.telerik.com/kendo-ui/api/ui/window)

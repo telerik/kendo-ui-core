@@ -30,4 +30,4 @@ When the `elements` option is configured, the ripple effect is displayed only fo
 ## See Also
 
 * [Basic Usage of the RippleContainer (Demo)](https://demos.telerik.com/kendo-ui/ripplecontainer/index)
-* [JavaScript API Reference of the RippleContainer](/api/javascript/ui/ripplecontainer)
+* [JavaScript API Reference of the RippleContainer](/api/ui/ripplecontainer)

@@ -37,18 +37,18 @@ The Editor itself cannot protect you from XSS attacks because malicious users ca
 
 By design, the Editor does not allow the execution of scripts inside its content area. This is achieved by transforming all `script` tags in the content to `k:script` tags.
 
-When the Editor content is submitted, the `k:script` tags are either completely removed, or transformed back to `script` tags. This depends on the [`serialization.scripts`](/api/javascript/ui/editor/configuration/serialization.scripts) property.
+When the Editor content is submitted, the `k:script` tags are either completely removed, or transformed back to `script` tags. This depends on the [`serialization.scripts`](/api/ui/editor/configuration/serialization.scripts) property.
 
 To allow the execution of scripts inside the Editor content:
 
 * Enable the script serialization.
-* Obtain the value of the Editor through its [`value()`](/api/javascript/ui/editor/methods/value) method.
+* Obtain the value of the Editor through its [`value()`](/api/ui/editor/methods/value) method.
 * Extract the `script` tags.
 * Place the `script` tags elsewhere on the page where they can be evaluated by the browser.
 
 ## Serialization and Deserialization
 
-Script tags and DOM event attributes stripping, as well as value encoding, are built-in functionalities of the Editor. In addition, you can use the [`serialization.custom`](/api/javascript/ui/editor/configuration/serialization.custom) and [`deserialization.custom`](/api/javascript/ui/editor/configuration/deserialization#deserializationcustom) options of the Editor.
+Script tags and DOM event attributes stripping, as well as value encoding, are built-in functionalities of the Editor. In addition, you can use the [`serialization.custom`](/api/ui/editor/configuration/serialization.custom) and [`deserialization.custom`](/api/ui/editor/configuration/deserialization#deserializationcustom) options of the Editor.
 
 The following example demonstrates how to use the serialization and deserialization custom otpions, to sanitize the value of the Editor by using [DOMPurify](https://github.com/cure53/DOMPurify) library.
 
@@ -97,4 +97,4 @@ The following list provides information on the libraries that allow processing H
 ## See Also
 
 * [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
-* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
+* [JavaScript API Reference of the Editor](/api/ui/editor)
