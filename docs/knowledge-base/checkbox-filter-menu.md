@@ -37,7 +37,7 @@ How can I create a checkbox filter menu functionality in the Kendo UI Grid?
 
 The following example demonstrates how to create a menu functionality based on a checkbox filter in a Grid.
 
-> The functionality is available out of the box using the [columns.filterable.multi](/api/ui/grid/configuration/columns.filterable.multi) property.
+> The functionality is available out of the box using the [columns.filterable.multi](/api/ui/grid/configuration/columns#columnsfilterablemulti) property.
 
 ```dojo
      <div id="grid"></div>

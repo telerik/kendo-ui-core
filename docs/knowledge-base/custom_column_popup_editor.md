@@ -30,7 +30,7 @@ How to add a button to every cell in a column that invokes the Kendo UI Editor b
 
 ## Possible Solution
 
-1. Use a [`columns.template`](/api/ui/grid/configuration/columns.template) to add a button to the cell.
+1. Use a [`columns.template`](/api/ui/grid/configuration/columns#columnstemplate) to add a button to the cell.
 1. Once the user clicks the button, invoke a window that contains an editor to modify the data item of the cell.
 
 ```dojo
