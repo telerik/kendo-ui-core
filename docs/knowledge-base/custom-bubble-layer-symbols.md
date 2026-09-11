@@ -39,7 +39,7 @@ How can I add some custom symbols to the Bubble layer of the Kendo UI for jQuery
 
 The Bubble Layer allows you to define the way symbols are rendered.
 
-This approach works by defining a [`symbol`](/api/dataviz/ui/map/configuration/layers.symbol) function that uses the [Drawing API]({% slug overview_kendoui_drawingapi %}) to define the shape. The symbol is typically a [Group](/api/drawing/group) of shapes.
+This approach works by defining a [`symbol`](/api/dataviz/ui/map/configuration/layers#layerssymbol) function that uses the [Drawing API]({% slug overview_kendoui_drawingapi %}) to define the shape. The symbol is typically a [Group](/api/drawing/group) of shapes.
 
 The following example demonstrates how to render 200-kilometer lines in West-East direction as a symbol. Note that the lines get longer the farther you go North, which is due to that fact that the example uses the [Mercator Projection](https://en.wikipedia.org/wiki/Mercator_projection).
 

@@ -40,7 +40,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To achieve this behavior, use the [`categoryAxis.labels.template`](/api/dataviz/ui/chart/configuration/categoryaxis.labels) configuration and implement a custom function to trim the label text.
+To achieve this behavior, use the [`categoryAxis.labels.template`](/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxislabels) configuration and implement a custom function to trim the label text.
 
 1. Define the `categoryAxis.labels.template` property in the Kendo UI Chart configuration.
 2. Use a JavaScript function to shorten the label text based on your requirements.
@@ -134,4 +134,4 @@ For a runnable example, please refer to the Dojo below.
 
 ## See Also
 - [Kendo UI for jQuery Chart Documentation](/controls/charts/overview)
-- [CategoryAxis Labels Configuration](/api/dataviz/ui/chart/configuration/categoryaxis.labels)
+- [CategoryAxis Labels Configuration](/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxislabels)
