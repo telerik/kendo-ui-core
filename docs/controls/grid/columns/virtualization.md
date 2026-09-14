@@ -8,9 +8,9 @@ slug: columnvirtualization_kendoui_grid_widget
 
 # Column Virtualization
 
-The Grid provides a built-in option for virtualizing its columns. To enable it, set the [`scollable.virtual`](/api/ui/grid/configuration/scrollable.virtual) property to `"columns"`. As a result, the columns outside the current visible aria of the Grid will not be rendered and this will improve the rendering performance. When scrolling is performed the visual subset of columns is changed accordingly.
+The Grid provides a built-in option for virtualizing its columns. To enable it, set the [`scollable.virtual`](/api/ui/grid/configuration/scrollable#scrollablevirtual) property to `"columns"`. As a result, the columns outside the current visible aria of the Grid will not be rendered and this will improve the rendering performance. When scrolling is performed the visual subset of columns is changed accordingly.
 
-> To work properly, the column virtualization requires you to set the [`columns.width`](/api/ui/grid/configuration/columns.width).
+> To work properly, the column virtualization requires you to set the [`columns.width`](/api/ui/grid/configuration/columns#columnswidth).
 
 To enable virtualized columns:
 

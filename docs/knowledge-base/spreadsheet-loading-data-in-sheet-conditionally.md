@@ -38,7 +38,7 @@ How to populate Spreadsheet remote dataSource conditionally by dynamically chang
 	1. define a [new `kendo.data.DataSource`](https://docs.telerik.com/kendo-ui/api/data/datasource#kendodatadatasource)
 	1. get the `activeSheet`, then get its `_rows`.`_count` and `_columns`.`_count`
 	1. use the `sheet.range(0,0,rowsCount,columnsCount).clear()` to clear any leftover data from the Spreadsheet
-	1. pass the local url variable to the Speadsheet's [transport.read.url](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/transport.read#transportreadurl)
+	1. pass the local url variable to the Speadsheet's [transport.read.url](https://docs.telerik.com/kendo-ui/api/data/datasource/configuration/transport#transportread#transportreadurl)
     1. finally in the loadData() use [setDataSource](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet/methods/setdatasource) to set the dataSource of the [activeSheet](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/methods/activesheet) to be  equal to the `kendo.data.DataSource`
 
 ```dojo

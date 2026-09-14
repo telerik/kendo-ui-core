@@ -164,7 +164,7 @@ Below is a runnable example:
 ```
 
 For more detailed information on configuring the columns and dropdown width of the MultiColumnComboBox, refer to the official documentation:
-- [Configuring columns in MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox/configuration/columns.width)
+- [Configuring columns in MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox/configuration/columns#columnswidth)
 - [Setting dropdown width](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox/configuration/dropdownwidth)
 
 ## See Also

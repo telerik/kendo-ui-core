@@ -28,7 +28,7 @@ How can I display a base64-encoded image in the Grid?
 ## Solution
 
 1. Specify a field in the server-side model that will hold the base64-encoded string.
-1. When the Grid reads the data, display the image by using [`column.template`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.template).
+1. When the Grid reads the data, display the image by using [`column.template`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnstemplate).
 
 
 ```dojo

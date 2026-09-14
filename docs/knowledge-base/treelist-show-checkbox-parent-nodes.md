@@ -29,7 +29,7 @@ components: ["treelist"]
 How can I show the checkbox in the checkbox column of the Kendo UI TreeList for the root nodes only?
 
 ## Solution
-1. Set the [visibility](https://www.w3schools.com/cssref/pr_class_visibility.asp) of all the checkboxes to *hidden* in the [columns.template](https://docs.telerik.com/kendo-ui/api/ui/treelist/configuration/columns.template) property as seen below:
+1. Set the [visibility](https://www.w3schools.com/cssref/pr_class_visibility.asp) of all the checkboxes to *hidden* in the [columns.template](https://docs.telerik.com/kendo-ui/api/ui/treelist/configuration/columns#columnstemplate) property as seen below:
 
 	```javascript
 	  columns: [{ 
@@ -121,5 +121,5 @@ The following example renders a TreeList with a checkbox column and uses the `da
 ## See Also
 - [Show Checkbox Column](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/show-a-checkbox-column)
 - [CSS visibility](https://www.w3schools.com/cssref/pr_class_visibility.asp)
-- [columns.template](https://docs.telerik.com/kendo-ui/api/ui/treelist/configuration/columns.template)
+- [columns.template](https://docs.telerik.com/kendo-ui/api/ui/treelist/configuration/columns#columnstemplate)
 - [dataBound](https://docs.telerik.com/kendo-ui/api/ui/treelist/events/databound)

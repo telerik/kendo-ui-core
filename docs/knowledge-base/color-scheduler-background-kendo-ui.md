@@ -33,7 +33,7 @@ This KB article also answers the following questions:
 
 To customize the background color of Scheduler days based on working hours, you can use the `.k-scheduler-content td:not(.k-nonwork-hour)` selector. 
 
-For different colors each day, use the [`slotTemplate`](/api/ui/scheduler/configuration/views.slottemplate) option in the Scheduler's configuration. This allows adding a different class based on the day rendered:
+For different colors each day, use the [`slotTemplate`](/api/ui/scheduler/configuration/views#viewsslottemplate) option in the Scheduler's configuration. This allows adding a different class based on the day rendered:
 
 ```javascript
 {
@@ -148,5 +148,5 @@ Below is a runnable example:
 
 ## See Also
 
-- [Scheduler Configuration - slotTemplate](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/views.slottemplate)
+- [Scheduler Configuration - slotTemplate](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/views#viewsslottemplate)
 - [Scheduler Event - dataBound](https://docs.telerik.com/kendo-ui/api/ui/scheduler/events/databound)

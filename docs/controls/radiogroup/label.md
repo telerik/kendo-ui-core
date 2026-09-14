@@ -14,7 +14,7 @@ If the RadioGroup widget is bound to an array of strings, those will be used as 
 
 ## Set the Label text
 
-To customize the text of the label, use the [`label`](/api/ui/radiogroup/configuration/items.label) option. 
+To customize the text of the label, use the [`label`](/api/ui/radiogroup/configuration/items#itemslabel) option. 
 
 ```dojo
     <ul id="radiogroup"></ul>

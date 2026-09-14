@@ -34,7 +34,7 @@ You can alter the generated workbook to include a column with formulas by follow
 
 1. Add an [`excelExport`](/api/ui/grid/events/excelexport) event handler function to loop over the workbook.
 1. Add a header cell for the formula column.
-1. Generate the formula for all the next cells and add it as the [`sheets.rows.cells.formula`](/api/ooxml/workbook/configuration/sheets.rows.cells.formula).
+1. Generate the formula for all the next cells and add it as the [`sheets.rows.cells.formula`](/api/ooxml/workbook/configuration/sheets/rows/cells#sheetsrowscellsformula).
 
 ```
     excelExport: function(e) {

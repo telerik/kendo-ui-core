@@ -28,7 +28,7 @@ To enable the selection functionality of the TreeList, set the `selectable` opti
 
 ## Single Row Checkbox Selection
 
-To enable checkbox selection, add a column to the `columns` collection of the TreeList and set the [`selectable`](/api/ui/treelist/configuration/columns.selectable) option to `true`:
+To enable checkbox selection, add a column to the `columns` collection of the TreeList and set the [`selectable`](/api/ui/treelist/configuration/columns#columnsselectable) option to `true`:
  
 ```
     <script>

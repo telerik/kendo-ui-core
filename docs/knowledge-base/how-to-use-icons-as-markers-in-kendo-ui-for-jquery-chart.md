@@ -42,11 +42,11 @@ First, ensure you have access to the iconography you want to use. If you're usin
 
 Then, follow these steps to implement font icons as series markers:
 
-1. For the series that you want to customize the markers for, add a [`markers`]((https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.markers)) configuration object.
+1. For the series that you want to customize the markers for, add a [`markers`]((https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series#seriesmarkers)) configuration object.
 
-2. Inside the [`markers`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.markers) configuration, specify a [`visual`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.markers.visual) function. This function will be used to create custom visuals for the markers.
+2. Inside the [`markers`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series#seriesmarkers) configuration, specify a [`visual`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series/markers#seriesmarkersvisual) function. This function will be used to create custom visuals for the markers.
 
-3. In the [`visual`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.markers.visual) function, create and return a visual element (e.g., a `Path` or `Text` element) that represents the icon. You can set the content of the `Text` element to be the character code of the icon if using font icons.
+3. In the [`visual`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series/markers#seriesmarkersvisual) function, create and return a visual element (e.g., a `Path` or `Text` element) that represents the icon. You can set the content of the `Text` element to be the character code of the icon if using font icons.
 
 Here's an example of how to define the `visual` function to use a font icon as a marker in a series:
 

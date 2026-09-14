@@ -34,7 +34,7 @@ I am working on a multiple grid export to PDF which needs a custom template.
 
 ## Solution
 
-- The Kendo UI PDF template has the [`pageNum`](/api/ui/grid/configuration/pdf.template) property that can be used as a condition as part of the template. This will allow you to add or remove parts of the template dependent on it. 
+- The Kendo UI PDF template has the [`pageNum`](/api/ui/grid/configuration/pdf#pdftemplate) property that can be used as a condition as part of the template. This will allow you to add or remove parts of the template dependent on it. 
 - It is possible to check runtime if the `kendo-pdf-document` contains a child with a certain id. It is important to remember that the "#" literal needs to be escaped:
 
 ```

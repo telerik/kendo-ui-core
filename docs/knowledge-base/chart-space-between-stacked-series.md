@@ -30,7 +30,7 @@ components: ["chart"]
 How can I add space between the Stacked Series in the Kendo UI Column Chart?
 
 ## Solution
-In order to add space between two series of a Stacked Column Chart, use the [series.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.visual) property:
+In order to add space between two series of a Stacked Column Chart, use the [series.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series#seriesvisual) property:
 
 ```javascript
 $("#chart").kendoChart({
@@ -146,4 +146,4 @@ The following example demonstrates a Stacked Column Chart that uses the `space` 
 ```
 
 ## See Also
-- [series.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.visual)
+- [series.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series#seriesvisual)

@@ -29,7 +29,7 @@ How can I remove the emboss effect from a Kendo UI Bar Chart?
 
 ## Solution
 
-Some Kendo UI themes default to displaying a slight gradient in their Charts. To remove that effect from a graph like the [Bar chart](https://demos.telerik.com/kendo-ui/bar-charts/index), set the [`series.overlay.gradient`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.overlay#series.overlay.gradient) property to `none`.
+Some Kendo UI themes default to displaying a slight gradient in their Charts. To remove that effect from a graph like the [Bar chart](https://demos.telerik.com/kendo-ui/bar-charts/index), set the [`series.overlay.gradient`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series#seriesoverlay#series.overlay.gradient) property to `none`.
 
 ```
 $("#chart").kendoChart({
@@ -42,7 +42,7 @@ $("#chart").kendoChart({
 });
 ```
 
-If the Kendo UI Chart contains more than one series, use the [`seriesDefaults.overlay.gradient`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/seriesdefaults.overlay#seriesDefaults.overlay.gradient) property to remove all gradients with a single setting.
+If the Kendo UI Chart contains more than one series, use the [`seriesDefaults.overlay.gradient`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultsoverlay#seriesDefaults.overlay.gradient) property to remove all gradients with a single setting.
 
 The following example demonstrates how to render the bars in the Kendo UI Chart in a flat appearance.
 
@@ -65,4 +65,4 @@ The following example demonstrates how to render the bars in the Kendo UI Chart 
 ## See Also
 
 * [Basic Usage Demo of the Kendo UI Bar Chart](https://demos.telerik.com/kendo-ui/bar-charts/index)
-* [API Reference of series.overlay.gradient](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.overlay#series.overlay.gradient)
+* [API Reference of series.overlay.gradient](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series#seriesoverlay#series.overlay.gradient)

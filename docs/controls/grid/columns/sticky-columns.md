@@ -27,7 +27,7 @@ For a runnable example, refer to the demo on [implementing sticky columns in the
 
 The following Grid configuration ensures that it will be possible to scroll columns horizontally to make the feature work. If there is not enough horizontal space for the scrollbar, it will not appear.
 * Enable [scrolling](/controls/grid/scrolling/overview).
-* [Stick columns initially](/api/ui/grid/configuration/columns.sticky) or [enable the stickable property](/api/ui/grid/configuration/columns.stickable) so users can stick column on the fly.
+* [Stick columns initially](/api/ui/grid/configuration/columns#columnssticky) or [enable the stickable property](/api/ui/grid/configuration/columns#columnsstickable) so users can stick column on the fly.
 * Set a Grid height.
 * Set explicit pixel widths to all columns to allow the Grid to adjust the layout of the sticky and non-sticky columns.
 * Make sure that the Grid is not [initialized inside a hidden container](/controls/grid/appearance/hidden-containers).

@@ -51,7 +51,7 @@ In this step, you will initialize the Upload from the `input` element.
 
 ## 3. Configure the Upload Settings
 
-Next, set the [`saveUrl`](/api/ui/upload/configuration/async.saveurl) and [`removeUrl`](/api/ui/upload/configuration/async.removeurl) configuration options. These configurations allow the end-user to upload a file to the server and remove it afterwards.
+Next, set the [`saveUrl`](/api/ui/upload/configuration/async#asyncsaveurl) and [`removeUrl`](/api/ui/upload/configuration/async#asyncremoveurl) configuration options. These configurations allow the end-user to upload a file to the server and remove it afterwards.
 
 ```html
     <script>

@@ -41,7 +41,7 @@ How can I hide the specific legend items for which I will not have any data to s
 
 ## Solution
 
-To allow the use of custom logic and determine whether a legend item will be added or not, use the [`legend.item.visual`](/api/dataviz/ui/chart/configuration/legend.item#legenditemvisual) property of the Chart.
+To allow the use of custom logic and determine whether a legend item will be added or not, use the [`legend.item.visual`](/api/dataviz/ui/chart/configuration/legend#legenditem#legenditemvisual) property of the Chart.
 
 ```dojo
   <div id="chart"></div>

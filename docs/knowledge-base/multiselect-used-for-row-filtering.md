@@ -37,7 +37,7 @@ How can I use a Kendo UI MultiSelect for row filtering of the Kendo UI Grid for 
 
 ## Solution
 
-1. Use [`columns.filterable.cell.template`](/api/ui/grid/configuration/columns.filterable.cell#columnsfilterablecelltemplate) property to set the MultiSelect as the row filter.
+1. Use [`columns.filterable.cell.template`](/api/ui/grid/configuration/columns/filterable#columnsfilterablecell#columnsfilterablecelltemplate) property to set the MultiSelect as the row filter.
 2. In the [`filter`](/api/ui/grid/events/filter) Grid event update the MultiSelect values to match the applied filter from the multi checkbox menu.
 
 The following example demonstrates the full implementation of the suggested approach.

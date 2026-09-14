@@ -173,8 +173,8 @@ For more information on how to implement the approach, refer to the following re
 
 <ul>
     <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar">https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar</a></li>
-    <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar.iconclass">https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar.iconClass</a></li>
-    <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar.text">https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar.text</a></li>
+    <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar#toolbariconclass">https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar#toolbariconclass</a></li>
+    <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar#toolbartext">https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar#toolbartext</a></li>
     <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/methods/addrow">https://docs.telerik.com/kendo-ui/api/ui/grid/methods/addRow</a></li>
     <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/methods/savechanges">https://docs.telerik.com/kendo-ui/api/ui/grid/methods/saveChanges</a></li>
     <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/methods/savechanges"></a><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/methods/cancelchanges">https://docs.telerik.com/kendo-ui/api/ui/grid/methods/cancelChanges</a></li>

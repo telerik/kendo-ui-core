@@ -25,7 +25,7 @@ Can I implement a **Confirm** dialog before the user uploads a file when the Upl
 
 ## Solution
 
-Use the [Kendo UI **Confirm** Dialog](https://demos.telerik.com/kendo-ui/dialog/predefined-dialogs) and an asynchronous Upload with [`AutoUpload`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async.autoupload) turned off.
+Use the [Kendo UI **Confirm** Dialog](https://demos.telerik.com/kendo-ui/dialog/predefined-dialogs) and an asynchronous Upload with [`AutoUpload`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async#asyncautoupload) turned off.
 
 The following example demonstrates how to open the **Confirm** Dialog within the [`select`](https://docs.telerik.com/kendo-ui/api/ui/upload/events/select) event handler and display the name of the file.
 

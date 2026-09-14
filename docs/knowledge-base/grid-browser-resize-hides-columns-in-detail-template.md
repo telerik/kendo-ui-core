@@ -30,7 +30,7 @@ How can I hide the Grid columns inside the [`detailTemplate`](/api/ui/grid/confi
 ## Solution
 
 1. Define the thresholds at which each individual column will be hidden. Refer to the `getThresholds` function in the example below.
-1. Set these thresholds to the Grid by using the [`columns.media`](/api/ui/grid/configuration/columns.media) configuration. Refer to the `setThresholds` function in the example below.
+1. Set these thresholds to the Grid by using the [`columns.media`](/api/ui/grid/configuration/columns#columnsmedia) configuration. Refer to the `setThresholds` function in the example below.
 1. Attach handlers for the [`dataBound`](/api/ui/grid/events/databound), [`columnHide`](/api/ui/grid/events/columnhide), and [`columnShow`](/api/ui/grid/events/columnshow) events to the Grid. The `columnHide` and `columnShow` handlers are responsible for hiding and showing the columns inside the `detailTemplate`. The `dataBound` handler is responsible for initializing the `detailTemplate`.
 1. Handle the `resize` event of the JavaScript `window` object. If the Grid doesn't have any hidden columns when the browser window is resized, collapse all detail rows.
 1. Use `CSS` to conditionally display the hierarchy column.

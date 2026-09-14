@@ -39,7 +39,7 @@ How can I filter the jQuery Grid by Kendo UI by using AutoComplete and by showin
 
 The following example demonstrates how to set the Grid with an Excel-like filter that has sorted and unique items.
 
-To set a single Data Source for all filter menus, the example uses the [`columns.filterable.dataSource`](/api/ui/grid/configuration/columns.filterable.datasource) property of the Grid.
+To set a single Data Source for all filter menus, the example uses the [`columns.filterable.dataSource`](/api/ui/grid/configuration/columns/filterable#columnsfilterabledatasource) property of the Grid.
 
 To observe this behavior:
 

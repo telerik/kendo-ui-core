@@ -31,7 +31,7 @@ How can I align the category axis labels of the Kendo UI Bar Chart to the left?
 
 Use the Kendo UI Drawing API to customize the appearance of the labels in the Bar Chart. You can adjust the following suggested approach to your preferences:
 
-1. Create a new function within the [`categoryAxis.labels.visual` configuration](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual).
+1. Create a new function within the [`categoryAxis.labels.visual` configuration](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxislabels#categoryaxislabelsvisual).
 1. Initialize a new [`kendo.drawing.Group` object](https://docs.telerik.com/kendo-ui/api/drawing/group).
 1. Set the appearance of the label with the [`kendo.drawing.Text`](https://docs.telerik.com/kendo-ui/api/drawing/text) element.
 1. [Configure the rectangle](https://docs.telerik.com/kendo-ui/api/geometry/rect) which will hold the text.
@@ -91,7 +91,7 @@ The following example demonstrates the full implementation of the suggested appr
 
 ## See Also
 
-* [API Reference of categoryAxis.labels.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual)
+* [API Reference of categoryAxis.labels.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxislabels#categoryaxislabelsvisual)
 * [API Reference of kendo.drawing.Group](https://docs.telerik.com/kendo-ui/api/drawing/group)
 * [API Reference of kendo.drawing.Text](https://docs.telerik.com/kendo-ui/api/drawing/text)
 * [API Reference of kendo.geometry.Rect](https://docs.telerik.com/kendo-ui/api/geometry/rect)

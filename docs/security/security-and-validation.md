@@ -31,11 +31,11 @@ The Editor provides configuration options that help the developer prevent XSS at
 
 **Grid**
 
-The [`columns.encoded`](/api/ui/grid/configuration/columns.encoded) configuration option of the Grid provides the possibility to display non-encoded HTML value if set to `false`. In such scenarios it is important to sanitize the values on the server to ensure only safe HTML is rendered.
+The [`columns.encoded`](/api/ui/grid/configuration/columns#columnsencoded) configuration option of the Grid provides the possibility to display non-encoded HTML value if set to `false`. In such scenarios it is important to sanitize the values on the server to ensure only safe HTML is rendered.
 
 **Spreadsheet**
 
-When the [`html` method](/api/spreadsheet/range/methods/html) is used or the [`sheets.rows.cells.html` configuration option](/api/ui/spreadsheet/configuration/sheets.rows.cells) is set to `true` the user is allowed to input HTML. In such scenarios it is important to sanitize cell values on the server to ensure only safe html is passed.
+When the [`html` method](/api/spreadsheet/range/methods/html) is used or the [`sheets.rows.cells.html` configuration option](/api/ui/spreadsheet/configuration/sheets/rows#sheetsrowscells) is set to `true` the user is allowed to input HTML. In such scenarios it is important to sanitize cell values on the server to ensure only safe html is passed.
 
 **PanelBar**
 

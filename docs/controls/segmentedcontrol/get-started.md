@@ -72,7 +72,7 @@ Use the [`items`](/api/ui/segmentedcontrol/configuration/items) option to define
 
 ## 4. Add Icons
 
-Use the [`icon`](/api/ui/segmentedcontrol/configuration/items.icon) option on each item to display a Kendo UI theme icon alongside the label.
+Use the [`icon`](/api/ui/segmentedcontrol/configuration/items#itemsicon) option on each item to display a Kendo UI theme icon alongside the label.
 
 ```html
 <div id="segmentedControl"></div>

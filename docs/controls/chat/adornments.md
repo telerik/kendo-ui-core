@@ -15,9 +15,9 @@ The Kendo UI for jQuery Chat allows you to customize the PromptBox area with ado
 
 You can configure the following PromptBox adornment template options:
 
-* [`messageBox.startAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagebox.startaffixtemplate)&mdash;Renders content before the message input.
-* [`messageBox.endAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagebox.endaffixtemplate)&mdash;Renders content after the message input.
-* [`messageBox.topAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagebox.topaffixtemplate)&mdash;Renders content above the message input.
+* [`messageBox.startAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagebox#messageboxstartaffixtemplate)&mdash;Renders content before the message input.
+* [`messageBox.endAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagebox#messageboxendaffixtemplate)&mdash;Renders content after the message input.
+* [`messageBox.topAffixTemplate`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/chat/configuration/messagebox#messageboxtopaffixtemplate)&mdash;Renders content above the message input.
 
 ## Configuring Start and End Adornments
 

@@ -45,7 +45,7 @@ The following example sets the default background color for the panes:
 By default, the pane content cannot extend beyond its border. This prevents charts from overlapping other elements like the legend or title.
 
 Pane clipping may be undesired, for example when plotting series markers at the edge of the pane.
-To disable clipping, set the [panes.clip](/api/dataviz/ui/chart/configuration/panes.clip) setting to `false`:
+To disable clipping, set the [panes.clip](/api/dataviz/ui/chart/configuration/panes#panesclip) setting to `false`:
 
     $("#chart").kendoChart({
     seriesDefaults: {

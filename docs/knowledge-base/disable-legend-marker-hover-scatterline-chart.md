@@ -28,7 +28,7 @@ ticketid: 1641339
 
 ## Description
 
-I want to prevent the markers from appearing in the legend when hovering over it in a Kendo UI for jQuery [Scatterline Chart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.type#seriesystypescatterline). Even though the markers are set to not be visible in the chart, they still appear when hovering over the legend.
+I want to prevent the markers from appearing in the legend when hovering over it in a Kendo UI for jQuery [Scatterline Chart](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series#seriestype#seriesystypescatterline). Even though the markers are set to not be visible in the chart, they still appear when hovering over the legend.
 
 This knowledge base article also answers the following questions:
 - How to stop legend markers from appearing on hover in Scatterline Chart?
@@ -37,7 +37,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To ensure that markers do not appear on hover in the legend when [`markers.visible`](/api/dataviz/ui/chart/configuration/series.markers.visible) is set to `false`, set the [`legend.item.highlight.visible`](/api/dataviz/ui/chart/configuration/legend.item#legenditemhighlightvisible) configuration to `false`. This disables the highlight behavior of legend items.
+To ensure that markers do not appear on hover in the legend when [`markers.visible`](/api/dataviz/ui/chart/configuration/series/markers#seriesmarkersvisible) is set to `false`, set the [`legend.item.highlight.visible`](/api/dataviz/ui/chart/configuration/legend#legenditem#legenditemhighlightvisible) configuration to `false`. This disables the highlight behavior of legend items.
 
 ### Configuration Example
 
@@ -130,5 +130,5 @@ The following example renders a full Scatterline Chart with three series and app
 ## See Also
 
 - [Kendo UI for jQuery Chart Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/overview)
-- [Kendo UI Chart Legend API Configuration](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/legend.item)
-- [Kendo UI Scatterline Chart Series API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/series.type#seriesystypescatterline)
+- [Kendo UI Chart Legend API Configuration](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/legend#legenditem)
+- [Kendo UI Scatterline Chart Series API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/series#seriestype#seriesystypescatterline)

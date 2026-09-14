@@ -1848,7 +1848,7 @@ How do I set the size of connection midpoint handles in a Kendo UI Diagram? Conf
 
 ### connectionDefaults.endCap `String|Object`
 
-The connections end cap configuration. Can be set to a configuration object or a string that represents the [endCap.type](/api/dataviz/ui/diagram/configuration/connectiondefaults.endcap#connectionDefaults.endCap.type) value.
+The connections end cap configuration. Can be set to a configuration object or a string that represents the [endCap.type](/api/dataviz/ui/diagram/configuration/connectiondefaults#connectiondefaultsendcap#connectionDefaults.endCap.type) value.
 
 
 <div class="meta-api-description">
@@ -7608,12 +7608,12 @@ Speifies the connection type, which defines the way it routes.
 
 The routing of a connection is the way intermediate points of a connection define a route. A route is usually defined on the basis of constraints or behaviors. Currently there are two routing mechanisms for Diagram connections:
 
-* polyline route - connects the defined intermediate points, see [connections.points](/api/dataviz/ui/diagram/configuration/connections.points).
+* polyline route - connects the defined intermediate points, see [connections.points](/api/dataviz/ui/diagram/configuration/connections#connectionspoints).
 * cascading route - a simple rectangular route that creates a cascading path between the two ends of a connection, ignoring given connection points. The cascading type is useful when using tree layout and hierarchies. The routed connection will in this case enhance the representation of the hierarchy, reproducing a classic organization diagram.
 
 The available values for the `type` property are:
 
-* "polyline" - connects the defined intermediate points. See [connections.points](/api/dataviz/ui/diagram/configuration/connections.points).
+* "polyline" - connects the defined intermediate points. See [connections.points](/api/dataviz/ui/diagram/configuration/connections#connectionspoints).
 * "cascading" - discards given points and defines a cascading path between the endpoints.
 
 
@@ -10908,7 +10908,7 @@ How do I customize metadata keywords in Kendo UI Diagram PDF exports? Set or con
 
 ### pdf.landscape `Boolean` *(default: false)*
 
-If set to `true`, changes the document orientation to landscape. This property takes effect when [pdf.paperSize](/api/dataviz/ui/diagram/configuration/pdf.papersize) is set.
+If set to `true`, changes the document orientation to landscape. This property takes effect when [pdf.paperSize](/api/dataviz/ui/diagram/configuration/pdf#pdfpapersize) is set.
 
 
 <div class="meta-api-description">
@@ -18824,7 +18824,7 @@ How to change the fill opacity when hovering over shapes in a Kendo UI diagram? 
 
 ### shapes.id `String`
 
-The unique identifier for a Shape. The `id` value is used to identify shapes in connection configurations. The connection [`to`](/api/dataviz/ui/diagram/configuration/connections.to) and [`from`](/api/dataviz/ui/diagram/configuration/connections.from#connections.from) properties usually point to shape id values.
+The unique identifier for a Shape. The `id` value is used to identify shapes in connection configurations. The connection [`to`](/api/dataviz/ui/diagram/configuration/connections#connectionsto) and [`from`](/api/dataviz/ui/diagram/configuration/connections#connectionsfrom) properties usually point to shape id values.
 
 
 <div class="meta-api-description">
@@ -18895,7 +18895,7 @@ How do I set a minimum height limit for shapes in Kendo UI Diagram? Set or confi
 
 ### shapes.minWidth `Number` *(default: 20)*
 
-Defines the minimum width the shape should have, that is, it cannot be resized to a value smaller than the given one. See example at [shapes.minHeight](/api/dataviz/ui/diagram/configuration/shapes.minheight).
+Defines the minimum width the shape should have, that is, it cannot be resized to a value smaller than the given one. See example at [shapes.minHeight](/api/dataviz/ui/diagram/configuration/shapes#shapesminheight).
 
 
 <div class="meta-api-description">
@@ -19527,7 +19527,7 @@ How to set the initial x-coordinate of shapes in a Kendo UI diagram? Set or adju
 
 ### shapes.y `Number` *(default: 0)*
 
-Defines the y-coordinate of the shape when added to the Diagram. Does not take effect if the Diagram is using a pre-defined layout. You can see an example at [shapes.x](/api/dataviz/ui/diagram/configuration/shapes.x)
+Defines the y-coordinate of the shape when added to the Diagram. Does not take effect if the Diagram is using a pre-defined layout. You can see an example at [shapes.x](/api/dataviz/ui/diagram/configuration/shapes#shapesx)
 
 
 <div class="meta-api-description">

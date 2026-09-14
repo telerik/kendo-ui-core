@@ -36,7 +36,7 @@ How can I create a simpler Image Insert Tool that enables me to upload from my f
 ### Create a custom tool
 
 1. Create the custom [tool](https://docs.telerik.com/kendo-ui/api/ui/editor/configuration/tools)
-1. Define its [tool.exec](https://docs.telerik.com/kendo-ui/api/ui/editor/configuration/tools.exec) function 
+1. Define its [tool.exec](https://docs.telerik.com/kendo-ui/api/ui/editor/configuration/tools#toolsexec) function 
 1. In the exec function create a file input element, click it programmatically and subscribe to its [change event](https://api.jquery.com/change/)
 1. (Optional) Use CSS to style the custom **Insert Image From File System** tool with the desired [Kendo Icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web#list-of-font-icons)
 

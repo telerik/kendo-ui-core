@@ -127,7 +127,7 @@ In this step, you will add scale labels and style the major and minor ticks.
 
 ## 4. Customize the Scale Colors
 
-Here, you will specify the [`colors of the scale ranges`](/api/dataviz/ui/lineargauge/configuration/scale.ranges#scale.ranges.color). 
+Here, you will specify the [`colors of the scale ranges`](/api/dataviz/ui/lineargauge/configuration/scale#scaleranges#scale.ranges.color). 
 
 ```dojo
     <div id="linear-gauge"></div>
@@ -176,7 +176,7 @@ Here, you will specify the [`colors of the scale ranges`](/api/dataviz/ui/linear
 
 ## 5. Add the Pointer
 
-The LinearGauge allows you to add multiple [`pointers`](/api/dataviz/ui/lineargauge/configuration/pointer). In this step, you will add a single pointer and will configure its [`shape`](/api/dataviz/ui/lineargauge/configuration/pointer.shape) and [`color`](/api/dataviz/ui/lineargauge/configuration/pointer.color). 
+The LinearGauge allows you to add multiple [`pointers`](/api/dataviz/ui/lineargauge/configuration/pointer). In this step, you will add a single pointer and will configure its [`shape`](/api/dataviz/ui/lineargauge/configuration/pointer#pointershape) and [`color`](/api/dataviz/ui/lineargauge/configuration/pointer#pointercolor). 
 
 ```
     <div id="linear-gauge"></div>

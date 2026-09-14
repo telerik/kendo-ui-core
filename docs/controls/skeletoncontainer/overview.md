@@ -18,7 +18,7 @@ A SkeletonContainer is a simplified preview version of a page into which informa
 
 ## Functionality and Features
 
-* [Items]({% slug items_kendoui_skeletoncontainer_widget %})&mdash;The SkeletonContainer exposes an [`items`](/api/ui/skeletoncontainer/configuration/grid.items) object that represents the settings of the component items.
+* [Items]({% slug items_kendoui_skeletoncontainer_widget %})&mdash;The SkeletonContainer exposes an [`items`](/api/ui/skeletoncontainer/configuration/grid#griditems) object that represents the settings of the component items.
 * [Grid Integration](https://demos.telerik.com/kendo-ui/skeletoncontainer/grid-integration)&mdash;The SkeletonContainer allows a seamless integration of the Kendo UI for jQuery Grid.
 
 ## Next Steps 

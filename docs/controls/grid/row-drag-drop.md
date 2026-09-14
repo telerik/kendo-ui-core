@@ -9,7 +9,7 @@ position: 13
 
 # Row Click-Move-Click
 
-As of Kendo UI R2 SP1 2023, users can reorder the Grid's rows by using the click-move-click functionality provided by the [clickMoveClick](/api/ui/grid/configuration/reorderable.rows.clickmoveclick) option. To start moving the row, users can click the drag icon, and then click again to place the row in its new position.
+As of Kendo UI R2 SP1 2023, users can reorder the Grid's rows by using the click-move-click functionality provided by the [clickMoveClick](/api/ui/grid/configuration/reorderable/rows#reorderablerowsclickmoveclick) option. To start moving the row, users can click the drag icon, and then click again to place the row in its new position.
 
 ```dojo
     <div id="grid"></div>

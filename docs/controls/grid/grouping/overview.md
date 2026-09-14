@@ -32,7 +32,7 @@ To sort the grouped content, click the grouping tab. To toggle the sort order of
 
 ![Kendo UI for jQuery Grid Grouped by Last Name](../grid-grouping-lastname.png)
 
-> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.field) can be groupable. To enable grouping on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/kendo-ui/knowledge-base/enable-operations-for-object-column).
+> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsfield) can be groupable. To enable grouping on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/kendo-ui/knowledge-base/enable-operations-for-object-column).
 
 ## Using with Row Templates
 
@@ -74,7 +74,7 @@ To enable the Grid to execute grouping before paging, group the whole data sourc
 
 As of R3 2022, the Kendo UI Grid enables the developer to hide grouped columns from the Grid. This feature prevents the duplication of data in both the Grid and the group header.
 
-To allow automatic hiding of a grouped column, set the [`columns.hideOnGroup`](/api/ui/grid/configuration/columns.hideongroup property to **true**.
+To allow automatic hiding of a grouped column, set the [`columns.hideOnGroup`](/api/ui/grid/configuration/columns#columnshideongroup property to **true**.
 
 **Note:** This functionality of the Grid works when the user applies grouping. The `hideOnGroup` property will not have any effect if the grouping is applied directly to the dataSource configuration.
 

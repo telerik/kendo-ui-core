@@ -129,7 +129,7 @@ To create templates that have more complex logic, write them as functions with a
 
 ## Converting Existing Templates to CSP-Compatible Templates
 
-You can also convert your existing templates into CSP-compatible ones, for example, an existing Grid [column template](/api/ui/grid/configuration/columns.template) into a CSP-compatible one.
+You can also convert your existing templates into CSP-compatible ones, for example, an existing Grid [column template](/api/ui/grid/configuration/columns#columnstemplate) into a CSP-compatible one.
 
 The following snippet demonstrates the previously used approach for defining the template in the specific scenario. 
 

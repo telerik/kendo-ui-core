@@ -17,7 +17,7 @@ To enable this behavior, configure the Grid with the [`adaptiveMode`](/api/ui/gr
 
 When the `adaptiveMode` is enabled and the Grid is rendered on small or medium screens, the Grid will display popups for sorting, filtering, and grouping in an ActionSheet. To ensure these tools function as expected, the corresponding configuration options (e.g., `sortable`, `filterable`, `groupable`) must be enabled on the Grid instance. If the Grid has editable mode `pop` set, an ActionSheet will also be displayed for editing or creating records. 
 
-The adaptive tools are not displayed and are not supported in the [`overflow`](/api/ui/toolbar/configuration/items.overflow) mode of the toolbar.
+The adaptive tools are not displayed and are not supported in the [`overflow`](/api/ui/toolbar/configuration/items#itemsoverflow) mode of the toolbar.
 
 
 ## Sorting
@@ -69,7 +69,7 @@ To use sorting in adaptive mode, enable the Grid's [`sortable`](/api/ui/grid/con
 
 ## Filtering
 
-The adaptive filter UI is based on the Grid’s [`filterable`](/api/ui/grid/configuration/filterable) settings. These options determine how filters are presented and applied within the ActionSheet or popup. For example, if the [`filterable.extra`](/api/ui/grid/configuration/filterable.extra) is disabled for the Grid or [`filterable.multi`](/api/ui/grid/configuration/columns.filterable.multi) is enabled for any of the columns, the filter UI will be applied also in the filter adaptive tool.
+The adaptive filter UI is based on the Grid’s [`filterable`](/api/ui/grid/configuration/filterable) settings. These options determine how filters are presented and applied within the ActionSheet or popup. For example, if the [`filterable.extra`](/api/ui/grid/configuration/filterable#filterableextra) is disabled for the Grid or [`filterable.multi`](/api/ui/grid/configuration/columns/filterable#columnsfilterablemulti) is enabled for any of the columns, the filter UI will be applied also in the filter adaptive tool.
  
 
 ```dojo  
@@ -433,7 +433,7 @@ When popup editing is enabled, selected rows can be edited or deleted using the 
 
 The following configuration options provide additional control over the appearance and behavior of adaptive tools:
 
-* [`showInactiveTools`](/api/ui/grid/configuration/toolbar.showinactivetools)&mdash;Controls whether the inactive tools in the toolbar are hidden or displayed in disabled state; 
+* [`showInactiveTools`](/api/ui/grid/configuration/toolbar#toolbarshowinactivetools)&mdash;Controls whether the inactive tools in the toolbar are hidden or displayed in disabled state; 
 * `adaptiveTitle`&mdash;Customizes the title text displayed in the adaptive view;
 * `adaptiveSubtitle`&mdash;Customizes the subtitle text displayed in the adaptive view;
 

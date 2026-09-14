@@ -24,7 +24,7 @@ The Kendo UI components that support editing provide the following common config
 - `editable`&mdash;Controls whether the editing is enabled or not. For instance, the editing functionality in the Kendo UI Grid component is disabled by default. For detailed information, refer to [the API article on editing of the Grid](/api/ui/grid/configuration/editable).
 - `editable.template`&mdash;Allows you to define a custom editor template.
 
-> Some components provide additional `editable` options. For more details, refer to the particular component API documentation. For example, the Grid component can disable the `remove` functionality by using the [`editable.destroy`](/api/ui/grid/configuration/editable.destroy) option.
+> Some components provide additional `editable` options. For more details, refer to the particular component API documentation. For example, the Grid component can disable the `remove` functionality by using the [`editable.destroy`](/api/ui/grid/configuration/editable#editabledestroy) option.
 
 The Kendo UI components that support editing provide the following common events:
 - `edit`&mdash;Triggered before the editor form is shown. The UI elements are already bound to the model.

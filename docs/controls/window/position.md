@@ -40,7 +40,7 @@ The following example demonstrates how to initialize and center the Window, and 
 
 ## Constraining the Movement
 
-The Window provides the [`draggable.containment`](/api/ui/window/configuration/draggable.containment) option which you can use to constrain the movement of the widget inside a container element. The `containment` option overrides the `appendTo` setting and attaches the Window to the specified DOM element. To position the `containment` element, use the `relative`, `absolute`, or `fixed` CSS rules. For a complete example, refer to the [demo on constraining the movement of the Window within containers](https://demos.telerik.com/kendo-ui/window/constrain-movement).
+The Window provides the [`draggable.containment`](/api/ui/window/configuration/draggable#draggablecontainment) option which you can use to constrain the movement of the widget inside a container element. The `containment` option overrides the `appendTo` setting and attaches the Window to the specified DOM element. To position the `containment` element, use the `relative`, `absolute`, or `fixed` CSS rules. For a complete example, refer to the [demo on constraining the movement of the Window within containers](https://demos.telerik.com/kendo-ui/window/constrain-movement).
 
 The following example demonstrates how to create a modal Window and constrain its movement inside a DOM element.
 

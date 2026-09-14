@@ -68,7 +68,7 @@ Indicates whether an item has children. When the `hasChildren` field value is `t
 
 > When the user clicks on the expand icon, the Kendo UI TreeList DataSource requests the children of the item by sending the parent item `id` as a request parameter, for example `&id=1`.
 
-> The parameter name can be changed with the [`paramaterMap`](/api/data/datasource/configuration/transport.parametermap) function.
+> The parameter name can be changed with the [`paramaterMap`](/api/data/datasource/configuration/transport#transportparametermap) function.
 
 
 <div class="meta-api-description">

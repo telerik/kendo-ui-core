@@ -13,7 +13,7 @@ The MultiColumnComboBox allows you to predefine the columns that will be rendere
 
 You can also set which field from the `dataItem` will be populated, set a title, template, `headerTemplate`, and width. For more information, refer to the [API for the columns configuration of the MultiColumnComboBox](/api/ui/multicolumncombobox/configuration/columns#related-properties).
 
-The MultiColumnComboBox allows you to set the width of the drop-down through the [`dropDownWidth`](/api/ui/multicolumncombobox/configuration/dropdownwidth) option. In addition, the columns also allow you to [set their width](/api/ui/multicolumncombobox/configuration/columns.width).
+The MultiColumnComboBox allows you to set the width of the drop-down through the [`dropDownWidth`](/api/ui/multicolumncombobox/configuration/dropdownwidth) option. In addition, the columns also allow you to [set their width](/api/ui/multicolumncombobox/configuration/columns#columnswidth).
 
 > * If the widths of all columns are defined in pixels through their `width` option, the `dropDownWidth` value (if set) is overridden.
 > * In all other cases when the widths of all columns are not set, the `dropDownWidth` value is applied to the element.

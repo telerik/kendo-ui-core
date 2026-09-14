@@ -63,8 +63,8 @@ The following table lists the available data types.
 Data Type | Column Template or Format | Editor | Parser
 :-------: | :----: | :--------: | :------------------:
 `string`| Displayed as text.  | `<input type="text" class="k-textbox" name="fieldName" data-bind="value:fieldName">` | Internal method. String conversion.
-`number`| [`columns.format`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.format) can be used to format the number as currency `"{0:c2}"`, percentage `"{0:p0}"`, exponential `"{0:e4}"` or a custom format `"{0:0.00}"`. See all [`Number Formatting`](/framework/globalization/numberformatting) | [`kendo.ui.NumericTextBox`](/controls/numerictextbox/overview) | [`kendo.parseFloat()`](/api/kendo/methods/parsefloat)
-`date` | [`columns.format`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.format) can be used to format the date as a short `"{0:d}"`, long `"{0:D}"`, full date/time `"{0:F}"` and many more standard and custom date patterns. See all [`Date Formatting`](/framework/globalization/dateformatting) | [`kendo.ui.DatePicker`](/controls/datepicker/overview) | [`kendo.parseDate()`](/api/kendo/methods/parsedate)
+`number`| [`columns.format`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsformat) can be used to format the number as currency `"{0:c2}"`, percentage `"{0:p0}"`, exponential `"{0:e4}"` or a custom format `"{0:0.00}"`. See all [`Number Formatting`](/framework/globalization/numberformatting) | [`kendo.ui.NumericTextBox`](/controls/numerictextbox/overview) | [`kendo.parseFloat()`](/api/kendo/methods/parsefloat)
+`date` | [`columns.format`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsformat) can be used to format the date as a short `"{0:d}"`, long `"{0:D}"`, full date/time `"{0:F}"` and many more standard and custom date patterns. See all [`Date Formatting`](/framework/globalization/dateformatting) | [`kendo.ui.DatePicker`](/controls/datepicker/overview) | [`kendo.parseDate()`](/api/kendo/methods/parsedate)
 `boolean` | Displayed as lowercase text `true` or `false` | `<input type="checkbox" name="fieldName" data-type="boolean" data-bind="checked:fieldName">`| Internal method. Boolean conversion.
 `object` |  Arrays and Objects without templates are rendered as `[object Object]`.| `<input type="text" class="k-textbox" name="fieldName" data-bind="value:fieldName">` | Not processed. The value is passed as is.
 
@@ -107,7 +107,7 @@ Data Type | Column Template or Format | Editor | Parser
 
 ### Setting the Editable Option
 
-By default, the Grid is not [`editable`](/api/ui/grid/configuration/editable). To enable the editing functionality, add the desired type of editing. The Kendo UI jQuery Grid supports the in-cell, inline, and popup [edit modes](/api/ui/grid/configuration/editable.mode). In order for the edit functionality to be fully functional, add a [`toolbar`](/api/ui/grid/configuration/toolbar) with a **Create** button and a [command column](/api/ui/grid/configuration/columns.command) for the update and destroy operations.
+By default, the Grid is not [`editable`](/api/ui/grid/configuration/editable). To enable the editing functionality, add the desired type of editing. The Kendo UI jQuery Grid supports the in-cell, inline, and popup [edit modes](/api/ui/grid/configuration/editable#editablemode). In order for the edit functionality to be fully functional, add a [`toolbar`](/api/ui/grid/configuration/toolbar) with a **Create** button and a [command column](/api/ui/grid/configuration/columns#columnscommand) for the update and destroy operations.
 
 The following example demonstrates how to configure a basic Grid in the incell edit mode for CRUD operations.
 

@@ -30,7 +30,7 @@ The Grid supports the following built-in aggregates for all selected cells:
 * The Grid must be [`selectable`](/api/ui/grid/configuration/selectable) where the [`cellAgregates`] property is specified. The aggregates work with `cell`, `row`, and `checkbox` selection.
 * The [`schema.model.id`](/api/data/datasource/configuration/schema#schemamodel) field must be defined when the [`selectable`](/api/ui/grid/configuration/selectable) is set to `cell`.
 
-The aggregates are configured inside the selectable configuration of the Grid through the [`cellAggregates`](/api/ui/grid/configuration/selectable.cellaggregates) property. 
+The aggregates are configured inside the selectable configuration of the Grid through the [`cellAggregates`](/api/ui/grid/configuration/selectable#selectablecellaggregates) property. 
 
 ```
 selectable: { 

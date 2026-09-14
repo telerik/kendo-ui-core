@@ -107,5 +107,5 @@ Remember to use the [`dataBound`](https://docs.telerik.com/kendo-ui/api/dataviz/
 ## See Also
 
 - [Official Kendo UI for jQuery Chart Documentation](https://docs.telerik.com/kendo-ui/controls/charts/overview/)
-- [Kendo UI for jQuery Chart Series Colors Documentation](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.color)
+- [Kendo UI for jQuery Chart Series Colors Documentation](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series#seriescolor)
 - [Kendo UI for jQuery Chart dataBound API Documentation](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/events/databound)

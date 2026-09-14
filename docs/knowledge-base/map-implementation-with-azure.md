@@ -28,7 +28,7 @@ How can I implement Azure maps' geospatial capabilities with Kendo Map?
 
 ## Solution
 
-The Kendo UI Map is fully compatible with Azure's png tile API. Use the Url of the Asure service in the [urlTemplate](https://docs.telerik.com/kendo-ui/api/dataviz/ui/map/configuration/layers.urltemplate) property of the Map and observe the result.
+The Kendo UI Map is fully compatible with Azure's png tile API. Use the Url of the Asure service in the [urlTemplate](https://docs.telerik.com/kendo-ui/api/dataviz/ui/map/configuration/layers#layersurltemplate) property of the Map and observe the result.
 
 Make sure that the API version is specified in the URL. In order to use Azure maps you need to have an [Azure Maps account and key](https://docs.microsoft.com/en-us/azure/azure-maps/how-to-manage-authentication).
 

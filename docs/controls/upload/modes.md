@@ -65,7 +65,7 @@ The `save` handler is expected to return any of the following responses:
 
 ### Configuring the remove Handler
 
-The `remove` handler has to accept POST requests which can be configured through the [`removeVerb`](/api/ui/upload/configuration/async.removeverb) option. The requests will contain one or more text fields with the `"fileNames"` name&mdash;in the case of the previous example, change it to `"fileNames[]"` by using the `removeField` option.
+The `remove` handler has to accept POST requests which can be configured through the [`removeVerb`](/api/ui/upload/configuration/async#asyncremoveverb) option. The requests will contain one or more text fields with the `"fileNames"` name&mdash;in the case of the previous example, change it to `"fileNames[]"` by using the `removeField` option.
 
 The `remove` handler is expected to return any of the following responses:
 

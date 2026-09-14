@@ -32,7 +32,7 @@ Calling [`setOptions`](/api/ui/grid/methods/setoptions) method does not persist 
 
 To work around this issue, use either of the following approaches:
 
-* Declare the DataSource directly inside the [`columns.filterable.dataSource`](/api/ui/grid/configuration/columns.filterable.datasource) property:
+* Declare the DataSource directly inside the [`columns.filterable.dataSource`](/api/ui/grid/configuration/columns/filterable#columnsfilterabledatasource) property:
 
 	```dojo
 	    <div class="box-col">

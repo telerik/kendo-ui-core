@@ -20,7 +20,7 @@ Before enabling row pinning, ensure the following requirements are met:
 
 ## Getting Started
 
-To enable row pinning, set the [`pinnable.pinRowLocation`](/api/ui/grid/configuration/pinnable.pinrowlocation) option. The available values are:
+To enable row pinning, set the [`pinnable.pinRowLocation`](/api/ui/grid/configuration/pinnable#pinnablepinrowlocation) option. The available values are:
 
 * `true`&mdash;Allows pinning rows to both the top and bottom of the Grid.
 * `"top"`&mdash;Allows pinning rows to the top of the Grid only.
@@ -55,7 +55,7 @@ The following example enables pinning to both the top and bottom of the Grid.
 
 ## Initially Pinned Rows
 
-To pin rows on initial load, populate the [`pinnable.top`](/api/ui/grid/configuration/pinnable.top) and [`pinnable.bottom`](/api/ui/grid/configuration/pinnable.bottom) arrays with data items before the Grid renders. This is useful for scenarios where you need to surface critical data immediately, such as out-of-stock inventory items or overstock alerts.
+To pin rows on initial load, populate the [`pinnable.top`](/api/ui/grid/configuration/pinnable#pinnabletop) and [`pinnable.bottom`](/api/ui/grid/configuration/pinnable#pinnablebottom) arrays with data items before the Grid renders. This is useful for scenarios where you need to surface critical data immediately, such as out-of-stock inventory items or overstock alerts.
 
 ```dojo
 <div id="grid"></div>
@@ -86,7 +86,7 @@ To pin rows on initial load, populate the [`pinnable.top`](/api/ui/grid/configur
 
 ## Controlling Pinnable Rows
 
-The [`isRowPinnable`](/api/ui/grid/configuration/pinnable.isrowpinnable) callback allows you to restrict which rows can be pinned. The callback receives the row data item and its index, and returns a boolean that determines whether the row displays the pin action.
+The [`isRowPinnable`](/api/ui/grid/configuration/pinnable#pinnableisrowpinnable) callback allows you to restrict which rows can be pinned. The callback receives the row data item and its index, and returns a boolean that determines whether the row displays the pin action.
 
 The following example allows pinning only for items with age greater than 30.
 

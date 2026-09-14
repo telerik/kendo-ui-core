@@ -23,7 +23,7 @@ components: ["grid"]
 
 ## Description
 
-How can I add a Grid in the [editable template](/api/ui/scheduler/configuration/editable.template) of the Scheduler with an additionally dynamically bound row editor ?
+How can I add a Grid in the [editable template](/api/ui/scheduler/configuration/editable#editabletemplate) of the Scheduler with an additionally dynamically bound row editor ?
 
 ## Solution
 

@@ -15,7 +15,7 @@ However, you can configure a cell to occupy more than one row or column.
 
 ## Spanning across Columns
 
-To expand a cell across two or more columns, set the [`colSpan`](/api/ooxml/workbook/configuration/sheets.rows.cells.colspan) option. As a result, all cells will follow shift to the right with the same number of columns as defined by the `colSpan`.
+To expand a cell across two or more columns, set the [`colSpan`](/api/ooxml/workbook/configuration/sheets/rows/cells#sheetsrowscellscolspan) option. As a result, all cells will follow shift to the right with the same number of columns as defined by the `colSpan`.
 
 ```dojo
 <script>
@@ -43,7 +43,7 @@ workbook.toDataURLAsync().then(function (dataURI) {
 
 ## Spanning across Rows
 
-To expand a cell across two or more rows, set the [`rowSpan`](/api/ooxml/workbook/configuration/sheets.rows.cells.rowspan) option.
+To expand a cell across two or more rows, set the [`rowSpan`](/api/ooxml/workbook/configuration/sheets/rows/cells#sheetsrowscellsrowspan) option.
 
 ```dojo
 <script>

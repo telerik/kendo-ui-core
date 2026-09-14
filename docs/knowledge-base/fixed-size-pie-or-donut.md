@@ -37,9 +37,9 @@ How can I render Pie or Donut Charts that have the same diameter?
 
 ## Solution
 
-Normally, the plot area size is determined by the free space left by other Chart elements such as the title, the legend, and others, which ultimately leads to this issue. To work around the problem, remove the legend from the normal element flow by setting the [`legend` position](/api/dataviz/ui/chart/configuration/legend.position) to `"custom"`.
+Normally, the plot area size is determined by the free space left by other Chart elements such as the title, the legend, and others, which ultimately leads to this issue. To work around the problem, remove the legend from the normal element flow by setting the [`legend` position](/api/dataviz/ui/chart/configuration/legend#legendposition) to `"custom"`.
 
-To make room for the legend, set a fixed `plotArea.height` for all charts and position it by using the [`offsetX`/`offsetY`](/api/dataviz/ui/chart/configuration/legend.offsetx) configuration options.
+To make room for the legend, set a fixed `plotArea.height` for all charts and position it by using the [`offsetX`/`offsetY`](/api/dataviz/ui/chart/configuration/legend#legendoffsetx) configuration options.
 
 The following example demonstrates how to store and load the axis range. The changes are detected in the [`drag`](/api/dataviz/ui/chart/events/drag) and [`zoom`](/api/dataviz/ui/chart/events/zoom) events. The axis range is restored in the [`dataBound` event](/api/dataviz/ui/chart/events/databound).
 

@@ -91,7 +91,7 @@ If you use the inline or the popup edit mode, set a more specific filter which e
 
 The draggable functionality of the Sortable prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM from saving the updated value.
 
-If you use the batch (incell) edit mode, the code from the previous example that is applied to the inline and popup edit modes will not work. To work around this issue, use [custom editors](/api/ui/grid/configuration/columns.editor) and configure them to [update when the `input` event fires]({% slug valuebinding_mvvm_kendoui %}#controlling-when-the-view-model-is-updated)&mdash;by default, the framework listens for the `change` event. To implement the solution, add the `data-value-update="input"` attribute to the editor inputs. The downside of this approach is that the `input` event does not work for earlier Internet Explorer versions.
+If you use the batch (incell) edit mode, the code from the previous example that is applied to the inline and popup edit modes will not work. To work around this issue, use [custom editors](/api/ui/grid/configuration/columns#columnseditor) and configure them to [update when the `input` event fires]({% slug valuebinding_mvvm_kendoui %}#controlling-when-the-view-model-is-updated)&mdash;by default, the framework listens for the `change` event. To implement the solution, add the `data-value-update="input"` attribute to the editor inputs. The downside of this approach is that the `input` event does not work for earlier Internet Explorer versions.
 
 > The `data-value-update` approach works with regular inputs. However, you must manually configure the Kendo UI components as they do not support the `data-value-update` attribute.
 

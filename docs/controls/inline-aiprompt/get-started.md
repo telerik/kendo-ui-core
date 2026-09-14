@@ -67,7 +67,7 @@ In this step, you will initialize the InlineAIPrompt from the `<div>` element. W
 
 ## 3. Add the Service URL
 
-Configure the AI service endpoint that will process the prompts. The [`service.url`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/configuration/service.url) option specifies the backend endpoint for AI completion requests.
+Configure the AI service endpoint that will process the prompts. The [`service.url`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/inlineaiprompt/configuration/service#serviceurl) option specifies the backend endpoint for AI completion requests.
 
 The example in this article uses a Telerik-hosted AI service for demonstration purposes only.
 

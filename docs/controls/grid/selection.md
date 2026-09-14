@@ -43,7 +43,7 @@ The Grid supports the following select modes:
 
 ### Checkbox-Column Selection
 
-As of the R2 2017 SP1 release, the Grid provides an option for setting multiple selection through rendering a checkbox column. To enable the checkbox column selection, configure the [`columns.selectable`](/api/ui/grid/configuration/columns.selectable) property. Enabling the `selectable` property for a column will also render a checkbox in the header and will allow the selection and deselection of all rows on the current page.
+As of the R2 2017 SP1 release, the Grid provides an option for setting multiple selection through rendering a checkbox column. To enable the checkbox column selection, configure the [`columns.selectable`](/api/ui/grid/configuration/columns#columnsselectable) property. Enabling the `selectable` property for a column will also render a checkbox in the header and will allow the selection and deselection of all rows on the current page.
 
     $("#grid").kendoGrid({
       columns: [

@@ -43,7 +43,7 @@ How do I add a notification count to a Kendo UI button? Control and customize ov
 
 Specifies alignment of the badge relative to button. Valid position options are: `top start`, `top end`, `bottom start`, `bottom end`.
 
-`badge.align` works in conjunction with [`badge.position`](/api/ui/button/configuration/badge.position).
+`badge.align` works in conjunction with [`badge.position`](/api/ui/button/configuration/badge#badgeposition).
 
 
 <div class="meta-api-description">
@@ -155,7 +155,7 @@ How do I limit the maximum value shown on a button's badge in Kendo UI for jQuer
 
 Specifies position of the badge relative to the edge of the button. Valid placemnt options are: `inline`, `edge`, `inside`, `outside`.
 
-Note: position configuration, other than `inline`, requires the badge to be aligned. See [`badge.align`](/api/ui/button/configuration/badge.align) for more details.
+Note: position configuration, other than `inline`, requires the badge to be aligned. See [`badge.align`](/api/ui/button/configuration/badge#badgealign) for more details.
 
 
 <div class="meta-api-description">

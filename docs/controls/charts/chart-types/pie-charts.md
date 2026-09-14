@@ -61,7 +61,7 @@ The following example demonstrates how to define a single series of type `"pie"`
 
 ## Auto-Fit Labels
 
-Use the Series [autoFit option](/api/dataviz/ui/chart/configuration/series.autofit) to avoid clipping of the labels' content.
+Use the Series [autoFit option](/api/dataviz/ui/chart/configuration/series#seriesautofit) to avoid clipping of the labels' content.
 
 ```dojo
     <div id="chart" style="width: 200px;"></div>

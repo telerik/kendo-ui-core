@@ -37,7 +37,7 @@ Sometimes the Chart produces series of points that are too small to be reliably 
 
 ## Solution
 
-It is possible to expand the active area by adding a transparent element as part of the [`visual`](/api/dataviz/ui/chart/configuration/series.visual) configuration.
+It is possible to expand the active area by adding a transparent element as part of the [`visual`](/api/dataviz/ui/chart/configuration/series#seriesvisual) configuration.
 
 The following example demonstrates how to achieve this behavior in a Bar Charts series.
 

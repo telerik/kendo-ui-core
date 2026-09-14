@@ -692,7 +692,7 @@ How to get the unmasked raw input text from a Kendo UI MaskedTextBox? Retrieve o
 Gets or sets the value of the MaskedTextBox.
 
 > **Important:** This method **does not trigger** the `focusout` event of the input.
-This can affect the [floating label functionality](/api/ui/maskedtextbox/configuration/label.floating).
+This can affect the [floating label functionality](/api/ui/maskedtextbox/configuration/label#labelfloating).
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#maskedtextbox").data("kendoMaskedTextBox").floatingLabel.refresh();`
 
 

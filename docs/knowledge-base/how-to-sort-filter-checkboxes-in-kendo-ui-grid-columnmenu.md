@@ -25,7 +25,7 @@ ticketid: 1677462
 </table>
 
 ## Description
-When working with the [Grid for Progress® Kendo UI®](https://docs.telerik.com/kendo-ui/api/ui/grid), specifically with its `columnMenu` configured to [`componentType = "tabbed"`](/api/ui/grid/configuration/columnmenu.componenttype) and [`filterable mode = "menu"`](/api/ui/grid/configuration/filterable.mode), I wanted the filter checkboxes to be sorted in ascending order. This knowledge base article also answers the following questions:
+When working with the [Grid for Progress® Kendo UI®](https://docs.telerik.com/kendo-ui/api/ui/grid), specifically with its `columnMenu` configured to [`componentType = "tabbed"`](/api/ui/grid/configuration/columnmenu#columnmenucomponenttype) and [`filterable mode = "menu"`](/api/ui/grid/configuration/filterable#filterablemode), I wanted the filter checkboxes to be sorted in ascending order. This knowledge base article also answers the following questions:
 - How can I sort filter options in the Grid's column menu?
 - Is it possible to customize the order of filter checkboxes in a Kendo UI Grid?
 - Can the Grid's filter menu checkboxes be sorted alphabetically?

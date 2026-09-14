@@ -119,7 +119,7 @@ When you need full control over a single item's markup without switching the who
 
 ## Mini-Mode Per-Item Templates
 
-When the Drawer is configured with [`mini`](/api/ui/drawer/configuration/mini) mode, supply `miniTemplate` on individual items to control their collapsed appearance. If [`mini.template`](/api/ui/drawer/configuration/mini.template) is also set, it takes precedence over per-item `miniTemplate` values.
+When the Drawer is configured with [`mini`](/api/ui/drawer/configuration/mini) mode, supply `miniTemplate` on individual items to control their collapsed appearance. If [`mini.template`](/api/ui/drawer/configuration/mini#minitemplate) is also set, it takes precedence over per-item `miniTemplate` values.
 
 ```dojo
     <div id="drawer">

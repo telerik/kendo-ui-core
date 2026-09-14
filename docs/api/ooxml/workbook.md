@@ -104,7 +104,7 @@ How to set creation date and time for a Kendo UI workbook? Configure, set, or re
 
 ### images `Object` *(default: null)*
 
-An object containing any images used in the Spreadsheet.  The keys should be image ID-s (they are referenced by this ID in [`sheets.drawings`](/api/ooxml/workbook/configuration/sheets.drawings)) and the values should represent binary data.
+An object containing any images used in the Spreadsheet.  The keys should be image ID-s (they are referenced by this ID in [`sheets.drawings`](/api/ooxml/workbook/configuration/sheets#sheetsdrawings)) and the values should represent binary data.
 
 
 <div class="meta-api-description">
@@ -189,7 +189,7 @@ How to embed images in Kendo UI workbook spreadsheet? Embed and manage pictures 
       }
     </script>
 
-Note, we can reference the same image ID in two different drawings. See the [`sheets.drawings`](/api/ooxml/workbook/configuration/sheets.drawings) property for more information about a drawing's properties.
+Note, we can reference the same image ID in two different drawings. See the [`sheets.drawings`](/api/ooxml/workbook/configuration/sheets#sheetsdrawings) property for more information about a drawing's properties.
 
 ### rtl `Boolean` *(default: false)*
 

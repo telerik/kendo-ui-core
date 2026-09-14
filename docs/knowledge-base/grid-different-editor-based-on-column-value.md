@@ -30,7 +30,7 @@ How can I use a different editor based on the column value in a Grid?
 
 ## Solution
 
-1. Place a condition within the [`editor`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.editor) function.
+1. Place a condition within the [`editor`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnseditor) function.
 1. Based on that condition, return the corresponding editor.
 
 ```dojo

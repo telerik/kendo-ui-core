@@ -11,7 +11,7 @@ position: 3
 
 The [`items`](/api/ui/breadcrumb/configuration/items) configuration allows you to set specific attributes to the Breadcrumb items. You can set the text and the icon of an element and determine whether they would be visible or not. The configuration also allows you to add classes for the different elements which are rendered when initializing the component. 
 
-The default values of the [`showIcon`](/api/ui/breadcrumb/configuration/items.showicon) and [`showText`](/api/ui/breadcrumb/configuration/items.showtext) configurations are different for the two types of items. The `showIcon`'s default value is *true* for `rootItem` and *false* for `item`. The `showText` configuration is by default *false* for `rootitem` and *true* for `item`.
+The default values of the [`showIcon`](/api/ui/breadcrumb/configuration/items#itemsshowicon) and [`showText`](/api/ui/breadcrumb/configuration/items#itemsshowtext) configurations are different for the two types of items. The `showIcon`'s default value is *true* for `rootItem` and *false* for `item`. The `showText` configuration is by default *false* for `rootitem` and *true* for `item`.
 
 The following example demonstrates how the attributes of the Breadcrumb items can be set through the *items* configuration.
 

@@ -30,7 +30,7 @@ Kendo UI for jQuery Gantt
 
 ## Description
 
-After upgrading Kendo UI for jQuery Gantt, pressing the Delete key on a selected dependency line no longer triggers the deletion dialog, even when the [`dependencyDestroy`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/gantt/configuration/editable.dependencydestroy) option is set to true. 
+After upgrading Kendo UI for jQuery Gantt, pressing the Delete key on a selected dependency line no longer triggers the deletion dialog, even when the [`dependencyDestroy`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/gantt/configuration/editable#editabledependencydestroy) option is set to true. 
 
 This knowledge base article also answers the following questions:
 - How to enable dependency line deletion dialog triggered by the Delete key in Kendo UI for jQuery Gantt?

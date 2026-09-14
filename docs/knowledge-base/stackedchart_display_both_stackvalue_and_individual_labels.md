@@ -25,9 +25,9 @@ How can I display both stackValue label and individual series labels in a Stacke
 
 ## Solution
 
-1. Create a new separate [`series`](/api/dataviz/ui/chart/configuration/series) at the end of the corresponding stack and set the values of its [`data`](/api/dataviz/ui/chart/configuration/series.data) to zero. 
-1. Set the `stackValue` label [`template`](/api/dataviz/ui/chart/configuration/series.labels.template) in the newly created series.
-1. Do not set the [`name`](/api/dataviz/ui/chart/configuration/series.name) property of the new series, so it would not be visible in the chart.
+1. Create a new separate [`series`](/api/dataviz/ui/chart/configuration/series) at the end of the corresponding stack and set the values of its [`data`](/api/dataviz/ui/chart/configuration/series#seriesdata) to zero. 
+1. Set the `stackValue` label [`template`](/api/dataviz/ui/chart/configuration/series/labels#serieslabelstemplate) in the newly created series.
+1. Do not set the [`name`](/api/dataviz/ui/chart/configuration/series#seriesname) property of the new series, so it would not be visible in the chart.
 
 The following example demonstrates how to achieve the desired scenario: 
 ```dojo

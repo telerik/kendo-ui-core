@@ -188,7 +188,7 @@ Runnable example:
 
 ### Option 2: Customize Filter Row with DropDownList
 
-If you want filtering without changing the data source, customize the filter row using [`filterable.cell.template`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/columns.filterable.cell). Use a [DropDownList](https://www.telerik.com/kendo-jquery-ui/documentation/controls/dropdownlist/overview#kendo-ui-for-jquery-dropdownlist-overview) for filtering.
+If you want filtering without changing the data source, customize the filter row using [`filterable.cell.template`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/columns/filterable#columnsfilterablecell). Use a [DropDownList](https://www.telerik.com/kendo-jquery-ui/documentation/controls/dropdownlist/overview#kendo-ui-for-jquery-dropdownlist-overview) for filtering.
 
 ```javascript
 columns: [
@@ -340,4 +340,4 @@ Runnable example:
 - [Kendo UI for jQuery Grid Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/overview)
 - [DataSource Schema Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/data/datasource/configuration/schema)
 - [DropDownList Configuration for Filtering](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdownlist/configuration/filter) 
-- [Columns Filterable Cell Template](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/columns.filterable.cell)
+- [Columns Filterable Cell Template](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/columns/filterable#columnsfilterablecell)

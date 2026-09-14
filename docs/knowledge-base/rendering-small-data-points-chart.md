@@ -41,9 +41,9 @@ This knowledge base article also answers the following questions:
 
 To make very small data points visible on the chart, set a maximum value for the `valueAxis` and dynamically adjust the labels to display only for significant values.
 
-1. Configure the [`valueAxis.max`](/api/dataviz/ui/chart/configuration/valueaxis.max) property to limit the axis range. This ensures the chart scales appropriately for very small values.
+1. Configure the [`valueAxis.max`](/api/dataviz/ui/chart/configuration/valueaxis#valueaxismax) property to limit the axis range. This ensures the chart scales appropriately for very small values.
    
-2. Use the [`seriesDefaults.labels.template`](/api/dataviz/ui/chart/configuration/seriesdefaults.labels.template) function to dynamically display labels only for values above a specific threshold.
+2. Use the [`seriesDefaults.labels.template`](/api/dataviz/ui/chart/configuration/seriesdefaults/labels#seriesdefaultslabelstemplate) function to dynamically display labels only for values above a specific threshold.
 
 Example:
 
@@ -964,5 +964,5 @@ For a runnable example please refer to the next demo.
 ## See Also
 
 - [Kendo UI Chart Documentation](/controls/charts/overview)
-- [valueAxis.max Property](/api/dataviz/ui/chart/configuration/valueaxis.max)
-- [Chart seriesDefaults.labels API Documentation](/api/dataviz/ui/chart/configuration/seriesdefaults.labels)
+- [valueAxis.max Property](/api/dataviz/ui/chart/configuration/valueaxis#valueaxismax)
+- [Chart seriesDefaults.labels API Documentation](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultslabels)

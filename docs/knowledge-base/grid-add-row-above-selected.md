@@ -25,7 +25,7 @@ How can I add add a row above the selected row in the Grid?
 
 ## Solution
 
-1. To achieve such behavior you can add a custom button in the toolbar using the Grid [toolbar template](/api/ui/grid/configuration/toolbar.template) option.
+1. To achieve such behavior you can add a custom button in the toolbar using the Grid [toolbar template](/api/ui/grid/configuration/toolbar#toolbartemplate) option.
 
 2. Find the index of the currently selected Grid row.
 

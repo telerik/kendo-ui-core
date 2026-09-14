@@ -37,7 +37,7 @@ Then, in the popup window, you can select or drag in a file from the file system
         }
     ```
 
-1. Reference that image and place it accordingly using the [`drawings`](/api/ui/spreadsheet/configuration/sheets.drawings) array of the respective sheet.
+1. Reference that image and place it accordingly using the [`drawings`](/api/ui/spreadsheet/configuration/sheets#sheetsdrawings) array of the respective sheet.
 
   The drawing definition has to contain:
 

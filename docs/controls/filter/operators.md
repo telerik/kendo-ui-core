@@ -89,7 +89,7 @@ The following example demonstrates how to set the `equals` and `contains` filter
 
 ## Set operator per field
 
-The [`fields.operators`](/api/ui/filter/configuration/fields.operators) configuration allows you to specify the available operators for the current field of the model.
+The [`fields.operators`](/api/ui/filter/configuration/fields#fieldsoperators) configuration allows you to specify the available operators for the current field of the model.
 
 The following example demonstrates how to set the `equals` and `contains` filter operators of the name field.
 
@@ -158,7 +158,7 @@ The following example demonstrates how to set the `equals` and `contains` filter
 
 ## Use custom operators
 
-The [`operators.{type}.custom`](/api/ui/filter/configuration/operators.string.custom) settings allows you to create a custom operator.
+The [`operators.{type}.custom`](/api/ui/filter/configuration/operators/string#operatorsstringcustom) settings allows you to create a custom operator.
 
 The following example demonstrates how to create a custom operator for string fields.
 

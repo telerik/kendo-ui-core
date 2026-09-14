@@ -11,7 +11,7 @@ position: 3
 
 The RadialGauge enables you to customize the options of the scale.
 
-To set the start and end values of the scale, use the [`startAngle`](/api/dataviz/ui/radialgauge/configuration/scale.startangle) and [`endAngle`](/api/dataviz/ui/radialgauge/configuration/scale.endangle) configuration options. For a runnable example, refer to the [**Car Dashboard** demo](https://demos.telerik.com/kendo-ui/radial-gauge/car-dashboard).
+To set the start and end values of the scale, use the [`startAngle`](/api/dataviz/ui/radialgauge/configuration/scale#scalestartangle) and [`endAngle`](/api/dataviz/ui/radialgauge/configuration/scale#scaleendangle) configuration options. For a runnable example, refer to the [**Car Dashboard** demo](https://demos.telerik.com/kendo-ui/radial-gauge/car-dashboard).
 
 The following example demonstrates how to create a quarter-gauge that is oriented to the top-right.
 

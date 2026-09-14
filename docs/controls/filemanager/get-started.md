@@ -219,8 +219,8 @@ By using the [`uploadUrl`](/api/ui/filemanager/configuration/uploadurl), you can
 
 ## 6. Define Template
 
-You can customize the preview pane through the [`noFileTemplate`](/api/ui/filemanager/configuration/previewpane.nofiletemplate), 
-[`singleFileTemplate`](/api/ui/filemanager/configuration/previewpane.singlefiletemplate), and [`multipleFilesTemplate`](/api/ui/filemanager/configuration/previewpane.multipleFilesTemplate).
+You can customize the preview pane through the [`noFileTemplate`](/api/ui/filemanager/configuration/previewpane#previewpanenofiletemplate), 
+[`singleFileTemplate`](/api/ui/filemanager/configuration/previewpane#previewpanesinglefiletemplate), and [`multipleFilesTemplate`](/api/ui/filemanager/configuration/previewpane#previewpanemultiplefilestemplate).
 
 The following example demonstrates how to configure the `noFileTemplate`:
 

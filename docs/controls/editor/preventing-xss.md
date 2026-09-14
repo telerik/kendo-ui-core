@@ -37,7 +37,7 @@ The Editor itself cannot protect you from XSS attacks because malicious users ca
 
 By design, the Editor does not allow the execution of scripts inside its content area. This is achieved by transforming all `script` tags in the content to `k:script` tags.
 
-When the Editor content is submitted, the `k:script` tags are either completely removed, or transformed back to `script` tags. This depends on the [`serialization.scripts`](/api/ui/editor/configuration/serialization.scripts) property.
+When the Editor content is submitted, the `k:script` tags are either completely removed, or transformed back to `script` tags. This depends on the [`serialization.scripts`](/api/ui/editor/configuration/serialization#serializationscripts) property.
 
 To allow the execution of scripts inside the Editor content:
 
@@ -48,7 +48,7 @@ To allow the execution of scripts inside the Editor content:
 
 ## Serialization and Deserialization
 
-Script tags and DOM event attributes stripping, as well as value encoding, are built-in functionalities of the Editor. In addition, you can use the [`serialization.custom`](/api/ui/editor/configuration/serialization.custom) and [`deserialization.custom`](/api/ui/editor/configuration/deserialization#deserializationcustom) options of the Editor.
+Script tags and DOM event attributes stripping, as well as value encoding, are built-in functionalities of the Editor. In addition, you can use the [`serialization.custom`](/api/ui/editor/configuration/serialization#serializationcustom) and [`deserialization.custom`](/api/ui/editor/configuration/deserialization#deserializationcustom) options of the Editor.
 
 The following example demonstrates how to use the serialization and deserialization custom otpions, to sanitize the value of the Editor by using [DOMPurify](https://github.com/cure53/DOMPurify) library.
 

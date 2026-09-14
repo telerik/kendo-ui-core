@@ -37,7 +37,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To set a different color for the outliers in a Kendo UI for jQuery Scatter Chart, use a function in the [`series.color`](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/series.color) property. This function allows you to conditionally apply colors to data points based on their values.
+To set a different color for the outliers in a Kendo UI for jQuery Scatter Chart, use a function in the [`series.color`](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/series#seriescolor) property. This function allows you to conditionally apply colors to data points based on their values.
 
 ### Example
 
@@ -148,5 +148,5 @@ Test the example above in the following Dojo.
 ## See Also
 
 - [Kendo UI for jQuery Chart Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/overview)
-- [Series Color API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/series.color)
+- [Series Color API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/dataviz/ui/chart/configuration/series#seriescolor)
 - [Additional Scatter Chart Customization](https://www.telerik.com/kendo-jquery-ui/documentation/controls/charts/chart-types/scatter-charts)

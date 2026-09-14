@@ -28,7 +28,7 @@ How can I have a column whose editor depends on the value of the Grid record?
 
 ## Solution
 
-1. Place a condition within the [`columns.editor`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.editor) function.
+1. Place a condition within the [`columns.editor`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnseditor) function.
 1. Based on that condition, add the corresponding editor template.
 
 ```dojo

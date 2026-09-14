@@ -42,7 +42,7 @@ This knowledge base article also answers the following questions:
 
 To achieve this functionality, follow these steps:
 
-1. Use the [`columns.filterable.ui`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/columns.filterable.ui) option of the Kendo Grid to implement the DropDownTree as a filter popup.
+1. Use the [`columns.filterable.ui`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid/configuration/columns/filterable#columnsfilterableui) option of the Kendo Grid to implement the DropDownTree as a filter popup.
 2. Replace the original filter input element with a DropDownTree container element.
 3. Configure the DropDownTree with [`checkboxes`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdowntree/configuration/checkboxes) and [`checkAll`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdowntree/configuration/checkall) enabled.
 4. Handle the [`change`](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/dropdowntree/events/change) event of the DropDownTree to filter the Grid manually.

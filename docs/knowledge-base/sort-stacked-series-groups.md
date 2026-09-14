@@ -41,7 +41,7 @@ The order of the stacked series in a grouped chart cannot be set through the `so
 
 The reason for this behavior is that the grouping overrides the sort order as part of its implementation. In effect, the sort order is respected only within the resulting groups. Still, you can influence the final order of the stacked series as follows:
 
-* Collect the stack values in an array. The stackValue can be obtained from the [labels.template](/api/dataviz/ui/chart/configuration/series.labels.template).
+* Collect the stack values in an array. The stackValue can be obtained from the [labels.template](/api/dataviz/ui/chart/configuration/series/labels#serieslabelstemplate).
 * [Sort the categories]({% slug howto_sortcategorisinagroupedchart_charts %}) based on the stack values array.
 
 The following example demonstrates how to sort stacked series values in a grouped Kendo UI Chart.

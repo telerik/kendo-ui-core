@@ -1073,7 +1073,7 @@ How do I customize the styling of Gantt chart column headers in Kendo UI for jQu
 
 ### columns.headerTemplate `String|Function`
 
-The [`template`](/api/kendo/methods/template) which renders the column header content. By default, the value of the [`title`](/api/ui/gantt/configuration/columns.title) column option is displayed in the column header cell.
+The [`template`](/api/kendo/methods/template) which renders the column header content. By default, the value of the [`title`](/api/ui/gantt/configuration/columns#columnstitle) column option is displayed in the column header cell.
 
 > If sorting is enabled, the column header content will be wrapped in an `<a>` element. As a result, the template must contain only inline elements.
 
@@ -1271,7 +1271,7 @@ How do I customize column visibility in a Kendo UI Gantt chart? Manage the visib
 
 ### columns.minScreenWidth `Number`
 
-The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/ui/gantt/configuration/columns.hidden) setting and the two cannot not be used at the same time.
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/ui/gantt/configuration/columns#columnshidden) setting and the two cannot not be used at the same time.
 
 
 <div class="meta-api-description">

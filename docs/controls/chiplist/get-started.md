@@ -70,7 +70,7 @@ You can add individual Chip items by passing objects to the [`items`](/api/ui/ch
 
 ## 4. Add Icons to the Chips inside the ChipList
 
-Now you can use the [`items.icon`](/api/ui/chiplist/configuration/items.icon) option which allows you to display a label on the Chips inside the ChipList.
+Now you can use the [`items.icon`](/api/ui/chiplist/configuration/items#itemsicon) option which allows you to display a label on the Chips inside the ChipList.
 
 ```html
     <div id="chiplist"></div>

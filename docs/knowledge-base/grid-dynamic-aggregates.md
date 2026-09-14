@@ -31,7 +31,7 @@ I have created a dynamic grid as shown in [this article]({% slug howto_createdyn
 
 There a different options to choose from when it comes to the UI of the aggregate column menu. This example is created with the FilterMultiCheck menu as a proof of concept. Here are the important steps:
 
-1. Initialize a header menu with dynamic aggregates dependent on the field type by using the [`headerTemplate`](/api/ui/grid/configuration/columns.headertemplate) in the grid `dataBound` event. If the grid has aggregates previously selected, reflect that in the UI.
+1. Initialize a header menu with dynamic aggregates dependent on the field type by using the [`headerTemplate`](/api/ui/grid/configuration/columns#columnsheadertemplate) in the grid `dataBound` event. If the grid has aggregates previously selected, reflect that in the UI.
 1. When the selection in the menu changes, generate a `footerTemplate` and assign it to the respective grid columns. Use the `setOptions()` method to update the grid with the new column configuration or refresh the grid if using static footer templates
 1. Apply the aggregates dynamically by using the data source [`aggregate()`](/api/data/datasource/methods/aggregate) method on selection change in the menu. 
 

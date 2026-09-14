@@ -29,7 +29,7 @@ I want to remove the master checkbox of the built-in checkbox column in the Kend
 
 ## Solution
 
-1. Remove the master checkbox by adding an empty [header template](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.headertemplate) to the column.
+1. Remove the master checkbox by adding an empty [header template](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsheadertemplate) to the column.
 1. Subscribe for the [`click`](https://api.jquery.com/click/) event of the checkboxes by using a jQuery selector.
 1. In the `click` event handler, get the row and the row classes by using the [`closest`](https://api.jquery.com/closest/) jQuery method.
 1. Based on the row classes, use the [`clearSelection`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/clearselection) method of the Grid.
@@ -111,4 +111,4 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
 * [Grid Checkbox Selection Demo](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.selectable)
+* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsselectable)

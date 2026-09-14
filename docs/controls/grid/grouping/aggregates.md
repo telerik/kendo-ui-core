@@ -15,7 +15,7 @@ To enable grouping by using aggregate functions, use the `aggregates`, `groupFoo
 
 ## Known Limitations
 
-The [`columns.aggregates`](/api/ui/grid/configuration/columns.aggregates) configuration needs to be included if the Grid has its [`groupable`](/api/ui/grid/configuration/groupable) property enabled, otherwise the `groupFooterTemplate` and `groupHeaderTemplate` won't function properly.
+The [`columns.aggregates`](/api/ui/grid/configuration/columns#columnsaggregates) configuration needs to be included if the Grid has its [`groupable`](/api/ui/grid/configuration/groupable) property enabled, otherwise the `groupFooterTemplate` and `groupHeaderTemplate` won't function properly.
 
 ## See Also
 

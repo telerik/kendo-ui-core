@@ -56,7 +56,7 @@ Now, you will set the [`columns`](/api/ui/timedurationpicker/configuration/colum
 
 * Is a fundamental and mandatory setting for the TimeDurationPicker&mdash;the component will not work without it. 
 * Allows you to specify which time portion columns will be visible when the drop-down is expanded. 
-* Enables you to specify a [`format`](/api/ui/timedurationpicker/configuration/columns.format), [`min`](/api/ui/timedurationpicker/configuration/columns.min) and [`max`](/api/ui/timedurationpicker/configuration/columns.max) allowed values, and [`step`](/api/ui/timedurationpicker/configuration/columns.step) for each individual column.
+* Enables you to specify a [`format`](/api/ui/timedurationpicker/configuration/columns#columnsformat), [`min`](/api/ui/timedurationpicker/configuration/columns#columnsmin) and [`max`](/api/ui/timedurationpicker/configuration/columns#columnsmax) allowed values, and [`step`](/api/ui/timedurationpicker/configuration/columns#columnsstep) for each individual column.
 
 ```html
 <input id="timedurationpicker" />

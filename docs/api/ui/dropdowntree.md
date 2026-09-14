@@ -1577,7 +1577,7 @@ The mode used to render the selected tags when [checkboxes](/api/ui/dropdowntree
 - `multiple` - renders a tag for every selected value
 - `single` - renders only one tag that shows the number of the selected values
 
-> When tagMode is to `single` its message can be configured by setting [singleTag](/api/ui/dropdowntree/configuration/messages.singletag) message property.
+> When tagMode is to `single` its message can be configured by setting [singleTag](/api/ui/dropdowntree/configuration/messages#messagessingletag) message property.
 
 
 <div class="meta-api-description">

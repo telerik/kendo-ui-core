@@ -92,6 +92,6 @@ dataBound: function(e){
 For a practical demonstration of dynamically setting the background with a dataSource field, refer to this [Progress Kendo UI Dojo](https://dojo.telerik.com/NfFWNtWO).
 
 ## See Also
-- [Column Template in Kendo UI Grid](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.template)
+- [Column Template in Kendo UI Grid](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnstemplate)
 - [DataBound Event in Kendo UI Grid](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound)
 - [Styling Rows and Cells Based on Data Item Values](https://docs.telerik.com/kendo-ui/knowledge-base/style-rows-cells-based-on-data-item-values)

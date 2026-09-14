@@ -73,7 +73,7 @@ The following example demonstrates how to set `size` of the toolbar to `small`.
 
 ### Overflow Options
 
-The ToolBar and its [`overflow`](/api/ui/toolbar/configuration/items.overflow) configuration provide the following methods for styling:
+The ToolBar and its [`overflow`](/api/ui/toolbar/configuration/items#itemsoverflow) configuration provide the following methods for styling:
 
 - [`mode`](#Mode)—Defines the overflow mode. 
 - [`scrollButtons`](#ScrollButtons)—Defines the visibility of scroll buttons when mode is "scroll".

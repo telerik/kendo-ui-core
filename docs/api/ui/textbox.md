@@ -570,7 +570,7 @@ This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model 
 You can overcome this behavior triggering the `change` event manually using [trigger("change")](/api/observable/methods/trigger) method.
 
 > **Important:** This method **does not trigger** the `focusout` event of the input.
-This can affect the [floating label functionality](/api/ui/textbox/configuration/label.floating).
+This can affect the [floating label functionality](/api/ui/textbox/configuration/label#labelfloating).
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#textbox").data("kendoTextBox").floatingLabel.refresh();`
 
 

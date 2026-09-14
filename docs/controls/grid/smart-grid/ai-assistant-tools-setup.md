@@ -39,7 +39,7 @@ Choose an integration approach based on how much control you need over the AI co
 
 The automatic approach is the quickest way to integrate AI Assistant functionality with your Grid. The AI Assistant tool handles all communication with your AI service internally through HTTP requests.
 
-To configure automatic integration, configure the Grid's [`ai.service`](/api/ui/grid/configuration/ai.service) property to point to your AI service endpoint where the natural language prompts will be processed.
+To configure automatic integration, configure the Grid's [`ai.service`](/api/ui/grid/configuration/ai#aiservice) property to point to your AI service endpoint where the natural language prompts will be processed.
 
 > For runnable examples of automatic integration, see the [AI Smart Box](slug:ai_toolbar_tool_kendoui_grid) and [AI Toolbar Assistant](slug:ai_toolbar_tool_kendoui_grid) articles.
 
@@ -83,7 +83,7 @@ In the controlled approach, you maintain full control over the AI Assistant tool
 
 The controlled integration allows you to provide a `service Url` for [automatic request handling](#automatic-integration) while intercepting [appropriate events](#event-handling) to modify request options or customize response handling.
 
-You can customize the AI request before it is sent to your backend service by handling the [`aiPromptRequest`](/api/ui/grid/configuration/ai.aiassistant.promptrequest) event. This allows you to add custom headers, modify request data, or add authentication tokens.
+You can customize the AI request before it is sent to your backend service by handling the [`aiPromptRequest`](/api/ui/grid/configuration/ai/aiassistant#aiaiassistantpromptrequest) event. This allows you to add custom headers, modify request data, or add authentication tokens.
 
 The following example demonstrates controlled integration where the AI Toolbar Assistant still handles the HTTP request automatically, but the interaction is customized through request and response event handlers.
 
@@ -251,20 +251,20 @@ The AI Assistant tools provide events for enhanced control over the AI interacti
 <TabStrip>
 <TabStripTab title="AI Smart Box">
 
-- [`aiAssistantPromptRequest`](/api/ui/grid/configuration/smartbox.aiassistantpromptrequest)&mdash;Emits before the SmartBox tool sends the AI request in AI Assistant mode.
-- [`aiAssistantCancelRequest`](/api/ui/grid/configuration/smartbox.aiassistantcancelrequest)&mdash;Emits when the user clicks the cancel button in AI Assistant mode.
-- [`aiAssistantResponseSuccess`](/api/ui/grid/configuration/smartbox.aiassistantresponsesuccess)&mdash;Emits when the SmartBox tool completes the AI request successfully.
-- [`aiAssistantResponseError`](/api/ui/grid/configuration/smartbox.aiassistantresponseerror)&mdash;Emits when the SmartBox tool completes the AI request with an error.
-- [`open`](/api/ui/grid/configuration/smartbox.open)&mdash;Emits when the SmartBox tool opens.
-- [`close`](/api/ui/grid/configuration/smartbox.close)&mdash;Emits when the SmartBox tool closes.
+- [`aiAssistantPromptRequest`](/api/ui/grid/configuration/smartbox#smartboxaiassistantpromptrequest)&mdash;Emits before the SmartBox tool sends the AI request in AI Assistant mode.
+- [`aiAssistantCancelRequest`](/api/ui/grid/configuration/smartbox#smartboxaiassistantcancelrequest)&mdash;Emits when the user clicks the cancel button in AI Assistant mode.
+- [`aiAssistantResponseSuccess`](/api/ui/grid/configuration/smartbox#smartboxaiassistantresponsesuccess)&mdash;Emits when the SmartBox tool completes the AI request successfully.
+- [`aiAssistantResponseError`](/api/ui/grid/configuration/smartbox#smartboxaiassistantresponseerror)&mdash;Emits when the SmartBox tool completes the AI request with an error.
+- [`open`](/api/ui/grid/configuration/smartbox#smartboxopen)&mdash;Emits when the SmartBox tool opens.
+- [`close`](/api/ui/grid/configuration/smartbox#smartboxclose)&mdash;Emits when the SmartBox tool closes.
 
 </TabStripTab>
 <TabStripTab title="AI Toolbar Assistant">
 
-- [`promptRequest`](/api/ui/grid/configuration/ai.aiassistant.promptrequest)&mdash;Triggered when the prompt view Generate output button is clicked. 
-- [`promptResponse`](/api/ui/grid/configuration/ai.aiassistant.promptresponse)&mdash;Triggered when the AI service response is received. 
-- [`promptRequestCancel`](slug:/api/ui/grid/configuration/smartbox.aiassistantresponsesuccess)&mdash;Emits when a prompt request is cancelled.
-- [`commandExecute`](slug:/api/ui/grid/configuration/smartbox.aiassistantresponseerror)&mdash;Emits when a command item from the Commands view is clicked.
+- [`promptRequest`](/api/ui/grid/configuration/ai/aiassistant#aiaiassistantpromptrequest)&mdash;Triggered when the prompt view Generate output button is clicked. 
+- [`promptResponse`](/api/ui/grid/configuration/ai/aiassistant#aiaiassistantpromptresponse)&mdash;Triggered when the AI service response is received. 
+- [`promptRequestCancel`](slug:/api/ui/grid/configuration/smartbox#smartboxaiassistantresponsesuccess)&mdash;Emits when a prompt request is cancelled.
+- [`commandExecute`](slug:/api/ui/grid/configuration/smartbox#smartboxaiassistantresponseerror)&mdash;Emits when a command item from the Commands view is clicked.
 
 </TabStripTab>
 </TabStrip>

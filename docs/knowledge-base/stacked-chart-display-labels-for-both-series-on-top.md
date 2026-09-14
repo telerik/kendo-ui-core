@@ -25,7 +25,7 @@ How can I display series labels above the bars in the Stacked Bar Chart componen
 
 ## Solution
 
-To achieve the desired scenario, utilize the [`series.labels.visual`](/api/dataviz/ui/chart/configuration/series.labels.visual) property for the secondly declared series. Obtain the data from both series and render it by using the [Kendo UI Drawing graphics library (Drawing API)]({% slug overview_kendoui_drawingapi %}).
+To achieve the desired scenario, utilize the [`series.labels.visual`](/api/dataviz/ui/chart/configuration/series/labels#serieslabelsvisual) property for the secondly declared series. Obtain the data from both series and render it by using the [Kendo UI Drawing graphics library (Drawing API)]({% slug overview_kendoui_drawingapi %}).
 
 
 ```dojo

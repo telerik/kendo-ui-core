@@ -25,7 +25,7 @@ How can I include the negative values in the label's total of a Stacked Column C
 
 ## Solution
 
-Use the [`series.labels.template`](/api/dataviz/ui/chart/configuration/series.labels.template) function to calculate and return the desired result.
+Use the [`series.labels.template`](/api/dataviz/ui/chart/configuration/series/labels#serieslabelstemplate) function to calculate and return the desired result.
 
 ```dojo
     <div id="chart"></div>

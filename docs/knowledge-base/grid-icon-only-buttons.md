@@ -29,7 +29,7 @@ How can I use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** butt
 
 ## Solution
 
-1. Set [`command.text`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.command.text) to a space.
+1. Set [`command.text`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns/command#columnscommandtext) to a space.
 
     ```
         columns: [
@@ -40,7 +40,7 @@ How can I use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** butt
         ]
     ```
 
-2. Set [`toolbar.text`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar.text) to a space.
+2. Set [`toolbar.text`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar#toolbartext) to a space.
 
     ```
         toolbar: [{name: "create", text: " "}]

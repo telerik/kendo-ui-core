@@ -32,7 +32,7 @@ How can I merge cells in the footer of the Grid?
 
 For the current version, it is not possible to merge cells out of the box. However, you cans till work around this issue.
 
-1. Add the desired content in a cell by using the [`footerTemplate`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.footertemplate) configuration.
+1. Add the desired content in a cell by using the [`footerTemplate`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsfootertemplate) configuration.
 1. Set the `overflow: visible;` and `white-space: nowrap;` styles for this cell.
 1. Remove the borders from the desired cells by using CSS.
 

@@ -80,7 +80,7 @@ All configuration options for text customization are nested in a `messages` obje
 
 **Editor**
 
-Because of security precautions, scripts are no longer posted to the server by default. To allow scripts to be posted to the server, set the [`serialization.scripts` configuration option](/api/ui/editor/configuration/serialization.scripts) to `true`. Note that for true protection from cross-site scripting, you still need server-side sanitization, as noted in the [preventing cross-site scripting](/web/editor/preventing-xss) help topic.
+Because of security precautions, scripts are no longer posted to the server by default. To allow scripts to be posted to the server, set the [`serialization.scripts` configuration option](/api/ui/editor/configuration/serialization#serializationscripts) to `true`. Note that for true protection from cross-site scripting, you still need server-side sanitization, as noted in the [preventing cross-site scripting](/web/editor/preventing-xss) help topic.
 
 ```tab-Old
 	$("#editor").kendoEditor();

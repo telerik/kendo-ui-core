@@ -35,7 +35,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To achieve this, use the [`series.highlight.visual`](/api/dataviz/ui/chart/configuration/series.highlight#serieshighlightvisual) property to customize the hover effect of the chart elements. This property allows you to define a visual representation of the hovered element, enabling you to apply a darker color.
+To achieve this, use the [`series.highlight.visual`](/api/dataviz/ui/chart/configuration/series#serieshighlight#serieshighlightvisual) property to customize the hover effect of the chart elements. This property allows you to define a visual representation of the hovered element, enabling you to apply a darker color.
 
 ### Implementation Example
 

@@ -108,7 +108,7 @@ In this step, you will initialize the Editor from the `<textarea>` element.
 
 ## 3. Apply Basic Configurations
 
-The Editor provides several options that enable you to modify its behavior. The following example demonstrates how to apply a handle to allow users to resize the Editor by using the [`resizable`](/api/ui/editor/configuration/resizable.toolbar) property and add a collection of [`tools`](/api/ui/editor/configuration/tools) that are used to interact with the Editor.
+The Editor provides several options that enable you to modify its behavior. The following example demonstrates how to apply a handle to allow users to resize the Editor by using the [`resizable`](/api/ui/editor/configuration/resizable#resizabletoolbar) property and add a collection of [`tools`](/api/ui/editor/configuration/tools) that are used to interact with the Editor.
 
 ```html
 <textarea id="editor" rows="10" cols="30"></textarea>

@@ -25,7 +25,7 @@ How can I display an image in the categoryAxis label of the Chart?
 
 ## Solution
 
-* You may use the [`labels.visual`](/api/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual) function of the Chart categoryAxis. In this function, you can create a [`kendo.geometry.Rect`](/api/geometry/rect) instance, and then use [`kendo.drawing.Image`](/api/drawing/image) to draw a bitmap image with a given source URL into the configured rectangle.
+* You may use the [`labels.visual`](/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxislabels#categoryaxislabelsvisual) function of the Chart categoryAxis. In this function, you can create a [`kendo.geometry.Rect`](/api/geometry/rect) instance, and then use [`kendo.drawing.Image`](/api/drawing/image) to draw a bitmap image with a given source URL into the configured rectangle.
 
 The following example demonstrates how to achieve the desired scenario: 
 ```dojo

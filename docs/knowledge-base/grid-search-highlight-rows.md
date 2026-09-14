@@ -31,7 +31,7 @@ I want to use a search input to find data on the current page of the Grid. I als
 
 The search will work only with string values. Numbers and dates will also be treated as strings when a value is typed in the searchbox.
 
-1. Create a Grid [`toolbar.template`](/api/ui/grid/configuration/toolbar.template) with a search input and an icon for the column menu.
+1. Create a Grid [`toolbar.template`](/api/ui/grid/configuration/toolbar#toolbartemplate) with a search input and an icon for the column menu.
 1. Create a `div` element for the column menu. The purpose of the column menu is to allow the user to select which columns can be searched.
 1. Initialize the Grid.
 1. Attach an event handler to the [`dataBound`](/api/ui/grid/events/databound) event of the Grid.

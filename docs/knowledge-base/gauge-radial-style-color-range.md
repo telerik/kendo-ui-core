@@ -29,8 +29,8 @@ How can I configure the colors and range of the Kendo UI RadialGauge?
 
 ## Solution
 
-1. Determine the ranges by using the [`scale.ranges`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/radialgauge/configuration/scale.ranges) property of the RadialGauge.
-1. [Adjust the colors](https://docs.telerik.com/kendo-ui/api/dataviz/ui/radialgauge/configuration/scale.ranges#scale.ranges.color) for each range.
+1. Determine the ranges by using the [`scale.ranges`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/radialgauge/configuration/scale#scaleranges) property of the RadialGauge.
+1. [Adjust the colors](https://docs.telerik.com/kendo-ui/api/dataviz/ui/radialgauge/configuration/scale#scaleranges#scale.ranges.color) for each range.
 
 ```
           $("#gauge").kendoRadialGauge({
@@ -113,5 +113,5 @@ The following example demonstrates how to set the RadialGauge to display a serie
 ## See Also
 
 * [Scale Options Demo of the Kendo UI RadialGauge](https://demos.telerik.com/kendo-ui/radial-gauge/scale-options)
-* [API Reference of scale.ranges](https://docs.telerik.com/kendo-ui/api/dataviz/ui/radialgauge/configuration/scale.ranges)
-* [API Reference of scale.ranges.color](https://docs.telerik.com/kendo-ui/api/dataviz/ui/radialgauge/configuration/scale.ranges#scale.ranges.color)
+* [API Reference of scale.ranges](https://docs.telerik.com/kendo-ui/api/dataviz/ui/radialgauge/configuration/scale#scaleranges)
+* [API Reference of scale.ranges.color](https://docs.telerik.com/kendo-ui/api/dataviz/ui/radialgauge/configuration/scale#scaleranges#scale.ranges.color)

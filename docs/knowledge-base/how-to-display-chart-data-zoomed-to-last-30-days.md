@@ -36,9 +36,9 @@ I need to display a chart with 365 days of data but want it zoomed by default to
 
 ## Solution
 
-To display a chart with 365 days of data initially zoomed to the last 30 days, configure the [`categoryAxis.min`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.min) and [`categoryAxis.max`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.max) options. These options control the initial zoom level by setting the visible date range on the chart. Here's how to set it up:
+To display a chart with 365 days of data initially zoomed to the last 30 days, configure the [`categoryAxis.min`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxismin) and [`categoryAxis.max`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxismax) options. These options control the initial zoom level by setting the visible date range on the chart. Here's how to set it up:
 
-1. Define the `categoryAxis` with a [`type`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.type) of `"date"`.
+1. Define the `categoryAxis` with a [`type`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxistype) of `"date"`.
 2. Set the `min` and `max` properties to define the visible date range. For example, to zoom in on December 1st to 31st, 2023:
 
 ```javascript

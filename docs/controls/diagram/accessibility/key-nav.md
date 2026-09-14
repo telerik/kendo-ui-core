@@ -13,7 +13,7 @@ The keyboard navigation of the Diagram is always available and enabled by defaul
 
 For a complete example, refer to the [demo on keyboard navigation of the Diagram](https://demos.telerik.com/kendo-ui/diagram/keyboard-navigation).
 
-The Diagram provides comprehensive keyboard navigation capabilities that allow users to interact with shapes, connections, and other diagram elements without using a mouse. You can disable keyboard navigation by setting the [`navigatable.disabled`](/api/dataviz/ui/diagram/configuration/navigatable.disabled) option to `true`.
+The Diagram provides comprehensive keyboard navigation capabilities that allow users to interact with shapes, connections, and other diagram elements without using a mouse. You can disable keyboard navigation by setting the [`navigatable.disabled`](/api/dataviz/ui/diagram/configuration/navigatable#navigatabledisabled) option to `true`.
 
 The following example demonstrates how to disable the keyboard navigation in the Diagram.
 
@@ -107,7 +107,7 @@ Configure the accessibility attributes of the Diagram using the [`accessibility`
 
 ### Connection Accessibility
 
-Configure accessibility attributes for connections using the [`connectionDefaults.accessibility`](/api/dataviz/ui/diagram/configuration/connectiondefaults.accessibility) option.
+Configure accessibility attributes for connections using the [`connectionDefaults.accessibility`](/api/dataviz/ui/diagram/configuration/connectiondefaults#connectiondefaultsaccessibility) option.
 
     $("#diagram").kendoDiagram({
         connectionDefaults: {
@@ -118,7 +118,7 @@ Configure accessibility attributes for connections using the [`connectionDefault
         }
     });
 
-The [`ariaRoleDescription`](/api/dataviz/ui/diagram/configuration/connectiondefaults.accessibility.ariaroledescription) property sets the accessibility role description for connection elements, which defaults to `"Connection"`. The [`ariaLabel`](/api/dataviz/ui/diagram/configuration/connectiondefaults.accessibility.arialabel) property defines the accessibility label for connection elements.
+The [`ariaRoleDescription`](/api/dataviz/ui/diagram/configuration/connectiondefaults/accessibility#connectiondefaultsaccessibilityariaroledescription) property sets the accessibility role description for connection elements, which defaults to `"Connection"`. The [`ariaLabel`](/api/dataviz/ui/diagram/configuration/connectiondefaults/accessibility#connectiondefaultsaccessibilityarialabel) property defines the accessibility label for connection elements.
 
 ## See Also
 

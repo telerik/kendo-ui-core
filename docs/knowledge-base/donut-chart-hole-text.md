@@ -39,7 +39,7 @@ How can I display some content in the center of a Kendo UI Donut Chart?
 
 To achieve this behavior:
 
-1. Locate the center point of the Donut Chart. For more information, refer to the [`series.visual`](/api/dataviz/ui/chart/configuration/series.visual) API call.
+1. Locate the center point of the Donut Chart. For more information, refer to the [`series.visual`](/api/dataviz/ui/chart/configuration/series#seriesvisual) API call.
 2. Plot `Text` or other `Shapes` to achieve this behavior by using the [`render` event](/api/dataviz/ui/chart/events/render).
 
 The following example demonstrates how to place some text in the center of a Kendo UI Donut Chart.
