@@ -26,7 +26,7 @@ I want to enable my users to filter a Grid column that contains values with diac
 
 ## Solution
 
-1. Use the [`columns.filterable.cell.template`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.filterable.cell#columnsfilterablecelltemplate) to initialize a custom Kendo AutoComplete component.
+1. Use the [`columns.filterable.cell.template`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns/filterable#columnsfilterablecell#columnsfilterablecelltemplate) to initialize a custom Kendo AutoComplete component.
 1. Attach a handler to the [`filtering`](https://docs.telerik.com/kendo-ui/api/ui/autocomplete/events/filtering) event of the custom AutoComplete.
 1. Inside the filtering event, use a custom operator to convert the diacritic character to a regular one. For example, ``e`` instead of ``É``.
 

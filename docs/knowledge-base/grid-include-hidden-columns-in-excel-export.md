@@ -29,7 +29,7 @@ How can I show some of the hidden columns of the Grid in the exported Excel file
 
 > **Important**
 >
-> As of Kendo UI R1 2021 the grid columns have an [`exportable`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.exportable) configuration, which if enabled, will include the hidden column in the exported file.
+> As of Kendo UI R1 2021 the grid columns have an [`exportable`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsexportable) configuration, which if enabled, will include the hidden column in the exported file.
 
 ## Solution
 
@@ -57,7 +57,7 @@ $("#grid").data("kendoGrid").bind("excelExport", function (e) {
 ## See Also
 
 * [Exporting Hidden Columns to PDF](https://docs.telerik.com/kendo-ui/knowledge-base/grid-include-hidden-columns-to-exported-pdf)
-* [API Reference of the exportable Configuration](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.exportable)
+* [API Reference of the exportable Configuration](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsexportable)
 * [API Reference of the showColumn Method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/showcolumn)
 * [API Reference of the hideColumn Method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/hidecolumn)
 * [API Reference of the excelExportevent Event](https://docs.telerik.com/kendo-ui/api/ui/grid/events/excelexport)

@@ -35,7 +35,7 @@ To enable the summary of validation messages, set the `validationSummary` option
 
 ## Specifying the Summary Location 
 
-You can render the summary of the validation messages in a container of your choice by utilizing the [`validationSummary.container`](/api/ui/validator/configuration/validationsummary.container) option. For example, you can display the validation summary under the validated content with the following configuration:
+You can render the summary of the validation messages in a container of your choice by utilizing the [`validationSummary.container`](/api/ui/validator/configuration/validationsummary#validationsummarycontainer) option. For example, you can display the validation summary under the validated content with the following configuration:
 
     <form id="myform">
         <input name="username" required /> <br />
@@ -53,7 +53,7 @@ You can render the summary of the validation messages in a container of your cho
 
 ## Customizing the Validation Messages
 
-You can change the default template of the validation summary through the [`validationSummary.template`](/api/ui/validator/configuration/validationsummary.template) option. Note that the `data-field` attribute will link the error message to the corresponding form control and focus it on click.
+You can change the default template of the validation summary through the [`validationSummary.template`](/api/ui/validator/configuration/validationsummary#validationsummarytemplate) option. Note that the `data-field` attribute will link the error message to the corresponding form control and focus it on click.
 
 
     <form id="myform">

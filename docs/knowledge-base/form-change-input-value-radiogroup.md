@@ -29,7 +29,7 @@ How can I change the value in an input field displayed in Kendo UI for jQuery Fo
 
 ## Solution
 
-Use the [items.editorOptions](/api/ui/grid/configuration/columns.editoroptions) to handle the RadioGroup [select event](/api/ui/radiogroup/events/select). In the event handler find the needed field and set its value.
+Use the [items.editorOptions](/api/ui/grid/configuration/columns#columnseditoroptions) to handle the RadioGroup [select event](/api/ui/radiogroup/events/select). In the event handler find the needed field and set its value.
 
 
 ```dojo

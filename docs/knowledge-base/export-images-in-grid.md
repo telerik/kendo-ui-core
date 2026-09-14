@@ -28,7 +28,7 @@ I have a Grid that contains images. I need to enable the application users to ex
 
 ## Solution
 
-To include the images in the exported document, configure the [`drawings`](/api/ooxml/workbook/configuration/sheets.drawings) option to include the loaded images and additional settings for their position. For more information on how Excel documents works, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+To include the images in the exported document, configure the [`drawings`](/api/ooxml/workbook/configuration/sheets#sheetsdrawings) option to include the loaded images and additional settings for their position. For more information on how Excel documents works, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
 
 The following example demonstrates how to customize the Excel document so that it includes the images.
 

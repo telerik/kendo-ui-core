@@ -36,7 +36,7 @@ Search Panel works with strings, whereas the date type is an object.
 To accomplish date type searching: 
 
 1. Add an additional field within the [`model`](/api/data/datasource/configuration/schema#schemamodel), that will represent a formatted date.
-2. Use the newly created field in [`search.fields`](/api/ui/grid/configuration/search.fields) configuration.
+2. Use the newly created field in [`search.fields`](/api/ui/grid/configuration/search#searchfields) configuration.
 
 ```dojo
 

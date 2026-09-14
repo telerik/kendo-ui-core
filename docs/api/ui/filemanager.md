@@ -158,7 +158,7 @@ How to enable drag-and-drop functionality in Kendo UI FileManager? Control the a
 
 Sets the [FileManagerDataSource](/api/data/filemanagerdatasource) of the FileManager. Can be bound to a remote service or local data.
 
-> When using the transport options as functions the target parameter will not be sent automatically due to the DataSource not calling the [parameterMap method](/api/data/datasource/configuration/transport.parametermap).
+> When using the transport options as functions the target parameter will not be sent automatically due to the DataSource not calling the [parameterMap method](/api/data/datasource/configuration/transport#transportparametermap).
 > You can call it within your function to pass the required data - Example - read as function.
 
 

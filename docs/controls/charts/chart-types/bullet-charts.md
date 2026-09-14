@@ -99,10 +99,10 @@ You can change the orientation of the Bullet Chart by setting the series type to
 
 ## Displaying labels
 
-To display labels for the bullet chart value, set the [`labels.visible`](/api/dataviz/ui/chart/configuration/series.labels.visible) option to `true`.
+To display labels for the bullet chart value, set the [`labels.visible`](/api/dataviz/ui/chart/configuration/series/labels#serieslabelsvisible) option to `true`.
 
-The label content can be customized using the [`format`](/api/dataviz/ui/chart/configuration/series.labels.format) or
-[`template`](/api/dataviz/ui/chart/configuration/series.labels.template) options.
+The label content can be customized using the [`format`](/api/dataviz/ui/chart/configuration/series/labels#serieslabelsformat) or
+[`template`](/api/dataviz/ui/chart/configuration/series/labels#serieslabelstemplate) options.
 
 ```dojo
       <div id="chart-sales"></div>

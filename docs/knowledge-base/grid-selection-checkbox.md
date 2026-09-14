@@ -25,7 +25,7 @@ How can I select a row of the Data Grid with a checkbox column, preserve the sel
 
 ## Solution
 
-As of the Kendo UI R2 2017 SP1 release, the [selection of columns with checkboxes](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.selectable) is a built-in feature for
+As of the Kendo UI R2 2017 SP1 release, the [selection of columns with checkboxes](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsselectable) is a built-in feature for
 the Grid.
 
 For earlier versions, refer to the following example. It demonstrates how to select a Grid row by using a checkbox, preserve the selection between pages, and get the IDs of the selected items from all pages.

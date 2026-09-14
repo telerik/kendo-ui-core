@@ -35,7 +35,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To show markers at specific intervals, use the [`markers.visible`](/api/dataviz/ui/chart/configuration/series.markers.visible) property. This property accepts a function that controls the visibility of markers based on the index of the data point.
+To show markers at specific intervals, use the [`markers.visible`](/api/dataviz/ui/chart/configuration/series/markers#seriesmarkersvisible) property. This property accepts a function that controls the visibility of markers based on the index of the data point.
 
 Below is an example of how to display markers for every second data point:
 
@@ -89,5 +89,5 @@ For a live demonstration, refer to the example below.
 
 ## See Also
 
-- [Kendo UI Chart Series Markers API Documentation](/api/dataviz/ui/chart/configuration/series.markers.visible)
+- [Kendo UI Chart Series Markers API Documentation](/api/dataviz/ui/chart/configuration/series/markers#seriesmarkersvisible)
 - [Kendo UI Chart Overview](/controls/charts/overview)

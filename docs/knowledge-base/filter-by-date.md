@@ -43,7 +43,7 @@ The helper field is intended to hold only the date, so that the Grid data is lat
 
 To create the helper field:
 * Use the [`dataSource.schema.parse`](/api/data/datasource/configuration/schema#schemaparse) configuration to create a new field that is intended to hold the date only.
-* Use the data-holding field in the [`columns`](/api/ui/grid/configuration/columns) definition, but provide a [`template`](/api/ui/grid/configuration/columns.template) that will visualize the initial datetime field.
+* Use the data-holding field in the [`columns`](/api/ui/grid/configuration/columns) definition, but provide a [`template`](/api/ui/grid/configuration/columns#columnstemplate) that will visualize the initial datetime field.
 
 ```dojo
 <div id="grid"></div>

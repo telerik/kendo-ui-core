@@ -40,7 +40,7 @@ How can I convert the DataSource filters to an SQL expression?
 1. Use the [`kendo.format`](/api/kendo/methods/format) method to replace the placeholders in the mapping string with the field and value of the current filter.
 1. Finally, combine all of the filter strings into a single string.
 
-Once the SQL expression is generated, you can use a number of different approaches to send the string back to the server for further processing. For example, the [`data`](/api/data/datasource/configuration/transport.read#transportreaddata) option of the [`transport`](/api/data/datasource/configuration/transport) configurations.
+Once the SQL expression is generated, you can use a number of different approaches to send the string back to the server for further processing. For example, the [`data`](/api/data/datasource/configuration/transport#transportread#transportreaddata) option of the [`transport`](/api/data/datasource/configuration/transport) configurations.
 
 The following example showcases the complete solution integrated with a Kendo UI Grid:
 

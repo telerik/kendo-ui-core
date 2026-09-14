@@ -96,7 +96,7 @@ You can also bind the `TreeListDataSource` to remote data which means that the T
 
 > To lazy-load the TreeList hierarchy, calculate and include the Boolean [`hasChildren`](/api/data/treelistmodel/fields/haschildren) field on the server.
 > When the user clicks the expand icon, the TreeList DataSource requests the children of the item by sending the parent item `id` as a request parameter, for example `&id=1`.
-> You can change the parameter name by using the [`paramaterMap`](/api/data/datasource/configuration/transport.parametermap) function. For more information, refer to the controller code in the [`kendo-ui-demos service`](https://github.com/telerik/kendo-ui-demos-service/blob/master/demos-and-odata-v3/KendoCRUDService/Controllers/EmployeeDirectoryController.cs).
+> You can change the parameter name by using the [`paramaterMap`](/api/data/datasource/configuration/transport#transportparametermap) function. For more information, refer to the controller code in the [`kendo-ui-demos service`](https://github.com/telerik/kendo-ui-demos-service/blob/master/demos-and-odata-v3/KendoCRUDService/Controllers/EmployeeDirectoryController.cs).
 
 The following example demonstrates how to enable the remote binding for the TreeList by setting the DataSource `transport`.
 

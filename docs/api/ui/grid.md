@@ -5399,7 +5399,7 @@ How to dynamically hide show command buttons in Kendo UI Grid based on row data?
 The data source of the values for the foreign key columns. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
-> **Note:** When the dataSource property is set one should also set the [dataTextField](/api/ui/grid/configuration/columns.datatextfield) and [dataValueField](/api/ui/grid/configuration/columns.datavaluefield).
+> **Note:** When the dataSource property is set one should also set the [dataTextField](/api/ui/grid/configuration/columns#columnsdatatextfield) and [dataValueField](/api/ui/grid/configuration/columns#columnsdatavaluefield).
 
 
 <div class="meta-api-description">
@@ -7071,7 +7071,7 @@ How to customize sorting behavior in grouped Grid columns using Kendo UI for jQu
 
 ### columns.groupable.sort.compare `Function`
 
-A JavaScript function which is used to compare the groups (refer to [`sortable.compare`](/api/ui/grid/configuration/columns.sortable#columns.sortable.compare) for comparing the items of the groups). It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+A JavaScript function which is used to compare the groups (refer to [`sortable.compare`](/api/ui/grid/configuration/columns#columnssortable#columns.sortable.compare) for comparing the items of the groups). It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
 
 
@@ -7663,7 +7663,7 @@ How do I add a pin button column to a Kendo UI Grid? Add a visual pin icon or bu
 
 Sets the condition that needs to be satisfied for a column to remain visible. The property accepts valid strings for the [`matchMedia`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) browser API (assuming it is supported by the browser) and toggles the visibility of the columns based on the media queries.
 
-The [`hidden`](/api/ui/grid/configuration/columns.hidden) option takes precedence over `media`. This option cannot be used with [`minScreenWidth`](/api/ui/grid/configuration/columns.minscreenwidth) at the same time.
+The [`hidden`](/api/ui/grid/configuration/columns#columnshidden) option takes precedence over `media`. This option cannot be used with [`minScreenWidth`](/api/ui/grid/configuration/columns#columnsminscreenwidth) at the same time.
 
 Also accepts the device identifiers that are [available in Bootstrap 4](https://v4-alpha.getbootstrap.com/layout/grid/#grid-options):
 
@@ -7726,7 +7726,7 @@ How to set minimum width for resizable columns in Kendo UI Grid? Set a minimum p
 
 ### columns.minScreenWidth `Number`
 
-The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/ui/grid/configuration/columns.hidden) setting,
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/ui/grid/configuration/columns#columnshidden) setting,
 so the two should not be used at the same time.
 
 
@@ -7784,7 +7784,7 @@ How can I make specific columns in my Kendo UI Grid resizable? Control whether s
 
 If set to `true` the grid will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page. The [`change`](/api/ui/grid/events/change) event is fired when a row is selected.
 
-> Setting the [`columns.selectable`](/api/ui/grid/configuration/columns.selectable) to `true` overrides the [`selectable.mode`](/api/ui/grid/configuration/selectable.mode) configuration property if it is set to `"single"`.
+> Setting the [`columns.selectable`](/api/ui/grid/configuration/columns#columnsselectable) to `true` overrides the [`selectable.mode`](/api/ui/grid/configuration/selectable#selectablemode) configuration property if it is set to `"single"`.
 
 More about the Grid Selection feature you can find in [this documentation article](/controls/grid/selection).
 
@@ -8237,7 +8237,7 @@ How do I enable column management features in Kendo UI Grid's header? Control th
 
 If set to `auto` and the filterMenu will use adaptive rendering.
 
-> The Adaptive Rendering of the Column Menu is available only for `modern`[componentType](/api/ui/grid/configuration/columnmenu.componenttype)
+> The Adaptive Rendering of the Column Menu is available only for `modern`[componentType](/api/ui/grid/configuration/columnmenu#columnmenucomponenttype)
 
 
 <div class="meta-api-description">
@@ -8272,7 +8272,7 @@ How can I make the column menu in Kendo UI Grid adapt to different screen sizes?
 
 ### columnMenu.autoSize `Boolean` *(default: false)*
 
-If set to `true` the column menu would allow the user to fit one or all columns to the width of their content. This setting is available only when the `tabbed` [componentType](/api/ui/grid/configuration/columnmenu.componenttype) is used.
+If set to `true` the column menu would allow the user to fit one or all columns to the width of their content. This setting is available only when the `tabbed` [componentType](/api/ui/grid/configuration/columnmenu#columnmenucomponenttype) is used.
 
 
 <div class="meta-api-description">
@@ -8637,7 +8637,7 @@ How can I customize column menu messages in Kendo UI Grid? Configure and customi
 
 The text of the button which applies the columns filter.
 
-> The button is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu.componenttype) is set to `modern` or `tabbed`.
+> The button is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu#columnmenucomponenttype) is set to `modern` or `tabbed`.
 
 
 <div class="meta-api-description">
@@ -8672,7 +8672,7 @@ How do I customize the label for the apply button in Kendo UI Grid's column menu
 
 The text of the autosize single column option.
 
-> The autosize option is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu.componenttype) is set to `tabbed`.
+> The autosize option is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu#columnmenucomponenttype) is set to `tabbed`.
 
 
 <div class="meta-api-description">
@@ -8708,7 +8708,7 @@ How can I customize the "Auto-size column" menu item in a Kendo UI Grid? Control
 
 The text of the autosize single column option.
 
-> The autosize option is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu.componenttype) is set to `tabbed`.
+> The autosize option is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu#columnmenucomponenttype) is set to `tabbed`.
 
 
 <div class="meta-api-description">
@@ -9139,7 +9139,7 @@ How do I customize the "Ungroup Column" option in Kendo UI Grid column menu? Cus
 
 The text of the button which resets the columns filter.
 
-> The button is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu.componenttype) is set to `modern` or `tabbed`.
+> The button is visible when the column menu [componentType](/api/ui/grid/configuration/columnmenu#columnmenucomponenttype) is set to `modern` or `tabbed`.
 
 
 <div class="meta-api-description">
@@ -13053,7 +13053,7 @@ How can I configure Kendo UI Grid to allow users to filter columns through a dro
 The text of the filter operators displayed in the filter menu.
 
 > * If `operators` are defined manually, the default messages will be overridden too. To control the `operators` and still use the default messages, retrieve them from the `FilterCell` prototype - `kendo.ui.FilterCell.fn.options.operators.{type}`, where the type can be `"string"`, `"date"`, `"number"`, and `"enums"`.
-> * If the same options are specific to a column, it is possible to use the [column filterable configuration of the Grid](/api/ui/grid/configuration/columns.filterable.operators).
+> * If the same options are specific to a column, it is possible to use the [column filterable configuration of the Grid](/api/ui/grid/configuration/columns/filterable#columnsfilterableoperators).
 > * In multiple Grids, it is possible to override the filterable options of the Kendo UI FilterMenu before the Grids are initialized. Then the new filter options will be available for all Grids without further configurations.
 
 
@@ -14648,7 +14648,7 @@ How do I make group headers stick to the top of the grid while scrolling? Enable
 
 ### groupable.stickyFooters `Boolean` *(default: false)*
 
-When enabled the group footer rows will stick to the bottom of the scrollable content area while scrolling through the group's data rows. Requires the [`scrollable`](/api/ui/grid/configuration/scrollable) option to be enabled. The columns must have a [`groupFooterTemplate`](/api/ui/grid/configuration/columns.groupfootertemplate) defined.
+When enabled the group footer rows will stick to the bottom of the scrollable content area while scrolling through the group's data rows. Requires the [`scrollable`](/api/ui/grid/configuration/scrollable) option to be enabled. The columns must have a [`groupFooterTemplate`](/api/ui/grid/configuration/columns#columnsgroupfootertemplate) defined.
 
 
 <div class="meta-api-description">
@@ -18950,7 +18950,7 @@ Can also be set to the following string values:
 - "columns" - enables virtualization of columns.
 - "rows, columns" - enables virtualization of both rows and columns.
 
-> For columns virtualization to work, define [widths for the columns](/api/ui/grid/configuration/columns.width). For additional information about the configuration of this functionality, visit the [Virtual Scrolling]({% slug virtual_scrolling_kendoui_grid_widget %}) documentation article.
+> For columns virtualization to work, define [widths for the columns](/api/ui/grid/configuration/columns#columnswidth). For additional information about the configuration of this functionality, visit the [Virtual Scrolling]({% slug virtual_scrolling_kendoui_grid_widget %}) documentation article.
 
 Check [Virtualization of local data](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data), [Virtualization of remote data](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) and [Colums Virtualization](https://demos.telerik.com/kendo-ui/grid/column-virtualization) for live demos.
 
@@ -19309,7 +19309,7 @@ How to enable checkbox selection in Kendo UI Grid with cell aggregation? Configu
 
 When set to `true`, the user can drag to select multiple Grid rows or cells.
 
-> Applies only for [multiple row or multiple cell selection](/api/ui/grid/configuration/selectable.mode).
+> Applies only for [multiple row or multiple cell selection](/api/ui/grid/configuration/selectable#selectablemode).
 
 
 <div class="meta-api-description">
@@ -22931,11 +22931,11 @@ How to automatically resize grid columns to fit their content width in Kendo UI 
 
 ##### column `Number|String|Object`
 
-The index of the column, or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/ui/grid/fields/columns) collection.
+The index of the column, or the [field](/api/ui/grid/configuration/columns#columnsfield) to which the columns is bound, or the column object obtained from the [columns](/api/ui/grid/fields/columns) collection.
 
 When using multicolumn headers, using an index is not allowed. In such scenarios, please use a field name or a column object as a method argument.
 
-> The method ignores and does not resize [hidden](/api/ui/grid/configuration/columns.hidden) columns.
+> The method ignores and does not resize [hidden](/api/ui/grid/configuration/columns#columnshidden) columns.
 >
 > Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](slug://width_kendoui_grid_widget), according to their content.
 >
@@ -23004,7 +23004,7 @@ When using multicolumn headers, using an index is not allowed. In such scenarios
 
 Applies the minimum possible width for all columns, so that all text fits without wrapping.
 
-> The method ignores and does not resize [hidden](/api/ui/grid/configuration/columns.hidden) columns.
+> The method ignores and does not resize [hidden](/api/ui/grid/configuration/columns#columnshidden) columns.
 >
 > Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns ([autoFitColumn](/api/ui/grid/methods/autoFitColumn)) that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](slug://width_kendoui_grid_widget), according to their content.
 >
@@ -23240,7 +23240,7 @@ How do I clear selected rows in a Kendo UI grid? Clear or reset the currently se
 
 ### closeCell
 
-Stops editing the table cell which is in edit mode. Requires "incell" [edit mode](/api/ui/grid/configuration/editable.mode).
+Stops editing the table cell which is in edit mode. Requires "incell" [edit mode](/api/ui/grid/configuration/editable#editablemode).
 
 > When keyboard navigation is used, the Grid [`table`](/api/ui/grid/fields/table) must be focused programmatically after calling `closeCell`.
 
@@ -23562,7 +23562,7 @@ How to disable runtime editing in Kendo UI Grid? Control or disable runtime edit
 
 ### editCell
 
-Switches the specified table cell in edit mode. Requires "incell" [edit mode](/api/ui/grid/configuration/editable.mode).
+Switches the specified table cell in edit mode. Requires "incell" [edit mode](/api/ui/grid/configuration/editable#editablemode).
 
 Fires the [edit](/api/ui/grid/events/edit) event.
 
@@ -23603,7 +23603,7 @@ The jQuery object which represents the table cell.
 
 ### editRow
 
-Switches the specified table row in edit mode. Requires "inline" or "popup" [edit mode](/api/ui/grid/configuration/editable.mode).
+Switches the specified table row in edit mode. Requires "inline" or "popup" [edit mode](/api/ui/grid/configuration/editable#editablemode).
 
 Fires the [edit](/api/ui/grid/events/edit) event.
 
@@ -24257,7 +24257,7 @@ How to programmatically hide columns in Kendo UI Grid? Dynamically control colum
 
 ##### column `Number|String|Object|Array`
 
-The index of the column, or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/ui/grid/fields/columns) collection, or array of indexes, or array of fields, or array of column objects obtained from the collection of columns, or array of mixed values.
+The index of the column, or the [field](/api/ui/grid/configuration/columns#columnsfield) to which the columns is bound, or the column object obtained from the [columns](/api/ui/grid/fields/columns) collection, or array of indexes, or array of fields, or array of column objects obtained from the collection of columns, or array of mixed values.
 
 When using multicolumn headers, using an index will hide a top-level column together with all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
 
@@ -24390,7 +24390,7 @@ How can I lock specific columns in my Kendo UI Grid so they remain visible durin
 
 ##### column `Number|String`
 
-The index of the column or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound.
+The index of the column or the [field](/api/ui/grid/configuration/columns#columnsfield) to which the columns is bound.
 
 > In order to use this method, the grid must be initialized with at least one locked column, and should have unlocked columns left after the target column is locked.
 
@@ -24599,7 +24599,7 @@ How do I update Kendo Grid data in jQuery after modifying an in-memory item? Tri
 
 Removes the specified table row from the grid. Also removes the corresponding data item from the data source.
 
-Executing of `removeRow` triggers the default execution of the Grid delete mechanism. If the Grid data source is configured with destroy remote data operation a delete request will be performed. If the `editable` configuration is set to `true`, a confirmation dialog will appear before removing the row. You can disable it from the [`editable.confirmation`](/api/ui/grid/configuration/editable.confirmation) setting.
+Executing of `removeRow` triggers the default execution of the Grid delete mechanism. If the Grid data source is configured with destroy remote data operation a delete request will be performed. If the `editable` configuration is set to `true`, a confirmation dialog will appear before removing the row. You can disable it from the [`editable.confirmation`](/api/ui/grid/configuration/editable#editableconfirmation) setting.
 
 Fires the [remove](/api/ui/grid/events/remove) event.
 
@@ -25342,7 +25342,7 @@ When `setOptions` is called, the Grid widget will be destroyed and recreated. If
 > This is because the server templates are rendered server-side and do not have corresponding configuration options included in the JavaScript initialization statement that creates the
 > Grid object client-side. As a result, the templates will be lost once the `setOptions()` method is invoked.
 > There are two options to avoid the issue - use JavaScript initialization instead of an MVC wrapper, or add template configuration to the retrieved Grid state with the JavaScript
-> equivalent syntax (e.g. [`headerTemplate`](/api/ui/grid/configuration/columns.headertemplate) and [`toolbar`](/api/ui/grid/configuration/toolbar)).
+> equivalent syntax (e.g. [`headerTemplate`](/api/ui/grid/configuration/columns#columnsheadertemplate) and [`toolbar`](/api/ui/grid/configuration/toolbar)).
 
 
 <div class="meta-api-description">
@@ -25399,7 +25399,7 @@ How can I dynamically show hidden columns in a Kendo UI Grid? Enable displaying 
 
 ##### column `Number|String|Object|Array`
 
-The index of the column, or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/ui/grid/fields/columns) collection, or array of indexes, or array of fields, or array of column objects obtained from the collection of columns, or array of mixed values.
+The index of the column, or the [field](/api/ui/grid/configuration/columns#columnsfield) to which the columns is bound, or the column object obtained from the [columns](/api/ui/grid/fields/columns) collection, or array of indexes, or array of fields, or array of column objects obtained from the collection of columns, or array of mixed values.
 
 When using multicolumn headers, using an index will hide a top-level column together with all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
 
@@ -25495,7 +25495,7 @@ How do I pin specific columns in a Kendo UI Grid to prevent them from scrolling 
 
 ##### column `Number|String`
 
-The index of the column or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound.
+The index of the column or the [field](/api/ui/grid/configuration/columns#columnsfield) to which the columns is bound.
 
 #### Example - stick a column
 
@@ -25526,7 +25526,7 @@ How to dynamically unlock columns in Kendo UI Grid? Enable dynamic column unfree
 
 ##### column `Number|String`
 
-The index of the column or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound.
+The index of the column or the [field](/api/ui/grid/configuration/columns#columnsfield) to which the columns is bound.
 
 > In order to use this method, the grid must be initialized with at least one locked column, and there should be locked columns left after the target column is unlocked.
 
@@ -25637,7 +25637,7 @@ How do I unpin a column in Kendo UI grid? Enable developers to unpin, unfreeze, 
 
 ##### column `Number|String`
 
-The index of the column or the [field](/api/ui/grid/configuration/columns.field) to which the columns is bound.
+The index of the column or the [field](/api/ui/grid/configuration/columns#columnsfield) to which the columns is bound.
 
 #### Example - unstick a column
 
@@ -25758,7 +25758,7 @@ The widget instance which fired the event.
 
 ### cancel
 
-Fired when the user clicks the "cancel" button (in inline or popup [editing mode](/api/ui/grid/configuration/editable.mode)) or closes the popup window.
+Fired when the user clicks the "cancel" button (in inline or popup [editing mode](/api/ui/grid/configuration/editable#editablemode)) or closes the popup window.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
@@ -27402,7 +27402,7 @@ How can I capture the edit event in Kendo UI Grid for jQuery? Capture and respon
 
 ##### e.container `jQuery`
 
-The jQuery object of the edit container element, which wraps the editing UI. Depending on the [Grid edit mode](/api/ui/grid/configuration/editable.mode), the container is different:
+The jQuery object of the edit container element, which wraps the editing UI. Depending on the [Grid edit mode](/api/ui/grid/configuration/editable#editablemode), the container is different:
 
 * "incell" edit mode - the container element is a table cell
 * "inline" edit mode - the container is a table row
@@ -28911,11 +28911,11 @@ The widget instance which fired the event.
 
 ##### e.values `Object`
 
-The values entered by the user. **Available only when the [editable.mode](/api/ui/grid/configuration/editable.mode) option is set to "incell".**
+The values entered by the user. **Available only when the [editable.mode](/api/ui/grid/configuration/editable#editablemode) option is set to "incell".**
 
 ##### e.preventDefault `Function`
 
-If invoked, prevents the save action. In "incell" [editable.mode](/api/ui/grid/configuration/editable.mode) the edited table cell will exit edit mode. In "inline" and "popup" edit modes, the edit form will remain open.
+If invoked, prevents the save action. In "incell" [editable.mode](/api/ui/grid/configuration/editable#editablemode) the edited table cell will exit edit mode. In "inline" and "popup" edit modes, the edit form will remain open.
 
 #### Example - subscribe to the "save" event during initialization
 

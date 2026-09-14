@@ -169,7 +169,7 @@ In this step, you will add scale labels and style the major and minor ticks.
 
 ## 5. Customize the Scale Colors
 
-Here, you will specify the [`colors of the scale ranges`](/api/dataviz/ui/radialgauge/configuration/scale.ranges). 
+Here, you will specify the [`colors of the scale ranges`](/api/dataviz/ui/radialgauge/configuration/scale#scaleranges). 
 
 ```dojo
     <div id="radial-gauge"></div>

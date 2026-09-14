@@ -20,7 +20,7 @@ Clicking **Export to Excel** or calling the `saveAsExcel` throws an exception if
 
 ## Excel export is not working in Internet Explorer and Safari
 
-Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To work around this issue, set the [`proxyURL`](/api/ui/grid/configuration/excel.proxyurl) option to specify the server proxy URL.
+Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To work around this issue, set the [`proxyURL`](/api/ui/grid/configuration/excel#excelproxyurl) option to specify the server proxy URL.
 
 ```dojo
     <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>

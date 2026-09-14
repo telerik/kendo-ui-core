@@ -32,8 +32,8 @@ How can I create a Kendo UI Column or Bar Chart with two values in the same cate
 
 ## Solution
 
-1. Use the [`series.spacing`](/api/dataviz/ui/chart/configuration/series.spacing) property with a value of `-1` (minus one) to place one series on top of the other.
-2. Apply a custom [`visual`](/api/dataviz/ui/chart/configuration/series.visual) for the top series to make their bar narrower.
+1. Use the [`series.spacing`](/api/dataviz/ui/chart/configuration/series#seriesspacing) property with a value of `-1` (minus one) to place one series on top of the other.
+2. Apply a custom [`visual`](/api/dataviz/ui/chart/configuration/series#seriesvisual) for the top series to make their bar narrower.
 
 The following example demonstrates how to apply the suggested approach to a Bar Chart series.
 

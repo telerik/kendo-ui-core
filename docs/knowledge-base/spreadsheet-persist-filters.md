@@ -29,7 +29,7 @@ How can I save the filter for each column and then re-apply the filter once the 
 
 The Spreadsheet does not provide a built-in option for achieving the described scenario. However, you can still work around the issue by using its API.
 
-1. Store the current filter state on the sheet by retrieving it through the [`filter()`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/configuration/sheets.filter) method.
+1. Store the current filter state on the sheet by retrieving it through the [`filter()`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/configuration/sheets#sheetsfilter) method.
 
 	```js
 	var spread = $("#spreadsheet").getKendoSpreadsheet();

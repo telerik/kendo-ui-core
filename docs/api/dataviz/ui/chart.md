@@ -6715,7 +6715,7 @@ How to limit date groups on a Kendo UI chart axis? Configure the upper limit on 
 
 ### categoryAxis.maxDivisions `Number`
 
-The maximum number of ticks, labels and grid lines to display. Applicable for date category axis. You can combine this property with a bigger value of the [maxDateGroups](/api/dataviz/ui/chart/configuration/categoryaxis.maxdategroups) property to increase the number of rendered data points in the Chart without drawing too many labels, ticks, and grid lines.
+The maximum number of ticks, labels and grid lines to display. Applicable for date category axis. You can combine this property with a bigger value of the [maxDateGroups](/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxismaxdategroups) property to increase the number of rendered data points in the Chart without drawing too many labels, ticks, and grid lines.
 
 
 <div class="meta-api-description">
@@ -7422,7 +7422,7 @@ How do I set the starting position of a highlighted region in Kendo UI for jQuer
 
 The label configuration of the plotband.
 
-> The [categoryAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/categoryaxis.plotbands#categoryaxisplotbandslabeltext) option must be set in order to display the plotband label.
+> The [categoryAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxisplotbands#categoryaxisplotbandslabeltext) option must be set in order to display the plotband label.
 
 
 <div class="meta-api-description">
@@ -29718,7 +29718,7 @@ How do I set uniform padding around donut and pie chart series in Kendo UI for j
 
 The configuration options of the series pattern.
 
-> The pattern inherits the [`series.color`](/api/dataviz/ui/chart/configuration/series.color) as main color and accepts an optional `background` color.
+> The pattern inherits the [`series.color`](/api/dataviz/ui/chart/configuration/series#seriescolor) as main color and accepts an optional `background` color.
 
 
 <div class="meta-api-description">
@@ -30863,9 +30863,9 @@ The supported values are:
 * [`bar`](/controls/charts/chart-types/bar-charts)
 * [`bubble`](/controls/charts/chart-types/bubble-charts)
 * [`bullet`](/controls/charts/chart-types/bullet-charts)
-* [`candlestick`](/api/dataviz/ui/chart/configuration/seriesdefaults.candlestick)
+* [`candlestick`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultscandlestick)
 * [`column`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.column)
-* [`donut`](/api/dataviz/ui/chart/configuration/seriesdefaults.donut)
+* [`donut`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultsdonut)
 * [`funnel`](/controls/charts/chart-types/funnel-charts)
 * [`pyramid`](/controls/charts/chart-types/pyramid-charts)
 * [`heatmap`](/controls/charts/chart-types/heatmap)
@@ -30877,7 +30877,7 @@ The supported values are:
 * [`powerTrendline`](/controls/charts/elements/trendlines)
 * [`polynomialTrendline`](/controls/charts/elements/trendlines)
 * [`movingAverageTrendline`](/controls/charts/elements/trendlines)
-* [`ohlc`](/api/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
+* [`ohlc`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultsohlc)
 * [`pie`](/controls/charts/chart-types/pie-charts)
 * [`polarArea`](https://demos.telerik.com/kendo-ui/polar-charts/polar-area)
 * [`polarLine`](https://demos.telerik.com/kendo-ui/polar-charts/index)
@@ -30889,12 +30889,12 @@ The supported values are:
 * [`rangeBar`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
 * [`rangeColumn`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
 * [`scatter`](/controls/charts/chart-types/scatter-charts)
-* [`scatterLine`](/api/dataviz/ui/chart/configuration/seriesdefaults.scatterline)
+* [`scatterLine`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultsscatterline)
 * [`verticalArea`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalarea)
 * [`verticalBoxPlot`](https://demos.telerik.com/kendo-ui/box-plot-charts/vertical)
 * [`verticalBullet`](/controls/charts/chart-types/bullet-charts)
-* [`verticalLine`](/api/dataviz/ui/chart/configuration/seriesdefaults.verticalline)
-* [`verticalRangeArea`](/api/dataviz/ui/chart/configuration/seriesdefaults.verticalrangearea)
+* [`verticalLine`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultsverticalline)
+* [`verticalRangeArea`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultsverticalrangearea)
 * [`waterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/index)
 
 Different chart types expect data in specific formats:
@@ -37334,9 +37334,9 @@ The supported values are:
 * [`bar`](/controls/charts/chart-types/bar-charts)
 * [`bubble`](/controls/charts/chart-types/bubble-charts)
 * [`bullet`](/controls/charts/chart-types/bullet-charts)
-* [`candlestick`](/api/dataviz/ui/chart/configuration/seriesdefaults.candlestick)
+* [`candlestick`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultscandlestick)
 * [`column`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.column)
-* [`donut`](/api/dataviz/ui/chart/configuration/seriesdefaults.donut)
+* [`donut`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultsdonut)
 * [`funnel`](/controls/charts/chart-types/funnel-charts)
 * [`pyramid`](/controls/charts/chart-types/pyramid-charts)
 * [`heatmap`](/controls/charts/chart-types/heatmap)
@@ -37348,7 +37348,7 @@ The supported values are:
 * [`powerTrendline`](/controls/charts/elements/trendlines)
 * [`polynomialTrendline`](/controls/charts/elements/trendlines)
 * [`movingAverageTrendline`](/controls/charts/elements/trendlines)
-* [`ohlc`](/api/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
+* [`ohlc`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultsohlc)
 * [`pie`](/controls/charts/chart-types/pie-charts)
 * [`polarArea`](https://demos.telerik.com/kendo-ui/polar-charts/polar-area)
 * [`polarLine`](https://demos.telerik.com/kendo-ui/polar-charts/index)
@@ -37360,12 +37360,12 @@ The supported values are:
 * [`rangeBar`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
 * [`rangeColumn`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
 * [`scatter`](/controls/charts/chart-types/scatter-charts)
-* [`scatterLine`](/api/dataviz/ui/chart/configuration/seriesdefaults.scatterline)
+* [`scatterLine`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultsscatterline)
 * [`verticalArea`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalarea)
 * [`verticalBoxPlot`](https://demos.telerik.com/kendo-ui/box-plot-charts/vertical)
 * [`verticalBullet`](/controls/charts/chart-types/bullet-charts)
-* [`verticalLine`](/api/dataviz/ui/chart/configuration/seriesdefaults.verticalline)
-* [`verticalRangeArea`](/api/dataviz/ui/chart/configuration/seriesdefaults.verticalrangearea)
+* [`verticalLine`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultsverticalline)
+* [`verticalRangeArea`](/api/dataviz/ui/chart/configuration/seriesdefaults#seriesdefaultsverticalrangearea)
 * [`waterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/index)
 
 
@@ -43086,7 +43086,7 @@ How do I set the maximum value on a Kendo UI chart's value axis? Control or conf
 
 ### valueAxis.min `Number` *(default: 0)*
 
-The minimum value of the axis. Under certain conditions, the [narrowRange](/api/dataviz/ui/chart/configuration/valueaxis.narrowrange) setting can overwrite this setting. To give priority to the `min` setting of your choice, set `valueAxis.narrowRange` to `false`.
+The minimum value of the axis. Under certain conditions, the [narrowRange](/api/dataviz/ui/chart/configuration/valueaxis#valueaxisnarrowrange) setting can overwrite this setting. To give priority to the `min` setting of your choice, set `valueAxis.narrowRange` to `false`.
 
 
 <div class="meta-api-description">
@@ -43844,7 +43844,7 @@ How do I set a custom name for a value axis in a Kendo UI chart? Assign a unique
 ### valueAxis.narrowRange `Boolean` *(default: true)*
 
 If set to `true` the Chart will narrow the value axis range in order to display data points in better detail.
-Setting it to `false` will force the automatic axis range to start from 0 or the explicitly specified [valueAxis.min](/api/dataviz/ui/chart/configuration/valueaxis.min) value.
+Setting it to `false` will force the automatic axis range to start from 0 or the explicitly specified [valueAxis.min](/api/dataviz/ui/chart/configuration/valueaxis#valueaxismin) value.
 
 
 <div class="meta-api-description">
@@ -43989,7 +43989,7 @@ How do I set the starting point of a highlighted range on my chart's value axis 
 
 The label configuration of the plotband.
 
-> The [valueAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/valueAxis.plotbands#valueaxisplotbandslabeltext) option must be set in order to display the plotband label.
+> The [valueAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/valueaxis/plotbands/label#valueaxisplotbandslabeltext) option must be set in order to display the plotband label.
 
 
 <div class="meta-api-description">
@@ -50942,7 +50942,7 @@ How to set the starting position of an x-axis plot band in a Kendo UI chart? Spe
 
 The label configuration of the plotband.
 
-> The [xAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/xAxis.plotbands#xAxisplotbandslabeltext) option must be set in order to display the plotband label.
+> The [xAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/xaxis#xaxisplotbands#xAxisplotbandslabeltext) option must be set in order to display the plotband label.
 
 
 <div class="meta-api-description">
@@ -57926,7 +57926,7 @@ How do I set the starting point of a highlighted range in my Kendo UI Chart's y-
 
 The label configuration of the plotband.
 
-> The [yAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/yAxis.plotbands#yAxisplotbandslabeltext) option must be set in order to display the plotband label.
+> The [yAxis.plotBands.label.text](/api/dataviz/ui/chart/configuration/yaxis#yaxisplotbands#yAxisplotbandslabeltext) option must be set in order to display the plotband label.
 
 
 <div class="meta-api-description">

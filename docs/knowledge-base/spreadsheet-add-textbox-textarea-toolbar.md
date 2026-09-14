@@ -23,7 +23,7 @@ I want to add an interactive TextBox or TextArea to the toolbar of a Kendo UI Sp
 
 To add a TextBox or TextArea to the Kendo UI Spreadsheet's toolbar, you can follow these steps:
 
-1. Initialize the Spreadsheet component with a [custom template for the toolbar](/api/ui/toolbar/configuration/items.template).
+1. Initialize the Spreadsheet component with a [custom template for the toolbar](/api/ui/toolbar/configuration/items#itemstemplate).
 2. Add a `div` element with an `id` for the TextBox and [initialize it](/intro/widget-basics/jquery-initialization?#getting-started) as a [Kendo UI TextBox](https://demos.telerik.com/kendo-ui/textbox/index).
 3. Add a `textArea` element with an `id` for the TextArea and  [initialize it](/intro/widget-basics/jquery-initialization?#getting-started) as a [Kendo UI TextArea](https://demos.telerik.com/kendo-ui/textarea/index).
 

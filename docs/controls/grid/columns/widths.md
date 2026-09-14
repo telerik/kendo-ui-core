@@ -10,7 +10,7 @@ position: 1
 
 # Column Widths
 
-To set the widths of the Grid columns, use their [`width`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.width) property.
+To set the widths of the Grid columns, use their [`width`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnswidth) property.
 
 You can also set the width of the columns when you create a Grid from an HTML `table` through the `col` elements, however, avoid this approach when you use width styles for table cells.
 

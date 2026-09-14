@@ -31,7 +31,7 @@ How can I hide the grouping details when there is only one record in the group o
 
 To hide the group header:
 
-1. In the [`groupHeaderTemplate`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.groupheadertemplate), implement an `if/else` condition.
+1. In the [`groupHeaderTemplate`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsgroupheadertemplate), implement an `if/else` condition.
 1. Based on it, display different templates.
 
     ```
@@ -40,7 +40,7 @@ To hide the group header:
 
 To hide the group footer:
 
-1. In the [`groupFooterTemplate`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.groupfootertemplate) implement an `if/else` condition. Based on it, add a class to the cell.
+1. In the [`groupFooterTemplate`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsgroupfootertemplate) implement an `if/else` condition. Based on it, add a class to the cell.
 1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event handler, select the class and [`hide`](https://api.jquery.com/hide/) the [`closest`](https://api.jquery.com/closest/) `.k-group-footer` row.
 
     ```

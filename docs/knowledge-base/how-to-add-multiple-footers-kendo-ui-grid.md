@@ -28,7 +28,7 @@ This KB article also answers the following questions:
 
 To add multiple footer rows to a Kendo UI Grid without employing grouping, utilize the footer template to divide the content into separate `div` elements. By doing so, you can simulate multiple footers. Here is a step-by-step guide:
 
-1. **Define the Grid Column with Custom Footer Template**: In the Grid column definition, use the [`footerTemplate`](/api/ui/grid/configuration/columns.footertemplate) to introduce multiple `div` elements for displaying various calculations or summaries.
+1. **Define the Grid Column with Custom Footer Template**: In the Grid column definition, use the [`footerTemplate`](/api/ui/grid/configuration/columns#columnsfootertemplate) to introduce multiple `div` elements for displaying various calculations or summaries.
 
     ```javascript
     { 
@@ -112,5 +112,5 @@ Below you will find a runnable example:
 
 ## See Also
 
-- [Kendo UI Grid Footer Template Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.footertemplate)
+- [Kendo UI Grid Footer Template Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsfootertemplate)
 - [Kendo UI Grid Overview](https://docs.telerik.com/kendo-ui/controls/grid/overview)

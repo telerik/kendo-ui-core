@@ -37,7 +37,7 @@ How can I set the size of the default drawing element of the Chart bars to the s
 
 ## Solution
 
-The following example demonstrates how to use the [`series.visual`](/api/dataviz/ui/chart/configuration/series.visual) function to scale the default drawing element of the bars and achieve this behavior.
+The following example demonstrates how to use the [`series.visual`](/api/dataviz/ui/chart/configuration/series#seriesvisual) function to scale the default drawing element of the bars and achieve this behavior.
 
 ```dojo
     <div id="chart"></div>

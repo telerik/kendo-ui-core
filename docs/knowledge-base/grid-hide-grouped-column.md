@@ -22,7 +22,7 @@ components: ["grid"]
 
 ## Description
 
-I have enabled the [`hideOnGroup`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.hideongroup) option, but the column is still visible when the Grid is loaded initially. How can I hide the grouped column when the dataSource is grouped initially?
+I have enabled the [`hideOnGroup`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnshideongroup) option, but the column is still visible when the Grid is loaded initially. How can I hide the grouped column when the dataSource is grouped initially?
 
 By design, the `hideOnGroup` option specifies if the column will be hidden when the Grid is grouped upon user interaction. For this reason, even if the dataSource is grouped initially using the group option, the respective column is visible in the table.
 

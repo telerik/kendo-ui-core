@@ -26,7 +26,7 @@ To enable the ContextMenu functionality, set the [`contextmenu`](/api/ui/grid/co
 
 ## Predefined Tools
 
-The Grid component allows you to choose between a predefined list of commands that will be included in the ContextMenu. You can add the needed tools in the [`contextmenu.body`](/api/ui/grid/configuration/contextmenu.body) configuration option.
+The Grid component allows you to choose between a predefined list of commands that will be included in the ContextMenu. You can add the needed tools in the [`contextmenu.body`](/api/ui/grid/configuration/contextmenu#contextmenubody) configuration option.
 The valid predefined tools are: *"separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc".*
 In the example below all predefined commands are included in a customized order.
 

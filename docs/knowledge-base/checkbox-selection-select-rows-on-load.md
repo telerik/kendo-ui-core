@@ -107,4 +107,4 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
 * [Grid Checkbox Selection Demo](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.selectable)
+* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsselectable)

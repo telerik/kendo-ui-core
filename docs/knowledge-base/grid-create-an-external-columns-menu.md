@@ -44,7 +44,7 @@ Here's one approach you can take to add an external Kendo UI Menu with checkbox 
             var columnValues = grid.columns;
     ```
 
-1. Create an array and loop through the [grid columns hidden field](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.hidden). If it's not hidden, push the "checked" string.
+1. Create an array and loop through the [grid columns hidden field](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnshidden). If it's not hidden, push the "checked" string.
 
     ```javascript
             //Create array
@@ -300,7 +300,7 @@ The following example creates a Kendo UI Menu with checkbox items that control t
 * [showColumn Method - Grid API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/showcolumn)
 * [hideColumn Method - Grid API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/hidecolumn)
 * [columns - Grid API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid/fields/columns)
-* [columns.hidden - Grid API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.hidden)
+* [columns.hidden - Grid API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnshidden)
 * [append method - Menu API Reference](https://docs.telerik.com/kendo-ui/api/ui/menu/methods/append)
 * [select event - Menu API Reference](https://docs.telerik.com/kendo-ui/api/ui/menu/events/select)
 * [columnMenu - Grid API Reference](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columnmenu)

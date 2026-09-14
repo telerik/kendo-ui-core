@@ -63,7 +63,7 @@ With regard to its CSV export, the Grid enables you to:
 
 ### Exporting All Pages
 
-By default, the Grid exports only the current page. To export all pages, set [`csv.allPages`](/api/ui/grid/configuration/csv.allpages) to `true`.
+By default, the Grid exports only the current page. To export all pages, set [`csv.allPages`](/api/ui/grid/configuration/csv#csvallpages) to `true`.
 
 ```dojo
     <div id="grid"></div>
@@ -97,11 +97,11 @@ By default, the Grid exports only the current page. To export all pages, set [`c
 
 You can customize the exported CSV through the [`csv`](/api/ui/grid/configuration/csv) configuration:
 
-* [`csv.delimiter`](/api/ui/grid/configuration/csv.delimiter)
-* [`csv.lineSeparator`](/api/ui/grid/configuration/csv.lineseparator)
-* [`csv.includeUTF8BOM`](/api/ui/grid/configuration/csv.includeutf8bom)
-* [`csv.preventFormulaInjection`](/api/ui/grid/configuration/csv.preventformulainjection)
-* [`csv.maxCellLength`](/api/ui/grid/configuration/csv.maxcelllength)
+* [`csv.delimiter`](/api/ui/grid/configuration/csv#csvdelimiter)
+* [`csv.lineSeparator`](/api/ui/grid/configuration/csv#csvlineseparator)
+* [`csv.includeUTF8BOM`](/api/ui/grid/configuration/csv#csvincludeutf8bom)
+* [`csv.preventFormulaInjection`](/api/ui/grid/configuration/csv#csvpreventformulainjection)
+* [`csv.maxCellLength`](/api/ui/grid/configuration/csv#csvmaxcelllength)
 
 The following example demonstrates a custom delimiter, custom line separator, UTF-8 BOM, and formula injection protection.
 
@@ -225,7 +225,7 @@ Use the [`csvExport`](/api/ui/grid/events/csvexport) event to inspect or modify 
 ## Known Limitations
 
 * When exporting all pages with large remote datasets, the browser may become unresponsive.
-* Older browsers may require a server proxy. Configure [`csv.proxyURL`](/api/ui/grid/configuration/csv.proxyurl) and [`csv.forceProxy`](/api/ui/grid/configuration/csv.forceproxy) when needed.
+* Older browsers may require a server proxy. Configure [`csv.proxyURL`](/api/ui/grid/configuration/csv#csvproxyurl) and [`csv.forceProxy`](/api/ui/grid/configuration/csv#csvforceproxy) when needed.
 * The [`saveAsCSV`](/api/ui/grid/methods/saveascsv) method does not trigger the [`csvExport`](/api/ui/grid/events/csvexport) event.
 * The Grid CSV export does not support exporting footer rows.
 

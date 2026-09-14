@@ -2174,7 +2174,7 @@ The URL template for tile layers. Template variables:
 * x - X coordinate of the tile
 * y - Y coordinate of the tile
 * zoom - zoom level
-* subdomain - Subdomain for this tile. See [subdomains](/api/dataviz/ui/map/configuration/layers.subdomains)
+* subdomain - Subdomain for this tile. See [subdomains](/api/dataviz/ui/map/configuration/layers#layerssubdomains)
 
 
 <div class="meta-api-description">
@@ -4047,7 +4047,7 @@ The URL template for tile layers. Template variables:
 * x - X coordinate of the tile
 * y - Y coordinate of the tile
 * zoom - zoom level
-* subdomain - Subdomain for this tile. See [subdomains](/api/dataviz/ui/map/configuration/layers.subdomains)
+* subdomain - Subdomain for this tile. See [subdomains](/api/dataviz/ui/map/configuration/layers#layerssubdomains)
 
 
 <div class="meta-api-description">

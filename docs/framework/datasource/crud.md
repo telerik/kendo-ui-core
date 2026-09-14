@@ -596,7 +596,7 @@ For a complete example of Remote CRUD Operations please refer to this [Grid Inli
 
 ## Submitting All Items with a Single Request
 
-When you use custom transport, the create, update, and delete operations will be handled by the [`transport.submit`](/api/data/datasource/configuration/transport.submit) function in a single batch. You are also required to define `transport.read` as a function. The `transport.create`, `transport.update`, and `transport.delete` operations will not be executed in this case.
+When you use custom transport, the create, update, and delete operations will be handled by the [`transport.submit`](/api/data/datasource/configuration/transport#transportsubmit) function in a single batch. You are also required to define `transport.read` as a function. The `transport.create`, `transport.update`, and `transport.delete` operations will not be executed in this case.
 
 > For the defined function to invoke a single request for all read, create, update, and delete operation, set the DataSource in its [batch mode](/api/data/datasource#configuration-batch).
 

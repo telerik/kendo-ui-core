@@ -48,4 +48,4 @@ The possible causes of the issue may be either of the following:
 
 Use a valid `type` value, or remove the `type` property, or add the corresponding missing file&mdash;for example, `kendo.aspnetmvc.min.js` when using the Kendo UI MVC wrappers.
 
-Note that the [dataSource `type`](/api/data/datasource/configuration/type) differs from the [`type` of the transport actions](/api/data/datasource/configuration/transport.read#transportreadtype).
+Note that the [dataSource `type`](/api/data/datasource/configuration/type) differs from the [`type` of the transport actions](/api/data/datasource/configuration/transport#transportread#transportreadtype).

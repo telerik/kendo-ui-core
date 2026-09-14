@@ -11,7 +11,7 @@ position: 4
 
 The Spreadsheet offers support for comments to be placed within each of its cells.
 
-The following example demonstrates how a cell in the Spreadsheet can be initially [configured to contain a comment](/api/ui/spreadsheet/configuration/sheets.rows.cells.comment).
+The following example demonstrates how a cell in the Spreadsheet can be initially [configured to contain a comment](/api/ui/spreadsheet/configuration/sheets/rows/cells#sheetsrowscellscomment).
 
 ```dojo
     <div id="spreadsheet"></div>

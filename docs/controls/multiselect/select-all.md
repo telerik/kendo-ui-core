@@ -87,7 +87,7 @@ You can combine Select All with the [`summarizeAfter`](/api/ui/multiselect/confi
 
 ## Customizing the Select All Label
 
-To change the text displayed in the sticky header, set the [`messages.selectAll`](/api/ui/multiselect/configuration/messages.selectall) option.
+To change the text displayed in the sticky header, set the [`messages.selectAll`](/api/ui/multiselect/configuration/messages#messagesselectall) option.
 
 ```dojo
     <select id="multiselect" multiple="multiple"></select>

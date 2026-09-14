@@ -37,7 +37,7 @@ How can I show more events in view cells in a Kendo UI for jQuery Scheduler?
 
 ## Solution
 
-As of the 2020 R1, you can use the [`views.eventsPerDay`](/api/ui/scheduler/configuration/views.eventsperday) option, to set the number of events in the `month` view.
+As of the 2020 R1, you can use the [`views.eventsPerDay`](/api/ui/scheduler/configuration/views#viewseventsperday) option, to set the number of events in the `month` view.
 
 For versions of Kendo UI prior to 2020 R1, where the `eventsPerDay` property is not available, increasing the number of events in the `month` view cells must be achieved by using CSS.
 

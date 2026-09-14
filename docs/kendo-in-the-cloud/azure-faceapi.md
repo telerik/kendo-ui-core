@@ -20,7 +20,7 @@ You can seamlessly integrate Kendo UI widgets with a cognitive service such as [
 
 ## Sending Files Directly to Face API with the Upload
 
-The following example demonstrates how to send files directly to Azure Face API by using the [`useArrayBuffer`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async.usearraybuffer) configuration option of the Upload. This approach enables the file reading with `FileReader` and the sending of buffer data to the cloud service afterwards. In turn, the Face API analyzes the image, detects the available faces, and returns data in a JSON format.
+The following example demonstrates how to send files directly to Azure Face API by using the [`useArrayBuffer`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async#asyncusearraybuffer) configuration option of the Upload. This approach enables the file reading with `FileReader` and the sending of buffer data to the cloud service afterwards. In turn, the Face API analyzes the image, detects the available faces, and returns data in a JSON format.
 
 ### Configuration
 
@@ -136,7 +136,7 @@ The following example demonstrates how to send files directly to Azure Face API 
 
 ## Breakdown of the Sample Implementation
 
-1. The first step is to initialize an async Kendo UI Upload by also passing the base service URL with the required [Face API parameters](https://westcentralus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236). Then, you need to configure the [`useArrayBuffer`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async.usearraybuffer) and [`withCredentials`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async.withcredentials) to send the uploaded file directly to the Azure Face API.
+1. The first step is to initialize an async Kendo UI Upload by also passing the base service URL with the required [Face API parameters](https://westcentralus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236). Then, you need to configure the [`useArrayBuffer`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async#asyncusearraybuffer) and [`withCredentials`](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async#asyncwithcredentials) to send the uploaded file directly to the Azure Face API.
 
 2. Next, to authenticate with the API, you have to send the `Content-Type` and `Ocp-Apim-Subscription-Key` headers with the request by utilizing [`upload`](https://docs.telerik.com/kendo-ui/api/ui/upload/events/upload) event of the Upload.
 

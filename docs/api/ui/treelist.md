@@ -260,7 +260,7 @@ The built-in commands are:
 
 Custom commands are supported by specifying the [`click`](/api/ui/treelist#configuration-columns.command.click) option.
 
-> * Each custom command requires you to explicitly specify its [`name`](/api/ui/treelist/configuration/columns.command#columnscommandname).
+> * Each custom command requires you to explicitly specify its [`name`](/api/ui/treelist/configuration/columns#columnscommand#columnscommandname).
 > * A command column cannot be [`expandable`](/api/ui/treelist#configuration-columns.expandable).
 > * The built-in commands work only if editing is enabled through the [`editable`](/api/ui/treelist#configuration-editable) option and the DataSource of the TreeList is configured for [CRUD operations](https://docs.telerik.com/kendo-ui/framework/datasource/crud).
 
@@ -1623,7 +1623,7 @@ How do I add custom CSS classes to column headers in a Kendo UI TreeList compone
 
 ### columns.headerTemplate `String|Function`
 
-The [`template`](/api/kendo/methods/template) which renders the column header content. By default, the value of the [`title`](/api/ui/treelist/configuration/columns.title) column option is displayed in the column header cell.
+The [`template`](/api/kendo/methods/template) which renders the column header content. By default, the value of the [`title`](/api/ui/treelist/configuration/columns#columnstitle) column option is displayed in the column header cell.
 
 > If sorting is enabled, the column header content will be wrapped in an `<a>` element. As a result, the template must contain only inline elements.
 
@@ -1652,7 +1652,7 @@ How do I customize the header template in Kendo UI TreeList to include HTML mark
 
 ### columns.minScreenWidth `Number`
 
-The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/ui/treelist/configuration/columns.hidden) setting and the two cannot not be used at the same time.
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/ui/treelist/configuration/columns#columnshidden) setting and the two cannot not be used at the same time.
 
 
 <div class="meta-api-description">
@@ -7911,7 +7911,7 @@ How to customize toolbar buttons in Kendo UI TreeList? Configure or set the iden
 
 ### toolbar.template `String|Function`
 
-The [template](/api/kendo/methods/template) which renders the command. By default renders a button. Uses the template for a ToolBar item [toolbar.items.template](/api/ui/toolbar/configuration/items.template)
+The [template](/api/kendo/methods/template) which renders the command. By default renders a button. Uses the template for a ToolBar item [toolbar.items.template](/api/ui/toolbar/configuration/items#itemstemplate)
 
 
 <div class="meta-api-description">
@@ -8181,7 +8181,7 @@ How to configure custom button actions in Kendo UI TreeList? Configure and contr
 
 ### toolbar.items.template `String|Function`
 
-The [template](/api/kendo/methods/template) which renders the command. By default renders a button. Uses the template for a ToolBar item [toolbar.items.template](/api/ui/toolbar/configuration/items.template)
+The [template](/api/kendo/methods/template) which renders the command. By default renders a button. Uses the template for a ToolBar item [toolbar.items.template](/api/ui/toolbar/configuration/items#itemstemplate)
 
 
 <div class="meta-api-description">

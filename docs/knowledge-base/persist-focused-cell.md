@@ -44,7 +44,7 @@ The demo implies the usage of incell editing, built-in keyboard navigation, and 
 The functionality relies on the following milestones:
 
 * The [`navigatable`](/api/ui/grid/configuration/navigatable) option is set to `true`.
-* The [`editable`](/api/ui/grid/configuration/editable) option is set to `true` or the [`editable.mode`](/api/ui/grid/configuration/editable.mode) option is set to `"incell"`.
+* The [`editable`](/api/ui/grid/configuration/editable) option is set to `true` or the [`editable.mode`](/api/ui/grid/configuration/editable#editablemode) option is set to `"incell"`.
 * The [`dataBinding`](/api/ui/grid/events/databinding) event handler of the Grid is used to obtain the [`current`](/api/ui/grid/methods/current) Grid cell and its corresponding row and cell indexes.
 * The saved row and cell indexes are applied through the [`current()`](/api/ui/grid/methods/current) method in the [`dataBound`](/api/ui/grid/events/databound) event handler.
 * The [`table`](/api/ui/grid#fields-table) option of the Grid can be focused explicitly if the user has clicked on the **Save Changes** button&mdash;this requires you to set a flag in the [`saveChanges`](/api/ui/grid/events/savechanges) event handler.

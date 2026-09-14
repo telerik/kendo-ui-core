@@ -194,7 +194,7 @@ How do I control the length of the opening animation for Kendo UI windows? Contr
 
 ### appendTo `Object|String` *(default: document.body)*
 
-The element to which the Window will be appended. It is beneficial to [use the Window together with a form](/web/window/overview#using-kendo-ui-window-with-a-form) which does not constrain the dragging of the Window within the specific element. For such scenarios, use the [`draggable.containment`](/api/ui/window/configuration/draggable.containment) setting.
+The element to which the Window will be appended. It is beneficial to [use the Window together with a form](/web/window/overview#using-kendo-ui-window-with-a-form) which does not constrain the dragging of the Window within the specific element. For such scenarios, use the [`draggable.containment`](/api/ui/window/configuration/draggable#draggablecontainment) setting.
 
 > Appending the Window to an element styled with `overflow:hidden`, `overflow:auto`, or `overflow:scroll` may result in undesired behavior because the Window will not be displayed outside the  boundaries of the element. Unwanted scrollbars may appear as well.
 
@@ -382,7 +382,7 @@ How do I enable dragging for a Kendo UI window? Control whether a window or UI c
 
 ### draggable.containment `String|Element|jQuery` *default: ""*
 
-Defines the element in which the window will be able to move. The containment option overrides the [`appendTo`](/api/ui/window/configuration/draggable.containment) setting and attaches the Window to the specified DOM element. Accepts either a selector or an element.
+Defines the element in which the window will be able to move. The containment option overrides the [`appendTo`](/api/ui/window/configuration/draggable#draggablecontainment) setting and attaches the Window to the specified DOM element. Accepts either a selector or an element.
 
 > The containment element has to be positioned, that is, its CSS `position` attribute has to be set to `relative`, `absolute`, or `fixed`.
 
@@ -613,7 +613,7 @@ How do I enable modal dialogs in a Kendo UI window? Control whether a window dis
 
 ### modal.preventScroll `Boolean` *(default: false)*
 
-Specifies whether the document will stop scrolling when a modal dialog is opened. Closing the modal dialog has to restore the initial document overflow. The `modal.preventScroll` setting will modify the overflow rule of the document and, therefore, cannot be used together with the [`containment`](/api/ui/window/configuration/draggable.containment) option.
+Specifies whether the document will stop scrolling when a modal dialog is opened. Closing the modal dialog has to restore the initial document overflow. The `modal.preventScroll` setting will modify the overflow rule of the document and, therefore, cannot be used together with the [`containment`](/api/ui/window/configuration/draggable#draggablecontainment) option.
 
 > Multiple windows with different `preventScroll` settings are not supported.
 
@@ -655,7 +655,7 @@ How to pin a Kendo UI window in place while scrolling? Control whether a window 
 
 ### position `Object`
 
-A collection of one or two members which define the initial top and/or left position of the Window or the position of the [`containment` element](/api/ui/window/configuration/draggable.containment) on the page.
+A collection of one or two members which define the initial top and/or left position of the Window or the position of the [`containment` element](/api/ui/window/configuration/draggable#draggablecontainment) on the page.
 
 
 <div class="meta-api-description">
@@ -758,7 +758,7 @@ How do I enable scrolling in a Kendo UI for jQuery Window widget? Control whethe
 
 The text in the title bar of the Window. If set to `false`, the Window will be displayed without a title bar.
 
-> The title bar buttons of the Window will not be displayed. Unless [`dragHandle`](/api/ui/window/configuration/draggable.draghandle) is configured, this will prevent the Window from dragging.
+> The title bar buttons of the Window will not be displayed. Unless [`dragHandle`](/api/ui/window/configuration/draggable#draggabledraghandle) is configured, this will prevent the Window from dragging.
 
 
 <div class="meta-api-description">

@@ -79,7 +79,7 @@ In this step, you will initialize the Chart from the `<div>` element.
 
 Once the basic initialization is completed, you can start adding additional configurations to the Chart. The first and most important configuration is the [`series`](/api/dataviz/ui/chart/configuration/series).
 
-You can combine several different [Chart types]({% slug overview_charttypes_charts %}) by configuring multiple [`series.types`](/api/dataviz/ui/chart/configuration/series.type) in the same component configuration.
+You can combine several different [Chart types]({% slug overview_charttypes_charts %}) by configuring multiple [`series.types`](/api/dataviz/ui/chart/configuration/series#seriestype) in the same component configuration.
 
 ```html
     <div id="chart"></div>
@@ -209,7 +209,7 @@ The [`legend`](/api/dataviz/ui/chart/configuration/legend) configuration renders
 
 ## 7. Add Labels to the Value Axis
 
-The [`valueAxis.labels`](/api/dataviz/ui/chart/configuration/valueaxis.labels) configuration enables you to change the appearance of the labels on the value axis.
+The [`valueAxis.labels`](/api/dataviz/ui/chart/configuration/valueaxis#valueaxislabels) configuration enables you to change the appearance of the labels on the value axis.
 
 ```html
     <div id="chart"></div>

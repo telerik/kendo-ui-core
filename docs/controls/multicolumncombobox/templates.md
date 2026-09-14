@@ -15,7 +15,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 ## Column Templates
 
-You can define [column templates](/api/ui/multicolumncombobox/configuration/columns.template) and [header column templates](/api/ui/multicolumncombobox/configuration/columns.headertemplate) to customize the layout of your project.
+You can define [column templates](/api/ui/multicolumncombobox/configuration/columns#columnstemplate) and [header column templates](/api/ui/multicolumncombobox/configuration/columns#columnsheadertemplate) to customize the layout of your project.
 
     <input id="multicolumncombobox" />
     <script>

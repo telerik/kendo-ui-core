@@ -15,7 +15,7 @@ This article lists the breaking changes in the Kendo UI 2020 releases.
 
 **Upload**
 
-Changed appearance in `Less-based themes` of the Upload action buttons that are rendered when the [async.autoUpload option](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async.autoupload) is set to `false`.
+Changed appearance in `Less-based themes` of the Upload action buttons that are rendered when the [async.autoUpload option](https://docs.telerik.com/kendo-ui/api/ui/upload/configuration/async#asyncautoupload) is set to `false`.
 
 Reverting to the previous appearance is possible by utilizing the following styles:
 

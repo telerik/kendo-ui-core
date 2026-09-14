@@ -23,7 +23,7 @@ I want to customize the filter for a column in my Kendo UI Grid that uses a temp
 
 The filters are applied to the dataSource of the Grid, not the Grid itself. The Grid's column templates are used only to change the appearance of the data and have no direct relation to the filter. When a value is entered in the input, it will filter the original data loaded in the Grid, not the one displayed by the template.
 
-To customize the filter to find values based on the template, you can create a custom filter using the [columns.filterable.ui](/api/ui/grid/configuration/columns.filterable.ui) option.
+To customize the filter to find values based on the template, you can create a custom filter using the [columns.filterable.ui](/api/ui/grid/configuration/columns/filterable#columnsfilterableui) option.
 
 Here is an example of how to create a custom filter for a column with a template:
 

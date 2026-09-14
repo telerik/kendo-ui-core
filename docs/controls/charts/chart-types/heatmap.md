@@ -78,7 +78,7 @@ The default marker type of a Heatmap is `rect`. You can change this value by usi
 The available built-in options are:
 
 - `rect`—The markers appear as rectangles.
-- `roundedRect`—The markers appear as rounded rectangles with a configurable [border radius](/api/dataviz/ui/chart/configuration/series.markers.borderRadius).
+- `roundedRect`—The markers appear as rounded rectangles with a configurable [border radius](/api/dataviz/ui/chart/configuration/series/markers#seriesmarkersborderradius).
 - `circle`—The markers appear as circles.
 - `triangle`—The markers appear as triangles.
 

@@ -412,7 +412,7 @@ How to configure Kendo UI Spreadsheet to export Excel files using a proxy URL? C
 
 An object containing any images used in the Spreadsheet.  The keys
 should be image ID-s (they are referenced by this ID in
-[`sheets.drawings`](/api/ui/spreadsheet/configuration/sheets.drawings)) and the values
+[`sheets.drawings`](/api/ui/spreadsheet/configuration/sheets#sheetsdrawings)) and the values
 should be image URLs.
 
 The image URLs can be either
@@ -465,7 +465,7 @@ How do I configure images in Kendo UI Spreadsheet to load from a data URL versus
 
 Note, we can reference the same image ID in two different drawings,
 anchored to cells C2 and E3.  See the
-[`sheets.drawings`](/api/ui/spreadsheet/configuration/sheets.drawings) property for more
+[`sheets.drawings`](/api/ui/spreadsheet/configuration/sheets#sheetsdrawings) property for more
 information about a drawing's properties.
 
 ### pdf `Object`

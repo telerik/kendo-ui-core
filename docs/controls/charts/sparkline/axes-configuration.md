@@ -94,7 +94,7 @@ To determine a default base, use the smallest duration between categories.
 
 #### Manual Configuration
 
-You can also manually specify the [`baseUnit`](/api/dataviz/ui/chart/configuration/categoryaxis.baseunit).
+You can also manually specify the [`baseUnit`](/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxisbaseunit).
 
 The following options are valid:
 

@@ -33,7 +33,7 @@ The following example demonstrates how to use the default label.
 
 ## Customizing the Label
 
-To customize the text of the label, use the [`label.template`](/api/ui/rating/configuration/label.template) option. By default, the template automatically receives the `value` and `maxValue` in the data object which allows you to use those properties inside the template through [the Kendo UI Templates syntax](/framework/templates/overview).
+To customize the text of the label, use the [`label.template`](/api/ui/rating/configuration/label#labeltemplate) option. By default, the template automatically receives the `value` and `maxValue` in the data object which allows you to use those properties inside the template through [the Kendo UI Templates syntax](/framework/templates/overview).
 
 ```dojo
     <input id="rating" name="rating">

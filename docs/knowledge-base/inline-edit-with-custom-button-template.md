@@ -125,5 +125,5 @@ Use the [`addRow`](/api/ui/grid/methods/addrow) and [`removeRow`](/api/ui/grid/m
 
 * [API Reference of the `editRow` Method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/editrow).
 * [API Reference of the `removeRow` Method](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/removerow).
-* [API Reference of the `columns.template` Property](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.template).
+* [API Reference of the `columns.template` Property](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnstemplate).
 * [Working with Templates in Kendo UI](https://docs.telerik.com/kendo-ui/framework/templates/overview)

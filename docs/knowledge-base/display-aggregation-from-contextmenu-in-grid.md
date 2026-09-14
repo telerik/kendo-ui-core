@@ -29,7 +29,7 @@ How can I display a specific aggregation by selecting it from a ContextMenu in t
 
 ## Solution
 
-- Add an empty span with custom class as a [`footerTemplate`](/api/ui/grid/configuration/columns.footertemplate) in each column of the Grid.
+- Add an empty span with custom class as a [`footerTemplate`](/api/ui/grid/configuration/columns#columnsfootertemplate) in each column of the Grid.
 
 ```js
 columns: [

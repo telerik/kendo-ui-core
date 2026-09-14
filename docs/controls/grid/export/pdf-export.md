@@ -73,7 +73,7 @@ With regard to its PDF export, the Grid enables you to:
 
 ### Exporting All Pages
 
-By default, the Kendo UI Grid exports only the current page of data. To export all pages, set the [`allPages`](/api/ui/grid/configuration/pdf.allpages) option to `true`.
+By default, the Kendo UI Grid exports only the current page of data. To export all pages, set the [`allPages`](/api/ui/grid/configuration/pdf#pdfallpages) option to `true`.
 
 > When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make multiple `"read"` requests for all data. There will be a request for each page with data. If the data items are too many, the browser may become unresponsive. In such cases, use server-side export.
 
@@ -103,7 +103,7 @@ By default, the Kendo UI Grid exports only the current page of data. To export a
 
 ### Fitting Content to Paper Size
 
-By default, the [paper size](/api/ui/grid/configuration/pdf.papersize) of the exported document is determined by the size of the Grid on the screen. This implies that the document can contain pages with different dimensions if the size of the Grid is not uniform for each data page. For detailed information on the conversion from screen to document units, refer to the article on [dimensions and CSS units]({% slug dimensionscssunits_drawing %}).
+By default, the [paper size](/api/ui/grid/configuration/pdf#pdfpapersize) of the exported document is determined by the size of the Grid on the screen. This implies that the document can contain pages with different dimensions if the size of the Grid is not uniform for each data page. For detailed information on the conversion from screen to document units, refer to the article on [dimensions and CSS units]({% slug dimensionscssunits_drawing %}).
 
 You can specify a paper size that will be applied to the whole document. The content will be scaled to fit the specified paper size. The automatic scale factor can be overridden, for example, to make room for additional page elements. To use all available space, the Grid will:
 - Adjust the column widths to fill the page so try to avoid setting width on all columns.
@@ -225,7 +225,7 @@ The Grid allows you to specify a page template and use the template to position 
 
 ### Using Server Proxy
 
-Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the server proxy URL, set the [`proxyURL`](/api/ui/grid/configuration/pdf.proxyurl) option.
+Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the server proxy URL, set the [`proxyURL`](/api/ui/grid/configuration/pdf#pdfproxyurl) option.
 
 ```dojo
     <div id="grid"></div>
@@ -340,7 +340,7 @@ The following example demonstrates how to handle custom fonts.
 
 ## Exclude Column From Exporting
 
-In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.exportable) setting.
+In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsexportable) setting.
 
 It can also be set to an Object containing different values for Excel and PDF exporting modes, providing separate options for each:
 

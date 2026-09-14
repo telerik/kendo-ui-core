@@ -33,8 +33,8 @@ Right before the export begins, hide the navigator and make it visible again aft
 
 To maintain the navigator settings after it was zoomed in or out:
 
-1. Use the [`select`](https://docs.telerik.com/kendo-ui/api/dataviz/navigator/methods/select) method of the navigator to get the [`from`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/configuration/navigator.select#navigator.select.from) and [`to`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/configuration/navigator.select#navigator.select.to) values when the export starts.
-1. Include the `from` and `to` values in the [`select`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/configuration/navigator.select) property of the navigator by using the `setOptions` method.
+1. Use the [`select`](https://docs.telerik.com/kendo-ui/api/dataviz/navigator/methods/select) method of the navigator to get the [`from`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/configuration/navigator#navigatorselect#navigator.select.from) and [`to`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/configuration/navigator#navigatorselect#navigator.select.to) values when the export starts.
+1. Include the `from` and `to` values in the [`select`](https://docs.telerik.com/kendo-ui/api/dataviz/ui/stock-chart/configuration/navigator#navigatorselect) property of the navigator by using the `setOptions` method.
 
 ```dojo
 <div id="example">

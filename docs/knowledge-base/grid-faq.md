@@ -73,4 +73,4 @@ Use the configurations, methods, and events of the Grid and jQuery. For more inf
 ## See Also
 
 * [Grid Checkbox Selection Demo](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.selectable)
+* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsselectable)

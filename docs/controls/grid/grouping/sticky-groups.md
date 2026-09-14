@@ -13,7 +13,7 @@ The Kendo UI Grid supports sticky group headers and footers. When the user scrol
 
 ## Getting Started
 
-To enable sticky group headers, set the [`groupable.stickyHeaders`](/api/ui/grid/configuration/groupable.stickyheaders) option to `true`. To enable sticky group footers, set the [`groupable.stickyFooters`](/api/ui/grid/configuration/groupable.stickyfooters) option to `true`. The Grid must have the [`scrollable`](/api/ui/grid/configuration/scrollable) option enabled and a [`height`](/api/ui/grid/configuration/height) set for the sticky behavior to work.
+To enable sticky group headers, set the [`groupable.stickyHeaders`](/api/ui/grid/configuration/groupable#groupablestickyheaders) option to `true`. To enable sticky group footers, set the [`groupable.stickyFooters`](/api/ui/grid/configuration/groupable#groupablestickyfooters) option to `true`. The Grid must have the [`scrollable`](/api/ui/grid/configuration/scrollable) option enabled and a [`height`](/api/ui/grid/configuration/height) set for the sticky behavior to work.
 
     $("#grid").kendoGrid({
         height: 400,

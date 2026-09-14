@@ -30,8 +30,8 @@ I had a request to combine the paging bar and search bar into a single div/row. 
 Indeed, there is no pager template and the toolbar and pager are separate divs (siblings). I was able to achieve an outcome similar to the one you shared with us with the following steps:
 
 1. Pager Settings
-    - [`pageable.position`](/api/ui/grid/configuration/pageable.position) set to `top`
-    - [`pageable.responsive`](/api/ui/grid/configuration/pageable.responsive) set to `false`
+    - [`pageable.position`](/api/ui/grid/configuration/pageable#pageableposition) set to `top`
+    - [`pageable.responsive`](/api/ui/grid/configuration/pageable#pageableresponsive) set to `false`
 1. In the `document.ready` event, get the grid instance and use its `dataBound` event to wrap the pager and toolbar elements with another div. This will give us the chance to control them together in a container and reorder them.
   ```js
       var grid = $("#grid").data("kendoGrid");

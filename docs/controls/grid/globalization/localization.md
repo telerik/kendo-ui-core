@@ -25,7 +25,7 @@ The following example demonstrates how to implement the translation of the toolb
 
 ## Menu Messages
 
-The following example demonstrates how to implement the message translation of the column menu in the Grid. For more information, refer to the [`columnMenu.messages`](/api/ui/grid/configuration/columnmenu.messages) API reference.  
+The following example demonstrates how to implement the message translation of the column menu in the Grid. For more information, refer to the [`columnMenu.messages`](/api/ui/grid/configuration/columnmenu#columnmenumessages) API reference.  
 
     columnMenu: {
         messages: {
@@ -38,7 +38,7 @@ The following example demonstrates how to implement the message translation of t
 
 ## Command Messages
 
-The following example demonstrates how to implement the translation of the column command messages in the Grid. For more information, refer to the [`columns.command`](/api/ui/grid/configuration/columns.command) API reference.  
+The following example demonstrates how to implement the translation of the column command messages in the Grid. For more information, refer to the [`columns.command`](/api/ui/grid/configuration/columns#columnscommand) API reference.  
 
     columns: [
         { field: "FirstName", title: "First Name" },
@@ -60,7 +60,7 @@ The following example demonstrates how to implement the translation of the colum
 
 ## Filter Messages
 
-The following example demonstrates how to implement the translations of the filter menu and operator messages in the Grid. For more information, refer to the [`filterable`](/api/ui/grid/configuration/filterable.messages) API reference.  
+The following example demonstrates how to implement the translations of the filter menu and operator messages in the Grid. For more information, refer to the [`filterable`](/api/ui/grid/configuration/filterable#filterablemessages) API reference.  
 
   	filterable: {
   		messages: {
@@ -113,7 +113,7 @@ The following example demonstrates how to implement the translations of the filt
 
 ## Grouping Header Messages
 
-The following example demonstrates how to implement the translations of the group header messages in the Grid. For more information, refer to the [`groupable.messages`](/api/ui/grid/configuration/columnmenu.messages) API reference.
+The following example demonstrates how to implement the translations of the group header messages in the Grid. For more information, refer to the [`groupable.messages`](/api/ui/grid/configuration/columnmenu#columnmenumessages) API reference.
 
     groupable: {
         messages: {

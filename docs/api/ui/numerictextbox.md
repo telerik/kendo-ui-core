@@ -951,7 +951,7 @@ The step value to set.
 Gets or sets the value of the NumericTextBox.
 
 > **Important:** This method **does not trigger** the `focusout` event of the input.
-This can affect the [floating label functionality](/api/ui/numerictextbox/configuration/label.floating).
+This can affect the [floating label functionality](/api/ui/numerictextbox/configuration/label#labelfloating).
 To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#numerictextbox").data("kendoNumericTextBox").floatingLabel.refresh();`
 
 

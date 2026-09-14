@@ -51,4 +51,4 @@ For a live demonstration, refer to this Dojo demo: [https://dojo.telerik.com/IxA
 ## See Also
 
 - [Grid excelExport Event Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/events/excelexport)
-- [Workbook sheets.rows.cells.background Configuration](https://docs.telerik.com/kendo-ui/api/ooxml/workbook/configuration/sheets.rows.cells.background)
+- [Workbook sheets.rows.cells.background Configuration](https://docs.telerik.com/kendo-ui/api/ooxml/workbook/configuration/sheets/rows/cells#sheetsrowscellsbackground)

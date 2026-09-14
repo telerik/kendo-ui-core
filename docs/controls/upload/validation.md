@@ -29,7 +29,7 @@ For a runnable example, refer to the [demo on Upload file validation](https://de
 
 ## File Extension
 
-The `allowedExtensions` array object lists all file extensions that the Upload will accept for uploading. If the user tries to select a file with an extension that is not included in the array, the validation will fail and a validation error message will be rendered. Depending on whether the [`async.batch`](/api/ui/upload/configuration/async.batch) option is enabled, the validation messages can be differently displayed.
+The `allowedExtensions` array object lists all file extensions that the Upload will accept for uploading. If the user tries to select a file with an extension that is not included in the array, the validation will fail and a validation error message will be rendered. Depending on whether the [`async.batch`](/api/ui/upload/configuration/async#asyncbatch) option is enabled, the validation messages can be differently displayed.
 
 The following image displays a validation message when the batch mode of the Upload is disabled.
 

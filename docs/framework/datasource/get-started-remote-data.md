@@ -50,7 +50,7 @@ After the completion of this guide, you will be able to sort, filter, and log th
 
 When you bind the DataSource to remote data, the component requires information about the URLs of the web service, the request type, and the response data type. A `transport` configuration must identify the protocols, the URLs of the endpoints, and the serialization formats for any or all CRUD (Create, Read, Update, Destroy) data operations.
 
-The example below demonstrates how to use the [`transport.read`](/api/data/datasource/configuration/transport.read) option to retrieve the data from a remote endpoint.
+The example below demonstrates how to use the [`transport.read`](/api/data/datasource/configuration/transport#transportread) option to retrieve the data from a remote endpoint.
 
 
 ```

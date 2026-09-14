@@ -29,7 +29,7 @@ How can I exclude a particular row from sorting so that it always stays on top?
 
 ## Solution
 
-Use the [`compare`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.sortable#columns.sortable.compare) function of the [`sortable`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.sortable#columns.sortable) property and use custom logic to override the default behavior. In the following example, Chai will always be the first row regardless of the sorting that the user applies.
+Use the [`compare`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnssortable#columns.sortable.compare) function of the [`sortable`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnssortable#columns.sortable) property and use custom logic to override the default behavior. In the following example, Chai will always be the first row regardless of the sorting that the user applies.
 
 ```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>

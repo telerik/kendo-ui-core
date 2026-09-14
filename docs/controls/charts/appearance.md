@@ -129,9 +129,9 @@ To revert to the series colors from version 4.x, you can:
 
 ### Using Pattern Fills
 
-In addition to solid colors, the Chart series can also be filled with repeating patterns by using the [`series.pattern`](/api/dataviz/ui/chart/configuration/series.pattern) configuration setting.
+In addition to solid colors, the Chart series can also be filled with repeating patterns by using the [`series.pattern`](/api/dataviz/ui/chart/configuration/series#seriespattern) configuration setting.
 
-> The pattern inherits the [`series.color`](/api/dataviz/ui/chart/configuration/series.color) as main color and accepts an optional `background` color.
+> The pattern inherits the [`series.color`](/api/dataviz/ui/chart/configuration/series#seriescolor) as main color and accepts an optional `background` color.
 
 The following customizable pattern fills are available:
 

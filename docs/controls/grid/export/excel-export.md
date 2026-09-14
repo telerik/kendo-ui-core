@@ -35,9 +35,9 @@ To initiate Excel export through code, call the [`saveAsExcel`](/api/ui/grid/met
 > * By default, the Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
 > * The Grid uses the current column order, visibility, and dimensions to generate the Excel file.
 > * The Grid does not export the current CSS theme in the Excel file. For more information on how to change the visual appearance of the Excel document, refer to the section on [customizing exported files](#customizing-exported-files).
-> * The Grid exports only data-bound columns. All columns that do not have their [field](/api/ui/grid/configuration/columns.field) option set are ignored.
-> * The [`format`](/api/ui/grid/configuration/columns.format) option is not used during export. For more information, refer to the section on [column formats](#known-limitations).
-> * The [`template`](/api/ui/grid/configuration/columns.template) option is not used during export. For more information, refer to the section on [column templates](#known-limitations).
+> * The Grid exports only data-bound columns. All columns that do not have their [field](/api/ui/grid/configuration/columns#columnsfield) option set are ignored.
+> * The [`format`](/api/ui/grid/configuration/columns#columnsformat) option is not used during export. For more information, refer to the section on [column formats](#known-limitations).
+> * The [`template`](/api/ui/grid/configuration/columns#columnstemplate) option is not used during export. For more information, refer to the section on [column templates](#known-limitations).
 > * The [`detailTemplate`](/api/ui/grid/configuration/detailtemplate) option is not used during export. For more information, refer to the section on [detail templates](#known-limitations).
 
 For more information, refer to the [online demo on Excel export](https://demos.telerik.com/kendo-ui/grid/excel-export).
@@ -83,7 +83,7 @@ With regard to its Excel export, the Grid enables you to:
 
 ### Exporting All Pages
 
-By default, the Grid exports only the current page of data. To export all pages, set the [`allPages`](/api/ui/grid/configuration/excel.allpages) option to `true`.
+By default, the Grid exports only the current page of data. To export all pages, set the [`allPages`](/api/ui/grid/configuration/excel#excelallpages) option to `true`.
 
 >note When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, use [server-side export](#server-side-processing).
 
@@ -227,7 +227,7 @@ To export large datasets to Excel, use the [RadSpreadStreamProcessing library](h
 
 ## Exclude Column From Exporting
 
-In some scenarios, you may want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.exportable) setting.
+In some scenarios, you may want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsexportable) setting.
 
 You can also set it to an Object containing different values for Excel and PDF exporting modes, providing separate options for each:
 
@@ -244,11 +244,11 @@ columns: [
 
 * The Grid and its DataSource contain only the data items from the current page during client-side export. As a result, either make the export in chunks, or disable the paging feature.
 * The maximum size of the exported file has a system-specific limit. For large data sets, use the server-side solution which is provided by the [RadSpreadStreamProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) as part of the [Document Processing Library](https://docs.telerik.com/devtools/document-processing/introduction).
-* Exporting the Grid to Excel in older browsers, such as Internet Explorer 9 and Safari, requires the implementation of a server proxy. For more information, refer to [the `proxyUrl` configuration section](/api/ui/grid/configuration/excel.proxyurl).
+* Exporting the Grid to Excel in older browsers, such as Internet Explorer 9 and Safari, requires the implementation of a server proxy. For more information, refer to [the `proxyUrl` configuration section](/api/ui/grid/configuration/excel#excelproxyurl).
 * If you use Kendo UI Q2 2014 SP2 (2014.2.1008) or earlier, the export requires a custom implementation. Use either a server-side implementation to directly export the data that is otherwise displayed by the Grid, or a client-side implementation to export the table HTML markup or the dataSource items of the Grid.
-* The Grid does not use [column templates](/api/ui/grid/configuration/columns.template) during the Excel export&mdash;it exports only the data. The reason for this behavior is that a column template may contain arbitrary HTML which cannot be converted to Excel column values. For more information on how to use a column template that does not contain HTML, refer to [this column template example]({% slug howto_use_column_template_grid %}).
+* The Grid does not use [column templates](/api/ui/grid/configuration/columns#columnstemplate) during the Excel export&mdash;it exports only the data. The reason for this behavior is that a column template may contain arbitrary HTML which cannot be converted to Excel column values. For more information on how to use a column template that does not contain HTML, refer to [this column template example]({% slug howto_use_column_template_grid %}).
 * The Grid does not export its [detail template](/api/ui/grid/configuration/detailtemplate) for the same reason as it does not export its column templates. If the detail template contains another Grid, follow [the example on the exporting a detail Grid]({% slug howto_exportto_excel_masterand_detail_grid %}).
-* The Grid does not use [column formats](/api/ui/grid/configuration/columns.format) during the Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](/api/ooxml/workbook/configuration/sheets.rows.cells.format) option of the cells.
+* The Grid does not use [column formats](/api/ui/grid/configuration/columns#columnsformat) during the Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](/api/ooxml/workbook/configuration/sheets/rows/cells#sheetsrowscellsformat) option of the cells.
 
   For more information on the formats that are supported by Excel, refer to [this page](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4). For more information on how to format cell values, refer to [this example]({% slug howto_format_cell_values_grid %}).
 

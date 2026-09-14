@@ -30,7 +30,7 @@ Certain values in my Grid have a strikethrough decoration applied with the `<s><
 
 > This approach appends a unicode character to the value of the cell. The exported text isn't just decorated, the strikethrough will be a part of the cell value.
 
-1. Use a [`template`](/api/ui/grid/configuration/columns.template) to render the strikethrough text in the Grid.
+1. Use a [`template`](/api/ui/grid/configuration/columns#columnstemplate) to render the strikethrough text in the Grid.
 1. Handle the [`excelExport`](/api/ui/grid/events/excelexport) event of the Grid.
 1. Inside the `excelExport` event, generate an HTML string by using the template.
 1. Use a Regular expression to find if the cell value has the `<s></s>` tags.

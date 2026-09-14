@@ -28,7 +28,7 @@ How can I change the default text alignment of a Grid column to right or center?
 
 ## Solution
 
-Apply the `k-text-left`, `k-text-right` or `k-text-center` classes through the Grid [column.attributes](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.attributes), [column.headerAttributes](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.headerattributes) and [column.footerAttributes](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.footerattributes) options.
+Apply the `k-text-left`, `k-text-right` or `k-text-center` classes through the Grid [column.attributes](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsattributes), [column.headerAttributes](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsheaderattributes) and [column.footerAttributes](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsfooterattributes) options.
 
 ```dojo
 <div id="grid"></div>

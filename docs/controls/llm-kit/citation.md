@@ -37,7 +37,7 @@ Use the [`svgIcon`](/api/ui/citation/configuration/svgicon) and [`sourceIcon`](/
 </script>
 ```
 
-Add [`description`](/api/ui/citation/configuration/sources.description) to each source so users have enough context to decide whether to open the link. Replace the default globe icon with a domain-specific icon, such as a document for internal wikis or a database for data sources, to help users identify the source type before hovering.
+Add [`description`](/api/ui/citation/configuration/sources#sourcesdescription) to each source so users have enough context to decide whether to open the link. Replace the default globe icon with a domain-specific icon, such as a document for internal wikis or a database for data sources, to help users identify the source type before hovering.
 
 ```javascript
 $("#citation").kendoCitation({

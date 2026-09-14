@@ -72,7 +72,7 @@ In this step, initialize the Spreadsheet from the `<div>` element.
 
 Next, populate the Spreadsheet with data.
 
-You can add multiple sheets in the [`sheets`](/api/ui/spreadsheet/configuration/sheets) configuration array. Use the [`sheets.rows`](/api/ui/spreadsheet/configuration/sheets.rows) and [`sheets.rows.cells`](/api/ui/spreadsheet/configuration/sheets.rows.cells) options to define the data.
+You can add multiple sheets in the [`sheets`](/api/ui/spreadsheet/configuration/sheets) configuration array. Use the [`sheets.rows`](/api/ui/spreadsheet/configuration/sheets#sheetsrows) and [`sheets.rows.cells`](/api/ui/spreadsheet/configuration/sheets/rows#sheetsrowscells) options to define the data.
 
 ```dojo
     <div id="spreadsheet"></div>
@@ -147,7 +147,7 @@ You can use the [`formula`](/api/spreadsheet/range/methods/formula) method to ad
 
 ## 5. Customize the Cells Appearance
 
-The Spreadsheet component provides multiple configuration options that let you customize the cells appearance. You can use the [`format`](/api/ui/spreadsheet/configuration/sheets.rows.cells.format) configuration to format the numbers and dates displayed in the cells. You can also customize the [`font-size`](/api/ui/spreadsheet/configuration/sheets.rows.cells.fontsize), [`color`](/api/ui/spreadsheet/configuration/sheets.rows.cells.color), [`borders`](/api/ui/spreadsheet/configuration/sheets.rows.cells.bordertop), etc.
+The Spreadsheet component provides multiple configuration options that let you customize the cells appearance. You can use the [`format`](/api/ui/spreadsheet/configuration/sheets/rows/cells#sheetsrowscellsformat) configuration to format the numbers and dates displayed in the cells. You can also customize the [`font-size`](/api/ui/spreadsheet/configuration/sheets/rows/cells#sheetsrowscellsfontsize), [`color`](/api/ui/spreadsheet/configuration/sheets/rows/cells#sheetsrowscellscolor), [`borders`](/api/ui/spreadsheet/configuration/sheets/rows/cells#sheetsrowscellsbordertop), etc.
 
 ```dojo
     <div id="spreadsheet"></div>

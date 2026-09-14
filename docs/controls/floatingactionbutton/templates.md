@@ -15,7 +15,7 @@ For a complete example, refer to the [demo on customizing the FloatingActionButt
 
 ## Item Templates
 
-The [`items.template`](/api/ui/floatingactionbutton/configuration/items.template) configuration options manages the way the speed dial action items of a FloatingActionButton are rendered.
+The [`items.template`](/api/ui/floatingactionbutton/configuration/items#itemstemplate) configuration options manages the way the speed dial action items of a FloatingActionButton are rendered.
 
 ```
     <div id="fab"></div>

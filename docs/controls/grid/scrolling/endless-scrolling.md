@@ -17,7 +17,7 @@ For runnable examples, refer to:
 
 ## Getting Started
 
-To enable endless scrolling, set the [`scrollable.endless`](/api/ui/grid/configuration/scrollable.endless) property to `true`.
+To enable endless scrolling, set the [`scrollable.endless`](/api/ui/grid/configuration/scrollable#scrollableendless) property to `true`.
 
 > For the functionality to work as expected there are two requirements:
 > - There needs to be a vertical scrollbar

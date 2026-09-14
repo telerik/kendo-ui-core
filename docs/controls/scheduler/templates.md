@@ -56,8 +56,8 @@ The Scheduler provides templates for other parts of its interface:
 * [`dateHeaderTemplate`](/api/ui/scheduler/configuration/dateheadertemplate) customizes date headers.
 * [`groupHeaderTemplate`](/api/ui/scheduler/configuration/groupheadertemplate) customizes resource group headers.
 * [`majorTimeHeaderTemplate`](/api/ui/scheduler/configuration/majortimeheadertemplate) and [`minorTimeHeaderTemplate`](/api/ui/scheduler/configuration/minortimeheadertemplate) customize time headers.
-* [`views.slotTemplate`](/api/ui/scheduler/configuration/views.slottemplate) customizes time slots in supported views.
-* [`views.tooltipTemplate`](/api/ui/scheduler/configuration/views.tooltiptemplate) customizes tooltips in the Year view.
+* [`views.slotTemplate`](/api/ui/scheduler/configuration/views#viewsslottemplate) customizes time slots in supported views.
+* [`views.tooltipTemplate`](/api/ui/scheduler/configuration/views#viewstooltiptemplate) customizes tooltips in the Year view.
 
 ## See Also
 

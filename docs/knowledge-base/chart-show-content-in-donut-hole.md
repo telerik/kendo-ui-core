@@ -32,7 +32,7 @@ How can I place and center multiple lines of text inside the center of a Kendo U
 
 Make a custom drawing on top of the Donut Chart and show the multi-line text and other content in its center.
 
-1. Use the [`series.visual`](/api/dataviz/ui/chart/configuration/series.visual) function to store the position and size of the Donut Chart center.
+1. Use the [`series.visual`](/api/dataviz/ui/chart/configuration/series#seriesvisual) function to store the position and size of the Donut Chart center.
 
     ```
     // global variables

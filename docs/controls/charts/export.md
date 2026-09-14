@@ -126,7 +126,7 @@ The following example demonstrates how to obtain an image from the Chart.
 
 ## Using Server Proxy
 
-Internet Explorer 9 and Safari do not support the saving of files and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the URL of the server proxy, set the [`proxyURL`](/api/ui/grid/configuration/pdf.proxyurl) option.
+Internet Explorer 9 and Safari do not support the saving of files and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the URL of the server proxy, set the [`proxyURL`](/api/ui/grid/configuration/pdf#pdfproxyurl) option.
 
     <!-- Load Pako Deflate library to enable PDF compression -->
     <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
@@ -345,7 +345,7 @@ All [known limitations of the Drawing library]({% slug drawingofhtmlelements_dra
 The following limitations are the most important among the listed ones for exporting the Chart to PDF:
 
 * The maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in all viewers.
-* Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information, refer to the [`proxyUrl`](/api/ui/grid/configuration/pdf.proxyurl) API reference.
+* Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information, refer to the [`proxyUrl`](/api/ui/grid/configuration/pdf#pdfproxyurl) API reference.
 
 ## Further Reading
 

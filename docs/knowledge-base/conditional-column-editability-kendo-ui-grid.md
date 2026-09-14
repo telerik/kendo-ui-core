@@ -36,7 +36,7 @@ This knowledge base article also answers the following questions:
 
 ## Solution
 
-To make a specific column in the Kendo UI Grid editable while keeping other columns non-editable, use the [`columns.editable`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.editable) property. This property accepts a function that determines whether the column should be editable.
+To make a specific column in the Kendo UI Grid editable while keeping other columns non-editable, use the [`columns.editable`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnseditable) property. This property accepts a function that determines whether the column should be editable.
 
 For example, to make only the `OtherField` column editable, configure the `editable` property as follows:
 
@@ -86,6 +86,6 @@ For a live example, refer to the below Dojo:
 
 ## See Also
 
-- [Grid Columns Editable Property Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.editable)
+- [Grid Columns Editable Property Documentation](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnseditable)
 - [Overview of the Kendo UI Grid for jQuery](https://docs.telerik.com/kendo-ui/controls/grid/overview)
 - [API Reference of the Grid Component](https://docs.telerik.com/kendo-ui/api/ui/grid)

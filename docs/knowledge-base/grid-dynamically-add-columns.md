@@ -25,7 +25,7 @@ How can I add and remove columns to the jQuery Grid component dynamically?
 
 ## Solution
 
-The most straightforward way to achieve the desired scenario is to have [hidden columns](/api/ui/grid/configuration/columns.hidden) and allow the users to unhide them with the help of the [column menu](/api/ui/grid/configuration/columnmenu).
+The most straightforward way to achieve the desired scenario is to have [hidden columns](/api/ui/grid/configuration/columns#columnshidden) and allow the users to unhide them with the help of the [column menu](/api/ui/grid/configuration/columnmenu).
 
 An alternative option is to use the [`setOptions()`](/api/ui/grid/methods/setoptions) method with a custom UI, for example, a Kendo UI for jQuery MultiSelect that holds a collection of all the available columns: 
 

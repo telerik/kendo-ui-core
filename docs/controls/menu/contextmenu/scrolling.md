@@ -56,7 +56,7 @@ The following example demonstrates how to enable scrolling within the ContextMen
         });
     </script>
 
-You can also customize the scrollable amount by setting a value (in pixels) to the [`distance`](/api/ui/contextmenu/configuration/scrollable.distance) property. `distance` defaults to `50`.
+You can also customize the scrollable amount by setting a value (in pixels) to the [`distance`](/api/ui/contextmenu/configuration/scrollable#scrollabledistance) property. `distance` defaults to `50`.
 
     <div id="target">Right Click to open the ContextMenu</div>
     <ul id="context-menu">

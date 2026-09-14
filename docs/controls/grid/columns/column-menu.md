@@ -123,7 +123,7 @@ As of R3 2023 version of the Kendo UI, the Grid component supports a new `tabbed
 
 As of R3 2022, the Kendo UI Grid enables the developer to disable the columnMenu for specific columns.
 
-To take advantage of this feature, use the [`columns.columnMenu`](/api/ui/grid/configuration/columns.columnMenu) property.
+To take advantage of this feature, use the [`columns.columnMenu`](/api/ui/grid/configuration/columns#columnscolumnmenu) property.
 
 ## Global Column Menu
 

@@ -30,7 +30,7 @@ How can I skip noneditable Grid columns when I use the `Tab` key to navigate the
 
 Utilize the Grid's [`navigate`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/navigate) event and programmatically skip the noneditable columns.
 
-1. Apply a custom class to the noneditable columns through the [columns.attributes](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.attributes) configuration.
+1. Apply a custom class to the noneditable columns through the [columns.attributes](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnsattributes) configuration.
 1. In the `navigate` event, check if the current cell is editable and if the `Tab` key has been pressed.
 1. Check if the `Shift` key has been pressed. This tells you if the user is navigating backwards or not.
 1. Loop through the next/previous cells until you reach an editable column.

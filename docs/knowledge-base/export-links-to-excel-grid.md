@@ -36,7 +36,7 @@ I have a Grid column that contains a hyperlink. The link is clickable in the Gri
 
 ## Solution
 
-The [`Workbook API`](/api/ooxml/workbook/configuration/sheets.hyperlinks) exposes a configuration that enables you to set hyperlinks to specific cells. You can combine this configuration with the [`excelExport`](/api/ui/grid/events/excelexport) event of the Grid to make the links clickable in the exported file.
+The [`Workbook API`](/api/ooxml/workbook/configuration/sheets#sheetshyperlinks) exposes a configuration that enables you to set hyperlinks to specific cells. You can combine this configuration with the [`excelExport`](/api/ui/grid/events/excelexport) event of the Grid to make the links clickable in the exported file.
 
 1. Configure a column with links.
 2. Attach the `excelExport` event to the Grid.

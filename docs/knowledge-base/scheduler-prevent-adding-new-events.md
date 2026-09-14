@@ -26,7 +26,7 @@ I want to allow user to edit the existing events, but I want to prevent adding n
 ## Solution
 
 1. Handle the [`add`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/events/add) event of the Scheduler and prevent the default behavior.
-1. Set [`editable.destroy`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/editable.destroy) option to `false`.
+1. Set [`editable.destroy`](https://docs.telerik.com/kendo-ui/api/ui/scheduler/configuration/editable#editabledestroy) option to `false`.
 
 ```dojo
 	<div id="scheduler"></div>

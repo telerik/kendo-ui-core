@@ -15,7 +15,7 @@ components: ["scheduler"]
 
 ## Description
 
-You can implement server-side filtering for the Scheduler component by using the [`parameterMap`](/api/data/datasource/configuration/transport.parametermap) method of the DataSource to send the range to the backend.
+You can implement server-side filtering for the Scheduler component by using the [`parameterMap`](/api/data/datasource/configuration/transport#transportparametermap) method of the DataSource to send the range to the backend.
 
 ## Solution
 

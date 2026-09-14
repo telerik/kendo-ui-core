@@ -37,4 +37,4 @@ For more information on how to implement the suggested approach, refer to the fo
 * [https://dojo.telerik.com/Oveja](https://dojo.telerik.com/Oveja)  
 * [https://docs.telerik.com/kendo-ui/api/ui/grid/methods/addrow](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/addrow)  
 * [https://docs.telerik.com/kendo-ui/api/ui/grid/methods/closecell](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/closecell)  
-* [https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.command.click](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.command.click)  
+* [https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns/command#columnscommandclick](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns/command#columnscommandclick)  

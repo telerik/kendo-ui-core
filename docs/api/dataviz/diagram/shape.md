@@ -2083,8 +2083,8 @@ How to access data for a specific diagram shape in Kendo UI? Accessing or modify
 The visual element representing the shape.
 
 This is either the result returned from
-[shape.visual](/api/dataviz/ui/diagram/configuration/shapedefaults.visual)
-or a [predefined type](/api/dataviz/ui/diagram/configuration/shapes.type).
+[shape.visual](/api/dataviz/ui/diagram/configuration/shapedefaults#shapedefaultsvisual)
+or a [predefined type](/api/dataviz/ui/diagram/configuration/shapes#shapestype).
 
 
 <div class="meta-api-description">

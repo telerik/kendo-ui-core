@@ -24,8 +24,8 @@ I have a chart with multiple axes. One has negative values and the other does no
 
 ## Solution
 
-1. Update the [min](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/valueaxis.min) and [max](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/valueaxis.max) setting for the value axes so they include both positive and negative values.
-1. Specify a function for the [valueAxis.labels.template](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/valueaxis.labels#valueaxislabelstemplate) of the axes where only positive values should be displayed.
+1. Update the [min](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/valueaxis#valueaxismin) and [max](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/valueaxis#valueaxismax) setting for the value axes so they include both positive and negative values.
+1. Specify a function for the [valueAxis.labels.template](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/valueaxis#valueaxislabels#valueaxislabelstemplate) of the axes where only positive values should be displayed.
 1. Check the values in the template handler and return only the positive values. For the negative values return an empty string.
 
 

@@ -50,7 +50,7 @@ The following example adds an **Export to PDF** button to the TreeList toolbar a
 
 ## Export All Pages and Configure Layout
 
-By default, the TreeList exports the current page. Set [`pdf.allPages`](/api/ui/treelist/configuration/pdf.allpages) to `true` to export all pages, and use PDF options such as `paperSize`, `landscape`, and `margin` to configure the document layout.
+By default, the TreeList exports the current page. Set [`pdf.allPages`](/api/ui/treelist/configuration/pdf#pdfallpages) to `true` to export all pages, and use PDF options such as `paperSize`, `landscape`, and `margin` to configure the document layout.
 
 ```javascript
 pdf: {

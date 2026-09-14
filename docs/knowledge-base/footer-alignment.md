@@ -35,7 +35,7 @@ How can I align the footer cells during Excel export in a Kendo UI Grid for jQue
 
 The following example demonstrates how to align the footer cells during Excel export.
 
-Normally, to achieve this behavior, you can use HTML and CSS. However, Excel does not supported these options. To set the alignment, the demo uses the [`hAlign`](/api/ooxml/workbook/configuration/sheets.rows.cells.halign) option of the cell. For more information on how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}).
+Normally, to achieve this behavior, you can use HTML and CSS. However, Excel does not supported these options. To set the alignment, the demo uses the [`hAlign`](/api/ooxml/workbook/configuration/sheets/rows/cells#sheetsrowscellshalign) option of the cell. For more information on how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}).
 
 ```dojo
 <div id="grid"></div>

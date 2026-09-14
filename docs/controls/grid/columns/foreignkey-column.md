@@ -18,7 +18,7 @@ The foreign values for the columns of the grid could be supplied in two ways:
 
 ## Binding to a Local Collection
 
-Binding the column to a local collection of items can be done via the [column.values](/api/ui/grid/configuration/columns.values) option. 
+Binding the column to a local collection of items can be done via the [column.values](/api/ui/grid/configuration/columns#columnsvalues) option. 
 
 ```
     <div id="grid"></div>
@@ -41,7 +41,7 @@ Binding the column to a local collection of items can be done via the [column.va
 
 ## Binding to a Remote Collection
 
-In order to bind the column to a remote collection of items, supply the [column.dataSource](/api/ui/grid/configuration/columns.dataSource) option. It is mandatory to supply the [columns.dataValueField](/api/ui/grid/configuration/columns.dataValueField) and [columns.dataTextField](/api/ui/grid/configuration/columns.dataTextField) options in order to ensure that the column values will be bound to the correct foreign value. 
+In order to bind the column to a remote collection of items, supply the [column.dataSource](/api/ui/grid/configuration/columns#columnsdatasource) option. It is mandatory to supply the [columns.dataValueField](/api/ui/grid/configuration/columns#columnsdatavaluefield) and [columns.dataTextField](/api/ui/grid/configuration/columns#columnsdatatextfield) options in order to ensure that the column values will be bound to the correct foreign value. 
 
 ```
 columns:[{ 

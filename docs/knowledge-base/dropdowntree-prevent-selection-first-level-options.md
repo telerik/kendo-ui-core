@@ -33,7 +33,7 @@ $("#dropdowntree").kendoDropDownTree({
 });
 ```
 
-2. Define the [checkboxes.template](/api/ui/dropdowntree/configuration/checkboxes.template) using a function. In the function, check if the item is on the root level. If it is, hide the checkbox; otherwise, define the checkbox element according to your preference.
+2. Define the [checkboxes.template](/api/ui/dropdowntree/configuration/checkboxes#checkboxestemplate) using a function. In the function, check if the item is on the root level. If it is, hide the checkbox; otherwise, define the checkbox element according to your preference.
 
 ```javascript
 $("#dropdowntree").kendoDropDownTree({

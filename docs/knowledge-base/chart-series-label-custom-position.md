@@ -30,7 +30,7 @@ components: ["chart"]
 How can I show the Series Label in the top left corner of the Kendo UI Column Chart?
 
 ## Solution
-In order to show the [Series Labels](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.labels) in the top left corner of the Kendo UI Column Chart Series, use the [series.labels.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.labels.visual) function:
+In order to show the [Series Labels](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series#serieslabels) in the top left corner of the Kendo UI Column Chart Series, use the [series.labels.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series/labels#serieslabelsvisual) function:
 
 ```javascript
 $("#chart").kendoChart({
@@ -59,7 +59,7 @@ function left(e) {
   return layout;
 }
 ```
-> Make sure to set the [series.labels.position](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.labels.position).
+> Make sure to set the [series.labels.position](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series/labels#serieslabelsposition).
 
 #### Example
 
@@ -97,6 +97,6 @@ The following example demonstrates a Column Chart that renders the series label 
 ```
 
 ## See Also
-- [series.labels](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.labels)
-- [series.labels.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.labels.visual)
-- [series.labels.position](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series.labels.position)
+- [series.labels](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series#serieslabels)
+- [series.labels.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series/labels#serieslabelsvisual)
+- [series.labels.position](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series/labels#serieslabelsposition)

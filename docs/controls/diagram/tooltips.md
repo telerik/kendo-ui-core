@@ -33,7 +33,7 @@ When enabled, the Diagram will display default tooltips when hovering over shape
 
 ## Configuring the Delay
 
-The [`delay`](/api/dataviz/ui/diagram/configuration/tooltip.delay) option controls the time in milliseconds before the tooltip appears after the user hovers over a diagram item. The default delay is 200 milliseconds.
+The [`delay`](/api/dataviz/ui/diagram/configuration/tooltip#tooltipdelay) option controls the time in milliseconds before the tooltip appears after the user hovers over a diagram item. The default delay is 200 milliseconds.
 
 ```dojo
 <div id="diagram"></div>
@@ -53,7 +53,7 @@ Increasing the delay can prevent tooltips from appearing during quick mouse move
 
 ## Customizing Shape Tooltips
 
-Use the [`shapeTemplate`](/api/dataviz/ui/diagram/configuration/tooltip.shapetemplate) option to define a custom template function for shape tooltips. The template function receives the shape data as a parameter and returns the tooltip content.
+Use the [`shapeTemplate`](/api/dataviz/ui/diagram/configuration/tooltip#tooltipshapetemplate) option to define a custom template function for shape tooltips. The template function receives the shape data as a parameter and returns the tooltip content.
 
 ```dojo
 <div id="diagram"></div>
@@ -93,7 +93,7 @@ $("#diagram").kendoDiagram({
 
 ## Customizing Connection Tooltips
 
-Use the [`connectionTemplate`](/api/dataviz/ui/diagram/configuration/tooltip.connectiontemplate) option to define a custom template function for connection tooltips. This is particularly useful when connections have associated data.
+Use the [`connectionTemplate`](/api/dataviz/ui/diagram/configuration/tooltip#tooltipconnectiontemplate) option to define a custom template function for connection tooltips. This is particularly useful when connections have associated data.
 
 ```dojo
 <div id="diagram"></div>

@@ -9,11 +9,11 @@ position: 4
 
 # Toolbar Templates
 
-The Kendo UI Grid provides full control over the rendering of its Toolbar content by using the [`Kendo UI Templates`](/framework/templates/overview). The [`toolbar.template`](/api/ui/grid/configuration/toolbar.template) configuration enables you to specify your own layout instead of using the built-in buttons.
+The Kendo UI Grid provides full control over the rendering of its Toolbar content by using the [`Kendo UI Templates`](/framework/templates/overview). The [`toolbar.template`](/api/ui/grid/configuration/toolbar#toolbartemplate) configuration enables you to specify your own layout instead of using the built-in buttons.
 
 ## Setting a Toolbar Template as a Function
 
-The [`template`](/api/ui/grid/configuration/toolbar.template) toolbar configuration enables you to build a [`Kendo UI Template`](/framework/templates/overview) by passing a function.
+The [`template`](/api/ui/grid/configuration/toolbar#toolbartemplate) toolbar configuration enables you to build a [`Kendo UI Template`](/framework/templates/overview) by passing a function.
 
 The following example demonstrates how to set the template as a function that is returned by [`kendo.template`](/api/kendo/methods/template).
 
@@ -46,7 +46,7 @@ $("#grid").kendoGrid({
 
 ## Setting a Toolbar Template as a String
 
-The [`template`](/api/ui/grid/configuration/toolbar.template) toolbar configuration enables you to create HTML chunks by passing directly a `string`.
+The [`template`](/api/ui/grid/configuration/toolbar#toolbartemplate) toolbar configuration enables you to create HTML chunks by passing directly a `string`.
 
 The following example demonstrates how to set the template as a string.
 

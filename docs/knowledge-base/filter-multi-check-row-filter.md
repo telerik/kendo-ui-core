@@ -36,7 +36,7 @@ The Kendo UI Grid does not provide a built-in solution for achieving this behavi
 
 Move the built-in menu to the filter row and, if not needed, hide the rest of the filter menus from the headers:
 
-1. At Grid level, set `filterable` to `"menu, row"` mode. Initiate the `FilterMultiCheck` in the header of the Grid by using the [`column.filterable.multi`](/api/ui/grid/configuration/columns.filterable.multi).
+1. At Grid level, set `filterable` to `"menu, row"` mode. Initiate the `FilterMultiCheck` in the header of the Grid by using the [`column.filterable.multi`](/api/ui/grid/configuration/columns/filterable#columnsfilterablemulti).
 1. Add an event handler to the [`dataBound`](/api/ui/grid/events/databound) event of the Grid.  
 1. Look for the `MultiFilterCheck` in the header.
 1. Find the desired filter row cell and replace its content with `MultiFilterCheck`.

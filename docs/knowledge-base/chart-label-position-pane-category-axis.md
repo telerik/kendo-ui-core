@@ -29,7 +29,7 @@ How can I position the `categoryAxis` labels below multiple panes in a Kendo UI 
 
 ## Solution
 
-Set the [`categoryAxis.labels.position` configuration](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsposition) to `start`.
+Set the [`categoryAxis.labels.position` configuration](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxislabels#categoryaxislabelsposition) to `start`.
 
 ```javascript
         categoryAxis: [{
@@ -84,4 +84,4 @@ The following example demonstrates the full implementation of the suggested appr
 
 ## See Also
 
-* [API Reference of categoryAxis.labels.position](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsposition)
+* [API Reference of categoryAxis.labels.position](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/categoryaxis#categoryaxislabels#categoryaxislabelsposition)

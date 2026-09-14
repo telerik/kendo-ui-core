@@ -52,9 +52,9 @@ To enable load on demand, set the [`loadOnDemand`](/api/ui/dropdowntree/configur
 
 ## Value Mapper Configuration
 
-When using load on demand with pre-selected values, you may need to implement a [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand.valuemapper) function to resolve the selected values to their corresponding data items. The [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand.valuemapper) is particularly useful when you have initial values that need to be displayed but the corresponding data items are not yet loaded due to the lazy loading nature of load on demand.
+When using load on demand with pre-selected values, you may need to implement a [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand#loadondemandvaluemapper) function to resolve the selected values to their corresponding data items. The [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand#loadondemandvaluemapper) is particularly useful when you have initial values that need to be displayed but the corresponding data items are not yet loaded due to the lazy loading nature of load on demand.
 
-The following example demonstrates how to configure a [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand.valuemapper) function that fetches the data items for the selected values from the server.
+The following example demonstrates how to configure a [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand#loadondemandvaluemapper) function that fetches the data items for the selected values from the server.
 
 ```dojo
   <input id="dropdowntree" />   
@@ -112,7 +112,7 @@ The following example demonstrates how to configure a [`valueMapper`](/api/ui/dr
     </script>
 ```
 
-The [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand.valuemapper) function receives an `options` object with the following properties:
+The [`valueMapper`](/api/ui/dropdowntree/configuration/loadondemand#loadondemandvaluemapper) function receives an `options` object with the following properties:
 
 * `value`: An array of the selected values that need to be resolved to data items.
 * `success`: A callback function that should be called with the resolved data items.

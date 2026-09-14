@@ -33,7 +33,7 @@ How can I add a ProgressBar to a Kendo UI Grid cell?
 
 To achieve the desired scenario:
 
-1. Add the DOM elements for the ProgressBar by using the [`column.template`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns.template) configuration.
+1. Add the DOM elements for the ProgressBar by using the [`column.template`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnstemplate) configuration.
 
 1. On the [`dataBound`](https://docs.telerik.com/kendo-ui/api/ui/grid/events/databound) event, initialize the ProgressBars by using the model value.
 

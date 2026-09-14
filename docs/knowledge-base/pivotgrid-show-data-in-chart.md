@@ -31,7 +31,7 @@ I want to create a [`Kendo UI Chart`](/controls/charts/overview) using the data 
 
 1. Define two separate [`views`](/api/view) for the PivotGrid and the Chart. Refer to the `showGrid()` and `showChart()` methods in the snippet below.
 1. Convert the tree structure of the PivotGrid data to a simple array of objects. Refer to the `convertData()` method.
-1. Create a [`Kendo UI DropDownList`](/controls/editors/dropdownlist/overview) which will be used to select the [`type`](/api/dataviz/ui/chart/configuration/series.type) of the chart.
+1. Create a [`Kendo UI DropDownList`](/controls/editors/dropdownlist/overview) which will be used to select the [`type`](/api/dataviz/ui/chart/configuration/series#seriestype) of the chart.
 1. Handle the [`change`](/api/ui/dropdownlist/events/change) event of the DropDownList to update the type of the displayed chart. Refer to the `fillChartPicker()` method.
 
 This solution is courtesy of a Telerik Feedback Portal user. You can find the original post in the following thread:

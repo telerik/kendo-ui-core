@@ -177,5 +177,5 @@ How can I have separate sheets for the rows of the master Grid and for all detai
 ## See Also
 
 * [Exporting All Data]({% slug grid-excel-export-entire-data %})
-* [sheets.filter API](/api/ooxml/workbook/configuration/sheets.filter)
-* [sheets.columns.width API](/api/ooxml/workbook/configuration/sheets.columns#sheetscolumnswidth)
+* [sheets.filter API](/api/ooxml/workbook/configuration/sheets#sheetsfilter)
+* [sheets.columns.width API](/api/ooxml/workbook/configuration/sheets#sheetscolumns#sheetscolumnswidth)
