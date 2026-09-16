@@ -33,15 +33,15 @@ liquid:
 
 markdown-replacements:
 # Already-prefixed member slug paths with javascript/ → anchor on type page
-- pattern: \(slug:/api/(?<typePath>[^)]+?)/(?:fields|methods|events|configuration|class-methods|class-fields|static-methods|constructor-parameters)/(?<member>[^)/#]+?)/?(?:#[^)]+)?\)
+- pattern: \(slug:/api/javascript/(?<typePath>[^)]+?)/(?:fields|methods|events|configuration|class-methods|class-fields|static-methods|constructor-parameters)/(?<member>[^)/#]+?)/?(?:#[^)]+)?\)
   replacement: (slug:/api/$<typePath>#$<member>)
 # Already-prefixed slug paths with javascript/ → strip javascript/
-- pattern: \(slug:/api/(?<path>[^)]*?)\)
+- pattern: \(slug:/api/javascript/(?<path>[^)]*?)\)
   replacement: (slug:/api/$<path>)
-# Member paths (e.g. /api/ui/scheduler/events/edit) → anchor on type page
+# Member paths (e.g. /api/javascript/ui/scheduler/events/edit) → anchor on type page
 - pattern: \(/?(?:kendo-ui/)?api/javascript/(?<typePath>[^)]+?)/(?:fields|methods|events|configuration|class-methods|class-fields|static-methods|constructor-parameters)/(?<member>[^)/#]+?)/?(?:#[^)]+)?\)
   replacement: (slug:/api/$<typePath>#$<member>)
-# General API path (e.g. /api/data/datasource) → slug
+# General API path (e.g. /api/javascript/data/datasource) → slug
 - pattern: \(/?(kendo-ui/)?api/javascript/(?<path>.*?)/?\)
   replacement: (slug:/api/$<path>)
 - pattern: (?<!!)\[(?<linkText>[^\]]+?)\]\(((?<part1>[a-z0-9]*)\.)((?<part2>[a-z0-9]*)\.)?((?<part3>[a-z0-9]*)\.)?(?<rest>[a-z0-9]*)\)
@@ -797,11 +797,15 @@ redirects:
 - from: ^/api/wrappers/(.*)$
   to: /api/$1
 
+- from: ^/api/javascript/(.*?)/(fields|methods|events|configuration|class-methods|class-fields|static-methods|constructor-parameters)/([^/]+)$
+  to: /api/$1/$2/$3
+  slashifyMember: true
+
 - from: ^/api/(.*?)/(fields|methods|events|configuration|class-methods|class-fields|static-methods|constructor-parameters)/([^/]+)$
   to: /api/$1/$2/$3
   slashifyMember: true
 
-- from: ^/api/(.*)$
+- from: ^/api/javascript/(.*)$
   to: /api/$1
 
 - from: ^/jsp/(.*)$
