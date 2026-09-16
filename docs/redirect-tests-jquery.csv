@@ -7,7 +7,6 @@
 /api/dataviz/diagram, /api/dataviz/ui/diagram
 /api/dataviz/lineargauge, /api/dataviz/ui/lineargauge
 /api/dataviz/map, /api/dataviz/ui/map
-/api/dataviz/navigator, /api/dataviz/navigator
 /api/dataviz/qrcode, /api/dataviz/ui/qrcode
 /api/dataviz/radialgauge, /api/dataviz/ui/radialgauge
 /api/dataviz/sparkline, /api/dataviz/ui/sparkline
