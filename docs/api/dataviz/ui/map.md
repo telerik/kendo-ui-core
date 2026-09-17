@@ -785,7 +785,7 @@ How do I load dynamic HTML content into Kendo UI map marker tooltips using a URL
 
 ### layerDefaults.marker.tooltip.template `String|Template`
 
-The [template](/api/framework/kendo#methods-template) which renders the tooltip content.
+The [template](/api/kendo/methods/template) which renders the tooltip content.
 
 The fields which can be used in the template are:
 
@@ -2483,7 +2483,7 @@ How can I customize the attribution for individual layers in a Kendo UI map? Dis
 
 ### layers.autoBind `Boolean` *(default: true)*
 
-If set to `false` the layer will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/framework/datasource#events-change) event of the
+If set to `false` the layer will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple layers (or widgets) are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -2530,7 +2530,7 @@ How does autoBind affect data binding for map layers in Kendo UI? Configure auto
 
 ### layers.dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the layer. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/framework/datasource)
+The data source of the layer. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/data/datasource)
 instance.
 
 
@@ -3227,7 +3227,7 @@ How to load external data into Kendo UI Map layer tooltips? Configure dynamic to
 
 ### layers.tooltip.template `String|Template`
 
-The [template](/api/framework/kendo#methods-template) which renders the tooltip content.
+The [template](/api/kendo/methods/template) which renders the tooltip content.
 
 The fields which can be used in the template are:
 
@@ -3553,7 +3553,7 @@ The maximum zoom level at which to show this layer.
 How do I control the maximum zoom level for displaying map layers in Kendo UI Map widget? Control the maximum zoom level for displaying map layers to limit visibility based on zoom scale, configure the highest zoom threshold at which tiles or vector layers remain visible, set upper zoom boundaries to hide or show specific layers dynamically, enable layer rendering control tied to zoom changes, optimize map performance by restricting layers beyond a certain zoom level, manage map layer visibility during zoom in and zoom out interactions, customize layer display to appear only within desired zoom ranges, adjust layer show/hide behavior linked to zoom levels, enforce zoom-based layer filtering for rendering efficiency, and apply zoom constraints to tile and vector data presentation on interactive maps.
 </div>
 
-#### Example - switch to OpenCycleMap at zoom level 14
+#### Example - switch to CyclOSM at zoom level 14
     <div id="map"></div>
     <script>
         $("#map").kendoMap({
@@ -3567,7 +3567,7 @@ How do I control the maximum zoom level for displaying map layers in Kendo UI Ma
             }, {
                 minZoom: 14,
                 type: "tile",
-                urlTemplate: "https://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://#= subdomain #.tile-cyclosm.openstreetmap.fr/cyclosm/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"]
             }]
         });
@@ -3582,7 +3582,7 @@ The minimum zoom level at which to show this layer.
 How do I control which map layers become visible in Kendo UI based on zoom level? Set or adjust the minimum zoom level to control when a map layer becomes visible, configuring the scale threshold to display or hide specific layers depending on how far users have zoomed in or out, enabling precise control over layer visibility based on zoom settings, scale levels, zoom thresholds, or map zoom units, allowing developers to enable, disable, limit, or filter layers dynamically as users zoom, ensuring that layers appear only at desired zoom ranges across individual layers within the map’s layer collection.
 </div>
 
-#### Example - switch to OpenCycleMap at zoom level 14
+#### Example - switch to CyclOSM at zoom level 14
     <div id="map"></div>
     <script>
         $("#map").kendoMap({
@@ -3596,7 +3596,7 @@ How do I control which map layers become visible in Kendo UI based on zoom level
             }, {
                 minZoom: 14,
                 type: "tile",
-                urlTemplate: "https://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://#= subdomain #.tile-cyclosm.openstreetmap.fr/cyclosm/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"]
             }]
         });
@@ -4646,7 +4646,7 @@ How to dynamically load marker tooltip content from a remote URL in Kendo UI Map
 
 ### markerDefaults.tooltip.template `String|Template`
 
-The [template](/api/framework/kendo#methods-template) which renders the tooltip content.
+The [template](/api/kendo/methods/template) which renders the tooltip content.
 
 The fields which can be used in the template are:
 
@@ -5387,7 +5387,7 @@ How to dynamically load marker tooltip content from external URLs in Kendo UI Ma
 
 ### markers.tooltip.template `String|Template`
 
-The [template](/api/framework/kendo#methods-template) which renders the tooltip content.
+The [template](/api/kendo/methods/template) which renders the tooltip content.
 
 The fields which can be used in the template are:
 

@@ -113,13 +113,7 @@ Below is a runnable Dojo example where the full implementation is demonstrated:
       $(document).ready(function() {
         $("#FeaturesSelect").kendoMultiSelect({
           headerTemplate: '<div style="padding:4px 8px"><input type="checkbox" id="selectAll"/>Select All</div>',
-          autoClose : true,         
-          dataBound: function() {
-            var items = this.ul.find("li");
-            setTimeout(function() {
-              checkInputs(items);
-            });
-          },
+          autoClose : true,
           change: function(e) {
             var totalItems = this.dataSource.data().length;
             var selected = this.value().length;

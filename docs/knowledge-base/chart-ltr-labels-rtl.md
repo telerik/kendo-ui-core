@@ -48,7 +48,7 @@ The scenario is not a built-in one and to achieve it we need to override two thi
 1. The [text-anchor](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/text-anchor) attribute of the label. To change the text-anchor, we need to override the internal SVG `TextNode` function before the chart is initialized
 
   ```
-    kendo.drawing.svg.TextNode.fn.renderTextAnchor = function(){
+    kendo.drawing.svg.TextNode.prototype.renderTextAnchor = function(){
       return renderAttr("text-anchor", "end");
     }
 
@@ -70,7 +70,7 @@ The following example demonstrates how to apply the suggested approach to a Bar 
         <div id="chart" style="background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png');"></div>
       </div>
       <script>
-        kendo.drawing.svg.TextNode.fn.renderTextAnchor = function(){
+        kendo.drawing.svg.TextNode.prototype.renderTextAnchor = function(){
           return renderAttr("text-anchor", "end");
         }
         function renderAttr(name, value) {

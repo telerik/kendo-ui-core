@@ -437,7 +437,7 @@ How to configure PDF export settings for Kendo UI PivotGrid? Configure exporting
                 type: "xmla"
             },
             error: function (e) {
-                alert("error: " + kendo.stringify(e.errors[0]));
+                console.log("error: " + kendo.stringify(e.errors[0]));
             }
         }
     });
@@ -780,7 +780,7 @@ How to adjust image quality when exporting pivot grids to PDF with Kendo UI? Adj
                 type: "xmla"
             },
             error: function (e) {
-                alert("error: " + kendo.stringify(e.errors[0]));
+                console.log("error: " + kendo.stringify(e.errors[0]));
             }
         }
     });
@@ -823,7 +823,7 @@ How to keep PNG images intact when exporting PivotGrid to PDF? Control whether e
                 type: "xmla"
             },
             error: function (e) {
-                alert("error: " + kendo.stringify(e.errors[0]));
+                console.log("error: " + kendo.stringify(e.errors[0]));
             }
         }
     });
@@ -3923,7 +3923,7 @@ A promise that will be resolved when the export completes.
     });
     var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
     pivotgrid.bind("pdfExport", function(e) {
-        alert("PDF export");
+        console.log("PDF export");
     });
     pivotgrid.saveAsPDF();
     </script>

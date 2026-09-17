@@ -50,6 +50,8 @@ The Compatibility button will invoke the [Upgrade API Analyzer tool](https://doc
 ![{{ site.product_short }} Choosing projects and distribution version](../installation/images/upgrade-step-2.png)
 {% endif %}
 
+When you select **Remote NuGet feed**, the Upgrade Project Wizard uses the Telerik NuGet feed configured for your Visual Studio environment. The wizard does not document a separate login page or another location choice for signing in. Before opening the wizard, [configure the Telerik NuGet feed](../installation/installation-options/nuget-install.md) and authenticate with your Telerik NuGet API key. If the version list is unavailable, [verify your NuGet credentials and package access](../troubleshoot/troubleshooting-nuget.md#verify-nuget-credentials-and-package-access).
+
 {% if site.mvc %}
 
 ## Project Resources for Upgrade

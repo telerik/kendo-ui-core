@@ -132,6 +132,24 @@ public class SampleData
 }
 ```
 
+{% if site.core %}
+## Custom Operators with TagHelpers
+
+To define a custom operator with TagHelpers, nest the `<filter-custom-operator>` tag directly inside one of the type-specific operator tags: `<filter-operators-string>`, `<filter-operators-number>`, `<filter-operators-date>`, or `<filter-operators-boolean>`. The type-specific operator tag must be nested inside `<operators>`.
+
+```TagHelper
+<kendo-filter name="filter">
+    <operators>
+        <filter-operators-string>
+            <filter-custom-operator name="customOperator" text="Custom operator" handler="customOperatorHandler" />
+        </filter-operators-string>
+    </operators>
+</kendo-filter>
+```
+
+The current TagHelper implementation supports one `<filter-custom-operator>` per type-specific operator tag. If you add multiple custom operator tags to the same type-specific tag, the last one replaces the preceding definitions. The fluent API also supports one custom operator per type.
+{% endif %}
+
 ## See Also
 
 * [Basic Usage of the Filter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filter/index)

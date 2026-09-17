@@ -65,6 +65,12 @@ However, adding the scripts without `type="module"` is also not an option becaus
 
 Apply any of the following approaches when using {{ site.product }} PDFViewer (version 2024.4.1112 or later):
 
+{% if site.core %}
+For current Telerik UI for ASP.NET Core NuGet applications, PDFViewer module loading does not require a client-side license script. Use the `telerik-license.txt` file and the `Telerik.Licensing` package as described in [Setting Up Your License Key]({% slug installation_license_key_aspnetcore %}). Do not create or reference `telerik-license.js`, `kendo-ui-license.js`, or `KendoLicensing.setScriptKey` for this licensing workflow.
+
+When using the partial-view approach, include only the PDFViewer module files that are present in the client resources for your product version. Module files can differ between releases, so do not add a missing `kendo.pdfviewer-common.cmn.chunk.js` file unless it is included in your distribution.
+{% endif %}
+
 - [Using RenderAsModule option for module-based script initialization](#using-renderasmodule-for-module-based-script-initialization)
 - [Loading the PDFViewer through a partial View](#loading-pdfviewer-through-a-partial-view)
 - [Using `kendo.aspnetmvc.ready.min.js` script](#using-kendoaspnetmvcreadyminjs-script)

@@ -54,7 +54,7 @@ The following example demonstrates the implementation of the suggested approach.
 
 > The example loads Kendo UI 2023.3.1010 version.
 
-```dojo
+```javascript
 	<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
 	<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
 

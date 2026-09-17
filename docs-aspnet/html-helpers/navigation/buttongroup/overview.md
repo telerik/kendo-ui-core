@@ -46,6 +46,19 @@ The following example demonstrates how to initialize the ButtonGroup.
 ```
 {% endif %}
 
+## Referencing the ButtonGroup Instance
+
+After the ButtonGroup is initialized, you can retrieve its client-side instance with the `getKendoButtonGroup()` jQuery getter or the equivalent `data("kendoButtonGroup")` method:
+
+```JS script
+        <script>
+                var buttonGroupReference = $("#select-period").getKendoButtonGroup();
+                buttonGroupReference.enable(false);
+        </script>
+```
+
+The `getKendoButtonGroup()` method is a client-side jQuery getter. It is separate from the server-side `Html.Kendo().ButtonGroup()` configuration.
+
 
 ## Functionality and Features
 

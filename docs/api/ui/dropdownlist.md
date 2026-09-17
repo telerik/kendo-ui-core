@@ -1728,7 +1728,7 @@ How to map selected values to data indexes in Kendo UI DropDownList with virtual
               source: new kendo.data.DataSource({
                 type: "odata-v4",
                 transport: {
-                  read: "https://demos.telerik.com/service/v2/core/odata/Orders"
+                  read: "https://demos.telerik.com/service/v2/odata/Orders"
                 },
                 schema: {
                   model: {

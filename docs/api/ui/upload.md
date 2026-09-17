@@ -360,7 +360,7 @@ How to enable selecting entire folders in Kendo UI Upload widget? Configure fold
                 directory: true
             });
         });
-    </script
+    </script>
 
 ### directoryDrop `Boolean` *(default: false)*
 
@@ -389,7 +389,7 @@ How to enable folder drag-and-drop upload functionality in Kendo UI Upload widge
                 directoryDrop: true
             });
         });
-    </script
+    </script>
 
 ### dropZone `String`
 

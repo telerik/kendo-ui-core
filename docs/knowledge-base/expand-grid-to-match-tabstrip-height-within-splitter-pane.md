@@ -166,7 +166,7 @@ The following example demonstrates how to expand a Grid that is located in a Tab
 
         var splitter = $("#splitter").data("kendoSplitter");
         splitter.bind("resize", resizeTabsAndGrid);
-        resizeTabAndGrid();
+        resizeTabsAndGrid();
 
     </script>
 ```

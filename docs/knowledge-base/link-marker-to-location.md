@@ -57,7 +57,7 @@ The following example demonstrates how to draw a straight line between a marker 
           dataSource: {
             type: "geojson",
             transport: {
-              read: "https://output.jsbin.com/zuguhajiye.js"
+              read: "https://runner.telerik.io/fullscreen/ByPoAVUf.json"
             }
           }
         }, {

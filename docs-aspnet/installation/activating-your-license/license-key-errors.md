@@ -43,6 +43,8 @@ This error can occur when a project references `Telerik.Licensing`, but not any 
 
 The error means that the license key is missing or not set up correctly. For example, the environment variable is not set, or [the license file may be located in the wrong place]({%slug installation_license_key_aspnetcore%}#manual-installation).
 
+In a production application, you may also see a message such as `License key missing for Kendo UI v2025.3 1002. A license key is required for both paid and trial usage. Learn how to set up a license key.`
+
 [Install a license key]({%slug installation_license_key_aspnetcore%}) again. Also, check how to [set up a license key in CI/CD environments]({%slug deployment_license_key_aspnetcore%}).
 
 ### Corrupted Telerik and Kendo UI License Key content (TKL003)

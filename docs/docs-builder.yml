@@ -805,6 +805,54 @@ redirects:
   to: /api/$1/$2/$3
   slashifyMember: true
 
+- from: ^/api/javascript/mobile/ui/backbutton$
+  to: /api/ui/button
+
+- from: ^/api/javascript/mobile/ui/collapsible$
+  to: /api/ui/button
+
+- from: ^/api/javascript/mobile/ui/detailbutton$
+  to: /api/ui/button
+
+- from: ^/api/javascript/mobile/ui/layout$
+  to: /api/layout
+
+- from: ^/api/javascript/mobile/ui/mobilewidget$
+  to: /api/view
+
+- from: ^/api/javascript/mobile/ui/modalview$
+  to: /api/view
+
+- from: ^/api/javascript/mobile/ui/view$
+  to: /api/view
+
+- from: ^/api/javascript/mobile/ui/splitview$
+  to: /api/ui/splitter
+
+- from: ^/api/javascript/mobile/ui/scroller$
+  to: /api/view
+
+- from: ^/api/javascript/mobile/ui/navbar$
+  to: /api/ui/menu
+
+- from: ^/api/javascript/mobile/ui/pane$
+  to: /api/ui/panelbar
+
+- from: ^/api/javascript/ui/(datasource|dataSource)$
+  to: /api/data/datasource
+
+- from: ^/api/javascript/geometry$
+  to: /api/geometry/arc
+
+- from: ^/api/javascript/dataviz/drawing/(.*)$
+  to: /api/drawing/$1
+
+- from: ^/api/javascript/dataviz/geometry/(.*)$
+  to: /api/geometry/$1
+
+- from: ^/api/javascript/dataviz/ui/stockchart/?$
+  to: /api/dataviz/ui/stock-chart
+
 - from: ^/api/javascript/(.*)$
   to: /api/$1
 
@@ -846,9 +894,6 @@ redirects:
 
 - from: ^/api/(?:javascript/)?dataviz/(barcode|chart|diagram|lineargauge|map|qrcode|radialgauge|sparkline|stock-chart|treemap)$
   to: /api/dataviz/ui/$1
-
-- from: ^/api/geometry$
-  to: /api/geometry/arc
 
 - from: ^/web/(grid|listview|pivotgrid|spreadsheet|treelist)/(.*)$
   to: /controls/$1/$2
@@ -925,10 +970,7 @@ redirects:
 - from: ^/using-kendo-with/(.*)$
   to: /$1
 
-- from: ^/api/ui/(datasource|dataSource)$
-  to: /api/data/datasource
-
-- from: ^/api/ui/AutoComplete$
+- from: ^/api/javascript/ui/AutoComplete$
   to: /api/ui/autocomplete
 
 - from: ^/api/ui/Editor$
@@ -937,13 +979,13 @@ redirects:
 - from: ^/controls/scheduling/scheduler/Overview$
   to: /controls/scheduler/overview
 
-- from: ^/api/ui/RangeSlider$
+- from: ^/api/javascript/ui/RangeSlider$
   to: /api/ui/rangeslider
 
-- from: ^/api/ui/Splitter$
+- from: ^/api/javascript/ui/Splitter$
   to: /api/ui/splitter
 
-- from: ^/api/ui/TreeView$
+- from: ^/api/javascript/ui/TreeView$
   to: /api/ui/treeview
 
 - from: ^/documentation/api/framework/datasource$
@@ -955,47 +997,11 @@ redirects:
 - from: ^/controls/data-management/grid/(introduction|walkthrough)$
   to: /controls/grid/overview
 
-- from: ^/api/mobile/ui/backbutton$
-  to: /api/ui/button
-
-- from: ^/api/mobile/ui/collapsible$
-  to: /api/ui/button
-
-- from: ^/api/mobile/ui/detailbutton$
-  to: /api/ui/button
-
-- from: ^/api/mobile/ui/layout$
-  to: /api/layout
-
-- from: ^/api/mobile/ui/mobilewidget$
-  to: /api/view
-
-- from: ^/api/mobile/ui/modalview$
-  to: /api/view
-
-- from: ^/api/mobile/ui/view$
-  to: /api/view
-
-- from: ^/api/mobile/ui/splitview$
-  to: /api/ui/splitter
-
-- from: ^/api/mobile/ui/scroller$
-  to: /api/view
-
-- from: ^/api/mobile/ui/navbar$
-  to: /api/ui/menu
-
-- from: ^/api/mobile/ui/pane$
-  to: /api/ui/panelbar
-
 - from: ^/styles-and-layout/performance-tips$
   to: /controls/charts/troubleshoot/performance-tips
 
 - from: ^/controls/data-management/spreadsheet/import-and-export-data/overview$
   to: /controls/spreadsheet/import-and-export-data/json
-
-- from: ^/api/dataviz/ui/stockchart/?$
-  to: /api/dataviz/ui/stock-chart
 
 - from: ^/aspnet-mvc/mvc-6/(.*)$
   to: https://www.telerik.com/aspnet-mvc/documentation/$1
@@ -1057,46 +1063,46 @@ redirects:
 - from: ^/api/aspnet-mvc/?(.*)$
   to: https://www.telerik.com/aspnet-mvc/documentation/api/$1
 
-- from: ^/api/ui/grid/configuration/allowcopy.(delimeter)$
+- from: ^/api/javascript/ui/grid/configuration/allowcopy.(delimeter)$
   to: /api/ui/grid/configuration/allowcopy
 
-- from: ^/api/ui/grid/configuration/columns.command.(visible|name|text.edit|text.cancel|text.update|text|classname|click|iconclass.edit|iconclass.update|iconclass.cancel|iconclass)$
+- from: ^/api/javascript/ui/grid/configuration/columns.command.(visible|name|text.edit|text.cancel|text.update|text|classname|click|iconclass.edit|iconclass.update|iconclass.cancel|iconclass)$
   to: /api/ui/grid/configuration/columns.command
 
-- from: ^/api/ui/grid/configuration/columns.filterable.cell.(datasource|datatextfield|delay|inputwidth|suggestionoperator|minlength|enabled|operator|showoperators|template)$
+- from: ^/api/javascript/ui/grid/configuration/columns.filterable.cell.(datasource|datatextfield|delay|inputwidth|suggestionoperator|minlength|enabled|operator|showoperators|template)$
   to: /api/ui/grid/configuration/columns.filterable.cell
 
-- from: ^/api/ui/grid/configuration/columns.sortable.(compare|initialdirection)$
+- from: ^/api/javascript/ui/grid/configuration/columns.sortable.(compare|initialdirection)$
   to: /api/ui/grid/configuration/columns.sortable
 
-- from: ^/api/ui/grid/configuration/columnmenu.messages.(columns|filter|sortascending|sortdescending|settings|done|unlock|lock)$
+- from: ^/api/javascript/ui/grid/configuration/columnmenu.messages.(columns|filter|sortascending|sortdescending|settings|done|unlock|lock)$
   to: /api/ui/grid/configuration/columnmenu.messages
 
-- from: ^/api/ui/grid/configuration/filterable.messages.(and|clear|filter|info|title|isfalse|istrue|or|search|selectvalue|cancel|selecteditemsformat|operator|checkall|value)$
+- from: ^/api/javascript/ui/grid/configuration/filterable.messages.(and|clear|filter|info|title|isfalse|istrue|or|search|selectvalue|cancel|selecteditemsformat|operator|checkall|value)$
   to: /api/ui/grid/configuration/filterable.messages
 
-- from: ^/api/ui/grid/configuration/filterable.operators.string.(neq|eq|isnull|isnotnull|isempty|isnotempty|startswith|contains|doesnotcontain|endswith)$
+- from: ^/api/javascript/ui/grid/configuration/filterable.operators.string.(neq|eq|isnull|isnotnull|isempty|isnotempty|startswith|contains|doesnotcontain|endswith)$
   to: /api/ui/grid/configuration/filterable.operators.string
 
-- from: ^/api/ui/grid/configuration/filterable.operators.number.(neq|eq|isnull|isnotnull|gte|gt|lte|lt)$
+- from: ^/api/javascript/ui/grid/configuration/filterable.operators.number.(neq|eq|isnull|isnotnull|gte|gt|lte|lt)$
   to: /api/ui/grid/configuration/filterable.operators.number
 
-- from: ^/api/ui/grid/configuration/filterable.operators.date.(neq|eq|isnull|isnotnull|gte|gt|lte|lt)$
+- from: ^/api/javascript/ui/grid/configuration/filterable.operators.date.(neq|eq|isnull|isnotnull|gte|gt|lte|lt)$
   to: /api/ui/grid/configuration/filterable.operators.date
 
-- from: ^/api/ui/grid/configuration/filterable.operators.enums.(neq|eq|isnull|isnotnull)$
+- from: ^/api/javascript/ui/grid/configuration/filterable.operators.enums.(neq|eq|isnull|isnotnull)$
   to: /api/ui/grid/configuration/filterable.operators.enums
 
-- from: ^/api/ui/grid/configuration/messages.commands.(canceledit|cancel|create|destroy|edit|excel|save|update)$
+- from: ^/api/javascript/ui/grid/configuration/messages.commands.(canceledit|cancel|create|destroy|edit|excel|save|update)$
   to: /api/ui/grid/configuration/messages.commands
 
-- from: ^/api/ui/grid/configuration/norecords.(template)$
+- from: ^/api/javascript/ui/grid/configuration/norecords.(template)$
   to: /api/ui/grid/configuration/norecords
 
-- from: ^/api/ui/grid/configuration/pageable.messages.(display|empty|itemsperpage|morepages|page|first|last|next|previous|refresh|of)$
+- from: ^/api/javascript/ui/grid/configuration/pageable.messages.(display|empty|itemsperpage|morepages|page|first|last|next|previous|refresh|of)$
   to: /api/ui/grid/configuration/pageable.messages
 
-- from: ^/api/ui/grid/configuration/pdf.margin.(bottom|left|right|top)$
+- from: ^/api/javascript/ui/grid/configuration/pdf.margin.(bottom|left|right|top)$
   to: /api/ui/grid/configuration/pdf.margin
 
 - from: ^/controls/(data-management|editors|layout|navigation|barcodes|interactivity|media|pdf|scheduling|gauges|conversational-ui|diagrams-and-maps)/(.*)$
@@ -1186,17 +1192,11 @@ redirects:
 - from: ^/api/dataviz/(barcode|chart|diagram|lineargauge|map|qrcode|radialgauge|sparkline|stock-chart|treemap|circulargauge|stock-chart)$
   to: /api/dataviz/ui/$1
 
-- from: ^/api/dataviz/(chart|diagram|map)$
+- from: ^/api/javascript/dataviz/(chart|diagram|map)$
   to: /api/dataviz/ui/$1
 
 - from: ^/api/dataviz/(.*)$
   to: /api/dataviz/$1
-
-- from: ^/api/dataviz/drawing/(.*)$
-  to: /api/drawing/$1
-
-- from: ^/api/dataviz/geometry/(.*)$
-  to: /api/geometry/$1
 
 - from: ^/web/styles-and-layout/(.*)$
   to: /styles-and-layout/$1
