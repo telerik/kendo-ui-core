@@ -9,7 +9,7 @@ position: 11
 
 # Import and Export of Documents
 
-As of the R1 2017 release, the Telerik UI Editor for ASP.NET MVC enables you to import and export various types of documents through the dedicated `Kendo.Mvc.Export` assembly. In the Q2 2025 release, `Kendo.Mvc.Export` has been replaced by the `Telerik.Core.Export` NuGet package.
+As of the R1 2017 release, the Telerik UI Editor for {{ site.framework }} enables you to import and export various types of documents through the dedicated export assembly. In current releases, use the `Telerik.Export.Core` NuGet package.
 
 Along with the server-side integration of the [Telerik Document Processing](https://docs.telerik.com/devtools/document-processing/introduction) suite, the new `ExportAs` and `Import` tools which utilize the import and export functionality are available.
 
@@ -21,7 +21,7 @@ The import and export capabilities are bundled as part of the [UI for ASP.NET MV
 
 To start using the import and export functionality:
 
-1. Add a reference in your project to the `Telerik.Export.Core` assembly, or install the `Telerik.Export.Core` NuGet package for product versions after 2026 Q3.
+1. Add a reference in your project to the `Telerik.Export.Core` assembly, or install the `Telerik.Export.Core` NuGet package.
 1. Add references in your project to the required [Telerik Document Processing libraries](https://docs.telerik.com/devtools/document-processing/introduction#libraries).
 
 ## Exporting Content from the Editor
@@ -82,6 +82,18 @@ To start using the import and export functionality:
     ...
     ```
 
+    To retrieve the Editor contents as an HTML string without downloading a file, call the client-side `value()` method. The method returns the serialized HTML, including its tags:
+
+    ```JS dojo
+    <script>
+        var editor = $("#Editor").data("kendoEditor");
+        var html = editor.value();
+        console.log(html); // For example: <p><strong>Text</strong></p>
+    </script>
+    ```
+
+    To download the contents as an HTML file, add `HTML` to the `ExportAs` items and configure the export proxy as shown above. The downloaded file contains HTML markup, which a browser renders as formatted content. To display the tags as text instead, use the `encodedValue()` method.
+
 ## Importing Content from Files
 
 1. Add the `Import` tool.
@@ -121,6 +133,33 @@ To start using the import and export functionality:
 
 1. Implement the action method in the corresponding controller.
 
+{% if site.core %}
+    ```C#
+    using Microsoft.AspNetCore.Http;
+    using Telerik.Export.Core;
+    ...
+        public ActionResult Import(IFormFile file)
+        {
+            var settings = new EditorImportSettings();
+            string htmlResult;
+            switch (Path.GetExtension(file.FileName))
+            {
+                case ".docx":
+                    htmlResult = EditorImport.ToDocxImportResult(file, settings);
+                    break;
+                case ".rtf":
+                    htmlResult = EditorImport.ToRtfImportResult(file, settings);
+                    break;
+                default:
+                    htmlResult = EditorImport.GetTextContent(file);
+                    break;
+            }
+
+            return Json(new { html = htmlResult });
+        }
+    ...
+    ```
+{% else %}
     ```C#
     using Telerik.Export.Core;
     ...
@@ -145,6 +184,7 @@ To start using the import and export functionality:
         }
     ...
     ```
+{% endif %}
 
 ## Changing Import and Export Settings
 
@@ -185,6 +225,23 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 
 The following example demonstrates how to configure the import capabilities so that images are generated with inline base64 data in the HTML `<img>` tag. For more information on each setting that is supported by `EditorImportSettings`, refer to the [documentation on HTML export settings](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings#export-settings).
 
+{% if site.core %}
+```C#
+using Microsoft.AspNetCore.Http;
+using Telerik.Export.Core;
+using Telerik.Windows.Documents.Flow.FormatProviders.Html;
+...
+    public ActionResult Import(IFormFile file)
+    {
+        var settings = new EditorImportSettings();
+        settings.ImagesImportMode = ImagesExportMode.Embedded;
+        string htmlResult = EditorImport.ToDocxImportResult(file, settings);
+
+        return Json(new { html = htmlResult });
+    }
+...
+```
+{% else %}
 ```C#
 using Telerik.Export.Core;
 using Telerik.Windows.Documents.Flow.FormatProviders.Html;
@@ -199,6 +256,7 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
     }
 ...
 ```
+{% endif %}
 
 ## See Also
 

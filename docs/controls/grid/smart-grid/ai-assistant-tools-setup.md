@@ -263,8 +263,8 @@ The AI Assistant tools provide events for enhanced control over the AI interacti
 
 - [`promptRequest`](/api/ui/grid/configuration/ai/aiassistant#aiaiassistantpromptrequest)&mdash;Triggered when the prompt view Generate output button is clicked. 
 - [`promptResponse`](/api/ui/grid/configuration/ai/aiassistant#aiaiassistantpromptresponse)&mdash;Triggered when the AI service response is received. 
-- [`promptRequestCancel`](slug:/api/ui/grid/configuration/smartbox#smartboxaiassistantresponsesuccess)&mdash;Emits when a prompt request is cancelled.
-- [`commandExecute`](slug:/api/ui/grid/configuration/smartbox#smartboxaiassistantresponseerror)&mdash;Emits when a command item from the Commands view is clicked.
+- [`promptRequestCancel`](/api/ui/grid/configuration/ai/aiassistant#aiaiassistantpromptrequestcancel)&mdash;Emits when a prompt request is cancelled.
+- [`commandExecute`](/api/ui/grid/configuration/ai/aiassistant#aiaiassistantcommandexecute)&mdash;Emits when a command item from the Commands view is clicked.
 
 </TabStripTab>
 </TabStrip>

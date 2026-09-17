@@ -43,7 +43,7 @@ Configure the child DropDownList by setting the `k-cascade-from` and `k-cascade-
 
 > The example loads Kendo UI 2023.3.1010 version.
 
-```dojo
+```javascript
 <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
 
@@ -103,7 +103,9 @@ Configure the child DropDownList by setting the `k-cascade-from` and `k-cascade-
 
           })
 </script>
+```
 
+```C#
 ---------Controller Implementation-------------
  public class ProductsController : ApiController
     {
@@ -143,5 +145,4 @@ Configure the child DropDownList by setting the `k-cascade-from` and `k-cascade-
         }
 
     }
-
 ```

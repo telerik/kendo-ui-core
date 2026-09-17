@@ -233,6 +233,8 @@ Users execute commands in the following ways:
 
 Command buttons can only reside in Grid [column commands](/api/kendo.mvc.ui.fluent/gridcolumnfactory#commandsystemaction) or the Grid [Toolbar]({% slug htmlhelpers_grid_aspnetcore_toolbar%}). You can also trigger the desired operation programmatically from anywhere on the page using the [client-side methods](https://www.telerik.com/kendo-jquery-ui/documentation/api/ui/grid#methods).
 
+In versions before 2023.1.314, the Grid update command used `k-grid-update`; in versions 2023.1.314 and later, use `k-grid-save-command`. This command class is a client-side CSS and behavior hook and is separate from the `Update()` configuration of the Grid DataSource. ListView editor templates use `k-update-button` and `k-cancel-button` instead. For more information, see the [2023 breaking changes]({% slug breakingchanges_2023 %}).
+
 ## Known Limitations
 
 The following limitations apply when using editing along with other features of the component.

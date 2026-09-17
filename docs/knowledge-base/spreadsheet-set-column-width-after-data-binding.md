@@ -127,7 +127,7 @@ Below is a runnable example of how to implement this logic:
 
         function onRead(options) {
           $.ajax({
-            url: crudServiceBaseUrl + "/Products"
+            url: crudServiceBaseUrl + "/Products",
             success: function (result) {
               options.success(result);
             },

@@ -126,6 +126,48 @@ public ActionResult Read_PanelBarData(int? id)
 ```
 {% endif %}
 
+## Troubleshooting Remote Loading
+
+The PanelBar supports two remote loading scenarios:
+
+* **Remote hierarchical data**&mdash;The `DataSource` sends a `Read` request for the root items and for the children of an expanded item. Inspect the request in the browser developer tools and verify that the response contains the configured text field, the item `id`, the `hasChildren` value, and the children for the requested parent.
+* **Remote HTML content**&mdash;The `LoadContentFrom` method or the `content-url` attribute loads HTML into an item when it is expanded. Verify that the content URL returns HTML and that the item's content `<div>` is empty before the request is made. For more information, see [Loading Content with AJAX in the PanelBar](https://docs.telerik.com/kendo-ui/controls/panelbar/content).
+
+For remote hierarchical data, you can customize the loading and retry messages and handle DataSource errors:
+
+```HtmlHelper
+@(Html.Kendo().PanelBar()
+    .Name("panelbar")
+    .Messages(messages => messages
+        .Loading("Loading items...")
+        .RequestFailed("Request failed.")
+        .Retry("Retry")
+    )
+    .Events(events => events.Error("onError"))
+)
+
+<script>
+    function onError(e) {
+        console.error(e);
+    }
+</script>
+```
+{% if site.core %}
+```TagHelper
+<kendo-panelbar name="panelbar" on-error="onError">
+    <messages loading="Loading items..." retry="Retry" />
+</kendo-panelbar>
+
+<script>
+    function onError(e) {
+        console.error(e);
+    }
+</script>
+```
+{% endif %}
+
+The `Messages` settings and built-in retry behavior apply to DataSource binding failures. For remote HTML content requests, use the `contentLoad` and `error` events where supported and inspect the network response. The PanelBar `error` event does not fire with jQuery 3.x. For more information, see [PanelBar Data Binding](https://docs.telerik.com/kendo-ui/controls/panelbar/binding) and the [PanelBar API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar).
+
 ## See Also
 
 * [Remote Data Binding by the PanelBar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/remote-data-binding)

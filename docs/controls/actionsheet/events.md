@@ -60,7 +60,7 @@ The following example demonstrates how you can subscribe to the `open` event of 
                 actionsheet.open()
             }
         });
-</script
+</script>
 ```
 
 ## Close
@@ -112,7 +112,7 @@ The following example demonstrates how you can subscribe to the `open` event of 
                 actionsheet.open()
             }
         });
-</script
+</script>
 ```
 
 ## See Also

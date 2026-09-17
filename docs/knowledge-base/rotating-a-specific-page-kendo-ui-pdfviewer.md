@@ -54,18 +54,10 @@ In the example below the currently displayed page will be rotated on a button cl
       <div id="pdfViewer">
       </div>
     </div>
-    <script>
+    <script type="module">
       var rotate = 0;
 
-      $.when(
-        $.getScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"),
-        $.getScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js")
-      )
-        .done(function () {
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';           
-      }).then(function(){
-
-        $("#pdfViewer").kendoPDFViewer({
+      $("#pdfViewer").kendoPDFViewer({
           toolbar: {
             items: [
               "pager",
@@ -86,10 +78,9 @@ In the example below the currently displayed page will be rotated on a button cl
           dataSource:["1","2","3"],
           width:50
         })
-      })
 
 
-      function rotatePDF(){
+      window.rotatePDF = function rotatePDF() {
 
         let currentPage = $("#pdfViewer").data('kendoPDFViewer')._pageNum;      
         let current = $('.k-page:nth-child(' + currentPage + ')')[0].style.transform

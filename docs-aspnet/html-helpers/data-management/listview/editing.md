@@ -171,7 +171,9 @@ The following example demonstrates how to define the `EditorTemplate` for the mo
 1. Declare the editor template in a file that uses the name of the edited model&mdash;for example, `OrderViewModel.cshtml`.
 1. Place this file in the `~Views\Shared\EditorTemplates` directory of your project.
 
-> `click` events for elements with `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Telerik UI ListView as `save` and `cancel` actions. Similar to the item template, you have to wrap the editor template in an HTML container.
+> `click` events for elements with `k-update-button` and `k-cancel-button` class names are automatically handled and treated by the Telerik UI ListView as `save` and `cancel` actions. The nested icon classes only control the button appearance. Similar to the item template, you have to wrap the editor template in an HTML container.
+
+The examples below use the legacy `k-icon` font-icon markup. To use these icons, configure the font icon resources as described in [Font Icons Migration](../../../styles-and-layout/sass-themes/font-icons-migration.md). For the default SVG icon type in current releases, use the [`kendo.ui.icon`](https://docs.telerik.com/kendo-ui/api/javascript/ui/ui/methods/icon) method instead.
 
 ```HtmlHelper
     @model ListViewExample.Models.OrderViewModel

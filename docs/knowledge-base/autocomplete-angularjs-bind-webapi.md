@@ -43,7 +43,7 @@ To achieve the desired scenario, set the `dataSource` type to `webapi` and the `
 
 > The example loads Kendo UI 2023.3.1010 version.
 
-```dojo
+```javascript
 <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
 
@@ -78,7 +78,9 @@ To achieve the desired scenario, set the `dataSource` type to `webapi` and the `
 
           })              
 </script>
+```
 
+```C#
 ----------- Controller implementation
 // GET api/values
   public DataSourceResult Get([System.Web.Http.ModelBinding.ModelBinder(typeof(WebApiDataSourceRequestModelBinder))]DataSourceRequest request)

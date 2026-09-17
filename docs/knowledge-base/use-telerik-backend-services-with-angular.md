@@ -82,7 +82,7 @@ The following example demonstrates how to bind the [Grid](https://www.telerik.co
                         that.dataSource.read();
                     })
                     .catch(function(error) {
-                        alert(error.message);
+                        console.log(error.message);
                     });
             } else {
                 this.dataSource.read();
@@ -115,7 +115,7 @@ The following example demonstrates how to bind the [Grid](https://www.telerik.co
             serverSorting: true,
             serverPaging: true,
             error: function(err) {
-                alert(JSON.stringify(err));
+                console.log(JSON.stringify(err));
             }
         });
 

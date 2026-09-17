@@ -34,7 +34,9 @@ The following example demonstrates how to enable the sort-by-text functionality 
 To achieve the desired scenario:
 
 1. Add the complex model field that is corresponding for the ForeignKey column.
-1. Subscribe to the [`document.ready()`](http://learn.jquery.com/using-jquery-core/document-ready/) event, get a reference of the header for the ForeignKey column, and change the data-field attribute to point to the text field.
+1. Subscribe to the [`document.ready()`](http://learn.jquery.com/using-jquery-core/document-ready/) event after the Grid declaration, get a reference of the header for the ForeignKey column, and change the `data-kendo-field` attribute to point to the text field.
+
+If the Grid uses deferred initialization, place the handler after the deferred scripts are rendered. This example uses `ServerOperation(false)`, so the Grid sorts the returned data on the client by the text field.
 
 ```C# Model.cs
      public class ProductViewModel
@@ -72,7 +74,7 @@ To achieve the desired scenario:
             .Columns(columns =>
             {
                 columns.Bound(p => p.ProductName);
-                columns.Bound(p => p.CategoryName).ClientTemplate("#=calculateField(CategoryID)#").EditorTemplateName("CategoryNameEditor").Width(200);
+                columns.Bound(p => p.CategoryID).ClientTemplate("#=calculateField(CategoryID)#").EditorTemplateName("CategoryNameEditor").Width(200);
                 columns.Bound(p => p.UnitPrice).Format("{0:c}").Width(200);
                 columns.Command(command => command.Destroy()).Width(150);
             })
@@ -107,10 +109,12 @@ To achieve the desired scenario:
    <script type="text/javascript">
         $(function () {
             var grid = $("#grid").data("kendoGrid"); // Get the Grid's reference.
-            grid.thead.find("th[data-field='CategoryID']").attr("data-field", "Category.CategoryName"); // Change the data-field attribute.
+            grid.thead.find("th[data-kendo-field='CategoryID']").attr("data-kendo-field", "Category.CategoryName");
         });
    </script>
 ```
+
+Place the script in the same `.cshtml` view after the Grid markup, or in an `@section Scripts` that the layout renders after the view content. The Grid must be initialized before the handler runs.
 
 For the complete implementation of the suggested approach, refer to the [Telerik REPL example on enabling foreign key column sorting by text in the Grid](https://netcorerepl.telerik.com/GxEIcTlf138axUqV28).
 

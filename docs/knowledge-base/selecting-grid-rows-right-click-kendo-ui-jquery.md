@@ -79,7 +79,7 @@ $("#grid").kendoGrid({
 You can view and test this implementation in the following example: 
 
 ```dojo
-<script src="../content/shared/js/orders.js"></script>
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/orders.js"></script>
 
     <div id="example">
 

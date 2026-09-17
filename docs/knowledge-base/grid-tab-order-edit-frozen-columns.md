@@ -63,6 +63,7 @@ To keep the tab order:
                           url: crudServiceBaseUrl + "/Products/Create",
                           type: "POST",
                   		    contentType: "application/json"
+                      },
                   },
                 batch: true,
                 pageSize: 20,

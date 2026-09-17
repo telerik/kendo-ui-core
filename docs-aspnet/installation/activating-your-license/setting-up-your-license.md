@@ -63,6 +63,10 @@ By default, when you have an active license, the [required Kendo UI scripts]({% 
     @(Html.Kendo().ActivateKendoScripts())
 ```
 
+When an ASP.NET Core MVC application uses the Telerik UI for ASP.NET Core NuGet package and initializes Kendo UI for jQuery controls, do not add `kendo-ui-license.js`, `telerik-license.js`, or `KendoLicensing.setScriptKey`. The `Telerik.Licensing` package and the `telerik-license.txt` file provide the current licensing workflow. If the application uses standalone `@progress/kendo-ui` assets instead of the Telerik UI for ASP.NET Core NuGet package, follow the [Kendo UI for jQuery license key documentation](https://docs.telerik.com/kendo-ui/intro/installation/licensing/using-license-file).
+
+For Kendo UI for jQuery versions before `2025.1.211`, use the [legacy script license key workflow](https://docs.telerik.com/kendo-ui/intro/installation/licensing/adding-the-license-key) instead.
+
 ## License Key Updates
 
 Always install a new license key whenever you:

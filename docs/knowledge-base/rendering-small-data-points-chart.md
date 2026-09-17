@@ -83,7 +83,7 @@ For a runnable example please refer to the next demo.
 ```dojo
 <div id="example">
       <div class="demo-section wide">
-        <div id="chart" style="background: center no-repeat url('../content/shared/styles/world-map.png');"></div>
+        <div id="chart" style="background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png');"></div>
       </div>
       <script>
         function createChart() {

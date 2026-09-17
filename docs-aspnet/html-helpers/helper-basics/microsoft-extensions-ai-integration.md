@@ -13,6 +13,8 @@ The [AIPrompt component]({% slug htmlhelpers_overview_aiprompt %}) incorporates 
 
 Other components will support similar integration in future versions of {{ site.product_short }}.
 
+An API key alone is not enough to connect an AI component to a third-party service. You also need the provider endpoint, model or deployment configuration, and a server-side endpoint or registered `IChatClient` that sends the request and returns the response expected by the component. Integration is component-specific, so follow the setup instructions for the AI component you use. Keep provider credentials in server-side configuration and do not expose them in client-side code.
+
 ## Integration
 
 To integrate the <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.ai?view=net-9.0-pp" target="_blank">`Microsoft.Extensions.AI`</a> library with your AIPrompt component, register an <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.ai.ichatclient?view=net-9.0-pp" target="_blank">`IChatClient`</a> service and configure it according to the model you are using. The AIPrompt is designed to automatically use the registered `IChatClient`.

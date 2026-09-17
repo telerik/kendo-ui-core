@@ -118,12 +118,11 @@ To provide the client-side web assets by using LibMan:
 
     The result of the bundling will be a `bundle.js` file output in the **wwwroot/dist/** folder.
 
-1. In the `_Layout.cshtml`, file add a reference to the desired theme, the bundled scripts, and the license file `kendo-ui-license.js`:
+1. In the `_Layout.cshtml` file, add a reference to the desired theme and the bundled scripts. The `telerik-license.txt` file is activated through the licensing workflow described in [Setting Up Your License Key]({% slug installation_license_key_aspnetcore %}); do not add a separate `kendo-ui-license.js` or `telerik-license.js` reference for current versions:
 
     ```Razor _Layout.cshtml
         <link rel="stylesheet" href="~/lib/kendo-ui/{{ site.cdnVersion }}/css/web/kendo.default-v2.css" />
         <script src="~/dist/bundle.js"></script>
-        <script src="./kendo-ui-license.js"></script>
     ```
 
 ## See Also

@@ -3649,6 +3649,7 @@ layers.maxSize
 layers.minSize
 layers.maxZoom
 OpenCycleMap
+CyclOSM
 layers.minZoom
 layers.opacity
 layers.subdomains

@@ -287,7 +287,7 @@ The following example applies the initial filter on `dataBound` and adds the `k-
                   dataSource: {
                     transport: {
                       read: {
-                        url: crudServiceBaseUrl + "Employees/Unique"
+                        url: crudServiceBaseUrl + "Employees/Unique",
                         data: {
                           field: "FirstName"
                         }
@@ -302,7 +302,7 @@ The following example applies the initial filter on `dataBound` and adds the `k-
                   dataSource: {
                     transport: {
                       read: {
-                        url: crudServiceBaseUrl + "Employees/Unique"
+                        url: crudServiceBaseUrl + "Employees/Unique",
                         data: {
                           field: "LastName"
                         }
@@ -320,7 +320,7 @@ The following example applies the initial filter on `dataBound` and adds the `k-
                   dataSource: {
                     transport: {
                       read: {
-                        url: crudServiceBaseUrl + "Employees/Unique"
+                        url: crudServiceBaseUrl + "Employees/Unique",
                         data: {
                           field: "Country"
                         }
@@ -362,7 +362,7 @@ The following example applies the initial filter on `dataBound` and adds the `k-
                   dataSource: {
                     transport: {
                       read: {
-                        url: crudServiceBaseUrl + "Employees/Unique"
+                        url: crudServiceBaseUrl + "Employees/Unique",
                         data: {
                           field: "Title"
                         }

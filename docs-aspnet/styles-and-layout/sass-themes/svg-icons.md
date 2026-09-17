@@ -56,6 +56,12 @@ This global configuration will be used by all components that render any element
 
 With the R1 SP1 2023 release, {{ site.product }} introduced a new `kendo.ui.icon` method. Depending on the global configuration, `kendo.ui.icon` allows you to render either an SVG icon or a Font icon. Through the method, you can also specify the icon over the `iconType` field.
 
+{% if site.core %}
+The ASP.NET Core wrappers do not provide a `<kendo-icon>` TagHelper. Use the `icon` option on a supported component, such as the Button, or use `kendo.ui.icon` for standalone SVG icons.
+{% endif %}
+
+The theme CSS styles the rendered SVG markup. The icon definitions come from the standard Kendo UI bundle or, when you intentionally use the v5 outline icon collection, from the `@progress/kendo-svg-icons` package assigned to `kendo.ui.svgIcons` before component initialization. For more information, see [Using v5 Outline SVG Icons]({% slug configure-design-system-v5-outline-svg-icons %}).
+
 The following example shows how to create an SVG icon by extending an existing HTML element.
 
 ```JS dojo

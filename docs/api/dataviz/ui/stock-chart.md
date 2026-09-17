@@ -1177,7 +1177,7 @@ How do I customize the font of the category axis crosshair tooltip in a StockCha
 
 ### navigator.categoryAxis.crosshair.tooltip.format `String` *(default: "{0}")*
 
-The format used to display the tooltip. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the tooltip. Uses [kendo.format](api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -1413,7 +1413,7 @@ How do I adjust the top padding of the crosshair tooltip in a Kendo UI StockChar
 
 ### navigator.categoryAxis.crosshair.tooltip.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the tooltip.
+The [template](/api/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -1924,7 +1924,7 @@ How do I customize date and time formatting for category axis labels in Kendo UI
 
 ### navigator.categoryAxis.labels.dateFormats `Object`
 
-The format used to display the labels when the categories are dates. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels when the categories are dates. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 > The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit). Setting the [categoryAxis.labels.format](/api/dataviz/ui/stock-chart#configuration-categoryAxis.labels.format) option will override the date formats.
 
@@ -2182,7 +2182,7 @@ How can I change the font size of category axis labels in a Kendo UI StockChart 
 
 ### navigator.categoryAxis.labels.format `String` *(default: "{0}")*
 
-The format used to display the labels. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -2698,7 +2698,7 @@ How to configure label spacing in StockChart navigator category axis? Adjust or 
 
 ### navigator.categoryAxis.labels.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -5983,7 +5983,7 @@ How do I customize the font of note labels in a Kendo UI StockChart navigator ca
 
 ### navigator.categoryAxis.notes.label.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -6104,7 +6104,7 @@ How do I rotate category axis labels in Kendo UI Stock Chart navigator? Adjust t
 
 ### navigator.categoryAxis.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the notes label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -6978,7 +6978,7 @@ How can I customize the font of note labels in a StockChart navigator category a
 
 ### navigator.categoryAxis.notes.data.label.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -7069,7 +7069,7 @@ How to rotate labels for data notes on stock chart category axis? Adjust or set 
 
 ### navigator.categoryAxis.notes.data.label.format `String` *(default: "{0}")*
 
-The format used to display the note label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the note label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -8981,7 +8981,7 @@ How do I customize the label of a navigator series in a Kendo UI StockChart? Set
     });
     </script>
 
-The name can also be a [template](/api/framework/kendo#methods-template) which sets the name of the series when bound to grouped data source.
+The name can also be a [template](/api/kendo/methods/template) which sets the name of the series when bound to grouped data source.
 
 The fields which can be used in the template are:
 
@@ -10477,7 +10477,7 @@ How to customize labels in Kendo UI StockChart navigator series? Configure and c
 
 ### navigator.series.labels.ariaTemplate `String | Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the ARIA label for the series labels.
+The [template](/api/kendo/methods/template) which renders the ARIA label for the series labels.
 
 The fields which can be used in the template are:
 
@@ -11420,7 +11420,7 @@ The label is positioned to the left of the marker.
 
 ### navigator.series.labels.template `String | Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the chart series label.
+The [template](/api/kendo/methods/template) which renders the chart series label.
 
 The fields which can be used in the template are:
 
@@ -14479,7 +14479,7 @@ How do I control the frequency of category axis labels on a Kendo UI StockChart?
 
 ### categoryAxis.labels.template `String | Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -19276,7 +19276,7 @@ How to customize font settings for category axis notes in Kendo UI StockChart? C
 
 ### categoryAxis.notes.label.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -19364,7 +19364,7 @@ How to rotate axis note labels in Kendo UI StockChart category axis? Adjust the 
 
 ### categoryAxis.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the notes label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -20221,7 +20221,7 @@ How to customize font settings for data note labels on a stock chart's category 
 
 ### categoryAxis.notes.data.label.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -20315,7 +20315,7 @@ How do I rotate data note labels in a stock chart's category axis? Adjust, confi
 
 ### categoryAxis.notes.data.label.format `String` *(default: "{0}")*
 
-The format used to display the note label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the note label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 
 <div class="meta-api-description">
@@ -22744,7 +22744,7 @@ How do I change the font of legend labels in a Kendo UI StockChart? Control and 
 
 ### legend.labels.template `String`
 
-The [template](/api/framework/kendo#methods-template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -23132,7 +23132,7 @@ How do I change the font of inactive legend items in a Kendo UI Stock Chart? Adj
 
 ### legend.inactiveItems.labels.template `String`
 
-The [template](/api/framework/kendo#methods-template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -27466,7 +27466,7 @@ How do I customize the legend labels for multiple series in a stock chart using 
     });
     </script>
 
-The name can also be a [template](/api/framework/kendo#methods-template) which sets the name of the series when bound to grouped data source.
+The name can also be a [template](/api/kendo/methods/template) which sets the name of the series when bound to grouped data source.
 
 The fields which can be used in the template are:
 
@@ -29004,7 +29004,7 @@ The label is positioned to the left of the marker.
 
 ### series.labels.template `String | Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the chart series label.
+The [template](/api/kendo/methods/template) which renders the chart series label.
 
 The fields which can be used in the template are:
 
@@ -32675,7 +32675,7 @@ How to customize font style for note labels in Kendo UI StockChart series? Adjus
     </script>
 
 ### series.notes.label.template `String|Function`
-The [template](/api/framework/kendo#methods-template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -32765,7 +32765,7 @@ How to rotate annotation labels in Kendo UI StockChart? Adjust or configure the 
     </script>
 
 ### series.notes.label.format `String` *(default: "{0}")*
-The format used to display the notes label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 
 <div class="meta-api-description">
@@ -33381,7 +33381,7 @@ How to customize data labels in Kendo UI StockChart series? Control and customiz
 
 ### seriesDefaults.labels.ariaTemplate `String | Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the ARIA label for the series labels.
+The [template](/api/kendo/methods/template) which renders the ARIA label for the series labels.
 
 The fields which can be used in the template are:
 
@@ -40964,7 +40964,7 @@ How do I change the font of note labels on a Kendo UI StockChart value axis? Adj
 
 ### valueAxis.notes.label.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -41052,7 +41052,7 @@ How to rotate note labels on value axis in Kendo UI StockChart? Configure the an
 
 ### valueAxis.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 
 <div class="meta-api-description">
@@ -41919,7 +41919,7 @@ How do I customize the font of annotation labels on a stock chart's value axis? 
 
 ### valueAxis.notes.data.label.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the labels.
+The [template](/api/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -42013,7 +42013,7 @@ How to rotate annotation labels on the vertical axis of a stock chart in Kendo U
 
 ### valueAxis.notes.data.label.format `String` *(default: "{0}")*
 
-The format used to display the note label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the note label. Uses [kendo.format](/api/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 
 <div class="meta-api-description">

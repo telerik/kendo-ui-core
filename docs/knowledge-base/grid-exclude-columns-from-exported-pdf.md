@@ -113,9 +113,9 @@ The following example demonstrates how to hide the last column during PDF Export
           scale: 0.6
         },
         dataSource: {
-          type: "odata-v3",
+          type: "odata-v4",
           transport: {
-            read: "https://demos.telerik.com/service/v2/Products"
+            read: "https://demos.telerik.com/service/v2/odata/Products"
           },
           pageSize: 10
         },

@@ -2512,6 +2512,7 @@ How to configure data source for Kendo UI TaskBoard? Configure, set, or bind res
 
 #### Example - remote data binding
 
+```pseudo
     <div id="taskBoard"></div>
 
     <script>
@@ -2538,6 +2539,7 @@ How to configure data source for Kendo UI TaskBoard? Configure, set, or bind res
         ]
       });
     </script>
+```
 
 ### resources.dataTextField `String` *(default: "text")*
 
