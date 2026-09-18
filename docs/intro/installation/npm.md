@@ -15,9 +15,9 @@ This article assumes that you are familiar with the necessary steps to use brows
 
 ## 1. Install the Package
 
-Kendo UI for jQuery maintains the [commercial Kendo UI for jQuery (Kendo UI Professional)](#commercial-distribution-on-bower) and the [open-source Kendo UI for jQuery (Kendo UI Core)](#open-source-distribution-on-bower) NPM packages. 
+Kendo UI for jQuery maintains the [commercial Kendo UI for jQuery (Kendo UI Professional)](#commercial-distribution-on-npm) and the [open-source Kendo UI for jQuery (Kendo UI Core)](#open-source-distribution-on-npm) NPM packages. 
 
-All official releases, service packs, and internal builds are uploaded to both distribution packages.
+All official releases are uploaded to both distribution packages.
 
 > As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can [`download jQuery using npm`](https://jquery.com/download/#downloading-jquery-using-npm-or-yarn) or use other source for the jQuery library.
 
@@ -45,14 +45,10 @@ To install `kendo-ui-core`, run the following command:
 
 ## 2. Use the Proper NPM Channel 
 
-As of November 2019, Kendo UI for jQuery supports two separate channels for its official and internal NPM packages.
+The official releases and service packs for the commercial and open-source Kendo UI distributions are uploaded in the **latest** channel. 
 
-The official releases and service packs for the commercial and open-source Kendo UI distributions are uploaded in the **latest** channel. To install the latest official build, run `npm install --save @progress/kendo-ui@latest`.
-
-The internal builds are released in the **dev** channel. 
-
-* To install the latest internal build, run `npm install --save @progress/kendo-ui@dev`. 
-* To install an earlier version, run `npm install --save @progress/kendo-ui@2019.3.1115-internal`.
+* To install the latest official build, run `npm install --save @progress/kendo-ui@latest`.
+* To install an earlier version, run `npm install --save @progress/kendo-ui@2025.4.1321`.
 
 ## 3. Choose a Module System 
 
