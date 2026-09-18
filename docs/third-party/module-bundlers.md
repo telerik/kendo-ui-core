@@ -61,6 +61,8 @@ The Kendo UI for jQuery library presumes that the jQuery instance is available a
 
 * With webpack, use the [ProvidePlugin](https://webpack.js.org/plugins/provide-plugin/):
 
+The default module mapping applies when Webpack resolves the CommonJS `main` entry or when using a jQuery version that exposes the callable instance as the default export. For jQuery 4 with Webpack resolving the ECMAScript module entry, use the named `$` export shown below.
+
 ```javascript
   // webpack.config.js
   const webpack = require('webpack');
@@ -74,6 +76,16 @@ The Kendo UI for jQuery library presumes that the jQuery instance is available a
       })
     ]
   };
+```
+
+When using jQuery 4 with Webpack resolving the ECMAScript module entry, map the globals to jQuery's named `$` export:
+
+```javascript
+  new webpack.ProvidePlugin({
+    $: ['jquery', '$'],
+    jQuery: ['jquery', '$'],
+    'window.jQuery': ['jquery', '$']
+  });
 ```
 
 Registering a global variable will ultimately enable you to avoid importing jQuery as a module in your JS/TS file and still have jQuery available globally: 

@@ -36,11 +36,9 @@ To remove the buttons, apply CSS rules.
     </script>
 
 	<style>
-		.k-spreadsheet .k-tabstrip-wrapper .k-spreadsheet-quick-access-toolbar {
+		button[data-command="undo"],
+     	 button[data-command="redo"] {
 			display: none;
-		}
-		.k-spreadsheet .k-tabstrip-wrapper .k-tabstrip-items {
-			padding-left: .3em !important;
 		}
 	</style>
 ```
