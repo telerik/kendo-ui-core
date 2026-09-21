@@ -16,6 +16,7 @@ export const __meta__ = {
     var kendoAttr = kendo.attr;
     var data = kendo.data;
     var keys = kendo.keys;
+    var encode = kendo.htmlEncode;
     var kendoTemplate = kendo.template;
     var Widget = kendo.ui.Widget;
     var DataSource = data.DataSource;
@@ -1034,7 +1035,7 @@ export const __meta__ = {
             if (options.template && typeof options.template == "string") {
                 template = kendo.template(options.template);
             } else if (!options.template) {
-                template = kendo.template((data) => `${kendo.getter(options.dataTextField)(data)}`);
+                template = kendo.template((data) => `${encode(kendo.getter(options.dataTextField)(data))}`);
             } else {
                 template = options.template;
             }
@@ -1094,7 +1095,7 @@ export const __meta__ = {
             option += " selected>";
 
             if (dataText !== undefined) {
-                option += kendo.htmlEncode(dataText);
+                option += encode(dataText);
             }
 
             return option += "</option>";
