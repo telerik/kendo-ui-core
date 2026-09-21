@@ -4,6 +4,8 @@ const ltRegExp = /</g;
 const quoteRegExp = /"/g;
 const aposRegExp = /'/g;
 const gtRegExp = />/g;
+const encodedPercentRegExp = /%25([\dA-F]{2})/gi;
+const encodedIpv6HostRegExp = /^((?:https?:)?\/\/(?:[^/?#]*@)?)%5B([^/?#]+)%5D/i;
 // Allowed protocols for sanitized links
 const ALLOWED_PROTOCOLS = ["http:", "https:"];
 /**
@@ -44,7 +46,10 @@ class HtmlService {
             // Use the default origin in case the value is a relative URL.
             const url = new URL(value, window.location.origin);
             if (ALLOWED_PROTOCOLS.includes(url.protocol)) {
-                link = value;
+                link = encodeURI(value).replace(encodedPercentRegExp, "%$1");
+                if (url.hostname.startsWith("[") && url.hostname.endsWith("]")) {
+                    link = link.replace(encodedIpv6HostRegExp, "$1[$2]");
+                }
             }
             else {
                 throw new Error("Invalid protocol");

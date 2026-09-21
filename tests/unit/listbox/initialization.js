@@ -188,4 +188,31 @@ describe("ListBox initialization", function() {
         assert.equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");
         assert.equal(listbox.items().first().find("span").html(), "<div>item1</div>");
     });
+
+    it("encoding is performed when no template is supplemented with dataSource", function() {
+        let markup = "<img src=x onerror=\"alert(1)\">";
+        listbox = createListBox({
+            dataTextField: "name",
+            dataValueField: "name",
+            dataSource: [
+                { name: markup }
+            ]
+        });
+
+        assert.equal(listbox.items().first().find("img").length, 0);
+    })
+
+    it("encoding is not performed when a template is supplemented with dataSource", function() {
+        let markup = "<img src=x onerror=\"alert(1)\">";
+        listbox = createListBox({
+            dataTextField: "name",
+            dataValueField: "name",
+            template: ({ name }) => name,
+            dataSource: [
+                { name: markup }
+            ]
+        });
+
+        assert.equal(listbox.items().first().find("img").length, 1);
+    })
 });

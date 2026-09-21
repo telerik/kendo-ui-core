@@ -46,12 +46,93 @@ enable-tabbed-code-blocks: true
 demos:
   metaFileName: demo.json
   defaultTheme: default-ocean-blue-a11y
+  themeCustomizer: kendoThemeCustomizer
   uris:
       www.telerik.com: https://demos.telerik.com/aspnet-core/docsbuilder/
       wwwsit.telerik.com: https://demos.telerik.com/aspnet-core/docsbuilder/
       wwwuat.telerik.com: https://aspnet-core-demos-staging.azurewebsites.net/aspnet-core/docsbuilder/
       default: https://localhost:44314/docsbuilder/
   themes:
+      meridian-main:
+          name: Main
+          group: Meridian
+          colors: ['#ffffff', '#5558e8', '#334155']
+      meridian-main-dark:
+          name: Main Dark
+          group: Meridian
+          tags: [dark]
+          colors: ['#060813', '#5558e8', '#cbd5e1']
+      bootstrap-main:
+          name: Main
+          group: Bootstrap
+          colors: ['#ffffff', '#0d6efd', '#212529']
+      bootstrap-main-dark:
+          name: Main Dark
+          tags: [dark]
+          group: Bootstrap
+          colors: ['#212529', '#0d6efd', '#ffffff']
+      bootstrap-nordic:
+          name: Nordic
+          group: Bootstrap
+          colors: ['#ffffff', '#01a8c1', '#e7607b']
+      bootstrap-urban:
+          name: Urban
+          group: Bootstrap
+          colors: ['#ffffff', '#447a99', '#ff804d']
+      bootstrap-vintage:
+          name: Vintage
+          group: Bootstrap
+          colors: ['#744662', '#f2efe8', '#90b8c1']
+
+      material-main:
+          name: Main
+          group: Material
+          colors: ['#FEFBFF', '#65558F', '#1D1B20']
+      material-2:
+          name: Material 2
+          group: Material
+          colors: ['#ffffff', '#3f51b5', '#424242']
+      material-main-dark:
+          name: Main Dark
+          tags: [dark]
+          group: Material
+          colors: ['#141218', '#d0bcff', '#e6e0e9']
+      material-2-dark:
+          name: Material 2 Dark
+          tags: [dark]
+          group: Material
+          colors: ['#303030', '#3f51b5', '#ffffff']
+      material-arctic:
+          name: Arctic
+          group: Material
+          colors: ['#ffffff', '#2196f3', '#455a64']
+      material-lime-dark:
+          name: Lime Dark
+          tags: [dark]
+          group: Material
+          colors: ['#303030', '#8bc34a', '#ffffff']
+      material-nova:
+          name: Nova
+          group: Material
+          colors: ['#ffffff', '#e91e63', '#455a64']
+
+      fluent-main:
+          name: Main
+          group: Fluent
+          colors: ['#fafafa', '#0f6cbd', '#242424']
+      fluent-main-dark:
+          name: Main Dark
+          group: Fluent
+          colors: ['#1f1f1f', '#115ea3', '#ffffff']
+      fluent-1:
+          name: Fluent 1
+          group: Fluent
+          colors: ['#ffffff', '#0078d4', '#323130']
+      fluent-1-dark:
+          name: Fluent 1 Dark
+          group: Fluent
+          colors: ['#1b1a19', '#2899f5', '#f3f2f1']
+
       default-main:
           name: Main
           group: Default
@@ -82,61 +163,6 @@ demos:
           name: Turquoise
           group: Default
           colors: ['#ffffff', '#28bfba', '#424242']
-
-      bootstrap-main:
-          name: Main
-          group: Bootstrap
-          colors: ['#ffffff', '#0d6efd', '#212529']
-      bootstrap-main-dark:
-          name: Main Dark
-          tags: [dark]
-          group: Bootstrap
-          colors: ['#212529', '#0d6efd', '#ffffff']
-      bootstrap-nordic:
-          name: Nordic
-          group: Bootstrap
-          colors: ['#ffffff', '#01a8c1', '#e7607b']
-      bootstrap-urban:
-          name: Urban
-          group: Bootstrap
-          colors: ['#ffffff', '#447a99', '#ff804d']
-      bootstrap-vintage:
-          name: Vintage
-          group: Bootstrap
-          colors: ['#744662', '#f2efe8', '#90b8c1']
-
-      material-main:
-          name: Main
-          group: Material
-          colors: ['#ffffff', '#3f51b5', '#424242']
-      material-main-dark:
-          name: Main Dark
-          tags: [dark]
-          group: Material
-          colors: ['#303030', '#3f51b5', '#ffffff']
-      material-arctic:
-          name: Arctic
-          group: Material
-          colors: ['#ffffff', '#2196f3', '#455a64']
-      material-lime-dark:
-          name: Lime Dark
-          tags: [dark]
-          group: Material
-          colors: ['#303030', '#8bc34a', '#ffffff']
-      material-nova:
-          name: Nova
-          group: Material
-          colors: ['#ffffff', '#e91e63', '#455a64']
-
-      fluent-main:
-          name: Main
-          group: Fluent
-          colors: ['#ffffff', '#0078D4', '#323130']
-
-      fluent-main-dark:
-          name: Main Dark
-          group: Fluent
-          colors: ['#323130', '#0078D4', '#ffffff']
   actions:
     open-telerik-repl:
         name: Telerik REPL
