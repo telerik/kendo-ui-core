@@ -2613,6 +2613,7 @@ declare namespace kendo.ui {
     interface BadgeOptions {
         name?: string | undefined;
         align?: string | undefined;
+        encoded?: boolean | undefined;
         cutoutBorder?: boolean | undefined;
         fillMode?: string | undefined;
         icon?: string | undefined;
@@ -2805,6 +2806,7 @@ declare namespace kendo.ui {
     interface ButtonBadge {
         align?: string | undefined;
         cutoutBorder?: boolean | undefined;
+        encoded?: boolean | undefined;
         fill?: string | undefined;
         icon?: string | undefined;
         max?: number | undefined;
@@ -2858,6 +2860,7 @@ declare namespace kendo.ui {
     interface ButtonGroupItemBadge {
         align?: string | undefined;
         cutoutBorder?: boolean | undefined;
+        encoded?: boolean | undefined;
         fill?: string | undefined;
         icon?: string | undefined;
         max?: number | undefined;

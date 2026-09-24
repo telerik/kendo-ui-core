@@ -247,6 +247,33 @@ How to add a cutout border around badges in Kendo UI ButtonGroup? Control the vi
     </script>
 
 
+### items.badge.encoded `Boolean` *(default: true)*
+
+Determines whether the textual content should be rendered as an HTML string or it should be encoded.
+
+
+<div class="meta-api-description">
+How do I prevent cross-site scripting in Kendo UI ButtonGroup item badges? Control whether each item badge's text is HTML-encoded and displayed as plain text or rendered as trusted raw HTML, allowing developers to escape special characters by default or explicitly disable encoding for sanitized HTML content in grouped button badges.
+</div>
+
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Inbox",
+                badge: {
+                    encoded: false,
+                    text: "<strong>New</strong>"
+                }
+            }
+        ]
+    });
+    </script>
+
+
 ### items.badge.fill `String` *(default: undefined)*
 
 Sets a value controlling how the color is applied to the badge. When `undefined` (the default), the theme controls the fill mode. Can also be set to the following string values:
