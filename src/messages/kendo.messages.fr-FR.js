@@ -36,8 +36,8 @@
           "isnotnull": "N’est pas nulle",
           "isempty": "Est vide",
           "isnotempty": "N’est pas vide",
-          "isnullorempty": "A une valeur",
-          "isnotnullorempty": "N'a pas de valeur"
+          "isnullorempty": "N'a pas de valeur",
+          "isnotnullorempty": "A une valeur"
         },
         "enums": {
           "eq": "Est égal à",
@@ -160,8 +160,8 @@
           "isnotnull": "N’est pas nulle",
           "isempty": "Est vide",
           "isnotempty": "N’est pas vide",
-          "isnullorempty": "A une valeur",
-          "isnotnullorempty": "N'a pas de valeur"
+          "isnullorempty": "N'a pas de valeur",
+          "isnotnullorempty": "A une valeur"
         },
         "enums": {
           "eq": "Est égal à",

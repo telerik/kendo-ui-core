@@ -84,6 +84,27 @@ How do I customize the visual emphasis of a button's badge by using a cutout bor
       });
     </script>
 
+### badge.encoded `Boolean` *(default: true)*
+
+Determines whether the textual content should be rendered as an HTML string or it should be encoded.
+
+
+<div class="meta-api-description">
+How do I prevent cross-site scripting in a Kendo UI Button badge? Control whether badge text is HTML-encoded and displayed as plain text or rendered as trusted raw HTML, allowing developers to escape special characters by default or explicitly disable encoding for sanitized HTML content in button badges.
+</div>
+
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          encoded: false,
+          text: "<strong>New</strong>"
+        }
+      });
+    </script>
+
 ### badge.fillMode `String` *(default: undefined)*
 
 Sets a value controlling how the color is applied to the badge. When `undefined` (the default), the theme controls the fill mode. Can also be set to the following string values:

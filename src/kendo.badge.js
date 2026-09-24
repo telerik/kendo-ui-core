@@ -44,6 +44,7 @@ export const __meta__ = {
             data: {},
             fillMode: undefined,
             icon: '',
+            encoded: true,
             max: Infinity,
             position: 'inline',
             align: '',
@@ -211,8 +212,9 @@ export const __meta__ = {
         },
 
         text: function(text) {
-            var that = this;
-            var max = that.options.max;
+            let that = this,
+                max = that.options.max,
+                encoded = that.options.encoded !== false;
 
             // handle badge.text()
             if (arguments.length === 0 || text === undefined) {
@@ -230,8 +232,8 @@ export const __meta__ = {
 
             // handle badge.text('string')
             if (typeof text === 'string') {
+                text = encoded === true ? kendo.htmlEncode(text): text;
                 that.element.html(text);
-
                 return;
             }
 
@@ -248,8 +250,8 @@ export const __meta__ = {
 
             // handle other objects
             if (typeof text === 'object' && 'toString' in text) {
+                text = encoded === true ? kendo.htmlEncode(text): text;
                 that.element.html(text.toString());
-
                 return;
             }
 

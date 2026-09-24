@@ -1,4 +1,5 @@
 import '@progress/kendo-ui/src/kendo.badge.js';
+import { assert, it } from 'vitest';
 
 let Badge = kendo.ui.Badge;
 let span;
@@ -208,7 +209,7 @@ describe('kendo.ui.Badge content', function() {
     // #region badge.text()
     it('badge.text() gets and sets correctly', function() {
         span.html('<strong>HtMl</strong>');
-        badge = new Badge(span);
+        badge = new Badge(span, { encoded: false });
 
         assert.equal(badge.text(), badge.element.html());
         assert.equal(badge.text(), '<strong>HtMl</strong>');
@@ -222,6 +223,23 @@ describe('kendo.ui.Badge content', function() {
 
         assert.equal(badge.text(), badge.element.html());
         assert.equal(badge.text(), 'text');
+    });
+
+    it('badge.text() encodes malicious markup by default', function() {
+        const markup = '<img src=x onerror=alert(1)>';
+        badge = new Badge(span, { text: markup });
+
+        assert.equal(span.find("img").length, 0);
+        assert.equal(span.text(), markup);
+    });
+
+    it('badge.text() encodes object-backed malicious markup by default', function() {
+        const markup = '<img src=x onerror=alert(1)>';
+        const text = { toString: () => markup };
+        badge = new Badge(span, { text });
+
+        assert.equal(span.find("img").length, 0);
+        assert.equal(span.text(), markup);
     });
     // #endregion
 

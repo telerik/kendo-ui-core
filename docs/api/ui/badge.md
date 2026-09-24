@@ -46,6 +46,24 @@ How do I adjust the position of a Kendo UI badge in relation to its container? C
         $('#badge-bottom-end').kendoBadge({position: 'edge', align: 'bottom end', themeColor: 'primary'});
     </script>
 
+### encoded `Boolean` *(default: true)*
+
+Determines whether the textual content should be rendered as an HTML string or it should be encoded.
+
+<div class="meta-api-description">
+ How do I prevent cross-site scripting in Kendo UI badge labels? Control the textual rendering by toggling between raw HTML output and HTML-encoded text to either enable innerHTML display or prevent cross-site scripting by encoding special characters; configure whether the text is parsed as safe HTML or treated as plain text, allowing developers to set encoding for the text in badges, manage security through HTML escaping, handle injection risks, and customize the textual presentation by enabling or disabling HTML decoding.
+</div>
+
+#### Example
+
+    <span id="badge"></span>
+    <script>
+        $('#badge').kendoBadge({
+            encoded: false,
+            text: '<strong>New</strong>',
+            themeColor: 'primary'
+        });
+    </script>
 
 ### cutoutBorder `Boolean` *(default: false)*
 
