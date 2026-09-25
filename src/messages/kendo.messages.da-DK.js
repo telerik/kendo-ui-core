@@ -77,7 +77,15 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
 if (kendo.ui.FilterMultiCheck) {
 kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
-  "search": "Søg"
+  "checkAll": "Vælg alle",
+  "clearAll": "Ryd alle",
+  "clear": "Nulstil",
+  "filter": "Filter",
+  "search": "Søg",
+  "cancel": "Annuller",
+  "selectedItemsFormat": "{0} elementer valgt",
+  "done": "Udført",
+  "into": "i"
 });
 }
 
