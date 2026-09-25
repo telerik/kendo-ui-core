@@ -59,6 +59,55 @@ describe("DataSource binding", function() {
         assert.equal(getPanelBarObject(panelbar).dataSource.view().length, 2);
     });
 
+    it("Data-bound URL attributes do not allow attribute injection", function() {
+        let url = "https://example.com/' onmouseover='alert(1)";
+        let imageUrl = "https://example.com/' onerror='alert(1)";
+        let panelbar = createPanelBar([
+            { text: "foo", url: url, imageUrl: imageUrl }
+        ]);
+        let link = panelbar.find(".k-link");
+        let image = link.find("img");
+
+        assert.equal(link.attr("href"), url);
+        assert.isUndefined(link.attr("onmouseover"));
+        assert.equal(image.attr("src"), imageUrl);
+        assert.isUndefined(image.attr("onerror"));
+    });
+
+    it("Data-bound URLs reject executable schemes", function() {
+        let panelbar = createPanelBar([
+            { text: "url", url: "javascript:alert(1)" },
+            { text: "contentUrl", contentUrl: "javascript:alert(1)" }
+        ]);
+        let links = panelbar.find(".k-link");
+
+        assert.equal(links.eq(0).attr("href"), "#INVALIDLINK");
+        assert.equal(links.eq(1).attr("href"), "#INVALIDLINK");
+    });
+
+    it("contentUrls reject executable schemes for existing and generated links", function() {
+        let panelbar = PanelBarHelpers.fromHtml(
+            "<ul><li><a>existing link</a></li><li>generated link</li></ul>",
+            { contentUrls: ["javascript:alert(1)", "javascript:alert(1)"] }
+        );
+        let links = panelbar.children("li").children(".k-link");
+
+        assert.equal(links.eq(0).attr("href"), "#INVALIDLINK");
+        assert.equal(links.eq(1).attr("href"), "#INVALIDLINK");
+    });
+
+    it("contentUrls preserve query parameters for existing and generated links", function() {
+        let url = "/view?a=1&b=2";
+        let panelbar = PanelBarHelpers.fromHtml(
+            "<ul><li><a>existing link</a></li><li>generated link</li></ul>",
+            { contentUrls: [url, url] }
+        );
+        let links = panelbar.children("li").children(".k-link");
+
+        assert.equal(links.eq(0).attr("href"), url);
+        assert.equal(links.eq(1).attr("href"), url);
+    });
+
     it("Adding items to the datasource adds them to the panelbar", function() {
 
         let panelbar = createPanelBar([

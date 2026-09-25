@@ -53,6 +53,65 @@ describe("Client side rendering", function() {
         assert.equal(classAttributesCount, 1);
     });
 
+    it('Class options do not create item attributes', function() {
+        const className = "custom' onmouseover='alert(1)";
+
+        createMenu({
+            dataSource: [{
+                text: "Item 1",
+                cssClass: className
+            }, {
+                text: "Item 2",
+                attr: {
+                    class: className
+                }
+            }]
+        });
+
+        const items = menu.element.children("li");
+
+        assert.include(items.eq(0).attr("class"), className);
+        assert.isUndefined(items.eq(0).attr("onmouseover"));
+        assert.include(items.eq(1).attr("class"), className);
+        assert.isUndefined(items.eq(1).attr("onmouseover"));
+    });
+
+    it('Attribute options do not create additional attributes', function() {
+        const attributeValue = 'custom" onmouseover="alert(1)';
+
+        createMenu({
+            dataSource: [{
+                text: "Item 1",
+                attr: {
+                    title: attributeValue
+                }
+            }, {
+                text: "Item 2",
+                imageUrl: "https://example.com/image.png",
+                imageAttr: {
+                    class: attributeValue
+                }
+            }, {
+                text: "Item 3",
+                content: "Item content",
+                contentAttr: {
+                    class: attributeValue
+                }
+            }]
+        });
+
+        const item = menu.element.children("li").eq(0);
+        const image = menu.element.find("img");
+        const content = menu.element.find(".k-content");
+
+        assert.equal(item.attr("title"), attributeValue);
+        assert.isUndefined(item.attr("onmouseover"));
+        assert.include(image.attr("class"), attributeValue);
+        assert.isUndefined(image.attr("onmouseover"));
+        assert.include(content.attr("class"), attributeValue);
+        assert.isUndefined(content.attr("onmouseover"));
+    });
+
     it('Multiple attributes are rendered in item', function() {
         createMenu({
             dataSource: [{

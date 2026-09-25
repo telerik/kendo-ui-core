@@ -60,6 +60,13 @@ class HtmlService {
         }
         return this.encode(link);
     }
+    sanitizeIframeUrl(value, encodeForHtml = true) {
+        if (value === "about:blank") {
+            return value;
+        }
+        const sanitizedUrl = this.sanitizeLink(value);
+        return encodeForHtml || sanitizedUrl === "#INVALIDLINK" ? sanitizedUrl : encodeURI(value);
+    }
     /**
      * Convert text URLs to clickable HTML links
      */

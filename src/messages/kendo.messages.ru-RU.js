@@ -103,6 +103,10 @@ $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Редактор повторений",
+  "removeRecurrence": "Удалить повторение",
+  "cancel": "Отмена",
+  "update": "Сохранить",
   "daily": {
     "interval": "дней",
     "repeatEvery": "Повторять каждые:"
@@ -398,10 +402,20 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "date": "Дата",
   "destroy": "Удалить",
+  "resetSeries": "Сбросить серию",
   "editor": {
     "allDayEvent": "Событие на весь день",
     "description": "Описание",
+    "descriptionPlaceholder": "Добавить описание",
+    "from": "с",
+    "to": "до",
+    "cancelTimezoneReset": "Нет",
+    "resetTimezone": "Да",
+    "resetTimezoneConfirmation": "Вы уверены, что хотите сбросить часовой пояс?",
+    "resetTimezoneWindowTitle": "Сбросить часовой пояс",
     "editorTitle": "Событие",
+    "newEvent": "Новое событие",
+    "editEvent": "Изменить событие",
     "end": "Окончание",
     "endTimezone": "Часовой пояс окончания",
     "repeat": "Повторение",
@@ -417,6 +431,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "event": "Событие",
   "recurrenceMessages": {
     "deleteRecurring": "Вы хотите удалить только это событие или весь ряд повторяющихся событий?",
+    "deleteRecurringConfirmation": "Вы уверены, что хотите удалить это повторение события?",
+    "deleteSeriesConfirmation": "Вы уверены, что хотите удалить всю серию?",
+    "resetSeriesConfirmation": "Вы уверены, что хотите сбросить всю серию?",
     "deleteWindowOccurrence": "Удалить это событие",
     "deleteWindowSeries": "Удалить весь ряд",
     "deleteWindowTitle": "Удалить повторяющееся событие",
@@ -428,6 +445,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "save": "Сохранить",
   "time": "время",
   "today": "Сегодня",
+  "create": "Новое событие",
   "views": {
     "agenda": "Повестка",
     "day": "День",

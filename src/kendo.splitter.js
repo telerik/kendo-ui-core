@@ -341,7 +341,7 @@ export const __meta__ = {
                     });
                 } else {
                     pane.removeClass(KSCROLLABLE)
-                        .html("<iframe src='" + url + "' frameborder='0' class='k-content-frame'>" +
+                        .html("<iframe src='" + kendo.sanitizeLink(url) + "' frameborder='0' class='k-content-frame'>" +
                             "This page requires frames in order to show content" +
                             "</iframe>");
                 }

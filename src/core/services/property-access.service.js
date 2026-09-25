@@ -1,4 +1,5 @@
 import { utilsService } from "./utils.service";
+const unsafeFields = ["__proto__", "constructor", "prototype"];
 /**
  * Property Access Service Implementation
  * Provides utilities for dynamic property access using path expressions.
@@ -6,8 +7,8 @@ import { utilsService } from "./utils.service";
  */
 class PropertyAccessService {
     constructor() {
-        this.getterCache = {};
-        this.setterCache = {};
+        this.getterCache = Object.create(null);
+        this.setterCache = Object.create(null);
     }
     /**
      * Wrap an expression for safe access.
@@ -95,6 +96,9 @@ class PropertyAccessService {
         if (!this.setterCache[expression]) {
             this.setterCache[expression] = (obj, value) => {
                 const fields = this.exprToArray(expression);
+                if (fields.some(field => unsafeFields.indexOf(field) >= 0)) {
+                    return;
+                }
                 const innerSetter = (args) => {
                     if (args.props.length) {
                         args.parent = args.parent[args.props.shift()];

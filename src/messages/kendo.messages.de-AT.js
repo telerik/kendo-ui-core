@@ -251,6 +251,9 @@
       $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
         "repeat": "Wiederholen",
         "recurrenceEditorTitle": "Wiederholungseditor",
+        "removeRecurrence": "Wiederholung entfernen",
+        "cancel": "Abbrechen",
+        "update": "Speichern",
         "daily": {
           "interval": "Tag(e)",
           "repeatEvery": "Wiederholen an jedem:"
@@ -814,7 +817,16 @@
         "editor": {
           "allDayEvent": "Ganztägiger Termin",
           "description": "Beschreibung",
+          "descriptionPlaceholder": "Beschreibung hinzufügen",
+          "from": "von",
+          "to": "bis",
+          "cancelTimezoneReset": "Nein",
+          "resetTimezone": "Ja",
+          "resetTimezoneConfirmation": "Möchten Sie die Zeitzone wirklich zurücksetzen?",
+          "resetTimezoneWindowTitle": "Zeitzone zurücksetzen",
           "editorTitle": "Termin",
+          "newEvent": "Neuer Termin",
+          "editEvent": "Termin bearbeiten",
           "end": "Beenden",
           "timezoneTitle": "Zeitzone",
           "endTimezone": "Zeitzone Ende",
@@ -832,6 +844,7 @@
         "save": "Speichern",
         "time": "Zeit",
         "today": "Heute",
+        "create": "Neuer Termin",
         "views": {
           "agenda": "Agenda",
           "day": "Tag",
@@ -863,7 +876,8 @@
           "editWindowTitle": "Wiederholungseintrag bearbeiten",
           "resetSeriesWindowTitle": "Serie zurücksetzen",
           "deleteRecurringConfirmation": "Sind Sie sicher, dass Sie dieses Terminvorkommen löschen möchten?",
-          "deleteSeriesConfirmation": "Sind Sie sicher, dass Sie die gesamte Serie löschen möchten?"
+          "deleteSeriesConfirmation": "Sind Sie sicher, dass Sie die gesamte Serie löschen möchten?",
+          "resetSeriesConfirmation": "Möchten Sie wirklich die gesamte Serie zurücksetzen?",
         }
       });
   }

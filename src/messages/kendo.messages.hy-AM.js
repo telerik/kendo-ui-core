@@ -93,6 +93,10 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Կրկնության խմբագիր",
+  "removeRecurrence": "Հեռացնել կրկնությունը",
+  "cancel": "Չեղարկել",
+  "update": "Պահպանել",
   "daily": {
     "interval": "օր(եր)",
     "repeatEvery": "Կրկնել ամեն:"
@@ -356,10 +360,20 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "date": "Ամսաթիվ",
   "destroy": "Հեռացնել",
+  "resetSeries": "Վերակայել շարքը",
   "editor": {
     "allDayEvent": "Ամենօրյա իրադարձություն",
     "description": "Նկարագրություն",
+    "descriptionPlaceholder": "Ավելացնել նկարագրություն",
+    "from": "սկսած",
+    "to": "մինչև",
+    "cancelTimezoneReset": "Ոչ",
+    "resetTimezone": "Այո",
+    "resetTimezoneConfirmation": "Վստա՞հ եք, որ ցանկանում եք վերակայել ժամային գոտին:",
+    "resetTimezoneWindowTitle": "Վերակայել ժամային գոտին",
     "editorTitle": "Իրադարձություն",
+    "newEvent": "Նոր իրադարձություն",
+    "editEvent": "Խմբագրել իրադարձությունը",
     "end": "Վերջ",
     "endTimezone": "End timezone",
     "repeat": "Կրկնել",
@@ -375,6 +389,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "event": "Event",
   "recurrenceMessages": {
     "deleteRecurring": "Do you want to delete only this event occurrence or the whole series?",
+    "deleteRecurringConfirmation": "Վստա՞հ եք, որ ցանկանում եք ջնջել իրադարձության այս կրկնությունը:",
+    "deleteSeriesConfirmation": "Վստա՞հ եք, որ ցանկանում եք ջնջել ամբողջ շարքը:",
+    "resetSeriesConfirmation": "Վստա՞հ եք, որ ցանկանում եք վերակայել ամբողջ շարքը:",
     "deleteWindowOccurrence": "Delete current occurrence",
     "deleteWindowSeries": "Delete the series",
     "deleteWindowTitle": "Delete Recurring Item",
@@ -386,6 +403,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "save": "Save",
   "time": "Time",
   "today": "Today",
+  "create": "Նոր իրադարձություն",
   "views": {
     "agenda": "Agenda",
     "day": "Day",

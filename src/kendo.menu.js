@@ -121,11 +121,11 @@ export const __meta__ = {
                 }
 
                 if (item.cssClass) {
-                    result += " " + item.cssClass;
+                    result += " " + encode(item.cssClass);
                 }
 
                 if (item.attr && item.attr.hasOwnProperty("class")) {
-                    result += " " + item.attr["class"];
+                    result += " " + encode(item.attr["class"]);
                 }
 
                 if (item.selected) {
@@ -141,7 +141,7 @@ export const __meta__ = {
 
                 for (var attr in attributes) {
                     if (attributes.hasOwnProperty(attr) && attr !== "class") {
-                        result += attr + "=\"" + attributes[attr] + "\" ";
+                        result += attr + "=\"" + encode(attributes[attr]) + "\" ";
                     }
                 }
 
@@ -160,7 +160,7 @@ export const __meta__ = {
 
                 for (var attr in attributes) {
                     if (attributes.hasOwnProperty(attr)) {
-                        result += attr + "=\"" + attributes[attr] + "\" ";
+                        result += attr + "=\"" + encode(attributes[attr]) + "\" ";
                     }
                 }
 
@@ -180,7 +180,7 @@ export const __meta__ = {
 
                 for (var attr in attributes) {
                     if (attributes.hasOwnProperty(attr)) {
-                        result += attr + "=\"" + attributes[attr] + "\" ";
+                        result += attr + "=\"" + encode(attributes[attr]) + "\" ";
                     }
                 }
 

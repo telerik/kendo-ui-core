@@ -401,6 +401,10 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "繰り返しエディター",
+  "removeRecurrence": "繰り返しを削除",
+  "cancel": "キャンセル",
+  "update": "保存",
   "frequencies": {
     "never": "なし",
     "hourly": "毎時",
@@ -476,9 +480,11 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showFullDay": "24 時間表示",
   "showWorkDay": "営業時間を表示",
   "today": "今日",
+  "create": "新しいイベント",
   "save": "保存",
   "cancel": "キャンセル",
   "destroy": "削除",
+  "resetSeries": "シリーズをリセット",
   "deleteWindowTitle": "イベントを削除",
   "ariaSlotLabel": "{0:t} ～ {1:t} 時の範囲から選択",
   "ariaEventLabel": "{0} ({1:D} 日の {2:t} 時)",
@@ -498,6 +504,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowOccurrence": "現在の回を編集",
     "editWindowSeries": "系列を編集",
     "deleteRecurring": "このイベントの回のみを削除しますか、それとも系列全体を削除しますか?",
+    "deleteRecurringConfirmation": "このイベントの繰り返しを削除してもよろしいですか？",
+    "deleteSeriesConfirmation": "シリーズ全体を削除してもよろしいですか？",
+    "resetSeriesConfirmation": "シリーズ全体をリセットしてもよろしいですか？",
     "editRecurring": "このイベントの回のみを編集しますか、それとも系列全体を編集しますか?"
   },
   "editor": {
@@ -506,6 +515,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "終点",
     "allDayEvent": "終日のイベント",
     "description": "説明",
+    "descriptionPlaceholder": "説明を追加",
+    "from": "開始",
+    "to": "終了",
+    "cancelTimezoneReset": "いいえ",
+    "resetTimezone": "はい",
+    "resetTimezoneConfirmation": "タイムゾーンをリセットしてもよろしいですか？",
+    "resetTimezoneWindowTitle": "タイムゾーンをリセット",
     "repeat": "繰り返す",
     "timezone": " ",
     "startTimezone": "開始タイムゾーン",
@@ -515,7 +531,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "タイム ゾーン",
     "timezoneTitle": "タイム ゾーン",
     "noTimezone": "タイムゾーンがありません",
-    "editorTitle": "イベント"
+    "editorTitle": "イベント",
+    "newEvent": "新しいイベント",
+    "editEvent": "イベントを編集"
   }
 });
 }

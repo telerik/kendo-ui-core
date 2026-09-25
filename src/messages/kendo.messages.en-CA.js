@@ -819,6 +819,9 @@
       $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
         "repeat": "Repeat",
         "recurrenceEditorTitle": "Recurrence editor",
+        "removeRecurrence": "Remove recurrence",
+        "cancel": "Cancel",
+        "update": "Save",
         "frequencies": {
           "never": "Never",
           "hourly": "Hourly",
@@ -949,6 +952,7 @@
         "showFullDay": "Show full day",
         "showWorkDay": "Show business hours",
         "today": "Today",
+        "create": "New Event",
         "save": "Save",
         "cancel": "Cancel",
         "destroy": "Delete",
@@ -975,6 +979,7 @@
           "deleteWindowSeries": "Delete the series",
           "deleteRecurringConfirmation": "Are you sure you want to delete this event occurrence?",
           "deleteSeriesConfirmation": "Are you sure you want to delete the whole series?",
+          "resetSeriesConfirmation": "Are you sure you want to reset the whole series?",
           "editWindowTitle": "Edit Recurring Item",
           "editWindowOccurrence": "Edit current occurrence",
           "editWindowSeries": "Edit the series",
@@ -987,6 +992,13 @@
           "end": "End",
           "allDayEvent": "All day event",
           "description": "Description",
+          "descriptionPlaceholder": "Add Description",
+          "from": "from",
+          "to": "to",
+          "cancelTimezoneReset": "No",
+          "resetTimezone": "Yes",
+          "resetTimezoneConfirmation": "Are you sure you want to reset the timezone?",
+          "resetTimezoneWindowTitle": "Reset Timezone",
           "repeat": "Repeat",
           "timezone": " ",
           "startTimezone": "Start timezone",
@@ -996,7 +1008,9 @@
           "timezoneEditorButton": "Time zone",
           "timezoneTitle": "Time zones",
           "noTimezone": "No timezone",
-          "editorTitle": "Event"
+          "editorTitle": "Event",
+          "newEvent": "New Event",
+          "editEvent": "Edit Event"
         },
         "search": "Search..."
       });

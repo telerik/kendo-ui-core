@@ -113,6 +113,10 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Editor ricorrenza",
+  "removeRecurrence": "Rimuovi ricorrenza",
+  "cancel": "Annulla",
+  "update": "Salva",
   "repeat": "Ripeti",
   "daily": {
     "interval": "giorno(i)",
@@ -453,10 +457,20 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "date": "Data",
   "destroy": "Rimuovi",
+  "resetSeries": "Reimposta serie",
   "editor": {
     "allDayEvent": "Giornata intera",
     "description": "Descrizione",
+    "descriptionPlaceholder": "Aggiungi descrizione",
+    "from": "da",
+    "to": "a",
+    "cancelTimezoneReset": "No",
+    "resetTimezone": "Sì",
+    "resetTimezoneConfirmation": "Sei sicuro di voler reimpostare il fuso orario?",
+    "resetTimezoneWindowTitle": "Reimposta fuso orario",
     "editorTitle": "Evento",
+    "newEvent": "Nuovo evento",
+    "editEvent": "Modifica evento",
     "end": "Fine",
     "endTimezone": "Fuso orario finale",
     "repeat": "Ripeti",
@@ -478,11 +492,15 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowSeries": "Modifica la serie",
     "editWindowTitle": "Modifica elemento ricorrente",
     "deleteRecurring": "Vuoi rimuovere solo questo evento o la serie completa?",
+    "deleteRecurringConfirmation": "Sei sicuro di voler eliminare questa occorrenza dell'evento?",
+    "deleteSeriesConfirmation": "Sei sicuro di voler eliminare l'intera serie?",
+    "resetSeriesConfirmation": "Sei sicuro di voler reimpostare l'intera serie?",
     "editRecurring": "Vuoi modifcare solo questo evento o la serie completa?"
   },
   "save": "Salva",
   "time": "Tempo",
   "today": "Oggi",
+  "create": "Nuovo evento",
   "views": {
     "agenda": "Agenda",
     "day": "Giorno",

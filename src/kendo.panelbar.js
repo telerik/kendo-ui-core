@@ -122,7 +122,7 @@ export const __meta__ = {
         return result;
     },
     textAttributes: function(url) {
-        return url ? " href='" + url + "'" : "";
+        return url ? " href='" + kendo.sanitizeLink(url) + "'" : "";
     },
     arrowIconOptions: function(item) {
         return {
@@ -149,7 +149,7 @@ export const __meta__ = {
         return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
     },
     contentUrl: function(item) {
-        return item.contentUrl ? 'href="' + item.contentUrl + '"' : "";
+        return item.contentUrl ? 'href="' + kendo.sanitizeLink(item.contentUrl) + '"' : "";
     }
 };
 
@@ -340,7 +340,7 @@ export const __meta__ = {
                      var tag = url || contentUrl ? 'a' : 'span';
 
                     return `<${tag} class='${textClass(item)}' ${contentUrl}${textAttributes(url)}>` +
-                        (imageUrl ? `<img class='k-panelbar-item-icon k-image' alt='' src='${imageUrl}' />` : '') +
+                        (imageUrl ? `<img class='k-panelbar-item-icon k-image' alt='' src='${kendo.sanitizeLink(imageUrl)}' />` : '') +
                         (spriteCssClass ? `<span class='k-sprite ${spriteCssClass}'></span>` : '') +
                         (icon ? kendo.ui.icon($("<span></span>"), { icon: icon, iconClass: "k-panelbar-item-icon" + iconClass }) : '') +
                         panelBar.options.template({ panelBar, item, arrow, textClass, textAttributes, contentUrl }) +
@@ -1270,7 +1270,7 @@ export const __meta__ = {
                 contentUrls = this.options.contentUrls,
                 url = contentUrls && contentUrls[index],
                 root = this.element[0],
-                wrapElement, link;
+                wrapElement, link, sanitizedUrl;
 
             item = $(item)
                 .addClass("k-panelbar-item")
@@ -1293,7 +1293,8 @@ export const __meta__ = {
                     .addClass(LINK);
 
             if (link[0]) {
-                link.attr("href", url); //url can be undefined
+                sanitizedUrl = url ? kendo.sanitizeLink(url) : url;
+                link.attr("href", sanitizedUrl == "#INVALIDLINK" ? sanitizedUrl : url); //url can be undefined
 
                 link.children(IMG)
                     .addClass(IMAGE);
@@ -1328,7 +1329,7 @@ export const __meta__ = {
             if (!item.children(LINKSELECTOR)[0]) {
                 wrapElement = "<span class='" + LINK + "'><span class='k-panelbar-item-text'></span></span>";
                 if (contentUrls && contentUrls[index] && item[0].parentNode == root) {
-                    wrapElement = '<a class="k-link" href="' + contentUrls[index] + '"></a>';
+                    wrapElement = '<a class="k-link" href="' + kendo.sanitizeLink(contentUrls[index]) + '"></a>';
                 }
 
                 item

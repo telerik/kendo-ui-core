@@ -612,6 +612,10 @@
   if (kendo.ui.RecurrenceEditor) {
     kendo.ui.RecurrenceEditor.prototype.options.messages =
       $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+        "recurrenceEditorTitle": "Editor de recurrencia",
+        "removeRecurrence": "Eliminar recurrencia",
+        "cancel": "Cancelar",
+        "update": "Guardar",
         "frequencies": {
           "never": "Nunca",
           "hourly": "Por hora",
@@ -687,6 +691,7 @@
         "showFullDay": "Mostrar día completo",
         "showWorkDay": "Mostrar horas laborables",
         "today": "Hoy",
+        "create": "Nuevo evento",
         "save": "Guardar",
         "cancel": "Cancelar",
         "destroy": "Eliminar",
@@ -714,7 +719,8 @@
           "editRecurring": "¿Quiere editar esta ocurrencia del evento o la serie completa?",
           "resetSeriesWindowTitle": "Reiniciar serie",
           "deleteRecurringConfirmation": "¿Está seguro que desea eliminar esta ocurrencia del evento?",
-          "deleteSeriesConfirmation": "¿Está seguro que desea eliminar toda la serie?"
+          "deleteSeriesConfirmation": "¿Está seguro que desea eliminar toda la serie?",
+          "resetSeriesConfirmation": "¿Está seguro de que desea restablecer toda la serie?",
         },
         "editor": {
           "title": "Título",
@@ -722,6 +728,13 @@
           "end": "Fin",
           "allDayEvent": "Todo el día",
           "description": "Descripción",
+          "descriptionPlaceholder": "Agregar descripción",
+          "from": "desde",
+          "to": "hasta",
+          "cancelTimezoneReset": "No",
+          "resetTimezone": "Sí",
+          "resetTimezoneConfirmation": "¿Está seguro de que desea restablecer la zona horaria?",
+          "resetTimezoneWindowTitle": "Restablecer zona horaria",
           "repeat": "Repetir",
           "timezone": " ",
           "startTimezone": "Zona horaria de inicio",
@@ -731,7 +744,9 @@
           "timezoneEditorButton": "Zona horaria",
           "timezoneTitle": "Zonas horarias",
           "noTimezone": "Sin zona horaria",
-          "editorTitle": "Evento"
+          "editorTitle": "Evento",
+          "newEvent": "Nuevo evento",
+          "editEvent": "Editar evento"
         },
         "resetSeries": "Reiniciar serie",
         "refresh": "Actualizar",

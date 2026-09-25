@@ -212,6 +212,9 @@
       $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
         "repeat": "Répéter",
         "recurrenceEditorTitle": "Éditeur de récurrence",
+        "removeRecurrence": "Supprimer la récurrence",
+        "cancel": "Annuler",
+        "update": "Sauvegarder",
         "daily": {
           "interval": "jour(s)",
           "repeatEvery": "Répéter chaque:"
@@ -727,6 +730,7 @@
         "save": "Sauvegarder",
         "time": "Time",
         "today": "Aujourd'hui",
+        "create": "Nouvel événement",
         "views": {
           "agenda": "Agenda",
           "day": "Jour",
@@ -754,12 +758,22 @@
           "editWindowTitle": "Modification de l'élément courant",
           "resetSeriesWindowTitle": "Réinitialiser la série",
           "deleteRecurringConfirmation": "Êtes-vous sûr de vouloir supprimer cette occurrence de l'événement ?",
-          "deleteSeriesConfirmation": "Êtes-vous sûr de vouloir supprimer toute la série ?"
+          "deleteSeriesConfirmation": "Êtes-vous sûr de vouloir supprimer toute la série ?",
+          "resetSeriesConfirmation": "Voulez-vous vraiment réinitialiser toute la série ?",
         },
         "editor": {
           "allDayEvent": "Toute la journée",
           "description": "Description",
+          "descriptionPlaceholder": "Ajouter une description",
+          "from": "de",
+          "to": "à",
+          "cancelTimezoneReset": "Non",
+          "resetTimezone": "Oui",
+          "resetTimezoneConfirmation": "Voulez-vous vraiment réinitialiser le fuseau horaire ?",
+          "resetTimezoneWindowTitle": "Réinitialiser le fuseau horaire",
           "editorTitle": "Evènement",
+          "newEvent": "Nouvel événement",
+          "editEvent": "Modifier l'événement",
           "end": "Fin",
           "endTimezone": "End timezone",
           "repeat": "Répéter",

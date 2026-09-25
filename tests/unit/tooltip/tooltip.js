@@ -319,6 +319,17 @@ describe("kendo.ui.tooltip", function() {
         assert.equal(container.attr("title"), "foo");
     });
 
+    it("default content from title attribute is html-encoded", function() {
+        container.attr("title", "<img src=x onerror=alert(1)>");
+
+        let tooltip = new Tooltip(container, {});
+
+        tooltip.show(container);
+
+        assert.equal(tooltip.content.find("img").length, 0);
+        assert.equal(tooltip.content.html(), "&lt;img src=x onerror=alert(1)&gt;");
+    });
+
     it("title attributes is restored on mouse leave", async function() {
         container.attr("title", "foo");
 

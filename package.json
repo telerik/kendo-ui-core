@@ -47,7 +47,7 @@
     "merge2": "~0.3.6",
     "playwright": "1.63.0",
     "require-dir": "~0.3.0",
-    "rolldown": "^1.2.6",
+    "rolldown": "^1.2.9",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",
     "validate-commit-msg": "^2.14.0",

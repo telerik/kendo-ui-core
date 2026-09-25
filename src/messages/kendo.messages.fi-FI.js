@@ -405,6 +405,10 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Toistuvuuden muokkaus",
+  "removeRecurrence": "Poista toistuminen",
+  "cancel": "Peruuta",
+  "update": "Tallenna",
   "frequencies": {
     "never": "Ei koskaan",
     "hourly": "Joka tunti",
@@ -480,9 +484,11 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showFullDay": "Näytä koko päivä",
   "showWorkDay": "Näytä virka-aika",
   "today": "Tänään",
+  "create": "Uusi tapahtuma",
   "save": "Tallenna",
   "cancel": "Peruuta",
   "destroy": "Poista",
+  "resetSeries": "Palauta sarja",
   "deleteWindowTitle": "Poista tapahtuma",
   "ariaSlotLabel": "Valittuna {0:t} - {1:t}",
   "ariaEventLabel": "{0} {1:D} klo {2:t}",
@@ -504,6 +510,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowOccurrence": "Muokkaa vain tätä tapahtumaa",
     "editWindowSeries": "Muokkaa kaikkia tapahtumia",
     "deleteRecurring": "Haluatko poistaa vain tämän tapahtuman, vai koko sarjan?",
+    "deleteRecurringConfirmation": "Haluatko varmasti poistaa tämän tapahtuman esiintymän?",
+    "deleteSeriesConfirmation": "Haluatko varmasti poistaa koko sarjan?",
+    "resetSeriesConfirmation": "Haluatko varmasti palauttaa koko sarjan?",
     "editRecurring": "Haluatko muokata vain tätä tapahtumaa, vai koko sarjaa?"
   },
   "editor": {
@@ -512,6 +521,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Loppu",
     "allDayEvent": "Koko päivän tapahtuma",
     "description": "Kuvaus",
+    "descriptionPlaceholder": "Lisää kuvaus",
+    "from": "alkaen",
+    "to": "asti",
+    "cancelTimezoneReset": "Ei",
+    "resetTimezone": "Kyllä",
+    "resetTimezoneConfirmation": "Haluatko varmasti palauttaa aikavyöhykkeen?",
+    "resetTimezoneWindowTitle": "Palauta aikavyöhyke",
     "repeat": "Toistuminen",
     "timezone": " ",
     "startTimezone": "Alkamisen aikavyöhyke",
@@ -521,7 +537,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Aikavyöhyke",
     "timezoneTitle": "Aikavyöhykkeet",
     "noTimezone": "Ei aikavyöhykettä",
-    "editorTitle": "Tapahtuma"
+    "editorTitle": "Tapahtuma",
+    "newEvent": "Uusi tapahtuma",
+    "editEvent": "Muokkaa tapahtumaa"
   }
 });
 }

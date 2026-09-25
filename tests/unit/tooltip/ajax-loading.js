@@ -162,6 +162,21 @@ describe("kendo.ui.tooltip.ajax", function() {
         assert.equal(iframe.attr("src"), "http://www.telerik.com/");
     });
 
+    it("a remote `content` creates iframe with a sanitized link", function() {
+        let url = "https://example.com/a' on" + "error='alert(2)'";
+
+        let tooltip = new Tooltip(container, {
+            content: { url: url }
+        });
+
+        tooltip.show(container);
+
+        let iframe = tooltip.content.find("iframe");
+
+        assert.equal(iframe.length, 1);
+        assert.isUndefined(iframe.attr("onerror"));
+    });
+
     it("iframe is created if showIframe is set", function() {
         let tooltip = new Tooltip(container, {
             content: { url: "/foo/" },
@@ -282,6 +297,27 @@ describe("kendo.ui.tooltip.ajax", function() {
         tooltip.show(container);
 
         tooltip.refresh();
+    });
+
+    it("refresh sanitizes the URL of an existing iframe", function() {
+        let tooltip = new Tooltip(container, {
+            content: { url: "about:blank" },
+            iframe: true
+        });
+
+        tooltip.show(container);
+
+        assert.equal(tooltip.content.find("iframe").attr("src"), "about:blank");
+
+        tooltip.options.content.url = "/foo/?a=1&b=2";
+        tooltip.refresh();
+
+        assert.equal(tooltip.content.find("iframe").attr("src"), "/foo/?a=1&b=2");
+
+        tooltip.options.content.url = "javascript:alert(1)";
+        tooltip.refresh();
+
+        assert.equal(tooltip.content.find("iframe").attr("src"), "#INVALIDLINK");
     });
 
     it("refresh does not refresh the content if popup is not created", function() {

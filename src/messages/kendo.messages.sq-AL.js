@@ -516,6 +516,10 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Redaktori i përsëritjes",
+  "removeRecurrence": "Hiq përsëritjen",
+  "cancel": "Anulo",
+  "update": "Ruaj",
   "frequencies": {
     "never": "Asnjëherë",
     "hourly": "Çdo orë",
@@ -591,9 +595,11 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showFullDay": "Trego ditën e plotë",
   "showWorkDay": "Trego orët e biznesit",
   "today": "Sot",
+  "create": "Ngjarje e re",
   "save": "Ruaj",
   "cancel": "Anulo",
   "destroy": "Fshij",
+  "resetSeries": "Rivendos serinë",
   "deleteWindowTitle": "Fshij ngjarjen",
   "ariaSlotLabel": "Zgjedhur prej {0:t} deri {1:t}",
   "ariaEventLabel": "{0} në {1:D} me {2:t}",
@@ -615,6 +621,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowOccurrence": "Redakto dukurin e tanishme",
     "editWindowSeries": "Redakto serinë",
     "deleteRecurring": "Doni të fshini vetëm këtë dukuri apo të gjithë serinë?",
+    "deleteRecurringConfirmation": "Jeni i sigurt që dëshironi të fshini këtë përsëritje të ngjarjes?",
+    "deleteSeriesConfirmation": "Jeni i sigurt që dëshironi të fshini të gjithë serinë?",
+    "resetSeriesConfirmation": "Jeni i sigurt që dëshironi të rivendosni të gjithë serinë?",
     "editRecurring": "Doni të redaktoni vetëm këtë dukuri apo të gjithë serinë?"
   },
   "editor": {
@@ -623,6 +632,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Përfundimi",
     "allDayEvent": "Ngjarja gjithë ditës",
     "description": "Përshkrimi",
+    "descriptionPlaceholder": "Shto përshkrim",
+    "from": "nga",
+    "to": "deri",
+    "cancelTimezoneReset": "Jo",
+    "resetTimezone": "Po",
+    "resetTimezoneConfirmation": "Jeni i sigurt që dëshironi të rivendosni zonën kohore?",
+    "resetTimezoneWindowTitle": "Rivendos zonën kohore",
     "repeat": "Përsërit",
     "timezone": " ",
     "startTimezone": "Fillo zonën kohore",
@@ -632,7 +648,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Zona kohore",
     "timezoneTitle": "Zonat kohore",
     "noTimezone": "Nuk ka zonë kohore",
-    "editorTitle": "Ngjarje"
+    "editorTitle": "Ngjarje",
+    "newEvent": "Ngjarje e re",
+    "editEvent": "Redakto ngjarjen"
   }
 });
 }

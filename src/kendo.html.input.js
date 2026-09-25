@@ -59,7 +59,7 @@ export const __meta__ = {
             }
 
             if (!!options.label) {
-                that.labelEl = $("<label for='" + elementId + "' class='" + options.labelClass + "'>");
+                that.labelEl = $("<label></label>").attr({ "for": elementId, "class": options.labelClass });
 
                 if (options.encoded) {
                     that.labelEl.text(options.label);

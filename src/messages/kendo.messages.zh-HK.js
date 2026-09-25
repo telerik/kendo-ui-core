@@ -511,6 +511,9 @@
     kendo.ui.RecurrenceEditor.prototype.options.messages =
       $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
         "recurrenceEditorTitle": "週期類型事件編輯",
+        "removeRecurrence": "移除週期性",
+        "cancel": "取消",
+        "update": "保存",
         "frequencies": {
           "never": "從不",
           "hourly": "每小時",
@@ -686,6 +689,7 @@
         "showFullDay": "顯示全天",
         "showWorkDay": "顯示工作時間",
         "today": "今天",
+        "create": "新事件",
         "pdf": "匯出 PDF",
         "save": "保存",
         "cancel": "取消",
@@ -717,6 +721,7 @@
           "deleteWindowSeries": "刪除整個週期事件",
           "deleteRecurringConfirmation": "你確定要刪除當前事件？",
           "deleteSeriesConfirmation": "你確定要刪除整個週期事件？",
+          "resetSeriesConfirmation": "確定要重設整個週期事件嗎？",
           "editWindowTitle": "編輯週期類型事件",
           "editWindowOccurrence": "編輯當前事件",
           "editWindowSeries": "編輯整個週期事件",
@@ -729,6 +734,13 @@
           "end": "結束時間",
           "allDayEvent": "全天事件",
           "description": "描述",
+          "descriptionPlaceholder": "新增描述",
+          "from": "從",
+          "to": "到",
+          "cancelTimezoneReset": "否",
+          "resetTimezone": "是",
+          "resetTimezoneConfirmation": "確定要重設時區嗎？",
+          "resetTimezoneWindowTitle": "重設時區",
           "repeat": "重複",
           "timezone": "時區",
           "startTimezone": "開始時區",
@@ -738,7 +750,9 @@
           "timezoneEditorButton": "時區選擇",
           "timezoneTitle": "選擇時區",
           "noTimezone": "無時區",
-          "editorTitle": "事件"
+          "editorTitle": "事件",
+          "newEvent": "新事件",
+          "editEvent": "編輯事件"
         }
       });
   }

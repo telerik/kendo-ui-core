@@ -643,6 +643,9 @@ kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "repeat": "Повторение",
   "recurrenceEditorTitle": "Конфигуратор на повторенията",
+  "removeRecurrence": "Премахване на повторението",
+  "cancel": "Откажи",
+  "update": "Запази",
   "daily": {
     "interval": " ден(дни)",
     "repeatEvery": "Повтаряй всеки: "
@@ -1146,7 +1149,16 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "editor": {
     "allDayEvent": "Целодневно събитие",
     "description": "Описание",
+    "descriptionPlaceholder": "Добавете описание",
+    "from": "от",
+    "to": "до",
+    "cancelTimezoneReset": "Не",
+    "resetTimezone": "Да",
+    "resetTimezoneConfirmation": "Сигурни ли сте, че искате да нулирате часовата зона?",
+    "resetTimezoneWindowTitle": "Нулиране на часовата зона",
     "editorTitle": "Събитие",
+    "newEvent": "Ново събитие",
+    "editEvent": "Редактиране на събитие",
     "end": "Край",
     "endTimezone": "Крайна часова зона",
     "repeat": "Повторение",
@@ -1156,12 +1168,17 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezone": "Часова зона",
     "timezoneEditorButton": "Часовa зона",
     "timezoneEditorTitle": "Часови зони",
+    "timezoneTitle": "Часови зони",
     "title": "Заглавие",
     "noTimezone": "Без часова зона"
   },
   "event": "Събитие",
   "recurrenceMessages": {
     "deleteRecurring": "Сигурен ли сте че искате да изтриете това събитие или цялата серия?",
+    "deleteRecurringConfirmation": "Сигурни ли сте, че искате да изтриете това повторение на събитието?",
+    "deleteSeriesConfirmation": "Сигурни ли сте, че искате да изтриете цялата серия?",
+    "resetSeriesConfirmation": "Сигурни ли сте, че искате да нулирате цялата серия?",
+    "resetSeriesWindowTitle": "Нулиране на серията",
     "deleteWindowOccurrence": "Изтрий единично събитие",
     "deleteWindowSeries": "Изтрий серията",
     "deleteWindowTitle": "Изтриване на повтарящо се събитие",
@@ -1173,6 +1190,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "save": "Запази",
   "time": "Време",
   "today": "Днес",
+  "create": "Създай ново събитие",
   "views": {
     "agenda": "Дневен ред",
     "day": "Ден",
@@ -1181,6 +1199,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "workWeek": "Работна седмица"
   },
   "deleteWindowTitle": "Изтрий събитие",
+  "resetSeries": "Нулирай серията",
   "showFullDay": "Покажи цял ден",
   "showWorkDay": "Покажи работни часове",
   "search": "Намери...",

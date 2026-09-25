@@ -117,6 +117,10 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Yineleme düzenleyicisi",
+  "removeRecurrence": "Yinelemeyi kaldır",
+  "cancel": "İptal Et",
+  "update": "Kaydet",
   "daily": {
     "interval": "Günler",
     "repeatEvery": "Her gün tekrarla"
@@ -400,10 +404,20 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "date": "Tarih",
   "deleteWindowTitle": "Etkinliği sil",
   "destroy": "Sil",
+  "resetSeries": "Seriyi sıfırla",
   "editor": {
     "allDayEvent": "Tüm gün süren olay",
     "description": "Tanım",
+    "descriptionPlaceholder": "Açıklama ekle",
+    "from": "başlangıç",
+    "to": "bitiş",
+    "cancelTimezoneReset": "Hayır",
+    "resetTimezone": "Evet",
+    "resetTimezoneConfirmation": "Saat dilimini sıfırlamak istediğinizden emin misiniz?",
+    "resetTimezoneWindowTitle": "Saat dilimini sıfırla",
     "editorTitle": "Olay",
+    "newEvent": "Yeni etkinlik",
+    "editEvent": "Etkinliği düzenle",
     "end": "Bitiş",
     "endTimezone": "Bitiş saati",
     "noTimezone": "Zaman Aralığı belirtilmemiş",
@@ -419,6 +433,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "event": "Olay",
   "recurrenceMessages": {
     "deleteRecurring": "Sadece bu olayı mı yoksa bütün seriyi mi silmek istiyorsunuz?",
+    "deleteRecurringConfirmation": "Bu etkinlik oluşumunu silmek istediğinizden emin misiniz?",
+    "deleteSeriesConfirmation": "Tüm seriyi silmek istediğinizden emin misiniz?",
+    "resetSeriesConfirmation": "Tüm seriyi sıfırlamak istediğinizden emin misiniz?",
     "deleteWindowOccurrence": "Geçerli yinelemeyi Sil",
     "deleteWindowSeries": "Seriyi Sil",
     "deleteWindowTitle": "Tekrarlanan Öğeyi Sil",
@@ -432,6 +449,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showWorkDay": "İş saatlerini göster",
   "time": "Zaman",
   "today": "Bugün",
+  "create": "Yeni etkinlik",
   "views": {
     "agenda": "Gündem",
     "day": "Gün",

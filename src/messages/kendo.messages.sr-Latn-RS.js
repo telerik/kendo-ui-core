@@ -516,6 +516,10 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Uređivač ponavljanja",
+  "removeRecurrence": "Ukloni ponavljanje",
+  "cancel": "Otkazati",
+  "update": "Začuvaj",
   "frequencies": {
     "never": "Nikad",
     "hourly": "Po satu",
@@ -591,9 +595,11 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showFullDay": "Prikaži ceo dan",
   "showWorkDay": "Prikaži radno vreme",
   "today": "Danas",
+  "create": "Novi događaj",
   "save": "Začuvaj",
   "cancel": "Otkazati",
   "destroy": "Izbriši",
+  "resetSeries": "Resetuj seriju",
   "deleteWindowTitle": "Obriši događaj",
   "ariaSlotLabel": "Izabrano od {0:t} do {1:t}",
   "ariaEventLabel": "{0} na {1:D} u {2:t}",
@@ -615,6 +621,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowOccurrence": "Izmeni ponavljajuću stavku",
     "editWindowSeries": "Izmeni seriju",
     "deleteRecurring": "Da li želite da izbrišete samo pojavu ovog događaja ili čitavu seriju?",
+    "deleteRecurringConfirmation": "Da li ste sigurni da želite da izbrišete ovo ponavljanje događaja?",
+    "deleteSeriesConfirmation": "Da li ste sigurni da želite da izbrišete celu seriju?",
+    "resetSeriesConfirmation": "Da li ste sigurni da želite da resetujete celu seriju?",
     "editRecurring": "Želite li urediti samo pojavu događaja ili čitavu seriju?"
   },
   "editor": {
@@ -623,6 +632,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Kraj",
     "allDayEvent": "Celodnevni događaj",
     "description": "Opis",
+    "descriptionPlaceholder": "Dodaj opis",
+    "from": "od",
+    "to": "do",
+    "cancelTimezoneReset": "Ne",
+    "resetTimezone": "Da",
+    "resetTimezoneConfirmation": "Da li ste sigurni da želite da resetujete vremensku zonu?",
+    "resetTimezoneWindowTitle": "Resetuj vremensku zonu",
     "repeat": "Ponovi",
     "timezone": " ",
     "startTimezone": "Započnite vremensku zonu",
@@ -632,7 +648,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Vremenske zone",
     "timezoneTitle": "Vremenske zone",
     "noTimezone": "Bez vremenske zone",
-    "editorTitle": "Događaj"
+    "editorTitle": "Događaj",
+    "newEvent": "Novi događaj",
+    "editEvent": "Uredi događaj"
   }
 });
 }

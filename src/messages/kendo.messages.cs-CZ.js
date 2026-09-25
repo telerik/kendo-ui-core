@@ -713,6 +713,9 @@ kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "repeat": "Opakování",
   "recurrenceEditorTitle": "Editor opakování",
+  "removeRecurrence": "Odebrat opakování",
+  "cancel": "Zrušit",
+  "update": "Uložit",
   "frequencies": {
     "never": "Nikdy",
     "hourly": "Každou hodinu",
@@ -843,6 +846,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showFullDay": "Zobrazit celý den",
   "showWorkDay": "Zobrazit pracovní dobu",
   "today": "Dnes",
+  "create": "Nová událost",
   "save": "Uložit",
   "cancel": "Zrušit",
   "destroy": "Smazat",
@@ -869,6 +873,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "deleteWindowSeries": "Smazat vše",
     "deleteRecurringConfirmation": "Opravdu chcete smazat tento výskyt události?",
     "deleteSeriesConfirmation": "Opravdu chcete smazat celou řadu?",
+    "resetSeriesConfirmation": "Opravdu chcete obnovit celou řadu?",
     "editWindowTitle": "Upravit opakující se událost",
     "editWindowOccurrence": "Upravit jen vybranou událost",
     "editWindowSeries": "Upravit vše",
@@ -881,6 +886,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Konec",
     "allDayEvent": "Celodenní",
     "description": "Popis",
+    "descriptionPlaceholder": "Přidat popis",
+    "from": "od",
+    "to": "do",
+    "cancelTimezoneReset": "Ne",
+    "resetTimezone": "Ano",
+    "resetTimezoneConfirmation": "Opravdu chcete obnovit časové pásmo?",
+    "resetTimezoneWindowTitle": "Obnovit časové pásmo",
     "repeat": "Opakování",
     "timezone": "Časové pásmo",
     "startTimezone": "Časové pásmo začátku",
@@ -890,7 +902,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Časové pásmo",
     "timezoneTitle": "Časová pásma",
     "noTimezone": "Žádné časová pásmo",
-    "editorTitle": "Událost"
+    "editorTitle": "Událost",
+    "newEvent": "Nová událost",
+    "editEvent": "Upravit událost"
   },
   "search": "Hledat..."
 });

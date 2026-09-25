@@ -19,6 +19,9 @@ kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "repeat": "Repeat",
   "recurrenceEditorTitle": "Recurrence editor",
+  "removeRecurrence": "Ukloni ponavljanje",
+  "cancel": "Cancel",
+  "update": "Spremi",
   "frequencies": {
     "never": "Nikad",
     "hourly": "Hourly",
@@ -98,6 +101,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showFullDay": "Show full day",
   "showWorkDay": "Show business hours",
   "today": "Today",
+  "create": "Novi događaj",
   "save": "Spremi",
   "cancel": "Cancel",
   "destroy": "Izbriši",
@@ -124,6 +128,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "deleteWindowSeries": "Izbriši seriju",
     "deleteRecurringConfirmation": "Are you sure you want to delete this event occurrence?",
     "deleteSeriesConfirmation": "Are you sure you want to delete the whole series?",
+    "resetSeriesConfirmation": "Jeste li sigurni da želite ponovno postaviti cijeli niz?",
     "editWindowTitle": "Uredi ponavljajuću stavku",
     "editWindowOccurrence": "Uredi trenutno pojavljivanje",
     "editWindowSeries": "Uredi niz događaja",
@@ -136,6 +141,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Kraj",
     "allDayEvent": "Cjelodnevni događaj",
     "description": "Opis",
+    "descriptionPlaceholder": "Dodaj opis",
+    "from": "od",
+    "to": "do",
+    "cancelTimezoneReset": "Ne",
+    "resetTimezone": "Da",
+    "resetTimezoneConfirmation": "Jeste li sigurni da želite ponovno postaviti vremensku zonu?",
+    "resetTimezoneWindowTitle": "Ponovno postavi vremensku zonu",
     "repeat": "Ponovi",
     "timezone": "Vremenska zona",
     "startTimezone": "Početna vremenska zona",
@@ -145,7 +157,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Vremenska zona",
     "timezoneTitle": "Time zones",
     "noTimezone": "Nema vremenske zone",
-    "editorTitle": "Event"
+    "editorTitle": "Event",
+    "newEvent": "Novi događaj",
+    "editEvent": "Uredi događaj"
   },
   "search": "Search..."
 });

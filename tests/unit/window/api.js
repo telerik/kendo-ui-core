@@ -445,6 +445,39 @@ describe("api", function() {
         assert.equal(iframe.attr("src"), url);
     });
 
+    it("refresh() creates an iframe, with sanitizes url", function() {
+         let dialog = createWindow({}),
+            url = "https://example.com/a' on" + "error='alert(2)'";
+
+        dialog.refresh(url);
+
+        let iframe = dialog.wrapper.find("iframe");
+
+        assert.equal(iframe.length, 1);
+        assert.isUndefined(iframe.attr("onerror"));
+    });
+
+    it("refresh() sanitizes the URL of an existing iframe", function() {
+        let dialog = createWindow({ iframe: true });
+
+        dialog.refresh("/foo/");
+
+        let iframe = dialog.wrapper.find("iframe");
+
+        dialog.refresh("/foo/?a=1&b=2");
+
+        assert.equal(iframe.attr("src"), "/foo/?a=1&b=2");
+
+        dialog.refresh("about:blank");
+
+        assert.equal(iframe.attr("src"), "about:blank");
+
+        dialog.refresh("javascript:alert(1)");
+
+        assert.equal(dialog.wrapper.find("iframe")[0], iframe[0]);
+        assert.equal(iframe.attr("src"), "#INVALIDLINK");
+    });
+
     it("refresh() of AJAX window with cross-domain URL", function() {
         $.mockjax({
             url: "foo",

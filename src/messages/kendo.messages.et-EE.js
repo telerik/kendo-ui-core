@@ -745,6 +745,9 @@ kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "repeat": "Korda",
     "recurrenceEditorTitle": "Korduste redigeerija",
+    "removeRecurrence": "Eemalda kordus",
+    "cancel": "Tühista",
+    "update": "Salvesta",
     "frequencies": {
         "never": "Mitte kunagi",
         "hourly": "Iga tund",
@@ -875,6 +878,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "showFullDay": "Näita tervet päeva",
     "showWorkDay": "Näita lahtioleku aegu",
     "today": "Täna",
+    "create": "Uus sündmus",
     "save": "Salvesta",
     "cancel": "Tühista",
     "destroy": "Kustuta",
@@ -901,6 +905,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
       "deleteWindowSeries": "Kustuta sarjad",
       "deleteRecurringConfirmation": "Kas olete kindel, et soovite kustutada selle ürituse kordumise?",
       "deleteSeriesConfirmation": "Kas olete kindel, et soovite kustutada kogu sarja?",
+      "resetSeriesConfirmation": "Kas soovite kindlasti kogu sarja lähtestada?",
       "editWindowTitle": "Redigeeri korduvat artiklit",
       "editWindowOccurrence": "Redigeeri jooksvat kordumist",
       "editWindowSeries": "Redigeeri sarju",
@@ -913,6 +918,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
       "end": "Lõpp",
       "allDayEvent": "Kogu päeva üritus",
       "description": "Kirjeldus",
+      "descriptionPlaceholder": "Lisa kirjeldus",
+      "from": "alates",
+      "to": "kuni",
+      "cancelTimezoneReset": "Ei",
+      "resetTimezone": "Jah",
+      "resetTimezoneConfirmation": "Kas soovite kindlasti ajavööndi lähtestada?",
+      "resetTimezoneWindowTitle": "Lähtesta ajavöönd",
       "repeat": "Korda",
       "timezone": " ",
       "startTimezone": "Alguse ajavöönd",
@@ -922,7 +934,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
       "timezoneEditorButton": "Ajavöönd",
       "timezoneTitle": "Ajavööndid",
       "noTimezone": "Ilma ajavööndita",
-      "editorTitle": "Üritus"
+      "editorTitle": "Üritus",
+      "newEvent": "Uus sündmus",
+      "editEvent": "Muuda sündmust"
   },
     "search": "Otsing..."
 });
