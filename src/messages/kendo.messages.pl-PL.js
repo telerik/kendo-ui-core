@@ -138,6 +138,10 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Edytor cykliczności",
+  "removeRecurrence": "Usuń cykl",
+  "cancel": "Anuluj",
+  "update": "Zapisz",
   "daily": {
     "interval": "dni",
     "repeatEvery": "Powtarzaj co:"
@@ -620,10 +624,20 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "date": "Data",
   "destroy": "Usuń",
+  "resetSeries": "Zresetuj serię",
   "editor": {
     "allDayEvent": "Wydarzenie całodniowe",
     "description": "Opis",
+    "descriptionPlaceholder": "Dodaj opis",
+    "from": "od",
+    "to": "do",
+    "cancelTimezoneReset": "Nie",
+    "resetTimezone": "Tak",
+    "resetTimezoneConfirmation": "Czy na pewno chcesz zresetować strefę czasową?",
+    "resetTimezoneWindowTitle": "Zresetuj strefę czasową",
     "editorTitle": "Wydarzenie",
+    "newEvent": "Nowe wydarzenie",
+    "editEvent": "Edytuj wydarzenie",
     "end": "Koniec",
     "endTimezone": "Strefa czasowa końca",
     "repeat": "Cykl",
@@ -639,6 +653,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "event": "Wydarzenie",
   "recurrenceMessages": {
     "deleteRecurring": "Czy chcesz usunąć pojedyńcze wydarzenie, czy cały cykl?",
+    "deleteRecurringConfirmation": "Czy na pewno chcesz usunąć to wystąpienie wydarzenia?",
+    "deleteSeriesConfirmation": "Czy na pewno chcesz usunąć całą serię?",
+    "resetSeriesConfirmation": "Czy na pewno chcesz zresetować całą serię?",
     "deleteWindowOccurrence": "Usuń bieżące wydarzenie",
     "deleteWindowSeries": "Usuń cykl",
     "deleteWindowTitle": "Usuń wydarzenie cykliczne",
@@ -650,6 +667,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "save": "Zapisz",
   "time": "Czas",
   "today": "Dziś",
+  "create": "Nowe wydarzenie",
   "views": {
     "agenda": "Agenda",
     "day": "Dzień",

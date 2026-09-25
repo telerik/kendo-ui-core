@@ -516,6 +516,10 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Уредувач на повторување",
+  "removeRecurrence": "Отстрани повторување",
+  "cancel": "Откажи",
+  "update": "Зачувај",
   "frequencies": {
     "never": "Никогаш",
     "hourly": "Часовно",
@@ -591,9 +595,11 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showFullDay": "Прикажи цел ден",
   "showWorkDay": "Прикажи работни часови",
   "today": "Денес",
+  "create": "Нов настан",
   "save": "Зачувај",
   "cancel": "Откажи",
   "destroy": "Избриши",
+  "resetSeries": "Ресетирај серија",
   "deleteWindowTitle": "Избриши настан",
   "ariaSlotLabel": "Избран од {0:t} до {1:t}",
   "ariaEventLabel": "{0} на {1:D} во {2:t}",
@@ -615,6 +621,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowOccurrence": "Измени тековен настан",
     "editWindowSeries": "Измени ги сериите",
     "deleteRecurring": "Дали сакате да го избришете само овој настан или целата серија?",
+    "deleteRecurringConfirmation": "Дали сте сигурни дека сакате да го избришете ова повторување на настанот?",
+    "deleteSeriesConfirmation": "Дали сте сигурни дека сакате да ја избришете целата серија?",
+    "resetSeriesConfirmation": "Дали сте сигурни дека сакате да ја ресетирате целата серија?",
     "editRecurring": "Дали сакате да го измените само овој настан или целата серија?"
   },
   "editor": {
@@ -623,6 +632,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Крај",
     "allDayEvent": "All day event",
     "description": "Опис",
+    "descriptionPlaceholder": "Додај опис",
+    "from": "од",
+    "to": "до",
+    "cancelTimezoneReset": "Не",
+    "resetTimezone": "Да",
+    "resetTimezoneConfirmation": "Дали сте сигурни дека сакате да ја ресетирате временската зона?",
+    "resetTimezoneWindowTitle": "Ресетирај временска зона",
     "repeat": "Повтори",
     "timezone": " ",
     "startTimezone": "Почетна временска зона",
@@ -632,7 +648,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Временска зона",
     "timezoneTitle": "Временски зони",
     "noTimezone": "Нема временска зона",
-    "editorTitle": "Настан"
+    "editorTitle": "Настан",
+    "newEvent": "Нов настан",
+    "editEvent": "Уреди настан"
   }
 });
 }

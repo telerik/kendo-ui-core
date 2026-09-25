@@ -507,6 +507,10 @@
   if (kendo.ui.RecurrenceEditor) {
     kendo.ui.RecurrenceEditor.prototype.options.messages =
       $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+        "recurrenceEditorTitle": "Επεξεργαστής επανάληψης",
+        "removeRecurrence": "Κατάργηση επανάληψης",
+        "cancel": "Άκυρο",
+        "update": "Αποθήκευση",
         "frequencies": {
           "never": "Ποτέ",
           "hourly": "Ωριαία",
@@ -585,6 +589,7 @@
         "showFullDay": "Δείξε ολόκληρη ημέρα",
         "showWorkDay": "Δείξε εργάσιμες ώρες",
         "today": "Σήμερα",
+        "create": "Νέο συμβάν",
         "save": "Αποθήκευση",
         "cancel": "Άκυρο",
         "destroy": "Διαγραφή",
@@ -610,6 +615,9 @@
           "editWindowOccurrence": "Επεξεργασία τρέχουσας εμφάνισης",
           "editWindowSeries": "Επεξεργασία της σειράς",
           "deleteRecurring": "Θέλετε να διαγράψετε μόνο αυτό το γεγονός ή ολόκληρη τη σειρά;",
+          "deleteRecurringConfirmation": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την εμφάνιση του συμβάντος;",
+          "deleteSeriesConfirmation": "Είστε βέβαιοι ότι θέλετε να διαγράψετε ολόκληρη τη σειρά;",
+          "resetSeriesConfirmation": "Είστε βέβαιοι ότι θέλετε να επαναφέρετε ολόκληρη τη σειρά;",
           "editRecurring": "Θέλετε να επεξεργαστείτε μονο αυτό το γεγονός ή ολόκληρη της σειρά;"
         },
         "editor": {
@@ -618,6 +626,13 @@
           "end": "Τέλος",
           "allDayEvent": "Ολοήμερο γεγονός",
           "description": "Περιγραφή",
+          "descriptionPlaceholder": "Προσθήκη περιγραφής",
+          "from": "από",
+          "to": "έως",
+          "cancelTimezoneReset": "Όχι",
+          "resetTimezone": "Ναι",
+          "resetTimezoneConfirmation": "Είστε βέβαιοι ότι θέλετε να επαναφέρετε τη ζώνη ώρας;",
+          "resetTimezoneWindowTitle": "Επαναφορά ζώνης ώρας",
           "repeat": "Επανάληψη",
           "timezone": " ",
           "startTimezone": "Εκκίνηση ζώνη ώρας",
@@ -627,7 +642,9 @@
           "timezoneEditorButton": "Ζώνη Ώρας",
           "timezoneTitle": "Ζώνες Ώρας",
           "noTimezone": "Καμία ζώνη ώρας",
-          "editorTitle": "Γεγονός"
+          "editorTitle": "Γεγονός",
+          "newEvent": "Νέο συμβάν",
+          "editEvent": "Επεξεργασία συμβάντος"
         }
       });
   }

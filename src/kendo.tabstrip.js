@@ -114,7 +114,7 @@ export const __meta__ = {
 
                 classAttributes.split(" ").forEach(function(className) {
                     if (className && !result.includes(className)) {
-                        result.push(className);
+                        result.push(kendo.htmlEncode(className));
                     }
                 });
 

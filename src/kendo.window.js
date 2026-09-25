@@ -2,6 +2,7 @@ import "./kendo.draganddrop.js";
 import "./kendo.popup.js";
 import "./kendo.icons.js";
 import "./kendo.html.button.js";
+import { htmlService } from "./core/services/html.service";
 
     export const __meta__ = {
         id: "window",
@@ -1714,7 +1715,7 @@ import "./kendo.html.button.js";
 
                         if (iframe) {
                             // refresh existing iframe
-                            iframe.src = url;
+                            iframe.src = htmlService.sanitizeIframeUrl(url, false);
                         } else {
                             // render new iframe
                             element.html(templates.contentFrame(extend({}, initOptions, { content: options })));
@@ -1903,8 +1904,8 @@ import "./kendo.html.button.js";
             ),
             overlay: "<div class='k-overlay'></div>",
             contentFrame: template(({ title, content }) =>
-                `<iframe frameborder='0' title='${title}' class='${KCONTENTFRAME}' ` +
-                `src='${content.url}'>` +
+                `<iframe frameborder='0' title='${kendo.htmlEncode(title)}' class='${KCONTENTFRAME}' ` +
+                `src='${htmlService.sanitizeIframeUrl(content.url)}'>` +
                 "This page requires frames in order to show content" +
                 "</iframe>"
             ),

@@ -92,6 +92,10 @@ if (kendo.ui.ColumnMenu) {
 if (kendo.ui.RecurrenceEditor) {
     kendo.ui.RecurrenceEditor.prototype.options.messages =
     $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+        "recurrenceEditorTitle": "Rediger gjentakelse",
+        "removeRecurrence": "Fjern gjentakelse",
+        "cancel": "Avbryt",
+        "update": "Lagre",
         "daily": {
             "interval": "dag(er)",
             "repeatEvery": "Gjenta hver:"
@@ -363,10 +367,20 @@ if (kendo.ui.Scheduler) {
         },
         "date": "Dato",
         "destroy": "Slett",
+        "resetSeries": "Tilbakestill serie",
         "editor": {
             "allDayEvent": "Heldags oppgave",
             "description": "Beskrivelse",
+            "descriptionPlaceholder": "Legg til beskrivelse",
+            "from": "fra",
+            "to": "til",
+            "cancelTimezoneReset": "Nei",
+            "resetTimezone": "Ja",
+            "resetTimezoneConfirmation": "Er du sikker på at du vil tilbakestille tidssonen?",
+            "resetTimezoneWindowTitle": "Tilbakestill tidssone",
             "editorTitle": "Oppgave",
+            "newEvent": "Ny hendelse",
+            "editEvent": "Rediger hendelse",
             "end": "Slutt",
             "endTimezone": "Slutt tidssone",
             "repeat": "Gjenta",
@@ -382,6 +396,9 @@ if (kendo.ui.Scheduler) {
         "event": "Oppgave",
         "recurrenceMessages": {
             "deleteRecurring": "Vil du slette bare denne forekomsten eller alle forekomster av denne oppgaven?",
+            "deleteRecurringConfirmation": "Er du sikker på at du vil slette denne forekomsten av hendelsen?",
+            "deleteSeriesConfirmation": "Er du sikker på at du vil slette hele serien?",
+            "resetSeriesConfirmation": "Er du sikker på at du vil tilbakestille hele serien?",
             "deleteWindowOccurrence": "Slett denne forekomsten",
             "deleteWindowSeries": "Slett alle forekomster",
             "deleteWindowTitle": "Slett gjentagende forekomst",
@@ -393,6 +410,7 @@ if (kendo.ui.Scheduler) {
         "save": "Lagre",
         "time": "Tid",
         "today": "I dag",
+        "create": "Ny hendelse",
         "views": {
             "agenda": "Agenda",
             "day": "Dag",

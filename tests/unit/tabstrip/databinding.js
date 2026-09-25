@@ -128,6 +128,23 @@ describe("tabstrip data binding", function() {
         assert.isOk(tabstrip.tabGroup.find("span.k-sprite").hasClass("foo"));
     });
 
+    it("class attribute does not create additional item attributes", function() {
+        const className = "custom' onmouseover='alert(1)";
+        let tabstrip = new kendo.ui.TabStrip(dom, {
+            dataSource: [{
+                text: "Item 1",
+                attributes: {
+                    class: className
+                }
+            }]
+        });
+
+        const item = tabstrip.tabGroup.children("li").first();
+
+        assert.include(item.attr("class"), className);
+        assert.isUndefined(item.attr("onmouseover"));
+    });
+
     it("resetting dataSource detaches the previous events", function() {
         let tabstrip = new kendo.ui.TabStrip(dom);
 

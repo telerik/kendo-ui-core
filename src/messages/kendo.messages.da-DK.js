@@ -101,6 +101,10 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Rediger gentagelse",
+  "removeRecurrence": "Fjern gentagelse",
+  "cancel": "Fortryd",
+  "update": "Gem",
   "daily": {
     "interval": "days(s)",
     "repeatEvery": "Gentag hver:"
@@ -382,10 +386,20 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "date": "Dato",
   "destroy": "Slet",
+  "resetSeries": "Nulstil serie",
   "editor": {
     "allDayEvent": "Hele dagen",
     "description": "Beskrivelse",
+    "descriptionPlaceholder": "Tilføj beskrivelse",
+    "from": "fra",
+    "to": "til",
+    "cancelTimezoneReset": "Nej",
+    "resetTimezone": "Ja",
+    "resetTimezoneConfirmation": "Er du sikker på, at du vil nulstille tidszonen?",
+    "resetTimezoneWindowTitle": "Nulstil tidszone",
     "editorTitle": "Begivenhed",
+        "newEvent": "Ny begivenhed",
+        "editEvent": "Rediger begivenhed",
     "end": "Slut",
     "endTimezone": "Slut tidszone",
     "repeat": "Gentag",
@@ -401,6 +415,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "event": "Begivenhed",
   "recurrenceMessages": {
     "deleteRecurring": "Vil du kun slette denne hændelse eller hele serien?",
+    "deleteRecurringConfirmation": "Er du sikker på, at du vil slette denne forekomst af begivenheden?",
+    "deleteSeriesConfirmation": "Er du sikker på, at du vil slette hele serien?",
+    "resetSeriesConfirmation": "Er du sikker på, at du vil nulstille hele serien?",
     "deleteWindowOccurrence": "Slet denne hændelse",
     "deleteWindowSeries": "Slet hele serien",
     "deleteWindowTitle": "Slet tilbagevendende hændelse",
@@ -412,6 +429,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "save": "Gem",
   "time": "Tid",
   "today": "I dag",
+    "create": "Ny begivenhed",
   "views": {
     "agenda": "Agenda",
     "day": "Dag",

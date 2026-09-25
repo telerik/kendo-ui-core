@@ -533,6 +533,10 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Trình chỉnh sửa lặp lại",
+  "removeRecurrence": "Xóa lặp lại",
+  "cancel": "Hủy",
+  "update": "Lưu",
   "frequencies": {
     "never": "Không bao giờ",
     "hourly": "Từng giờ",
@@ -608,6 +612,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showFullDay": "Hiển thị cả ngày",
   "showWorkDay": "Hiển thị giờ hành chính",
   "today": "Hôm nay",
+  "create": "Sự kiện mới",
   "save": "Lưu",
   "cancel": "Hủy",
   "destroy": "Xóa",
@@ -632,6 +637,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "deleteWindowSeries": "Xóa chuỗi",
     "deleteRecurringConfirmation": "Bạn có thực sự muốn xóa sự kiện này?",
     "deleteSeriesConfirmation": "Bạn có thực sự muốn xóa bỏ toàn bộ chuỗi này?",
+    "resetSeriesConfirmation": "Bạn có chắc chắn muốn đặt lại toàn bộ chuỗi không?",
     "editWindowTitle": "Sửa các mục định kỳ",
     "editWindowOccurrence": "Sửa sự xuất hiện hiện tại",
     "editWindowSeries": "Sửa chuỗi",
@@ -644,6 +650,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Kết thúc",
     "allDayEvent": "Sự kiện kéo dài cả ngày",
     "description": "Mô tả",
+    "descriptionPlaceholder": "Thêm mô tả",
+    "from": "từ",
+    "to": "đến",
+    "cancelTimezoneReset": "Không",
+    "resetTimezone": "Có",
+    "resetTimezoneConfirmation": "Bạn có chắc chắn muốn đặt lại múi giờ không?",
+    "resetTimezoneWindowTitle": "Đặt lại múi giờ",
     "repeat": "Lặp lại",
     "timezone": " ",
     "startTimezone": "Múi giờ bắt đầu",
@@ -653,7 +666,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Múi giờ",
     "timezoneTitle": "Múi giờ",
     "noTimezone": "Không có múi giờ",
-    "editorTitle": "Sự kiện"
+    "editorTitle": "Sự kiện",
+    "newEvent": "Sự kiện mới",
+    "editEvent": "Chỉnh sửa sự kiện"
   }
 });
 }

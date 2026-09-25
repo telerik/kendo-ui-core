@@ -92,6 +92,10 @@
   if (kendo.ui.RecurrenceEditor) {
     kendo.ui.RecurrenceEditor.prototype.options.messages =
       $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+        "recurrenceEditorTitle": "Terugkeerpatroon bewerken",
+        "removeRecurrence": "Herhaling verwijderen",
+        "cancel": "Annuleren",
+        "update": "Opslaan",
         "daily": {
           "interval": "dag(en)",
           "repeatEvery": "Herhaal elke"
@@ -388,10 +392,20 @@
         "date": "Datum",
         "deleteWindowTitle": "Afspraak verwijderen",
         "destroy": "Verwijderen",
+        "resetSeries": "Reeks opnieuw instellen",
         "editor": {
           "allDayEvent": "Duurt hele dag",
           "description": "Omschrijving",
+          "descriptionPlaceholder": "Beschrijving toevoegen",
+          "from": "van",
+          "to": "tot",
+          "cancelTimezoneReset": "Nee",
+          "resetTimezone": "Ja",
+          "resetTimezoneConfirmation": "Weet u zeker dat u de tijdzone opnieuw wilt instellen?",
+          "resetTimezoneWindowTitle": "Tijdzone opnieuw instellen",
           "editorTitle": "Afspraak",
+          "newEvent": "Nieuwe afspraak",
+          "editEvent": "Afspraak bewerken",
           "end": "Eind",
           "endTimezone": "Eindtijd",
           "repeat": "Terugkeerpatroon",
@@ -407,6 +421,9 @@
         "event": "Afspraak",
         "recurrenceMessages": {
           "deleteRecurring": "Wilt u alleen dit exemplaar uit de reeks verwijderen of wilt u de hele reeks verwijderen?",
+          "deleteRecurringConfirmation": "Weet u zeker dat u dit exemplaar van de gebeurtenis wilt verwijderen?",
+          "deleteSeriesConfirmation": "Weet u zeker dat u de hele reeks wilt verwijderen?",
+          "resetSeriesConfirmation": "Weet u zeker dat u de hele reeks opnieuw wilt instellen?",
           "deleteWindowOccurrence": "Verwijder exemplaar",
           "deleteWindowSeries": "Verwijder reeks",
           "deleteWindowTitle": "Verwijder terugkeerpatroon",
@@ -420,6 +437,7 @@
         "showWorkDay": "Toon werktijden",
         "time": "Tijd",
         "today": "Vandaag",
+        "create": "Nieuwe afspraak",
         "views": {
           "agenda": "Agenda",
           "day": "Dag",

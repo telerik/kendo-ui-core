@@ -253,6 +253,10 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "עורך אירועים חוזרים",
+  "removeRecurrence": "הסר חזרה",
+  "cancel": "בטל",
+  "update": "שמור",
   "daily": {
     "interval": "מחזוריות",
     "repeatEvery": "חזור כל: "
@@ -581,13 +585,23 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "cancel": "בטל",
   "date": "תאריך",
   "destroy": "מחק",
+  "resetSeries": "איפוס סדרה",
   "editable": {
     "confirmation": "האם הנך בטוח כי ברצונך למחוק אירוע זה ?"
   },
   "editor": {
     "allDayEvent": "אירוע של יום שלם",
     "description": "תיאור",
+    "descriptionPlaceholder": "הוסף תיאור",
+    "from": "מ-",
+    "to": "עד",
+    "cancelTimezoneReset": "לא",
+    "resetTimezone": "כן",
+    "resetTimezoneConfirmation": "האם אתה בטוח שברצונך לאפס את אזור הזמן?",
+    "resetTimezoneWindowTitle": "איפוס אזור זמן",
     "editorTitle": "אירוע",
+    "newEvent": "אירוע חדש",
+    "editEvent": "עריכת אירוע",
     "end": "סיום",
     "endTimezone": "אזור זמן",
     "repeat": "ארוע חוזר",
@@ -603,6 +617,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "event": "אירוע",
   "recurrenceMessages": {
       "deleteRecurring": "האם הנך בטוח כי ברצונך למחוק אירוע זה או את כל הסדרה ?",
+      "deleteRecurringConfirmation": "האם אתה בטוח שברצונך למחוק מופע אירוע זה?",
+      "deleteSeriesConfirmation": "האם אתה בטוח שברצונך למחוק את הסדרה כולה?",
+      "resetSeriesConfirmation": "האם אתה בטוח שברצונך לאפס את הסדרה כולה?",
     "deleteWindowOccurrence": "מחיקת אירוע בודד",
     "deleteWindowSeries": "מחק סדרת ארועים",
     "deleteWindowTitle": "מחק אירוע מחזורי",
@@ -614,6 +631,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "save": "שמור",
   "time": "שעה",
   "today": "היום",
+  "create": "אירוע חדש",
   "views": {
     "agenda": "סדר יום",
     "day": "יום",

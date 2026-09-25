@@ -76,14 +76,6 @@ export const __meta__ = {
         return rules;
     }
 
-    function decode(value) {
-        return value.replace(/&amp/g, '&amp;')
-            .replace(/&quot;/g, '"')
-            .replace(/&#39;/g, "'")
-            .replace(/&lt;/g, '<')
-            .replace(/&gt;/g, '>');
-    }
-
     function numberOfDecimalDigits(value) {
         value = (value + "").split('.');
         if (value.length > 1) {
@@ -136,7 +128,7 @@ export const __meta__ = {
     var SUMMARYTEMPLATE = ({ errors }) => {
         let result = '<ul>';
         for (var i = 0; i < errors.length; i += 1) {
-            result += `<li><a data-field="${errors[i].field}" href="#">${errors[i].message}</a></li>`;
+            result += `<li><a data-field="${kendo.htmlEncode(errors[i].field)}" href="#">${kendo.htmlEncode(errors[i].message)}</a></li>`;
         }
 
         result += '</ul>';
@@ -183,7 +175,7 @@ export const __meta__ = {
 
         options: {
             name: "Validator",
-            errorTemplate: ({ message }) => `<span class="k-form-error">${message}</span>`,
+            errorTemplate: ({ message }) => `<span class="k-form-error">${kendo.htmlEncode(message)}</span>`,
             messageBoxThemeColor: "error",
             messages: {
                 required: "{0} is required",
@@ -484,7 +476,7 @@ export const __meta__ = {
 
                 })).addClass("k-hidden"),
                 messageText = !valid ? that._extractMessage(input, result.key) : "",
-                messageLabel = !valid ? parseHtml(template({ message: decode(messageText), field: fieldName })) : "",
+                messageLabel = !valid ? parseHtml(template({ message: messageText, field: fieldName })) : "",
                 wasValid = !input.attr(ARIAINVALID),
                 isInputInner = input.is(INPUTINNER),
                 inputWrapper = input.parent(INPUTWRAPPER);

@@ -620,6 +620,9 @@
         kendo.ui.RecurrenceEditor.prototype.options.messages =
             $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
                 "recurrenceEditorTitle": "周期类型事件编辑",
+                "removeRecurrence": "删除重复",
+                "cancel": "取消",
+                "update": "保存",
                 "frequencies": {
                     "never": "从不",
                     "hourly": "每小时",
@@ -791,6 +794,7 @@
                 "showFullDay": "显示全天",
                 "showWorkDay": "显示工作时间",
                 "today": "今天",
+                "create": "新事件",
                 "pdf": "导出 PDF",
                 "save": "保存",
                 "cancel": "取消",
@@ -822,6 +826,7 @@
                     "deleteWindowSeries": "删除整个周期事件",
                     "deleteRecurringConfirmation": "你确定要删除当前事件？",
                     "deleteSeriesConfirmation": "你确定要删除整个周期事件？",
+                    "resetSeriesConfirmation": "确定要重置整个周期事件吗？",
                     "editWindowTitle": "编辑周期类型事件",
                     "editWindowOccurrence": "编辑当前事件",
                     "editWindowSeries": "编辑整个周期事件",
@@ -834,6 +839,13 @@
                     "end": "结束时间",
                     "allDayEvent": "全天事件",
                     "description": "描述",
+                    "descriptionPlaceholder": "添加描述",
+                    "from": "从",
+                    "to": "到",
+                    "cancelTimezoneReset": "否",
+                    "resetTimezone": "是",
+                    "resetTimezoneConfirmation": "确定要重置时区吗？",
+                    "resetTimezoneWindowTitle": "重置时区",
                     "repeat": "重复",
                     "timezone": "时区",
                     "startTimezone": "开始时区",
@@ -843,7 +855,9 @@
                     "timezoneEditorButton": "时区选择",
                     "timezoneTitle": "选择时区",
                     "noTimezone": "无时区",
-                    "editorTitle": "事件"
+                    "editorTitle": "事件",
+                    "newEvent": "新事件",
+                    "editEvent": "编辑事件"
                 }
             });
     }

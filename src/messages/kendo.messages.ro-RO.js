@@ -92,6 +92,10 @@ if (kendo.ui.ColumnMenu) {
 if (kendo.ui.RecurrenceEditor) {
   kendo.ui.RecurrenceEditor.prototype.options.messages =
     $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+      "recurrenceEditorTitle": "Editor de recurență",
+      "removeRecurrence": "Eliminați recurența",
+      "cancel": "Anulați",
+      "update": "Salvați",
       "daily": {
         "interval": "zi/zile",
         "repeatEvery": "Repetă în fiecare:"
@@ -371,10 +375,20 @@ if (kendo.ui.Scheduler) {
       },
       "date": "Data",
       "destroy": "Ștergeți",
+      "resetSeries": "Resetați seria",
       "editor": {
         "allDayEvent": "Eveniment pe întreaga zi",
         "description": "Descriere",
+        "descriptionPlaceholder": "Adăugați o descriere",
+        "from": "de la",
+        "to": "până la",
+        "cancelTimezoneReset": "Nu",
+        "resetTimezone": "Da",
+        "resetTimezoneConfirmation": "Sigur doriți să resetați fusul orar?",
+        "resetTimezoneWindowTitle": "Resetați fusul orar",
         "editorTitle": "Eveniment",
+        "newEvent": "Eveniment nou",
+        "editEvent": "Editați evenimentul",
         "end": "End",
         "endTimezone": "Sfârsit zona timp",
         "repeat": "Repetați",
@@ -390,6 +404,9 @@ if (kendo.ui.Scheduler) {
       "event": "Event",
       "recurrenceMessages": {
         "deleteRecurring": "Doriți să ștergeți doar această ocurența sau toată seria?",
+        "deleteRecurringConfirmation": "Sigur doriți să ștergeți această apariție a evenimentului?",
+        "deleteSeriesConfirmation": "Sigur doriți să ștergeți întreaga serie?",
+        "resetSeriesConfirmation": "Sigur doriți să resetați întreaga serie?",
         "deleteWindowOccurrence": "Ștergeți această ocurența",
         "deleteWindowSeries": "Ștergeți toată seria",
         "deleteWindowTitle": "Ștergeți elementul recurent",
@@ -402,6 +419,7 @@ if (kendo.ui.Scheduler) {
       "time": "Timp",
       "search": "Caută...",
       "today": "Astăzi",
+      "create": "Eveniment nou",
       "views": {
         "agenda": "Agendă",
         "day": "Zi",

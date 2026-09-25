@@ -404,6 +404,10 @@
     if (kendo.ui.RecurrenceEditor) {
         kendo.ui.RecurrenceEditor.prototype.options.messages =
         $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+            "recurrenceEditorTitle": "ویرایشگر تکرار",
+            "removeRecurrence": "حذف تکرار",
+            "cancel": "Cancel",
+            "update": "Save",
             "frequencies": {
                 "never": "هیچ وقت",
                 "hourly": "ساعتی",
@@ -479,9 +483,11 @@
             "showFullDay": "Show full day",
             "showWorkDay": "Show business hours",
             "today": "Today",
+            "create": "رویداد جدید",
             "save": "Save",
             "cancel": "Cancel",
             "destroy": "Delete",
+            "resetSeries": "بازنشانی مجموعه",
             "deleteWindowTitle": "Delete event",
             "ariaSlotLabel": "Selected from {0:t} to {1:t}",
             "ariaEventLabel": "{0} on {1:D} at {2:t}",
@@ -503,6 +509,9 @@
                 "editWindowOccurrence": "Edit current occurrence",
                 "editWindowSeries": "Edit the series",
                 "deleteRecurring": "Do you want to delete only this event occurrence or the whole series?",
+                "deleteRecurringConfirmation": "آیا مطمئن هستید که می‌خواهید این رخداد رویداد را حذف کنید؟",
+                "deleteSeriesConfirmation": "آیا مطمئن هستید که می‌خواهید کل مجموعه را حذف کنید؟",
+                "resetSeriesConfirmation": "آیا مطمئن هستید که می‌خواهید کل مجموعه را بازنشانی کنید؟",
                 "editRecurring": "Do you want to edit only this event occurrence or the whole series?"
             },
             "editor": {
@@ -511,6 +520,13 @@
                 "end": "End",
                 "allDayEvent": "All day event",
                 "description": "Description",
+                "descriptionPlaceholder": "افزودن توضیحات",
+                "from": "از",
+                "to": "تا",
+                "cancelTimezoneReset": "خیر",
+                "resetTimezone": "بله",
+                "resetTimezoneConfirmation": "آیا مطمئن هستید که می‌خواهید منطقه زمانی را بازنشانی کنید؟",
+                "resetTimezoneWindowTitle": "بازنشانی منطقه زمانی",
                 "repeat": "Repeat",
                 "timezone": " ",
                 "startTimezone": "Start timezone",
@@ -520,7 +536,9 @@
                 "timezoneEditorButton": "Time zone",
                 "timezoneTitle": "Time zones",
                 "noTimezone": "No timezone",
-                "editorTitle": "Event"
+                "editorTitle": "Event",
+                "newEvent": "رویداد جدید",
+                "editEvent": "ویرایش رویداد"
             }
         });
     }

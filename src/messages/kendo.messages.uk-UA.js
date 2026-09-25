@@ -92,6 +92,10 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Редактор повторень",
+  "removeRecurrence": "Видалити повторення",
+  "cancel": "Скасувати",
+  "update": "Зберегти",
   "daily": {
     "interval": "days(s)",
     "repeatEvery": "Repeat every:"
@@ -361,10 +365,20 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "date": "Date",
   "destroy": "Delete",
+  "resetSeries": "Скинути серію",
   "editor": {
     "allDayEvent": "All day event",
     "description": "Description",
+    "descriptionPlaceholder": "Додати опис",
+    "from": "з",
+    "to": "до",
+    "cancelTimezoneReset": "Ні",
+    "resetTimezone": "Так",
+    "resetTimezoneConfirmation": "Ви впевнені, що хочете скинути часовий пояс?",
+    "resetTimezoneWindowTitle": "Скинути часовий пояс",
     "editorTitle": "Event",
+    "newEvent": "Нова подія",
+    "editEvent": "Редагувати подію",
     "end": "End",
     "endTimezone": "End timezone",
     "repeat": "Repeat",
@@ -380,6 +394,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "event": "Event",
   "recurrenceMessages": {
     "deleteRecurring": "Do you want to delete only this event occurrence or the whole series?",
+    "deleteRecurringConfirmation": "Ви впевнені, що хочете видалити це повторення події?",
+    "deleteSeriesConfirmation": "Ви впевнені, що хочете видалити всю серію?",
+    "resetSeriesConfirmation": "Ви впевнені, що хочете скинути всю серію?",
     "deleteWindowOccurrence": "Delete current occurrence",
     "deleteWindowSeries": "Delete the series",
     "deleteWindowTitle": "Delete Recurring Item",
@@ -391,6 +408,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "save": "Save",
   "time": "Time",
   "today": "Today",
+  "create": "Нова подія",
   "views": {
     "agenda": "Agenda",
     "day": "Day",

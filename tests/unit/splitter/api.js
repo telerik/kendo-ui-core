@@ -288,6 +288,22 @@ describe("splitter api", function() {
         assert.isOk(!pane.hasClass("k-scrollable"));
     });
 
+    it("ajaxRequest() with malicious remote URL is sanitized", function() {
+        splitter = create({
+            panes: [{}, {}]
+        });
+
+        let url = "https://example.com/a' on" + "error='alert(2)'";
+
+        splitter.object.ajaxRequest(".k-pane:first", url);
+
+        let pane = splitter.dom.find(".k-pane:first"),
+            iframe = pane.find("> iframe");
+
+        assert.equal(iframe.length, 1);
+        assert.isUndefined(iframe.attr("onerror"));
+    });
+
     it("collapsing uncollapsible panes is not permitted", function() {
         splitter = create({
             panes: [{ collapsible: false }, { collapsible: false }]

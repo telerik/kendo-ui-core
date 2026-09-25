@@ -105,6 +105,10 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Redigera återkommande",
+  "removeRecurrence": "Ta bort upprepning",
+  "cancel": "Avbryt",
+  "update": "Spara",
   "daily": {
     "interval": "dag(ar)",
     "repeatEvery": "Återkommer varje:"
@@ -403,10 +407,20 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "date": "Datum",
   "destroy": "Ta bort",
+  "resetSeries": "Återställ serie",
   "editor": {
     "allDayEvent": "Heldagstillfälle",
     "description": "Beskrivning",
+    "descriptionPlaceholder": "Lägg till beskrivning",
+    "from": "från",
+    "to": "till",
+    "cancelTimezoneReset": "Nej",
+    "resetTimezone": "Ja",
+    "resetTimezoneConfirmation": "Är du säker på att du vill återställa tidszonen?",
+    "resetTimezoneWindowTitle": "Återställ tidszon",
     "editorTitle": "Tillfälle",
+    "newEvent": "Ny händelse",
+    "editEvent": "Redigera händelse",
     "end": "Slut",
     "endTimezone": "Sluttidszon",
     "repeat": "Upprepa",
@@ -422,6 +436,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "event": "Tillfälle",
   "recurrenceMessages": {
     "deleteRecurring": "Vill du ta bort enbart detta tillfället eller hela serien?",
+    "deleteRecurringConfirmation": "Är du säker på att du vill ta bort den här förekomsten av händelsen?",
+    "deleteSeriesConfirmation": "Är du säker på att du vill ta bort hela serien?",
+    "resetSeriesConfirmation": "Är du säker på att du vill återställa hela serien?",
     "deleteWindowOccurrence": "Ta bort nuvarande upprepning",
     "deleteWindowSeries": "Ta bort serien",
     "deleteWindowTitle": "Ta bort återkommande objekt",
@@ -433,6 +450,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "save": "Spara",
   "time": "Tid",
   "today": "Idag",
+  "create": "Ny händelse",
   "views": {
     "agenda": "Agenda",
     "day": "Dag",

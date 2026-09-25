@@ -1503,6 +1503,29 @@ How can I customize the cancel button label in Kendo UI Scheduler for different 
     });
     </script>
 
+### messages.create `String`
+
+The text similar to "New Event" displayed by the Scheduler create-event toolbar button.
+
+
+<div class="meta-api-description">
+How do I customize the create-event button label in Kendo UI Scheduler? Set, translate, or localize the text displayed by the toolbar action for adding a new event, appointment, booking, or task in desktop and adaptive Scheduler layouts, enabling custom wording for the event creation command.
+</div>
+
+#### Example - set the "create" Scheduler message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      toolbar: {
+        items: ["create"]
+      },
+      messages: {
+        create: "Add appointment"
+      }
+    });
+    </script>
+
 ### messages.date `String`
 
 The text similar to "Date" displayed in scheduler.
@@ -2185,7 +2208,7 @@ The text similar to "Description" displayed in the scheduler event editor.
 
 
 <div class="meta-api-description">
-How do I customize the event description label in Kendo UI Scheduler? Customize, configure, or set the text label, caption, placeholder, or localized phrase used for the event description field inside a scheduler or calendar editor interface, enabling control over how the description input prompt appears in different languages or contexts, including changing or overriding the default description label shown to users when editing or creating events, appointments, or tasks.
+How do I customize the event description label in Kendo UI Scheduler? Customize, configure, or localize the caption shown for the description field when users create or edit events, appointments, or tasks.
 </div>
 
 #### Example - set the "description" scheduler editor message
@@ -2207,6 +2230,29 @@ How do I customize the event description label in Kendo UI Scheduler? Customize,
           title: "Interview"
         }
       ]
+    });
+    </script>
+
+### messages.editor.descriptionPlaceholder `String`
+
+The text similar to "Add Description" displayed as the placeholder of the description field in the Scheduler event editor.
+
+
+<div class="meta-api-description">
+How do I customize the placeholder of the description field in the Kendo UI Scheduler event editor? Configure or localize the prompt shown in the description input when creating or editing an event, appointment, booking, or task.
+</div>
+
+#### Example - set the "descriptionPlaceholder" Scheduler editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        editor: {
+          descriptionPlaceholder: "Add event details"
+        }
+      }
     });
     </script>
 
@@ -2326,6 +2372,29 @@ How to customize the end timezone label in Kendo UI Scheduler? Customize or modi
     });
     </script>
 
+### messages.editor.from `String`
+
+The text similar to "from" displayed next to the start date and time fields in the Scheduler event editor.
+
+
+<div class="meta-api-description">
+How do I customize the text that connects the start date and time fields in the Kendo UI Scheduler event editor? Configure or localize the start date and time separator shown when users create or edit an event or appointment.
+</div>
+
+#### Example - set the "from" Scheduler editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        editor: {
+          from: "starting at"
+        }
+      }
+    });
+    </script>
+
 ### messages.editor.newEvent `String`
 
 The text similar to "New Event" displayed as the title of the Scheduler event editor Dialog when creating an event. Falls back to `messages.editor.editorTitle` when not set.
@@ -2398,6 +2467,29 @@ How do I customize the confirm action text in the Kendo UI Scheduler timezone-re
       messages: {
         editor: {
           resetTimezone: "Reset timezone"
+        }
+      }
+    });
+    </script>
+
+### messages.editor.resetTimezoneConfirmation `String`
+
+The text similar to "Are you sure you want to reset the timezone?" displayed in the timezone-reset confirmation Dialog.
+
+
+<div class="meta-api-description">
+How do I customize the confirmation message shown before resetting an event timezone in the Kendo UI Scheduler? Configure or localize the prompt that asks users to confirm clearing the timezone settings of an event or appointment.
+</div>
+
+#### Example - set the "resetTimezoneConfirmation" Scheduler editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        editor: {
+          resetTimezoneConfirmation: "Clear the event timezone?"
         }
       }
     });
@@ -2516,6 +2608,29 @@ How to change the label for the start time zone field in Kendo UI Scheduler? Cus
           title: "Interview"
         }
       ]
+    });
+    </script>
+
+### messages.editor.to `String`
+
+The text similar to "to" displayed next to the end date and time fields in the Scheduler event editor.
+
+
+<div class="meta-api-description">
+How do I customize the text that connects the end date and time fields in the Kendo UI Scheduler event editor? Configure or localize the end date and time separator shown when users create or edit an event or appointment.
+</div>
+
+#### Example - set the "to" Scheduler editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        editor: {
+          to: "ending at"
+        }
+      }
     });
     </script>
 
@@ -2776,11 +2891,11 @@ How do I customize the recurrence editor labels in Kendo UI Scheduler? Control a
 
 ### messages.recurrenceEditor.cancel `String`
 
-Applicable in Scheduler Adaptive rendering scenario. The text for the cancel button on the scheduler recurrence editor header.
+The text for the cancel action in the desktop recurrence editor Dialog and for the cancel button in the adaptive recurrence editor header.
 
 
 <div class="meta-api-description">
-How can I change the cancel button label in Kendo UI Scheduler's recurrence editor? Customize, configure, or set the cancel button label, text, or caption displayed in the header of the recurrence editor within scheduler applications using adaptive rendering. This enables adjusting or changing the cancel action wording, button content, or UI text for recurrence editing interfaces, supporting localization, personalization, or alternative phrasing for cancel, dismiss, close, or exit commands during recurring event scheduling tasks.
+How can I change the cancel action label in Kendo UI Scheduler's recurrence editor? Customize, configure, or localize the cancel button text displayed in the desktop recurrence Dialog and the adaptive recurrence editor header when users dismiss changes to a repeating event.
 </div>
 
 #### Example
@@ -3910,6 +4025,38 @@ How can I customize the title of the recurrence editor in Kendo UI Scheduler? Cu
     });
     </script>
 
+### messages.recurrenceEditor.removeRecurrence `String`
+
+The text similar to "Remove recurrence" displayed for the remove-recurrence action in the Scheduler recurrence editor Dialog.
+
+
+<div class="meta-api-description">
+How do I customize the button that removes recurrence from an event in the Kendo UI Scheduler? Configure or localize the action label shown in the recurrence editor Dialog when users convert a repeating appointment into a nonrecurring event.
+</div>
+
+#### Example - set the "removeRecurrence" Scheduler recurrence editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2022/6/13"),
+      messages: {
+        recurrenceEditor: {
+          removeRecurrence: "Stop repeating"
+        }
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2022/6/13 10:00 AM"),
+          end: new Date("2022/6/13 11:00 AM"),
+          title: "Production Review",
+          recurrenceRule: "FREQ=WEEKLY"
+        }
+      ]
+    });
+    </script>
+
 ### messages.recurrenceEditor.repeatTitle `String`
 
 Applicable in Scheduler Adaptive rendering scenario. The text for the repeatTitle (repeat on) on the scheduler recurrence editor.
@@ -4062,11 +4209,11 @@ How can I change the word before the ending date in a Kendo UI Scheduler recurre
 
 ### messages.recurrenceEditor.update `String`
 
-Applicable in Scheduler Adaptive rendering scenario. The text for the update button on the scheduler recurrence editor header.
+The text for the save action in the desktop recurrence editor Dialog and for the update button in the adaptive recurrence editor header.
 
 
 <div class="meta-api-description">
-How do I customize the update button text in Kendo UI Scheduler's recurrence editor? Customize, translate, or configure the text label for the update button in the recurrence editor of a scheduling interface, enabling localization and adaptation of the button’s wording in recurring event editors, recurrence dialogs, or repeat event settings to match different languages, user interfaces, or adaptive layouts for consistent user experience across diverse locales and dynamic UI environments.
+How do I customize the save or update action text in Kendo UI Scheduler's recurrence editor? Configure or localize the action label displayed in the desktop recurrence Dialog and the adaptive recurrence editor header when users apply changes to a repeating event.
 </div>
 
 #### Example
@@ -4646,13 +4793,17 @@ How do I customize the recurrence-related messages in Kendo UI for jQuery Schedu
         messages: {
             recurrenceMessages: {
                 deleteRecurring: "Do you want to delete only this event occurrence or the whole series?",
+              deleteRecurringConfirmation: "Are you sure you want to delete this event occurrence?",
+              deleteSeriesConfirmation: "Are you sure you want to delete the whole series?",
                 deleteWindowOccurrence: "Delete current occurrence",
                 deleteWindowSeries: "Delete the series",
                 deleteWindowTitle: "Delete Recurring Item",
                 editRecurring: "Do you want to edit only this event occurrence or the whole series?",
                 editWindowOccurrence: "Edit current occurrence",
                 editWindowSeries: "Edit the series",
-                editWindowTitle: "Edit Recurring Item"
+              editWindowTitle: "Edit Recurring Item",
+              resetSeriesConfirmation: "Are you sure you want to reset the whole series?",
+              resetSeriesWindowTitle: "Reset Series"
             }
         }
     });
@@ -4686,6 +4837,50 @@ How do I configure the confirmation message when deleting recurring events in Ke
           title: "Interview"
         }
       ]
+    });
+    </script>
+
+### messages.recurrenceMessages.deleteRecurringConfirmation `String`
+
+The text similar to "Are you sure you want to delete this event occurrence?" displayed in the recurring-event deletion confirmation Dialog.
+
+
+<div class="meta-api-description">
+How do I customize the confirmation prompt before deleting one occurrence of a recurring event in Kendo UI Scheduler? Configure or localize the warning text shown when a user confirms deletion of an individual event instance.
+</div>
+
+#### Example - set the "deleteRecurringConfirmation" Scheduler message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      messages: {
+        recurrenceMessages: {
+          deleteRecurringConfirmation: "Delete this occurrence?"
+        }
+      }
+    });
+    </script>
+
+### messages.recurrenceMessages.deleteSeriesConfirmation `String`
+
+The text similar to "Are you sure you want to delete the whole series?" displayed in the recurring-series deletion confirmation Dialog.
+
+
+<div class="meta-api-description">
+How do I customize the confirmation prompt before deleting an entire recurring event series in Kendo UI Scheduler? Configure or localize the warning text shown when a user confirms deletion of every occurrence in a series.
+</div>
+
+#### Example - set the "deleteSeriesConfirmation" Scheduler message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      messages: {
+        recurrenceMessages: {
+          deleteSeriesConfirmation: "Delete every occurrence?"
+        }
+      }
     });
     </script>
 
@@ -4903,6 +5098,28 @@ How do I customize the title of the recurring-event editing Dialog in Kendo UI S
           title: "Interview"
         }
       ]
+    });
+    </script>
+
+### messages.recurrenceMessages.resetSeriesConfirmation `String`
+
+The text similar to "Are you sure you want to reset the whole series?" displayed in the recurring-series reset confirmation Dialog.
+
+
+<div class="meta-api-description">
+How do I customize the confirmation prompt before resetting an entire recurring event series in Kendo UI Scheduler? Configure or localize the warning text shown when a user confirms reverting changes to the series.
+</div>
+
+#### Example - set the "resetSeriesConfirmation" Scheduler message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      messages: {
+        recurrenceMessages: {
+          resetSeriesConfirmation: "Reset every occurrence?"
+        }
+      }
     });
     </script>
 

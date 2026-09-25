@@ -425,6 +425,10 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Editor de recorrência",
+  "removeRecurrence": "Remover recorrência",
+  "cancel": "Cancelar",
+  "update": "Guardar",
   "frequencies": {
     "never": "Nunca",
     "hourly": "A cada hora",
@@ -501,9 +505,11 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showFullDay": "Mostrar dia completo",
   "showWorkDay": "Mostrar horário de trabalho",
   "today": "Hoje",
+  "create": "Novo evento",
   "save": "Guardar",
   "cancel": "Cancelar",
   "destroy": "Eliminar",
+  "resetSeries": "Redefinir série",
   "deleteWindowTitle": "Eliminar evento",
   "ariaSlotLabel": "Selecionado entre {0:t} e {1:t}",
   "ariaEventLabel": "{0} em {1:D} às {2:t}",
@@ -525,6 +531,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowOccurrence": "Editar ocorrência atual",
     "editWindowSeries": "Editar série de ocorrências",
     "deleteRecurring": "Quer eliminar só esta ocorrência ou toda a série de ocorrências?",
+    "deleteRecurringConfirmation": "Tem a certeza de que pretende eliminar esta ocorrência do evento?",
+    "deleteSeriesConfirmation": "Tem a certeza de que pretende eliminar toda a série?",
+    "resetSeriesConfirmation": "Tem a certeza de que pretende redefinir toda a série?",
     "editRecurring": "Quer editar só esta ocorrência ou toda a série de ocorrências?"
   },
   "editor": {
@@ -533,6 +542,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Fim",
     "allDayEvent": "Evento todo o dia",
     "description": "Descrição",
+    "descriptionPlaceholder": "Adicionar descrição",
+    "from": "de",
+    "to": "até",
+    "cancelTimezoneReset": "Não",
+    "resetTimezone": "Sim",
+    "resetTimezoneConfirmation": "Tem a certeza de que pretende redefinir o fuso horário?",
+    "resetTimezoneWindowTitle": "Redefinir fuso horário",
     "repeat": "Repetição",
     "timezone": "Fuso Horário",
     "startTimezone": "Início do fuso horário",
@@ -542,7 +558,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Fuso horário",
     "timezoneTitle": "Fusos Horários",
     "noTimezone": "Sem fuso horário",
-    "editorTitle": "Evento"
+    "editorTitle": "Evento",
+    "newEvent": "Novo evento",
+    "editEvent": "Editar evento"
   }
 });
 }

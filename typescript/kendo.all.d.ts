@@ -11758,11 +11758,19 @@ declare namespace kendo.ui {
 
     interface SchedulerMessagesEditor {
         allDayEvent?: string | undefined;
+        cancelTimezoneReset?: string | undefined;
         description?: string | undefined;
+        descriptionPlaceholder?: string | undefined;
+        editEvent?: string | undefined;
         editorTitle?: string | undefined;
         end?: string | undefined;
         endTimezone?: string | undefined;
+        from?: string | undefined;
+        newEvent?: string | undefined;
         repeat?: string | undefined;
+        resetTimezone?: string | undefined;
+        resetTimezoneConfirmation?: string | undefined;
+        resetTimezoneWindowTitle?: string | undefined;
         separateTimezones?: string | undefined;
         start?: string | undefined;
         startTimezone?: string | undefined;
@@ -11770,6 +11778,7 @@ declare namespace kendo.ui {
         timezoneEditorButton?: string | undefined;
         timezoneEditorTitle?: string | undefined;
         title?: string | undefined;
+        to?: string | undefined;
     }
 
     interface SchedulerMessagesRecurrenceEditorDaily {
@@ -11836,6 +11845,7 @@ declare namespace kendo.ui {
     }
 
     interface SchedulerMessagesRecurrenceEditor {
+        cancel?: string | undefined;
         daily?: SchedulerMessagesRecurrenceEditorDaily | undefined;
         end?: SchedulerMessagesRecurrenceEditorEnd | undefined;
         frequencies?: SchedulerMessagesRecurrenceEditorFrequencies | undefined;
@@ -11843,7 +11853,9 @@ declare namespace kendo.ui {
         offsetPositions?: SchedulerMessagesRecurrenceEditorOffsetPositions | undefined;
         makeRecurring?: string | undefined;
         recurrenceEditorTitle?: string | undefined;
+        removeRecurrence?: string | undefined;
         summary?: SchedulerMessagesRecurrenceEditorSummary | undefined;
+        update?: string | undefined;
         weekly?: SchedulerMessagesRecurrenceEditorWeekly | undefined;
         weekdays?: SchedulerMessagesRecurrenceEditorWeekdays | undefined;
         yearly?: SchedulerMessagesRecurrenceEditorYearly | undefined;
@@ -11851,6 +11863,8 @@ declare namespace kendo.ui {
 
     interface SchedulerMessagesRecurrenceMessages {
         deleteRecurring?: string | undefined;
+        deleteRecurringConfirmation?: string | undefined;
+        deleteSeriesConfirmation?: string | undefined;
         deleteWindowOccurrence?: string | undefined;
         deleteWindowSeries?: string | undefined;
         deleteWindowTitle?: string | undefined;
@@ -11858,6 +11872,8 @@ declare namespace kendo.ui {
         editWindowOccurrence?: string | undefined;
         editWindowSeries?: string | undefined;
         editWindowTitle?: string | undefined;
+        resetSeriesConfirmation?: string | undefined;
+        resetSeriesWindowTitle?: string | undefined;
     }
 
     interface SchedulerMessagesViews {
@@ -11880,6 +11896,7 @@ declare namespace kendo.ui {
         ariaEventLabel?: string | undefined;
         ariaSlotLabel?: string | undefined;
         cancel?: string | undefined;
+        create?: string | undefined;
         date?: string | undefined;
         deleteWindowTitle?: string | undefined;
         destroy?: string | undefined;
@@ -11889,6 +11906,7 @@ declare namespace kendo.ui {
         pdf?: string | undefined;
         previous?: string | undefined;
         refresh?: string | undefined;
+        resetSeries?: string | undefined;
         save?: string | undefined;
         selectView?: string | undefined;
         showFullDay?: string | undefined;

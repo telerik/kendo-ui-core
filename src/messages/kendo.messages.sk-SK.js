@@ -429,6 +429,10 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Editor opakovania",
+  "removeRecurrence": "Odstrániť opakovanie",
+  "cancel": "Storno",
+  "update": "Uložiť",
   "frequencies": {
     "never": "Nikdy",
     "hourly": "Každú hodinu",
@@ -505,9 +509,11 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showFullDay": "Zobraziť celý deň",
   "showWorkDay": "Zobraziť pracovný čas",
   "today": "Dnes",
+  "create": "Nová udalosť",
   "save": "Uložiť",
   "cancel": "Storno",
   "destroy": "Odstrániť",
+  "resetSeries": "Obnoviť rad",
   "deleteWindowTitle": "Odstránenie udalosti",
   "ariaSlotLabel": "Vybraté od {0:t} do {1:t}",
   "ariaEventLabel": "{0} dňa {1:D} o {2:t}",
@@ -529,6 +535,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowOccurrence": "Upraviť aktuálnu udalosť",
     "editWindowSeries": "Upraviť všetko",
     "deleteRecurring": "Chcete odstrániť len túto udalosť alebo aj všetky jej opakovania?",
+    "deleteRecurringConfirmation": "Naozaj chcete odstrániť tento výskyt udalosti?",
+    "deleteSeriesConfirmation": "Naozaj chcete odstrániť celý rad?",
+    "resetSeriesConfirmation": "Naozaj chcete obnoviť celý rad?",
     "editRecurring": "Chcete upraviť len túto udalosť alebo aj všetky jej opakovania?"
   },
   "editor": {
@@ -537,6 +546,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Koniec",
     "allDayEvent": "Celodenný",
     "description": "Popis",
+    "descriptionPlaceholder": "Pridať popis",
+    "from": "od",
+    "to": "do",
+    "cancelTimezoneReset": "Nie",
+    "resetTimezone": "Áno",
+    "resetTimezoneConfirmation": "Naozaj chcete obnoviť časové pásmo?",
+    "resetTimezoneWindowTitle": "Obnoviť časové pásmo",
     "repeat": "Opakovať",
     "timezone": "Časové pásmo",
     "startTimezone": "Časové pásmo začiatku",
@@ -546,7 +562,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Časové pásmo",
     "timezoneTitle": "Časové pásma",
     "noTimezone": "Bez časového pásma",
-    "editorTitle": "Udalosť"
+    "editorTitle": "Udalosť",
+    "newEvent": "Nová udalosť",
+    "editEvent": "Upraviť udalosť"
   }
 });
 }

@@ -1,6 +1,7 @@
 import '@progress/kendo-ui/src/kendo.window.js';
 import { TimerUtils } from '../../helpers/unit/timer-utils.js';
 import { asyncTest } from '../../helpers/unit/async-utils.js';
+import { it } from 'vitest';
 
 let form;
 
@@ -185,6 +186,18 @@ describe("initialization", function() {
         assert.equal(iframe.attr("src"), "http://www.telerik.com/");
     });
 
+    it("creating a window with a remote `content` creates iframe with sanitized attributes", function(){
+        let dialog = createWindow({
+             content: "https://example.com/a' on" + "error='alert(2)'",
+             title: "someTitle' on" + "mouseover='alert(2)'"
+        }),
+        iframe = dialog.element.find("iframe");
+
+        assert.equal(iframe.length, 1);
+        assert.isUndefined(iframe.attr("onerror"));
+        assert.isUndefined(iframe.attr("onmouseover"));
+    });
+
     it("creating a window with a `content` on the same server does not create iframe", function() {
         let dialog = createWindow({
             content: "foo"
@@ -261,6 +274,7 @@ describe("initialization", function() {
         });
 
         assert.isOk(dialog.element.hasClass("k-window-iframecontent"));
+        assert.equal(dialog.element.find("iframe").attr("src"), "about:blank");
     });
 
     it("creating window with minHeight constrains larger content with inner minHeight", function() {

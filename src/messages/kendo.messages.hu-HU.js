@@ -510,6 +510,10 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "recurrenceEditorTitle": "Ismétlődés-szerkesztő",
+  "removeRecurrence": "Ismétlődés eltávolítása",
+  "cancel": "Mégse",
+  "update": "Mentés",
   "frequencies": {
     "never": "Soha",
     "hourly": "Óránként",
@@ -585,9 +589,11 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showFullDay": "Teljes nap mutatása",
   "showWorkDay": "Munkaórák mutatása",
   "today": "Ma",
+  "create": "Új esemény",
   "save": "Mentés",
   "cancel": "Mégse",
   "destroy": "Törlés",
+  "resetSeries": "Sorozat visszaállítása",
   "deleteWindowTitle": "Esemény törlése",
   "ariaSlotLabel": "Kiválasztva {0:t}-tól {1:t}-ig",
   "ariaEventLabel": "{0} {1:D} {2:t}",
@@ -607,6 +613,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "deleteWindowSeries": "Összes ismétlődés törlése",
     "deleteRecurringConfirmation": "Biztos, hogy törölni akarja ezt az alakalmat?",
     "deleteSeriesConfirmation": "Biztos, hogy törölni akarja az összes ismétlődést?",
+    "resetSeriesConfirmation": "Biztosan visszaállítja a teljes sorozatot?",
     "editWindowTitle": "Ismétlődő elem szerkesztése",
     "editWindowOccurrence": "Alkalom szerkesztése",
     "editWindowSeries": "Összes ismétlődés szerkesztése",
@@ -619,6 +626,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Befejezés",
     "allDayEvent": "Egész napos esemény",
     "description": "Leírás",
+    "descriptionPlaceholder": "Leírás hozzáadása",
+    "from": "ettől",
+    "to": "eddig",
+    "cancelTimezoneReset": "Nem",
+    "resetTimezone": "Igen",
+    "resetTimezoneConfirmation": "Biztosan visszaállítja az időzónát?",
+    "resetTimezoneWindowTitle": "Időzóna visszaállítása",
     "repeat": "Ismétlődés",
     "timezone": " ",
     "startTimezone": "Kezdés időzónája",
@@ -628,7 +642,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Időzóna",
     "timezoneTitle": "Időzónák",
     "noTimezone": "Nincs időzóna",
-    "editorTitle": "Esemény"
+    "editorTitle": "Esemény",
+    "newEvent": "Új esemény",
+    "editEvent": "Esemény szerkesztése"
   }
 });
 }

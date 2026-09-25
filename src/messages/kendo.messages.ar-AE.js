@@ -668,6 +668,9 @@
             $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
                 "repeat": "تكرار",
                 "recurrenceEditorTitle": "محرر التكرار",
+                "removeRecurrence": "إزالة التكرار",
+                "cancel": "إلغاء",
+                "update": "حفظ",
                 "frequencies": {
                     "never": "ابداً",
                     "hourly": "كل ساعة",
@@ -798,6 +801,7 @@
                 "showFullDay": "عرض كامل لليوم",
                 "showWorkDay": "عرض ساعات العمل",
                 "today": "اليوم",
+                "create": "حدث جديد",
                 "save": "حفظ",
                 "cancel": "إلغاء",
                 "destroy": "حذف",
@@ -822,6 +826,7 @@
                     "deleteWindowSeries": "حذف السلسلة",
                     "deleteRecurringConfirmation": "هل أنت متأكد من حذف هذا الحدث؟",
                     "deleteSeriesConfirmation": "هل أنت متأكد حذف السلسلة بأكملها؟",
+                    "resetSeriesConfirmation": "هل أنت متأكد أنك تريد إعادة تعيين السلسلة بأكملها؟",
                     "editWindowTitle": "تعديل العنصر المتكرر",
                     "editWindowOccurrence": "تعديل الحدث الحالي",
                     "editWindowSeries": "تعديل السلسلة",
@@ -834,6 +839,13 @@
                     "end": "إنهاء",
                     "allDayEvent": "حدث اليوم بأكمله",
                     "description": "وصف",
+                    "descriptionPlaceholder": "أضف وصفًا",
+                    "from": "من",
+                    "to": "إلى",
+                    "cancelTimezoneReset": "لا",
+                    "resetTimezone": "نعم",
+                    "resetTimezoneConfirmation": "هل أنت متأكد أنك تريد إعادة تعيين المنطقة الزمنية؟",
+                    "resetTimezoneWindowTitle": "إعادة تعيين المنطقة الزمنية",
                     "repeat": "تكرار",
                     "timezone": " ",
                     "startTimezone": "بدء نظام التوقيت",
@@ -843,7 +855,9 @@
                     "timezoneEditorButton": "المنطقة الزمنية",
                     "timezoneTitle": "المناطق الزمنية",
                     "noTimezone": "بلا نظام توقيت",
-                    "editorTitle": "حدث"
+                    "editorTitle": "حدث",
+                    "newEvent": "حدث جديد",
+                    "editEvent": "تحرير الحدث"
                 },
                 "search": "بحث..."
             });
