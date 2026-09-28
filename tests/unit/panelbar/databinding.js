@@ -68,9 +68,9 @@ describe("DataSource binding", function() {
         let link = panelbar.find(".k-link");
         let image = link.find("img");
 
-        assert.equal(link.attr("href"), url);
+        assert.equal(link.attr("href"), encodeURI(url));
         assert.isUndefined(link.attr("onmouseover"));
-        assert.equal(image.attr("src"), imageUrl);
+        assert.equal(image.attr("src"), encodeURI(imageUrl));
         assert.isUndefined(image.attr("onerror"));
     });
 

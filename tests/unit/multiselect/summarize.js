@@ -71,6 +71,20 @@ describe("kendo.ui.MultiSelect summarizeAfter", function() {
         assert.include(overflowChip.text(), ms.options.messages.singleTag);
     });
 
+    it("overflow chip does not double encode the singleTag label", function() {
+        populateSelect(2);
+        let ms = new MultiSelect(select, {
+            summarizeAfter: 1,
+            tagMode: "multiple",
+            animation: false,
+            messages: { singleTag: "item(s) & selected" }
+        });
+        ms.value(["0","1"]);
+        let overflowChip = ms.tagList.children('.k-chip').last();
+
+        assert.equal(overflowChip.text(), "+1 item(s) & selected");
+    });
+
     it("deselecting below threshold transitions back to individual chips", function() {
         populateSelect(5);
         let ms = new MultiSelect(select, { summarizeAfter: 3, tagMode: "multiple", animation: false });

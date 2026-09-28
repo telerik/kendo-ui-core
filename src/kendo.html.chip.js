@@ -59,14 +59,14 @@ export const __meta__ = {
             if (options.icon) {
                 that.wrapper.prepend($(kendo.ui.icon({ icon: options.icon, size: "small", iconClass: `k-chip-icon${options.iconClass ? ` ${options.iconClass}` : '' }` })).attr(options.iconAttr));
             } else if (options.iconClass) {
-                that.wrapper.prepend($("<span class='" + options.iconClass + "'></span>").attr(options.iconAttr));
+                that.wrapper.prepend($("<span></span>").addClass(options.iconClass).attr(options.iconAttr));
             } else if (options.avatarClass) {
-                that.wrapper.prepend($("<span class='k-chip-avatar k-avatar " + options.avatarClass + "'></span>").attr(options.iconAttr));
+                that.wrapper.prepend($("<span class='k-chip-avatar k-avatar'></span>").addClass(options.avatarClass).attr(options.iconAttr));
             }
 
             that.element.addClass("k-chip-content");
             if (options.text) {
-                that.element.html('<span class="k-chip-label">' + options.text + '</span>');
+                that.element.html('<span class="k-chip-label">' + kendo.htmlEncode(options.text) + '</span>');
             }
 
             if (options.visible === false) {
@@ -97,7 +97,10 @@ export const __meta__ = {
             if (options.actions && options.actions.length > 0) {
                 for (var i = 0; i < options.actions.length; i++) {
                     var action = options.actions[i];
-                    that.actionsWrapper.append($(`<span class='k-chip-action ${action.iconClass ? action.iconClass : ''}'>${kendo.ui.icon({ icon: action.icon, size: "small" })}</span>`).attr(action.attr ? action.attr : {}));
+                    that.actionsWrapper.append($("<span class='k-chip-action'></span>")
+                        .addClass(action.iconClass ? action.iconClass : '')
+                        .append(kendo.ui.icon({ icon: action.icon, size: "small" }))
+                        .attr(action.attr ? action.attr : {}));
                 }
             }
 

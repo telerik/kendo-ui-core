@@ -95,6 +95,40 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
         assert.isOk(multiselect.tagTemplate);
     });
 
+    it("MultiSelect renders markup from custom tagTemplate in multiple tag mode", function() {
+        let text = '<b>Alex</b>';
+        let multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "id",
+            dataSource: [{ id: 1, text: text, color: "#f8a398" }],
+            value: [1],
+            tagMode: "multiple",
+            tagTemplate: (data) => `<span class="k-scheduler-mark">${data.text}</span>`
+        });
+        let tag = multiselect.tagList.children(".k-chip").first();
+
+        assert.equal(tag.find(".k-scheduler-mark").length, 1);
+        assert.equal(tag.find(".injected").length, 0);
+        assert.equal(tag.find(".k-chip-content").text(), "Alex");
+        assert.equal(tag.find(".k-chip-content").html(), `<span class="k-chip-label"><span class="k-scheduler-mark">${text}</span></span>`    );
+    });
+
+    it("MultiSelect encodes data in the default tag template in multiple tag mode", function() {
+        let text = 'Alex <img class="injected" src="x" onerror="alert(1)">';
+        let multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "id",
+            dataSource: [{ id: 1, text: text }],
+            value: [1],
+            tagMode: "multiple"
+        });
+        let tag = multiselect.tagList.children(".k-chip").first();
+
+        assert.equal(tag.find(".injected").length, 0);
+        assert.isUndefined(tag.find(".k-chip-content").attr("onerror"))
+        assert.equal(tag.find(".k-chip-content").text(), text);
+    });
+
     it("multiselect sets default item template", function() {
         let multiselect = new MultiSelect(select);
 

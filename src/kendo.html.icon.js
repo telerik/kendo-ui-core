@@ -90,6 +90,66 @@ export const __meta__ = {
         );
     }
 
+    const SVG_ALLOWED_ELEMENTS = new Set([
+        'circle', 'clippath', 'defs', 'ellipse', 'g', 'line', 'lineargradient',
+        'mask', 'path', 'polygon', 'polyline', 'radialgradient', 'rect', 'stop', 'use'
+    ]);
+
+    const SVG_ALLOWED_ATTRIBUTES = new Set([
+        'class', 'clip-path', 'clip-rule', 'cx', 'cy', 'd', 'fill', 'fill-opacity',
+        'fill-rule', 'gradienttransform', 'gradientunits', 'height', 'id', 'mask', 'offset',
+        'href', 'opacity', 'points', 'preserveaspectratio', 'r', 'rx', 'ry', 'spreadmethod',
+        'stop-color', 'stop-opacity', 'stroke', 'stroke-dasharray', 'stroke-dashoffset',
+        'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity',
+        'stroke-width', 'transform', 'vector-effect', 'width', 'x', 'x1', 'x2',
+        'xlink:href', 'y', 'y1', 'y2'
+    ]);
+
+    const SVG_PAINT_ATTRIBUTES = new Set(['fill', 'stroke']);
+    const SVG_LOCAL_URL_ATTRIBUTES = new Set(['clip-path', 'href', 'mask', 'xlink:href']);
+    const SVG_SAFE_PAINT = /^(none|currentcolor|transparent|context-fill|context-stroke|#[0-9a-f]{3,8}|[a-z]+|rgba?\([0-9.,%\s]+\)|hsla?\([0-9.,%\sdegturnrad]+\))$/i;
+
+    function isLocalSvgReference(value, ids, isUrl) {
+        const expression = isUrl ? /^url\(\s*(['"]?)#([\w:.-]+)\1\s*\)$/i : /^#([\w:.-]+)$/;
+        const match = String(value).trim().match(expression);
+
+        return !!match && ids.has(match[2] || match[1]);
+    }
+
+    function sanitizeSvgContent(html) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+        svg.innerHTML = String(html);
+        svg.querySelectorAll('*').forEach(element => {
+            if (!SVG_ALLOWED_ELEMENTS.has(element.localName.toLowerCase())) {
+                element.remove();
+                return;
+            }
+
+            Array.from(element.attributes).forEach(attribute => {
+                if (!SVG_ALLOWED_ATTRIBUTES.has(attribute.name.toLowerCase())) {
+                    element.removeAttribute(attribute.name);
+                }
+            });
+        });
+
+            const ids = new Set(Array.from(svg.querySelectorAll('[id]')).map(element => element.id));
+            svg.querySelectorAll('*').forEach(element => {
+                Array.from(element.attributes).forEach(attribute => {
+                    const name = attribute.name.toLowerCase();
+                    const isPaint = SVG_PAINT_ATTRIBUTES.has(name);
+                    const isLocalUrl = SVG_LOCAL_URL_ATTRIBUTES.has(name);
+                    const validPaint = SVG_SAFE_PAINT.test(attribute.value) || isLocalSvgReference(attribute.value, ids, true);
+
+                    if ((isPaint && !validPaint) || (isLocalUrl && !isLocalSvgReference(attribute.value, ids, name === 'clip-path' || name === 'mask'))) {
+                        element.removeAttribute(attribute.name);
+                    }
+                });
+            });
+
+        return svg.innerHTML;
+    }
+
     const HTMLBaseIcon = HTMLBase.extend({
         init: function(element, options) {
             const that = this;
@@ -254,7 +314,7 @@ export const __meta__ = {
                         'focusable': 'false',
                         'xmlns': 'http://www.w3.org/2000/svg'
                     })
-                    .html(expandSelfClosingTags(svgContent));
+                    .html(sanitizeSvgContent(expandSelfClosingTags(svgContent)));
 
                 that.wrapper.append(svgElm[0].outerHTML);
             }
