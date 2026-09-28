@@ -2464,6 +2464,8 @@ How do I customize the visible map layers in Kendo UI Map component? Control and
 
 The attribution for the layer. Accepts valid HTML.
 
+> Attribution supplied by remote providers, such as Bing, is HTML-encoded before it is rendered. User-provided attribution is rendered as HTML.
+
 
 <div class="meta-api-description">
 How can I customize the attribution for individual layers in a Kendo UI map? Display or configure layer credits, copyright notices, or attributions on the map by setting formatted text or HTML content that includes links, styled text, or markup to acknowledge data sources and map layer providers, enabling customizable and clear ownership or source information for individual layers.

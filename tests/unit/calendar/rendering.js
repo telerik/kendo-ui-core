@@ -18,6 +18,7 @@ describe("kendo.ui.Calendar rendering", function() {
     afterEach(function() {
         kendo.destroy(Mocha.fixture);
         kendo.ns = "";
+        delete kendo.cultures["calendar-security-test"];
     });
 
     it("firstDayOfMonth returns correct date", function() {
@@ -620,6 +621,31 @@ describe("kendo.ui.Calendar rendering", function() {
 
         assert.isOk(a[0]);
         assert.equal(a.attr("data-href"), "/home/index?url=" + kendo.toString(today, format, culture));
+    });
+
+    it("month view sanitizes URLs and encodes culture content", function() {
+        let date = new Date(2011, 9, 10),
+            cultureName = "calendar-security-test",
+            culture = $.extend(true, {}, kendo.culture());
+
+        culture.name = cultureName;
+        culture.calendars.standard.days.names[date.getDay()] = 'Unsafe" onmouseover="alert(1)';
+        culture.calendars.standard.days.namesShort[date.getDay()] = 'Unsafe" onmouseover="alert(1)';
+        culture.calendars.standard.months.names[date.getMonth()] = '<span onmouseover="alert(1)">Unsafe</span>';
+        kendo.cultures[cultureName] = culture;
+
+        let cal = new kendo.ui.Calendar(div, {
+            value: date,
+            dates: [date],
+            url: "javascript:alert(1)?date={0}",
+            culture: cultureName,
+            format: "MM/dd/yyyy"
+        });
+        let cell = cal.element.find('[data-kendo-value="2011/9/10"]');
+
+        assert.equal(cell.attr("data-href"), "#INVALIDLINK");
+        assert.equal(cell.attr("title"), kendo.toString(date, "D", culture));
+        assert.equal(cal.element.find("[onmouseover]").length, 0);
     });
 
     it("year view renders title", function() {

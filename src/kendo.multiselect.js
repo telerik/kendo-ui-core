@@ -1688,7 +1688,7 @@ export const __meta__ = {
                 if (overflowCount > 0) {
                     that.tagList.append(html.renderChip('<span unselectable="on"></span>', $.extend({}, that.options, {
                         enabled: true,
-                        text: '+' + overflowCount + ' ' + encode(that.options.messages.singleTag),
+                        text: '+' + overflowCount + ' ' + that.options.messages.singleTag,
                         attr: { unselectable: "on", "aria-selected": true, role: "option", "aria-keyshortcuts": "Enter" },
                         removable: false,
                         removableAttr: {},
@@ -1899,10 +1899,9 @@ export const __meta__ = {
             that.tagTextTemplate = tagTemplate = tagTemplate ? kendo.template(tagTemplate) : defaultTemplate;
 
             that.tagTemplate = function(data) {
-                return html.renderChip('<span unselectable="on">' +
-                '</span>', $.extend({}, options, {
+                return html.renderChip('<span unselectable="on"><span class="k-chip-label">' +
+                    tagTemplate(data) + '</span></span>', $.extend({}, options, {
                         enabled: true,
-                        text: tagTemplate(data),
                         attr: {
                             unselectable: "on",
                             "aria-selected": true,

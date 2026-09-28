@@ -492,7 +492,7 @@ export const __meta__ = {
             if (!from || that._changeView) {
                 var messages = that.options.messages;
                 var titleText = currentView.title(value, min, max, culture);
-                title.html('<span class="k-button-text">' + titleText + '</span>');
+                title.html('<span class="k-button-text">' + encode(titleText) + '</span>');
                 title.attr("aria-label", messages.navigateTo + messages.navigateToParentView + ": " + titleText);
 
                 if (messages.parentViews && that._view.name !== CENTURY) {
@@ -1632,7 +1632,7 @@ export const __meta__ = {
                 footerTemplate = (data) => `${kendo.toString(data,"D",options.culture)}`;
 
             that.month = {
-                content: (data) => `<td class="${data.cssClass}" role="gridcell"${data.ariaDisabled ? ' aria-disabled="true"' : ''}><span tabindex="-1" class="k-link ${data.linkClass}" data-href="${data.url}" ${kendo.attr(VALUE)}="${data.dateString}" title="${data.title}">${executeTemplate(content, data) || data.value}</span></td>`,
+                content: (data) => `<td class="${data.cssClass}" role="gridcell"${data.ariaDisabled ? ' aria-disabled="true"' : ''}><span tabindex="-1" class="k-link ${data.linkClass}" data-href="${kendo.sanitizeLink(data.url)}" ${kendo.attr(VALUE)}="${data.dateString}" title="${kendo.htmlEncode(data.title)}">${executeTemplate(content, data) || data.value}</span></td>`,
                 empty: (data) => `<td role="gridcell">${executeTemplate(empty, data) || "&nbsp;"}</td>`,
                 weekNumber: (data) => `<td class="k-calendar-td k-alt">${executeTemplate(weekNumber, data) || data.weekNumber}</td>`
             };
@@ -1734,7 +1734,7 @@ export const __meta__ = {
                     html = '<table tabindex="0" role="grid" class="' + contentClasses + '" cellspacing="0" data-start="' + toDateString(start) + '">';
 
                 if (showHeader) {
-                    html += '<caption class="k-calendar-caption k-month-header">' + this.title(date, min, max, culture) + '</caption>';
+                    html += '<caption class="k-calendar-caption k-month-header">' + encode(this.title(date, min, max, culture)) + '</caption>';
                 }
 
                 html += '<thead class="k-calendar-thead" role="rowgroup"><tr role="row" class="k-calendar-tr">';
@@ -1744,7 +1744,7 @@ export const __meta__ = {
                 }
 
                 for (; idx < 7; idx++) {
-                    html += '<th scope="col" role="columnheader" class="k-calendar-th" aria-label="' + names[idx] + '">' + shortNames[idx] + '</th>';
+                    html += '<th scope="col" role="columnheader" class="k-calendar-th" aria-label="' + encode(names[idx]) + '">' + encode(shortNames[idx]) + '</th>';
                 }
 
                 adjustDST(today, 0);

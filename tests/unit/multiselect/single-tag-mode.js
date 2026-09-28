@@ -48,6 +48,19 @@ describe("kendo.ui.MultiSelect Single Tag mode", function() {
         assert.equal(tag.find(".k-chip-icon").attr("aria-label"), "open");
     });
 
+    it("Widget encodes messages in the default tag template in single tag mode", function() {
+        let singleTag = 'item(s) <img class="injected" src="x">';
+        let multiselect = new MultiSelect(select, {
+            messages: { singleTag: singleTag },
+            tagMode: "single",
+            value: [1]
+        });
+        let tag = multiselect.tagList.children(".k-chip:first");
+
+        assert.equal(tag.find(".injected").length, 0);
+        assert.equal(tag.find(".k-chip-content").text(), "1 " + singleTag);
+    });
+
     it("Widget renders a single tag using a custom template with 'values' and 'maxTotal'", function() {
         let multiselect = new MultiSelect(select, {
             tagTemplate: ({ values, maxTotal }) => `${encode(values.length)} selected of ${encode(maxTotal)}`,
@@ -62,6 +75,76 @@ describe("kendo.ui.MultiSelect Single Tag mode", function() {
         assert.equal(tag.children().length, 2);
         assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 selected of 15</span>');
         assert.isOk(tag.find(".k-chip-icon").is(".k-i-chevron-down,.k-svg-i-chevron-down"));
+    });
+
+    it("Widget renders markup from custom tagTemplate in single tag mode", function() {
+        let text = '<b>Alex</b>';
+        select.empty();
+        let multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "id",
+            dataSource: [{ id: 1, text: text }],
+            tagTemplate: (data) => `<span class="custom-tag"></span>${data.dataItems[0].text}`,
+            tagMode: "single",
+            value: [1]
+        });
+        let tag = multiselect.tagList.children(".k-chip:first");
+
+        assert.equal(tag.find(".custom-tag").length, 1);
+        assert.equal(tag.find(".k-chip-content").text(), "Alex");
+        assert.equal(tag.find(".k-chip-content").html(), "<span class=\"k-chip-label\"><span class=\"custom-tag\"></span><b>Alex</b></span>");
+    });
+
+    it("Widget renders markup from custom tagTemplate in multiple tag mode", function() {
+        let text = '<b>Alex</b>';
+        select.empty();
+        let multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "id",
+            dataSource: [{ id: 1, text: text }],
+            tagTemplate: (data) => `<span class="custom-tag"></span>${data.text}`,
+            tagMode: "multiple",
+            value: [1]
+        });
+        let tag = multiselect.tagList.children(".k-chip:first");
+
+        assert.equal(tag.find(".custom-tag").length, 1);
+        assert.equal(tag.find(".k-chip-content").text(), "Alex");
+        assert.equal(tag.find(".k-chip-content").html(), "<span class=\"k-chip-label\"><span class=\"custom-tag\"></span><b>Alex</b></span>");
+    });
+
+    it("Widget renders markup and encodes data in single tag mode", function() {
+        let text = 'Alex <img class="injected" src="x">';
+        select.empty();
+        let multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "id",
+            dataSource: [{ id: 1, text: text }],
+            tagMode: "single",
+            value: [1]
+        });
+        let tag = multiselect.tagList.children(".k-chip:first");
+
+        assert.equal(tag.find(".custom-tag").length, 0);
+        assert.equal(tag.find(".injected").length, 0);
+        assert.equal(tag.find(".k-chip-content").text(), "1 item(s) selected");
+    });
+
+    it("Widget renders markup and encodes data in multiple tag mode", function() {
+        let text = 'Alex <img class="injected" src="x">';
+        select.empty();
+        let multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "id",
+            dataSource: [{ id: 1, text: text }],
+            tagMode: "multiple",
+            value: [1]
+        });
+        let tag = multiselect.tagList.children(".k-chip:first");
+
+        assert.equal(tag.find(".custom-tag").length, 0);
+        assert.equal(tag.find(".injected").length, 0);
+        assert.equal(tag.find(".k-chip-content").text(), text);
     });
 
     it("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
