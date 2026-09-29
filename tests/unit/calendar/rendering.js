@@ -623,6 +623,21 @@ describe("kendo.ui.Calendar rendering", function() {
         assert.equal(a.attr("data-href"), "/home/index?url=" + kendo.toString(today, format, culture));
     });
 
+    it("month view preserves valid URLs and prevents attribute injection", function() {
+        let date = new Date(2011, 9, 10),
+            url = 'https://example.com/" onmouseover="alert(1)?date={0}',
+            cal = new kendo.ui.Calendar(div, {
+                value: date,
+                dates: [date],
+                url: url,
+                format: "MM/dd/yyyy"
+            }),
+            cell = cal.element.find('[data-kendo-value="2011/9/10"]');
+
+        assert.equal(cell.attr("data-href"), url.replace("{0}", "10/10/2011"));
+        assert.equal(cal.element.find("[onmouseover]").length, 0);
+    });
+
     it("month view sanitizes URLs and encodes culture content", function() {
         let date = new Date(2011, 9, 10),
             cultureName = "calendar-security-test",

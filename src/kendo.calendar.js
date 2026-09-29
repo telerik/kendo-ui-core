@@ -1632,7 +1632,7 @@ export const __meta__ = {
                 footerTemplate = (data) => `${kendo.toString(data,"D",options.culture)}`;
 
             that.month = {
-                content: (data) => `<td class="${data.cssClass}" role="gridcell"${data.ariaDisabled ? ' aria-disabled="true"' : ''}><span tabindex="-1" class="k-link ${data.linkClass}" data-href="${kendo.sanitizeLink(data.url)}" ${kendo.attr(VALUE)}="${data.dateString}" title="${kendo.htmlEncode(data.title)}">${executeTemplate(content, data) || data.value}</span></td>`,
+                content: (data) => `<td class="${data.cssClass}" role="gridcell"${data.ariaDisabled ? ' aria-disabled="true"' : ''}><span tabindex="-1" class="k-link ${data.linkClass}" data-href="${sanitizeUrl(data.url)}" ${kendo.attr(VALUE)}="${data.dateString}" title="${kendo.htmlEncode(data.title)}">${executeTemplate(content, data) || data.value}</span></td>`,
                 empty: (data) => `<td role="gridcell">${executeTemplate(empty, data) || "&nbsp;"}</td>`,
                 weekNumber: (data) => `<td class="k-calendar-td k-alt">${executeTemplate(weekNumber, data) || data.weekNumber}</td>`
             };
@@ -2268,6 +2268,11 @@ export const __meta__ = {
 
     function prevent(e) {
         e.preventDefault();
+    }
+
+    function sanitizeUrl(value) {
+        var sanitizedValue = kendo.sanitizeLink(value);
+        return sanitizedValue === "#INVALIDLINK" ? sanitizedValue : encode(value);
     }
 
     // creates date with full year
