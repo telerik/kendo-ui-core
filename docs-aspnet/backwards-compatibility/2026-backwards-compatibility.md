@@ -445,6 +445,8 @@ If you have custom CSS or JavaScript targeting the old `caret-alt-*` icon class 
 
 The toolbar view selector in the Scheduler and Gantt components is now rendered with a **SegmentedControl** instead of a ButtonGroup. Custom CSS or DOM queries that targeted the previous ButtonGroup markup must be updated.
 
+To use individual view buttons instead, configure a [custom Scheduler toolbar]({% slug scheduler_toolbar_aspnetcore %}) and add custom buttons that call the Scheduler `view()` method.
+
 The DateTimePicker also now uses a SegmentedControl for its date/time toggle.
 
 ### LoaderContainer - Overlay Class Changed

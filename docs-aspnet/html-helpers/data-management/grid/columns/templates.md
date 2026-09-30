@@ -79,6 +79,30 @@ The following example demonstrates how to specify your own custom layout for the
     </script>
 ```
 {% endif %}
+
+{% if site.core %}
+## Conditional Cell Formatting with TagHelpers
+
+To conditionally format a Grid column with TagHelpers, use the column's `template` attribute and call a JavaScript function with the current data item. The following example renders the `Title` value in bold when it equals `Special`.
+
+```TagHelper
+    <kendo-grid name="grid">
+        <columns>
+            <column field="Title" template="#=titleTemplate(data)#" />
+        </columns>
+    </kendo-grid>
+
+    <script>
+        function titleTemplate(data) {
+            var title = kendo.htmlEncode(data.Title);
+
+            return data.Title === "Special"
+                ? "<strong>" + title + "</strong>"
+                : title;
+        }
+    </script>
+```
+{% endif %}
 ```CSS Styles
 <style type="text/css">
     .customer-photo {

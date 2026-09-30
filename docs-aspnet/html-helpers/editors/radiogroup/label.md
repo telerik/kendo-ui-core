@@ -39,6 +39,38 @@ To customize the text of the label, use the [`label`](https://docs.telerik.com/k
 ```
 {% endif %}
 
+## Add HTML to a Label
+
+To include Badge markup in a RadioGroup label, set the item label to an HTML string and disable label encoding. Without `Encoded(false)` or `encoded="false"`, the Badge markup is rendered as text.
+
+```HtmlHelper
+    @(Html.Kendo().RadioGroup()
+        .Name("radiogroup")
+        .Items(items =>
+        {
+            items.Add()
+                .Value("1")
+                .Label("Spain <span class='k-badge k-badge-solid k-badge-primary'>New</span>")
+                .Encoded(false);
+            items.Add().Label("Italy").Value("2");
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-radiogroup name="radiogroup">
+        <kendo-radiogroup-items>
+            <kendo-radiogroup-item
+                label="Spain <span class='k-badge k-badge-solid k-badge-primary'>New</span>"
+                value="1"
+                encoded="false">
+            </kendo-radiogroup-item>
+            <kendo-radiogroup-item label="Italy" value="2"></kendo-radiogroup-item>
+        </kendo-radiogroup-items>
+    </kendo-radiogroup>
+```
+{% endif %}
+
 ## Configure the Label Position
 
 The labels of all radio buttons in the RadioGroup could be rendered before or after the radio buttons.

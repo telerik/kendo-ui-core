@@ -20,6 +20,15 @@ The Filter is a unified control for filtering data-bound components that have a 
 
 You can add or remove the fields by which the data will be filtered and select the global logic of the filters (for example, `AND` or `OR`) and the filter operator for each field (for example, `contains` or `equals`). You can apply the filtering through a built-in button or through an API call. You can also select the name by which the fields will be displayed to the user and [localize]({% slug htmlhelpers_filter_aspnetcore_localization %}) the filter operators and messages.
 
+The `ToToken()` extension method converts a `FilterOperator` value to the string token used when a filter descriptor is serialized. For example, `FilterOperator.Contains.ToToken()` returns `"contains"`.
+
+```C#
+using Kendo.Mvc;
+using Kendo.Mvc.Extensions;
+
+var operatorToken = FilterOperator.Contains.ToToken();
+```
+
 * [Demo page for the Filter HtmlHelper](https://demos.telerik.com/{{ site.platform }}/filter/index)
 
 {% if site.core %}

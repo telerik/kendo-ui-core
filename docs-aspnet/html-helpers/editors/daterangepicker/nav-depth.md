@@ -44,6 +44,24 @@ The following example demonstrates how to create a DateRangePicker that sets the
 ```
 {% endif %}
 
+`Start` and `Depth` control the initial view and the selection depth; they do not lock the calendar to one month. To restrict both dates in the range to a specific month, set `Min` and `Max` to the first and last dates of that month.
+
+```HtmlHelper
+    @(Html.Kendo().DateRangePicker()
+        .Name("daterangepicker")
+        .Min(new DateTime(2026, 9, 1))
+        .Max(new DateTime(2026, 9, 30))
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-daterangepicker name="daterangepicker"
+                           min="new DateTime(2026, 9, 1)"
+                           max="new DateTime(2026, 9, 30)">
+    </kendo-daterangepicker>
+```
+{% endif %}
+
 ## See Also
 
 * [Server-Side API](/api/daterangepicker)

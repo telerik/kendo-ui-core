@@ -48,6 +48,8 @@ Each updated component has its own appearance documentation article with informa
 
 For a list of all the updated components which are affected by this change and their corresponding articles, see the [Updated Components](#updated-components) section.
 
+There is no single universal list of supported CSS classes for every component. Use the appearance documentation for the component you are styling to find its rendered classes and supported styling options. For application-specific selectors, prefer the component's custom class options and place your overrides after the Kendo UI theme styles. For icon classes, refer to the [font icons](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/sass-themes/font-icons) and [SVG icons](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/sass-themes/svg-icons) documentation.
+
 ### Theme Color
 
 The `ThemeColor` property controls the color used to style the component. The property is dependant on the [`FillMode`](#fill-mode) and cannot be used separately. The structure of the CSS class is `k-{component}-{fillMode}-{themeColor}`.

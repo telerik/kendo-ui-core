@@ -47,6 +47,8 @@ You can create custom scripts that provide only the components and features your
 
 Users with a commercial license can use the [custom Download Builder tool](https://www.telerik.com/download/custom-download) to create a single JavaScript file that contains only the required UI components and features.
 
+> **Important:** The Custom Download Builder requires a commercial license. If you use a trial license, use a prebuilt bundle available to your account or contact [Telerik Support](https://www.telerik.com/account/support-tickets/) to confirm which custom-build options are available. For more information about commercial and trial licenses, refer to the [Licensing FAQ]({% slug licensing-faq %}).
+
 > * Do not use multiple custom combined scripts, as they contain duplicate code. Instead, create one combined script file that includes everything you need.
 > * It is not possible to load Download Builder packages by using RequireJS because the tool will not create the required AMD modules.
 

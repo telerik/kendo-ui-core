@@ -26,6 +26,76 @@ If no template is defined, the name of the field and the current group are displ
 
 The only difference in the use of `ClientGroupHeaderTemplate` is that the template content is compiled and displayed instead of the field and current group value.
 
+## TypeScript Type for the Handler Argument
+
+The TypeScript definition for `groupHeaderTemplate` is `string | Function`; it does not provide a dedicated type for the argument of a `ClientGroupHeaderTemplateHandler` function. At runtime, the handler receives an object with the `field`, `value`, `items`, and `aggregates` properties.
+
+Define a local interface for the handler argument when you need type checking:
+
+```TypeScript
+interface GridGroupHeaderTemplateData {
+    field: string;
+    value: unknown;
+    items: kendo.data.DataSourceItemOrGroup[];
+    aggregates: Record<string, unknown>;
+}
+
+function myGroupHeaderTemplate(data: GridGroupHeaderTemplateData): string {
+    return `<strong>Group: ${String(data.value)}</strong>`;
+}
+```
+
+The `kendo.data.DataSourceGroup` interface is the closest built-in type, but it is not an exact match because it also requires the `hasSubgroups` property.
+
+{% if site.mvc %}
+## Client Group Header Handler in ASP.NET MVC
+
+The `ClientGroupHeaderTemplateHandler` method is available in the ASP.NET MVC wrapper. Repository history places its first tagged support in the `2023.3.1114` release. The handler receives the current group data, including the group `value` and the records in `items`. The following example adds a radio button and a hidden JSON value containing the `BondNumber` values for the current group:
+
+```HtmlHelper
+@(Html.Kendo().Grid<BondRecordViewModel>()
+    .Name("BondGrid")
+    .Groupable()
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.BondRecNumber)
+            .ClientGroupHeaderTemplateHandler("confirmBillingGroup");
+        columns.Bound(p => p.BondNumber).Title("Bond Number");
+        columns.Bound(p => p.Premium);
+        columns.Bound(p => p.Commission);
+        columns.Bound(p => p.Surety);
+        columns.Bound(p => p.BillingWorksheetNumber).Title("Billing Worksheet Number");
+    })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Group(groups => groups.Add(p => p.BondRecNumber))
+        .Read(read => read.Action("ReadBondRecords", "Billing"))
+    )
+)
+```
+
+```JavaScript
+function confirmBillingGroup(data) {
+    var bondNumbers = data.items.map(function(item) {
+        return item.BondNumber;
+    });
+    var groupValue = kendo.htmlEncode(String(data.value));
+    var encodedBondNumbers = kendo.htmlEncode(JSON.stringify(bondNumbers));
+
+    return "<input type='radio' class='confirm-billing' name='confirmBilling' value='" + groupValue + "'>" +
+        "<input type='hidden' class='bond-numbers' value='" + encodedBondNumbers + "'>" +
+        "BondRec#: " + groupValue;
+}
+
+$(document).on("change", "#BondGrid .confirm-billing", function() {
+    var bondNumbers = JSON.parse($(this).siblings(".bond-numbers").val());
+    processBillingConfirmation(bondNumbers);
+});
+```
+
+This example assumes a single, flat grouping level. With nested grouping, process the leaf group or recursively collect records from nested group items. The hidden input is a client-side convenience; validate the selected records on the server before processing billing.
+{% endif %}
+
 Both `ClientGroupHeaderColumnTemplate` and `ClientGroupFooterTemplate` work in a similar way. `ClientGroupHeaderColumnTemplate` displays the content as aligned to the column in the group row. `ClientGroupFooterTemplate` displays the content as aligned to the column in the group footer row. Their content is displayed as aligned to the column as shown in the following way.
 
 ![{{ site.product_short }} A Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](../images/grid-group-header-column-template.png)
