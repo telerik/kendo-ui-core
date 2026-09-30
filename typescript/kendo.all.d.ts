@@ -3108,7 +3108,8 @@ declare namespace kendo.ui {
         linesAdded?: number | undefined;
         linesRemoved?: number | undefined;
         time?: string | undefined;
-        children?: string | undefined;
+        content?: string | undefined;
+        encoded?: boolean | undefined;
     }
 
     interface ChainOfThoughtOptions {

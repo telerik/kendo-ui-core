@@ -11,6 +11,34 @@ position: 0
 
 This article lists the breaking or important changes in the 2026 releases of Kendo UI. For the complete list of changes in the UI components, see the [product release history](https://www.telerik.com/support/whats-new/kendo-ui/release-history).
 
+## Kendo UI 2026 October
+
+### ChainOfThought - thoughts.children Renamed to thoughts.content
+
+Starting with the **2026 October** release, the `thoughts.children` property of the ChainOfThought component is renamed to `thoughts.content`. The new `thoughts.encoded` option defaults to `true` and controls whether `thoughts.content` is HTML-encoded before it is rendered.
+
+**Before (2026 Q3):**
+
+```javascript
+$("#chain").kendoChainOfThought({
+    thoughts: [
+        { label: "Result", children: "<pre>{ ok: true }</pre>", encoded: false }
+    ]
+});
+```
+
+**After (2026 October and later):**
+
+```javascript
+$("#chain").kendoChainOfThought({
+    thoughts: [
+        { label: "Result", content: "<pre>{ ok: true }</pre>", encoded: false }
+    ]
+});
+```
+
+If your application relies on `thoughts.children`, rename it to `thoughts.content`. Content is HTML-encoded by default; set `thoughts.encoded` to `false` only for trusted markup that must render as raw HTML. 
+
 ## Kendo UI 2026 Q3
 
 ### New summarizeAfter behavior for MultiSelect

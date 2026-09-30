@@ -102,6 +102,28 @@ The available `ThemeColor` values are:
 ```
 {% endif %}
 
+### Custom Color
+
+The `ThemeColor()` option accepts only the predefined `LoaderThemeColor` values. To use a different color, add a custom CSS class to the Loader and override the background color of its segments. Load the custom CSS after the Kendo UI theme stylesheet.
+
+```HtmlHelper
+    @(Html.Kendo().Loader()
+        .Name("customLoader")
+        .HtmlAttributes(new { @class = "custom-loader" })
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-loader name="customLoader" class="custom-loader"></kendo-loader>
+```
+{% endif %}
+
+```CSS
+    #customLoader.custom-loader .k-loader-segment {
+        background-color: #7b2cbf;
+    }
+```
+
 ## Size
 
 The Loader allows you to set different sizes.

@@ -11,6 +11,52 @@ position: 2
 
 This article lists the breaking or important changes in the 2026 releases of {{ site.product }}.
 
+## {{ site.product }} 2026 October
+
+### ChainOfThought - Children Setting Renamed to Content
+
+Starting with the **2026 October** release, the `Children` setting of the ChainOfThought `Thought` item is renamed to `Content`. The new `Encoded` setting controls whether `Content` is HTML-encoded before it is rendered and defaults to `true` on the client when left unset.
+
+**Before (2026 Q3):**
+
+```HtmlHelper
+@(Html.Kendo().ChainOfThought()
+    .Name("chain")
+    .Thoughts(thoughts => thoughts.Add().Label("Result").Children("<pre>{ ok: true }</pre>").Encoded(false))
+)
+```
+
+{% if site.core %}
+```TagHelper
+<kendo-chainofthought name="chain">
+    <thoughts>
+        <thought label="Result" children="<pre>{ ok: true }</pre>" encoded="false"></thought>
+    </thoughts>
+</kendo-chainofthought>
+```
+{% endif %}
+
+**After (2026 October and later):**
+
+```HtmlHelper
+@(Html.Kendo().ChainOfThought()
+    .Name("chain")
+    .Thoughts(thoughts => thoughts.Add().Label("Result").Content("<pre>{ ok: true }</pre>").Encoded(false))
+)
+```
+
+{% if site.core %}
+```TagHelper
+<kendo-chainofthought name="chain">
+    <thoughts>
+        <thought label="Result" content="<pre>{ ok: true }</pre>" encoded="false"></thought>
+    </thoughts>
+</kendo-chainofthought>
+```
+{% endif %}
+
+If your application relies on the `Children` setting, rename it to `Content`. Content is HTML-encoded by default; set `Encoded` to `false` only for trusted markup that must render as raw HTML. This rename mirrors the equivalent `thoughts.children`-to-`thoughts.content` rename in Kendo UI for jQuery.
+
 ## {{ site.product }} 2026 Q3
 
 ### New SummarizeAfter behavior for MultiSelect
@@ -444,6 +490,8 @@ If you have custom CSS or JavaScript targeting the old `caret-alt-*` icon class 
 ### Scheduler and Gantt - View Selector Markup Changed
 
 The toolbar view selector in the Scheduler and Gantt components is now rendered with a **SegmentedControl** instead of a ButtonGroup. Custom CSS or DOM queries that targeted the previous ButtonGroup markup must be updated.
+
+To use individual view buttons instead, configure a [custom Scheduler toolbar]({% slug scheduler_toolbar_aspnetcore %}) and add custom buttons that call the Scheduler `view()` method.
 
 The DateTimePicker also now uses a SegmentedControl for its date/time toggle.
 

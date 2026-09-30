@@ -127,7 +127,7 @@ Allow users to expand or collapse a chain-of-thought step, enable the toggle beh
 
 ### thoughts `Array` *(default: [])*
 
-An array of thought objects rendered inside the step body. Each item can include `label`, `secondaryLabel`, `svgIcon`, `linesAdded`, `linesRemoved`, `time`, `children`, and `completed` properties.
+An array of thought objects rendered inside the step body. Each item can include `label`, `secondaryLabel`, `svgIcon`, `linesAdded`, `linesRemoved`, `time`, `content`, `encoded`, and `completed` properties.
 
 <div class="meta-api-description">
 Provide a list of thought items or reasoning steps to display inside the chain-of-thought body, configure the inner thoughts rendered as sub-steps of an agent reasoning block, populate the expandable thought list with step data, set the collection of thought entries shown under the step header, bind thought objects containing labels, icons, and metadata to the inner content area, or supply the data array that drives the rendering of individual thought rows.
@@ -274,12 +274,12 @@ Show a timestamp or elapsed time on an individual thought item, configure the du
     });
     </script>
 
-### thoughts.children `String`
+### thoughts.content `String`
 
-An HTML string rendered as a nested body inside the thought item.
+Content rendered as a nested body inside the thought item. HTML-encoded by default; set `thoughts.encoded` to `false` to render it as raw HTML.
 
 <div class="meta-api-description">
-Embed nested HTML content inside an individual thought item, add child content or sub-details to a reasoning step, configure additional HTML rendered below the thought row, or display structured inner content such as code snippets or lists within a single thought entry.
+How can I add nested text or trusted HTML to an individual thought? Embed nested content or sub-details in a reasoning step, configure content below the thought row, display structured inner content such as code snippets or lists, and control whether that content is escaped as plain text or rendered as raw markup.
 </div>
 
 #### Example - add nested content to a thought
@@ -290,7 +290,28 @@ Embed nested HTML content inside an individual thought item, add child content o
         label: "Analyzing",
         expanded: true,
         thoughts: [
-            { label: "Result", children: "<pre>{ ok: true }</pre>" }
+            { label: "Result", content: "<pre>{ ok: true }</pre>", encoded: false }
+        ]
+    });
+    </script>
+
+### thoughts.encoded `Boolean` *(default: true)*
+
+Controls whether `thoughts.content` is HTML-encoded before it is rendered. Set to `false` to render `thoughts.content` as raw HTML for trusted content.
+
+<div class="meta-api-description">
+Control whether nested thought content is escaped as plain text or rendered as raw HTML, opt in to unencoded markup for a thought's nested content, toggle HTML encoding for AI agent or reasoning trace output shown inside a thought item, and decide whether user-supplied or model-generated text in thoughts.content should be treated as safe trusted markup or sanitized display text.
+</div>
+
+#### Example - render trusted nested content as raw HTML
+
+    <div id="chain"></div>
+    <script>
+    $("#chain").kendoChainOfThought({
+        label: "Analyzing",
+        expanded: true,
+        thoughts: [
+            { label: "Result", content: "<pre>{ ok: true }</pre>", encoded: false }
         ]
     });
     </script>

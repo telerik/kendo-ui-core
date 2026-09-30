@@ -22,7 +22,26 @@ To set a timezone to the Scheduler, set the `timezone` option. `timezone` indica
 > The kendo.timezones.min.js file must be included in order to use timezones other than "Etc/UTC".
 > The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) Wikipedia page.
 
-The following example demonstrates how to set `"Etc/UTC"` timezone to the Scheduler.
+## Culture and Timezone
+
+The thread culture and the event timezone are separate values. `CultureInfo.CurrentCulture.Name` and `CultureInfo.CurrentUICulture.Name` return culture names such as `en-US` or `fr-FR`. These values control formatting and localization, but they do not identify a timezone and should not be assigned to `StartTimezone`.
+
+Store or receive the event's IANA timezone identifier separately from the `DateTimeOffset` value. For example, map the event to UTC while preserving its timezone identifier:
+
+```C#
+Start = x.StartTime.UtcDateTime,
+StartTimezone = storedIanaTimezoneId
+```
+
+If the event is intentionally defined in UTC, use `"Etc/UTC"`. Do not use `x.StartTime.Offset` as `StartTimezone`. An offset such as `+02:00` describes only the offset at that moment and cannot identify the original timezone or its daylight-saving rules.
+
+When the timezone comes from the browser, obtain the IANA identifier on the client and send it to the server with the event data:
+
+```JavaScript
+const timeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone;
+```
+
+The following example demonstrates how to set "Etc/UTC" timezone to the Scheduler.
 
 ```HtmlHelper
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()

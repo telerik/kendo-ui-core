@@ -169,6 +169,18 @@ The following example demonstrates the default tool methods of the Editor.
         </tools>
     </kendo-editor>
 ```
+```TagHelper
+    <kendo-editor name="editor">
+        <tools>
+            <tool name="formatting">
+                <tool-items>
+                    <tool-item text="Paragraph" value="p"></tool-item>
+                    <tool-item text="Quotation" value="blockquote"></tool-item>
+                </tool-items>
+            </tool>
+        </tools>
+    </kendo-editor>
+```
 {% endif %}
 
 ## Custom Tools

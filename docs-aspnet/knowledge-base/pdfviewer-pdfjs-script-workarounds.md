@@ -72,10 +72,30 @@ When using the partial-view approach, include only the PDFViewer module files th
 {% endif %}
 
 - [Using RenderAsModule option for module-based script initialization](#using-renderasmodule-for-module-based-script-initialization)
+- [Using the Telerik CLI to set up the Telerik environment](#using-the-telerik-cli-to-set-up-the-telerik-environment)
 - [Loading the PDFViewer through a partial View](#loading-pdfviewer-through-a-partial-view)
 - [Using `kendo.aspnetmvc.ready.min.js` script](#using-kendoaspnetmvcreadyminjs-script)
 - [Compiling the PDF.js scripts to UMD modules](#compiling-pdfjs-scripts-to-umd-modules)
 - [Loading Kendo UI scripts twice](#loading-kendo-ui-scripts-twice)
+
+### Using the Telerik CLI to Set Up the Telerik Environment
+
+The [Telerik CLI]({% slug installation_cli %}) can prepare the Telerik environment before you configure the PDFViewer. Install the CLI and run the setup command for your product:
+
+```SH
+dotnet tool install -g Telerik.CLI
+```
+{% if site.core %}
+```SH.skip-repl
+telerik setup aspnetcore
+```
+{% else %}
+```SH.skip-repl
+telerik setup aspnetmvc
+```
+{% endif %}
+
+The setup command logs in the CLI, downloads the `telerik-license.txt` file, and configures the Telerik NuGet feed. It does not configure PDF.js or change the script loading mode. You must still apply one of the PDFViewer solutions below, including the `type="module"` attributes and the `RenderAsModule` option when you use PDF.js 4.x.x.
 
 ### Using RenderAsModule for Module-Based Script Initialization
 

@@ -56,6 +56,68 @@ The Telerik {{ site.product_short }} Scheduler allows you to customize entirely 
 
 The default order of the Scheduler tools is: `[ "pdf", [ "today", "previous", "next" ], "current", { type: "spacer" }, "search", "views" ]`. You can set the `Items` configuration to entirely replace all tools in the Scheduler ToolBar (including the default once) in order desired for them to appear in the component. Grouping tools to render a ButtonGroup in the ToolBar is also supported via the `Group()` configuration. Rendering custom components in the Toolbar is also supported via the `CustomTool()` configuration method.
 
+The Scheduler does not provide a documented `wrap` option for rendering the toolbar on multiple lines. Its responsive rendering progressively hides tools as the available width decreases. The `Spacer()` command controls placement and does not enable wrapping. If you require a true multi-line layout, use custom styling and test it with the Scheduler's responsive rendering.
+
+### View Buttons
+
+The built-in `views` toolbar command uses the current Scheduler view-selector rendering. To use individual buttons instead, omit the `views` command from a custom toolbar and add custom buttons to a group. Handle each button's `Click()` event by calling the Scheduler's `view()` method.
+
+For exact visual parity with a previous release, choose the button icons for the target release and theme. Icon names are version-sensitive; for example, recent releases replace the `caret-alt-*` icons with their `chevron-*` equivalents.
+
+```HtmlHelper
+    .Toolbar(t => t.Custom(c => c.Desktop(d =>
+    {
+        d.Group(g =>
+        {
+            g.CustomTool(button => button.Text("Day").Click("showDay"));
+            g.CustomTool(button => button.Text("Week").Click("showWeek"));
+            g.CustomTool(button => button.Text("Month").Click("showMonth"));
+        });
+    })))
+```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-scheduler name="scheduler">
+        <toolbar>
+            <scheduler-desktop-items>
+                <scheduler-desktop-tool>
+                    <scheduler-tool-template>
+                        <kendo-buttongroup name="schedulerViews" on-select="onViewSelect">
+                            <buttongroup-items>
+                                <item text="Day"></item>
+                                <item text="Week"></item>
+                                <item text="Month"></item>
+                            </buttongroup-items>
+                        </kendo-buttongroup>
+                    </scheduler-tool-template>
+                </scheduler-desktop-tool>
+            </scheduler-desktop-items>
+        </toolbar>
+    </kendo-scheduler>
+```
+{% endif %}
+
+```JavaScript
+function showDay() {
+    $("#scheduler").getKendoScheduler().view("day");
+}
+
+function showWeek() {
+    $("#scheduler").getKendoScheduler().view("week");
+}
+
+function showMonth() {
+    $("#scheduler").getKendoScheduler().view("month");
+}
+
+function onViewSelect(e) {
+    var views = ["day", "week", "month"];
+    $("#scheduler").getKendoScheduler().view(views[e.indices[0]]);
+}
+```
+
 ```HtmlHelper
     .Toolbar(t => t.Custom(c =>
         c.Items(itm => {

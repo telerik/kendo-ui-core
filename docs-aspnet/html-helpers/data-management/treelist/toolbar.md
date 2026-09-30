@@ -132,6 +132,8 @@ The {{site.product}} TreeList supports adding Custom Commands to its ToolBar. Th
 [REPL example of a Custom Command in TreeList ToolBar TagHelper for {{ site.framework }}](https://netcorerepl.telerik.com/wyupwblF57auW35034)
 {% endif %} 
 
+> **Version note:** `ToolbarTemplateHandler` and `ToolbarTemplateId` are available in the Telerik UI for ASP.NET MVC and ASP.NET Core wrappers starting with the `2024.2.514` release. If these methods are missing, verify that the referenced `Kendo.Mvc.dll` matches the documentation and product version. Earlier releases require an upgrade to use these methods.
+
 ## ToolBar Template Handler
 
 Telerik UI for {{ site.framework }} ToolBar introduces an overload that accept a `JavaScript` function name. It allows you to define the Template content through a client-side handler. This way, you can prevent the components from being dependent on the `unsafe-eval` and reuse the templates within multiple Components in different application pages.
