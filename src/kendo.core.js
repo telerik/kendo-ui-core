@@ -155,6 +155,10 @@ function sanitizeLink(value) {
     return htmlService.sanitizeLink(value);
 }
 
+function sanitizeImageSrc(value) {
+    return htmlService.sanitizeImageSrc(value);
+}
+
 function unescape(value) {
     return htmlService.unescape(value);
 }
@@ -431,6 +435,7 @@ extend(kendo, {
     eventTarget: eventTarget,
     htmlEncode: htmlEncode,
     sanitizeLink: sanitizeLink,
+    sanitizeImageSrc: sanitizeImageSrc,
     convertTextUrlToLink: convertTextUrlToLink,
     unescape: unescape,
     isLocalUrl: function(url) {

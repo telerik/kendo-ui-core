@@ -100,7 +100,7 @@ Use compatible versions of the MVC assemblies, Kendo UI client-side resources, a
 
 ## See Also
 
-- [Building Custom Kendo UI Scripts Locally]({% slug kendoui_custom_builder_cli %})
-- [Using the Kendo CLI]({% slug kendoui_kendo_cli %})
+- [Building Custom Kendo UI Scripts Locally](https://docs.telerik.com/kendo-ui/intro/installation/custom-builder-cli)
+- [Using the Kendo CLI](https://docs.telerik.com/kendo-ui/intro/installation/kendo-cli)
 - [UI for ASP.NET MVC Documentation](https://docs.telerik.com/aspnet-mvc/introduction)
 - [UI for ASP.NET MVC Knowledge Base](https://docs.telerik.com/aspnet-mvc/knowledge-base)

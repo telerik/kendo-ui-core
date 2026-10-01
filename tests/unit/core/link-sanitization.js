@@ -51,4 +51,54 @@ describe("sanitize link", function() {
     it("rejects data links", function() {
         assert.equal(kendo.sanitizeLink("data:text/html,<script>probe()</script>"), "#INVALIDLINK");
     });
+    
+    it("sanitizes links that use the data protocol", function() {
+        assert.equal(kendo.sanitizeLink("data:text/html,<script>alert(1)</script>"), "#INVALIDLINK");
+        assert.equal(kendo.sanitizeLink("data:image/png;base64,AAAA"), "#INVALIDLINK");
+    });
+});
+
+describe("sanitize image source", function() {
+
+    it("allows http and https image sources", function() {
+        assert.equal(kendo.sanitizeImageSrc("http://telerik.com/image.png"), "http://telerik.com/image.png");
+        assert.equal(kendo.sanitizeImageSrc("https://telerik.com/image.png"), "https://telerik.com/image.png");
+    });
+
+    it("allows relative image sources", function() {
+        assert.equal(kendo.sanitizeImageSrc("/images/image.png"), "/images/image.png");
+    });
+
+    it("preserves brackets around IPv6 hosts", function() {
+        assert.equal(kendo.sanitizeImageSrc("http://[::1]/image.png"), "http://[::1]/image.png");
+    });
+
+    it("allows non-scriptable image data MIME types", function() {
+        [
+            "image/apng",
+            "image/avif",
+            "image/bmp",
+            "image/gif",
+            "image/jpeg",
+            "image/png",
+            "image/vnd.microsoft.icon",
+            "image/webp",
+            "image/x-icon"
+        ].forEach(function(mimeType) {
+            const source = `data:${mimeType};base64,AAAA`;
+            assert.equal(kendo.sanitizeImageSrc(source), source);
+        });
+    });
+
+    it("sanitizes HTML data URLs", function() {
+        assert.equal(kendo.sanitizeImageSrc("data:text/html,<script>alert(1)</script>"), "#INVALIDLINK");
+    });
+
+    it("sanitizes SVG data URLs", function() {
+        assert.equal(kendo.sanitizeImageSrc("data:image/svg+xml,<svg onload='alert(1)'></svg>"), "#INVALIDLINK");
+    });
+
+    it("sanitizes script image sources", function() {
+        assert.equal(kendo.sanitizeImageSrc("javascript:alert(1)"), "#INVALIDLINK");
+    });
 });

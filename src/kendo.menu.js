@@ -2581,7 +2581,7 @@ export const __meta__ = {
                     var tag = url ? 'a' : 'span';
 
                     return `<${tag} class='${rendering.textClass(item)}' role='none' ${url ? `href='${kendo.sanitizeLink(url)}'` : ''} >` +
-                        (imageUrl ? `<img ${rendering.imageCssAttributes(imgAttributes)}  alt='' src='${imageUrl}' />` : '') +
+                        (imageUrl ? `<img ${rendering.imageCssAttributes(imgAttributes)}  alt='' src='${kendo.sanitizeImageSrc(imageUrl)}' />` : '') +
                         (iconPosition == "before" ? iconString : '') +
                         sprite +
                         this.options.template(data) +

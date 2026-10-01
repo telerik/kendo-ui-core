@@ -899,4 +899,228 @@ describe("kendo.ui.tooltip", function() {
         assert.equal(anchorPosition, tooltipElementPosition - tooltip.options.offset);
     });
 
+    it("keeps the callout inside the popup bounds when the anchor's centre falls outside the collision-fitted popup (JMC-10934)", function() {
+        let tooltip = new Tooltip(container, { position: "bottom", width: 150 });
+
+        tooltip.show(container);
+
+        let anchor = tooltip.popup.options.anchor;
+        let popupElement = tooltip.popup.element;
+
+        let originalOffset = $.fn.offset;
+        let originalOuterWidth = $.fn.outerWidth;
+
+        vi.spyOn($.fn, "offset").mockImplementation(function() {
+            if (this[0] === anchor[0]) {
+                return { top: 0, left: 300 };
+            }
+            if (this[0] === popupElement[0]) {
+                return { top: 0, left: 100 };
+            }
+            return originalOffset.apply(this, arguments);
+        });
+
+        vi.spyOn($.fn, "outerWidth").mockImplementation(function() {
+            if (this[0] === anchor[0]) {
+                return 40;
+            }
+            if (this[0] === popupElement[0]) {
+                return 150;
+            }
+            return originalOuterWidth.apply(this, arguments);
+        });
+
+        tooltip._positionCallout();
+
+        let calloutLeft = parseFloat(tooltip.arrow.css("left"));
+        let popupWidth = popupElement.outerWidth();
+
+        vi.restoreAllMocks();
+
+        assert.isAtMost(calloutLeft, popupWidth,
+            "callout left offset (" + calloutLeft + ") should stay within the popup width (" + popupWidth + "), not extend past it");
+    });
+
+    it("keeps the callout inside the popup bounds when the anchor's centre falls before the collision-fitted popup's left edge (JMC-10934)", function() {
+        let tooltip = new Tooltip(container, { position: "bottom", width: 150 });
+
+        tooltip.show(container);
+
+        let anchor = tooltip.popup.options.anchor;
+        let popupElement = tooltip.popup.element;
+
+        let originalOffset = $.fn.offset;
+        let originalOuterWidth = $.fn.outerWidth;
+
+        vi.spyOn($.fn, "offset").mockImplementation(function() {
+            if (this[0] === anchor[0]) {
+                return { top: 0, left: 50 };
+            }
+            if (this[0] === popupElement[0]) {
+                return { top: 0, left: 100 };
+            }
+            return originalOffset.apply(this, arguments);
+        });
+
+        vi.spyOn($.fn, "outerWidth").mockImplementation(function() {
+            if (this[0] === anchor[0]) {
+                return 10;
+            }
+            if (this[0] === popupElement[0]) {
+                return 150;
+            }
+            return originalOuterWidth.apply(this, arguments);
+        });
+
+        tooltip._positionCallout();
+
+        let calloutLeft = parseFloat(tooltip.arrow.css("left"));
+
+        vi.restoreAllMocks();
+
+        let arrowInset = kendo._outerWidth(tooltip.arrow) / 2;
+        let nearCornerRadius = parseFloat(kendo.getComputedStyles(popupElement[0], ["border-top-left-radius"])["border-top-left-radius"]) || 0;
+        let expectedOffset = arrowInset + nearCornerRadius;
+
+        assert.isAtLeast(calloutLeft, 0,
+            "callout left offset (" + calloutLeft + ") should not be negative / extend past the popup's left edge");
+        assert.closeTo(calloutLeft, expectedOffset, 0.5,
+            "callout should be clamped up to the arrow's half-width inset plus the popup's corner radius (" + expectedOffset + "), not left at the unclamped negative value (would have been -40)");
+    });
+
+    it("keeps the callout inside the popup bounds on the vertical (top/outerHeight) axis for left/right positioned tooltips (JMC-10934)", function() {
+        let tooltip = new Tooltip(container, { position: "right", height: 150 });
+
+        tooltip.show(container);
+
+        let anchor = tooltip.popup.options.anchor;
+        let popupElement = tooltip.popup.element;
+
+        let originalOffset = $.fn.offset;
+        let originalOuterHeight = $.fn.outerHeight;
+
+        vi.spyOn($.fn, "offset").mockImplementation(function() {
+            if (this[0] === anchor[0]) {
+                return { top: 300, left: 0 };
+            }
+            if (this[0] === popupElement[0]) {
+                return { top: 100, left: 0 };
+            }
+            return originalOffset.apply(this, arguments);
+        });
+
+        vi.spyOn($.fn, "outerHeight").mockImplementation(function() {
+            if (this[0] === anchor[0]) {
+                return 40;
+            }
+            if (this[0] === popupElement[0]) {
+                return 150;
+            }
+            return originalOuterHeight.apply(this, arguments);
+        });
+
+        tooltip._positionCallout();
+
+        let calloutTop = parseFloat(tooltip.arrow.css("top"));
+        let popupHeight = popupElement.outerHeight();
+
+        vi.restoreAllMocks();
+
+        assert.isAtMost(calloutTop, popupHeight,
+            "callout top offset (" + calloutTop + ") should stay within the popup height (" + popupHeight + "), not extend past it");
+    });
+
+    it("clears the popup's corner radius when clamping the callout offset (JMC-10934)", function() {
+        let tooltip = new Tooltip(container, { position: "bottom", width: 150 });
+
+        tooltip.show(container);
+
+        let anchor = tooltip.popup.options.anchor;
+        let popupElement = tooltip.popup.element;
+
+        let originalOffset = $.fn.offset;
+        let originalOuterWidth = $.fn.outerWidth;
+
+        vi.spyOn($.fn, "offset").mockImplementation(function() {
+            if (this[0] === anchor[0]) {
+                return { top: 0, left: 300 };
+            }
+            if (this[0] === popupElement[0]) {
+                return { top: 0, left: 100 };
+            }
+            return originalOffset.apply(this, arguments);
+        });
+
+        vi.spyOn($.fn, "outerWidth").mockImplementation(function() {
+            if (this[0] === anchor[0]) {
+                return 40;
+            }
+            if (this[0] === popupElement[0]) {
+                return 150;
+            }
+            return originalOuterWidth.apply(this, arguments);
+        });
+
+        vi.spyOn(kendo, "getComputedStyles").mockImplementation(function() {
+            return {
+                "border-top-left-radius": "8px",
+                "border-top-right-radius": "8px"
+            };
+        });
+
+        tooltip._positionCallout();
+
+        let calloutLeft = parseFloat(tooltip.arrow.css("left"));
+        let popupWidth = popupElement.outerWidth();
+        let arrowInset = kendo._outerWidth(tooltip.arrow) / 2;
+
+        vi.restoreAllMocks();
+
+        let expectedOffset = popupWidth - arrowInset - 8;
+
+        assert.closeTo(calloutLeft, expectedOffset, 0.5,
+            "callout left offset (" + calloutLeft + ") should be clamped to the popup width minus the arrow's half-width and the far corner radius (" + expectedOffset + ")");
+    });
+
+    it("does not alter the callout offset when the anchor's centre already lies within the popup bounds (JMC-10934 regression guard)", function() {
+        let tooltip = new Tooltip(container, { position: "bottom", width: 150 });
+
+        tooltip.show(container);
+
+        let anchor = tooltip.popup.options.anchor;
+        let popupElement = tooltip.popup.element;
+
+        let originalOffset = $.fn.offset;
+        let originalOuterWidth = $.fn.outerWidth;
+
+        vi.spyOn($.fn, "offset").mockImplementation(function() {
+            if (this[0] === anchor[0]) {
+                return { top: 0, left: 170 };
+            }
+            if (this[0] === popupElement[0]) {
+                return { top: 0, left: 100 };
+            }
+            return originalOffset.apply(this, arguments);
+        });
+
+        vi.spyOn($.fn, "outerWidth").mockImplementation(function() {
+            if (this[0] === anchor[0]) {
+                return 40;
+            }
+            if (this[0] === popupElement[0]) {
+                return 150;
+            }
+            return originalOuterWidth.apply(this, arguments);
+        });
+
+        tooltip._positionCallout();
+
+        let calloutLeft = parseFloat(tooltip.arrow.css("left"));
+
+        vi.restoreAllMocks();
+
+        assert.equal(calloutLeft, 90,
+            "callout should remain centred on the anchor (unclamped offset) when already within the popup's bounds");
+    });
+
 });

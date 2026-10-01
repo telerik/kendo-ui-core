@@ -1,4 +1,5 @@
 import '@progress/kendo-ui/src/kendo.tabstrip.js';
+import { it } from 'vitest';
 
 let dom;
 
@@ -99,6 +100,28 @@ describe("tabstrip data binding", function() {
         });
 
         assert.equal(tabstrip.contentElements.first().text(), "foo");
+    });
+
+    it("dataImageUrlField prevents malicious injection", function() {
+        const IMAGE_URL = "https://example.com/a' on" + "error='alert(2)'";
+
+        let tabstrip = new kendo.ui.TabStrip(dom, {
+            dataImageUrlField: "foo",
+            dataSource: [{ foo: IMAGE_URL }]
+        });
+
+        assert.isUndefined(tabstrip.tabGroup.find("img").attr("onerror"));
+    });
+
+    it("dataImageUrlField is passed with data protocol", function() {
+        const DATA_IMAGE_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=";
+        
+        let tabstrip = new kendo.ui.TabStrip(dom, {
+            dataImageUrlField: "foo",
+            dataSource: [{ foo: DATA_IMAGE_URL }]
+        });
+
+        assert.equal(tabstrip.tabGroup.find("img").attr("src"), DATA_IMAGE_URL);
     });
 
     it("dataImageUrlField", function() {

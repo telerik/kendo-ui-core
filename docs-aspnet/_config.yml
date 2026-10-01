@@ -123,7 +123,8 @@ knowledge-base/grid-use-multiselect-filter.md,
 knowledge-base/grid-use-with-contextmenu.md,
 knowledge-base/grid-using-remote-validation.md,
 knowledge-base/grid-utc-time-on-both-server-and-client.md,
-knowledge-base/mvc-with-requirejs.md]
+knowledge-base/mvc-with-requirejs.md,
+knowledge-base/custom-builder-not-working-ui-for-aspnet-mvc.md]
 
 exclude_navigation: ["knowledge-base/*",
 api/kendo.mvc/*,
