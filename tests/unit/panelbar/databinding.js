@@ -788,4 +788,27 @@ describe("DataSource binding", function() {
         assert.isOk(getPanelBarObject(panelbar).element.find(".k-panelbar-item").eq(1).is(".k-level-1"));
     });
 
+
+    it("imageUrl prevents malicious injection", function() {
+        const IMAGE_URL = "https://example.com/a' on" + "error='alert(2)'";
+
+        let panelbar = createPanelBar({
+            dataSource: [{ imageUrl: IMAGE_URL , text: "Test"}]
+        });
+
+        let imageElement = getPanelBarObject(panelbar).element.find(".k-panelbar-item").eq(0).find("img");
+        assert.isUndefined(imageElement.attr("onerror"));
+    });
+
+    it("imageUrl is passed with the data protocol", function() {
+        const DATA_IMAGE_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=";
+        
+        let panelbar = createPanelBar({
+            dataSource: [{ imageUrl: DATA_IMAGE_URL , text: "Test"}]
+        });
+
+        let imageElement = getPanelBarObject(panelbar).element.find(".k-panelbar-item").eq(0).find("img");
+
+        assert.equal(imageElement.attr("src"), DATA_IMAGE_URL);
+    });
 });

@@ -173,6 +173,46 @@ describe("Client side rendering", function() {
         assert.isOk(img.hasClass("customClass"));
     });
 
+
+    it("ImageUrl prevents malicious injection", function() {
+        const IMAGE_URL = "https://example.com/a' on" + "error='alert(2)'";
+
+        createMenu({
+            dataSource: [{
+                text: "Item 1",
+                items: [{
+                    text: "Item 2",
+                    imageUrl: IMAGE_URL
+                }]
+            }]
+        });
+
+        menu.dataSource.view()[0].load();
+
+        let imageElement = menu.element.find("img");
+        assert.isUndefined(imageElement.attr("onerror"));
+    });
+
+    it("ImageUrl is rendered in an item with data protocol", function() {
+        const DATA_IMAGE_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=";
+
+        createMenu({
+            dataSource: [{
+                text: "Item 1",
+                items: [{
+                    text: "Item 2",
+                    imageUrl: DATA_IMAGE_URL
+                }]
+            }]
+        });
+
+        menu.dataSource.view()[0].load();
+
+        let imageElement = menu.element.find("img");
+        assert.equal(imageElement.attr("src"), DATA_IMAGE_URL);
+    });
+
+
     it('Content attributes are rendered in a item', function() {
         createMenu({
             dataSource: [{

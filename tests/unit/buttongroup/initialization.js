@@ -73,6 +73,32 @@ describe("kendo.ui.ButtonGroup initialization", function() {
         assert.isOk(iconEl.is(".k-icon, .k-svg-icon"));
         assert.isOk(iconEl.is(".k-i-align-center, .k-svg-i-align-center"));
     });
+    
+    it("href assignment prevents attribute injection", function() {
+        let url = "https://example.test/\" onmouseover=\"alert(1)";
+
+        buttonGroup = initializeButtonGroup({
+            items: [
+                { text: "test1", url: url }
+            ]
+        });
+
+        let link = buttonGroup.element.find(".k-button");
+
+        assert.isUndefined(link.attr("onmouseover"));
+        assert.equal(link.attr("href"), url);
+    });
+
+    it("rejects executable URL schemes", function() {
+        buttonGroup = initializeButtonGroup({
+            items: [
+                { text: "test1", url: "javascript:alert(1)" }
+            ]
+        });
+
+        assert.equal(buttonGroup.element.find(".k-button").attr("href"), "#INVALIDLINK");
+    });
+
     it("image is added to the button", function() {
         let img = "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/snowboarding.png";
         buttonGroup = initializeButtonGroup({

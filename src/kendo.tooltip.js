@@ -89,6 +89,12 @@ export const __meta__ = {
             "horizontal": { offset: "top", size: "outerHeight" },
             "vertical": { offset: "left", size: "outerWidth" }
         },
+        CORNERRADIUS = {
+            n: [ "border-top-left-radius", "border-top-right-radius" ],
+            s: [ "border-bottom-left-radius", "border-bottom-right-radius" ],
+            e: [ "border-top-right-radius", "border-bottom-right-radius" ],
+            w: [ "border-top-left-radius", "border-bottom-left-radius" ]
+        },
         DEFAULTCONTENT = function(e) {
             var title = e.target.data(kendo.ns + "title");
             return title ? kendo.htmlEncode(title) : title;
@@ -273,7 +279,25 @@ export const __meta__ = {
                 anchorOffset = $(anchor).offset(),
                 elementOffset = $(popup.element).offset(),
                 cssClass = DIRCLASSES[popup.flipped ? REVERSE[position] : position],
-                offsetAmount = anchorOffset[offset] - elementOffset[offset] + ($(anchor)[dimensions.size]() / 2);
+                arrowInset = kendo._outerWidth(that.arrow) / 2,
+                popupSize = $(popup.element)[dimensions.size](),
+cornerRadiusProps = CORNERRADIUS[cssClass],
+                cornerRadii = kendo.getComputedStyles(popup.element[0], cornerRadiusProps),
+                radiusIndex = offset == "top" ? 1 : 0,
+                parseCornerRadius = function(value) {
+                    var parts = String(value || 0).trim().split(/\s+/),
+                        radius = parts[radiusIndex] || parts[0],
+                        amount = parseFloat(radius) || 0;
+
+                    return radius.indexOf("%") >= 0 ? popupSize * amount / 100 : amount;
+                },
+                nearCornerRadius = parseCornerRadius(cornerRadii[cornerRadiusProps[0]]),
+                farCornerRadius = parseCornerRadius(cornerRadii[cornerRadiusProps[1]]),
+                offsetAmount = anchorOffset[offset] - elementOffset[offset] + ($(anchor)[dimensions.size]() / 2),
+                minOffset = Math.min(arrowInset + nearCornerRadius, popupSize - arrowInset - farCornerRadius),
+                maxOffset = Math.max(arrowInset + nearCornerRadius, popupSize - arrowInset - farCornerRadius);
+
+            offsetAmount = Math.min(Math.max(offsetAmount, minOffset), maxOffset);
 
             that._offset(position, that.options.offset);
 

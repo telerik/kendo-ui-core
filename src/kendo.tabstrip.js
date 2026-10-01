@@ -83,7 +83,7 @@ export const __meta__ = {
                 `<li class='${data.wrapperCssClass(data.group, data.item)}' ${data.itemAttributes(data.item)} role='tab' ${data.item.active ? "aria-selected='true'" : ''}>` +
                     item +
                 "</li>",
-            image: ({ imageUrl }) => `<img class='k-image' alt='' src='${imageUrl}' />`,
+            image: ({ imageUrl }) => `<img class='k-image' alt='' src='${kendo.sanitizeImageSrc(imageUrl)}' />`,
             sprite: ({ spriteCssClass }) => `<span class='k-sprite ${spriteCssClass}'></span>`,
             empty: () => "",
             itemActionsWrapperTemplate: () => `<span class="k-item-actions"></span>`,

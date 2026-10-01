@@ -292,7 +292,8 @@ export const __meta__ = {
 
             items.forEach(function(item, index) {
                 var text = item.text ? item.encoded === false ? item.text : kendo.htmlEncode(item.text) : "",
-                    el = item.url ? $("<a href=" + kendo.sanitizeLink(item.url) + ">") : $("<button>");
+                    sanitizedUrl = item.url ? kendo.sanitizeLink(item.url) : item.url,
+                    el = item.url ? $("<a>").attr("href", sanitizedUrl === "#INVALIDLINK" ? sanitizedUrl : item.url) : $("<button>");
 
                 el.html(text);
 
