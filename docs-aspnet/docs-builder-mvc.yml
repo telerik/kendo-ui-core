@@ -911,3 +911,11 @@ redirects:
 - from: "^/helpers/(.*)$"
   to: "/html-helpers/$1"
 
+- from: "^/api/kendo.mvc/([^/]+)$"
+  to: "/api/kendo.mvc.$1"
+
+- from: "^/api/kendo.mvc.ui/([^/]+)$"
+  to: "/api/kendo.mvc.ui.$1"
+
+- from: "^/api/kendo.mvc.ui.fluent/([^/]+)$"
+  to: "/api/kendo.mvc.ui.fluent.$1"

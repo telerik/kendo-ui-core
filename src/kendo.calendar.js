@@ -1629,7 +1629,7 @@ export const __meta__ = {
                 content = month.content,
                 weekNumber = month.weekNumber,
                 empty = month.empty,
-                footerTemplate = (data) => `${kendo.toString(data,"D",options.culture)}`;
+                footerTemplate = (data) => kendo.htmlEncode(kendo.toString(data,"D",options.culture));
 
             that.month = {
                 content: (data) => `<td class="${data.cssClass}" role="gridcell"${data.ariaDisabled ? ' aria-disabled="true"' : ''}><span tabindex="-1" class="k-link ${data.linkClass}" data-href="${sanitizeUrl(data.url)}" ${kendo.attr(VALUE)}="${data.dateString}" title="${kendo.htmlEncode(data.title)}">${executeTemplate(content, data) || data.value}</span></td>`,
