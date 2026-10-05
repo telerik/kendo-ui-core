@@ -189,9 +189,6 @@ demos:
 excluded-files:
 - "**/all-pages.md"
 - "**/README.md"
-- "**/Gemfile"
-- "**/Gemfile.lock"
-- "**/api_sort.rb"
 - "**/Dockerfile"
 - "**/bs-config.js"
 - "**/build-docs.sh"

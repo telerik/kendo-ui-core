@@ -59,7 +59,8 @@
   "overrides": {
     "js-yaml": "4.1.1",
     "chokidar": "^3.0.0",
-    "postcss": "8.5.20",
+    "postcss": "8.5.28",
+    "decode-uri-component": "0.5.0",
     "braces": "~3.0.3",
     "glob-stream": "^8.0.0",
     "micromatch": "^4.0.8",

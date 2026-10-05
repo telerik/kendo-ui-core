@@ -2,8 +2,6 @@
 .dockerignore
 .DS_Store
 .editorconfig
-.jekyll-metadata
-.ruby-version
 /_assets/
 /_build/
 /_buildApi/
@@ -28,8 +26,6 @@ build-docs.sh
 copy_content.sh
 copy_local.sh
 Dockerfile
-Gemfile
-Gemfile.lock
 install-npm.sh
 knowledge-base.html
 modify-config.sh
