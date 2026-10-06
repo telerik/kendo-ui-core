@@ -237,10 +237,12 @@ How to set the initial breadcrumb text in Kendo UI chart navigation? Customize t
     });
     </script>
 
-### rootItem.icon `String`
+### rootItem.icon `String|Object`
 
 Defines the icon to be rendered.
 
+
+Set this option to an icon descriptor such as `{ name: "home", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I change the icon for the root item in a Kendo UI Chart breadcrumb? Configure or customize the top-level breadcrumb icon in a chart to visually represent the root item, enabling control over the navigation hierarchy symbol, setting or changing the displayed graphic for the main breadcrumb element, adjusting the icon for better user orientation within chart structures, specifying or replacing the root indicator icon to improve contextual clarity, and managing the breadcrumb appearance to reflect the starting point or highest-level node in charts or hierarchical visualizations.
@@ -266,6 +268,72 @@ How do I change the icon for the root item in a Kendo UI Chart breadcrumb? Confi
         rootItem: {
             text: "Home",
             icon: "home", // Icon name to be rendered
+            showIcon: true
+        }
+    });
+    </script>
+
+### rootItem.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="chart"></div>
+    <div id="breadcrumb"></div>
+    <script>
+    $("#chart").kendoChart({
+        categoryAxis: {
+            categories: ["A", "B", "C"]
+        },
+        series: [{
+            type: "column",
+            data: [1, 2, 3]
+        }]
+    });
+
+    $("#breadcrumb").kendoChartBreadcrumb({
+        chart: "#chart",
+        rootItem: {
+            text: "Home",
+            icon: { name: "home" },
+            showIcon: true
+        }
+    });
+    </script>
+
+### rootItem.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="chart"></div>
+    <div id="breadcrumb"></div>
+    <script>
+    $("#chart").kendoChart({
+        categoryAxis: {
+            categories: ["A", "B", "C"]
+        },
+        series: [{
+            type: "column",
+            data: [1, 2, 3]
+        }]
+    });
+
+    $("#breadcrumb").kendoChartBreadcrumb({
+        chart: "#chart",
+        rootItem: {
+            text: "Home",
+            icon: { name: "home", variant: "outline" },
             showIcon: true
         }
     });

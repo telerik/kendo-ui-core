@@ -241,10 +241,12 @@ How do I add a custom prefix to a Kendo UI MaskedTextBox? Set or customize a sta
         });
     </script>
 
-### prefixOptions.icon `String`
+### prefixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I add an icon to the input field of a Kendo UI MaskedTextBox? Customize the input field by configuring a leading icon or symbol before the text area using predefined icons from a UI theme library or custom SVG graphics, enabling developers to set, change, or control the prefix icon displayed in masked input components for enhanced visual context, branding, or user interface clarity in forms and data entry fields.
@@ -258,6 +260,51 @@ How do I add an icon to the input field of a Kendo UI MaskedTextBox? Customize t
             mask: "000000",
             prefixOptions: {
                 icon: "search"
+            }
+        })
+    </script>
+
+### prefixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="maskedtextbox" />
+    <script>
+        $("#maskedtextbox").kendoMaskedTextBox({
+            mask: "000000",
+            prefixOptions: {
+                icon: {
+                    name: "search"
+                }
+            }
+        })
+    </script>
+
+### prefixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="maskedtextbox" />
+    <script>
+        $("#maskedtextbox").kendoMaskedTextBox({
+            mask: "000000",
+            prefixOptions: {
+                icon: {
+                    name: "search",
+                    variant: "outline"
+                }
             }
         })
     </script>
@@ -435,10 +482,12 @@ How to customize the appearance of suffix elements in Kendo UI MaskedTextBox? Co
         });
     </script>
 
-### suffixOptions.icon `String`
+### suffixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the suffix icon in Kendo UI MaskedTextBox? Configure or customize the suffix icon on input fields by specifying a built-in themed icon name or injecting custom SVG content to enhance visual appearance, enable icon toggling, or add actionable graphics next to text input boxes; control suffix icon rendering with options to set Kendo theme icons or provide your own scalable vector graphics for flexible styling, branding, or UI feedback indicators in masked input components.
@@ -452,6 +501,51 @@ How do I customize the suffix icon in Kendo UI MaskedTextBox? Configure or custo
             mask: "000000",
             suffixOptions: {
                 icon: "search"
+            }
+        })
+    </script>
+
+### suffixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="maskedtextbox" />
+    <script>
+        $("#maskedtextbox").kendoMaskedTextBox({
+            mask: "000000",
+            suffixOptions: {
+                icon: {
+                    name: "search"
+                }
+            }
+        })
+    </script>
+
+### suffixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="maskedtextbox" />
+    <script>
+        $("#maskedtextbox").kendoMaskedTextBox({
+            mask: "000000",
+            suffixOptions: {
+                icon: {
+                    name: "search",
+                    variant: "outline"
+                }
             }
         })
     </script>

@@ -314,6 +314,21 @@ describe("kendo.ui.DropDownList initialization", function() {
         assert.equal(result, "abc");
     });
 
+    it("renders the default group label without whitespace", function() {
+        let dropdownlist = new DropDownList(input, {
+            dataTextField: "text",
+            dataValueField: "value",
+            fixedGroupHeader: false,
+            dataSource: {
+                data: [{ text: "Tokyo", value: 1, country: "Japan" }],
+                group: { field: "country" }
+            }
+        });
+        let groupLabel = dropdownlist.ul.find(".k-list-group-item .k-list-item-text").first();
+
+        assert.equal(groupLabel.text(), "Japan");
+    });
+
     it("dropdownlist supports setting a custom group template", function() {
         let dropdownlist = new DropDownList(input, {
             groupTemplate: (data) => data.toUpperCase()

@@ -401,6 +401,8 @@ How to specify the field that holds image URLs for TreeView node icons? Specify 
 Sets the field of the data item that provides the icon name of the nodes.
 If an array, each level uses the field that is at the same index in the array, or the last item in the array.
 
+The field can also hold an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 
 <div class="meta-api-description">
 Control or configure icon rendering for TreeView nodes by specifying the data source field(s) that contain icon names, supporting both single string field names or arrays for hierarchical levels, enabling dynamic icon display based on data properties with fallback behavior for unmatched levels, useful for customizing node appearance with Kendo UI icons by linking node data fields to icon identifiers.

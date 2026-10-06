@@ -1767,10 +1767,12 @@ How to customize the visual prefix in a Kendo UI MultiColumnComboBox? Set or cus
       });
     </script>
 
-### prefixOptions.icon `String`
+### prefixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How can I add an icon to the input field of a MultiColumnComboBox? Set or customize a leading icon for input fields by configuring a prefix icon using either predefined theme icon names or custom SVG markup, enabling the display of icons before text input in dropdowns or combo boxes; control icon appearance to enhance UI elements in multi-column selection components, support icon prefixes for better user interaction, and integrate scalable vector icons to visually augment input controls with flexible icon sources.
@@ -1796,6 +1798,75 @@ How can I add an icon to the input field of a MultiColumnComboBox? Set or custom
         ],
         prefixOptions: {
           icon: "search"
+        }
+      })
+    </script>
+
+### prefixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ],
+        prefixOptions: {
+          icon: {
+              name: "search"
+          }
+        }
+      })
+    </script>
+
+### prefixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ],
+        prefixOptions: {
+          icon: {
+              name: "search",
+              variant: "outline"
+          }
         }
       })
     </script>
@@ -1969,10 +2040,12 @@ How to customize the trailing elements in Kendo UI MultiColumnComboBox input fie
       });
     </script>
 
-### suffixOptions.icon `String`
+### suffixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I change the default suffix icon in a Kendo UI MultiColumnComboBox? Set or customize the suffix icon shown in a multi-column combo box input by specifying an icon source, including predefined theme icon names or custom inline SVG content, enabling replacement or addition of the default suffix symbol; control, configure, or change the suffix visual element with either built-in theme glyphs or personalized SVG icons to enhance component appearance, support icon rendering, and tailor UI elements for selection inputs with flexible icon options and suffix decoration.
@@ -1998,6 +2071,75 @@ How do I change the default suffix icon in a Kendo UI MultiColumnComboBox? Set o
         ],
         suffixOptions: {
           icon: "search"
+        }
+      })
+    </script>
+
+### suffixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="suffix" />
+    <script>
+      $("#suffix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ],
+        suffixOptions: {
+          icon: {
+              name: "search"
+          }
+        }
+      })
+    </script>
+
+### suffixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="suffix" />
+    <script>
+      $("#suffix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ],
+        suffixOptions: {
+          icon: {
+              name: "search",
+              variant: "outline"
+          }
         }
       })
     </script>

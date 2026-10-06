@@ -342,12 +342,10 @@ import "../kendo.html.button.js";
             if(kendo.isPresent(options) && kendo.isBlank(options.buttonsTemplate)) {
                 return  (
                             html
-                                .renderButton(`<button class="k-coloreditor-apply" title="${encode(options.messages.apply)}">
-                                    ${encode(options.messages.apply)}</button>`, extend({}, buttonOptions, { fillMode: null, themeColor: "primary" })
+                                .renderButton(`<button class="k-coloreditor-apply" title="${encode(options.messages.apply)}">${encode(options.messages.apply)}</button>`, extend({}, buttonOptions, { fillMode: null, themeColor: "primary" })
                                 ) +
                             html
-                                .renderButton(`<button class="k-coloreditor-cancel" title="${encode(options.messages.cancel)}">
-                                    ${encode(options.messages.cancel)}</button>`, extend({}, buttonOptions, { fillMode: null })
+                                .renderButton(`<button class="k-coloreditor-cancel" title="${encode(options.messages.cancel)}">${encode(options.messages.cancel)}</button>`, extend({}, buttonOptions, { fillMode: null })
                                 )
                         );
             }

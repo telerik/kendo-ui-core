@@ -11,6 +11,7 @@ describe('kendo.ui.FontIcon initialization', function() {
     });
     afterEach(function() {
         icon.destroy();
+        kendo.setDefaults("icon", { variant: null });
         span.remove();
         kendo.destroy(Mocha.fixture);
     });
@@ -47,10 +48,25 @@ describe('kendo.ui.SvgIcon initialization', function() {
     it('adds required classes', function() {
         icon = new SvgIcon(span, { icon: 'gear' });
 
+        assert.isNotOk(icon.options.variant);
         assert.isOk(span.hasClass('k-svg-icon'));
         assert.isOk(span.hasClass('k-svg-i-gear'));
         assert.isOk(span.find('svg').length);
         assert.isOk(span.find('svg path').length);
+    });
+
+    it('uses the global icon variant when no local variant is configured', function() {
+        kendo.setDefaults("icon", { variant: "duotone" });
+        icon = new SvgIcon(span, { icon: 'gear' });
+
+        assert.equal(icon.options.variant, 'duotone');
+    });
+
+    it('does not add a variant class', function() {
+        icon = new SvgIcon(span, { icon: 'gear', variant: 'duotone' });
+
+        assert.isFalse(span.hasClass('k-svg-icon-outline'));
+        assert.isFalse(span.hasClass('k-svg-icon-duotone'));
     });
 
     it('adds styling classes', function() {

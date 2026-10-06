@@ -777,7 +777,7 @@ How can I customize the corner roundness of the Kendo UI color picker? Adjust co
     });
     </script>
 
-### toolIcon `String` *(default: null)*
+### toolIcon `String|Object` *(default: null)*
 
 A CSS class name to display an icon in the color picker button.  If
 specified, the HTML for the element will look like this:
@@ -787,8 +787,44 @@ specified, the HTML for the element will look like this:
     </span>
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How to customize the icon in Kendo UI colorpicker's selection button? Customize the icon displayed in the color selection button by setting a CSS class that defines the visual symbol shown next to the chosen color, enabling integration with icon font libraries, SVG-based icons, or CSS sprite images for tailored user interface appearance. Control and modify the appearance of the color picker's action button by applying specific class names that configure or replace the default icon rendering, supporting use cases like theming, branding, or enhancing usability through custom visual cues. Adjust or enable different icon styles programmatically by referencing CSS selector names that affect the color picker's icon container, facilitating flexible design adjustments for toolbars and color controls within applications.
+</div>
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+    $("#colorpicker").kendoColorPicker({
+      toolIcon: "k-foreColor"
+    });
+    </script>
+
+### toolIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+    $("#colorpicker").kendoColorPicker({
+      toolIcon: "k-foreColor"
+    });
+    </script>
+
+### toolIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example

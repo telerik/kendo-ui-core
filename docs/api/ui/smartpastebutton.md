@@ -39,9 +39,11 @@ How do I enable or disable user interaction with the Smart Paste Button in Kendo
     });
     </script>
 
-### cancelIcon `String` *(default: "x")*
+### cancelIcon `String|Object` *(default: "x")*
 
 Specifies the icon displayed when the button is in listening/processing state.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the cancel icon displayed in Kendo UI SmartPasteButton during processing? Configure the icon shown when the smart paste button is actively processing or listening for clipboard content, enabling control over the visual indicator used during the cancellation state, allowing customization of the stop or cancel symbol, setting the icon that appears when users can cancel the paste operation, and managing the visual feedback provided during AI processing or clipboard reading operations within smart paste functionality.
@@ -63,9 +65,59 @@ How do I customize the cancel icon displayed in Kendo UI SmartPasteButton during
     });
     </script>
 
-### icon `String` *(default: "clipboard")*
+### cancelIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <form id="form">
+        <input name="firstName" />
+        <button id="smartPasteButton"></button>
+    </form>
+
+    <script>
+    $("#smartPasteButton").kendoSmartPasteButton({
+        cancelIcon: "stop",
+        service: {
+            url: "https://your-ai-service.com/api/parse"
+        }
+    });
+    </script>
+
+### cancelIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <form id="form">
+        <input name="firstName" />
+        <button id="smartPasteButton"></button>
+    </form>
+
+    <script>
+    $("#smartPasteButton").kendoSmartPasteButton({
+        cancelIcon: "stop",
+        service: {
+            url: "https://your-ai-service.com/api/parse"
+        }
+    });
+    </script>
+
+### icon `String|Object` *(default: "clipboard")*
 
 Specifies the icon displayed on the button in its default state.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I change the default icon for Kendo UI SmartPasteButton? Customize the visual symbol or icon displayed on the smart paste button when it's in the ready state, enabling control over the button's appearance, setting custom icons to match design requirements, configuring the visual indicator that represents the paste functionality, and managing the default icon shown when the button is available for user interaction before any paste operations begin.
@@ -81,6 +133,59 @@ How do I change the default icon for Kendo UI SmartPasteButton? Customize the vi
     <script>
     $("#smartPasteButton").kendoSmartPasteButton({
         icon: "paste",
+        service: {
+            url: "https://your-ai-service.com/api/parse"
+        }
+    });
+    </script>
+
+### icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <form id="form">
+        <input name="firstName" />
+        <button id="smartPasteButton"></button>
+    </form>
+
+    <script>
+    $("#smartPasteButton").kendoSmartPasteButton({
+        icon: {
+            name: "paste"
+        },
+        service: {
+            url: "https://your-ai-service.com/api/parse"
+        }
+    });
+    </script>
+
+### icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <form id="form">
+        <input name="firstName" />
+        <button id="smartPasteButton"></button>
+    </form>
+
+    <script>
+    $("#smartPasteButton").kendoSmartPasteButton({
+        icon: {
+            name: "paste",
+            variant: "outline"
+        },
         service: {
             url: "https://your-ai-service.com/api/parse"
         }

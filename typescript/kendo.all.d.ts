@@ -2137,7 +2137,7 @@ declare namespace kendo.ui {
         description?: string | undefined;
         disabled?: boolean | undefined;
         group?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconClass?: string | undefined;
         iconColor?: string | undefined;
         iconSize?: number | undefined;
@@ -2148,7 +2148,7 @@ declare namespace kendo.ui {
         click?: Function | undefined;
         disabled?: boolean | undefined;
         fillMode?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconClass?: string | undefined;
         rounded?: string | undefined;
         size?: string | undefined;
@@ -2157,7 +2157,7 @@ declare namespace kendo.ui {
     }
 
     interface ActionSheetStartButton {
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         click?: Function | undefined;
     }
 
@@ -2297,13 +2297,19 @@ declare namespace kendo.ui {
     interface AIPromptOutputAction {
         command?: string | undefined;
         text?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         fillMode?: string | undefined;
         rounded?: string | undefined;
         themeColor?: string | undefined;
         title?: string | undefined;
         type?: string | undefined;
         iconButton?: boolean | undefined;
+    }
+
+    interface AIPromptPromptCommand {
+        id?: string | undefined;
+        text?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
     }
 
     interface AIPromptOptions {
@@ -2359,7 +2365,8 @@ declare namespace kendo.ui {
 
     interface AIPromptView {
         buttonText?: string | undefined;
-        buttonIcon?: string | undefined;
+        buttonIcon?: string | IconDescriptor | undefined;
+        promptCommands?: AIPromptPromptCommand[] | undefined;
         type?: string | undefined;
         name?: string | undefined;
         viewTemplate?: string | Function | undefined;
@@ -2579,7 +2586,7 @@ declare namespace kendo.ui {
         border?: boolean | undefined;
         className?: string | undefined;
         fillMode?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         image?: string | undefined;
         rounded?: string | undefined;
         size?: string | undefined;
@@ -2616,7 +2623,7 @@ declare namespace kendo.ui {
         encoded?: boolean | undefined;
         cutoutBorder?: boolean | undefined;
         fillMode?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         max?: number | undefined;
         position?: string | undefined;
         rounded?: string | undefined;
@@ -2662,7 +2669,7 @@ declare namespace kendo.ui {
     interface BottomNavigationItem {
         url?: string | undefined;
         data?: any;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         text?: string | undefined;
         encoded?: boolean | undefined;
         iconClass?: string | undefined;
@@ -2722,12 +2729,12 @@ declare namespace kendo.ui {
         name?: string | undefined;
         items?: BreadcrumbItem[] | undefined;
         bindToLocation?: boolean | undefined;
-        delimiterIcon?: string | undefined;
+        delimiterIcon?: string | IconDescriptor | undefined;
         editable?: boolean | undefined;
         gap?: number | undefined;
         messages?: BreadcrumbMessages | undefined;
         navigational?: boolean | undefined;
-        rootIcon?: string | undefined;
+        rootIcon?: string | IconDescriptor | undefined;
         size?: string | undefined;
         value?: string | undefined;
 
@@ -2744,7 +2751,7 @@ declare namespace kendo.ui {
         type?: string | undefined;
         href?: string | undefined;
         text?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         itemClass?: string | undefined;
         linkClass?: string | undefined;
         iconClass?: string | undefined;
@@ -2792,7 +2799,7 @@ declare namespace kendo.ui {
         badge?: ButtonBadge | undefined;
         enable?: boolean | undefined;
         fillMode?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconClass?: string | undefined;
         imageUrl?: string | undefined;
         rounded?: string | undefined;
@@ -2808,7 +2815,7 @@ declare namespace kendo.ui {
         cutoutBorder?: boolean | undefined;
         encoded?: boolean | undefined;
         fill?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         max?: number | undefined;
         position?: string | undefined;
         shape?: string | undefined;
@@ -2862,7 +2869,7 @@ declare namespace kendo.ui {
         cutoutBorder?: boolean | undefined;
         encoded?: boolean | undefined;
         fill?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         max?: number | undefined;
         position?: string | undefined;
         shape?: string | undefined;
@@ -2877,7 +2884,7 @@ declare namespace kendo.ui {
         attributes?: any;
         badge?: ButtonGroupItemBadge | undefined;
         enabled?: boolean | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconClass?: string | undefined;
         imageUrl?: string | undefined;
         selected?: boolean | undefined;
@@ -3103,7 +3110,7 @@ declare namespace kendo.ui {
     interface ChainOfThoughtThought {
         label?: string | undefined;
         secondaryLabel?: string | undefined;
-        svgIcon?: string | undefined;
+        svgIcon?: string | IconDescriptor | undefined;
         completed?: boolean | undefined;
         linesAdded?: number | undefined;
         linesRemoved?: number | undefined;
@@ -3116,7 +3123,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         label?: string | undefined;
         secondaryLabel?: string | undefined;
-        svgIcon?: string | undefined;
+        svgIcon?: string | IconDescriptor | undefined;
         completed?: boolean | undefined;
         expanded?: boolean | undefined;
         expandable?: boolean | undefined;
@@ -3577,7 +3584,7 @@ declare namespace kendo.ui {
         /** Display text for the action */
         text: string;
         /** Icon identifier */
-        icon: string;
+        icon: string | IconDescriptor;
         /** Additional attributes for the menu item */
         attributes?: Record<string, string>;
         /** Additional data attributes */
@@ -3591,7 +3598,7 @@ declare namespace kendo.ui {
         /** Display text for the action */
         text?: string;
         /** Icon identifier */
-        icon?: string;
+        icon?: string | IconDescriptor;
         /** Button type */
         type?: string;
         /** Button fill mode */
@@ -3636,7 +3643,7 @@ declare namespace kendo.ui {
     type MessageStatus = "sent" | "delivered" | "seen" | "failed";
     interface IMessageStatusSettings {
         /** Font icon name to display for the status */
-        icon?: string;
+        icon?: string | IconDescriptor;
         /** SVG icon to display for the status */
         svgIcon?: any;
         /** Text to display for the status */
@@ -3764,7 +3771,7 @@ declare namespace kendo.ui {
         /** Theme color for the button */
         themeColor?: string;
         /** Icon name */
-        icon?: string;
+        icon?: string | IconDescriptor;
         /** Tooltip/aria-label text */
         text?: string;
         /** File restrictions */
@@ -3898,11 +3905,11 @@ declare namespace kendo.ui {
     }
     interface IActionButtonSettings {
         /** Icon name for the action button */
-        icon?: string;
+        icon?: string | IconDescriptor;
         /** Text to display on the action button */
         text?: string;
         /** Icon for the loading state */
-        loadingIcon?: string;
+        loadingIcon?: string | IconDescriptor;
         /** Text to display while loading */
         loadingText?: string;
         /** Whether to show the stop button when loading */
@@ -3910,7 +3917,7 @@ declare namespace kendo.ui {
         /**
          * @deprecated Use `loadingIcon` instead. Will be removed in future version.
          */
-        stopIcon?: string;
+        stopIcon?: string | IconDescriptor;
         /**
          * @deprecated Use `loadingText` instead. Will be removed in future version.
          */
@@ -4246,10 +4253,10 @@ declare namespace kendo.ui {
 
     interface ChipOptions {
         name?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconClass?: string | undefined;
         avatarClass?: string | undefined;
-        removeIcon?: string | undefined;
+        removeIcon?: string | IconDescriptor | undefined;
         removeIconClass?: string | undefined;
         fillMode?: string | undefined;
         rounded?: string | undefined;
@@ -4315,7 +4322,7 @@ declare namespace kendo.ui {
     }
 
     interface ChipListItem {
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconClass?: string | undefined;
         avatarClass?: string | undefined;
         label?: string | undefined;
@@ -4435,11 +4442,11 @@ declare namespace kendo.ui {
         name?: string | undefined;
         sources?: CitationSource[] | undefined;
         label?: string | undefined;
-        svgIcon?: string | undefined;
+        svgIcon?: string | IconDescriptor | undefined;
         showAdditionalCount?: boolean | undefined;
         showOn?: string | undefined;
-        sourceIcon?: string | undefined;
-        sourceSVGIcon?: string | undefined;
+        sourceIcon?: string | IconDescriptor | undefined;
+        sourceSVGIcon?: string | IconDescriptor | undefined;
         popoverWidth?: number | undefined;
         bodyTemplate?: Function | undefined;
         messages?: CitationMessages | undefined;
@@ -4619,7 +4626,7 @@ declare namespace kendo.ui {
         palette?: string | any;
         opacity?: boolean | undefined;
         preview?: boolean | undefined;
-        toolIcon?: string | undefined;
+        toolIcon?: string | IconDescriptor | undefined;
         value?: string | kendo.Color | undefined;
         view?: string | undefined;
         views?: any;
@@ -4965,7 +4972,7 @@ declare namespace kendo.ui {
     }
 
     interface BasePrefixSuffixOptions {
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         template?: string | Function | undefined;
         separator?: boolean | undefined;
     }
@@ -5401,7 +5408,7 @@ declare namespace kendo.ui {
         fillMode?: string | undefined;
         themeColor?: string | undefined;
         size?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconClass?: string | undefined;
         rounded?: string | undefined;
     }
@@ -5494,7 +5501,7 @@ declare namespace kendo.ui {
 
     interface DrawerItem {
         text?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         separator?: boolean | undefined;
         selected?: boolean | undefined;
         enabled?: boolean | undefined;
@@ -5567,7 +5574,7 @@ declare namespace kendo.ui {
         data?: Function | undefined;
         enabled?: boolean | undefined;
         hidden?: boolean | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         id?: string | undefined;
         imageUrl?: string | undefined;
         spriteCssClass?: string | undefined;
@@ -5585,7 +5592,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         enabled?: boolean | undefined;
         fillMode?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconClass?: string | undefined;
         imageUrl?: string | undefined;
         items?: DropDownButtonItem[] | undefined;
@@ -6059,7 +6066,7 @@ declare namespace kendo.ui {
     interface EditorAICommandOptions {
         text?: string | undefined;
         prompt?: Function | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         id?: string | undefined;
     }
 
@@ -6580,15 +6587,15 @@ declare namespace kendo.ui {
     }
 
     interface FileManagerBreadcrumb {
-        rootIcon?: string | undefined;
-        delimiterIcon?: string | undefined;
+        rootIcon?: string | IconDescriptor | undefined;
+        delimiterIcon?: string | IconDescriptor | undefined;
     }
 
     interface FileManagerContextMenuItem {
         name?: string | undefined;
         text?: string | undefined;
         spriteCssClass?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         command?: string | undefined;
     }
 
@@ -6716,7 +6723,7 @@ declare namespace kendo.ui {
         spriteCssClass?: string | undefined;
         imageUrl?: string | undefined;
         showIcon?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         id?: string | undefined;
     }
 
@@ -7079,7 +7086,7 @@ declare namespace kendo.ui {
     }
 
     interface FloatingActionButtonOptions {
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         text?: string | undefined;
         themeColor?: string | undefined;
         size?: string | undefined;
@@ -7101,7 +7108,7 @@ declare namespace kendo.ui {
 
     interface FloatingActionButtonItem {
         label?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         title?: string | undefined;
         enabled?: boolean | undefined;
         cssClass?: string | undefined;
@@ -8310,7 +8317,7 @@ declare namespace kendo.ui {
     interface GridContextMenuItem {
         name?: string | undefined;
         text?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         command?: string | undefined;
         items?: GridContextMenuItem[] | undefined;
     }
@@ -8801,7 +8808,7 @@ declare namespace kendo.ui {
         spriteCssClass?: string | undefined;
         imageUrl?: string | undefined;
         showIcon?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         id?: string | undefined;
     }
 
@@ -10227,7 +10234,7 @@ declare namespace kendo.ui {
         spriteCssClass?: string | undefined;
         imageUrl?: string | undefined;
         showIcon?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         id?: string | undefined;
     }
 
@@ -10975,7 +10982,7 @@ declare namespace kendo.ui {
     interface PopoverAction {
         text?: string;
         click?: Function;
-        icon?: Function;
+        icon?: string | IconDescriptor | Function;
         iconClass?: Function;
     }
 
@@ -11246,7 +11253,7 @@ declare namespace kendo.ui {
     interface PropertyGridContextMenuItem {
         name?: string | undefined;
         text?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         command?: string | undefined;
     }
 
@@ -11291,7 +11298,7 @@ declare namespace kendo.ui {
 
     interface PropertyGridToolbarItem {
         click?: Function | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         imageClass?: string | undefined;
         name?: string | undefined;
         text?: string | undefined;
@@ -11622,7 +11629,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         label?: string | undefined;
         secondaryLabel?: string | undefined;
-        svgIcon?: string | undefined;
+        svgIcon?: string | IconDescriptor | undefined;
         completed?: boolean | undefined;
         expanded?: boolean | undefined;
         expandable?: boolean | undefined;
@@ -11960,7 +11967,7 @@ declare namespace kendo.ui {
         dataTextField?: string | undefined;
         dataValueField?: string | undefined;
         field?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         multiple?: boolean | undefined;
         name?: string | undefined;
         title?: string | undefined;
@@ -12281,7 +12288,7 @@ declare namespace kendo.ui {
 
     interface SegmentedControlItem {
         enabled?: boolean | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconClass?: string | undefined;
         text?: string | undefined;
         value?: string | undefined;
@@ -12599,7 +12606,7 @@ declare namespace kendo.ui {
         data?: Function | undefined;
         enabled?: boolean | undefined;
         hidden?: boolean | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         id?: string | undefined;
         imageUrl?: string | undefined;
         spriteCssClass?: string | undefined;
@@ -12615,10 +12622,10 @@ declare namespace kendo.ui {
 
     interface SplitButtonOptions {
         name?: string | undefined;
-        arrowIcon?: string | undefined;
+        arrowIcon?: string | IconDescriptor | undefined;
         enabled?: boolean | undefined;
         fillMode?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconClass?: string | undefined;
         imageUrl?: string | undefined;
         items?: SplitButtonItem[] | undefined;
@@ -13358,7 +13365,7 @@ declare namespace kendo.ui {
     }
 
     interface TabStripItem {
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconPosition?: "before" | "after" | undefined;
         closable?: boolean | undefined;
         enabled?: boolean | undefined;
@@ -13367,7 +13374,7 @@ declare namespace kendo.ui {
 
     interface TabStripTabAction {
         action?: Function | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         iconClass?: string | undefined;
         attributes?: any | undefined;
     }
@@ -13454,7 +13461,7 @@ declare namespace kendo.ui {
     interface TaskBoardCardMenuItem {
         name?: string | undefined;
         text?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         spriteCssClass?: string | undefined;
         command?: string | undefined;
         options?: string | undefined;
@@ -13463,7 +13470,7 @@ declare namespace kendo.ui {
     interface TaskBoardColumnSettingsButton {
         name?: string | undefined;
         text?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         spriteCssClass?: string | undefined;
         command?: string | undefined;
         options?: string | undefined;
@@ -13481,7 +13488,7 @@ declare namespace kendo.ui {
     interface TaskBoardEditableButton {
         name?: string | undefined;
         text?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         spriteCssClass?: string | undefined;
         command?: string | undefined;
         options?: string | undefined;
@@ -13520,7 +13527,7 @@ declare namespace kendo.ui {
     interface TaskBoardPreviewPaneButton {
         name?: string | undefined;
         text?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         spriteCssClass?: string | undefined;
         command?: string | undefined;
         options?: string | undefined;
@@ -13563,7 +13570,7 @@ declare namespace kendo.ui {
         spriteCssClass?: string | undefined;
         imageUrl?: string | undefined;
         showIcon?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         id?: string | undefined;
     }
 
@@ -14063,7 +14070,7 @@ declare namespace kendo.ui {
     interface InlineAIPromptCommand {
         id?: string | undefined;
         text?: string | undefined;
-        icon?: string | Function | undefined;
+        icon?: string | IconDescriptor | Function | undefined;
         prompt?: Function | undefined;
         items?: InlineAIPromptCommand[] | undefined;
     }
@@ -14078,7 +14085,7 @@ declare namespace kendo.ui {
     interface InlineAIPromptOutputAction {
         command?: string | undefined;
         text?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         fillMode?: string | undefined;
         rounded?: string | undefined;
         themeColor?: string | undefined;
@@ -14378,7 +14385,7 @@ declare namespace kendo.ui {
 
     interface SpeechToTextButtonOptions extends kendo.ui.ButtonOptions {
         name?: string;
-        stopIcon?: string;
+        stopIcon?: string | IconDescriptor;
         integrationMode?: "webSpeech" | "none";
         lang?: string;
         continuous?: boolean;
@@ -14467,7 +14474,7 @@ declare namespace kendo.ui {
         enable?: boolean | undefined;
         group?: string | undefined;
         hidden?: boolean | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         id?: string | undefined;
         imageUrl?: string | undefined;
         selected?: boolean | undefined;
@@ -14484,7 +14491,7 @@ declare namespace kendo.ui {
         attributes?: any;
         enable?: boolean | undefined;
         hidden?: boolean | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         id?: string | undefined;
         imageUrl?: string | undefined;
         spriteCssClass?: string | undefined;
@@ -14499,7 +14506,7 @@ declare namespace kendo.ui {
         enable?: boolean | undefined;
         group?: string | undefined;
         hidden?: boolean | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         id?: string | undefined;
         imageUrl?: string | undefined;
         menuButtons?: ToolBarItemMenuButton[] | undefined;
@@ -14602,7 +14609,7 @@ declare namespace kendo.ui {
 
     interface ToolCallOptions {
         name?: string | undefined;
-        svgIcon?: string | undefined;
+        svgIcon?: string | IconDescriptor | undefined;
         label?: string | undefined;
         secondaryLabel?: string | undefined;
         state?: string | undefined;
@@ -14612,7 +14619,7 @@ declare namespace kendo.ui {
         result?: any;
         approvalText?: string | undefined;
         errorText?: string | undefined;
-        statusSVGIcon?: string | undefined;
+        statusSVGIcon?: string | IconDescriptor | undefined;
         parametersTemplate?: Function | undefined;
         approvalTemplate?: Function | undefined;
         resultTemplate?: Function | undefined;
@@ -14909,7 +14916,7 @@ declare namespace kendo.ui {
 
     interface TreeListColumnCommandItem {
         className?: string | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         imageClass?: string | undefined;
         click?: Function | undefined;
         name?: string | undefined;
@@ -15135,7 +15142,7 @@ declare namespace kendo.ui {
 
     interface TreeListToolbarItem {
         click?: Function | undefined;
-        icon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
         imageClass?: string | undefined;
         name?: string | undefined;
         text?: string | undefined;
@@ -16031,6 +16038,11 @@ declare namespace kendo.ui {
         iconClass?: string | undefined;
     }
 
+    interface IconDescriptor {
+        name: string;
+        variant: string;
+    }
+
     interface FontIconOptions extends IconOptions {
         icon?: string | undefined;
     }
@@ -16068,8 +16080,8 @@ declare namespace kendo.ui {
     interface SmartPasteButtonOptions {
         name?: string | undefined;
         enable?: boolean | undefined;
-        cancelIcon?: string | undefined;
-        icon?: string | undefined;
+        cancelIcon?: string | IconDescriptor | undefined;
+        icon?: string | IconDescriptor | undefined;
         fillMode?: string | undefined;
         rounded?: string | undefined;
         size?: string | undefined;
@@ -26600,8 +26612,8 @@ declare namespace kendo.stepper {
 
     interface StepOptions {
         label?: string | undefined;
-        icon?: string | undefined;
-        successIcon?: string | undefined;
+        icon?: string | IconDescriptor | undefined;
+        successIcon?: string | IconDescriptor | undefined;
         iconTemplate?: string | Function | undefined;
         enabled?: boolean | undefined;
         error?: boolean | undefined;

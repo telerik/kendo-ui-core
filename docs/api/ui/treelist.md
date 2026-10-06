@@ -389,10 +389,12 @@ How do I customize the appearance of action buttons in a Kendo UI TreeList colum
       }
     </style>
 
-### columns.command.icon `String`
+### columns.command.icon `String|Object`
 
 Specifies the icon's name of the command button.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icons for command buttons in a Kendo UI TreeList column? Customize, specify, or set the graphic or symbol shown on command buttons within hierarchical or tree-structured data grids, enabling control over button visuals by defining icon names, glyphs, or CSS-based images. This includes configuring command button appearances, changing icons dynamically or statically, binding icon sources to data or expressions, and modifying the visual indicators used for commands like edit, delete, or custom actions within tree list columns. Adjust button styling and icon representation to enhance user interface clarity and functionality in tree or nested list views.
@@ -411,6 +413,75 @@ How do I customize the icons for command buttons in a Kendo UI TreeList column? 
               name: "details",
               text: "Details",
               icon: "info-circle",
+              imageClass: "details-info"
+            }
+          ]}
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.command.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - setting the CSS class of the command icon
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" },
+          { command: [
+            {
+              name: "details",
+              text: "Details",
+              icon: {
+                  name: "info-circle"
+              },
+              imageClass: "details-info"
+            }
+          ]}
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.command.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - setting the CSS class of the command icon
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" },
+          { command: [
+            {
+              name: "details",
+              text: "Details",
+              icon: {
+                  name: "info-circle",
+                  variant: "outline"
+              },
               imageClass: "details-info"
             }
           ]}
@@ -7822,10 +7893,12 @@ How to customize toolbar button click actions in Kendo UI TreeList? Configure or
       });
     </script>
 
-### toolbar.icon `String`
+### toolbar.icon `String|Object`
 
 Specifies the icon's name that will be rendered inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button which has a name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I set a custom icon for toolbar buttons in my TreeList? Configure or set a custom icon for toolbar buttons within a hierarchical or tree-structured list interface to visually represent commands, actions, or features; control the appearance by specifying icon names that integrate font icons, sprite icons, or symbolic graphics inside toolbar buttons for better user recognition and usability; enable adding graphical markers, symbols, or icons dynamically to toolbars in tree views, allowing developers to customize command buttons with distinctive visual elements for enhanced navigation and interaction cues.
@@ -7837,6 +7910,56 @@ How do I set a custom icon for toolbar buttons in my TreeList? Configure or set 
     <script>
       $("#treeList").kendoTreeList({
         toolbar: [{name: "custom", text: "About", icon: "info-circle", imageClass: "custom-info" }],
+        columns: [
+          "lastName",
+          "position"
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "  VP, Engineering" }
+        ]
+      });
+    </script>
+
+### toolbar.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specifying the name of the command
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        toolbar: [{name: "custom", text: "About", icon: { name: "info-circle" }, imageClass: "custom-info" }],
+        columns: [
+          "lastName",
+          "position"
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "  VP, Engineering" }
+        ]
+      });
+    </script>
+
+### toolbar.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specifying the name of the command
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        toolbar: [{name: "custom", text: "About", icon: { name: "info-circle", variant: "outline" }, imageClass: "custom-info" }],
         columns: [
           "lastName",
           "position"
@@ -8078,10 +8201,12 @@ How do I handle click events on custom toolbar buttons in a Kendo UI TreeList? C
     </script>
 
 
-### toolbar.items.icon `String`
+### toolbar.items.icon `String|Object`
 
 Specifies the icon's name that will be rendered inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button which has a name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to customize icon in TreeList toolbar using Kendo UI for jQuery? Specify or configure the icon displayed within a toolbar button of a TreeList, enabling customization or enhancement of toolbar commands by setting the icon’s name, symbol, or identifier. Control the visual representation of buttons by adding graphic elements, symbols, or glyphs inside toolbar items, including setting icons for both built-in and custom toolbar commands, embedding icons by name or key, and adjusting toolbar button visuals for better user interface clarity, appearance, or branding. Use cases include enabling or changing toolbar button images, icons, symbols, or glyphs dynamically through configuration, tailoring toolbar controls with specific iconography, and managing toolbar button elements for improved navigation and usability in TreeList components.
@@ -8112,6 +8237,76 @@ How to customize icon in TreeList toolbar using Kendo UI for jQuery? Specify or 
       });
     </script>
 
+### toolbar.items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            {
+              name: "settings",
+              text: "Settings",
+              icon: {
+                  name: "k-icon k-i-gear"
+              }
+            }
+          ]
+        }
+      });
+    </script>
+
+### toolbar.items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            {
+              name: "settings",
+              text: "Settings",
+              icon: {
+                  name: "k-icon k-i-gear",
+                  variant: "outline"
+              }
+            }
+          ]
+        }
+      });
+    </script>
 
 ### toolbar.items.imageClass `String`
 

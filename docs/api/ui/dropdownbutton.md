@@ -60,12 +60,14 @@ How do I customize the visual appearance of a Kendo UI dropdown button with diff
         });
     </script>
 
-### icon `String`
+### icon `String|Object`
 
 Defines a name of an existing icon in the Kendo UI theme sprite. The icon will be applied as background image of a `span` element inside the **DropDownButton**.
 The `span` element can be added automatically by the widget, or an existing element can be used, if it has a `k-icon` CSS class applied.
 For a list of available icon names, please refer to the [Icons demo](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I change the icon in a Kendo UI dropdown button? Configure or customize the dropdown button symbol using named icons from the Kendo UI theme sprite set, enabling developers to specify or change the visual icon displayed within the dropdown trigger element by applying icon names that attach background images to internal span elements with appropriate styling classes. This feature supports various approaches to set or override the default icon, control appearance via theme-consistent iconography, utilize pre-defined icon name references, and integrate with the existing k-icon class for seamless icon embedding inside dropdown buttons, facilitating UI consistency and easy icon swapping in dropdown controls.
@@ -81,6 +83,53 @@ How do I change the icon in a Kendo UI dropdown button? Configure or customize t
             { text: "item 2" }
         ],
         icon: "cancel"
+    });
+    </script>
+
+### icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <button id="dropdownbutton" type="button">Cancel</button>
+    <script>
+    $("#dropdownbutton").kendoDropDownButton({
+        items:[
+            { text: "item 1" },
+            { text: "item 2" }
+        ],
+        icon: {
+            name: "cancel"
+        }
+    });
+    </script>
+
+### icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <button id="dropdownbutton" type="button">Cancel</button>
+    <script>
+    $("#dropdownbutton").kendoDropDownButton({
+        items:[
+            { text: "item 1" },
+            { text: "item 2" }
+        ],
+        icon: {
+            name: "cancel",
+            variant: "outline"
+        }
     });
     </script>
 
@@ -323,10 +372,12 @@ How do I hide specific items in a Kendo UI dropdown button's list using jQuery? 
         });
     </script>
 
-### items.icon `String`
+### items.icon `String|Object`
 
 Specifies the icon of the item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon for each dropdown menu item in Kendo UI? Set or customize the visual icon for individual dropdown menu entries by specifying icon identifiers, CSS classes, or styles that appear next to the item label, enabling control over how icons are displayed within dropdown buttons, including configuring icons during component initialization, assigning specific symbols or graphic indicators to menu items, and adjusting which icon accompanies each selectable option in a dropdown list.
@@ -342,6 +393,50 @@ How do I customize the icon for each dropdown menu item in Kendo UI? Set or cust
                 { text: "Save", icon: "save" },
                 { text: "Print", icon: "print" },
                 { text: "Email", icon: "email" }
+            ]
+        });
+    </script>
+
+### items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <button id="dropdownbutton" type="button">Tools</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { text: "Settings", icon: { name: "gear" } },
+                { text: "Save", icon: { name: "save" } },
+                { text: "Print", icon: { name: "print" } },
+                { text: "Email", icon: { name: "email" } }
+            ]
+        });
+    </script>
+
+### items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <button id="dropdownbutton" type="button">Tools</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { text: "Settings", icon: { name: "gear", variant: "outline" } },
+                { text: "Save", icon: { name: "save", variant: "outline" } },
+                { text: "Print", icon: { name: "print", variant: "outline" } },
+                { text: "Email", icon: { name: "email", variant: "outline" } }
             ]
         });
     </script>

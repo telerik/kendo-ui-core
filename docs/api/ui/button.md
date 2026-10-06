@@ -130,10 +130,12 @@ How do I configure the fill mode for a button's badge in Kendo UI? Configure how
       });
     </script>
 
-### badge.icon `String` *(default: '')*
+### badge.icon `String|Object` *(default: '')*
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the badge by a `span.k-icon` or `span.k-svg-icon` element.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I add an icon to a Kendo UI button's badge? Configure or set a badge icon on a button by specifying an existing theme icon name or providing custom raw SVG content to display as a visual indicator or notification marker within the button’s badge area. Enable embedding of scalable vector graphics or standard icon fonts inside the badge for consistent styling and flexible design, allowing controls to show status, alerts, counts, or decorative symbols on buttons in applications. Customize the badge’s icon content whether you need prebuilt icons or custom SVGs injected with proper elements to ensure uniform rendering and appearance on user interface buttons.
@@ -146,6 +148,51 @@ How do I add an icon to a Kendo UI button's badge? Configure or set a badge icon
       $("#button").kendoButton({
         badge: {
           icon: "check",
+          themeColor: "success"
+        }
+      });
+    </script>
+
+### badge.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          icon: {
+              name: "check"
+          },
+          themeColor: "success"
+        }
+      });
+    </script>
+
+### badge.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          icon: {
+              name: "check",
+              variant: "outline"
+          },
           themeColor: "success"
         }
       });
@@ -366,12 +413,14 @@ How do I customize the appearance of a Kendo UI button using the fillMode proper
         });
     </script>
 
-### icon `String`
+### icon `String|Object`
 
 Defines a name of an existing icon in the Kendo UI theme sprite. The icon will be applied as background image of a `span` element inside the **Button**.
 The `span` element can be added automatically by the widget, or an existing element can be used, if it has a `k-icon` CSS class applied.
 For a list of available icon names, please refer to the [Icon Button article](https://docs.telerik.com/kendo-ui/controls/button/icons).
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I set an icon for a Kendo UI button? Adjust, configure, or assign graphical icons, symbols, or sprite-based images to appear within buttons or clickable elements using predefined theme sprites, icon classes, or custom inline elements; enable visual indicators by specifying icon names, set background images for spans or elements styled with icon CSS classes, customize button appearance with built-in or thematic icon sets, control icon display inside button components, and integrate scalable, consistent iconography for UI buttons and interactive controls.
@@ -397,6 +446,71 @@ How do I set an icon for a Kendo UI button? Adjust, configure, or assign graphic
     });
     </script>
 
+### icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <button id="button" type="button">Cancel</button>
+    <script>
+    $("#button").kendoButton({
+        icon: {
+            name: "cancel"
+        }
+    });
+    </script>
+
+#### Example with an existing span element
+
+    <button id="button" type="button">
+        <span class="k-icon"></span> Cancel
+    </button>
+    <script>
+    $("#button").kendoButton({
+        icon: {
+            name: "cancel"
+        }
+    });
+    </script>
+
+### icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <button id="button" type="button">Cancel</button>
+    <script>
+    $("#button").kendoButton({
+        icon: {
+            name: "cancel",
+            variant: "outline"
+        }
+    });
+    </script>
+
+#### Example with an existing span element
+
+    <button id="button" type="button">
+        <span class="k-icon"></span> Cancel
+    </button>
+    <script>
+    $("#button").kendoButton({
+        icon: {
+            name: "cancel",
+            variant: "outline"
+        }
+    });
+    </script>
 
 ### iconClass `String`
 

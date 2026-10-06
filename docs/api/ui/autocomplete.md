@@ -975,10 +975,12 @@ How do I customize the prefix of an AutoComplete input field in Kendo UI? Contro
       });
     </script>
 
-### prefixOptions.icon `String`
+### prefixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to set an icon as a prefix in Kendo UI AutoComplete input field? Configure or set a leading icon inside the autocomplete input field by specifying either a theme icon name or custom SVG markup to display as a prefix. Enable, customize, or control input prefix icons to visually enhance autocomplete suggestions or inputs by providing icon names recognized by the theme or embedding scalable vector graphics directly. This supports adding decorative or functional icons before user input, supporting use cases such as symbolizing search, user, location, or other context-relevant cues within the autocomplete component.
@@ -996,6 +998,59 @@ How to set an icon as a prefix in Kendo UI AutoComplete input field? Configure o
         dataTextField: "name",
         prefixOptions: {
           icon: "search"
+        }
+      })
+    </script>
+
+### prefixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        prefixOptions: {
+          icon: {
+              name: "search"
+          }
+        }
+      })
+    </script>
+
+### prefixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        prefixOptions: {
+          icon: {
+              name: "search",
+              variant: "outline"
+          }
         }
       })
     </script>
@@ -1176,10 +1231,12 @@ How do I customize the suffix of an autocomplete input in Kendo UI for jQuery? C
       });
     </script>
 
-### suffixOptions.icon `String`
+### suffixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the suffix icon in an autocomplete input? Configure or customize the suffix icon displayed in an autocomplete input by specifying a predefined theme icon name or providing custom SVG markup to control the trailing icon appearance, including setting, changing, or overriding the default suffix icon for enhanced UI clarity, visual cues, or branding in autocomplete components across user input scenarios.
@@ -1197,6 +1254,59 @@ How do I customize the suffix icon in an autocomplete input? Configure or custom
         dataTextField: "name",
         suffixOptions: {
           icon: "search"
+        }
+      })
+    </script>
+
+### suffixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        suffixOptions: {
+          icon: {
+              name: "search"
+          }
+        }
+      })
+    </script>
+
+### suffixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        suffixOptions: {
+          icon: {
+              name: "search",
+              variant: "outline"
+          }
         }
       })
     </script>

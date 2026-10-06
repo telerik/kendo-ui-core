@@ -353,10 +353,12 @@ How do I customize the prefix of a numeric text box in Kendo UI for jQuery? Cont
         });
     </script>
 
-### prefixOptions.icon `String`
+### prefixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How can I customize the prefix icon in a Kendo UI NumericTextBox? Configure and customize the prefix icon displayed before numeric input values in a numeric text box by setting an icon from a predefined icon set or supplying custom SVG markup; control, enable, or change the decorative or functional graphic element that appears as a prefix alongside numeric input fields, including using theme-based named icons or raw SVG content for enhanced UI clarity, branding consistency, or improved user experience in number input components.
@@ -369,6 +371,49 @@ How can I customize the prefix icon in a Kendo UI NumericTextBox? Configure and 
         $("#numerictextbox").kendoNumericTextBox({
             prefixOptions: {
                 icon:"search"
+            }
+        })
+    </script>
+
+### prefixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            prefixOptions: {
+                icon: {
+                    name: "search"
+                }
+            }
+        })
+    </script>
+
+### prefixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            prefixOptions: {
+                icon: {
+                    name: "search",
+                    variant: "outline"
+                }
             }
         })
     </script>
@@ -584,10 +629,12 @@ How can I customize the suffix in a Kendo UI NumericTextBox? Configure or custom
         });
     </script>
 
-### suffixOptions.icon `String`
+### suffixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to add an icon suffix to a numeric input field in Kendo UI for jQuery? Configure or add a visual icon as a suffix to numeric input fields, enabling the use of predefined theme icons or custom SVG markup to enhance the numerical text box appearance and user interface; supports specifying icon names from UI icon libraries or embedding raw SVG content for flexible styling and branding of numeric input components.
@@ -600,6 +647,49 @@ How to add an icon suffix to a numeric input field in Kendo UI for jQuery? Confi
         $("#numerictextbox").kendoNumericTextBox({
             suffixOptions: {
                 icon: "search"
+            }
+        })
+    </script>
+
+### suffixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            suffixOptions: {
+                icon: {
+                    name: "search"
+                }
+            }
+        })
+    </script>
+
+### suffixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            suffixOptions: {
+                icon: {
+                    name: "search",
+                    variant: "outline"
+                }
             }
         })
     </script>

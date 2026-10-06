@@ -644,9 +644,11 @@ How to configure icon display in Kendo UI ImageEditor toolbar? Configure the dis
     });
     </script>
 
-### toolbar.items.icon `String`
+### toolbar.items.icon `String|Object`
 Sets icon for the item. The icon should be one of the existing in the Kendo UI theme sprite.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon for specific toolbar buttons in a Kendo UI Image Editor? Customize or control the icon displayed on toolbar buttons in an image editing interface by selecting or setting specific sprite icons from a predefined Kendo UI theme collection; configure the toolbar item’s appearance by assigning icon names that correspond to available theme sprites, enabling developers to define, change, or specify visual symbols for editor tools such as crop, rotate, zoom, or other actions using standardized icon sets within the user interface.
@@ -662,6 +664,52 @@ How do I customize the icon for specific toolbar buttons in a Kendo UI Image Edi
                 { text: "Crop", icon: "crop", command: "crop" },
                 { text: "Resize", icon: "resize", command: "resize" },
                 { text: "Save", icon: "save", command: "save" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="imageEditor"></div>
+    <script>
+    $("#imageEditor").kendoImageEditor({
+        toolbar: {
+            items: [
+                { text: "Crop", icon: { name: "crop" }, command: "crop" },
+                { text: "Resize", icon: { name: "resize" }, command: "resize" },
+                { text: "Save", icon: { name: "save" }, command: "save" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="imageEditor"></div>
+    <script>
+    $("#imageEditor").kendoImageEditor({
+        toolbar: {
+            items: [
+                { text: "Crop", icon: { name: "crop", variant: "outline" }, command: "crop" },
+                { text: "Resize", icon: { name: "resize", variant: "outline" }, command: "resize" },
+                { text: "Save", icon: { name: "save", variant: "outline" }, command: "save" }
             ]
         }
     });

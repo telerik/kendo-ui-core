@@ -311,10 +311,12 @@ How to make badges in a Kendo UI ButtonGroup display with a solid filled backgro
     </script>
 
 
-### items.badge.icon `String` *(default: '')*
+### items.badge.icon `String|Object` *(default: '')*
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the badge by a `span.k-icon` or `span.k-svg-icon` element.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon within a badge in Kendo UI ButtonGroup? Set or customize the icon displayed within a badge on items in a button group by specifying a theme icon name or providing custom SVG markup, enabling control over badge visuals with recognizable Kendo UI theme glyphs or personalized SVG graphics, supporting icon configuration inside badge elements for enhanced UI indicators or notifications, including options to input existing icon names or raw SVG content to appear consistently in badges alongside buttons, suitable for developers seeking to configure, enable, or change badge iconography within grouped button interfaces.
@@ -342,6 +344,75 @@ How do I customize the icon within a badge in Kendo UI ButtonGroup? Set or custo
     });
     </script>
 
+### items.badge.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Alert",
+                badge: {
+                    icon: {
+                        name: "warning"
+                    }
+                }
+            },
+            {
+                text: "Success",
+                badge: {
+                    icon: {
+                        name: "check"
+                    }
+                }
+            }
+        ]
+    });
+    </script>
+
+### items.badge.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Alert",
+                badge: {
+                    icon: {
+                        name: "warning",
+                        variant: "outline"
+                    }
+                }
+            },
+            {
+                text: "Success",
+                badge: {
+                    icon: {
+                        name: "check",
+                        variant: "outline"
+                    }
+                }
+            }
+        ]
+    });
+    </script>
 
 ### items.badge.max `Number` *(default: Infinity)*
 
@@ -696,10 +767,12 @@ How can I enable or disable individual buttons within a Kendo UI ButtonGroup? To
         });
     </script>
 
-### items.icon `String`
+### items.icon `String|Object`
 
 Defines the name of an existing icon in a Kendo theme.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to set icons for individual buttons in a Kendo UI ButtonGroup component? Configure or assign icons to individual buttons within a grouped set, enabling the display of built-in theme icons by specifying icon names as strings for each button element; control and customize button visuals by setting icon properties to include predefined graphic symbols, standard iconography, or theme-based icons to enhance UI clarity and user interaction in grouped button components.
@@ -715,6 +788,50 @@ How to set icons for individual buttons in a Kendo UI ButtonGroup component? Con
                 { icon: "align-left" },
                 { icon: "align-center" },
                 { icon: "align-right" }
+            ]
+        });
+    </script>
+
+### items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { icon: { name: "align-left" } },
+                { icon: { name: "align-center" } },
+                { icon: { name: "align-right" } }
+            ]
+        });
+    </script>
+
+### items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { icon: { name: "align-left", variant: "outline" } },
+                { icon: { name: "align-center", variant: "outline" } },
+                { icon: { name: "align-right", variant: "outline" } }
             ]
         });
     </script>

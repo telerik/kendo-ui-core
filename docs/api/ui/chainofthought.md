@@ -46,12 +46,50 @@ Add a secondary subtitle or supporting text to the step header of a chain-of-tho
     });
     </script>
 
-### svgIcon `String` *(default: "sparkles")*
+### svgIcon `String|Object` *(default: "sparkles")*
 
 The name of the SVG icon displayed in the step header.
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 Set or change the icon shown in the header of a chain-of-thought step, configure the SVG icon name for the reasoning step indicator, specify a Kendo UI icon to represent the type of thought being shown, customize the visual icon of an agent step component, choose which predefined theme icon identifies the step, or adjust the graphic symbol displayed next to the step label.
+</div>
+
+#### Example - set the icon
+
+    <div id="chain"></div>
+    <script>
+    $("#chain").kendoChainOfThought({
+        label: "Running tool",
+        svgIcon: "wrench"
+    });
+    </script>
+
+### svgIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - set the icon
+
+    <div id="chain"></div>
+    <script>
+    $("#chain").kendoChainOfThought({
+        label: "Running tool",
+        svgIcon: "wrench"
+    });
+    </script>
+
+### svgIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example - set the icon
@@ -190,12 +228,56 @@ Add supplemental text to an individual thought item displayed after the separato
     });
     </script>
 
-### thoughts.svgIcon `String`
+### thoughts.svgIcon `String|Object`
 
 The name of the SVG icon displayed for the thought item.
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 Assign an icon to an individual thought item inside the chain-of-thought body, set the visual symbol displayed in a sub-step row, configure which Kendo UI theme icon appears next to a thought entry, or customize the graphic identifier for a specific reasoning step.
+</div>
+
+#### Example - set an icon on a thought
+
+    <div id="chain"></div>
+    <script>
+    $("#chain").kendoChainOfThought({
+        label: "Running",
+        expanded: true,
+        thoughts: [
+            { label: "Searching", svgIcon: "search" }
+        ]
+    });
+    </script>
+
+### thoughts.svgIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - set an icon on a thought
+
+    <div id="chain"></div>
+    <script>
+    $("#chain").kendoChainOfThought({
+        label: "Running",
+        expanded: true,
+        thoughts: [
+            { label: "Searching", svgIcon: "search" }
+        ]
+    });
+    </script>
+
+### thoughts.svgIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example - set an icon on a thought

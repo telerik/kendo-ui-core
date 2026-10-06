@@ -63,10 +63,12 @@ How do I handle custom click events for action buttons in a Kendo UI Popover com
         });
     </script>
 
-### actions.icon `String`
+### actions.icon `String|Object`
 
 The name of the icon to display inside the button.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I set an icon for an action button within a Kendo UI popover? Configure or set an icon symbol for an action button within a popover interface by specifying the icon's identifier or name to visually represent the button’s function, enabling developers to customize button appearance with graphical icons, symbols, or glyphs for enhanced user interaction, styling, and intuitive action cues inside popover menus or dropdown actions.
@@ -90,6 +92,57 @@ How do I set an icon for an action button within a Kendo UI popover? Configure o
         });
     </script>
 
+### actions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - set the icon name
+
+    <span id="target">
+        Some Content
+    </span>
+
+    <script>
+        $(document).ready(function() {
+          $("#target").kendoPopover({
+            showOn: "click",
+            header: "Header text",
+            body: "Content description",
+            actionsLayout: "center",
+            actions: [{ text: "refresh", icon: { name: "arrow-rotate-cw" }, iconClass: "refresh-icon" }, { icon: { name: "pencil" }, iconClass: "edit-icon" }]
+          });
+        });
+    </script>
+
+### actions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - set the icon name
+
+    <span id="target">
+        Some Content
+    </span>
+
+    <script>
+        $(document).ready(function() {
+          $("#target").kendoPopover({
+            showOn: "click",
+            header: "Header text",
+            body: "Content description",
+            actionsLayout: "center",
+            actions: [{ text: "refresh", icon: { name: "arrow-rotate-cw", variant: "outline" }, iconClass: "refresh-icon" }, { icon: { name: "pencil", variant: "outline" }, iconClass: "edit-icon" }]
+          });
+        });
+    </script>
 
 ### actions.iconClass `String`
 

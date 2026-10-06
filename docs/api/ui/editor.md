@@ -169,10 +169,12 @@ How do I uniquely identify and reference AI prompt commands in a Kendo UI Editor
     });
     </script>
 
-### ai.aiPrompt.commands.icon `String`
+### ai.aiPrompt.commands.icon `String|Object`
 
 The icon of the command.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the visual representation of AI prompt commands in Kendo UI's Editor component? Configure or customize the visual representation for AI prompt commands within the editor by setting an icon, glyph, or image that visually indicates the command’s function; this includes using font icons, SVG graphics, CSS-based symbols, or images to clearly symbolize actions on command buttons, enabling intuitive command identification, interface customization, and enhanced user experience by controlling how commands are visually conveyed in AI-driven prompts and editor tools.
@@ -187,6 +189,59 @@ How do I customize the visual representation of AI prompt commands in Kendo UI's
             aiPrompt: {
                 commands: [{
                     icon: "gear",
+                    text: "Summarize"
+                }]
+            }
+        }
+    });
+    </script>
+
+### ai.aiPrompt.commands.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            aiPrompt: {
+                commands: [{
+                    icon: {
+                        name: "gear"
+                    },
+                    text: "Summarize"
+                }]
+            }
+        }
+    });
+    </script>
+
+### ai.aiPrompt.commands.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            aiPrompt: {
+                commands: [{
+                    icon: {
+                        name: "gear",
+                        variant: "outline"
+                    },
                     text: "Summarize"
                 }]
             }
@@ -325,10 +380,12 @@ How to set a unique identifier for an AI command in Kendo UI Editor? Set or spec
     });
     </script>
 
-### ai.commands.icon `String`
+### ai.commands.icon `String|Object`
 
 The icon of the command.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon for a specific command in Kendo UI Editor? Customize the toolbar or menu button appearance by configuring the visual icon tied to a command, using a string identifier such as an icon name, CSS class, or symbol to define and control how the icon is displayed within the editor’s interface, including setting, changing, or styling command icons for improved UX and intuitive command recognition.
@@ -342,6 +399,55 @@ How do I customize the icon for a specific command in Kendo UI Editor? Customize
         ai: {
             commands: [{
                 icon: "spell-checker",
+                text: "Proofread"
+            }]
+        }
+    });
+    </script>
+
+### ai.commands.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            commands: [{
+                icon: {
+                    name: "spell-checker"
+                },
+                text: "Proofread"
+            }]
+        }
+    });
+    </script>
+
+### ai.commands.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            commands: [{
+                icon: {
+                    name: "spell-checker",
+                    variant: "outline"
+                },
                 text: "Proofread"
             }]
         }
@@ -512,10 +618,12 @@ How do I assign a unique ID to inline AI prompt commands in Kendo UI for jQuery 
     });
     </script>
 
-### ai.inlineAIPrompt.commands.icon `String`
+### ai.inlineAIPrompt.commands.icon `String|Object`
 
 The icon of the command.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon for inline AI prompt commands in Kendo UI Editor? Control and customize the visual symbol, glyph, or icon shown alongside inline AI prompt commands within the editor interface, enabling you to set, change, or configure the command's graphical representation for buttons, labels, or toolbar elements, helping users identify or distinguish specific AI-driven actions or shortcuts through icons, visuals, or symbolic imagery.
@@ -530,6 +638,59 @@ How do I customize the icon for inline AI prompt commands in Kendo UI Editor? Co
             inlineAIPrompt: {
                 commands: [{
                     icon: "sparkline",
+                    text: "Enhance"
+                }]
+            }
+        }
+    });
+    </script>
+
+### ai.inlineAIPrompt.commands.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            inlineAIPrompt: {
+                commands: [{
+                    icon: {
+                        name: "sparkline"
+                    },
+                    text: "Enhance"
+                }]
+            }
+        }
+    });
+    </script>
+
+### ai.inlineAIPrompt.commands.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            inlineAIPrompt: {
+                commands: [{
+                    icon: {
+                        name: "sparkline",
+                        variant: "outline"
+                    },
                     text: "Enhance"
                 }]
             }

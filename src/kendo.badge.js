@@ -269,7 +269,7 @@ export const __meta__ = {
             that._icon = icon;
 
             // Handle badge.icon(<SVG />)
-            if (icon.indexOf('<svg') === 0) {
+                if (kendo.isString(icon) && icon.indexOf('<svg') === 0) {
                 var svgIcon = icon;
 
                 if (!/^<svg\b[^>]*\baria-hidden\s*=/i.test(svgIcon)) {

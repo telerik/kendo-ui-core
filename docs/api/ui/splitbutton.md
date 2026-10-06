@@ -13,13 +13,57 @@ Represents the Kendo UI SplitButton widget. Inherits from [Widget](/api/ui/widge
 
 ## Configuration
 
-### arrowIcon `String` *(default: 'chevron-down')*
+### arrowIcon `String|Object` *(default: 'chevron-down')*
 
 The icon rendered for the arrow button of the **SplitButton**.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How do I customize the arrow icon in Kendo UI SplitButton? Control, configure, or customize the icon displayed for dropdown toggles, arrow indicators, or expand buttons in split button components to visually signal menu or options expansion; set, change, or replace the arrow icon, toggle arrow graphic, or dropdown indicator to match design requirements, style preferences, or UI standards, enabling clear user recognition of expandable menus and improving user interface consistency and visual feedback for actionable split buttons with integrated dropdowns.
+</div>
+
+#### Example
+
+    <button id="splitbutton" type="button">Foo</button>
+    <script>
+    $("#splitbutton").kendoSplitButton({
+        items:[
+            { text: "item 1" },
+            { text: "item 2" }
+        ],
+        arrowIcon: "chevron-up"
+    });
+    </script>
+
+### arrowIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <button id="splitbutton" type="button">Foo</button>
+    <script>
+    $("#splitbutton").kendoSplitButton({
+        items:[
+            { text: "item 1" },
+            { text: "item 2" }
+        ],
+        arrowIcon: "chevron-up"
+    });
+    </script>
+
+### arrowIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example
@@ -82,12 +126,14 @@ How do I customize the appearance of a Kendo UI split button with different fill
         });
     </script>
 
-### icon `String`
+### icon `String|Object`
 
 Defines a name of an existing icon in the Kendo UI theme sprite. The icon will be applied as background image of a `span` element inside the **SplitButton**.
 The `span` element can be added automatically by the widget, or an existing element can be used, if it has a `k-icon` CSS class applied.
 For a list of available icon names, please refer to the [Icons demo](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to set an icon for a Kendo UI SplitButton? Configure or assign an icon for the split button using theme-based sprite icons by specifying the icon name to display consistent visual symbols, apply custom or predefined icons to control the button appearance with background images, set icons via CSS classes or automatically generated elements, customize button iconography for user interface clarity, and utilize theme icon sets for cohesive design integration by referencing available icon names or sprite resources.
@@ -103,6 +149,53 @@ How to set an icon for a Kendo UI SplitButton? Configure or assign an icon for t
             { text: "item 2" }
         ],
         icon: "cancel"
+    });
+    </script>
+
+### icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <button id="splitbutton" type="button">Cancel</button>
+    <script>
+    $("#splitbutton").kendoSplitButton({
+        items:[
+            { text: "item 1" },
+            { text: "item 2" }
+        ],
+        icon: {
+            name: "cancel"
+        }
+    });
+    </script>
+
+### icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <button id="splitbutton" type="button">Cancel</button>
+    <script>
+    $("#splitbutton").kendoSplitButton({
+        items:[
+            { text: "item 1" },
+            { text: "item 2" }
+        ],
+        icon: {
+            name: "cancel",
+            variant: "outline"
+        }
     });
     </script>
 
@@ -325,10 +418,12 @@ How can I hide specific menu items in a Kendo UI SplitButton? Control visibility
         });
     </script>
 
-### items.icon `String`
+### items.icon `String|Object`
 
 Specifies the icon of the item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon for SplitButton menu items in Kendo UI? Configure or customize the icon displayed alongside SplitButton menu items using various formats such as icon fonts, CSS classes, built-in icon sets, SVG graphics, or image resources. Control or set the visual indicators next to each dropdown option, enabling you to enhance button item representation by assigning specific graphical elements or symbols, supporting different rendering methods for flexible UI design and visual customization in interactive button menus.
@@ -343,6 +438,48 @@ How do I customize the icon for SplitButton menu items in Kendo UI? Configure or
                 { text: "Save", icon: "save" },
                 { text: "Download", icon: "download" },
                 { text: "Print", icon: "print" }
+            ]
+        });
+    </script>
+
+### items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Save", icon: { name: "save" } },
+                { text: "Download", icon: { name: "download" } },
+                { text: "Print", icon: { name: "print" } }
+            ]
+        });
+    </script>
+
+### items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Save", icon: { name: "save", variant: "outline" } },
+                { text: "Download", icon: { name: "download", variant: "outline" } },
+                { text: "Print", icon: { name: "print", variant: "outline" } }
             ]
         });
     </script>

@@ -2,6 +2,8 @@ top-navigation-product: asp-net-mvc
 path-prefix: /aspnet-mvc/documentation
 default-title-prefix: ASP.NET MVC
 
+disable-html-redirect: true
+
 primary-color:
   light: rgb(29, 136, 0)
   dark: rgb(104, 191, 81)

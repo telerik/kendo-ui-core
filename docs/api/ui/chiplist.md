@@ -194,15 +194,59 @@ How do I customize the collection of chip elements in a Kendo UI ChipList? Defin
         });
     </script>
 
-### items.icon `String` *(default: '')*
+### items.icon `String|Object` *(default: '')*
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the chip by a `span.k-icon` or `span.k-svg-icon` element.
 
 See [web font icons help article](/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How do I customize icons for individual chips in a ChipList? Set or customize an icon for individual chips within a list by specifying a theme-based font icon name or embedding custom SVG graphics, enabling developers to display visual symbols inside each chip element using standardized icon classes or scalable vector format, supporting scenarios like configuring badges, status indicators, or category markers within user interface components through font or SVG iconography for enhanced visual representation and consistent styling.
+</div>
+
+#### Example
+
+    <div id="chiplist"></div>
+    <script>
+        $('#chiplist').kendoChipList({
+            items: [
+                { icon: 'plus', label: 'Add' },
+                { icon: 'pencil', label: 'Edit' },
+                { icon: 'trash', label: 'Remove' },
+            ]
+        });
+    </script>
+
+### items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="chiplist"></div>
+    <script>
+        $('#chiplist').kendoChipList({
+            items: [
+                { icon: 'plus', label: 'Add' },
+                { icon: 'pencil', label: 'Edit' },
+                { icon: 'trash', label: 'Remove' },
+            ]
+        });
+    </script>
+
+### items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example

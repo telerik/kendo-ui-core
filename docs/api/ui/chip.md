@@ -11,15 +11,53 @@ Represents the Kendo UI Chip widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
-### icon `String` *(default: '')*
+### icon `String|Object` *(default: '')*
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the chip by a `span.k-icon` or `span.k-svg-icon` element.
 
 See [web font icons help article](/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How do I set an icon for a Kendo UI chip element using its configuration? Configure or customize a visual symbol or graphic element within the chip UI component by specifying an icon using either a predefined theme icon name or custom SVG markup, enabling developers to visually represent content, status, or categories inside the chip. This includes setting font-based icons or scalable vector graphics that render inline to enhance user interface clarity, support dynamic icon assignment, and facilitate consistent styling of chips with recognizable imagery. It supports use cases such as adding status indicators, category symbols, or decorative icons within chip elements, making it easy to control the appearance and semantic meaning of chip components through icons configured by name or SVG data.
+</div>
+
+#### Example
+
+    <span id="chip"></span>
+    <script>
+        $('#chip').kendoChip({
+            icon: 'plus',
+            label: 'Add'
+        });
+    </script>
+
+### icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <span id="chip"></span>
+    <script>
+        $('#chip').kendoChip({
+            icon: 'plus',
+            label: 'Add'
+        });
+    </script>
+
+### icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example
@@ -75,15 +113,55 @@ How can I customize the appearance of a Kendo UI chip's avatar element? Customiz
     </script>
 
 
-### removeIcon `String` *(default: '')*
+### removeIcon `String|Object` *(default: '')*
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content for the remove button when `removable=true`. The icon is rendered inside the chip by a `span.k-icon` or `span.k-svg-icon` element.
 
 See [web font icons help article](/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How to customize the close button icon in Kendo UI Chip? Customize the icon used for the removable chip’s close or delete button by configuring it with a predefined theme icon name or supplying custom SVG markup, enabling developers to control the visual appearance of the chip’s remove indicator whether using built-in icon sets or bespoke vector graphics, suitable for setting or changing the delete cross, close symbol, or removal glyph inside the chip’s UI element when toggling removable states or adjusting user interaction cues for chip deletion.
+</div>
+
+#### Example
+
+    <span id="chip"></span>
+    <script>
+        $('#chip').kendoChip({
+            removable: true,
+            removeIcon: 'x',
+            themeColor: 'success'
+        });
+    </script>
+
+### removeIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <span id="chip"></span>
+    <script>
+        $('#chip').kendoChip({
+            removable: true,
+            removeIcon: 'x',
+            themeColor: 'success'
+        });
+    </script>
+
+### removeIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example

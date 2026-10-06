@@ -346,6 +346,8 @@ How do I dynamically load content for expandable PanelBar items using AJAX calls
 
 Sets the field of the data item that provides the icon name of the **PanelBar** nodes.
 
+The field can also hold an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 
 <div class="meta-api-description">
 How do I configure icons for each node in my Kendo UI PanelBar using a specific field from my data source? Configure node icons by specifying the data source field that holds icon names or CSS classes to dynamically assign icons to hierarchical panels or menus. Enable binding of icon identifiers directly from your dataset for menu items, tree nodes, or accordion panels, controlling icon visuals through data-driven values. Set or customize which property in your input data maps to icon styling or glyphs for each navigational or collapsible element, supporting dynamic UI icon rendering from database fields or JSON attributes. Use field name references to toggle, update, or manage icons on expandable nodes based on your structured source data.

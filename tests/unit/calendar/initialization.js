@@ -53,6 +53,20 @@ describe("kendo.ui.Calendar initialization", function() {
         assert.isOk(header.find(".k-calendar-nav-fast")[0]);
     });
 
+    it("modern nav prev and next buttons contain only the icon without whitespace text nodes", function() {
+        let cal = new Calendar(div, { componentType: "modern" });
+        let buttons = cal.element.find(".k-calendar-nav-prev, .k-calendar-nav-next");
+
+        assert.equal(buttons.length, 2);
+
+        buttons.each(function() {
+            let textNodes = $(this).contents().filter(function() { return this.nodeType === 3; });
+
+            assert.equal(textNodes.length, 0);
+            assert.equal(this.children.length, 1);
+        });
+    });
+
     it("render table after header", function() {
         let cal = new Calendar(div);
 

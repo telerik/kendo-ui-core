@@ -11,12 +11,50 @@ Represents the Kendo UI ToolCall widget. Inherits from [Widget](/api/ui/widget).
 
 ## Configuration
 
-### svgIcon `String` *(default: "wrench")*
+### svgIcon `String|Object` *(default: "wrench")*
 
 The name of the SVG icon displayed in the step header.
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 Set or change the icon shown in the header of a tool call step, configure the SVG icon name for the tool indicator, specify a Kendo UI icon to represent the type of tool being invoked, customize the visual icon of an agent tool call component, or adjust the graphic symbol displayed next to the step label.
+</div>
+
+#### Example - set the icon
+
+    <div id="toolcall"></div>
+    <script>
+    $("#toolcall").kendoToolCall({
+        label: "Search",
+        svgIcon: "search"
+    });
+    </script>
+
+### svgIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - set the icon
+
+    <div id="toolcall"></div>
+    <script>
+    $("#toolcall").kendoToolCall({
+        label: "Search",
+        svgIcon: "search"
+    });
+    </script>
+
+### svgIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example - set the icon
@@ -204,12 +242,52 @@ Set an error message or failure description shown when a tool call encounters an
     });
     </script>
 
-### statusSVGIcon `String` *(default: null)*
+### statusSVGIcon `String|Object` *(default: null)*
 
 Overrides the default SVG icon used inside the state badge. When `null`, a built-in icon is chosen based on the current `state`.
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 Override or customize the icon shown in the tool call state badge, replace the default completed, error, or awaiting-approval badge icon with a different Kendo UI SVG icon, configure a custom status indicator symbol for the step header badge, or set a specific icon name to use in the state badge instead of the automatically chosen one.
+</div>
+
+#### Example - set a custom status icon
+
+    <div id="toolcall"></div>
+    <script>
+    $("#toolcall").kendoToolCall({
+        label: "process_data",
+        state: "completed",
+        statusSVGIcon: "star"
+    });
+    </script>
+
+### statusSVGIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - set a custom status icon
+
+    <div id="toolcall"></div>
+    <script>
+    $("#toolcall").kendoToolCall({
+        label: "process_data",
+        state: "completed",
+        statusSVGIcon: "star"
+    });
+    </script>
+
+### statusSVGIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example - set a custom status icon

@@ -168,15 +168,55 @@ How to set up background fill for a floating action button in Kendo UI? Configur
     });
     </script>
 
-### icon `String` *(default: "")*
+### icon `String|Object` *(default: "")*
 
 Specifies the name for an existing icon in a Kendo UI theme that is rendered in the FloatingActionButton.
 
 See [`the Web Font Icons help article`](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How do I set an icon for a Kendo UI floating action button? Set, configure, or customize an icon within a floating action button using predefined theme icons or web font glyphs, allowing developers to display, embed, or render scalable vector icons inside action buttons, choose from a library of theme-compatible icons, control the button’s visual symbol, enable iconography for buttons, incorporate standard or custom icon names, and adjust the button’s icon representation based on theme web-font sets for consistent UI design and user interaction.
+</div>
+
+#### Example - display icon
+
+	<button id="fab-icon"></button>
+
+	<script>
+        $('#fab-icon').kendoFloatingActionButton({
+            align: 'top start',
+            icon: 'plus'
+        });
+    </script>
+
+### icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - display icon
+
+	<button id="fab-icon"></button>
+
+	<script>
+        $('#fab-icon').kendoFloatingActionButton({
+            align: 'top start',
+            icon: 'plus'
+        });
+    </script>
+
+### icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example - display icon
@@ -308,12 +348,14 @@ How do I apply custom CSS classes to individual buttons in a Kendo UI Floating A
         });
     </script>
 
-### items.icon `String`
+### items.icon `String|Object`
 
 Specifies the name for an existing icon in a Kendo UI theme that is rendered in the speed-dial item.
 
 See [`the Web Font Icons help article`](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I change the icon in a Floating Action Button speed-dial item using Kendo UI theme icons? Set or customize the icon displayed in a speed-dial item within a floating action button by specifying the name of a Kendo UI theme icon or glyph, enabling control over the visual symbol shown on each item. Configure, change, or update the icon to represent actions with web font icons, glyphs, or theme-based visuals, supporting use cases like specifying, enabling, or switching icons within speed-dial menus. This includes searching for how to assign icons by name, use existing icon libraries, replace default glyphs, and render scalable vector icons inside floating action button items, ensuring consistent, customizable visuals aligned with Kendo UI’s icon sets.
@@ -335,6 +377,53 @@ How do I change the icon in a Floating Action Button speed-dial item using Kendo
         });
     </script>
 
+### items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+	<button id="fab-items"></button>
+
+	<script>
+        $('#fab-items').kendoFloatingActionButton({
+            align: 'top start',
+            icon: 'home',
+            items: [{
+                icon: 'download',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+                click: function() { console.log('download action'); }
+            }]
+        });
+    </script>
+
+### items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+	<button id="fab-items"></button>
+
+	<script>
+        $('#fab-items').kendoFloatingActionButton({
+            align: 'top start',
+            icon: 'home',
+            items: [{
+                icon: 'download',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+                click: function() { console.log('download action'); }
+            }]
+        });
+    </script>
 
 ### items.label `String`
 

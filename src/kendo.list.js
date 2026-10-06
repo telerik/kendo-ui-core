@@ -3309,9 +3309,7 @@ export const __meta__ = {
             const groupItem = $(`
                 <li class='${groupItemClass}' role='presentation' id='${groupId}'>
                     ${groupIconHtml}
-                    <span class='${groupTextClass}'>
-                        ${groupText}
-                    </span>
+                    <span class='${groupTextClass}'>${groupText}</span>
                 </li>
             `);
 

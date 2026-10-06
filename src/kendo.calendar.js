@@ -93,15 +93,11 @@ export const __meta__ = {
             </button>
             <span class="k-spacer"></span>
             <span class="k-calendar-nav">
-                <button tabindex="-1" ${actionAttr}=${isRtl ? "next" : "prev"} class="k-calendar-nav-prev k-button ${size} k-button-flat k-icon-button" aria-label="${messages.navigateToPast}">
-                    ${kendo.ui.icon({ icon: `chevron-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}
-                </button>
+                <button tabindex="-1" ${actionAttr}=${isRtl ? "next" : "prev"} class="k-calendar-nav-prev k-button ${size} k-button-flat k-icon-button" aria-label="${messages.navigateToPast}">${kendo.ui.icon({ icon: `chevron-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}</button>
                 <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat">
                     <span class="k-button-text">${kendo.htmlEncode(messages.today)}</span>
                 </button>
-                <button tabindex="-1" ${actionAttr}=${isRtl ? "prev" : "next"} class="k-calendar-nav-next k-button ${size} k-button-flat k-icon-button" aria-label="${messages.navigateToFuture}">
-                    ${kendo.ui.icon({ icon: `chevron-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}
-                </button>
+                <button tabindex="-1" ${actionAttr}=${isRtl ? "prev" : "next"} class="k-calendar-nav-next k-button ${size} k-button-flat k-icon-button" aria-label="${messages.navigateToFuture}">${kendo.ui.icon({ icon: `chevron-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}</button>
             </span>
         </div>`;
 

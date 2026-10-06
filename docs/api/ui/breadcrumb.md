@@ -30,13 +30,53 @@ How do I sync Kendo UI breadcrumb with browser location on initialization? Confi
         });
 	</script>
 
-### delimiterIcon `String` *(default: "chevron-right")*
+### delimiterIcon `String|Object` *(default: "chevron-right")*
 
 Defines a name of an existing icon in [the Kendo UI Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web). The icon will be applied as separator between the segments of the **Breadcrumb** path.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How do I customize the separator icon in Kendo UI Breadcrumb widget? Configure or customize the visual separator between breadcrumb navigation items by selecting or setting the icon that divides path segments, enabling control over the appearance of breadcrumb dividers using predefined icon names or visual symbols from a web font icon set, including changing, replacing, or styling the breadcrumb separators to enhance navigation clarity and UI consistency.
+</div>
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+            delimiterIcon: "shape-line",
+			value: 'Telerik UI/Navigation/Breadcrumb'
+        });
+	</script>
+
+### delimiterIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+            delimiterIcon: "shape-line",
+			value: 'Telerik UI/Navigation/Breadcrumb'
+        });
+	</script>
+
+### delimiterIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example
@@ -187,10 +227,12 @@ How do I customize the visible label for each entry in a Kendo UI breadcrumb nav
 		});
 	</script>
 
-### items.icon `String`
+### items.icon `String|Object`
 
 Defines the icon to be rendered.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon displayed next to each breadcrumb item? Control and customize the visual icons or markers displayed next to each navigation path segment by setting graphical elements such as CSS class-based icons, inline SVG graphics, image URLs, or symbol markers within breadcrumb items; configure, enable, or replace the icon representation alongside breadcrumb labels to enhance navigation clarity, customize UI indicators, or visually denote specific path elements in breadcrumb trails and navigation components.
@@ -206,6 +248,50 @@ How do I customize the icon displayed next to each breadcrumb item? Control and 
 				{ type: "rootitem", icon: "home", showIcon: true, showText: false },
 				{ type: "item", icon: "folder", text: "Documents", showIcon: true },
 				{ type: "item", icon: "file", text: "readme.txt", showIcon: true }
+			]
+		});
+	</script>
+
+### items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			items: [
+				{ type: "rootitem", icon: { name: "home" }, showIcon: true, showText: false },
+				{ type: "item", icon: { name: "folder" }, text: "Documents", showIcon: true },
+				{ type: "item", icon: { name: "file" }, text: "readme.txt", showIcon: true }
+			]
+		});
+	</script>
+
+### items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			items: [
+				{ type: "rootitem", icon: { name: "home", variant: "outline" }, showIcon: true, showText: false },
+				{ type: "item", icon: { name: "folder", variant: "outline" }, text: "Documents", showIcon: true },
+				{ type: "item", icon: { name: "file", variant: "outline" }, text: "readme.txt", showIcon: true }
 			]
 		});
 	</script>
@@ -418,15 +504,55 @@ How do I control breadcrumb link behavior in Kendo UI for jQuery? Enable or disa
         });
 	</script>
 
-### rootIcon `String` *(default: "home")*
+### rootIcon `String|Object` *(default: "home")*
 
 Defines a name of an existing icon in [the Kendo UI Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web). The icon will be applied as the first item(root) of **Breadcrumb** path.
 
 The root icon is clickable and resets the value of the component.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How do I configure a home icon in Kendo UI breadcrumb navigation? Configure a clickable home or root icon to appear as the first element in breadcrumb navigation that serves as a reset or starting point; customize this icon by specifying any supported icon name from the web font icon set to enable quick navigation back to the initial state or homepage, allowing users to efficiently reset or clear current breadcrumb selections and improve navigation flow.
+</div>
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+            rootIcon: "cloud",
+			value: 'Telerik UI/Navigation/Breadcrumb'
+        });
+	</script>
+
+### rootIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+            rootIcon: "cloud",
+			value: 'Telerik UI/Navigation/Breadcrumb'
+        });
+	</script>
+
+### rootIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example

@@ -1710,6 +1710,9 @@ export const __meta__ = {
                 text: originalTool.text || messages[toolOptions.name || toolOptions.property],
                 attributes: attributes,
             });
+            if (originalTool.icon !== undefined) {
+                toolOptions.icon = originalTool.icon;
+            }
 
             if (toolOptions.type === "component") {
                 if (toolOptions.items) {

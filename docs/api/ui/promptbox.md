@@ -86,9 +86,11 @@ How do I change the fill style of the Action button in Kendo UI PromptBox? Set t
     });
     </script>
 
-### actionButton.icon `String`
+### actionButton.icon `String|Object`
 
 Defines the font icon name for the send state.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the send icon in Kendo UI PromptBox Action button? Set a custom font icon to display on the Action button when in the normal (send) state. Use icon names from the Kendo UI icon library.
@@ -106,12 +108,99 @@ How do I customize the send icon in Kendo UI PromptBox Action button? Set a cust
     });
     </script>
 
-### actionButton.loadingIcon `String`
+### actionButton.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="promptbox"></div>
+    <script>
+    $("#promptbox").kendoPromptBox({
+        actionButton: {
+            icon: {
+                name: "paper-plane"
+            }
+        },
+        placeholder: "Custom send icon..."
+    });
+    </script>
+
+### actionButton.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="promptbox"></div>
+    <script>
+    $("#promptbox").kendoPromptBox({
+        actionButton: {
+            icon: {
+                name: "paper-plane",
+                variant: "outline"
+            }
+        },
+        placeholder: "Custom send icon..."
+    });
+    </script>
+
+### actionButton.loadingIcon `String|Object`
 
 Defines the font icon name for the loading/stop state.
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How do I customize the loading/stop icon in Kendo UI PromptBox? Set a custom font icon to display on the Action button when in the loading state. This icon indicates that generation can be stopped.
+</div>
+
+#### Example
+
+    <div id="promptbox"></div>
+    <script>
+    $("#promptbox").kendoPromptBox({
+        actionButton: {
+            loadingIcon: "stop"
+        },
+        placeholder: "Custom loading icon..."
+    });
+    </script>
+
+### actionButton.loadingIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="promptbox"></div>
+    <script>
+    $("#promptbox").kendoPromptBox({
+        actionButton: {
+            loadingIcon: "stop"
+        },
+        placeholder: "Custom loading icon..."
+    });
+    </script>
+
+### actionButton.loadingIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example
@@ -409,9 +498,11 @@ How do I change the fill style of the File Select button in Kendo UI PromptBox? 
     });
     </script>
 
-### fileSelectButton.icon `String`
+### fileSelectButton.icon `String|Object`
 
 Defines the font icon name for the File Select button.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon of the File Select button in Kendo UI PromptBox? Set the icon option to display a custom font icon on the button. Use icon names from the Kendo UI icon library.
@@ -424,6 +515,51 @@ How do I customize the icon of the File Select button in Kendo UI PromptBox? Set
     $("#promptbox").kendoPromptBox({
         fileSelectButton: {
             icon: "folder-open"
+        },
+        placeholder: "Custom file icon..."
+    });
+    </script>
+
+### fileSelectButton.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="promptbox"></div>
+    <script>
+    $("#promptbox").kendoPromptBox({
+        fileSelectButton: {
+            icon: {
+                name: "folder-open"
+            }
+        },
+        placeholder: "Custom file icon..."
+    });
+    </script>
+
+### fileSelectButton.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="promptbox"></div>
+    <script>
+    $("#promptbox").kendoPromptBox({
+        fileSelectButton: {
+            icon: {
+                name: "folder-open",
+                variant: "outline"
+            }
         },
         placeholder: "Custom file icon..."
     });
@@ -879,9 +1015,11 @@ How do I change the fill style of the Speech to Text button in Kendo UI PromptBo
     });
     </script>
 
-### speechToTextButton.icon `String`
+### speechToTextButton.icon `String|Object`
 
 Defines the font icon name for the Speech to Text button.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon of the Speech to Text button in Kendo UI PromptBox? Set the icon option to display a custom font icon on the button. Use icon names from the Kendo UI icon library.
@@ -894,6 +1032,51 @@ How do I customize the icon of the Speech to Text button in Kendo UI PromptBox? 
     $("#promptbox").kendoPromptBox({
         speechToTextButton: {
             icon: "microphone"
+        },
+        placeholder: "Custom speech icon..."
+    });
+    </script>
+
+### speechToTextButton.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="promptbox"></div>
+    <script>
+    $("#promptbox").kendoPromptBox({
+        speechToTextButton: {
+            icon: {
+                name: "microphone"
+            }
+        },
+        placeholder: "Custom speech icon..."
+    });
+    </script>
+
+### speechToTextButton.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="promptbox"></div>
+    <script>
+    $("#promptbox").kendoPromptBox({
+        speechToTextButton: {
+            icon: {
+                name: "microphone",
+                variant: "outline"
+            }
         },
         placeholder: "Custom speech icon..."
     });

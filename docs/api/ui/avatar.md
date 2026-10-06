@@ -91,10 +91,12 @@ How do I control the appearance of an avatar in Kendo UI for jQuery? control ava
         });
     </script>
 
-### icon `String`
+### icon `String|Object`
 
 Specifies an icon name to be used if the avatar `type` is set to `icon`. For a list of available icon names, please refer to the [Web Font Icons article](/styles-and-layout/icons-web).
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I set an icon inside a Kendo UI avatar using its glyph, symbol, or character? Specify or set the icon glyph, symbol, or character to display inside an avatar or user icon by naming the font icon or web font icon identifier; customize or control which icon or icon font appears when using icon-based avatars, enable or configure specific font-based glyphs inside avatar placeholders, provide the icon name string or font icon reference to render symbols, pictograms, or font icons within avatar components or user profiles.
@@ -107,6 +109,47 @@ How do I set an icon inside a Kendo UI avatar using its glyph, symbol, or charac
         $("#avatar").kendoAvatar({
             type: "icon",
             icon: "file-config"
+        });
+    </script>
+
+### icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="avatar"></div>
+    <script>
+        $("#avatar").kendoAvatar({
+            type: "icon",
+            icon: {
+                name: "file-config"
+            }
+        });
+    </script>
+
+### icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="avatar"></div>
+    <script>
+        $("#avatar").kendoAvatar({
+            type: "icon",
+            icon: {
+                name: "file-config",
+                variant: "outline"
+            }
         });
     </script>
 

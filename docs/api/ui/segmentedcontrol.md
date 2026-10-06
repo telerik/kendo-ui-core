@@ -77,10 +77,12 @@ How do I disable a specific button in a Kendo UI SegmentedControl? Control the e
     });
     </script>
 
-### items.icon `String` *(default: null)*
+### items.icon `String|Object` *(default: null)*
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the button.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I add an icon to a segment button in a Kendo UI SegmentedControl? Set or configure a visual icon for individual segment buttons by specifying an icon name from the Kendo UI icon set or providing SVG content, display icons alongside text labels in segmented control buttons, customize the visual representation of each segment with theme-compatible icons, and enhance the user interface by combining text and iconography within the segmented control items.
@@ -94,6 +96,46 @@ How do I add an icon to a segment button in a Kendo UI SegmentedControl? Set or 
       items: [
         { text: "Settings", icon: "gear", value: "settings" },
         { text: "Home", icon: "home", value: "home" }
+      ]
+    });
+    </script>
+
+### items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - set an icon for an item
+
+    <div id="segmentedControl"></div>
+    <script>
+    $("#segmentedControl").kendoSegmentedControl({
+      items: [
+        { text: "Settings", icon: { name: "gear" }, value: "settings" },
+        { text: "Home", icon: { name: "home" }, value: "home" }
+      ]
+    });
+    </script>
+
+### items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - set an icon for an item
+
+    <div id="segmentedControl"></div>
+    <script>
+    $("#segmentedControl").kendoSegmentedControl({
+      items: [
+        { text: "Settings", icon: { name: "gear", variant: "outline" }, value: "settings" },
+        { text: "Home", icon: { name: "home", variant: "outline" }, value: "home" }
       ]
     });
     </script>

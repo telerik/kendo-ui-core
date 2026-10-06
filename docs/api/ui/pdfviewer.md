@@ -1394,9 +1394,11 @@ How do I configure the PDFViewer toolbar to show icons in both main and overflow
     });
     </script>
 
-### toolbar.items.icon `String`
+### toolbar.items.icon `String|Object`
 Sets icon for the item. The icon should be one of the existing in the Kendo UI theme sprite.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How can I customize the icons in the PDFViewer toolbar with Kendo UI for jQuery? Customize the toolbar icon by specifying which glyph or symbol appears for each toolbar button in the PDF viewer interface, enabling configuration of button visuals, icon themes, symbol sets, and appearance to match design requirements, with options to select from predefined icons, change button images, modify toolbar button styles, control icon display, and tailor the toolbar’s look and feel through icon assignment and theming support.
@@ -1413,6 +1415,73 @@ How can I customize the icons in the PDFViewer toolbar with Kendo UI for jQuery?
                     type: "button",
                     text: "Print",
                     icon: "print"
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
+### toolbar.items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Print",
+                    icon: {
+                        name: "print"
+                    }
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
+### toolbar.items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Print",
+                    icon: {
+                        name: "print",
+                        variant: "outline"
+                    }
                 },
                 "pager"
             ]

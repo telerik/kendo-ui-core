@@ -1493,10 +1493,12 @@ How do I customize the prefix label in a Kendo UI MultiSelect widget? Configure 
         });
     </script>
 
-### prefixOptions.icon `String`
+### prefixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How can I customize the icon shown in a Kendo UI MultiSelect's prefix area? Configure or customize the prefix icon displayed in a multi-select component by specifying either a predefined theme icon name or embedding custom SVG markup; control the visual indicator shown before selected options using built-in icon sets or raw SVG content to set, change, or override the prefix area symbol, enabling tailored iconography for dropdown selections, multi-choice inputs, and user interface prefixes in multi-select elements.
@@ -1518,6 +1520,67 @@ How can I customize the icon shown in a Kendo UI MultiSelect's prefix area? Conf
             },
             prefixOptions: {
                 icon: "search"
+            }
+        })
+    </script>
+
+### prefixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="prefix" />
+    <script>
+        $("#prefix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            prefixOptions: {
+                icon: {
+                    name: "search"
+                }
+            }
+        })
+    </script>
+
+### prefixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="prefix" />
+    <script>
+        $("#prefix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            prefixOptions: {
+                icon: {
+                    name: "search",
+                    variant: "outline"
+                }
             }
         })
     </script>
@@ -1610,10 +1673,12 @@ How to customize suffix elements in Kendo UI MultiSelect widget? Control and cus
         });
     </script>
 
-### suffixOptions.icon `String`
+### suffixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How can I customize the icon that appears after selected items in a Kendo UI MultiSelect? Control or customize the trailing icon or visual indicator that appears after selected items in a multi-select input field, enabling configuration of the suffix icon using predefined icon names from Kendo UI themes or by providing custom SVG content to display unique or branded graphics as the suffix, allowing developers to set, change, or override the icon that appears at the end of selected options for clearer user interface cues or enhanced design consistency.
@@ -1635,6 +1700,67 @@ How can I customize the icon that appears after selected items in a Kendo UI Mul
             },
             suffixOptions: {
                 icon: "search"
+            }
+        })
+    </script>
+
+### suffixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="suffix" />
+    <script>
+        $("#suffix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            suffixOptions: {
+                icon: {
+                    name: "search"
+                }
+            }
+        })
+    </script>
+
+### suffixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="suffix" />
+    <script>
+        $("#suffix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            suffixOptions: {
+                icon: {
+                    name: "search",
+                    variant: "outline"
+                }
             }
         })
     </script>

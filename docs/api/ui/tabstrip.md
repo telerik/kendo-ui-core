@@ -545,12 +545,14 @@ How do I customize the content of each tab in a Kendo UI TabStrip? Define or con
         });
     </script>
 
-### dataSource.icon `String` *(default: "")*
+### dataSource.icon `String|Object` *(default: "")*
 
 Тhe name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the tab element.
 
 See [web icons help article](https://www.telerik.com/kendo-jquery-ui/documentation/styles-and-layout/sass-themes/svg-icons) for more details on Kendo UI icons.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to set custom icons for tab headers in Kendo UI TabStrip? Set or configure icons for tab headers by specifying a predefined icon name from Kendo UI themes or by supplying custom SVG content to visually enhance tabs, control tab imagery, customize glyph appearance within tab elements, enable icon display on tabs, and customize or change tab icon graphics dynamically for better UI navigation and branding consistency.
@@ -567,6 +569,52 @@ How to set custom icons for tab headers in Kendo UI TabStrip? Set or configure i
             dataSource: [
               { text: "Home", icon: "home", content: "Home content" },
               { text: "Settings", icon: "gear", content: "Settings content" }
+            ]
+        });
+    </script>
+
+### dataSource.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataIconField: "icon",
+            dataSource: [
+              { text: "Home", icon: { name: "home" }, content: "Home content" },
+              { text: "Settings", icon: { name: "gear" }, content: "Settings content" }
+            ]
+        });
+    </script>
+
+### dataSource.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataIconField: "icon",
+            dataSource: [
+              { text: "Home", icon: { name: "home", variant: "outline" }, content: "Home content" },
+              { text: "Settings", icon: { name: "gear", variant: "outline" }, content: "Settings content" }
             ]
         });
     </script>
@@ -682,10 +730,12 @@ How to add custom buttons to each tab in Kendo UI TabStrip? Add and customize in
         });
     </script>
 
-### dataSource.actions.icon `String` *(default: "")*
+### dataSource.actions.icon `String|Object` *(default: "")*
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content that is used for the action button.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How can I customize the appearance of action buttons in a Kendo UI TabStrip? Configure or customize the visual representation of action buttons in tab strip components by setting icons through icon names from predefined UI themes or by providing custom SVG markup strings; this enables control over action button appearance, including styling, graphical symbols, or unique icons for toolbar actions, navigation tabs, or interactive controls, supporting scenarios such as replacing default icons, enhancing UI clarity, or integrating branded graphics within dynamic tab bars.
@@ -705,6 +755,75 @@ How can I customize the appearance of action buttons in a Kendo UI TabStrip? Con
                 actions: [
                   {
                     icon: "pencil",
+                    action: function(e) {
+                      console.log("Edit tab", e);
+                    }
+                  }
+                ]
+              }
+            ]
+        });
+    </script>
+
+### dataSource.actions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              {
+                text: "Tab with actions",
+                content: "Tab content",
+                actions: [
+                  {
+                    icon: {
+                        name: "pencil"
+                    },
+                    action: function(e) {
+                      console.log("Edit tab", e);
+                    }
+                  }
+                ]
+              }
+            ]
+        });
+    </script>
+
+### dataSource.actions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              {
+                text: "Tab with actions",
+                content: "Tab content",
+                actions: [
+                  {
+                    icon: {
+                        name: "pencil",
+                        variant: "outline"
+                    },
                     action: function(e) {
                       console.log("Edit tab", e);
                     }
