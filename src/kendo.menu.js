@@ -29,6 +29,14 @@ export const __meta__ = {
         keys = kendo.keys,
         Widget = ui.Widget,
         excludedNodesRegExp = /^(ul|a|div)$/i,
+        validAttributeNameRegExp = /^[a-zA-Z][\w:.-]*$/,
+        eventHandlerRegExp = /^on/i,
+        // srcdoc holds markup rather than a URL, so neither encoding nor URL sanitization makes it safe.
+        markupAttributeRegExp = /^srcdoc$/i,
+        urlAttributeRegExp = /^(href|xlink:href|action|formaction|cite|data|ping|poster|background|longdesc|manifest)$/i,
+        imageSrcAttributeRegExp = /^src$/i,
+        generatedItemAttributeRegExp = /^(class|role|aria-controls|aria-haspopup|aria-disabled|aria-expanded)$/i,
+        generatedContentAttributeRegExp = /^tabindex$/i,
         NS = ".kendoMenu",
         IMG = "img",
         OPEN = "open",
@@ -87,6 +95,7 @@ export const __meta__ = {
         KENDO_KEYDOWN = "kendoKeydown",
         ARIA_EXPANDED = "aria-expanded",
         ROLE = "role",
+        MENUITEMCHECKBOX = "menuitemcheckbox",
 
         bindings = {
             text: "dataTextField",
@@ -124,8 +133,10 @@ export const __meta__ = {
                     result += " " + encode(item.cssClass);
                 }
 
-                if (item.attr && item.attr.hasOwnProperty("class")) {
-                    result += " " + encode(item.attr["class"]);
+                var cssClass = getCssClass(item.attr);
+
+                if (cssClass) {
+                    result += " " + encode(cssClass);
                 }
 
                 if (item.selected) {
@@ -136,55 +147,19 @@ export const __meta__ = {
             },
 
             itemCssAttributes: function(item) {
-                var result = "";
-                var attributes = item.attr || {};
+                return serializeAttributes(item.attr, generatedItemAttributeRegExp);
+            },
 
-                for (var attr in attributes) {
-                    if (attributes.hasOwnProperty(attr) && attr !== "class") {
-                        result += attr + "=\"" + encode(attributes[attr]) + "\" ";
-                    }
-                }
-
-                return result;
+            itemRole: function(item) {
+                return getAttributeValue(item.attr, ROLE) === MENUITEMCHECKBOX ? MENUITEMCHECKBOX : "menuitem";
             },
 
             imageCssAttributes: function(imgAttributes) {
-                var result = "";
-                var attributes = imgAttributes && imgAttributes.toJSON ? imgAttributes.toJSON() : {};
-
-                if (!attributes['class']) {
-                    attributes['class'] = IMAGE;
-                } else {
-                    attributes['class'] += " " + IMAGE;
-                }
-
-                for (var attr in attributes) {
-                    if (attributes.hasOwnProperty(attr)) {
-                        result += attr + "=\"" + encode(attributes[attr]) + "\" ";
-                    }
-                }
-
-                return result;
+                return serializeAttributes(mergeCssClass(imgAttributes, IMAGE));
             },
 
             contentCssAttributes: function(item) {
-                var result = "";
-                var attributes = item.contentAttr || {};
-                var defaultClasses = "k-content k-menu-group";
-
-                if (!attributes['class']) {
-                    attributes['class'] = defaultClasses;
-                } else {
-                    attributes['class'] += " " + defaultClasses;
-                }
-
-                for (var attr in attributes) {
-                    if (attributes.hasOwnProperty(attr)) {
-                        result += attr + "=\"" + encode(attributes[attr]) + "\" ";
-                    }
-                }
-
-                return result;
+                return serializeAttributes(mergeCssClass(item.contentAttr, "k-content k-menu-group"), generatedContentAttributeRegExp);
             },
 
             textClass: function() {
@@ -207,6 +182,76 @@ export const __meta__ = {
                 return item.content ? item.content : "&nbsp;";
             }
     };
+
+    // The rendered attribute name is not encodable, so unsafe names are dropped instead.
+    function serializeAttributes(attributes, skipRegExp) {
+        var result = "";
+        var uidAttribute = kendo.attr("uid").toLowerCase();
+
+        attributes = toPlainAttributes(attributes);
+
+        for (var attr in attributes) {
+            if (!Object.prototype.hasOwnProperty.call(attributes, attr) ||
+                !validAttributeNameRegExp.test(attr) ||
+                eventHandlerRegExp.test(attr) ||
+                markupAttributeRegExp.test(attr) ||
+                attr.toLowerCase() === uidAttribute ||
+                (skipRegExp && skipRegExp.test(attr))) {
+                continue;
+            }
+
+            result += attr + "=\"" + sanitizeAttributeValue(attr, attributes[attr]) + "\" ";
+        }
+
+        return result;
+    }
+
+    function sanitizeAttributeValue(name, value) {
+        if (imageSrcAttributeRegExp.test(name)) {
+            return kendo.sanitizeImageSrc(value);
+        }
+
+        return urlAttributeRegExp.test(name) ? kendo.sanitizeLink(value) : encode(value);
+    }
+
+    function toPlainAttributes(attributes) {
+        return attributes && kendo.isFunction(attributes.toJSON) ? attributes.toJSON() : extend({}, attributes);
+    }
+
+    function mergeCssClass(attributes, defaultClasses) {
+        var result = toPlainAttributes(attributes);
+        var cssClass = getCssClass(result);
+
+        for (var name in result) {
+            if (name.toLowerCase() === "class") {
+                delete result[name];
+            }
+        }
+
+        result["class"] = cssClass ? cssClass + " " + defaultClasses : defaultClasses;
+
+        return result;
+    }
+
+    function getCssClass(attributes) {
+        var result = "";
+
+        for (var name in attributes) {
+            if (name.toLowerCase() === "class") {
+                result = result ? result + " " + attributes[name] : attributes[name];
+            }
+        }
+
+        return result;
+    }
+
+    function getAttributeValue(attributes, name) {
+        for (var key in attributes) {
+            if (key.toLowerCase() === name) {
+                return attributes[key];
+            }
+        }
+    }
 
     function getEffectDirection(direction, root) {
         direction = direction.split(" ")[!root + 0] || direction;
@@ -2074,7 +2119,7 @@ export const __meta__ = {
                     if (hasChildren && !focusItem.hasClass(DISABLEDSTATE)) {
                         that.open(focusItem);
                         that._moveFocus(focusItem, that._childPopupElement(focusItem).children().find("li").first());
-                    } else if (focusItem.is("li") && focusItem.attr("role") === "menuitemcheckbox") {
+                    } else if (focusItem.is("li") && focusItem.attr(ROLE) === MENUITEMCHECKBOX) {
                         focusItem.find(".k-checkbox").attr("checked", true);
                     } else {
                         that._moveFocusToRoot(focusItem, that._findRootParent(focusItem));
@@ -2596,7 +2641,7 @@ export const __meta__ = {
                         subGroup = data.subGroup;
                     var contentHtml = fieldAccessor("content")(item);
                     var groupId = kendo.guid();
-                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items || item.content) ? 'aria-controls="' + groupId + '"' : '' } ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items || item.content ? "aria-haspopup='true'" : ''}` +
+                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items || item.content) ? 'aria-controls="' + groupId + '"' : '' } ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='${rendering.itemRole(item)}'  ${item.items || item.content ? "aria-haspopup='true'" : ''}` +
                         `${item.enabled === false ? "aria-disabled='true'" : ''}` +
                         kendo.attr("uid") + `='${item.uid}' ` +
                         ((item.items && item.items.length > 0) || item.content ?

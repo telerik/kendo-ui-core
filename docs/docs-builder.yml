@@ -28,8 +28,8 @@ liquid-output-delimiter-right: "}}"
 liquid:
   product: "Kendo UI for jQuery"
   platform: "kendo-ui"
-  cdnVersion: "2026.3.811"
-  themesCdnVersion: "14.5.0"
+  cdnVersion: "2026.3.1008"
+  themesCdnVersion: "14.6.1"
 
 markdown-replacements:
 # Already-prefixed member slug paths with javascript/ → anchor on type page
@@ -52,8 +52,8 @@ default-code-block-language: js
 
 kendo-api-path: ./api
 dojo-scripts:
-  kendoCdnVersion: 2026.3.811
-  themesCdnVersion: 14.5.0
+  kendoCdnVersion: 2026.3.1008
+  themesCdnVersion: 14.6.1
   pdfJsVersion: 5.5.207
   jQueryVersion: 3.7.1
 
@@ -1086,7 +1086,7 @@ redirects:
   to: https://www.telerik.com/aspnet-mvc/documentation/$1
 
 - from: ^/api/aspnet-mvc/?(.*)$
-  to: https://www.telerik.com/aspnet-mvc/documentation/api/$1
+  to: https://www.telerik.com/aspnet-mvc/documentation/api/kendo.mvc.ui.$1
 
 - from: ^/api/javascript/ui/grid/configuration/allowcopy.(delimeter)$
   to: /api/ui/grid/configuration/allowcopy
