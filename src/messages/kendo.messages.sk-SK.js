@@ -1601,4 +1601,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Presuňte potiahnutím",
+        "movedUp": "Presunuté nahor",
+        "movedDown": "Presunuté nadol",
+        "movedLeft": "Presunuté doľava",
+        "movedRight": "Presunuté doprava"
+    });
+}
+
 })(window.kendo.jQuery);

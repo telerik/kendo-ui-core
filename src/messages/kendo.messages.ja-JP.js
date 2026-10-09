@@ -1655,4 +1655,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "ドラッグして再配置",
+        "movedUp": "上に移動しました",
+        "movedDown": "下に移動しました",
+        "movedLeft": "左に移動しました",
+        "movedRight": "右に移動しました"
+    });
+}
+
 })(window.kendo.jQuery);

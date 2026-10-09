@@ -1325,4 +1325,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Dra for å flytte",
+        "movedUp": "Flyttet opp",
+        "movedDown": "Flyttet ned",
+        "movedLeft": "Flyttet til venstre",
+        "movedRight": "Flyttet til høyre"
+    });
+}
+
 })(window.kendo.jQuery);

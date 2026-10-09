@@ -1688,4 +1688,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Húzza az áthelyezéshez",
+        "movedUp": "Felfelé mozgatva",
+        "movedDown": "Lefelé mozgatva",
+        "movedLeft": "Balra mozgatva",
+        "movedRight": "Jobbra mozgatva"
+    });
+}
+
 })(window.kendo.jQuery);

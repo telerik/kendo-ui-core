@@ -1632,4 +1632,17 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Влечете за преместување",
+        "movedUp": "Преместено нагоре",
+        "movedDown": "Преместено надолу",
+        "movedLeft": "Преместено налево",
+        "movedRight": "Преместено надесно"
+    });
+}
+
 })(window.kendo.jQuery);

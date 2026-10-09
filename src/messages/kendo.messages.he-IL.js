@@ -1640,4 +1640,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "גרור למיקום מחדש",
+        "movedUp": "הוזז למעלה",
+        "movedDown": "הוזז למטה",
+        "movedLeft": "הוזז שמאלה",
+        "movedRight": "הוזז ימינה"
+    });
+}
+
 })(window.kendo.jQuery);

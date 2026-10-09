@@ -1693,4 +1693,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Kéo để định vị lại",
+        "movedUp": "Đã di chuyển lên",
+        "movedDown": "Đã di chuyển xuống",
+        "movedLeft": "Đã di chuyển sang trái",
+        "movedRight": "Đã di chuyển sang phải"
+    });
+}
+
 })(window.kendo.jQuery);

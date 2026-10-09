@@ -1324,4 +1324,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Dra för att flytta",
+        "movedUp": "Flyttad uppåt",
+        "movedDown": "Flyttad nedåt",
+        "movedLeft": "Flyttad till vänster",
+        "movedRight": "Flyttad till höger"
+    });
+}
+
 })(window.kendo.jQuery);

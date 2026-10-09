@@ -1667,4 +1667,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Перетягніть, щоб перемістити",
+        "movedUp": "Переміщено вгору",
+        "movedDown": "Переміщено вниз",
+        "movedLeft": "Переміщено вліво",
+        "movedRight": "Переміщено вправо"
+    });
+}
+
 })(window.kendo.jQuery);

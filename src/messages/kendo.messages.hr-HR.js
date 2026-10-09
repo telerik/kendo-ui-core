@@ -2119,4 +2119,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Povucite za promjenu položaja",
+        "movedUp": "Pomaknuto gore",
+        "movedDown": "Pomaknuto dolje",
+        "movedLeft": "Pomaknuto lijevo",
+        "movedRight": "Pomaknuto desno"
+    });
+}
+
 })(window.kendo.jQuery);

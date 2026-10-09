@@ -1780,4 +1780,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Přetažením přemístíte",
+        "movedUp": "Přesunuto nahoru",
+        "movedDown": "Přesunuto dolů",
+        "movedLeft": "Přesunuto doleva",
+        "movedRight": "Přesunuto doprava"
+    });
+}
+
 })(window.kendo.jQuery);

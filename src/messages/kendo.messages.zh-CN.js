@@ -2388,4 +2388,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "拖动以重新定位",
+        "movedUp": "已上移",
+        "movedDown": "已下移",
+        "movedLeft": "已左移",
+        "movedRight": "已右移"
+    });
+}
+
 })(window.kendo.jQuery);

@@ -7137,6 +7137,95 @@ declare namespace kendo.ui {
         item: FloatingActionButtonItem | any;
     }
 
+    class FloatingToolBar extends kendo.ui.Widget {
+        static fn: FloatingToolBar;
+
+        options: FloatingToolBarOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+        popup: kendo.ui.Popup;
+        toolbar: kendo.ui.ToolBar;
+
+        static extend(proto: Object): FloatingToolBar;
+
+        constructor(element: Element, options?: FloatingToolBarOptions);
+
+        show(): void;
+        show(anchor: string | Element | JQuery): void;
+        show(position: { top: number; left: number }): void;
+        hide(): void;
+        setPosition(position: { top: number; left: number }): void;
+        setAnchor(target: string | Element | JQuery): void;
+        focus(): void;
+        destroy(): void;
+    }
+
+    interface FloatingToolBarContainerAlign {
+        horizontal?: "left" | "center" | "right" | undefined;
+        vertical?: "top" | "center" | "bottom" | undefined;
+    }
+
+    interface FloatingToolBarMargin {
+        horizontal?: number | undefined;
+        vertical?: number | undefined;
+    }
+
+    interface FloatingToolBarMessages {
+        dragHandle?: string | undefined;
+        movedUp?: string | undefined;
+        movedDown?: string | undefined;
+        movedLeft?: string | undefined;
+        movedRight?: string | undefined;
+    }
+
+    interface FloatingToolBarOptions {
+        name?: string | undefined;
+        items?: ToolBarItem[] | undefined;
+        visible?: boolean | undefined;
+        anchor?: string | Element | JQuery | undefined;
+        position?: "top" | "bottom" | "left" | "right" | undefined;
+        overflow?: ToolBarOverflowOptions | undefined;
+        draggable?: boolean | undefined;
+        size?: string | undefined;
+        fillMode?: string | undefined;
+        ariaLabel?: string | undefined;
+        containerAlign?: FloatingToolBarContainerAlign | undefined;
+        margin?: FloatingToolBarMargin | undefined;
+        messages?: FloatingToolBarMessages | undefined;
+
+        show?(e: FloatingToolBarShowEvent): void;
+        hide?(e: FloatingToolBarHideEvent): void;
+        dragStart?(e: FloatingToolBarDragStartEvent): void;
+        move?(e: FloatingToolBarMoveEvent): void;
+        dragEnd?(e: FloatingToolBarDragEndEvent): void;
+    }
+
+    interface FloatingToolBarEvent {
+        sender: FloatingToolBar;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface FloatingToolBarShowEvent extends FloatingToolBarEvent {}
+
+    interface FloatingToolBarHideEvent extends FloatingToolBarEvent {}
+
+    interface FloatingToolBarDragStartEvent extends FloatingToolBarEvent {
+        top?: number | undefined;
+        left?: number | undefined;
+    }
+
+    interface FloatingToolBarMoveEvent extends FloatingToolBarEvent {
+        top?: number | undefined;
+        left?: number | undefined;
+    }
+
+    interface FloatingToolBarDragEndEvent extends FloatingToolBarEvent {
+        top?: number | undefined;
+        left?: number | undefined;
+    }
+
     class Form extends kendo.ui.Widget {
         static fn: Form;
 
@@ -27948,6 +28037,10 @@ interface JQuery {
     kendoFloatingActionButton(): JQuery;
     kendoFloatingActionButton(options: kendo.ui.FloatingActionButtonOptions): JQuery;
     data(key: "kendoFloatingActionButton"): kendo.ui.FloatingActionButton | undefined;
+
+    kendoFloatingToolBar(): JQuery;
+    kendoFloatingToolBar(options: kendo.ui.FloatingToolBarOptions): JQuery;
+    data(key: "kendoFloatingToolBar"): kendo.ui.FloatingToolBar | undefined;
 
     kendoForm(): JQuery;
     kendoForm(options: kendo.ui.FormOptions): JQuery;

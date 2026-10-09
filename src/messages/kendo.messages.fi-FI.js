@@ -1555,4 +1555,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Vedä siirtääksesi",
+        "movedUp": "Siirretty ylös",
+        "movedDown": "Siirretty alas",
+        "movedLeft": "Siirretty vasemmalle",
+        "movedRight": "Siirretty oikealle"
+    });
+}
+
 })(window.kendo.jQuery);

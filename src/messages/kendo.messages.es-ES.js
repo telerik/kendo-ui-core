@@ -2082,4 +2082,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Arrastrar para reposicionar",
+        "movedUp": "Movido hacia arriba",
+        "movedDown": "Movido hacia abajo",
+        "movedLeft": "Movido hacia la izquierda",
+        "movedRight": "Movido hacia la derecha"
+    });
+}
+
 })(window.kendo.jQuery);

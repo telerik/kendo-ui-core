@@ -1963,4 +1963,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Плъзнете за преместване",
+        "movedUp": "Преместено нагоре",
+        "movedDown": "Преместено надолу",
+        "movedLeft": "Преместено наляво",
+        "movedRight": "Преместено надясно"
+    });
+}
+
 })(window.kendo.jQuery);

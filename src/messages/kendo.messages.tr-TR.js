@@ -1698,4 +1698,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Yeniden konumlandırmak için sürükleyin",
+        "movedUp": "Yukarı taşındı",
+        "movedDown": "Aşağı taşındı",
+        "movedLeft": "Sola taşındı",
+        "movedRight": "Sağa taşındı"
+    });
+}
+
 })(window.kendo.jQuery);

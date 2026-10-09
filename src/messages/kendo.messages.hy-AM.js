@@ -1694,4 +1694,17 @@ $.extend(true, kendo.spreadsheet.messages.view,{
   });
   }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Քաշեք՝ տեղափոխելու համար",
+        "movedUp": "Տեղափոխվեց վերև",
+        "movedDown": "Տեղափոխվեց ներքև",
+        "movedLeft": "Տեղափոխվեց ձախ",
+        "movedRight": "Տեղափոխվեց աջ"
+    });
+}
+
 })(window.kendo.jQuery);

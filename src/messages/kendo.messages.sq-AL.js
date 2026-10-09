@@ -1632,4 +1632,17 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Zvarrit për ta rivendosur",
+        "movedUp": "Lëvizur lart",
+        "movedDown": "Lëvizur poshtë",
+        "movedLeft": "Lëvizur majtas",
+        "movedRight": "Lëvizur djathtas"
+    });
+}
+
 })(window.kendo.jQuery);

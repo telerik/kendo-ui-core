@@ -1762,4 +1762,17 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Ümberpaigutamiseks lohista",
+        "movedUp": "Liigutatud üles",
+        "movedDown": "Liigutatud alla",
+        "movedLeft": "Liigutatud vasakule",
+        "movedRight": "Liigutatud paremale"
+    });
+}
+
 })(window.kendo.jQuery);

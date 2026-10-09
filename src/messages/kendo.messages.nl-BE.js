@@ -1316,4 +1316,17 @@
       });
   }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Sleep om te verplaatsen",
+        "movedUp": "Omhoog verplaatst",
+        "movedDown": "Omlaag verplaatst",
+        "movedLeft": "Naar links verplaatst",
+        "movedRight": "Naar rechts verplaatst"
+    });
+}
+
 })(window.kendo.jQuery);

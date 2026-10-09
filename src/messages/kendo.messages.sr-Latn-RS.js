@@ -1673,4 +1673,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Prevucite za premeštanje",
+        "movedUp": "Pomereno gore",
+        "movedDown": "Pomereno dole",
+        "movedLeft": "Pomereno levo",
+        "movedRight": "Pomereno desno"
+    });
+}
+
 })(window.kendo.jQuery);

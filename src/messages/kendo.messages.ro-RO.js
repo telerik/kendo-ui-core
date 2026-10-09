@@ -1659,4 +1659,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Trageți pentru a repoziționa",
+        "movedUp": "Mutat în sus",
+        "movedDown": "Mutat în jos",
+        "movedLeft": "Mutat la stânga",
+        "movedRight": "Mutat la dreapta"
+    });
+}
+
 })(window.kendo.jQuery);

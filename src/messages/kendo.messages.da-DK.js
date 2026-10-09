@@ -1304,4 +1304,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Træk for at flytte",
+        "movedUp": "Flyttet op",
+        "movedDown": "Flyttet ned",
+        "movedLeft": "Flyttet til venstre",
+        "movedRight": "Flyttet til højre"
+    });
+}
+
 })(window.kendo.jQuery);

@@ -1672,4 +1672,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Σύρετε για επανατοποθέτηση",
+        "movedUp": "Μετακινήθηκε προς τα πάνω",
+        "movedDown": "Μετακινήθηκε προς τα κάτω",
+        "movedLeft": "Μετακινήθηκε αριστερά",
+        "movedRight": "Μετακινήθηκε δεξιά"
+    });
+}
+
 })(window.kendo.jQuery);

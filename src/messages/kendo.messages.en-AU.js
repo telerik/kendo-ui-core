@@ -1688,4 +1688,17 @@
       $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
   }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "Drag to reposition",
+        "movedUp": "Moved up",
+        "movedDown": "Moved down",
+        "movedLeft": "Moved left",
+        "movedRight": "Moved right"
+    });
+}
+
 })(window.kendo.jQuery);

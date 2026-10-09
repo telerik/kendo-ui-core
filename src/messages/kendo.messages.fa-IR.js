@@ -1597,4 +1597,17 @@ $.extend(true, kendo.spreadsheet.messages.view,{
       });
   }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "برای جابجایی مجدد بکشید",
+        "movedUp": "به بالا منتقل شد",
+        "movedDown": "به پایین منتقل شد",
+        "movedLeft": "به چپ منتقل شد",
+        "movedRight": "به راست منتقل شد"
+    });
+}
+
 })(window.kendo.jQuery);

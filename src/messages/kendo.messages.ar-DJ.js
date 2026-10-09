@@ -1421,4 +1421,17 @@ if (kendo.ui.Checkpoint) {
     });
 }
 
+/* FloatingToolBar messages */
+
+if (kendo.ui.FloatingToolBar) {
+    kendo.ui.FloatingToolBar.prototype.options.messages =
+    $.extend(true, kendo.ui.FloatingToolBar.prototype.options.messages,{
+        "dragHandle": "اسحب لإعادة التموضع",
+        "movedUp": "تم التحريك لأعلى",
+        "movedDown": "تم التحريك لأسفل",
+        "movedLeft": "تم التحريك لليسار",
+        "movedRight": "تم التحريك لليمين"
+    });
+}
+
 })(window.kendo.jQuery);
