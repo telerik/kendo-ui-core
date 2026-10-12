@@ -42,15 +42,7 @@ export const __meta__ = {
 
     var SvgIcon = Widget.extend({
         init: function(element, options) {
-            var that = this,
-                globalIconDefaults = kendo.defaults.icon || {};
-
-            options = options || {};
-
-            if (!kendo.isPresent(options.variant) && kendo.isPresent(globalIconDefaults.variant)) {
-                options = extend({}, options, { variant: globalIconDefaults.variant });
-            }
-
+            var that = this;
             Widget.fn.init.call(that, element, options);
 
             delete options.name;

@@ -170,6 +170,7 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
          <IntroTableAnchor title="Drawer" href="slug:htmlhelpers_drawer_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="DropDownButton" href="slug:htmlhelpers_dropdownbutton_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="FloatingActionButton" href="slug:htmlhelpers_floatingactionbutton_aspnetcore"></IntroTableAnchor>
+         <IntroTableAnchor title="FloatingToolBar" href="slug:htmlhelpers_floatingtoolbar_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="Menu" href="slug:htmlhelpers_menu_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="PanelBar" href="slug:htmlhelpers_panelbar_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="SmartPasteButton" href="slug:htmlhelpers_overview_smartpastebutton"></IntroTableAnchor>
