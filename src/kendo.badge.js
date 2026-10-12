@@ -232,7 +232,7 @@ export const __meta__ = {
 
             // handle badge.text('string')
             if (typeof text === 'string') {
-                text = encoded === true ? kendo.htmlEncode(text): text;
+                text = encoded === true ? kendo.htmlEncode(text) : text;
                 that.element.html(text);
                 return;
             }
@@ -250,7 +250,7 @@ export const __meta__ = {
 
             // handle other objects
             if (typeof text === 'object' && 'toString' in text) {
-                text = encoded === true ? kendo.htmlEncode(text): text;
+                text = encoded === true ? kendo.htmlEncode(text) : text;
                 that.element.html(text.toString());
                 return;
             }
@@ -269,7 +269,7 @@ export const __meta__ = {
             that._icon = icon;
 
             // Handle badge.icon(<SVG />)
-                if (kendo.isString(icon) && icon.indexOf('<svg') === 0) {
+            if (icon.indexOf('<svg') === 0) {
                 var svgIcon = icon;
 
                 if (!/^<svg\b[^>]*\baria-hidden\s*=/i.test(svgIcon)) {

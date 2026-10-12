@@ -616,6 +616,8 @@ meta:
     title: ChipList
   html-helpers/navigation/floatingactionbutton:
     title: FloatingActionButton
+  html-helpers/navigation/floatingtoolbar:
+    title: FloatingToolBar
   html-helpers/navigation/breadcrumb:
     title: Breadcrumb
   html-helpers/navigation/bottomnavigation:

@@ -82,13 +82,13 @@ export const __meta__ = {
                 that.element.addClass("k-icon-button");
 
                 if (options.autoAriaLabel !== false && !element.attr("aria-label")) {
-                    labelText = icon && icon.name ? icon.name : icon;
+                    labelText = icon;
 
                     if (!labelText && iconClass) {
                         labelText = (iconClass.match(/k-i-([\w-]+)/) || [])[1];
                     }
 
-                    if (kendo.isString(labelText)) {
+                    if (labelText) {
                         labelText = labelText.replace(/-/g, " ");
                         labelText = labelText.charAt(0).toUpperCase() + labelText.slice(1);
                         element.attr("aria-label", labelText);

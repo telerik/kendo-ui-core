@@ -350,6 +350,8 @@ meta:
     title: ExpansionPanel
   "*/floatingactionbutton":
     title: FloatingActionButton
+  "*/floatingtoolbar":
+    title: FloatingToolBar
   "*form":
     title: Form
   "*filter":

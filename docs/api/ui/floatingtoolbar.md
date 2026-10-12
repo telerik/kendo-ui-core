@@ -831,7 +831,7 @@ The new anchor target of the FloatingToolBar. If omitted, the current anchor is 
 
 ### focus
 
-Moves the focus into the hosted [ToolBar](/api/ui/toolbar), at its current roving-tabindex position.
+Moves focus to the first focusable tool in the hosted [ToolBar](/api/ui/toolbar).
 
 
 <div class="meta-api-description">
