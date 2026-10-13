@@ -13,6 +13,31 @@ This article lists the breaking or important changes in the 2026 releases of {{ 
 
 ## {{ site.product }} 2026 October
 
+### Badge Text Is HTML-Encoded by Default
+
+Starting with the **2026 October** release, the Badge `Text` setting is HTML-encoded by default.
+The first example displays the markup as text. Set `Encoded(false)` or `encoded="false"` only when the text contains trusted HTML that should be rendered.
+
+```HtmlHelper
+@(Html.Kendo().Badge()
+    .Name("badgeEncoded")
+    .Text("<strong>New</strong>")
+)
+
+@(Html.Kendo().Badge()
+    .Name("badgeHtml")
+    .Text("<strong>New</strong>")
+    .Encoded(false)
+)
+```
+
+{% if site.core %}
+```TagHelper
+<kendo-badge name="badgeEncoded" text="@("<strong>New</strong>")"></kendo-badge>
+<kendo-badge name="badgeHtml" text="@("<strong>New</strong>")" encoded="false"></kendo-badge>
+```
+{% endif %}
+
 ### ChainOfThought - Children Setting Renamed to Content
 
 Starting with the **2026 October** release, the `Children` setting of the ChainOfThought `Thought` item is renamed to `Content`. The new `Encoded` setting controls whether `Content` is HTML-encoded before it is rendered and defaults to `true` on the client when left unset.
@@ -56,6 +81,7 @@ Starting with the **2026 October** release, the `Children` setting of the ChainO
 {% endif %}
 
 If your application relies on the `Children` setting, rename it to `Content`. Content is HTML-encoded by default; set `Encoded` to `false` only for trusted markup that must render as raw HTML. This rename mirrors the equivalent `thoughts.children`-to-`thoughts.content` rename in Kendo UI for jQuery.
+
 
 ## {{ site.product }} 2026 Q3
 

@@ -124,10 +124,42 @@ You can manually build the source code of the components by following these step
   - The following command enables you to produce a custom bundle with only the components that you need:
 
     ```javascript
-      npm run scripts:custom
+      npm run build:custom
     ```
 
     The process is easy and straightforward. Refer to the `README.md` inside the source bundle for additional information. This command is designed to be a replacement to both the legacy `npx gulp custom -c` AND the custom `download-builder` application.
+
+#### Build the Full Unminified UMD Bundle
+
+To build an unminified UMD bundle that contains all Kendo UI components, use the full Kendo entry point instead of selecting individual component files.
+  
+1. In `custom-bundle.js`, import the complete `kendo.all.js` source file:
+
+    ```javascript
+    import './js/kendo.all.js';
+    ```
+
+1. In `rolldown.config.custom.mjs`, configure the output as an unminified UMD bundle with source maps:
+
+    ```javascript
+    export default [
+        {
+            input: file,
+            output: {
+                dir: './dist/custom',
+                format: 'umd',
+                entryFileNames: 'kendo.all.js',
+                minify: false,
+                sourcemap: true,
+            },
+            ....
+        }
+    ];
+    ```
+
+  3.  From the `src` folder, run `npm run build:custom` or `npm run build:full`.
+
+  The unminified bundle and its source map will be generated in `src/dist/custom/kendo.all.js`.
 
 ### Versions prior to February 2026
 
