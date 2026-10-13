@@ -4584,6 +4584,12 @@ export const __meta__ = {
 
                 if (that.options.virtual) {
                     options.virtual = that.options.virtual;
+
+                    if (options.sort && that.options.serverPaging && !that._isGroupPaged() &&
+                        options.skip + options.take > that.total()) {
+                        options.skip = math.max(0, that.total() - options.take);
+                        that._skip = that._currentRangeStart = options.skip;
+                    }
                 }
 
                 if (options.sort) {
@@ -5669,6 +5675,11 @@ export const __meta__ = {
             that._pending = undefined;
 
             that._skip = skip > that.skip() && !that._omitPrefetch ? math.min(size, (that.totalPages() - 1) * that.take()) : pageSkip;
+
+            if (that.options.virtual && that._omitPrefetch && !that._isGroupPaged() &&
+                skip > that.skip() && skip + take >= that.total()) {
+                that._skip = math.min(size, (that.totalPages() - 1) * that.take());
+            }
 
             that._currentRangeStart = skip;
 
