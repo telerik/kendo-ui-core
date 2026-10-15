@@ -34,9 +34,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-mvc
   framework: "ASP.NET MVC"
   framework_short: "MVC"
-  cdnVersion: "2026.3.1014"
+  cdnVersion: "2026.3.1015"
   themesCdnVersion: "14.6.1"
-  mvcCoreVersion: "2026.3.1014"
+  mvcCoreVersion: "2026.3.1015"
   platform: aspnet-mvc
   core: false
   mvc: true
