@@ -52,6 +52,7 @@ You can construct the PivotGridV2 table by using the fields from the sample data
 					fields: {
 						ProductID: { type: "number" },
 						ProductName: { type: "string" },
+						// The service returns UnitPrice as a string, so convert it to a number.
 						UnitPrice: { type: "number" }
 					}
 				},

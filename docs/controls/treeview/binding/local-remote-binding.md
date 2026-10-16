@@ -52,6 +52,7 @@ The following example demonstrates how to create a TreeView and bind it to a rem
             schema: {
                 model: {
                     id: "EmployeeId",
+                    // Maps the field that marks a node as expandable before its children load.
                     hasChildren: "HasEmployees"
                 }
             }

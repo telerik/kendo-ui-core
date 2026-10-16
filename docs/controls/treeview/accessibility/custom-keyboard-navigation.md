@@ -41,12 +41,14 @@ The TreeView uses `Arrow Up` and `Arrow Down` to move between nodes, and `Arrow 
             var tv = e.sender;
             var keys = kendo.keys;
 
+            // Suppress the built-in Arrow key handling so only U, D, L, and R navigate.
             if (e.keyCode === keys.UP || e.keyCode === keys.DOWN ||
                 e.keyCode === keys.LEFT || e.keyCode === keys.RIGHT) {
                 e.preventKendoKeydown = true;
             }
 
             var current = tv.current();
+            // Nothing to move or expand when no node is focused.
             if (!current) { return; }
             var node = tv.dataItem(current);
 

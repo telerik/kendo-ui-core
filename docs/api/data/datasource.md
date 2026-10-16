@@ -3089,6 +3089,25 @@ How to configure read transport in Kendo UI DataSource? Configure loading data f
     dataSource.fetch();
     </script>
 
+#### Example - modify the request before it is sent
+
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        read: {
+          url: "https://demos.telerik.com/service/v2/core/products",
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("X-Custom-Header", "value");
+          }
+        }
+      }
+    });
+    dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(dataSource.view().length); // displays "77"
+    });
+    </script>
+
 #### Example - set read as a function
 
     <script>

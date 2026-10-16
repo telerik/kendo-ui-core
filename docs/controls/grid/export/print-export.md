@@ -61,6 +61,7 @@ It also addresses the following important issues:
                 '</body>';
             var gridHeader = gridElement.children('.k-grid-header');
             if (gridHeader[0]) {
+                // Move the cloned header into the data table for repeated print headers.
                 var thead = gridHeader.find('thead').clone().addClass('k-grid-header');
                 printableContent = gridElement
                     .clone()

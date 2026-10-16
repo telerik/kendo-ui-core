@@ -193,6 +193,7 @@ You can customize the appearance of suggestions using the [`suggestionTemplate`]
             { text: "Help" }
         ],
         suggestionsTemplate: function(suggestions) {
+            // The wrapper needs ref-chat-suggestion-group and each button needs k-suggestion.
             let html = "<div class='custom-suggestions' ref-chat-suggestion-group>";
             for (let i = 0; i < suggestions.length; i++) {
                 html += "<button class='custom-suggestion-btn k-suggestion'>" + suggestions[i].text + "</button>";
@@ -316,6 +317,7 @@ You can customize the appearance of suggestions actions using the [`suggestiedAc
     
     $("#chat").kendoChat({
         suggestedActionsTemplate: function(suggestions) {
+            // The wrapper needs ref-chat-suggestion-group and each button needs k-suggestion.
             let html = "<div class='custom-actions' ref-chat-suggestion-group>";
             for (let i = 0; i < suggestions.length; i++) {
                 html += "<button class='custom-action-btn k-suggestion'>" + suggestions[i].text + "</button>";

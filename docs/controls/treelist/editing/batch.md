@@ -27,6 +27,7 @@ The following example demonstrates how to implement the incell edit mode in the 
 			for (var i = 0; i < items.length; i++) {
 				var dataItem = e.sender.dataItem(items[i]);
 				var row = $(items[i]);
+				// New records have no service-assigned id, so they cannot get child nodes.
 				if (dataItem.isNew()) {
 					row.find("[data-command='createchild']").hide();
 				}

@@ -47,6 +47,7 @@ The TreeList uses `Arrow` keys to navigate between cells and to expand/collapse 
             var tl = e.sender;
             var keys = kendo.keys;
 
+            // Suppress the built-in Arrow key handling so only U, D, L, and R move focus.
             if (e.keyCode === keys.UP || e.keyCode === keys.DOWN ||
                 e.keyCode === keys.LEFT || e.keyCode === keys.RIGHT) {
                 e.preventKendoKeydown = true;
@@ -103,6 +104,7 @@ The following example adds a `Ctrl+E` shortcut to select the currently focused r
 
             if (e.ctrlKey && e.keyCode === 69) { // Ctrl+E
                 e.preventKendoKeydown = true;
+                // Skip selection when no cell is currently focused.
                 if (current && current.length) {
                     tl.select(current.closest("tr"));
                 }

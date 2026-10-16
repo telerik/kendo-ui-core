@@ -38,7 +38,7 @@ The DropDownList uses `Arrow Up` and `Arrow Down` to navigate through its items.
                 e.preventKendoKeydown = true;
             }
 
-            if (e.keyCode === 85) { // 'U'
+            if (e.keyCode === 85) { // 85 is the key code for U.
                 e.preventKendoKeydown = true;
                 if (!ddl.popup.visible()) {
                     ddl.open();
@@ -49,7 +49,7 @@ The DropDownList uses `Arrow Up` and `Arrow Down` to navigate through its items.
                 }
             }
 
-            if (e.keyCode === 68) { // 'D'
+            if (e.keyCode === 68) { // 68 is the key code for D.
                 e.preventKendoKeydown = true;
                 if (!ddl.popup.visible()) {
                     ddl.open();

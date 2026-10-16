@@ -44,6 +44,7 @@ A row template explicitly defines the row markup while grouping requires you to 
             var cnt = $("#" + id).data("kendoGrid").dataSource.group().length,
                 result = "";
 
+            // Match one leading cell to each active grouping level.
             for (var j = 0; j < cnt; j++) {
                 result += "<td class='k-group-cell'>&nbsp;</td>";
             }

@@ -88,6 +88,7 @@ The following example demonstrates how to access the calculated cell aggregates 
             var result = "";
             for (const aggregate in aggregates) {
               const value = aggregates[aggregate];
+              // Retain zero-valued aggregates while omitting unavailable values.
               if (value || value === 0) {
                 result +=  `<div class="k-selection-aggregates-item"><span class="k-selection-aggregates-item-text">${aggregate}: </span><span class="k-selection-aggregates-item-value">${formatAggregate(aggregates[aggregate], aggregate)}</span></div>`;
               }
@@ -171,6 +172,7 @@ The following example demonstrates how to access the calculated cell aggregates 
         var result = '<div class="k-d-flex k-gap-sm">External Aggregates: ';
         for (const aggregate in aggregates) {
           const value = aggregates[aggregate];
+          // Retain zero-valued aggregates while omitting unavailable values.
           if (value || value === 0) {
             result +=  `<div class="k-selection-aggregates-item"><span class="k-selection-aggregates-item-text">${aggregate}: </span><span class="k-selection-aggregates-item-value">${formatAggregate(aggregates[aggregate], aggregate)}</span></div>`;
           }

@@ -69,7 +69,7 @@ $("#grid").kendoGrid({
         e.preventDefault();
         
         // Perform custom operations
-        // ... your code
+        // TODO: modify e.workbook before saving the custom export.
         
         // Manually save
         kendo.saveAs({

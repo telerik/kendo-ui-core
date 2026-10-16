@@ -74,6 +74,7 @@ The following example demonstrates how to bind the component to a remote service
                     contentType: "application/json"
                 },
                 parameterMap: function (options, operation) {
+                    // Send the changed events as JSON for batch create, update, and destroy.
                     if (operation !== "read" && options.models) {
                         return kendo.stringify(options.models);
                     }

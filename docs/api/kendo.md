@@ -1154,7 +1154,7 @@ How do I compile a Kendo UI template into a JavaScript function to generate HTML
     </script>
 
 #### Returns
-`Function` the compiled template as a JavaScript function. When called this function will return the generated HTML string.
+`Function` the compiled template as a JavaScript function. When called this function will return the generated HTML string. The function accepts a single argument&mdash;the data object that the template renders. The argument is named `data` by default and can be renamed through the `options.paramName` setting.
 
 #### Parameters
 

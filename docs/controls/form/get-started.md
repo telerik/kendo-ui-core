@@ -65,6 +65,7 @@ After the completion of this guide, you will be able to achieve the following en
             { field: "Birth", label: { text: "Date of birth:", optional: true }, format: 'dd MMMM yyyy'},            
           ],
           submit: function(e) {
+            // Prevent the native form post so the alert confirms the submission.
             e.preventDefault();
             alert('Form submitted successfully');
           }
@@ -179,6 +180,7 @@ However, you can also implement a [`custom editor`](https://docs.telerik.com/ken
             label: "Password:",           
             hint: "Hint: enter alphanumeric characters only.",
             editor: function (container, options) {
+              // The data-bind and aria ids link the input to the model value, label, and hint.
               $('<input type="password" id="Password" name="' + options.field + '" title="Password" autocomplete="off" aria-labelledby="Password-form-label" data-bind="value: Password" aria-describedby="Password-form-hint"/>')
                 .appendTo(container)
                 .kendoTextBox();
@@ -259,6 +261,7 @@ You can specify which of the items in the Form are required. The Form component 
             { field: "Birth", label: { text: "Date of birth:", optional: true }, format: 'dd MMMM yyyy'},            
           ],
           submit: function(e) {
+            // Prevent the native form post so the alert confirms the submission.
             e.preventDefault();
             alert('Form submitted successfully');
           }
@@ -321,6 +324,7 @@ The [`orientation`](/api/ui/form/configuration/orientation) of the Form can be e
             { field: "Birth", label: { text: "Date of birth:", optional: true }, format: 'dd MMMM yyyy'},            
           ],
           submit: function(e) {
+            // Prevent the native form post so the alert confirms the submission.
             e.preventDefault();
             alert('Form submitted successfully');
           }

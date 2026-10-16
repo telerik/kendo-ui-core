@@ -188,9 +188,11 @@ The following example demonstrates custom validation of the `RetireDate` field.
                             validation: {
                                 required: true,
                                 greaterdate: function (input) {
+                                    // The rule runs for every input, so target only RetireDate.
                                     if (input.is("[name='RetireDate']") && input.val() != "") {
                                         var date = kendo.parseDate(input.val()),
                                             hireDate = kendo.parseDate($("[name='HireDate']").val());
+                                        // The data-greaterdate-msg attribute supplies the error message.
                                         input.attr("data-greaterdate-msg", "Retire Date should be after Hire Date");
                                         return hireDate == null || hireDate.getTime() < date.getTime();
                                     }

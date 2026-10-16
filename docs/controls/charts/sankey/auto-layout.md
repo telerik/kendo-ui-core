@@ -30,6 +30,7 @@ The following example demonstrates how to disable the automatic layout feature b
                     { sourceId: 2, targetId: 3, value: 1 }
                 ]
             },
+            // Node and link order follows their order in the data.
             disableAutoLayout: true
         });
     </script>

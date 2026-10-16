@@ -44,12 +44,14 @@ The Gantt uses `Arrow Up` and `Arrow Down` to navigate tasks. The following exam
             var gantt = e.sender;
             var selected = $(gantt.select());
 
+            // 85 is the key code for U.
             if (e.keyCode === 85) {
                 e.preventKendoKeydown = true;
                 var prev = selected.prev("tr");
                 if (prev.length) { gantt.select(prev); }
             }
 
+            // 68 is the key code for D.
             if (e.keyCode === 68) {
                 e.preventKendoKeydown = true;
                 var next = selected.next("tr");
@@ -73,6 +75,7 @@ The following example adds a `T` key shortcut to navigate to today.
         ],
         views: ["week"],
         kendoKeydown: function(e) {
+            // 84 is the key code for T.
             if (e.keyCode === 84) {
                 e.sender.date(new Date());
             }

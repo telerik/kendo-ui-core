@@ -62,6 +62,7 @@ The following example demonstrates a basic Grid configuration with Web API integ
             serverPaging: true,
             serverSorting: true,
             serverFiltering: true,
+            // Match the DataSource fields to the Web API response properties.
             schema: {
                 data: "Data",
                 total: "Total",
@@ -166,7 +167,7 @@ namespace YourApp.Controllers
         {
             if (orders == null)
             {
-                // Initialize your data
+                // TODO: implement GetOrdersFromDatabase for your application's storage.
                 orders = GetOrdersFromDatabase();
             }
 

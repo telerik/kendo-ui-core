@@ -22,7 +22,7 @@ You can provide the tasks and dependencies as an array of JavaScript objects.
 
 The following example demonstrates how to initialize a Gantt with two tasks and one dependency between them. You can switch the views, edit the tasks, and create and delete new tasks and dependencies. Any changes, however, are kept in-memory and are lost once the user refreshes the page. That is why it is better to bind the Gantt to a remote service which persists the Gantt tasks and dependencies.
 
-    <!-- HTML element in which the Kendo UI Gantt will initialize -->
+    <!-- Match this ID to the jQuery selector below. -->
     <div id="gantt"></div>
     <script>      
       $("#gantt").kendoGantt({
@@ -65,7 +65,7 @@ The following example demonstrates how to bind the component to a remote service
     <script>      
       $("#gantt").kendoGantt({
         dataSource: {
-          batch: true, // Enable the batch updates.
+          batch: true, // Combine multiple CRUD changes in one request.
           transport: {
               read: {
                   url: "https://demos.telerik.com/service/v2/core/GanttTasks"
@@ -90,6 +90,7 @@ The following example demonstrates how to bind the component to a remote service
               },
               parameterMap: function(options, operation) {
                   if (operation !== "read") {
+                      // JSON-encode writes and wrap a lone item in an array.
                       return kendo.stringify(options.models || [options]);
                   }
               }
@@ -98,8 +99,10 @@ The following example demonstrates how to bind the component to a remote service
               model: {
                   id: "id",
                   fields: {
+                      // Map service task fields to the Gantt task model.
                       id: { from: "ID", type: "number" },
                       orderId: { from: "OrderID", type: "number", validation: { required: true } },
+                      // Top-level tasks need nullable parent IDs.
                       parentId: { from: "ParentID", type: "number", defaultValue: null, nullable: true },
                       start: { from: "Start", type: "date" },
                       end: { from: "End", type: "date" },
@@ -133,6 +136,7 @@ The following example demonstrates how to bind the component to a remote service
               },
               parameterMap: function (options, operation) {
                   if (operation !== "read") {
+                      // JSON-encode writes and wrap a lone item in an array.
                       return kendo.stringify(options.models || [options]);
                   }
               }
@@ -141,6 +145,7 @@ The following example demonstrates how to bind the component to a remote service
               model: {
                   id: "id",
                   fields: {
+                      // Map service dependency fields to the Gantt dependency model.
                       id: { from: "ID", type: "number" },
                       predecessorId: { from: "PredecessorID", type: "number" },
                       successorId: { from: "SuccessorID", type: "number" },

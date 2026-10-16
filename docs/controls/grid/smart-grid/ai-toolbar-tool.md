@@ -73,6 +73,7 @@ In the following example, you can switch between modes in the AI Smart Box to ex
         let embeddedData = [];
 
         async function initializeEmbeddings() {
+            // Hide the loader if model initialization stalls.
             const hideTimer = setTimeout(() => {
                 try { kendo.ui.progress($('#example'), false); } catch (e) {}
             }, 30000);
@@ -96,6 +97,7 @@ In the following example, you can switch between modes in the AI Smart Box to ex
                     embeddings.push(...results);
                 }
 
+                // Preserve product order so each embedding matches its source item.
                 embeddedData = originalData.map((item, idx) => ({
                     ...item,
                     embedding: embeddings[idx]
@@ -116,6 +118,7 @@ In the following example, you can switch between modes in the AI Smart Box to ex
             }
             try {
                 const q = await semanticSearch.embed(query);
+                // Exclude weak semantic matches from the Grid results.
                 const results = embeddedData.map(item => ({ ...item, similarity: semanticSearch.cosineSimilarity(q, item.embedding) }))
                   .filter(x => x.similarity > 0.78)
                   .sort((a,b) => b.similarity - a.similarity);
@@ -325,7 +328,7 @@ To configure the Grid's AI Smart Box:
                     similarity: semanticService.cosineSimilarity(queryEmbedding, item.embedding)
                 });
             })
-            .filter(function(x) { return x.similarity > 0.35; })  // Apply similarity threshold
+            .filter(function(x) { return x.similarity > 0.35; })  // Exclude weak matches before ranking products.
             .sort(function(a, b) { return b.similarity - a.similarity; });
         
         // Update Grid data with semantically similar results
@@ -391,7 +394,7 @@ $("#grid").kendoGrid({
             enabled: true
         },
         semanticSearch: async (e) => {
-            // Implement your semantic search logic here
+            // TODO: match e.searchValue against your indexed data.
             // Use a desired semantic matching technique to filter and update the Grid data
             // based on the search value
         },

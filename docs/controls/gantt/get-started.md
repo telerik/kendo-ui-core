@@ -51,7 +51,6 @@ After the completion of this guide, you will be able to achieve the following en
             { name: "append" },
             { name: "pdf" }
         ],
-        // Enable the filtering functionality.
         filterable: true,
         // Enable the editing functionality (incell by default).
         editable: true,

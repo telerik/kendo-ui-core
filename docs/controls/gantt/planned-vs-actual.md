@@ -42,6 +42,7 @@ The example below demonstrates how to configure the Gantt to display planned and
             "plannedTasks"
         ],
         editable: { plannedTasks: true },
+        // Allow free task movement and resizing between timeline slots.
         snap: false
       }).data("kendoGantt");
     </script>

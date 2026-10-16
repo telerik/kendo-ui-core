@@ -200,6 +200,7 @@ Only the last one of the resources could be configured to allow multiple instanc
             }
         ],
         group: {
+            // List resources in parent-child order; the last one cannot be a parent.
             resources: ["Rooms", "Attendees"],
         },
         resources: [
@@ -217,6 +218,7 @@ Only the last one of the resources could be configured to allow multiple instanc
                 name: "Attendees",
                 dataSource: [
                     { text: "Alex", value: 1, color: "#f8a398" },
+                    // parentValue assigns the attendee to the room with that value.
                     { text: "Bob", value: 2, color: "#51a0ed", parentValue: 1 },
                     { text: "Charlie", value: 3, color: "#56ca85", parentValue: 2 }
                 ],

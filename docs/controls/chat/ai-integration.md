@@ -100,6 +100,7 @@ To create an AI chat service that connects to the Chat, follow the steps below:
 
                 buffer += decoder.decode(result.value, { stream: !result.done });
                 const lines = buffer.split("\n");
+                // Keep the trailing partial line for the next chunk.
                 buffer = lines.pop();
 
                 for (const line of lines) {
@@ -310,6 +311,7 @@ To create an AI chat service that connects to the Chat, follow the steps below:
 
         function onSendMessage(e) {
             if (e.generating) {
+                // A send click during generation cancels the in-flight request.
                 streamingService.abortRequest();
                 e.sender.toggleSendButtonGenerating(false);
                 return;
@@ -374,6 +376,7 @@ To create an AI chat service that connects to the Chat, follow the steps below:
                 onStreaming: (data) => {
                     const newText = currentAIMessage.text + data.message;
                     rawResponse += data.message;
+                    // Display encoded text while streaming; Markdown is applied on completion.
                     e.sender.updateMessage(currentAIMessage, {
                         text: kendo.htmlEncode(newText, true)
                     });

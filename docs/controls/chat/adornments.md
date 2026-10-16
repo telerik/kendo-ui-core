@@ -66,6 +66,7 @@ Use `topAffixTemplate` to render additional controls such as model selectors or 
         }
     });
 
+    // Initialize the DropDownList after the Chat renders the top affix element.
     $("#model").kendoDropDownList({
         dataSource: ["GPT-4o", "GPT-4o mini", "Claude 3.5 Haiku"],
         value: "GPT-4o"

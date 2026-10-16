@@ -204,6 +204,7 @@ You can implement custom editor by using the editor option as a function as foll
                     field: "Description",
                     label: "Description:",
                     editor: function(container, options) {
+                        // The data-bind attribute binds the textarea value to the model field.
                         $("<textarea class='k-textarea' name='" + options.field + "' required data-bind='value: " +  options.field + "'></textarea>")
                             .appendTo(container);
                     },

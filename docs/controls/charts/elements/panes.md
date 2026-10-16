@@ -25,6 +25,7 @@ The following example sets the default background color for the panes:
     $("#chart").kendoChart({
       series: [
         { data: [1, 2, 3] },
+        // The axis value names the value axis, which places the series in the bottom pane.
         { data: [1, 2, 3, 4], axis: "bottom" }
       ],
       valueAxis: [
@@ -57,6 +58,7 @@ To disable clipping, set the [panes.clip](/api/dataviz/ui/chart/configuration/pa
     ],
     valueAxis: [
         { pane: "top-pane", max: 70 },
+        // The value 100 exceeds max, so it draws past the pane edge when clip is false.
         { pane: "bottom-pane", name: "bottom", max: 70 }
     ],
     panes: [

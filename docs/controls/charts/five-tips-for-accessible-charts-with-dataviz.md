@@ -150,6 +150,7 @@ Another available approach is to manually add the `title` and `description` elem
         }
 
         createChart();
+        // Run after createChart so the svg element already exists.
         makeChartAccessible();
 
 ### Generating Accessible Data Tables from Data Sources

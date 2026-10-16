@@ -42,6 +42,7 @@ Binding the Chart to arrays of objects is a more flexible alternative which enab
         }, {
             name: "Series 2",
             type: "column",
+            // Use null to leave a gap for a category that has no value.
             data: [210, null, 200, 100, null]
         }],
         categoryAxis: {
@@ -232,6 +233,7 @@ The Chart enables you to bind it to grouped data and creates the categories depe
             group: {
                 field: "group"
             },
+            // Sort by category so every group plots its points in the same category order.
             sort: {
                 field: "category",
                 dir: "asc"
@@ -314,6 +316,7 @@ Categorical series allow you to specify a category field. The category values fr
         series: [{
             field: "sold",
             categoryField: "year",
+            // Sum the values of the points that share a category.
             aggregate: "sum"
         }]
     });

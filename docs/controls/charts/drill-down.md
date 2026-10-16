@@ -130,6 +130,7 @@ To populate the drilldown series on demand:
           data: vehiclesByMake,
           field: 'count',
           categoryField: 'company',
+          // The company value is passed to drilldownSeriesFactory as the lookup key.
           drilldownField: 'company',
           drilldownSeriesFactory: drilldownByModel
         }]
@@ -200,6 +201,7 @@ To populate the drilldown series on demand:
           data: vehiclesByMake,
           field: 'count',
           categoryField: 'company',
+          // The company value is passed to drilldownSeriesFactory as the lookup key.
           drilldownField: 'company',
           drilldownSeriesFactory: drilldownByModel
         }]

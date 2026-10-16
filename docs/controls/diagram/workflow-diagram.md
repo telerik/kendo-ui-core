@@ -177,6 +177,7 @@ const connections = [
         type: 'polyline',
         fromConnector: 'left',
         toConnector: 'left',
+        // Intermediate points route the No branch back to the Process shape.
         points: [
             { x: 230, y: 591 },
             { x: 200, y: 591 },

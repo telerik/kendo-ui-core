@@ -93,8 +93,8 @@ The following example demonstrates how to enable virtualization in the DropDownL
             });
         });
 
-        // This is a helper method that serializes values into an understandable format for the server.
-        // This method is not obligatory to use. Instead, you need to send the value in a format that is understandable for the server.
+        // Format single or multiple values as the demo service's values[n] parameters.
+        // Adapt this helper if your service expects a different request format.
         function convertValues(value) {
             var data = {};
 
@@ -122,9 +122,9 @@ When the widget receives a value which is not fetched from the remote server yet
         $.ajax({
             url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
             type: "GET",
-            data: options.value, // Send value to the server.
+            data: options.value, // Send the selected value to resolve its row index.
             success: function (data) {
-                options.success(data); // Return the index number of the corresponding data item.
+                options.success(data); // Pass the matching row index back to the DropDownList.
             }
         })
     }
@@ -140,9 +140,9 @@ If you implement the `mapValueTo: "dataItem"` configuration, the `valueMapper` w
         $.ajax({
             url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
             type: "GET",
-            data: options.value, //send value to the server
+            data: options.value, // Send the selected value to retrieve its matching data item.
             success: function (dataItems) {
-                options.success(dataItems); //return the dataItems that correspond to provided values
+                options.success(dataItems); // Return matching items; this mode does not locate their page.
             }
         })
     }
@@ -182,13 +182,13 @@ $.ajax({
     type: "GET",
     data: { "values[0]": "10661" }
     success: function (data) {
-        // The returned data is [413].
+        // The service maps value 10661 to row index 413.
         options.success(data);
     }
 })
 ```
 
-The AJAX method calls URLs similar to `https://demos.telerik.com/service/v2/core/Orders/ValueMapper?values[0]=10661`. The result is `callback([413]) //the result is JSONP`. The service maps the selected value to a particular row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
+The AJAX method calls URLs similar to `https://demos.telerik.com/service/v2/core/Orders/ValueMapper?values[0]=10661`. The result is `callback([413]) // JSONP response with the mapped row index`. The service maps the selected value to a particular row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
 
 ### Mapping to Data Item Values
 

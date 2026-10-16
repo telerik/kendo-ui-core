@@ -16,6 +16,7 @@ As of Kendo UI R2 SP1 2023, users can reorder the TreeList's rows can be by usin
     <script>
     $("#treeList").kendoTreeList({
         columns: [
+            // Renders the drag icon that users click to start moving a row.
             {draggable:true },
             { field: "name" },
             { field: "age" }
@@ -70,6 +71,7 @@ The following example demonstrates how to enable the batch data source and the e
                             }
                         }
                     },
+                    // Queue the moved rows until the Save toolbar command syncs them.
                     batch: true,
                     schema: {
                         model: {

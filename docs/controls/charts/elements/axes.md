@@ -32,6 +32,7 @@ To clearly indicate the role of the axis, add an axis title.
         }],
         categoryAxis: {
             categories: ["Aug", "Sep", "Oct"],
+            // Cross the value axes at the first and the last category.
             axisCrossingValue: [0, 3]
         },
         valueAxis: [{

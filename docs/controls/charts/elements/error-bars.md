@@ -216,6 +216,7 @@ The following example demonstrates how to use different percentages for the low 
               var value = data.value,
                 lowPercentage = value * 0.05,
                 highPercentage = value * 0.1;                                    
+              // Return the low and high offsets from the point value.
               return [lowPercentage, highPercentage];
           }
         },

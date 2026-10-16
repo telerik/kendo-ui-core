@@ -31,6 +31,7 @@ To create a hierarchical Diagram, pass a Kendo UI template and a data source as 
           }
         }
     }).data("kendoDiagram");
+    // Arrange the bound shapes as a tree because they are not positioned automatically.
     diagram.layout();
 
 The previous example produces a tree diagram with default rectangular shapes. Alternatively, you can also define the data binding through the `setDataSource` method.
@@ -83,6 +84,7 @@ The following example demonstrates how to reproduce the same Diagram with ellips
         visual: visualTemplate
       }
     }).data("kendoDiagram");
+    // Arrange the bound shapes as a tree because they are not positioned automatically.
     diagram.layout();
 
 ## See Also

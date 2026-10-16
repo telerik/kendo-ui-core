@@ -139,6 +139,7 @@ The following example demonstrates how to define the `temperature` and `humidity
         series: [{
                 name: "Temperature",
                 data: [20, 25, 32],
+                // The axis value must match the name of a valueAxis.
                 axis: "temperature"
             }, {
                 name: "Humidity",

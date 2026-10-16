@@ -51,6 +51,7 @@ The pre-processing of all available data and its conversion into a hierarchy pri
         hash[id] = hash[id] || [];
         hash[parentId] = hash[parentId] || [];
 
+        // Share the id array with item.items so children attach regardless of row order.
         item.items = hash[id];
         hash[parentId].push(item);
       }

@@ -26,6 +26,7 @@ To send metadata over to the `save` handler:
 2. Declare a handler for the `upload` event and attach a data object to the passed event.
 
         function onUpload(e) {
+            // Fields on e.data are serialized into the POST request.
             e.data = {
                 fileDescription: $("#fileDescription").val()
             };

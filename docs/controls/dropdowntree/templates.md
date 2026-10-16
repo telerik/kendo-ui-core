@@ -47,7 +47,7 @@ The value template manages the way the selected items in the input area of the D
 > Value templates must consist of `inline` HTML elements only.
 
     <input id="dropdowntree"></input>
-    <!-- Template -->
+    <!-- Keep value-template markup to inline HTML elements. -->
     <script id="valueTemplate" type="text/x-kendo-template">
         ContactName: #:data.FullName#
     </script>
@@ -105,7 +105,7 @@ The header template manages the way the pop-up header of a DropDownTree is rende
 The footer template manages the way the pop-up footer of a DropDownList is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
     <input id="dropdowntree"></input>
-    <!-- Template -->
+    <!-- The template context is the DropDownTree instance. -->
     <script id="footerTemplate" type="text/x-kendo-template">
     <strong>this is footer</strong>
     </script>
@@ -137,7 +137,7 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
 > When the `noDataTemplate` option is defined, the widget always opens the popup element.
 
     <input id="dropdowntree"></input>
-    <!-- Template -->
+    <!-- Show this content when data is empty or filtering finds no matches. -->
     <script id="noDataTemplate" type="text/x-kendo-template">
         <strong>No Data!</strong>
     </script>

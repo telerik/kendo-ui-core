@@ -171,6 +171,7 @@ The following example demonstrates a Grid with localized user interface for all 
                     contentType: "application/json"
                   },
                   parameterMap: function(options, operation) {
+                    // Serialize changed models for writes without altering read parameters.
                     if (operation !== "read" && options.models) {
                       return kendo.stringify(options.models);
                     }

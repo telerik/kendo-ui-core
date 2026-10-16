@@ -35,6 +35,7 @@ The [`hidden`](https://www.w3schools.com/tags/att_hidden.asp) attribute must be 
                         let nextDataItem = dataView.at(++currentIndex);
                         let rowSpan = 1;
 
+                        // Hide repeated country cells beneath the spanning cell.
                         if (prevDataItem && dataItem['country'] === prevDataItem['country']) {
                             return {
                                 hidden: 'hidden'
@@ -153,6 +154,7 @@ The following example demonstrates how to span "pass" and "country" columns if t
             field: "country", 
             width: 300,
             attributes: ({ pass }) => {
+              // Hide the country cell covered by the spanning pass cell.
               if (!pass) {
                 return { hidden: "hidden" };
               }

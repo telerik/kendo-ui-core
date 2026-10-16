@@ -25,7 +25,7 @@ After the completion of this guide, you will be able to achieve the following en
         {ID: 5, ProductName: "TV stoves" }
     ];
     
-    // Target the select element by using jQuery and then call the kendoDropDownList() method.
+    // Match this selector to the select element's ID.
     $("#dropdownlist").kendoDropDownList({
         dataTextField:"ProductName",
         dataValueField:"ID",
@@ -53,9 +53,9 @@ In this step, you will initialize the DropDownList from the `<select>` element. 
 <select id="dropdownlist"></select>
 
 <script>
-    // Target the select element by using jQuery and then call the kendoDropDownList() method.
+    // Match this selector to the select element's ID.
     $("#dropdownlist").kendoDropDownList({
-        // Add some basic configuration.
+        // Limit the visible height of the option list.
         height: "400px"
     });
 </script>
@@ -77,7 +77,7 @@ Once the basic initialization is completed, you can start adding additional conf
     {ID: 5, ProductName: "TV stoves" }
   ];
   
-  // Target the select element by using jQuery and then call the kendoDropDownList() method.
+  // Match this selector to the select element's ID.
   $("#dropdownlist").kendoDropDownList({
     dataTextField:"ProductName",
     dataValueField:"ID",
@@ -103,7 +103,7 @@ Among other functionalities, the DropDownList supports filtering. The filtering 
     {ID: 5, ProductName: "TV stoves" }
   ];
   
-  // Target the select element by using jQuery and then call the kendoDropDownList() method.
+  // Match this selector to the select element's ID.
   $("#dropdownlist").kendoDropDownList({
     dataTextField:"ProductName",
     dataValueField:"ID",

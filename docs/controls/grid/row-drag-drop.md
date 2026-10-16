@@ -88,7 +88,7 @@ The [`rowReorder`](/api/ui/grid/events/rowReorder) event fires when the user dro
             rows: true
         },
         rowReorder(ev) {
-            // Custom logic
+            // TODO: update your data collection using ev.oldIndex and ev.newIndex.
         }
         // Other configuration.
      });

@@ -58,7 +58,7 @@ The following example demonstrates how to define a custom group template.
     $(document).ready(function() {
         $("#customers").kendoDropDownList({
             height: 200,
-            groupTemplate: "<strong>#:data#</strong>", //`data` is the title of the group
+            groupTemplate: "<strong>#:data#</strong>", // data contains the current group's title.
             dataTextField: "ContactName",
             dataValueField: "CustomerID",
             dataSource: {
@@ -88,7 +88,7 @@ The following example demonstrates how to define a custom fixed group template.
     $(document).ready(function() {
         $("#customers").kendoDropDownList({
             height: 200,
-            fixedGroupedTemplate: "<strong>#:data#</strong>", //`data` is the title of the group
+            fixedGroupedTemplate: "<strong>#:data#</strong>", // data contains the currently visible group's title.
             dataTextField: "ContactName",
             dataValueField: "CustomerID",
             dataSource: {

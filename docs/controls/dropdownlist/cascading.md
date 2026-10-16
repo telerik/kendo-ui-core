@@ -21,9 +21,9 @@ The child DropDownList takes the following actions during initialization:
 - Listens to any changes of the parent value.
 - If the parent does not have a value, the child is disabled. If the parent has a value, the child is enabled and filters its data accordingly. The filter options are similar to the following:
 
-        field: "parentID",  //the dataValueField of the parent
+        field: "parentID",  // Match the parent's dataValueField.
         operator: "eq",
-        value: "" // Parent's value.
+        value: "" // Replace with the parent's selected value.
 
     The following example demonstrates the parameters of this request.
 
@@ -47,12 +47,12 @@ The following example demonstrates how to initialize a cascading DropDownList.
              $("#parent").kendoDropDownList({
                 dataTextField: "parentName",
                 dataValueField: "parentID"
-                // Define the settings for the DropDownList.
+                // Add a comma above before adding more parent options.
              });
 
              $("#child").kendoDropDownList({
                 cascadeFrom: "parent"
-                // Define other settings.
+                // Add a comma above before adding more child options.
              });
          });
     </script>

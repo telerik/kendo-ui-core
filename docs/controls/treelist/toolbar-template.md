@@ -38,6 +38,7 @@ The following example demonstrates how to set the template as a function that is
         ]
       });
 
+      // Initialize the Button after the TreeList renders the toolbar template.
       $("#custom-button").kendoButton({
         click: function(e) {
           /* The result can be observed in the DevTools(F12) console of the browser. */
@@ -71,6 +72,7 @@ The following example demonstrates how to set the template as a string.
         ]
       });
 
+      // Initialize the Button after the TreeList renders the toolbar template.
       $("#custom-button").kendoButton({
         click: function(e) {
           /* The result can be observed in the DevTools(F12) console of the browser. */

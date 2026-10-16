@@ -204,6 +204,7 @@ The inline editing mode is demonstrated in the example below:
                             contentType: "application/json"
                         },
                         parameterMap: function(options, operation) {
+                            // Serialize changed models for writes without altering read parameters.
                             if (operation !== "read" && options.models) {
                                 return kendo.stringify(options.models);
                             }
@@ -289,6 +290,7 @@ To delete a row, the user must first select the row, then click the **Delete** b
                             contentType: "application/json"
                         },
                         parameterMap: function(options, operation) {
+                            // Serialize changed models for writes without altering read parameters.
                             if (operation !== "read" && options.models) {
                                 return kendo.stringify(options.models);
                             }
@@ -373,6 +375,7 @@ When popup editing is enabled, selected rows can be edited or deleted using the 
                             contentType: "application/json"
                         },
                         parameterMap: function(options, operation) {
+                            // Serialize changed models for writes without altering read parameters.
                             if (operation !== "read" && options.models) {
                                 return kendo.stringify(options.models);
                             }

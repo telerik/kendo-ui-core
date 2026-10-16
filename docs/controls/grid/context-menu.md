@@ -60,6 +60,7 @@ In the example below all predefined commands are included in a customized order.
           						contentType: "application/json"
     						},
     						parameterMap: function (options, operation) {
+							// Serialize changed models for writes without altering read parameters.
     							if (operation !== "read" && options.models) {
     								return kendo.stringify(options.models);
     							}
@@ -159,6 +160,7 @@ The example below demonstrates how the pages in the Grid can be changed using cu
           					contentType: "application/json"
 						},
 						parameterMap: function (options, operation) {
+							// Serialize changed models for writes without altering read parameters.
 							if (operation !== "read" && options.models) {
 								return kendo.stringify(options.models);
 							}

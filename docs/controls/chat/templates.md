@@ -258,6 +258,7 @@ The `messageReferenceTemplate` function renders message references that are used
       var chat = $("#chat")
         .kendoChat({
           messageReferenceTemplate: function (data) {
+            // The outermost element must carry the ref-chat-message-reference-pin-wrapper attribute.
             return (
               "<div class='custom-reference' ref-chat-message-reference-pin-wrapper>" +
               "<span class='custom-reference-text'><strong>Message reference:</strong> " +
@@ -307,6 +308,7 @@ The `messageContentTemplate` option controls the rendering of the content area f
         height: 500,
         authorId: 1,
         messageContentTemplate: function(message) {
+            // Encode the text so message content cannot inject HTML.
             return '<div style="border-left:3px solid #1a73e8;padding-left:8px;">' +
                    '<em>' + kendo.htmlEncode(message.text) + '</em>' +
                    '</div>';

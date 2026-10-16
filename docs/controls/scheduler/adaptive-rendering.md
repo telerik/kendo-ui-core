@@ -30,6 +30,7 @@ The following example demonstrates how to configure the adaptive rendering mode 
 <script>
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/6"),
+        // Force adaptive rendering regardless of the browser type.
         mobile: "phone",
         height: "600px",
         views: [
@@ -63,6 +64,7 @@ The mobile pane in which the adaptive Scheduler is placed does not automatically
 The following example demonstrates how to apply the `stretch` option.
 
 ```
+<!-- Stretch makes the pane fill the view so the 100% Scheduler height resolves. -->
 <div id="foo" data-role="view" data-init="onInit" data-stretch="true">
     <div id="scheduler"></div>
 </div>

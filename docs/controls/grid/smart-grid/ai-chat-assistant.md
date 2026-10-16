@@ -73,7 +73,7 @@ To implement an AI Chat Assistant for your Grid, follow the steps below:
           grid.handleAIResponse(response);
         },
         error: function() {
-          // handle error
+          // TODO: show an error message in the Chat when the AI request fails.
         }
       });
     }

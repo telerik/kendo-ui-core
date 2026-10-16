@@ -95,6 +95,7 @@ The example below demonstrates the different [`colorTypes`](/api/dataviz/ui/sank
               sourceId: "female",
               targetId: "tablet",
               value: 12,
+              // A link color in data overrides links.colorType for this link.
               color: "#317773",
             },
             {

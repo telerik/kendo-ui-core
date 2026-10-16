@@ -73,6 +73,7 @@ The following example demonstrates Semantic Search mode in action:
         let embeddedData = [];
 
         async function initializeEmbeddings() {
+            // Hide the loader if model initialization stalls.
             const hideTimer = setTimeout(() => {
                 try { kendo.ui.progress($('#example'), false); } catch (e) {}
             }, 30000);
@@ -96,6 +97,7 @@ The following example demonstrates Semantic Search mode in action:
                     embeddings.push(...results);
                 }
 
+                // Preserve product order so each embedding matches its source item.
                 embeddedData = originalData.map((item, idx) => ({
                     ...item,
                     embedding: embeddings[idx]
@@ -116,6 +118,7 @@ The following example demonstrates Semantic Search mode in action:
             }
             try {
                 const q = await semanticSearch.embed(query);
+                // Exclude weak semantic matches from the Grid results.
                 const results = embeddedData.map(item => ({ ...item, similarity: semanticSearch.cosineSimilarity(q, item.embedding) }))
                   .filter(x => x.similarity > 0.78)
                   .sort((a,b) => b.similarity - a.similarity);
@@ -278,7 +281,7 @@ To implement Semantic Search in the AI Smart Box tool:
                     similarity: semanticService.cosineSimilarity(queryEmbedding, item.embedding)
                 });
             })
-            .filter(function(x) { return x.similarity > 0.35; })  // Apply similarity threshold
+            .filter(function(x) { return x.similarity > 0.35; })  // Exclude weak matches before ranking products.
             .sort(function(a, b) { return b.similarity - a.similarity; });
         
         // Update Grid data with semantically similar results

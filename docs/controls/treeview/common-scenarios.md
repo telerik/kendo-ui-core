@@ -44,6 +44,7 @@ Since `dataItem` is of the [`Node`](/api/framework/node) type, you can use its [
     function onExpand(e) {
         var dataItem = this.dataItem(e.node);
 
+        // Marking the node as not loaded makes it request its children again.
         dataItem.loaded(false);
     }
 
@@ -96,6 +97,7 @@ The `HierarchicalDataSource` does not support data projection. Therefore, you mi
           schema: {
             parse: function(response) {
               return $.map(response, function(x) {
+                // Map the custom Downloaded field to the built-in expanded state.
                 x.expanded = x.Downloaded;
                 return x;
               });

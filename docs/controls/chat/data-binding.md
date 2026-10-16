@@ -75,6 +75,7 @@ With local data, the Chat can still render the batch that contains a pinned or r
             });
         }
 
+        // The pinned message is outside the latest batch, so the Chat loads its batch on click.
         messages[6].isPinned = true;
         messages[6].text = "Order 98145 left the regional warehouse at 10:14 AM and is scheduled for next-day delivery.";
         messages[44].replyToId = messages[6].id;

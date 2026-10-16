@@ -27,12 +27,12 @@ The item template manages the way the list items of a DropDownList are rendered.
 
 ```dojo
     <input id="dropdownlist" />
-    <!-- Template -->
+    <!-- Define markup rendered for each option in the popup. -->
     <script id="scriptTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
     </script>
 
-    <!-- DropDownList initialization -->
+    <!-- Initialize the DropDownList with this item template. -->
     <script>
         $(document).ready(function() {
             $("#dropdownlist").kendoDropDownList({
@@ -59,12 +59,12 @@ The value template manages the way the selected value of a DropDownList is rende
 
 ```dojo
     <input id="dropdownlist" />
-    <!-- Template -->
+    <!-- Keep selected-value template content to inline HTML elements. -->
     <script id="valueTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#
     </script>
 
-    <!-- DropDownList initialization -->
+    <!-- Apply this markup to the selected value, not each popup item. -->
     <script>
         $(document).ready(function() {
             $("#dropdownlist").kendoDropDownList({
@@ -89,12 +89,12 @@ The header template manages the way the popup header of a DropDownList is render
 
 ```dojo
     <input id="dropdownlist" />
-    <!-- Template -->
+    <!-- Define content displayed above the popup list. -->
     <script id="headerTemplate" type="text/x-kendo-template">
         <strong>Header</strong>
     </script>
 
-    <!-- DropDownList initialization -->
+    <!-- Use this template for the popup header. -->
     <script>
         $(document).ready(function() {
             $("#dropdownlist").kendoDropDownList({
@@ -119,12 +119,12 @@ The footer template manages the way the popup footer of a DropDownList is render
 
 ```dojo
     <input id="dropdownlist" />
-    <!-- Template -->
+    <!-- The template context is the widget instance. -->
     <script id="footerTemplate" type="text/x-kendo-template">
         Total <strong>#: instance.dataSource.total() #</strong> items found
     </script>
 
-    <!-- DropDownList initialization -->
+    <!-- Re-render the footer whenever the DataSource changes. -->
     <script>
         $(document).ready(function() {
             $("#dropdownlist").kendoDropDownList({
@@ -151,12 +151,12 @@ The DropDownList widget displays `noDataTemplate` in the popup when the data sou
 
 ```dojo
     <input id="dropDownList" />
-    <!-- Template -->
+    <!-- Define content shown when no data is available. -->
     <script id="noDataTemplate" type="text/x-kendo-template">
         <strong>No Data!</strong>
     </script>
 
-    <!-- DropDownList initialization -->
+    <!-- Defining noDataTemplate opens the popup even for an empty data source. -->
     <script>
         $(document).ready(function() {
             $("#dropDownList").kendoDropDownList({

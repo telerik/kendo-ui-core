@@ -178,6 +178,7 @@ The following example demonstrates how to place a Kendo UI Calendar in a custom 
 
 		  var element = e.sender.element.closest('.k-card-container');
 
+		  // Defer cleanup so the Calendar is not destroyed inside its own change handler.
 		  setTimeout(function() {
 			e.sender.destroy();
 			element.remove();

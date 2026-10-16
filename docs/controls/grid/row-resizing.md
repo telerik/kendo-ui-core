@@ -46,7 +46,7 @@ The [`rowResize`](/api/ui/grid/events/rowResize) event fires when the user resiz
         },
         selectable: "multiple row",
         rowResize: function(e) {
-            // Execute logic when the user resizes a row.
+            // TODO: handle the resized e.rows using e.oldHeight and e.newHeight.
         },
         // Other configuration.
      });

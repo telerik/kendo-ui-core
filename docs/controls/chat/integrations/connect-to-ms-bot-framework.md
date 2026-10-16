@@ -58,6 +58,7 @@ In this case, the establishment of a connection to the service and the binding o
         .subscribe();
     },
     onResponse: function (response) {
+      // Ignore the activities that the current user posted, which the service echoes back.
       if (response.from.id === this.chat.getUser().id) {
         return;
       }

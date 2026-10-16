@@ -56,7 +56,7 @@ Prior to binding the DropDownTree widget, you can pre-process all available data
       return hash[rootLevel];
     }
 
-    // The tree for visualizing the data.
+    // Bind the hierarchy built from the flat records.
     $("#dropdowntree").kendoDropDownTree({
       dataSource: processTable(flatData, "id", "parent", 0),
       loadOnDemand: false

@@ -157,6 +157,7 @@ The following example demonstrates a StockChart in the master and navigator data
                     url: "https://demos.telerik.com/service/v2/core/StockData"
                 },
                 parameterMap: function(data) {
+                    // Send the visible date range as a JSON filter so the service returns only that range.
                     return { filter: JSON.stringify(data.filter) };
                 }
             },

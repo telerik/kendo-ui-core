@@ -56,6 +56,7 @@ Once the schema is configured, you need to configure the `transport` actions for
                 contentType: "application/json"
             },
             parameterMap: function(options, operation) {
+                // Send changed models as JSON for create, update, and destroy.
                 if (operation !== "read" && options.models) {
                     return kendo.stringify(options.models);
                 }

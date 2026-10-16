@@ -32,6 +32,7 @@ The following example demonstrates how to create a linear trendline for Categori
                 {
                     name: 'Sales Forecast (LINEAR)',
                     type: 'linearTrendline',
+                    // The for value must match the name of the series to trend.
                     for: 'World',
                     color: 'lime',
                     forecast: {

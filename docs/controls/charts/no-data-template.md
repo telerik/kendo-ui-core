@@ -79,6 +79,7 @@ The following example demonstrates how to configure a custom No Data Template fo
                 }
             },
             dataBound: function () {
+                // The button exists only while the no-data template is rendered.
                 $("#button").kendoButton({
                     icon: "arrow-rotate-cw",
                     click: function () {

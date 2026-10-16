@@ -62,6 +62,7 @@ The following example demonstrates how to add an Upload editor to a Form:
         }
       ],
       submit: function(e) {
+        // Prevent the native form post so the result renders on the page.
         e.preventDefault();
         if (e.model.UploadedFile) {
           validationSuccess.html(
@@ -154,6 +155,7 @@ $("#exampleform").kendoForm({
     }
   ],
   submit: function(e) {
+    // Prevent the native form post and send the data through FormData instead.
     e.preventDefault();
     
     var validationSuccess = $("#validation-success");

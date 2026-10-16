@@ -47,7 +47,7 @@ In this step, you will initialize the DropDownTree from the `<input>` element. A
 <input id="dropdowntree" />
 
 <script>
-    // Target the input element by using jQuery and then call the kendoDropDownTree() method.
+    // Match this selector to the DropDownTree input's ID.
     $("#dropdowntree").kendoDropDownTree();
 </script>
 ```

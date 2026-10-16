@@ -66,10 +66,10 @@ The following example demonstrates how to customize the appearance of the drop z
     }
 
     .customDropZone.k-dropzone-active {
-        border: 1px solid yellow;
+        border: 1px solid yellow; /* While a file is dragged over the page */
     }
     .customDropZone.k-dropzone-active.k-dropzone-hovered {
-        border: 1px solid green;
+        border: 1px solid green; /* While the file is over the drop zone itself */
     }
 
 ## Uploading File Directories

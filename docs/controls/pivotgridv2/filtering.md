@@ -77,6 +77,7 @@ The example below demonstrates how to filter data only for cities starting with 
                   {
                     field: "[Date].[Calendar]",
                     operator: "in",
+                    // A comma-separated list of MDX members selects both calendar years.
                     value: "[Date].[Calendar].[Calendar Year].&[2010],[Date].[Calendar].[Calendar Year].&[2013]"
                   }
                 ]

@@ -56,6 +56,7 @@ The Scheduler uses `Arrow` keys to navigate between time slots. The following ex
         ],
         kendoKeydown: function(e) {
             var keys = kendo.keys;
+            // Suppress the built-in Arrow Up and Arrow Down slot navigation.
             if (e.keyCode === keys.UP || e.keyCode === keys.DOWN) {
                 e.preventKendoKeydown = true;
             }

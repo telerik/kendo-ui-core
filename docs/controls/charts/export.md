@@ -101,6 +101,7 @@ The following example demonstrates how to obtain an image from the Chart.
     <div id="chart"></div>
     <script>
         $("#chart").kendoChart({
+            // Disable animations so the exported image captures the final render.
             transitions: false,
             series: [{
                 type: "column",
