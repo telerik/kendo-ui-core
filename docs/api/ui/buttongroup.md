@@ -421,56 +421,6 @@ How do I control the position of notification badges in a Kendo UI ButtonGroup? 
     });
     </script>
 
-
-### items.badge.shape `String` *(default: 'rounded')*
-
-
-Specifies the shape of the badge.
-Valid options are `rectangle`, `rounded`, `pill`, `circle`, `dot`.
-
-
-<div class="meta-api-description">
-How do I customize the shape of badges in a Kendo UI ButtonGroup? Set or customize the geometric form and visual style of badges on grouped buttons or menu items by selecting from shapes such as rectangle, rounded corners, pill-shaped, circular, or small dot indicators to configure numeric counters, status indicators, minimal notification dots, or alert symbols; adjust badge outlines, contours, and overall appearance to match design requirements, apply shapes that convey priority or state, and control how badges visually represent counts or statuses across button collections and interactive UI elements.
-</div>
-
-#### Example
-
-    <div id="buttonGroup"></div>
-    <script>
-    $("#buttonGroup").kendoButtonGroup({
-        items: [
-            {
-                text: "Rectangle",
-                badge: {
-                    text: "1",
-                    shape: "rectangle"
-                }
-            },
-            {
-                text: "Rounded",
-                badge: {
-                    text: "2",
-                    shape: "rounded"
-                }
-            },
-            {
-                text: "Circle",
-                badge: {
-                    text: "3",
-                    shape: "circle"
-                }
-            },
-            {
-                text: "Dot",
-                badge: {
-                    shape: "dot"
-                }
-            }
-        ]
-    });
-    </script>
-
-
 ### items.badge.size `String` *(default: undefined)*
 
 Sets a value controlling the size of the badge. When `undefined` (the default), the theme controls the size. Can also be set to the following string values:

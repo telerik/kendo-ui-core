@@ -11,6 +11,25 @@ position: 2
 
 This article lists the breaking or important changes in the 2026 releases of {{ site.product }}.
 
+## {{ site.product }} 2026 Q4
+
+### Obsolete `Button.Badge.Shape` option removed
+
+The `Button.Badge.Shape` setting and `ButtonGroup.Items.Badge.Shape` is removed. The shape of the badge can be controlled with the `Rounded` configuration option.
+
+```HtmlHelper
+    @(Html.Kendo().Button().Name("btn").Content("5+").Badge(b => b.Rounded(Rounded.Full).ThemeColor(BadgeColor.Success)))
+```
+{% if site.core %}
+```TagHelper
+    <kendo-button name="btn">
+        <badge
+            rounded="@Rounded.Full"
+            theme-color="@BadgeColor.Success"/>
+    </kendo-button>
+```
+{% endif %}
+
 ## {{ site.product }} 2026 October
 
 ### Badge Text Is HTML-Encoded by Default
