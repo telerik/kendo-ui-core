@@ -11,7 +11,7 @@ position: 4
 
 The Button can accommodate a [Badge](https://docs.telerik.com/{{ site.platform }}/html-helpers/layout/badge/overview) to enhance the meaning of the text content.
 
-The Button provides the `Badge()` configuration method for configuring the Button's Badge. The [API](/api/kendo.mvc.ui.fluent/buttonbadgesettingsbuilder) exposes methods you can use, including `shape()`, `size()`, `themecolor()`, `position()`, `fill()`,`visible()` and `align()` to customize the appearance of the Badge:
+The Button provides the `Badge()` configuration method for configuring the Button's Badge. The [API](/api/kendo.mvc.ui.fluent/buttonbadgesettingsbuilder) exposes methods you can use, including `size()`, `themecolor()`, `position()`, `fill()`,`visible()` and `align()` to customize the appearance of the Badge:
 
 ```HtmlHelper
     @(Html.Kendo().Button()
@@ -19,7 +19,7 @@ The Button provides the `Badge()` configuration method for configuring the Butto
         .Content("Click Me!")
         .Badge(b => b
             .Text("success")
-            .Shape(BadgeShape.Pill)
+            .Rounded(Rounded.None)
             .Size(BadgeSize.Medium)
             .ThemeColor(BadgeColor.Info)
             .Position(BadgePosition.Edge)
@@ -34,7 +34,7 @@ The Button provides the `Badge()` configuration method for configuring the Butto
             cutout-border="true"
             visible="true"
             fill="@BadgeFill.Solid"
-            shape="@BadgeShape.Rectangle"
+            rounded="@Rounded.None"
             size="@BadgeSize.Large"
             theme-color="@BadgeColor.Success"
             position="@BadgePosition.Outside"
@@ -52,7 +52,7 @@ The Button provides the `Badge()` configuration method for configuring the Butto
         .Name("save")
         .Content("Save")
         .Badge(b => b
-            .Shape(BadgeShape.Circle)
+            .Rounded(Rounded.Full)
             .Size(BadgeSize.Large)
             .ThemeColor(BadgeColor.Success)
             .Position(BadgePosition.Edge)
@@ -66,7 +66,7 @@ The Button provides the `Badge()` configuration method for configuring the Butto
     <kendo-button name="buttonWithBadge">
         <badge icon="save"
             fill="@BadgeFill.Solid"
-            shape="@BadgeShape.Circle"
+            rounded="@Rounded.Full"
             size="@BadgeSize.Medium"
             theme-color="@BadgeColor.Success"
             position="@BadgePosition.Edge"

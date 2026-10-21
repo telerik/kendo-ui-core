@@ -32,7 +32,6 @@ How do I add a notification count to a Kendo UI button? Control and customize ov
                 text: 1234,
                 max: 99,
                 themeColor: "warning",
-                shape: "circle",
                 cutoutBorder: true
             }
         });
@@ -192,27 +191,6 @@ How do I position a badge next to a button in Kendo UI for jQuery? Control the p
           text: "8",
           position: "inside",
           align: "bottom end"
-        }
-      });
-    </script>
-
-### badge.shape `String` *(default: 'rounded')*
-
-Specifies the shape of the badge. Valid options are: `rectangle`, `rounded`, `pill`, `circle`, `dot`.
-
-
-<div class="meta-api-description">
-How do I change the shape of a badge on a Kendo UI button? Customize and configure the badge shape on buttons by selecting from various styles such as rectangle, rounded corners, pill-shaped, circular, or small dot indicators to fit different design themes, user interface layouts, and visual preferences, enabling control over badge appearance, shape styling, spacing, and how notification or status markers are displayed on interactive elements.
-</div>
-
-#### Example
-
-    <button id="button">Button</button>
-    <script>
-      $("#button").kendoButton({
-        badge: {
-          text: "7",
-          shape: "circle"
         }
       });
     </script>
