@@ -213,6 +213,43 @@ describe("SplitButton menu button initialization", function() {
         assert.isOk(item.hasClass("my-custom-class"));
         assert.isOk(item.hasClass("k-menu-item"));
     });
+
+    it("SplitButton preserves item ids without injecting markup during initialization", function() {
+        const id = 'item"><img data-injected="true">&quot;\'';
+        new SplitButton(button, { items: [{ id: id, text: "Item" }] });
+
+        const list = $(document.getElementById(button.next().attr("aria-controls")));
+
+        assert.equal(list.find("img").length, 0);
+        assert.equal(list.children("li").length, 1);
+        assert.equal(list.children("li").attr("id"), id);
+    });
+
+    it("SplitButton preserves attribute ids without injecting markup during initialization", function() {
+        const id = 'item"><img data-injected="true">&quot;\'';
+        new SplitButton(button, { items: [{ text: "Item", attributes: { id: id } }] });
+
+        const list = $(document.getElementById(button.next().attr("aria-controls")));
+
+        assert.equal(list.find("img").length, 0);
+        assert.equal(list.children("li").length, 1);
+        assert.equal(list.children("li").attr("id"), id);
+    });
+
+    it("SplitButton preserves link targets without injecting markup during initialization", function() {
+        const target = 'frame"><img data-injected="true">&quot;\'';
+        new SplitButton(button, {
+            items: [{ text: "Item", url: "https://example.com", attributes: { target: target } }]
+        });
+
+        const list = $(document.getElementById(button.next().attr("aria-controls")));
+
+        assert.equal(list.find("img").length, 0);
+        assert.equal(list.children("li").length, 1);
+        assert.equal(list.find("a").length, 1);
+        assert.equal(list.find("a").attr("target"), target);
+        assert.isUndefined(list.children("li").attr("target"));
+    });
 });
 
 describe("SplitButton - disabled states", function() {

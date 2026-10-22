@@ -31,7 +31,6 @@ When the download completes, each folder inside the downloaded archive contains 
 |`/src`							|Used to hold the source code files but they are now provided in a separate download package. Access the source code package from the [**Downloads** section](https://www.telerik.com/account/my-downloads) of your account. Note that the source code is not available to trial users.|
 |`/styles`					|Contains the compiled CSS of all the [themes]({% slug sassbasedthemes_kendoui %}) Kendo UI provides. |
 |`/typescript`			|Includes the Kendo UI [TypeScript definitions](https://docs.telerik.com/kendo-ui/third-party/typescript).|
-|`/vsdoc`				    |Includes the files that provide the intellisense.  |
 |`changelog.html`		|Provides the Kendo UI release notes.|
 
 ## Alternative Download Options

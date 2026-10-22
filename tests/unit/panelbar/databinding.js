@@ -85,6 +85,17 @@ describe("DataSource binding", function() {
         assert.equal(links.eq(1).attr("href"), "#INVALIDLINK");
     });
 
+    it("Data-bound spriteCssClass does not allow attribute injection", function() {
+        let spriteCssClass = "custom' onmouseover='alert(1)";
+        let panelbar = createPanelBar([
+            { text: "foo", spriteCssClass: spriteCssClass }
+        ]);
+        let sprite = panelbar.find(".k-sprite");
+
+        assert.equal(sprite.attr("class"), "k-sprite " + spriteCssClass);
+        assert.isUndefined(sprite.attr("onmouseover"));
+    });
+
     it("contentUrls reject executable schemes for existing and generated links", function() {
         let panelbar = PanelBarHelpers.fromHtml(
             "<ul><li><a>existing link</a></li><li>generated link</li></ul>",
@@ -802,7 +813,7 @@ describe("DataSource binding", function() {
 
     it("imageUrl is passed with the data protocol", function() {
         const DATA_IMAGE_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=";
-        
+
         let panelbar = createPanelBar({
             dataSource: [{ imageUrl: DATA_IMAGE_URL , text: "Test"}]
         });

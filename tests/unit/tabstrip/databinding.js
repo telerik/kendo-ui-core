@@ -115,7 +115,7 @@ describe("tabstrip data binding", function() {
 
     it("dataImageUrlField is passed with data protocol", function() {
         const DATA_IMAGE_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=";
-        
+
         let tabstrip = new kendo.ui.TabStrip(dom, {
             dataImageUrlField: "foo",
             dataSource: [{ foo: DATA_IMAGE_URL }]
@@ -149,6 +149,18 @@ describe("tabstrip data binding", function() {
         });
 
         assert.isOk(tabstrip.tabGroup.find("span.k-sprite").hasClass("foo"));
+    });
+
+    it("data-bound spriteCssClass does not allow attribute injection", function() {
+        let spriteCssClass = "custom' onmouseover='alert(1)";
+        let tabstrip = new kendo.ui.TabStrip(dom, {
+            dataSpriteCssClass: "spriteCssClass",
+            dataSource: [{ text: "Item 1", spriteCssClass: spriteCssClass }]
+        });
+        let sprite = tabstrip.tabGroup.find("span.k-sprite");
+
+        assert.equal(sprite.attr("class"), "k-sprite " + spriteCssClass);
+        assert.isUndefined(sprite.attr("onmouseover"));
     });
 
     it("class attribute does not create additional item attributes", function() {

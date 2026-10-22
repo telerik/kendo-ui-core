@@ -2671,7 +2671,7 @@ export const __meta__ = {
                 sprite: template((data) => {
                     var spriteCssClass = fieldAccessor("spriteCssClass")(data);
                     if (spriteCssClass) {
-                        return `<span class='k-sprite ${spriteCssClass}'></span>`;
+                        return `<span class='k-sprite ${encode(spriteCssClass)}'></span>`;
                     }
                     return '';
                 }),

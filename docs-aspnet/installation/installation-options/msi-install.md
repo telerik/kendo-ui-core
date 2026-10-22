@@ -78,7 +78,6 @@ You will find the following in the {{ site.product }} installation directory:
 * `src`&mdash;Contains an informational `README` saying that you must visit [your Telerik account](https://www.telerik.com/login/) to download the `source.zip` package with the JavaScript, CSS, and C# source code. This directory is not available, if you are using a trial license.
 * `VSExtensions`&mdash;The extensions for Visual Studio.
 * `typescript`&mdash;The TypeScript definitions for the Kendo combined scripts (`kendo.all`, `kendo.dataviz`, `kendo.web`, and `kendo.mobile`).
-* `vsdoc`&mdash;The intellisense definitions for the Kendo combined scripts.
 * `pdfviewer`&mdash;The `Telerik.Pdf.Web` assembly from the Telerik Document Processing library and its dependencies.
 * `dpl`&mdash;The NuGet packages for the Telerik Document Processing library.
 * `export`&mdash;The `Telerik.Export.Core` NuGet package that allows exporting `IEnumerable` sources to XLSX and CSV formats.

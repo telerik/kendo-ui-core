@@ -84,7 +84,7 @@ export const __meta__ = {
                     item +
                 "</li>",
             image: ({ imageUrl }) => `<img class='k-image' alt='' src='${kendo.sanitizeImageSrc(imageUrl)}' />`,
-            sprite: ({ spriteCssClass }) => `<span class='k-sprite ${spriteCssClass}'></span>`,
+            sprite: ({ spriteCssClass }) => `<span class='k-sprite ${kendo.htmlEncode(spriteCssClass)}'></span>`,
             empty: () => "",
             itemActionsWrapperTemplate: () => `<span class="k-item-actions"></span>`,
             itemActionTemplate: ({ element, icon, iconClass, attributes }) => {

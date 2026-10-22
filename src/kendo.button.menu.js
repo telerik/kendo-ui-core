@@ -87,7 +87,7 @@ export const __meta__ = {
                                                         `${TEXT_TEMPLATE({ text })}` +
                                                     `</span>`;
 
-    var LINK_TEMPLATE = ({ url, imageUrl, spriteCssClass, icon, text, attributes }) => `<a href="${sanitizeLink(url)}" ${attributes && attributes.target ? `target="${attributes.target}"` : ''} class="${cssClasses.item}">` +
+    var LINK_TEMPLATE = ({ url, imageUrl, spriteCssClass, icon, text, attributes }) => `<a href="${sanitizeLink(url)}" ${attributes && attributes.target ? `target="${encode(attributes.target)}"` : ''} class="${cssClasses.item}">` +
                                                     `${IMAGE_TEMPLATE({ imageUrl })}` +
                                                     `${SPRITE_TEMPLATE({ spriteCssClass })}` +
                                                     `${ICON_TEMPLATE({ icon })}` +
@@ -177,7 +177,10 @@ export const __meta__ = {
             });
 
             id = item.id || attributesId || kendo.guid();
-            menuItem = $("<li id=\"" + id + "\" role=\"" + ROLE_MENU_ITEM + "\" class=\"" + cssClasses.listItem + "\">" + that._renderItemButton(item) + "</li>");
+            menuItem = $("<li>")
+                .attr({ id: id, role: ROLE_MENU_ITEM })
+                .addClass(cssClasses.listItem)
+                .html(that._renderItemButton(item));
 
             if (item.click) {
                 that._clickHandlers[id] = item.click;

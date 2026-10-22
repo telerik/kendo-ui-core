@@ -286,6 +286,7 @@ excluded-files:
 - "**/knowledge-base/grid-utc-time-on-both-server-and-client.md"
 - "**/knowledge-base/mvc-with-requirejs.md"
 - "**/knowledge-base/custom-builder-not-working-ui-for-aspnet-mvc.md"
+- "**/knowledge-base/grid-ambiguous-widgetfactory.md"
 
 meta:
   "*/accessibility":

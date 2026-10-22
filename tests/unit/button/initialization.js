@@ -78,6 +78,16 @@ describe("initialization", function() {
         assert.isOk(icon.hasClass("bar"));
     });
 
+    it("encodes spriteCssClass before adding it to the icon class", function() {
+        button = getButton().kendoButton({
+            spriteCssClass: "custom' onclick='alert(1)"
+        });
+
+        let icon = button.data("kendoButton").element.children("span.k-sprite");
+
+        assert.equal(icon.attr("class"), "k-sprite custom' onclick='alert(1) k-button-icon");
+    });
+
     it("spriteCssClass adds corresponding class(es) to span.k-sprite element if already exists", function() {
         button = getButton('<span class="k-sprite"></span>text').kendoButton({
             spriteCssClass: "foo bar"
