@@ -1,7 +1,7 @@
 ---
 title: Visual Studio IntelliSense
 page_title: Visual Studio IntelliSense - Kendo UI Third-Party Tools
-description: "Learn how to reference the Kendo UI Visual Studio IntelliSense by using an additional vsdoc or IntelliSense JavaScript file."
+description: "Learn how to enable Visual Studio IntelliSense for Kendo UI by using TypeScript definitions."
 components: ["general"]
 previous_url: /vs-intellisense
 slug: visualstudiointellisense_integration_kendoui
@@ -9,77 +9,23 @@ slug: visualstudiointellisense_integration_kendoui
 
 # Visual Studio IntelliSense
 
-Kendo UI provides Intelligent code completion for Visual Studio (VS) by using an additional `vsdoc` or `intellisense` JavaScript file.
+Kendo UI provides code completion in Visual Studio through its [TypeScript definitions]({% slug typescript_integration_kendoui %}).
 
-The approach was initially described in Scott Guthrie's blog post [jQuery IntelliSense in VS 2008](https://weblogs.asp.net/scottgu/jquery-intellisense-in-vs-2008/). Kendo UI Visual Studio IntelliSense is integrated in Visual Studio 2008 SP1 or later versions and it also works with Visual Web Developer (free).
+## TypeScript-Based IntelliSense
 
-For versions of Visual Studio prior to Visual Studio 2017, refer to the [section on installation](#installation).
-
-## VS 2017
-
-As of the Visual Studio 2017 release, Microsoft use a [new language service for JavaScript IntelliSense](https://docs.microsoft.com/en-us/visualstudio/ide/javascript-intellisense?view=vs-2017) that is based on TypeScript. This means that the `-vsdoc.js` files are no longer read and supported for JavaScript IntelliSense and that to get IntelliSense for non-standard object types including custom components like the Kendo UI components, you need to treat it like a strongly typed language.
+Visual Studio 2017 and later use a [TypeScript-based language service for JavaScript IntelliSense](https://learn.microsoft.com/en-us/visualstudio/ide/javascript-intellisense). Use the Kendo UI TypeScript definitions to provide type information for components and their configuration.
 
 For more information on this service, the way it works, and the features it supports, refer to:
 * [Microsoft/TypeScript GitHub repo wiki: JavaScript Language Service in Visual Studio](https://github.com/Microsoft/TypeScript/wiki/JavaScript-Language-Service-in-Visual-Studio)
 * [Microsoft/TypeScript GitHub repo wiki: JSDoc Support in JavaScript](https://github.com/Microsoft/TypeScript/wiki/JsDoc-support-in-JavaScript)
 
-With this in mind, you may want to consider writing directly in TypeScript and using the [TypeScript definitions for Kendo UI]({% slug typescript_integration_kendoui %}).
-
-To get the VSDoc-based IntelliSense, you can try to revert to the previous behavior by going to **Tools** > **Options** > **Text Editor** > **JavaScript/TypeScript** > **Language Service** and uncheck the checkbox under **Enable the new JavaScript Language service**. To enforce the changes, restart Visual Studio.
-
-![Kendo UI for jQuery revert to previous JS service](../images/vsdoc/revert-to-old-language-service.png)
-
-By utilizing the suggested approach, you can use the JavaScript documentation provided in the `vsdoc` files as demonstrated in the [following section on installation](#installation).
-
-Alternatively, you can also use the TypeScript definitions in JavaScript code by utilizing the JSDoc syntax as demonstrated in the [followign section on JSDoc Syntax for TypeScript-based Intellisense](#jsdoc-syntax-for-typescript-based-intellisense).
-
 ## Installation
 
-Each bundle package includes a `vsdoc` directory which contains a `vsdoc.js` and an `intellisense.js` file for JavaScript.
-
-* For Visual Studio 2008 SP1 and Visual Studio 2010, place the `vsdoc.js` file next to the `kendoui` bundle script.
-* For Visual Studio 2012 and later, place the `intellisense.js` file next to the `kendoui` bundle script.
-
-Make sure the naming prefix of the IntelliSense file matches the `kendoui` bundle name.
-
-- Visual Studio 2008 SP1 - 2010
-
-    ![Kendo UI for jQuery Solution Explorer](../images/vsdoc/solution-explorer.png)
-
-- Visual Studio 2012 and later
-
-    ![Kendo UI for jQuery Solution Explorer VS2012](../images/vsdoc/solution-explorer-vs2012.png)
-
-- Visual Studio 2017
-
-    For Visual Studio 2017, you must disable its TypeScript-based Intellisense in order for this to work. See the [Visual Studio 2017](#visual-studio-2017) section.
-
-## Features
-
-* Options for components initialization
-
-    ![Kendo UI for jQuery plugin](../images/vsdoc/jquery-plugin.png)
-
-* Widget accessors
-
-    ![Kendo UI for jQuery plugin](../images/vsdoc/jquery-accessor.png)
-
-* Widget methods
-
-    ![Kendo UI for jQuery plugin](../images/vsdoc/widget-method.png)
-
-## Reference
-
-To reference the IntelliSense, use either of the following approaches:
-
-* Reference the Kendo UI Visual Studio IntelliSense when the script is directly added to a page as previously demonstrated. The `kendo.all-vsdoc.js` and `kendo.all.min.intellisense.js` files are also available on the [Kendo UI CDN]({% slug kendoui_cdn_services_installation %}) in the same folder as the regular JavaScript files.
-* Reference the IntelliSense by using a reference hint from within an external JavaScript file as demonstrated in the following screenshot. This approach may not work in Visual Studio 2017 and later.
-
-    ![Kendo UI for jQuery script reference](../images/vsdoc/js-reference.png)
+Each distribution bundle includes a `typescript` directory containing `kendo.all.d.ts`. The Kendo UI NPM package also includes the TypeScript definitions. Follow the [TypeScript getting-started instructions]({% slug typescript_integration_kendoui %}#getting-started) to add them to your project.
 
 ## JSDoc Syntax for TypeScript-Based Intellisense
 
-With the TypeScript-based IntelliSense in Visual Studio 2017, you can use TypeScript definitions to get IntelliSense with the default TypeScript-based IntelliSense mode. In this way, you will not have to disable the new language service and affect other parts of your workflow. This approach and the `vsdoc`-based IntelliSense may not work and you might have to prune the code before executing it.
+In JavaScript files, use the TypeScript definitions together with JSDoc annotations to provide type information without disabling the TypeScript-based language service.
 
 The following screenshot demonstrates how to add TypeScript references to a JavaScript code block.
 

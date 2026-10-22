@@ -667,6 +667,23 @@ describe("Client side rendering", function() {
         assert.isOk(menu.element.find(".k-sprite").is(".TESTCLASS"));
     });
 
+    it('data-bound spriteCssClass does not allow attribute injection', function() {
+        let spriteCssClass = "custom' onmouseover='alert(1)";
+        createMenu({
+            dataSource: [{
+                text: "RootItem",
+                spriteCssClass: spriteCssClass
+            }]
+        });
+
+        menu.dataSource.view()[0].load();
+
+        let sprite = menu.element.find(".k-sprite");
+
+        assert.equal(sprite.attr("class"), "k-sprite " + spriteCssClass);
+        assert.isUndefined(sprite.attr("onmouseover"));
+    });
+
     it('dataImageUrlField configures the item image', function() {
         createMenu({
             dataImageUrlField: "imgUrl",

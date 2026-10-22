@@ -341,7 +341,7 @@ export const __meta__ = {
 
                     return `<${tag} class='${textClass(item)}' ${contentUrl}${textAttributes(url)}>` +
                         (imageUrl ? `<img class='k-panelbar-item-icon k-image' alt='' src='${kendo.sanitizeImageSrc(imageUrl)}' />` : '') +
-                        (spriteCssClass ? `<span class='k-sprite ${spriteCssClass}'></span>` : '') +
+                        (spriteCssClass ? `<span class='k-sprite ${encode(spriteCssClass)}'></span>` : '') +
                         (icon ? kendo.ui.icon($("<span></span>"), { icon: icon, iconClass: "k-panelbar-item-icon" + iconClass }) : '') +
                         panelBar.options.template({ panelBar, item, arrow, textClass, textAttributes, contentUrl }) +
                         arrow({ panelBar, item, arrow, textClass, arrowIconOptions, textAttributes, contentUrl }) +
