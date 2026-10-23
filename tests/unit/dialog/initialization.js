@@ -132,6 +132,19 @@ describe("initialization", function() {
         assert.equal(dialog.wrapper.find(".k-dialog-actions > .k-button").length, 1);
     });
 
+    it("encodes action cssClass attributes", function() {
+        let dialog = createDialog({
+            actions: [{
+                text: "OK",
+                cssClass: 'custom-class" onmouseover="void(0)'
+            }]
+        });
+        let button = dialog.wrapper.find(".k-dialog-actions > .k-button");
+
+        assert.equal(button.attr("class").includes('custom-class" onmouseover="void(0)'), true);
+        assert.isUndefined(button.attr("onmouseover"));
+    });
+
     it("setting an primary acition in options adds a primary button", function() {
         let dialog = createDialog({
             actions: [{

@@ -72,7 +72,7 @@ export const __meta__ = {
                 }
 
                 if (options.optional) {
-                    that.labelEl.append("<span class='" + options.optionalClass + "'>" + options.optionalText + "</span>");
+                    that.labelEl.append($("<span></span>").addClass(options.optionalClass).text(options.optionalText));
                 }
 
                 that.element[options.labelPosition](that.labelEl);
@@ -151,4 +151,3 @@ export const __meta__ = {
 
 })(window.kendo.jQuery);
 export default kendo;
-

@@ -74,6 +74,17 @@ describe("DataSource binding", function() {
         assert.isUndefined(image.attr("onerror"));
     });
 
+    it("Data-bound sprite classes do not allow attribute injection", function() {
+        let spriteCssClass = "sprite' onmouseover='void(0)";
+        let panelbar = createPanelBar([
+            { text: "foo", spriteCssClass }
+        ]);
+        let sprite = panelbar.find(".k-sprite");
+
+        assert.isUndefined(sprite.attr("onmouseover"));
+        assert.isOk(sprite.attr("class").includes(spriteCssClass));
+    });
+
     it("Data-bound URLs reject executable schemes", function() {
         let panelbar = createPanelBar([
             { text: "url", url: "javascript:alert(1)" },

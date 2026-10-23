@@ -201,7 +201,7 @@ import "../kendo.core.js";
                 cellElements +=
                 `<td role="gridcell" unselectable="on" ${kendo.attr("style-background-color")}="${colors[i].toCss()}"` +
                     `${selected ? " aria-selected=true" : ""} ` +
-                    `${(id && i === 0) ? 'id=\\"' + id + '\\" ' : '' } ` +
+                    `${(id && i === 0) ? 'id="' + kendo.htmlEncode(id) + '" ' : '' } ` +
 
                     `class="k-colorpalette-tile${selected ? " " + ITEMSELECTEDCLASS : ""}" ` +
                     `aria-label="${colors[i].toCss()}"></td>`;
@@ -309,4 +309,3 @@ import "../kendo.core.js";
 
 
 })(window.kendo.jQuery);
-

@@ -1095,7 +1095,7 @@ import "./kendo.html.button.js";
                 if (data.primary && !data.themeColor) {
                     data.themeColor = "primary";
                 }
-                return kendo.html.renderButton($(`<button${data.cssClass ? ` class="${data.cssClass}"` : ''}>${encode(text)}</button>`),data);
+                return kendo.html.renderButton($(`<button${data.cssClass ? ` class="${encode(data.cssClass)}"` : ''}>${encode(text)}</button>`),data);
             }),
             titlebar: template(({ title }) =>
                 "<div class='k-window-titlebar k-dialog-titlebar'>" +
@@ -1118,4 +1118,3 @@ import "./kendo.html.button.js";
 
     })(window.kendo.jQuery);
 export default kendo;
-

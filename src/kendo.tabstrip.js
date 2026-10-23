@@ -147,7 +147,7 @@ export const __meta__ = {
                 return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
             },
             contentUrl: function(item) {
-                return item.contentUrl ? kendo.attr("content-url") + '="' + item.contentUrl + '"' : "";
+                return item.contentUrl ? kendo.attr("content-url") + '="' + kendo.sanitizeLink(item.contentUrl) + '"' : "";
             }
         };
 
@@ -2096,4 +2096,3 @@ export const __meta__ = {
 
 })(window.kendo.jQuery);
 export default kendo;
-

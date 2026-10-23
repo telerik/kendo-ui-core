@@ -567,7 +567,7 @@ export const __meta__ = {
                     optionLabelValue = "";
                 }
 
-                optionLabel = '<option value="' + optionLabelValue + '">' + that._text(optionLabel) + "</option>";
+                optionLabel = '<option value="' + encode(optionLabelValue) + '">' + encode(that._text(optionLabel)) + "</option>";
             }
 
             that._options(data, optionLabel, value);
@@ -1567,4 +1567,3 @@ export const __meta__ = {
     }]);
 })(window.kendo.jQuery);
 export default kendo;
-

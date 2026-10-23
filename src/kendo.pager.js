@@ -36,7 +36,7 @@ export const __meta__ = {
         MOUSEDOWN = "down",
         MAX_VALUE = Number.MAX_VALUE,
         isRtl = false,
-        iconTemplate = ({ text, wrapClassName, className, size }) => `<button title="${text}" aria-label="${text}" class="k-pager-nav k-button k-button-flat k-icon-button ${wrapClassName} ${size}">${kendo.ui.icon($('<span class="k-button-icon"></span>'),className)}</button>`;
+        iconTemplate = ({ text, wrapClassName, className, size }) => `<button title="${encode(text)}" aria-label="${encode(text)}" class="k-pager-nav k-button k-button-flat k-icon-button ${wrapClassName} ${size}">${kendo.ui.icon($('<span class="k-button-icon"></span>'),className)}</button>`;
 
     function button(options) {
         return options.template( {
@@ -230,8 +230,8 @@ export const __meta__ = {
 
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
-                    that.element.append('<button href="#" class="k-pager-refresh k-button ' + buttonSize + ' k-button-flat k-icon-button" title="' + options.messages.refresh +
-                        '" aria-label="' + options.messages.refresh + '">' + kendo.ui.icon($('<span class="k-button-icon"></span>'),REFRESH) + '</button>');
+                    that.element.append('<button href="#" class="k-pager-refresh k-button ' + buttonSize + ' k-button-flat k-icon-button" title="' + encode(options.messages.refresh) +
+                        '" aria-label="' + encode(options.messages.refresh) + '">' + kendo.ui.icon($('<span class="k-button-icon"></span>'),REFRESH) + '</button>');
                 }
 
                 that.element.on(CLICK + NS, ".k-pager-refresh", that._refreshClick.bind(that));
@@ -302,7 +302,7 @@ export const __meta__ = {
                 options = that.options;
 
             $(pagerInputWrap).append('<span>' + encode(options.messages.page) + '</span>' +
-                    `<input aria-label='${that.options.messages.page}'/>` +
+                    `<input aria-label='${encode(that.options.messages.page)}'/>` +
                     '<span>' + encode(kendo.format(options.messages.of, totalPages)) + '</span>');
 
             return pagerInputWrap;
@@ -335,8 +335,8 @@ export const __meta__ = {
             name: "Pager",
             adaptiveMode: "none",
             ARIATemplate: ({ page, totalPages }) => `Page ${page} of ${totalPages}`,
-            selectTemplate: ({ text, title, tabindex, size }) => `<button aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-button ${size} k-button-flat k-button-primary k-selected"><span class="k-button-text">${encode(text)}</span></button>`,
-            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" aria-label="${title}" ${title !== "" ? `title="${title}"` : ''}><span class="k-button-text">${encode(text)}</span></button>`,
+            selectTemplate: ({ text, title, tabindex, size }) => `<button aria-current="page" tabindex="${tabindex}" aria-label="${encode(title)}" class="k-button ${size} k-button-flat k-button-primary k-selected"><span class="k-button-text">${encode(text)}</span></button>`,
+            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" aria-label="${encode(title)}" ${title !== "" ? `title="${encode(title)}"` : ''}><span class="k-button-text">${encode(text)}</span></button>`,
             numericSelectItemTemplate: ({ idx, selected, text }) => `<option value="${idx}" ${selected ? 'selected="selected"' : '' }>${encode(text)}</option>`,
             buttonCount: 10,
             autoBind: true,
@@ -908,4 +908,3 @@ export const __meta__ = {
     ui.plugin(Pager);
 })(window.kendo.jQuery);
 export default kendo;
-

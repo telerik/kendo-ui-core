@@ -140,6 +140,28 @@ describe("DropDownButton menu button initialization", function() {
         assert.equal(dropDownButton.menu.list.children("li").eq(1).text(), "item 2");
     });
 
+    it("encodes item IDs and link targets as attribute values", function() {
+        let id = 'item" onmouseover="alert(1)';
+        let target = 'window" onfocus="alert(1)';
+        let dropDownButton = new DropDownButton(button, {
+            items: [
+                { id: id, text: "Item ID", url: "https://example.com", attributes: { target: target } },
+                { text: "Attribute ID", url: "https://example.com", attributes: { id: id, target: target } }
+            ]
+        });
+        let items = dropDownButton.menu.list.children("li");
+        let links = items.find("a");
+
+        assert.equal(items.eq(0).attr("id"), id);
+        assert.equal(items.eq(1).attr("id"), id);
+        assert.isUndefined(items.eq(0).attr("onmouseover"));
+        assert.isUndefined(items.eq(1).attr("onmouseover"));
+        assert.equal(links.eq(0).attr("target"), target);
+        assert.equal(links.eq(1).attr("target"), target);
+        assert.isUndefined(links.eq(0).attr("onfocus"));
+        assert.isUndefined(links.eq(1).attr("onfocus"));
+    });
+
     it("DropDownButton renders custom classes applied to its item", function() {
         button.attr("type", "submit");
         let dropDownButton = new DropDownButton(button, {

@@ -41,4 +41,22 @@ describe("kendo.ui.ComboBox messages", function() {
         let clearTitle = comboBox.wrapper.find('.k-clear-value').attr("title");
         assert.equal(clearTitle, "custom");
     });
+
+    it("encodes the clear button title", function() {
+        let clear = 'Clear" onmouseover="void(0)';
+        let comboBox = new ComboBox(input, {
+            value: 1,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [{
+                text: "Test",
+                value: 1
+            }],
+            messages: { clear }
+        });
+        let clearButton = comboBox.wrapper.find(".k-clear-value");
+
+        assert.equal(clearButton.attr("title"), clear);
+        assert.isUndefined(clearButton.attr("onmouseover"));
+    });
 });

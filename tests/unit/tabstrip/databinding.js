@@ -102,6 +102,31 @@ describe("tabstrip data binding", function() {
         assert.equal(tabstrip.contentElements.first().text(), "foo");
     });
 
+    it("dataContentUrlField sanitizes attribute-bound URLs", function() {
+        let contentUrl = 'https://example.com/view" onmouseover="void(0)';
+        let tabstrip = new kendo.ui.TabStrip(dom, {
+            dataTextField: "text",
+            dataContentUrlField: "contentUrl",
+            dataSource: [{ text: "Tab", contentUrl }]
+        });
+        let link = tabstrip.tabGroup.find(".k-link");
+
+        assert.isUndefined(link.attr("onmouseover"));
+        assert.equal(link.attr("data-content-url"), "https://example.com/view%22%20onmouseover=%22void(0)");
+    });
+
+    it("dataSpriteCssClass encodes sprite class attributes", function() {
+        let spriteCssClass = "sprite' onmouseover='void(0)";
+        let tabstrip = new kendo.ui.TabStrip(dom, {
+            dataSpriteCssClass: "spriteClass",
+            dataSource: [{ text: "Tab", spriteClass: spriteCssClass }]
+        });
+        let sprite = tabstrip.tabGroup.find(".k-sprite");
+
+        assert.isUndefined(sprite.attr("onmouseover"));
+        assert.isOk(sprite.attr("class").includes(spriteCssClass));
+    });
+
     it("dataImageUrlField prevents malicious injection", function() {
         const IMAGE_URL = "https://example.com/a' on" + "error='alert(2)'";
 

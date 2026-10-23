@@ -467,7 +467,7 @@ export const __meta__ = {
                     buttonsHtml += kendo.html.renderButton(`<button data-command=${command}>${text}</button>`, buttonOptions);
                 });
 
-                return buttonsHtml;
+                return () => buttonsHtml;
             }
         },
 
@@ -521,8 +521,8 @@ export const __meta__ = {
                             themeColor: "primary",
                         },
                         hideOverflowContent: true,
-                        title: options.adaptiveTitle ? kendo.htmlEncode(options.adaptiveTitle) : "Choose Color",
-                        subtitle: options.adaptiveSubtitle ? kendo.htmlEncode(options.adaptiveSubtitle) : "",
+                        title: options.adaptiveTitle || "Choose Color",
+                        subtitle: options.adaptiveSubtitle || "",
                         footerTemplate: that._actionFooterButtons(),
                     }).data("kendoActionSheet");
 
@@ -672,4 +672,3 @@ export const __meta__ = {
 
 })(window.kendo.jQuery);
 export default kendo;
-

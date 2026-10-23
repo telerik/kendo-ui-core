@@ -113,7 +113,7 @@ import "../kendo.icons.js";
                 '</div>';
 
                 if(options.opacity) {
-                    let optionsMessagesAlpha = options.messages.alpha;
+                    let optionsMessagesAlpha = encode(options.messages.alpha);
                     rgbaInputElement +=
                     `<div class="k-vstack" data-${ns}bind="visible: isRGBMode">` +
                         `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.a" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}step="0.1" data-${ns}max="1" data-${ns}min="0" data-${ns}decimals="1" data-${ns}spinners="false" data-${ns}format="n1" aria-label="${optionsMessagesAlpha}" inputmode="decimal"/>` +
@@ -716,4 +716,3 @@ import "../kendo.icons.js";
     ui.plugin(ColorGradient);
 
 })(window.kendo.jQuery);
-

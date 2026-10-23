@@ -1725,4 +1725,3 @@ kendo.ui.plugin(PanelBar);
 
 })(window.kendo.jQuery);
 export default kendo;
-

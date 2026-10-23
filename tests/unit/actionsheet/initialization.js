@@ -100,6 +100,18 @@ describe("kendo.ui.ActionSheet initialization", function() {
         assert.isOk(viewWithActionButtons.wrapper.find("[ref-actionsheet-action-button]").length === 2);
     });
 
+    it("encodes action button text", function() {
+        const label = '<img src=x onerror="void(0)">';
+        createInstanceWithViews({}, [{}, {
+            actionButtons: [{ text: label }]
+        }]);
+
+        const button = instance.views[1].wrapper.find("[ref-actionsheet-action-button]");
+
+        assert.equal(button.text(), label);
+        assert.equal(button.find("img, [onerror]").length, 0);
+    });
+
     it("each actionsheet view has title", function() {
         createInstanceWithViews();
 
@@ -110,6 +122,25 @@ describe("kendo.ui.ActionSheet initialization", function() {
         assert.isOk(headers.length === 2);
         assert.isOk(headers[0].text() === "Some title");
         assert.isOk(headers[1].text() === "Some title");
+    });
+
+    it("encodes title, subtitle, and header button labels", function() {
+        let label = '<img src=x onerror=void(0)>" onmouseover="void(0)';
+        createInstance({
+            title: label,
+            subtitle: label,
+            startButton: { text: label },
+            closeButton: { text: label }
+        });
+
+        instance.open();
+
+        let header = instance.element.find(".k-actionsheet-titlebar");
+        assert.equal(header.find(".k-actionsheet-title > div:first-child").text(), label);
+        assert.equal(header.find(".k-actionsheet-subtitle").text(), label);
+        assert.equal(header.find("[data-ref-actionsheet-start-button]").attr("aria-label"), label);
+        assert.equal(header.find("[data-ref-actionsheet-close-button]").last().attr("aria-label"), label);
+        assert.equal(header.find("img, [onerror], [onmouseover]").length, 0);
     });
 
     it("each actionsheet view has footer", function() {
@@ -476,4 +507,3 @@ describe("kendo.ui.ActionSheet initialization", function() {
         assert.notEqual(animation.open.effects, "fadeIn", "Should not use adaptive animation");
     });
 });
-

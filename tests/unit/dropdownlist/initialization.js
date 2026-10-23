@@ -386,6 +386,38 @@ describe("kendo.ui.DropDownList initialization", function() {
         assert.equal(optionHeader.innerHTML, "SELECT...");
     });
 
+    it("encodes native option label text", function() {
+        const optionLabel = '</option><option value="injected">Injected</option><option>';
+        let dropdownlist = select.kendoDropDownList({
+            optionLabel,
+            dataSource: [{ text: "Item", value: "item" }],
+            dataTextField: "text",
+            dataValueField: "value"
+        }).data("kendoDropDownList");
+        const options = dropdownlist.element.find("option");
+
+        assert.equal(options.length, 2);
+        assert.equal(options.eq(0).text(), optionLabel);
+        assert.equal(options.eq(1).val(), "item");
+        assert.equal(dropdownlist.element.find("[value='injected'], img, [onerror]").length, 0);
+    });
+
+    it("encodes native option label value", function() {
+        const optionLabelValue = '" onfocus="void(0)';
+        let dropdownlist = select.kendoDropDownList({
+            optionLabel: { text: "Select...", value: optionLabelValue },
+            dataSource: [{ text: "Item", value: "item" }],
+            dataTextField: "text",
+            dataValueField: "value"
+        }).data("kendoDropDownList");
+        const options = dropdownlist.element.find("option");
+
+        assert.equal(options.length, 2);
+        assert.equal(options.eq(0).val(), optionLabelValue);
+        assert.isUndefined(options.eq(0).attr("onfocus"));
+        assert.equal(options.eq(1).val(), "item");
+    });
+
     it("optionLabel template supports complex object", function() {
         let dropdownlist = new DropDownList(input, {
             dataTextField: "name",
