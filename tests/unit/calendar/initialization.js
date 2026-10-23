@@ -96,6 +96,30 @@ describe("kendo.ui.Calendar initialization", function() {
         assert.equal(anchors.eq(0).html(), january);
     });
 
+    it("encodes year-view month names in their HTML contexts", function() {
+        const months = kendo.culture().calendar.months;
+        const originalName = months.names[0];
+        const originalAbbreviation = months.namesAbbr[0];
+        const name = 'January" onmouseover="void(0)';
+        const abbreviation = '<img src=x onerror="void(0)">';
+
+        months.names[0] = name;
+        months.namesAbbr[0] = abbreviation;
+
+        try {
+            let cal = new Calendar(div, { value: new Date(2011, 0, 10), start: "year" });
+            let january = cal.element.find(".k-calendar-table span[aria-label]").first();
+
+            assert.equal(january.attr("aria-label"), name);
+            assert.isUndefined(january.attr("onmouseover"));
+            assert.equal(january.text(), abbreviation);
+            assert.equal(january.find("img, [onerror]").length, 0);
+        } finally {
+            months.names[0] = originalName;
+            months.namesAbbr[0] = originalAbbreviation;
+        }
+    });
+
     it("render decade view when init", function() {
         let date = new Date(2011, 10, 10),
             cal = new Calendar(div, { start: "decade", value: date }),

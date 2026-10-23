@@ -59,6 +59,60 @@ describe('pager aria', function() {
         assert.equal(element.find(".k-pager-refresh").attr("aria-label"), "Refresh");
     });
 
+    it("encodes navigation and refresh message attributes", function() {
+        let message = 'Navigation" onmouseover="void(0)';
+        let element = setup(null, {
+            previousNext: true,
+            refresh: true,
+            messages: {
+                first: message,
+                previous: message,
+                next: message,
+                last: message,
+                refresh: message
+            }
+        });
+
+        element.find(".k-pager-nav").each(function() {
+            assert.equal(this.getAttribute("title"), message);
+            assert.equal(this.getAttribute("aria-label"), message);
+        });
+        assert.equal(element.find(".k-pager-refresh").attr("title"), message);
+        assert.equal(element.find(".k-pager-refresh").attr("aria-label"), message);
+        assert.equal(element.find("[onmouseover]").length, 0);
+    });
+
+    it("encodes the page input message attribute", function() {
+        let message = "Page' onmouseover='void(0)";
+        let element = setup(null, {
+            input: true,
+            messages: {
+                page: message
+            }
+        });
+
+        pager.page(1);
+
+        assert.equal(element.find(".k-pager-input input").attr("aria-label"), message);
+        assert.equal(element.find("[onmouseover]").length, 0);
+    });
+
+    it("encodes the page button label attributes", function() {
+        let message = 'Page {0}" onmouseover="void(0)';
+        let element = setup(null, {
+            messages: {
+                pageButtonLabel: message
+            }
+        });
+
+        pager.page(1);
+
+        let pageButton = element.find(".k-pager-numbers .k-button").eq(1);
+        assert.equal(pageButton.attr("aria-label"), 'Page 2" onmouseover="void(0)');
+        assert.equal(pageButton.attr("title"), 'Page 2" onmouseover="void(0)');
+        assert.equal(element.find("[onmouseover]").length, 0);
+    });
+
     it("input should have aria label", function() {
         let element = setup(null, { input: true });
         pager.page(1);

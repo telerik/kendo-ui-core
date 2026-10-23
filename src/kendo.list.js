@@ -754,7 +754,7 @@ export const __meta__ = {
             var clearTitle = list.options.messages.clear;
 
             if (!list._clear) {
-                list._clear = $(`<span unselectable="on" class="k-clear-value" title="${clearTitle}">${kendo.ui.icon("x")}</span>`).attr({
+                list._clear = $(`<span unselectable="on" class="k-clear-value" title="${kendo.htmlEncode(clearTitle)}">${kendo.ui.icon("x")}</span>`).attr({
                     "role": "button",
                     "tabIndex": -1
                 });

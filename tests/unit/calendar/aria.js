@@ -247,6 +247,23 @@ describe("kendo.ui.Calendar ARIA modern", function() {
         assert.equal(instance._nextArrow.attr("aria-label"), instance.options.messages.navigateToFuture);
     });
 
+    it("modern Calendar encodes navigation messages in button aria-labels", function() {
+        let label = 'Navigate" onmouseover="void(0)';
+        instance.destroy();
+        div = $("<div id='test-xss' />").appendTo(Mocha.fixture);
+        instance = new Calendar(div, {
+            componentType: "modern",
+            messages: {
+                navigateToPast: label,
+                navigateToFuture: label
+            }
+        });
+
+        assert.equal(instance._prevArrow.attr("aria-label"), label);
+        assert.equal(instance._nextArrow.attr("aria-label"), label);
+        assert.equal(div.find(".k-calendar-nav [onmouseover]").length, 0);
+    });
+
     it("modern Calendar today button has no role attribute", function() {
         assert.isUndefined(div.find(".k-calendar-nav-today").attr("role"));
     });

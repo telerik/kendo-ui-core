@@ -26,7 +26,7 @@ export const __meta__ = {
     const HEADER_TEMPLATE = (options) => {
         const startButtonHtml = options.startButton ?
             '<div class="k-actionsheet-actions">' +
-                kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-start-button")} aria-label="${options.startButton.text || "Start"}"></button>`, { icon: "chevron-left", fillMode: "flat", size: "large", ...options.startButton }) +
+                kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-start-button")} aria-label="${encode(options.startButton.text || "Start")}"></button>`, { icon: "chevron-left", fillMode: "flat", size: "large", ...options.startButton }) +
             '</div>' : "";
 
         const closeButtonHtml = options.closeButton ?
@@ -34,19 +34,19 @@ export const __meta__ = {
                 kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-close-button")}></button>`, { icon: "x", fillMode: "flat", size: "large" }) +
             '</div>' : "";
 
-        const subtitleHtml = options.subtitle || options.subtitle === "" ? `<div class="k-actionsheet-subtitle k-text-center">${options.subtitle || ""}</div>` : "";
+        const subtitleHtml = options.subtitle || options.subtitle === "" ? `<div class="k-actionsheet-subtitle k-text-center">${encode(options.subtitle || "")}</div>` : "";
 
         return `<div class="k-actionsheet-titlebar">` +
             (options.title || options.title === "" ?
                 '<div class="k-actionsheet-titlebar-group">' +
                     startButtonHtml +
                     `<div id="${ACTIONSHEET_TITLE_ID}" class="k-actionsheet-title">` +
-                        `<div class="k-text-center">${options.title}</div>` +
+                        `<div class="k-text-center">${encode(options.title)}</div>` +
                         subtitleHtml +
                     '</div>' +
                     (options.closeButton ?
                     '<div class="k-actionsheet-actions">' +
-                        kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-close-button")} aria-label="${options.closeButton.text || "Close"}"></button>`, { icon: "x", fillMode: "flat", size: "large", ...options.closeButton }) +
+                        kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-close-button")} aria-label="${encode(options.closeButton.text || "Close")}"></button>`, { icon: "x", fillMode: "flat", size: "large", ...options.closeButton }) +
                     '</div>'
                     : "") +
                 '</div>'
@@ -314,7 +314,7 @@ export const __meta__ = {
             for (var i = 0; i < actionButtons.length; i++) {
                 var action = actionButtons[i];
                 var enable = action.disabled !== true;
-                actionButtonElement = $(kendo.html.renderButton(`<button ref-actionsheet-action-button>${action.text || ""}</button>`, $.extend({ size: "large" }, action)));
+                actionButtonElement = $(kendo.html.renderButton(`<button ref-actionsheet-action-button>${encode(action.text || "")}</button>`, $.extend({ size: "large" }, action)));
                 actionsContainer.append(actionButtonElement);
                 actionButtonElement.toggleClass(STATEDISABLED, !enable);
                 actionButtonElement.attr(DISABLED, !enable);
