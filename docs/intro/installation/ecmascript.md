@@ -127,11 +127,19 @@ You can manually build the source code of the components by following these step
       npm run build:custom
     ```
 
+  - The following command builds the UMD scripts without minification in the `dist/js` folder:
+
+    ```javascript
+      npm run build-no-min
+    ```
+
     The process is easy and straightforward. Refer to the `README.md` inside the source bundle for additional information. This command is designed to be a replacement to both the legacy `npx gulp custom -c` AND the custom `download-builder` application.
+
+
 
 #### Build the Full Unminified UMD Bundle
 
-To build an unminified UMD bundle that contains all Kendo UI components, use the full Kendo entry point instead of selecting individual component files.
+As an alternative to `npm run build-no-min`, you can build a single unminified UMD bundle that contains all Kendo UI components by using the full Kendo entry point instead of selecting individual component files.
   
 1. In `custom-bundle.js`, import the complete `kendo.all.js` source file:
 

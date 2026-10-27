@@ -382,8 +382,6 @@ How do I prevent button badges from showing extremely large numbers in Kendo UI 
 Specifies position of the badge relative to the edge of the button. Valid placemnt options are: `inline`, `edge`, `inside`, `outside`.
 
 Note: position configuration, other than `inline` requires the badge to be aligned. See [`items.badge.align`](/api/ui/buttongroup/configuration/items#itemsbadgealign) for more details.
-
-
 <div class="meta-api-description">
 How do I control the position of notification badges in a Kendo UI ButtonGroup? Control and customize the placement of notification badges on button edges within a group, enabling developers to set badge positions as inline with the button label, aligned along the button’s edge, placed inside the button boundaries, or displayed outside the button perimeter. Adjusting badge location supports different UI designs, helps highlight status indicators distinctly, and can be combined with badge alignment settings to fine-tune vertical or horizontal positioning relative to each button’s shape and layout. This flexibility allows configuring badge placement for visibility, style consistency, and responsive design across various interface scenarios where badges indicate counts, alerts, or statuses on grouped buttons.
 </div>
@@ -415,6 +413,32 @@ How do I control the position of notification badges in a Kendo UI ButtonGroup? 
                     text: "!",
                     position: "inside",
                     align: "top start"
+                }
+            }
+        ]
+    });
+    </script>
+
+### items.badge.rounded `String` *(default: undefined)*
+
+Specifies the rounding of the badge. When `undefined` (the default), the theme controls the default border radius. Valid options are `small`, `medium`, `large` and `full`.
+
+
+<div class="meta-api-description">
+How do I control the corner rounding of a ButtonGroup item badge? Set the badge rounding to small, medium, large, or full to customize its corner radius, or leave it undefined to use the theme default.
+</div>
+
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Full Rounded Badge",
+                badge: {
+                    text: "NEW",
+                    rounded: "full"
                 }
             }
         ]

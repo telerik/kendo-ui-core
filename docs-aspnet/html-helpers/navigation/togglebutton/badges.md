@@ -13,11 +13,11 @@ The ToggleButton can incorporate a [Badge](https://docs.telerik.com/{{ site.plat
 
 The ToggleButton provides the `Badge()` configuration method for configuring the ToggleButton's Badge. The [API](/api/kendo.mvc.ui.fluent/buttonbadgesettingsbuilder) exposes several methods that you can use to customize the appearance of the Badge:
 
-* `Shape()`&mdash;Specifies the shape of the badge. The default value is `Rounded`.
+* `Rounded()`&mdash;Specifies the border radius of the component.
 * `Size()`&mdash;Sets the proportions of the badge. The default size is `Medium`
 * `ThemeColor()`&mdash;Configures the default theme color for the badge. The default value is `Primary`.
 * `Position()`&mdash;Defines the position of the Badge of the badge. The default value is `Inline`.
-* `Fill()`&mdash;Species the fill mode of the badge. The default value is `Solid`. 
+* `Fill()`&mdash;Species the fill mode of the badge. The default value is `Solid`.
 * `Visible()`&mdash;Configures the visible state of the badge.
 * `Align()`&mdash;Defines the alignment of the badge.
 * `CutoutBorder()`&mdash;Specifies wether or not to render additional cutout border around the badge.
@@ -30,7 +30,7 @@ The ToggleButton provides the `Badge()` configuration method for configuring the
         .Badge(badge => badge
             .Text("+5")
             .CutoutBorder(true)
-            .Shape(BadgeShape.Rectangle)
+            .Rounded(Rounded.None)
             .Size(BadgeSize.Large)
             .ThemeColor(BadgeColor.Success)
             .Position(BadgePosition.Outside)
@@ -45,7 +45,7 @@ The ToggleButton provides the `Badge()` configuration method for configuring the
             cutout-border="true"
             visible="true"
             fill="@BadgeFill.Solid"
-            shape="@BadgeShape.Rectangle"
+            rounded="@Rounded.None"
             size="@BadgeSize.Large"
             theme-color="@BadgeColor.Success"
             position="@BadgePosition.Outside"
@@ -63,7 +63,7 @@ The ToggleButton provides the `Badge()` configuration method for configuring the
         .Name("toggleButton")
         .Content("Text ToggleButton")
         .Badge(badge => badge
-            .Shape(BadgeShape.Circle)
+            .Rounded(Rounded.Full)
             .Size(BadgeSize.Large)
             .ThemeColor(BadgeColor.Success)
             .Position(BadgePosition.Edge)
@@ -76,7 +76,7 @@ The ToggleButton provides the `Badge()` configuration method for configuring the
 ```TagHelper
     <kendo-button name="toggleButton">
         <badge icon="save"
-               shape="@BadgeShape.Circle"
+               rounded="@Rounded.Full"
                size="@BadgeSize.Medium"
                theme-color="@BadgeColor.Success"
                position="@BadgePosition.Edge"
