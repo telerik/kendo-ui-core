@@ -125,7 +125,15 @@ You can manually build the source code of the components by following these step
       npm run scripts:custom
     ```
 
+  - The following command builds the UMD scripts without minification in the `dist/js` folder:
+
+    ```javascript
+      npm run build-no-min
+    ```
+
     The process is easy and straightforward. Refer to the `README.md` inside the source bundle for additional information. This command is designed to be a replacement to both the legacy `npx gulp custom -c` AND the custom `download-builder` application.
+
+
 
 ### Versions prior to February 2026
 

@@ -195,6 +195,27 @@ How do I position a badge next to a button in Kendo UI for jQuery? Control the p
       });
     </script>
 
+### badge.rounded `String` *(default: undefined)*
+
+Specifies the rounding of the badge. When `undefined` (the default), the theme controls the default border radius. Valid options are `small`, `medium`, `large` and `full`.
+
+
+<div class="meta-api-description">
+How do I control the corner rounding of a button badge? Set the badge rounding to small, medium, large, or full to customize its corner radius, or leave it undefined to use the theme default.
+</div>
+
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          text: "New",
+          rounded: "full"
+        }
+      });
+    </script>
+
 ### badge.size `String` *(default: undefined)*
 
 Sets a value controlling the size of the badge. When `undefined` (the default), the theme controls the size. Can also be set to the following string values:

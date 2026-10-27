@@ -300,7 +300,7 @@ export const __meta__ = {
             const that = this;
             const isHidden = that.options.overflow.scrollButtons === "hidden";
 
-            if (that.options.overflow?.mode !== "scroll") {
+            if (that.options.overflow.mode !== "scroll") {
                 that.element.removeClass("k-toolbar-scrollable");
             }
 
