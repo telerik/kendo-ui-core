@@ -47,6 +47,8 @@ The following examples demonstrates how to subscribe to events by a handler name
 
 ## Handling by Template Delegate
 
+The following example configures the event handlers with inline template delegates.
+
 ```HtmlHelper
     @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
         .Name("chart")

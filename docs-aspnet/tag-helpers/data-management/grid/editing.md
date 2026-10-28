@@ -21,7 +21,7 @@ To enable the data editing capabilities:
 
 The example below demonstrates how to implement batch editing in the Grid. For a runnable example, refer to the [demo on setting the batch edit mode of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/editing).
 
-```tagHelper
+```TagHelper
 <kendo-grid name="grid" height="550" navigatable="true">
     <datasource page-size="20" type="DataSourceTagHelperType.Ajax" batch="true" server-operation="false" on-error="error_handler">
         <transport>

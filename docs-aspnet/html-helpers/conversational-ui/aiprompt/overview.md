@@ -36,7 +36,7 @@ The following example demonstrates how to define the AIPrompt.
 ```
 {% if site.core %}
 ```TagHelper
-    @addTagHelper *, Kendo.Mvcl
+    @addTagHelper *, Kendo.Mvc
 
     @{
         var promptSuggestionsList = new string[] { "Act as [actor] and write [format] about [subject] in [100 words]", "Suggest post about [subject] that will be used in [social media]" };
@@ -71,7 +71,7 @@ The AIPrompt provides options for configuring its views, toolbar items, and appe
 ```
 {% if site.core %}
 ```TagHelper
-    @addTagHelper *, Kendo.Mvcl
+    @addTagHelper *, Kendo.Mvc
     @{
         var promptSuggestionsList = new string[] { "Out of office (contact colleague)", "LinkedIn post for well-being" };
     }

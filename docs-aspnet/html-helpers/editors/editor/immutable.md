@@ -61,7 +61,7 @@ The `immutables.serialization` configuration method accepts the following parame
 * [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview)&mdash;Contains the immutable `data` DOM element.
 
     ```HtmlHelper
-    (Html.Kendo().Editor()
+    @(Html.Kendo().Editor()
         .Name("editor")
         .Immutables(i => i
             .Serialization("<#= data.nodeName # data=\"immutable-element\"></#= data.nodeName #>")
@@ -74,7 +74,7 @@ The `immutables.serialization` configuration method accepts the following parame
 * `Function`&mdash;A callback function. Exposes the immutable DOM element in the overload and is expected to return a string.
 
     ```HtmlHelper
-    (Html.Kendo().Editor()
+    @(Html.Kendo().Editor()
         .Name("editor")
         .Immutables(i => i
             .SerializationHandler("immutablesSerializationHandler")

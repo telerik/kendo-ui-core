@@ -16,9 +16,9 @@ For runnable examples, refer to the [demos on templates in the Grid](https://dem
 
 A group row contains an expanding and collapsing group icon that enables end-users to expand and collapse a group row, and thus show or hide its child rows. One of the main features of group rows is to display group summary values. The Grid provides three different templates that can be used to customize the appearance of the group rows:
 
-- `ClientGroupHeaderTemplate`&mdash;Renders a template that will be displayed for the entire group row. Usually the main objective is to show an information about the entire group. By default if no template is defined the name of the field and the current group value is displayed.
-- `ClientGroupHeaderColumnTemplate`&mdash;Renders a template in the group row aligned to the column itself. Usually it is used to show an aggregate value for a specific column in the context of the current group. Visually the template content is displayed aligned to the column itself. This functionality is introduced in R3 2018 release.
-- `ClientGroupFooterTemplate`&mdash;Renders a template in the group footer row aligned to the column. Pretty much it works in the same way as the `ClientGroupHeaderColumnTemplate` for the group footer row.
+- `ClientGroupHeaderTemplate`&mdash;Renders a template that will be displayed for the entire group row. Usually the main objective is to show information about the entire group. By default, if no template is defined, the name of the field and the current group value is displayed.
+- `ClientGroupHeaderColumnTemplate`&mdash;Renders a template in the group row aligned to the column itself. Usually it is used to show an aggregate value for a specific column in the context of the current group. The template content is displayed aligned to the column itself. This functionality is introduced in R3 2018 release.
+- `ClientGroupFooterTemplate`&mdash;Renders a template in the group footer row aligned to the column. It works in much the same way as the `ClientGroupHeaderColumnTemplate` for the group footer row.
 
 If no template is defined, the name of the field and the current group are displayed in the following way.
 
@@ -96,11 +96,11 @@ $(document).on("change", "#BondGrid .confirm-billing", function() {
 This example assumes a single, flat grouping level. With nested grouping, process the leaf group or recursively collect records from nested group items. The hidden input is a client-side convenience; validate the selected records on the server before processing billing.
 {% endif %}
 
-Both `ClientGroupHeaderColumnTemplate` and `ClientGroupFooterTemplate` work in a similar way. `ClientGroupHeaderColumnTemplate` displays the content as aligned to the column in the group row. `ClientGroupFooterTemplate` displays the content as aligned to the column in the group footer row. Their content is displayed as aligned to the column as shown in the following way.
+Both `ClientGroupHeaderColumnTemplate` and `ClientGroupFooterTemplate` work in a similar way. `ClientGroupHeaderColumnTemplate` displays the content aligned to the column in the group row. `ClientGroupFooterTemplate` displays the content aligned to the column in the group footer row. Their content is aligned to the column, as shown below.
 
 ![{{ site.product_short }} A Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](../images/grid-group-header-column-template.png)
 
-Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expanding icon of the group row, it takes precedence over the `ClientGroupHeaderColumnTemplate` of the first visible column. If you want to show the `ClientGroupHeaderColumnTemplate` content for the first column of the Grid, do not set the `ClientGroupHeaderTemplate` for the group column. The following Grid configuration shows that commenting the `ClientGroupHeaderTemplate` for the **Units In Stock** column shows the `ClientGroupHeaderColumnTemplate` for the **Product Name** column.
+Because `ClientGroupHeaderTemplate` is displayed next to the expanding icon of the group row, it takes precedence over the `ClientGroupHeaderColumnTemplate` of the first visible column. If you want to show the `ClientGroupHeaderColumnTemplate` content for the first column of the Grid, do not set the `ClientGroupHeaderTemplate` for the group column. The following Grid configuration shows that commenting the `ClientGroupHeaderTemplate` for the **Units In Stock** column shows the `ClientGroupHeaderColumnTemplate` for the **Product Name** column.
 
 ```HtmlHelper
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()

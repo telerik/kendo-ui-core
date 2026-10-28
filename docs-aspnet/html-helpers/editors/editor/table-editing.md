@@ -116,7 +116,7 @@ The **Table** tab provides the following options:
 * **Cell Spacing**&mdash;Specifies the space between the cells ([`cellspacing` attribute](http://www.w3schools.com/tags/att_table_cellspacing.asp)).
 * **Cell Padding**&mdash;Specifies the padding in the cells ([`cellpadding` attribute](http://www.w3schools.com/tags/att_table_cellpadding.asp)).
 * **Independent Cell Paddings** (available as of the `2024 Q2` release)&mdash;Specifies individual padding in the cells for `top`, `right`, `bottom` and `left`.
-![Independent Table Paddings](./images/cell-paddings.png)
+![Editor Table tab showing independent cell padding controls](./images/cell-paddings.png)
 * **Alignment**&mdash;Specifies the text alignment in the cells.
 * **Background**&mdash;Specifies the background color of the table.
 * **CSS Class**&mdash;Defines the class names for the table element (white space-separated).
@@ -135,7 +135,7 @@ The **Cell** tab provides the following options:
 * **Cell Margin**&mdash;Defines the margin of the cell or cells.
 * **Cell Padding**&mdash;Defines the padding of the cell or cells.
 * **Independent Cell Paddings** (available as of the `2024 Q2` release)&mdash;Specifies individual padding in the cells for `top`, `right`, `bottom` and `left`.
-![Independent Table Paddings](./images/cell-paddings.png)
+![Editor Cell tab showing independent cell padding controls](./images/cell-paddings.png)
 * **Alignment**&mdash;Specifies the text alignment of the cell or cells.
 * **Background**&mdash;Specifies the background color of the cell or cells.
 * **CSS Class**&mdash;Defines class names for the cells (white space-separated).

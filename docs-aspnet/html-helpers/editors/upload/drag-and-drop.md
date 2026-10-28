@@ -81,10 +81,10 @@ The following example demonstrates how to customize the appearance of the drop z
         border: 1px solid red;
     }
 
-    .customDropZone.k-dropzone-active {
+    .dropZoneElement.k-dropzone-active {
         border: 1px solid yellow;
     }
-    .customDropZone.k-dropzone-active.k-dropzone-hovered {
+    .dropZoneElement.k-dropzone-active.k-dropzone-hovered {
         border: 1px solid green;
     }
 ```

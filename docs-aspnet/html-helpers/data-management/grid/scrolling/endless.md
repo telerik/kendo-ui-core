@@ -1,7 +1,7 @@
 ---
 title: Endless Scrolling
 page_title: Endless Scrolling
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} supporting endless scrolling mode suitable for displaying large number of items."
+description: "Enable endless scrolling in the Telerik UI Grid for {{ site.framework }} to load data as users scroll."
 components: ["grid"]
 slug: endless_scrolling_aspnetcore_grid
 position: 3
@@ -9,7 +9,7 @@ position: 3
 
 # Endless Scrolling
 
-Endless scrolling is suitable when you display large number of items and use editing, grouping, filtering, sorting, or hierarchy.
+Endless scrolling is suitable when you display a large number of items and use editing, grouping, filtering, sorting, or hierarchy.
 
 For a runnable example, refer to the [demo on endless scrolling of remote data in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/endless-scrolling-remote).
 
@@ -51,7 +51,7 @@ Out of the box, endless scrolling works together with grouping. However, when th
 * If the Grid is scrolled to the bottom, the number of the items it will request will be equal to the number of items on the page size.
 * If the last group of items is collapsed, the Grid will still make requests for the items from that group.
 * If a group of items spans across multiple pages, the Grid will make multiple requests.
-* When a particular subset of items is returned, the items will be rendered and hidden because the group is collapsed. The Grid will continue to request the items until a new group is reached or until none of the items are present for to be requested.
+* When a particular subset of items is returned, the items will be rendered and hidden because the group is collapsed. The Grid will continue to request the items until a new group is reached or until none of the items are present to be requested.
 
 ## Using with Hierarchy
 
@@ -110,7 +110,7 @@ In such cases, you have to manually update the scroll position and [`pageSize`](
 ## Known Limitations
 
 * Either enable endless scrolling or paging, and do not use both features simultaneously.
-* [Scrolling to an item functionality]({% slug scrolling_to_item_aspnetcore_grid %}) is not supported in an endless scrollable Gird.
+* [Scrolling to an item functionality]({% slug scrolling_to_item_aspnetcore_grid %}) is not supported in an endless scrollable Grid.
 
 ## See Also
 

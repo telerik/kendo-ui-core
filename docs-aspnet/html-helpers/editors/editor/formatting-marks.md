@@ -15,6 +15,24 @@ Formatting marks enable you to show characters that represent non-printing eleme
 
  ![Telerik UI for {{ site.framework }} Editor Formatting Marks Tool](./images/formatting-marks.png)
 
+Use the Editor HtmlHelper {% if site.core %}or TagHelper{% endif %} to enable the Formatting Marks tool.
+
+```HtmlHelper
+	@(Html.Kendo().Editor()
+		.Name("editor")
+		.Tools(tools => tools.Formatting())
+	)
+```
+{% if site.core %}
+```TagHelper
+	<kendo-editor name="editor">
+		<tools>
+			<tool name="formatting" />
+		</tools>
+	</kendo-editor>
+```
+{% endif %}
+
 ## Line Ending
 
 The Line Ending mark `↵` represents a line break within a paragraph. It allows you to break a line without starting a new paragraph. When formatting marks are visible, the line break mark is displayed as a bent arrow pointing downward.

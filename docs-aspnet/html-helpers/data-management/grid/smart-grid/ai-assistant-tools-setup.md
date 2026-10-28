@@ -1,6 +1,6 @@
 ---
 title: AI Assistant Tools Setup
-description: "Learn more about the different approaches for setting up the AI Assistant Tools of the Smart Grid and integrating them with your AI service."
+description: "Learn how to set up AI Assistant Tools for the Smart Grid and connect them to your AI service endpoints."
 slug: ai_assistant_tools_setup
 position: 1
 components: ["grid"]

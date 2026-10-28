@@ -75,7 +75,7 @@ You can configure the DropDownList to get its data from a remote source by makin
                 ProductName = "ProductName" + i
             });
 
-            return Json(products, JsonRequestBehavior.AllowGet);
+            return Json(products{% if site.mvc %}, JsonRequestBehavior.AllowGet{% endif %});
         }
         {% else %}
         public JsonResult GetProductsAjax()
@@ -86,7 +86,7 @@ You can configure the DropDownList to get its data from a remote source by makin
                 ProductName = "ProductName" + i
             });
 
-            return Json(products, JsonRequestBehavior.AllowGet);
+            return Json(products{% if site.mvc %}, JsonRequestBehavior.AllowGet{% endif %});
         }
         {% endif %}
 

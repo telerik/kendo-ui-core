@@ -1,7 +1,7 @@
 ---
 title: Scrolling to a Specific Item
 page_title: Scrolling to a Specific Item
-description: "Learn more about the programmatic scrolling to specific items with the Telerik UI Grid component for {{ site.framework }}."
+description: "Scroll to a specific item in the Telerik UI Grid for {{ site.framework }} by using the Grid API method."
 components: ["grid"]
 slug: scrolling_to_item_aspnetcore_grid
 position: 4
@@ -17,6 +17,8 @@ The `scrollToItem()` method requires the following:
 
 * Specify the unique Model identifier to the [`Id()` option of the `Model()` configuration]({% slug htmlhelper_datasourcemodel %}) of the DataSource.
 * Ensure the target data item appears in the current Grid data items. If the Grid is pageable, the item must be available on the current page.
+
+The following Grid configuration defines the model identifier and data source needed to scroll to a specific item with `scrollToItem()`.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<OrderViewModel>()
@@ -107,8 +109,8 @@ The following example shows how to scroll to the last row of the Grid when a but
     <script>
         function onBtnClick() {
             const grid = $("#grid").data("kendoGrid"); // Get an instance of the Grid.
-            const gridDataSoruce = grid.dataSource; // Access the Grid's DataSouce.
-            let lastRowItem = gridDataSoruce.at(gridDataSoruce.view().length - 1); // Use the at() method of the DataSource to get the data item that corresponds to the last row.
+            const gridDataSource = grid.dataSource; // Access the Grid's DataSource.
+            let lastRowItem = gridDataSource.at(gridDataSource.view().length - 1); // Use the at() method of the DataSource to get the data item that corresponds to the last row.
             grid.scrollToItem(lastRowItem.OrderID); // Pass the "OrderID" value of the last data item to scroll the Grid to the last row.
         }
     </script>
@@ -259,7 +261,7 @@ The following example shows how to scroll to an item that is not loaded yet when
 ## Known Limitations
 
 * Scrolling to an item in a Grid with enabled [group paging functionality]({% slug htmlhelpers_grid_aspnet_grouping %}) is not supported.
-* Scrolling to an item in a Gird that uses [endless scrolling mode]({% slug endless_scrolling_aspnetcore_grid %}) is not supported.
+* Scrolling to an item in a Grid that uses [endless scrolling mode]({% slug endless_scrolling_aspnetcore_grid %}) is not supported.
 * When the sum of the specified row's height and the height of all rows afterward is less than the Grid's height, the row that must be scrolled to the top will not appear at the top. In non-virtualized Grids, the Grid will be scrolled to its bottom, but the specified row will not appear at the top. In Grids with enabled virtual scrolling, the Grid will be scrolled to the bottom of the current data set, but the scroller will not be positioned at the bottom, and the row will not be positioned at the top. 
 
 ## See Also

@@ -1,6 +1,6 @@
 ---
 title: AI Smart Box
-description: "Learn how to use the AI Smart Box in the {{ site.framework }} Grid to provide unified search, semantic search, and AI-powered interactions in a single toolbar control."
+description: "Use the AI Smart Box in the {{ site.framework }} Grid for unified and semantic search with AI tools."
 slug: ai_toolbar_tool_core_grid
 position: 3
 components: ["grid"]
@@ -46,7 +46,7 @@ To configure the Grid's AI Smart Box:
 ```
 {% endif %}
 
-2. Enable the modes you want to show in the AI Smart Box using the `SearchSettings`, `SemanticSearchSettings`, and `SiAssistantSettings` options:
+2. Enable the modes you want to show in the AI Smart Box using the `SearchSettings`, `SemanticSearchSettings`, and `AiAssistantSettings` options:
 
 ```HtmlHelper
     @(
@@ -81,7 +81,7 @@ To configure the Grid's AI Smart Box:
 ```
 {% endif %}
 
-> Search mode applies filters automatically to the Grid DataSource. You can optionally handle the `search` eventto customize the default search behavior.
+> Search mode applies filters automatically to the Grid DataSource. You can optionally handle the `search` event to customize the default search behavior.
 
 
 3. Configure the `Service.Url` property for AI Assistant mode to point to your AI service endpoint:

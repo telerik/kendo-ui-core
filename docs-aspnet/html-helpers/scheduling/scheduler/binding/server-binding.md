@@ -25,8 +25,8 @@ To bind the Scheduler to a model collection, follow the next steps:
         public DateTime End { get; set; }
         public string Description { get; set; }
         public bool IsAllDay { get; set; }
-        string StartTimezone { get; set; }
-        string EndTimezone { get; set; }
+        public string StartTimezone { get; set; }
+        public string EndTimezone { get; set; }
         public string RecurrenceRule { get; set; }
         public string RecurrenceException { get; set; }
     }

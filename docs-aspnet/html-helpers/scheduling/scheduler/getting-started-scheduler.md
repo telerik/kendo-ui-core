@@ -198,8 +198,8 @@ private List<TaskViewModel> tasks = new List<TaskViewModel> {
    new TaskViewModel { TaskID= 9, Title="Alex's Birthday", Start=new DateTime(2013, 06, 14, 02, 00, 00, DateTimeKind.Utc), End=new DateTime(2013, 06, 14, 02, 00, 00, DateTimeKind.Utc), IsAllDay= true, OwnerID= 2 },
    new TaskViewModel { TaskID= 25, Title="HR Lecture", Start=new DateTime(2013, 06, 04, 19, 00, 00, DateTimeKind.Utc), End=new DateTime(2013, 06, 04, 21, 00, 00, DateTimeKind.Utc), RecurrenceRule="FREQ=WEEKLY;BYDAY=TU,TH", IsAllDay= false, OwnerID= 1 },
    new TaskViewModel { TaskID= 95, Title="Dance Practice", Start=new DateTime(2013, 06, 03, 18, 30, 00, DateTimeKind.Utc), End=new DateTime(2013, 06, 03, 20, 00, 00, DateTimeKind.Utc), RecurrenceRule="FREQ=WEEKLY;BYDAY=MO,WE", IsAllDay= false, OwnerID= 2 },
-   new TaskViewModel { TaskID= 119, Title="Helpdesk weekly meeting", Start=new DateTime(2013, 06, 05, 15, 00, 00, DateTimeKind.Utc), End=new DateTime(2013, 06, 05, 16, 00, 00, DateTimeKind.Utc), RecurrenceRule="FREQ=WEEKLY;BYDAY=WE", IsAllDay= false, OwnerID= 3 }
-
+    new TaskViewModel { TaskID= 119, Title="Helpdesk weekly meeting", Start=new DateTime(2013, 06, 05, 15, 00, 00, DateTimeKind.Utc), End=new DateTime(2013, 06, 05, 16, 00, 00, DateTimeKind.Utc), RecurrenceRule="FREQ=WEEKLY;BYDAY=WE", IsAllDay= false, OwnerID= 3 }
+};
 }
 
 public virtual JsonResult Basic_Usage_Read([DataSourceRequest] DataSourceRequest request)
@@ -211,7 +211,7 @@ public virtual JsonResult Basic_Usage_Destroy([DataSourceRequest] DataSourceRequ
 {
     if (ModelState.IsValid)
     {
-        tasks.Delete(task, ModelState);
+        tasks.RemoveAll(item => item.TaskID == task.TaskID);
     }
 
     return Json(new[] { task }.ToDataSourceResult(request, ModelState));
@@ -221,7 +221,8 @@ public virtual JsonResult Basic_Usage_Create([DataSourceRequest] DataSourceReque
 {
     if (ModelState.IsValid)
     {
-        tasks.Insert(task, ModelState);
+        task.TaskID = tasks.Count + 1;
+        tasks.Add(task);
     }
 
     return Json(new[] { task }.ToDataSourceResult(request, ModelState));
@@ -237,7 +238,11 @@ public virtual JsonResult Basic_Usage_Update([DataSourceRequest] DataSourceReque
 
     if (ModelState.IsValid)
     {
-        tasks.Update(task, ModelState);
+        var taskIndex = tasks.FindIndex(item => item.TaskID == task.TaskID);
+        if (taskIndex >= 0)
+        {
+            tasks[taskIndex] = task;
+        }
     }
 
     return Json(new[] { task }.ToDataSourceResult(request, ModelState));

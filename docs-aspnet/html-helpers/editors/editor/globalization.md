@@ -24,7 +24,7 @@ The globalization functionality of the Editor is enabled through:
     ```
         <script type="text/javascript">
             //set the Kendo UI culture
-            kendo.culture("@culture");
+            kendo.culture("bg-BG");
         </script> 
     ```
 

@@ -11,7 +11,7 @@ position: 1
 
 This tutorial explains how to set up a basic Telerik UI for {{ site.framework }} Editor and highlights the major steps in the configuration of the component.
 
-You will initialize a Editor component and load it with data. {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
+You will initialize an Editor component and load it with data. {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
 
  ![Sample Telerik UI for {{ site.framework }} Editor](./images/editor-getting-started.png)
 
@@ -192,7 +192,7 @@ To use the client-side API of the Editor and build on top of its initial configu
         </script>
     ```
 
-1. Use the [Editor client-side API](https://docs.telerik.com/kendo-ui/api/ui/editor#methods) to control the behavior of the control. In this example, you will use the `value` method to select an item.
+1. Use the [Editor client-side API](https://docs.telerik.com/kendo-ui/api/ui/editor#methods) to control the behavior of the control. In this example, you will use the `value` method to set the Editor HTML content.
 
     ```JS script
         <script>

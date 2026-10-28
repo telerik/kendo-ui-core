@@ -20,7 +20,7 @@ To enable the search panel functionality, include the `Search` option to the too
 ```HtmlHelper
     @(Html.Kendo().TreeList<CustomerViewModel>()
         .Name("treeList")
-        .ToolBar(t => t.Search()) // Enable the Search panel.
+        .Toolbar(t => t.Search()) // Enable the Search panel.
         ...
 ```
 {% if site.core %}

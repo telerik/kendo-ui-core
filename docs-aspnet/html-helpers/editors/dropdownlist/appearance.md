@@ -64,8 +64,8 @@ The following example demonstrates how to set `Size` in the declaration of the D
                     size="ComponentSize.Medium"
                     option-label="Select category..."
                     height="310"
-                    template="<span class='k-state-default' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span class='k-state-default' style='padding-left: 15px;'><h3>#: data.CategoryName #</h3></span>"
-                    value-template="<span class='selected-value' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span>#:data.CategoryName#</span>"
+                    template="<span class='k-state-default' style='background-image: url(/shared/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span class='k-state-default' style='padding-left: 15px;'><h3>#: data.CategoryName #</h3></span>"
+                    value-template="<span class='selected-value' style='background-image: url(/shared/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span>#:data.CategoryName#</span>"
                     footer-template="Total number of <strong>#: instance.dataSource.total() #</strong> categories found">
 
     <datasource>
@@ -127,8 +127,8 @@ The following example demonstrates how to set `Rounded` in the declaration of th
                     rounded="Rounded.Medium"
                     option-label="Select category..."
                     height="310"
-                    template="<span class='k-state-default' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span class='k-state-default' style='padding-left: 15px;'><h3>#: data.CategoryName #</h3></span>"
-                    value-template="<span class='selected-value' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span>#:data.CategoryName#</span>"
+                    template="<span class='k-state-default' style='background-image: url(/shared/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span class='k-state-default' style='padding-left: 15px;'><h3>#: data.CategoryName #</h3></span>"
+                    value-template="<span class='selected-value' style='background-image: url(/shared/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span>#:data.CategoryName#</span>"
                     footer-template="Total number of <strong>#: instance.dataSource.total() #</strong> categories found">
 
     <datasource>
@@ -136,6 +136,7 @@ The following example demonstrates how to set `Rounded` in the declaration of th
             <read url="@Url.Action("Overview_Get_Categories", "DropDownList")" />
         </transport>
     </datasource>
+ </kendo-dropdownlist>
 ```
 {% endif %}
 > When not explicitly set, the applied theme controls the default border radius.
@@ -187,8 +188,8 @@ The following example demonstrates how to set `FillMode` in the declaration of t
                     fill-mode="FillMode.Solid"
                     option-label="Select category..."
                     height="310"
-                    template="<span class='k-state-default' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span class='k-state-default' style='padding-left: 15px;'><h3>#: data.CategoryName #</h3></span>"
-                    value-template="<span class='selected-value' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span>#:data.CategoryName#</span>"
+                    template="<span class='k-state-default' style='background-image: url(/shared/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span class='k-state-default' style='padding-left: 15px;'><h3>#: data.CategoryName #</h3></span>"
+                    value-template="<span class='selected-value' style='background-image: url(/shared/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span>#:data.CategoryName#</span>"
                     footer-template="Total number of <strong>#: instance.dataSource.total() #</strong> categories found">
 
     <datasource>

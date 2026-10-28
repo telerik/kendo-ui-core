@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Export Overview
-description: "Get started with the {{ site.product_short }} Grid by Kendo UI and learn how to configure the export functionality of the widget."
+description: "Learn how to configure export functionality in {{ site.product_short }} Grid for Excel, PDF, and printing."
 components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_export_overview
 position: 1

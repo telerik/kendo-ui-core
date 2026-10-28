@@ -70,9 +70,11 @@ To configure the hierarchical grouping of the Scheduler's resources:
         }
         <kendo-scheduler name="scheduler">
             <resources>
-                <resource field="RoomID" title="Room" name="Rooms" datatextfield="Text" datavaluefield="Value" datacolorfield="Color" bind-to="@roomsData"> // Parent resource.
+                <!-- Parent resource. -->
+                <resource field="RoomID" title="Room" name="Rooms" datatextfield="Text" datavaluefield="Value" datacolorfield="Color" bind-to="@roomsData">
                 </resource>
-                <resource  // Child resource.
+                <!-- Child resource. -->
+                <resource
                     field="Attendees" 
                     title="Attendees" 
                     name="Attendees" 
@@ -80,7 +82,7 @@ To configure the hierarchical grouping of the Scheduler's resources:
                     datatextfield="Text" 
                     datavaluefield="Value" 
                     datacolorfield="Color" 
-                    dataparentvaluefield="Parent" // The "Parent" field in the "SchedulerResourceModel" Model holds the value of the "Value" field in the "Room" resource.
+                    dataparentvaluefield="Parent"
                     bind-to="@attendeesData">
                 </resource>
             </resources>

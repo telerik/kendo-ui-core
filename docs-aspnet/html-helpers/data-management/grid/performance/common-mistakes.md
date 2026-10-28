@@ -1,7 +1,7 @@
 ---
 title: Common Mistakes
 page_title: Common Mistakes
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to avoid and handle the most common performance mistakes."
+description: "Avoid common performance mistakes when configuring a Telerik UI Grid in {{ site.framework }} applications."
 components: ["grid"]
 slug: performance_htmlhelpers_grid_aspnetcore
 position: 2
@@ -22,13 +22,13 @@ If the Grid displays too many records and columns without having its paging or v
 
 ## Using Editors or Widgets in Cells Excessively
 
-Rendering editors directly in the columns looks great but hinders performance. Initializing widgets in each cell is a slow operation and will be a major performance issue when the Grid displays many records. Additionally, if you use custom code for the two-way binding between the editors and the underlying data items, each change will initiate the re-rendering of the entire data which will trigger the re-initialization of the editors  and will lead to slow performance.
+Rendering editors directly in the columns looks great but hinders performance. Initializing widgets in each cell is a slow operation and will be a major performance issue when the Grid displays many records. Additionally, if you use custom code for the two-way binding between the editors and the underlying data items, each change will initiate the re-rendering of the entire data which will trigger the re-initialization of the editors and will lead to slow performance.
 
 If you prevent the rebinding of the Grid after each change by removing the two-way binding and by manually changing the `dataItem` values (changing the properties without using the `set` method and setting the dirty property to `true`), you can edit multiple records without re-rendering the Grid. However, the issue with the initial initialization of the widget is still present and to work around it, reduce the `PageSize()` up to five or ten records per page depending on the number of columns.
 
 ## Using Too Many Columns
 
-While the Grid may have its paging or virtual scrolling enabled, having too many columns slows down the rendering of the rows because each column increases the cells in the DOM. You can hide the column by setting the `Hidden()` method to `true` but this approach will worsen the situation because the columns will be still rendered in the DOM and in addition to that they will receive `display: none` as an inline style.
+While the Grid may have its paging or virtual scrolling enabled, having too many columns slows down the rendering of the rows because each column increases the cells in the DOM. You can hide the column by setting the `Hidden()` method to `true`, but this approach will worsen the situation because the columns will be still rendered in the DOM and in addition to that they will receive `display: none` as an inline style.
 
 To work around this issue, if your Grid displays up to 20 columns, define all of them in its configuration and decrease the `PageSize()` to up to 50 (1,000 cells). You can also hide some of the columns and enable the `ColumnMenu()` so that the user can choose which columns to display. However, if your Grid displays 100 or more columns, implement external logic for allowing the end user to choose a list of columns that will be rendered. You can then use that list to initialize the Grid with only that set of columns. The benefit of this approach is that no hidden columns will be rendered in the DOM and you will reduce the cell count drastically.
 
@@ -44,5 +44,5 @@ Hierarchical Grids are fast when the records for the child Grids in the `DetailT
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
 * [Server-Side API](/api/grid)
-* [Rendering and Dimensions of the Grid component for {{ site.framework }}]({% slug width_grid_aspnetcore %})
-* [Adaptive Rendering of the Grid component for {{ site.framework }}]({% slug adaptive_rendering_gridhelper_aspnetcore %})
+* [Rendering and Dimensions of the Grid component for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/appearance/width)
+* [Adaptive Rendering of the Grid component for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/appearance/adaptive)

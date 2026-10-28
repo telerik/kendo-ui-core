@@ -10,7 +10,7 @@ position: 4
 
 # Web API Binding
 
-Web API is an application programming interface for a web application or server that utilizes the [HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) for communication. It enables you to make the server-side of the application more monolithic when it comes to establishing communication between clients and websites to have data access.
+Web API is an application programming interface that uses the [HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) to expose data and operations to clients. The Scheduler can use RESTful HTTP requests to perform remote read, create, update, and destroy operations.
 
 {% if site.core %}
 For a runnable example, refer to the [demo on Web API binding of the Scheduler component](https://demos.telerik.com/{{ site.platform }}/scheduler/webapi).
@@ -263,6 +263,9 @@ To enable the CRUD operations that support Web API Binding, explicitly add a `We
     )
 ```
 ```TagHelper
+    @{
+        var defaultTitle = "No title";
+    }
     <kendo-scheduler name="scheduler" 
         date="new DateTime(2022, 6, 13)"
         start-time="new DateTime(2022, 6, 13, 7, 00, 00)"
@@ -338,4 +341,4 @@ To enable the CRUD operations that support Web API Binding, explicitly add a `We
 ## See Also
 
 * [Web API Binding by the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/webapi)
-* [Server-Side API](/api/grid)
+* [Server-Side API](/api/scheduler)

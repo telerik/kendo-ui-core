@@ -72,7 +72,7 @@ To enable the vertical virtualization of the Scheduler's resources:
             </views>
             <group orientation="vertical">
                 <resources>
-                    <group-resource name="Rooms"/> // "Rooms" matches the "name" attribute of the defined resource within the "resources" tag.
+                    <group-resource name="Rooms"/> <!-- "Rooms" matches the "name" attribute of the defined resource within the "resources" tag. -->
                 </resources>
             </group>
             <!--Additional configuration-->

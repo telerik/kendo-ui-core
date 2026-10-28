@@ -1,7 +1,7 @@
 ---
 title: Excel Export
 page_title: Excel Export Troubleshooting
-description: "Learn about the solutions of common issues that may occur while exporting the Grid to Excel in ASP.NET MVC applications."
+description: "Learn how to resolve Grid Excel export issues in {{ site.framework }} applications with a server proxy."
 components: ["grid"]
 slug: excelissues_gridhelper_aspnetmvc
 position: 2
@@ -23,7 +23,7 @@ Internet Explorer versions below 10 and Safari cannot save a file and require th
 
 **Solution** Set the `ProxyURL` option to specify the server proxy URL.
 
-The following example demonstrates the user server proxy.
+The following example demonstrates a server proxy.
 
 ```Controller
     public class ProxyController : Controller
@@ -74,7 +74,7 @@ The following example demonstrates the user server proxy.
             <toolbar-button name="excel" ></toolbar-button>
         </toolbar>
         <excel all-pages="true" proxy-url="@Url.Action("Save", "Proxy")" />
-        <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
             <schema data="Data" total="Total">
                 <model id="ProductID">
                     <fields>
@@ -88,10 +88,10 @@ The following example demonstrates the user server proxy.
                 </model>
             </schema>
             <transport>
-                <read url="@Url.Action("Products_Read" "Grid")" />
-                <update url="@Url.Action("Products_Update" "Grid")" />
-                <create url="@Url.Action("Products_Create" "Grid")" />
-                <destroy url="@Url.Action("Products_Destroy" "Grid")" />
+                <read url="@Url.Action("Products_Read", "Grid")" />
+                <update url="@Url.Action("Products_Update", "Grid")" />
+                <create url="@Url.Action("Products_Create", "Grid")" />
+                <destroy url="@Url.Action("Products_Destroy", "Grid")" />
             </transport>
         </datasource>
     </kendo-grid>

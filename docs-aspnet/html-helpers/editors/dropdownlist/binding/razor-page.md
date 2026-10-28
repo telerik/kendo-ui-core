@@ -225,7 +225,7 @@ To bind the DropDownList to a property from the `PageModel`, follow the next ste
         @Html.AntiForgeryToken()
         @addTagHelper *, Kendo.Mvc
 
-        <kendo-combobox for="OrderID"
+        <kendo-dropdownlist for="OrderID"
             datatextfield="ShipName" 
             datavaluefield="OrderID">
             <datasource>
@@ -233,7 +233,7 @@ To bind the DropDownList to a property from the `PageModel`, follow the next ste
                     <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
                 </transport>
             </datasource>
-        </kendo-combobox>
+        </kendo-dropdownlist>
     ```
     ```JS
         <script>

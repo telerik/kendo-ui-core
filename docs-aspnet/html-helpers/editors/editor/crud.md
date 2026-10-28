@@ -9,14 +9,15 @@ position: 9
 
 # CRUD Operations
 
-The following example demonstrates how to save, read, update and delete a text data content in a local database using the Editor component.
+The following example demonstrates how to save, read, update, and delete text content in a local database using the Editor component.
 
 For a runnable project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples). The previously linked example assumes you have Telerik UI for ASP.NET Core and Entity framework installed and a local database set up.
 
 
 > This code has no applied XSS attack prevention and it is the responsibility of the developer to manage these security risks. For more information, refer to the article on [preventing cross-site scripting](https://docs.telerik.com/kendo-ui/controls/editor/preventing-xss).
 
-The following example demonstrates how to define the database model.
+{% if site.core %}
+The following Core example demonstrates how to define the database model.
 
 ```C#
 public class EditorDataContext : DbContext
@@ -335,6 +336,125 @@ public async Task<IActionResult> DeleteConfirmed(int id)
     return RedirectToAction(nameof(Index));
 }
 ```
+
+{% else %}
+The following examples demonstrate the equivalent CRUD workflow for ASP.NET MVC.
+
+```C# Model
+public class EditorDataContext : DbContext
+{
+    public DbSet<EditorData> EditorData { get; set; }
+}
+
+public class EditorData
+{
+    [Key]
+    public int ContentId { get; set; }
+    public string EditorContent { get; set; }
+}
+```
+
+```C# Controller
+public class EditorController : Controller
+{
+    private EditorDataContext db = new EditorDataContext();
+
+    public ActionResult Index()
+    {
+        return View(db.EditorData.ToList());
+    }
+
+    public ActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Create(EditorData editorData)
+    {
+        if (ModelState.IsValid)
+        {
+            db.EditorData.Add(editorData);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        return View(editorData);
+    }
+
+    public ActionResult Details(int id)
+    {
+        return View(db.EditorData.Find(id));
+    }
+
+    public ActionResult Edit(int id)
+    {
+        return View(db.EditorData.Find(id));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Edit(EditorData editorData)
+    {
+        if (ModelState.IsValid)
+        {
+            db.Entry(editorData).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        return View(editorData);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Delete(int id)
+    {
+        var editorData = db.EditorData.Find(id);
+        if (editorData != null)
+        {
+            db.EditorData.Remove(editorData);
+            db.SaveChanges();
+        }
+
+        return RedirectToAction("Index");
+    }
+}
+```
+
+```Razor Index.cshtml
+@model IEnumerable<EditorData>
+
+<p>@Html.ActionLink("Create New", "Create", null, new { @class = "k-button" })</p>
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.EditorContent)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ContentId }, new { @class = "k-button k-primary" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ContentId }, new { @class = "k-button" })
+            </td>
+        </tr>
+    }
+</table>
+```
+
+```Razor Create.cshtml
+@model EditorData
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.LabelFor(model => model.EditorContent)
+    @(Html.Kendo().EditorFor(model => model.EditorContent))
+    <input type="submit" value="Create" class="k-button k-primary" />
+}
+```
+
+Use the same form pattern for `Edit.cshtml`, replacing the submit text with `Save` and adding `@Html.HiddenFor(model => model.ContentId)`.
+{% endif %}
 
 ## See Also
 

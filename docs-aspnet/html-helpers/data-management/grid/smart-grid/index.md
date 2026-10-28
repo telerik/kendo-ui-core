@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: "Discover how the {{ site.framework }} Smart Grid combines AI-powered features with traditional Grid functionality to enable natural language interaction and intelligent data exploration."
+description: "Explore AI features in the {{ site.framework }} Smart Grid for natural language interaction and search."
 slug: overview_smart_grid
 position: 0
 components: ["grid"]

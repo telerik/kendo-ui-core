@@ -59,4 +59,4 @@ builder.Services
 
 * [Basic Usage of the DropDownList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist)
 * [Using the API of the DropDownList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist/api)
-* [Server-Side API](/api/grid)
+* [Server-Side API](/api/dropdownlist)

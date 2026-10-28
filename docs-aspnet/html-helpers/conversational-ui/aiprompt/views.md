@@ -59,6 +59,11 @@ The following example demonstrates how to specify the `Output` view as active wh
     @(Html.Kendo().AIPrompt()
         .Name("aiprompt")
         .ActiveView(1)
+        .OutputActions(action =>
+        {
+            action.Copy();
+            action.Retry();
+        })
         .Views(views =>
         {
             views.Add().Type(ViewType.Prompt);
@@ -71,6 +76,10 @@ The following example demonstrates how to specify the `Output` view as active wh
     @addTagHelper *, Kendo.Mvc
 
     <kendo-aiprompt name="aiprompt" active-view="1">
+        <output-actions>
+            <aiprompt-output-action command="copy" />
+            <aiprompt-output-action command="retry" />
+        </output-actions>
         <aiprompt-views>
             <aiprompt-view type="ViewType.Prompt"></aiprompt-view>
             <aiprompt-view type="ViewType.Output"></aiprompt-view>

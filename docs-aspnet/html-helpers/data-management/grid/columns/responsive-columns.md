@@ -1,7 +1,7 @@
 ---
 title: Responsive Columns
 page_title: Responsive Columns
-description: "Learn how to make the Telerik UI for {{ site.framework}} Grid columns responsive for different viewport dimensions."
+description: "Configure responsive Grid columns in Telerik UI for {{ site.framework }} by using Media and template options for each viewport size."
 components: ["grid"]
 slug: responsive_columns_grid
 position: 12
@@ -9,16 +9,17 @@ position: 12
 
 # Responsive Columns
 
-The {{ site.product }} Grid provides the built-in functionality to conditionally make a column visible based on the width of the viewport.
+The {{ site.product }} Grid includes built-in options that show or hide columns based on the viewport width.
 
 For a runnable example, refer to the [demo on Responsive Columns for the Grid component](https://demos.telerik.com/{{ site.platform }}/grid/responsive-columns).
 
-> * The [`Hidden()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#hiddensystemboolean) configuration method takes precedence over the `Media()` configuration.
-> * The [`Media()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#mediasystemstring) configuration method cannot be used with the [`MinScreenWidth()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#minscreenwidthsystemint32) option simultaneously.
+>important
+> - The [`Hidden()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#hiddensystemboolean) configuration method takes precedence over `Media()`.
+> - The [`Media()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#mediasystemstring) configuration method cannot be used together with [`MinScreenWidth()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#minscreenwidthsystemint32).
 
 ## Configuration
 
-Set the [`Media()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#mediasystemstring) configuration method of the column to a [valid string](#accepted-values). When set, the column will predominantly remain visible if the specified condition is satisfied.
+Set the [`Media()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#mediasystemstring) configuration method of the column to a [supported value](#accepted-values). When the media query matches, the column stays visible.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Customer>()
@@ -77,9 +78,9 @@ Set the [`Media()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.u
 
 ## Accepted Values
 
-1. The property accepts valid strings for the [`matchMedia browser API`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) (assuming the property is supported by the browser) and toggles the visibility of the columns based on the media queries.
+1. Use a valid media query string for the [`matchMedia browser API`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia). The Grid toggles column visibility based on the query result.
 
-1. The property accepts the device identifiers that are available in [Bootstrap 5](https://getbootstrap.com/docs/5.0/layout/grid/#grid-options):
+2. Use one of the device identifiers available in [Bootstrap 5](https://getbootstrap.com/docs/5.0/layout/grid/#grid-options):
 
 - **xs** is equivalent to "(max-width: 576px)"
 - **sm** is equivalent to "(min-width: 576px)"
@@ -89,9 +90,9 @@ Set the [`Media()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.u
 
 ## Column Template
 
-The Responsive Column functionality works in strong symbiosis with the Column Template functionality. The column template is used for melding all columns into an autonomous container by using the [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview) conventions.
+Responsive Columns work with Column Templates to render multiple field values in a single compact layout.
 
-The content within the column `Template()` method will be displayed when the condition specified in the `Media()` is met (for example, the viewport is not wider than 450px). This functionality is useful, as it allows you to alter the existing column structure based on the current viewport dimensions.
+The content in the `Template()` method is displayed when the `Media()` condition is met. For example, the following template column appears when the viewport is up to 450px wide.
 
 ```HtmlHelper
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Customer>()
@@ -131,7 +132,7 @@ The content within the column `Template()` method will be displayed when the con
         </column>
         <column field="Country" media="(min-width: 450px)">
         </column>
-        <column template="#=resColTemplate(data)#" title="Items" media="(min-width: 450px)">
+        <column template="#=resColTemplate(data)#" title="Items" media="(max-width: 450px)">
         </column>
     </columns>
     <sortable enabled="true" />
@@ -150,7 +151,7 @@ The content within the column `Template()` method will be displayed when the con
   </kendo-grid>
 ```
 {% endif %}
-```JS script
+```javascript
     <script>
         var resColTemplate;
 
@@ -160,7 +161,7 @@ The content within the column `Template()` method will be displayed when the con
         });
     </script>
 ```
-```JS Template
+```html
     <script id="responsive-column-template" type="text/x-kendo-template">
         <strong>Contact Name</strong>
         <p class="col-template-val">#=data.ContactName#</p>

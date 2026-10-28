@@ -35,6 +35,8 @@ The following example shows the pattern for overriding a built-in shortcut of th
 ```javascript
     function onSchedulerKendoKeydown(e) {
         if (e.keyCode === kendo.keys.ENTER) {
+            // Suppress the built-in Scheduler shortcut for this key combination.
+            // Suppress the built-in Scheduler shortcut for this key combination.
             e.preventKendoKeydown = true;
             console.log("Built-in shortcut overridden.");
         }

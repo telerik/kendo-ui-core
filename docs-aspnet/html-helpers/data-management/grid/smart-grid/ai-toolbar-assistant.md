@@ -1,12 +1,12 @@
 ---
 title: AI Toolbar Assistant
-description: "Learn how to use the AI Assistant Toolbar Tool in the Telerik UI for Grid for {{ site.framework }} to interact with your data using natural language prompts."
+description: "Use the AI Assistant Toolbar Tool in the {{ site.framework }} Grid for natural language data operations."
 components: ["grid"]
 slug: ai_toolbar_assistant_core_grid
 position: 6
 ---
 
-# Core Data Grid AI Toolbar Assistant
+# {{ site.framework }} Data Grid AI Toolbar Assistant
 
 The Telerik UI Grid provides a built-in AI Assistant toolbar tool that allows users to interact with the Grid using natural language prompts. Use this feature to enable your end users to perform complex data operations like sorting, filtering, grouping, and highlighting without having to use the specific UI controls.
 

@@ -11,7 +11,7 @@ position: 19
 
 The Drag and Drop functionality allows you to reorder single or multiple Grid rows by dragging. Additionally, you can move rows between different Grids.
 
-The {{site.prouct}} Grid supports two interaction modes:
+The {{ site.product }} Grid supports two interaction modes:
 
 - [Drag and Drop](#getting-started) - The user can click to drag a row and release the dragged row in the desired location.
 - [Click-Move-Click](#row-click-move-click) - The user can click to initiate the dragging interaction, move the pointer to the desired location and click again to release the dragged item.
@@ -299,7 +299,7 @@ The example below demonstrates how to drag and drop the Grid rows by using the k
 ```
 {% endif %}
 
-When the [`Multiple` selection]({% slug htmlhelpers_grid_aspnetcore_selection%}#select-modes
+When the [`Multiple` selection]({% slug htmlhelpers_grid_aspnetcore_selection %}#select-modes
 ) option is enabled for the Grid rows, the user can drag and drop the selected rows through the `Ctrl` + `Mouse left-click` combination.
 
 ## Known Limitations

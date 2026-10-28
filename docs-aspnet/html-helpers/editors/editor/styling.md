@@ -117,6 +117,7 @@ To avoid the default content styles from the previous example, remove or overrid
         $(document).ready(function() {
             var editor = $("#editor").data("kendoEditor");
             var styleTag = editor.body.parentNode.getElementsByTagName("style")[0];
+            // Remove the default styles injected into the Editor iframe.
             styleTag.parentNode.removeChild(styleTag);
         });
     </script>
@@ -136,6 +137,7 @@ To avoid the default content styles from the previous example, remove or overrid
         $(document).ready(function() {
             var editor = $("#editor").data("kendoEditor");
             var styleTag = editor.body.parentNode.getElementsByTagName("style")[0];
+            // Remove the default styles injected into the Editor iframe.
             styleTag.parentNode.removeChild(styleTag);
         });
     </script>

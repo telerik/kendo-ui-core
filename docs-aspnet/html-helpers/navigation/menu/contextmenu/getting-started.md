@@ -107,6 +107,7 @@ In this step, you will also configure a ListView component that will serve as a 
         }
     </style>
 ```
+{% if site.core %}
 ```TagHelper
     @using Kendo.Mvc.UI
 
@@ -188,6 +189,7 @@ In this step, you will also configure a ListView component that will serve as a 
         }
     </style>
 ```
+{% endif %}
 
 ## 2. Initialize the ContextMenu
 

@@ -130,7 +130,7 @@ The AI Prompt has been tested with the following screen readers and browsers com
 
 ### Test Example
 
-To test the AIPrompt component, refer to the [ActionSheet Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/aiprompt).
+To test the AIPrompt component, refer to the [AIPrompt Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/aiprompt).
 
 ## Keyboard Navigation
 

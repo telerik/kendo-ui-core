@@ -1,7 +1,7 @@
 ---
 title: OData-v4 Binding
 page_title: OData-v4 Binding
-description: "Learn how to implement OData-v4 binding with the Telerik UI Grid component for {{ site.framework }}."
+description: "Learn how to configure OData-v4 binding, CRUD operations, and batch editing for the Telerik UI Grid in {{ site.framework }}."
 components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/odatav4-binding
 slug: htmlhelpers_grid_aspnetcore_odatav4-binding
@@ -10,22 +10,22 @@ position: 8
 
 # OData-v4 Binding
 
-[OData (Open Data Protocol)](https://www.odata.org/) defines best practices when it comes to building and consuming RESTful APIs in a dependable manner. It enables you to mimic a Web API but with built-in support for filtering, selecting, and expanding amongst other capabilities. Binding the {{ site.framework }} Grid through OData-v4, allows you to elevate its REST API by introducing advanced querying options.
+[OData (Open Data Protocol)](https://www.odata.org/) defines best practices for building and consuming RESTful APIs. It provides built-in support for filtering, selecting, and expanding, among other query capabilities. By binding the {{ site.framework }} Grid to OData-v4, you can extend your REST API with advanced query options.
 
-For a runnable example, refer to the [demo on OData binding of the Grid component](https://demos.telerik.com/{{ site.platform }}/grid/odatav4).
+For a runnable example, refer to the [Grid OData-v4 binding demo](https://demos.telerik.com/{{ site.platform }}/grid/odatav4).
 
-## Installing the OData Package 
+## Installing the OData Package
 
 {% if site.core %}
-To install the required dependencies for using OData, install the autonomous `Microsoft.AspNetCore.OData` NuGet package in your project.
+Install the required OData dependency by adding the `Microsoft.AspNetCore.OData` NuGet package to your project.
 {% else %}
-To install the required dependencies for using OData, install the autonomous `Microsoft.AspNet.OData` and `Microsoft.AspNet.WebApi.WebHost` NuGet packages in your project.
+Install the required OData dependencies by adding the `Microsoft.AspNet.OData` and `Microsoft.AspNet.WebApi.WebHost` NuGet packages to your project.
 {% endif %}
 
 {% if site.core %}
-## Building the Edm Model and Configuring the Service in ASP.NET Core 6
+## Building the EDM Model and Configuring the Service in ASP.NET Core 6
 
-For applications using .NET Core 6 and the minimal hosting model, the Edm model and service need to be configured through the `Program.cs` file in the following way:
+For applications that use .NET 6 and the minimal hosting model, configure the EDM model and OData service in `Program.cs`:
 
 ```C#
     builder.Services.AddControllers().AddOData(options =>
@@ -49,9 +49,9 @@ For applications using .NET Core 6 and the minimal hosting model, the Edm model 
 ```
 
 
-## Building the Edm Model and Configuring the Service in ASP.NET Core 3.1 and ASP.NET Core 5
+## Building the EDM Model and Configuring the Service in ASP.NET Core 3.1 and ASP.NET Core 5
 
-For applications using .NET Core 3.1 and 5, the Edm model and service need to be configured through the `ConfigureServices` method in the following way:
+For applications that use .NET Core 3.1 or ASP.NET Core 5, configure the EDM model and OData service in `ConfigureServices`:
 
 ```C#
   public void ConfigureServices(IServiceCollection services)
@@ -70,9 +70,9 @@ For applications using .NET Core 3.1 and 5, the Edm model and service need to be
   }
 ```
 {% else %}
-## Building the Edm Model and Configuring OData in an ASP.NET MVC Environment
+## Building the EDM Model and Configuring OData in an ASP.NET MVC Environment
 
-To ensure that the application is configured for both WebApi and OData binding capabilities:
+To configure the application for both Web API and OData binding:
 
 1. Configure Web API by calling `GlobalConfiguration.Configure` in the `Application_Start` method.
   
@@ -86,7 +86,7 @@ To ensure that the application is configured for both WebApi and OData binding c
         }
     }
   ```
-2. Create a file named `WebApiConfig.cs` inside the `App_Start` folder and configure the Edm model and OData services.
+2. Create a file named `WebApiConfig.cs` in the `App_Start` folder, and configure the EDM model and OData services.
   
   ```C#
     public static class WebApiConfig
@@ -117,7 +117,7 @@ To ensure that the application is configured for both WebApi and OData binding c
 {% endif %}
 ## Adding an OData Controller
 
-To support writing and reading data using the OData formats, the `ODataController` base class needs to be inherited for a given controller instance.
+To support read and write operations in OData format, inherit from the `ODataController` base class.
 
 ```C#
     public class ProductsController : ODataController
@@ -126,7 +126,7 @@ To support writing and reading data using the OData formats, the `ODataControlle
     }
 ```
 
-From there, the REST API endpoints need to be decorated with the `EnableQuery` attribute. This attribute is responsible for applying the query options that are passed in the query string.
+Then, decorate the REST API endpoints with the `EnableQuery` attribute so the query options from the URL are applied automatically.
 
 {% if site.core %}
 ```C#
@@ -223,7 +223,7 @@ From there, the REST API endpoints need to be decorated with the `EnableQuery` a
 
 ## Configuring the Grid for OData-v4 Binding
 
-To implement the OData binding within the boundaries of the Telerik UI for {{ site.framework }} Grid, specify the `.Type("odata-v4")` configuration method within the DataSource. This ensures that the requests can be sent to the OData endpoint in the expected format and out of the box.
+To bind the Telerik UI for {{ site.framework }} Grid to OData-v4, set `.Type("odata-v4")` in the DataSource configuration. This setting sends requests to the OData endpoint in the expected format.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Product>()
@@ -280,7 +280,7 @@ To implement the OData binding within the boundaries of the Telerik UI for {{ si
                         ProductID: { editable: false },
                         ProductName: { type: "string" },
                         UnitPrice: { type: "number" },
-                        UnitsInOrder: {type: "number"},
+                        UnitsOnOrder: { type: "number" },
                         Discontinued: { type: "boolean" },
                         UnitsInStock: { type: "number" }
                     }
@@ -305,7 +305,7 @@ To implement the OData binding within the boundaries of the Telerik UI for {{ si
 
 ## Configuring the CRUD Operations
 
-To configure CRUD operations that support OData-v4 Binding, explicitly add a `ClientHandlerDescriptor` that will be responsible for mapping the OData-v4 endpoints.
+To configure CRUD operations for OData-v4 binding, add `ClientHandlerDescriptor` handlers that map each request to the corresponding OData-v4 endpoint.
 
 ```HtmlHelper
   @(Html.Kendo().Grid<Product>()
@@ -397,7 +397,7 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
                         ProductID: { editable: false },
                         ProductName: { type: "string" },
                         UnitPrice: { type: "number" },
-                        UnitsInOrder: {type: "number"},
+                        UnitsOnOrder: { type: "number" },
                         Discontinued: { type: "boolean" },
                         UnitsInStock: { type: "number" }
                     }
@@ -458,7 +458,7 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
       app.UseODataBatching();
     ```
 
-2. Within the Grid, set the Batch operation with `ClientHandlerDescriptor` to support batching and enable the `Batch()` option of the Grid's DataSource.
+2. In the Grid, configure the batch operation with `ClientHandlerDescriptor`, and enable the DataSource `Batch()` option.
 
    ```HtmlHelper
       @(Html.Kendo().Grid<ProductViewModel>()
@@ -567,7 +567,7 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
                         ProductID: { editable: false },
                         ProductName: { type: "string" },
                         UnitPrice: { type: "number" },
-                        UnitsInOrder: {type: "number"},
+                        UnitsOnOrder: { type: "number" },
                         Discontinued: { type: "boolean" },
                         UnitsInStock: { type: "number" }
                     }
@@ -599,9 +599,9 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
     </kendo-grid>
    ```
 
-### Enabling Batch Editing in OData-v4 Binding Scenarios with ASP.NET Core 3.1 and 5:
+### Enabling Batch Editing in OData-v4 Binding Scenarios with ASP.NET Core 3.1 and 5
 
-1. Add a default batch handler within the `AddOData()` extensions method and inject the `UseODataBatching()` middleware within the `Startup.cs` file.
+1. Add a default batch handler in the `AddOData()` extension method, and inject the `UseODataBatching()` middleware in `Startup.cs`.
 
   ```C#
       public void ConfigureServices(IServiceCollection services)
@@ -624,7 +624,7 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
       }
   ```
 
-2. Within the Grid, set the Batch operation with `ClientHandlerDescriptor` to support batching and enable the `Batch()` option of the Grid's DataSource.
+2. In the Grid, configure the batch operation with `ClientHandlerDescriptor`, and enable the DataSource `Batch()` option.
 
   ```HtmlHelper
       @(Html.Kendo().Grid<ProductViewModel>()
@@ -733,7 +733,7 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
                         ProductID: { editable: false },
                         ProductName: { type: "string" },
                         UnitPrice: { type: "number" },
-                        UnitsInOrder: {type: "number"},
+                        UnitsOnOrder: { type: "number" },
                         Discontinued: { type: "boolean" },
                         UnitsInStock: { type: "number" }
                     }
@@ -767,7 +767,7 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
 
 {% else %}
 
-To enable batch editing capabilities in an ASP.NET MVC Environment:
+To enable batch editing in an ASP.NET MVC environment:
 
 1. Add a default batch handler inside the `WebApiConfig` file.
   ```C#
@@ -796,7 +796,7 @@ To enable batch editing capabilities in an ASP.NET MVC Environment:
   ```
 
 
-2. Within the Grid, set the Batch operation with `ClientHandlerDescriptor` to support batching and enable the `Batch()` option of the Grid's DataSource.
+2. In the Grid, configure the batch operation with `ClientHandlerDescriptor`, and enable the DataSource `Batch()` option.
 
   ```HtmlHelper
       @(Html.Kendo().Grid<ProductViewModel>()
@@ -880,4 +880,4 @@ To enable batch editing capabilities in an ASP.NET MVC Environment:
 {% else %}
 * [Official Microsoft Documentation on Getting Started with {{ site.framework }} OData-v4](https://learn.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint)
 {% endif %}
-* [Server-Side API](/api/grid)
+* [Grid Server-Side API](/api/grid)

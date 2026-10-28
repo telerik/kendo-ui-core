@@ -65,8 +65,8 @@ You can configure the Telerik UI DropDownList for data binding to use a custom D
             <transport>
                 <read url="@Url.Action("GetProducts", "Home")" />
             </transport>
-            <schema data="Data"     // Define the [data](https://docs.telerik.com/kendo-ui/api/data/datasource#configuration-schema.data) option.
-                    total="Total">  // Define the [total](https://docs.telerik.com/kendo-ui/api/data/datasource#configuration-schema.total) option.
+                <!-- The data and total attributes map the response fields used by the DataSource. -->
+                <schema data="Data" total="Total">
             </schema>
         </datasource>
     </kendo-dropdownlist>

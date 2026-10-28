@@ -1,7 +1,7 @@
 ---
 title: Sticky
 page_title: Sticky Columns
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} (Demo) supporting sticky columns that are scrollable, yet, visible at all times while the user scrolls the Grid horizontally."
+description: "Learn how to configure sticky Grid columns in Telerik UI for {{ site.framework }} so key columns stay visible during horizontal scrolling."
 components: ["grid"]
 slug: htmlhelper_grid_sticky_columns
 position: 4
@@ -9,18 +9,18 @@ position: 4
 
 # Sticky Columns
 
-Sticky columns enable you to display specific columns at all times while the user scrolls the Grid horizontally. This specific column will be scrollable as well, however, it will fix its position to the left/right when it reaches left/right Grid border.
+Sticky columns keep specific columns visible while users scroll the Grid horizontally. The sticky columns still scroll until they reach the left or right Grid border, where they stay fixed.
 
-For a runnable example, refer to the demo on [implementing sticky columns in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/sticky-columns).
+For a runnable example, review the [Grid sticky columns demo](https://demos.telerik.com/{{ site.platform }}/grid/sticky-columns).
 
-The following Grid configuration ensures that it will be possible to scroll columns horizontally to make the feature work. If there is not enough horizontal space for the scrollbar, it will not appear.
+To enable sticky columns, configure the Grid as follows:
 * Enable [scrolling]({% slug htmlhelpers_grid_aspnetcore_scrolling %}).
-* [Stick columns initially](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#stickysystemboolean) or [enable the stickable property](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#stickablesystemboolean) so users can stick column on the fly.
+* [Stick columns initially](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#stickysystemboolean) or [enable the stickable property](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#stickablesystemboolean) so users can stick columns on the fly.
 * Set a Grid height.
-* Set explicit pixel widths to all columns to allow the Grid to adjust the layout of the sticky and non-sticky columns.
-* Make sure that the Grid is not [initialized inside a hidden container]({% slug hidden_containers_aspnetcore_grid %}).
+* Set explicit pixel widths on all columns so the Grid can calculate sticky and non-sticky column layout.
+* Make sure the Grid is not [initialized inside a hidden container]({% slug hidden_containers_aspnetcore_grid %}).
 
-> The [JavaScript API of the Grid](https://docs.telerik.com/kendo-ui/api/ui/grid#methods) allows you to stick and unstick columns on the fly. However, this is possible only if the stickable configuration is enabled during initialization. If a certain column needs to be open for the users to change its position to sticky/non-sticky this must be specified in the column declaration.
+>note The [Grid JavaScript API methods](https://docs.telerik.com/kendo-ui/api/ui/grid#methods) allow users to stick and unstick columns on the fly only when `Stickable(true)` is enabled during initialization.
 
 ```HtmlHelper
     .ColumnMenu()
@@ -42,7 +42,7 @@ The following Grid configuration ensures that it will be possible to scroll colu
         <column field="CompanyName" stickable="true" title="Company Name" />
         <column field="Country" stickable="true" title="Country" width="150" />
     </columns>
-````
+```
 {% endif %}
 
 ## Known Limitations

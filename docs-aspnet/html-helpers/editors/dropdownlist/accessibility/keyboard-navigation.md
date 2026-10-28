@@ -35,7 +35,7 @@ For a complete example, refer to the [demo on keyboard navigation of the DropDow
 
 When the popup of the DropDownList is opened and the arrow keys are used to highlight an item a `select` event is fired upon highlighting an item. When pressing `Enter` or `Space`, or blurring the component a `change` event is fired and the value of the component is set.
 
-When the popup of the DropDownList is closed and the arrow keys are used to select an item a `select` event is fired imediately followed by a `change` event.
+When the popup of the DropDownList is closed and the arrow keys are used to select an item a `select` event is fired immediately followed by a `change` event.
 
 ## See Also
 

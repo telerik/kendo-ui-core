@@ -193,8 +193,9 @@ By handling the client-side events of the Scheduler, you can restrict the creati
 ```
 {% endif %}
 ```JS scripts
+    // The resource helpers below are application-specific and should inspect the Scheduler resources.
     function onAdd(e){
-        if (!checkAvailability(e.event.start, e.event.end, e.event)) {
+        if (!checkAvailability(e.event.start, e.event.end, e.event, e.resources)) {
             e.preventDefault();
         }
     }

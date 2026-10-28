@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Grouping
-description: "Learn how to enable the grouping functionality of the Telerik UI Grid for {{ site.framework }}."
+description: "Configure Grid grouping in {{ site.framework }} and group data with Groupable or DataSource expressions."
 components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_grouping
 position: 1

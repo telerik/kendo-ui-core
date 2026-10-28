@@ -226,7 +226,7 @@ The next two approaches let you create a data table serving as an alternative or
           overflow:hidden;
         }
     ```
-    As a result, the data table is no longer on the screen but is accessible to screen readers as demonstrated in the [following video] (https://www.youtube.com/watch?v=0xdrBjwiFVA&ab_channel=KendoUI)
+    As a result, the data table is no longer on the screen but is accessible to screen readers as demonstrated in the [following video](https://www.youtube.com/watch?v=0xdrBjwiFVA&ab_channel=KendoUI)
 
     <iframe width="853" height="480" src="https://www.youtube.com/embed/0xdrBjwiFVA" frameborder="0" allowfullscreen></iframe>
 

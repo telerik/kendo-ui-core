@@ -9,7 +9,7 @@ position: 5
 
 # Toolbar
 
-The Telerik {{ site.product_short }} Scheduler component provides the means to customize it's toolbar.
+The Telerik {{ site.product_short }} Scheduler component provides the means to customize its toolbar.
 
 ## Default Toolbar
 
@@ -52,9 +52,9 @@ The Telerik {{ site.product_short }} Scheduler allows you to add commands for ex
 
 ## Custom Toolbar
 
-The Telerik {{ site.product_short }} Scheduler allows you to customize entirely it's Toolbar via the `.Toolbar(t=>t.Custom())` configuration option.
+The Telerik {{ site.product_short }} Scheduler allows you to customize its Toolbar via the `.Toolbar(t=>t.Custom())` configuration option.
 
-The default order of the Scheduler tools is: `[ "pdf", [ "today", "previous", "next" ], "current", { type: "spacer" }, "search", "views" ]`. You can set the `Items` configuration to entirely replace all tools in the Scheduler ToolBar (including the default once) in order desired for them to appear in the component. Grouping tools to render a ButtonGroup in the ToolBar is also supported via the `Group()` configuration. Rendering custom components in the Toolbar is also supported via the `CustomTool()` configuration method.
+The default order of the Scheduler tools is: `[ "pdf", [ "today", "previous", "next" ], "current", { type: "spacer" }, "search", "views" ]`. You can set the `Items` configuration to entirely replace all tools in the Scheduler ToolBar (including the default ones) in the order you want them to appear in the component. Grouping tools to render a ButtonGroup in the ToolBar is also supported via the `Group()` configuration. Rendering custom components in the Toolbar is also supported via the `CustomTool()` configuration method.
 
 The Scheduler does not provide a documented `wrap` option for rendering the toolbar on multiple lines. Its responsive rendering progressively hides tools as the available width decreases. The `Spacer()` command controls placement and does not enable wrapping. If you require a true multi-line layout, use custom styling and test it with the Scheduler's responsive rendering.
 
@@ -113,6 +113,7 @@ function showMonth() {
 }
 
 function onViewSelect(e) {
+    // Map the selected button index to the corresponding Scheduler view.
     var views = ["day", "week", "month"];
     $("#scheduler").getKendoScheduler().view(views[e.indices[0]]);
 }
@@ -210,7 +211,7 @@ function onViewSelect(e) {
 
 ### Desktop Toolbar
 
-Besides setting a custom Toolbar, the Scheduler provides the option to specify all the tools rendered in the Scheduler's ToolBar with its non-adaptive rendering. You can specify the tools via the `.Toolbar(t=>t.Custom(c=>c.Desktop()))` configuraiton method. If not explicitly set here, the component will render its built-in tools
+Besides setting a custom Toolbar, the Scheduler provides the option to specify all the tools rendered in the Scheduler's ToolBar with its non-adaptive rendering. You can specify the tools via the `.Toolbar(t=>t.Custom(c=>c.Desktop()))` configuration method. If not explicitly set here, the component will render its built-in tools
 
 ### Mobile Toolbar
 

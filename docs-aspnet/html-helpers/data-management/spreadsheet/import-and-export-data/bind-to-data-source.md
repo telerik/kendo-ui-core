@@ -205,8 +205,11 @@ For the complete project, refer to the [Spreadsheet in Razor Pages example](http
             {
                 foreach (var updated in model.Updated)
                 {
-                    var target = SpreadData.FirstOrDefault(x=>x.ProductID == updated.ProductID);
-                    target = updated;
+                    var targetIndex = SpreadData.FindIndex(x => x.ProductID == updated.ProductID);
+                    if (targetIndex >= 0)
+                    {
+                        SpreadData[targetIndex] = updated;
+                    }
                     result.Updated.Add(updated);
                 }
             }

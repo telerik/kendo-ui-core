@@ -13,7 +13,7 @@ The Grid enables you to use gestures to activate its functionalities.
 
 ## Editing
 
-When the [Editing Mode](% slug htmlhelpers_grid_aspnetcore_editing_overview %) of the Grid is configured to `InCell`, use `double-tap` to activate a cell for editing in mobile devices.
+When the [Editing Mode]({% slug htmlhelpers_grid_aspnetcore_editing_overview %}) of the Grid is configured to `InCell`, use `double-tap` to activate a cell for editing in mobile devices.
 
 ## Selection
 

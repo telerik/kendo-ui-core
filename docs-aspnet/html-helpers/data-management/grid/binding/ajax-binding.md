@@ -1,7 +1,7 @@
 ---
 title: Ajax Binding
 page_title: Ajax Binding
-description: "Learn how to implement Ajax binding with the Telerik UI Grid component for {{ site.framework }}."
+description: "Learn how to configure Ajax binding in the Telerik UI Grid for {{ site.framework }} to load, sort, filter, and update data."
 components: ["grid"]
 previous_url: /helpers/html-helpers/grid/ajax-binding, /helpers/data-management/grid/binding/ajax-binding
 slug: htmlhelpers_grid_aspnetcore_ajaxbinding
@@ -10,9 +10,9 @@ position: 2
 
 # Ajax Binding
 
-You can configure the Grid component extension for Ajax binding.
+You can configure the Grid component for Ajax binding.
 
-When configured for Ajax binding, the Grid for {{ site.framework }} makes Ajax requests when doing paging, sorting, filtering, grouping, or when saving data. For a runnable example, refer to the [demo on Ajax binding of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/remote-data-binding).
+When configured for Ajax binding, the Grid for {{ site.framework }} sends Ajax requests for paging, sorting, filtering, grouping, and saving data. For a runnable example, refer to the [Grid Ajax binding demo](https://demos.telerik.com/{{ site.platform }}/grid/remote-data-binding).
 
 The Ajax-bound mode has the following features:
 - The Grid retrieves only the data (in JSON format) representing the current page. As a result, only the Grid is updated.
@@ -22,16 +22,20 @@ The Ajax-bound mode has the following features:
 @[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
 {% endif %}
 
-To configure the Grid for {{ site.framework }} to do Ajax binding to the **Products** table of a sample database:
+## Configuring Ajax Binding to Database Data
 
-1. Create a new {{ site.framework }} web application. Follow the steps from the [introductory article]({% if site.core %}{% slug gettingstartedtelerik_aspnetcore %}{% else %}{% slug gettingstartedtelerik_cli_aspnetmvc %}{% endif %}) to add {{ site.product }} to the application.
+To configure the Grid for {{ site.framework }} for Ajax binding to the **Products** table in a sample database, follow these steps:
+
+1. Create a new {{ site.framework }} web application. Follow the [Getting Started with {{ site.product }}]({% if site.core %}{% slug gettingstartedtelerik_aspnetcore %}{% else %}{% slug gettingstartedtelerik_cli_aspnetmvc %}{% endif %}) article to add {{ site.product }} to the application.
 {% if site.core %}
 1. Install the `Microsoft.EntityFrameworkCore` NuGet package.
 1. Install `Microsoft.EntityFrameworkCore.SqlServer` package.
 1. Install `Microsoft.EntityFrameworkCore.Tools` package.
-1. Run a `Scaffold-DbContext` command in the Visual Studio Package Management Console. It will generate models from the tables in a database called 'Sample'. For more information on scaffolding a model from an existing database refer to [this Microsoft article](https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db#reverse-engineer-your-model).
+1. Run a `Scaffold-DbContext` command in the Visual Studio Package Management Console. It generates models from the tables in a database called `Sample`. For more information, refer to [Scaffold a model from an existing database in EF Core](https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db#reverse-engineer-your-model).
 
+    ```powershell
     Scaffold-DbContext 'Server=(localdb)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=D:\MyProjects\TelerikAspNetCoreApp1\TelerikAspNetCoreApp1\App_Data\Sample.mdf;Trusted_Connection=True;' Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context SampleEntities
+    ```
 
 Note that the command specifies the path to the database `Sample.mdf` file.
 
@@ -39,7 +43,7 @@ Note that the command specifies the path to the database `Sample.mdf` file.
 If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application using the [New Project Wizard]({% slug newprojectwizards_visualstudio_aspnetcore %}).
 
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `SampleModel` and click **Next**. This starts the **Entity Data Model Wizard**.
-1.  Pick the **EF Designer from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
+1. Pick the **EF Designer from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
     ![{{ site.product_short }} Choosing the connection](../images/grid-binding-choose-data-connection.png)
 
@@ -180,7 +184,7 @@ If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](
     ![{{ site.product_short }} The final result is a Grid bound to data](../images/grid-binding-mvc.png)
     {% endif %}
 
-To download a Visual Studio Project, refer to [this GitHub repository]({% if site.mvc %} https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridAjaxBindingDatabase{% else %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/AjaxBinding.cshtml{% endif %}).
+To download a Visual Studio project, refer to the [Grid Ajax binding sample repository on GitHub]({% if site.mvc %} https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridAjaxBindingDatabase{% else %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/AjaxBinding.cshtml{% endif %}).
 
 ## See Also
 
@@ -190,5 +194,5 @@ To download a Visual Studio Project, refer to [this GitHub repository]({% if sit
 * [DataSource Overview]({% slug htmlhelpers_datasource_aspnetcore %})
 * [Grid FAQs]({% slug freqaskedquestions_gridhelper_aspnetmvc %})
 * [Custom Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/customajaxbinding)
-* [Knowledge Base Section](/knowledge-base)
+* [Knowledge Base Articles](/knowledge-base)
 * [Server-Side API](/api/grid)

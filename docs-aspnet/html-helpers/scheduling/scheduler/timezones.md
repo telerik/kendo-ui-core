@@ -117,7 +117,7 @@ The following example demonstrates how to set "Etc/UTC" timezone to the Schedule
 
 ## Reading Events from Data Source
 
-If the `timezone` option is defined, the Scheduler will remove the local timezone offset, converting dates to UTC. Then, it will apply the defined timezone value, for exampe, **America/New_York**.
+If the `timezone` option is defined, the Scheduler will remove the local timezone offset, converting dates to UTC. Then, it will apply the defined timezone value, for example, **America/New_York**.
 
 ## Sending Events to Remote Service
 

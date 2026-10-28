@@ -9,20 +9,20 @@ position: 6
 
 # ToolBar Adaptive Tools
 
-The Telerik UI Grid for {{ site.framework }} supports rendering selected toolbar tools in adaptive mode starting with version Q2 2025. This feature improves usability on smaller screens by displaying sorting, filtering, grouping, and editing UI elements in a mobile-friendly ActionSheet.
+The Telerik UI Grid for {{ site.framework }} supports rendering selected toolbar tools in adaptive mode, starting with version Q2 2025. This feature improves usability on small screens by displaying sorting, filtering, grouping, and editing UI elements in a mobile-friendly ActionSheet.
 
-To enable the adaptive mode of the Grid, set the [`AdaptiveMode()`](/api/kendo.mvc.ui.fluent/gridbuilder#adaptivemode) configuration option.
+To enable adaptive mode for the Grid, set the [`AdaptiveMode()`](/api/kendo.mvc.ui.fluent/gridbuilder#adaptivemode) configuration option.
 
-The tools appear in the ActionSheet automatically on small or medium screen sizes. To ensure that the sorting, filtering, and grouping tools function as expected, specify the respective options&mdash;`Sortable()`, `Filterable()`, and `Groupable()`. If the Grid is configured for `Popup` editing, an ActionSheet will be displayed for editing or creating records. 
+The tools appear in the ActionSheet automatically on small and medium screen sizes. To ensure that sorting, filtering, and grouping tools work as expected, configure the respective options&mdash;`Sortable()`, `Filterable()`, and `Groupable()`. If the Grid is configured for `Popup` editing, an ActionSheet is displayed for editing or creating records.
 
-> The adaptive tools are not rendered or supported when the toolbar uses the `Overflow` mode.
+>important The adaptive tools are not rendered or supported when the toolbar uses the `Overflow` mode.
 
 ## Sorting
 
-To enable sorting in adaptive mode, configure the Grid with `Sortable()`.
+To enable sorting in adaptive mode, configure the Grid with `Sortable()`:
 
-* In [single-column sorting mode]({% slug htmlhelpers_grid_aspnetcore_sorting%}#single-column-sorting), the sorting popup will close immediately after a field is selected, and the Grid will be sorted accordingly.
-* In [multi-column]({% slug htmlhelpers_grid_aspnetcore_sorting%}#multi-column-sorting) or [mixed-column]({% slug htmlhelpers_grid_aspnetcore_sorting%}#mixed-column-sorting) sorting modes, the popup will remain open until the user clicks the **Done** button. Sorting is applied in the background as fields are selected.
+* In [single-column sorting mode]({% slug htmlhelpers_grid_aspnetcore_sorting %}#single-column-sorting), the sorting popup will close immediately after a field is selected, and the Grid will be sorted accordingly.
+* In [multi-column]({% slug htmlhelpers_grid_aspnetcore_sorting %}#multi-column-sorting) or [mixed-column]({% slug htmlhelpers_grid_aspnetcore_sorting %}#mixed-column-sorting) sorting modes, the popup will remain open until the user clicks the **Done** button. Sorting is applied in the background as fields are selected.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()
@@ -73,7 +73,7 @@ To enable sorting in adaptive mode, configure the Grid with `Sortable()`.
 
 ## Filtering
 
-To enable filtering in adaptive mode, define the `Filterable()` option. The specified filterable settings will be applied also in the filter adaptive tool.
+To enable filtering in adaptive mode, define the `Filterable()` option. The specified filtering settings also apply to the adaptive filtering tool.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()
@@ -126,8 +126,8 @@ To enable filtering in adaptive mode, define the `Filterable()` option. The spec
 
 ## Grouping
 
-The adaptive grouping tool allows users to add, remove, and reorder grouped columns. By default, groups can be rearranged by using drag-and-drop within the popup. 
-To enable the adaptive grouping tool, specify the `Groupable()` option and add the `Group` tool in the Grid's toolbar. Use `ReorderButtons(true)` to show arrow up and down arrow buttons in the popup for reordering of the groups.
+The adaptive grouping tool allows users to add, remove, and reorder grouped columns. By default, users can rearrange groups by using drag-and-drop within the popup.
+To enable the adaptive grouping tool, specify the `Groupable()` option and add the `Group` tool to the Grid toolbar. Use `ReorderButtons(true)` to show up and down arrow buttons in the popup for reordering groups.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()
@@ -179,13 +179,13 @@ To enable the adaptive grouping tool, specify the `Groupable()` option and add t
 
 The Grid supports editing in adaptive mode for all available editing modes: `Popup`, `InLine`, and `InCell`.
 
-When using `Popup` or `InLine` Grid edit mode, you must enable the `Selectable()` configuration option to enable editing or deleting rows in adaptive mode. For `InCell` editing, `Selectable()` is needed only for deleting rows.
+When you use `Popup` or `InLine` Grid edit mode, you must enable the `Selectable()` configuration option to enable editing or deleting rows in adaptive mode. For `InCell` editing, `Selectable()` is required only for deleting rows.
 
 When multiple rows are selected, the data operations will apply to the most recently selected row.
 
 ### Popup Editing
 
-In adaptive mode, when the Grid uses `Popup` editing, the Edit and Create actions open a mobile-friendly ActionSheet, allowing users to input or update data in a compact and responsive layout suitable for smaller screens.
+In adaptive mode, when the Grid uses `Popup` editing, the Edit and Create actions open a mobile-friendly ActionSheet that allows users to add or update data in a compact layout for small screens.
 
 To delete a record, the user must select the respective row and click the **Delete** toolbar button.
 
@@ -274,7 +274,7 @@ To delete a record, the user must select the respective row and click the **Dele
 
 ### InLine Editing
 
-In adaptive mode, when using `InLine` editing mode, the Grid displays the editable fields directly within the selected row while the rest of the Grid remains visible. On smaller screens, the editing UI is optimized within an ActionSheet to maintain usability.
+In adaptive mode, when using `InLine` editing mode, the Grid displays editable fields directly in the selected row while the rest of the Grid remains visible. On small screens, the editing UI is optimized in an ActionSheet.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()
@@ -363,7 +363,7 @@ In adaptive mode, when using `InLine` editing mode, the Grid displays the editab
 
 ### InCell Editing
 
-In adaptive mode, the `InCell` editing allows users to edit individual cells by clicking into them. After a cell is edited and loses focus, the toolbar displays the **Save changes** and **Cancel changes** buttons.
+In adaptive mode, `InCell` editing allows users to edit individual cells by clicking them. After a cell is edited and loses focus, the toolbar displays the **Save changes** and **Cancel changes** buttons.
 
 To delete a specified record, the user must first select the row, then click the **Delete** button in the toolbar.
 

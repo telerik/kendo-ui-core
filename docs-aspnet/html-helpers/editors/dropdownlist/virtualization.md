@@ -162,7 +162,9 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 
                 value = Array.isArray(value) ? value : [value];
 
+    1. Create the `Read` and `ValueMapper` actions. The `ValueMapper` resolves selected values that are not currently loaded in the virtualized data source.
                 for (var idx = 0; idx < value.length; idx++) {
+                        // Build the values[index] query-string keys expected by the ValueMapper action.
                     data["values[" + idx + "]"] = value[idx];
                 }
 

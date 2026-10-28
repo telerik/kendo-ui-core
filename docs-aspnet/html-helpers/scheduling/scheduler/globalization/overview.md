@@ -13,5 +13,5 @@ The globalization process combines the translation of component messages (locali
 
 The globalization functionality of the Scheduler is enabled through:
 
-* [Localization of messages]({% slug localization_scheduler%})
+* [Localization of messages]({% slug localization_scheduler %})
 * [Right-to-left support]({% slug rtl_scheduler %})

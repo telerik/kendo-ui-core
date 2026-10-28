@@ -1,7 +1,7 @@
 ---
 title: Printing
 page_title: Printing
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} allowing you to select only the Grid content on a page for printing."
+description: "Print the Telerik UI Grid for {{ site.framework }} while hiding other page content with print styles."
 components: ["grid"]
 slug: printing_gridhelper_aspnetcore
 position: 4

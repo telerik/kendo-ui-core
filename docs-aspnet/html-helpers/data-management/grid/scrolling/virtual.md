@@ -1,7 +1,7 @@
 ---
 title: Virtual Scrolling
 page_title: Virtual Scrolling
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to enable virtual scrolling as an alternative to paging."
+description: "Enable virtual scrolling in the Telerik UI Grid for {{ site.framework }} as an alternative to paging."
 components: ["grid"]
 slug: virtual_scrolling_aspnetcore_grid
 position: 2
@@ -52,7 +52,7 @@ In virtual scrolling, the HTML output is different from the standard scrolling f
 </div>
 ```
 
-When the user scrolls a Grid in its virtual-scrolling mode, the Grid renders the table rows for the reached scroll position on the fly. If the Gris uses local data or if its remote data has already been loaded and cached, the rendering rate and performance of the widget depend on:
+When the user scrolls a Grid in its virtual-scrolling mode, the Grid renders the table rows for the reached scroll position on the fly. If the Grid uses local data or if its remote data has already been loaded and cached, the rendering rate and performance of the widget depend on:
 * The page size.
 * The Grid height.
 * The scrolling speed.

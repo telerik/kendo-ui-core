@@ -1,7 +1,7 @@
 ---
 title: Inline
 page_title: Inline Editing
-description: "Get started with the Inline edit mode of the Telerik UI Grid component for {{ site.framework }}."
+description: "Learn how to implement Inline editing mode in the Telerik UI Grid component for {{ site.framework }}."
 components: ["grid"]
 slug: inlineediting_grid_aspnetcore
 position: 2
@@ -151,7 +151,7 @@ The example below shows how to implement Inline Grid CRUD operations with a mini
                 northwind.Products.Attach(entity);
                 // Delete the entity.
                 northwind.Products.Remove(entity);
-                // Or use DeleteObject if using a previous versoin of Entity Framework.
+                // Or use DeleteObject if using a previous version of Entity Framework.
                 // northwind.Products.DeleteObject(entity);
                 // Delete the entity in the database.
                 northwind.SaveChanges();
@@ -251,7 +251,7 @@ To define a custom editor for a specified column:
         @(Html.Kendo().DropDownListFor(m => m)
             .DataValueField("Id") // The value of the drop-down is taken from the "Id" property.
             .DataTextField("Name") // The text of the item is taken from the "Name" property.
-            .BindTo((System.Collections.IEnumerable)ViewData["categories"]) // A list of all optipns, which is populated in the controller.
+            .BindTo((System.Collections.IEnumerable)ViewData["categories"]) // A list of all options, which is populated in the controller.
         )
     ```
     ```C# ProductViewModel

@@ -55,7 +55,7 @@ To enable the horizontal resources grouping, add the [`Group()`](/api/kendo.mvc.
         </resources>
         <group>
             <resources>
-                <group-resource name="Rooms"/> // "Rooms" matches the "name" attribute of the defined resource within the "resources" tag.
+                <group-resource name="Rooms"/> <!-- "Rooms" matches the "name" attribute of the defined resource within the "resources" tag. -->
             </resources>
         </group>
         <!--Additional configuration-->

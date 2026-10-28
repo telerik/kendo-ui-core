@@ -1,7 +1,7 @@
 ---
 title: Localization
 page_title: Localization
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} and translate its toolbar, menu, command, filter, header, and pager text messages for different culture locales."
+description: "Translate Grid toolbar, menu, filter, and pager messages for different cultures in {{ site.framework }}."
 components: ["grid"]
 slug: localization_aspnetcore_grid
 position: 3
@@ -36,7 +36,7 @@ To use the community-sources Resources files, override the executing context and
 1. Match the client-side culture. By including the Kendo UI culture scripts, the number formats, the week and month names, the date and time formats, and so on will match the server-side culture and prevent validation errors. The culture scripts are generated from the Windows 10 and .NET 4.7 server-side culture definitions and match them by design.
 
     ```HtmlHelper
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/cultures/kendo.culture.fr-FR.min.js">
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/cultures/kendo.culture.fr-FR.min.js"></script>
         <!-- include the call to the kendo.culture() method before any widgets are initialized -->
 
         <script>kendo.culture("fr-FR");</script>
@@ -47,7 +47,7 @@ To use the community-sources Resources files, override the executing context and
     ```
     {% if site.core %}
     ```TagHelper
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/cultures/kendo.culture.fr-FR.min.js">
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/cultures/kendo.culture.fr-FR.min.js"></script>
         <!-- include the call to the kendo.culture() method before any widgets are initialized -->
 
         <script>kendo.culture("fr-FR");</script>
@@ -228,7 +228,7 @@ The following example demonstrates how to implement the translations of the page
             messages.Refresh("My Refresh");
             messages.Next("My Next");
             messages.Last("My Last");
-            messages.Display("My {0} - {1} of {2} items"); // {0} is the index of the first record on the page, {1}     - the index of the last")
+            messages.Display("My {0} - {1} of {2} items"); // {0} is the index of the first record on the page, {1} - the index of the last
             /* and others */
         });
     })
@@ -241,7 +241,7 @@ The following example demonstrates how to implement the translations of the page
                       refresh="My Refresh"
                       next="My Next"
                       last="My Last"
-                      display="My {0} - {1} of {2} items"/> @*{0} is the index of the first record on the page, {1} - the index of the last"*@
+                      display="My {0} - {1} of {2} items"/> @*{0} is the index of the first record on the page, {1} - the index of the last*@
         </pageable>
     </kendo-grid>
 ```

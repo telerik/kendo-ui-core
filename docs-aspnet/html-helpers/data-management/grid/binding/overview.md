@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Telerik UI Grid Documentation | Data Binding Overview  
-description: "Learn how to bind data to the {{ site.product }} Grid using various data binding approaches."
+description: "Learn how to bind the {{ site.product }} Grid to local, remote, Web API, custom, and SignalR data sources."
 components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/overview
 slug: htmlhelpers_grid_aspnetcore_binding_overview
@@ -22,7 +22,7 @@ The Grid supports the following data binding methods:
 
 ### Local Data Binding
 
-Bind the Grid to a local dataset by passing an arbitrary model directly within the boundaries of the component. This approach is optimal for:
+Bind the Grid to a local dataset by passing a model directly in the component definition. This approach is best for:
 - Small to medium-sized datasets that can be loaded in memory.
 - Static data that does not require frequent updates.
 - Scenarios where all data is available at render time.
@@ -31,7 +31,7 @@ For detailed implementation instructions, see [Local Data Binding]({% slug htmlh
 
 ### Remote Data Binding
 
-Connect the Grid to a remote endpoint using AJAX operations. This enables:
+Connect the Grid to a remote endpoint by using AJAX operations. This approach supports:
 - Dynamic data loading with paging, sorting, grouping, and filtering.
 - Real-time data updates from external sources.
 - Improved performance with large datasets through on-demand data loading.
@@ -40,7 +40,7 @@ For more information and examples, refer to the [Remote Data Binding]({% slug ht
 
 ### Custom DataSource Binding
 
-Implement custom data binding scenarios with full control over the data retrieval process:
+Implement custom data binding scenarios when you need full control over data retrieval:
 - Custom data processing logic based on the remote server structure and requirements.
 - Custom data operations such as paging, sorting, filtering, and grouping.
 - Connection to [OData]({% slug htmlhelpers_grid_aspnetcore_odata-binding %}) and [GraphQL]({% slug htmlhelpers_grid_aspnetcore_graphql-binding %}) services.
@@ -60,7 +60,7 @@ For more information, refer to the [Web API Binding]({% slug htmlhelpers_grid_we
 {% if site.mvc %}
 ### Server Binding
 
-Utilize server-side binding for rendering the Grid with data on the server. This approach provides:
+Use server-side binding to render the Grid with data on the server. This approach provides:
 - Server-side rendering with pre-populated data.
 - Full-page postback scenarios with HTTP requests for CRUD operations.
 - Integration with server-side data processing.
@@ -71,7 +71,7 @@ For detailed implementation instructions, see [Server Binding]({% slug serverbin
 
 ### SignalR Data Binding
 
-Enable real-time data synchronization using SignalR for live data updates:
+Use SignalR data binding to enable real-time data synchronization:
 - Real-time data synchronization across multiple clients.
 - Automatic Grid updates when data changes on the server.
 - Live collaboration features with instant data broadcasting.
@@ -95,7 +95,7 @@ When selecting a data binding approach for the Grid, evaluate the following fact
 
 * **Performance**&mdash;Local binding offers faster initial rendering for small datasets, while remote binding provides better performance with large datasets through on-demand loading and server-side operations.
 * **Data volume**&mdash;Large datasets require remote binding, custom DataSource, or Web API binding to leverage server-side paging, sorting, and filtering for optimal performance.
-* **Security**&mdash;Remote binding provide better control over data access through server-side validation and authorization.
+* **Security**&mdash;Remote binding provides better control over data access through server-side validation and authorization.
 * **Real-time requirements**&mdash;SignalR binding is essential for scenarios requiring live data updates and multi-client synchronization.
 * **API architecture**&mdash;Web API binding is optimal for RESTful services, while Custom DataSource binding provides flexibility for OData, GraphQL, or custom endpoints.
 {% if site.mvc %}
@@ -109,9 +109,9 @@ The Grid component exposes two types of loading indicators:
 
 * The `GridLoaderType.LoadingPanel` adds an overlay element with a loading spinner over the main content of the Grid. This is the default type.
 
-* The `GridLoaderType.Skeleton` uses the [SkeletonContainer widget](https://docs.telerik.com/kendo-ui/controls/skeletoncontainer/overview) to show a simplified preview of each of the grid's cells. The `Skeleton` loading type aims at helping the user gain an idea of what the content would look like when the loading completes. It also makes the page load time appear shorter.
+* The `GridLoaderType.Skeleton` uses the [SkeletonContainer widget](https://docs.telerik.com/kendo-ui/controls/skeletoncontainer/overview) to show a simplified preview of each Grid cell. The `Skeleton` loading type helps users estimate how the content will look after loading completes. It also makes page load time appear shorter.
 
-Check the `Skeleton` loading type in action in the live demo below:
+See the `Skeleton` loading type in action in the live demo:
 
 * [Skeleton Loading Type Demo](https://demos.telerik.com/{{ site.platform }}/skeletoncontainer/grid-integration)
 

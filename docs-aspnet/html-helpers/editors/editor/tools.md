@@ -294,7 +294,7 @@ The following example demonstrates the same scenarios implemented using Kendo Te
         .Name("editor")
         .Tools(t => t
             .CustomTemplate(x => x
-                .Name("customDropDownList)
+                .Name("customDropDownList")
                 .Template("<label for='templateTool' style='vertical-align:middle;'>Background:</label>" +
                     "<select id='templateTool'>" +
                         "<option value=''>none</option>" +

@@ -1,7 +1,7 @@
 ---
 title: Adaptive Rendering
 page_title: Adaptive Rendering
-description: "Get started with the {{ site.framework }} Grid by Telerik UI which provides consistency to the customer experience on any device by supporting adaptive rendering."
+description: "Learn how to enable adaptive rendering in the Telerik UI Grid for {{ site.framework }} on mobile devices."
 components: ["grid"]
 previous_url: /html-helpers/data-management/grid/adaptive, /helpers/data-management/grid/adaptive
 slug: adaptive_rendering_gridhelper_aspnetcore
@@ -10,18 +10,18 @@ position: 5
 
 # Adaptive Rendering
 
-The Telerik UI Grid for {{ site.framework }} provides consistency to the customer experience on any device by supporting adaptive enhancements.
+The Telerik UI Grid for {{ site.framework }} supports adaptive rendering to provide a consistent experience across device types.
 
-For example, when you filter or edit data on mobile, the system slides in a new screen for the user, which is a departure from the desktop-like inline and popup behaviors. For a runnable example, refer to the [demo on implementing the responsive web design in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/adaptive-rendering).
+When users filter or edit data on mobile devices, the Grid opens a dedicated view instead of using desktop inline or popup behavior. For a runnable example, review the [adaptive rendering Grid demo](https://demos.telerik.com/{{ site.platform }}/grid/adaptive-rendering).
 
 ## Enabling the Responsive Web Design
 
 To enable the adaptive rendering feature, set the [`Mobile`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridbuilder#mobile) property to `MobileMode.Auto` or `MobileMode.Phone`:
 
-* If set to `MobileMode.Auto`, the component will use adaptive rendering when viewed on a mobile browser.
-* If set to `MobileMode.Phone`, the component will be forced to use adaptive rendering regardless of the browser type.
+* If set to `MobileMode.Auto`, the component uses adaptive rendering when viewed in a mobile browser.
+* If set to `MobileMode.Phone`, the component always uses adaptive rendering, regardless of browser type.
 
-> Important: With the mobile rendering, we recommend to set up `height` as well. Without setting an explicit height, every view of the grid might have a different height.
+>important Set the `height` option when you enable mobile rendering. Without an explicit height, each Grid view can render at a different height.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()
@@ -57,7 +57,7 @@ The column resizing feature on touch screen devices is triggered when the user h
 
 ## Destroying Adaptive Grids
 
-When the Grid is in its adaptive rendering mode, it generates auxiliary markup which needs to be removed if the Grid is to be `destroyed` manually.
+When the Grid runs in adaptive rendering mode, it generates auxiliary markup that you must remove if you manually `destroy` the Grid.
 
 To manually destroy the Grid:
 

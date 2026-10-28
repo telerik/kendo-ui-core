@@ -1,7 +1,7 @@
 ---
 title: Selection & Export
 page_title: Selection & Export
-description: "With Telerik UI Grid for {{ site.framework }} you can enable users to select specific cells and export them to Excel or Telerik UI Chart"
+description: "Export selected Grid cells for {{ site.framework }} to Excel or visualize them in a Telerik UI Chart."
 components: ["grid"]
 slug: exportingselection_gridhelper_aspnetcore
 position: 6
@@ -9,7 +9,7 @@ position: 6
 
 # Selection & Export
 
-The Grid widget allows users to select specific cells and then to export them to Excel or a Telerik UI Chart for {{ site.framework }} .
+The Grid widget allows users to select specific cells and then to export them to Excel or a Telerik UI Chart for {{ site.framework }}.
 
 For runnable example, refer to the [Demo on copying/exporting selected cells](https://demos.telerik.com/{{ site.platform }}/grid/selection-export)
 

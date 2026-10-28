@@ -63,13 +63,13 @@ To configure date validation for a cell, set the Validation.DataType() configura
                     <sheet-row>
                         <cells>
                             <cell>
-                                <validation datatype="list" 
+                                <validation datatype="date"
                                     show-button="true"
-                                    comparer-type="date"
+                                    comparer-type="between"
                                     from="@from" to="@to"
                                     allow-nulls="true"
-                                    message-template="Selected Date validation error"
-                                    title-template="Selected Date should be between year 1900 and 2100."
+                                    message-template="Selected Date should be between year 1900 and 2100."
+                                    title-template="Selected Date validation error"
                                     type="reject"/>
                             </cell> 
                         </cells>
@@ -176,7 +176,7 @@ To configure text validation for a cell, set the Validation.DataType() configura
                         <cells>
                             <cell>
                                 <validation datatype="text" show-button="true" comparer-type="equalTo" from="@from" allow-nulls="false"
-                                    message-template="The full name should be longer than 3 letters and shorter than 200." type="reject"/>
+                                    message-template="Enter YES (capital letters)" type="reject"/>
                             </cell> 
                         </cells>
                     </sheet-row>
@@ -228,7 +228,7 @@ To configure number validation for a cell, set the Validation.DataType() configu
                         <cells>
                             <cell>
                                 <validation datatype="number" show-button="true" comparer-type="between" from="1" to="10" allow-nulls="false"
-                                    message-template="The full name should be longer than 3 letters and shorter than 200." type="reject"/>
+                                    message-template="Only Numbers between 1 and 10 are allowed" type="reject"/>
                             </cell> 
                         </cells>
                     </sheet-row>
@@ -278,9 +278,7 @@ To configure validation for a cell based on a formula, set the Validation.DataTy
                     <sheet-row>
                         <cells>
                             <cell>
-                                <validation datatype="list" 
-                                    show-button="true"
-                                    comparer-type="custom"
+                                <validation datatype="custom"
                                     from="@from"
                                     allow-nulls="true"
                                     message-template="Full Name validation error"

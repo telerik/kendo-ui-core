@@ -33,6 +33,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
             ...
         )
     ```
+    {% if site.core %}
     ```TagHelper
         @page
         @model IndexModel
@@ -46,6 +47,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
             <!--Other configuration-->
         </kendo-chart>
     ```
+        {% endif %}
 
 1. Add an `AntiForgeryToken` at the top of the page.
 

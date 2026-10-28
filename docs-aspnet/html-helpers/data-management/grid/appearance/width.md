@@ -1,7 +1,7 @@
 ---
 title: Width
 page_title: Width
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to apply different widths to the Grid."
+description: "Learn how to set Grid column widths in {{ site.framework }} for responsive layouts and complex hierarchy."
 components: ["grid"]
 slug: width_grid_aspnetcore
 position: 2
@@ -9,17 +9,17 @@ position: 2
 
 # Width
 
-By default, the Grid has no set width, behaves like a block-level element, and expands to a 100% width (the width of the parent element).
+By default, the Grid has no set width. It behaves like a block-level element and expands to 100% of its parent element width.
 
 ## Getting Started
 
-To control the width of the Grid, set the CSS `width` properties to the Grid itself or to some of its ancestors. If you use hierarchy and unless the detail template is scrollable, the detail template has to be narrower than the sum of the widths of all master columns. For more information on the supported scroll modes by the Grid, refer to the [article on scrolling]({% slug htmlhelpers_grid_aspnetcore_scrolling %}).
+To control the width of the Grid, set CSS `width` properties on the Grid element or its ancestors. When you use hierarchy and the detail template is not scrollable, the detail template must be narrower than the combined width of all master columns. For more information about supported Grid scroll modes, see [Scroll Modes of the Grid HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_grid_aspnetcore_scrolling %}).
 
-If you enable scrolling and the sum of all column widths is greater than the width of the Grid, a horizontal scrollbar appears. If you disable scrolling and the columns do not fit, they overflow the `<div>` element of the Grid. The `div` overflowing results in the passing of the right border of the Grid through the data cells because the Grid is a `<table>` element inside a `<div>` element and while to enclose their content tables can expand horizontally beyond 100%, `<div>` elements lack this behavior.
+If you enable scrolling and the sum of all column widths is greater than the Grid width, a horizontal scrollbar appears. If you disable scrolling and the columns do not fit, they overflow the Grid `<div>` element. This overflow can move the Grid right border through the data cells because the Grid renders a `<table>` inside a `<div>`. The table can grow beyond 100% width to fit its content, but the `<div>` cannot.
 
 To avoid table overflowing, apply any of the following approaches:
-* Enable the scrolling functionality which, by default, is disabled when the Kendo UI Grid MVC wrapper is in use.
-* Set a large-enough width or a min-width style to the Grid wrapper&mdash;the `<div class="k-widget k-grid">` element.
+* Enable scrolling, which is disabled by default when you use the Kendo UI Grid MVC wrapper.
+* Set a large enough `width` or `min-width` style on the Grid wrapper (`<div class="k-widget k-grid">`).
 * (Use this approach only if the previous two are unacceptable.) [Float](https://developer.mozilla.org/en-US/docs/Web/CSS/float) the Grid wrapper and [clear](https://developer.mozilla.org/en-US/docs/Web/CSS/clear) the float right after the Grid. Floated elements expand and shrink automatically to enclose their content when needed.
 
 ## Applying a Minimum Width
@@ -35,28 +35,36 @@ Depending on the specific scenarios, you can use any of the following approaches
     }
     ```
 
-* If scrolling is enabled and the Grid is not hierarchical (with no nested tables), use the following CSS. For more information on the supported scroll modes by the Grid, refer to the [article on scrolling]({% slug htmlhelpers_grid_aspnetcore_scrolling %}).
+* If scrolling is enabled and the Grid is not hierarchical (with no nested tables), use the following CSS. For more information about supported Grid scroll modes, see [Scroll Modes of the Grid HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_grid_aspnetcore_scrolling %}).
 
     ```CSS
-    #GridID .k-grid-header-wrap > table, // A header table.
-    #GridID .k-grid-content table, // A data table, no virtual scrolling.
-    #GridID .k-virtual-scrollable-wrap table // A data table, with virtual scrolling.
+    /* Header table */
+    #GridID .k-grid-header-wrap > table,
+    /* Data table without virtual scrolling */
+    #GridID .k-grid-content table,
+    /* Data table with virtual scrolling */
+    #GridID .k-virtual-scrollable-wrap table
     {
         min-width: 800px;
     }
     ```
 
-* If scrolling is enabled and the Grid is hierarchical (with nested tables), use the following CSS. For more information on the supported scroll modes by the Grid, refer to the [article on scrolling]({% slug htmlhelpers_grid_aspnetcore_scrolling %}).
+* If scrolling is enabled and the Grid is hierarchical (with nested tables), use the following CSS. For more information about supported Grid scroll modes, see [Scroll Modes of the Grid HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_grid_aspnetcore_scrolling %}).
 
     ```CSS
-    #GridID .k-grid-header-wrap > table, // A header table.
-    #GridID .k-grid-content table, // A data table, no virtual scrolling.
-    #GridID .k-virtual-scrollable-wrap table // A data table, with virtual scrolling.
+    /* Header table */
+    #GridID .k-grid-header-wrap > table,
+    /* Data table without virtual scrolling */
+    #GridID .k-grid-content table,
+    /* Data table with virtual scrolling */
+    #GridID .k-virtual-scrollable-wrap table
     {
         min-width: 800px;
     }
-    #GridID .k-grid-content table table, // A data table, no virtual scrolling.
-    #GridID .k-virtual-scrollable-wrap table table // A data table, with virtual scrolling.
+    /* Nested data table without virtual scrolling */
+    #GridID .k-grid-content table table,
+    /* Nested data table with virtual scrolling */
+    #GridID .k-virtual-scrollable-wrap table table
     {
         min-width: initial;
     }

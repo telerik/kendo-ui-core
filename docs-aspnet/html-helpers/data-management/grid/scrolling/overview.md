@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Scrolling Overview
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to configure the scrolling functionality of the component."
+description: "Configure scrolling in the Telerik UI Grid for {{ site.framework }} and select a scroll mode for data."
 components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_scrolling
 position: 1
@@ -36,7 +36,7 @@ To enable the scrolling, set the `Scrollable()` option.
 For more information about the scroll modes and scroll features of the Grid, refer to the articles on:
 * [Virtual Scrolling]({% slug virtual_scrolling_aspnetcore_grid %})
 * [Endless Scrolling]({% slug endless_scrolling_aspnetcore_grid %})
-* [Scrolling to a Specific Row]({% slug scrolling_to_item_aspnetcore_grid %})
+* [Scrolling to a Specific Item]({% slug scrolling_to_item_aspnetcore_grid %})
 
 Depending on the enabled scroll mode, the rendering of the dimensions and layout of the Grid varies. For more information, refer to the following articles:
 * [Height of the Grid]({% slug height_aspnetcore_grid %})
@@ -200,7 +200,7 @@ In some scenarios, the scroll position of the Grid can be reset when the compone
 1. Save the scroll position in the [`DataBinding`](/api/kendo.mvc.ui.fluent/grideventbuilder#databindingsystemstring) event handler.
 1. Restore the scroll position in the [`DataBound`](/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event handler.
 
-The scrollable container is `div.k-grid-content`. You can retrieve it with jQuery through the `wrapper` object (the outermost object of the component)  of the Grid reference.  If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and the container is scrolled only horizontally.
+The scrollable container is `div.k-grid-content`. You can retrieve it with jQuery through the `wrapper` object (the outermost object of the component) of the Grid reference. If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and the container is scrolled only horizontally.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<OrderViewModel>()

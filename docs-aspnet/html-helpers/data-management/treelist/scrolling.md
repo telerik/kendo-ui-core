@@ -22,6 +22,22 @@ You can independently control vertical and horizontal scrolling.
 
 When scrolling is enabled, the TreeList renders two tables&mdash;one for the header area and one for the scrollable data area. This ensures that the header area of the TreeList is always visible during vertical scrolling. Take the two tables into account when you need to manually make JavaScript or CSS updates to the Grid tables.
 
+The following configurations enable scrolling and set a fixed height for the TreeList.
+
+```HtmlHelper
+    @(Html.Kendo().TreeList<EmployeeViewModel>()
+        .Name("treelist")
+        .Height(400)
+        .Scrollable(true)
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist" height="400" scrollable="true">
+    </kendo-treelist>
+```
+{% endif %}
+
     <div class="k-widget k-grid k-treelist">
         <div class="k-grid-header">
             <div class="k-grid-header-wrap">

@@ -1,7 +1,7 @@
 ---
 title: Column Menu
 page_title: Column Menu
-description: "Get started with the {{ site.product_short }} Grid by Kendo UI and learn how to enable its column menu."
+description: "Learn how to enable and configure the {{ site.product_short }} Grid Column Menu, including global options, sorting, grouping, and types."
 components: ["grid"]
 slug: columnmenu_aspnet_grid
 position: 6
@@ -9,15 +9,16 @@ position: 6
 
 # Column Menu
 
-The column menu allows users to quickly access column-related operations like sorting and filtering.
+The Grid column menu provides quick access to column operations such as sorting, filtering, and visibility.
 
-To enable the column menu, use the `ColumnMenu(true)` method. As a result, the column headers of the Grid render a column menu, which allows the user to sort, filter, or change the visibility of a column. The column menu also detects when a specific column operation is disabled through the column definition and excludes the corresponding UI from rendering. For a runnable example, refer to the [demo on implementing a column menu in the Grid](https://demos.telerik.com/{{site.platform}}/grid/column-menu).
+Enable the column menu with the `ColumnMenu(true)` method. When enabled, each column header renders a menu that lets users sort, filter, or change column visibility. The menu also respects disabled operations in the column definition and does not render their related UI. For a runnable example, refer to the [Grid Column Menu demo](https://demos.telerik.com/{{site.platform}}/grid/column-menu).
 
-> As of the R3 2022 release, you can disable the column menu for a specific column by using `.ColumnMenu(false)`.
+>note
+> Starting with R3 2022, you can disable the column menu for a specific column by using `.ColumnMenu(false)`.
 
 ## Global Column Menu
 
-As of {{ site.product }} R1 2024, you can display the column menu in the Grid's [Toolbar]({% slug htmlhelpers_grid_aspnetcore_toolbar%}) instead of in each column's header. The global column menu allows you to control the columns' visibility and clear all filters applied to the Grid through a single button.
+Starting with {{ site.product }} R1 2024, you can display the column menu in the Grid [Toolbar]({% slug htmlhelpers_grid_aspnetcore_toolbar%}) instead of in each column header. The global column menu lets you control column visibility and clear all Grid filters through a single button.
 
 The following example shows how to set up the global column menu and enable the clear-all-filters button.
 
@@ -47,7 +48,7 @@ For a runnable example with the global column menu, see the [Grid Global Column 
 
 ## Column Reordering
 
-As of {{ site.product }} R2 SP1 2023, the Grid's Column Menu provides an option to change the position of the target column by using **Move next** and **Move previous** buttons. The functionality requires that reordering for the columns is enabled.
+Starting with {{ site.product }} R2 SP1 2023, the Grid column menu provides options to change the target column position by using the **Move next** and **Move previous** buttons. This functionality requires enabled column reordering.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
@@ -67,13 +68,14 @@ To see this functionality in action, check the [Grid Column Menu demo](https://d
 
 ## Column Grouping
 
-As of {{ site.product }} R2 SP1 2023, the Grid's Column Menu provides an option that allows users to select the target column for grouping or ungrouping the Grid. To display the option item in the Column Menu, enable grouping via the [`Groupable`](/api/kendo.mvc.ui.fluent/gridbuilder#groupable) configuration.
-## Sort
+Starting with {{ site.product }} R2 SP1 2023, the Grid column menu provides an option that lets users group or ungroup the Grid by the target column. To display this option in the column menu, enable grouping through the [`Groupable`](/api/kendo.mvc.ui.fluent/gridbuilder#groupable) configuration.
+
+## Column Title Sorting
 
 The column menu allows you to control the visibility of each Grid column. For this purpose, the column menu renders a child column menu with a checkbox for each Grid column.
 By default, the Grid column titles in the child column menu are not sorted. They have the same order as the columns in the Grid. To sort the column titles in the child menu, use the `ColumnMenu()` method.
 
-The below example demonstrates how to sort the column titles in the child menu in ascending order:
+The following example demonstrates how to sort the column titles in the child menu in ascending order:
 
 ```HtmlHelper
     .ColumnMenu(menu=>
@@ -90,9 +92,9 @@ The below example demonstrates how to sort the column titles in the child menu i
 ```
 {% endif %}
 
-## Group
+## Column Title Grouping
 
-The `ColumnMenu()` method accepts a `GridColumnMenuSettingsBuilder` that enables grouping of the columns in the child menu. The `Columns()` group method expects a collection of the model properties. The menu will automatically use the title of the grid columns if such is defined
+The `ColumnMenu()` method accepts a `GridColumnMenuSettingsBuilder` that enables column grouping in the child menu. The `Columns()` group method expects a collection of model properties. The menu automatically uses Grid column titles when they are defined.
 
 The following example demonstrates how to group columns by providing the model fields in a list of strings:
 
@@ -101,7 +103,7 @@ The following example demonstrates how to group columns by providing the model f
            menu.Columns(columns => {
                columns.Groups(groups =>
                {
-                   groups.Add().Title("Company Info").Columns(new List<string> { "CompanyName", "Country" }); ;
+                   groups.Add().Title("Company Info").Columns(new List<string> { "CompanyName", "Country" });
                    groups.Add().Title("Contact Info").Columns(new List<string> { "ContactName", "ContactTitle" });
                });
            })
@@ -117,7 +119,7 @@ The following example demonstrates how to group columns by providing the model f
             </column-menu-columns-groups>
         </column-menu-columns>
     </column-menu>
-````
+```
 {% endif %}
 
 ## Column Menu Types
@@ -134,7 +136,7 @@ By default, the column menu of the Grid is initialized in the `classic` render m
 
 ```HtmlHelper
     @(Html.Kendo().Grid()
-            .Name("datePicker")
+            .Name("grid")
             .ColumnMenu(m=>{
                m.ComponentType("tabbed");
             })

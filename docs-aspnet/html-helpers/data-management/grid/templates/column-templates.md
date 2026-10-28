@@ -32,7 +32,7 @@ The following example demonstrates how to set the template as a string and wrap 
 {% if site.core %}
 ```TagHelper
     <columns>
-        <column field="ShipCounty" template="<strong>#= ShipCountry # </strong>"/>
+        <column field="ShipCountry" template="<strong>#= ShipCountry # </strong>"/>
     </columns>
 ```
 {% endif %}
@@ -41,7 +41,7 @@ The following example demonstrates how to set column templates as a Kendo UI tem
 
 ```HtmlHelper
         <script type="kendo-template" id="my-template">
-            <em>#= ShipCountry  # </em>
+            <em>#= ShipCountry # </em>
         </script>
         <script>
             var myTemplate = kendo.template($('#my-template').html());
@@ -54,7 +54,7 @@ The following example demonstrates how to set column templates as a Kendo UI tem
 {% if site.core %}
 ```TagHelper
     <script type="kendo-template" id="my-template">
-        <em>#= ShipCountry  # </em>
+        <em>#= ShipCountry # </em>
     </script>
     <script>
         var myTemplate = kendo.template($('#my-template').html());
@@ -91,7 +91,7 @@ The following example demonstrates how to set a column template as a function.
 {% if site.core %}
 ```TagHelper
     <columns>
-        <column field="Products" template="#=showProductsTemplate(data)#"/>
+        <column field="Products" template="#=showProducts(data)#"/>
     </columns>
 ```
 {% endif %}

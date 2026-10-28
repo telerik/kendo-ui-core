@@ -1,7 +1,7 @@
 ---
 title: PDF Export
 page_title: PDF Export
-description: "Export the Telerik UI Grid for {{ site.framework }} to PDF."
+description: "Export the Telerik UI Grid for {{ site.framework }} data to PDF with page size, headers, and footers."
 components: ["grid"]
 slug: pdfexport_gridhelper_aspnetcore
 position: 3
@@ -168,6 +168,8 @@ The Grid supports the following page template variables:
 
 * `pageNum`&mdash;Specifies the current page number.
 * `totalPages`&mdash;Specifies the total number of pages.
+
+The following page template uses the `pageNum` and `totalPages` variables to render the page number in the exported PDF.
 
 ```JS Template
     <script type="x/kendo-template" id="page-template">

@@ -47,7 +47,7 @@ The following example demonstrates how to add a new `Ctrl+Shift+X` shortcut for 
 
 ```javascript
     function onDropDownListKendoKeydown(e) {
-        if (e.ctrlKey && e.shiftKey && e.keyCode === 88) {
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 88) { // 88 is the key code for X.
             console.log("Custom shortcut activated.");
         }
     }

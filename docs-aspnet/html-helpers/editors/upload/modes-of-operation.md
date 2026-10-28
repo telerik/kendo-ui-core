@@ -51,7 +51,7 @@ public UploadController(IWebHostEnvironment webHostEnvironment)
     WebHostEnvironment = webHostEnvironment;
 }
 
-public ActionResult Submit(IEnumerable<IFormFile> files)
+public async Task<ActionResult> Submit(IEnumerable<IFormFile> files)
 {
     // The Name of the Upload component is "files".
     if (files != null)
@@ -77,13 +77,6 @@ public ActionResult Submit(IEnumerable<IFormFile> files)
 ```
 {% else %}
 ```Controller
-public IWebHostEnvironment WebHostEnvironment { get; set; }
-
-public UploadController(IWebHostEnvironment webHostEnvironment)
-{
-    WebHostEnvironment = webHostEnvironment;
-}
-
 public ActionResult Submit(IEnumerable<HttpPostedFileBase> files)
 {
     // The Name of the Upload component is "files".
@@ -91,17 +84,9 @@ public ActionResult Submit(IEnumerable<HttpPostedFileBase> files)
     {
         foreach (var file in files)
         {
-            var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-
-            // Some browsers send file names with full path.
-            // The demo is interested only in the file name.
-            var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
-            var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
-
-            using (var fileStream = new FileStream(physicalPath, FileMode.Create))
-            {
-                await file.CopyToAsync(fileStream);
-            }
+            var fileName = Path.GetFileName(file.FileName);
+            var physicalPath = Server.MapPath("~/App_Data/" + fileName);
+            file.SaveAs(physicalPath);
         }
     }
 
@@ -136,7 +121,7 @@ An Upload in the asynchronous mode requires dedicated server handlers to store a
 
 {% if site.core %}
 ```Controller
-public IWebHostingEnvironment WebHostEnvironment { get; set; }
+public IWebHostEnvironment WebHostEnvironment { get; set; }
 
 public UploadController(IWebHostEnvironment webHostEnvironment)
 {

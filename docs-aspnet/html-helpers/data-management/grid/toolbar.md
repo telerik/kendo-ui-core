@@ -17,7 +17,15 @@ You can configure the Toolbar and include any of the built-in commands:
 
 ```HtmlHelper
     .ToolBar(toolbar=> {
-        toolbar.Columns();
+           toolbar.Columns();
+           toolbar.Create();
+           toolbar.Save();
+           toolbar.Paste();
+           toolbar.Pdf();
+           toolbar.Excel();
+           toolbar.Search();
+           toolbar.Spacer();
+           toolbar.Separator();
         toolbar.Create();
         toolbar.Save();
         toolbar.Paste();
@@ -47,7 +55,7 @@ You can configure the Toolbar and include any of the built-in commands:
 In the 2025 Q2 release an alternative way to configure the tools has been implemented. It relies on the `Items` configuration of the Grid toolbar:
 
 ```HtmlHelper
-    .ToolBar(toolbar =>toolbar
+    .ToolBar(toolbar => toolbar
         .Items(itm=>{
             itm.Edit();
             itm.Update();
@@ -153,7 +161,7 @@ The following example demonstrates how to add a custom command to the Toolbar:
             columns.Bound(p => p.Discontinued).Width(100);
             columns.Command(command => command.Destroy()).Width(150);
         })
-        .ToolBar(toolbar =>toolbar
+        .ToolBar(toolbar => toolbar
             .Items(itm =>
             {
                 itm.Create();
@@ -204,7 +212,15 @@ The Toolbar of the Grid component supports custom commands.
 The following example demonstrates how to add a custom command to the Toolbar:
 ```HtmlHelper
     .ToolBar(toolbar=> {
-        toolbar.Custom().Text("Click me").HtmlAttributes(new { id = "customCommand" });
+           toolbar.Columns();
+           toolbar.Create();
+           toolbar.Save();
+           toolbar.Paste();
+           toolbar.Pdf();
+           toolbar.Excel();
+           toolbar.Search();
+           toolbar.Spacer();
+           toolbar.Separator();
     })
 
     <script>
@@ -236,7 +252,7 @@ The following example demonstrates how to add a custom command to the Toolbar:
 If you are using the `Toolbar.Items` configuration (available since the Q2 2025 release), you can add a custom command as shown below:
 
 ```HtmlHelper
-    .ToolBar(toolbar =>toolbar
+    .ToolBar(toolbar => toolbar
         .Items(itm=>{
             itm.Excel();
             itm.Pdf();
@@ -378,7 +394,15 @@ The following example demonstrates how you can add [Button]({% slug htmlhelpers_
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")
         .ToolBar(toolbar=> {
-            toolbar.Custom().ClientTemplate(
+               toolbar.Columns();
+               toolbar.Create();
+               toolbar.Save();
+               toolbar.Paste();
+               toolbar.Pdf();
+               toolbar.Excel();
+               toolbar.Search();
+               toolbar.Spacer();
+               toolbar.Separator();
                 Html.Kendo().Template().AddComponent(c=>c
                     .Button()
                     .Name("refresh")

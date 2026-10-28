@@ -9,7 +9,7 @@ position: 6
 
 # Scheduler in Razor Pages
 
-This article describes how to seamlessly integrate and configure the Telerik UI Loader for {{ site.framework }} in Razor Pages applications.
+This article describes how to seamlessly integrate and configure the Telerik UI Scheduler for {{ site.framework }} in Razor Pages applications.
 
 > You can use any of the available [data binding approaches]({% slug htmlhelpers_scheduler_databinding %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
@@ -175,7 +175,11 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
         {
             if (ModelState.IsValid)
             {
-                meetings.Where(x => x.MeetingID == meeting.MeetingID).Select(x => meeting);
+                var meetingIndex = meetings.FindIndex(x => x.MeetingID == meeting.MeetingID);
+                if (meetingIndex >= 0)
+                {
+                    meetings[meetingIndex] = meeting;
+                }
             }
 
             return new JsonResult(new[] { meeting }.ToDataSourceResult(request, ModelState));

@@ -215,8 +215,8 @@ The following example illustrates how to bind custom attributes.
         <script>
             function onMenuSelect(e){
                 // Gather the constructed custom attributes. 
-                let categoryIdAttr = $(ev.item).attr("categoryid");
-                let productidAttr = $(ev.item).attr("productid");
+                let categoryIdAttr = $(e.item).attr("categoryid");
+                let productidAttr = $(e.item).attr("productid");
             }
         </script>
     ```

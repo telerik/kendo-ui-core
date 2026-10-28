@@ -13,7 +13,7 @@ This article explains how to implement server-side filtering for the Scheduler c
 
 The server-side filtering allows the user to load only the events that are part of the currently loaded View without the need to fetch all the available data from the datasource. The server-side filtering approach is very useful for situations where there are a lot of events/meetings in the database allowing us to fetch the needed data only - leading to better performance and faster loading.
 
-The code snippets below are extracted from a demo project of Scheduler with Server Filtering in {{ site.framework }} that can be downloaded from  [this repository]({% if site.core %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Scheduler/SchedulerServerFiltering.cshtml{% else %}https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerServerFiltering{% endif %}). The current article discussed the more difficult steps of the server filtering implementation. For more details, please refer to the above-linked repository.
+The code snippets below are extracted from a demo project of Scheduler with Server Filtering in {{ site.framework }} that can be downloaded from [this repository]({% if site.core %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Scheduler/SchedulerServerFiltering.cshtml{% else %}https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerServerFiltering{% endif %}). This article discusses the more difficult steps of the server filtering implementation. For more details, please refer to the above-linked repository.
 
 ## Initializing the Scheduler
 
@@ -120,7 +120,7 @@ Here is a sample definition:
 
 To be sure that the server will return only the events visible in the current Scheduler View, we have to pass to it the timespan that is currently visible. The timespan data is sent to the server using the Data parameter mentioned in the above section.
 
-Here is a function that returns the current timespan boundries:
+Here is a function that returns the current timespan boundaries. It converts the visible dates to UTC and adds the view's start and end offsets to the request.
 
 ```JS
 function getAdditionalData() {

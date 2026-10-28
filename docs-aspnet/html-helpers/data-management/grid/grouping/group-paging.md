@@ -1,9 +1,10 @@
 ---
 title: Group Paging
-page_title: Group Paging Overview 
-description: "Learn how to enable the group paging in the Telerik UI for {{ site.framework }} Grid by Kendo UI and load groups on demand."
+page_title: Group Paging Overview
+description: "Load and page through groups on demand in the Telerik UI Grid for {{ site.framework }} applications."
 components: ["grid"]
 slug: htmlhelpers_grid_aspnet_grouping
+position: 3
 ---
 
 # Group Paging Overview
@@ -45,7 +46,7 @@ To enable group paging, use the `GroupPaging()` method as part of the data sourc
 
 Group paging can be used with virtual scrolling. This further improves the performance because the grid only renders as many rows as its page size. When a group row is expanded, the grid rows content is refreshed to show the new rows within the current page. 
 
-All [limitations]({% slug virtual_scrolling_aspnetcore_grid%}#known-limitations) of the virtual scrolling functionality apply.
+All [limitations]({% slug virtual_scrolling_aspnetcore_grid %}#known-limitations) of the virtual scrolling functionality apply.
 
 ## Using with Paging
 

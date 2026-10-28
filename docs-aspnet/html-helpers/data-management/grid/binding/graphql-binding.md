@@ -1,7 +1,7 @@
 ---
 title: GraphQL Binding
 page_title: GraphQL Binding
-description: "Learn how to implement GraphQL binding with the Telerik UI Grid component for {{ site.framework }}."
+description: "Learn how to bind the Telerik UI Grid to a GraphQL service in {{ site.framework }} and handle read and CRUD operations."
 components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/graphql-binding
 slug: htmlhelpers_grid_aspnetcore_graphql-binding
@@ -10,26 +10,26 @@ position: 10
 
 # GraphQL Binding
 
-The Grid component provides multiple types of server-side binding. Using its DataSource `.Custom()` property, you can configure the Grid to execute CRUD operations to a GraphQL remote data source.
+The Telerik UI Grid supports multiple server-side binding approaches. With the DataSource `.Custom()` option, you can configure the Grid to run read and CRUD operations against a GraphQL endpoint.
 
 ## What is GraphQL?
 
-GraphQL is a query language for APIs and a runtime for fulfilling client (browser) queries by returning existing data. It offers a complete and understandable description of the data and provides the API clients exactly with the specific data they requested.
+GraphQL is a query language for APIs and a runtime that fulfills client requests with existing data. It describes the available data clearly and returns only the fields requested by the client.
 
-As an alternative to REST, GraphQL allows developers to make requests to fetch data from multiple data sources with a single API call. GraphQL queries access not just the properties of one resource but also smoothly follow references between them.
+As an alternative to REST, GraphQL lets you fetch data from multiple related sources in a single request. A GraphQL query can access properties from one resource and follow references to related resources.
 
 ## Implementing the Service
 
-First, you will need to create a live service following the GraphQL and .NET Guideliness:
+First, create a running service that follows GraphQL and .NET guidelines:
 [Creating a GraphQL Backend on .NET](https://learn.microsoft.com/en-us/shows/on-dotnet/creating-a-graphql-backend)
 
-You can see the Kendo and Telerik Services implementation provided in this public repository:
+For a complete service implementation, review the public Telerik sample repository:
 [Kendo UI Demos Service - graphql](https://github.com/telerik/kendo-ui-demos-service/tree/master/graphql/graphql-aspnet-core)
 
-One key point is to modify the Startup.cs file to accomodate handling service requests. e.g.:
+Update `Startup.cs` to register the GraphQL services and schema, for example:
 ```C#
         // Product
-        services.AddTransient<IProductRepository, roductRepository>();
+    services.AddTransient<IProductRepository, ProductRepository>();
         services.AddSingleton<ProductQuery>();
         services.AddSingleton<ProductMutation>();
         services.AddSingleton<ProductType>();
@@ -40,11 +40,11 @@ One key point is to modify the Startup.cs file to accomodate handling service re
 
 ## Binding the Grid
 
-The preparation of the Grid component to handle remote GraphQL queries requires several configuration steps.
+To bind the Grid to GraphQL, configure the DataSource transport, schema, and request payload handlers.
 
-### DataSource Configuration
+### Configuring the DataSource
 
-The GraphQL service URL endpoints are referenced in the `.Custom() -> Transport` section of the DataSource. In addition, defining the `.Schema()` is required when implementing editing capabilities.
+Define the GraphQL endpoint URLs in the DataSource `.Custom()` transport configuration. When you enable editing, also configure `.Schema()` so the Grid can map fields and parse the response.
 
 ```C#
     .DataSource(dataSource => dataSource
@@ -117,7 +117,7 @@ The GraphQL service URL endpoints are referenced in the `.Custom() -> Transport`
 
 ### Handling Parameters
 
-Sending required parameters to the GraphQL server backend and extracting the meaningful data happens with javascript:
+Use JavaScript helper functions to send GraphQL queries and map response data:
 ```JS
 <script>
     function additionalDataOnCreate(model) {

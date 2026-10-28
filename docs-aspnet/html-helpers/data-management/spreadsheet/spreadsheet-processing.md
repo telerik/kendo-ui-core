@@ -23,6 +23,7 @@ TDP handles the data import, export, and processing from the following formats:
 * Tab-separated values (`.txt`)
 * Portable document format (`.pdf`) (export only)
 
+{% if site.mvc %}
 ## Dependencies
 
 The `.NET` server-side module is distributed as a part of the [{{ site.product }}]({% slug overview_aspnetmvc6_aspnetmvc %}). The `telerik.ui.for.aspnetmvc.<version>.zip` archive contains a `spreadsheet` folder that contains assemblies for both .NET 4.0 and .NET 4.5 versions. Include a reference to the `Telerik.Spreadsheet.Web.dll` assembly for the respective framework version. The main entry point for the project is the `Telerik.Spreadsheet.Web.Workbook` class. This is a `POCO` object that mirrors the object structure of the JSON and provides format conversion methods. Under the hood, it uses TDP to perform the actual conversion.
@@ -191,6 +192,8 @@ You can convert a `Telerik.Spreadsheet.Web.Workbook` Spreadsheet model and to a 
 
         return new EmptyResult();
     }
+
+{% endif %}
 
 ## See Also
 

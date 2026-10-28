@@ -1,9 +1,9 @@
 ---
 title: Custom AI Column
-description: "Learn how to integrate the InlineAIPrompt component in the Telerik UI for Grid to interact with your data using natural language prompts."
+description: "Use InlineAIPrompt in a Telerik UI Grid column to interact with data through natural language prompts."
 components: ["grid"]
 slug: custom_ai_column_core_grid
-position: 2
+position: 5
 ---
 
 

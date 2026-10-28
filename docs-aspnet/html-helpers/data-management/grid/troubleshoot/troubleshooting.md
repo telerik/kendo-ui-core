@@ -41,7 +41,7 @@ The causes of this issue are various.
 1. Check the **Network**&mdash;or **Net** in Firebug&mdash;tab of the browser developer console. Look for a failed HTTP request for the action method configured via the `DataSource` Grid setting.
 
     * HTTP status code [401](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#401) indicates that the required authentication has failed or has not been provided yet.
-    * HTTP status code [403](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#403) indicates that the request is not authorized. Perhaps the current user does not have     the required permissions.
+    * HTTP status code [403](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#403) indicates that the request is not authorized. Perhaps the current user does not have the required permissions.
     * HTTP status code [404](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#404) indicates that the requested URL cannot be found. Check if the controller and action names are spelled correctly.
     * HTTP status code [500](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500) indicates that a server error occurred while processing the request. Check what the server response is. In most cases, it will contain the full `.NET` stacktrace. If the reason for the exception is not clear, put a break-point in the action method and break with the debugger. Also, refer to the [article on well-known exceptions]({% slug knownexceptions_gridhelper_aspnetmvc %}).
 
@@ -59,7 +59,7 @@ For an `Ajax` bound Grid, make sure the `ServerOperation(false)` property of the
 
 ## Grid Fails to Update Dates and Numbers When Current Culture Is Not en-US
 
-Make sure the respective culture script file included (for example, `kendo.culture.es-ES.min.js`). For more information, refer to the [globalization documentation]({% slug overview_globalization_core%}#applying-cultures).
+Make sure the respective culture script file is included (for example, `kendo.culture.es-ES.min.js`). For more information, refer to the [globalization documentation]({% slug overview_globalization_core %}#applying-cultures).
 
 {% if site.mvc %}
 ## Column Templates Are Not Displayed
@@ -78,7 +78,7 @@ Make sure the respective culture script file included (for example, `kendo.cultu
 
 Not all settings of the DataSource are exposed through the `DataSource` fluent API.
 
-**Solution**: To gain full control over the DataSource, consider using the [`Custom()` DataSource](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource) fluent API.
+**Solution**: To gain full control over the DataSource, consider using the [`Custom()`](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource) fluent API.
 
 ## Grid Fires Create Action instead of Update Action
 
@@ -116,7 +116,7 @@ If an `ID` value is not specified for a given data item, the DataSource of the G
 
 By default, the Grid formats dates and numbers using the `en-US` culture.
 
-If the Grid does not display the numbers and dates in a format that matches the server-side culture of the application, update the client-side culture to match the server-side culture, as described in the [globalization documentation]({% slug overview_globalization_core%}#matching-cultures).
+If the Grid does not display the numbers and dates in a format that matches the server-side culture of the application, update the client-side culture to match the server-side culture, as described in the [globalization documentation]({% slug overview_globalization_core %}#matching-cultures).
 
 ## See Also
 

@@ -347,8 +347,8 @@ To bind to remote data by using the DataSource component:
             [HttpPost]
             public IActionResult _SpainElectricityProduction()
             {
-                // Data is usually read from a service that communicates with the an instance of the DbContext. 
-                // Refer to the MSDN documentation for further details on connecting to a data base and using a DBContext:
+                // Data is usually read from a service that communicates with an instance of the DbContext.
+                // Refer to the MSDN documentation for further details on connecting to a database and using a DbContext:
                 // https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontext?view=efcore-5.0
                 //
                 // For clarity, in this example static data is generated and returned from the remote-endpoint.
@@ -371,8 +371,8 @@ To bind to remote data by using the DataSource component:
             [HttpPost]
             public ActionResult _SpainElectricityProduction()
             {
-                // Data is usually read from a service that communicates with the an instance of the DbContext. 
-                // Refer to the MSDN documentation for further details on connecting to a data base and using a DBContext:
+                // Data is usually read from a service that communicates with an instance of the DbContext.
+                // Refer to the MSDN documentation for further details on connecting to a database and using a DbContext:
                 // https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontext?view=efcore-5.0
                 //
                 // For clarity, in this example static data is generated and returned from the remote-endpoint.
