@@ -58,12 +58,14 @@ The following example demonstrates how to enable the PDF export functionality of
             <transport>
                 <read url="@Url.Action("PDF_Export_Read", "Scheduler")" />
             </transport>
-            <scheduler-model id="Id">
+            <schema>
+                <scheduler-model id="Id">
                <fields>
                    <field name="Id" type="number"></field>
                    <field name="title" from="Title" type="string" default-value="No title"></field>
                </fields>
-            </scheduler-model>
+                </scheduler-model>
+            </schema>
         </scheduler-datasource>
     </kendo-scheduler>
 ```
@@ -108,12 +110,14 @@ The following example demonstrates how to additionally configure the Scheduler's
             <transport>
                 <read url="@Url.Action("PDF_Export_Read", "Scheduler")" />
             </transport>
-            <scheduler-model id="Id">
+            <schema>
+                <scheduler-model id="Id">
                <fields>
                    <field name="Id" type="number"></field>
                    <field name="title" from="Title" type="string" default-value="No title"></field>
                </fields>
-            </scheduler-model>
+                </scheduler-model>
+            </schema>
         </scheduler-datasource>
     </kendo-scheduler>
 ```
@@ -157,12 +161,14 @@ To send the generated file to a remote endpoint, use the `ProxyURL()` and `Force
             <transport>
                 <read url="@Url.Action("PDF_Export_Read", "Scheduler")" />
             </transport>
-            <scheduler-model id="Id">
+            <schema>
+                <scheduler-model id="Id">
                <fields>
                    <field name="Id" type="number"></field>
                    <field name="title" from="Title" type="string" default-value="No title"></field>
                </fields>
-            </scheduler-model>
+                </scheduler-model>
+            </schema>
         </scheduler-datasource>
     </kendo-scheduler>
 ```
@@ -211,12 +217,14 @@ The following example demonstrates how to handle custom fonts.
             <transport>
                 <read url="@Url.Action("PDF_Export_Read", "Scheduler")" />
             </transport>
-            <scheduler-model id="Id">
+            <schema>
+                <scheduler-model id="Id">
                <fields>
                    <field name="Id" type="number"></field>
                    <field name="title" from="Title" type="string" default-value="No title"></field>
                </fields>
-            </scheduler-model>
+                </scheduler-model>
+            </schema>
         </scheduler-datasource>
     </kendo-scheduler>
 ```

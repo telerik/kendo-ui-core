@@ -81,7 +81,7 @@ The next step is to specify the mode of operation for the Upload. In this tutori
            remove-url="@Url.Action("Remove","Upload")" />
 ```
 ```Controller
-    public IWebHostingEnvironment WebHostEnvironment { get; set; }
+    public IWebHostEnvironment WebHostEnvironment { get; set; }
 
     public UploadController(IWebHostEnvironment webHostEnvironment)
     {

@@ -47,11 +47,11 @@ The following example demonstrates the basic AI configuration for the Editor.
             <command id="change-tone-friendly" text="Change to friendly tone" icon="tell-a-friend" prompt="function(context) {return `Adjust the tone of the following text to be more friendly while preserving its original meaning and intent. Selected Text: ${context}` }"></command>
             <command id="adjust-length-shorten" text="Shorten Length" icon="col-resize" prompt="function(context) {return `Shorten the following text while preserving its original meaning and intent. Selected Text: ${context}` }"></command>
         </commands>
-        </pane>
         </ai>
     </kendo-editor>
 ```
 {% endif %}
+{% if site.core %}
 ```C#
     [HttpPost]
     [RateLimit(10, 60)]
@@ -94,6 +94,7 @@ The following example demonstrates the basic AI configuration for the Editor.
         }
     }
 ```
+{% endif %}
 For a live example, visit the [AI Integration Demo of the Editor](https://demos.telerik.com/{{ site.platform }}/editor/ai-integration).
 ## See Also
 

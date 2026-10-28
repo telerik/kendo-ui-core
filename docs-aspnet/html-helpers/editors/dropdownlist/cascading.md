@@ -80,8 +80,8 @@ The following example demonstrates how to configure the cascading functionality 
 {% if site.core %}
 ```TagHelper
 <kendo-dropdownlist name="categories"
-                    datatextfield="ContactName"
-                    datavaluefield="CustomerID"
+                    datatextfield="CategoryName"
+                    datavaluefield="CategoryId"
                     option-label="Select category...">
 
     <datasource>
@@ -186,8 +186,8 @@ The following example demonstrates how to configure the cascading functionality 
 {% if site.core %}
 ```TagHelper
 <kendo-dropdownlist name="categories"
-                    datatextfield="ContactName"
-                    datavaluefield="CustomerID"
+                    datatextfield="CategoryName"
+                    datavaluefield="CategoryId"
                     option-label="Select category...">
     <datasource>
         <transport>

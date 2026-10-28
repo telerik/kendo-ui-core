@@ -1,7 +1,7 @@
 ---
 title: WebApi Binding
 page_title: WebApi Binding
-description: "Learn how to enable the WebAPI binding capabilities of the Telerik UI Grid for {{ site.framework }}."
+description: "Learn how to configure WebAPI binding in the Telerik UI Grid for {{ site.framework }} with CRUD controller actions and DataSource transport setup."
 components: ["grid"]
 slug: htmlhelpers_grid_webapi_binding
 previous_url: /html-helpers/data-management/grid/editing/webapi, /helpers/grid/webapi-editing, /helpers/data-management/grid/webapi-editing
@@ -10,14 +10,14 @@ position: 5
 
 # WebAPI Binding
 
-Web API is an application programming interface for a web application or server which utilizes the [HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) for communication. It enables you to make the server-side of the application more monolithic when it comes to establishing communication between clients and websites to have data access.
+Web API is an application programming interface that uses the [HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) for communication between clients and servers. For Grid scenarios, WebAPI binding connects CRUD transport operations to HTTP endpoints and returns data in a `DataSourceResult` shape.
 
 For runnable examples, refer to the [demos on WebAPI binding of the Grid component](https://demos.telerik.com/{{ site.platform }}/grid/webapi).
 
-> Defining a Schema.Model.Id is mandatory for the proper execution of the Update, Create and Destroy of the Grid.
+>important Defining a `Schema.Model.Id` is mandatory for proper execution of the Grid `Update`, `Create`, and `Destroy` operations.
 
 {% if site.mvc %}
-## Setting up the application for WebAPI Binding
+## Setting Up the Application for WebAPI Binding
 
 To ensure that the application is configured for both Web API binding capabilities:
 
@@ -55,20 +55,20 @@ To ensure that the application is configured for both Web API binding capabiliti
 ## Adding a Web API Controller
 
 {% if site.mvc %}
-To support writing and reading data using WebAPI endpoints, the `ApiController` base class needs to be inherited for a given controller instance.
+To support reading and writing data through WebAPI endpoints, inherit the `ApiController` base class.
 
 ```C#
-    public class TaskController : System.Web.Http.ApiController
+    public class ProductController : System.Web.Http.ApiController
     {
     }
 ```
 {% else %}
-To support writing and reading data using WebAPI endpoints, the ControllerBase base class needs to be inherited for a given controller instance.
+To support reading and writing data through WebAPI endpoints, inherit the `ControllerBase` base class.
 
 ```C#
     [ApiController()]
     [Route("api/[controller]")]
-    public class TaskController : BaseController
+    public class ProductController : BaseController
     {
     }
 ```
@@ -86,7 +86,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
     ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-binding-choose-database-objects.png)
 
 1. Right click the `Controllers` folder in Visual Studio solution explorer. Select **Add** > **Controller**.
-1. Set **ProductsController** as **Controller name**. Select **API controller with read/write actions, using Entity Framework** as **Template**. Select **Product (KendoGridWebApiCRUD.Models)** as **Model class** and **NorthwindEntities (KendoGridWebApiCRUD.Models)** as **Data context class**. Click **Add** to create the WebAPI controller.
+1. Set **ProductController** as **Controller name**. Select **API controller with read/write actions, using Entity Framework** as **Template**. Select **Product (KendoGridWebApiCRUD.Models)** as **Model class** and **NorthwindEntities (KendoGridWebApiCRUD.Models)** as **Data context class**. Click **Add** to create the WebAPI controller.
 
     ![{{ site.product_short }} Adding the Controller](../images/grid-api-controller.png)
 {% else %}
@@ -105,11 +105,11 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
     ```
 {% endif %}
 
-1. Update the `Get` method as demonstrated by The following example.
+1. Update the `Get` method as demonstrated in the following example.
 
     {% if site.mvc %}
     ```C#
-        public DataSourceResult Get([System.Web.Http.ModelBinding.ModelBinder(typeof    (WebApiDataSourceRequestModelBinder))DataSourceRequest request)
+        public DataSourceResult Get([System.Web.Http.ModelBinding.ModelBinder(typeof(WebApiDataSourceRequestModelBinder))]DataSourceRequest request)
         {
             return db.Products.ToDataSourceResult(request);
         }
@@ -124,7 +124,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
     ```
     {% endif %}
 
-1. Update the `Post` method as demonstrated in The following example.
+1. Update the `Post` method as demonstrated in the following example.
 
    {% if site.mvc %}
    ```C#
@@ -155,29 +155,29 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
         [HttpPost]
         public IActionResult Post([FromForm] ProductViewModel product)
         {
-	    	if (!ModelState.IsValid)
-	    	{
-	    		return BadRequest(ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage));
-           }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage));
+            }
 
-	    	service.Create(product);
+            service.Create(product);
 
-	    	return new ObjectResult(new DataSourceResult { Data = new[] { product }, Total = 1 });
-	    }
+            return new ObjectResult(new DataSourceResult { Data = new[] { product }, Total = 1 });
+        }
     ```
     {% endif %}
 
-1. Update the `Put` method as demonstrated in The following example.
+1. Update the `Put` method as demonstrated in the following example.
 
     {% if site.mvc %}
     ```C#
-        public HttpResponseMessage Put(int id, TaskViewModel task)
+        public HttpResponseMessage Put(int id, ProductViewModel product)
         {
-            if (ModelState.IsValid && id == task.TaskID)
+            if (ModelState.IsValid && id == product.ProductID)
             {
                 try
                 {
-                    service.Update(task, null);
+                    service.Update(product);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -195,27 +195,26 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
     ```
     {% else %}
     ```C#
-         [HttpPut("{id}")]
-         public IActionResult Put(int id, [FromForm] ProductViewModel product)
-         {
-	        	if (ModelState.IsValid && id == product.ProductID)
-	        	{
-	        		try
-	        		{
-	        			service.Update(product);
-	        		}
-	        		catch (DbUpdateConcurrencyException)
-	        		{
-	        			return new NotFoundResult();
-	        		}
-	        		return new StatusCodeResult(200);
-             }
-	        	else
-	        	{
-	        		return BadRequest(ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage));
-	        	}
-	        }
-     ```
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromForm] ProductViewModel product)
+        {
+            if (ModelState.IsValid && id == product.ProductID)
+            {
+                try
+                {
+                    service.Update(product);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return new NotFoundResult();
+                }
+
+                return new StatusCodeResult(200);
+            }
+
+            return BadRequest(ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage));
+        }
+    ```
      {% endif %}
 
 1. Update the `Delete` method as demonstrated in the following example.
@@ -295,7 +294,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
             .Read(read => read.Action("Get", "Product"))
             .Create(create => create.Action("Post", "Product"))
             .Update(update => update.Action("Put", "Product", new { id = "{0}"} ))
-            .Destroy(destroy => destroy.Action("DELETE", "Product", new { id = "{0}" }))
+            .Destroy(destroy => destroy.Action("Delete", "Product", new { id = "{0}" }))
             {% endif %}
         )
     )
@@ -341,8 +340,9 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
 
 ## Building the application
 
+The final result is a Grid with configured editing.
 
-The final result is a Grid with configured editing![{{ site.product_short }} The final result is a Grid with editing configured](../images/grid-inline-editing.png)
+![{{ site.product_short }} Grid with inline editing configured after WebAPI binding setup](../images/grid-inline-editing.png)
 
 ## See Also
 

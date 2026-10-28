@@ -1,7 +1,7 @@
 ---
 title: Directory Upload
 page_title: Directory Upload
-description: "Learn how to enable the Directry upload feature of the Telerik UI Upload component for {{ site.framework }}."
+description: "Learn how to enable the Directory upload feature of the Telerik UI Upload component for {{ site.framework }}."
 components: ["upload"]
 slug: htmlhelpers_upload_directory_aspnetcore
 position: 9
@@ -36,6 +36,7 @@ The following example demonstrates how you can enable the `Directory` upload fea
     </kendo-upload>
 ```
 {% endif %}
+{% if site.core %}
 ```Controller
     public class UploadController : Controller
     {
@@ -98,6 +99,46 @@ The following example demonstrates how you can enable the `Directory` upload fea
         }
     }
 ```
+{% else %}
+```Controller
+    public class UploadController : Controller
+    {
+        public ActionResult Directory_Upload(IEnumerable<HttpPostedFileBase> files)
+        {
+            if (files != null)
+            {
+                foreach (var file in files)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var physicalPath = Path.Combine(Server.MapPath("~/Files"), fileName);
+
+                    // The files are not actually saved in this demo.
+                    // file.SaveAs(physicalPath);
+                }
+            }
+
+            return Content("");
+        }
+
+        public ActionResult Directory_Remove(string[] fileNames)
+        {
+            if (fileNames != null)
+            {
+                foreach (var fullName in fileNames)
+                {
+                    var fileName = Path.GetFileName(fullName);
+                    var physicalPath = Path.Combine(Server.MapPath("~/Files"), fileName);
+
+                    // The files are not actually removed in this demo.
+                    // System.IO.File.Delete(physicalPath);
+                }
+            }
+
+            return Content("");
+        }
+    }
+```
+{% endif %}
 
 ## See Also
 * [Directory Upload by the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/directoryupload)

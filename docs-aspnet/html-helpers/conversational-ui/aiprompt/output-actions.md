@@ -58,12 +58,12 @@ The custom output actions support the following appearance options:
 
 | Option | Description |
 |---|---|
-| `Comamnd()` | Defines the name of the action (a command identifier). |
+| `Command()` | Defines the name of the action (a command identifier). |
 | `Type()` | Sets the command type (a `Button` or a `Spacer`). |
 | `Icon()` | Specifies an icon for the button. |
 | `FillMode()` | Defines how the color is applied to the action button. |
 | `Rounded()` | Determines the border radius of the button. |
-| `ThemeColor()` | Sest what color will be applied to the button. |
+| `ThemeColor()` | Sets what color will be applied to the button. |
 | `Text()` | Sets the button's text. |
 | `Title()` | Configures a title to the button's element (a tooltip). |
 

@@ -18,16 +18,16 @@ You can also define and add [custom commands](#custom-commands) to the TreeList'
 You can configure the ToolBar and include any of the built-in commands:
 
 ```HtmlHelper
-.ToolBar(toolbar=> {
-        toolbar.Columns();
+.Toolbar(toolbar=> {
+    toolbar.Columns();
         toolbar.Create();
         toolbar.Save();
-        toolbar.Paste();
+    toolbar.Paste();
         toolbar.Pdf();
         toolbar.Excel();
         toolbar.Search();
-        toolbar.Spacer();
-        toolbar.Separator();
+    toolbar.Spacer();
+    toolbar.Separator();
     })
 ```
 {% if site.core %}
@@ -68,7 +68,7 @@ The following example demonstrates how to modify the default overflow settings o
 ```Razor
 @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
      .Name("treelist")
-     .Toolbar(t => t.Items(item =>
+    .Toolbar(t => t.Items(item =>
      {
          item.Pdf();
          item.Search();

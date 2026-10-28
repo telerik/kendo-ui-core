@@ -70,7 +70,7 @@ Use the AIPrompt HtmlHelper {% if site.core %}or TagHelper{% endif %} to configu
 ```
 {% if site.core %}
 ```TagHelper
-    @addTagHelper *, Kendo.Mvcl
+    @addTagHelper *, Kendo.Mvc
 
     <kendo-aiprompt name="aiprompt">
         <aiprompt-views>
@@ -206,7 +206,7 @@ To define the prompt suggestions, use the `PromptSuggestions()` option of the `P
 
 ## 4. Configure the Prompt Command
 
-In this step, handle the `CommandExecute` event of the AIPromprt that triggers when a command item from the `Commands` view is clicked, and get the translated version of the latest output in the `Output` view from the **promptData** array. Then, call the `addPromptOutput()` client-side method to modify the current output in the AIPrompt.
+In this step, handle the `CommandExecute` event of the AIPrompt that triggers when a command item from the `Commands` view is clicked, and get the translated version of the latest output in the `Output` view from the **promptData** array. Then, call the `addPromptOutput()` client-side method to modify the current output in the AIPrompt.
 
 ```HtmlHelper
     @(Html.Kendo().AIPrompt()
@@ -258,11 +258,11 @@ In this step, handle the `CommandExecute` event of the AIPromprt that triggers w
                 if (response) {
                     let result = { // Construct the modified output.
                         id: kendo.guid(),
-                        output: response["spanish"], // Select the transalted verison of the output.
+                        output: response["spanish"], // Select the translated version of the output.
                         prompt: output,
                         isRetry: ev.isRetry
                     };
-                    aipromptWidget.addPormptOutput(result); // Update the output content when the command is clicked.
+                    aipromptWidget.addPromptOutput(result); // Update the output content when the command is clicked.
                 }
             }
         }
@@ -339,7 +339,7 @@ The AIPrompt exposes events that you can handle and further customize the functi
 ```JS scripts
     <script>
         function onOutputRatingChange(e) {
-            console.log("Output Rated: " + ev.rateType);
+            console.log("Output Rated: " + e.rating);
         }
     </script>
 ```

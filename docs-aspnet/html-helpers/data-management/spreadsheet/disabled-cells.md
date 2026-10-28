@@ -63,7 +63,7 @@ You can set the state of a cell during the initialization of the Spreadsheet for
 
 You can set the state of a cell or range of cells after the initialization by using the [kendo.spreadsheet.Range client-side API](https://docs.telerik.com/kendo-ui/api/spreadsheet/range) and the [enable](https://docs.telerik.com/kendo-ui/api/spreadsheet/range/methods/enable) method.
 
-The following example demosntrates how to toggle the state of cell `A1` on button click:
+The following example demonstrates how to toggle the state of cell `A1` on button click:
 
 ```JS
 $("#myButton").click(function () {

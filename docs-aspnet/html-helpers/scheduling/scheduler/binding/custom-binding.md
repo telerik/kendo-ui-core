@@ -88,7 +88,7 @@ The following example demonstrates how to declare the {{ site.product }} Schedul
                 .Create(create => create.Url("https://demos.telerik.com/service/v2/core/meetings/create")
                     .ContentType("application/json")
                     .Type(HttpVerbs.Post))
-                .Destroy(destroy => destroy.Url(""https://demos.telerik.com/service/v2/core/meetings/destroy")
+                .Destroy(destroy => destroy.Url("https://demos.telerik.com/service/v2/core/meetings/destroy")
                     .ContentType("application/json")
                     .Type(HttpVerbs.Post))
                 .Update(update => update.Url("https://demos.telerik.com/service/v2/core/meetings/update")
@@ -102,7 +102,7 @@ The following example demonstrates how to declare the {{ site.product }} Schedul
     <script>
         function parameterMap(options, operation) { // Handler that alters the request format.
             if (operation !== "read" && options.models) {
-                kendo.stringify(options.models);
+                return kendo.stringify(options.models);
             }
         }
     </script>
@@ -176,7 +176,7 @@ The following example demonstrates how to declare the {{ site.product }} Schedul
     <script>
         function parameterMap(options, operation) { // Handler that alters the request format.
             if (operation !== "read" && options.models) {
-                kendo.stringify(options.models);
+                return kendo.stringify(options.models);
             }
         }
     </script>
@@ -187,7 +187,7 @@ For a complete example on the Custom DataSource Binding, refer to the [demo on c
 
 ## See Also
 
-* [Custom DataSource Binding in the Scheduler (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/menu-bind-attributes)
+* [Custom DataSource Binding in the Scheduler (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/custom-datasource)
 * [Server-Side API of the Scheduler HtmlHelper](/api/scheduler)
 {% if site.core %}
 * [Server-Side API of the Scheduler TagHelper](/api/taghelpers/scheduler)

@@ -1,7 +1,7 @@
 ---
 title: Internationalization
 page_title: Internationalization
-description: "Get started with the {{ site.product_short }} Grid by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
+description: "Configure date and number formats in the Telerik UI Grid for {{ site.framework }} using culture settings."
 components: ["grid"]
 slug: intl_aspnetcore_grid
 position: 2
@@ -11,7 +11,7 @@ position: 2
 
 The internationalization process applies specific culture formats to a web application by providing options for the parsing and formatting of dates and numbers.
 
-For more information, refer to the [globalization overview]({% slug overview_globalization_core %})
+For more information, refer to the [globalization overview]({% slug overview_globalization_core %}).
 
 ## Showing Dates Depending on the Client Timezone
 

@@ -31,7 +31,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
 
 1. Select **Generate from database** and click **Next**. Configure a connection to the **Northwind** database. Click **Next**.
 
-    ![{{ site.product_short }} Choosing the connection](../images/grid-entity-data-model.png)
+    ![{{ site.product_short }} Choosing the connection](../images/grid-binding-choose-data-connection.png)
 
 1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as set by default. Click **Finish**.
 
@@ -101,7 +101,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
     {% if site.core %}
     ```TagHelper
         <kendo-grid name="grid">
-            <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
                 <schema data="Data" total="Total">
                     <model id="ProductID">
                         <fields>
@@ -111,7 +111,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
                     </model>
                 </schema>
                 <transport>
-                    <read url="@Url.Action("Products_Read" "Grid")" />
+                    <read url="@Url.Action("Products_Read", "Grid")" />
                 </transport>
             </datasource>
             <columns>
@@ -159,7 +159,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
     {% if site.core %}
     ```TagHelper
         <kendo-grid name="grid" detail-template-id="client-template">
-            <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
                 <schema data="Data" total="Total">
                     <model id="ProductID">
                         <fields>
@@ -169,7 +169,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
                     </model>
                 </schema>
                 <transport>
-                    <read url="@Url.Action("Products_Read" "Grid")" />
+                    <read url="@Url.Action("Products_Read", "Grid")" />
                 </transport>
             </datasource>
             <columns>
@@ -292,7 +292,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
     {% if site.core %}
     ```TagHelper
         <kendo-grid name="grid" >
-            <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
                 <schema data="Data" total="Total">
                     <model id="CategoryID">
                         <fields>
@@ -302,7 +302,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
                     </model>
                 </schema>
                 <transport>
-                    <read url="@Url.Action("Categories_Read" "Grid")" />
+                    <read url="@Url.Action("Categories_Read", "Grid")" />
                 </transport>
             </datasource>
             <columns>
@@ -348,7 +348,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
                 <columns>
                     <column field="ProductID">
                     </column>
-                    <column field="ProductName" template="<strong>\\#:ProductName\\#</strong>""> // escape the "#" characters
+                    <column field="ProductName" template="<strong>\\#:ProductName\\#</strong>">
                     </column>
                 </columns>
                 <datasource type="DataSourceTagHelperType.Ajax">
@@ -383,7 +383,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
     {% if site.core %}
     ```TagHelper
         <kendo-grid name="grid" detail-template-id="client-template" >
-            <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
                 <schema data="Data" total="Total">
                     <model id="CategoryID">
                         <fields>
@@ -393,7 +393,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
                     </model>
                 </schema>
                 <transport>
-                    <read url="@Url.Action("Categories_Read" "Grid")" />
+                    <read url="@Url.Action("Categories_Read", "Grid")" />
                 </transport>
             </datasource>
             <columns>
@@ -415,7 +415,7 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 ## Handling Nested Client Templates
 
-Nesting client templates are not an out-of-the-box feature the Kendo UI Core wrappers support. For more information on this issue, check the Grid troubleshooting section in [invalid template errors when nesting client templates]({% slug knownexceptions_gridhelper_aspnetmvc%}#invalid-template-error-when-nesting-client-templates).
+Nesting client templates are not an out-of-the-box feature the Kendo UI Core wrappers support. For more information on this issue, check the Grid troubleshooting section in [invalid template errors when nesting client templates]({% slug knownexceptions_gridhelper_aspnetmvc %}#invalid-template-error-when-nesting-client-templates).
 
 ## See Also
 

@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Template Columns
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} supporting template columns."
+description: "Learn how to configure Telerik UI Grid template columns in {{ site.framework }} to render custom and conditional cell content."
 components: ["grid"]
 slug: htmlhelper_grid_template_columns
 position: 4
@@ -9,9 +9,9 @@ position: 4
 
 # Template Columns
 
-Template columns enable you to cusomize the way data is displayed based on your specific preferences.
+Template columns let you customize how the Grid displays data in each cell.
 
-The following example demonstrates how to specify your own custom layout for the Grid columns by using images and property bindings from the underlying data source. The templates are defined by using JavaScript functions.
+The following example shows how to define a custom column layout with images and field values from the data source. The templates use JavaScript functions.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Customer>()
@@ -40,12 +40,11 @@ The following example demonstrates how to specify your own custom layout for the
     <script>
         function template(data) {
             return `<div class='customer-photo'
-                    style= 'background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/${data.CustomerID}.jpg);' ></div >
-                    <div class='customer-name'>${ data.ContactName} </div>
-                    `
+                    style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/${data.CustomerID}.jpg);'></div>
+                    <div class='customer-name'>${data.ContactName}</div>`;
         }
     </script>
-````
+```
 {% if site.core %}
 ```TagHelper
     <kendo-grid name="grid" height="380">
@@ -72,9 +71,8 @@ The following example demonstrates how to specify your own custom layout for the
     <script>
         function template(data) {
             return `<div class='customer-photo'
-                    style= 'background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/${data.CustomerID}.jpg);' ></div >
-                    <div class='customer-name'>${ data.ContactName} </div>
-                    `
+                    style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/${data.CustomerID}.jpg);'></div>
+                    <div class='customer-name'>${data.ContactName}</div>`;
         }
     </script>
 ```
@@ -103,6 +101,9 @@ To conditionally format a Grid column with TagHelpers, use the column's `templat
     </script>
 ```
 {% endif %}
+
+Use the following CSS to style the image and text in the template column.
+
 ```CSS Styles
 <style type="text/css">
     .customer-photo {
@@ -126,3 +127,9 @@ To conditionally format a Grid column with TagHelpers, use the column's `templat
     }
 </style>
 ```
+
+## See Also
+
+* [Bound Column Settings]({% slug htmlhelper_gridcolumns %})
+* [Implementing Template Columns in the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/column-template)
+* [Server-Side API](/api/grid)

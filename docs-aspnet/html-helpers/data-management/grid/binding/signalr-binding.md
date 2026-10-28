@@ -1,7 +1,7 @@
 ---
 title: SignalR Binding
 page_title: SignalR Binding
-description: "Learn the basics of SignalR Binding when working with the Grid component for {{ site.framework }}."
+description: "Learn how to bind the Telerik UI Grid for {{ site.framework }} to SignalR hubs for real-time updates and push notifications."
 components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_signalrbinding
 previous_url: /helpers/html-helpers/grid/signalr-binding
@@ -14,22 +14,22 @@ SignalR allows you to add real-time functionality to your Grid. SignalR takes ca
 
 You can use it with both the Telerik UI helpers for MVC and Core because they wrap the [Kendo UI for jQuery Grid](https://docs.telerik.com/kendo-ui/controls/grid/overview).
 
- For a runnable example, refer to the [demo on SignalR binding of the Grid component](https://demos.telerik.com/{{ site.platform }}/grid/signalr).
+For a runnable example, refer to the [demo on SignalR binding of the Grid component](https://demos.telerik.com/{{ site.platform }}/grid/signalr).
 
-> As of the [{{ site.framework }} R2 2018 release](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-2.1), the suite provides SignalR support for its components.
+>note Starting with the [{{ site.framework }} R2 2018 release](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-2.1), the suite provides SignalR support for its components.
 
 This article provides step-by-step instructions on using SignalR binding with the Grid.
 
 ## SignalR Versions
 
-Two versions of SignalR exist&mdash;[ASP.NET Core SignalR](https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-8.0) and [ASP.NET SignalR](https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/introduction-to-signalr). It is important to note that ASP.NET Core SignalR  is not compatible with clients or servers for ASP.NET SignalR. This means, for example, that you cannot connect a ASP.NET SignalR server to a client using ASP.NET Core SignalR client library.
+Two versions of SignalR exist&mdash;[ASP.NET Core SignalR](https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-8.0) and [ASP.NET SignalR](https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/introduction-to-signalr). ASP.NET Core SignalR is not compatible with ASP.NET SignalR clients or servers. For example, you cannot connect an ASP.NET SignalR server to a client that uses the ASP.NET Core SignalR client library.
 
 The table below highlights the major differences between ASP.NET SignalR and ASP.NET Core SignalR:
 
 <table>
       <thead>
          <tr>
-            <th></th>
+                <th>Category</th>
             <th>ASP.NET SignalR</th>
             <th>ASP.NET Core SignalR</th>
          </tr>
@@ -37,7 +37,7 @@ The table below highlights the major differences between ASP.NET SignalR and ASP
       <tbody>
          <tr>
             <td><strong>Server NuGet package</strong></td>
-            <td>Microsoft.AspNet.SignalR</a></td>
+                <td>Microsoft.AspNet.SignalR</td>
             <td>None. Included in the Microsoft.AspNetCore.App shared framework.</td>
          </tr>
          <tr>
@@ -72,7 +72,7 @@ For further details, refer to [the official Microsoft documentation](https://lea
 
 To configure ASP.NET Core SignalR service, edit the `Program.cs` file and add SignalR to the services collection. Once done, ensure the hubs are mapped, as well.
 
-```
+```C#
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddSignalR(opt => opt.EnableDetailedErrors = true).AddJsonProtocol(options => {
@@ -95,7 +95,7 @@ Complete details on setting up an ASP.NET SignalR service are available in [Micr
 1. Add an OWIN Startup Class and the SignalR configuration.
 1. Ensure the hubs are mapped.
 
-```
+```C#
     public class Startup
     {
         public void Configuration(IAppBuilder app)
@@ -112,11 +112,11 @@ Complete details on setting up an ASP.NET SignalR service are available in [Micr
 
 ## Configuring the Hub
 
-SignalR uses [hubs to communicate between clients and servers](https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs?view=aspnetcore-8.0). A hub is a high-level pipeline that allows the client-server communication. The SignalR Hubs API enables you to call methods on connected clients from the server.
+SignalR uses [hubs to communicate between clients and servers](https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs?view=aspnetcore-8.0). A hub is a high-level pipeline that enables client-server communication. The SignalR Hubs API enables you to call methods on connected clients from the server.
 
 The example below demonstrates a sample Hub implementation:
 
-```
+```C#
     public class ProductHub(SampleEntitiesDataContext context) : Hub
     {
         public override Task OnConnectedAsync()
@@ -191,6 +191,8 @@ Ensure the client-side library matches the server-side library version. Connecti
 {% if site.core %}
 ### Configuring the ASP.NET Core SignalR Client-Side Hub
 
+To configure the ASP.NET Core SignalR client-side hub, complete the following steps:
+
 1. Add a reference to the client-side SignalR library.
 1. Initialize a hub.
 1. Start the hub.
@@ -220,7 +222,7 @@ For complete details and API reference on the client-side SignalR library, refer
 {% else %}
 ### Configuring the ASP.NET SignalR Client-Side Hub
 
-If you use the ASP.NET SignalR service, you must use the ASP.NET SignalR client-side library. 
+If you use the ASP.NET SignalR service, you must use the ASP.NET SignalR client-side library.
 
 1. Add a reference to the client-side SignalR library.
 1. Initialize a hub.

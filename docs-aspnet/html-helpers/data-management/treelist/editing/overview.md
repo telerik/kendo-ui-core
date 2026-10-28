@@ -53,7 +53,7 @@ All CRUD operations of the TreeList component require a model with `Id` and `Par
 	public int EmployeeId { get; set; }
 ```
 
-The following example demonstrates how to use the non-nullable model&mdash;items with ParentId `string.empty` will be root items.
+The following example demonstrates how to use the non-nullable model&mdash;items with ParentId `String.Empty` will be root items.
 
 ```HtmlHelper
  	.DataSource(dataSource => dataSource

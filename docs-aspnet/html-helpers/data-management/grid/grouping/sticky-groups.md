@@ -1,7 +1,7 @@
 ---
 title: Sticky Groups
 page_title: Sticky Groups
-description: "Learn how to enable sticky group headers and footers in the Telerik UI Grid for {{ site.framework }} to keep group context visible while scrolling."
+description: "Keep group headers and footers visible when scrolling in the Telerik UI Grid for {{ site.framework }}."
 components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_sticky_groups
 position: 4

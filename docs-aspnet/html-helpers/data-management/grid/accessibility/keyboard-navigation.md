@@ -1,7 +1,7 @@
 ---
 title: Keyboard Navigation
 page_title: Keyboard Navigation
-description: "Get started with the {{ site.product_short }} Grid by Telerik UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+description: "Learn Grid keyboard navigation in the {{ site.product }}, including focus and link activation."
 components: ["grid"]
 slug: keynav_aspnetcore_grid
 position: 2
@@ -9,13 +9,15 @@ position: 2
 
 # Keyboard Navigation
 
-The keyboard navigation of the Grid is always available.
+The Grid provides built-in keyboard navigation for moving focus and selecting data from the keyboard.
 
-For a complete example, refer to the [demo on using the keyboard navigation of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/keyboard-navigation).
+For a complete example, see the [Grid keyboard navigation demo](https://demos.telerik.com/{{ site.platform }}/grid/keyboard-navigation).
 
-The Grid supports its keyboard navigation functionality through the `Navigatable()` method. When enabled, you can initially select a row or cell and then move within the Grid by using the `Arrow` keys. The navigation occurs at a cell level regardless of what the `Selectable()` mode is. To select the current row or cell, press `Space`.
+## Enabling Keyboard Navigation
 
-The following example demonstrates how to enable the key navigation in the Grid.
+Enable keyboard navigation with the `Navigatable()` method. When this option is enabled, select a row or cell and move through the Grid with the `Arrow` keys. Navigation works at the cell level, regardless of the `Selectable()` mode. Press `Space` to select the current row or cell.
+
+The following example enables keyboard navigation in the Grid.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EmployeeViewModel>()
@@ -25,15 +27,17 @@ The following example demonstrates how to enable the key navigation in the Grid.
     )
 ```
 
-The keyboard navigation of the Grid works by listening to the `keydown` events on the wrapper element of the helper. Its behavior is based on the assumption that whatever the user does is in accordance with the currently focused Grid cell and not with the focused element of the browser. If the data cells of the Grid contain hyperlinks that have to be activated through the keyboard:
+## Activating Hyperlinks in Grid Cells
+
+Keyboard navigation listens for `keydown` events on the Grid wrapper element. The behavior depends on the currently focused Grid cell, not the currently focused browser element. If Grid data cells contain hyperlinks that you need to activate from the keyboard:
 
 1. Navigate to the respective Grid cell by using the `Arrow` keys.
 1. Press `Enter` to focus the hyperlink inside the cell.
-1. Press `Enter` again.
+1. Press `Enter` again to activate the hyperlink.
 
-To return the focus on the table cell, press `Esc`. In order for the hyperlinks to be inaccessible through tabbing, set the `tabindex="-1"` attribute to the custom hyperlinks.
+Press `Esc` to move focus back to the table cell. To keep custom hyperlinks out of the tab order, set `tabindex="-1"` on those links.
 
-You can also avoid the procedure and bypass the keyboard navigation of the Grid, access the custom hyperlinks with tabbing, and activate them with `Enter`. To achieve this, prevent the `keydown` event bubbling of the custom hyperlinks. As a result, the `Enter` key-presses will be unnoticed by the Grid.
+You can also bypass Grid keyboard navigation, use `Tab` to move to custom hyperlinks, and then press `Enter` to activate them. To do this, prevent `keydown` event bubbling on the custom hyperlinks so that the Grid does not process `Enter` key presses.
 
 ## See Also
 

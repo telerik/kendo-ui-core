@@ -1,7 +1,7 @@
 ---
 title: Multi-Column Headers
 page_title: Multi-Column Headers
-description: "The Multi-Column Header feature of the Telerik UI Grid component for {{ site.framework }} allows you to group one or more columns under a common higher-level header."
+description: "Learn how to configure Grid multi-column headers in {{ site.framework }} to group columns under shared parent headers."
 components: ["grid"]
 slug: multicolumn_headers_aspnetcore_grid
 position: 5
@@ -9,11 +9,12 @@ position: 5
 
 # Multi-Column Headers
 
-The multicolumn headers of the Grid represent a tree-like structure where the user can group one or more columns together by a common header.
+The Grid multi-column headers create a tree-like header structure.
+You can group one or more columns under a shared parent header.
 
 For a runnable example, refer to the [demo on implementing multi-column headers in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/multicolumnheaders).
 
-That common header in turn can be a child of another upper `MultiColumn` header which can also span both columns and other headers.
+The parent header can be a child of another `MultiColumn` header that spans both columns and other headers.
 
 ```HtmlHelper
     .Columns(columns =>
@@ -50,11 +51,11 @@ That common header in turn can be a child of another upper `MultiColumn` header 
 ```
 {% endif %}
 
-The previous example results in the following output.
+The previous example produces the following output.
 
-![{{ site.product_short }} Grid with a column group](grid-column-group.png)
+![{{ site.product_short }} Grid with a Ship Information column group](grid-column-group.png)
 
-A full Grid with Multi-column headers would look like below
+The following example shows a complete Grid configuration with multi-column headers.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()

@@ -28,7 +28,7 @@ To configure the server detail template:
 
 1. Select **Generate from database** and click **Next**. Configure a connection to the **Northwind** database. Click **Next**.
 
-    ![{{ site.product_short }} Choosing the connection](../images/grid-entity-data-model.png)
+    ![{{ site.product_short }} Choosing the connection](../images/grid-binding-choose-data-connection.png)
 
 1. Choose the **Products** table from **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 

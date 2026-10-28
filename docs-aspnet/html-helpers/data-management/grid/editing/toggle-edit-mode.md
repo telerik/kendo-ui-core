@@ -1,7 +1,7 @@
 ---
 title: Toggle Edit Mode
 page_title: Toggle Edit Mode
-description: "Learn how to toggle the edit mode of the Telerik UI for {{ site.framework }} Grid."
+description: "Toggle the Telerik UI Grid between Readonly and Editable modes in {{ site.framework }} web applications."
 components: ["grid"]
 position: 7
 slug: toggle_edit_mode_grid

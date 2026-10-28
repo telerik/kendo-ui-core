@@ -9,7 +9,7 @@ position: 14
 
 # PDF Export
 
-The Telerik UI Editor for {{ site.framework }} comes with a built-in option to export its content to PDF. To enable the PDF export, add the `Pdf` tool to the widget' toolbox:
+The Telerik UI Editor for {{ site.framework }} comes with a built-in option to export its content to PDF. To enable the PDF export, add the `Pdf` tool to the widget's toolbox:
 
 ```HtmlHelper
     @(Html.Kendo().Editor()

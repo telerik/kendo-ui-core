@@ -19,7 +19,7 @@ To enable the aggregate functions, use the `DataSource.Aggregates()` and the `Fo
         .Columns(columns =>
         {
             columns.Add().Field(e => e.Extension).Title("Ext")
-            .FooterTemplate("Tota: #= count #, Sum: #= sum #, Min: #= min #, Max: #= max #, Average: #= average #");
+            .FooterTemplate("Total: #= count #, Sum: #= sum #, Min: #= min #, Max: #= max #, Average: #= average #");
         })
         .DataSource(dataSource => dataSource
             .ServerOperation(false)
@@ -42,7 +42,7 @@ To enable the aggregate functions, use the `DataSource.Aggregates()` and the `Fo
     <kendo-treelist name="treelist">
         <columns>
             <treelist-column field="Extension" title="Ext"
-            footer-template="Tota: #= count #, Sum: #= sum #, Min: #= min #, Max: #= max #, Average: #= average #"></treelist-column>
+                footer-template="Total: #= count #, Sum: #= sum #, Min: #= min #, Max: #= max #, Average: #= average #"></treelist-column>
         </columns>
         <treelist-datasource server-operation="false">
             <transport>

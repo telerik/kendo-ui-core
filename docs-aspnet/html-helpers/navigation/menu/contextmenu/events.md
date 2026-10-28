@@ -21,9 +21,9 @@ The following example demonstrates how to subscribe to events by a handler name.
         .Name("menu")
         .Target("body")
         .Events(e => e
-            .Open("menu_open")
-            .Close("menu_close")
-            .Select("onSelect)
+            .Open("openMenu")
+            .Close("closeMenu")
+            .Select("onSelect")
         )
 )
 ```
@@ -118,7 +118,7 @@ The following example demonstrates how to subscribe to the `select` event of a s
 
 ## Next Steps
 
-* [Using the Menu Events (Demo)](https://demos.telerik.com/aspnet-core/menu/events)
+* [Using the Menu Events (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/events)
 
 ## See Also
 

@@ -1,7 +1,7 @@
 ---
 title: OData Binding
 page_title: OData Binding
-description: "Learn how to implement OData binding with the Telerik UI Grid component for {{ site.framework }}."
+description: "Learn how to bind the Telerik UI Grid for {{ site.framework }} to an OData service and configure server operations."
 components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/odata-binding
 slug: htmlhelpers_grid_aspnetcore_odata-binding
@@ -10,54 +10,55 @@ position: 9
 
 # OData Binding
 
-The Grid component supports the newer OData-v4 data binding capability, so you can use it in your new projects:
-[Grid OData-v4 Binding](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/binding/odatav4-binding)
+The Grid component supports OData v4 data binding. For new projects, use the [Grid OData-v4 Binding](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/binding/odatav4-binding) approach.
 
-![Grid OData-v4 Binding](../images/grid-odata.png)
+![Telerik UI Grid bound to an OData v4 endpoint](../images/grid-odata.png)
 
-If you want to use the older OData-v3 implementation, this article will give you the basic information.
+If you are working with an older OData v3 service, this article provides the required concepts and Grid configuration.
 
-## What is API?
+## What Is an API?
 
-An application programming interface (API) is a language for short commands between computers and computer programs. It is a type of software interface, offering a service to other pieces of software.
+An application programming interface (API) defines how software systems exchange requests and responses.
+It describes the operations, inputs, and outputs that a client uses to communicate with a service.
 
-It provides a way of connection for a computer or system to retrieve information or perform a function and to communicate with that system so it can understand and fulfill the request.
+## What Is a Web API?
 
-## What is Web API?
+A web API is an API that uses HTTP to exchange data between a client and a web server.
+All web services are APIs, but not all APIs are web services.
+In this model, the client sends requests and the server returns structured responses.
 
-A Web API or Web Service API is an application processing interface between a web server and web browser. All web services are APIs but not all APIs are web services.
+## What Is REST?
 
-A Web API is a set of definitions and protocols for building and integrating communication between a browser and a web server. It’s represents a contract between the information provider and the information user—establishing the content required from the consumer (the browser client) and the content required by the producer (the web server response).
+Representational State Transfer (REST) is an architectural style for web services.
+REST services are stateless and separate client concerns from server concerns.
+Clients use HTTP methods such as GET, POST, PUT, and DELETE to request data operations.
+The server returns data responses instead of full page rendering.
 
-## What is REST?
+## What Is OData?
 
-REpresentational State Transfer (REST), is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other. REST-compliant systems, often called RESTful systems, are characterized by how they are stateless and separate the concerns of client and server, where two computer systems use to exchange information securely over the internet.
-
-REST defines a set of functions like GET, PUT, DELETE, etc. that clients can use to access server data. Clients and servers exchange data using web protocols. Its main feature is statelessness—servers do not save client data between requests. Client requests to the server are similar to URLs you type in your browser to visit a website. The response from the server is plain data, without the typical graphical rendering of a web page.
-
-## What is OData?
-
-The OData Protocol is an application-level protocol for interacting with data via RESTful web services. The protocol supports the description of data models and the editing and querying of data according to those models. It provides facilities for:
+The OData protocol is an application-level protocol for querying and updating data through RESTful web services.
+It provides facilities for:
 
 * Metadata: a machine-readable description of the data model exposed by a particular data provider.
 * Data: sets of data entities and the relationships between them.
 * Querying: requesting that the service perform a set of filtering and other transformations to its data, then return the results.
 * Editing: creating, editing, and deleting data.
-* Operations: invoking custom logic
-* Vocabularies: attaching custom semantics
+* Operations: invoking custom logic.
+* Vocabularies: attaching custom semantics.
 
-The OData Protocol is different from other REST-based web service approaches in that it provides a uniform way to describe both the data and the data model. This improves semantic interoperability between systems and allows an ecosystem to emerge.
+Unlike many REST-based approaches, OData provides a consistent way to describe both the data and its model.
+This consistency improves interoperability between systems.
 
 ## Creating the Web Service
 
-First, you will need to create a live service with the help of a special content file with the extention ".svc" and add it to your service deployment project:
-[Deploying an Internet Information Services-Hosted WCF Service](https://learn.microsoft.com/en-us/dotnet/framework/wcf/feature-details/deploying-an-internet-information-services-hosted-wcf-service?redirectedfrom=MSDN#create-an-svc-file-for-the-wcf-service)
+Create a live service by adding an `.svc` file to your service deployment project:
+[Deploy a WCF Service Hosted in Internet Information Services](https://learn.microsoft.com/en-us/dotnet/framework/wcf/feature-details/deploying-an-internet-information-services-hosted-wcf-service?redirectedfrom=MSDN#create-an-svc-file-for-the-wcf-service)
 
-You can see the Kendo and Telerik Services implementation provided in this public repository:
-[Kendo UI Demos Service demos-and-odata-v3](https://github.com/telerik/kendo-ui-demos-service/tree/master/demos-and-odata-v3)
+Review the Kendo UI demos service implementation in this public repository:
+[Kendo UI Demos Service - demos-and-odata-v3](https://github.com/telerik/kendo-ui-demos-service/tree/master/demos-and-odata-v3)
 
-You will also have to add this configuration in your Web.config file:
-```HTML
+Add the following configuration to your `Web.config` file:
+```xml
   <system.serviceModel>
     <serviceHostingEnvironment aspNetCompatibilityEnabled="true" multipleSiteBindingsEnabled="true" />
   </system.serviceModel>
@@ -65,7 +66,7 @@ You will also have to add this configuration in your Web.config file:
 
 ## Binding the Grid
 
-Once the Web service is up and running, you define the Grid's DataSource instance and can apply its settings to point to the RESTful API URL:
+After the web service is available, configure the Grid DataSource to point to the REST API URL:
 
 ```HtmlHelper
     .DataSource(dataSource => dataSource
@@ -104,5 +105,5 @@ Once the Web service is up and running, you define the Grid's DataSource instanc
 {% else %}
 * [Official Microsoft Documentation on Getting Started with {{ site.framework }} OData](https://learn.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint)
 {% endif %}
-* [OData-v4 Binding by the Grid HtmlHelper for {{ site.framework }} ](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/binding/odatav4-binding)
-* [Server-Side API](/api/grid)
+* [OData-v4 Binding by the Grid HtmlHelper for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/binding/odatav4-binding)
+* [Grid Server-Side API Reference](/api/grid)

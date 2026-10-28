@@ -9,7 +9,7 @@ position: 5
 
 # File Identification
 
-The internal implementation of the Upload widget allows you to identify which is the file object which is in the process of uploading to the remote endpoint.
+The Upload assigns a unique identifier to each file so event handlers can identify the file being uploaded to the remote endpoint.
 
 Regardless of the mode of operation, the Upload generates a unique identifier (`uid`) for each file. When the Upload is in a synchronous or asynchronous mode with its `batch` option enabled, the single `uid` that is generated stands for the whole batch of files which were selected at the same time. If the Upload is in an asynchronous mode with its `batch` option disabled, the Upload generates a `uid` for each separate file.
 

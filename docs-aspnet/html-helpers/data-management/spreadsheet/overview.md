@@ -11,7 +11,7 @@ position: 0
 # {{ site.framework }} Spreadsheet Overview
 
 {% if site.core %}
-The Telerik UI Spreadsheet TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Spreadsheet widget. To add the component to your ASP.NET Core app, you can use either.
+The Telerik UI Spreadsheet TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Spreadsheet widget. To add the component to your ASP.NET Core app, you can use either the HtmlHelper or the TagHelper.
 {% else %}
 The Telerik UI Spreadsheet HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Spreadsheet widget.
 {% endif %}
@@ -725,8 +725,11 @@ The following example demonstrates the basic configuration for the Spreadsheet c
     )
 ```
 ```TagHelper
+    @{
+        var mergedCells = new[] { "A1:G1" };
+    }
     <kendo-spreadsheet name="spreadsheet" style="width: 100%">
-        <excel proxy-url="@Url.Action(" TagHelper_Save", "Spreadsheet" )" />
+        <excel proxy-url="@Url.Action("TagHelper_Save", "Spreadsheet")" />
         <pdf proxy-url="@Url.Action("TagHelper_Save", "Spreadsheet")" />
         <sheets>
             <sheet name="FoodOrder" merged-cells="@mergedCells">
@@ -882,7 +885,7 @@ The following example demonstrates the basic configuration for the Spreadsheet c
                             <cell index="0" background="rgb(193,226,255)" color="rgb(0,62,117)"></cell>
                             <cell index="1" background="rgb(193,226,255)" color="rgb(0,62,117)"></cell>
                             <cell index="2" value="Total Amount: " text-align="SpreadsheetTextAlign.Right" background="rgb(193,226,255)" color="rgb(0,62,117)"></cell>
-                            <cell index="5" formula="SUM(F3:F13)" bold="true" format="$#,##0.00" vertical-align="SpreadsheetVerticalAlign.Bottom" background="rgb(193,226,255)" color="rgb(0,62,117)"></cell>
+                            <cell index="5" formula="SUM(F3:F14)" bold="true" format="$#,##0.00" vertical-align="SpreadsheetVerticalAlign.Bottom" background="rgb(193,226,255)" color="rgb(0,62,117)"></cell>
                             <cell index="6" background="rgb(193,226,255)" color="rgb(0,62,117)"></cell>
                         </cells>
                     </sheet-row>

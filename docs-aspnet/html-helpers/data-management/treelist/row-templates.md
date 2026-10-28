@@ -36,6 +36,7 @@ The following scripts will generate the content for the templates:
 <script id="rowTemplate" type="text/x-kendo-template">
     <tr class="k-table-row" data-uid='#: data.model.uid #' role="row">
     <td class="k-table-td" role="gridcell">
+    #// Render one indent icon for each hierarchy level.
     #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
                 <span class="k-icon k-i-none"></span>
             #}#
@@ -53,7 +54,7 @@ The following scripts will generate the content for the templates:
        <div class='employee-name'>#: data.model.FirstName # #: data.model.LastName # <span class = 'employee-position'>#: data.model.Position #</span></div>
     </td>
     <td class="k-table-td" role="gridcell">
-        <img class= "county-flag" alt="Telerik UI for ASP.NET MVC TreeList #: data.model.CountryFlag # country flag" src="../Content/web/country-flags/#: data.model.CountryFlag #.png" />
+        <img class= "county-flag" alt="{{ site.product_short }} TreeList #: data.model.CountryFlag # country flag" src="../Content/web/country-flags/#: data.model.CountryFlag #.png" />
     </td>
     <td class="k-table-td" role="gridcell">
          <span class='badgeTemplate'>#: Math.floor((kendo.date.today() - data.model.HireDate)/(365*24*60*60*1000)) #</span>
@@ -81,7 +82,7 @@ The following scripts will generate the content for the templates:
        <div class='employee-name'>#: data.model.FirstName # #: data.model.LastName # <span class = 'employee-position'>#: data.model.Position #</span></div>
     </td>
     <td class="k-table-td" role="gridcell">
-        <img class= "county-flag" alt="Telerik UI for ASP.NET MVC TreeList #: data.model.CountryFlag # country flag" src="../Content/web/country-flags/#: data.model.CountryFlag #.png" />
+        <img class= "county-flag" alt="{{ site.product_short }} TreeList #: data.model.CountryFlag # country flag" src="../Content/web/country-flags/#: data.model.CountryFlag #.png" />
     </td>
     <td class="k-table-td" role="gridcell">
          <span class='badgeTemplate'>#: Math.floor((kendo.date.today() - data.model.HireDate)/(365*24*60*60*1000)) #</span>
@@ -95,6 +96,7 @@ Additionally, for the expand/collapse icons to apear, you must create SVG icons 
 ```
 <script>
     function onDataBound(e) {
+        // Replace the template icon placeholders with the current Kendo SVG icons.
         $(".k-svg-i-chevron-right").each(function () {
             kendo.ui.icon(this, { icon: 'chevron-right' });
         })
@@ -127,7 +129,7 @@ The TreeList in versions of {{ site.product_short }} prior to R1 2023 SP1 (2023.
        <div class='employee-name'>#: data.model.FirstName # #: data.model.LastName # <span class = 'employee-position'>#: data.model.Position #</span></div>
     </td>
     <td role="gridcell">
-        <img class= "county-flag" src="../Content/web/country-flags/#: data.model.CountryFlag #.png" />
+        <img class= "county-flag" alt="{{ site.product_short }} TreeList #: data.model.CountryFlag # country flag" src="../Content/web/country-flags/#: data.model.CountryFlag #.png" />
     </td>
     <td role="gridcell">
          <span class='badgeTemplate'>#: Math.floor((kendo.date.today() - data.model.HireDate)/(365*24*60*60*1000)) #</span>
@@ -153,7 +155,7 @@ The TreeList in versions of {{ site.product_short }} prior to R1 2023 SP1 (2023.
        <div class='employee-name'>#: data.model.FirstName # #: data.model.LastName # <span class = 'employee-position'>#: data.model.Position #</span></div>
     </td>
     <td role="gridcell">
-        <img class= "county-flag" src="../Content/web/country-flags/#: data.model.CountryFlag #.png" />
+        <img class= "county-flag" alt="{{ site.product_short }} TreeList #: data.model.CountryFlag # country flag" src="../Content/web/country-flags/#: data.model.CountryFlag #.png" />
     </td>
     <td role="gridcell">
          <span class='badgeTemplate'>#: Math.floor((kendo.date.today() - data.model.HireDate)/(365*24*60*60*1000)) #</span>

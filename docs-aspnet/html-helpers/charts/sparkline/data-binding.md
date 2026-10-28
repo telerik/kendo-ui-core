@@ -41,6 +41,8 @@ Binding to local data can be done by using either of the following approaches:
 ```
 {% endif %}
 
+Alternatively, set the root-level `Data` field to an array of values.
+
 ```HtmlHelper
     @(Html.Kendo().Sparkline()
             .Name("temp-log")

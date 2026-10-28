@@ -13,11 +13,11 @@ The Row and Column spanning functionality provides the option to customize the a
 
 ## Row Spanning
 
-The Row spanning functionality of the Grid enables you to span a cell between multiple rows. You can use one of the [`Columns.HtmlAttributes`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#htmlattributessystemstring) overload and pass the name of the JavaScript handler function that will set the attributes for the column. The function will receive the dataItem as a parameter and you use tha data to calculate the span of each cell. In the attributes function you can apply the rowSpan and hidden attributes to the cells.
+The Row spanning functionality of the Grid enables you to span a cell between multiple rows. You can use one of the [`Columns.HtmlAttributes`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#htmlattributessystemstring) overload and pass the name of the JavaScript handler function that will set the attributes for the column. The function will receive the dataItem as a parameter and you use the data to calculate the span of each cell. In the attributes function you can apply the rowSpan and hidden attributes to the cells.
 
 The [`rowspan`](https://www.w3schools.com/tags/att_rowspan.asp) attribute defines the number of rows a table cell needs to span. The [`hidden`](https://www.w3schools.com/tags/att_hidden.asp) attribute must be added to cells that should not be displayed when a condition or hiding a cell is met.
 
-The example below demonstrates how to implement row spanning when the ShipCity field for consequtive cells has the same value:
+The example below demonstrates how to implement row spanning when the ShipCity field for consecutive cells has the same value:
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()

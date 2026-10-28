@@ -1,7 +1,7 @@
 ---
 title: Local Binding
 page_title: Local Binding
-description: "Learn how to implement Local Binding with Telerik UI Grid component for {{ site.framework }}."
+description: "Learn how to bind the Telerik UI Grid to local data in {{ site.framework }}, configure client operations, and display results."
 components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/server-binding
 slug: htmlhelpers_grid_aspnetcore_localbinding
@@ -10,7 +10,7 @@ position: 1
 
 # Local Binding
 
-When configured for local binding, the Grid serializes the data as part of its `DataSource` and performs all data operations, such as paging, sorting, filtering, grouping, and aggregating, on the client.
+With local binding, the Grid serializes data in its `DataSource` and performs paging, sorting, filtering, grouping, and aggregating on the client.
 
 For a runnable example, refer to the [demo on local binding of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/local-data-binding).  
 
@@ -36,7 +36,7 @@ To configure the Grid for {{ site.framework }} to do local binding:
         }
     ```
     
-1. Open the `HomeController.cs` and return an `IEnumerable` of the model type with the View. This is the `View()` which holds the Grid definition.
+1. Open `HomeController.cs` and return an `IEnumerable` of the model type to the view that contains the Grid definition.
 
     {% if site.core %}
     ```C# HomeController.cs      
@@ -76,7 +76,7 @@ To configure the Grid for {{ site.framework }} to do local binding:
     ```
     {% endif %}
 
-1. In the `Index.cshtml` view, configure the Grid to accept the model in its constructor and set `ServerOperations(false)`.
+1. In `Index.cshtml`, configure the Grid to accept the model in its constructor and set `ServerOperation(false)`.
 
     ```HtmlHelper
         @model IEnumerable<AspNetCoreGrid.Models.OrderViewModel>
@@ -136,5 +136,5 @@ To configure the Grid for {{ site.framework }} to do local binding:
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
 * [Custom Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/customajaxbinding)
-* [Knowledge Base Section](/knowledge-base)
-* [Server-Side API](/api/grid)
+* [Grid Knowledge Base Articles](/knowledge-base)
+* [Grid API Reference](/api/grid)

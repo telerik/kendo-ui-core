@@ -1,7 +1,7 @@
 ---
 title: Chart Integration
 page_title: Chart Wizard Integration
-description: "Get started with the Telerik UI Grid for {{ site.framework }} and learn how to quickly create the a chart by using the Grid dataset."
+description: "Create charts from Telerik UI Grid data in {{ site.framework }} with the Chart Wizard and selected rows."
 components: ["grid"]
 slug: htmlhelpers_grid_chart_integration
 position: 25
@@ -46,7 +46,7 @@ To create different types of charts from the Grid row and cell selection, procee
     ```TagHelper
         @addTagHelper *, Kendo.Mvc
 
-        <kendo-grid name="grid" selectable="multiple,row>
+        <kendo-grid name="grid" selectable="multiple,row">
             <datasource type="DataSourceTagHelperType.Ajax" page-size="15">
                 <schema data="Data" total="Total" errors="Errors">
                     <model id="ProductID">
@@ -65,7 +65,7 @@ To create different types of charts from the Grid row and cell selection, procee
             </datasource>
             <columns>
                 <column field="ProductID" />
-                <column field="ProductName"title="Product Name" />
+                <column field="ProductName" title="Product Name" />
                 <column field="UnitPrice" title="Unit Price" />
                 <column field="UnitsInStock" title="Units In Stock" />
                 <column field="Discontinued" />
@@ -95,7 +95,7 @@ To create different types of charts from the Grid row and cell selection, procee
     ```
     {% endif %}
 
-1. Within the `$(document).ready()` function, when the Grid is initialized, get a reference to the Grid and use the `setOptions()` method to update the [built-in context menu]({% slug grid_aspnetcore_contextmenu%}) of the Grid with custom commands. Using the context menu commands, you can select the type of chart that must be generated.
+1. Within the `$(document).ready()` function, when the Grid is initialized, get a reference to the Grid and use the `setOptions()` method to update the [built-in context menu]({% slug grid_aspnetcore_contextmenu %}) of the Grid with custom commands. Using the context menu commands, you can select the type of chart that must be generated.
 
     ```JS
         $(document).ready(function(){

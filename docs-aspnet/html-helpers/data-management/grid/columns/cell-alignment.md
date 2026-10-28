@@ -1,7 +1,7 @@
 ---
 title: Content Alignment
 page_title: Content Alignment
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to align the cell content, the column header, and the column footer."
+description: "Learn how to align Telerik UI Grid cell, header, and footer content in {{ site.framework }} by using styles and alignment classes."
 components: ["grid"]
 slug: cell_alignment_aspnet_grid
 position: 11
@@ -9,7 +9,7 @@ position: 11
 
 # Content Alignment
 
-By default, the text and values in the Grid are aligned to the left.
+By default, Grid cell content is left-aligned.
 
 ## Cell Content
 
@@ -24,13 +24,13 @@ To change the content alignment of the Grid, use either of the following approac
     ```
     {% if site.core %}
     ```TagHelper
-    <column field="OrderID" html-attributes='new Dictionary<string,object> { ["style"] = "text-align : right" }'/>
+    <column field="OrderID" html-attributes='new Dictionary<string,object> { ["style"] = "text-align: right" }'/>
     ```
     {% endif %}
 
 
 
-* Apply the `k-text-left`, `k-text-right` or `k-text-center` classes to the column definition by using the `HtmlAttributes()` method.
+* Apply the `k-text-left`, `k-text-right`, or `k-text-center` classes to the column definition by using the `HtmlAttributes()` method.
 
     ```HtmlHelper
         .Columns(columns =>
@@ -46,7 +46,7 @@ To change the content alignment of the Grid, use either of the following approac
 
 ## Column Headers
 
-You can set the alignment of the column headers through the `HeaderHtmlAttributes()` method.
+Set the alignment of the column headers through the `HeaderHtmlAttributes()` method.
 
 ```HtmlHelper
     .Columns(columns =>
@@ -62,7 +62,7 @@ You can set the alignment of the column headers through the `HeaderHtmlAttribute
 
 ## Column Footers
 
-When a specified column has a footer, you can change the alignment of its content by using the `FooterHtmlAttributes()` method.
+When a column has a footer, change the alignment of its content by using the `FooterHtmlAttributes()` method.
 
 ```HtmlHelper
     .Columns(columns =>
@@ -72,14 +72,14 @@ When a specified column has a footer, you can change the alignment of its conten
 ```
 {% if site.core %}
 ```TagHelper
-    <column field="OrderID" footer-html-attributes='new Dictionary<string,object> ["style"] = "text-align: center" }'/>
+    <column field="OrderID" footer-html-attributes='new Dictionary<string,object> { ["style"] = "text-align: center" }'/>
 ```
 {% endif %}
 
 ## See Also
 
 {% if site.core %}
-* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+* [ASP.NET Core Grid overview](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
 * [Content Alignment of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/cell-alignment)
-* [Server-Side API](/api/grid)
+* [Grid server-side API reference for {{ site.framework }}](/api/grid)

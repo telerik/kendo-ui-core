@@ -16,7 +16,7 @@ As of the R1 2022 SP2 release, the API of the Spreadsheet [Sheet](https://docs.t
 
 ## Using the Resize Method
 
-If you programmmatically set the number of rows or columns with the `resize` method, the user will not able to revert the applied changes through the **Undo** or **Redo** toolbar options. **Undo** and **Redo** will take effect, only if the user modifies the number of rows or columns through the **Insert New Row** or **Insert New Column**, or the **Delete Row** or **Delete Column** toolbar options.
+If you programmatically set the number of rows or columns with the `resize` method, the user will not be able to revert the applied changes through the **Undo** or **Redo** toolbar options. **Undo** and **Redo** will take effect only if the user modifies the number of rows or columns through the **Insert New Row** or **Insert New Column**, or the **Delete Row** or **Delete Column** toolbar options.
 
 The example below shows how to set the number of rows and columns in the active sheet by using the [`resize`](https://docs.telerik.com/kendo-ui/api/spreadsheet/sheet/methods/resize) API method. 
 

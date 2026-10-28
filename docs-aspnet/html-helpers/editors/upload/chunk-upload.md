@@ -101,7 +101,7 @@ To enable the chunk upload:
         {
             if (metaData == null)
             {
-                return Save(files);
+                return await Save(files);
             }
 
             MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(metaData));
@@ -129,6 +129,7 @@ To enable the chunk upload:
             // This response indicates to the Upload
             // that it can proceed either
             // with the next chunk ("uploaded" = false) or with the next file ("uploaded" = true).
+            // Mark the final chunk so the Upload advances to the next file.
             fileBlob.uploaded = chunkData.TotalChunks - 1<= chunkData.ChunkIndex;
             fileBlob.fileUid = chunkData.UploadUid;
 
@@ -172,7 +173,7 @@ To enable the chunk upload:
                     var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
                     using (var fileStream = new FileStream(physicalPath, FileMode.Create))
                     {
-                        file.CopyToAsync(fileStream);
+                        await file.CopyToAsync(fileStream);
                     }
                 }
             }
@@ -255,7 +256,7 @@ To enable the chunk upload:
             {
                 path = Path.Combine(Server.MapPath("~/App_Data"), chunkData.FileName);
 
-                //AppendToFile(path, file.InputStream);
+                AppendToFile(path, file.InputStream);
             }
         }
 

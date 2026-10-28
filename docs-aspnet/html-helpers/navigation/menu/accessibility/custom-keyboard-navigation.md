@@ -35,6 +35,7 @@ The following example shows the pattern for overriding a built-in shortcut of th
 ```javascript
     function onMenuKendoKeydown(e) {
         if (e.keyCode === kendo.keys.ENTER) {
+            // Suppress the built-in Menu shortcut for this key combination.
             e.preventKendoKeydown = true;
             console.log("Built-in shortcut overridden.");
         }

@@ -1,7 +1,7 @@
 ---
 title: Aggregates
 page_title: Aggregates
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} and group its data by using aggregate functions."
+description: "Configure aggregate functions and display group totals in the Telerik UI Grid for {{ site.framework }}."
 components: ["grid"]
 slug: aggregates_aspnetcore_grid
 position: 2
@@ -9,9 +9,9 @@ position: 2
 
 # Aggregates
 
-The Telerik UI Grid for {{ site.framework}} component provides built-in aggregates for a grand total row and also column values based on [grouping]({%slug htmlhelpers_grid_aspnetcore_grouping%}).
+The Telerik UI Grid for {{ site.framework }} component provides built-in aggregates for a grand total row and also column values based on [grouping]({% slug htmlhelpers_grid_aspnetcore_grouping %}).
 
-#### In this article:
+## In This Article
 
 * [Available Aggregate Functions](#available-aggregate-functions)
 * [Where You Can Use Aggregates](#where-you-can-use-aggregates)
@@ -88,7 +88,7 @@ To enable aggregates:
 {% if site.mvc %}
 ## Server Aggregates
 
-When the Telerik UI Grid for {{site.framework}} is configured for server-binding, the aggregates are also calculated on the server-side. The whole grid content with the aggregates calculated are pushed as HTML to the client. 
+When the Telerik UI Grid for {{ site.framework }} is configured for server-binding, the aggregates are also calculated on the server-side. The whole grid content with the aggregates calculated are pushed as HTML to the client.
 
 To configure the grid to use server aggregates:
 

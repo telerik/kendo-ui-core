@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Columns Overview
-description: "An overview the Telerik UI Grid component for {{ site.framework }} columns options."
+description: "Learn how to configure Telerik UI Grid bound columns in {{ site.framework }}, including appearance, templates, and behavior settings."
 components: ["grid"]
 slug: htmlhelper_gridcolumns
 position: 1
@@ -11,9 +11,9 @@ position: 1
 
 A bound column is declared through the `Bound` method, which specifies a data field.
 
-> The data field names must be valid JavaScript identifiers and contain neither spaces, nor special characters. The first character should be a letter.
+>important The data field names must be valid JavaScript identifiers and contain no spaces or special characters. The first character must be a letter.
 
-Bound columns support many settings and amongst the most used are the following settings:
+Bound columns support many settings, and the most commonly used settings are:
 
 ## For Appearance
 
@@ -25,7 +25,7 @@ Bound columns support many settings and amongst the most used are the following 
 * Media
 * MinScreenWidth
 * MinResizableWidth
-* HideOnGroup - specifies whether the column/field that is used to group the data in the Grid should be hidden from the displayed columns. By default, it is set to `false`. If set to `true` the column will be hidden when the Grid is groupd via user interaction. The column will be displayed again if interaction to ungroup by it is performed.
+* HideOnGroup - specifies whether the column or field used to group the Grid data is hidden from the displayed columns. By default, it is set to `false`. If set to `true`, the column is hidden when the Grid is grouped through user interaction. The column is displayed again when the user ungroups by that field.
 
 ## For Functionality
 
@@ -34,16 +34,15 @@ Bound columns support many settings and amongst the most used are the following 
 * Template - sets the {% if site.mvc %}server{% endif %} template which is used when the bound field is displayed.
 * EditorTemplateName
 * Editable
-* Sortable
 * Filterable - enables or disables the filtering UI. By default, it is set to `true` which means that the bound Grid columns can be filtered using the filtering UI.
 * Locked
 * Lockable
 * IncludeInMenu
 
-### Custom Appearance 
+### Custom Appearance
 
 * ClientTemplate {% if site.mvc %}- used when the Grid is configured for [Ajax binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}).{% endif %}
-* Template -  This is a column that is not bound to a specific field from the data, so it is not sortable, nor filterable. Nevertheless, template columns can still display data item values.
+* Template - this is a column that is not bound to a specific field from the data, so it is not sortable or filterable. Template columns can still display data item values.
 * ClientHeaderTemplate
 * ClientFooterTemplate
 * ClientGroupHeaderTemplate
@@ -98,7 +97,7 @@ Bound columns support many settings and amongst the most used are the following 
     </kendo-grid>
 ```
 {% endif %}
-```JS script
+```JavaScript
 <script>
     function calculateField(data) {
         return data.UnitPrice * data.UnitsInStock;
@@ -110,20 +109,20 @@ Bound columns support many settings and amongst the most used are the following 
 
 The [`Columns`](/api/kendo.mvc.ui.fluent/gridbuilder#columnssystemaction) method configures the Grid columns. If not used, the Grid creates a column for every public property of the model.
 
-* A [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
+* A [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) that specifies how the column is displayed.
 
-    > The `ClientTemplate` is used when the Grid is configured for [Ajax binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}) {% if site.mvc %} or when [server binding]({% slug serverbinding_grid_aspnetmvc %}) is combined with client-side data operations^&mdash;when [`ServerOperation` is set to `false`]({% slug htmlhelpers_datasource_aspnetcore %}#enabling-client-data-processing){% endif %}.
+    >note The `ClientTemplate` is used when the Grid is configured for [Ajax binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}) {% if site.mvc %}or when [server binding]({% slug serverbinding_grid_aspnetmvc %}) is combined with client-side data operations - when [`ServerOperation` is set to `false`]({% slug htmlhelpers_datasource_aspnetcore %}#enabling-client-data-processing){% endif %}.
 
-    Client templates defined in server-side code are URL encoded before they are sent to the client. As a result, a `+` (plus) sign, which is used inside a binding expression, is lost&mdash;for example, `"#= 3 + 5 #"`.
+    Client templates defined in server-side code are URL encoded before they are sent to the client. As a result, a `+` (plus) sign used in a binding expression is lost - for example, `"#= 3 + 5 #"`.
 
-    To work around this issue, use either f the following approaches:
-    * Use an auxiliary JavaScript function in the global scope, which returns the desired value&mdash;for example, `"#= auxFunction(3, 5) #"`.
-    * Encode the `+` (plus) sign&mdash;for example, `"#= 3 %2b 5 #"`.
+    To work around this issue, use either of the following approaches:
+    * Use an auxiliary JavaScript function in the global scope that returns the desired value - for example, `"#= auxFunction(3, 5) #"`.
+    * Encode the `+` (plus) sign - for example, `"#= 3 %2b 5 #"`.
 
 ```HtmlHelper
             @(Html.Kendo().Grid<Product>()
                 .Name("grid")
-                .Columns(
+                .Columns(columns =>
                 {
                     columns.Bound(product => product.ProductName).ClientTemplate("<strong>#:ProductName #</strong>");
                 })

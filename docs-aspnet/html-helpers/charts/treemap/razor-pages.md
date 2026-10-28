@@ -36,6 +36,7 @@ To bind the TreeMap to a data set received from a remote endpoint within a Razor
             ...
         )
     ```
+    {% if site.core %}
     ```TagHelper
         @page
         @model IndexModel
@@ -52,6 +53,7 @@ To bind the TreeMap to a data set received from a remote endpoint within a Razor
             <!--Other configuration-->
         </kendo-treemap>
     ```
+        {% endif %}
 
 1. Add an `AntiForgeryToken` at the top of the page.
 

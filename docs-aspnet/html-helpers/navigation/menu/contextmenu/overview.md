@@ -44,13 +44,13 @@ The following example demonstrates how to define the ContextMenu.
                 children.Add()
                     .Text("Tables")
                     .Items(i =>{
-                        i.Add().Text("Dinning Tables");
+                        i.Add().Text("Dining Tables");
                         i.Add().Text("Coffee Tables");
                     })
                 children.Add().Text("Accessories");
             });
         items.Add()
-            .Text("Electronics"); //Add an item with the text "Item2".)
+            .Text("Electronics") //Add an item with the text "Item2".)
             .Items(children =>{
                 children.Add().Text("TVs");
                 children.Add().Text("Laptops");
@@ -60,6 +60,7 @@ The following example demonstrates how to define the ContextMenu.
 ```
 {% if site.core %}
 ```TagHelper
+    <div id="target">Right click here</div>
     <kendo-contextmenu name="menu" target="#target" show-on="click">
         <popup-animation>
             <open effects="fade:in" duration="500" />
@@ -71,7 +72,7 @@ The following example demonstrates how to define the ContextMenu.
                     <menu-item text="Chairs"></menu-item>
                     <menu-item text="Tables">
                         <sub-items>
-                            <menu-item text="Dinning Tables"></menu-item>
+                            <menu-item text="Dining Tables"></menu-item>
                             <menu-item text="Coffee Tables"></menu-item>
                         </sub-items>
                     </menu-item>
@@ -205,7 +206,7 @@ The ContextMenu derives from the Menu component and largely shares the same func
 ## Next Steps
 
 * [Getting Started with the ContextMenu]({% slug context_menu_getting_started %})
-* [Using the ContextMenu (Demo)](https://demos.telerik.com/aspnet-core/menu/context-menu)
+* [Using the ContextMenu (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/context-menu)
 {% if site.core %}
 * [ContextMenu in Razor Pages]({% slug htmlhelpers_contextmenu_razorpage_aspnetcore %})
 {% endif %}

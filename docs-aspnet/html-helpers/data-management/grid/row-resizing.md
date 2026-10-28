@@ -1,7 +1,7 @@
 ---
 title: Row Resizing
 page_title: Row Resizing
-description: "Learn all about the Row Resizing feature of the Grid."
+description: "Learn how to resize Grid rows in the Telerik UI for {{ site.framework }} and control row heights easily."
 components: ["grid"]
 slug: rowresize_kendoui_grid
 position: 20

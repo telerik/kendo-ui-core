@@ -134,6 +134,7 @@ The following example demonstrates a StockChart in the master and navigator data
     <kendo-stockchart name="stockChart"
                       date-field="Date">
         <chart-title text="The ACME Company"></chart-title>
+    <!-- Main data source for the detailed StockChart data. -->
         <datasource type="DataSourceTagHelperType.Ajax">
             <transport>
                 <read url="@Url.Action("_StockData", "Financial")" />
@@ -153,6 +154,7 @@ The following example demonstrates a StockChart in the master and navigator data
             </schema>
         </datasource>
         <navigator>
+            <!-- Navigator data source provides the preview data. -->
             <datasource type="DataSourceTagHelperType.Ajax">
                 <transport>
                     <read url="@Url.Action("_StockData", "Financial")" />

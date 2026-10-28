@@ -13,6 +13,8 @@ The Telerik UI Chart component for {{ site.framework }} allows to display a mess
 
 ## Example with Bar Chart
 
+The following example displays a custom message and a button when a Bar Chart has no data.
+
 ```HtmlHelper
     @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
         .Name("chart")
@@ -42,7 +44,7 @@ The Telerik UI Chart component for {{ site.framework }} allows to display a mess
     @addTagHelper *,Kendo.Mvc
     <div class="demo-section wide">
         <kendo-chart name="chart">
-            <no-data template="<div class='empty-template'>\r\n<p>There is no data to display.</p>\r\n<button id='button' type='button'>Load Data</    button>\r\n</div>"></no-data>
+            <no-data template="<div class='empty-template'>\r\n<p>There is no data to display.</p>\r\n<button id='button' type='button'>Load Data</button>\r\n</div>"></no-data>
             <category-axis>
                 <category-axis-item>
                     <labels>
@@ -105,6 +107,7 @@ The Telerik UI Chart component for {{ site.framework }} allows to display a mess
                 click: function () {
                     let chart = $("#chart").data("kendoChart");
 
+                    // Replace the empty chart data source with the data loaded from the server.
                     chart.setDataSource(dataSource);
                 }
             })
@@ -113,6 +116,8 @@ The Telerik UI Chart component for {{ site.framework }} allows to display a mess
 ```
 
 ## Example with Pie Chart.
+
+The following example uses a custom No Data Template for a Pie Chart.
 
 ```HtmlHelper
     @(Html.Kendo().Chart(Model)
@@ -188,6 +193,7 @@ The Telerik UI Chart component for {{ site.framework }} allows to display a mess
                 click: function () {
                     let chart = $("#chart").data("kendoChart");
 
+                    // Replace the empty chart data source with the data loaded from the server.
                     chart.setDataSource(dataSource);
                 }
             })
@@ -195,7 +201,7 @@ The Telerik UI Chart component for {{ site.framework }} allows to display a mess
     </script>
 ```
 
-## Intergation with Template Component
+## Integration with Template Component
 
 The Telerik Template component can be integrated to further enhance the No Data Template. For example, the Html.Kendo().Template() approach can be used to add more complex UI elements, such as buttons or forms, directly within the template. Here is an example:
 

@@ -1,7 +1,7 @@
 ---
 title: Popup
 page_title: Popup
-description: "Define commands and set the edit mode to configure the Telerik UI Grid component for {{ site.framework }} for Popup editing."
+description: "Enable Popup editing mode and configure the edit form in the Telerik UI Grid for {{ site.framework }}."
 components: ["grid"]
 slug: popupediting_grid_aspnetcore
 position: 3
@@ -246,7 +246,7 @@ To define a custom editor for a specified field in the popup form:
     @(Html.Kendo().DropDownListFor(m => m)
         .DataValueField("Id") // The value of the drop-down is taken from the "Id" property.
         .DataTextField("Name") // The text of the item is taken from the "Name" property.
-        .BindTo((System.Collections.IEnumerable)ViewData["categories"]) // A list of all optipns, which is populated in the controller.
+        .BindTo((System.Collections.IEnumerable)ViewData["categories"]) // A list of all options, which is populated in the controller.
     )
     ```
     ```C# OrderViewModel

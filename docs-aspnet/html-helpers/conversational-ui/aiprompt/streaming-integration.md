@@ -15,7 +15,7 @@ In this article, you will build a practical, end-to-end example that wires the A
 
 ## Getting Started
 
-To creare an AI chat serivce that connects to the AIPrompt, follow the next steps:
+To create an AI chat service that connects to the AIPrompt, follow the next steps:
 
 > The example uses a Telerik-hosted AI service for demonstration purposes only. For production applications, you can implement your own AI service that understands your specific domain, data, and business requirements.
 
@@ -153,7 +153,7 @@ To creare an AI chat serivce that connects to the AIPrompt, follow the next step
     * Reads the stream and invokes callbacks: `onStart`, `onProgress`, `onComplete`.
     * Supports cancelling through `abortRequest()`.
 
-1. Define the AIPrompt component and enable the built-in [SpeechToTextButton](slug:htmlhelpers_overview_speechtotextbutton) and [TextArea](slug:htmlhelpers_overview_textarea) components through the `SpeechToText()` and `PromptTextArea()` configurations.
+1. Define the AIPrompt component and enable the built-in [SpeechToTextButton]({% slug htmlhelpers_overview_speechtotextbutton %}) and [TextArea]({% slug htmlhelpers_overview_textarea %}) components through the `SpeechToText()` and `PromptTextArea()` configurations.
 
     ```HtmlHelper
     @(Html.Kendo().AIPrompt()
@@ -247,6 +247,13 @@ To creare an AI chat serivce that connects to the AIPrompt, follow the next step
 
                 // Set active view to output
                 aiPromptInstance.activeView("output");
+                aiPromptInstance.addPromptOutput({
+                    id: currentOutputId,
+                    prompt: promptText,
+                    output: "",
+                    isLoading: true,
+                    isStreaming: true
+                });
 
                 try {
                     // Handle the streaming response using the API client.

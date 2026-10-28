@@ -9,7 +9,7 @@ position: 12
 
 # Selection Aggregates
 
-The Grid allows you calculate aggregated metrics based on the data of the selected cells or rows.
+The Grid allows you to calculate aggregated metrics based on the data of the selected cells or rows.
 
 This functionality allows you to get a quick snapshot containing metrics about the selected data. You can use the built-in approach and display these metrics at the bottom of the Grid or create your own elements that will display the data.
 
@@ -29,7 +29,7 @@ The Grid supports the following built-in aggregates for all selected cells:
 
 To display selection aggregates, the Grid must meet the following requirements:
 
-* The Grid must be [`Selectable`](/api/kendo.mvc.ui.fluent/gridselectionsettingsbuilder) where the `CellAgregates` property is specified. The aggregates work with `Cell`, `Row`, and `Checkbox` selection.
+* The Grid must be [`Selectable`](/api/kendo.mvc.ui.fluent/gridselectionsettingsbuilder) where the `CellAggregates` property is specified. The aggregates work with `Cell`, `Row`, and `Checkbox` selection.
 * The [`Model.Id`](/api/kendo.mvc.ui.fluent/datasourcemodeldescriptorfactory#idsystemlinqexpressionsexpression) field must be defined so that the aggregates can be calculated.
 
 To enable the display of aggregates, use either of the following approaches:

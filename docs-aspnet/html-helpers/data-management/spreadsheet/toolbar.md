@@ -18,7 +18,7 @@ The Toolbar of the Spreadsheet supports the following options:
 
 * [`File`](#file)&mdash;Configures the tools displayed in the `File` tab.
 * [`Home`](#home)&mdash;Configures the `Home` tab of the toolbar in the component.
-* [`Insert`](#home)&mdash;Configures the `Insert` tab of the toolbar in the component.
+* [`Insert`](#insert)&mdash;Configures the `Insert` tab of the toolbar in the component.
 * [`Format`](#format)&mdash;Configures the `Format` tab of the toolbar in the component.
 * [`Data`](#data)&mdash;Configures the `Data` tab of the toolbar in the component.
 * [`View`](#view)&mdash;Configures the `View` tab of the toolbar in the component.

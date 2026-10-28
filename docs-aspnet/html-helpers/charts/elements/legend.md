@@ -102,7 +102,7 @@ To customize the position of the legend, use the `offsetX` and `offsetY` options
 
 If you set the series names, the Chart displays a default legend.
 
-The following example demonstrates how to hide the legend by setting its `Visisble` option to `false`.
+The following example demonstrates how to hide the legend by setting its `Visible` option to `false`.
 
 ```HtmlHelper
      @(Html.Kendo().Chart()

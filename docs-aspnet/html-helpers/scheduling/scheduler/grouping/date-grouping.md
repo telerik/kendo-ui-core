@@ -56,7 +56,7 @@ To enable the date grouping of the resources, add the [`Group()`](/api/kendo.mvc
         </resources>
         <group date="true">
             <resources>
-                <group-resource name="Rooms" /> // "Rooms" matches the "name" attribute of the defined resource within the "resources" tag.
+                <group-resource name="Rooms" /> <!-- "Rooms" matches the "name" attribute of the defined resource within the "resources" tag. -->
             </resources>
         </group>
         <!--Additional configuration-->

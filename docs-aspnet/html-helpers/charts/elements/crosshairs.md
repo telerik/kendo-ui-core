@@ -105,7 +105,6 @@ The Telerik UI for {{ site.framework }} Chart supports the following properties 
     <kendo-chart name="chart">
         <series-defaults type="ChartSeriesType.Line"></series-defaults>
         <series>
-        <series>
             <series-item name="India" data="new double[] { 3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855 }">
             </series-item>
         </series>

@@ -23,7 +23,7 @@ To enable the PDF and Excel Export functionality, add the following ToolBar conf
 ```HtmlHelper
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
-        .ToolBar(tools=>
+        .Toolbar(tools=>
         {
             tools.Pdf();
             tools.Excel();

@@ -42,7 +42,7 @@ The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/ui
             var treelist = $("#treelist").data("kendoTreeList");
 
             // Use the expand method to expand the first row.
-            treelist.expand($("#treelist tbody>tr:eq(0)"));T
+            treelist.expand($("#treelist tbody>tr:eq(0)"));
         })
 
         var dataSource = new kendo.data.TreeListDataSource({
@@ -58,7 +58,7 @@ The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/ui
 
 ## Events
 
-The TreeList supports a set of [events](https://docs.telerik.com/kendo-ui/api/ui/treelist#methods) to which you can subscribe.
+The TreeList supports a set of [events](https://docs.telerik.com/kendo-ui/api/ui/treelist#events) to which you can subscribe.
 
 To handle the events, either:
 * Specify the JavaScript function which will handle the event during the initialization of the widget, or

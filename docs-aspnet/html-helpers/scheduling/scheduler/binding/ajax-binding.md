@@ -10,7 +10,7 @@ position: 2
 
 # Ajax Binding
 
-You can configure the Scheduler for Ajax binding.
+You can configure the Scheduler for Ajax binding to load event data remotely and send CRUD operations to server endpoints. This approach is useful when the event data is stored on the server instead of in the page.
 
 For a complete example, refer to the [demo on binding the Scheduler to remote data](https://demos.telerik.com/{{ site.platform }}/scheduler/resources).
 

@@ -29,7 +29,7 @@ Then, in the popup window, you can select or drag in a file from the file system
 
 ## Configuring the Spreadsheet to Initially Display an Image
 
-1. To properly configure the Spreadsheet to display an image on one its sheets, add a definition for the image to the Spreadsheet [`images`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/configuration/images) field. In the `images` object each image should be specified with unique key (property name) holding as value the image URL. The image URLs can be either [data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs), in which case the images are fully contained in the definition, or can be external URLs.
+1. To properly configure the Spreadsheet to display an image on one of its sheets, add a definition for the image to the Spreadsheet [`images`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/configuration/images) field. In the `images` object each image should be specified with a unique key (property name) holding the image URL as its value. The image URLs can be either [data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs), in which case the images are fully contained in the definition, or can be external URLs.
 1. Reference that image and place it accordingly using the [`drawings`](https://docs.telerik.com/kendo-ui/api/ui/spreadsheet/configuration/sheets.drawings) array of the respective sheet.
 
 The drawing definition has to contain:
@@ -123,6 +123,7 @@ The Spreadsheet Sheet API exposes a method that allows you to programmatically a
                     offsetY: 10,
                     width: 50,
                     height: 50,
+                    // Register the image and use its key in the drawing definition.
                     image: spreadsheet.addImage("/images/chrome.gif")
                 });
 

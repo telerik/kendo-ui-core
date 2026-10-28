@@ -77,7 +77,7 @@ The `PasteCleanup()` options starting with an `Ms` prefix that targets MS Word. 
 
 The `MsTags()` and the `MsAllFormatting()` options strip MS Word specific tags. MS Word specific tags are some valid XML nodes that MS Word uses to render text formatting and decoration. Some browsers do not translate these tags and they are just inserted into the content area on pasting. This makes the HTML invalid. Additionally, the `MsAllFormatting()` option removes the font-name and font-size stylization.
 
-The `MsConvertLists()` is an option that enables the end user to successfully paste MS Word lists and convert them to proper HTML lists on pasting. Only few browsers support this feature and lists are pasted as plain `<p>` tags.
+The `MsConvertLists()` is an option that enables the end user to successfully paste MS Word lists and convert them to proper HTML lists on pasting. Only a few browsers support this feature and lists are pasted as plain `<p>` tags.
 
 The following example demonstrates how to adjust the MS Word specific options. To see the result, paste some content from MS Word.
 

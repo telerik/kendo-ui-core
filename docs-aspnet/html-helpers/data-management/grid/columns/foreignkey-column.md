@@ -9,9 +9,9 @@ position: 10
 
 # ForeignKey Column
 
-The ForeignKey column functionality of the Telerik UI Grid component for {{ site.framework }} is primarily used for matching the value of a bound property to a desired text field from a collection external to the Grid. It follows the convention of the SQL ForeignKey functionality that links two tables based on a foreign key.
+Use the ForeignKey column to map the value of a bound field to display text from a collection outside the Grid. This behavior follows the SQL foreign key pattern for linking related data.
 
-## ForeignKey Coulmn Data Binding
+## ForeignKey Column Data Binding
 
 You can supply the foreign values for the columns of the Grid using the following approaches:
 
@@ -54,12 +54,15 @@ public class GridController : Controller
         using (var dataContext = GetContext())
         {
             var categories = dataContext.Categories
-            .Select(c => new CategoryViewModel
-            {
-                CategoryID = c.CategoryID,
-                CategoryName = c.CategoryName
-            })
-            .OrderBy(e => e.CategoryName);
+                .Select(c => new CategoryViewModel
+                {
+                    CategoryID = c.CategoryID,
+                    CategoryName = c.CategoryName
+                })
+                .OrderBy(e => e.CategoryName)
+                .ToList();
+
+            return categories;
         }
     }
 }
@@ -78,11 +81,14 @@ public class GridController : Controller
     {
         var dataContext = new DemoDBContext();
         var categories = dataContext.Categories
-        .Select(c => new CategoryViewModel {
-            CategoryID = c.CategoryID,
-            CategoryName = c.CategoryName
-        })
-        .OrderBy(e => e.CategoryName);
+            .Select(c => new CategoryViewModel {
+                CategoryID = c.CategoryID,
+                CategoryName = c.CategoryName
+            })
+            .OrderBy(e => e.CategoryName)
+            .ToList();
+
+        return categories;
     }
 }
 ```
@@ -98,7 +104,7 @@ For a live example, visit the [ForeignKey Column Demo of the Grid](https://demos
 
 ### Binding to Remote Data
 
-To bind the Grid column to a remote collection of items, specify a URL to the remote endpoint that returns the data instead of a static collection. It is mandatory to supply the `dataFieldValue` and `dataFieldText` parameters to ensure the column values will bind to the correct foreign key value. 
+To bind the Grid column to a remote collection of items, specify a URL to the remote endpoint that returns the data instead of a static collection. You must supply the `dataFieldValue` and `dataFieldText` parameters so the column binds to the correct foreign key value.
 
 The example below shows the following [`ForeignKey()`](/api/kendo.mvc.ui.fluent/gridcolumnfactory#foreignkeysystemlinqexpressionsexpressionsystemactionsystemstringsystemstring) column configuration:
 
@@ -128,7 +134,7 @@ public class GridController : Controller
     public JsonResult Categories()
     {
         IEnumerable<CategoryViewModel> categories;
-        using (var dataContext = new GetContext())
+        using (var dataContext = GetContext())
         {
             categories = dataContext.Categories
             .Select(c => new CategoryViewModel
@@ -227,7 +233,7 @@ When the Grid is set up for [Inline]({% slug inlineediting_grid_aspnetcore %}) o
 
 To use a custom editor for the ForeignKey column, use the [`ForeignKey()` overload](/api/kendo.mvc.ui.fluent/gridcolumnfactory#foreignkeysystemlinqexpressionsexpressionsystemactionsystemstringsystemstringsystemboolean) and set its `useServerEditor` argument to `true` to indicate that a custom editor must be used.
 
-> To use a custom editor for the ForeignKey column in HtmlHelper Grid, it is required to [configure the column for remote data-binding](#binding-to-remote-data).
+>note To use a custom editor for the ForeignKey column in HtmlHelper Grid, configure the column for [remote data binding](#binding-to-remote-data).
 
 The following example shows how to create a custom editor for a ForeignKey column in an editable HtmlHelper Grid:
 

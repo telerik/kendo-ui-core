@@ -42,7 +42,7 @@ The following example demonstrates how to define the Menu.
                         innerChildren.Add().Text("Tables & Chairs");
                         innerChildren.Add().Text("Sofas");
                         innerChildren.Add().Text("Occasional Furniture");
-                        innerChildren.Add().Text("Childerns Furniture");
+                        innerChildren.Add().Text("Children's Furniture");
                         innerChildren.Add().Text("Beds");
                     });
 
@@ -94,7 +94,7 @@ The following example demonstrates how to define the Menu.
                             <menu-item text="Tables & Chairs"></menu-item>
                             <menu-item text="Sofas"></menu-item>
                             <menu-item text="Occasional Furniture"></menu-item>
-                            <menu-item text="Childerns Furniture"></menu-item>
+                            <menu-item text="Children's Furniture"></menu-item>
                             <menu-item text="Beds"></menu-item>
                         </sub-items>
                     </menu-item>

@@ -1,7 +1,7 @@
 ---
 title: Frequently Asked Questions
 page_title: Frequently Asked Questions
-description: "Find the answers of the most frequently asked questions related to the Telerik UI Grid component and their answers."
+description: "Find answers to frequently asked questions about the Telerik UI Grid in {{ site.framework }} applications."
 components: ["grid"]
 previous_url: /kendo-ui/aspnet-mvc/helpers/grid/faq, /helpers/data-management/grid/faq
 slug: freqaskedquestions_gridhelper_aspnetmvc

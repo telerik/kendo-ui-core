@@ -1,7 +1,7 @@
 ---
 title: Excel Export
 page_title: Excel Export
-description: "Export the Telerik UI Grid for {{ site.framework }} to Excel."
+description: "Learn how to export the Telerik UI Grid for {{ site.framework }} data to Excel with customization options."
 components: ["grid"]
 previous_url: /html-helpers/data-management/grid/excel-export, /helpers/data-management/grid/excel-export
 slug: excelexport_gridhelper_aspnetcore
@@ -120,9 +120,9 @@ By default, the Telerik UI Grid for {{ site.framework }} exports only the curren
 
 ## Customizing Excel Documents
 
-The [`ExcelExport()`](/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event allows the customization of the generated excel document. the `workbook` event argument exposes the generated excel workbook configuration. for more information on how the excel documents work, refer to the article on [excel export in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/framework/excel/introduction).
+The [`ExcelExport()`](/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event allows the customization of the generated Excel document. The `workbook` event argument exposes the generated Excel workbook configuration. For more information on how Excel documents work, refer to the article on [Excel export in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/framework/excel/introduction).
 
-1. Attach an excel export handler.
+1. Attach an Excel export handler.
 
     ```HtmlHelper
         @(Html.Kendo().Grid<OrderViewModel>()    
@@ -163,7 +163,7 @@ The [`ExcelExport()`](/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsyste
 
 ## Exporting Right-to-Left Content
 
-The [`ExcelExport()`](/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event allows you to reverse the cells and set the text alignment to support right-to-left (RTL) languages. To render the document in the right-to-left flow in excel, enable the [`rtl`](https://docs.telerik.com/kendo-ui/api/ooxml/workbook/configuration/rtl) option of the workbook.
+The [`ExcelExport()`](/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event allows you to reverse the cells and set the text alignment to support right-to-left (RTL) languages. To render the document in the right-to-left flow in Excel, enable the [`rtl`](https://docs.telerik.com/kendo-ui/api/ooxml/workbook/configuration/rtl) option of the workbook.
 
 Each row has a `type` field that can be used to distinguish between the various row types in the Grid. The supported values are:
 - `"header"`
@@ -176,7 +176,7 @@ Each row has a `type` field that can be used to distinguish between the various 
 
 The Telerik UI Grid for {{ site.framework }} does not use the `ClientTemplate` during Excel export. It exports only the data. The reason is that a column template may contain arbitrary HTML which cannot be converted to Excel column values. Here is how to use a column template that does not contain HTML:
 
-1. Attach an excel export handler.
+1. Attach an Excel export handler.
 
     ```HtmlHelper
         @(Html.Kendo().Grid<OrderViewModel>()    
@@ -266,11 +266,8 @@ The [page on creating a custom number format](https://support.office.com/en-us/a
         function excelExport(e) {
             var sheet = e.workbook.sheets[0];
             for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
-                var sheet = e.workbook.sheets[0];
-                for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
-                    var row = sheet.rows[rowIndex];
-                    row.cells[1].format = "[Blue]#,##0.0_);[Red](#,##0.0);0.0;"
-                }
+                var row = sheet.rows[rowIndex];
+                row.cells[1].format = "[Blue]#,##0.0_);[Red](#,##0.0);0.0;"
             }
         }
     </script>
@@ -284,7 +281,7 @@ The Kendo UI Grid does not export its `DetailTemplate` for the same reason it do
 
 ## Exporting Multiple Grids
 
-For more information on how to export multiple Grids to a separate Excel sheet in a single Excel document, refer to [this runnable how-to example]({% slug excel-export-multiple-grids%}).
+For more information on how to export multiple Grids to a separate Excel sheet in a single Excel document, refer to [this runnable how-to example]({% slug excel-export-multiple-grids %}).
 {% endif %}
 
 ## Server-Side Processing
@@ -320,7 +317,7 @@ You can also set `Exportable` in a detailed fashion to include different values 
 ```
 {% endif %}
 
-In some scenarios, you may want to include instead of exclude columns. You can have defined Grid columns which are not displayed in the View mode and show them in the exported file. In this case, setting `.Exportable(true)` will not work automatically and you'll need to  use `.Exportable(x=> x.Pdf(false).Excel(true));` explicitly.
+In some scenarios, you may want to include instead of exclude columns. You can have defined Grid columns which are not displayed in the View mode and show them in the exported file. In this case, setting `.Exportable(true)` will not work automatically and you'll need to use `.Exportable(x=> x.Pdf(false).Excel(true));` explicitly.
 
 Also, note the difference between the `.Hidden()` and `.Visible()` properties of a Grid column. `.Hidden()` will hide the column only visually by using CSS. `.Visible()` will prevent the column from rendering at all.
 
@@ -331,9 +328,9 @@ Also, note the difference between the `.Hidden()` and `.Visible()` properties of
 * The Grid and its DataSource contain only the data items from the current page during client-side export. As a result, either make the export in chunks, or disable the paging feature.
 * The maximum size of the exported file has a system-specific limit. For large data sets, use the server-side solution which is provided by the [RadSpreadStreamProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) as part of the [Document Processing Library](https://docs.telerik.com/devtools/document-processing/introduction).
 * Exporting the Grid to Excel in older browsers, such as Internet Explorer 9 and Safari, requires the implementation of a server proxy. For more information, refer to [the `ProxyURL` configuration section](/api/kendo.mvc.ui.fluent/gridexcel{% if site.core %}settings{% endif %}builder#proxyurlsystemstring).
-* The Grid does not use the column [`ClientTemplate`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clienttemplatesystemstring) during the Excel export&mdash;it exports only the data. the reason for this behavior is that a column template has a chance to contain arbitrary HTML which cannot be converted to excel column values. for more information on how to use a column template that does not contain HTML, refer to [this column template example](#setting-the-column-templates).
+* The Grid does not use the column [`ClientTemplate`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clienttemplatesystemstring) during the Excel export&mdash;it exports only the data. The reason for this behavior is that a column template has a chance to contain arbitrary HTML which cannot be converted to Excel column values. For more information on how to use a column template that does not contain HTML, refer to [this column template example](#setting-the-column-templates).
 * The Grid does not export its [`ClientDetailTemplateId`](/api/kendo.mvc.ui.fluent/gridbuilder#clientdetailtemplateidsystemstring) for the same reason as it does not export its column templates.
-* The Grid does not use [column formats](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#formatsystemstring) during the Excel export because some Kendo UI formats are incompatible with excel. To format the cell values, set the cell [`format`](https://docs.telerik.com/kendo-ui/api/ooxml/workbook/configuration/sheets.rows.cells.format) option of the cells.
+* The Grid does not use [column formats](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#formatsystemstring) during the Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the cell [`format`](https://docs.telerik.com/kendo-ui/api/ooxml/workbook/configuration/sheets.rows.cells.format) option of the cells.
 
 For more information on the formats that are supported by Excel, refer to [this page](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
 

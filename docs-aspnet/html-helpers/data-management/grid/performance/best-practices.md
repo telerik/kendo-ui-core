@@ -1,7 +1,7 @@
 ---
 title: Best Practices
 page_title: Best Practices
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn which the best practices for boosting its performance are."
+description: "Learn the best practices for improving Telerik UI Grid performance in {{ site.framework }} applications."
 components: ["grid"]
 slug: bestpractice_aspnetcore_grid
 position: 1
@@ -9,7 +9,7 @@ position: 1
 
 # Best Practices
 
-This article lists the best practices and approaches which optimize and boost the performance of the Grid.
+This article lists the best practices and approaches that optimize the performance of the Grid.
 
 * [Enable paging](#enabling-paging)
 * [Enable virtualization](#enabling-virtualization)

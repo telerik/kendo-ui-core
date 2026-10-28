@@ -65,7 +65,7 @@ The following example demonstrates how to define the DropDownList.
         {
             var result = Enumerable.Range(0, 50).Select(i => new ProductViewModel
             {
-                ProductID = "" + i,
+                ProductID = i,
                 ProductName = "Product " + i
             });
 
@@ -87,7 +87,7 @@ The following example demonstrates how to define the DropDownList.
         {
             var result = Enumerable.Range(0, 50).Select(i => new ProductViewModel
             {
-                ProductID = "" + i,
+                ProductID = i,
                 ProductName = "Product " + i
             });
 

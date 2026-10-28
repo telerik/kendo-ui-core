@@ -17,7 +17,7 @@ Along with the server-side integration of the [Telerik Document Processing](http
 
 ## Requirements
 
-The import and export capabilities are bundled as part of the [UI for ASP.NET MVC suite]({% slug overview_aspnetmvc6_aspnetmvc %}). You can get the required assemblies from the `telerik.ui.for.aspnetmvc.<version>.zip` archive that contains a `Kendo.MVC.Export` folder with the assemblies for both .NET 4.0 and .NET 4.5 versions. For product versions after Q2 2025, use the `Telerik.Core.Export` NuGet package.
+The import and export capabilities are bundled as part of the [{{ site.product }} suite]({% slug overview_aspnetmvc6_aspnetmvc %}). You can get the required assemblies from the `telerik.ui.for.aspnetmvc.<version>.zip` archive that contains a `Kendo.MVC.Export` folder with the assemblies for both .NET 4.0 and .NET 4.5 versions. For product versions after Q2 2025, use the `Telerik.Export.Core` NuGet package.
 
 To start using the import and export functionality:
 
@@ -260,6 +260,6 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 
 ## See Also
 
-* [Document Import and Export by the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor/import-export)
-* [EditorBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/editorbuilder)
+* [Document Import and Export by the Editor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/editor/import-export)
+* [EditorBuilder Server-Side API](/api/editor)
 * [Editor Server-Side API](/api/editor)

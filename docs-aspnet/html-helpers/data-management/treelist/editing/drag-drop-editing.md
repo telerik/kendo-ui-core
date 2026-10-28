@@ -22,7 +22,7 @@ Refer to the example below for the configuration details:
             columns.Add().Field(e => e.LastName).Title("Last Name");
             columns.Add().Field(e => e.Position);
         })
-		.Editable(editable => editable.Move(move => move.Reorderable(true).ClickMoveClicl(true)))
+		.Editable(editable => editable.Move(move => move.Reorderable(true).ClickMoveClick(true)))
 		.DataSource(dataSource => dataSource
         	.Read(read => read.Action("Employees_Read", "TreeList"))
         	.Update(update => update.Action("Employees_Update", "TreeList"))
@@ -78,7 +78,7 @@ To persist the new hierarchy, configure the TreeList data source for CRUD operat
 ```HtmlHelper
     @(Html.Kendo().TreeList<EmployeeViewModel>()
     	.Name("treelist")
-		.Editable(editable => editable.Move(move => move.Reorderable(true))
+		.Editable(editable => editable.Move(move => move.Reorderable(true)))
 		.DataSource(dataSource => dataSource
         	.Read(read => read.Action("Employees_Read", "TreeList"))
         	.Update(update => update.Action("Employees_Update", "TreeList"))

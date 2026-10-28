@@ -15,7 +15,7 @@ You can seamlessly integrate the Telerik UI Sparkline for {{ site.framework }} i
 
 This article describes how to configure a basic Sparkline component in a Razor Pages scenario.
 
-For the complete project, refer to the [Sparkline in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Sparkline/SparklineRemoteBidning.cshtml).
+For the complete project, refer to the [Sparkline in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Sparkline/SparklineRemoteBinding.cshtml).
 
 ## Getting Started
 
@@ -35,6 +35,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
             ...
         )
     ```
+    {% if site.core %}
     ```TagHelper
         @page
         @model IndexModel
@@ -48,6 +49,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
             <!--Other configuration-->
         </kendo-sparkline>
     ```
+        {% endif %}
 
 1. Add an `AntiForgeryToken` at the top of the page.
 

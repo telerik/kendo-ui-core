@@ -9,13 +9,13 @@ position: 3
 
 # Custom DataSource
 
-Telerik UI for ASP.NET MVC enables you to use the CustomDataSource builder that is available to helpers that support Data Binding.
+Telerik UI for ASP.NET MVC lets you use the CustomDataSource builder with helpers that support data binding.
 
-The CustomDataSource builder class allows full control over the [DataSource client-side API options](https://docs.telerik.com/kendo-ui/api/data/datasource), through Razor syntax. The CustomDataSource builder facilitates the usage of the Telerik UI helpers&mdash;for example, the helpers generate validation attributes, editors, and so on, while they utilize the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
+The CustomDataSource builder class gives you full control over the [DataSource client-side API options](https://docs.telerik.com/kendo-ui/api/data/datasource) through Razor syntax. It lets you keep Telerik UI helper benefits&mdash;for example, generated validation attributes and editors&mdash;while still using JavaScript-level DataSource flexibility. You can also use the CustomDataSource builder in advanced scenarios where the regular DataSource builders limit full DataSource customization.
 
 ## DataSource and Custom DataSource
 
-The regular DataSource builders have many settings that are configured by default. The CustomDataSource builder removes these predefined settings, so when you declare a DataSource as custom, configure these additional settings.
+Regular DataSource builders apply many default settings. The CustomDataSource builder removes these defaults, so when you declare a DataSource as custom, configure the required settings explicitly.
 
 The following two examples demonstrate a regular Grid AjaxDataSourceBuilder and a CustomDataSource builder.
 
@@ -130,5 +130,5 @@ The following example demonstrates a CustomDataSourceBuilder definition.
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
 * [Custom DataSource for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/html-helpers/datasource/custom-datasource)
-* [Server-Side API](/api/grid)
+* [Grid Server-Side API Reference](/api/grid)
 * [Custom DataSource in Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource)

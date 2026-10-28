@@ -1,7 +1,7 @@
 ---
 title: RTL Support
 page_title: Right-to-Left Support
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn about the RTL supports it provides."
+description: "Enable right-to-left layout and RTL support in the Telerik UI Grid for {{ site.framework }} applications."
 components: ["grid"]
 slug: rtl_aspnetcore_grid
 position: 4

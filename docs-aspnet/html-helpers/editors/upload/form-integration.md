@@ -323,7 +323,7 @@ The following example shows how to integrate the Upload component into a standar
     ```HtmlHelper
     @model FormViewModel
 
-    <form id="exampleForm" action='@Url.Action("Submit")' method="post">
+    <form id="exampleForm" action='@Url.Action("SubmitForm")' method="post">
         <div class="k-form-group">
             <div class="k-form-field">
                 @(Html.Kendo().TextBoxFor(m => m.OrderName)
@@ -351,7 +351,7 @@ The following example shows how to integrate the Upload component into a standar
 
     @model FormViewModel
 
-    <form id="exampleForm" action='@Url.Action("Submit")' method="post">
+    <form id="exampleForm" action='@Url.Action("SubmitForm")' method="post">
         <div class="k-form-group">
             <div class="k-form-field">
                 <kendo-textbox for="OrderName">

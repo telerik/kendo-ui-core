@@ -1,7 +1,7 @@
 ---
 title: Custom Binding
 page_title: Custom Binding
-description: "Learn how to implement custom binding with Telerik UI Grid component for {{ site.framework }}."
+description: "Learn how to implement custom server and Ajax binding for the Telerik UI Grid in {{ site.framework }} applications."
 components: ["grid"]
 previous_url: /helpers/grid/custom-binding, /helpers/data-management/grid/custom-binding, /helpers/data-management/grid/binding/custom-binding
 slug: custombinding_grid_aspnetmvc
@@ -11,6 +11,7 @@ position: 4
 # Custom Binding
 
 The Telerik UI Grid for {{ site.framework }} allows you to bypass the built-in data processing and handle operations like paging, sorting, filtering, and grouping yourself.
+This article describes custom server and custom Ajax binding workflows.
 
 {% if site.mvc %}
 The Grid provides the following custom binding options:
@@ -19,6 +20,8 @@ The Grid provides the following custom binding options:
 * [Custom Ajax Binding](#custom-ajax-binding)
 
 ## Custom Server Binding
+
+Use custom server binding to process Grid data operations in the controller and return prepared data to the View.
 
 1. Add a new parameter of type `Kendo.UI.DataSourceRequest` to the action method. It must contain information about the requested Grid data operation&mdash;paging, sorting, grouping, or filtering. Decorate this parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute populates the `DataSourceRequest` object.
 
@@ -172,13 +175,15 @@ The Grid provides the following custom binding options:
         )
     ```
 
-To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridCustomServerBinding).
+To download the Visual Studio project, refer to the [Grid custom server binding sample in the Telerik UI for ASP.NET MVC examples repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridCustomServerBinding).
 
 For a complete example, refer to the [demo on implementing server binding of the Grid](https://demos.telerik.com/aspnet-mvc/grid/serverbinding).  
 
 {% endif %}
 
 ## Custom Ajax Binding
+
+Use custom Ajax binding to process Grid operations on the server and return a JSON response.
 
 1. Add a new parameter of type `Kendo.UI.DataSourceRequest` to the action method. It must contain information about the requested Grid data operation&mdash;paging, sorting, grouping, or filtering. Decorate this parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute populates the `DataSourceRequest` object.
 
@@ -189,9 +194,11 @@ For a complete example, refer to the [demo on implementing server binding of the
     }
     ```
 
-1. Handle the respective data operations and calculate the total number of records.
+1. Handle the respective data operations and calculate the total number of records:
 
     * Filtering
+
+        The following code applies the filter descriptors from the Grid request to the orders query.
 
         ```C#
         namespace ProjectName.Controllers
@@ -221,6 +228,8 @@ For a complete example, refer to the [demo on implementing server binding of the
         ```
     
     * Sorting
+
+        The following code applies the sort descriptors from the Grid request to the orders query.
 
         ```C#
         namespace ProjectName.Controllers
@@ -302,6 +311,8 @@ For a complete example, refer to the [demo on implementing server binding of the
     
     * Paging
 
+        The following code applies the requested page number and page size to the orders query.
+
         ```C#
         namespace ProjectName.Controllers
         {
@@ -337,6 +348,8 @@ For a complete example, refer to the [demo on implementing server binding of the
         ```
     
     * Grouping
+
+        The following code applies the group descriptors from the Grid request to the orders query.
 
         ```C#
         namespace ProjectName.Controllers
@@ -514,7 +527,7 @@ For a complete example, refer to the [demo on implementing server binding of the
     {% endif %}
 
 {% if site.mvc %}
-To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridCustomAjaxBinding).
+To download the Visual Studio project, refer to the [Grid custom Ajax binding sample in the Telerik UI for ASP.NET MVC examples repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridCustomAjaxBinding).
 {% endif %}
 
 For a complete example, refer to the [demo on implementing custom Ajax binding of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/customajaxbinding).  

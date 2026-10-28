@@ -1,6 +1,6 @@
 ---
 title: AI Chat Assistant
-description: "Learn how to implement an AI Chat Assistant for the {{ site.framework }} Grid that enables natural language interactions to perform data operations through conversational commands."
+description: "Use an AI Chat Assistant with the {{ site.framework }} Grid for natural language and common data commands."
 slug: ai_chat_assistant
 position: 4
 tag: new
@@ -15,7 +15,7 @@ By integrating the Kendo UI `Chat` component with the Grid's AI helpers (for exa
 
 The following example demonstrates how to implement an AI Chat Assistant that enables users to manage Grid data through natural language commands. Click the **AI Grid** button in the Grid toolbar to open the Chat panel and try inserting a prompt to interact with the data.
 
-For a full runnable example demonstrating integration betweeh {{ site.framework }} Grid and Chat please refer to the [AI Chat Assitant Demo](https://demos.telerik.com/aspnet-core/grid/ai-chat-integration)
+For a full runnable example demonstrating the integration between {{ site.framework }} Grid and Chat, refer to the [AI Chat Assistant Demo](https://demos.telerik.com/{{ site.platform }}/grid/ai-chat-integration).
 
 
 ## Implementation Steps
@@ -121,7 +121,7 @@ To implement an AI Chat Assistant for your Grid, follow the steps below:
     grid.handleAIResponse(response);
 ```
 
-For a full runnable example demonstrating integration between the {{ site.framework }} Grid and Chat please refer to the [AI Chat Assitant Demo](https://demos.telerik.com/kendo-ui/grid/ai-chat-integration)
+For a full runnable example demonstrating the integration between the {{ site.framework }} Grid and Chat, refer to the [AI Chat Assistant Demo](https://demos.telerik.com/{{ site.platform }}/grid/ai-chat-integration).
 
 ## Suggested Links
 

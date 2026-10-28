@@ -1,7 +1,7 @@
 ---
 title: Server Binding
 page_title: Server Binding - Telerik UI Grid HtmlHelper for ASP.NET MVC
-description: "Learn how to implement server binding with Telerik UI Grid HtmlHelper for ASP.NET MVC."
+description: "Learn how to configure server binding in the Telerik UI Grid HtmlHelper for ASP.NET MVC, including supported events and limitations."
 components: ["grid"]
 previous_url: /helpers/grid/server-binding, /helpers/data-management/grid/server-binding
 slug: serverbinding_grid_aspnetmvc
@@ -10,7 +10,7 @@ position: 4
 
 # Server Binding
 
-By default, the Telerik UI Grid for ASP.NET MVC performs server-side requests (`HTTP` and `GET`) when doing paging, sorting, and filtering.
+By default, the Telerik UI Grid for ASP.NET MVC sends `HTTP GET` requests to the server for paging, sorting, and filtering operations.
 
 ## Supported Client-Side Events
 
@@ -30,10 +30,11 @@ The Grid supports the following client-side events when it is in server binding 
 - `GroupExpand`&mdash;The group object that is associated with group row will be empty in server binding scenario.
 - `GroupCollapse`&mdash;The group object that is associated with group row will be empty in server binding scenario.
 
-> * The other client-side events, which are related to data-binding and CRUD data operations, will not be raised when the Grid is configured for server binding.
-> * Locked columns are not supported. To support locked columns, use [Ajax binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}) instead.
-> * Showing or hiding of columns and reordering with the `GroupHeaderColumnTemplate` in server-binding scenarios is not supported. The reason is that in server-binding scenarios the Kendo UI for jQuery DataSource instance does not have groups and aggregates information. Therefore, the templates for the group rows cannot be compiled on the client side. If your project requires such a scenario, use [Ajax binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}).
-> * Rows spanning is not supported. To support both rows and columns spanning, use [Ajax binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}) instead and refer to the [Row and Column Spanning]({% slug grid_aspnetcore_spanning %}) article for configuration details.
+>important
+> - Client-side events related to data binding and CRUD operations are not raised when the Grid is configured for server binding.
+> - Locked columns are not supported. To use locked columns, use [Ajax binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}).
+> - Showing or hiding columns and reordering with `GroupHeaderColumnTemplate` in server-binding scenarios is not supported. In server-binding scenarios, the Kendo UI for jQuery DataSource instance does not include group and aggregate information, so group-row templates cannot be compiled on the client.
+> - Row spanning is not supported. To use row and column spanning, use [Ajax binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}) and review [Row and Column Spanning]({% slug grid_aspnetcore_spanning %}).
 
 ## Getting Started
 
@@ -74,7 +75,7 @@ The example below demonstrates how to bind the Grid to a model.
 
 ## Using the ViewData or ViewBag Items Binding
 
-The following example demonstrate how to apply data binding with `ViewData` or `ViewBag`.
+The following example demonstrates how to apply data binding with `ViewData` or `ViewBag`.
 
 ```Controller
     public ActionResult Index()
@@ -127,18 +128,20 @@ The following example demonstrates how to bind the Grid to data by using the `Bi
     )
 ```
 
-The Grid makes `HTTP GET` requests to the action method which initially renders the view. The Grid page, sort, filter, and group information is passed as query string parameters.
+The Grid makes `HTTP GET` requests to the action method that initially renders the view. The Grid page, sort, filter, and group information is passed as query string parameters.
 
-For more information on how a typical URL looks like, refer to [this location](http://localhost:4939/?Grid-sort=ProductName-asc&amp;Grid-page=2\). The `Name` of the Grid will be used as a prefix of the query string parameters. In this way, more than one server-bound Grid can coexist in the same view. The prefix can be disabled through the `PrefixUrlParameters` method.
+For example, a server-bound Grid URL can look like `http://localhost:4939/?Grid-sort=ProductName-asc&Grid-page=2`. The Grid `Name` is used as a query-string prefix so multiple server-bound Grid instances can coexist in the same view. You can disable the prefix through the `PrefixUrlParameters` method.
 
-    <%: Html.Kendo().Grid(Model)
-        .Name("Grid")
-        .PrefixUrlParameters(false)
-    %>
+```HtmlHelper
+<%: Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .PrefixUrlParameters(false)
+%>
+```
 
 ## Passing Additional Data to Action Methods
 
-The action method which renders the view that contains the Grid may need additional data.
+The action method that renders the view containing the Grid may need additional data.
 
 ```Controller
     public ActionResult Index(string firstName, string lastName)
@@ -153,7 +156,7 @@ The action method which renders the view that contains the Grid may need additio
         .Name("Grid")
         .DataSource(dataSource => dataSource
             .Server() // Specify server type
-            .Read(read => read.Action("Index", "Home", new { firstName = "John", lastName = "Doe } ))
+            .Read(read => read.Action("Index", "Home", new { firstName = "John", lastName = "Doe" }))
         )
     )
 ```
@@ -175,71 +178,79 @@ The action method which renders the view that contains the Grid may need additio
 
 1. Open **HomeController.cs** and modify the `Index` action method.
 
-        public ActionResult Index()
-        {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
-            var northwind = new NorthwindEntities();
-            // Get the Products entities and add them to the ViewBag.
-            ViewBag.Products = northwind.Products;
-            return View();
-        }
+    ```C#
+    public ActionResult Index()
+    {
+        ViewBag.Message = "Welcome to ASP.NET MVC!";
+        var northwind = new NorthwindEntities();
+        // Get the Products entities and add them to the ViewBag.
+        ViewBag.Products = northwind.Products;
+        return View();
+    }
+    ```
 
 1. Modify the `Create` method as demonstrated in the following example.
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(Product product)
+    ```C#
+    [AcceptVerbs(HttpVerbs.Post)]
+    public ActionResult Create(Product product)
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                productService.Create(product);
+            productService.Create(product);
 
-                RouteValueDictionary routeValues = this.GridRouteValues();
+            RouteValueDictionary routeValues = this.GridRouteValues();
 
-                return RedirectToAction("Index", routeValues);
-            }
-
-            return View("Index", productService.GetAll());
+            return RedirectToAction("Index", routeValues);
         }
+
+        return View("Index", productService.GetAll());
+    }
+    ```
 
 1. Modify the `Update` method as demonstrated in the following example.
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Update(Product product)
+    ```C#
+    [AcceptVerbs(HttpVerbs.Post)]
+    public ActionResult Update(Product product)
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                productService.Update(product);
+            productService.Update(product);
 
-                RouteValueDictionary routeValues = this.GridRouteValues();
+            RouteValueDictionary routeValues = this.GridRouteValues();
 
-                return RedirectToAction("Index", routeValues);
-            }
-
-            return View("Index", productService.GetAll());
+            return RedirectToAction("Index", routeValues);
         }
+
+        return View("Index", productService.GetAll());
+    }
+    ```
 
 1. Modify the `Destroy` method as demonstrated in the following example.
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Destroy(int productID)
+    ```C#
+    [AcceptVerbs(HttpVerbs.Post)]
+    public ActionResult Destroy(int productID)
+    {
+        Product product = productService.GetAll().FirstOrDefault(p => p.ProductID == productID);
+
+        RouteValueDictionary routeValues;
+
+        if (product == null)
         {
-            Product product = productService.GetAll().FirstOrDefault(p => p.ProductID == productID);
-
-            RouteValueDictionary routeValues;
-
-            if (product == null)
-            {
-                routeValues = this.GridRouteValues();
-
-                return RedirectToAction("Index", routeValues);
-            }
-
-            productService.Destroy(product);
-
             routeValues = this.GridRouteValues();
 
             return RedirectToAction("Index", routeValues);
         }
+
+        productService.Destroy(product);
+
+        routeValues = this.GridRouteValues();
+
+        return RedirectToAction("Index", routeValues);
+    }
+    ```
 
 1. Add a Kendo UI Grid to the `Index` view.
 

@@ -1,7 +1,7 @@
 ---
 title: Known Exceptions
 page_title: Known Exceptions Troubleshooting
-description: "Learn about the known exceptions you might come across while working with Kendo UI Grid for ASP.NET MVC."
+description: "Learn how to resolve known exceptions in the Telerik UI Grid for {{ site.framework }} applications."
 components: ["grid"]
 slug: knownexceptions_gridhelper_aspnetmvc
 position: 3
@@ -42,7 +42,7 @@ This exception is thrown when the length of the JSON response exceeds the defaul
 
 ## Sensitive Information Error Message
 
-An exception that a request has been blocked because sensitive information could be disclosed to third-party web sites when this is used in a `GET` request would be thrown when the `kendo.aspnetmvc.min.js` is not included or is included before the `kendo.all.min.js`.
+An exception is thrown when a request is blocked because sensitive information could be disclosed to third-party web sites during a `GET` request and the `kendo.aspnetmvc.min.js` file is not included or is included before the `kendo.all.min.js` file.
 
 Yet another reason is that you explicitly specified that the Grid should make HTTP `GET` requests via the `Type` setting but did not allow HTTP `GET` requests.
 
@@ -58,7 +58,7 @@ Yet another reason is that you explicitly specified that the Grid should make HT
 {% if site.core %}
 ```TagHelper
 
-    // Omitted for brevity.
+    <!-- Omitted for brevity. -->
     <datasource page="0" type="DataSourceTagHelperType.Ajax" page-size="20" server-operation="false">
         <schema data="Data" total="Total" errors="Errors">
             <model id="ProductID"></model>
@@ -67,7 +67,7 @@ Yet another reason is that you explicitly specified that the Grid should make HT
             <read url="@Url.Action("Read","Home")" type="Get" />
         </transport>
     </datasource>
-    // Omitted for brevity.
+    <!-- Omitted for brevity. -->
 
 ```
 {% endif %}
@@ -85,7 +85,7 @@ Yet another reason is that you explicitly specified that the Grid should make HT
 {% if site.core %}
 The Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates (like Group Header Templates) which makes the usage of `.ServerOperations(true)` in this case incompatible.
 {% else %}
-An exception that templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions can occur if an editable Grid is bound to a `DataTable` or `DataSet`. The reason is that the ASP.NET MVC `EditorFor` method does not support `DataTable`.
+An exception can occur when an editable Grid is bound to a `DataTable` or `DataSet` and its templates use expressions beyond field access, property access, single-dimension array indexes, or single-parameter custom indexers. The reason is that the ASP.NET MVC `EditorFor` method does not support `DataTable`.
 
 **Solution** Use a popup edit form with a custom editor template.
 
@@ -93,8 +93,7 @@ For more information on how to resolve this issue, refer to the following resour
 * [Popup editing in the Telerik UI for ASP.NET MVC Grid HtmlHelper (demo)](https://demos.telerik.com/aspnet-mvc/grid/editing-popup)
 * [Binding to a DataTable by the Telerik UI for ASP.NET MVC Grid HtmlHelper (how-to online example)](/helpers/grid/how-to/Binding/grid-bind-to-datatable)
 * [Editor templates in the Telerik UI for ASP.NET MVC Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_editing_overview %})&mdash;use a separate editor template for each data field.
-* [The TemplateName setting in the Telerik UI for ASP.NET MVC Grid HtmlHelper](/api/kendo.mvc.ui.fluent/grideditingsettingsbuilder#methods-TemplateName(System.String))&mdash;use it
-to set a single edit form template for the whole edit form.
+* [The TemplateName setting in the Telerik UI for ASP.NET MVC Grid HtmlHelper](/api/kendo.mvc.ui.fluent/grideditingsettingsbuilder#methods-TemplateName(System.String))&mdash;use it to set a single edit form template for the whole edit form.
 {% endif %}
 
 ## Invalid Template Error When Nesting Client Templates

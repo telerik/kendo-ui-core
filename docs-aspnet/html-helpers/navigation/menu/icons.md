@@ -32,6 +32,7 @@ When the [Menu is configured for remote data binding]({% slug htmlhelpers_menu_b
     )
 ```
 {% if site.core %}
+{% if site.core %}
 ```TagHelper
     <kendo-menu name="menu" datatextfield="Text" dataiconfield="Icon">
         <hierarchical-datasource>
@@ -41,6 +42,7 @@ When the [Menu is configured for remote data binding]({% slug htmlhelpers_menu_b
         </hierarchical-datasource>
     </kendo-menu>
 ```
+{% endif %}
 {% endif %}
 
 ### Items Binding

@@ -75,7 +75,7 @@ The following example demonstrates how to configure DropDownList for Server Filt
                 products = products.Where(p => p.ProductName.Contains(text));
             }
 
-            return Json(products.ToList());
+            return Json(products.ToList(){% if site.mvc %}, JsonRequestBehavior.AllowGet{% endif %});
         }
     }
 ```
@@ -130,7 +130,7 @@ For smaller sets of data, the {{ site.product_short }} DropDownList also support
                 Discontinued = product.Discontinued
             });
 
-            return Json(products.ToList());
+            return Json(products.ToList(){% if site.mvc %}, JsonRequestBehavior.AllowGet{% endif %});
         }
     }
 ```

@@ -9,11 +9,11 @@ position: 9
 
 # Custom Commands
 
-You can implement custom commands for handling the records of the Grid.
+Custom commands let you handle Grid records with custom buttons in a command column.
 
-To include a command column which will render a button for triggering the command in the column cells:
+To add a command column that renders a custom button in each row:
 
-1. Add a custom command column by using the column definition.
+1. Define a custom command in the column configuration.
 
     ```HtmlHelper
         .Columns(columns => {
@@ -30,7 +30,7 @@ To include a command column which will render a button for triggering the comman
     ```
     {% endif %}
 
-1. Wire the `click` event of the button to a JavaScript function which will receive the corresponding Grid data item as an argument.  In the function definition, handle the command.
+1. Handle the button `click` event in a JavaScript function. Use the event target to get the row data item and run your custom logic.
 
     ```JS
     <script type="text/javascript">
@@ -47,18 +47,18 @@ For a runnable example, refer to the [demo on implementing custom commands in th
 
 ## Features
 
-The custom command button offers the following features: 
+The custom command button offers the following features:
 
-* `HtmlAttributes` - set custom HTML attributes to the underlying HTML of the button
-* `IconClass` - set an icon of your choice by providing the icon's name
-* `Template` and `TemplateId` - customize the appearance of the button via a template
-* `Text` - set the text of the button
-* `Visible` - conditionally determine whether the button should be visible via JavaScript (pass the name of the JavaScript function to this option)
+* Set custom HTML attributes on the button with `HtmlAttributes`.
+* Set the icon by name with `IconClass`.
+* Customize the button appearance with `Template` and `TemplateId`.
+* Set the button text with `Text`.
+* Control button visibility in JavaScript with `Visible`.
 
 ## See Also
 
 {% if site.core %}
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
-* [Knowledge Base Section](/knowledge-base)
-* [Server-Side API](/api/grid)
+* [Knowledge Base Articles](/knowledge-base)
+* [Grid Server-Side API Reference](/api/grid)

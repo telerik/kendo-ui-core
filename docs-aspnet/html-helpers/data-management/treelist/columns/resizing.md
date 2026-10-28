@@ -11,6 +11,8 @@ position: 4
 
 You can make the TreeList columns resizable by enabling the Resizable() property.
 
+The following examples enable column resizing. When scrolling is enabled, columns can expand beyond the visible TreeList width without forcing other columns to shrink.
+
 ```HtmlHelper
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")

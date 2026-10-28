@@ -35,6 +35,7 @@ The following example shows the pattern for overriding a built-in shortcut of th
 ```javascript
     function onAIPromptKendoKeydown(e) {
         if (e.keyCode === kendo.keys.ENTER) {
+            // Suppress the built-in AIPrompt shortcut for this key combination.
             e.preventKendoKeydown = true;
             console.log("Built-in shortcut overridden.");
         }
@@ -47,7 +48,7 @@ The following example demonstrates how to add a new `Ctrl+Shift+X` shortcut for 
 
 ```javascript
     function onAIPromptKendoKeydown(e) {
-        if (e.ctrlKey && e.shiftKey && e.keyCode === 88) {
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 88) { // 88 is the key code for X.
             console.log("Custom shortcut activated.");
         }
     }

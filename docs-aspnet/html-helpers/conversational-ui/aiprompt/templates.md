@@ -76,7 +76,7 @@ The following example demonstrates how to use the `PromptSuggestionItemTemplateH
 
 Use the `OutputTemplate()` option to control how each generated output card is rendered in the `Output` view. The specified template is applied after the output has finished streaming to render the final content.
 
-The option has a various overloads like `OutputTemplateHandler()`, `OutputTemplateId()`, `OutputTemplate()` that accepts a [Template component](slug:htmlhelpers_overview_template), and `OutputTemplateView()`.
+The option has a various overloads like `OutputTemplateHandler()`, `OutputTemplateId()`, `OutputTemplate()` that accepts a [Template component]({% slug htmlhelpers_overview_template %}), and `OutputTemplateView()`.
 
 The following example demonstrates how to customize the default appearance of the output cards.
 

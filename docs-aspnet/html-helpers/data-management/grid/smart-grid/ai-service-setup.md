@@ -1,6 +1,6 @@
 ---
 title: AI Service Setup
-description: "Learn how to set up the Smart Extensions library to handle AI requests from Smart Grid and automatically generate Grid commands from natural language prompts."
+description: "Set up Smart Extensions to handle AI requests and generate Grid commands from natural language prompts."
 slug: smart_ext_core_grid
 position: 2
 components: ["grid"]

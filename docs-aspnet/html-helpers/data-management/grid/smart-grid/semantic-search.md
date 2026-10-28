@@ -1,6 +1,6 @@
 ---
 title: Semantic Search
-description: "Learn how to use Semantic Search mode in the AI Smart Box to enable semantic search that interprets user intent and matches related terms and contextual meanings."
+description: "Use Semantic Search in the AI Smart Box to match related terms in the {{ site.framework }} Data Grid."
 slug: smartbox_semantic_search_mode
 position: 8
 components: ["grid"]

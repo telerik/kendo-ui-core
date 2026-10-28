@@ -61,6 +61,7 @@ To send metadata over to the `Save()` handler:
         public ActionResult ChunkSave(IEnumerable<IFormFile> files, string fileDescription)
         {
             // use the files and their associated meta data
+            return Json(new { success = true });
         }
     ```
     {% else %}
@@ -68,6 +69,7 @@ To send metadata over to the `Save()` handler:
         public ActionResult ChunkSave(IEnumerable<HttpPostedFileBase> files, string fileDescription)
         {
             // use the files and their associated meta data
+            return Json(new { success = true });
         }
     ```
     {% endif %}
@@ -84,7 +86,7 @@ To receive metadata from the `save` handler:
 1. Build the response.
 
     ```C#
-    return Json(new object() { foo = "bar" });
+    return Json(new { foo = "bar" });
     ```
 
 2. Declare a handler for the [`success` event](https://docs.telerik.com/kendo-ui/api/ui/upload/events/success) and process the response.

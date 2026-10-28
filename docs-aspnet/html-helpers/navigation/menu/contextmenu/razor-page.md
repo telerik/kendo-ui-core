@@ -1,7 +1,7 @@
 ---
 title: Razor Pages
 page_title: Razor Pages
-description: "An example on how to configure the Telerik UI Button component for {{ site.framework }} in a Razor Page."
+description: "An example on how to configure the Telerik UI ContextMenu component for {{ site.framework }} in a Razor Page."
 components: ["menu"]
 slug: htmlhelpers_contextmenu_razorpage_aspnetcore
 position: 3
@@ -60,6 +60,8 @@ For the complete project, refer to the [ContextMenu in Razor Pages example](http
 ```
 {% if site.core %}
 ```TagHelper
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
 	<div id="target">Right click here</div>
 
     <kendo-contextmenu name="menu" target="#target" orientation="ContextMenuOrientation.Vertical"

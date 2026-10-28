@@ -101,7 +101,7 @@ The following example demonstrates how to define the TreeList.
     public class EmployeeViewModel
     {
         // The Id.
-        public int EmployeeID { get; set; }
+        public int EmployeeId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -134,12 +134,12 @@ The following example demonstrates how to define the TreeList.
 ```C# AsyncController
     public async Task<JsonResult> TreeList_Read([DataSourceRequest] DataSourceRequest request)
     {
-        var northwind = new NortwindEntities();
+        var northwind = new NorthwindEntities();
 
         var result = await northwind.Employees.ToTreeDataSourceResultAsync(request,
-            employee => employee.EmployeeID,
+            employee => employee.EmployeeId,
             employee => employee.ReportsTo,
-            employee => e
+            employee => employee
         );
 
         return Json(result, JsonRequestBehavior.AllowGet);
@@ -163,12 +163,12 @@ The following example demonstrates how to define the TreeList.
 ```C# AsyncController
     public async Task<JsonResult> TreeList_Read([DataSourceRequest] DataSourceRequest request)
     {
-        var northwind = new NortwindEntities();
+        var northwind = new NorthwindEntities();
 
         var result = await northwind.Employees.ToTreeDataSourceResultAsync(request,
             employee => employee.EmployeeID,
             employee => employee.ReportsTo,
-            employee => e
+            employee => employee
         );
 
         return Json(result);

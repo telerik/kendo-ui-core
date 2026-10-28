@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Globalization
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn about the globalization options it supports."
+description: "Learn how to configure globalization options in the Telerik UI Grid component for {{ site.framework }}."
 components: ["grid"]
 slug: globalization_grid_aspnetcore
 position: 1

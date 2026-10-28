@@ -1,7 +1,7 @@
 ---
 title: InCell
 page_title: InCell Grid Editing Mode
-description: "Enable InCell edit mode and batch updates in Telerik UI Grid component for {{ site.framework }}."
+description: "Enable InCell edit mode and batch data updates in the Telerik UI Grid component for {{ site.framework }}."
 components: ["grid"]
 slug: batchediting_grid_aspnetcore
 position: 4
@@ -297,7 +297,7 @@ To define a custom editor for a specified column:
         @(Html.Kendo().DropDownListFor(m => m)
             .DataValueField("Id") // The value of the drop-down is taken from the "Id" property.
             .DataTextField("Name") // The text of the item is taken from the "Name" property.
-            .BindTo((System.Collections.IEnumerable)ViewData["categories"]) // A list of all optipns, which is populated in the controller.
+            .BindTo((System.Collections.IEnumerable)ViewData["categories"]) // A list of all options, which is populated in the controller.
         )
     ```
     ```C# ProductViewModel
@@ -358,6 +358,6 @@ For more use-cases and information on the column editor templates, refer to the 
 {% if site.core %}
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
-* [InCell(batch) Editing by the Grid for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/editing)
+* [InCell Editing by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/editing)
 * [Server-Side HtmlHelper API](/api/grid)
 {% if site.core %}* [Server-Side TagHelper API](/api/taghelpers/grid){% endif %}

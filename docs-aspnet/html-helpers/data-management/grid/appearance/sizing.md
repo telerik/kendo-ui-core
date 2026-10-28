@@ -1,7 +1,7 @@
 ---
 title: Sizing
 page_title: Telerik UI Grid component for {{ site.framework }} Documentation - Sizing
-description: "Get started with the Telerik UI Grid for {{ site.framework }} and learn about its sizing options."
+description: "Configure Grid sizing in {{ site.framework }} by setting the Size option and adjusting element dimensions."
 components: ["grid"]
 slug: sizing_grid
 position: 7
@@ -9,21 +9,22 @@ position: 7
 
 # Sizing
 
-The sizing feature of the Telerik UI for {{ site.framework }} Data Grid attempts at addressing the requirement for a compact grid component, which renders more items by utilizing the available space mainly through setting smaller paddings in its cells.
+Use the sizing feature to make the Telerik UI for {{ site.framework }} Data Grid more compact. Smaller paddings and element sizes let the Grid render more data in the same space.
 
-To increase or decrease the size of the Grid, utilize its [`Size`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridbuilder#sizekendomvcuicomponentsize) configuration.
+To increase or decrease the size of the Grid, utilize its [`Size`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridbuilder#sizekendomvcuicomponentsize) configuration.
 
-> Changing the `Size` property affects different building blocks of the component such as tables, buttons, inputs, an dropdowns among others.
+>note Changing the `Size` property affects Grid building blocks such as tables, buttons, inputs, and dropdowns.
 
 ```C#
-            @(Html.Kendo().Grid<ModelName>()
-               .Name("compact-grid")
-               .Size(ComponentSize.Small) // Enable compact Grid.
+@(Html.Kendo().Grid<ModelName>()
+   .Name("compact-grid")
+   .Size(ComponentSize.Small)
+)
 ```
 
 ## Affected Elements
 
-The `Size` option does not affect elements which are displayed inside a popup such as a Filter Menu, Column Menu, and so on. By design, all popup elements are rendered on root level and not inside the Grid.
+The `Size` option does not affect elements that appear inside popups, such as the Filter Menu and Column Menu. By design, popup elements render at the root level, outside the Grid.
 
 ## See Also
 

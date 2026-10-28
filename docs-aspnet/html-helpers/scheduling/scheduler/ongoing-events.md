@@ -37,7 +37,7 @@ For example, consider an event that starts at 10:00 UTC and ends at 11:00 UTC. I
 
 If a [timezone](/api/kendo.mvc.ui.fluent/schedulerbuilder#timezonesystemstring) is specified, the Scheduler component takes the timezone configuration into account and will adjust the ongoing events highlight accordingly.
 
-Consider an event that starts at 10:00 UTC and ends at 11:00 UTC. The Scheduler component has its timezone configuration set to `UTC/Etc` and the user is located in Europe/Sofia in summer time `UTC +3`. The Scheduler component will render the event from 10:00 to 11:00 (taking into account the timezone set on the component). The event will be highlighted if the current time on the client is from 10:00 to 11:00 (Europe/Sofia, UTC +3). By default, the functionality will use the local (machine/client) timezone to determine which event is highlighted.
+Consider an event that starts at 10:00 UTC and ends at 11:00 UTC. The Scheduler component has its timezone configuration set to `Etc/UTC` and the user is located in Europe/Sofia in summer time `UTC +3`. The Scheduler component will render the event from 10:00 to 11:00 (taking into account the timezone set on the component). The event will be highlighted if the current time on the client is from 10:00 to 11:00 (Europe/Sofia, UTC +3). By default, the functionality will use the local (machine/client) timezone to determine which event is highlighted.
 
 The behavior can be configured via the `OngoingEvents.UseLocalTimezone` configuration option. Setting it to `false` the event will be highlighted if the current time on the client is from 13:00 to 14:00 (Europe/Sofia, UTC +3).
 

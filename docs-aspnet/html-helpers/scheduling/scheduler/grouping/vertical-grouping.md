@@ -56,7 +56,7 @@ To enable the vertical resources grouping:
           </resources>
           <group orientation="vertical">
               <resources>
-                  <group-resource name="Rooms"/> // "Rooms" matches the "name" attribute of the defined resource within the "resources" tag.
+                  <group-resource name="Rooms"/> <!-- "Rooms" matches the "name" attribute of the defined resource within the "resources" tag. -->
               </resources>
           </group>
           <!--Additional configuration-->

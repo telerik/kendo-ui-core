@@ -15,7 +15,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 ## Basic Usage
 
-The following example demonstrates how to customize the DropDownList by declaring an inline string.
+The following example demonstrates how to customize the DropDownList by referencing a script tag by its `id`.
 
 
 ```HtmlHelper
@@ -28,7 +28,7 @@ The following example demonstrates how to customize the DropDownList by declarin
                 {
                     source.Read(read =>
                     {
-                        read.Action("Template_GetCustomers", "ComboBox");
+                        read.Action("Template_GetCustomers", "DropDownList");
                     });
                 })
     )
@@ -41,7 +41,7 @@ The following example demonstrates how to customize the DropDownList by declarin
                     template-id="itemTemplate">
     <datasource>
         <transport>
-            <read url="@Url.Action("Template_GetCustomers", "ComboBox")" />
+            <read url="@Url.Action("Template_GetCustomers", "DropDownList")" />
         </transport>
     </datasource>
 </kendo-dropdownlist>
@@ -53,7 +53,7 @@ The following example demonstrates how to customize the DropDownList by declarin
     </script>
 ```
 
-The following example demonstrates how to customize the DropDownList by referencing a script tag by its `id`.
+The following example demonstrates how to customize the DropDownList by declaring an inline string.
 
 ```HtmlHelper
     @(Html.Kendo().DropDownList()
@@ -65,11 +65,12 @@ The following example demonstrates how to customize the DropDownList by referenc
                 {
                     source.Read(read =>
                     {
-                        read.Action("Template_GetCustomers", "ComboBox");
+                        read.Action("Template_GetCustomers", "DropDownList");
                     });
                 })
     )
 ```
+{% if site.core %}
 ```TagHelper
 <kendo-dropdownlist name="customers"
                     datatextfield="ContactName"
@@ -78,11 +79,12 @@ The following example demonstrates how to customize the DropDownList by referenc
 
     <datasource>
         <transport>
-            <read url="@Url.Action("Template_GetCustomers", "ComboBox")" />
+            <read url="@Url.Action("Template_GetCustomers", "DropDownList")" />
         </transport>
     </datasource>
 </kendo-dropdownlist>
 ```
+{% endif %}
 
 ## Item Template
 
@@ -100,7 +102,7 @@ The following example demonstrates how to define an item template and how to eva
                 {
                     source.Read(read =>
                     {
-                        read.Action("Template_GetCustomers", "ComboBox");
+                        read.Action("Template_GetCustomers", "DropDownList");
                     });
                 })
     )
@@ -113,7 +115,7 @@ The following example demonstrates how to define an item template and how to eva
                     template-id="itemTemplate">
     <datasource>
         <transport>
-            <read url="@Url.Action("Template_GetCustomers", "ComboBox")" />
+            <read url="@Url.Action("Template_GetCustomers", "DropDownList")" />
         </transport>
     </datasource>
 </kendo-dropdownlist>
@@ -141,7 +143,7 @@ The value template manages the way the selected value of a DropDownList is rende
                 {
                     source.Read(read =>
                     {
-                        read.Action("Template_GetCustomers", "ComboBox");
+                        read.Action("Template_GetCustomers", "DropDownList");
                     });
                 })
     )
@@ -155,7 +157,7 @@ The value template manages the way the selected value of a DropDownList is rende
 
     <datasource>
         <transport>
-            <read url="@Url.Action("Template_GetCustomers", "ComboBox")" />
+            <read url="@Url.Action("Template_GetCustomers", "DropDownList")" />
         </transport>
     </datasource>
 </kendo-dropdownlist>
@@ -183,7 +185,7 @@ The header template manages the way the pop-up header of a DropDownList is rende
                 {
                     source.Read(read =>
                     {
-                        read.Action("Template_GetCustomers", "ComboBox");
+                        read.Action("Template_GetCustomers", "DropDownList");
                     });
                 })
     )
@@ -197,7 +199,7 @@ The header template manages the way the pop-up header of a DropDownList is rende
 
     <datasource>
         <transport>
-            <read url="@Url.Action("Template_GetCustomers", "ComboBox")" />
+            <read url="@Url.Action("Template_GetCustomers", "DropDownList")" />
         </transport>
     </datasource>
 </kendo-dropdownlist>
@@ -223,7 +225,7 @@ The footer template manages the way the pop-up footer of a DropDownList is rende
                 {
                     source.Read(read =>
                     {
-                        read.Action("Template_GetCustomers", "ComboBox");
+                        read.Action("Template_GetCustomers", "DropDownList");
                     });
                 })
     )
@@ -237,7 +239,7 @@ The footer template manages the way the pop-up footer of a DropDownList is rende
 
     <datasource>
         <transport>
-            <read url="@Url.Action("Template_GetCustomers", "ComboBox")" />
+            <read url="@Url.Action("Template_GetCustomers", "DropDownList")" />
         </transport>
     </datasource>
 </kendo-dropdownlist>
@@ -265,7 +267,7 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
                 {
                     source.Read(read =>
                     {
-                        read.Action("Template_GetCustomers", "ComboBox");
+                        read.Action("Template_GetCustomers", "DropDownList");
                     });
                 })
     )
@@ -279,7 +281,7 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
 
     <datasource>
         <transport>
-            <read url="@Url.Action("Template_GetCustomers", "ComboBox")" />
+            <read url="@Url.Action("Template_GetCustomers", "DropDownList")" />
         </transport>
     </datasource>
 </kendo-dropdownlist>
@@ -308,7 +310,7 @@ The DropDownList displays an `OptionLabelTemplate` when the `OptionLabel` has be
                 {
                     source.Read(read =>
                     {
-                        read.Action("Template_GetCustomers", "ComboBox");
+                        read.Action("Template_GetCustomers", "DropDownList");
                     });
                 })
     )
@@ -323,7 +325,7 @@ The DropDownList displays an `OptionLabelTemplate` when the `OptionLabel` has be
 
     <datasource>
         <transport>
-            <read url="@Url.Action("Template_GetCustomers", "ComboBox")" />
+            <read url="@Url.Action("Template_GetCustomers", "DropDownList")" />
         </transport>
     </datasource>
 </kendo-dropdownlist>

@@ -1,7 +1,7 @@
 ---
 title: Server Export
 page_title: Server Export
-description: "Export the Telerik UI Grid for {{ site.framework }} on the Server."
+description: "Export Telerik UI Grid for {{ site.framework }} data to Excel or CSV on the server for large datasets."
 components: ["grid"]
 previous_url: /kendo-ui/aspnet-mvc/helpers/grid/how-to/excel-export-server-side, /helpers/data-management/grid/how-to/Export/excel-export-server-side, /html-helpers/data-management/grid/how-to/Export/excel-export-server-side
 slug: serverexport_gridhelper_aspnetcore
@@ -10,7 +10,7 @@ position: 5
 
 # Server Export
 
-The Telerik UI Grid for {{ site.framework }} exposes the functionality to export its data to XLSX (Excel) and CSV on the Server. This approach is recommended when the data is large and resource demanding. It escapes the need to serialize the whole dataset and to create the file on the Client. When Server-side export it used, the file is created on the Server and is pushed to the Client as a `File` object.
+The Telerik UI Grid for {{ site.framework }} exposes the functionality to export its data to XLSX (Excel) and CSV on the Server. This approach is recommended when the data is large and resource demanding. It escapes the need to serialize the whole dataset and to create the file on the Client. When Server-side export is used, the file is created on the Server and is pushed to the Client as a `File` object.
 
 For a runnable example, refer to the [demo on Server export by the Grid](https://demos.telerik.com/{{ site.platform }}/grid/server-export).
 

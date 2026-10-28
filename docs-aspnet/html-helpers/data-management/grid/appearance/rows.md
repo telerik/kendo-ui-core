@@ -1,7 +1,7 @@
 ---
 title: Rows
 page_title: Rows
-description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to handle the most common scenarios when configuring the behavior of its rows."
+description: "Learn how to customize Grid row appearance in {{ site.framework }} with selection, templates, and styles."
 components: ["grid"]
 slug: rows_aspnetcore_grid_widget
 position: 3
@@ -9,14 +9,14 @@ position: 3
 
 # Rows
 
-The Grid enables you to handle the appearance of its rows by [using the `id` of the data item](#getting-rows-by-model-id), [adding custom rows](#adding-custom-rows), [utilizing row templates](#using-row-templates), and [disabling the hover effect](#disabling-the-hover-effect).  
+Control the appearance of Grid rows by [getting rows by model ID](#getting-rows-by-model-id), [adding custom rows](#adding-custom-rows), [using row templates](#using-row-templates), and [disabling the hover effect](#disabling-the-hover-effect).
 
-## Getting Rows by Model Id
+## Getting Rows by Model ID
 
 To get a table row in the Grid by the ID of the data item:
 
 1. Make sure the [Id field is defined in the model configuration](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/datasourcemodeldescriptorfactory) of the data source of the Grid.
-2. Retrieve the row model, the model UID, and the Grid table row consecutively.
+2. Retrieve the data item, read its UID, and then select the corresponding table row.
 
 ```JS script
     var grid = $("#grid").data("kendoGrid"); // Get the Grid instance.
@@ -26,7 +26,7 @@ To get a table row in the Grid by the ID of the data item:
 
 ## Adding Custom Rows
 
-You can manually add a table row with a user-friendly message when the DataSource does not return any data, for example, as a result of filtering. For more information, refer to the article on [row templates]({% slug row_templates_aspnetcore_grid %}).
+You can manually add a table row with a user-friendly message when the DataSource returns no data, for example, after filtering. For more information, see [Row Templates in the Grid HtmlHelper for {{ site.framework }}]({% slug row_templates_aspnetcore_grid %}).
 
 The following example demonstrates how to add a table row in the [`DataBound()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event handler of the Grid.
 
@@ -61,13 +61,13 @@ The following example demonstrates how to add a table row in the [`DataBound()`]
 
 ## Using Row Templates
 
-For more information, refer to the article on [row templates]({% slug row_templates_aspnetcore_grid %}).
+Use row templates to customize row markup and content. For implementation details, see [Row Templates in the Grid HtmlHelper for {{ site.framework }}]({% slug row_templates_aspnetcore_grid %}).
 
 ## Disabling the Hover Effect
 
-Hover is a UI state which provides better visualization across long table rows and when the Grid is in its edit mode. However, if your project requires you to avoid the `hover` state, use either of the following approaches:
+Hover is a UI state that improves row visibility, especially across long rows and while editing. If your project must avoid the `hover` state, use one of the following approaches:
 
-* Open the Kendo UI theme CSS file (for example, `kendo.default.min.css`) and remove the following CSS rule.
+* Open the Kendo UI theme CSS file (for example, `kendo.default.min.css`) and remove this CSS rule.
 
     ```CSS
     .k-grid tr:hover {
@@ -75,7 +75,7 @@ Hover is a UI state which provides better visualization across long table rows a
     }
     ```
 
-* Override the `hover` styling by using the CSS code from the following example. The `#f1f1f1` value corresponds to the background color of the `.k-alt` table rows. To find the correct value for the Kendo UI theme that you are applying, use the DOM inspector of the browser. Alternatively, set a background color value of your preference.
+* Override the `hover` styling by using the CSS from the following example. The `#f1f1f1` value corresponds to the background color of the `.k-alt` table rows. To find the correct value for your Kendo UI theme, use the browser DOM inspector, or set a background color of your preference.
 
     ```CSS
     .k-grid tr:not(.k-selected):hover {

@@ -9,13 +9,17 @@ position: 3
 
 # Custom Key Handling
 
-The {{ site.product }} Grid wrappers expose the `KendoKeydown` event, which lets you intercept keyboard input before the built-in handler runs and customize how it responds to specific shortcuts.
+Use the `KendoKeydown` event to customize how the {{ site.product }} Grid handles keyboard shortcuts.
+The event fires before the built-in keyboard handler, so you can override built-in combinations or add your own.
 
 For event details and the full list of supported wrappers, refer to [Custom Key Handling Overview]({% slug custom_keyboard_navigation_aspnet_wrappers %}).
 
 ## How It Works
 
-When the Grid receives keyboard input, the `KendoKeydown` event fires before the built-in handler.
+When the Grid receives keyboard input, the `KendoKeydown` event runs first.
+Attach a handler to inspect the pressed keys and decide whether to keep the built-in behavior or replace it.
+The event object includes the pressed key code and modifier-key state, which lets you branch for different combinations in one handler.
+This approach keeps keyboard logic in one place and makes custom behavior easier to maintain.
 
 Use the following configuration to subscribe to the event:
 
@@ -30,7 +34,10 @@ Use the following configuration to subscribe to the event:
 
 ## Overriding a Built-In Key Combination
 
-The following example shows the pattern for overriding a built-in shortcut of the Grid. Replace `kendo.keys.ENTER` with one of the built-in shortcuts that you want to take over.
+The following example shows how to override a built-in shortcut.
+Set `e.preventKendoKeydown = true` to stop the Grid from executing its default keyboard action.
+Replace `kendo.keys.ENTER` with the shortcut that you want to override.
+Use this pattern when a built-in key action conflicts with your app flow, such as custom row editing logic or command routing.
 
 ```javascript
     function onGridKendoKeydown(e) {
@@ -43,7 +50,10 @@ The following example shows the pattern for overriding a built-in shortcut of th
 
 ## Adding a Custom Key Combination
 
-The following example demonstrates how to add a new `Ctrl+Shift+X` shortcut for the Grid.
+The following example adds a custom `Ctrl+Shift+X` shortcut.
+In this case, `88` is the key code for the X key.
+You can extend this pattern for additional combinations by checking different key codes and modifier keys in the same handler.
+When you add custom shortcuts, avoid combinations that overlap with common browser or assistive-technology shortcuts.
 
 ```javascript
     function onGridKendoKeydown(e) {
@@ -56,6 +66,7 @@ The following example demonstrates how to add a new `Ctrl+Shift+X` shortcut for 
 ## Built-In Keyboard Shortcuts
 
 For the full list of built-in keyboard shortcuts, see the [Grid Keyboard Navigation Demo](https://demos.telerik.com/{{ site.platform }}/grid/keyboard-navigation) and the [Keyboard Navigation article]({% slug keynav_aspnetcore_grid %}).
+Review these defaults before adding custom combinations so users keep a predictable keyboard experience in the Grid.
 
 ## See Also
 

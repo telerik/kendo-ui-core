@@ -146,9 +146,9 @@ To configure a chart series for drill-down:
 
 ## Drilling Down with Dynamic Data
 
-The drill-down functionality enables you to drill past arbitrary data which is based on a upward level criteria.
+The drill-down functionality enables you to drill past arbitrary data which is based on an upper-level criterion.
 
-To populate the drill-down series on dynamically:
+To populate the drill-down series dynamically:
 
 1. Set the [`DrilldownField()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/chartbuilder#drilldownfieldsystemstring) option to a field that contains the drill-down value field for each point.
 1. Define a [`DrilldownSeriesFactory()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/chartbuilder#drilldownseriesfactorysystemstring) function handler that returns the series definition for each data point.
@@ -176,7 +176,8 @@ To populate the drill-down series on dynamically:
     )
 
     <script>
-       var vehiclesByQuarter = @Html.Raw(Json.Serialize(@ViewData["VehiclesByQuarter"]));
+    // Serialize server-side ViewData for the client-side drilldown factory.
+    var vehiclesByQuarter = @Html.Raw(Json.Serialize(@ViewData["VehiclesByQuarter"]));
        var vehiclesByModel = @Html.Raw(Json.Serialize(@ViewData["VehiclesByModel"]));
        function drilldownByQuarter(model) {
            const data = vehiclesByQuarter[model];
@@ -794,7 +795,7 @@ To implement a custom drill-down navigation:
 
     @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.CompanyModel>()
         .Name("chart")
-        .Events(events => events.Drilldown("onDrillDown"))
+        .Events(events => events.Drilldown("onDrilldown"))
         .Series(series =>
         {
             series.Column(model => model.Sales)
