@@ -254,6 +254,34 @@ With the `Editor` option you can explicitly configure an editor to be used for a
 ```
 {% endif %}
 
+### Use a ComboBox data callback
+
+The `Field` configuration defines the name of the Form item. When you configure the item with `.Field(f => f.ComboBox)` and do not set an explicit item ID, the Form uses `ComboBox` as the editor ID. The `#ComboBox` jQuery selector therefore targets the ComboBox editor rendered for that Form field. It does not refer to the displayed text, the selected value, or the `DataTextField()` or `DataValueField()` configuration.
+
+Use the `Data()` configuration to pass a JavaScript function that returns additional request data. For example, the following function uses the built-in `kendo.ui.ComboBox.requestData` helper to send the text entered in the ComboBox:
+
+```JavaScript
+function filterProducts() {
+    return kendo.ui.ComboBox.requestData($("#ComboBox"));
+}
+```
+
+The returned data has the following shape:
+
+```JavaScript
+{ text: "current filter text" }
+```
+
+The parameter names returned by a custom data function must match the parameters expected by the server action. For example, use a custom object when the action expects a different parameter:
+
+```JavaScript
+function filterProducts() {
+    return {
+        categoryId: $("#Category").val()
+    };
+}
+```
+
 ## Custom Editor
 
 You can implement custom editor by using the editor option as a function as follows:

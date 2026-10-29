@@ -15,6 +15,8 @@ To provide better customer experience, the Chat offers support for predefined an
 * [Suggested actions](#suggested-actions)
 * [Custom templates](#custom-templates)
 
+The `carousel` attachment layout applies to attachments rendered inside Chat messages. It is not a general-purpose carousel for page-level messages, top-menu information, or static message containers.
+
 ## Default Cards
 
 The Chat supports rendering of hero cards through the `RenderAttachments()` method, which displays attachments with customizable layout options.

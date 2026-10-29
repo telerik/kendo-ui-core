@@ -20,6 +20,18 @@ The Notification provides a styled UI widget with arbitrary content which can pr
 
 * [Demo page for the Notification HtmlHelper](https://demos.telerik.com/{{ site.platform }}/notification/index)
 
+## Choose a Message Display Pattern
+
+Use the `k-messagebox` CSS classes for a static, inline message container. The following example displays a persistent success message without initializing a Notification widget:
+
+```HTML
+<div class="k-messagebox k-messagebox-success">
+    Your changes were saved successfully.
+</div>
+```
+
+Use the Notification when the message should be transient, positioned, stacked, or displayed as a popup. Use a Card when the message is part of a persistent content container with a header, body, footer, or actions.
+
 ## Initializing the Notification
 
 You can initialize the Notification from any element because it does not manipulate its content. The element will be hidden if the widget uses popup notifications or if the static notifications are not appended to the Notification element. In such cases, the element is not needed.

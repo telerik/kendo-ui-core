@@ -22,6 +22,8 @@ Use only one of them with a particular Button instance. If you define multiple p
 
 The `Icon()` method displays a built-in Kendo UI icon in the Button. In current releases, the icon is rendered as SVG by default. The Button enables you to completely omit any text to be specified for its contents. For more information about SVG icons, see [SVG Icons]({% slug svgicons_core_mvc %}).
 
+For Telerik UI for ASP.NET Core, the icon behavior follows the Telerik UI release and does not use a separate .NET Core icon version. SVG icons were introduced in the R1 SP1 2023 release, and SVG became the default icon type in R2 2023. Font icons remain supported and can be selected through the server-side `IconType.Font` setting or the client-side `iconType: "font"` configuration. For more information, see [Migrating from Font Icons to SVG Icons]({% slug font_icons_migration %}).
+
 ```HtmlHelper
 	@(Html.Kendo().Button()
 		.Name("textButton")

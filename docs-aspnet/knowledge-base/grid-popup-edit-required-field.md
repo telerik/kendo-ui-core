@@ -74,6 +74,15 @@ The following example demonstrates the steps described above.
     }
 ```
 
+The editable Grid initializes the Kendo Validator internally. It uses the input's `required` attribute for built-in validation, so no separate Validator initialization is needed.
+
+To verify the behavior:
+
+1. Edit a data item in the Grid popup.
+2. Set the DropDownList value to `ShipName is required`.
+3. Clear the `ShipName` field and blur it. The Grid displays a validation message and prevents saving.
+4. Set the DropDownList value to `ShipName is not required`. The `ShipName` field is no longer required.
+
 For more examples on Grid editing, see the following demos:
 
 * [Grid Popup Editing](https://demos.telerik.com/{{ site.platform }}/grid/editing-popup)

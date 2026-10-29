@@ -59,6 +59,35 @@ To bind the Switch to a property from the `PageModel`, follow the next steps:
     <kendo-switch for="IsChecked"></kendo-switch>
     ```
 
+### Binding to a Nested Property
+
+The `for` attribute accepts a model expression, including a nested Boolean property. For example, if the `PageModel` has a `Patient` property with a `NoEmail` property, bind the Switch as follows:
+
+```C# Index.cshtml.cs
+public class IndexModel : PageModel
+{
+    [BindProperty]
+    public PatientViewModel Patient { get; set; } = new PatientViewModel();
+}
+
+public class PatientViewModel
+{
+    public bool NoEmail { get; set; }
+}
+```
+
+```TagHelper
+<kendo-switch for="Patient.NoEmail"></kendo-switch>
+```
+
+The generated field name is `Patient.NoEmail`, which allows the value to bind to the nested property when the form is submitted. The `SwitchFor` HtmlHelper supports the equivalent expression:
+
+```HtmlHelper
+@(Html.Kendo().SwitchFor(m => m.Patient.NoEmail))
+```
+
+If a checkbox remains visible instead of being transformed into a Switch, inspect the rendered markup and browser console. The Switch is initialized on a checkbox input, so a visible checkbox can indicate that the Kendo UI scripts or styles are not loaded, the Switch initialization script did not run, or the generated ID is not unique. These checks are separate from the model-binding path.
+
 For the complete project, refer to the [Switch in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Switch/SwitchIndex.cshtml).
 
 ## See Also

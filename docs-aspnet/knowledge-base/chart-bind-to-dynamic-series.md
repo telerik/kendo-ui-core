@@ -26,6 +26,27 @@ components: ["general"]
 ## Description
 How can I bind the Chart to dynamic series?
 
+## Model
+
+Define the series data and category values in the view model. The `Stack` property in this example stores the stack group, while the Stack100 mode is configured in the Chart.
+
+```C#
+using System.Collections.Generic;
+
+public class MySeriesData
+{
+    public string Name { get; set; }
+    public string Stack { get; set; }
+    public decimal[] Data { get; set; }
+}
+
+public class MyViewModel
+{
+    public List<string> Categories { get; set; } = new List<string>();
+    public List<MySeriesData> Series { get; set; } = new List<MySeriesData>();
+}
+```
+
 ## Example
 ```HtmlHelper
     @model TelerikAspNetCoreApp4.Models.MyViewModel
@@ -34,24 +55,25 @@ How can I bind the Chart to dynamic series?
           .Name("Chart")
           .Series(series => {
               foreach (var def in Model.Series) {
-                  series.Column(def.Data).Name(def.Name).Stack(def.Stack);
+                  series.Column(def.Data)
+                        .Name(def.Name)
+                        .Stack(ChartStackType.Stack100, def.Stack);
               }
           })
           .CategoryAxis(axis => axis
-             .Categories(new string[] { "A", "B", "C" })
+             .Categories(Model.Categories.ToArray())
           )
     )
 ```
-
 {% if site.core %}
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
+    @model TelerikAspNetCoreApp4.Models.MyViewModel
+
     @{ 
-        var categories = new string[] { "A", "B", "C" };
+        var categories = Model.Categories.ToArray();
     }
 
-    @model TelerikAspNetCoreApp4.Models.MyViewModel
-    
     <kendo-chart name="chart">
         <category-axis>
                 <category-axis-item name="series-axis">
@@ -65,8 +87,8 @@ How can I bind the Chart to dynamic series?
             {
                 <series-item type="ChartSeriesType.Column"
                              name="@def.Name"
-                             stack="@def.Stack"
                              data="@def.Data">
+                    <stack type="ChartStackType.Stack100" group="@def.Stack" />
                     <labels background="transparent" visible="true">
                     </labels>
                 </series-item>

@@ -11,6 +11,8 @@ position: 11
 
 By default, Grid cell content is left-aligned.
 
+The alignment methods in this article apply to cells generated from the column definitions. If you use a [`ClientRowTemplate()`]({% slug row_templates_aspnetcore_grid %}), the template defines the `<tr>` and `<td>` markup, so apply the alignment class or style directly to the relevant `<td>` elements in the template.
+
 ## Cell Content
 
 To change the content alignment of the Grid, use either of the following approaches:

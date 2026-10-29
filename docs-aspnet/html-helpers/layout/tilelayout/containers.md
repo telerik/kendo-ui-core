@@ -31,6 +31,10 @@ The main tile content is rendered from the [`BodyTemplate()`](/api/kendo.mvc.ui.
 
 ## Container Styles
 
+The TileLayout containers do not support a container-level `HtmlAttributes()` method in the HtmlHelper or an `html-attributes` attribute in the TagHelper. The `HtmlAttributes()` configuration applies to the root TileLayout element, not to individual containers.
+
+To customize the class used by all tile items, override the `kendo.ui.TileLayout.styles.item` style before the widget is initialized. To add attributes to content inside a tile, include them in the container body template. Per-container attributes require client-side customization after the TileLayout is initialized.
+
 The TileLayout exposes an object that allows you to override the following styles:
 
 ```JS
