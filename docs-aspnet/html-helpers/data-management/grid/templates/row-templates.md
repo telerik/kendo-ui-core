@@ -11,6 +11,23 @@ position: 3
 
 The Kendo UI Grid supports row templates which enable you to place custom content into a Grid row.
 
+When you use a `ClientRowTemplate`, the template defines the complete `<tr>` and `<td>` markup. To center a cell, add a class or an inline `text-align` style directly to the relevant `<td>` element.
+
+```HtmlHelper
+    .ClientRowTemplate("<tr data-uid='#=data.uid#'>" +
+        "<td class='toppane-input-wrap'>#=data.OrderID#</td>" +
+        "<td class='toppane-input-wrap'>#=data.ShipCountry#</td>" +
+    "</tr>")
+```
+
+```CSS
+    .toppane-input-wrap {
+        text-align: center;
+    }
+```
+
+The `toppane-input-wrap` class in this example is a custom application class, not a Kendo UI class. For standard generated Grid cells, use the column alignment options described in the [content alignment article]({% slug cell_alignment_aspnet_grid %}).
+
 For runnable examples, refer to:
 * [Demo on using the row template of the Grid HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/grid/rowtemplate)
 * [Demo on using the detail-row template of the Grid HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/grid/detailtemplate)

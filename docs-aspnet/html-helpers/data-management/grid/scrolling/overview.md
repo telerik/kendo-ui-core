@@ -146,6 +146,8 @@ By default, the Grid does not display scrollbars when scrolling is enabled. To r
 
 When scrolling is enabled, the vertical scrollbar of the Grid is always visible even if not needed, which simplifies the implementation and improves the performance of the component. 
 
+If scrolling is disabled, the Grid does not create the scrollable content area described above. When the table is wider than the Grid, the table can overflow the Grid or an ancestor element instead of displaying a Grid content scrollbar. For more information, refer to the [Grid width article]({% slug width_grid_aspnetcore %}).
+
 To remove the vertical scrollbar, use CSS rules and make sure that neither the Grid nor its data area apply fixed heights so that they can shrink and expand according to the number of table rows. In the following example, the `#GridID` CSS selector applies the styles only to a particular Grid instance. To apply these styles in all Grid instances, replace the `#GridID` CSS selector with the `.k-grid` class. 
 
 ```CSS

@@ -17,6 +17,8 @@ To control the width of the Grid, set CSS `width` properties on the Grid element
 
 If you enable scrolling and the sum of all column widths is greater than the Grid width, a horizontal scrollbar appears. If you disable scrolling and the columns do not fit, they overflow the Grid `<div>` element. This overflow can move the Grid right border through the data cells because the Grid renders a `<table>` inside a `<div>`. The table can grow beyond 100% width to fit its content, but the `<div>` cannot.
 
+When scrolling is disabled, the horizontal movement caused by overflowing columns is not a Grid content scrollbar. It can instead make the table or an ancestor element extend beyond the Grid width, depending on the surrounding CSS. To render a scrollbar in the Grid content area, enable scrolling and configure the Grid and column widths as described in the [scrolling overview]({% slug htmlhelpers_grid_aspnetcore_scrolling %}).
+
 To avoid table overflowing, apply any of the following approaches:
 * Enable scrolling, which is disabled by default when you use the Kendo UI Grid MVC wrapper.
 * Set a large enough `width` or `min-width` style on the Grid wrapper (`<div class="k-widget k-grid">`).

@@ -113,6 +113,27 @@ The example below demonstrates how to implement row spanning when the ShipCity f
     }
 ```
 
+To span one cell across every row in the current Grid view, use a handler that assigns the number of rendered data items to `rowSpan` and hides the cells for the remaining items:
+
+```JavaScript
+    function setRowSpanForAllRows(dataItem) {
+        let grid = $("#grid").getKendoGrid();
+        let dataView = grid.dataItems();
+
+        if (dataView.indexOf(dataItem) !== 0) {
+            return {
+                hidden: "hidden"
+            };
+        }
+
+        return {
+            rowSpan: dataView.length
+        };
+    }
+```
+
+Configure the target column with `.HtmlAttributes("setRowSpanForAllRows")` instead of the `setRowSpan` handler in the preceding example. The span applies to the current rendered view. With paging enabled, each page is rendered separately, so one HTML cell cannot span rows across multiple pages.
+
 ## Column Spanning
 
 The Column spanning functionality enables you to span multiple columns in the Grid. To implement Column spanning use one of the [`Columns.HtmlAttributes`](/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#htmlattributessystemstring) overload and pass the name of the JavaScript handler function that will set the attributes for the column. You can then set the colSpan and hidden attributes to the cells.
