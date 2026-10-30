@@ -64,7 +64,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
 
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```

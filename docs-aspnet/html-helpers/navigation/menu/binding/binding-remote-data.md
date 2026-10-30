@@ -16,7 +16,7 @@ The Menu supports remote data binding as of the R2 2019 release.
 
 1. Implement an action method in your controller that returns the collection for the Menu.
 
-    ```
+    ```Controller
     public JsonResult GetCategories()
     {
         SampleEntities northwind = new SampleEntities();

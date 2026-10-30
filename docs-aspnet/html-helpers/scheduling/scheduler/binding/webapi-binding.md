@@ -306,7 +306,7 @@ To enable the CRUD operations that support Web API Binding, explicitly add a `We
     </kendo-scheduler>
 ```
 {% else %}
-```
+```HtmlHelper
 @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
     .Name("scheduler")
     .Date(new DateTime(2022, 6, 13))

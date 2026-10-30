@@ -57,7 +57,7 @@ To configure the TreeView for remote data binding within a Razor Pages applicati
     
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```

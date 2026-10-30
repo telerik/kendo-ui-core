@@ -32,7 +32,7 @@ The following example demonstrates how to implement row and alter row templates 
 
 The following scripts will generate the content for the templates:
 
-```
+```JS Template
 <script id="rowTemplate" type="text/x-kendo-template">
     <tr class="k-table-row" data-uid='#: data.model.uid #' role="row">
     <td class="k-table-td" role="gridcell">
@@ -93,7 +93,7 @@ The following scripts will generate the content for the templates:
 
 Additionally, for the expand/collapse icons to apear, you must create SVG icons from the respective span elements in the templates. You can do that in the TreeList `DataBound` event handler:
 
-```
+```JavaScript
 <script>
     function onDataBound(e) {
         // Replace the template icon placeholders with the current Kendo SVG icons.
@@ -110,7 +110,7 @@ Additionally, for the expand/collapse icons to apear, you must create SVG icons 
 
 The TreeList in versions of {{ site.product_short }} prior to R1 2023 SP1 (2023.1.314) has a different rendering. SVG icons are not used in the old version, so creating SVG icons in the `DataBound` event handler is not applicable. However, the templates should be declared as shown below, because of the difference in the classes between the old and the new rendering of the component:
 
-```
+```JS Template
 <script id="rowTemplate" type="text/x-kendo-template">
     <tr data-uid='#: data.model.uid #' role="row">
     <td role="gridcell">

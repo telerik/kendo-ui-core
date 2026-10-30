@@ -185,7 +185,7 @@ Configure output actions so users can copy, insert, or discard the AI-generated 
 
 In the example, `Insert` is a custom action. When the `Insert` action is triggered, you can update the corresponding row's "AI Assisted Info" field and refresh the Grid.
 
-```
+ ```JavaScript
         function onOutputAction(e) {
             if (e.action === "insert") {
                 var row = e.sender.element.closest("tr");

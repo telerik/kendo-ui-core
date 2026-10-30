@@ -48,7 +48,9 @@ The boilerplate has an HTML page, a layout, the Northwind database, and some ser
 
 1. Using the package manager console, run the command below.
 
-        PM> Install-Package KendoQsBoilerplate
+    ```powershell
+    PM> Install-Package KendoQsBoilerplate
+    ```
 
     Alternatively, you can use the GUI package manager.
 

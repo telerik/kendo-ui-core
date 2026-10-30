@@ -94,7 +94,7 @@ Multiple value axes are also supported. For example, to define four value axes, 
 1. Within the `Series()` configuration, use the `Axis()`option to specify the name of the value axis for each of the defined series.
 1. Set the alignment of the value axes by using the `AxisCrossingValue()` of the `CategoryAxis()`. This method accepts comma-separated indexes that correspond to the indices, at which the value axes cross the category axis.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Title("March Weather Report")

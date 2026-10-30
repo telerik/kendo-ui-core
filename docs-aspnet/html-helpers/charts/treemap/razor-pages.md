@@ -57,7 +57,7 @@ To bind the TreeMap to a data set received from a remote endpoint within a Razor
 
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```

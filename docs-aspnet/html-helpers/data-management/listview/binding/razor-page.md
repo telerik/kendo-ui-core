@@ -112,7 +112,7 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
 
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```
@@ -223,7 +223,7 @@ To bind the ListView to a property from the `PageModel`, follow the next steps:
 
 1. Declare the `PageModel` at the top of the page.
 
-    ```
+    ```Razor
         @model ListViewPageModel
     ```
 

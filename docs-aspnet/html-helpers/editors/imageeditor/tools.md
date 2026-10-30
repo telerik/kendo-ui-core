@@ -77,7 +77,7 @@ The kendo.ui.imageeditor namespace exposes the ImageEditorCommand class that cou
 
 First, create a new command by extending the ImageEditorCommand class.
 
-```
+ ```JavaScript
     <script>
         var imageEditorNS = kendo.ui.imageeditor;
 

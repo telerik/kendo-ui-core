@@ -1260,7 +1260,7 @@ To set up the image and file browser tools when using the Editor component in a 
 
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```

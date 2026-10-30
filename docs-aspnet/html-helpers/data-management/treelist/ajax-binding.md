@@ -17,6 +17,7 @@ The Ajax-bound mode has the following features:
 - The TreeList retrieves only the data (in JSON format) representing the current level items.
 >  To use lazy-loading define the `hasChildren` property of the Model
 
+    ```C#
     public class EmployeeViewModel
     {
         // The Id.
@@ -28,6 +29,7 @@ The Ajax-bound mode has the following features:
         // If it is not defined, the TreeList will calculate and assign its value on the client.
         public bool hasChildren { get; set; }
     }
+    ```
 - All column templates are executed client-side. They follow the [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
 
 To configure the TreeList for {{ site.framework }} to do Ajax binding:
@@ -35,18 +37,23 @@ To configure the TreeList for {{ site.framework }} to do Ajax binding:
 1. Create a new {{ site.framework }} web application. Follow the steps from the [introductory article]({% if site.core %}{% slug gettingstartedtelerik_aspnetcore %}{% else %}{% slug gettingstartedtelerik_cli_aspnetmvc %}{% endif %}) to add {{ site.product }} to the application.
 1. Open the `HomeController.cs` and add a new action method which will return the items as JSON. The TreeList makes Ajax requests to this action.
 
+    ```C# Controller
         public ActionResult TreeList_Read()
         {
         }
+    ```
 
 1. Add a new parameter of type `Kendo.Mvc.UI.DataSourceRequest` to the action. It will contain the current TreeList request information about sorting, aggregates and filtering. Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. This attribute will populate the `DataSourceRequest` object from the posted data. Now import the `Kendo.Mvc.UI` namespace. Also add another parameter which will indicate which parent node has been expanded.
 
+    ```C# Controller
         public ActionResult TreeList_Read([DataSourceRequest]DataSourceRequest request, int? id)
         {
         }
+    ```
 
 1. Use the `ToTreeDataSourceResult` extension method to convert the items collection to a `Kendo.Mvc.UI.TreeDataSourceResult` object. This extension method will filter, sort, calculate aggregates and find only the current level items of your data using the information provided by the `DataSourceRequest` object. To use the `ToTreeDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
 
+    ```C# Controller
         public JsonResult TreeList_Read([DataSourceRequest] DataSourceRequest request, int? id)
         {
             var result = ((EmployeeDirectoryService) employeeDirectory).GetAllRemote().ToTreeDataSourceResult(request,
@@ -57,9 +64,11 @@ To configure the TreeList for {{ site.framework }} to do Ajax binding:
             );
 
         }
+    ```
 
 1. Return the `TreeDataSourceResult` as JSON. Configure the Telerik UI TreeList for Ajax binding.
-        {% if site.core %}
+    {% if site.core %}
+    ```C# Controller
         public JsonResult TreeList_Read([DataSourceRequest] DataSourceRequest request, int? id)
         {
             var result = ((EmployeeDirectoryService) employeeDirectory).GetAllRemote().ToTreeDataSourceResult(request,
@@ -71,7 +80,9 @@ To configure the TreeList for {{ site.framework }} to do Ajax binding:
 
             return Json(result);
         }
-        {% else %}
+    ```
+    {% else %}
+    ```C# Controller
         public JsonResult TreeList_Read([DataSourceRequest] DataSourceRequest request, int? id)
         {
             var result = ((EmployeeDirectoryService) employeeDirectory).GetAllRemote().ToTreeDataSourceResult(request,
@@ -83,7 +94,8 @@ To configure the TreeList for {{ site.framework }} to do Ajax binding:
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        {% endif %}
+    ```
+    {% endif %}
 
 1. In the view, configure the TreeList to use the action method created in the previous steps.
 

@@ -15,13 +15,13 @@ The globalization functionality of the Editor is enabled through:
 
 1. Adding a reference to the specific culture file:
 
-    ```
+    ```HTML
         <script src="@Url.Content("~/lib/kendo/js/cultures/kendo.culture.bg-BG.min.js")"></script>
     ```
 
 1. Apply the culture to all Telerik UI components:
 
-    ```
+    ```HTML
         <script type="text/javascript">
             //set the Kendo UI culture
             kendo.culture("bg-BG");

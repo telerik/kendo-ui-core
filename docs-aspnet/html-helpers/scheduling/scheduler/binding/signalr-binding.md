@@ -93,7 +93,7 @@ Complete details on setting up an ASP.NET SignalR service are available in [Micr
 1. Add an OWIN Startup Class and the SignalR configuration.
 1. Ensure the hubs are mapped.
 
-```
+ ```C#
     public class Startup
     {
         public void Configuration(IAppBuilder app)

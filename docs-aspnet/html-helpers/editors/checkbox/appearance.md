@@ -68,7 +68,7 @@ The border radius of the CheckBox can be customized through the `Rounded()` meth
 ```
 {% endif %}
 {% if site.mvc %}
-```
+```HtmlHelper
 @(Html.Kendo().CheckBox()
     .Name("checkBoxBtn")
     .Checked(true)

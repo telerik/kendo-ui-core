@@ -69,7 +69,7 @@ To configure the CRUD operations in the FileManager within a Razor Pages applica
 
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```

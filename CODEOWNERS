@@ -1,17 +1,15 @@
 # jQuery Docs owners
-/docs/ @NikoPenev21 @nelito987 @martintabakov
+/docs/ @nelito987 @mihaela-lukanova @VicTachev @P1l3T0 @Jekata
 # MVC/Core Docs owners
-/docs-aspnet/ @eyupyusein @alestoya @aleksandarevangelatov @mihaela-lukanova @antonmironovv @VicTachev @IvanDanchev
+/docs-aspnet/ @nelito987 @mihaela-lukanova @VicTachev @P1l3T0 @Jekata
 # Source owners
-/src/ @Iankodj @ag-petrov @pepinho24 @gdenchevprog @iordanGrancharov
-/tests/ @Iankodj @ag-petrov @pepinho24 @gdenchevprog @iordanGrancharov
-/typescript/ @Iankodj @ag-petrov @pepinho24 @gdenchevprog @iordanGrancharov
+/src/ @ag-petrov @iordanGrancharov @alestoya @aleksandarevangelatov @attilaantal
+/tests/ @ag-petrov @iordanGrancharov @alestoya @aleksandarevangelatov @attilaantal
+/typescript/  @ag-petrov @iordanGrancharov @alestoya @aleksandarevangelatov @attilaantal
 # Infrastructure owners
-/build/ @Iankodj @ag-petrov
-gulpfile.js @Iankodj @ag-petrov @pepinho24 @gdenchevprog
-package.json @Iankodj @ag-petrov @MilenaCh @Dimitar-Goshev
-package-lock.json @Iankodj @ag-petrov @MilenaCh @Dimitar-Goshev
+/build/ @ag-petrov @alestoya @aleksandarevangelatov
+gulpfile.js @alestoya @aleksandarevangelatov
+package.json @ag-petrov @Dimitar-Goshev @alestoya @aleksandarevangelatov
+package-lock.json @ag-petrov @Dimitar-Goshev @alestoya @aleksandarevangelatov
 # Workflow owners
-/.github/ @VicTachev @nenchef
-# LESS owners
-/styles/ @NikoPenev21 @magdalenaan
+/.github/ @VicTachev @nenchef @ag-petrov

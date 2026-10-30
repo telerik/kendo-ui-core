@@ -238,7 +238,7 @@ The next two approaches let you create a data table serving as an alternative or
 
     The example below shows how to add a **Show Table** button on the screen. When the user clicks the button, the Chart is hidden, the table is displayed, and the button's label changes to **Show Chart**.
 
-    ```
+    ```HtmlHelper
         @(Html.Kendo().Button()
             .Name("tableBtn")
             .FillMode(ButtonFillMode.Solid)

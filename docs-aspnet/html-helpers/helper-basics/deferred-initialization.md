@@ -169,7 +169,7 @@ To defer components globally:
 
 1. Configure a `HttpModule` in the `Web.config` file that returns the cached scripts when the browser request them.
 
-    ```
+    ```HTML
     <configuration>
         ...
         <system.webServer>

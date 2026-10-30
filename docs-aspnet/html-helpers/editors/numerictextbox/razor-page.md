@@ -19,7 +19,7 @@ To bind the NumericTextBox to a property from the `PageModel`, follow the next s
 
 1. Declare the `PageModel` at the top of the `RazorPage`:
 
-    ```
+    ```Razor
         @page
         @model NumericTextBoxBindingModel
     ```

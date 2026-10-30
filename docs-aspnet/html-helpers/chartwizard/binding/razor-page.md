@@ -64,7 +64,7 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
     
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```
