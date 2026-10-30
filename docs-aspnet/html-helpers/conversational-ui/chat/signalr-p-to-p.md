@@ -111,10 +111,13 @@ Depending on your preferred editor, use any of the following approaches:
 
 1. Add the[ `Microsoft.AspNet.SignalR`](https://www.nuget.org/packages/Microsoft.AspNet.SignalR) NuGet package to the application.
 
-        Install-Package Microsoft.AspNet.SignalR
+    ```powershell
+    Install-Package Microsoft.AspNet.SignalR
+    ```
 
 1. Create a `Startup.cs` file to configure the hub connection.
 
+    ```C# Startup.cs
         using Microsoft.Owin;
         using Owin;
 
@@ -129,9 +132,11 @@ Depending on your preferred editor, use any of the following approaches:
                 }
             }
         }
+    ```
 
 1. Create a `Hubs` folder and create a `ChatHub` class in it.
 
+    ```C# ChatHub.cs
         using Microsoft.AspNet.SignalR;
 
         namespace YourAppNamespace.Hubs
@@ -152,6 +157,7 @@ Depending on your preferred editor, use any of the following approaches:
                 }
             }
         }
+    ```
 
 {% endif %}
 
@@ -367,8 +373,7 @@ Initialize the Chat and implement handlers for its [`SendMessage`](/api/kendo.mv
 1. Include the SignalR 2 script in the page. You can install [`Microsoft.AspNet.SignalR.JS`](https://www.nuget.org/packages/microsoft.aspnet.signalr.js/) NuGet package or reference the library directly from CDN.
 
     **Using NuGet package**
-
-    ```
+    ```powershell
     Install-Package Microsoft.AspNet.SignalR.JS
     ```
 

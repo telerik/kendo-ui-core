@@ -104,7 +104,7 @@ To connect the Chat to a data set retrieved from a remote endpoint in a Razor Pa
     
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
     ```

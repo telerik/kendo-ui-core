@@ -30,7 +30,7 @@ If the component is initially visible, you can add `aria-busy="true"` to the con
 
 If the text should be read while dynamically showing/hiding the loader, you can add `aria-live="polite"`:
 
-```
+```Razor
 <div id="test" aria-live="polite">
     @(Html.Kendo().Loader()
         .Name("loader")

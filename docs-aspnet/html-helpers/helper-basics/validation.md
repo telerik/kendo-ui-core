@@ -207,7 +207,7 @@ The following example demonstrates how to enable the Kendo UI Validator to perfo
 
     Alternatively, you can initialize the Validator with jQuery when the page with the form is loaded:
 
-    ```
+    ```Razor
         @model OrderViewModel
 
         <form id="exampleForm" asp-controller="Home" asp-action="Create" method="post" class="k-form k-form-vertical">
@@ -224,7 +224,7 @@ The following example demonstrates how to enable the Kendo UI Validator to perfo
 
 1. Create the editors in the View based on the Model properties and initialize the Validator on the form with jQuery when the page with the form is loaded:
 
-    ```
+    ```Razor
     @model OrderViewModel
 
     @using (Html.BeginForm()) {
@@ -481,7 +481,7 @@ For example, you can implement a `GreaterDateAttribute` attribute to check wheth
         </script>
     ```
     {% else %}
-    ```
+    ```Razor
         @model OrderViewModel
 
         @using (Html.BeginForm()) {

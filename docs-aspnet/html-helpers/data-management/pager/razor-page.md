@@ -98,7 +98,7 @@ The Pager component provides a convenient integration with the Grid and DataSour
     
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```

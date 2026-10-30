@@ -764,20 +764,19 @@ describe("kendo.ui.tooltip", function() {
         }
     });
 
-    asyncTest("is visible when mouse enters the popup", function(done) {
+    it("is visible when mouse enters the popup", async function() {
         let tooltip = new Tooltip(container, {});
 
         tooltip.show(container);
 
+        await vi.waitUntil(() => !tooltip.popup._hovered);
+
         triggerEvent(tooltip.popup.element, "mouseenter");
 
-        setTimeout(function() {
-            done(async() => {
-                await vi.waitUntil(() => tooltip.popup._hovered);
-                assert.equal(tooltip.popup._hovered, true);
-                assert.isOk(tooltip.popup.visible());
-            });
-        }, tooltip.options.hideAfter);
+        await new Promise(resolve => setTimeout(resolve, tooltip.options.hideAfter));
+
+        assert.equal(tooltip.popup._hovered, true);
+        assert.isOk(tooltip.popup.visible());
     });
 
     asyncTest("is hidden when mouse leaves the popup", function(done) {

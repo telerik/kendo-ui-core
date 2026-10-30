@@ -14,47 +14,51 @@ The AutoComplete provides support for remote data binding by using a `DataSource
 
 1. Create an action that returns the data as a JSON result.
 
-            {% if site.core %}
-            public IActionResult Index()
+    {% if site.core %}
+    ```C# Controller
+        public IActionResult Index()
+        {
+            return View(new ProductViewModel
             {
-                return View(new ProductViewModel
-                {
-                    ProductID = 4,
-                    ProductName = "ProductName4"
-                });
-            }
+                ProductID = 4,
+                ProductName = "ProductName4"
+            });
+        }
 
-            public JsonResult GetProductsAjax()
+        public JsonResult GetProductsAjax()
+        {
+            var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
             {
-                var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
-                {
-                    ProductID = i,
-                    ProductName = "ProductName" + i
-                });
+                ProductID = i,
+                ProductName = "ProductName" + i
+            });
 
-                return Json(products);
-            }
-            {% else %}
-            public ActionResult Index()
+            return Json(products);
+        }
+    ```
+    {% else %}
+    ```C# Controller
+        public ActionResult Index()
+        {
+            return View(new ProductViewModel
             {
-                return View(new ProductViewModel
-                {
-                    ProductID = 4,
-                    ProductName = "ProductName4"
-                });
-            }
+                ProductID = 4,
+                ProductName = "ProductName4"
+            });
+        }
 
-            public JsonResult GetProductsAjax()
+        public JsonResult GetProductsAjax()
+        {
+            var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
             {
-                var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
-                {
-                    ProductID = i,
-                    ProductName = "ProductName" + i
-                });
+                ProductID = i,
+                ProductName = "ProductName" + i
+            });
 
-                return Json(products, JsonRequestBehavior.AllowGet);
-            }
-            {% endif %}
+            return Json(products, JsonRequestBehavior.AllowGet);
+        }
+    ```
+    {% endif %}
 
 1. Add the AutoComplete to the view and configure its DataSource to use remote data.
 

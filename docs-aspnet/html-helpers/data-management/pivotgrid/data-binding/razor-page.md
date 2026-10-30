@@ -107,7 +107,7 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
     
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```

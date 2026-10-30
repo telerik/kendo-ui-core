@@ -84,7 +84,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
     ```
 
 1. Add an `AntiForgeryToken` at the top of the page.
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```
@@ -172,7 +172,7 @@ To bind the ListBox to a property from the `PageModel`, follow the next steps:
 
 1. Declare the `PageModel` at the top of the page.
 
-    ```
+      ```Razor
         @model ListBoxPageModel
     ```
 

@@ -16,27 +16,33 @@ You can configure the Telerik UI ComboBox for Ajax binding to the Northwind **Pr
 
 1. Create an action method which renders the view.
 
+    ```C# Controller
         public ActionResult Index()
         {
             return View();
         }
+    ```
 
 1. Create a new action method and pass the **Products** table as JSON result.
-        {% if site.mvc %}
+    {% if site.mvc %}
+    ```C# Controller
         public JsonResult GetProducts()
         {
             NorthwindDataContext northwind = new NorthwindDataContext();
 
             return Json(northwind.Products, JsonRequestBehavior.AllowGet);
         }
-        {% else %}
+    ```
+    {% else %}
+    ```C# Controller
         public JsonResult GetProducts()
         {
             NorthwindDataContext northwind = new NorthwindDataContext();
 
             return Json(northwind.Products);
         }
-        {% endif %}
+    ```
+    {% endif %}
 
 1. Add an Ajax-bound ComboBox.
 

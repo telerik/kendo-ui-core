@@ -49,7 +49,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```

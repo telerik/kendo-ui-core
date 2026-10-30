@@ -67,7 +67,7 @@ To connect the OrgChart to a data set retrieved from a remote endpoint in a Razo
 
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```

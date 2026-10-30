@@ -148,7 +148,7 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
     ```
 
 1. Add an `AntiForgeryToken` at the top of the page.
-    ```
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```

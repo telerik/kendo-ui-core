@@ -17,7 +17,7 @@ Players usually feature a different video based on user action. To implement you
 
 To change the existing source of the MediaPlayer, use the MediaPlayer client-side [`media()`](https://docs.telerik.com/kendo-ui/api/ui/mediaplayer/methods/media) method.
 
-```
+ ```JavaScript
     <script>
         function buttonClick() {
             var player = $("#mediaplayer").data("kendoMediaPlayer");

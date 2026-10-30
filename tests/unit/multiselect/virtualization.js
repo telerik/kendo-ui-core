@@ -405,17 +405,9 @@ describe("kendo.ui.MultiSelect Initialization", function() {
         }, 400);
     });
 
-    asyncTest("highlight selected when filtering", function(done) {
-        let requests = [];
-        let watchRequests = false;
-
+    it("highlight selected when filtering", async function() {
         let transport = {
             read: function(options) {
-                //gatter requests after rebind
-                if (watchRequests) {
-                    requests.push(options.data);
-                }
-
                 setTimeout(function() {
                     if (options.data.filter && options.data.filter.filters.length) {
                         options.success({ data: [{ id: 200, value: 200, text: "Item 200" }], total: 1 });
@@ -440,13 +432,14 @@ describe("kendo.ui.MultiSelect Initialization", function() {
         });
 
         multiselect.value([200]);
-        setTimeout(() => {
-            multiselect.search("Item 200");
-        }, 50);
 
-        setTimeout(() => {
-            done(() => assert.equal($(".k-selected").length, 1));
-        }, 100);
+        await vi.waitUntil(() => multiselect.value().length === 1 && multiselect.dataSource.data().length > 0);
+
+        multiselect.search("Item 200");
+
+        await vi.waitUntil(() => $(".k-selected").length === 1);
+
+        assert.equal($(".k-selected").length, 1);
     });
 
 

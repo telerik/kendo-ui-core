@@ -259,7 +259,7 @@ You can reference the PDFViewer instances that you have created and build on top
 
 1. Use the [PDFViewer client-side API](https://docs.telerik.com/kendo-ui/api/ui/pdfviewer#methods) to control the behavior of the widget. In this example, you will use the `activatePage` method to activate a page.
 
-    ```
+    ```JS script
     <input id="btn1" type="button" value="Load page 3" onclick="changePdfViewerPage()" />
 
     <script>
