@@ -49,4 +49,18 @@ describe("api", function() {
 
         assert.isOk(!button.hasClass("k-selected"));
     });
+
+    it("toggle() preserves endIcon", function() {
+        instance = button.kendoToggleButton({
+            icon: "bookmark",
+            endIcon: "chevron-right",
+            toggleIcon: "x",
+            applyToggleIcon: true
+        }).data("kendoToggleButton");
+
+        instance.toggle(true);
+
+        assert.isOk(button.children("[ref='button-icon']").hasClass("k-svg-i-x"));
+        assert.isOk(button.children("[ref='button-end-icon']").hasClass("k-svg-i-chevron-right"));
+    });
 });

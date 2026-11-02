@@ -87,6 +87,31 @@ How do I change the default icon for Kendo UI SmartPasteButton? Customize the vi
     });
     </script>
 
+### endIcon `String` *(default: null)*
+
+Defines a Kendo UI font or SVG icon that is rendered after the SmartPasteButton text.
+
+<div class="meta-api-description">
+How do I add an icon after the text in a Kendo UI SmartPasteButton? Display a trailing arrow, chevron, disclosure indicator, or other built-in font or SVG graphic at the end of the button label, configure an end-positioned visual cue for an AI-assisted paste action, and combine a leading icon, text, and a trailing icon in one SmartPasteButton.
+</div>
+
+#### Example
+
+    <form id="form">
+        <input name="firstName" />
+        <button id="smartPasteButton"></button>
+    </form>
+
+    <script>
+    $("#smartPasteButton").kendoSmartPasteButton({
+        text: "Smart Paste",
+        endIcon: "chevron-right",
+        service: {
+            url: "https://your-ai-service.com/api/parse"
+        }
+    });
+    </script>
+
 ### fillMode `String` *(default: "solid")*
 
 Sets a value controlling the way the color is applied to the SmartPasteButton. Valid values are `"solid"`, `"outline"`, `"flat"`, and `"link"`.

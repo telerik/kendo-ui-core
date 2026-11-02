@@ -36,6 +36,20 @@ How do I make my Kendo UI dropdown button clickable? Control whether the dropdow
     </script>
 
 
+### endIcon `String` *(default: null)*
+
+Defines a Kendo UI font or SVG icon that is rendered after the DropDownButton text.
+
+#### Example
+
+    <button id="dropdownbutton" type="button">Tools</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            endIcon: "chevron-right",
+            items: [{ text: "Settings" }]
+        });
+    </script>
+
 ### fillMode `String` *(default: undefined)*
 
 Controls how the color is applied to the button. When `undefined` (the default), the theme controls the default fill mode. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`.

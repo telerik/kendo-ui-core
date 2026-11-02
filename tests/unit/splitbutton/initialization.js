@@ -34,6 +34,13 @@ describe("SplitButton intialization", function() {
        assert.isOk(splitButton.menu.element.is(":hidden"));
     });
 
+    it("SplitButton reads endIcon from data attribute", function() {
+        button.attr({ "data-role": "splitbutton", "data-end-icon": "chevron-right" });
+        kendo.init(Mocha.fixture);
+
+        assert.equal(button.data("kendoSplitButton").options.endIcon, "chevron-right");
+    });
+
     it("SplitButton renders arrow button", function() {
         let splitButton = new SplitButton(button, { items: defaultItems });
         let arrowBtn = button.next();
@@ -70,6 +77,26 @@ describe("SplitButton intialization", function() {
         assert.isOk(button.children().eq(0).is(".k-icon, .k-svg-icon"));
         assert.isOk(button.children().eq(0).is(".k-i-gear, .k-svg-i-gear"));
         assert.equal(button.children().eq(1).text(), "Button");
+    });
+
+    it("SplitButton renders end icon only on its main button", function() {
+        new SplitButton(button, { endIcon: "chevron-right", items: defaultItems });
+
+        assert.isOk(button.children().eq(1).hasClass("k-button-icon"));
+        assert.equal(button.next().children(".k-button-icon").length, 1);
+        assert.isOk(button.next().children(".k-button-icon").is(".k-i-chevron-down, .k-svg-i-chevron-down"));
+    });
+
+    it("SplitButton updates and removes the end icon after setOptions", function() {
+        let splitButton = new SplitButton(button, { endIcon: "chevron-right", items: defaultItems });
+
+        splitButton.setOptions({ themeColor: "secondary" });
+
+        assert.equal(button.children("[ref='button-end-icon']").length, 1);
+
+        splitButton.setOptions({ endIcon: "" });
+
+        assert.equal(button.children("[ref='button-end-icon']").length, 0);
     });
 
     it("SplitButton does not render default styling classes when options are undefined", function() {

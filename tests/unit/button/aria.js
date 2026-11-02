@@ -111,6 +111,24 @@ let button;
             assert.equal(button.attr("aria-label"), "My Folder Label");
         });
 
+        it("end-icon-only button has aria-label", function() {
+            button = getButton("").kendoButton({
+                endIcon: "chevron-right"
+            });
+
+            assert.equal(button.attr("aria-label"), "Chevron right");
+        });
+
+        it("end-icon-only button preserves explicit aria-label", function() {
+            button = getButton("");
+            button.attr("aria-label", "Next page");
+            button.kendoButton({
+                endIcon: "chevron-right"
+            });
+
+            assert.equal(button.attr("aria-label"), "Next page");
+        });
+
         it("enabled native button does not add aria-disabled and role", function() {
             button = getButton().kendoButton();
 
@@ -118,4 +136,3 @@ let button;
             assert.isUndefined(button.attr("role"));
         });
     });
-

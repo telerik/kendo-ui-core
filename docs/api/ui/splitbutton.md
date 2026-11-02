@@ -58,6 +58,20 @@ How do I disable a SplitButton in Kendo UI for jQuery? Control whether the butto
     </script>
 
 
+### endIcon `String` *(default: null)*
+
+Defines a Kendo UI font or SVG icon that is rendered after the text of the main SplitButton button. The arrow button is not affected.
+
+#### Example
+
+    <button id="splitbutton" type="button">Save</button>
+    <script>
+        $("#splitbutton").kendoSplitButton({
+            endIcon: "chevron-right",
+            items: [{ text: "Save as draft" }, { text: "Save and close" }]
+        });
+    </script>
+
 ### fillMode `String` *(default: undefined)*
 
 Controls how the color is applied to the button. When `undefined` (the default), the theme controls the default fill mode. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`.

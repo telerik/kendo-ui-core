@@ -29,6 +29,7 @@ import "./kendo.html.button.js";
 
         var BUTTON_DEFAULTS = {
             icon: "",
+            endIcon: null,
             iconClass: "",
             spriteCssClass: "",
             imageUrl: "",
@@ -95,6 +96,7 @@ import "./kendo.html.button.js";
                 enable: true,
                 enabled: true,
                 icon: "",
+                endIcon: null,
                 iconClass: "",
                 spriteCssClass: "",
                 imageUrl: "",
@@ -251,4 +253,3 @@ import "./kendo.html.button.js";
 
     })(window.kendo.jQuery);
 export default kendo;
-

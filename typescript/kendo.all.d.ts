@@ -2791,6 +2791,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         badge?: ButtonBadge | undefined;
         enable?: boolean | undefined;
+        endIcon?: string | undefined;
         fillMode?: string | undefined;
         icon?: string | undefined;
         iconClass?: string | undefined;
@@ -2877,6 +2878,7 @@ declare namespace kendo.ui {
         attributes?: any;
         badge?: ButtonGroupItemBadge | undefined;
         enabled?: boolean | undefined;
+        endIcon?: string | undefined;
         icon?: string | undefined;
         iconClass?: string | undefined;
         imageUrl?: string | undefined;
@@ -5584,6 +5586,7 @@ declare namespace kendo.ui {
     interface DropDownButtonOptions {
         name?: string | undefined;
         enabled?: boolean | undefined;
+        endIcon?: string | undefined;
         fillMode?: string | undefined;
         icon?: string | undefined;
         iconClass?: string | undefined;
@@ -12370,6 +12373,7 @@ declare namespace kendo.ui {
 
     interface SegmentedControlItem {
         enabled?: boolean | undefined;
+        endIcon?: string | undefined;
         icon?: string | undefined;
         iconClass?: string | undefined;
         text?: string | undefined;
@@ -12706,6 +12710,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         arrowIcon?: string | undefined;
         enabled?: boolean | undefined;
+        endIcon?: string | undefined;
         fillMode?: string | undefined;
         icon?: string | undefined;
         iconClass?: string | undefined;
@@ -16158,6 +16163,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         enable?: boolean | undefined;
         cancelIcon?: string | undefined;
+        endIcon?: string | undefined;
         icon?: string | undefined;
         fillMode?: string | undefined;
         rounded?: string | undefined;

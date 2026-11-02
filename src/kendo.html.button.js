@@ -40,11 +40,13 @@ export const __meta__ = {
             that._addClasses();
             that.iconElement();
             that._textElement();
+            that.endIconElement();
         },
         options: {
             name: "HTMLButton",
             type: "button",
             icon: "",
+            endIcon: null,
             iconClass: "",
             spriteCssClass: "",
             imageUrl: "",
@@ -60,13 +62,14 @@ export const __meta__ = {
                 element = that.element,
                 options = that.options,
                 icon = options.icon,
+                endIcon = options.endIcon,
                 iconClass = options.iconClass,
                 spriteCssClass = options.spriteCssClass,
                 imageUrl = options.imageUrl,
                 labelText,
                 span, img, isEmpty;
 
-            if (spriteCssClass || imageUrl || icon || iconClass) {
+            if (spriteCssClass || imageUrl || icon || endIcon || iconClass) {
                 isEmpty = true;
 
                 element.contents().filter(function() {
@@ -82,7 +85,7 @@ export const __meta__ = {
                 that.element.addClass("k-icon-button");
 
                 if (options.autoAriaLabel !== false && !element.attr("aria-label")) {
-                    labelText = icon;
+                    labelText = icon || endIcon;
 
                     if (!labelText && iconClass) {
                         labelText = (iconClass.match(/k-i-([\w-]+)/) || [])[1];
@@ -104,20 +107,35 @@ export const __meta__ = {
                 img.attr("src", imageUrl);
                 img.addClass(KBUTTONICON);
             } else if (icon || iconClass) {
-                span = element.children("span.k-icon, span.k-svg-icon").first();
+                span = element.children("[ref='button-icon']").first();
                 if (!span[0]) {
-                    span = $(kendo.ui.icon({ icon, iconClass })).prependTo(element);
+                    span = element.children("span.k-icon, span.k-svg-icon").not("[ref='button-end-icon']").first();
+                }
+                if (!span[0]) {
+                    span = $(kendo.ui.icon($('<span ref="button-icon"></span>'), { icon, iconClass })).prependTo(element);
                 } else {
                     kendo.ui.icon(span, { icon, iconClass });
                 }
 
-                span.addClass(KBUTTONICON);
+                span.attr("ref", "button-icon").addClass(KBUTTONICON);
             } else if (spriteCssClass) {
                 span = element.children("span.k-sprite").first();
                 if (!span[0]) {
                     span = $('<span class="k-sprite"></span>').prependTo(element);
                 }
                 span.addClass(spriteCssClass + " " + KBUTTONICON);
+            }
+        },
+        endIconElement: function() {
+            var options = this.options,
+                element = this.element;
+
+            element.children("[ref='button-end-icon']").remove();
+            if (options.endIcon) {
+                var endIcon = $('<span ref="button-end-icon"></span>').appendTo(element);
+                endIcon.replaceWith($(kendo.ui.icon(endIcon, { icon: options.endIcon }))
+                    .attr("ref", "button-end-icon")
+                    .addClass(KBUTTONICON));
             }
         },
         _textElement: function() {
@@ -161,4 +179,3 @@ export const __meta__ = {
 
 })(window.kendo.jQuery);
 export default kendo;
-

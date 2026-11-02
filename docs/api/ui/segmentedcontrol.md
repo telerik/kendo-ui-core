@@ -77,6 +77,26 @@ How do I disable a specific button in a Kendo UI SegmentedControl? Control the e
     });
     </script>
 
+### items.endIcon `String` *(default: null)*
+
+Defines a Kendo UI font or SVG icon that is rendered after the item text.
+
+<div class="meta-api-description">
+How do I add an icon after the text in a Kendo UI SegmentedControl item? Display a trailing arrow, chevron, disclosure indicator, or other built-in font or SVG graphic after an individual segment label, configure end-positioned visual cues for segmented actions, and combine a leading icon, text, and a trailing icon in one segment button.
+</div>
+
+#### Example - set an end icon for an item
+
+    <div id="segmentedControl"></div>
+    <script>
+    $("#segmentedControl").kendoSegmentedControl({
+      items: [
+        { text: "Previous", icon: "arrow-left", endIcon: "chevron-right", value: "previous" },
+        { text: "Next", endIcon: "chevron-right", value: "next" }
+      ]
+    });
+    </script>
+
 ### items.icon `String` *(default: null)*
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the button.

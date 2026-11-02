@@ -269,6 +269,7 @@ export const __meta__ = {
                         options = {
                             badge: kendo.attrValue(el, "badge"),
                             icon: !image[0] ? kendo.attrValue(el, "icon") : null,
+                            endIcon: kendo.attrValue(el, "end-icon"),
                             disabled: disabled,
                             selected: !disabled ? el.is(DOT + SELECTED) : false,
                             size: groupOptions.size,

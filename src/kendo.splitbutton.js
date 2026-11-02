@@ -76,6 +76,7 @@ export const __meta__ = {
             fillMode: undefined,
             themeColor: undefined,
             icon: null,
+            endIcon: null,
             popup: null,
             arrowIcon: "chevron-down",
             messages: {
@@ -154,6 +155,7 @@ export const __meta__ = {
             delete options.imageUrl;
             delete options.click;
             delete options.iconClass;
+            delete options.endIcon;
 
             html.renderButton(that.arrowButton, options);
         },
@@ -372,4 +374,3 @@ export const __meta__ = {
 
 })(window.kendo.jQuery);
 export default kendo;
-

@@ -174,6 +174,38 @@ describe("initialization", function() {
         assert.isOk(button.children().eq(1).hasClass("k-button-text"));
     });
 
+    it("endIcon appends a k-button-icon after button text", function() {
+        button = getButton().kendoButton({
+            endIcon: "chevron-right"
+        });
+
+        assert.isOk(button.children().eq(0).hasClass("k-button-text"));
+        assert.isOk(button.children().eq(1).hasClass("k-button-icon"));
+        assert.isOk(button.children().eq(1).is(".k-icon, .k-svg-icon"));
+    });
+
+    it("endIcon renders after the leading icon and button text", function() {
+        button = getButton().kendoButton({
+            icon: "filter",
+            endIcon: "chevron-right"
+        });
+
+        assert.isOk(button.children().eq(0).hasClass("k-button-icon"));
+        assert.isOk(button.children().eq(1).hasClass("k-button-text"));
+        assert.isOk(button.children().eq(2).hasClass("k-button-icon"));
+        assert.equal(button.children().eq(0).attr("ref"), "button-icon");
+        assert.equal(button.children().eq(2).attr("ref"), "button-end-icon");
+    });
+
+    it("endIcon adds a k-button-icon and k-icon-button class to an empty button", function() {
+        button = getButton("").kendoButton({
+            endIcon: "chevron-right"
+        });
+
+        assert.isOk(button.children().eq(0).hasClass("k-button-icon"));
+        assert.isOk(button.hasClass("k-icon-button"));
+    });
+
     it("iconClass prepends a span element with corresponding class(es)", function() {
         button = getButton().kendoButton({
             iconClass: "fa fa-test"

@@ -95,7 +95,7 @@ import "./kendo.button.js";
 
             _updateIcon: function(icon) {
                 let that = this;
-                let iconElement = that.element.find(".k-icon, .k-svg-icon");
+                let iconElement = that.element.children("[ref='button-icon']");
 
                 if (iconElement.length) {
                     kendo.ui.icon(iconElement, { icon: icon });
