@@ -59,6 +59,18 @@ describe("kendo.ui.ButtonGroup initialization", function() {
         assert.isOk(iconEl.hasClass("fa-male"));
         assert.isOk(iconEl.hasClass("k-button-icon"));
     });
+    it("endIcon is rendered after the text", function() {
+        buttonGroup = initializeButtonGroup({
+            items: [
+                { text: "test1", endIcon: "chevron-right" },
+                { text: "test2" }
+            ]
+        });
+
+        let firstButton = buttonGroup.element.children().eq(0);
+        assert.isOk(firstButton.children().eq(0).hasClass("k-button-text"));
+        assert.isOk(firstButton.children().eq(1).hasClass("k-button-icon"));
+    });
     it("default icon classes are added to the button", function() {
         buttonGroup = initializeButtonGroup({
             items: [

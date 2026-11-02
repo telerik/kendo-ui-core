@@ -345,6 +345,25 @@ How do I programmatically enable or disable a button in Kendo UI for jQuery? Con
     </script>
 
 
+### endIcon `String` *(default: null)*
+
+Defines a Kendo UI font or SVG icon that is rendered after the Button text.
+
+
+<div class="meta-api-description">
+How do I add an icon after the text in a Kendo UI button? Display a trailing arrow, chevron, disclosure indicator, or other built-in font or SVG graphic at the end of a button label, configure an end-positioned visual cue for navigation and actions, and combine a leading icon, text, and a trailing icon in one button.
+</div>
+
+#### Example
+
+    <button id="button" type="button">Next</button>
+    <script>
+    $("#button").kendoButton({
+        endIcon: "chevron-right"
+    });
+    </script>
+
+
 ### fillMode `String` *(default: undefined)*
 
 Controls how the color is applied to the button. Valid values are: `"solid"`, `"outline"`, `"flat"`, and `"link"`. When `undefined` (the default), the theme controls the default fill mode.

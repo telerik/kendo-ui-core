@@ -670,6 +670,23 @@ How can I enable or disable individual buttons within a Kendo UI ButtonGroup? To
         });
     </script>
 
+### items.endIcon `String` *(default: null)*
+
+Defines the name of an existing icon in a Kendo theme that is rendered after the text of the item.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "Next", endIcon: "chevron-right" },
+                { text: "Download", endIcon: "download" }
+            ]
+        });
+    </script>
+
 ### items.icon `String`
 
 Defines the name of an existing icon in a Kendo theme.

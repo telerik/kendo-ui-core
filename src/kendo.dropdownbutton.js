@@ -77,6 +77,7 @@ export const __meta__ = {
             themeColor: undefined,
             showArrowButton: false,
             icon: null,
+            endIcon: null,
             popup: null,
             messages: {
                 labelSuffix: "dropdownbutton"

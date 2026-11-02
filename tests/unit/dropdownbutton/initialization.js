@@ -25,6 +25,13 @@ describe("DropDownButton intialization", function() {
         assert.isOk(dropDownButton);
     });
 
+    it("DropDownButton reads endIcon from data attribute", function() {
+        button.attr({ "data-role": "dropdownbutton", "data-end-icon": "chevron-right" });
+        kendo.init(Mocha.fixture);
+
+        assert.equal(button.data("kendoDropDownButton").options.endIcon, "chevron-right");
+    });
+
     it("DropDownButton renders button", function() {
         const dropDownButton = new DropDownButton(button, { items: defaultItems, showArrowButton: true });
 
@@ -46,6 +53,25 @@ describe("DropDownButton intialization", function() {
         assert.isOk(button.children().eq(0).is(".k-icon, .k-svg-icon"));
         assert.isOk(button.children().eq(0).is(".k-i-gear, .k-svg-i-gear"));
         assert.equal(button.children().eq(1).text(), "Button");
+    });
+
+    it("DropDownButton renders button with end icon after text", function() {
+        new DropDownButton(button, { endIcon: "chevron-right", items: defaultItems });
+
+        assert.isOk(button.children().eq(0).hasClass("k-button-text"));
+        assert.isOk(button.children().eq(1).hasClass("k-button-icon"));
+    });
+
+    it("DropDownButton updates and removes the end icon after setOptions", function() {
+        let dropDownButton = new DropDownButton(button, { endIcon: "chevron-right", items: defaultItems });
+
+        dropDownButton.setOptions({ themeColor: "secondary" });
+
+        assert.equal(button.children("[ref='button-end-icon']").length, 1);
+
+        dropDownButton.setOptions({ endIcon: "" });
+
+        assert.equal(button.children("[ref='button-end-icon']").length, 0);
     });
 
     it("DropDownButton renders buttons with default styling options", function() {
