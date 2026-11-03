@@ -453,6 +453,7 @@ For more information on the existing limitations, refer to the documentation on 
 
 * [Templates Performance]({% slug performance_kendoui_templatescomponent %})
 * [Loading Templates from External Files]({% slug externalteplateloading_templatescomponent %})
+* [Using Templates with Server-Side Template Engines]({% slug howto_use_templates_with_server_side_template_engines %})
 * [Templates JavaScript API Reference](/api/kendo/methods/template)
 * [Templates Demos](https://demos.telerik.com/kendo-ui/templates/index)
 * [Knowledge Base](https://docs.telerik.com/kendo-ui/knowledge-base)

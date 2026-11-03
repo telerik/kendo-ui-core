@@ -29,6 +29,15 @@ describe("kendo.ui.TextBox Prefix and Suffix", function() {
         assert.equal(textbox._prefixContainer.next().hasClass("k-input-separator"), true);
     });
 
+    it("prefix renders an icon descriptor", function() {
+        let textbox = new TextBox(input, {
+            prefixOptions: { icon: { name: "gear", variant: "solid" } }
+        });
+
+        assert.isOk(textbox._prefixContainer.find(".k-svg-i-gear").length);
+        assert.equal(textbox._prefixContainer.find("svg path").attr("d"), $(kendo.ui.svgIcons.gearIcon.variants.solid).attr("d"));
+    });
+
     it("prefix does not render a separator", function() {
         let textbox = new TextBox(input, {
             prefixOptions: {

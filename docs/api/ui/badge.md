@@ -88,32 +88,36 @@ How to enable or disable the decorative border around a Kendo UI for jQuery badg
 
 ### fillMode `String` *(default: undefined)*
 
-Specifies how themeColor is applied to a badge. When `undefined` (the default), the theme controls the default fill mode. Valid options are `solid` and `outline`.
+Specifies how themeColor is applied to a badge. When `undefined` (the default), the theme controls the default fill mode. Valid options are `solid`, `tint`, and `outline`.
 
 
 <div class="meta-api-description">
-What is Kendo UI badge fillMode property used for? Adjust the visual style or appearance of a badge by choosing between a solid filled background or an outlined design that colors the border and text, enabling customization of how the main theme color is applied. This setting lets you configure the badge’s fill style, switch between filled backgrounds and transparent or outline-only looks, control whether the badge uses a full color fill or just colored edges and typography, and set the style to solid or outline to match branding or UI preferences.
+What is Kendo UI badge fillMode property used for? Adjust the visual style or appearance of a badge by choosing a solid, tinted, or outlined design, enabling customization of how the main theme color is applied. This setting lets you configure the badge’s fill style, switch between filled backgrounds, muted tinted looks, and transparent outline-only looks, control whether the badge uses a full color fill or just colored edges and typography, and set the style to solid, tint, or outline to match branding or UI preferences.
 </div>
 
 #### Example
 
     <span id="badge-solid">Solid</span>
+    <span id="badge-tint">Tint</span>
     <span id="badge-outline">Outline</span>
     <script>
         $('#badge-solid').kendoBadge({ fillMode: 'solid' });
+        $('#badge-tint').kendoBadge({ fillMode: 'tint' });
         $('#badge-outline').kendoBadge({ fillMode: 'outline' });
     </script>
 
 
-### icon `String` *(default: '')*
+### icon `String|Object` *(default: '')*
 
-Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the badge by a `span.k-icon` or `span.k-svg-icon` element.
+Defines the name for an existing icon in a Kendo UI theme. The icon is rendered inside the badge by a `span.k-icon` element.
 
 See [web font icons help article](/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
-How do I customize the icon in a Kendo UI badge? Configure or enable an icon within a badge by specifying a predefined Kendo theme icon name or supplying custom SVG content to customize the badge's visual indicator, controlling how an icon is displayed inside the badge element using web font icons or inline SVG, allowing for flexible icon integration, styling, and dynamic rendering within user interface badges for status indicators, notifications, or markers.
+How do I customize the icon in a Kendo UI badge? Configure or enable an icon within a badge by specifying a predefined Kendo theme icon name to customize the badge's visual indicator, controlling how an icon is displayed inside the badge element using web font or SVG icons from the Kendo icon set, allowing for flexible icon integration, styling, and dynamic rendering within user interface badges for status indicators, notifications, or markers.
 </div>
 
 #### Example
@@ -126,6 +130,41 @@ How do I customize the icon in a Kendo UI badge? Configure or enable an icon wit
         });
     </script>
 
+### icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <span id="badge"></span>
+    <script>
+        $('#badge').kendoBadge({
+            icon: 'plus',
+            themeColor: 'primary'
+        });
+    </script>
+
+### icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <span id="badge"></span>
+    <script>
+        $('#badge').kendoBadge({
+            icon: 'plus',
+            themeColor: 'primary'
+        });
+    </script>
 
 ### max `Number` *(default: Infinity)*
 

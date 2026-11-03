@@ -270,10 +270,12 @@ How to customize context menu text in Kendo UI PropertyGrid? Configure and custo
     });
     </script>
 
-### contextMenu.body.icon `String`
+### contextMenu.body.icon `String|Object`
 
 Specifies the icon of the item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to customize icons for context menu items in a Kendo UI PropertyGrid? Customize or configure the icon displayed next to context menu items within a property grid interface, enabling control over the visual symbol or glyph shown in menu bodies. This setting lets you set, change, or update the graphical icon component associated with menu entries to enhance interface clarity, user experience, or branding. Adjust, assign, or override the visual marker for context menu items' body sections to signify actions or categories, tailor menu item icons for better recognition, or implement specific icon components in menus tied to property grids.
@@ -289,6 +291,67 @@ How to customize icons for context menu items in a Kendo UI PropertyGrid? Custom
                 name: "customItem",
                 text: "Custom Item",
                 icon: "k-icon k-i-gear",
+                command: "CustomCommand"
+            }]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
+### contextMenu.body.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        contextMenu: {
+            body: [{
+                name: "customItem",
+                text: "Custom Item",
+                icon: {
+                    name: "k-icon k-i-gear"
+                },
+                command: "CustomCommand"
+            }]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
+### contextMenu.body.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        contextMenu: {
+            body: [{
+                name: "customItem",
+                text: "Custom Item",
+                icon: {
+                    name: "k-icon k-i-gear",
+                    variant: "outline"
+                },
                 command: "CustomCommand"
             }]
         },
@@ -2103,10 +2166,12 @@ How to set up custom event handlers for toolbar button clicks in Kendo UI Proper
       });
     </script>
 
-### toolbar.icon `String`
+### toolbar.icon `String|Object`
 
 Specifies the icon's name that will be rendered inside the toolbar button. When you set this option, the PropertyGrid renders an additional `span` element inside the toolbar button which has a name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to display custom icons in property grid toolbar buttons? Control the display of icons within toolbar buttons of a property grid by specifying icon names or identifiers, enabling the integration of custom graphical elements or symbols in toolbar commands, configuring the appearance of toolbar buttons with visual icons, setting icon options to enhance toolbar command clarity, showing icons alongside text in toolbar buttons, customizing toolbar commands with graphical indicators, embedding icons dynamically inside toolbar elements, and toggling icon visibility to improve user interface intuitiveness and aesthetics in property editing toolbars.
@@ -2118,6 +2183,50 @@ How to display custom icons in property grid toolbar buttons? Control the displa
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         toolbar: [{name: "custom", text: "About", icon: "info-circle", imageClass: "custom-info" }],
+        model: {
+            foo: "bar",
+            baz: 5
+        },
+        width: 500
+      });
+    </script>
+
+### toolbar.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specifying the name of the command
+
+    <div id="propertyGrid"></div>
+    <script>
+      $("#propertyGrid").kendoPropertyGrid({
+        toolbar: [{name: "custom", text: "About", icon: { name: "info-circle" }, imageClass: "custom-info" }],
+        model: {
+            foo: "bar",
+            baz: 5
+        },
+        width: 500
+      });
+    </script>
+
+### toolbar.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specifying the name of the command
+
+    <div id="propertyGrid"></div>
+    <script>
+      $("#propertyGrid").kendoPropertyGrid({
+        toolbar: [{name: "custom", text: "About", icon: { name: "info-circle", variant: "outline" }, imageClass: "custom-info" }],
         model: {
             foo: "bar",
             baz: 5
@@ -2261,10 +2370,12 @@ What event is triggered when a toolbar button in a Kendo UI PropertyGrid is clic
     });
     </script>
 
-### toolbar.items.icon `String`
+### toolbar.items.icon `String|Object`
 
 Specifies the icon's name that will be rendered inside the toolbar button. When you set this option, the PropertyGrid renders an additional `span` element inside the toolbar button which has a name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I add icons to property grid toolbar buttons in Kendo UI for jQuery? Customize toolbar buttons with icons by specifying an icon name or identifier, enabling display of graphical symbols or visual indicators within toolbar commands. Configure buttons to include icons by setting an icon attribute or property, allowing embedding of visual elements like glyphs or symbols for clearer command recognition. Control appearance of toolbar items by providing icon names that insert corresponding visual icons inside custom buttons, supporting interface customization and enhancing user interaction through recognizable imagery. Enable icons on toolbar actions by linking icon identifiers to buttons, facilitating intuitive navigation and richer UI commands with graphic representations for various tool functionalities and custom controls.
@@ -2281,6 +2392,69 @@ How do I add icons to property grid toolbar buttons in Kendo UI for jQuery? Cust
                     name: "custom", 
                     text: "Settings",
                     icon: "k-icon k-i-gear"
+                }
+            ]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
+### toolbar.items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                {
+                    name: "custom",
+                    text: "Settings",
+                    icon: {
+                        name: "k-icon k-i-gear"
+                    }
+                }
+            ]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
+### toolbar.items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                {
+                    name: "custom",
+                    text: "Settings",
+                    icon: {
+                        name: "k-icon k-i-gear",
+                        variant: "outline"
+                    }
                 }
             ]
         },

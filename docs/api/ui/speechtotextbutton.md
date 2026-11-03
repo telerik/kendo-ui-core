@@ -51,9 +51,11 @@ How do I configure voice recognition for a Kendo UI SpeechToTextButton? Configur
         });
     </script>
 
-### icon `String` *(default: "microphone")*
+### icon `String|Object` *(default: "microphone")*
 The name of the Kendo UI font icon to be displayed in the button when it is not active (not listening).
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I change the icon on a Kendo UI SpeechToTextButton when voice recognition is inactive? Customize the visual appearance of the button when voice recognition is inactive by setting or changing the displayed icon, selecting from a range of icon fonts or design names to modify how the button looks while idle, not listening, or awaiting user speech input. This includes specifying or configuring the symbol, glyph, or graphic that represents the button’s inactive state, allowing control over the default icon shown before activating speech-to-text functionality, supporting adjustments for UI consistency, branding, and clear indication when the microphone or recognition service is off.
@@ -68,12 +70,85 @@ How do I change the icon on a Kendo UI SpeechToTextButton when voice recognition
         });
     </script>
 
-### stopIcon `String` *(default: "stop")*
+### icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <button id="speechButton"></button>
+    <script>
+        $("#speechButton").kendoSpeechToTextButton({
+            icon: {
+                name: "headset"
+            }
+        });
+    </script>
+
+### icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <button id="speechButton"></button>
+    <script>
+        $("#speechButton").kendoSpeechToTextButton({
+            icon: {
+                name: "headset",
+                variant: "outline"
+            }
+        });
+    </script>
+
+### stopIcon `String|Object` *(default: "stop")*
 The name of the Kendo UI font icon to be displayed in the button when it is active (listening).
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How can I customize the stop icon for Kendo UI SpeechToTextButton? Control and customize the visual indicator for when voice recognition or speech input is active by setting the icon that appears while listening, allowing you to configure or change the active state symbol, such as specifying a stop, pause, or microphone icon, to clearly show when audio capture is in progress, enhancing user feedback and interface clarity during speech-to-text operations or voice command interactions.
+</div>
+
+#### Example
+    <button id="speechButton"></button>
+    <script>
+        $("#speechButton").kendoSpeechToTextButton({
+            stopIcon: "stop"
+        });
+    </script>
+
+### stopIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+    <button id="speechButton"></button>
+    <script>
+        $("#speechButton").kendoSpeechToTextButton({
+            stopIcon: "stop"
+        });
+    </script>
+
+### stopIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example

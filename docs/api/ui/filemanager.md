@@ -1340,9 +1340,11 @@ How to customize icon display for toolbar buttons in Kendo UI FileManager? Speci
         });
     </script>
 
-### toolbar.items.icon `String`
+### toolbar.items.icon `String|Object`
 Sets icon for the item. The icon should be one of the existing in the Kendo UI theme sprite.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to customize the icon for file manager toolbar buttons in Kendo UI? Set or customize the visual symbol, glyph, or icon for toolbar buttons within a file management interface, enabling configuration of toolbar item appearance by selecting from predefined, theme-based icon sets or sprite resources, allowing developers to assign, change, or control toolbar icons to enhance UI clarity, usability, and consistent visual cues in file navigation or manipulation tools.
@@ -1359,6 +1361,70 @@ How to customize the icon for file manager toolbar buttons in Kendo UI? Set or c
                 items: [
                     { name: "createFolder", icon: "folder" },
                     { name: "upload", icon: "upload" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
+### toolbar.items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", icon: { name: "folder" } },
+                    { name: "upload", icon: { name: "upload" } }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
+### toolbar.items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", icon: { name: "folder", variant: "outline" } },
+                    { name: "upload", icon: { name: "upload", variant: "outline" } }
                 ]
             },
             dataSource: {
@@ -2087,10 +2153,12 @@ How to customize the CSS class for context menu icons in a Kendo UI file manager
         });
     </script>
 
-### contextMenu.items.icon `String`
+### contextMenu.items.icon `String|Object`
 
 Specifies the icon of the item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon for each context menu item in Kendo UI's FileManager widget? Control or customize the visual icon displayed next to context menu entries in file management interfaces by setting or configuring graphical indicators such as CSS icon classes, font glyphs, SVG images, or custom pictures to enhance menu item appearance, enable visual cues, specify symbolic representations, or adjust icons for context menu options, buttons, or commands in file explorers and user interfaces.
@@ -2108,6 +2176,79 @@ How do I customize the icon for each context menu item in Kendo UI's FileManager
                     {
                         text: "delete",
                         icon: "pencil"
+                    }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
+### contextMenu.items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            contextMenu: {
+                items: [
+                    {
+                        text: "delete",
+                        icon: {
+                            name: "pencil"
+                        }
+                    }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
+### contextMenu.items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            contextMenu: {
+                items: [
+                    {
+                        text: "delete",
+                        icon: {
+                            name: "pencil",
+                            variant: "outline"
+                        }
                     }
                 ]
             },
@@ -2634,9 +2775,11 @@ How do I customize breadcrumb navigation in Kendo UI File Manager? Control the v
         });
     </script>
 
-### breadcrumb.rootIcon `String`
+### breadcrumb.rootIcon `String|Object`
 Defines a new root icon for the breadcrumb.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to customize root folder icon in FileManager breadcrumb? Customize or replace the root folder icon displayed in the file navigation breadcrumb to personalize, configure, or set a different visual indicator for the top-level directory; control the breadcrumb trail’s starting point icon to better fit UI themes, enhance navigation clarity, or override default folder symbols in file explorers, path bars, or directory hierarchies.
@@ -2663,12 +2806,130 @@ How to customize root folder icon in FileManager breadcrumb? Customize or replac
         });
     </script>
 
-### breadcrumb.delimiterIcon `String`
+### breadcrumb.rootIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            breadcrumb: {
+                rootIcon: "home"
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
+### breadcrumb.rootIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            breadcrumb: {
+                rootIcon: "home"
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
+### breadcrumb.delimiterIcon `String|Object`
 Defines a new delimiter icon for the breadcrumb.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How to customize the separator icon in Kendo UI file manager breadcrumb navigation? Control and customize the visual separator or icon displayed between breadcrumb navigation items in file or folder paths, enabling you to set, override, or change the delimiter symbol such as arrows, chevrons, slashes, or custom icons and SVGs to modify the appearance of hierarchical file path breadcrumbs for clearer navigation, folder structure indication, or UI personalization in file browsers.
+</div>
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            breadcrumb: {
+                delimiterIcon: "arrow-right"
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
+### breadcrumb.delimiterIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            breadcrumb: {
+                delimiterIcon: "arrow-right"
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
+### breadcrumb.delimiterIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example

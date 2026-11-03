@@ -113,12 +113,50 @@ Set a custom text label for the citation chip, override the automatically derive
     });
     </script>
 
-### svgIcon `String` *(default: "globe")*
+### svgIcon `String|Object` *(default: "globe")*
 
 The name of the SVG icon displayed on the chip.
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 Set or change the icon displayed on the citation chip button, configure the SVG icon name for the chip indicator, specify a Kendo UI icon to represent the citation type, customize the visual symbol on the chip, or adjust the graphic shown on the citation chip element.
+</div>
+
+#### Example - set the chip icon
+
+    <span id="citation"></span>
+    <script>
+    $("#citation").kendoCitation({
+        svgIcon: "file-pdf",
+        sources: [{ url: "https://example.com", title: "Example" }]
+    });
+    </script>
+
+### svgIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - set the chip icon
+
+    <span id="citation"></span>
+    <script>
+    $("#citation").kendoCitation({
+        svgIcon: "file-pdf",
+        sources: [{ url: "https://example.com", title: "Example" }]
+    });
+    </script>
+
+### svgIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example - set the chip icon
@@ -170,9 +208,11 @@ Configure when the citation popover opens, set the trigger mode for the popover 
     });
     </script>
 
-### sourceIcon `String` *(default: "globe")*
+### sourceIcon `String|Object` *(default: "globe")*
 
 The name of the SVG icon used for source links inside the popover.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 Set the icon displayed next to source URLs in the citation popover, configure the default icon for source link entries, specify a Kendo UI icon to represent each referenced source in the popover list, or customize the graphic shown beside each URL link in the popover body.
@@ -188,12 +228,86 @@ Set the icon displayed next to source URLs in the citation popover, configure th
     });
     </script>
 
-### sourceSVGIcon `String` *(default: null)*
+### sourceIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - set the source link icon
+
+    <span id="citation"></span>
+    <script>
+    $("#citation").kendoCitation({
+        sourceIcon: "link",
+        sources: [{ url: "https://example.com", title: "Example" }]
+    });
+    </script>
+
+### sourceIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - set the source link icon
+
+    <span id="citation"></span>
+    <script>
+    $("#citation").kendoCitation({
+        sourceIcon: "link",
+        sources: [{ url: "https://example.com", title: "Example" }]
+    });
+    </script>
+
+### sourceSVGIcon `String|Object` *(default: null)*
 
 Overrides `sourceIcon` with a specific SVG icon name for source links inside the popover.
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 Override the default source link icon with a specific named SVG icon in the citation popover, configure a custom SVG icon name for the source URL indicators, replace the sourceIcon with a more specific icon for source links in the popover, or set a named Kendo UI SVG icon to use for every source entry in the popover.
+</div>
+
+#### Example - set a custom source SVG icon
+
+    <span id="citation"></span>
+    <script>
+    $("#citation").kendoCitation({
+        sourceSVGIcon: "pdf",
+        sources: [{ url: "https://example.com", title: "Example" }]
+    });
+    </script>
+
+### sourceSVGIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - set a custom source SVG icon
+
+    <span id="citation"></span>
+    <script>
+    $("#citation").kendoCitation({
+        sourceSVGIcon: "pdf",
+        sources: [{ url: "https://example.com", title: "Example" }]
+    });
+    </script>
+
+### sourceSVGIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example - set a custom source SVG icon

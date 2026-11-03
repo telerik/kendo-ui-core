@@ -37,6 +37,7 @@ describe('kendo.ui.Badge content', function() {
         badge = new Badge(span, { text: 100 });
 
         assert.equal(badge.text(), 100);
+        assert.equal(badge.element.children('.k-badge-text').text(), '100');
     });
 
     it('badge.options.text overrides the initial HTML of the badge element', function() {
@@ -101,13 +102,13 @@ describe('kendo.ui.Badge content', function() {
         span.html('100');
         badge = new Badge(span, { max: 99 });
 
-        assert.equal(badge.element.html(), '100');
+        assert.equal(badge.element.children('.k-badge-text').text(), '100');
     });
 
     it('badge.options.max has no effect on strings', function() {
         badge = new Badge(span, { text: '100', max: 14 });
 
-        assert.equal(badge.element.html(), '100');
+        assert.equal(badge.element.children('.k-badge-text').text(), '100');
     });
 
     it('badge.options.max has no effect on templates', function() {
@@ -123,7 +124,7 @@ describe('kendo.ui.Badge content', function() {
         });
 
         assert.equal(badge.text(), 100);
-        assert.equal(badge.element.html(), '14+');
+        assert.equal(badge.element.children('.k-badge-text').text(), '14+');
     });
 
     it('badge.options.max does not cap lesser or equal numbers', function() {
@@ -133,7 +134,7 @@ describe('kendo.ui.Badge content', function() {
         });
 
         assert.equal(badge.text(), 100);
-        assert.equal(badge.element.html(), '100');
+        assert.equal(badge.element.children('.k-badge-text').text(), '100');
     });
     // #endregion
 
@@ -156,52 +157,34 @@ describe('kendo.ui.Badge content', function() {
         assert.equal(badge.element.find(".k-badge-icon").length, 1);
     });
 
-    it('badge.options.icon takes precedense over badge.options.text', function() {
+    it('badge.options.icon renders with badge.options.text', function() {
         span.html('<strong>text</strong>');
         badge = new Badge(span, {
             text: 100,
             icon: 'plus'
         });
 
-        assert.equal(badge.text(), undefined);
+        assert.equal(badge.text(), 100);
         assert.equal(badge.element.find(".k-badge-icon").length, 1);
+        assert.equal(badge.element.children('.k-badge-text').text(), '100');
     });
 
-    it('badge.icon(svg) applies aria-hidden to icon wrapper and svg', function() {
+    it('badge.icon(svg) does not render raw SVG content', function() {
         badge = new Badge(span);
 
         badge.icon('<svg id="raw-svg-test" viewBox="0 0 10 10"><path d="M0 0h10v10H0z"></path></svg>');
 
-        assert.equal(badge.element.find('.k-badge-icon').attr('aria-hidden'), 'true');
-        assert.equal(badge.element.find('#raw-svg-test').attr('aria-hidden'), 'true');
+        assert.equal(badge.element.find('#raw-svg-test').length, 0);
+        assert.equal(badge.element.find('.k-badge-icon').length, 1);
     });
 
-    it('badge.icon(svg) preserves existing aria-hidden false on svg', function() {
+    it('badge.icon(name) renders a known icon', function() {
         badge = new Badge(span);
 
-        badge.icon('<svg id="raw-svg-false" aria-hidden="false" viewBox="0 0 10 10"><path d="M0 0h10v10H0z"></path></svg>');
+        badge.icon('plus');
 
-        assert.equal(badge.element.find('.k-badge-icon').attr('aria-hidden'), 'true');
-        assert.equal(badge.element.find('#raw-svg-false').attr('aria-hidden'), 'false');
-    });
-
-    it('badge.icon(svg) preserves existing aria-hidden true on svg', function() {
-        badge = new Badge(span);
-
-        badge.icon('<svg id="raw-svg-true" aria-hidden="true" viewBox="0 0 10 10"><path d="M0 0h10v10H0z"></path></svg>');
-
-        assert.equal(badge.element.find('.k-badge-icon').attr('aria-hidden'), 'true');
-        assert.equal(badge.element.find('#raw-svg-true').attr('aria-hidden'), 'true');
-    });
-
-    it('badge.icon(svg) adds aria-hidden to root when only nested elements have it', function() {
-        badge = new Badge(span);
-
-        badge.icon('<svg id="raw-svg-nested" viewBox="0 0 10 10"><g aria-hidden="false"><path d="M0 0h10v10H0z"></path></g></svg>');
-
-        assert.equal(badge.element.find('.k-badge-icon').attr('aria-hidden'), 'true');
-        assert.equal(badge.element.find('#raw-svg-nested').attr('aria-hidden'), 'true');
-        assert.equal(badge.element.find('#raw-svg-nested g').attr('aria-hidden'), 'false');
+        assert.equal(badge.icon(), 'plus');
+        assert.equal(badge.element.find('.k-badge-icon.k-svg-i-plus').length, 1);
     });
     // #endregion
 
@@ -211,8 +194,8 @@ describe('kendo.ui.Badge content', function() {
         span.html('<strong>HtMl</strong>');
         badge = new Badge(span, { encoded: false });
 
-        assert.equal(badge.text(), badge.element.html());
         assert.equal(badge.text(), '<strong>HtMl</strong>');
+        assert.equal(badge.element.children('.k-badge-text').html(), '<strong>HtMl</strong>');
 
         badge.text('');
 
@@ -221,8 +204,26 @@ describe('kendo.ui.Badge content', function() {
 
         badge.text('text');
 
-        assert.equal(badge.text(), badge.element.html());
         assert.equal(badge.text(), 'text');
+        assert.equal(badge.element.children('.k-badge-text').text(), 'text');
+    });
+
+    it('badge.text() preserves the icon', function() {
+        badge = new Badge(span, { icon: 'plus', text: 100 });
+
+        badge.text(101);
+
+        assert.equal(badge.element.children('.k-badge-icon').length, 1);
+        assert.equal(badge.element.children('.k-badge-text').text(), '101');
+    });
+
+    it('badge.icon() preserves the text', function() {
+        badge = new Badge(span, { icon: 'plus', text: 100 });
+
+        badge.icon('minus');
+
+        assert.equal(badge.element.children('.k-badge-icon').length, 1);
+        assert.equal(badge.element.children('.k-badge-text').text(), '100');
     });
 
     it('badge.text() encodes malicious markup by default', function() {
@@ -257,7 +258,7 @@ describe('kendo.ui.Badge content', function() {
         badge.setOptions({ text: 300, max: 99 });
 
         assert.equal(badge.text(), 300);
-        assert.equal(badge.element.html(), '99+');
+        assert.equal(badge.element.children('.k-badge-text').text(), '99+');
     });
     it('badge.setOptions({icon: icon}) works correctly', function() {
         badge = new Badge(span);
@@ -266,6 +267,39 @@ describe('kendo.ui.Badge content', function() {
 
         assert.equal(badge.icon(), 'plus');
         assert.equal(badge.element.find(".k-badge-icon").length, 1);
+    });
+    it('badge.setOptions({text: ""}) clears the text and keeps the icon', function() {
+        badge = new Badge(span, { icon: 'plus', text: 100 });
+
+        badge.setOptions({ text: '' });
+
+        assert.equal(badge.element.children('.k-badge-text').length, 0);
+        assert.equal(badge.element.children('.k-badge-icon').length, 1);
+    });
+    it('badge.setOptions({icon: ""}) clears the icon and keeps the text', function() {
+        badge = new Badge(span, { icon: 'plus', text: 100 });
+
+        badge.setOptions({ icon: '' });
+
+        assert.equal(badge.element.children('.k-badge-icon').length, 0);
+        assert.equal(badge.element.children('.k-badge-text').text(), '100');
+    });
+    it('badge.setOptions({text: undefined, icon: undefined}) preserves content', function() {
+        badge = new Badge(span, { icon: 'plus', text: 100 });
+
+        badge.setOptions({ text: undefined, icon: undefined });
+
+        assert.equal(badge.element.children('.k-badge-icon').length, 1);
+        assert.equal(badge.element.children('.k-badge-text').text(), '100');
+    });
+    it('badge.setOptions() preserves text taken from the initial element content', function() {
+        span.html('100');
+        badge = new Badge(span);
+
+        badge.setOptions({ fillMode: 'tint' });
+
+        assert.equal(badge.text(), '100');
+        assert.equal(badge.element.children('.k-badge-text').text(), '100');
     });
     it('badge.setOptions({template: tmeplate}) works correctly', function() {
         badge = new Badge(span);

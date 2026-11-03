@@ -6908,10 +6908,12 @@ How do I configure Kendo UI for jQuery Scheduler to identify resource IDs in eve
     });
     </script>
 
-### resources.icon `String`
+### resources.icon `String|Object`
 
 The name of the icon displayed instead of the resource text label in the desktop event editor. When the option is not set, the editor displays the resource [title](/api/ui/scheduler#configuration-resources.title), or its existing field-name fallback.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I show an icon instead of a resource label in the Kendo UI Scheduler desktop event editor? Set a Kendo icon name for a resource editor field while preserving the configured resource title or field name as the fallback when no icon is supplied.
@@ -6931,6 +6933,67 @@ How do I show an icon instead of a resource label in the Kendo UI Scheduler desk
           field: "technicianId",
           title: "Technician",
           icon: "user",
+          dataSource: [{ text: "Morgan Lee", value: 1 }]
+        }
+      ]
+    });
+    </script>
+
+### resources.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - use an icon for a resource in the desktop editor
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      dataSource: [
+        { id: 1, title: "Equipment Inspection", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00"), technicianId: 1 }
+      ],
+      resources: [
+        {
+          field: "technicianId",
+          title: "Technician",
+          icon: {
+              name: "user"
+          },
+          dataSource: [{ text: "Morgan Lee", value: 1 }]
+        }
+      ]
+    });
+    </script>
+
+### resources.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - use an icon for a resource in the desktop editor
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      dataSource: [
+        { id: 1, title: "Equipment Inspection", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00"), technicianId: 1 }
+      ],
+      resources: [
+        {
+          field: "technicianId",
+          title: "Technician",
+          icon: {
+              name: "user",
+              variant: "outline"
+          },
           dataSource: [{ text: "Morgan Lee", value: 1 }]
         }
       ]

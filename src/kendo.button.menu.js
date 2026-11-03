@@ -77,7 +77,10 @@ export const __meta__ = {
 
     var IMAGE_TEMPLATE = ({ imageUrl }) => `${imageUrl ? `<img alt="icon" class="${cssClasses.image}" src="${encode(imageUrl)}" />` : ''}`;
     var SPRITE_TEMPLATE = ({ spriteCssClass }) => `${spriteCssClass ? `<span class="${cssClasses.sprite} ${encode(spriteCssClass)}"></span>` : ''}`;
-    var ICON_TEMPLATE = ({ icon }) => `${icon ? kendo.ui.icon(encode(icon)) : ''}`;
+    var ICON_TEMPLATE = ({ icon }) => {
+        const finalIcon = kendo.isString(icon) ? encode(icon) : icon;
+        return `${icon ? kendo.ui.icon({ icon: finalIcon }) : ''}`;
+    };
     var TEXT_TEMPLATE = ({ text }) => `${text ? `<span class="${cssClasses.itemText}">${encode(text)}</span>` : ''}`;
 
     var ITEM_TEMPLATE = ({ imageUrl, spriteCssClass, icon, text }) => `<span class="${cssClasses.item}">` +

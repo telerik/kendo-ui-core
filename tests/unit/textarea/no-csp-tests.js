@@ -19,7 +19,7 @@ describe("kendo.ui.TextArea MVVM", function() {
     });
 
     it("floating label wraps the widget", function() {
-        dom = $('<textarea data-role="textarea" data-label="{ floating: true }"/>');
+        dom = $('<textarea data-role="textarea" data-label=\'{"floating":true}\'/>');
 
         kendo.bind(dom);
 

@@ -1367,8 +1367,8 @@ export const __meta__ = {
                 `<div class="k-actionsheet-titlebar">` +
                         '<div class="k-actionsheet-titlebar-group">' +
                             `<div  class="k-actionsheet-title">` +
-                                (list.options.adaptiveTitle || list.options.label ? `<div class="k-text-center">${list.options.adaptiveTitle || list.options.label}</div>` : '') +
-                                (list.options.adaptiveSubtitle ? `<div class="k-actionsheet-subtitle k-text-center">${list.options.adaptiveSubtitle || ""}</div>` : "") +
+                                (list.options.adaptiveTitle || list.options.label ? `<div class="k-text-center">${list.options.adaptiveTitle ? htmlEncode(list.options.adaptiveTitle) : list.options.label}</div>` : '') +
+                                (list.options.adaptiveSubtitle ? `<div class="k-actionsheet-subtitle k-text-center">${htmlEncode(list.options.adaptiveSubtitle)}</div>` : "") +
                             '</div>' +
                             (options.closeButton ?
                             '<div class="k-actionsheet-actions">' +

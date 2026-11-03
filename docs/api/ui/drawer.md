@@ -118,12 +118,14 @@ How do I set the text label for a Drawer item in Kendo UI for jQuery? Configure 
         });
     </script>
 
-### items.icon `String`
+### items.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme.
 
 See [web font icons help article](/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I show icons in generated Drawer items? Configure a theme icon name for each drawer entry, set icons for navigation items in a sidebar or slide-out menu, customize the graphic shown next to drawer labels, and choose built-in Kendo UI icons for generated side navigation items to improve recognition and visual hierarchy.
@@ -141,6 +143,54 @@ How do I show icons in generated Drawer items? Configure a theme icon name for e
                 { text: "Dashboard", icon: "home" },
                 { text: "Files", icon: "folder" },
                 { text: "Preferences", icon: "gear" }
+            ]
+        });
+    </script>
+
+### items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - configure item icons
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            items: [
+                { text: "Dashboard", icon: { name: "home" } },
+                { text: "Files", icon: { name: "folder" } },
+                { text: "Preferences", icon: { name: "gear" } }
+            ]
+        });
+    </script>
+
+### items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - configure item icons
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            items: [
+                { text: "Dashboard", icon: { name: "home", variant: "outline" } },
+                { text: "Files", icon: { name: "folder", variant: "outline" } },
+                { text: "Preferences", icon: { name: "gear", variant: "outline" } }
             ]
         });
     </script>

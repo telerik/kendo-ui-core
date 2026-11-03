@@ -83,4 +83,25 @@ describe('kendo.ui.SvgIcon API', function() {
         assert.isFalse(span.hasClass('k-svg-i-gear'));
         assert.isOk(span.hasClass('k-svg-i-camera'));
     });
+
+    it('setOptions changes the variant content without adding a variant class', function() {
+        const customIcon = {
+            name: 'custom',
+            viewBox: '0 0 10 10',
+            content: '<path d="M0 0"></path>',
+            variants: { duotone: '<path d="M1 1"></path>' }
+        };
+
+        icon = new SvgIcon(span, { icon: customIcon });
+
+        assert.include(span.find('svg').html(), 'M0 0');
+
+        icon.setOptions({ variant: 'duotone' });
+
+        assert.equal(icon.options.variant, 'duotone');
+        assert.include(span.find('svg').html(), 'M1 1');
+        assert.notInclude(span.find('svg').html(), 'M0 0');
+        assert.isFalse(span.hasClass('k-svg-icon-outline'));
+        assert.isFalse(span.hasClass('k-svg-icon-duotone'));
+    });
 });

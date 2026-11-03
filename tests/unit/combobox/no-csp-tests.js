@@ -123,11 +123,17 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
                 'data-animation="false" ' +
                 'data-text-field="text" ' +
                 'data-value-field="value" ' +
-                'data-virtual="{itemHeight: 20, valueMapper: function(o) { o.success(o.value); }}" ' +
+                'bind:data-virtual="virtual" ' +
                 'data-value-primitive="true" ' +
                 'data-bind="value:Invoice.orderId, source: ds"/>');
 
             let vm = kendo.observable({
+                virtual: {
+                    itemHeight: 20,
+                    valueMapper: function(options) {
+                        options.success(options.value);
+                    }
+                },
                 ds: createAsyncDataSource(),
                 Invoice: { value: null },
                 setFoo: function() {
@@ -158,7 +164,7 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
         });
 
         it("popup option can be successfully set through data attribute", function() {
-            dom = $('<select data-popup="{ origin: \'top left\', position: \'bottom left\' }" data-role="combobox" />');
+            dom = $('<select data-popup=\'{"origin":"top left","position":"bottom left"}\' data-role="combobox" />');
 
             let observable = kendo.observable({});
 

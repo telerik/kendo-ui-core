@@ -66,6 +66,7 @@ describe("kendo.init", function() {
         delete window.foo;
         delete window.bar;
         delete window.testDataSource;
+        delete window.invalidJSONEvaluated;
         kendo.destroy(dom);
         kendo.ns = "";
     });
@@ -338,6 +339,121 @@ describe("kendo.init", function() {
         let testwidget = dom.data("kendoTestWidget");
         assert.equal(testwidget.options.columns.foo, "foo");
         assert.equal(testwidget.options.columns.bar, "bar");
+    });
+
+    function captureConsoleErrors(callback) {
+        let originalError = window.console.error;
+        let errors = [];
+
+        window.console.error = function(error) {
+            errors.push(error);
+        };
+
+        try {
+            callback();
+        } finally {
+            window.console.error = originalError;
+        }
+
+        return errors;
+    }
+
+    function invalidJSONMessage(option, value) {
+        try {
+            JSON.parse(value);
+        } catch (error) {
+            return "Invalid JSON in data-" + option + ": " + error.toString();
+        }
+    }
+
+    it("logs an error when a data attribute contains invalid JSON", function() {
+        let value = "{ foo: true }";
+        dom = $('<div data-role="testwidget"/>').attr("data-columns", value);
+
+        let errors = captureConsoleErrors(() => kendo.init(dom));
+
+        assert.equal(errors.length, 1);
+        assert.equal(errors[0], invalidJSONMessage("columns", value));
+    });
+
+    it("logs an error message that includes the namespace of the data attribute", function() {
+        let value = "{ foo: true }";
+        dom = $('<div data-kendo-role="testwidget"/>').attr("data-kendo-columns", value);
+
+        kendo.ns = "kendo-";
+
+        let errors = captureConsoleErrors(() => kendo.init(dom));
+
+        assert.equal(errors.length, 1);
+        assert.equal(errors[0], invalidJSONMessage("kendo-columns", value));
+    });
+
+    it("logs a separate error message for each data attribute with invalid JSON", function() {
+        dom = $('<div data-role="testwidget" data-columns="{ foo: true }" data-format="{ bar: 1 }" data-foo=\'{"baz":1}\'/>');
+
+        let errors = captureConsoleErrors(() => kendo.init(dom));
+
+        assert.equal(errors.length, 2);
+        assert.include(errors, invalidJSONMessage("columns", "{ foo: true }"));
+        assert.include(errors, invalidJSONMessage("format", "{ bar: 1 }"));
+    });
+
+    it("does not log an error message for valid JSON", function() {
+        dom = $('<div data-role="testwidget" data-columns=\'{"foo":true}\'/>');
+
+        let errors = captureConsoleErrors(() => kendo.init(dom));
+
+        assert.equal(errors.length, 0);
+    });
+
+    it("does not log the error message when kendo.suppressLog is true", function() {
+        let originalSuppressLog = kendo.suppressLog;
+        dom = $('<div data-role="testwidget" data-columns="{ foo: true }"/>');
+        kendo.suppressLog = true;
+
+        let errors;
+
+        try {
+            errors = captureConsoleErrors(() => kendo.init(dom));
+        } finally {
+            kendo.suppressLog = originalSuppressLog;
+        }
+
+        assert.equal(errors.length, 0);
+    });
+
+    it("does not evaluate invalid JSON from data attributes", function() {
+        let value = "{ foo: window.invalidJSONEvaluated = true }";
+        dom = $('<div data-role="testwidget"/>').attr("data-columns", value);
+        window.invalidJSONEvaluated = false;
+
+        let errors = captureConsoleErrors(() => kendo.init(dom));
+
+        assert.isFalse(window.invalidJSONEvaluated);
+        assert.deepEqual(errors, [invalidJSONMessage("columns", value)]);
+    });
+
+    ["{ foo: true }", "[foo, bar]"].forEach(value => {
+        it("falls back to the default option value for invalid JSON " + value, function() {
+            dom = $('<div data-role="testwidget"/>').attr("data-columns", value);
+
+            let errors = captureConsoleErrors(() => kendo.init(dom));
+
+            assert.isNull(dom.data("kendoTestWidget").options.columns);
+            assert.deepEqual(errors, [invalidJSONMessage("columns", value)]);
+        });
+    });
+
+    it("parses valid options alongside an option with invalid JSON", function() {
+        dom = $('<div data-role="testwidget" data-foo="bar" data-columns="{ foo: true }" data-format=\'{"baz":1}\'/>');
+
+        let errors = captureConsoleErrors(() => kendo.init(dom));
+
+        let testwidget = dom.data("kendoTestWidget");
+        assert.equal(testwidget.options.foo, "bar");
+        assert.isNull(testwidget.options.columns);
+        assert.deepEqual(testwidget.options.format, { baz: 1 });
+        assert.deepEqual(errors, [invalidJSONMessage("columns", "{ foo: true }")]);
     });
 
     it("does not treat format strings as JSON", function() {

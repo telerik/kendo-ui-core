@@ -875,11 +875,13 @@ How do I configure individual steps in a Kendo UI Wizard with custom forms? Conf
     });
     </script>
 
-### steps.icon `String`
+### steps.icon `String|Object`
 
 Defines a name of an existing icon in the Kendo UI theme sprite. The icon will be displayed in the Stepper step element.
 For a list of available icon names, please refer to the [Web Font Icons article](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icons for each step in a Kendo UI Wizard? Display or configure an icon for each step in a multi-step wizard or stepper interface by setting or enabling an icon graphic, symbol, or visual indicator linked to predefined icon libraries or theme sprite sets. Customize step visuals by specifying an icon name, symbol, glyph, or font-based image from a collection of web font icons or UI theme sprites to enhance user navigation cues, highlight progress, or visually represent step meaning in wizards, multi-step forms, or guided workflows. Control the appearance of step markers by assigning existing icons, selecting from available icon sets, or configuring graphical step indicators during setup or initialization of wizard components to improve UI clarity and user experience across step-based processes.
@@ -898,6 +900,67 @@ How do I customize the icons for each step in a Kendo UI Wizard? Display or conf
                 title: "Second step",
                 content: "Step 2 Content",
                 icon: "cancel"
+            },{
+                title: "Third step",
+                content: "Step 3 Content"
+            }]
+        });
+	</script>
+
+### steps.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+	<div id="wizard"></div>
+
+	<script>
+        $("#wizard").kendoWizard({
+            steps: [{
+                title: "Initial step",
+                content: "Step 1 Content"
+            }, {
+                title: "Second step",
+                content: "Step 2 Content",
+                icon: {
+                    name: "cancel"
+                }
+            },{
+                title: "Third step",
+                content: "Step 3 Content"
+            }]
+        });
+	</script>
+
+### steps.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+	<div id="wizard"></div>
+
+	<script>
+        $("#wizard").kendoWizard({
+            steps: [{
+                title: "Initial step",
+                content: "Step 1 Content"
+            }, {
+                title: "Second step",
+                content: "Step 2 Content",
+                icon: {
+                    name: "cancel",
+                    variant: "outline"
+                }
             },{
                 title: "Third step",
                 content: "Step 3 Content"

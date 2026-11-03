@@ -675,10 +675,12 @@ How do I customize the command text in Kendo UI's InlineAIPrompt? Configure the 
     });
     </script>
 
-### commands.icon `String`
+### commands.icon `String|Object`
 
 The icon name of the command item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icons for command buttons in an inline AI prompt? Set or customize the visual representation of command buttons by specifying icon names, icon classes, or image identifiers to display graphical symbols next to commands, including configuring which icon appears for inline commands, menu options, or toolbar items using common icon frameworks, CSS classes, or custom icon sets, enabling control over the appearance of interactive elements in user interfaces, and allowing developers to assign, change, or override icons for better clarity, branding, or accessibility in inline AI prompts or command palettes.
@@ -693,6 +695,53 @@ How do I customize the icons for command buttons in an inline AI prompt? Set or 
             id: "explain",
             text: "Explain",
             icon: "info-circle"
+        }]
+    });
+    </script>
+
+### commands.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        commands: [{
+            id: "explain",
+            text: "Explain",
+            icon: {
+                name: "info-circle"
+            }
+        }]
+    });
+    </script>
+
+### commands.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        commands: [{
+            id: "explain",
+            text: "Explain",
+            icon: {
+                name: "info-circle",
+                variant: "outline"
+            }
         }]
     });
     </script>
@@ -841,10 +890,12 @@ How can I customize the text on action buttons in an Inline AI Prompt? Customize
     });
     </script>
 
-### outputActions.icon `String`
+### outputActions.icon `String|Object`
 
 The icon name for the action button. Uses Kendo UI icon names.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to customize the icon on an inline AI prompt output action button in Kendo UI for jQuery? Control and customize the graphical symbol or glyph shown on action buttons within an inline AI prompt interface by specifying icon identifiers, enabling configuration of visual button markers using standard icon sets or CSS classes such as search, settings, or other UI glyphs. Adjust, set, or override the displayed icon for output action buttons to match desired UI elements, enhance user interaction cues, or visually represent specific functions. Use recognizable icon names, icon strings, or CSS icon classes to define which symbol appears on inline action controls, supporting consistent styling and intuitive interface feedback. Manage iconography on inline prompt buttons to improve visual clarity, branding, or user guidance in workflows that output actions or commands.
@@ -857,6 +908,44 @@ How to customize the icon on an inline AI prompt output action button in Kendo U
         outputActions: [
             { command: "bookmark", text: "Bookmark", icon: "star" },
             { command: "share", text: "Share", icon: "share" }
+        ]
+    });
+    </script>
+
+### outputActions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        outputActions: [
+            { command: "bookmark", text: "Bookmark", icon: { name: "star" } },
+            { command: "share", text: "Share", icon: { name: "share" } }
+        ]
+    });
+    </script>
+
+### outputActions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        outputActions: [
+            { command: "bookmark", text: "Bookmark", icon: { name: "star", variant: "outline" } },
+            { command: "share", text: "Share", icon: { name: "share", variant: "outline" } }
         ]
     });
     </script>

@@ -180,10 +180,12 @@ How do I change the text on the card menu button in a TaskBoard? Customize or se
 
     </script>
 
-### cardMenu.icon `String`
+### cardMenu.icon `String|Object`
 
 The icon of the button.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I change the icon on the card menu button in Kendo UI TaskBoard? Customize or configure the symbol, graphic, or icon that appears on the button used to open a task card’s action menu within the TaskBoard interface. Control, set, or change the visual representation, pictogram, or graphical element displayed on the card menu button, enabling selection or adjustment of which icon, image, or button symbol is shown for triggering card options or actions. Adjust the card menu button icon during setup, initialization, or configuration to personalize, style, or define the menu’s visual cue for accessing task details, commands, or card-specific controls.
@@ -209,6 +211,100 @@ How do I change the icon on the card menu button in Kendo UI TaskBoard? Customiz
         { text: "Done", status: "done" }
         ],
         cardMenu: [ { name: "CustomButton", text: "My Custom Tool", icon: "gear", command: "MyCustomCommand", options: "myvalue" } ]
+    });
+
+    kendo.ui.taskboard.commands["MyCustomCommand"] = kendo.ui.taskboard.Command.extend({
+        exec: function () {
+            var taskboard = this.taskboard;
+            var options = this.options;
+            var card = options.card;
+            var cardElm = options.cardElement;
+            var column = options.column;
+            var columnElm = options.columnElement;
+
+            cardElm.css("border", "solid red 3px");
+            columnElm.css("border", "solid red 3px");
+            alert(kendo.format("{0} Card executed Custom command in column with status {1} with value {2}", card.get("title"), column.get("status"), options.value));
+        }
+    });
+
+    </script>
+
+### cardMenu.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="taskBoard"></div>
+
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        dataOrderField: "order",
+        dataSource: [
+        { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
+        { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
+        { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
+        { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
+        { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
+        ],
+        columns: [
+        { text: "Backlog", status: "backlog" },
+        { text: "Doing", status: "doing" },
+        { text: "Done", status: "done" }
+        ],
+        cardMenu: [ { name: "CustomButton", text: "My Custom Tool", icon: { name: "gear" }, command: "MyCustomCommand", options: "myvalue" } ]
+    });
+
+    kendo.ui.taskboard.commands["MyCustomCommand"] = kendo.ui.taskboard.Command.extend({
+        exec: function () {
+            var taskboard = this.taskboard;
+            var options = this.options;
+            var card = options.card;
+            var cardElm = options.cardElement;
+            var column = options.column;
+            var columnElm = options.columnElement;
+
+            cardElm.css("border", "solid red 3px");
+            columnElm.css("border", "solid red 3px");
+            alert(kendo.format("{0} Card executed Custom command in column with status {1} with value {2}", card.get("title"), column.get("status"), options.value));
+        }
+    });
+
+    </script>
+
+### cardMenu.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="taskBoard"></div>
+
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        dataOrderField: "order",
+        dataSource: [
+        { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
+        { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
+        { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
+        { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
+        { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
+        ],
+        columns: [
+        { text: "Backlog", status: "backlog" },
+        { text: "Doing", status: "doing" },
+        { text: "Done", status: "done" }
+        ],
+        cardMenu: [ { name: "CustomButton", text: "My Custom Tool", icon: { name: "gear", variant: "outline" }, command: "MyCustomCommand", options: "myvalue" } ]
     });
 
     kendo.ui.taskboard.commands["MyCustomCommand"] = kendo.ui.taskboard.Command.extend({
@@ -614,10 +710,12 @@ How do I customize the button text in Kendo UI TaskBoard column settings? Set or
       });
     </script>
 
-### columnSettings.buttons.icon `String`
+### columnSettings.buttons.icon `String|Object`
 
 The icon of the button.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to customize icons on task board column buttons in Kendo UI for jQuery? Configure or customize the icon displayed on column buttons within a task board interface by specifying icon names, CSS classes, or HTML markup to visually represent button actions, statuses, or functionalities; control and set icon appearance for task board columns to enhance UI clarity, enable intuitive user interactions, adjust visual indicators for column operations, and tailor iconography through various supported formats including icon fonts, custom styles, or embedded HTML elements.
@@ -644,6 +742,96 @@ How to customize icons on task board column buttons in Kendo UI for jQuery? Conf
         ],
         columnSettings: {
           buttons: [{ name: "CustomButton", text: "My Custom Tool", icon: "gear", command: "MyCustomCommand", options: "myvalue" }]
+        }
+      });
+
+      kendo.ui.taskboard.commands["MyCustomCommand"] = kendo.ui.taskboard.Command.extend({
+        exec: function () {
+          var taskboard = this.taskboard;
+          var options = this.options;
+          var column = options.column;
+          var columnElm = options.columnElement;
+
+          columnElm.css("border", "solid red 3px");
+          alert(kendo.format("Custom command executed for column with status {0} and value {1}", column.get("status"), options.value));
+        }
+      });
+    </script>
+
+### columnSettings.buttons.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="taskBoard"></div>
+
+    <script>
+      $("#taskBoard").kendoTaskBoard({
+        dataOrderField: "order",
+        dataSource: [
+          { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
+          { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
+          { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
+          { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
+          { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
+        ],
+        columns: [
+          { text: "Backlog", status: "backlog" },
+          { text: "Doing", status: "doing" },
+          { text: "Done", status: "done" }
+        ],
+        columnSettings: {
+          buttons: [{ name: "CustomButton", text: "My Custom Tool", icon: { name: "gear" }, command: "MyCustomCommand", options: "myvalue" }]
+        }
+      });
+
+      kendo.ui.taskboard.commands["MyCustomCommand"] = kendo.ui.taskboard.Command.extend({
+        exec: function () {
+          var taskboard = this.taskboard;
+          var options = this.options;
+          var column = options.column;
+          var columnElm = options.columnElement;
+
+          columnElm.css("border", "solid red 3px");
+          alert(kendo.format("Custom command executed for column with status {0} and value {1}", column.get("status"), options.value));
+        }
+      });
+    </script>
+
+### columnSettings.buttons.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="taskBoard"></div>
+
+    <script>
+      $("#taskBoard").kendoTaskBoard({
+        dataOrderField: "order",
+        dataSource: [
+          { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
+          { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
+          { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
+          { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
+          { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
+        ],
+        columns: [
+          { text: "Backlog", status: "backlog" },
+          { text: "Doing", status: "doing" },
+          { text: "Done", status: "done" }
+        ],
+        columnSettings: {
+          buttons: [{ name: "CustomButton", text: "My Custom Tool", icon: { name: "gear", variant: "outline" }, command: "MyCustomCommand", options: "myvalue" }]
         }
       });
 
@@ -1404,13 +1592,115 @@ How do I customize the button captions in my Kendo UI TaskBoard? Control, custom
       });
     </script>
 
-### editable.buttons.icon `String`
+### editable.buttons.icon `String|Object`
 
 The icon of the button.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How to customize the icon for editable buttons in a Kendo UI TaskBoard? Customize or set the icon displayed on editable buttons within task boards by configuring the button’s visual symbol, enabling control over button appearance, styling, and action indicators; adjust, change, or specify icons to represent editable states, action triggers, or interactive controls on task management interfaces, allowing developers to tailor button visuals for clarity, UX improvement, or branding by setting icon identifiers, image references, or icon fonts on editable buttons during component setup or runtime customization.
+</div>
+
+#### Example
+
+    <div id="taskBoard"></div>
+
+    <script>
+      $("#taskBoard").kendoTaskBoard({
+        editable: {
+          buttons: [
+            "saveChanges",
+            { name: "resetCard", text: "Default", command: "MyCustomCommand", options: "{ \"title\": \"Card Title\", \"description\": \"Put some description\" }", primary: false }]
+        },
+        dataOrderField: "order",
+        dataSource: [
+          { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
+          { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
+          { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
+          { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
+          { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
+        ],
+        columns: [
+          { text: "Doing", status: "doing" },
+          { text: "Backlog", status: "backlog" },
+          { text: "Done", status: "done" }
+        ]
+      });
+
+      kendo.ui.taskboard.commands["MyCustomCommand"] = kendo.ui.taskboard.Command.extend({
+        exec: function () {
+          var taskboard = this.taskboard;
+          var options = this.options;
+          var defaults = JSON.parse(options.value);
+          var card = options.card;
+          var cardElm = options.cardElement;
+          var column = options.column;
+          var columnElm = options.columnElement;
+
+          card.set("title", defaults.title);
+          card.set("description", defaults.description);
+        }
+      });
+    </script>
+
+### editable.buttons.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="taskBoard"></div>
+
+    <script>
+      $("#taskBoard").kendoTaskBoard({
+        editable: {
+          buttons: [
+            "saveChanges",
+            { name: "resetCard", text: "Default", command: "MyCustomCommand", options: "{ \"title\": \"Card Title\", \"description\": \"Put some description\" }", primary: false }]
+        },
+        dataOrderField: "order",
+        dataSource: [
+          { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
+          { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
+          { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
+          { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
+          { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
+        ],
+        columns: [
+          { text: "Doing", status: "doing" },
+          { text: "Backlog", status: "backlog" },
+          { text: "Done", status: "done" }
+        ]
+      });
+
+      kendo.ui.taskboard.commands["MyCustomCommand"] = kendo.ui.taskboard.Command.extend({
+        exec: function () {
+          var taskboard = this.taskboard;
+          var options = this.options;
+          var defaults = JSON.parse(options.value);
+          var card = options.card;
+          var cardElm = options.cardElement;
+          var column = options.column;
+          var columnElm = options.columnElement;
+
+          card.set("title", defaults.title);
+          card.set("description", defaults.description);
+        }
+      });
+    </script>
+
+### editable.buttons.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example
@@ -1995,13 +2285,129 @@ How can I customize the action button label in Kendo UI taskboard preview pane? 
       });
     </script>
 
-### previewPane.buttons.icon `String`
+### previewPane.buttons.icon `String|Object`
 
 The icon of the button.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How to customize icon for taskboard preview pane buttons in Kendo UI? Customize or configure the visual icon, glyph, or symbol displayed on buttons within a preview pane or task board interface, enabling control over the button’s appearance by setting icon names, icon classes, or CSS identifiers. This setting lets developers specify or change the graphical representation for preview pane buttons, allowing for tailored UI elements, adjusting visual cues, and managing button icons for improved usability, aesthetics, or branding within task preview contexts. Control and set the button icon display through icon identifiers, glyph names, or styling classes to match design requirements, user interface preferences, or interaction feedback in task board preview panels.
+</div>
+
+#### Example
+
+    <div id="taskBoard"></div>
+
+    <script>
+      $("#taskBoard").kendoTaskBoard({
+        previewPane: {
+          buttons: [
+            "edit",
+            "delete",
+            { name: "showDetails", text: "Details", command: "MyCustomCommand", primary: false }
+          ]
+        },
+        dataOrderField: "order",
+        dataSource: [
+          { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
+          { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
+          { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
+          { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
+          { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
+        ],
+        columns: [
+          { text: "Doing", status: "doing" },
+          { text: "Backlog", status: "backlog" },
+          { text: "Done", status: "done" }
+        ]
+      });
+
+      kendo.ui.taskboard.commands["MyCustomCommand"] = kendo.ui.taskboard.Command.extend({
+        exec: function () {
+          var taskboard = this.taskboard;
+          var options = this.options;
+          var defaults = JSON.parse(options.value);
+          var card = options.card;
+          var cardElm = options.cardElement;
+          var column = options.column;
+          var columnElm = options.columnElement;
+
+          kendo.alert(kendo.format('<p>Title: {0}</p>' +
+                                    '<p>Description: {1}</p>' +
+                                    '<p>Status: {2}</p>' +
+                                    '<p>Category: {3}</p>' +
+                                    '<p>Order: {4}</p>',
+                                    card.title, card.description,
+                                    card.status, card.category, card.order));
+        }
+      });
+    </script>
+
+### previewPane.buttons.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="taskBoard"></div>
+
+    <script>
+      $("#taskBoard").kendoTaskBoard({
+        previewPane: {
+          buttons: [
+            "edit",
+            "delete",
+            { name: "showDetails", text: "Details", command: "MyCustomCommand", primary: false }
+          ]
+        },
+        dataOrderField: "order",
+        dataSource: [
+          { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
+          { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
+          { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
+          { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
+          { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
+        ],
+        columns: [
+          { text: "Doing", status: "doing" },
+          { text: "Backlog", status: "backlog" },
+          { text: "Done", status: "done" }
+        ]
+      });
+
+      kendo.ui.taskboard.commands["MyCustomCommand"] = kendo.ui.taskboard.Command.extend({
+        exec: function () {
+          var taskboard = this.taskboard;
+          var options = this.options;
+          var defaults = JSON.parse(options.value);
+          var card = options.card;
+          var cardElm = options.cardElement;
+          var column = options.column;
+          var columnElm = options.columnElement;
+
+          kendo.alert(kendo.format('<p>Title: {0}</p>' +
+                                    '<p>Description: {1}</p>' +
+                                    '<p>Status: {2}</p>' +
+                                    '<p>Category: {3}</p>' +
+                                    '<p>Order: {4}</p>',
+                                    card.title, card.description,
+                                    card.status, card.category, card.order));
+        }
+      });
+    </script>
+
+### previewPane.buttons.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example
@@ -3549,9 +3955,11 @@ How do I configure icon display for toolbar items in a Kendo UI TaskBoard? Confi
     });
     </script>
 
-### toolbar.items.icon `String`
+### toolbar.items.icon `String|Object`
 Sets icon for the item. The icon should be one of the existing in the Kendo UI theme sprite.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I set an icon for a TaskBoard toolbar button using Kendo UI themes? Configure or set an icon on a TaskBoard toolbar button using a predefined Kendo UI theme sprite by specifying the icon name or CSS class linked to the built-in Kendo theme icons, enabling developers to customize toolbar visuals with standard icon sprites, assign theme-based graphical symbols, or apply consistent style icons for toolbar actions, enhancing the user interface by selecting from the official Kendo UI icon set or sprite classes for toolbar elements.
@@ -3568,6 +3976,66 @@ How do I set an icon for a TaskBoard toolbar button using Kendo UI themes? Confi
                 { text: "Settings", icon: "gear" },
                 { text: "Delete", icon: "trash" },
                 { text: "Save", icon: "save" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
+### toolbar.items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Add", icon: { name: "plus" } },
+                { text: "Settings", icon: { name: "gear" } },
+                { text: "Delete", icon: { name: "trash" } },
+                { text: "Save", icon: { name: "save" } }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
+### toolbar.items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Add", icon: { name: "plus", variant: "outline" } },
+                { text: "Settings", icon: { name: "gear", variant: "outline" } },
+                { text: "Delete", icon: { name: "trash", variant: "outline" } },
+                { text: "Save", icon: { name: "save", variant: "outline" } }
             ]
         },
         dataSource: [

@@ -196,11 +196,13 @@ How do I customize button fill styles in Kendo UI ActionSheet? Customize button 
         actionsheet.open();
     </script>
 
-### actionButtons.icon `String`
+### actionButtons.icon `String|Object`
 
 Specifies the icon's name of the action button.
 
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon on an action button in Kendo UI ActionSheet? Configure, set, or customize the icon displayed on action buttons within an action sheet or menu by specifying the icon name or symbol associated with each button. Control the visual representation of action items by assigning, updating, or binding different icons to correspond with various button actions, enhancing user interface clarity and providing intuitive visual cues. Adjust, enable, or change the icon graphics shown on interactive buttons in context menus or option sheets to match function, improve usability, or reflect dynamic states in app workflows.
@@ -242,6 +244,103 @@ How do I customize the icon on an action button in Kendo UI ActionSheet? Configu
         actionsheet.open();
     </script>
 
+### actionButtons.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="actionsheet">Do you confirm or cancel?</div>
+    <script>
+        var actionsheet = $('#actionsheet').kendoActionSheet({
+            title: 'Confirmation',
+            closeButton: true,
+            actionButtons: [
+                 {
+                    icon: {
+                        name: "check"
+                    },
+                    fillMode: "solid",
+                    themeColor: "primary",
+                    rounded: "full",
+                    size: "large",
+                    text: "Confirm",
+                    click: onClick
+                },
+                {
+                    icon: {
+                        name: "x"
+                    },
+                    fillMode: "flat",
+                    size: "large",
+                    text: "Close",
+                    click: onClick
+                }
+            ]
+        }).data('kendoActionSheet');
+
+        function onClick(e) {
+            e.preventDefault();
+            alert($(e.target).text() + " clicked;")
+            actionsheet.close();
+        }
+
+        actionsheet.open();
+    </script>
+
+### actionButtons.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="actionsheet">Do you confirm or cancel?</div>
+    <script>
+        var actionsheet = $('#actionsheet').kendoActionSheet({
+            title: 'Confirmation',
+            closeButton: true,
+            actionButtons: [
+                 {
+                    icon: {
+                        name: "check",
+                        variant: "outline"
+                    },
+                    fillMode: "solid",
+                    themeColor: "primary",
+                    rounded: "full",
+                    size: "large",
+                    text: "Confirm",
+                    click: onClick
+                },
+                {
+                    icon: {
+                        name: "x",
+                        variant: "outline"
+                    },
+                    fillMode: "flat",
+                    size: "large",
+                    text: "Close",
+                    click: onClick
+                }
+            ]
+        }).data('kendoActionSheet');
+
+        function onClick(e) {
+            e.preventDefault();
+            alert($(e.target).text() + " clicked;")
+            actionsheet.close();
+        }
+
+        actionsheet.open();
+    </script>
 
 ### actionButtons.iconClass `String`
 
@@ -1102,13 +1201,107 @@ How to group menu options in ActionSheet using Kendo UI for jQuery? Control the 
     </script>
 
 
-### items.icon `String`
+### items.icon `String|Object`
 
 Specifies the icon's name of the item.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How to customize icons for action items in an ActionSheet with Kendo UI? Specify or customize icons for action items in an ActionSheet by configuring icon names or identifiers to display visuals next to options, enabling control over the icon appearance alongside menu actions, setting or changing icon labels for actions, integrating recognizable graphics for user commands, and managing icon assets for interactive lists or popup menus to enhance clarity, usability, and visual context in action selections.
+</div>
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+      var actionsheet = $('#actionsheet').kendoActionSheet({
+          title:'Select item',
+          items:[
+              {
+                  text: 'Edit Item',
+                  icon: 'pencil',
+                  click: onClick
+              },
+              {
+                  text: 'Add to Favorites',
+                  icon: 'heart',
+                  click: onClick
+              },
+              {
+                  text: 'Upload New',
+                  icon: 'upload',
+                  click: onClick
+              },
+              {
+                  text: 'Cancel',
+                  icon: 'cancel',
+                  group: 'bottom',
+                  click: onClick
+              },
+          ]
+      }).data('kendoActionSheet');
+
+      actionsheet.open();
+      function onClick(e) {
+          e.preventDefault();
+          actionsheet.close();
+      }
+    </script>
+
+### items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+      var actionsheet = $('#actionsheet').kendoActionSheet({
+          title:'Select item',
+          items:[
+              {
+                  text: 'Edit Item',
+                  icon: 'pencil',
+                  click: onClick
+              },
+              {
+                  text: 'Add to Favorites',
+                  icon: 'heart',
+                  click: onClick
+              },
+              {
+                  text: 'Upload New',
+                  icon: 'upload',
+                  click: onClick
+              },
+              {
+                  text: 'Cancel',
+                  icon: 'cancel',
+                  group: 'bottom',
+                  click: onClick
+              },
+          ]
+      }).data('kendoActionSheet');
+
+      actionsheet.open();
+      function onClick(e) {
+          e.preventDefault();
+          actionsheet.close();
+      }
+    </script>
+
+### items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example
@@ -1382,10 +1575,12 @@ How do I customize the navigation button in an ActionSheet? Control the presence
       }
     </script>
 
-### startButton.icon `String`
+### startButton.icon `String|Object`
 
 Specifies the icon to be displayed in the start button.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to set icon on action sheet start button in Kendo UI? Configure or customize the icon displayed on the primary action button at the start of an action sheet to visually represent or highlight the main operation. Control or set the graphical symbol used on the starting button to enhance user recognition, replace or combine with button text, adjust icon style, appearance, or classes, and define visual indicators for primary actions within overlay menus or popup selections. Adjust the leading button’s icon to signal intent, enable intuitive click targets, and manage icon display for consistent user interface cues in modal action lists or contextual command panels.
@@ -1404,6 +1599,61 @@ How to set icon on action sheet start button in Kendo UI? Configure or customize
         startButton: {
             text: "Start",
             icon: "play"
+        }
+    }).data("kendoActionSheet").open();
+    </script>
+
+### startButton.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+    $("#actionsheet").kendoActionSheet({
+        title: "Select action",
+        items: [
+            { text: "Item 1", icon: { name: "folder" } },
+            { text: "Item 2", icon: { name: "file" } }
+        ],
+        startButton: {
+            text: "Start",
+            icon: {
+                name: "play"
+            }
+        }
+    }).data("kendoActionSheet").open();
+    </script>
+
+### startButton.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+    $("#actionsheet").kendoActionSheet({
+        title: "Select action",
+        items: [
+            { text: "Item 1", icon: { name: "folder", variant: "outline" } },
+            { text: "Item 2", icon: { name: "file", variant: "outline" } }
+        ],
+        startButton: {
+            text: "Start",
+            icon: {
+                name: "play",
+                variant: "outline"
+            }
         }
     }).data("kendoActionSheet").open();
     </script>

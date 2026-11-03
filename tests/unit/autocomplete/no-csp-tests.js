@@ -60,7 +60,7 @@ describe("autocomplete mvvm - No CSP", function() {
     });
 
     it("popup option can be successfully set through data attribute", function() {
-        dom = $('<input data-popup="{ origin: \'top left\', position: \'bottom left\' }" data-role="autocomplete" />');
+        dom = $('<input data-popup=\'{"origin":"top left","position":"bottom left"}\' data-role="autocomplete" />');
 
         let observable = kendo.observable({});
 

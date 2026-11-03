@@ -58,6 +58,22 @@ The following example shows how to create a specific SVG icon.
 </script>
 ```
 
+### Configuring a Global Variant
+
+To apply an SVG icon variant globally, configure the `icon` defaults. A locally configured variant takes precedence over the global variant.
+
+```dojo
+<script>
+    kendo.setDefaults('icon', {
+        iconType: 'svg',
+        variant: 'duotone'
+    });
+
+    var icon = kendo.ui.icon({ icon: 'camera' });
+    $('body').append(icon);
+</script>
+```
+
 The following example shows how to set a custom SVG icon.
 
  ```dojo

@@ -1233,10 +1233,12 @@ How do I customize the button text in Kendo UI Grid? Customize the text label di
     });
     </script>
 
-### ai.aiAssistant.outputActions.icon `String`
+### ai.aiAssistant.outputActions.icon `String|Object`
 
 The icon name for the action button.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to customize the icon for AI assistant action buttons in a Kendo UI Grid? Customize or configure the visual icon displayed on AI assistant action buttons within a grid interface by setting or changing the graphical symbol, image, or identifier that represents the output action control. Enable control over the appearance of interactive elements tied to AI-generated outputs, allowing developers to specify, select, or bind different icons for action triggers, buttons, or controls related to AI assistant responses in a grid layout. Adjust or set iconography to match desired UI design, user experience preferences, or functional needs when working with AI assistant features in grid components.
@@ -1262,6 +1264,81 @@ How to customize the icon for AI assistant action buttons in a Kendo UI Grid? Cu
               command: "share",
               text: "Share",
               icon: "share"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
+### ai.aiAssistant.outputActions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          outputActions: [
+            {
+              command: "share",
+              text: "Share",
+              icon: {
+                  name: "share"
+              }
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
+### ai.aiAssistant.outputActions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          outputActions: [
+            {
+              command: "share",
+              text: "Share",
+              icon: {
+                  name: "share",
+                  variant: "outline"
+              }
             }
           ]
         }
@@ -1608,10 +1685,12 @@ How to customize toolbar items in Kendo UI Grid AI assistant? Define the display
     });
     </script>
 
-### ai.aiAssistant.toolbarItems.icon `String`
+### ai.aiAssistant.toolbarItems.icon `String|Object`
 
 The icon name of the toolbar item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon for the AI Assistant toolbar button in Kendo UI Grid? Customize or configure the graphical icon displayed on an AI assistant’s toolbar button within the Grid interface by specifying the icon name as a string, enabling the system to render the appropriate themed symbol or CSS-based icon class. Control the visual representation, set or change toolbar glyphs, assign custom icons by name, and adjust toolbar item imagery to match theme or design. Enable or change toolbar button icons, select icon fonts or CSS classes dynamically for toolbar entries, and modify the assistant interface’s visual elements to enhance user experience with specific iconography.
@@ -1636,6 +1715,81 @@ How do I customize the icon for the AI Assistant toolbar button in Kendo UI Grid
             {
               type: "button",
               icon: "gear",
+              text: "Settings"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
+### ai.aiAssistant.toolbarItems.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          toolbarItems: [
+            {
+              type: "button",
+              icon: {
+                  name: "gear"
+              },
+              text: "Settings"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
+### ai.aiAssistant.toolbarItems.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          toolbarItems: [
+            {
+              type: "button",
+              icon: {
+                  name: "gear",
+                  variant: "outline"
+              },
               text: "Settings"
             }
           ]
@@ -1898,13 +2052,87 @@ How to change button captions in Kendo UI grid? Customize or configure the text 
     });
     </script>
 
-### ai.aiAssistant.views.buttonIcon `String`
+### ai.aiAssistant.views.buttonIcon `String|Object`
 
 The icon name of the toolbar button rendered for the view.
 
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 How to change the icon on a grid toolbar button in Kendo UI for jQuery? Set or change the icon displayed on a grid view's toolbar button to visually represent the view, configure or customize button icons for grid toolbars, assign specific icon names for toolbar or action buttons, control the visual appearance of grid buttons, and manage the icon used to identify or highlight particular views within a grid interface.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "custom",
+              name: "charts",
+              buttonText: "Charts",
+              buttonIcon: "chart-line"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
+### ai.aiAssistant.views.buttonIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "custom",
+              name: "charts",
+              buttonText: "Charts",
+              buttonIcon: "chart-line"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
+### ai.aiAssistant.views.buttonIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example
@@ -2249,10 +2477,12 @@ How do I customize the text displayed for a command in an AI assistant prompt in
     });
     </script>
 
-### ai.aiAssistant.views.promptCommands.icon `String`
+### ai.aiAssistant.views.promptCommands.icon `String|Object`
 
 The icon name of the command item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon displayed for AI Assistant prompt commands in a Kendo UI Grid? Configure or customize the visual symbol or icon representation displayed alongside AI Assistant prompt commands within Grid views, enabling control over which font icon or graphical identifier appears for each command item, supporting setup of command button icons, graphical labels, or symbolic markers during promptCommands configuration, to visually distinguish or enhance interface elements related to AI interaction commands with flexible icon naming and selection options.
@@ -2282,6 +2512,93 @@ How do I customize the icon displayed for AI Assistant prompt commands in a Kend
                   id: "insights",
                   text: "Generate Insights",
                   icon: "lightbulb"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
+### ai.aiAssistant.views.promptCommands.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "prompt",
+              name: "insights",
+              promptCommands: [
+                {
+                  id: "insights",
+                  text: "Generate Insights",
+                  icon: {
+                      name: "lightbulb"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
+### ai.aiAssistant.views.promptCommands.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "prompt",
+              name: "insights",
+              promptCommands: [
+                {
+                  id: "insights",
+                  text: "Generate Insights",
+                  icon: {
+                      name: "lightbulb",
+                      variant: "outline"
+                  }
                 }
               ]
             }
@@ -9928,9 +10245,11 @@ How do I customize the text label displayed for a grid's context menu item body 
     });
     </script>
 
-### contextMenu.body.icon `String`
+### contextMenu.body.icon `String|Object`
 Specifies the icon of the item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to set an icon next to each context menu item in a Kendo UI Grid? Specify or set an icon, image, or visual indicator alongside a context menu item to enhance user interface clarity, improve menu item recognition, customize menu appearance with symbols or graphics, enable icons next to right-click options, add visual cues for easier navigation, control which icon or glyph appears in contextual dropdown menus, configure symbols for interactive menu entries, display small images or icons adjacent to menu text, and tailor the context menu’s look by including representative icons for different actions or commands within the grid component.
@@ -9954,6 +10273,77 @@ How to set an icon next to each context menu item in a Kendo UI Grid? Specify or
           {
             text: "Settings",
             icon: "gear",
+            command: "SettingsCommand"
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.body.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            text: "Settings",
+            icon: {
+                name: "gear"
+            },
+            command: "SettingsCommand"
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.body.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            text: "Settings",
+            icon: {
+                name: "gear",
+                variant: "outline"
+            },
             command: "SettingsCommand"
           }
         ]
@@ -10117,9 +10507,11 @@ How do I customize the text label for individual context menu entries in a Kendo
     });
     </script>
 
-### contextMenu.body.items.icon `String`
+### contextMenu.body.items.icon `String|Object`
 Specifies the icon of the item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to customize the icon displayed next to each menu item in a Kendo UI grid's context menu body? Set or customize the visual icon displayed next to each menu item in the context menu body of a grid, including specifying icon names, CSS classes, or theme-compatible markup for consistent styling and appearance. Control how icons appear adjacent to menu entries, configure icon visuals for context menu options, enable inline icons by name or class, and tailor iconography to match design themes or user interface requirements within grid context menus. Adjust icon representation for clarity, branding, or usability in dropdown menus triggered on grid interactions.
@@ -10146,6 +10538,87 @@ How to customize the icon displayed next to each menu item in a Kendo UI grid's 
               {
                 text: "Edit",
                 icon: "edit",
+                command: "EditCommand"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.body.items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            text: "Tools",
+            items: [
+              {
+                text: "Edit",
+                icon: {
+                    name: "edit"
+                },
+                command: "EditCommand"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.body.items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            text: "Tools",
+            items: [
+              {
+                text: "Edit",
+                icon: {
+                    name: "edit",
+                    variant: "outline"
+                },
                 command: "EditCommand"
               }
             ]
@@ -10316,9 +10789,11 @@ How do I customize the text for grouped context menu items in a Kendo UI Grid? C
     });
     </script>
 
-### contextMenu.groups.icon `String`
+### contextMenu.groups.icon `String|Object`
 Specifies the icon of the item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How can I customize the icon for each context menu group in my Kendo UI Grid? Customize or configure the symbol or visual indicator displayed alongside context menu group labels in a grid, including setting or changing the icon via class names or predefined icon identifiers, controlling appearance, styling, and representation of menu group items, enabling intuitive visual cues, adjusting the icon graphic for different groups within the grid’s contextual menu, and influencing how users recognize or interact with grouped menu options by specifying icon types or CSS-based icons.
@@ -10343,6 +10818,79 @@ How can I customize the icon for each context menu group in my Kendo UI Grid? Cu
           {
             text: "Group Settings",
             icon: "gear",
+            command: "GroupSettingsCommand"
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.groups.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            text: "Group Settings",
+            icon: {
+                name: "gear"
+            },
+            command: "GroupSettingsCommand"
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.groups.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            text: "Group Settings",
+            icon: {
+                name: "gear",
+                variant: "outline"
+            },
             command: "GroupSettingsCommand"
           }
         ]
@@ -10509,9 +11057,11 @@ How do I customize the text displayed on context menu items in a Kendo UI Grid? 
     });
     </script>
 
-### contextMenu.groups.items.icon `String`
+### contextMenu.groups.items.icon `String|Object`
 Specifies the icon of the item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to customize icons for context menu entries in Kendo UI Grid? Set or customize icons for context menu entries in grid components by specifying icon identifiers, CSS classes, or sprite images that appear alongside menu item labels; configure visual indicators, symbols, or glyphs to enhance menu usability and appearance during initialization, enabling control over icon types, styles, and how they visually represent specific menu actions or options within grid context menus.
@@ -10539,6 +11089,89 @@ How to customize icons for context menu entries in Kendo UI Grid? Set or customi
               {
                 text: "Collapse",
                 icon: "minus",
+                command: "CollapseCommand"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.groups.items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            text: "Group Actions",
+            items: [
+              {
+                text: "Collapse",
+                icon: {
+                    name: "minus"
+                },
+                command: "CollapseCommand"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.groups.items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            text: "Group Actions",
+            items: [
+              {
+                text: "Collapse",
+                icon: {
+                    name: "minus",
+                    variant: "outline"
+                },
                 command: "CollapseCommand"
               }
             ]
@@ -10714,9 +11347,11 @@ How do I customize the context menu item label in a Kendo UI grid column header?
     });
     </script>
 
-### contextMenu.head.icon `String`
+### contextMenu.head.icon `String|Object`
 Specifies the icon of the item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon displayed next to context menu header items in a Kendo UI Grid? Configure or set an icon displayed alongside context menu header items in grid components, enabling control over header visuals with CSS classes, image URLs, or custom markup; customize, enable, or change icons next to context menu headers for grid interfaces, including specifying visual elements to enhance menu item appearance and support various formats and rendering methods for header icons within grid context menus.
@@ -10742,6 +11377,79 @@ How do I customize the icon displayed next to context menu header items in a Ken
             name: "editrow",
             text: "Edit Row",
             icon: "k-icon k-i-edit"
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.head.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        head: [
+          {
+            name: "editrow",
+            text: "Edit Row",
+            icon: {
+                name: "k-icon k-i-edit"
+            }
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.head.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        head: [
+          {
+            name: "editrow",
+            text: "Edit Row",
+            icon: {
+                name: "k-icon k-i-edit",
+                variant: "outline"
+            }
           }
         ]
       }
@@ -10906,9 +11614,11 @@ How to customize header context menu item text in Kendo UI Grid? Configure or cu
     });
     </script>
 
-### contextMenu.head.items.icon `String`
+### contextMenu.head.items.icon `String|Object`
 Specifies the icon of the item.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How can I customize the icon in Kendo UI Grid context menu items? Control or customize the visual icon, glyph, or symbol displayed next to header menu items in a grid context menu by setting or configuring icon classes, identifiers, or visual markers to enhance recognition, differentiate actions, or improve the user interface of header-related commands in data grids, tables, or interactive UI components.
@@ -10936,6 +11646,80 @@ How can I customize the icon in Kendo UI Grid context menu items? Control or cus
             items: [
               { name: "edititem", text: "Edit", icon: "k-icon k-i-edit", command: "edit" },
               { name: "deleteitem", text: "Delete", icon: "k-icon k-i-delete", command: "destroy" }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.head.items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        head: [
+          {
+            name: "actions",
+            text: "Actions",
+            items: [
+              { name: "edititem", text: "Edit", icon: { name: "k-icon k-i-edit" }, command: "edit" },
+              { name: "deleteitem", text: "Delete", icon: { name: "k-icon k-i-delete" }, command: "destroy" }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
+### contextMenu.head.items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        head: [
+          {
+            name: "actions",
+            text: "Actions",
+            items: [
+              { name: "edititem", text: "Edit", icon: { name: "k-icon k-i-edit", variant: "outline" }, command: "edit" },
+              { name: "deleteitem", text: "Delete", icon: { name: "k-icon k-i-delete", variant: "outline" }, command: "destroy" }
             ]
           }
         ]

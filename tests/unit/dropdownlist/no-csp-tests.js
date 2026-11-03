@@ -23,7 +23,7 @@ describe('dropdownlist MVVM - No CSP', function() {
     });
 
     it("popup option can be successfully set through data attribute", function() {
-        dom = $('<select data-popup="{ origin: \'top left\', position: \'bottom left\' }" data-role="dropdownlist" />');
+        dom = $('<select data-popup=\'{"origin":"top left","position":"bottom left"}\' data-role="dropdownlist" />');
 
         let observable = kendo.observable({});
 

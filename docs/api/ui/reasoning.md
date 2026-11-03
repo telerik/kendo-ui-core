@@ -46,12 +46,50 @@ Add a secondary subtitle or supporting text to the reasoning step header, config
     });
     </script>
 
-### svgIcon `String` *(default: "sparkles")*
+### svgIcon `String|Object` *(default: "sparkles")*
 
 The name of the SVG icon displayed in the step header.
 
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 <div class="meta-api-description">
 Set or change the icon shown in the header of a reasoning step, configure the SVG icon name for the step indicator, specify a Kendo UI icon to represent the type of reasoning being shown, customize the visual icon of an agent reasoning component, or adjust the graphic symbol displayed next to the step label.
+</div>
+
+#### Example - set the icon
+
+    <div id="reasoning"></div>
+    <script>
+    $("#reasoning").kendoReasoning({
+        label: "Processing",
+        svgIcon: "gear"
+    });
+    </script>
+
+### svgIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - set the icon
+
+    <div id="reasoning"></div>
+    <script>
+    $("#reasoning").kendoReasoning({
+        label: "Processing",
+        svgIcon: "gear"
+    });
+    </script>
+
+### svgIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
 </div>
 
 #### Example - set the icon

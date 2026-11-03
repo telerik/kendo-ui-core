@@ -233,10 +233,12 @@ How do I change the fill style of dialog action buttons in Kendo UI? Configure, 
         });
     </script>
 
-### actions.icon `String`
+### actions.icon `String|Object`
 
 Defines a name of an existing icon in the Kendo UI theme sprite. The icon will be applied as background image of a `span` element inside the action button.
 For a list of available icon names, please refer to the [List of Icons](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/).
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I add icons to dialog action buttons in Kendo UI? Configure, set, or add built-in icons to dialog action buttons by specifying an icon name from the Kendo UI theme sprite library to display graphical symbols alongside or within button labels; customize button appearance by adding visual indicators such as trash, save, cancel, delete, check, or other predefined icons; enhance user interface clarity and usability by including iconography within dialog buttons using theme-provided icon sets; control which icon appears within action buttons by referencing icon names that are rendered as background images inside span elements for consistent visual presentation and improved user recognition of button actions.
@@ -252,6 +254,50 @@ How do I add icons to dialog action buttons in Kendo UI? Configure, set, or add 
           actions: [
             { text: "OK"},
             { text: "Delete", themeColor: "error", icon: "trash" }
+          ]
+        });
+    </script>
+
+### actions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [
+            { text: "OK"},
+            { text: "Delete", themeColor: "error", icon: { name: "trash" } }
+          ]
+        });
+    </script>
+
+### actions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [
+            { text: "OK"},
+            { text: "Delete", themeColor: "error", icon: { name: "trash", variant: "outline" } }
           ]
         });
     </script>

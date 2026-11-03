@@ -62343,6 +62343,8 @@ How can I programmatically reset the drill-down level in a Kendo UI chart? Navig
 
 Adjusts the chart layout to match the size of the container.
 
+Use this method after changing the height or width of the chart container, including for charts bound to a `dataSource`. Call it on each affected chart instead of modifying the chart options.
+
 
 <div class="meta-api-description">
 What happens when I change the container size of a Kendo UI chart? Adjust chart dimensions, refresh layout, and force redraw when the container size changes or visibility toggles, enabling responsive resizing, dynamic layout recalculation, automatic axis and legend repositioning, and synchronized rendering after DOM resizes or programmatic container size updates to ensure visuals fit new dimensions accurately.

@@ -35,7 +35,7 @@ This article explains how to configure Telerik Design System v5 outline SVG icon
 Add the `kendo-svg-icons` script to the application layout. Place it after the Kendo UI scripts are available and before the application initializes Telerik components.
 
 ```Razor
-<script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-svg-icons@5.0.0/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-svg-icons@5.4.0/dist/index.min.js"></script>
 <script>
     kendo.ui.svgIcons = window.KendoSVGIcons;
 </script>

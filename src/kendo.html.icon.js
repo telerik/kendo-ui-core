@@ -49,6 +49,8 @@ export const __meta__ = {
     const VALID_VARIANTS = ['solid', 'outline', 'duotone'];
 
     const renderIcon = function(element, options) {
+        const globalIconDefaults = kendo.defaults.icon || {};
+
         if (!element || $.isPlainObject(element) || kendo.isString(element)) {
             options = element;
             element = $("<span></span>");
@@ -63,8 +65,26 @@ export const __meta__ = {
             options = parsed;
         }
 
+        if (options.icon && options.icon.name && !options.icon.content) {
+            options = extend({}, options, {
+                icon: options.icon.name,
+                variant: options.variant || options.icon.variant
+            });
+        }
+
         if (!kendo.isPresent(options.type)) {
-            options.type = kendo.defaults.iconType ? kendo.defaults.iconType : 'svg';
+            options.type = globalIconDefaults.iconType || kendo.defaults.iconType || 'svg';
+        }
+
+        if (options.type === 'svg' && !kendo.isPresent(options.variant) && kendo.isString(options.icon)) {
+            const variantMatch = options.icon.match(/-(solid|outline|duotone)$/);
+            if (variantMatch) {
+                options = extend({}, options, { variant: variantMatch[1] });
+            }
+        }
+
+        if (!kendo.isPresent(options.variant) && kendo.isPresent(globalIconDefaults.variant)) {
+            options = extend({}, options, { variant: globalIconDefaults.variant });
         }
 
         if (kendo.isFunction(options.type)) {
@@ -242,8 +262,7 @@ export const __meta__ = {
         },
         options: extend({}, HTMLBaseIcon.fn.options, {
             name: 'HTMLSVGIcon',
-            icon: null,
-            variant: null
+            icon: null
         }),
         _wrapper: function() {
             let that = this,

@@ -90,10 +90,10 @@ describe("kendo.init - no CSP", function() {
         assert.equal(testwidget.options.altTemplate({}), $("#template").html());
     });
 
-    it("initializes functions from parameters", function() {
-        dom = $('<div data-role="testwidget" data-columns=\'{"foo":foo}\'/>');
+    it("initializes functions from bound parameters", function() {
+        dom = $('<div data-role="testwidget" bind:data-columns="columns"/>');
 
-        kendo.init(dom);
+        kendo.initWidget(dom, {}, kendo.ui, { columns: { foo: window.foo } });
         let testwidget = dom.data("kendoTestWidget");
         assert.equal(testwidget.options.columns.foo, window.foo);
     });

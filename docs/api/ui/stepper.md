@@ -199,11 +199,13 @@ How to mark individual steps as failed in Kendo UI Stepper widget? Control and c
         });
 	</script>
 
-### steps.icon `String`
+### steps.icon `String|Object`
 
 Defines a name of an existing icon in the Kendo UI theme sprite. The icon will be displayed in the indicator element of that Step.
 For a list of available icon names, please refer to the [Web Font Icons article](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I change the icon in my Kendo UI Stepper step indicator? Set or customize the icon displayed inside a step indicator by configuring the step’s icon name from the available themed icon sprite or web font icons, enabling you to control which symbol or graphic appears within the step marker, adjust visual cues for progress steps, or integrate specific icons representing step status, type, or action in workflows and navigation components.
@@ -220,6 +222,61 @@ How do I change the icon in my Kendo UI Stepper step indicator? Set or customize
             }, {
                 label: "Second step",
                 icon: "cancel"
+            },{
+                label: "Third step"
+            }]
+        });
+	</script>
+
+### steps.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+	<nav id="stepper"></nav>
+
+	<script>
+        $("#stepper").kendoStepper({
+            steps: [{
+                label: "Initial step"
+            }, {
+                label: "Second step",
+                icon: {
+                    name: "cancel"
+                }
+            },{
+                label: "Third step"
+            }]
+        });
+	</script>
+
+### steps.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+	<nav id="stepper"></nav>
+
+	<script>
+        $("#stepper").kendoStepper({
+            steps: [{
+                label: "Initial step"
+            }, {
+                label: "Second step",
+                icon: {
+                    name: "cancel",
+                    variant: "outline"
+                }
             },{
                 label: "Third step"
             }]
@@ -338,11 +395,13 @@ How to set default active step in Kendo UI Stepper widget? Set or configure the 
         });
 	</script>
 
-### steps.successIcon `String`
+### steps.successIcon `String|Object`
 
 Defines a name of an existing icon in the Kendo UI theme sprite. The icon will be displayed in the indicator element of that Step, when the step is a previous one and it does not have an error.
 For a list of available icon names, please refer to the [Web Font Icons article](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon displayed when a step is completed successfully in Kendo UI Stepper? Customize or set the icon displayed within a multi-step progress indicator when a step is completed successfully without errors by specifying an icon name from a predefined icon library or theme sprite. Control the visual representation of completed steps by choosing from existing themed icons or font icons to enhance stepper UI elements, indicating prior steps that passed validation or finalized states. Enable or configure success status icons within step indicators to clearly show progression, completion markers, or error-free checkpoints using a standardized icon set reference. This feature supports defining or overriding default icons to improve user interface feedback in multi-step workflows, wizards, or progress bars.
@@ -366,7 +425,61 @@ How do I customize the icon displayed when a step is completed successfully in K
         });
 	</script>
 
+
+### steps.successIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+	<nav id="stepper"></nav>
+
+	<script>
+        $("#stepper").kendoStepper({
+            steps: [{
+                label: "Initial step"
+            }, {
+                label: "Second step",
+                successIcon: "plus"
+            },{
+                label: "Third step",
+                selected: true
+            }]
+        });
+	</script>
+
+### steps.successIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+	<nav id="stepper"></nav>
+
+	<script>
+        $("#stepper").kendoStepper({
+            steps: [{
+                label: "Initial step"
+            }, {
+                label: "Second step",
+                successIcon: "plus"
+            },{
+                label: "Third step",
+                selected: true
+            }]
+        });
+	</script>
+
 ## Methods
+
 
 ### enable
 

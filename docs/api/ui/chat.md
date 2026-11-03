@@ -30,9 +30,11 @@ Configures the action button (send/stop button) in the message input area. Allow
     });
     </script>
 
-### actionButton.icon `String` _(default: "send")_
+### actionButton.icon `String|Object` _(default: "send")_
 
 The icon name for the action button in its default (send) state.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 #### Example
 
@@ -42,6 +44,51 @@ The icon name for the action button in its default (send) state.
         authorId: "user",
         actionButton: {
             icon: "arrow-right"
+        }
+    });
+    </script>
+
+### actionButton.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        authorId: "user",
+        actionButton: {
+            icon: {
+                name: "arrow-right"
+            }
+        }
+    });
+    </script>
+
+### actionButton.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        authorId: "user",
+        actionButton: {
+            icon: {
+                name: "arrow-right",
+                variant: "outline"
+            }
         }
     });
     </script>
@@ -62,9 +109,51 @@ The text label for the action button in its default (send) state.
     });
     </script>
 
-### actionButton.loadingIcon `String` _(default: "stop")_
+### actionButton.loadingIcon `String|Object` _(default: "stop")_
 
 The icon name for the action button when in loading state.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        authorId: "user",
+        actionButton: {
+            loadingIcon: "pause"
+        }
+    });
+    </script>
+
+### actionButton.loadingIcon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        authorId: "user",
+        actionButton: {
+            loadingIcon: "pause"
+        }
+    });
+    </script>
+
+### actionButton.loadingIcon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
 
 #### Example
 
@@ -643,9 +732,28 @@ Whether context menu actions are enabled for author messages.
 
 Defines the collection of toolbar actions rendered for author messages.
 
-### authorMessageSettings.messageToolbarActions.icon `String`
+### authorMessageSettings.messageToolbarActions.icon `String|Object`
 
 Defines the icon class for the toolbar action.
+
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
+### authorMessageSettings.messageToolbarActions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+### authorMessageSettings.messageToolbarActions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
 
 ### authorMessageSettings.messageToolbarActions.text `String`
 
@@ -659,9 +767,28 @@ Defines the name identifier for the toolbar action.
 
 Defines the collection of context menu actions rendered for author messages.
 
-### authorMessageSettings.messageActions.icon `String`
+### authorMessageSettings.messageActions.icon `String|Object`
 
 Defines the icon class for the context menu action.
+
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
+### authorMessageSettings.messageActions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+### authorMessageSettings.messageActions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
 
 ### authorMessageSettings.messageActions.name `String`
 
@@ -1061,9 +1188,11 @@ How do I customize file attachment options in Kendo UI for jQuery chat interface
     });
     </script>
 
-### fileActions.icon `String`
+### fileActions.icon `String|Object`
 
 Defines the icon class for the context menu action. The icon appears next to the action text in the context menu.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How to customize file action icons in Kendo UI chat component? Customize or configure the icon displayed for file-related actions within chat message context menus by specifying a CSS icon class, enabling control over the visual appearance of file operation buttons or menu items next to their text labels, supporting settings during component initialization to change, set, or update the icon representation for file actions such as download, upload, preview, or share within chat interfaces.
@@ -1088,6 +1217,72 @@ How to customize file action icons in Kendo UI chat component? Customize or conf
     $("#chat").kendoChat({
         fileActions: [
             { name: "download", text: "Download", icon: "download" }
+        ],
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### fileActions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Check out this file:",
+            authorId: "user1",
+            authorName: "John Doe",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            files: [{ name: "image.jpg", size: 156000, extension: "jpg" }],
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        fileActions: [
+            { name: "download", text: "Download", icon: { name: "download" } }
+        ],
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### fileActions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Check out this file:",
+            authorId: "user1",
+            authorName: "John Doe",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            files: [{ name: "image.jpg", size: 156000, extension: "jpg" }],
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        fileActions: [
+            { name: "download", text: "Download", icon: { name: "download", variant: "outline" } }
         ],
         authorId: "user1",
         dataSource: messagesData
@@ -1198,9 +1393,11 @@ How to enable file uploads in Kendo UI Chat messages? Control enabling or disabl
     });
     </script>
 
-### fileAttachment.icon `String` _(default: "attachment")_
+### fileAttachment.icon `String|Object` _(default: "attachment")_
 
 The icon name for the file select button.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 #### Example
 
@@ -1209,6 +1406,51 @@ The icon name for the file select button.
     $("#chat").kendoChat({
         fileAttachment: {
             icon: "upload"
+        },
+        authorId: "user"
+    });
+    </script>
+
+### fileAttachment.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        fileAttachment: {
+            icon: {
+                name: "upload"
+            }
+        },
+        authorId: "user"
+    });
+    </script>
+
+### fileAttachment.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        fileAttachment: {
+            icon: {
+                name: "upload",
+                variant: "outline"
+            }
         },
         authorId: "user"
     });
@@ -1792,9 +2034,11 @@ How to customize the context menu in Kendo UI chat messages? Control, customize,
     });
     </script>
 
-### messageActions.icon `String`
+### messageActions.icon `String|Object`
 
 Defines the icon class for the context menu action.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon for message actions in a Kendo UI chat component? Configure or customize the icon displayed for message context menu actions in chat interfaces by specifying CSS class names, enabling control over font icons or custom styling for message action buttons, setting or overriding default icons during chat component setup, adjusting the visual representation of interactive message options, and tailoring message action icons to match branding or UI themes through flexible CSS class assignment.
@@ -1826,6 +2070,86 @@ How do I customize the icon for message actions in a Kendo UI chat component? Co
     $("#chat").kendoChat({
         messageActions: [
             { name: "reply", text: "Reply", icon: "undo" }
+        ],
+        authorId: "user2",
+        dataSource: messagesData
+    });
+    </script>
+
+### messageActions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Right-click this message to see the context menu with a reply action that has an undo icon.",
+            authorId: "user1",
+            authorName: "John Doe",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        },
+        {
+            id: 2,
+            text: "Icons make context menu actions more intuitive and visually appealing.",
+            authorId: "user2",
+            authorName: "Jane Smith",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 5)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        messageActions: [
+            { name: "reply", text: "Reply", icon: { name: "undo" } }
+        ],
+        authorId: "user2",
+        dataSource: messagesData
+    });
+    </script>
+
+### messageActions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Right-click this message to see the context menu with a reply action that has an undo icon.",
+            authorId: "user1",
+            authorName: "John Doe",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        },
+        {
+            id: 2,
+            text: "Icons make context menu actions more intuitive and visually appealing.",
+            authorId: "user2",
+            authorName: "Jane Smith",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 5)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        messageActions: [
+            { name: "reply", text: "Reply", icon: { name: "undo", variant: "outline" } }
         ],
         authorId: "user2",
         dataSource: messagesData
@@ -2667,9 +2991,28 @@ How do I customize message delivery status icons and text in Kendo UI Chat? Conf
 
 Configures the settings object used when the message status is `"sent"`.
 
-### messageStatusSettings.sent.icon `String`
+### messageStatusSettings.sent.icon `String|Object`
 
 The font icon name to display for the `"sent"` status.
+
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
+### messageStatusSettings.sent.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+### messageStatusSettings.sent.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
 
 ### messageStatusSettings.sent.text `String`
 
@@ -2683,9 +3026,28 @@ An additional CSS class applied to the `"sent"` status element.
 
 Configures the settings object used when the message status is `"delivered"`.
 
-### messageStatusSettings.delivered.icon `String`
+### messageStatusSettings.delivered.icon `String|Object`
 
 The font icon name to display for the `"delivered"` status.
+
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
+### messageStatusSettings.delivered.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+### messageStatusSettings.delivered.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
 
 ### messageStatusSettings.delivered.text `String`
 
@@ -2699,9 +3061,28 @@ An additional CSS class applied to the `"delivered"` status element.
 
 Configures the settings object used when the message status is `"seen"`.
 
-### messageStatusSettings.seen.icon `String`
+### messageStatusSettings.seen.icon `String|Object`
 
 The font icon name to display for the `"seen"` status.
+
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
+### messageStatusSettings.seen.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+### messageStatusSettings.seen.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
 
 ### messageStatusSettings.seen.text `String`
 
@@ -2715,9 +3096,28 @@ An additional CSS class applied to the `"seen"` status element.
 
 Configures the settings object used when the message status is `"failed"`.
 
-### messageStatusSettings.failed.icon `String`
+### messageStatusSettings.failed.icon `String|Object`
 
 The font icon name to display for the `"failed"` status.
+
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
+### messageStatusSettings.failed.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+### messageStatusSettings.failed.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
 
 ### messageStatusSettings.failed.text `String`
 
@@ -2910,9 +3310,11 @@ How can I customize the buttons in the message toolbar of a Kendo UI chat interf
     });
     </script>
 
-### messageToolbarActions.icon `String`
+### messageToolbarActions.icon `String|Object`
 
 Defines the icon class for the toolbar action.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon in Kendo UI Chat message toolbar actions? Set or customize the visual icon in chat message toolbar actions by specifying CSS class names or custom glyph identifiers, including font icon libraries like Font Awesome or Kendo UI, SVG-based icons, sprite icons, or any CSS-based icon styling. Control and configure the appearance of toolbar action icons during chat initialization, enabling developers to apply, change, or override icon sets, customize message action visuals, swap default icons with custom designs, and manage icon styling independently from labels or functionality to integrate consistent or branded iconography within chat interfaces.
@@ -2944,6 +3346,86 @@ How do I customize the icon in Kendo UI Chat message toolbar actions? Set or cus
     $("#chat").kendoChat({
         messageToolbarActions: [
             { name: "edit", icon: "pencil" }
+        ],
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### messageToolbarActions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "This message has a custom toolbar with an edit icon. Hover over the message to see it.",
+            authorId: "user1",
+            authorName: "John Doe",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        },
+        {
+            id: 2,
+            text: "The pencil icon makes it clear what the action does.",
+            authorId: "user2",
+            authorName: "Jane Smith",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 5)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        messageToolbarActions: [
+            { name: "edit", icon: { name: "pencil" } }
+        ],
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### messageToolbarActions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "This message has a custom toolbar with an edit icon. Hover over the message to see it.",
+            authorId: "user1",
+            authorName: "John Doe",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        },
+        {
+            id: 2,
+            text: "The pencil icon makes it clear what the action does.",
+            authorId: "user2",
+            authorName: "Jane Smith",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 5)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        messageToolbarActions: [
+            { name: "edit", icon: { name: "pencil", variant: "outline" } }
         ],
         authorId: "user1",
         dataSource: messagesData
@@ -3374,9 +3856,28 @@ Whether context menu actions are enabled for receiver messages.
 
 Defines the collection of toolbar actions rendered for receiver messages.
 
-### receiverMessageSettings.messageToolbarActions.icon `String`
+### receiverMessageSettings.messageToolbarActions.icon `String|Object`
 
 Defines the icon class for the toolbar action.
+
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
+### receiverMessageSettings.messageToolbarActions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+### receiverMessageSettings.messageToolbarActions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
 
 ### receiverMessageSettings.messageToolbarActions.text `String`
 
@@ -3390,9 +3891,28 @@ Defines the name identifier for the toolbar action.
 
 Defines the collection of context menu actions rendered for receiver messages.
 
-### receiverMessageSettings.messageActions.icon `String`
+### receiverMessageSettings.messageActions.icon `String|Object`
 
 Defines the icon class for the context menu action.
+
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
+### receiverMessageSettings.messageActions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+### receiverMessageSettings.messageActions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
 
 ### receiverMessageSettings.messageActions.name `String`
 
@@ -3584,9 +4104,11 @@ Maximum number of alternative transcriptions to return.
     });
     </script>
 
-### speechToText.icon `String` _(default: "microphone")_
+### speechToText.icon `String|Object` _(default: "microphone")_
 
 The icon name for the speech-to-text button.
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 #### Example
 
@@ -3595,6 +4117,51 @@ The icon name for the speech-to-text button.
     $("#chat").kendoChat({
         speechToText: {
             icon: "volume-up"
+        },
+        authorId: "user"
+    });
+    </script>
+
+### speechToText.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        speechToText: {
+            icon: {
+                name: "volume-up"
+            }
+        },
+        authorId: "user"
+    });
+    </script>
+
+### speechToText.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        speechToText: {
+            icon: {
+                name: "volume-up",
+                variant: "outline"
+            }
         },
         authorId: "user"
     });

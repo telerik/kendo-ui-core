@@ -23,7 +23,7 @@ describe('multiselect MVVM - No CSP', function() {
 
 
     it("popup option can be successfully set through data attribute", function() {
-        dom = $('<select data-popup="{ origin: \'top left\', position: \'bottom left\' }" data-role="multiselect" />');
+        dom = $('<select data-popup=\'{"origin":"top left","position":"bottom left"}\' data-role="multiselect" />');
 
         let observable = kendo.observable({});
 

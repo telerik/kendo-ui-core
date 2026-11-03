@@ -283,10 +283,12 @@ How do I hide individual buttons in Kendo UI toolbar? Control the visibility of 
     });
     </script>
 
-### items.buttons.icon `String`
+### items.buttons.icon `String|Object`
 
 Sets icon for the menu button. The icon should be one of the existing in the Kendo UI theme sprite.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I customize the icon for a toolbar button in Kendo UI? Set or customize the visual symbol, picture, or icon for toolbar menu buttons by specifying a theme-based sprite identifier from the available Kendo UI icon set; control, assign, or configure button icons using exact sprite names to display consistent graphical representations, symbols, glyphs, or graphical markers on toolbar items in user interfaces.
@@ -305,6 +307,60 @@ How do I customize the icon for a toolbar button in Kendo UI? Set or customize t
             { text: "foo", icon: "clock" },
             { text: "bar", icon: "info-circle" },
             { text: "baz", icon: "arrow-rotate-cw" }
+          ]
+        }
+      ]
+    });
+    </script>
+
+### items.buttons.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+    $("#toolbar").kendoToolBar({
+      items: [
+        {
+          type: "buttonGroup",
+          buttons: [
+            { text: "foo", icon: { name: "clock" } },
+            { text: "bar", icon: { name: "info-circle" } },
+            { text: "baz", icon: { name: "arrow-rotate-cw" } }
+          ]
+        }
+      ]
+    });
+    </script>
+
+### items.buttons.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+    $("#toolbar").kendoToolBar({
+      items: [
+        {
+          type: "buttonGroup",
+          buttons: [
+            { text: "foo", icon: { name: "clock", variant: "outline" } },
+            { text: "bar", icon: { name: "info-circle", variant: "outline" } },
+            { text: "baz", icon: { name: "arrow-rotate-cw", variant: "outline" } }
           ]
         }
       ]
@@ -693,10 +749,12 @@ How to hide specific buttons in Kendo UI toolbar dynamically? Adjust visibility 
     });
     </script>
 
-### items.icon `String`
+### items.icon `String|Object`
 
 Sets icon for the item. The icon should be one of the existing in the Kendo UI theme sprite.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I add an icon to a Kendo UI toolbar button? Configure or assign an icon to a toolbar button or item to visually indicate its function, status, or purpose by specifying an icon identifier that corresponds to available icons in the UI framework’s predefined icon set or sprite collection; this enables quick recognition of actions, enhances user interface clarity, and supports customization of toolbar elements with relevant symbolic images to represent commands, features, or states intuitively.
@@ -712,6 +770,50 @@ How do I add an icon to a Kendo UI toolbar button? Configure or assign an icon t
             { type: "button", text: "foo", icon: "clock" },
             { type: "button", text: "bar", icon: "info-circle" },
             { type: "button", text: "baz", icon: "arrow-rotate-cw" }
+            ]
+        });
+    </script>
+
+### items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            items: [
+            { type: "button", text: "foo", icon: { name: "clock" } },
+            { type: "button", text: "bar", icon: { name: "info-circle" } },
+            { type: "button", text: "baz", icon: { name: "arrow-rotate-cw" } }
+            ]
+        });
+    </script>
+
+### items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            items: [
+            { type: "button", text: "foo", icon: { name: "clock", variant: "outline" } },
+            { type: "button", text: "bar", icon: { name: "info-circle", variant: "outline" } },
+            { type: "button", text: "baz", icon: { name: "arrow-rotate-cw", variant: "outline" } }
             ]
         });
     </script>
@@ -904,10 +1006,12 @@ How do I dynamically hide or show menu buttons within a Kendo UI toolbar? Toggle
     });
     </script>
 
-### items.menuButtons.icon `String`
+### items.menuButtons.icon `String|Object`
 
 Sets icon for the menu buttons. The icon should be one of the existing in the Kendo UI theme sprite.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I change the icon on a menu button in Kendo UI toolbar? Set or configure the icon displayed on menu buttons within a toolbar interface, enabling customization of button visuals by selecting from predefined icon names, classes, or sprite icons available in UI themes; control, change, or update the symbol shown on toolbar menu items, assign specific graphical representations to menu buttons for enhanced user interface clarity, and adjust the icon style or appearance to match design requirements or branding by referencing standard icon sets or icon classes for menu elements.
@@ -927,6 +1031,62 @@ How do I change the icon on a menu button in Kendo UI toolbar? Set or configure 
                     { id: "foo", text: "Foo", icon: "check" },
                     { id: "bar", text: "Bar", icon: "info-circle" },
                     { id: "baz", text: "Baz", icon: "clock" }
+                ]
+            }
+            ]
+        });
+    </script>
+
+### items.menuButtons.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            items: [
+            {
+                type: "splitButton",
+                text: "splitButton",
+                menuButtons: [
+                    { id: "foo", text: "Foo", icon: { name: "check" } },
+                    { id: "bar", text: "Bar", icon: { name: "info-circle" } },
+                    { id: "baz", text: "Baz", icon: { name: "clock" } }
+                ]
+            }
+            ]
+        });
+    </script>
+
+### items.menuButtons.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            items: [
+            {
+                type: "splitButton",
+                text: "splitButton",
+                menuButtons: [
+                    { id: "foo", text: "Foo", icon: { name: "check", variant: "outline" } },
+                    { id: "bar", text: "Bar", icon: { name: "info-circle", variant: "outline" } },
+                    { id: "baz", text: "Baz", icon: { name: "clock", variant: "outline" } }
                 ]
             }
             ]

@@ -1296,10 +1296,12 @@ How to customize the input field in Kendo UI ComboBox with a prefix element that
       });
     </script>
 
-### prefixOptions.icon `String`
+### prefixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I add an icon to the beginning of a Kendo UI ComboBox input field? Add or customize a leading icon inside an input field as a prefix symbol, configuring a visual indicator or decorative element before the user’s text entry. Set or enable a small icon at the start of a dropdown or input control, specifying either a predefined theme symbol name or custom SVG graphics to enhance UI clarity or branding presence. Control the appearance of a prefix icon in combo boxes or input selectors, enabling icon replacement, decoration, or signal integration before typed values, supporting flexible icon injection for enhanced user interface design and interaction cues.
@@ -1314,6 +1316,53 @@ How do I add an icon to the beginning of a Kendo UI ComboBox input field? Add or
         dataSource: [1, 2],
         prefixOptions: {
           icon: "search"
+        }
+      })
+    </script>
+
+### prefixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        prefixOptions: {
+          icon: {
+              name: "search"
+          }
+        }
+      })
+    </script>
+
+### prefixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify prefix adornment icon
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        prefixOptions: {
+          icon: {
+              name: "search",
+              variant: "outline"
+          }
         }
       })
     </script>
@@ -1470,10 +1519,12 @@ How to customize the suffix element in a Kendo UI ComboBox? Set or control a tra
       });
     </script>
 
-### suffixOptions.icon `String`
+### suffixOptions.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How do I set an icon at the end of a Kendo UI for jQuery ComboBox dropdown input field? Configure, customize, or set a visual suffix icon, symbol, or inline SVG graphic at the end of a dropdown input field or ComboBox control to enhance UI clarity. Enable showing, changing, or replacing the trailing icon using theme-based icons or custom SVG elements for better visual cues, user guidance, or branding. Control which icon appears after the input text by defining icon names from prebuilt theme libraries or injecting direct SVG content to tailor the suffix display, improve dropdown recognition, or signal status or action hints. Adjust the icon appearance dynamically or on initialization to match design requirements, accessibility needs, or user interaction states within selection components.
@@ -1488,6 +1539,53 @@ How do I set an icon at the end of a Kendo UI for jQuery ComboBox dropdown input
         dataSource: [1, 2],
         suffixOptions: {
           icon: "search"
+        }
+      })
+    </script>
+
+### suffixOptions.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="autocomplete" />
+    <script>
+      $("#suffix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        suffixOptions: {
+          icon: {
+              name: "search"
+          }
+        }
+      })
+    </script>
+
+### suffixOptions.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example - specify suffix adornment icon
+
+    <input id="autocomplete" />
+    <script>
+      $("#suffix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        suffixOptions: {
+          icon: {
+              name: "search",
+              variant: "outline"
+          }
         }
       })
     </script>

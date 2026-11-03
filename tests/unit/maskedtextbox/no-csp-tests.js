@@ -19,7 +19,7 @@ describe("kendo.ui.MaskedTextBox MVVM - No CSP", function() {
     });
 
     it("floating label wraps the widget", function() {
-        dom = $('<input data-role="maskedtextbox" data-label="{ floating: true }"/>');
+        dom = $('<input data-role="maskedtextbox" data-label=\'{"floating":true}\'/>');
 
         kendo.bind(dom);
 

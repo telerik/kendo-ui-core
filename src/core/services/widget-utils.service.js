@@ -14,6 +14,7 @@ import { Observable } from "../base";
 // Constants - match original kendo.core.js
 const STRING = "string";
 const FUNCTION = "function";
+const ERROR_OPTION_MESSAGE = (option) => `Invalid JSON in data-${option}`;
 // RegExps - match original kendo.core.js exactly
 const templateRegExp = /template$/i;
 const jsonRegExp = /^\s*(?:\{(?:.|\r\n|\n)*\}|\[(?:.|\r\n|\n)*\])\s*$/;
@@ -73,8 +74,9 @@ class WidgetUtilsService {
                 value = JSON.parse(value);
             }
             catch (error) {
-                // Fallback to function eval for legacy reason - non CSP compliant
-                value = new Function("return (" + value + ")")();
+                value = undefined;
+                const errorMessage = `${ERROR_OPTION_MESSAGE(ns + option)}: ${error.toString()}`;
+                utilsService.logToConsole(errorMessage, "error");
             }
         }
         else if (modelBinded) {

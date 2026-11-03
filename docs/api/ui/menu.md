@@ -525,6 +525,8 @@ How to display images next to menu items in Kendo UI for jQuery using dataImageU
 
 Sets the field of the data item that provides the icon name of the menu items.
 
+The field can also hold an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
+
 
 <div class="meta-api-description">
 How do I dynamically bind icons to my Kendo UI menu items from a data source? Bind icons dynamically to menu items by specifying the data field that contains icon identifiers such as icon names, CSS classes, or image references, enabling menus connected to data sources to display corresponding icons automatically; configure, set, or map icon fields to show relevant visual indicators per menu entry, control icon rendering in data-driven menus, and link icon metadata from your dataset to menu elements for enhanced UI customization and consistent icon representation.

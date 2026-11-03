@@ -21,6 +21,12 @@ describe('kendo.ui.Badge fillMode', function() {
         assert.equal(badge._fillMode, 'outline');
         assert.equal(badge.element.hasClass('k-badge-outline'), true);
     });
+    it('badge.options.fillMode supports tint', function() {
+        badge = new Badge(span, { fillMode: 'tint' });
+
+        assert.equal(badge._fillMode, 'tint');
+        assert.equal(badge.element.hasClass('k-badge-tint'), true);
+    });
     it('badge.options.fillMode does not set classNames if fillMode is \'\'', function() {
         badge = new Badge(span, { fillMode: '' });
 

@@ -10,15 +10,14 @@ export const __meta__ = {
 };
 
 (function($, undefined) {
-    var kendo = window.kendo;
-    var Widget = kendo.ui.Widget;
-    var ui = kendo.ui;
-    var HIDDEN = 'k-hidden';
+    const kendo = window.kendo,
+        Widget = kendo.ui.Widget,
+        ui = kendo.ui,
+        HIDDEN = 'k-hidden',
+        iconTemplate = ({ icon }) => kendo.ui.icon($(`<span class='k-badge-icon'></span>`), { icon: icon }),
+        textTemplate = ({ text }) => `<span class='k-badge-text'>${text}</span>`;
 
-    var iconTemplate = ({ icon }) => kendo.ui.icon($(`<span class='k-badge-icon'></span>`), { icon: icon });
-    var svgIconTemplate = ({ icon }) => `<span class='k-badge-icon k-svg-icon k-icon' aria-hidden='true'>${icon}</span>`;
-
-    var Badge = Widget.extend({
+    const Badge = Widget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -92,6 +91,10 @@ export const __meta__ = {
             if (icon !== '') {
                 that.icon(icon);
 
+                if (text !== '') {
+                    that.text(text);
+                }
+
                 return;
             }
 
@@ -101,7 +104,7 @@ export const __meta__ = {
                 return;
             }
 
-            that.text(that.element.html());
+            that.text(that._text !== undefined ? that._text : that.element.html());
         },
 
         _appearance: function() {
@@ -206,15 +209,25 @@ export const __meta__ = {
 
             Widget.fn.setOptions.call(that, options);
 
+            if (options && options.text === '') {
+                that._text = '';
+                that.element.children('.k-badge-text').remove();
+            }
+
+            if (options && options.icon === '') {
+                that._icon = '';
+                that.element.children('.k-badge-icon').remove();
+            }
+
             that._content();
 
             that._appearance();
         },
 
         text: function(text) {
-            let that = this,
-                max = that.options.max,
-                encoded = that.options.encoded !== false;
+            var that = this;
+            var content;
+            var current;
 
             // handle badge.text()
             if (arguments.length === 0 || text === undefined) {
@@ -223,68 +236,76 @@ export const __meta__ = {
 
             that._text = text;
 
-            // handle badge.text(true|false|null)
-            if (text === true || text === false || text === null) {
-                that.element.html('');
+            content = that._textContent(text);
 
+            if (content === undefined) {
                 return;
             }
 
-            // handle badge.text('string')
+            current = that.element.children('.k-badge-text');
+
+            if (current.length) {
+                current.remove();
+            } else if (!that.element.children('.k-badge-icon').length) {
+                that.element.empty();
+            }
+
+            if (content !== '') {
+                that.element.append(content);
+            }
+        },
+
+        _textContent: function(text) {
+            var that = this;
+            var max = that.options.max;
+            var encoded = that.options.encoded !== false;
+
+            if (text === true || text === false || text === null) {
+                return '';
+            }
+
             if (typeof text === 'string') {
                 text = encoded === true ? kendo.htmlEncode(text) : text;
-                that.element.html(text);
-                return;
+                return text === '' ? '' : textTemplate({ text: text });
             }
 
-            // handle badge.text(1)
             if (typeof text === 'number') {
-                if (text > max) {
-                    that.element.html(max + '+');
-                } else {
-                    that.element.html(text);
-                }
-
-                return;
+                return textTemplate({ text: text > max ? max + '+' : text });
             }
 
-            // handle other objects
             if (typeof text === 'object' && 'toString' in text) {
                 text = encoded === true ? kendo.htmlEncode(text) : text;
-                that.element.html(text.toString());
-                return;
+                return textTemplate({ text: text.toString() });
             }
-
         },
 
         icon: function(icon) {
-            var that = this;
-            var iconTemplateFunction;
+            const that = this;
+            let content;
+            let current;
 
-            // handle badge.icon()
             if (arguments.length === 0 || icon === undefined) {
                 return that._icon;
             }
 
-            that._icon = icon;
+            const iconIsObject = icon && typeof icon === 'object' && icon.name;
+            that._icon = (typeof icon === 'string' || iconIsObject) ? icon : '';
 
-            // Handle badge.icon(<SVG />)
-            if (icon.indexOf('<svg') === 0) {
-                var svgIcon = icon;
-
-                if (!/^<svg\b[^>]*\baria-hidden\s*=/i.test(svgIcon)) {
-                    svgIcon = svgIcon.replace(/<svg\b([^>]*)>/i, "<svg$1 aria-hidden='true'>");
-                }
-
-                iconTemplateFunction = kendo.template(svgIconTemplate);
-                that.element.html(iconTemplateFunction({ icon: svgIcon }));
-
+            if (!that._icon) {
+                that.element.children('.k-badge-icon').remove();
                 return;
             }
 
-            // Handle badge.icon(ICON_NAME)
-            iconTemplateFunction = kendo.template(iconTemplate);
-            that.element.html(iconTemplateFunction({ icon: icon }));
+            content = iconTemplate({ icon: that._icon });
+            current = that.element.children('.k-badge-icon');
+
+            if (current.length) {
+                current.replaceWith(content);
+            } else if (that.element.children('.k-badge-text').length) {
+                that.element.prepend(content);
+            } else {
+                that.element.html(content);
+            }
         },
 
         themeColor: function(color) {
@@ -331,10 +352,12 @@ export const __meta__ = {
     kendo.cssProperties.registerPrefix("Badge", "k-badge-");
 
     kendo.cssProperties.registerValues("Badge", [{
+        prop: "fillMode",
+        values: ['solid', 'tint', 'outline']
+    }, {
         prop: "themeColor",
         values: ['base', 'primary', 'secondary', 'tertiary', 'info', 'success', 'warning', 'error']
     }]);
 
 })(window.kendo.jQuery);
 export default kendo;
-

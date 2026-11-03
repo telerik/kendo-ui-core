@@ -209,12 +209,14 @@ How to add custom data to Kendo UI BottomNavigation items? Add customizable meta
         });
     </script>
 
-### items.icon `String`
+### items.icon `String|Object`
 
 Defines the name for an existing icon in a Kendo UI theme.
 
 See [web font icons help article](/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
+
+Set this option to an icon descriptor such as `{ name: "gear", variant: "outline" }`. The `variant` can be `outline`, `solid`, or `duotone`; it applies to SVG rendering and is ignored for font icons.
 
 <div class="meta-api-description">
 How can I customize the icon for each item in a Kendo UI BottomNavigation? Set or customize the icon displayed for navigation bar items by specifying the exact name of a prebuilt theme icon or web font icon, enabling control over the visual representation of each navigation element, including options to choose from a library of standard, predefined icons to enhance user interface design, configure menu or tab icons, or replace default symbols with custom theme-based icons for better UX and consistent styling across bottom navigation components.
@@ -230,6 +232,50 @@ How can I customize the icon for each item in a Kendo UI BottomNavigation? Set o
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },
                 { text: "Contact", icon: "envelope" }
+            ]
+        });
+    </script>
+
+### items.icon.name `String`
+
+The name of the SVG icon.
+
+<div class="meta-api-description">
+How do I set an SVG icon name in a Kendo UI component configuration? Specify the icon identifier, name, or visual symbol to render in a button, item, command, action, or other customizable UI element, controlling which SVG graphic appears while configuring component iconography and interface actions.
+</div>
+
+#### Example
+
+    <nav id="bottomnav"></nav>
+
+    <script>
+        $("#bottomnav").kendoBottomNavigation({
+            items: [
+                { text: "Home", icon: { name: "home" } },
+                { text: "Info", icon: { name: "info-circle" } },
+                { text: "Contact", icon: { name: "envelope" } }
+            ]
+        });
+    </script>
+
+### items.icon.variant `String`
+
+The SVG icon variant. Supported values are `outline`, `solid`, and `duotone`. The variant applies to SVG rendering and is ignored for font icons.
+
+<div class="meta-api-description">
+How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI component? Configure the visual icon variant to render outlined, filled, or two-tone artwork for buttons, commands, items, and actions, controlling SVG icon appearance while preserving font icon behavior.
+</div>
+
+#### Example
+
+    <nav id="bottomnav"></nav>
+
+    <script>
+        $("#bottomnav").kendoBottomNavigation({
+            items: [
+                { text: "Home", icon: { name: "home", variant: "outline" } },
+                { text: "Info", icon: { name: "info-circle", variant: "outline" } },
+                { text: "Contact", icon: { name: "envelope", variant: "outline" } }
             ]
         });
     </script>
