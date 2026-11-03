@@ -1293,6 +1293,18 @@ The fields which can be used in the template are:
 For information about the tuple structure check this [link](/api/data/pivotdatasource/configuration/schema#schemaaxes).
 About the data item structure review this [help topic](/api/data/pivotdatasource/configuration/schema#schemadata).
 
+The `members` array of each tuple contains member objects. When the PivotGridV2 is bound to flat data, each member has the following fields:
+
+* caption - the display text of the member
+* name - the name of the member
+* hierarchy - the name of the hierarchy of the member
+* levelName - the name of the level of the member
+* levelNum - the number of the level of the member
+* hasChildren - indicates whether the member has children
+* parentName - the name of the parent of the member, if any
+
+The members do not have a `dimension` field.
+
 
 <div class="meta-api-description">
 How to customize data cell rendering in Kendo UI PivotGridV2? Control and customize the rendering of each data cell in a pivot grid by defining a dynamic template that can format, style, or manipulate the content based on the cell's value, associated row and column tuples, or the underlying data object. Enable setting custom display logic, conditional formatting, or injecting interactive elements by accessing the measure value, row headers, column headers, or the entire data item context. Adapt how data cells show numeric values, text, or complex structures to tailor reporting views, enhance data visualization, or implement specialized formatting and rendering behaviors. Configure flexible data cell content rendering by leveraging contextual information for precision display, custom formatting, or embedding controls, ensuring relevant and accurate presentation of pivot grid results.
@@ -1565,7 +1577,7 @@ The fields of the result object:
             }
         }).data("kendoPivotGridV2");
 
-        $("#button").click(function() {
+        $("#get").click(function() {
             var columnIndex = 1;
             var rowIndex = 1;
 
@@ -1591,6 +1603,8 @@ How do I get detailed metadata for a specific cell in Kendo UI PivotGridV2? Retr
 ##### cell `String|Element|jQuery`
 
 A string, DOM element or jQuery object which represents the data table cell. A string is treated as a jQuery selector.
+
+The data cells are the `td.k-pivotgrid-cell` elements inside the `.k-pivotgrid-values` container. The cells that render totals also have the `k-pivotgrid-total` class. The header cells are rendered in the separate `.k-pivotgrid-row-headers` and `.k-pivotgrid-column-headers` containers.
 
 #### Returns
 
@@ -1624,7 +1638,7 @@ The fields of the result object:
             }
         }).data("kendoPivotGridV2");
 
-        pivotgrid.wrapper.on("mouseenter", ".k-grid-content td", function(e){
+        pivotgrid.wrapper.on("mouseenter", ".k-pivotgrid-values td", function(e){
             var info = pivotgrid.cellInfoByElement(e.currentTarget);
 
 	/* The result can be observed in the DevTools(F12) console of the browser. */

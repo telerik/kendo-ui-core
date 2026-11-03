@@ -96,4 +96,20 @@ describe("kendo.ui.DropDownList adaptive mode switching", function() {
 
         assert.isFalse(dropdownlist.popup.element.hasClass("k-popup"));
     });
+
+    it("encodes adaptiveTitle and adaptiveSubtitle in the adaptive header", function() {
+        let payload = '<img src=x onerror=void(0)>';
+        dropdownlist = createAdaptiveDropDownList({
+            adaptiveTitle: payload,
+            adaptiveSubtitle: payload
+        });
+
+        dropdownlist._createActionSheet();
+        dropdownlist.popup.open();
+
+        let header = dropdownlist.popup.element.find(".k-actionsheet-titlebar");
+        assert.equal(header.find(".k-actionsheet-title > div:first-child").text(), payload);
+        assert.equal(header.find(".k-actionsheet-subtitle").text(), payload);
+        assert.equal(header.find("img, [onerror]").length, 0);
+    });
 });

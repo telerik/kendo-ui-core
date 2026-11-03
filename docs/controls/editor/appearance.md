@@ -1,7 +1,7 @@
 ---
 title: Appearance
 page_title: jQuery Editor Documentation - Appearance
-description: "Get started with the jQuery Editor by Kendo UI and set its size and use the default content styles or implement custom styles."
+description: "Get started with the jQuery Editor by Kendo UI and set its size, remove its border, and use the default content styles or implement custom styles."
 components: ["editor"]
 slug: appearance_kendoui_editor_widget
 position: 14
@@ -9,7 +9,7 @@ position: 14
 
 # Appearance
 
-The Editor provides options for [setting its size](#setting-the-size), [using the default styles](#using-the-default-styles), and [configuring custom styles](#setting-custom-styles).
+The Editor provides options for [setting its size](#setting-the-size), [removing its border](#removing-the-border), [using the default styles](#using-the-default-styles), and [configuring custom styles](#setting-custom-styles).
 
 ## Setting the Size
 
@@ -152,6 +152,30 @@ To avoid the default content styles which the previous examples demonstrates, re
 ## Setting Custom Styles
 
 You can also use custom styles with [higher specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) selectors and inject those custom styles in an [Editor stylesheet](https://demos.telerik.com/kendo-ui/editor/styles). In such cases, you do not have to customize the Formatting tool of the Editor.
+
+## Removing the Border
+
+The Editor renders its border on the `div.k-editor` wrapper element. To remove the border, override it with a CSS rule. The rule applies wherever the Editor is rendered, for example, inside a [DockManager pane]({% slug overview_kendoui_dockmanager_widget %}).
+
+```dojo
+<style>
+    div.k-editor {
+        border-width: 0;
+    }
+</style>
+
+<textarea id="editor" rows="10" cols="30" style="height:200px">
+    <p>Editor content</p>
+</textarea>
+
+<script>
+    $(function () {
+        $("#editor").kendoEditor();
+    });
+</script>
+```
+
+To remove the border of a single Editor only, add a class to its `div.k-editor` wrapper and scope the rule to that class, as in the `small-editor` example in [Setting the Size](#setting-the-size).
 
 ## See Also
 

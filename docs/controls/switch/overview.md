@@ -22,6 +22,7 @@ When initialized, the Switch renders the currently selected value. The Switch ca
 * [Disabled Switch]({% slug disabled_kendoui_switch_widget %})
 * [Read-only Switch]({% slug readonly_kendoui_switch_widget %})
 * [Custom Switch]({% slug custom_kendoui_switch_widget %})
+* [Required Switch]({% slug validation_kendoui_switch_widget %})
 * [Accessibility]({% slug jquery_switch_accessibility %})
 
 ## Next Steps 
