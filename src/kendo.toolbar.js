@@ -1271,7 +1271,9 @@ export const __meta__ = {
                 .on(FOCUSOUT + ns, that._focusOut.bind(that));
 
             if (options.overflow?.mode == "section" && that.overflowSection) {
-                that._overflowSectionContentElement().on(KEYDOWN + ns, that, that._keydown.bind(that));
+                that._overflowSectionContentElement()
+                    .on(KEYDOWN + ns, that, that._keydown.bind(that))
+                    .on(FOCUSIN + ns, ".k-segmented-control-button", that._focusIn.bind(that));
             }
 
             if (options.overflow?.mode == "scroll") {
@@ -1331,6 +1333,12 @@ export const __meta__ = {
             if (button.length > 0) {
                 this._resetTabIndex(button);
                 button.addClass(KFOCUS);
+            } else if (target.is(".k-segmented-control-button") && target.closest(".k-toolbar-item[ref-toolbar-tool]").length) {
+                const template = target.closest(".k-toolbar-item[ref-toolbar-tool]");
+                const siblingTabStops = template.find("[tabindex=0]")
+                    .not(target.closest(".k-segmented-control").find("[tabindex=0]"));
+                this._resetTabIndex(target);
+                siblingTabStops.attr(TABINDEX, 0);
             }
         },
 
@@ -2331,4 +2339,3 @@ export const __meta__ = {
     kendo.ui.plugin(ToolBar);
 })(window.kendo.jQuery);
 export default kendo;
-
