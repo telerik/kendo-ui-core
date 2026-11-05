@@ -1,15 +1,21 @@
 ---
 title: Changelog
-page_title: Kendo UI for jQuery AI Coding Assistant Changelog
-description: "Find out about the latest changes and improvements in the jQuery AI Coding Assistant."
+page_title: Kendo UI for jQuery Agentic UI Generator Changelog
+description: "Find out about the latest changes and improvements in the Kendo UI for jQuery Agentic UI Generator."
 slug: ai_coding_assistant_changelog
 components: ["aicodingassistant"]
 position: 4
 ---
 
-# Kendo UI for jQuery AI Coding Assistant Changelog
+# Kendo UI for jQuery Agentic UI Generator Changelog
 
-Learn about the latest changes, improvements and bug fixes in the Kendo UI for jQuery AI Coding Assistant. The updates are structured in a chronological order with the newest ones appearing first.
+Learn about the latest changes, improvements and bug fixes in the Kendo UI for jQuery Agentic UI Generator (formerly AI Coding Assistant). The updates are structured in a chronological order with the newest ones appearing first.
+
+## November, 2026 Changelog
+
+### Highlights
+
+- Renamed the Kendo UI for jQuery AI Coding Assistant to Kendo UI for jQuery Agentic UI Generator to unify the naming of the AI tooling across the Telerik and Kendo UI component products. The MCP server package, server name, and configuration remain unchanged.
 
 ## March, 2026 Changelog
 
@@ -48,4 +54,4 @@ Learn about the latest changes, improvements and bug fixes in the Kendo UI for j
 
 ## See Also
 
-- [Kendo UI for jQuery AI Coding Assistant Overview]({% slug ai_coding_assistant_overview %})
+- [Kendo UI for jQuery Agentic UI Generator Overview]({% slug ai_coding_assistant_overview %})

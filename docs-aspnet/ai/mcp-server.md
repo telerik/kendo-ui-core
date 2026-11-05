@@ -1,7 +1,7 @@
 ---
 title: MCP Server
 page_title: Telerik {{ site.framework }} MCP Server
-description: Learn how to add and use the Telerik {{ site.framework }} MCP Server as an {{ site.framework }} AI coding assistant and code generator for better developer productivity. The MCP server provides proprietary context about {{ site.product }} to AI-powered software.
+description: Learn how to add and use the Telerik {{ site.framework }} MCP Server that delivers the Telerik {{ site.framework }} Agentic UI Generator for better developer productivity. The MCP server provides proprietary context about {{ site.product }} to AI-powered software.
 components: ["aicodingassistant"]
 slug: ai_mcp_server
 position: 2
@@ -387,7 +387,7 @@ To use the Telerik {{ site.framework }} MCP Server:
     * `Running #telerik-aspnetmvc-assistant` (in VS Code)
     * `Calling MCP tool #telerik-aspnetmvc-assistant` (in Cursor)
 
-    ![MCP Server uses Telerik {{ site.framework }} AI Coding Assistant in VS Code](images/mcp-confirmation-mvc.png)
+    ![MCP Server uses Telerik {{ site.framework }} Agentic UI Generator in VS Code](images/mcp-confirmation-mvc.png)
 {% endif %}
 
 {% if site.core %}
@@ -396,7 +396,7 @@ To use the Telerik {{ site.framework }} MCP Server:
     * `Running telerik-aspnetcorehtml-assistant` or `Running telerik-aspnetcoretag-assistant` (in VS Code)
     * `Calling MCP tool telerik-aspnetcorehtml-assistant` or `Calling MCP tool telerik-aspnetcoretag-assistant` (in Cursor)
 
-    ![MCP Server uses Telerik {{ site.framework }} AI Coding Assistant in VS Code](images/mcp-confirmation.png)
+    ![MCP Server uses Telerik {{ site.framework }} Agentic UI Generator in VS Code](images/mcp-confirmation.png)
 {% endif %}
 
 1. If the Telerik MCP server is not used even though it's installed and enabled, double-check the server name in your configuration and try rephrasing your prompt using another trigger syntax from the list in step 1.
@@ -437,10 +437,10 @@ The following list describes how your prompts may look like:
 
 ## Connect to Local AI Model
 
-You can use the Telerik {{ site.framework }} MCP server with local large language models (LLM). For example, run your local model through [Ollama](https://ollama.com) and use a third-party package such as [MCP-LLM Bridge](https://github.com/patruff/ollama-mcp-bridge) to connect the model to the Telerik MCP server. This will allow you to use the Telerik AI Coding Assistant without a cloud-based AI model.
+You can use the Telerik {{ site.framework }} MCP server with local large language models (LLM). For example, run your local model through [Ollama](https://ollama.com) and use a third-party package such as [MCP-LLM Bridge](https://github.com/patruff/ollama-mcp-bridge) to connect the model to the Telerik MCP server. This will allow you to use the Telerik {{ site.framework }} Agentic UI Generator without a cloud-based AI model.
 
 ## See Also
 
-* [Telerik {{ site.framework }} AI Coding Assistant Intended Use](slug:overview_ai#intended-use)
-* [Telerik {{ site.framework }} AI Coding Assistant Recommendations](slug:overview_ai#recommendations)
+* [Telerik {{ site.framework }} Agentic UI Generator Intended Use](slug:overview_ai#intended-use)
+* [Telerik {{ site.framework }} Agentic UI Generator Recommendations](slug:overview_ai#recommendations)
 * [Telerik {{ site.framework }} Prompt Library](slug:ai_prompt_library)

@@ -162,7 +162,7 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 {% if site.core %}
 >tip You can accelerate your Grid journey with the [Telerik UI for ASP.NET Core Agentic UI Generator]({% slug ai-overview-core %}) and the [Component Assistant prompts]({% slug agentic-ui-generator-prompt-library-core %}#component-assistant-prompts).
 {% else %}
->tip You can accelerate your Grid journey with the [Telerik {{ site.framework }} AI Coding Assistant]({% slug overview_ai %}) and the available [Grid-related prompts]({% slug ai_prompt_library %}#grid).
+>tip You can accelerate your Grid journey with the [Telerik {{ site.framework }} Agentic UI Generator]({% slug overview_ai %}) and the available [Grid-related prompts]({% slug ai_prompt_library %}#grid).
 {% endif %}
 
 ## Functionality and Features

@@ -1,7 +1,7 @@
 ---
 title: Changelog
-page_title: Telerik {{ site.framework }} AI Coding Assistant Changelog
-description: "Find out about the latest changes and improvements in the {{ site.framework }} AI Coding Assistant."
+page_title: Telerik {{ site.framework }} Agentic UI Generator Changelog
+description: "Find out about the latest changes and improvements in the {{ site.framework }} Agentic UI Generator."
 components: ["aicodingassistant"]
 previous_url: /ai/release-notes, /ai/copilot-extension
 slug: ai_coding_assistant_release_notes_aspnet-core
@@ -76,4 +76,4 @@ Learn about the latest changes, improvements and bug fixes in the Telerik UI for
 
 ## See Also
 
-- [Telerik {{ site.framework }} AI Coding Assistant Overview]({% slug ai-overview-core %})
+- [Telerik {{ site.framework }} AI Tools Overview]({% slug ai-overview-core %})

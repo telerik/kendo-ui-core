@@ -1,7 +1,7 @@
 ---
 title: Prompt Library
 page_title: Telerik {{ site.framework }} Prompt Library
-description: Explore the extensive collection of prompts that you can use with the Telerik {{ site.framework }} AI Coding Assistant.
+description: Explore the extensive collection of prompts that you can use with the Telerik {{ site.framework }} Agentic UI Generator.
 components: ["aicodingassistant"]
 slug: ai_prompt_library
 position: 4
@@ -11,7 +11,7 @@ position: 4
 
 Welcome to the Telerik {{ site.framework }} Prompt Library.
 
-The prompts provided here are intended and optimized for use with the Telerik {{ site.framework }} AI Coding Assistant [MCP Server](slug:ai_mcp_server). They can help you kick start your app development and speed up the component configuration process.
+The prompts provided here are intended and optimized for use with the Telerik {{ site.framework }} Agentic UI Generator [MCP Server](slug:ai_mcp_server). They can help you kick start your app development and speed up the component configuration process.
 
 This collection of prompts is not exhaustive and the Telerik {{ site.framework }} team is constantly working on adding more prompts to the library.
 
@@ -23,7 +23,7 @@ All prompts in this library target the [MCP Server](slug:ai_mcp_server) through 
 
 1. Browse the prompt library to find a prompt that suits your needs.
 2. Copy the prompt text (including the {% if site.mvc %}`#telerik-aspnetmvc-assistant`{% endif %}{% if site.core %}`#telerik-aspnetcorehtml-assistant` or `#telerik-aspnetcoretag-assistant`{% endif %} handle, based on the used HtmlHelper {% if site.core %}or TagHelper{% endif %} synax).
-3. (Optional) Customize the prompt as needed for your specific use case but keep the {% if site.mvc %}`#telerik-aspnetmvc-assistant`{% endif %}{% if site.core %}`#telerik_aspnetcore{syntax type}_assistant`{% endif %} handle.<br/>When modifying the prompts, make sure the changes comply with the [intended use](slug:overview_ai#intended-use) and the [recommendations](slug:overview_ai#recommendations) for the AI Coding Assistant.
+3. (Optional) Customize the prompt as needed for your specific use case but keep the {% if site.mvc %}`#telerik-aspnetmvc-assistant`{% endif %}{% if site.core %}`#telerik_aspnetcore{syntax type}_assistant`{% endif %} handle.<br/>When modifying the prompts, make sure the changes comply with the [intended use](slug:overview_ai#intended-use) and the [recommendations](slug:overview_ai#recommendations) for the Agentic UI Generator.
 4. Run the prompt against the [MCP Server](slug:ai_mcp_server).
 
 >warning Always double-check the code and solutions proposed by any AI-powered tool before applying them to your project.
@@ -2867,8 +2867,8 @@ public class PersonFormModel
 
 ## See Also
 
-* [Telerik {{ site.framework }} AI Coding Assistant Overview](slug:overview_ai)
-* [Telerik {{ site.framework }} AI Coding Assistant Intended Use](slug:overview_ai#intended-use)
+* [Telerik {{ site.framework }} Agentic UI Generator Overview](slug:overview_ai)
+* [Telerik {{ site.framework }} Agentic UI Generator Intended Use](slug:overview_ai#intended-use)
 * [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server)
 
 <style>
