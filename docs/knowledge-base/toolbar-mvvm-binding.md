@@ -44,10 +44,10 @@ The following example demonstrates how to create a [custom MVVM binding](/framew
       <button data-bind="click: updateToolbar">Update toolbar</button>
       <div data-role="grid"
            date-scrollable="true"
-           data-columns="[
-                           { 'field': 'ProductName', 'width': 270 },
-                           { 'field': 'UnitPrice' },
-                        ]"
+           data-columns='[
+                           { "field": "ProductName", "width": 270 },
+                           { "field": "UnitPrice" }
+                        ]'
            data-bind="source: products, gridToolbar: toolbar"
            style="width: 480px; height: 200px"></div>
 </div>

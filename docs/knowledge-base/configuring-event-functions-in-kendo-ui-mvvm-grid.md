@@ -65,6 +65,10 @@ var viewModel = kendo.observable({
     }
 });
 
+viewModel.set("columns", [
+    { field: "column1", editor: viewModel.get("editor") }
+]);
+
 kendo.bind($("#grid"), viewModel);
 ```
 
@@ -74,9 +78,7 @@ In the MVVM Grid configuration, reference the custom editor function from the vi
 
 ```html
 <div id="grid" data-role="grid"
-     data-columns="[
-         { 'field': 'column1', editor: viewModel.editor }
-     ]"
+     bind:data-columns="columns"
      data-bind="source: gridData">
 </div>
 ```
@@ -94,12 +96,7 @@ The following example demonstrates a Grid bound through MVVM with a DropDownList
       <div
         data-role="grid"
         data-editable="true"
-        data-columns="[
-                         { 'field': 'column1', editor:viewModel.editor },
-                         { 'field': 'column2' },
-                         { 'field': 'column3' },
-                         { 'field': 'column4' }
-                      ]"
+        bind:data-columns="columns"
         data-bind="source: gridData"
       ></div>
 
@@ -143,6 +140,12 @@ The following example demonstrates a Grid bound through MVVM with a DropDownList
               });
           },
         });
+        viewModel.set("columns", [
+          { field: "column1", editor: viewModel.get("editor") },
+          { field: "column2" },
+          { field: "column3" },
+          { field: "column4" }
+        ]);
         kendo.bind($("#example"), viewModel);
       </script>
     </div>

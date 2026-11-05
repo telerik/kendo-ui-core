@@ -38,15 +38,15 @@ How can I change the default stacking order of series in Chart?
 
             <div id="chart2"
                  data-role="chart"
-                 data-chart-area="{height: 200, width: 500, margin:{top: 10, right: 20, bottom: 20, left: 20}}"
-                 data-series-defaults="{ type: 'line', style: 'smooth' }"
-                 data-legend="{ visible: false }"
-                 data-value-axis="{name: 'valueAxis', labels: {format: '{0:n0}'}, axisCrossingValues: [0, -100000000]}"
-                 data-category-axis="[{name: 'lineOnZero', labels:{visible:false}}, {name: 'lineOnBottom', baseUnit: 'days', labels:{step: 15}, majorGridLines:{visible:true, step: 15}, crosshair:{visible: true}, justified:true}]"
-                 data-series="[
-                             { field: 'ActualBalance', categoryField: 'ValueDate', categoryAxis: 'lineOnBottom'},
-                             { field: 'ForecastBalance', categoryField: 'ValueDate', categoryAxis: 'lineOnBottom'}
-                         ]"
+                 data-chart-area='{"height":200,"width":500,"margin":{"top":10,"right":20,"bottom":20,"left":20}}'
+                 data-series-defaults='{"type":"line","style":"smooth"}'
+                 data-legend='{"visible":false}'
+                 data-value-axis='{"name":"valueAxis","labels":{"format":"{0:n0}"},"axisCrossingValues":[0,-100000000]}'
+                 data-category-axis='[{"name":"lineOnZero","labels":{"visible":false}},{"name":"lineOnBottom","baseUnit":"days","labels":{"step":15},"majorGridLines":{"visible":true,"step":15},"crosshair":{"visible":true},"justified":true}]'
+                 data-series='[
+                             { "field": "ActualBalance", "categoryField": "ValueDate", "categoryAxis": "lineOnBottom"},
+                             { "field": "ForecastBalance", "categoryField": "ValueDate", "categoryAxis": "lineOnBottom"}
+                         ]'
                  data-bind="source: dataSource2, events: { dataBound: onDataBound }"
                  data-auto-bind="false">
             </div>

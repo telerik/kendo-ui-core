@@ -7181,10 +7181,21 @@ How to customize the footer cells in Kendo UI Grid columns with dynamic template
 #### Example - specify footer template when using source binding
 
     <div data-role="grid" data-bind="source:dataSource"
-         data-columns='["category", "name", {"field": "price", "footerTemplate": ({price}) => `Total: ${kendo.htmlEncode(price ? price.sum : 0)}`}]'></div>
+         bind:data-columns="columns"></div>
     <script>
       $(function() {
         var viewModel = kendo.observable({
+          columns: [
+            "category",
+            "name",
+            {
+              field: "price",
+              footerTemplate: function(data) {
+                var price = data.price;
+                return "Total: " + kendo.htmlEncode(price ? price.sum : 0);
+              }
+            }
+          ],
           dataSource: new kendo.data.DataSource({
             data: [
               { category: "Beverages", name: "Chai", price: 18 },
@@ -7204,10 +7215,21 @@ How to customize the footer cells in Kendo UI Grid columns with dynamic template
 #### Example - specify footer template when using source binding and there are no groups
 
     <div data-role="grid" data-bind="source:dataSource"
-         data-columns='["category", "name", {"field": "price", "footerTemplate": ({price}) => `Total: ${kendo.htmlEncode(price ? price.sum : 0)}`}]'></div>
+         bind:data-columns="columns"></div>
     <script>
       $(function() {
         var viewModel = kendo.observable({
+          columns: [
+            "category",
+            "name",
+            {
+              field: "price",
+              footerTemplate: function(data) {
+                var price = data.price;
+                return "Total: " + kendo.htmlEncode(price ? price.sum : 0);
+              }
+            }
+          ],
           dataSource: new kendo.data.DataSource({
             data: [
               { category: "Beverages", name: "Chai", price: 18 },
@@ -8465,18 +8487,13 @@ This example displays "Beverages" and "Food" in the "category" column instead of
 
     <div id="example">
       <div data-role="grid"
-           data-columns="[
-                         { 'field': 'productName' },
-
-                         { 'field': 'category', 'values': [
-
-                         { 'text': 'Beverages', 'value': 1 },
-
-                         { 'text': 'Food', 'value': 2 }
-
+           data-columns='[
+                         { "field": "productName" },
+                         { "field": "category", "values": [
+                           { "text": "Beverages", "value": 1 },
+                           { "text": "Food", "value": 2 }
                          ]}
-
-                         ]"
+                         ]'
            data-bind="source: products" ></div>
 
       <script>

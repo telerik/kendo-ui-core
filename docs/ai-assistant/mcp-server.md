@@ -1,13 +1,13 @@
 ---
 title: Getting Started
-page_title: Getting Started with the Kendo UI for jQuery Coding Assistant
-description: "Learn how to add and use the MCP Server as a Kendo UI for jQuery AI coding assistant and code generator for better developer productivity. The Kendo UI for jQuery MCP server provides proprietary context about Kendo UI for jQuery components to AI-powered software."
+page_title: Getting Started with the Kendo UI for jQuery Agentic UI Generator
+description: "Learn how to add and use the MCP Server that delivers the Kendo UI for jQuery Agentic UI Generator for better developer productivity. The Kendo UI for jQuery MCP server provides proprietary context about Kendo UI for jQuery components to AI-powered software."
 slug: kendo_jquery_mcp_server
 components: ["aicodingassistant"]
 position: 2
 ---
 
-# Getting Started with the Kendo UI for jQuery AI Coding Assistant
+# Getting Started with the Kendo UI for jQuery Agentic UI Generator
 
 The Kendo UI for jQuery [MCP Server](https://modelcontextprotocol.io/docs/getting-started/intro) lets you interact with AI and reach new levels of developer productivity. The MCP server provides proprietary context to AI-powered IDEs, apps and tools. You can use the Kendo UI for jQuery MCP server for AI code generation and ask about Kendo UI for jQuery components, features, or general usage. You can successfully prompt more complex questions and tasks, and generate tailored code that includes Kendo UI for jQuery components and API.
 
@@ -105,7 +105,7 @@ To use the Kendo UI for jQuery MCP server:
 1. Start your prompt with `/kendojquery` or `#kendo-jquery-assistant` (or with `#` followed by your custom server name installation, if set). Based on internal testing, the `/kendojquery` approach usually performs slightly better.
 2. Inspect the output and verify that the MCP Server is used. Look for a similar statement in the output (the exact text may vary across tools):
 
-  ![MCP Server uses Kendo UI jQuery AI Coding Assistant in VS Code](images/ai-assistant-output.png)
+  ![MCP Server uses Kendo UI for jQuery Agentic UI Generator in VS Code](images/ai-assistant-output.png)
 
 3. If the Kendo UI for jQuery MCP server is not used even though it's installed and enabled, double-check the server name in your configuration and try rephrasing your prompt.
 4. If requested, grant the Kendo UI for jQuery MCP server a permission to run for this session, workspace, or always.
@@ -133,13 +133,13 @@ The following list describes how your prompts may look like:
 
 ## Usage Limits
 
-A Telerik [Subscription license](https://www.telerik.com/purchase/faq/licensing-purchasing) is recommended in order to use the Kendo UI for jQuery AI Coding Assistant without restrictions. Perpetual license holders and trial users can make a [limited number of requests per year]({% slug ai_coding_assistant_overview %}#usage-limits).
+A Telerik [Subscription license](https://www.telerik.com/purchase/faq/licensing-purchasing) is recommended in order to use the Kendo UI for jQuery Agentic UI Generator without restrictions. Perpetual license holders and trial users can make a [limited number of requests per year]({% slug ai_coding_assistant_overview %}#usage-limits).
 
 ## Connect to Local AI Model
 
-You can use the Kendo UI for jQuery MCP server with local large language models (LLM). For example, run your local model through [Ollama](https://ollama.com) and use a third-party package such as [MCP-LLM Bridge](https://github.com/patruff/ollama-mcp-bridge) to connect the model to the Kendo UI for jQuery MCP server. This will allow you to use the Kendo UI for jQuery AI Coding Assistant without a cloud-based AI model.
+You can use the Kendo UI for jQuery MCP server with local large language models (LLM). For example, run your local model through [Ollama](https://ollama.com) and use a third-party package such as [MCP-LLM Bridge](https://github.com/patruff/ollama-mcp-bridge) to connect the model to the Kendo UI for jQuery MCP server. This will allow you to use the Kendo UI for jQuery Agentic UI Generator without a cloud-based AI model.
 
 ## See Also
 
-* [Kendo UI for jQuery AI Coding Assistant Intended Use]({% slug ai_coding_assistant_overview %}#intended-use)
-* [Kendo UI for jQuery AI Coding Assistant Recommendations]({% slug ai_coding_assistant_overview %}#recommendations)
+* [Kendo UI for jQuery Agentic UI Generator Intended Use]({% slug ai_coding_assistant_overview %}#intended-use)
+* [Kendo UI for jQuery Agentic UI Generator Recommendations]({% slug ai_coding_assistant_overview %}#recommendations)

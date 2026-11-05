@@ -40,6 +40,7 @@ The View-Model part of the MVVM handles the exposing of the data objects from th
         </script>
 
 * Initializing components' properties by passing `JSON` as string to the `DOM` results in unsafe HTML and is not recommended. The better practise is to pass the properties to the [`Observable Objects`]({% slug overview_observabeobject_kendoui %}).
+* Object and array options in declarative `data-*` attributes must use valid JSON. Do not put JavaScript expressions or functions in these attributes. For function-valued options, use a `bind:data-*` attribute to bind the option to a Kendo observable ViewModel. See the [2026 breaking changes]({% slug breakingchanges2026_kendoui %}) for migration guidance.
 
 ## Functionality and Features
 

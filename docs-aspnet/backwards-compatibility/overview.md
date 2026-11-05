@@ -10,11 +10,11 @@ position: 1
 # Breaking Changes
 
 {% if site.core %}
-[Telerik UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows you to use the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/introduction) from the server code. That is why, all important changes in the [Kendo UI for jQuery](https://www.telerik.com/kendo-jquery-ui) suite also apply to the client-side code and behavior of the Telerik UI for ASP.NET Core wrappers. For the list of all breaking changes, refer to the articles on the [Kendo UI for jQuery breaking changes](https://www.telerik.com/kendo-jquery-ui/documentation/backwards-compatibility/2025-backward-compatibility).
+[Telerik UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows you to use the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/introduction) from the server code. That is why, all important changes in the [Kendo UI for jQuery](https://www.telerik.com/kendo-jquery-ui) suite also apply to the client-side code and behavior of the Telerik UI for ASP.NET Core wrappers. For the list of all breaking changes, refer to the articles on the [Kendo UI for jQuery breaking changes](https://www.telerik.com/kendo-jquery-ui/documentation/backwards-compatibility/2026-backward-compatibility).
 {% else %}
 [Telerik UI for ASP.NET MVC](https://www.telerik.com/aspnet-mvc) is a set of server-side wrappers that allows using the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/introduction) from C# or VB.NET code.
 
-The [breaking changes in the Kendo UI for jQuery suite](https://www.telerik.com/kendo-jquery-ui/documentation/backwards-compatibility/2025-backward-compatibility) apply to the client-side code and behavior of the Telerik UI HtmlHelpers for ASP.NET MVC.
+The [breaking changes in the Kendo UI for jQuery suite](https://www.telerik.com/kendo-jquery-ui/documentation/backwards-compatibility/2026-backward-compatibility) apply to the client-side code and behavior of the Telerik UI HtmlHelpers for ASP.NET MVC.
 {% endif %}
 
 ## See Also

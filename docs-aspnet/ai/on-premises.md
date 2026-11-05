@@ -1,7 +1,7 @@
 ---
 title: On-Premises Deployment
-page_title: On-Premises Deployment - Telerik {{ site.framework }} AI Coding Assistant
-description: 'Learn how to deploy the Telerik {{ site.framework }} AI Coding Assistant Context API stack on-premises using the provided Helm chart in your Kubernetes cluster.'
+page_title: On-Premises Deployment - Telerik {{ site.framework }} Agentic UI Generator
+description: 'Learn how to deploy the Telerik {{ site.framework }} Agentic UI Generator Context API stack on-premises using the provided Helm chart in your Kubernetes cluster.'
 components: ["aicodingassistant"]
 slug: ai_coding_assistant_on_premises_aspnet
 position: 3
@@ -10,7 +10,7 @@ tag: new
 
 # On-Premises Deployment
 
-The Telerik {{ site.framework }} AI Coding Assistant supports on-premises deployment through a Helm chart that installs the Context API stack into your Kubernetes cluster. The deployment includes the Context API service, a bundled reranking service, and [Qdrant](https://qdrant.tech/) for vector storage.
+The Telerik {{ site.framework }} Agentic UI Generator supports on-premises deployment through a Helm chart that installs the Context API stack into your Kubernetes cluster. The deployment includes the Context API service, a bundled reranking service, and [Qdrant](https://qdrant.tech/) for vector storage.
 
 The on-premises package is simplified for customer-hosted environments. Hosted-only concerns such as authentication, rate limiting, and telemetry are removed from this deployment model. If needed, those controls should be handled at the ingress, API gateway, or cluster level.
 

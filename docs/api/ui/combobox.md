@@ -1994,7 +1994,7 @@ How to map preselected values in Kendo UI ComboBox with remote data? Handle and 
                data-text-field="ShipName"
                data-value-field="OrderID"
                data-filter="contains"
-               data-virtual="{itemHeight:26,valueMapper:orderValueMapper}"
+               bind:data-virtual="virtual"
                data-height="520"
                />
     </div>
@@ -2003,6 +2003,10 @@ How to map preselected values in Kendo UI ComboBox with remote data? Handle and 
         $(document).ready(function() {
             var model = kendo.observable({
                     order: "10249",
+              virtual: {
+                itemHeight: 26,
+                valueMapper: orderValueMapper
+              },
               source: new kendo.data.DataSource({
                 type: "odata-v4",
                 transport: {

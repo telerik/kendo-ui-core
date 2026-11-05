@@ -17,6 +17,8 @@ By default, the HTML and Tag Helpers output an initialization script after the h
 
 The declarative initialization feature serializes the helper declaration as an MVVM configuration and initializes the component from the DOM elements on the client.
 
+Object and array values in declarative `data-*` configuration must use valid JSON. Do not put JavaScript expressions or functions inside these values. For function-valued options, bind the configuration to a Kendo observable ViewModel with `bind:data-*`. This requirement applies to HtmlHelpers that use `UseMvvmInitialization()`. Standard HtmlHelper and TagHelper initialization scripts are not affected.
+
 To enable the declarative initialization:
 
 1. Add the `UseMvvmInitialization()` method in the HTML Helper declaration. This option will instruct the respective component to serialize its helper declaration as an MVVM declarative configuration.
@@ -48,7 +50,7 @@ The following example illustrates the generated declarative configuration of a [
         <div id="textbox-container">
             <label class="k-label k-input-label" for="textbox">Comments:</label>
             <span class="k-input k-textbox">
-                <input data-label="{'content':'Comments:'}" data-role="textbox" id="textbox" name="textbox" type="text" value="" aria-disabled="false" class="k-input-inner" autocomplete="off" style="width: 100%;">
+                <input data-label='{"content":"Comments:"}' data-role="textbox" id="textbox" name="textbox" type="text" value="" aria-disabled="false" class="k-input-inner" autocomplete="off" style="width: 100%;">
             </span>
         </div>
     ```

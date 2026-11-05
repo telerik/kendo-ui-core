@@ -13,6 +13,16 @@ This article lists the breaking or important changes in the 2026 releases of {{ 
 
 ## {{ site.product }} 2026 Q4
 
+### Declarative `data-*` Configuration Requires Valid JSON
+
+Starting with the **2026 Q4** release, Kendo UI no longer evaluates invalid JSON in declarative `data-*` configuration attributes as JavaScript. Previously, object and array values that failed `JSON.parse` could be evaluated as JavaScript expressions.
+
+Object and array options in `data-*` attributes must now use valid JSON. Quote property names and string values with double quotes. Invalid JSON produces a console error and is not evaluated.
+
+Do not declare functions inside JSON. For function-valued options, expose the option through a Kendo observable ViewModel and use a `bind:data-*` attribute. This change applies to client-side declarative initialization, including MVC HtmlHelpers that use `UseMvvmInitialization()`. Standard HtmlHelper and TagHelper initialization scripts are not affected.
+
+Kendo template options continue to be compiled as Kendo templates. For examples and migration guidance, see the [Kendo UI for jQuery 2026 Breaking Changes](https://www.telerik.com/kendo-jquery-ui/documentation/backwards-compatibility/2026-backward-compatibility#declarative-data-configuration-requires-valid-json).
+
 ### Obsolete `Button.Badge.Shape` option removed
 
 The `Button.Badge.Shape` setting and `ButtonGroup.Items.Badge.Shape` is removed. The shape of the badge can be controlled with the `Rounded` configuration option.

@@ -49,10 +49,10 @@ How can I add a Grid in the [editable template](/api/ui/scheduler/configuration/
    </div>
    <div id="rowGrid" data-role="grid" data-bind="source: rows"
    			data-selectable="true"
-        data-columns="[
-                                 { 'field': 'name', 'title': 'Name', 'width': 270 },
-                                 { 'field': 'field', 'title': 'Field' }
-                              ]">
+        data-columns='[
+                                 { "field": "name", "title": "Name", "width": 270 },
+                                 { "field": "field", "title": "Field" }
+                              ]'>
    </div>
 </script>
 

@@ -1,16 +1,22 @@
 ---
 title: Changelog
-page_title: Telerik {{ site.framework }} AI Coding Assistant Changelog
-description: "Find out about the latest changes and improvements in the {{ site.framework }} AI Coding Assistant."
+page_title: Telerik {{ site.framework }} Agentic UI Generator Changelog
+description: "Find out about the latest changes and improvements in the {{ site.framework }} Agentic UI Generator."
 components: ["aicodingassistant"]
 previous_url: /ai/release-notes, /ai/copilot-extension
 slug: ai_coding_assistant_release_notes_aspnet
 position: 5
 ---
 
-# Telerik {{ site.framework }} AI Coding Assistant Changelog
+# Telerik {{ site.framework }} Agentic UI Generator Changelog
 
-Learn about the latest changes, improvements and bug fixes in the Telerik UI for {{ site.framework }} AI Coding Assistant. The updates are structured in a chronological order with the newest ones appearing first.
+Learn about the latest changes, improvements and bug fixes in the Telerik UI for {{ site.framework }} Agentic UI Generator (formerly AI Coding Assistant). The updates are structured in a chronological order with the newest ones appearing first.
+
+## November, 2026 Changelog
+
+### Highlights
+
+- Renamed the Telerik {{ site.framework }} AI Coding Assistant to Telerik {{ site.framework }} Agentic UI Generator to unify the naming of the AI tooling across the Telerik and Kendo UI component products. The MCP server package, server name, and configuration remain unchanged.
 
 ## March, 2026 Changelog
 
@@ -62,4 +68,4 @@ Learn about the latest changes, improvements and bug fixes in the Telerik UI for
 
 ## See Also
 
-- [Telerik {{ site.framework }} AI Coding Assistant Overview]({% slug overview_ai %})
+- [Telerik {{ site.framework }} Agentic UI Generator Overview]({% slug overview_ai %})

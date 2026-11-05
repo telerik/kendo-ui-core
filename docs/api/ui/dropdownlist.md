@@ -1716,7 +1716,7 @@ How to map selected values to data indexes in Kendo UI DropDownList with virtual
                data-text-field="ShipName"
                data-value-field="OrderID"
                data-filter="contains"
-               data-virtual="{itemHeight:26,valueMapper:orderValueMapper}"
+               bind:data-virtual="virtual"
                data-height="520"
                />
     </div>
@@ -1725,6 +1725,10 @@ How to map selected values to data indexes in Kendo UI DropDownList with virtual
         $(document).ready(function() {
             var model = kendo.observable({
                     order: "10548",
+              virtual: {
+                itemHeight: 26,
+                valueMapper: orderValueMapper
+              },
               source: new kendo.data.DataSource({
                 type: "odata-v4",
                 transport: {

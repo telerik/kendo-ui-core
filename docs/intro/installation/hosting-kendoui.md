@@ -23,7 +23,6 @@ When the download completes, each folder inside the downloaded archive contains 
 
 |Folders 						|Contents |
 |:---								|:---			|
-|`/apptemplates`		|Contains standalone starter templates. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all AJAX data requests.|
 |`/examples`				|Accommodates the quick-start demo files. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all AJAX data requests.|
 |`/js`							|Contains the minified JavaScript files needed by Kendo UI to operates.|
 |`/mjs`							|Contains the JavaScript modules that can be used instead of the bundled scripts from the `js` folder.|

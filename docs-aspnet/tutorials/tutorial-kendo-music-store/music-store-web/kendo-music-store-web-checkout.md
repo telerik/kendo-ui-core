@@ -24,13 +24,13 @@ The examples use an MVVM-bound [Kendo UI Grid](https://demos.telerik.com/kendo-u
         data-bind="source: cartItems"
         data-row-template="rowTemplate"
         data-scrollable="false"
-        data-columns="[
-            'Item',
-            { title: 'Price', width: '100px' },
-            { title: 'Quantity', width: '100px' },
-            { title: 'Remove', width: '100px' },
-            { title: 'Total', width: '100px' }
-        ]"></div>
+        data-columns='[
+            "Item",
+            { "title": "Price", "width": "100px" },
+            { "title": "Quantity", "width": "100px" },
+            { "title": "Remove", "width": "100px" },
+            { "title": "Total", "width": "100px" }
+        ]'></div>
 
 The `data-bind="source: cartItems"` attribute indicates that the grid will be bound to the view model's `cartItems` property.
 

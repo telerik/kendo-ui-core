@@ -33,7 +33,7 @@ To set the [`noRecords.template`](https://docs.telerik.com/kendo-ui/api/ui/grid/
 
 ```
 <div data-role="grid"      
-      data-no-records="{ template : '<br /><br />Here is my No Records Message!'}">
+      data-no-records='{"template":"<br /><br />Here is my No Records Message!"}'>
 </div>
 ```
 
@@ -50,11 +50,11 @@ The following example demonstrates how to implement a custom `noRecords` templat
         <h4>Add or update a record</h4>
         <!--For DataSource, add: data-bind="source: products" -->
         <div data-role="grid"
-             data-columns="[
-                           { 'field': 'ProductName', 'width': 270 },
-                           { 'field': 'UnitPrice' },
-                           ]"          
-             data-no-records="{ template : '<br /><br />Here is my No Records Message!'}"            
+             data-columns='[
+                           { "field": "ProductName", "width": 270 },
+                           { "field": "UnitPrice" }
+                           ]'
+             data-no-records='{"template":"<br /><br />Here is my No Records Message!"}'
              style="height: 200px">
         </div>
       </div>

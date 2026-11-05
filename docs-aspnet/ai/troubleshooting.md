@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting
-page_title: Telerik {{ site.framework }} AI Coding Assistant Troubleshooting
-description: "Find out more about troubleshooting in the {{ site.framework }} AI Coding Assistant."
+page_title: Telerik {{ site.framework }} Agentic UI Generator Troubleshooting
+description: "Find out more about troubleshooting in the {{ site.framework }} Agentic UI Generator."
 components: ["aicodingassistant"]
 slug: ai_coding_assistant_troubleshooting_aspnet
 position: 5
@@ -23,5 +23,5 @@ This is a [known issue](https://developercommunity.visualstudio.com/t/Copilot-st
 
 ## See Also
 
-* [Telerik {{ site.framework }} AI Coding Assistant Overview]({% slug overview_ai %})
+* [Telerik {{ site.framework }} Agentic UI Generator Overview]({% slug overview_ai %})
 * [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server)

@@ -11,6 +11,57 @@ position: 0
 
 This article lists the breaking or important changes in the 2026 releases of Kendo UI. For the complete list of changes in the UI components, see the [product release history](https://www.telerik.com/support/whats-new/kendo-ui/release-history).
 
+## Kendo UI 2026 Q4
+
+### Declarative `data-*` Configuration Requires Valid JSON
+
+Starting with the **2026 Q4** release, Kendo UI no longer evaluates invalid JSON in declarative `data-*` configuration attributes as JavaScript. Previously, object and array values that failed `JSON.parse` could be evaluated as JavaScript expressions.
+
+Object and array options in `data-*` attributes must now use valid JSON. Quote property names and string values with double quotes. Invalid JSON produces a console error and is not evaluated.
+
+#### Object Options
+
+```html
+<input data-role="autocomplete"
+       data-source='{"data":[{"name":"Tea"},{"name":"Coffee"}]}' />
+```
+
+#### Array Options
+
+```html
+<input data-role="autocomplete"
+       data-source='["Tea","Coffee"]' />
+```
+
+#### Nested Configuration
+
+Use valid JSON for nested configuration as well:
+
+```html
+<input data-role="multiselect"
+       data-virtual='{"itemHeight":26}' />
+```
+
+#### Function Options
+
+Do not declare functions inside JSON. For function-valued options, expose the option through a Kendo observable ViewModel and use a `bind:data-*` attribute:
+
+```html
+<div id="example">
+    <input data-role="numerictextbox" bind:data-change="onChange" />
+</div>
+<script>
+var viewModel = kendo.observable({
+    onChange: function(e) {
+        console.log(e.sender.value());
+    }
+});
+kendo.bind($("#example"), viewModel);
+</script>
+```
+
+Kendo template options continue to be compiled as Kendo templates. This change affects declarative initialization through `data-role` and `data-*` attributes, including MVVM initialization. Programmatic widget initialization is not affected.
+
 ## Kendo UI 2026 October
 
 ### Badge Text Is HTML-Encoded by Default

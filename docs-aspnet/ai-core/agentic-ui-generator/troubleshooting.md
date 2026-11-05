@@ -77,5 +77,5 @@ In this case, enable HTTP/2 on the client device and any related firewalls or pr
 
 * [Telerik UI for ASP.NET Core AI Tools Overview](slug:ai-overview-core)
 * [Getting Started](slug:agentic-ui-generator-getting-started-core)
-* [Telerik UI for ASP.NET Core AI Coding Assistant Overview](slug:ai-overview-core)
+* [Telerik UI for ASP.NET Core AI Tools Overview](slug:ai-overview-core)
 * [Licensing](slug:installation_license_key_aspnetcore)

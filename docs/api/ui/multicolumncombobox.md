@@ -2351,10 +2351,10 @@ How to configure the MultiColumnComboBox in Kendo UI for jQuery to send the sele
 #### Example - specify that the View-Model field should be updated with the selected item value
 
     <input id="multicolumncombobox" data-bind="value: selectedProductId, source: products"
-            data-columns="[
-              { field: 'id' },
-              { field: 'name' }
-            ]" />
+            data-columns='[
+              { "field": "id" },
+              { "field": "name" }
+            ]' />
 
     <script>
     $("#multicolumncombobox").kendoMultiColumnComboBox({
@@ -2576,12 +2576,12 @@ How do I map selected values to their corresponding data indexes in a Kendo UI M
                data-text-field="ShipName"
                data-value-field="OrderID"
                data-filter="contains"
-               data-virtual="{itemHeight:26,valueMapper:orderValueMapper}"
+               bind:data-virtual="virtual"
                data-height="520"
-               data-columns="[
-                { field: 'ShipName' },
-                { field: 'OrderID' }
-               ]"
+               data-columns='[
+                { "field": "ShipName" },
+                { "field": "OrderID" }
+               ]'
                />
     </div>
 
@@ -2589,6 +2589,10 @@ How do I map selected values to their corresponding data indexes in a Kendo UI M
         $(document).ready(function() {
             var model = kendo.observable({
                     order: "10249",
+              virtual: {
+                itemHeight: 26,
+                valueMapper: orderValueMapper
+              },
               source: new kendo.data.DataSource({
                 type: "odata-v4",
                 transport: {

@@ -791,7 +791,7 @@ meta:
     title: Components
     position: 4
   ai-assistant:
-    title: AI Coding Assistant
+    title: Agentic UI Generator
     position: 7
   intro/widget-basics:
     title: Working with Components

@@ -47,7 +47,7 @@ Example:
       <div
         data-role="mediaplayer"
         data-auto-play="false"
-        data-media="{ 'title': 'Sample video', source: 'https://youtu.be/2OvvwWShNWo' }"
+        data-media='{"title":"Sample video","source":"https://youtu.be/2OvvwWShNWo"}'
         data-navigatable="true"
         data-bind="events: { ready: onPlayerReady }" >
       </div>

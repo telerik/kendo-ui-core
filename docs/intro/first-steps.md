@@ -122,9 +122,9 @@ You now have your first Kendo UI for jQuery component running in your applicatio
     <article-card
         href="slug://ai_coding_assistant_overview"
         src="../images/aicomponents/Chat_Light_Large.svg"
-        title="Use AI Coding Assistant"
+        title="Use Agentic UI Generator"
         darkSrc="../images/aicomponents/Chat_Dark_Large.svg"
-        description="Use the AI Coding Assistant to get intelligent, context-aware help while building your Kendo UI for jQuery application.">
+        description="Use the Agentic UI Generator to get intelligent, context-aware help while building your Kendo UI for jQuery application.">
     </article-card>
     <article-card
         href="slug://welcometo_kendoui#list-of-components"

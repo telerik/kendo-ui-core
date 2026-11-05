@@ -39,24 +39,27 @@ How can I create a Kendo DropDownList widget in the column template of an MVVM G
           <div data-role="grid"            
 
                data-editable="true"
-               data-toolbar="['create', 'save']"
-               data-columns="[{ 'field': 'Action', 'width': 270, 'template':viewModel.columnTemplateFunction, editable: viewModel.notEditable },{ 'field': 'Price' },]"
+               data-toolbar='["create", "save"]'
+               bind:data-columns="columns"
                data-bind="source: products"
                style="height: 200px"></div>
         </div>
 
         <script>
           var viewModel = kendo.observable({          
-            columnTemplateFunction:  function (dataItem) {
-              var input =
-                  `<input class="dropDown"
-data-role="dropdownlist"
-data-bind=" source: ActionsCollection, value: Action"
-style="width: 100%;"
-/>`;
-
-              return input;
-            },
+            columns: [
+              {
+                field: "Action",
+                width: 270,
+                template: function (dataItem) {
+                  return `<input class="dropDown" data-role="dropdownlist" data-bind="source: ActionsCollection, value: Action" style="width: 100%;" />`;
+                },
+                editable: function () {
+                  return false;
+                }
+              },
+              { field: "Price" }
+            ],
             products: new kendo.data.DataSource({
               schema: {
                 model: {
@@ -94,9 +97,6 @@ style="width: 100%;"
                 }
               ]
             }),
-            notEditable:function(){
-              return false;
-            },
             getById: function(Id){
               return viewModel.products.get(Id);
             }

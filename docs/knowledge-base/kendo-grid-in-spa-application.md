@@ -48,9 +48,9 @@ The following example demonstrates how to initialize a Grid widget in a Single-P
       data-scrollable="true"
       data-editable="inline"
       data-columns='[
-        { field : "JobTitle", width: 120, title : "Job Title Code" },
-        { field : "Description" },
-        { field : "CategoryId", template: "${Category}" },
+        { "field": "JobTitle", "width": 120, "title": "Job Title Code" },
+        { "field": "Description" },
+        { "field": "CategoryId", "template": "${Category}" },
         {"command": "edit"}]'
       data-bind="source: roles"
       style="height: 500px">

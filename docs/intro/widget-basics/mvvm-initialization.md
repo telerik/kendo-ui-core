@@ -43,7 +43,7 @@ Each configuration option can be set with the `data` attribute of the target ele
 
 > The camelCase options are set through dash-separated attributes. For example, the [`ignoreCase`](/api/ui/autocomplete/configuration/ignorecase) option of the AutoComplete is set through `data-ignore-case`.
 
-Options which start with `data` do not require an additional `"data"` in the attribute name. For example, the `dataTextField` option is set through the `data-text-field` attribute and `dataSource` is set through the `data-source` attribute. Complex configuration options are set as JavaScript object literals&mdash;for example, `data-source="{data: [{name: 'John Doe'},{name: 'Jane Doe'}]}"`.
+Options which start with `data` do not require an additional `"data"` in the attribute name. For example, the `dataTextField` option is set through the `data-text-field` attribute and `dataSource` is set through the `data-source` attribute. Object and array configuration values in `data-*` attributes must use valid JSON. Quote property names and string values with double quotes.
 
 The following example demonstrates how to configure Kendo UI components with `data` attributes.
 
@@ -51,7 +51,7 @@ The following example demonstrates how to configure Kendo UI components with `da
         <input data-role="autocomplete"
                data-ignore-case="true"
                data-text-field="name"
-               data-source="{data: [{name: 'John Doe'},{name: 'Jane Doe'}]}" />
+               data-source='{"data":[{"name":"John Doe"},{"name":"Jane Doe"}]}' />
     </div>
 
     <script>
@@ -100,7 +100,7 @@ You can also set the Data Source of data-bound Kendo UI components through a `da
 The following example demonstrates how to set the data source of a Kendo UI component to a JavaScript object.
 
     <div id="container">
-        <input data-role="autocomplete" data-source="{data:['One', 'Two']}" />
+        <input data-role="autocomplete" data-source='{"data":["One","Two"]}' />
     </div>
     <script>
     kendo.bind($("#container"));
@@ -109,7 +109,7 @@ The following example demonstrates how to set the data source of a Kendo UI comp
 The following example demonstrates how to set the data source of a Kendo UI component to a JavaScript array.
 
     <div id="container">
-        <input data-role="autocomplete" data-source="['One', 'Two']" />
+        <input data-role="autocomplete" data-source='["One","Two"]' />
     </div>
     <script>
     kendo.bind($("#container"));
@@ -118,14 +118,30 @@ The following example demonstrates how to set the data source of a Kendo UI comp
 The following example demonstrates how to set the data source of a Kendo UI component to a variable that is available in the global scope.
 
     <div id="container">
-        <input data-role="autocomplete" data-source="dataSource" />
+        <input data-role="autocomplete" bind:data-source="source" />
     </div>
     <script>
-    var dataSource = new kendo.data.DataSource( {
-        data: [ "One", "Two" ]
-    });
-    kendo.bind($("#container"));
-    </script>
+        var viewModel = kendo.observable({
+            source: new kendo.data.DataSource({
+                data: ["One", "Two"]
+            })
+        });
+        kendo.bind($("#container"), viewModel);
+        </script>
+
+For function-valued options, use a `bind:data-*` attribute and define the function on the observable ViewModel. Do not declare functions inside JSON configuration.
+
+        <div id="container">
+            <input data-role="numerictextbox" bind:data-change="onChange" />
+        </div>
+        <script>
+        var viewModel = kendo.observable({
+            onChange: function(e) {
+                console.log(e.sender.value());
+            }
+        });
+        kendo.bind($("#container"), viewModel);
+        </script>
 
 ## Managing Templates
 
@@ -135,7 +151,7 @@ The following example demonstrates how to set the template of a Kendo UI compone
 
     <div id="container">
         <input data-role="autocomplete"
-               data-source="[{firstName:'John', lastName: 'Doe'}, {firstName:'Jane', lastName: 'Doe'}]"
+               data-source='[{"firstName":"John","lastName":"Doe"},{"firstName":"Jane","lastName":"Doe"}]'
                data-text-field="firstName"
                data-template="template" />
     </div>

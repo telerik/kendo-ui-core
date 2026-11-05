@@ -51,10 +51,10 @@ Use a function that will return the desired template.
 	}
 </script>
 <div id="example">
-	<div data-role="treelist" data-selectable="true" data-columns="[
-						{ 'field': 'Name' },
-						{ 'field': 'Position', 'width': 270 },
-						]" data-bind="source: employees" data-toolbar="#=myTemplate()#" style="height: 300px"></div>
+	<div data-role="treelist" data-selectable="true" data-columns='[
+						{ "field": "Name" },
+						{ "field": "Position", "width": 270 }
+						]' data-bind="source: employees" data-toolbar="#=myTemplate()#" style="height: 300px"></div>
 	<script>
 		var viewModel = kendo.observable({
 			employees: new kendo.data.TreeListDataSource({

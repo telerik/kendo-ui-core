@@ -1559,7 +1559,7 @@ How to enable virtual scrolling in Kendo UI Autocomplete for large datasets? Con
                data-role="autocomplete"
                data-bind="value: order, source: source"
                data-text-field="ShipName"
-               data-virtual="{itemHeight:26,valueMapper:orderValueMapper}"
+               bind:data-virtual="virtual"
                />
     </div>
 
@@ -1567,6 +1567,10 @@ How to enable virtual scrolling in Kendo UI Autocomplete for large datasets? Con
         $(document).ready(function() {
             var model = kendo.observable({
               order: "Hanari Carnes",
+              virtual: {
+                itemHeight: 26,
+                valueMapper: orderValueMapper
+              },
               source: new kendo.data.DataSource({
                 type: "odata-v4",
                 transport: {

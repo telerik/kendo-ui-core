@@ -30,7 +30,7 @@ Create a custom MVVM binding that converts the hexadecimal color value to RGBA a
 <div id="example">
     <input id="colorpicker"
          type="color"
-         data-messages="{ cancel: 'Discard', apply: 'Select' }"
+         data-messages='{"cancel":"Discard","apply":"Select"}'
          data-role="colorpicker"
          data-opacity="true"
          class="form-control"

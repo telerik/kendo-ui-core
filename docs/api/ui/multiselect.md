@@ -2131,7 +2131,7 @@ How do I optimize large list performance in Kendo UI MultiSelect inputs? Optimiz
                data-text-field="ShipName"
                data-value-field="OrderID"
                data-filter="contains"
-               data-virtual="{itemHeight:26,valueMapper:orderValueMapper}"
+               bind:data-virtual="virtual"
                data-height="520"
                 ></select>
     </div>
@@ -2140,6 +2140,10 @@ How do I optimize large list performance in Kendo UI MultiSelect inputs? Optimiz
         $(document).ready(function() {
             var model = kendo.observable({
                     order: [10548],
+              virtual: {
+                itemHeight: 26,
+                valueMapper: orderValueMapper
+              },
               source: new kendo.data.DataSource({
                 type: "odata-v4",
                 transport: {

@@ -21,6 +21,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | -------- | --------- | ----- |
 | `.k-segmented-control` | `role=group` | Sets the proper role for the group of buttons. |
 | `.k-segmented-control-button` | `role=button` | Each button must have the appropriate button role. |
+|  | `tabindex` | Roving tabindex: only the selected (or first) button has `tabindex=0`; all others have `tabindex=-1`. `Tab` moves the focus into and out of the component as a single stop. |
 |  | `aria-label` | Each button should be properly labelled. Use `aria-label` if the button contains only an icon without text. |
 | `.k-segmented-control-button.k-selected` | `aria-pressed=true` | Only the selected button within the group will have this attribute set to true. |
 | `.k-segmented-control-button.k-disabled` | `aria-disabled=true` | Indicates that the button is disabled and cannot be interacted with. |

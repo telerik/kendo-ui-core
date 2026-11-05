@@ -46,12 +46,16 @@ Specify the `itemHeight` and the `valueMapper` in the `data-virtual` attribute o
                 data-text-field="ShipName"
                 data-value-field="OrderID"
                 data-filter="contains"
-                data-virtual="{itemHeight:26,valueMapper:orderValueMapper}"
+                bind:data-virtual="virtual"
                 data-height="520"/>
 </div>
 <script>
 $(document).ready(function() {
         var model = kendo.observable({
+        virtual: {
+                itemHeight: 26,
+                valueMapper: orderValueMapper
+        },
         source: new kendo.data.DataSource({
                 type: "odata-v4",
                 transport: {
