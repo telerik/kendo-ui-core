@@ -62,6 +62,30 @@ kendo.bind($("#example"), viewModel);
 
 Kendo template options continue to be compiled as Kendo templates. This change affects declarative initialization through `data-role` and `data-*` attributes, including MVVM initialization. Programmatic widget initialization is not affected.
 
+
+### Kendo UI Icons v5 Set as Default
+
+Starting with the **2026 November** release, Kendo UI products use Kendo UI Icons v5 as the default icon set. This update can change the appearance of icons and affects applications that reference icon names directly.
+
+In v5, some icon names have changed, and some icons are no longer available. For the complete list of renamed, removed, and otherwise changed icons, see the [Kendo UI Icons v5.0.0 changelog](https://www.telerik.com/design-system/docs/foundation/iconography/changelog/#v5.0.0), and update any custom icon references to use the v5 names.
+
+All icons in v5 support the `outline`, `solid`, and `duotone` variants. The default variant is `outline`. This default applies when you pass an icon name as a string or omit the `variant` property.
+
+For any component that supports the `icon` option, you can pass the icon name as a string or use an object with `name` and `variant` properties. 
+
+```javascript
+$("#button").kendoButton({
+    icon: {
+        name: "heart",
+        variant: "solid"
+    }
+});
+```
+
+For standalone icons, use the [`kendo.ui.icon` method](/api/ui/ui/methods/icon), which accepts an `icon` name and `variant` in its options object.
+
+To retain the version 4 icons with a newer Kendo UI for jQuery release, see [Using an Older Kendo SVG Icons Package]({% slug use-older-svg-icons-package-jquery %}).
+
 ## Kendo UI 2026 October
 
 ### Badge Text Is HTML-Encoded by Default

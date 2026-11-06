@@ -60,7 +60,7 @@ With the R1 SP1 2023 release, {{ site.product }} introduced a new `kendo.ui.icon
 The ASP.NET Core wrappers do not provide a `<kendo-icon>` TagHelper. Use the `icon` option on a supported component, such as the Button, or use `kendo.ui.icon` for standalone SVG icons.
 {% endif %}
 
-The theme CSS styles the rendered SVG markup. The icon definitions come from the standard Kendo UI bundle or, when you intentionally use the v5 outline icon collection, from the `@progress/kendo-svg-icons` package assigned to `kendo.ui.svgIcons` before component initialization. For more information, see [Using v5 Outline SVG Icons]({% slug configure-design-system-v5-outline-svg-icons %}).
+The theme CSS styles the rendered SVG markup. The icon definitions come from the standard Kendo UI bundle. For releases before Kendo UI Icons v5 became the default, see [Using v5 Outline SVG Icons]({% slug configure-design-system-v5-outline-svg-icons %}) to load the v5 collection.
 
 The following example shows how to create an SVG icon by extending an existing HTML element.
 
@@ -117,6 +117,44 @@ The following example shows how to set a custom SVG icon renderer.
 </script>
  ```
 
+## Specifying an Icon Variant
+
+All icons in Kendo UI Icons v5 support the `outline`, `solid`, and `duotone` variants. If you do not specify a variant, `outline` is used, including when you configure an icon by name only.
+
+{% if site.mvc %}
+In ASP.NET MVC, use the Menu HtmlHelper to configure an icon variant on an item:
+
+```HtmlHelper
+@(Html.Kendo().Menu()
+   .Name("menu")
+   .Items(items =>
+   {
+       items.Add().Text("Favorite")
+           .Icon(icon => icon.Name("heart").Variant("solid"));
+   })
+)
+```
+{% endif %}
+
+{% if site.core %}
+In ASP.NET Core, the Button HtmlHelper and TagHelper support an icon object:
+
+```HtmlHelper
+@(Html.Kendo().Button()
+   .Name("button")
+   .Icon(icon => icon.Name("heart").Variant(IconVariant.Solid))
+   .Content("Favorite")
+)
+```
+
+```TagHelper
+<kendo-button name="button">
+   <icon name="heart" variant="@IconVariant.Solid" />
+   Favorite
+</kendo-button>
+```
+{% endif %}
+
 ## Setting Font Icons from Client
 
 Depending on your preference, you can still use Font Icons either through the `iconType` option or through the `kendo.setDefaults` method.
@@ -141,3 +179,7 @@ The following example shows how to globally configure Font icons.
 ```
 
 @[template](/_contentTemplates/icons-list-section.md#icons-list-section)
+
+## See Also
+
+* [Using an Older Telerik.SvgIcons Version with the Icon Overrides Service]({% slug use-older-svgicons-version %})

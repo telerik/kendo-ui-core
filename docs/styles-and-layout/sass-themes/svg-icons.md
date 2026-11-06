@@ -28,7 +28,7 @@ SVG icons provide the following benefits over Font icons:
 
 ## Rendering SVG Icons
 
-With the R1 SP1 2023 release, Kendo UI for jQuery introduced a new `kendo.ui.icon` method. Depending on the global configuration, which is `font` by default, `kendo.ui.icon` allows you to render either an SVG icon or a Font icon. Through the method, you can also specify the icon over the `iconType` field.
+With the R1 SP1 2023 release, Kendo UI for jQuery introduced a new `kendo.ui.icon` method. Depending on the global configuration, `kendo.ui.icon` allows you to render either an SVG icon or a Font icon. Through the method, you can also specify the icon over the `iconType` field.
 
 The following example shows how to create an SVG icon by extending an existing HTML element.
 
@@ -55,6 +55,35 @@ The following example shows how to create a specific SVG icon.
 <script>
     var icon =  kendo.ui.icon({ icon: 'camera', type: 'svg' });
     $('body').append(icon);
+</script>
+```
+
+### Specifying an Icon Variant
+
+All icons in Kendo UI Icons v5 support the `outline`, `solid`, and `duotone` variants. If you do not specify a variant, the icon uses `outline`. This also applies when you provide an icon name as a string.
+
+For components that support the `icon` option, pass either an icon name or an object with `name` and `variant` properties. The following example sets a solid icon on a Button:
+
+```dojo
+<button id="button">Favorite</button>
+
+<script>
+    $("#button").kendoButton({
+        icon: {
+            name: "heart",
+            variant: "solid"
+        }
+    });
+</script>
+```
+
+For standalone SVG icons, pass the icon name and variant to `kendo.ui.icon`:
+
+```dojo
+<span id="icon"></span>
+
+<script>
+    kendo.ui.icon($("#icon"), { icon: "heart", variant: "duotone" });
 </script>
 ```
 

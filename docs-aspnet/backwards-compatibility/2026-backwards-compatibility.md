@@ -23,6 +23,55 @@ Do not declare functions inside JSON. For function-valued options, expose the op
 
 Kendo template options continue to be compiled as Kendo templates. For examples and migration guidance, see the [Kendo UI for jQuery 2026 Breaking Changes](https://www.telerik.com/kendo-jquery-ui/documentation/backwards-compatibility/2026-backward-compatibility#declarative-data-configuration-requires-valid-json).
 
+
+### Kendo UI Icons v5 Set as Default
+
+Starting with the **2026 November** release, {{ site.product }} uses Kendo UI Icons v5 as the default icon set. This update can change the appearance of icons and affects applications that reference icon names directly.
+
+In v5, some icon names have changed, and some icons are no longer available. For the complete list of renamed, removed, and otherwise changed icons, see the [Kendo UI Icons v5.0.0 changelog](https://www.telerik.com/design-system/docs/foundation/iconography/changelog/#v5.0.0), and update any custom icon references to use the v5 names.
+
+All icons in v5 support the `outline`, `solid`, and `duotone` variants. The default variant is `outline`. This default applies when you pass an icon name as a string or omit the `variant` property.
+
+For any component that supports the `icon` option, you can pass the icon name as a string or use an object with `name` and `variant` properties.
+
+{% if site.mvc %}
+For ASP.NET MVC, use the Menu HtmlHelper to set the variant on an icon:
+
+```HtmlHelper
+@(Html.Kendo().Menu()
+    .Name("menu")
+    .Items(items =>
+    {
+        items.Add().Text("Favorite")
+            .Icon(icon => icon.Name("heart").Variant("solid"));
+    })
+)
+```
+{% endif %}
+
+{% if site.core %}
+For ASP.NET Core, the Button HtmlHelper and TagHelper support configuring the icon name and variant:
+
+```HtmlHelper
+@(Html.Kendo().Button()
+    .Name("button")
+    .Icon(icon => icon.Name("heart").Variant(IconVariant.Solid))
+    .Content("Favorite")
+)
+```
+
+```TagHelper
+<kendo-button name="button">
+    <icon name="heart" variant="@IconVariant.Solid" />
+    Favorite
+</kendo-button>
+```
+{% endif %}
+
+To retain the older filled v4 artwork without downgrading the required `Telerik.SvgIcons` package, see [Using an Older Telerik.SvgIcons Version with the Icon Overrides Service]({% slug use-older-svgicons-version %}).
+
+For applications on earlier releases that need the client-side v5 collection, see [Configuring Telerik Design System v5 Outline SVG Icons Globally]({% slug configure-design-system-v5-outline-svg-icons %}).
+
 ### Obsolete `Button.Badge.Shape` option removed
 
 The `Button.Badge.Shape` setting and `ButtonGroup.Items.Badge.Shape` is removed. The shape of the badge can be controlled with the `Rounded` configuration option.

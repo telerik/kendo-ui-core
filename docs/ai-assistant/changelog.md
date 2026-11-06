@@ -17,6 +17,10 @@ Learn about the latest changes, improvements and bug fixes in the Kendo UI for j
 
 - Renamed the Kendo UI for jQuery AI Coding Assistant to Kendo UI for jQuery Agentic UI Generator to unify the naming of the AI tooling across the Telerik and Kendo UI component products. The MCP server package, server name, and configuration remain unchanged.
 
+## August, 2026 Changelog
+
+- Added the Upgrade Assistant to the Kendo UI for jQuery MCP server. It combines Kendo CLI codemods with AI-powered code analysis to provide end-to-end guidance when upgrading between Kendo UI for jQuery versions.
+
 ## March, 2026 Changelog
 
 ### Highlights

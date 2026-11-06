@@ -87,3 +87,4 @@ KendoMvc.Setup(options =>
 
 * [SVG Icons]({% slug svgicons_core_mvc %})
 * [Font Icons]({% slug webfonticons_aspnetmvc6_aspnetmvc %})
+* [Using an Older Telerik.SvgIcons Version with the Icon Overrides Service]({% slug use-older-svgicons-version %})
