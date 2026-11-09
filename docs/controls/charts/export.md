@@ -269,12 +269,12 @@ The following example demonstrates how to handle custom fonts by embedding a cus
     <script>
         // Import DejaVu Sans font for embedding.
         // NOTE: Only required if the Kendo UI stylesheets are loaded
-        // from a different origin, e.g. kendo.cdn.telerik.com.
+        // from a different origin, e.g. cdn.jsdelivr.net.
         kendo.pdf.defineFont({
-            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            "DejaVu Sans"             : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
     </script>
 

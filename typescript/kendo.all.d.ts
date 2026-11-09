@@ -19828,6 +19828,10 @@ declare namespace kendo.dataviz.ui {
         template?: string | Function | undefined;
     }
 
+    interface ChartMessages {
+        noData?: string | undefined;
+    }
+
     interface ChartOptions {
         name?: string | undefined;
         autoBind?: boolean | undefined;
@@ -19836,6 +19840,7 @@ declare namespace kendo.dataviz.ui {
         chartArea?: ChartChartArea | undefined;
         dataSource?: any | any | kendo.data.DataSource | undefined;
         legend?: ChartLegend | undefined;
+        messages?: ChartMessages | undefined;
         panes?: ChartPane[] | undefined;
         pannable?: boolean | ChartPannable | undefined;
         pdf?: ChartPdf | undefined;
@@ -19853,7 +19858,7 @@ declare namespace kendo.dataviz.ui {
         valueAxis?: ChartValueAxisItem | ChartValueAxisItem[] | undefined;
         xAxis?: ChartXAxisItem | ChartXAxisItem[] | undefined;
         yAxis?: ChartYAxisItem | ChartYAxisItem[] | undefined;
-        noData?: ChartNoData | undefined;
+        noData?: boolean | ChartNoData | undefined;
         zoomable?: boolean | ChartZoomable | undefined;
         axisLabelClick?(e: ChartAxisLabelClickEvent): void;
         dataBound?(e: ChartDataBoundEvent): void;
@@ -24727,6 +24732,7 @@ declare namespace kendo.dataviz.ui {
         dataSource?: any;
         autoBind?: boolean | undefined;
         legend?: StockChartLegend | undefined;
+        messages?: ChartMessages | undefined;
         panes?: StockChartPane[] | undefined;
         pdf?: StockChartPdf | undefined;
         persistSeriesVisibility?: boolean | undefined;
@@ -24740,6 +24746,7 @@ declare namespace kendo.dataviz.ui {
         tooltip?: StockChartTooltip | undefined;
         transitions?: boolean | undefined;
         valueAxis?: StockChartValueAxisItem | StockChartValueAxisItem[] | undefined;
+        noData?: boolean | ChartNoData | undefined;
         axisLabelClick?(e: StockChartAxisLabelClickEvent): void;
         dataBound?(e: StockChartEvent): void;
         dragStart?(e: StockChartDragStartEvent): void;

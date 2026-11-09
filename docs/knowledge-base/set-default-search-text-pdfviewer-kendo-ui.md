@@ -39,7 +39,7 @@ To set a default search text in the PDFViewer's search box, handle the [`click`]
 <div id="pdfviewer"></div>
     <script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.min.mjs" type="module"></script>
     <script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.worker.min.mjs" type="module"></script>
-    <script src="https://kendo.cdn.telerik.com/2025.1.227/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2025.1.227/umd/kendo.all.min.js" type="module"></script>
     <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {

@@ -33,13 +33,13 @@ To upgrade the version with NuGet or Bower:
    * If you use Bower instead of NuGet, open the Bower Package Manager and select the **Installed** tab. Click **Update** for the **kendo-ui** package.
 1. In the application, manually replace any references which point to the old Kendo UI [scripts and styles]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
-   * If the scripts and styles are referenced through the Kendo CDN service, update the links with the new version.
+   * If the scripts and styles are referenced through jsDelivr, update the package versions in the URLs.
 
       ```HTML _Layout.cshtml
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
       <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
       ```
 
    * If the scripts and styles are referenced locally, download the JavaScript and CSS files from the Telerik website and then copying them in your project. For the detailed step-by-step procedure, refer to the [Using Local Files]({% slug using_local_client_side_resources%}) article.
@@ -84,13 +84,13 @@ The project will be upgraded to the latest {{ site.product }} version.
 1. Change the reference to the new `Kendo.MVC` dll. Verify that the dll refers to the correct ASP.NET Core version.
 1. In the application, manually replace any references which point to the old Kendo UI [scripts and styles]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
-   * If the scripts and styles are referenced through the Kendo CDN service, update the links with the new version.
+   * If the scripts and styles are referenced through jsDelivr, update the package versions in the URLs.
 
       ```HTML _Layout.cshtml
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
       <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
       ```
 
    * If the scripts and styles are referenced locally, download the JavaScript and CSS files from the Telerik website and then copying them in your project. For the detailed step-by-step procedure, refer to the [Using Local Files]({% slug using_local_client_side_resources%}) article.
@@ -108,10 +108,10 @@ The project will be upgraded to the latest {{ site.product }} version.
    * If the scripts and styles are referenced through the Kendo UI CDN service, update the links with the new version.
 
       ```HTML _Layout.cshtml
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
       <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
       ```
 
    * If the scripts and styles are referenced locally, download the JavaScript and CSS files from the Telerik website and then copying them in your project. For the detailed step-by-step procedure, refer to the [Using Local Files]({% slug using_local_client_side_resources%}) article.

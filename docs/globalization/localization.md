@@ -29,8 +29,8 @@ The following example demonstrates how to add the localization script to a docum
 The following example demonstrates how to add the localization script to a document from the CDN.    
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.bg-BG.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/messages/kendo.messages.bg-BG.min.js"></script>
 
 > Currently, translations are not available for every language and some of the localization files may be incomplete. For more information on where to find the full list of available translations, refer to the [section on contributing]({% slug overview_localization_kendoui%}#contribution).
 

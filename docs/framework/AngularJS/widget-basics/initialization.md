@@ -27,9 +27,9 @@ The following example demonstrates an important detail&mdash;the `'Increment'` a
 
 ``` 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
     <div ng-app="app" ng-controller="MyCtrl">
         <input kendo-numerictextbox k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'">
@@ -46,9 +46,9 @@ The following example demonstrates how to specify options from the `controller` 
 
 ``` 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
     <div ng-app="app" ng-controller="MyCtrl">
         <input kendo-numerictextbox k-min="1" k-max="10" k-up-arrow-text="textUp" k-down-arrow-text="textDown">
@@ -67,9 +67,9 @@ The following example demonstrates how to use declarative attributes for the `ar
 
 ```
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
     <div ng-app="app" ng-controller="MyCtrl">
         <textarea kendo-editor
@@ -97,9 +97,9 @@ The following example demonstrates how to store the whole widget configuration i
 
 ```
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
     <div ng-app="app" ng-controller="MyCtrl">
         <input kendo-date-picker k-options="monthPickerConfig">

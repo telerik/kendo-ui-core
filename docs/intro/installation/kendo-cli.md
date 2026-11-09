@@ -149,6 +149,8 @@ kendo migrate --no-install
 kendo migrate --force
 ```
 
+For AI guidance with the jQuery migration, see [AI-Assisted Migration]({% slug ai_assisted_migration_kendoui %}).
+
 #### Options
 
 | Option | Description | Default |

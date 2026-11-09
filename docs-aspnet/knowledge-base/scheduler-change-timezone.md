@@ -36,7 +36,7 @@ To achieve this requirement, you can create a standalone DataSource instance and
 Then, you can include a selection component like a DropDownList that shows different time zone options. When the user selects a specified time zone, you can reset the Scheduler's DataSource to display the events in the respective time zone.
 
 ```Razor
-<script src="https://kendo.cdn.telerik.com/2025.1.227/js/kendo.timezones.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@2025.1.227/umd/kendo.timezones.min.js"></script>
 
 <script>
     // Initialize a DropDownList widget with jQuery to allow the user to change the timezone.
@@ -174,7 +174,7 @@ Then, you can include a selection component like a DropDownList that shows diffe
 ```TagHelper
 @addTagHelper *, Kendo.Mvc
 
-<script src="https://kendo.cdn.telerik.com/2025.1.227/js/kendo.timezones.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@2025.1.227/umd/kendo.timezones.min.js"></script>
 
 <script>
     // Initialize a DropDownList widget with jQuery to allow the user to change the timezone.
@@ -345,4 +345,3 @@ https://netcorerepl.telerik.com/QfESasEw44a1fhLt47
 {% endif %}
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2024%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
-

@@ -129,13 +129,14 @@ Because this approach is not related to the functionality of the Kendo UI suite,
             var swatch = this.value();
 
             $("link").each(function () {
-              if (this.href.indexOf("/themes/") != -1) {
-                var themeVersion = this.href.split("/")[4];
-                var curHref = "https://kendo.cdn.telerik.com/themes/" +
-                    themeVersion +
-                    "/" +
+              var themeMatch = this.href.match(/@progress\/kendo-theme-[^@/]+@([^/]+)\/dist\//);
+              if (themeMatch) {
+                var themeVersion = themeMatch[1];
+                var curHref = "https://cdn.jsdelivr.net/npm/@progress/kendo-theme-" +
                     themeName +
-                    "/" +
+                    "@" +
+                    themeVersion +
+                    "/dist/" +
                     swatch +
                     ".css";
                 this.href = curHref;

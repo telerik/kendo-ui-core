@@ -1,6 +1,6 @@
 ---
 title: Handling General Disruptions and Connection Issues
-description: Learn how to handle when you are unable to connect to the Kendo and Telerik CDN when working with the {{ site.product }} UI components.
+description: Learn how to handle connection issues with jsDelivr when working with the {{ site.product }} UI components.
 type: troubleshooting
 page_title: General Disruption and Connection Issues
 slug: cdn_connection_issues
@@ -22,13 +22,13 @@ components: ["general"]
 
 ## Description
 
-I am unable to connect to the Kendo and Telerik UI CDN (`kendo.cdn.telerik.com`) when working with the {{ site.product }} UI components. How can I solve this issue?
+I am unable to connect to jsDelivr when working with the {{ site.product }} UI components. How can I solve this issue?
 
 ## Solution
 
-The Kendo and Telerik CDN service is hosted on the Amazon CloudFront. Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) provides a reliable level of uptime support, you can encounter disruption or connection issues.
+The jsDelivr CDN serves the public npm packages. Connection issues can still occur even when the service is operating normally.
 
-To verify that the CDN service is running, check the [status of the Amazon CloudFront](http://status.aws.amazon.com/).
+Check the CDN provider's service status if you suspect a wider outage.
 
 If the Amazon CloudFront status is reported as healthy and operates normally but you still experience connection issues, contact your system administrator. Remote investigation of connection problems is outside the scope of the Kendo and Telerik UI Support Team. Some of the possible causes for the connection issues are:
 

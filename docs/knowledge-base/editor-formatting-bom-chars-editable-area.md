@@ -35,7 +35,7 @@ The Editor uses BOM characters to correctly handle some ranges. If there is an i
 To handle this behavior, refer to the following scenarios:
 
 1. If you observe the problem in the [online demos](https://demos.telerik.com/kendo-ui/editor), your browser might have enforced an encoding that is different from the UTF-8 one. This scenario is not supported.
-1. If the online demos behave properly, change the Kendo UI script references so they are loaded from the CDN (https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js). If your page is now working correctly, your local script files are served with the wrong encoding, or are corrupted. Copy over the scripts (the files, not their content) from the official distribution, and see if the issue persists.
+1. If the online demos behave properly, change the Kendo UI script references so they are loaded from the CDN (https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/kendo.all.min.js). If your page is now working correctly, your local script files are served with the wrong encoding, or are corrupted. Copy over the scripts (the files, not their content) from the official distribution, and see if the issue persists.
 1. If the problem is still visible on your page, and the scripts are loaded through the CDN, the page might be served with the wrong formatting. Verify that the page as well as its layout pages are saved and served in UTF-8.
 
 ## See Also

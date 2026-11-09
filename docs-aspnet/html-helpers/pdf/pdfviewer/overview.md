@@ -44,8 +44,8 @@ The following example demonstrates how to initialize the PDFViewer by using [PDF
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js" type="module"></script>
 
     @(Html.Kendo().PDFViewer()
         .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the component.
@@ -60,8 +60,8 @@ The following example demonstrates how to initialize the PDFViewer by using [PDF
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js" type="module"></script>
 
     <kendo-pdfviewer name="pdfviewer" height="1200">
         <pdfjs-processing file="@Url.Content("~/Content/web/pdfViewer/sample.pdf")"/>

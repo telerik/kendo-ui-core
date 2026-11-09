@@ -57,14 +57,14 @@ The following example uses the current MVC documentation versions:
 
 ```HTML
 <link rel="stylesheet"
-      href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+      href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
 <link rel="stylesheet"
       href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.aspnetmvc.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/kendo.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/kendo.aspnetmvc.min.js"></script>
 ```
 
 JSZip is optional. Include it only when the application uses a feature that requires it, such as Excel or PDF export.
@@ -154,7 +154,7 @@ For example, replace the LESS references with:
 
 ```HTML
 <link rel="stylesheet"
-      href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+      href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
 ```
 
 After migrating, review custom CSS selectors. Some CSS classes from the old component rendering may no longer exist in the new rendering.

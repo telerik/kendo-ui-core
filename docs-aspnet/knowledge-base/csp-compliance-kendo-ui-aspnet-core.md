@@ -65,11 +65,11 @@ app.Use(async (context, next) =>
     context.Response.Headers.Append(
         "Content-Security-Policy",
         "default-src 'self'; " +
-        $"script-src 'self' 'nonce-{cspNonce}' https://kendo.cdn.telerik.com; " +
-        $"style-src 'self' 'nonce-{cspNonce}' https://fonts.googleapis.com https://kendo.cdn.telerik.com; " +
+        $"script-src 'self' 'nonce-{cspNonce}' https://cdn.jsdelivr.net; " +
+        $"style-src 'self' 'nonce-{cspNonce}' https://fonts.googleapis.com https://cdn.jsdelivr.net; " +
         "font-src 'self' https://fonts.gstatic.com; " +
         "img-src 'self' data: blob:; " +
-        "connect-src 'self' https://kendo.cdn.telerik.com;");
+        "connect-src 'self' https://cdn.jsdelivr.net;");
 
     await next();
 });

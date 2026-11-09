@@ -73,8 +73,8 @@ Load the `pdf.js` library and use the PDFViewer HtmlHelper {% if site.core %}or 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js" type="module"></script>
 
     <div>
         @(Html.Kendo().PDFViewer()
@@ -98,8 +98,8 @@ Load the `pdf.js` library and use the PDFViewer HtmlHelper {% if site.core %}or 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js" type="module"></script>
 
     <div id="example">
         <kendo-pdfviewer name="pdfviewer"
@@ -128,8 +128,8 @@ To load and visualize an initial PDF document, set the `PdfjsProcessing` configu
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js" type="module"></script>
 
     <div>
         @(Html.Kendo().PDFViewer()
@@ -154,8 +154,8 @@ To load and visualize an initial PDF document, set the `PdfjsProcessing` configu
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js" type="module"></script>
 
     <div id="example">
         <kendo-pdfviewer name="pdfviewer"
@@ -184,8 +184,8 @@ The PDFViewer exposes various [events](/api/kendo.mvc.ui.fluent/pdfviewerbuilder
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js" type="module"></script>
 
     <div>
         @(Html.Kendo().PDFViewer()
@@ -219,8 +219,8 @@ The PDFViewer exposes various [events](/api/kendo.mvc.ui.fluent/pdfviewerbuilder
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js" type="module"></script>
 
     <div id="example">
         <kendo-pdfviewer name="pdfviewer"

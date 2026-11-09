@@ -15,7 +15,7 @@ Before adding a Telerik UI component, you must include the theme, the jQuery scr
 		@Scripts.Render("~/bundles/modernizr")
 
 		@* Add the Telerik UI Bootstrap Main theme: *@
-		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
+		<link href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-bootstrap@{{ site.themesCdnVersion }}/dist/bootstrap-main.css" rel="stylesheet" type="text/css" />
 		...
 	</head>
 	```
@@ -25,7 +25,7 @@ Before adding a Telerik UI component, you must include the theme, the jQuery scr
 	```HTML
 	<head>
 		...
-		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
+		<link href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-bootstrap@{{ site.themesCdnVersion }}/dist/bootstrap-main.css" rel="stylesheet" type="text/css" />
 	
 		@* Add the jQuery script from the jQuery CDN: *@
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -37,12 +37,12 @@ Before adding a Telerik UI component, you must include the theme, the jQuery scr
 	```HTML
 	<head>
 		...
-		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
+		<link href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-bootstrap@{{ site.themesCdnVersion }}/dist/bootstrap-main.css" rel="stylesheet" type="text/css" />
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 		@* Add the Kendo UI scripts: *@
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
 	</head>
 	```
 
@@ -54,10 +54,10 @@ Before adding a Telerik UI component, you must include the theme, the jQuery scr
 
 		@Styles.Render("~/Content/css")
 		@Scripts.Render("~/bundles/modernizr")
-		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
+		<link href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-bootstrap@{{ site.themesCdnVersion }}/dist/bootstrap-main.css" rel="stylesheet" type="text/css" />
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
 		
 		@* Add the bootstrap.min.js script: *@
 		<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>

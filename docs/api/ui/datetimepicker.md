@@ -353,7 +353,7 @@ How do I customize the appearance of a DateTimePicker in Kendo UI for jQuery? Se
 
 ### culture `String`*(default: "en-US")*
 
-Specifies the culture info used by the component. A valid kendo culture file must be added to the page in order for the example to work. `<script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>`
+Specifies the culture info used by the component. A valid kendo culture file must be added to the page in order for the example to work. `<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{version}/umd/cultures/kendo.culture.de-DE.min.js"></script>`
 
 
 <div class="meta-api-description">

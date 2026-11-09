@@ -37,8 +37,8 @@ The following example demonstrates how to subscribe to events by a handler name.
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js" type="module"></script>
 
     <h4>PDFViewer</h4>
     <div>
@@ -83,8 +83,8 @@ The following example demonstrates how to subscribe to events by a handler name.
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js" type="module"></script>
 
     <div id="example">
         <kendo-pdfviewer name="pdfviewer"

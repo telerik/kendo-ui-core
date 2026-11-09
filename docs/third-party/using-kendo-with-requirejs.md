@@ -62,7 +62,7 @@ The following example demonstrates how to use a bundle script with RequireJS.
 <!DOCTYPE HTML>
 <html>
   <head>
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
@@ -73,7 +73,7 @@ The following example demonstrates how to use a bundle script with RequireJS.
         paths: {
           "jquery": "https://code.jquery.com/jquery-1.9.1.min",
           "jszip": "https://unpkg.com/jszip@3.10.1/dist/jszip.min",
-          "kendo.all.min": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min",
+          "kendo.all.min": "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/kendo.all.min",
         }
       });
 
@@ -99,7 +99,7 @@ The following example demonstrates how to load AngularJS and initialize it with 
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
@@ -112,7 +112,7 @@ The following example demonstrates how to load AngularJS and initialize it with 
         paths: {
           "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min",
           "jquery": "https://code.jquery.com/jquery-1.9.1.min",
-          "kendo.all.min": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min"
+          "kendo.all.min": "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/kendo.all.min"
         },
         shim: {
           "angular": { deps: ["jquery"] },
@@ -148,7 +148,7 @@ The following example demonstrates how to use a [custom Kendo script created wit
 <!DOCTYPE HTML>
 <html>
   <head>
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>

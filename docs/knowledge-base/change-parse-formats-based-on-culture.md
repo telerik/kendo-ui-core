@@ -42,7 +42,7 @@ The default behavior of the DateTimePicker widget is to treat a value with no ti
 The following example demonstrates how to add the default short date format of the current culture to the `parseFormats` array, so that when the time portion is removed from the DateTimePicker input, the value is still parsed as a valid date.
 
 ```dojo
-<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.bg-BG.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/cultures/kendo.culture.bg-BG.min.js"></script>
 <input id="datetimepicker" />
 <script>
   kendo.culture('bg-BG');

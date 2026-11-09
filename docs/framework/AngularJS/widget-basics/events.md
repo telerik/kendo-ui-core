@@ -20,9 +20,9 @@ The following example includes a paragraph that uses the Angular `ng-show` direc
 
 ```
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
     <div ng-app="app" ng-controller="MyCtrl">
       <input kendo-date-picker k-options="monthPickerConfig" />
@@ -53,9 +53,9 @@ In the following example, the `kendoEvent` variable is defined in a scope and yo
 
 ```
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
     <div ng-app="app" ng-controller="MyCtrl">
       <input kendo-date-picker k-on-change="onDateSelected(kendoEvent)" />
@@ -89,9 +89,9 @@ The following example demonstrates how to use some of these local variables.
 
 ```
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-  <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+  <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">

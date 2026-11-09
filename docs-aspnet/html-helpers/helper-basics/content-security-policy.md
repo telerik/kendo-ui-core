@@ -15,7 +15,7 @@ position: 10
 The following code shows how to turn on the strict CSP mode:
 
  ```HTML
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' https://kendo.cdn.telerik.com https://code.jquery.com/; style-src 'self' https://kendo.cdn.telerik.com;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://code.jquery.com/; style-src 'self' https://cdn.jsdelivr.net;" />
  ```
 
 If the strict CSP mode is enabled, some browser features are disabled by default:
@@ -39,11 +39,11 @@ The rest of the Kendo UI components and internal mechanisms have been rewritten 
 {% if site.core %}
 
 When Kendo UI components are initialized from HTML helpers or Tag Helpers, inline scripts are generated automatically after each component HTML markup. When the CSP is enabled, you will get the following error:
-`Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'unsafe-eval' 'self' https://kendo.cdn.telerik.com.`
+`Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'unsafe-eval' 'self' https://cdn.jsdelivr.net.`
 
 {% else %}
 
-When Kendo UI components are initialized from HTML helpers, inline scripts are generated automatically after each component HTML markup. When the CSP is enabled, you will get the following error: `Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'unsafe-eval' 'self' https://kendo.cdn.telerik.com.`
+When Kendo UI components are initialized from HTML helpers, inline scripts are generated automatically after each component HTML markup. When the CSP is enabled, you will get the following error: `Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'unsafe-eval' 'self' https://cdn.jsdelivr.net.`
 
 {% endif %}
 
@@ -230,13 +230,13 @@ The Telerik UI for {{ site.framework }} releases before the R1 2023 SP1 one does
 1. Extend the `meta` CSP tag to include the `unsafe-eval` keyword and the `nonce` signature for enabling the CSP mode:
 
     ```HTML
-        <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' 'nonce-kendoInlineScript' https://kendo.cdn.telerik.com;">
+        <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' 'nonce-kendoInlineScript' https://cdn.jsdelivr.net;">
     ```
 
 1. Add the links used in the _Layout such as for example - `kendostatic`, `jquery`, and `unpkg(jszip)`:
 
     ```HTML
-        <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' 'nonce-kendoInlineScript' https://cdn.kendostatic.com https://code.jquery.com https://unpkg.com/;" />
+        <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' 'nonce-kendoInlineScript' https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com/;" />
     ```
 
 ## See Also
@@ -248,4 +248,3 @@ The Telerik UI for {{ site.framework }} releases before the R1 2023 SP1 one does
 {% endif %}
 * [Content Security Policy in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/troubleshoot/content-security-policy)
 * [Getting Started with Content Security Policy (CSP) Templates in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/framework/templates/get-started-csp-templates)
-

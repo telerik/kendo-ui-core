@@ -133,7 +133,7 @@ How to configure time zone handling for scheduling data in Kendo UI Scheduler? C
 #### Example - configure the data source model
 
     <script>
-        $.getScript('https://kendo.cdn.telerik.com/' + kendo.version + '/js/kendo.timezones.min.js', function() {
+        $.getScript('https://cdn.jsdelivr.net/npm/@progress/kendo-ui@' + kendo.version + '/umd/kendo.timezones.min.js', function() {
             var dataSource = new kendo.data.SchedulerDataSource({
                 batch: true,
                 transport: {

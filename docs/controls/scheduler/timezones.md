@@ -116,7 +116,7 @@ In the example below, the event will be displayed in the **Europe/Berlin** timez
       var version = kendo.version;
 
       // Load the timezone data first because non-UTC timezones require it.
-      $.getScript( 'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js', loadScheduler);
+      $.getScript( 'https://cdn.jsdelivr.net/npm/@progress/kendo-ui@'+version+'/umd/kendo.timezones.min.js', loadScheduler);
 
       function loadScheduler() {
         $("#scheduler").kendoScheduler({
@@ -148,7 +148,7 @@ The startTimezone and endTimezone of each single event can be used to define whi
     <script>
       var version = kendo.version;
       // Load the timezone data first because per-event timezones require it.
-      $.getScript( 'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js', function( data, textStatus, jqxhr ) {
+      $.getScript( 'https://cdn.jsdelivr.net/npm/@progress/kendo-ui@'+version+'/umd/kendo.timezones.min.js', function( data, textStatus, jqxhr ) {
         $("#scheduler").kendoScheduler({       
           date: new Date("2013/6/13"),
           startTime: new Date("2013/6/13 10:00"),

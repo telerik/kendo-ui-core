@@ -28,8 +28,8 @@ Follow the steps in this article to download a script key and add it to your app
 5. Add the file as a script reference right after the `kendo.aspnetmvc.min.js` reference or the Kendo UI scripts you are using.
 
 ```html
-<script src="https://kendo.cdn.telerik.com/2024.4.1112/kendo.all.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2024.4.1112/kendo.aspnetmvc.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js"></script>
 <script src="~/js/telerik-license.js"></script>
 
 <!-- Rest of the HTML -->
@@ -39,8 +39,8 @@ Follow the steps in this article to download a script key and add it to your app
 5. Add the file as a script reference right after the `kendo.aspnetmvc.min.js` reference or the Kendo UI scripts you are using.
 
 ```html
-<script src="https://kendo.cdn.telerik.com/2024.4.1112/kendo.all.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2024.4.1112/kendo.aspnetmvc.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js"></script>
 <script src="~/Scripts/telerik-license.js"></script>
 
 <!-- Rest of the HTML -->

@@ -82,7 +82,7 @@ In the example below, you can see how to enable the Form Filling feature:
     <script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
     <script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" type="module"></script>
-    <script src="https://kendo.cdn.telerik.com/2025.2.520/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2025.2.520/umd/kendo.all.min.js" type="module"></script>
 
     <div id="pdfviewer"></div>
     <script type="module">

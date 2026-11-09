@@ -36,10 +36,10 @@ To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript refe
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
 
     @Scripts.Render("~/bundles/jquery")
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{ site.cdnVersion }}/umd/kendo.all.min.js"></script>
 </head>
 ```
 

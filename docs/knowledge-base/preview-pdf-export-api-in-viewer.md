@@ -40,7 +40,7 @@ Combine the Drawing API with the [Kendo UI PDFViewer component](https://demos.te
 ```dojo
 <script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.min.mjs" type="module"></script>
 <script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.worker.min.mjs" type="module"></script>
-<script src="https://kendo.cdn.telerik.com/2025.1.227/js/kendo.all.min.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2025.1.227/umd/kendo.all.min.js" type="module"></script>
   <div class="content-wrapper">
     <input type="text" placeholder="Type your name" />
     <input type="text" placeholder="Type your comment" />    

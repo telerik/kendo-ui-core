@@ -42,7 +42,7 @@ The following example demonstrates how to extend an existing culture script, cre
 
 
 ```dojo
-<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.en-GB.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/cultures/kendo.culture.en-GB.min.js"></script>
 
 <div id="example">
     <input id="initial" value="10" min="1"/>

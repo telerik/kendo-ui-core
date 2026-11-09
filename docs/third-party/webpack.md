@@ -178,7 +178,7 @@ Create a folder named `dist` and add the `index.html` file in it.
       <head>
         <meta charset="utf-8" />
         <title>Getting Started</title>
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{themesCdnVersion}/default/default-main.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css">
         <script src="main.js"></script>
       </head>
       <body>

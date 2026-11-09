@@ -42,7 +42,7 @@ Use a strict CSP policy without `unsafe-inline` and `unsafe-eval` where your app
 ```HTML.skip-repl
 <meta http-equiv="Content-Security-Policy"
       content="default-src 'self';
-               script-src 'self' https://kendo.cdn.telerik.com https://code.jquery.com;
+               script-src 'self' https://cdn.jsdelivr.net https://code.jquery.com;
                style-src 'self';" />
 ```
 

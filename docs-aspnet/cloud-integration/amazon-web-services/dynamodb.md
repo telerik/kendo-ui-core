@@ -40,12 +40,12 @@ Once you have a user with the necessary permissions, you can proceed with config
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kendo Grid DynamoDB Integration</title>
 
-  <link rel="stylesheet" href=""https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css">
+  <link rel="stylesheet" href=""https://cdn.jsdelivr.net/npm/@@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css">
 
   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.221.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-  <script src="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/js/kendo.all.min.js"></script>
-  <script src="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/js/kendo.aspnetmvc.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{site.cdnVersion}}/umd/kendo.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{site.cdnVersion}}/umd/kendo.aspnetmvc.min.js"></script>
 
   <script>
     AWS.config.update({

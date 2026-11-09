@@ -13,7 +13,7 @@ Localization is the process of adapting software to meet the requirements of loc
 
 To translate the messages of the TaskBoard, use either of the following approaches:
 
-* Register a script before the initialization of the TreeList itself, for example, `<script src="https://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.es-ES.min.js"></script>`.
+* Register a script before the initialization of the TreeList itself, for example, `<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/messages/kendo.messages.es-ES.min.js"></script>`.
 * Reference a local file, for example, `<script src="~/lib/kendo-ui/js/cultures/kendo.messages.es-ES.min.js"></script>`.
 
 ## See Also

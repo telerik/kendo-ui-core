@@ -20,7 +20,7 @@ To replicate the look and feel of Bootstrap in Kendo UI, follow the steps below:
 
 The following example demonstrates the necessary link to these stylesheets.
 
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" /
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-bootstrap@{{ site.themesCdnVersion }}/dist/bootstrap-main.css" /
 
 ## Using Bootstrap Responsive Features
 

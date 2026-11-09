@@ -221,14 +221,14 @@ After the process is completed, you should see `dist/js/kendo.custom.js`(or `min
 
 If you want to skip building Kendo UI Core yourself, head on over to [Telerik.com](http://www.telerik.com/kendo-ui/open-source-core) to grab the full source.
 
-## Using Kendo UI Core via the Kendo Static CDN
+## Using Kendo UI Core via CDN
 
-You can also easily include Kendo UI Core in your site or application by using the Kendo CDN:
+You can also easily include Kendo UI Core in your site or application from a CDN service like `jsDelivr` or `unpkg`. For example:
 
 ```html
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/13.0.0/default/default-ocean-blue.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@14.6.1/dist/default-ocean-blue.css">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="http://kendo.cdn.telerik.com/2026.1.212/js/kendo.ui.core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2026.3.1015/umd/kendo.ui.core.min.js"></script>
 ```
 The main advantage of the CDN approach is that your users may be able to leverage a primed cache version of Kendo UI Core if they've visited other sites using the framework.
 

@@ -43,7 +43,7 @@ How do I configure date and number formats for a Kendo UI MaskedTextBox? Configu
 #### Example - specify German culture internationalization
 
 
-    <script src="https://kendo.cdn.telerik.com/2024.3.1015/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2024.3.1015/umd/cultures/kendo.culture.de-DE.min.js"></script>
     <input id="maskedtextbox" />
     <script>
     $("#maskedtextbox").kendoMaskedTextBox({

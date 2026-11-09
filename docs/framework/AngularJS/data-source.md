@@ -23,9 +23,9 @@ The following example contains static local data and demonstrates how to try to 
 
 ```
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid
@@ -74,9 +74,9 @@ However, if you click the **UPDATE FROM CODE** button, nothing appears to happen
 
 ```
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid

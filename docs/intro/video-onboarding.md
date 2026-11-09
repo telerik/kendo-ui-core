@@ -36,7 +36,7 @@ The Kendo UI for jQuery with JavaScript technical online training has an approxi
 
 * **Chapter 1: Welcome** (Course Overview, Prerequisites, Resources, Tour of Demo Application)
 * **Chapter 2: Getting Started** (What You Are Building, Sample Code, Running the API and Sample Apps)
-* **Chapter 3: Kendo Workflow** (Using Kendo CDN, Webpack, Kendo NPM, Buttons Example)
+* **Chapter 3: Kendo Workflow** (Using jsDelivr, Webpack, Kendo NPM, Buttons Example)
 * **Chapter 4: Basic UI Components** (Adding Kendo Inputs, DropDown, DropDown Templates, Slider, TabStrip Navigation, ComboBox, and ComboBox Templates)
 * **Chapter 5: Chart** (Chart Anatomy, Setup, Data, CategoryAxis, Series)
 * **Chapter 6: Grid** (Grid Setup and Rendering, Columns, Column Templates, Sorting and Paging)

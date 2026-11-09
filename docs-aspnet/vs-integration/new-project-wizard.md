@@ -197,7 +197,7 @@ Run the project and open the `Index` page in the browser to view the DatePicker.
 The project wizard applies the selected theme to the application. To change it later, replace the theme reference in `_Layout.cshtml`. For example, use the following CSS reference for the Default theme:
 
 ```HTML
-<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/@@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" rel="stylesheet" type="text/css" />
 ```
 
 The [SASS-based themes]({% slug sassbasedthemes_overview %}) do not require additional CSS files.

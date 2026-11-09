@@ -32,8 +32,8 @@ How can I insert a Kendo UI DatePicker widget into the toolbar of the Kendo UI G
 > The below example loads Kendo UI 2023.3.1010 version.
 
 ```dojo
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
 
 <div ng-app="KendoDemo" ng-controller="MyCtrl">
   <div kendo-gantt="theGantt" k-options="ganttOptions"></div>    

@@ -106,7 +106,7 @@ Using any of the Kendo UI for jQuery components distributed through the followin
 
 | Distribution channel | Version |
 |----------------------|----------------|
-| Kendo CDN (`kendo.cdn.telerik.com` and `cdn.kendostatic.com`) | version R3 2022 and later |
+| Kendo CDN (`kendo.cdn.telerik.com` and `cdn.kendostatic.com`), `jsDelivr` or `unpkg` CDN (`@progress/kendo-ui`) | version R3 2022 and later |
 | npm packages (`@progress/kendo-ui`) | version R2 2022 and later |
 | Trial installation bundle | version R3 2023 and later |
 | `KendoUIProfessional.Trial` NuGet package | version R3 2023 and later |
@@ -189,7 +189,7 @@ If your project includes Kendo UI for Angular components alongside Kendo UI for 
 In such hybrid scenarios, it is recommended to activate the license by [generating a Kendo Licensing Script Key and referencing it]({% slug using-license-code %}) before any Kendo UI components are initialized.
 
 ```js
-  <script src="https://kendo.cdn.telerik.com/2025.4.1111/js/kendo.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2025.4.1111/umd/kendo.all.min.js"></script>
   <script>
     // you can either refer a js file, or directly place the key in a script tag as below
     KendoLicensing.setScriptKey("yourLicenseScriptKey");

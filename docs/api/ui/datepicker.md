@@ -383,7 +383,7 @@ How do I change the date format for a Kendo UI DatePicker to match US English cu
         Include the culture file.
         List of available cultures - https://github.com/telerik/kendo-ui-core/tree/master/src/cultures
     -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/cultures/kendo.culture.de-DE.min.js"></script>
 
     <input id="datepicker" />
     <script>

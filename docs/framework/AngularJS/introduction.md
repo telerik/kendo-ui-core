@@ -49,9 +49,9 @@ You can reference a widget by using any of the following approaches:
 
     ```
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
         
         <div ng-app="app" ng-controller="MyCtrl">
           <input kendo-datepicker="datePicker" k-on-change="onChange()">
@@ -69,9 +69,9 @@ You can reference a widget by using any of the following approaches:
 
     ```
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
         <div ng-app="app" ng-controller="MyCtrl">
           <kendo-date-picker k-scope-field="datePicker" k-on-change="onChange()"></kendo-date-picker>
@@ -89,9 +89,9 @@ You can reference a widget by using any of the following approaches:
 
     ``` 
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
         <div id="example" ng-app="KendoDemos">
             <div class="demo-section k-header" ng-controller="MyCtrl">

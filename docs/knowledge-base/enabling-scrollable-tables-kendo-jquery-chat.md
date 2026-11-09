@@ -89,12 +89,12 @@ function transformTables(html) {
     <base href="https://demos.telerik.com/kendo-ui/chat/markdown-visualization?_gl=1*8ky9au*_gcl_au*MTYxMTQ0MTQyMC4xNzgxMDczNDIxLjE3NzY0MzY0OTkuMTc4MjM3NDE0OC4xNzgyMzc0MTQ4*_ga*MTIyMDc2ODEzMC4xNzU2OTA3MTk1*_ga_9JSNBCSF54*czE3ODIzNjkyMzgkbzUzJGcxJHQxNzgyMzg2MTU1JGo0MiRsMCRoMA..">
     <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
     <title></title>
-    <link href="https://kendo.cdn.telerik.com/themes/14.1.0/meridian/meridian-main.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-meridian@14.1.0/dist/meridian-main.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     
     
     
-    <script src="https://kendo.cdn.telerik.com/2026.2.520/js/kendo.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2026.2.520/umd/kendo.all.min.js"></script>
     
     
 </head>

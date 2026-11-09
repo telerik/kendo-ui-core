@@ -11,7 +11,7 @@ position: 2
 
 The DataSource component supports built-in types of data binding.
 
-To include the default data source types, add the `<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>` script to your `_Layout.cshtml` file after the Kendo UI scripts.
+To include the default data source types, add the `<script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>` script to your `_Layout.cshtml` file after the Kendo UI scripts.
 
 The available DataSource types of data binding are:
 * [Ajax](#ajax-datasource)

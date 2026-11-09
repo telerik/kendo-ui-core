@@ -47,8 +47,8 @@ To define the current culture:
 
         <!-- or when using the Kendo UI CDN -->
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.en-GB.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/cultures/kendo.culture.en-GB.min.js"></script>
     ```
 
 1. Set the culture script that Kendo UI will use.

@@ -45,7 +45,7 @@ To use the Telerik UI font icons:
 
  The following example demonstrates how to render a font calendar icon.
  ```HTML
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
     <link rel="stylesheet" href="https://unpkg.com/@@progress/kendo-font-icons/dist/index.css" />
 
     <span class="k-icon k-font-icon k-i-calendar"></span>

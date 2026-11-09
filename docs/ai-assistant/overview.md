@@ -23,6 +23,8 @@ The Agentic UI Generator is delivered through the [Kendo UI for jQuery MCP Serve
 
 The capabilities and MCP tools of the Agentic UI Generator vary across the Telerik and Kendo UI products. The Kendo UI for jQuery MCP server exposes the `kendo_jquery_assistant` tool, which provides context about Kendo UI for jQuery components, their configuration, and API. Your AI client uses this context to generate and explain code that includes Kendo UI for jQuery components.
 
+The server also provides the `kendo_jquery_upgrade_assistant` tool. It runs Kendo CLI codemods for an existing project and helps your AI client identify changes that need further attention. See [AI-Assisted Migration]({% slug ai_assisted_migration_kendoui %}) for prerequisites and upgrade steps.
+
 ## Getting Started
 
 To use the Kendo UI for jQuery Agentic UI Generator, you need to have:
@@ -42,6 +44,7 @@ You can use the Agentic UI Generator for:
 * Dummy data generation and data binding&mdash;Quickly add data to your app for testing and prototyping purposes. Avoid exposing or providing access to your proprietary or production data to AI-enabled tools.
 * Step-by-step explanations&mdash;Understand the solutions provided by the Agentic UI Generator through the detailed explanations (depends on the tool, mode, and model used). To further develop your knowledge, check the respective documentation.
 * Preliminary troubleshooting&mdash;Resolve obvious and easy-to-solve issues affecting your code. For more complex issues, look for assistance from the community or contact the support team.
+* [AI-assisted migration]({% slug ai_assisted_migration_kendoui %})&mdash;Upgrade an existing Kendo UI for jQuery project using codemods and AI guidance for remaining changes.
 
 > The Agentic UI Generator is not intended for styling and theme customization. If you are looking for AI-powered styling and theming, check out [ThemeBuilder](https://www.telerik.com/themebuilder).
 
@@ -81,6 +84,7 @@ The Kendo UI for jQuery Agentic UI Generator operates under the following condit
 * The Agentic UI Generator does not generate the actual responses and has no access to these responses. It only provides a better context that helps your selected model (for example, GPT, Gemini, Claude) provide better responses.
 * The Agentic UI Generator does not associate your prompts to your Telerik user account. Your prompts and generated context are anonymized and stored for statistical and troubleshooting purposes.
 * The Agentic UI Generator stores metrics about how often and how much you use it in order to ensure compliance with the [allowed number of requests that correspond to your current license](#usage-limits).
+* The Upgrade Assistant runs codemods in the project directory and can modify project files. 
 
 Make sure to also get familiar with the terms and privacy policy of your selected AI model and AI client.
 

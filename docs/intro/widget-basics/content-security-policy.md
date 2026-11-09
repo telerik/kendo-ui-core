@@ -34,7 +34,7 @@ The Kendo UI for jQuery releases before R1 2023 one use `eval()` calls for their
 
 If CSP is enabled for a Kendo UI application, you have to add the `unsafe-eval` keyword as a part of the `meta` tag that is used for enabling the CSP mode.
 
-    <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' https://kendo.cdn.telerik.com;">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' https://cdn.jsdelivr.net;">
 
 
 ## See Also 

@@ -55,8 +55,8 @@ The following example demonstrates the implementation of the suggested approach.
 > The example loads Kendo UI 2023.3.1010 version.
 
 ```javascript
-	<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-	<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
 
   <link rel="stylesheet" href="https://rawgit.com/tannerlinsley/nz-toggle/master/dist/nz-toggle.min.css"/>
     <script src="https://rawgit.com/tannerlinsley/nz-toggle/master/dist/nz-toggle.min.js">   </script>

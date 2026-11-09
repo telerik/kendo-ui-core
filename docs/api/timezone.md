@@ -39,9 +39,9 @@ The timezone.
       var version = kendo.version;
 
       $.getScript(
-        "https://kendo.cdn.telerik.com/" +
+        "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@" +
           version +
-          "/js/kendo.timezones.min.js",
+          "/umd/kendo.timezones.min.js",
         loadExample,
       );
 
@@ -87,9 +87,9 @@ The `'to'` offset represented as minutes (that is, the `Number` type) or timezon
       var version = kendo.version;
 
       $.getScript(
-        "https://kendo.cdn.telerik.com/" +
+        "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@" +
           version +
-          "/js/kendo.timezones.min.js",
+          "/umd/kendo.timezones.min.js",
         loadExample,
       );
 
@@ -138,9 +138,9 @@ The offset represented as minutes (that is, the `Number` type) or timezone (that
       var version = kendo.version;
 
       $.getScript(
-        "https://kendo.cdn.telerik.com/" +
+        "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@" +
           version +
-          "/js/kendo.timezones.min.js",
+          "/umd/kendo.timezones.min.js",
         loadExample,
       );
 
@@ -185,9 +185,9 @@ The offset represented as minutes (that is, the `Number` type) or timezone (that
       var version = kendo.version;
 
       $.getScript(
-        "https://kendo.cdn.telerik.com/" +
+        "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@" +
           version +
-          "/js/kendo.timezones.min.js",
+          "/umd/kendo.timezones.min.js",
         loadExample,
       );
 
@@ -232,9 +232,9 @@ The name of the particular timezone that will be used to get the abbreviation of
       var version = kendo.version;
 
       $.getScript(
-        "https://kendo.cdn.telerik.com/" +
+        "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@" +
           version +
-          "/js/kendo.timezones.min.js",
+          "/umd/kendo.timezones.min.js",
         loadExample,
       );
 
@@ -273,7 +273,7 @@ The date, represented as a date object or milliseconds, that will be converted t
       
         $('<script/>', { 
             type:'text/javascript', 
-            src:'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js'
+            src:'https://cdn.jsdelivr.net/npm/@progress/kendo-ui@'+version+'/umd/kendo.timezones.min.js'
         }).appendTo('head');
     </script>
 

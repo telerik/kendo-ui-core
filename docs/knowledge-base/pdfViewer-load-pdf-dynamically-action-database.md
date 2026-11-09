@@ -42,7 +42,7 @@ The following example demonstrates how to change the loaded PDF dynamically by c
 ```dojo
 <script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.min.mjs" type="module"></script>
 <script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.worker.min.mjs" type="module"></script>
-<script src="https://kendo.cdn.telerik.com/2025.1.227/js/kendo.all.min.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2025.1.227/umd/kendo.all.min.js" type="module"></script>
 <div id="grid"></div>
 
 <div id="pdfViewer">

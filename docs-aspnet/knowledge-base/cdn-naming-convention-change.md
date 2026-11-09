@@ -27,23 +27,23 @@ components: ["general"]
 I was using the following Kendo JS and CSS links before upgrading {{ site.product }}:
 
 ```
-    https://kendo.cdn.telerik.com/2022.2.802/styles/kendo.bootstrap-main.min.css
+    https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.2.802/css/web/kendo.bootstrap-main.min.css
 ```
 
-However, as of the latest `R1 2023 SP1` release, these resources seem to be obsolete. How can I reference the themes from the CDN?
+However, as of the latest `R1 2023 SP1` release, these resources seem to be obsolete. How can I reference the themes from jsDelivr?
 
 ## Solution
 
-As of version `R1 2023 SP1`, the CDN has a new structure where it is composed of:
+As of version `R1 2023 SP1`, the themes are available as npm packages through jsDelivr. A theme URL identifies:
 
 * Theme version&mdash;for example, `7.0.2`.
 * Theme name&mdash;for example, `default`, `bootstrap`, `material`, and so on.
 * File name&mdash;is the name of the theme.
 
-The following example shows the new structure of the Kendo CDN resources:
+The following example shows a jsDelivr URL for the Bootstrap theme:
 
 ```
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.2/bootstrap/bootstrap-main.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-bootstrap@7.0.2/dist/all.css" />
 ```
 
 ## See Also

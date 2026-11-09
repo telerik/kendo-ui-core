@@ -38,13 +38,13 @@ The following example demonstrates how to include the stylesheets to your projec
 > * You must register the common CSS file before the theme CSS file because the theme CSS file needs to override common styles through selectors with the same CSS specifics.
 > * On the page and at any given time, you need to register only one pair of common and theme CSS files.
 
-The following example demonstrates how to include the default Less theme by using the Kendo CDN:
+The following example demonstrates how to include the default Less theme from the Kendo UI npm package by using jsDelivr:
 
 ```html
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.rtl.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.default.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.mobile.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.2.510/css/web/kendo.common.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.2.510/css/web/kendo.rtl.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.2.510/css/web/kendo.default.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.2.510/css/mobile/kendo.mobile.all.min.css">
 ```
 
 ## Components for Data Visualization

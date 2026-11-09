@@ -18,9 +18,9 @@ The following example demonstrates how to change the disabled state of the DropD
 
 ```
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
     <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">
@@ -54,9 +54,9 @@ The following example demonstrates how to change the read-only state of the Drop
 
 ```
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
     <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">

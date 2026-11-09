@@ -30,7 +30,7 @@ The following example demonstrates the configuration for SystemJS up to 0.20 ver
     <!DOCTYPE html>
     <html>
     <head>
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion  }}/default/default-main.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion  }}/dist/default-main.css">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.16/system.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>

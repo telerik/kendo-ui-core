@@ -10,7 +10,7 @@ position: 40
 
 # Using CDN
 
-The Kendo UI for jQuery CDN resides on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/). Use it to load the official Kendo UI for jQuery releases and service packs without hosting the assets locally.
+Use jsDelivr to load Kendo UI for jQuery from its NPM packages without hosting the assets locally. Pin the Kendo UI and theme package versions in each URL and use the matching Subresource Integrity (SRI) value.
 
 >note As of the R3 2022 release, you must activate the CDN distribution by [adding your script license key]({% slug using-license-code %}).
 
@@ -18,33 +18,41 @@ The Kendo UI for jQuery CDN resides on the [Amazon CloudFront](https://aws.amazo
 
 1. Add the required CSS and JavaScript files.
 
-  The Kendo UI CDN provides `kendo.cdn.telerik.com` and the cookie-free `cdn.kendostatic.com` service.
+  Load a theme from the `@progress/kendo-theme-default` package. This example uses the `14.5.0` version of the Ocean Blue theme:
 
-  >note The legacy `https://da7xgjtj801h2.cloudfront.net/` URL remains active but is no longer recommended for new projects.
-
-  Add the theme stylesheet from `https://kendo.cdn.telerik.com/themes/<version>/<theme>/<swatch>.css`. For example, you can load the `{{ site.themesCdnVersion }}` version of the `Default` theme from `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css`.
+  ```html
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@14.5.0/dist/default-ocean-blue.css" integrity="sha256-eNPRBUJRAdbNuZjjM0HWX4qWYUQONec3soGf9AgbjbE=" crossorigin="anonymous" />
+  ```
 
   >note Starting with the 2023 R3 release, the font icons are detached from the Kendo Themes CDN. For more information on referencing the icons in your project, see the [font icon usage documentation](https://www.telerik.com/design-system/docs/foundation/iconography/font-icons/#usage).
 
   Add the JavaScript files by using either the [JavaScript modules]({% slug kendoui_ecmascript_overview %}) or the bundled JavaScript files.
 
-  The [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) are located in the `/mjs/` folder. To include a JavaScript module in your project, use the `script` tag with the `type="module"` attribute.
+  The [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) are located in the `/esm/` folder. To include a JavaScript module in your project, use the `script` tag with the `type="module"` attribute.
 
-  The following example demonstrates how to include an individual component module.
-
-  ```html
-  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.grid.js" type="module"></script>
-  ```
-
-  The following example demonstrates how to include all available modules.
+  The following example demonstrates how to include an individual component module from version `{{ site.cdnVersion }}`.
 
   ```html
-  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.all.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/esm/kendo.grid.js" type="module"></script>
   ```
 
-  The bundled version of the Kendo UI for jQuery library is available at `https://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`. For example, you can load the `{{ site.cdnVersion }}` version from `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`.
+  The following example demonstrates how to include the bundled module file.
 
-  The minified Kendo UI for jQuery scripts are available as of the Kendo UI Q1 2014 SP1 release. To load them, use `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js`.
+  ```html
+  <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/esm/kendo.all.js" type="module"></script>
+  ```
+
+  The UMD bundles are located in the `/umd/` folder. To load the full bundle, use the exact Kendo UI version and its matching SRI value:
+
+  ```html
+  <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2026.3.811/umd/kendo.all.min.js" integrity="sha256-Bjy6F9ho2vlkrHseUGTTc+Y6swvrpO7a10REh+IJHD4=" crossorigin="anonymous"></script>
+  ```
+
+  To load the smaller Core bundle, use `https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2026.3.811/umd/kendo.ui.core.min.js` with its matching SRI value:
+
+  ```html
+  <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2026.3.811/umd/kendo.ui.core.min.js" integrity="sha256-/wzJ3w2XwU5qiMCixBzKG0oQkxEJryRsnOB4uiyKNYE=" crossorigin="anonymous"></script>
+  ```
 
 1. Add your script license key.
 
@@ -61,10 +69,10 @@ The Kendo UI for jQuery CDN resides on the [Amazon CloudFront](https://aws.amazo
         <meta charset="utf-8">
         <title>Kendo UI using CDN</title>
 
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@14.5.0/dist/default-ocean-blue.css" integrity="sha256-eNPRBUJRAdbNuZjjM0HWX4qWYUQONec3soGf9AgbjbE=" crossorigin="anonymous" />
 
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2026.3.811/umd/kendo.all.min.js" integrity="sha256-Bjy6F9ho2vlkrHseUGTTc+Y6swvrpO7a10REh+IJHD4=" crossorigin="anonymous"></script>
     </head>
     <body>
       <input id="ddl" />
@@ -81,6 +89,35 @@ The Kendo UI for jQuery CDN resides on the [Amazon CloudFront](https://aws.amazo
     </body>
 </html>
 ```
+
+## Using Legacy Kendo CDNs
+
+Up to Kendo UI version `<DEPRICATION_VERSION>`, client-side resources were also hosted on the legacy Kendo CDN services:
+
+* `https://kendo.cdn.telerik.com`&mdash;The Kendo CDN.
+* `https://cdn.kendostatic.com`&mdash;The cookieless Kendo CDN host.
+
+The historical URL patterns used a Kendo UI version for JavaScript and older CSS files, and a separate theme version for Sass theme CSS:
+
+```text
+https://kendo.cdn.telerik.com/{KENDO_VERSION}/js/{FILE}
+https://cdn.kendostatic.com/{KENDO_VERSION}/js/{FILE}
+https://kendo.cdn.telerik.com/{KENDO_VERSION}/mjs/{FILE}
+https://kendo.cdn.telerik.com/{KENDO_VERSION}/styles/{FILE}
+https://kendo.cdn.telerik.com/themes/{THEME_VERSION}/{THEME}/{SWATCH}.css
+```
+
+For example, a legacy application could build its URLs from the Kendo UI and theme versions:
+
+```javascript
+const KENDO_VERSION = "2026.3.811";
+const THEME_VERSION = "14.5.0";
+const kendoAllUrl = `https://kendo.cdn.telerik.com/${KENDO_VERSION}/js/kendo.all.min.js`;
+const cookielessKendoAllUrl = `https://cdn.kendostatic.com/${KENDO_VERSION}/js/kendo.all.min.js`;
+const themeUrl = `https://kendo.cdn.telerik.com/themes/${THEME_VERSION}/default/default-main.css`;
+```
+
+Use the version-pinned jsDelivr package URLs described above for new integrations.
 
 ## Next Steps
 

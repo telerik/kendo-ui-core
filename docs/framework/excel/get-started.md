@@ -75,7 +75,7 @@ To take full advantage of the Excel Export feature, download the [JSZip](http://
 ```
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/kendo.all.min.js"></script>
 ```
 
 JSZip is part of the Kendo UI distribution and is also available through the Kendo UI CDN:

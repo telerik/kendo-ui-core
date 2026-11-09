@@ -88,12 +88,12 @@ The following example demonstrates how to handle custom fonts.
     <script>
         // Import the DejaVu Sans font for embedding.
         // NOTE: Only required if the Kendo UI stylesheets are loaded
-        // from a different origin, for example, kendo.cdn.telerik.com.
+        // from a different origin, for example, cdn.jsdelivr.net.
         kendo.pdf.defineFont({
-            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            "DejaVu Sans"             : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.3.1109/css/web/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.3.1109/css/web/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.3.1109/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.3.1109/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
     </script>
 
@@ -126,12 +126,12 @@ The following example demonstrates how to handle custom fonts.
     <script>
         // Import the DejaVu Sans font for embedding.
         // NOTE: Only required if the Kendo UI stylesheets are loaded
-        // from a different origin, for example, kendo.cdn.telerik.com.
+        // from a different origin, for example, cdn.jsdelivr.net.
         kendo.pdf.defineFont({
-            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2022.3.1109/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            "DejaVu Sans"             : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.3.1109/css/web/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.3.1109/css/web/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.3.1109/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.3.1109/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
     </script>
 

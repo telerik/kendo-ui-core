@@ -53,7 +53,7 @@ To add the client-side resources to your project:
             ...
 
             <link rel="stylesheet"
-                href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"
+                href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css"
                 asp-fallback-href="~/lib/kendo-ui/styles/default-main.css"
                 asp-fallback-test-class="k-theme-test-class"
                 asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
@@ -79,11 +79,11 @@ To add the client-side resources to your project:
             </script>
 
             @* Place the Kendo UI scripts after jQuery. *@
-            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"
+            <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/kendo.all.min.js"
                     asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
                     asp-fallback-test="window.kendo">
             </script>
-            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.aspnetmvc.min.js"
+            <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/kendo.aspnetmvc.min.js"
                     asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
                     asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
             </script>
@@ -177,7 +177,7 @@ To add the client-side resources to your project:
             ...
 
             <link rel="stylesheet"
-                href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"
+                href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css"
                 asp-fallback-href="~/lib/kendo-ui/styles/default-main.css"
                 asp-fallback-test-class="k-common-test-class"
                 asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
@@ -203,11 +203,11 @@ To add the client-side resources to your project:
             </script>
 
             @* Place the Kendo UI scripts after jQuery. *@
-            <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"
+            <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"
                     asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
                     asp-fallback-test="window.kendo">
             </script>
-            <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"
+            <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"
                     asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
                     asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
             </script>

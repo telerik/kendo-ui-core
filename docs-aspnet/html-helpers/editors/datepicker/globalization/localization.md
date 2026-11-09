@@ -14,7 +14,7 @@ The DatePicker provides options for localizing its user interface by utilizing i
 To apply the desired culture, add a reference to the script file before the DateRangePicker is initialized and include the desired culture in the settings of the helper.
 
 ```HtmlHelper
-    <script src="https://kendo.cdn.telerik.com/2019.2.619/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@2019.2.619/js/cultures/kendo.culture.de-DE.min.js"></script>
 
     @(Html.Kendo().DatePicker()
         .Name("datepicker")

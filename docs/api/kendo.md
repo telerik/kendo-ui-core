@@ -177,7 +177,7 @@ How do I set the locale for Kendo UI widgets? Configure or retrieve the current 
 </div>
 
 #### Example -  include a culture-specific JavaScript file and set the culture
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.en-GB.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/cultures/kendo.culture.en-GB.min.js"></script>
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("{0:c}", 99)); // outputs "$99.00" using the default en-US culture
@@ -626,7 +626,7 @@ How to convert string inputs into decimal numbers in Kendo UI? Convert string in
 
 #### Example
 
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseFloat("12.22")); // outputs "12.22"
@@ -662,7 +662,7 @@ How do I convert string values to integers using Kendo UI? Convert numeric strin
 
 #### Example
 
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseInt("12.22")); // outputs "12"
@@ -1258,7 +1258,7 @@ How can I use Kendo UI's toString method to format a date in a culture-aware way
 </div>
 
 #### Example
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
       // Format a number using standard number formats and default culture (en-US)
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -2039,7 +2039,7 @@ Formats the value as a number with decimal and thousand separators.
 
 ##### Example
 
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(1234.567, "n")); // outputs "1,234.57"
@@ -2054,7 +2054,7 @@ Formats the value by adding the currency symbol.
 
 ##### Example
 
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(1234.567, "c")); // outputs "$1,234.57"

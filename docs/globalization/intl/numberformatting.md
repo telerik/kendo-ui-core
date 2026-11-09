@@ -18,7 +18,7 @@ The following runnable example demonstrates how to format numbers by using the [
 
 ```dojo
     <!-- Add the de-DE culture file -->
-    <script src="https://kendo.cdn.telerik.com/2022.1.119/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.1.119/js/cultures/kendo.culture.de-DE.min.js"></script>
     <h4>Number formats with US culture.</h4>
     <div id="content"></div>
     <h4>Number formats with DE culture.</h4>
@@ -182,8 +182,8 @@ The following runnable example demonstrates how to use the [`kendo.toString`](/a
         kendo.ui.progress($("#scheduler"), true);
         language= this.value();
 
-        var baseUrlMessages = 'https://kendo.cdn.telerik.com/2022.1.119/js/messages/kendo.messages.';
-        var baseUrlCultures = 'https://kendo.cdn.telerik.com/2022.1.119/js/cultures/kendo.culture.';
+        var baseUrlMessages = 'https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.1.119/js/messages/kendo.messages.';
+        var baseUrlCultures = 'https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.1.119/js/cultures/kendo.culture.';
 
         $.getScript(baseUrlMessages + language + ".min.js", function () {
           $.getScript(baseUrlCultures + language + ".min.js", function () {

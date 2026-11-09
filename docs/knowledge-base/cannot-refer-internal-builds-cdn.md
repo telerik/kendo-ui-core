@@ -38,7 +38,7 @@ For internal builds, use private CDN services. It is recommended that you implem
     <html>
     <head>
         <title>Welcome to Kendo UI for jQuery</title>
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
 
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script>
@@ -48,7 +48,7 @@ For internal builds, use private CDN services. It is recommended that you implem
             }
         </script>
 
-        <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/kendo.all.min.js"></script>
         <script>
             if (typeof kendo == "undefined") {
                 // Checking for loaded CSS files is cumbersome,

@@ -1,6 +1,6 @@
 ---
 title: Referring Kendo UI internal builds from a CDN
-description: How can I refer Kendo UI internal builds from a CDN if the official Kendo CDN provides only official releases when working with {{ site.product }} UI components?
+description: How can I refer Kendo UI internal builds from a CDN if public npm-compatible CDN services provide only published releases when working with {{ site.product }} UI components?
 type: how-to
 page_title: Referring Kendo UI internal builds from a CDN
 slug: cdn_cannot_refer_internal_builds
@@ -22,7 +22,7 @@ components: ["general"]
 
 ## Description
 
-How can I refer Kendo UI internal builds from a CDN if the official Kendo CDN provides only official releases? I need these internal builds for my {{ site.product }} project.
+How can I refer Kendo UI internal builds from a CDN if public npm-compatible CDN services provide only published releases? I need these internal builds for my {{ site.product }} project.
 
 ## Solution
 
@@ -34,7 +34,7 @@ For access to internal builds over CDN, use private CDN services. Always impleme
     <html>
     <head>
         <title>Welcome to Kendo UI</title>
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
 
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script>
@@ -44,7 +44,7 @@ For access to internal builds over CDN, use private CDN services. Always impleme
             }
         </script>
 
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
         <script>
             if (typeof kendo == "undefined") {
                 // Checking for loaded CSS files is cumbersome.

@@ -35,7 +35,7 @@ The following {{ site.product }} helpers depend on the [current culture](https:/
 
 To use a culture that is different from the default `en-US` one in {{ site.product }}:
 
-1. Copy the required culture JavaScript file from the `\js\culture\` folder of your [{{ site.product }} installation]({% slug downloadinstall_aspnetcore %}) to the {% if site.core %}`wwwroot/lib/kendo-ui/js/cultures/`{% else %}`~/Scripts/cultures/`{% endif %} folder of your application. Alternatively, provide the culture files by using the [Kendo CDN service]({% slug cdnservices_core %}).
+1. Copy the required culture JavaScript file from the `\js\culture\` folder of your [{{ site.product }} installation]({% slug downloadinstall_aspnetcore %}) to the {% if site.core %}`wwwroot/lib/kendo-ui/js/cultures/`{% else %}`~/Scripts/cultures/`{% endif %} folder of your application. Alternatively, provide the culture files by using the [jsDelivr CDN service]({% slug cdnservices_core %}).
 
 1. Include the corresponding culture JavaScript file after the other JavaScript product files. This example uses the Spanish `es-ES` culture.
 
@@ -49,9 +49,9 @@ To use a culture that is different from the default `en-US` one in {{ site.produ
     ```
     ```HTML CDN
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.aspnetmvc.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.es-ES.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.aspnetmvc.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/cultures/kendo.culture.es-ES.min.js"></script>
     ```
 {% else %}
     ```HTML LocalFiles
@@ -62,9 +62,9 @@ To use a culture that is different from the default `en-US` one in {{ site.produ
     ```
     ```HTML CDN
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.aspnetmvc.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.es-ES.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.aspnetmvc.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/js/cultures/kendo.culture.es-ES.min.js"></script>
     ```
 {% endif %}
 

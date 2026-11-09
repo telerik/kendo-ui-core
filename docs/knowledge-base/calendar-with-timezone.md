@@ -37,7 +37,7 @@ To implement a timezone we need to take care of the following:
 
 
 ```dojo
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.timezones.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/kendo.timezones.min.js"></script>
     <div class="k-card">
       <div class="k-toolbar">
         <label for="picker" class="k-edit-label">Change selection to see today's day in different timezones</label>

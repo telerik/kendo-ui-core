@@ -37,7 +37,7 @@ The following example demonstrates how to use bundled scripts with RequireJS to 
 1. Initialize the Grid by calling the `DeferredScripts()` method in the `initApp()` function.
 
 ```Razor Index.cshtml
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/10.0.1/default/default-main.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@progress/kendo-theme-default@10.0.1/dist/all.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
 
     @(Html.Kendo().Grid<Telerik.Examples.Mvc.Areas.RequireJS.Models.Product>()
@@ -48,12 +48,12 @@ The following example demonstrates how to use bundled scripts with RequireJS to 
 
     <script>
         require.config({
-            baseUrl: "https://kendo.cdn.telerik.com/2024.4.1112/js/",
+            baseUrl: "https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@2024.4.1112/umd/",
             paths: {
                 "jquery": "https://code.jquery.com/jquery-3.7.1.min",
                 "jszip": "https://unpkg.com/jszip/dist/jszip.min.js",
-                "kendo.grid.min": "https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min",
-                "kendo.aspnetmvc.min": "https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.aspnetmvc.min"
+                "kendo.grid.min": "https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@2024.4.1112/umd/kendo.all.min",
+                "kendo.aspnetmvc.min": "https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min"
             }
         });
 

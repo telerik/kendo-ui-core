@@ -328,7 +328,7 @@ How do I configure the timepicker component to display dates in a specific cultu
         https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
 
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/cultures/kendo.culture.de-DE.min.js"></script>
 
     <input id="timepicker" />
     <script>

@@ -25,9 +25,9 @@ AngularJS evaluates a template expression which is placed as [`column.title`](/a
 
 ```
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
 <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
@@ -81,9 +81,9 @@ When the Grid is not in a multiple selection mode, the `data` will be a single d
 
 ```
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
 <div ng-app="app" ng-controller="MyCtrl">
   <label>Select mode: <select kendo-dropdownlist ng-model="gridOptions.selectable">
@@ -135,9 +135,9 @@ The following example demonstrates how to dynamically set the Grid columns in An
 
 ```
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
 <div ng-app="app" ng-controller="MyCtrl">
   <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions"></div>
@@ -170,9 +170,9 @@ The following example demonstrates how to set the Grid row template (`rowTemplat
 
 ```
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
 <div ng-app="app" ng-controller="MyCtrl">
   <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions">
@@ -218,9 +218,9 @@ The following example demonstrates how to use the `sum` aggregate in a `footerTe
 
 ```
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
 
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -278,9 +278,9 @@ The following example demonstrates how to use `$http` to bind the Grid.
 
 ```
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@7.0.1/dist/all.css">
 
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid k-options="gridOptions"></div>

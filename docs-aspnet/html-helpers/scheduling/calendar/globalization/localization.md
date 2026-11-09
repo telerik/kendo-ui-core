@@ -14,7 +14,7 @@ The Calendar provides options for localizing its user interface by utilizing its
 To enable the desired culture, add a reference to the script file before the Calendar is initialized and include the desired culture in the settings of the helper.
 
 ```HtmlHelper
-    <script src="https://kendo.cdn.telerik.com/2022.2.621/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@2022.2.621/js/cultures/kendo.culture.de-DE.min.js"></script>
     @(Html.Kendo().Calendar()
         .Name("calendar")
         .Culture("de-DE")
@@ -22,7 +22,7 @@ To enable the desired culture, add a reference to the script file before the Cal
 ```
 {% if site.core %}
 ```TagHelper
-    <script src="https://kendo.cdn.telerik.com/2022.2.621/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@2022.2.621/js/cultures/kendo.culture.de-DE.min.js"></script>
     <kendo-calendar name="calendar" culture="de-DE">
     </kendo-calendar>
 ```

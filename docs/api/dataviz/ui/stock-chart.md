@@ -47,6 +47,118 @@ How do I specify the date field in Kendo UI StockChart? Set or specify the data 
     });
     </script>
 
+### messages `Object`
+
+Allows localization of the strings that are used in the widget.
+
+
+<div class="meta-api-description">
+How do I customize messages in a Kendo UI StockChart? Set or localize the text displayed by the StockChart when it has no data, including translating or changing the default empty-state message for different languages and user experiences.
+</div>
+
+#### Example - configure the messages
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        messages: {
+            noData: "No data available"
+        },
+        series: [
+            { name: "Series 1", data: [] }
+        ]
+    });
+    </script>
+
+### messages.noData `String`
+
+Defines the text of the "no data" message that is rendered when no series are defined or all series are empty.
+
+
+<div class="meta-api-description">
+How do I customize the no-data message in a Kendo UI StockChart? Set the placeholder text shown when no series are configured or all data series are empty, including localized or custom messages for empty stock charts.
+</div>
+
+#### Example
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        series: [
+            { name: "Series 1", data: [] },
+            { name: "Series 2", data: [] }
+        ],
+        messages: {
+            noData: "Loading..."
+        }
+    });
+    </script>
+
+### noData `Boolean|Object` *(default: true)*
+
+When no series data is available, the StockChart will display an overlay element that contains a message with the text "No data available". The overlay will be automatically cleared if the series receive data.
+
+To disable the "No Data" overlay, set this option to `false`.
+
+
+<div class="meta-api-description">
+How to display a message when there is no data in a Kendo UI StockChart? Enable or disable the empty-state overlay shown when no series data is available, so users can identify an empty chart and the message clears automatically when data arrives.
+</div>
+
+#### Example - disable noData message
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        series: [
+            { name: "Series 1", data: [] },
+            { name: "Series 2", data: [] }
+        ],
+        noData: false
+    });
+    </script>
+
+#### Example - customize noData message
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        series: [
+            { name: "Series 1", data: [] },
+            { name: "Series 2", data: [] }
+        ],
+        messages: {
+            noData: "Loading..."
+        }
+    });
+    </script>
+
+### noData.template `String|Function`
+
+The [template](/api/kendo/methods/template) which is rendered when no series are defined, or all series are empty.
+
+The message overlays the entire StockChart with the exception of the Title and Subtitle.
+
+
+<div class="meta-api-description">
+How to customize the empty-state content in a Kendo UI StockChart? Set a template for the overlay displayed when no series exist or all series are empty, allowing custom text or markup while preserving the chart title and subtitle.
+</div>
+
+#### Example - customize the noData template using a function
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        series: [
+            { name: "Series 1", data: [] },
+            { name: "Series 2", data: [] }
+        ],
+        noData: {
+            template: () => `Loading...`
+        }
+    });
+    </script>
+
 ### navigator `Object`
 
 The data navigator configuration options.

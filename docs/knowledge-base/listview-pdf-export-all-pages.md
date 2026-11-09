@@ -41,13 +41,13 @@ How can I export all ListView pages to a PDF file?
         // Import DejaVu Sans font for embedding
 
         // NOTE: Only required if the Kendo UI stylesheets are loaded
-        // from a different origin, e.g. cdn.kendostatic.com
+        // from a different origin, e.g. cdn.jsdelivr.net
         kendo.pdf.defineFont({
-            "DejaVu Sans": "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold": "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic": "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic": "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "WebComponentsIcons": "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/glyphs/WebComponentsIcons.ttf"
+            "DejaVu Sans": "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold": "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic": "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic": "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "WebComponentsIcons": "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/glyphs/WebComponentsIcons.ttf"
         });
     </script>
 

@@ -35,8 +35,8 @@ The following example demonstrates how to apply the necessary approach.
 > The example loads Kendo UI 2023.3.1010 version.
 
 ```
-	<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-	<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
 
 	<div id="example" ng-app="KendoDemos">
 		<div ng-controller="MyCtrl">

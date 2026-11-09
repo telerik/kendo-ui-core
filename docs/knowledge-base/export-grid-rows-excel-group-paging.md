@@ -26,7 +26,7 @@ However, there is a workaround available that allows you to export a group-paged
 The example below demonstrates how to achieve the desired scenario.
 
 ```
- <script src="https://kendo.cdn.telerik.com/2025.1.227/js/kendo.aspnetmvc.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2025.1.227/umd/kendo.aspnetmvc.min.js"></script>
  <div id="grid"></div>
     <script>
       $(document).ready(function () {

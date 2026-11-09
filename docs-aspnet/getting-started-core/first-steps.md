@@ -131,11 +131,11 @@ After creating the project and adding the NuGet package, configure the applicati
     ```HTML
     <head>
         ...
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
 
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
     </head>
     ```
 >* The `kendo.all.min.js` and `kendo.aspnetmvc.min.js` scripts must be loaded after the `jquery.min.js` script.
@@ -247,7 +247,6 @@ Well done! Now you have your first {{ site.product }} component running in your 
     vertical-align: middle;
 }
 </style>
-
 
 
 

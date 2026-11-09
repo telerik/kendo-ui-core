@@ -128,12 +128,12 @@ To achieve the desired scenario, use the [drawing API]({% slug multipagecontent_
       // Import the DejaVu Sans font for embedding.
 
       // NOTE: Only required if the Kendo UI stylesheets are loaded
-      // from a different origin, for example, cdn.kendostatic.com.
+      // from a different origin, for example, cdn.jsdelivr.net.
       kendo.pdf.defineFont({
-        "DejaVu Sans"             : "//kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf",
-        "DejaVu Sans|Bold"        : "//kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-        "DejaVu Sans|Bold|Italic" : "//kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-        "DejaVu Sans|Italic"      : "//kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+        "DejaVu Sans"             : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans.ttf",
+        "DejaVu Sans|Bold"        : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Bold.ttf",
+        "DejaVu Sans|Bold|Italic" : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+        "DejaVu Sans|Italic"      : "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf"
       });
     </script>
 

@@ -10,38 +10,37 @@ position: 2
 
 # Using CDN with {{ site.product }}
 
-The Kendo UI client-side resources like JavaScript files and CSS files are available online through the Kendo CDN service. Including the client-side resources in your project is essential because the Telerik UI helpers are wrappers over the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/intro/first-steps).
+The client-side JavaScript and CSS resources for {{ site.product }} are published as `npm` packages. You can load them from an npm-compatible CDN, such as `jsDelivr` or `unpkg`. Including these resources in your project is essential because the Telerik UI helpers are wrappers over the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/intro/first-steps).
 
-> As of the R3 2022 release, you must install a license file in your application to access the resources provided by the CDN service. For more information, check [Installing a License File]({% slug installation_license_key_aspnetcore %}).
+> As of the R3 2022 release, you must install a license file in your application to use {{ site.product }}. For more information, check [Installing a License File]({% slug installation_license_key_aspnetcore %}).
 
-Only the official Kendo UI releases and serviced packs are uploaded to the CDN. Internal builds are not available on the CDN.
+The public npm CDN endpoints shown in this article serve package versions published to the `npm` registry. To use a private package or an internal build, host the files in a location your application can access.
 
-To access the Kendo UI CDN services, you can use either the HTTP or the HTTPS protocol with any of the following CDN services:
-
-* `kendo.cdn.telerik.com`
-* `cdn.kendostatic.com` (a cookieless CDN service)
-
->tip To check the status of the Progress Live Services, like Kendo UI CDN, Telerik NuGet, Kendo UI Dojo playground and others, visit the [Progress<sup>®</sup> Telerik<sup>®</sup> Live Services Status Page](http://status.telerik.com/).
+For production, it is advisable to pin the package version in the URL. If your CDN provider provides Subresource Integrity (SRI) metadata, it is also advisable to use the hash for the exact file and version and include the `integrity` and `crossorigin` attributes.
 
 ## Understanding the CDN Structure
 
-The URLs of the CDN service have the following structure:
+For public npm packages, `jsDelivr` and `unpkg` use the following URL structures:
 
-* `https://kendo.cdn.telerik.com/themes/[THEMEVERSION]/default/[FILENAME]`&mdash;The `themes` folder contains the [`.css` files](#adding-the-required-css-files) of the SASS themes for {{ site.product }} versions after R1 2023 SP1.
-* `https://kendo.cdn.telerik.com/[VERSION]/styles/[FILENAME]`&mdash;The `styles` folder contains the [`.css` files](#adding-the-required-css-files) (SASS and LESS) for {{ site.product }} versions before R1 2023 SP1.
-* `https://kendo.cdn.telerik.com/[VERSION]/mjs/[FILENAME]`&mdash;The `mjs` folder contains the [JavaScript modules](#using-javascript-modules).
-* `https://kendo.cdn.telerik.com/[VERSION]/js/[FILENAME]`&mdash;The `js` folder contains the [bundled Kendo UI JavaScript files](#using-bundled-javascript).
+* `https://cdn.jsdelivr.net/npm/[PACKAGE]@[VERSION]/[MODULE_FORMAT]/[FILE]`
+* `https://unpkg.com/[PACKAGE]@[VERSION]/[MODULE_FORMAT]/[FILE]`
 
-In the sample URLs above, you must replace `[VERSION]`, [THEMEVERSION] and `[FILENAME]` with the client-side resource that you need and its version. For example, to load version `{{ site.mvcCoreVersion }}` of the Kendo JavaScript modules and the CSS files for the Kendo Default visual theme, use these URLs:
+Replace `[PACKAGE]`, `[VERSION]`, and `[FILE]` with the npm package name, version, and file path. Use `js`, `umd` or `esm` to load the scripts in the desired module format - `CommonJs`, `UMD` or `ESM`, respectively. For example, to load the configured Kendo JavaScript and Default theme versions from jsDelivr, use:
 
-* `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.all.js`
-* `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css`
+* `https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/esm/kendo.all.js`
+* `https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css`
+
+To use unpkg for the same files, replace `https://cdn.jsdelivr.net/npm` with `https://unpkg.com`.
 
 ## Adding the Required CSS Files
 
-Adding the Kendo CSS files allows you to use the [Kendo UI visual themes]({% slug sassbasedthemes_overview %}). The `.css` files are available in the `themes` folder of the Kendo CDN URL&mdash;`https://kendo.cdn.telerik.com/themes/<version>/<theme>/<swatch>.css`.
+Adding the Kendo CSS files allows you to use the [Kendo UI visual themes]({% slug sassbasedthemes_overview %}). The compiled `.css` files are available in each theme package's `dist` folder.
 
-To load version `{{site.themesCdnVersion}}` of the desired visual theme, replace `[THEMEVERSION]` and `[FILENAME]` with their values, for example, `https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css`.
+To load the Bootstrap theme, reference its package and compiled stylesheet:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-bootstrap@{{ site.themesCdnVersion }}/dist/bootstrap-main.css" />
+```
 
 ## Adding the Required JavaScript Files
 
@@ -52,34 +51,38 @@ To import the JavaScript files required for the Telerik UI components, apply eit
 
 ### Using JavaScript Modules
 
-The [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) are located in the `mjs` folder of the Kendo CDN URL&mdash;`https://kendo.cdn.telerik.com/[VERSION]/mjs/[FILENAME]`.
+The [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) are located in the `esm` folder of the Kendo npm package.
 
 To include a Kendo JavaScript module in your project:
 
 1. Use the `script` tag with the `type=module` attribute.
-1. Add a reference to the global `aspnetmvc.min.js` file.
+1. Add a reference to the global `aspnetmvc.js` file.
 
 The two examples below demonstrate how to include individual component modules and all available component modules:
 
 * Including individual component modules.
 
     ```html
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.grid.js" type="module"></script> <!-- Include the Grid module. The rest of the dependencies required by the Grid will be loaded automatically. -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.aspnetmvc.js" type="module"></script> <!-- Include the global `kendo.aspnetmvc.js` file. -->
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/esm/kendo.grid.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/esm/kendo.aspnetmvc.js" type="module"></script>
     ```
 
 * Including all available modules.
 
     ```html
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.all.js" type="module"></script> <!-- Include all Kendo UI modules. -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.aspnetmvc.js" type="module"></script> <!-- Include the global `kendo.aspnetmvc.js` file. -->
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/esm/kendo.all.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/esm/kendo.aspnetmvc.js" type="module"></script>
     ```
 
 ### Using Bundled JavaScript
 
-The Kendo UI JavaScript files for the traditional format are located in the `js` folder of the Kendo CDN URL&mdash;`https://kendo.cdn.telerik.com/[VERSION]/js/[FILENAME]`.
+The Kendo UI bundled JavaScript files are located in the `umd` folder of the Kendo npm package.
 
-To load version `{{site.cdnVersion}}` of the bundled Kendo JavaScript files, replace `[VERSION]` and `[FILENAME]` with their values, for example, `https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js`.
+To load the full bundle, use a version-pinned URL from your chosen CDN provider:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js" ></script>
+```
 
 ## Using the CDN in Your Project
 
@@ -93,14 +96,14 @@ The following complete example demonstrates how to add the [CSS files](#adding-t
 1. To add the Bootstrap theme files, insert a `link` tag within the `head` tag of the layout and include the style file or files.
 
     ```HTML
-         <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-bootstrap@{{ site.themesCdnVersion }}/dist/bootstrap-main.css"  />
     ```
 
 1. To add the JavaScript files, insert a `script` tag and include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after the jQuery script.
 
     ```HTML
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
     ```
 
 {% else %}
@@ -109,27 +112,60 @@ The following complete example demonstrates how to add the [CSS files](#adding-t
 1. To add the JavaScript files, insert a `script` tag and include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after the jQuery script.
 
     ```HTML
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
     ```
 
 1. If using the Telerik MVC Scheduler helper, include `kendo.timezones.min.js` after `kendo.all.min.js`.
 
     ```HTML
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.timezones.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.timezones.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
     ```
 {% endif %}
 
 1. Setup the License File by following the instructions in the [Installing a License File]({% slug installation_license_key_aspnetcore %}).
 
-## Troubleshooting
+## Using Legacy Kendo CDNs
 
-The following articles provide solutions to common issues related to the Telerik and Kendo CDN services:
+Up to Kendo UI version `2026.3.811`, client-side resources were also hosted on the legacy Kendo CDN services:
+
+* `https://kendo.cdn.telerik.com`&mdash;The Kendo CDN.
+* `https://cdn.kendostatic.com`&mdash;The cookieless Kendo CDN host.
+
+The historical URL patterns used a Kendo UI version for JavaScript and older CSS files, and a separate theme version for Sass theme CSS:
+
+```text
+https://kendo.cdn.telerik.com/{KENDO_VERSION}/js/{FILE}
+https://cdn.kendostatic.com/{KENDO_VERSION}/js/{FILE}
+https://kendo.cdn.telerik.com/{KENDO_VERSION}/mjs/{FILE}
+https://kendo.cdn.telerik.com/{KENDO_VERSION}/styles/{FILE}
+https://kendo.cdn.telerik.com/themes/{THEME_VERSION}/{THEME}/{SWATCH}.css
+```
+
+For example, a legacy application could build its URLs from the Kendo UI and theme versions:
+
+```javascript
+const KENDO_VERSION = "2026.3.811";
+const THEME_VERSION = "14.5.0";
+const kendoAllUrl = `https://kendo.cdn.telerik.com/${KENDO_VERSION}/js/kendo.all.min.js`;
+const cookielessKendoAllUrl = `https://cdn.kendostatic.com/${KENDO_VERSION}/js/kendo.all.min.js`;
+const themeUrl = `https://kendo.cdn.telerik.com/themes/${THEME_VERSION}/default/default-main.css`;
+```
+
+For new integrations, use a version-pinned URL from an `npm` CDN provider, as described above.
+
+For troubleshooting historical integrations, see:
 
 * [CDN connection issues and general disruption occur]({% slug cdn_connection_issues %})
 * [How to refer Kendo UI internal builds from a CDN]({% slug cdn_cannot_refer_internal_builds %})
+
+>tip To check the status of Progress services, visit the [Progress<sup>®</sup> Telerik<sup>®</sup> Live Services Status Page](http://status.telerik.com/). For CDN availability, consult the status page for your chosen provider.
+
+## Troubleshooting
+
+If a file fails to load, verify the package name, version, and file path. Check the selected CDN provider's status page and confirm that your network and security settings allow the request.
 
 ## Next Steps
 

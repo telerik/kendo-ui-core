@@ -25,7 +25,7 @@ To enable the Excel export option of the Grid:
     ```HtmlHelper
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
 
         @(Html.Kendo().Grid<ProductViewModel>()
             .Name("grid")
@@ -42,7 +42,7 @@ To enable the Excel export option of the Grid:
     ```TagHelper
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
 
         <kendo-grid name="grid">
             <toolbar>

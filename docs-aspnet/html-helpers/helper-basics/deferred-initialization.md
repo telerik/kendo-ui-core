@@ -364,7 +364,7 @@ The `DeferredScriptFile()` method accepts a nonce, so you can call the method wi
     @(Html.Kendo().DeferredScriptFile("Telerik-CSP-Example"))
 ```
 ```Razor _Layout.cshtml
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'nonce-Telerik-CSP-Example' https://kendo.cdn.telerik.com;" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'nonce-Telerik-CSP-Example' https://cdn.jsdelivr.net;" />
 ```
 
 The following example showcases how to load a [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}) in a TabStrip item through a Partial View when the CSP is enabled.
@@ -468,7 +468,6 @@ The following example showcases how to load a [Grid]({% slug htmlhelpers_grid_as
 * [Declarative Initialization]({% slug declarative_initialization_overview %})
 {% endif %}
 * [Using Client Templates]({% slug client_templates_overview %})
-
 
 
 

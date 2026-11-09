@@ -40,7 +40,7 @@ How can I control the header format of the Kendo UI for jQuery Calendar based on
 The following example demonstrates how to achieve the desired behavior.
 
 ```dojo
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.ko-KR.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.cdnVersion }}/umd/cultures/kendo.culture.ko-KR.min.js"></script>
     <script>
       kendo.culture("ko-KR");
       kendo.calendar.views[0].title = function(date) {

@@ -43,26 +43,26 @@ The following example demonstrates a sample CSS declaration.
       */
       @font-face {
         font-family: "DejaVu Sans";
-        src: url("https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf") format("truetype");
+        src: url("https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans.ttf") format("truetype");
       }
 
       @font-face {
         font-family: "DejaVu Sans";
         font-weight: bold;
-        src: url("https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf") format("truetype");
+        src: url("https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Bold.ttf") format("truetype");
       }
 
       @font-face {
         font-family: "DejaVu Sans";
         font-style: italic;
-        src: url("https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf") format("truetype");
+        src: url("https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf") format("truetype");
       }
 
       @font-face {
         font-family: "DejaVu Sans";
         font-weight: bold;
         font-style: italic;
-        src: url("https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf") format("truetype");
+        src: url("https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf") format("truetype");
       }
     </style>
 ```
@@ -75,16 +75,16 @@ The following example demonstrates a sample CSS declaration.
         // Import DejaVu Sans font for embedding
         kendo.pdf.defineFont({
             "DejaVu Sans":
-                 "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf"
+                 "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans.ttf"
 
             "DejaVu Sans|Bold":
-                "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf"
+                "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Bold.ttf"
 
             "DejaVu Sans|Bold|Italic":
-                 "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+                 "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf"
 
             "DejaVu Sans|Italic":
-                 "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+                 "https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.1.117/css/web/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
     ```
 

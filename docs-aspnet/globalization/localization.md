@@ -16,7 +16,7 @@ You can change the messages that are displayed in the {{ site.product }} helpers
 
 ## Localization Files
 
-Officially, the {{ site.product }} components support only the English language. The community contributes to translating the messages to other languages by adding new `messages` JavaScript files and updating the existing ones in the [Kendo UI Core repository](https://github.com/telerik/kendo-ui-core/tree/master/src/messages). 
+Officially, the {{ site.product }} components support only the English language. The community contributes to translating the messages to other languages by adding new `messages` JavaScript files and updating the existing ones in the [Kendo UI Core repository](https://github.com/telerik/kendo-ui-core/tree/master/src/messages).
 
 To display messages in different languages, {{ site.product }} uses localization (resource) files, for example, `Messages.es-ES.resx`. The localization files are generated from the `messages` JavaScript files.
 
@@ -54,13 +54,13 @@ The following example demonstrates how to register the localization script in th
     <script src="~/lib/kendo-ui/js/cultures/kendo.messages.es-ES.min.js"></script>
 ```
 
-The following example demonstrates how to register the localization script in the`_Layout.cshtml` file by using CDN.    
+The following example demonstrates how to register the localization script in the`_Layout.cshtml` file by using CDN.
 
 ```HTML
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.aspnetmvc.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.es-ES.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.aspnetmvc.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/messages/kendo.messages.es-ES.min.js"></script>
 ```
 
 To change the current culture and language dynamically, refer to the [demo on globalization by the Grid](https://demos.telerik.com/{{ site.platform }}/grid/globalization).

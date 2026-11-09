@@ -40,8 +40,8 @@ The following example demonstrates how to create a custom editor in the [Data Gr
 > The example loads Kendo UI 2023.3.1010 version.
 
 ```
-  <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
-  <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/angular.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2023.3.1010/umd/kendo.all.min.js"></script>
   <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
   <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">

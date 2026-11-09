@@ -35,11 +35,11 @@ The following example demonstrates how to reference the required stylesheets of 
 > * You must add the common CSS file before the theme CSS file.
 > * Only one pair of common and theme CSS files should be referenced.
 
-The following example demonstrates how to reference the required stylesheets of the `Default` LESS theme in your project, when using the Kendo CDN:
+The following example demonstrates how to reference the required stylesheets of the `Default` LESS theme in your project from the Kendo UI npm package by using jsDelivr:
 
 ```html
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.3.1109/css/web/kendo.common.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.3.1109/css/web/kendo.default.min.css">
 ```
 
 ## Common CSS Files

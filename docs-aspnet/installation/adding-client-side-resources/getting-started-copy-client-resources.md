@@ -30,7 +30,7 @@ You can use the following methods for adding the Kendo client-side resources to 
 
 * Using CDN
 
-    The Kendo UI client-side resources like JavaScript files and CSS files are available online through the Kendo CDN service. This allows you to configure your project to import the client-side resources directly from the CDN. For more details, see the [Using CDN]({% slug cdnservices_core %}) article.
+    The Kendo UI client-side resources like JavaScript files and CSS files are available as npm packages through jsDelivr. This allows you to configure your project to import the client-side resources directly from the CDN. For more details, see the [Using CDN]({% slug cdnservices_core %}) article.
 
 ## Creating Custom Script Bundles
 

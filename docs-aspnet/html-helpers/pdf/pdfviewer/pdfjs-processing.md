@@ -53,12 +53,12 @@ The following example demonstrates how to configure the PDFViewer to use PDF.js 
 ```
 {% endif %}
 ```Razor _Layout
-    <link href="https://kendo.cdn.telerik.com/themes/10.0.1/default/default-ocean-blue.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/@@progress/kendo-theme-default@10.0.1/dist/default-ocean-blue.css" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.worker.mjs" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@2024.4.1112/umd/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@2024.4.1112/umd/kendo.aspnetmvc.min.js" type="module"></script>
 ```
 ```HtmlHelper
     @(Html.Kendo().PDFViewer()

@@ -35,7 +35,7 @@ Add the `WebComponentsIcons` font that is used for the Kendo UI font icons.
 
 ```
 <script>
-    kendo.pdf.defineFont({"WebComponentsIcons":"https://kendo.cdn.telerik.com/2022.1.412/styles/fonts/glyphs/WebComponentsIcons.ttf"});
+    kendo.pdf.defineFont({"WebComponentsIcons":"https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.1.412/css/web/fonts/glyphs/WebComponentsIcons.ttf"});
 </script>
 
  // Grid declaration

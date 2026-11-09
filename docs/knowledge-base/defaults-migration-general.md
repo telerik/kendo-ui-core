@@ -187,7 +187,7 @@ $("#button2").kendoButton($.extend({}, defaultAppearance, { content: "Button 2" 
 This change works with Kendo Themes v13.0.0 or later. Ensure your theme references are updated:
 
 ```html
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/13.0.0/default/default-main.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@13.0.0/dist/default-main.css" />
 ```
 
 ## See Also

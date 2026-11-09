@@ -460,7 +460,7 @@ Starting with the **2026 Q2** release, a new theme called **Meridian** is introd
 
 The **2026 Q2** release ships with Kendo UI Icons version **4.9.2** in the source package and wrappers. However, there is also Icons version **5.0.0** available, which includes new icons and updates aligned with the Meridian theme. Icons v5.0.0 is currently in preview mode in the demos and will be officially included in the source packages in an upcoming release.
 
-> If you are referencing icons from the Kendo CDN or npm and want to stay aligned with the demos, you can use version 5.0.0. If you prefer to stay aligned with the distributed source, continue using version 4.9.2 until the next official update.
+> If you are referencing icons from jsDelivr or npm and want to stay aligned with the demos, you can use version 5.0.0. If you prefer to stay aligned with the distributed source, continue using version 4.9.2 until the next official update.
 
 ### Dialog and Window - ThemeColor Option Removed
 
@@ -1158,7 +1158,7 @@ This change requires **Kendo Themes v13.0.0 or later**. Update your theme packag
 Or CDN references:
 
 ```html
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/13.0.0/default/default-main.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@13.0.0/dist/default-main.css" />
 ```
 
 ### Benefits
