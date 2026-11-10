@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2026.3.1015
+// Type definitions for Kendo UI Professional v2026.4.1110
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -9430,6 +9430,7 @@ declare namespace kendo.ui {
 
     interface MenuScrollable {
         distance?: number | undefined;
+        scrollButtonsPosition?: string | undefined;
     }
 
     interface MenuOptions {
@@ -9442,12 +9443,16 @@ declare namespace kendo.ui {
         dataSpriteCssClassField?: string | undefined;
         dataImageUrlField?: string | undefined;
         dataContentField?: string | undefined;
+        dataDescriptionField?: string | undefined;
+        dataActionsField?: string | undefined;
         direction?: string | undefined;
         hoverDelay?: number | undefined;
+        iconPosition?: "before" | "after" | undefined;
         openOnClick?: boolean | MenuOpenOnClick | undefined;
         orientation?: string | undefined;
         popupCollision?: string | undefined;
         scrollable?: boolean | MenuScrollable | undefined;
+        size?: "small" | "medium" | "large" | undefined;
         close?(e: MenuCloseEvent): void;
         open?(e: MenuOpenEvent): void;
         activate?(e: MenuActivateEvent): void;

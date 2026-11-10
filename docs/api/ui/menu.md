@@ -578,9 +578,33 @@ How to dynamically style icons in Kendo UI menu items using a specific data fiel
         });
     </script>
 
+### dataActionsField `String`
+
+Sets the field of the data item that provides the trailing actions-region content of the menu items, rendered as a `k-menu-link-actions` span positioned before the item's expand/collapse arrow. This is useful for displaying supplementary information next to a menu item's label, such as a keyboard-shortcut hint (for example, `Ctrl+N`). If not set, the Menu falls back to using the `actions` field of the data item. The actions content is HTML-encoded by default. To render it as raw HTML, set `encoded: false` on the data item and make sure that the value is trusted.
+
+
+<div class="meta-api-description">
+How do I show a keyboard shortcut or trailing hint next to a Kendo UI Menu item? Configure which data field supplies the trailing actions area shown at the end of a menu item, before the expand or collapse arrow, to render supplementary markup such as keyboard-shortcut hints, badges, or custom HTML next to the item label; bind this trailing region to a property on the data item, fall back to the item's own actions field when no mapping is set, and be aware that this content is HTML-encoded by default and is injected as raw HTML only when the item has encoded set to false, in which case only trusted values should be supplied; useful when setting up data-bound menus, context menus, or navigation bars that need to display shortcut hints, icons, or small action indicators per item.
+</div>
+
+#### Example
+
+    <ul id="menu"></ul>
+    <script>
+        $("#menu").kendoMenu({
+            dataSource: [
+                { text: "New", actionShortcut: "Ctrl+N" },
+                { text: "Open", actionShortcut: "Ctrl+O" },
+                { text: "Save", actionShortcut: "Ctrl+S" }
+            ],
+            dataTextField: "text",
+            dataActionsField: "actionShortcut"
+        });
+    </script>
+
 ### dataContentField `String`
 
-Sets the field of the data item that provides the content of the menu items.
+Sets the field of the data item that provides the content of the menu items. The content is HTML-encoded by default. To render it as raw HTML, set `encoded: false` on the data item and make sure that the value is trusted.
 
 
 <div class="meta-api-description">
@@ -607,6 +631,31 @@ How do I configure dynamic content in Kendo UI Menu items? Configure how menu it
             dataSpriteCssClassField:"Sprite",
             dataImageUrlField:"imgUrl",
             dataContentField:"description"
+        });
+    </script>
+
+### dataDescriptionField `String`
+
+Sets the field of the data item that provides the secondary description line of the menu items, rendered as a `k-menu-link-description` span displayed beneath the item's label. This is useful for showing additional context about a menu item, such as a short explanatory note under its title. If not set, the Menu falls back to using the `description` field of the data item. The description content is HTML-encoded by default, consistent with the item's `text`, and this can be disabled per item by setting `encoded: false` on the data item.
+
+
+<div class="meta-api-description">
+How do I show a subtitle or secondary text line under a Kendo UI Menu item? Configure which data field supplies a secondary line of descriptive text rendered beneath a menu item's label, enabling subtitles, captions, or short explanatory notes under the main text of each entry; bind the description area to a property on the data item or fall back to the item's own description field when no mapping is specified, useful when building data-bound menus, navigation bars, or popups that need extra context, hints, or supporting copy displayed under each item's title.
+</div>
+
+#### Example - combining dataDescriptionField and dataActionsField
+
+    <ul id="menu"></ul>
+    <script>
+        $("#menu").kendoMenu({
+            dataSource: [
+                { text: "New", info: "Create a new document", actionShortcut: "Ctrl+N" },
+                { text: "Open", info: "Open an existing document", actionShortcut: "Ctrl+O" },
+                { text: "Save", info: "Save the current document", actionShortcut: "Ctrl+S" }
+            ],
+            dataTextField: "text",
+            dataDescriptionField: "info",
+            dataActionsField: "actionShortcut"
         });
     </script>
 
@@ -962,6 +1011,43 @@ How to position scroll buttons in a kendo UI menu when content overflows? Adjust
             scrollable: {
                 scrollButtonsPosition: "start"
             }
+        });
+    </script>
+
+### size `String` *(default: undefined)*
+
+Sets the size of the component. Valid values are `"small"`, `"medium"`, and `"large"`. The selected size is applied as a `k-menu-sm`, `k-menu-md`, or `k-menu-lg` class on the Menu wrapper element, and works for both the `"horizontal"` and `"vertical"` orientations.
+
+
+<div class="meta-api-description">
+How do I change the size of a Kendo UI Menu component to small, medium, or large? Configure or set the overall size, scale, density, or compactness of a navigation menu or menu bar by choosing between small, medium, and large sizing options, controlling the height, padding, and spacing of menu items and links for both horizontal and vertical layouts, adjusting the component's visual footprint to fit compact toolbars or more spacious navigation areas, and applying predefined size classes to the menu wrapper to make items more or less dense on the page.
+</div>
+
+#### Example - setting the size of a horizontal Menu
+
+    <ul id="menu">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <script>
+        $("#menu").kendoMenu({
+            orientation: "horizontal",
+            size: "small"
+        });
+    </script>
+
+#### Example - setting the size of a vertical Menu
+
+    <ul id="menu">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <script>
+        $("#menu").kendoMenu({
+            orientation: "vertical",
+            size: "large"
         });
     </script>
 

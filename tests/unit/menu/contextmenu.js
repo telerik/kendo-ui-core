@@ -47,6 +47,16 @@ describe("menu api", function() {
         menu.destroy();
     });
 
+    it('setOptions with size replaces the previous size class without accumulating stale ones', function() {
+        menu.setOptions({ size: "small" });
+        assert.isTrue(menu.wrapper.hasClass("k-menu-sm"));
+        assert.isFalse(menu.wrapper.hasClass("k-menu-md"));
+
+        menu.setOptions({ size: "large" });
+        assert.isTrue(menu.wrapper.hasClass("k-menu-lg"));
+        assert.isFalse(menu.wrapper.hasClass("k-menu-sm"));
+    });
+
     it('.k-context-menu is placed on root element', function() {
         assert.isOk(menu.element.is(".k-context-menu"));
     });

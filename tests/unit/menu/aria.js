@@ -288,4 +288,30 @@ describe("ARIA support", function() {
 
         assert.equal(menu.find(".k-menu-expand-arrow").attr("aria-hidden"), "true");
     });
+
+    it("groupHeader item has no tabindex attribute, matching separator exclusion from the accessibility tree", function() {
+        setup({
+            dataSource: [
+                { groupHeader: true, text: "Group 1" },
+                { text: "Item 1" }
+            ]
+        });
+
+        let groupHeader = menu.children(".k-menu-group-header");
+
+        assert.isUndefined(groupHeader.attr("tabindex"));
+    });
+
+    it("groupHeader item is not included in the roving tabindex / focus order", function() {
+        setup({
+            dataSource: [
+                { groupHeader: true, text: "Group 1" },
+                { text: "Item 1" }
+            ]
+        });
+
+        menu.trigger("focus");
+
+        assert.isFalse(menu.children(".k-menu-group-header").hasClass("k-focus"));
+    });
 });

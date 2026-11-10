@@ -34,6 +34,8 @@ If you use Kendo UI for jQuery in a project with an invalid license, the UI comp
 
 ### Watermark
 
+The watermark appears only for license problems that require it, for example, a missing, invalid, or expired license. Dismissible notices, such as [trial notices](#trial-notices), display only the banner.
+
 * A watermark appearing in the `Light Theme` mode:
 
      ![Watermark in the Light Theme](../images/watermark.png)
@@ -48,8 +50,15 @@ A banner with an action button appears on pages that use Kendo UI for jQuery com
 
 ![Banner](../../../knowledge-base/images/banner.png)
 
+The colored accent bar on the left side of the banner and the action button reflect the severity of the message, for example, success, information, warning, or error.
+
 * Clicking the action button redirects you to start a trial, purchase, or renew your license, depending on your license status.
-* Clicking the x button of the banner closes it until the page is reloaded or a license is activated.
+* Clicking the x (**Close**) button of the banner closes it. For messages that support snoozing, the banner and the related watermark do not reappear on page reload until the snooze period, which is determined by the licensing package, ends. The browser remembers this choice in its `localStorage`, so clearing the site data resets it. Messages that do not support snoozing appear again on the next page load.
+* Activating a valid license removes the banner and the watermark.
+
+### Trial Notices
+
+When you use Kendo UI for jQuery with a valid trial license, a dismissible notice banner may appear on pages that use the components. The banner can display a badge with the remaining trial days, for example, `14d left`, next to its title. Trial notices do not add a watermark to the components.
 
 ### Console Warning
 

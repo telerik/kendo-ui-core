@@ -637,6 +637,7 @@ How do I set the height of a Kendo UI PropertyGrid widget? Adjust the vertical d
 
 Additional configuration options for the properties of the model.
 
+Bound property values, item descriptions, and group names are rendered as text by default. Use `items.template` to intentionally render trusted HTML for a property's value.
 
 <div class="meta-api-description">
 How to customize individual fields in a Kendo UI PropertyGrid? Customize individual fields in a property grid by configuring per-property settings that control how each model attribute is displayed and edited, including specifying editor types, custom labels, read-only states, validation rules, input options, or interactive behavior; enable fine-grained control over form fields, adjust property presentations, set custom editors, control editability, and tailor user input elements for dynamic model property handling and enhanced user interface customization.

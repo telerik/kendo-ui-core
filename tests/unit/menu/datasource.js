@@ -601,6 +601,85 @@ describe("Client side rendering", function() {
         assert.isOk(expandArrow.parent().hasClass("k-menu-expand-arrow"));
     });
 
+    it('groupHeader item does not get k-first class when it is the first child of a dataSource-bound submenu', function() {
+        createMenu({
+            dataSource: [{
+                text: "RootItem",
+                items: [
+                    { groupHeader: true, text: "Group 1" },
+                    { text: "Regular 1" },
+                    { text: "Regular 2" }
+                ]
+            }]
+        });
+
+        menu.dataSource.view()[0].load();
+
+        let subItems = menu.element.find(".k-menu-group > li");
+        let groupHeader = subItems.eq(0);
+        let lastRegularItem = subItems.eq(2);
+
+        assert.isTrue(groupHeader.hasClass("k-menu-group-header"));
+        assert.isTrue(groupHeader.is(":first-child"));
+        assert.isFalse(groupHeader.hasClass("k-first"));
+
+        assert.isTrue(lastRegularItem.is(":last-child"));
+        assert.isFalse(lastRegularItem.hasClass("k-last"));
+    });
+
+    it('groupHeader item does not get k-last class when it is the last child of a dataSource-bound submenu', function() {
+        createMenu({
+            dataSource: [{
+                text: "RootItem",
+                items: [
+                    { text: "Regular 1" },
+                    { text: "Regular 2" },
+                    { groupHeader: true, text: "Group 1" }
+                ]
+            }]
+        });
+
+        menu.dataSource.view()[0].load();
+
+        let subItems = menu.element.find(".k-menu-group > li");
+        let firstRegularItem = subItems.eq(0);
+        let groupHeader = subItems.eq(2);
+
+        assert.isTrue(groupHeader.hasClass("k-menu-group-header"));
+        assert.isTrue(groupHeader.is(":last-child"));
+        assert.isFalse(groupHeader.hasClass("k-last"));
+
+        assert.isTrue(firstRegularItem.is(":first-child"));
+        assert.isFalse(firstRegularItem.hasClass("k-first"));
+    });
+
+    it('groupHeader item does not get k-first/k-last classes when bound via HierarchicalDataSource', function() {
+        createMenu({
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [{
+                    text: "RootItem",
+                    items: [
+                        { groupHeader: true, text: "Group 1" },
+                        { text: "Regular 1" },
+                        { text: "Regular 2" }
+                    ]
+                }]
+            })
+        });
+
+        menu.dataSource.view()[0].load();
+
+        let subItems = menu.element.find(".k-menu-group > li");
+        let groupHeader = subItems.eq(0);
+        let lastRegularItem = subItems.eq(2);
+
+        assert.isTrue(groupHeader.hasClass("k-menu-group-header"));
+        assert.isTrue(groupHeader.is(":first-child"));
+        assert.isFalse(groupHeader.hasClass("k-first"));
+
+        assert.isTrue(lastRegularItem.is(":last-child"));
+        assert.isFalse(lastRegularItem.hasClass("k-last"));
+    });
 
     it('HierarchicalDataSource creates menu item', function() {
         createMenu({
@@ -733,5 +812,29 @@ describe("Client side rendering", function() {
 
         menu.dataSource.view()[0].load();
         assert.equal(menu.element.find(".k-content").text(), "CONTENT");
+    });
+    it("dataContentField encodes content by default", function() {
+        createMenu({
+            dataContentField: "desc",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [{ text: "RootItem", desc: "<b>CONTENT</b>" }]
+            })
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-content b").length, 0);
+        assert.equal(menu.element.find(".k-content").text(), "<b>CONTENT</b>");
+    });
+
+    it("dataContentField respects encoded false", function() {
+        createMenu({
+            dataContentField: "desc",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [{ text: "RootItem", desc: "<b>CONTENT</b>", encoded: false }]
+            })
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-content b").length, 1);
     });
 });

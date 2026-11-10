@@ -137,7 +137,8 @@ export const __meta__ = {
     }
 
     function sanitizeSvgContent(html) {
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const inertDocument = document.implementation.createHTMLDocument('');
+        const svg = inertDocument.createElementNS('http://www.w3.org/2000/svg', 'svg');
 
         svg.innerHTML = String(html);
         svg.querySelectorAll('*').forEach(element => {

@@ -317,4 +317,47 @@ describe("menu events", function() {
         menuDiv.remove();
     });
 
+    it("groupHeader item does not fire select event when clicked", function() {
+        let menuDiv = $("<ul></ul>").appendTo(Mocha.fixture);
+        let selectFired = false;
+        let groupMenu = menuDiv.kendoMenu({
+            animation: false,
+            select: function() {
+                selectFired = true;
+            },
+            dataSource: [
+                { groupHeader: true, text: "Group 1" },
+                { text: "Item 1" }
+            ]
+        }).data("kendoMenu");
+
+        menuDiv.children(".k-menu-group-header").trigger(CLICK);
+
+        assert.isFalse(selectFired);
+        groupMenu.destroy();
+        menuDiv.remove();
+    });
+
+    it("groupHeader item does not fire activate event when hovered", function() {
+        let menuDiv = $("<ul></ul>").appendTo(Mocha.fixture);
+        let activateFired = false;
+        let groupMenu = menuDiv.kendoMenu({
+            animation: false,
+            hoverDelay: 0,
+            activate: function() {
+                activateFired = true;
+            },
+            dataSource: [
+                { groupHeader: true, text: "Group 1", items: [{ text: "Sub item" }] },
+                { text: "Item 1" }
+            ]
+        }).data("kendoMenu");
+
+        menuDiv.children(".k-menu-group-header").trigger("mouseenter");
+
+        assert.isFalse(activateFired);
+        groupMenu.destroy();
+        menuDiv.remove();
+    });
+
 });

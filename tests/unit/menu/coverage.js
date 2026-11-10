@@ -56,6 +56,33 @@ describe("kendo.ui.Menu DataSource changes", function() {
         assert.equal(menu.element.find(".k-link").length, 1);
     });
 
+    it("removing the only regular item in a submenu with a groupHeader keeps the submenu and header", function() {
+        createMenu({
+            dataSource: new HierarchicalDataSource({
+                data: [
+                    {
+                        text: "Parent",
+                        items: [
+                            { groupHeader: true, text: "Group 1" },
+                            { text: "Child" }
+                        ]
+                    }
+                ]
+            })
+        });
+
+        menu.dataSource.view()[0].load();
+
+        let parentItem = menu.element.find(".k-item").first();
+        let childItem = parentItem.find("ul .k-item").first();
+
+        menu.remove(childItem);
+
+        let group = parentItem.find("ul.k-menu-group").first();
+        assert.equal(group.length, 1);
+        assert.equal(group.children(".k-menu-group-header").length, 1);
+    });
+
     it("itemchange via dataSource updates the menu item text", function() {
         createMenu({
             dataSource: new HierarchicalDataSource({
@@ -338,7 +365,7 @@ describe("kendo.ui.Menu item templates", function() {
         Mocha.fixture.append("<ul id='tmenu3'><li>Item 1</li></ul>");
         menu = new kendo.ui.Menu("#tmenu3", { animation: false });
 
-        menu.append([{ text: "With Content", content: "<div class='custom-content'>test</div>" }]);
+        menu.append([{ text: "With Content", content: "<div class='custom-content'>test</div>", encoded: false }]);
 
         assert.isOk(menu.element.find(".custom-content").length > 0);
     });
@@ -1277,7 +1304,7 @@ describe("kendo.ui.Menu content template", function() {
         Mocha.fixture.append("<ul id='contentmenu'></ul>");
         let m = new kendo.ui.Menu("#contentmenu", {
             animation: false,
-            dataSource: [{ text: "Item 1", content: "<span class='custom-content'>hello</span>" }]
+            dataSource: [{ text: "Item 1", content: "<span class='custom-content'>hello</span>", encoded: false }]
         });
         assert.isOk(m.element.find(".custom-content").length > 0 || m.element.find(".k-item").length > 0);
         m.destroy();

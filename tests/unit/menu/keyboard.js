@@ -146,3 +146,68 @@ describe("menu keyboard navigation", function() {
         assert.isOk(fired);
     });
 });
+
+describe("menu keyboard navigation with groupHeader items", function() {
+    let groupMenuElement, groupMenu;
+
+    function initGroupMenu(orientation) {
+        groupMenuElement = $("<ul></ul>").appendTo(Mocha.fixture);
+        groupMenu = groupMenuElement.kendoMenu({
+            animation: false,
+            orientation: orientation,
+            dataSource: [
+                { groupHeader: true, text: "Group 1" },
+                { text: "Item 1" },
+                { text: "Item 2" },
+                { text: "Item 3" }
+            ]
+        }).data("kendoMenu");
+    }
+
+    beforeEach(function() {
+        $.fn.press = function(key) {
+            return this.trigger({ type: "keydown", keyCode: key });
+        };
+    });
+
+    afterEach(function() {
+        groupMenu.destroy();
+        groupMenuElement.remove();
+    });
+
+    it('Home key skips the groupHeader and moves focus to the first real item', function() {
+        initGroupMenu("horizontal");
+        groupMenu.wrapper.focus().press(keys.HOME);
+
+        let realItems = groupMenu.wrapper.children(".k-item:not(.k-menu-group-header)");
+        assert.isOk(realItems.first().hasClass(FOCUSEDSTATE));
+    });
+
+    it('End key skips the groupHeader and moves focus to the last real item', function() {
+        initGroupMenu("horizontal");
+        groupMenu.wrapper.focus().press(keys.END);
+
+        let realItems = groupMenu.wrapper.children(".k-item:not(.k-menu-group-header)");
+        assert.isOk(realItems.last().hasClass(FOCUSEDSTATE));
+    });
+
+    it('Left arrow traversal from the first real item skips the groupHeader item in horizontal orientation', function() {
+        initGroupMenu("horizontal");
+        let firstRealItem = groupMenu.wrapper.children(".k-item:not(.k-menu-group-header)").first();
+        groupMenu._moveFocus($(), firstRealItem);
+
+        groupMenu.wrapper.focus().press(keys.LEFT);
+
+        assert.isFalse(groupMenu.wrapper.children(".k-menu-group-header").hasClass(FOCUSEDSTATE));
+    });
+
+    it('Up arrow traversal from the first real item skips the groupHeader item in vertical orientation', function() {
+        initGroupMenu("vertical");
+        let firstRealItem = groupMenu.wrapper.children(".k-item:not(.k-menu-group-header)").first();
+        groupMenu._moveFocus($(), firstRealItem);
+
+        groupMenu.wrapper.focus().press(keys.UP);
+
+        assert.isFalse(groupMenu.wrapper.children(".k-menu-group-header").hasClass(FOCUSEDSTATE));
+    });
+});

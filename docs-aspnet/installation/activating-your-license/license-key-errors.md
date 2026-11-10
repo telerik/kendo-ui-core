@@ -30,8 +30,12 @@ A Telerik license key error may occur in the following scenarios:
 A missing, expired, or invalid license will result in:
 
 * A watermark appearing on application startup.
-* A modal dialog appearing on application startup. Clicking the `OK` button of the dialog closes the dialog and removes the banner until the next application startup.
+* A banner appearing on pages that use the {{ site.product_short }} components. The colored accent bar and the action button of the banner reflect the severity of the message. Clicking the x (**Close**) button closes the banner. For messages that support snoozing, the banner and the related watermark do not reappear on page reload until the snooze period, which is determined by the licensing package, ends. The browser remembers this choice in its `localStorage`, so clearing the site data resets it. Messages that do not support snoozing appear again on the next page load.
 * A warning message in the build log
+
+Activating a valid license removes the banner and the watermark.
+
+With a valid trial license, a dismissible notice banner without a watermark may appear on pages that use the components. The banner can display a badge with the remaining trial days, for example, `14d left`.
 
 ## Error Messages
 
@@ -43,7 +47,7 @@ This error can occur when a project references `Telerik.Licensing`, but not any 
 
 The error means that the license key is missing or not set up correctly. For example, the environment variable is not set, or [the license file may be located in the wrong place]({%slug installation_license_key_aspnetcore%}#manual-installation).
 
-In a production application, you may also see a message such as `License key missing for Kendo UI v2025.3 1002. A license key is required for both paid and trial usage. Learn how to set up a license key.`
+In a production application, you may also see a message such as `Get started with Kendo UI. You need a license key to use this product. Start a free trial or configure an existing license key.`
 
 [Install a license key]({%slug installation_license_key_aspnetcore%}) again. Also, check how to [set up a license key in CI/CD environments]({%slug deployment_license_key_aspnetcore%}).
 
