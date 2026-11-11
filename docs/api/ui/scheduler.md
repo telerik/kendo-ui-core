@@ -10616,13 +10616,15 @@ The vertical position.
     /* The scheduler in this example should be fully rendered correct results of slotByPosition()  */
     setTimeout(() => {
         var scheduler = $("#scheduler").data("kendoScheduler");
-        var slot = scheduler.slotByPosition(100,100);
-    
-	      /* The result can be observed in the DevTools(F12) console of the browser. */
-        console.log("slot startDate: " + slot.startDate);
-	      /* The result can be observed in the DevTools(F12) console of the browser. */
-        console.log("slot endDate: " + slot.endDate);
-    }, 200);
+        var slot = scheduler.slotByPosition(300, 300);
+
+        if (slot) {
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log("slot startDate: " + slot.startDate);
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log("slot endDate: " + slot.endDate);
+        }
+      }, 200);
     </script>
 
 ### slotByElement

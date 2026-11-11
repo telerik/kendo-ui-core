@@ -28,7 +28,7 @@ liquid-output-delimiter-right: "}}"
 liquid:
   product: "Kendo UI for jQuery"
   platform: "kendo-ui"
-  cdnVersion: "2026.4.1110"
+  cdnVersion: "2026.4.1111"
   themesCdnVersion: "14.9.0"
 
 markdown-replacements:
@@ -52,7 +52,7 @@ default-code-block-language: js
 
 kendo-api-path: ./api
 dojo-scripts:
-  kendoCdnVersion: 2026.4.1110
+  kendoCdnVersion: 2026.4.1111
   themesCdnVersion: 14.9.0
   pdfJsVersion: 5.5.207
   jQueryVersion: 3.7.1

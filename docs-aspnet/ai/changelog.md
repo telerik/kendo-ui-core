@@ -18,6 +18,24 @@ Learn about the latest changes, improvements and bug fixes in the Telerik UI for
 
 - Renamed the Telerik {{ site.framework }} AI Coding Assistant to Telerik {{ site.framework }} Agentic UI Generator to unify the naming of the AI tooling across the Telerik and Kendo UI component products. The MCP server package, server name, and configuration remain unchanged.
 
+## November, 2026 Changelog
+
+### Highlights
+
+- The Telerik UI for ASP.NET MVC AI Coding Assistant is renamed to Telerik UI for ASP.NET MVC Agentic UI Generator to align with the naming across the Telerik and Kendo UI component products. The MCP server package, server name, and tool name remain unchanged.
+
+## August, 2026 Changelog
+
+### Highlights
+
+- Updated the component snippets to align with the latest version.
+
+## May, 2026 Changelog
+
+### Highlights
+
+- Updated the component snippets to align with the latest version.
+
 ## March, 2026 Changelog
 
 ### Highlights

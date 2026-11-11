@@ -13,6 +13,18 @@ tag: updated
 
 Learn about the latest changes, improvements and bug fixes in the Telerik UI for {{ site.framework }} MCP servers. The updates are structured in a chronological order with the newest ones appearing first.
 
+## October, 2026 Changelog
+
+### Highlights
+
+- Enhanced the Layout Assistant to provide shorter, more focused responses with less repetitive content, while retaining the information needed to select and apply CSS utility classes from the Progress Design System.
+
+## August, 2026 Changelog
+
+### Highlights
+
+- Updated the component snippets to align with the latest version.
+
 ## July, 2026 Changelog
 
 ### Highlights
