@@ -8043,6 +8043,7 @@ declare namespace kendo.ui {
     }
 
     interface GridColumnCommandItem {
+        attr?: any | string | Function | undefined;
         className?: string | undefined;
         click?: Function | undefined;
         iconClass?: string | GridColumnCommandItemIconClass | undefined;
@@ -13465,6 +13466,7 @@ declare namespace kendo.ui {
     }
 
     interface TabStripItem {
+        encoded?: boolean | undefined;
         icon?: string | IconDescriptor | undefined;
         iconPosition?: "before" | "after" | undefined;
         closable?: boolean | undefined;
@@ -16870,6 +16872,7 @@ declare namespace kendo.drawing {
     interface TooltipOptions {
         autoHide?: boolean | undefined;
         content?: string | Function | undefined;
+        encoded?: boolean | undefined;
         position?: string | undefined;
         height?: number | string | undefined;
         hideDelay?: number | undefined;
@@ -21447,8 +21450,13 @@ declare namespace kendo.dataviz.ui {
         zoom?: boolean | MapControlsZoom | undefined;
     }
 
+    interface MapLayerAttribution {
+        text: string;
+        encoded?: boolean | undefined;
+    }
+
     interface MapLayerDefaultsBing {
-        attribution?: string | undefined;
+        attribution?: string | MapLayerAttribution | undefined;
         opacity?: number | undefined;
         key?: string | undefined;
         imagerySet?: string | undefined;
@@ -21473,7 +21481,7 @@ declare namespace kendo.dataviz.ui {
     }
 
     interface MapLayerDefaultsBubble {
-        attribution?: string | undefined;
+        attribution?: string | MapLayerAttribution | undefined;
         opacity?: number | undefined;
         maxSize?: number | undefined;
         minSize?: number | undefined;
@@ -21538,14 +21546,14 @@ declare namespace kendo.dataviz.ui {
     }
 
     interface MapLayerDefaultsShape {
-        attribution?: string | undefined;
+        attribution?: string | MapLayerAttribution | undefined;
         opacity?: number | undefined;
         style?: MapLayerDefaultsShapeStyle | undefined;
     }
 
     interface MapLayerDefaultsTile {
         urlTemplate?: string | undefined;
-        attribution?: string | undefined;
+        attribution?: string | MapLayerAttribution | undefined;
         subdomains?: any;
         opacity?: number | undefined;
     }
@@ -21610,7 +21618,7 @@ declare namespace kendo.dataviz.ui {
     }
 
     interface MapLayer {
-        attribution?: string | undefined;
+        attribution?: string | MapLayerAttribution | undefined;
         autoBind?: boolean | undefined;
         dataSource?: any | any | kendo.data.DataSource | undefined;
         extent?: any | kendo.dataviz.map.Extent | undefined;
@@ -26445,7 +26453,7 @@ declare namespace kendo {
         function transformOrigin(firstElement: HTMLElement, secondElement: HTMLElement): any;
     }
 
-    function alert(text: string): void;
+    function alert(text: string, encoded?: boolean): void;
     function antiForgeryTokens(): any;
     function bind(element: string, viewModel: any, namespace?: any): void;
     function bind(element: string, viewModel: kendo.data.ObservableObject, namespace?: any): void;
@@ -26453,7 +26461,7 @@ declare namespace kendo {
     function bind(element: JQuery, viewModel: kendo.data.ObservableObject, namespace?: any): void;
     function bind(element: Element, viewModel: any, namespace?: any): void;
     function bind(element: Element, viewModel: kendo.data.ObservableObject, namespace?: any): void;
-    function confirm(text: string): JQueryPromise<any>;
+    function confirm(text: string, encoded?: boolean): JQueryPromise<any>;
     function culture(culture: string): void;
     function destroy(element: string): void;
     function destroy(element: JQuery): void;
@@ -26468,7 +26476,7 @@ declare namespace kendo {
     function parseFloat(value: string, culture?: string): number;
     function parseInt(value: string, culture?: string): number;
     function parseColor(color: string, noerror: boolean): kendo.Color;
-    function prompt(text: string, defaultValue: string): JQueryPromise<any>;
+    function prompt(text: string, defaultValue: string, encoded?: boolean): JQueryPromise<any>;
     function proxyModelSetters(): void;
     function proxyModelSetters(data: kendo.data.Model): void;
     function resize(element: string, force: boolean): void;
@@ -27589,6 +27597,7 @@ declare namespace kendo.dataviz.drawing {
     interface TooltipOptions {
         autoHide?: boolean | undefined;
         content?: string | Function | undefined;
+        encoded?: boolean | undefined;
         position?: string | undefined;
         height?: number | string | undefined;
         hideDelay?: number | undefined;

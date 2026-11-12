@@ -102,7 +102,7 @@ export const __meta__ = {
         }
 
         if (item.cssClass) {
-            result += " " + item.cssClass;
+            result += " " + encode(item.cssClass);
         }
 
         if (item.level) {
@@ -146,7 +146,11 @@ export const __meta__ = {
         return content.item.expanded !== true ? ` ${kendo.attr("style-display")}="none"` : "";
     },
     content: function(item) {
-        return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
+        if (item.content) {
+            return item.encoded === false ? item.content : kendo.htmlEncode(item.content);
+        }
+
+        return item.contentUrl ? "" : "&nbsp;";
     },
     contentUrl: function(item) {
         return item.contentUrl ? 'href="' + kendo.sanitizeLink(item.contentUrl) + '"' : "";

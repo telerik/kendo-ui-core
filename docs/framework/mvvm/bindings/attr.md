@@ -50,6 +50,8 @@ After calling `kendo.bind`, the image looks in the following way. The `data-bind
         kendo.bind($("div"), viewModel);
         </script>
 
+* Attribute sanitization&mdash;Attributes with invalid names and `srcdoc` are not set. The URL attributes (such as `href`, `src`, `action` and `formaction`) with unsafe protocols are replaced with `#INVALIDLINK`. Event handler attributes (names starting with `on`) are preserved for backward compatibility. Their values must come from trusted sources because the browser can execute them as JavaScript. Prefer the [`events`]({% slug eventsbinding_mvvm_kendoui %}) binding for event handlers.
+
 ## See Also
 
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})

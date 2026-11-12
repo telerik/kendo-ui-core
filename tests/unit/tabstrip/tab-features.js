@@ -4,8 +4,8 @@ import '@progress/kendo-ui/src/kendo.tabstrip.js';
 let dom;
 let tabstrip;
 
-function createTabStrip(options) {
-    dom = $('<div></div>').appendTo(document.body);
+function createTabStrip(options, markup) {
+    dom = $(markup || '<div></div>').appendTo(document.body);
     tabstrip = new kendo.ui.TabStrip(dom, options);
 }
 
@@ -208,5 +208,177 @@ describe('TabStrip Tab Features', function() {
         assert.equal(dom.find('.k-tabstrip-content').length, 1);
         assert.equal(dom.find('.k-tabstrip-item').text(), 'Tab 2');
         assert.equal(dom.find('.k-tabstrip-content').text(), 'Content 2');
+    });
+
+    it('renders data-source text as text when encoded is omitted', function() {
+        const untrustedText = 'Tab <img src=x onerror=alert(1)>';
+        createTabStrip({
+            dataTextField: 'text',
+            dataSource: [{ text: untrustedText }]
+        });
+
+        const tab = dom.find('.k-tabstrip-item').first();
+        assert.equal(tab.find('img').length, 0);
+        assert.equal(tab.text().trim(), untrustedText);
+    });
+
+    it('renders DOM-sourced tab text as text when encoded is omitted', function() {
+        const untrustedText = 'Tab <img src=x onerror=alert(1)>';
+        createTabStrip(
+            { _enableDOMDataSource: true },
+            `<div><ul><li><a class="k-link"><span class="k-link-text">Tab &lt;img src=x onerror=alert(1)&gt;</span></a></li></ul></div>`
+        );
+
+        const tab = dom.find('.k-tabstrip-item').first();
+        assert.equal(tab.find('img').length, 0);
+        assert.equal(tab.text().trim(), untrustedText);
+    });
+
+    it('renders DOM-sourced HTML when encoded is explicitly false', function() {
+        createTabStrip(
+            { _enableDOMDataSource: true },
+            '<div><ul><li data-encoded="false"><a class="k-link"><span class="k-link-text"><strong>Tab</strong></span></a></li></ul></div>'
+        );
+
+        assert.equal(dom.find('.k-tabstrip-item strong').text(), 'Tab');
+    });
+
+    it('renders DOM-sourced content as HTML when encoded is false', function() {
+        createTabStrip(
+            { _enableDOMDataSource: true },
+            `<div>
+                <ul>
+                    <li data-text="&lt;strong&gt;Tab&lt;/strong&gt;" data-encoded="false" data-content="&lt;strong&gt;Content&lt;/strong&gt;">
+                        <a class="k-link"><span class="k-link-text">Tab</span></a>
+                    </li>
+                </ul>
+                <div class="k-tabstrip-content">Initial content</div>
+            </div>`
+        );
+
+        assert.equal(dom.find(".k-tabstrip-content strong").text(), "Content");
+    });
+
+    it('preserves DOM-sourced panel HTML with plain-text header after refresh', function() {
+        createTabStrip(
+            { _enableDOMDataSource: true },
+            `<div>
+                <ul>
+                    <li>Tab &lt;b&gt;</li>
+                </ul>
+                <div><input class="panel-input" /><strong>Panel</strong></div>
+            </div>`
+        );
+
+        tabstrip.refresh();
+
+        assert.equal(dom.find('.k-tabstrip-item').first().text().trim(), 'Tab <b>');
+        assert.equal(dom.find('.k-tabstrip-item b').length, 0);
+        assert.equal(dom.find('.k-tabstrip-content .panel-input').length, 1);
+        assert.equal(dom.find('.k-tabstrip-content strong').text(), 'Panel');
+    });
+
+    it('renders data-source content as text when encoded is omitted', function() {
+        const untrustedContent = '<img src=x onerror=alert(1)>';
+        createTabStrip({
+            dataTextField: 'text',
+            dataContentField: 'content',
+            dataSource: [{ text: 'Tab', content: untrustedContent }]
+        });
+
+        const content = dom.find('.k-tabstrip-content').first();
+        assert.equal(content.find('img').length, 0);
+        assert.equal(content.text(), untrustedContent);
+    });
+
+    it('renders data-source content as HTML when encoded is explicitly false', function() {
+        createTabStrip({
+            dataTextField: 'text',
+            dataContentField: 'content',
+            dataSource: [{ text: 'Tab', content: '<strong>Content</strong>', encoded: false }]
+        });
+
+        assert.equal(dom.find('.k-tabstrip-content strong').text(), 'Content');
+    });
+
+    it('renders data-source content as text when DOM data source is enabled together with a data source', function() {
+        const untrustedContent = '<img src=x onerror=alert(1)>';
+        createTabStrip({
+            _enableDOMDataSource: true,
+            dataTextField: 'text',
+            dataContentField: 'content',
+            dataSource: [{ text: 'Tab', content: untrustedContent }]
+        });
+
+        assert.equal(dom.find('.k-tabstrip-content img').length, 0);
+    });
+
+    it('preserves configured event-handler attributes and encodes action button attribute values', function() {
+        createTabStrip({
+            dataTextField: 'text',
+            dataSource: [{
+                text: 'Tab',
+                actions: [{
+                    icon: 'pencil',
+                    attributes: {
+                        onclick: 'alert(1)',
+                        title: '<b>',
+                        'data-safe': 'true'
+                    }
+                }]
+            }]
+        });
+
+        const action = dom.find('.k-tabstrip-item .k-item-actions button').first();
+        assert.equal(action.attr('onclick'), 'alert(1)');
+        assert.equal(action.attr('title'), '<b>');
+        assert.equal(action.attr('data-safe'), 'true');
+    });
+
+    it('sanitizes tab and action URL attributes using the link allowlist', function() {
+        const attributes = { href: 'mailto:user@example.com', cite: 'javascript:alert(1)' };
+        createTabStrip({
+            dataTextField: 'text',
+            dataSource: [{
+                text: 'Tab',
+                attributes: attributes,
+                actions: [{ icon: 'pencil', attributes: attributes }]
+            }]
+        });
+
+        const tab = dom.find('.k-tabstrip-item').first();
+        const action = tab.find('.k-item-actions button').first();
+        assert.equal(tab.attr('href'), attributes.href);
+        assert.equal(tab.attr('cite'), '#INVALIDLINK');
+        assert.equal(action.attr('href'), attributes.href);
+        assert.equal(action.attr('cite'), '#INVALIDLINK');
+    });
+
+    it('renders data-source HTML when encoded is false on the item', function() {
+        createTabStrip({
+            dataTextField: 'text',
+            dataSource: [{ text: '<strong>Tab</strong>', encoded: false }]
+        });
+
+        assert.equal(dom.find('.k-tabstrip-item strong').text(), 'Tab');
+    });
+
+    it('preserves configured event-handler attributes and rejects invalid data-source attribute names', function() {
+        createTabStrip({
+            dataTextField: 'text',
+            dataSource: [{
+                text: 'Tab',
+                attributes: {
+                    onclick: 'alert(1)',
+                    'data-x" onmouseover="alert(1)': 'true',
+                    'data-safe': 'true'
+                }
+            }]
+        });
+
+        const tab = dom.find('.k-tabstrip-item').first();
+        assert.equal(tab.attr('onclick'), 'alert(1)');
+        assert.isUndefined(tab.attr('onmouseover'));
+        assert.equal(tab.attr('data-safe'), 'true');
     });
 });

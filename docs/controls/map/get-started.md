@@ -23,7 +23,7 @@ After the completion of this guide, you will be able to achieve the following en
             type: "tile",
             urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
           }],
           markers: [{
             location: [51.509865, -0.118092],
@@ -70,7 +70,7 @@ In this step, you need to configure the Map [`layers`](/api/dataviz/ui/map/confi
             type: "tile",
             urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
           }]
         }); 
     </script>
@@ -90,7 +90,7 @@ Next, you can set the coordinates to center the Map to a specific location. You 
             type: "tile",
             urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
           }]
         }); 
     </script>
@@ -110,7 +110,7 @@ You can display a marker over a specific Point of Interest. Similar to the `laye
             type: "tile",
             urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
           }],
           markers: [{
             location: [51.509865, -0.118092],

@@ -28,7 +28,17 @@ How do I display an alert message in a Kendo UI popup? Display a modal popup or 
 
 ##### text `String`
 
-The text to be shown in the Alert popup.
+The text to be shown in the Alert popup. The text is HTML-encoded by default. To render trusted HTML, set the `encoded` parameter to `false`.
+
+##### encoded `Boolean` *(default: true)*
+
+If set to `false`, the `text` is rendered as HTML without encoding. Use it only with trusted content.
+
+#### Example - Render trusted HTML in a Kendo UI Alert
+
+    <script>
+        kendo.alert("<strong>This is an alert popup!</strong>", false);
+    </script>
 
 ### antiForgeryTokens
 Returns an object that contains common
@@ -140,7 +150,11 @@ How to implement a customizable confirmation dialog in Kendo UI for jQuery? Open
 
 ##### text `String`
 
-The text to be shown in the Confirm popup.
+The text to be shown in the Confirm popup. The text is HTML-encoded by default. To render trusted HTML, set the `encoded` parameter to `false`.
+
+##### encoded `Boolean` *(default: true)*
+
+If set to `false`, the `text` is rendered as HTML without encoding. Use it only with trusted content.
 
 #### Returns
 
@@ -741,13 +755,17 @@ How do I create a modal input dialog with Kendo UI's prompt function? Display a 
 
 ##### text `String`
 
-The text to be shown in the Prompt popup.
+The text to be shown in the Prompt popup. The text is HTML-encoded by default. To render trusted HTML, set the `encoded` parameter to `false`.
 
 #### Parameters
 
 ##### defaultValue `String`
 
 The default value that will be shown in the popup's input.
+
+##### encoded `Boolean` *(default: true)*
+
+If set to `false`, the `text` is rendered as HTML without encoding. Use it only with trusted content.
 
 #### Returns
 

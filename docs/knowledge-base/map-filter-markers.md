@@ -45,8 +45,11 @@ The marker layer is added to the Map when the Map is initialized. To filter the 
                     type: "tile",
                     urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                     subdomains: ["a", "b", "c"],
-                    attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>." +
-                    "Tiles courtesy of <a href='https://www.opencyclemap.org/'>Andy Allan</a>"
+                    attribution: {
+                        text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>." +
+                            "Tiles courtesy of <a href='https://www.opencyclemap.org/'>Andy Allan</a>",
+                        encoded: false
+                    }
                 }, {
                     type: "marker",
                     dataSource: {

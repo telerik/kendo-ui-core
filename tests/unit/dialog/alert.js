@@ -115,4 +115,18 @@ describe("kendo.alert method", function() {
         assert.equal(alertDialog.content(), "message");
     });
 
+    it("renders text argument as text", function() {
+        let text = '<img src=x onerror="void(0)">';
+        let alertDialog = kendo.alert(text);
+
+        assert.equal(alertDialog.element.text(), text);
+        assert.equal(alertDialog.element.find("img, [onerror]").length, 0);
+    });
+
+    it("renders text argument as HTML when encoded is false", function() {
+        let alertDialog = kendo.alert("<strong>message</strong>", false);
+
+        assert.equal(alertDialog.element.find("strong").text(), "message");
+    });
+
 });

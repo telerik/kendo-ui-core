@@ -1,5 +1,6 @@
 import "./kendo.core.js";
 import "./kendo.data.js";
+import { isSafeAttributeName, sanitizeAttributeValue } from "./utils/html-attributes.js";
 
 export const __meta__ = {
     id: "binder",
@@ -313,7 +314,18 @@ export const __meta__ = {
 
     binders.attr = Binder.extend({
         refresh: function(key) {
-            this.element.setAttribute(key, this.bindings.attr[key].get());
+            var value = this.bindings.attr[key].get();
+
+            if (!isSafeAttributeName(key)) {
+                this.element.removeAttribute(key);
+                return;
+            }
+
+            if (value !== null && value !== undefined) {
+                value = sanitizeAttributeValue(key, value, false);
+            }
+
+            this.element.setAttribute(key, value);
         }
     });
 
@@ -2149,4 +2161,3 @@ export const __meta__ = {
 
 })(window.kendo.jQuery);
 export default kendo;
-

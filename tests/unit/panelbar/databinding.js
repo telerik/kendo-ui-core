@@ -85,6 +85,28 @@ describe("DataSource binding", function() {
         assert.isOk(sprite.attr("class").includes(spriteCssClass));
     });
 
+    it("Data-bound iconClass does not inject unsafe markup", function() {
+        let iconClass = "foo' onmouseover='void(0)";
+        let panelbar = createPanelBar([
+            { text: "foo", icon: "home", iconClass: iconClass }
+        ]);
+        let icon = panelbar.find(".k-icon");
+
+        assert.isUndefined(icon.attr("onmouseover"));
+        assert.isOk(icon.attr("class").includes(iconClass));
+    });
+
+    it("Data-bound item cssClass does not allow attribute injection", function() {
+        let cssClass = "custom' onmouseover='void(0)";
+        let panelbar = createPanelBar([
+            { text: "foo", cssClass }
+        ]);
+        let item = panelbar.find(".k-panelbar-item").first();
+
+        assert.isUndefined(item.attr("onmouseover"));
+        assert.isOk(item.attr("class").includes(cssClass));
+    });
+
     it("Data-bound URLs reject executable schemes", function() {
         let panelbar = createPanelBar([
             { text: "url", url: "javascript:alert(1)" },

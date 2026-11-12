@@ -42,7 +42,7 @@ The Map accepts a `[Latitude, Longitude]` format for its locations field. When y
             type: "tile",
             urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: { text: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
           }, {
             type: "bubble",
             attribution: "Population data from Nordpil and UN Population Division.",

@@ -63,7 +63,7 @@ Use the Map HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the comp
             .Type(MapLayerType.Tile)
             .UrlTemplate("https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
             .Subdomains("a", "b", "c")
-            .Attribution("&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>");
+            .Attribution("\u00A9 OpenStreetMap contributors");
     })
     .Markers(markers =>
     {
@@ -91,7 +91,7 @@ Use the Map HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the comp
         <layer type="MapLayerType.Tile"
                url-template="https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png"
                subdomains="subdomains"
-               attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>">
+               attribution="@("\u00A9 OpenStreetMap contributors")">
         </layer>
     </layers>
     <markers>
@@ -123,7 +123,7 @@ The next step is to configure Zoom configuration. Typical web maps use zoom leve
             .Type(MapLayerType.Tile)
             .UrlTemplate("https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
             .Subdomains("a", "b", "c")
-            .Attribution("&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>");
+            .Attribution("\u00A9 OpenStreetMap contributors");
     })
     .Markers(markers =>
     {
@@ -151,7 +151,7 @@ The next step is to configure Zoom configuration. Typical web maps use zoom leve
         <layer type="MapLayerType.Tile"
                url-template="https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png"
                subdomains="subdomains"
-               attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>">
+               attribution="@("\u00A9 OpenStreetMap contributors")">
         </layer>
     </layers>
     <markers>
@@ -183,7 +183,7 @@ The Map exposes a `ZoomStart()` event that you can handle and assign specific fu
             .Type(MapLayerType.Tile)
             .UrlTemplate("https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
             .Subdomains("a", "b", "c")
-            .Attribution("&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>");
+            .Attribution("\u00A9 OpenStreetMap contributors");
     })
     .Markers(markers =>
     {
@@ -218,7 +218,7 @@ The Map exposes a `ZoomStart()` event that you can handle and assign specific fu
         <layer type="MapLayerType.Tile"
                url-template="https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png"
                subdomains="subdomains"
-               attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>">
+               attribution="@("\u00A9 OpenStreetMap contributors")">
         </layer>
     </layers>
     <markers>

@@ -527,6 +527,79 @@ describe("Toolbar rendering:", function() {
         assert.isOk(button.hasClass("foo"));
     });
 
+    it("options.attributes preserves configured event handler attributes", function() {
+        let toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", attributes: { onclick: "alert(1)", "data-y": "1" } }
+            ]
+        }).data("kendoToolBar");
+
+        let button = toolbar.element.find("#foo");
+        assert.equal(button.attr("onclick"), "alert(1)");
+        assert.equal(button.attr("data-y"), "1");
+    });
+
+    it("options.attributes sanitizes URLs using the link allowlist", function() {
+        let toolbar = container.kendoToolBar({
+            items: [{
+                type: "button", id: "foo", text: "foo",
+                attributes: { href: "mailto:user@example.com", cite: "javascript:alert(1)" }
+            }]
+        }).data("kendoToolBar");
+
+        let button = toolbar.element.find("#foo");
+        assert.equal(button.attr("href"), "mailto:user@example.com");
+        assert.equal(button.attr("cite"), "#INVALIDLINK");
+    });
+
+    ["https://example.com/?a=1&b=2", "javascript:alert(1)"].forEach(function(url) {
+        const expected = url.startsWith("https:") ? url : "#INVALIDLINK";
+
+        it("options.attributes sanitizes the URL callback result " + url, function() {
+            const calls = [];
+            container.kendoToolBar({
+                items: [{
+                    type: "button", id: "foo", text: "foo", overflow: "never", url: "/original",
+                    attributes: {
+                        href: function(index, oldValue) {
+                            calls.push({ element: this, index, oldValue });
+                            return url;
+                        }
+                    }
+                }]
+            });
+
+            const button = container.find("#foo");
+            assert.equal(calls.length, 1);
+            assert.equal(calls[0].element, button[0]);
+            assert.equal(calls[0].index, 0);
+            assert.equal(calls[0].oldValue, "/original");
+            assert.equal(button.attr("href"), expected);
+        });
+
+        it("custom widget attributes sanitize the URL callback result " + url, function() {
+            const calls = [];
+            container.kendoToolBar({
+                items: [{
+                    component: "Button", id: "foo", element: '<a href="/original">foo</a>', overflow: "never",
+                    attributes: {
+                        href: function(index, oldValue) {
+                            calls.push({ element: this, index, oldValue });
+                            return url;
+                        }
+                    }
+                }]
+            });
+
+            const button = container.find("#foo");
+            assert.isAbove(calls.length, 0);
+            assert.equal(calls[0].element, button[0]);
+            assert.equal(calls[0].index, 0);
+            assert.equal(calls[0].oldValue, "/original");
+            assert.equal(button.attr("href"), expected);
+        });
+    });
+
     it("button is initially hidden if hidden option is set to true", function() {
         let toolbar = container.kendoToolBar({
             items: [

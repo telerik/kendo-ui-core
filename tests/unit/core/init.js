@@ -139,6 +139,18 @@ describe("kendo.init", function() {
         assert.equal(testwidget.options.foo, "foo");
     });
 
+    it("does not evaluate invalid JSON object options from data attributes", function() {
+        let value = "{ foo: window.invalidJSONEvaluated = true }";
+        dom = $('<div data-role="testwidget"/>').attr("data-foo", value);
+        window.invalidJSONEvaluated = false;
+
+        let errors = captureConsoleErrors(() => kendo.init(dom));
+
+        assert.isFalse(window.invalidJSONEvaluated);
+        assert.equal(dom.data("kendoTestWidget").options.foo, "");
+        assert.deepEqual(errors, [invalidJSONMessage("foo", value)]);
+    });
+
     it("parses string option from data attribute", function() {
         dom = $('<div data-role="testwidget" data-foo="[foo]" />');
         kendo.init(dom);

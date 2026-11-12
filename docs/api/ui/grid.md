@@ -4959,6 +4959,8 @@ How do I configure sum, average, and count calculations for each group in a Kend
 
 > HTML attributes which are JavaScript keywords (e.g. *class*) must be quoted.
 
+> Attribute values are HTML-encoded. Attributes with invalid names, event handler attributes (names starting with `on`) and `srcdoc` are ignored, and URL attributes such as `href` and `src` are sanitized.
+
 
 <div class="meta-api-description">
 How do I customize attributes for individual cells in a Kendo UI grid column? Set or customize HTML attributes on table cell elements of grid columns by specifying key-value pairs for classes, inline styles, data-* attributes, aria-* accessibility tags, or other custom attributes to control appearance, behavior, and metadata of column cells in data grids or tables, enabling fine-grained control over cell rendering, styling, accessibility, and dynamic content injection within grid columns.
@@ -5175,6 +5177,25 @@ How to configure custom commands in Kendo UI Grid columns? Configure and enable 
           }
         }
       }
+    });
+    </script>
+
+### columns.command.attr `Object|String|Function`
+
+The HTML attributes of the command button. Can be an object, a string of HTML attributes (for example, `"data-id='1' title='Edit'"`) or a function that receives the command and returns an object or a string.
+
+Attribute values are HTML-encoded. Attributes with invalid names, event handler attributes (names starting with `on`) and `srcdoc` are ignored, and URL attributes such as `href` and `src` are sanitized.
+
+#### Example - set HTML attributes of the command button
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{ name: "custom", text: "Info", attr: { title: "Show info", "data-id": "1" } }] }
+      ],
+      dataSource: [ { name: "Jane Doe" } ]
     });
     </script>
 
@@ -7098,6 +7119,8 @@ HTML attributes of the column footer. The `footerAttributes` option can be used 
 
 > HTML attributes which are JavaScript keywords (e.g. *class*) must be quoted.
 
+> Attribute values are HTML-encoded. Attributes with invalid names, event handler attributes (names starting with `on`) and `srcdoc` are ignored, and URL attributes such as `href` and `src` are sanitized.
+
 
 <div class="meta-api-description">
 How do I add custom CSS classes to the footer cell of a Kendo UI grid column? Customize or set HTML attributes on the footer cell of a grid column by configuring attribute name and value pairs such as class, id, data attributes, or custom tags to control styling, identification, data hooks, or behavior at the column footer level. Enable adding or overriding attributes like CSS classes, element IDs, data-binding properties, or ARIA roles for accessibility in the footer area of grid columns. This supports applying HTML attributes dynamically or statically during grid setup to target footer cells for styling, scripting, or identification, including handling special attributes that require quoting such as class or JavaScript reserved keywords.
@@ -7776,6 +7799,8 @@ How to customize group footer templates in Kendo UI Grid? Customize and configur
 HTML attributes of the column header. The grid renders a table header cell (`<th>`) for every column. The `headerAttributes` option can be used to set the HTML attributes of that `th`.
 
 > HTML attributes which are JavaScript keywords (e.g. *class*) must be quoted.
+
+> Attribute values are HTML-encoded. Attributes with invalid names, event handler attributes (names starting with `on`) and `srcdoc` are ignored, and URL attributes such as `href` and `src` are sanitized.
 
 
 <div class="meta-api-description">

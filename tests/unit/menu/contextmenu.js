@@ -4,6 +4,11 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
 
 let menu;
 let assertOk = function() { assert.isOk(true); };
+let gapStyles = '<style>' +
+    '.k-menu-popup { padding: 8px; border: 1px solid; margin: 2px 0; }' +
+    '.k-context-menu { padding: 0; }' +
+    '.k-context-menu.k-menu-horizontal { padding: 4px 8px; }' +
+    '</style>';
 
 describe("menu api", function() {
     beforeEach(function() {
@@ -425,6 +430,160 @@ describe("menu api", function() {
 
         target = $(".filter:first");
         target.trigger("click");
+    });
+
+    asyncTest("applies horizontal gap to sub menu popup of root item in vertical orientation", function(done) {
+        Mocha.fixture.append(gapStyles);
+        menu.setOptions({ hoverDelay: 0 });
+        menu.open(0, 0);
+
+        let item = menu.element.children("li").first();
+        menu.open(item);
+
+        setTimeout(function() {
+            let wrapper = item.find(".k-menu-popup").first().data("kendoPopup").wrapper[0];
+            let gap = item.find(".k-menu-popup")[0].getBoundingClientRect().left - menu.popup.element[0].getBoundingClientRect().right;
+
+            done(() => {
+                assert.closeTo(gap, 3, 0.5);
+                assert.equal(wrapper.style.marginTop, "");
+            });
+        });
+    });
+
+    asyncTest("applies vertical gap to sub menu popup of root item in horizontal orientation", function(done) {
+        Mocha.fixture.append(gapStyles);
+        menu.setOptions({ hoverDelay: 0, orientation: "horizontal" });
+        menu.open(0, 0);
+
+        let item = menu.element.children("li").first();
+        menu.open(item);
+
+        setTimeout(function() {
+            let wrapper = item.find(".k-menu-popup").first().data("kendoPopup").wrapper[0];
+            let gap = item.find(".k-menu-popup")[0].getBoundingClientRect().top - menu.popup.element[0].getBoundingClientRect().bottom;
+
+            done(() => {
+                assert.closeTo(gap, 3, 0.5);
+                assert.equal(wrapper.style.marginLeft, "");
+            });
+        });
+    });
+
+    asyncTest("applies vertical gap to sub menu popup of root item opening upward", function(done) {
+        Mocha.fixture.append(gapStyles);
+        menu.setOptions({ hoverDelay: 0, orientation: "horizontal", direction: "top" });
+        menu.open(0, 300);
+
+        let item = menu.element.children("li").first();
+        menu.open(item);
+
+        setTimeout(function() {
+            let gap = menu.popup.element[0].getBoundingClientRect().top - item.find(".k-menu-popup")[0].getBoundingClientRect().bottom;
+
+            done(() => assert.closeTo(gap, 3, 0.5));
+        });
+    });
+
+    asyncTest("applies gap in unscaled units to sub menu popup inside a scaled container", function(done) {
+        Mocha.fixture.append(gapStyles);
+        Mocha.fixture.append(
+            '<div id="scaled" style="position: absolute; left: 0; top: 0; transform: scale(0.5); transform-origin: 0 0;">' +
+            '   <ul id="scaledMenu"><li>Item<ul><li>Sub Item</li></ul></li></ul>' +
+            '</div>'
+        );
+        let scaledMenu = new kendo.ui.ContextMenu("#scaledMenu", { animation: false, target: "#target", appendTo: "#scaled", hoverDelay: 0 });
+        scaledMenu.open(0, 0);
+
+        let item = scaledMenu.element.children("li").first();
+        scaledMenu.open(item);
+
+        setTimeout(function() {
+            let marginLeft = parseFloat(item.find(".k-menu-popup").first().data("kendoPopup").wrapper[0].style.marginLeft);
+
+            scaledMenu.destroy();
+            done(() => assert.closeTo(marginLeft, 12, 0.5));
+        });
+    });
+    asyncTest("keeps sub menu popup inside the viewport when only the gap would overflow it", function(done) {
+        Mocha.fixture.append(gapStyles);
+        Mocha.fixture.append("<style>.k-menu-popup { padding: 40px; }</style>");
+        menu.setOptions({ hoverDelay: 0, popupCollision: "fit" });
+        menu.open(0, 0);
+
+        let item = menu.element.children("li").first();
+        menu.open(item);
+
+        setTimeout(function() {
+            let rootWidth = menu.popup.element[0].getBoundingClientRect().width;
+            let subWidth = item.find(".k-menu-popup")[0].getBoundingClientRect().width;
+            let viewportWidth = document.documentElement.clientWidth;
+
+            menu.close();
+            item.find(".k-menu-popup").first().data("kendoPopup").wrapper.css("marginLeft", "");
+            menu.open(viewportWidth - 20 - rootWidth + 41 - subWidth, 0);
+            menu.open(item);
+
+            setTimeout(function() {
+                let right = item.find(".k-menu-popup")[0].getBoundingClientRect().right;
+
+                done(() => assert.isAtMost(right, viewportWidth + 0.5));
+            });
+        });
+    });
+
+    asyncTest("applies vertical gap to sub menu popup that flips upward on collision", function(done) {
+        Mocha.fixture.append(gapStyles);
+        menu.setOptions({ hoverDelay: 0, orientation: "horizontal", popupCollision: "flip" });
+        menu.open(0, 0);
+
+        let item = menu.element.children("li").first();
+        menu.open(item);
+
+        setTimeout(function() {
+            let rootHeight = menu.popup.element[0].getBoundingClientRect().height;
+
+            menu.close();
+            menu.open(0, document.documentElement.clientHeight - rootHeight - 1);
+            menu.open(item);
+
+            setTimeout(function() {
+                let popup = item.find(".k-menu-popup").first().data("kendoPopup");
+                let gap = menu.popup.element[0].getBoundingClientRect().top - popup.element[0].getBoundingClientRect().bottom;
+
+                done(() => {
+                    assert.isTrue(popup.flipped);
+                    assert.closeTo(gap, 3, 0.5);
+                });
+            });
+        });
+    });
+
+    asyncTest("applies horizontal gap to sub menu popup that flips sideways on collision", function(done) {
+        Mocha.fixture.append(gapStyles);
+        menu.setOptions({ hoverDelay: 0 });
+        menu.open(0, 0);
+
+        let item = menu.element.children("li").first();
+        menu.open(item);
+
+        setTimeout(function() {
+            let rootWidth = menu.popup.element[0].getBoundingClientRect().width;
+
+            menu.close();
+            menu.open(document.documentElement.clientWidth - rootWidth - 1, 0);
+            menu.open(item);
+
+            setTimeout(function() {
+                let popup = item.find(".k-menu-popup").first().data("kendoPopup");
+                let gap = menu.popup.element[0].getBoundingClientRect().left - popup.element[0].getBoundingClientRect().right;
+
+                done(() => {
+                    assert.isTrue(popup.flipped);
+                    assert.closeTo(gap, 3, 0.5);
+                });
+            });
+        });
     });
 
     it("ContextMenu is accessible", async function() {

@@ -489,7 +489,7 @@ How to customize AI response display in Kendo UI InlineAIPrompt? Customize the w
     <div id="inlineaiprompt"></div>
     <script>
     $("#inlineaiprompt").kendoInlineAIPrompt({
-        responseTemplate: (data) => `<div class="custom-response"><strong>Prompt:</strong> ${data.prompt}<br><strong>Response:</strong> ${data.output}</div>`
+        responseTemplate: (data) => `<div class="custom-response"><strong>Prompt:</strong> ${kendo.htmlEncode(data.prompt)}<br><strong>Response:</strong> ${kendo.htmlEncode(data.output)}</div>`
     });
     </script>
 
@@ -499,13 +499,13 @@ How to customize AI response display in Kendo UI InlineAIPrompt? Customize the w
                     <p>Prompt:</p>
                     <br/>
                     <br/>
-                    <p>${response.prompt}</p>
+                    <p>${kendo.htmlEncode(response.prompt)}</p>
                     <br/>
                     <br/>
                     <p><strong>Output:</strong></p>
                     <br/>
                     <br/>
-                    <p><strong>${response.output}</strong></p>
+                    <p><strong>${kendo.htmlEncode(response.output)}</strong></p>
                 `
            },
     })

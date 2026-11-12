@@ -59,7 +59,7 @@ How do I control when Kendo UI ScrollView fetches its data? Configure initial da
             # for (var i = 0; i < data.length; i++) { #
             <div>
                 <div style="width: 140px; height: 140px; background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
-                <p>#= data[i].ProductName #</p>
+                <p>#: data[i].ProductName #</p>
         </div>
          # } #
         </div>
@@ -201,7 +201,7 @@ How do I configure Kendo UI ScrollView to automatically populate its content fro
             # for (var i = 0; i < data.length; i++) { #
             <div>
                 <div style="width: 140px; height: 140px; background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
-                <p>#= data[i].ProductName #</p>
+                <p>#: data[i].ProductName #</p>
             </div>
          # } #
         </div>

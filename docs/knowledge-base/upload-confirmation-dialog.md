@@ -49,9 +49,9 @@ The following example demonstrates how to open the **Confirm** Dialog within the
 		  // Initialize a Confirm Dialog
 		  kendo.confirm("File name:" +
 						"<br/>" +
-						file.name +
+						kendo.htmlEncode(file.name) +
 						"<br/>" +
-						"Are you sure that you want to upload this file?")
+						"Are you sure that you want to upload this file?", false)
 			.then(function () {
 			  // Upload the file if confirmed
 			  upload.upload();

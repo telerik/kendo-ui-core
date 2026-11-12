@@ -79,7 +79,7 @@ The following example renders a Map centered on Austin, TX, adds a new marker at
             type: "tile",
             urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
           }],
           markers: [{
             location: [30.268107, -97.744821],
@@ -122,7 +122,7 @@ The following example renders a Map centered on Austin, TX, adds a new marker at
          	for(var i=0; i< markers.length; i++){
             message += kendo.format("Marker {0} Location - {1}</br>", i+1, markers[i].location());
           }
-          kendo.alert(message);
+          kendo.alert(message, false);
         }
       </script>
 

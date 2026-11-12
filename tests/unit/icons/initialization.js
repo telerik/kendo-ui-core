@@ -79,4 +79,28 @@ describe('kendo.ui.SvgIcon initialization', function() {
         assert.isOk(span.hasClass('k-flip-v'));
         assert.isOk(span.hasClass('custom-class'));
     });
+
+    it('parses custom SVG content in an inert document', function() {
+        let parsingDocument;
+        const implementation = document.implementation;
+        const createHTMLDocument = implementation.createHTMLDocument;
+        implementation.createHTMLDocument = function(title) {
+            parsingDocument = createHTMLDocument.call(this, title);
+            return parsingDocument;
+        };
+
+        try {
+            icon = new SvgIcon(span, {
+                icon: {
+                    name: 'custom',
+                    content: '<path d="M1 1"></path>'
+                }
+            });
+        } finally {
+            implementation.createHTMLDocument = createHTMLDocument;
+        }
+
+        assert.isOk(parsingDocument);
+        assert.isNull(parsingDocument.defaultView);
+    });
 });

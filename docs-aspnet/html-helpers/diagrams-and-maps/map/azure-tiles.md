@@ -100,7 +100,7 @@ Use a tile layer and configure its UrlTemplate to point to the proxy controller 
                     Url.Action("AzureTile", "Map") +
                     "?zoom=#=zoom#&x=#=x#&y=#=y#"
                 )
-                .Attribution("© Microsoft Azure Maps");
+                .Attribution("\u00A9 Microsoft Azure Maps");
         })
     )
 ```
@@ -120,7 +120,7 @@ Use a tile layer and configure its UrlTemplate to point to the proxy controller 
         <layers>
             <layer type="MapLayerType.Tile"
                    url-template="@Url.Action("AzureTile", "Map")?zoom=#=zoom#&x=#=x#&y=#=y#"
-                   attribution="© Microsoft Azure Maps">
+                   attribution="@("\u00A9 Microsoft Azure Maps")">
             </layer>
         </layers>
     </kendo-map>

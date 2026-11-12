@@ -1,3 +1,4 @@
+import { isSafeUrl, resolveUrlProtocol } from "../../utils/url";
 // Regex patterns for HTML encoding
 const ampRegExp = /&/g;
 const ltRegExp = /</g;
@@ -6,19 +7,6 @@ const aposRegExp = /'/g;
 const gtRegExp = />/g;
 const encodedPercentRegExp = /%25([\dA-F]{2})/gi;
 const encodedIpv6HostRegExp = /^((?:https?:)?\/\/(?:[^/?#]*@)?)%5B([^/?#]+)%5D/i;
-// Allowed protocols for sanitized links
-const ALLOWED_PROTOCOLS = ["http:", "https:"];
-const ALLOWED_IMAGE_DATA_MIME_TYPES = [
-    "image/apng",
-    "image/avif",
-    "image/bmp",
-    "image/gif",
-    "image/jpeg",
-    "image/png",
-    "image/vnd.microsoft.icon",
-    "image/webp",
-    "image/x-icon",
-];
 /**
  * Service for HTML encoding, decoding, and sanitization
  */
@@ -47,57 +35,39 @@ class HtmlService {
         }
         return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;").replace(quoteRegExp, "&quot;").replace(aposRegExp, "&#39;");
     }
-    /**
-     * Sanitize a URL to prevent XSS attacks
-     * Only allows http: and https: protocols
-     */
     sanitizeLink(value) {
-        let link = "";
-        try {
-            // Use the default origin in case the value is a relative URL.
-            const url = new URL(value, window.location.origin);
-            if (ALLOWED_PROTOCOLS.includes(url.protocol)) {
-                link = encodeURI(value).replace(encodedPercentRegExp, "%$1");
-                if (url.hostname.startsWith("[") && url.hostname.endsWith("]")) {
-                    link = link.replace(encodedIpv6HostRegExp, "$1[$2]");
-                }
-            }
-            else {
-                throw new Error("Invalid protocol");
-            }
-        }
-        catch (_a) {
-            link = "#INVALIDLINK";
-        }
-        return this.encode(link);
+        return this.sanitizeUrl(value, "link");
     }
     sanitizeIframeUrl(value, encodeForHtml = true) {
         if (value === "about:blank") {
             return value;
         }
+        const protocol = typeof value === "string" ? resolveUrlProtocol(value) : null;
+        if (protocol !== "http:" && protocol !== "https:") {
+            return "#INVALIDLINK";
+        }
         const sanitizedUrl = this.sanitizeLink(value);
         return encodeForHtml || sanitizedUrl === "#INVALIDLINK" ? sanitizedUrl : encodeURI(value);
     }
     sanitizeImageSrc(value) {
-        var _a;
-        let link = "";
+        return this.sanitizeUrl(value, "image");
+    }
+    sanitizeUrl(value, context) {
+        if (!isSafeUrl(value, context)) {
+            return "#INVALIDLINK";
+        }
         try {
-            const url = new URL(value, window.location.origin);
-            const mimeType = (_a = value.match(/^data:([^;,]+)/i)) === null || _a === void 0 ? void 0 : _a[1].toLowerCase();
-            if (ALLOWED_PROTOCOLS.includes(url.protocol) || (url.protocol === "data:" && mimeType && ALLOWED_IMAGE_DATA_MIME_TYPES.includes(mimeType))) {
-                link = encodeURI(value).replace(encodedPercentRegExp, "%$1");
-                if (url.hostname.startsWith("[") && url.hostname.endsWith("]")) {
-                    link = link.replace(encodedIpv6HostRegExp, "$1[$2]");
-                }
-            }
-            else {
-                throw new Error("Invalid image source");
-            }
+            const link = encodeURI(value)
+                .replace(encodedPercentRegExp, "%$1")
+                .replace(encodedIpv6HostRegExp, "$1[$2]");
+            return this.encode(link);
         }
-        catch (_b) {
-            link = "#INVALIDLINK";
+        catch (error) {
+            if (error instanceof URIError) {
+                return "#INVALIDLINK";
+            }
+            throw error;
         }
-        return this.encode(link);
     }
     /**
      * Convert text URLs to clickable HTML links

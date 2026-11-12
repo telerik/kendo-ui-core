@@ -248,6 +248,8 @@ excluded-files:
 - "**/razor-page.md"
 - "**/razor-pages.md"
 - "**/ai/copilot-extension.md"
+- "**/knowledge-base/kb-security-uncontrolled-resource-consumption-cve-2026-106156.md"
+- "**/knowledge-base/kb-security-uncontrolled-recursion-cve-2026-106154.md"
 
 meta:
   "*/accessibility":

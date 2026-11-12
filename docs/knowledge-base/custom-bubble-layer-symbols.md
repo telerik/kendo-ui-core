@@ -58,7 +58,7 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
           type: "tile",
           urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           subdomains: ["a", "b", "c"],
-          attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+          attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
         }, {
           type: "bubble",
           attribution: "Population data from Nordpil and UN Population Division.",

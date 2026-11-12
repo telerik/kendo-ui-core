@@ -38,6 +38,9 @@ class KendoJQueryService {
             if (source != null) {
                 // Extend the base object
                 for (name in source) {
+                    if (name === "__proto__" || name === "constructor" || name === "prototype") {
+                        continue;
+                    }
                     // filters, concat and : properties are depricated in the jQuery 3.3.0
                     // cssNumber is deprecated in jQuery 4.0.0
                     // accessing these properties throw a warning when jQuery migrate is included

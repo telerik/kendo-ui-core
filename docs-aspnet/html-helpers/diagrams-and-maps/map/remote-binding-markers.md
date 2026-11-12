@@ -30,8 +30,8 @@ The following example demonstrates how to configure the markers for remote data 
                 .Type(MapLayerType.Tile)
                 .UrlTemplate("https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
                 .Subdomains("a", "b", "c")
-                .Attribution("&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>." +
-                             "Tiles courtesy of <a href='https://www.opencyclemap.org/'>Andy Allan</a>");
+                .Attribution("\u00A9 OpenStreetMap contributors. " +
+                             "Tiles courtesy of Andy Allan");
 
             layers.Add()
                 .Type(MapLayerType.Marker)
@@ -56,7 +56,7 @@ The following example demonstrates how to configure the markers for remote data 
             <layer type="MapLayerType.Tile" 
                    url-template="https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png"
                    subdomains="subdomains"
-                   attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>. Tiles courtesy of <a href='https://www.opencyclemap.org/'>Andy Allan</a>">
+                   attribution="@("\u00A9 OpenStreetMap contributors. Tiles courtesy of Andy Allan")">
             </layer>
             <layer type="MapLayerType.Marker" location-field="LatLng" title-field="Name">
                 <datasource>

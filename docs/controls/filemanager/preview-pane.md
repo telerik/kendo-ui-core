@@ -62,7 +62,7 @@ The following example demonstrates a singleFileTemplate declaration in the FileM
                 <span class="k-icon k-i-#=kendo.getFileGroup(selection[0].extension, true)#"></span>
             </div>
             <div class="#=styles.fileTitleWrapper#">
-                <span class="#=styles.fileTitle#">#=selection[0].name#</span>
+                <span class="#=styles.fileTitle#">#:selection[0].name#</span>
             </div>
             #if(metaFields){#
             <dl class="#=styles.fileMetaWrapper#">
@@ -97,4 +97,3 @@ The following example demonstrates a singleFileTemplate declaration in the FileM
 * [JavaScript API Reference of the Grid](/api/ui/filemanager)
 * [Sort in Kendo UI FileManager]({% slug sort_kendoui_filemanager_widget %})
 * [Toolbar Commands in Kendo UI FileManager]({% slug toolbar_kendoui_filemanager_widget %})
-

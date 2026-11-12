@@ -56,6 +56,10 @@ Scenarios that do not match the above three descriptions result in the following
 * A watermark appears on {{ site.product }} components.
 * [A warning message appears in the application's build log]({%slug troubleshooting-license-key-errors%}).
 
+## Why do I see a banner with a valid trial license?
+
+A valid trial license may display a dismissible notice with the remaining trial days. This notice does not indicate an activation failure and does not add a watermark to the components. For examples and dismissal behavior, see [Trial Notices]({% slug troubleshooting-license-key-errors %}#trial-notices).
+
 ## I updated the {{ site.product }} version in my project and license errors appeared. Why?
 
 The most likely cause is that the new {{ site.product }} version was released after the expiration date of your current license or license key. To fix this issue:

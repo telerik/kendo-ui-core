@@ -29,7 +29,7 @@ How do I link a layer to its parent map in Kendo UI for jQuery? Configure the in
             layerOptions = {
             urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
             };
 
         let layer = new kendo.dataviz.map.layers.TileLayer(map, layerOptions);
@@ -67,7 +67,7 @@ How do I customize the display of data on a map layer in Kendo UI using Layer.op
             layerOptions = {
             urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
             };
 
         let layer = new kendo.dataviz.map.layers.TileLayer(map, layerOptions);
@@ -112,7 +112,7 @@ How do I access the parent map object in Kendo UI for jQuery? Retrieve or access
               type: "tile",
               urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
               subdomains: ["a", "b", "c"],
-              attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+              attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
             }
           ]
         });
@@ -160,7 +160,7 @@ How do I dynamically show or hide specific layers on a Kendo UI map? Control lay
               type: "tile",
               urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
               subdomains: ["a", "b", "c"],
-              attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+              attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
             }
           ]
         });
@@ -204,7 +204,7 @@ How can I programmatically hide a map layer in Kendo UI for jQuery? Control, tog
               type: "tile",
               urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
               subdomains: ["a", "b", "c"],
-              attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+              attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
             }
           ]
         });

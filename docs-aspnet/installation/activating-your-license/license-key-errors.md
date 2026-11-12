@@ -30,12 +30,38 @@ A Telerik license key error may occur in the following scenarios:
 A missing, expired, or invalid license will result in:
 
 * A watermark appearing on application startup.
-* A banner appearing on pages that use the {{ site.product_short }} components. The colored accent bar and the action button of the banner reflect the severity of the message. Clicking the x (**Close**) button closes the banner. For messages that support snoozing, the banner and the related watermark do not reappear on page reload until the snooze period, which is determined by the licensing package, ends. The browser remembers this choice in its `localStorage`, so clearing the site data resets it. Messages that do not support snoozing appear again on the next page load.
+* A [banner](#banner) appearing on pages that use the {{ site.product_short }} components.
 * A warning message in the build log
 
 Activating a valid license removes the banner and the watermark.
 
-With a valid trial license, a dismissible notice banner without a watermark may appear on pages that use the components. The banner can display a badge with the remaining trial days, for example, `14d left`.
+### Banner
+
+The colored accent bar and the action button of the banner reflect the severity of the message. The title, message, and available action vary with the license status. Clicking the action button directs you to start a trial, purchase, or renew a license, depending on the message.
+
+The following example illustrates a client-side missing-license banner for {{ site.product }}.
+
+{% if site.core %}
+![Missing-license banner for Telerik UI for ASP.NET Core with a Start Free Trial button](../images/banner.png)
+{% else %}
+![Missing-license banner for Telerik UI for ASP.NET MVC with a Start Free Trial button](../images/banner-mvc.png)
+{% endif %}
+
+Clicking the x (**Close**) button closes the banner. For messages that support snoozing, the banner and the related watermark do not reappear on page reload until the snooze period, which is determined by the licensing package, ends. The browser remembers this choice in its `localStorage`, so clearing the site data resets it. Messages that do not support snoozing appear again on the next page load.
+
+### Trial Notices
+
+With a valid trial license, a dismissible notice banner without a watermark may appear on pages that use the components. The banner can display a badge with the remaining trial days, for example, `19d left`.
+
+The following simulated example illustrates a client-side trial notice for {{ site.product }}.
+
+{% if site.core %}
+![Trial notice for Telerik UI for ASP.NET Core with a 19d left badge and a See Plans button](../images/trial-banner.png)
+{% else %}
+![Trial notice for Telerik UI for ASP.NET MVC with a 19d left badge and a See Plans button](../images/trial-banner-mvc.png)
+{% endif %}
+
+The message and available action vary with the trial stage. A trial notice does not indicate that license activation has failed.
 
 ## Error Messages
 
@@ -47,7 +73,7 @@ This error can occur when a project references `Telerik.Licensing`, but not any 
 
 The error means that the license key is missing or not set up correctly. For example, the environment variable is not set, or [the license file may be located in the wrong place]({%slug installation_license_key_aspnetcore%}#manual-installation).
 
-In a production application, you may also see a message such as `Get started with Kendo UI. You need a license key to use this product. Start a free trial or configure an existing license key.`
+In a production application, a missing-license banner may prompt you to start a trial or configure an existing license key.
 
 [Install a license key]({%slug installation_license_key_aspnetcore%}) again. Also, check how to [set up a license key in CI/CD environments]({%slug deployment_license_key_aspnetcore%}).
 
@@ -98,7 +124,7 @@ This error applies to subscription licenses. [Renew your subscription](https://w
 
 ### License key is installed but the banner and watermark do not disappear
 
-This is a known issue in version {{ site.product }} 2025.1.211 in scenarios related to deferring the initialization of the components, and in editing scenarios. 
+This is a known issue in version {{ site.product }} 2025.1.211 in scenarios related to deferring the initialization of the components, and in editing scenarios.
 
 The following workaround can be applied to remove the banner and watermark.
 

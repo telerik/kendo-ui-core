@@ -354,6 +354,8 @@ As of the Kendo UI R1 2017 release, this option can contain configuration object
 
 Sets the field of the data item that provides the text content of the tab content element.
 
+Tab content is HTML-encoded by default. Set `encoded: false` on an item to render trusted HTML in its text and content.
+
 
 <div class="meta-api-description">
 How do I bind tab content dynamically to my data source in Kendo UI TabStrip? Map or bind tab panel content text dynamically from a specific data field in your data source, enabling tabs to display content based on underlying dataset properties or records; configure which item attribute controls the displayed content text inside each tab panel, set or link content fields for data-driven tab content population, synchronize tab bodies with corresponding data fields, and control how tab content text is derived from your data structure to support dynamic, variable, or database-driven tab interfaces.
@@ -541,6 +543,30 @@ How do I customize the content of each tab in a Kendo UI TabStrip? Define or con
             dataSource: [
               { text: "Tab 1", content: "Tab 1 content" },
               { text: "Tab 2", content: "Tab 2 content" }
+            ]
+        });
+    </script>
+
+### dataSource.encoded `Boolean` *(default: true)*
+
+Specifies whether the `text` and `content` of the tab are HTML-encoded. By default, both are encoded and rendered as plain text. Set to `false` to render them as HTML.
+
+> **Security Warning:** Setting `encoded` to `false` renders the `text` and `content` as HTML without encoding. Use it only with trusted content. Rendering unsanitized user input can lead to Cross-Site Scripting (XSS) vulnerabilities.
+
+<div class="meta-api-description">
+How do I render HTML markup in a Kendo UI TabStrip tab header or content? Control whether tab text and tab panel content are HTML-encoded or rendered as markup, allow trusted HTML in tab headers and bodies, enable or disable encoding per data item, and prevent XSS by keeping the default encoding for untrusted data.
+</div>
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              { text: "<b>Encoded</b> tab", content: "<i>Encoded</i> content" },
+              { text: "<b>Trusted</b> tab", content: "<i>Trusted</i> content", encoded: false }
             ]
         });
     </script>

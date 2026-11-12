@@ -37,7 +37,8 @@ I would like to show a tooltip for the shapes of the diagram.
 
   	```
          g.drawingElement.options.tooltip = {
-            content: "<span style='background:" + dataItem.colorScheme + "; float:left;width:100%'>" + dataItem.title + "</span>",
+            content: "<span style='background:" + kendo.htmlEncode(dataItem.colorScheme) + "; float:left;width:100%'>" + kendo.htmlEncode(dataItem.title) + "</span>",
+            encoded: false,
             shared: true
         };
   	```
@@ -47,7 +48,8 @@ I would like to show a tooltip for the shapes of the diagram.
   	```
         if(dataItem.hasChildren){ // add to shapes that meet the condition only
             g.drawingElement.options.tooltip = {
-                content: "<span style='background:" + dataItem.colorScheme + "; float:left;width:100%'>" + dataItem.    title + "</span>",
+                content: "<span style='background:" + kendo.htmlEncode(dataItem.colorScheme) + "; float:left;width:100%'>" + kendo.htmlEncode(dataItem.title) + "</span>",
+                encoded: false,
                 shared: true
             };
         }
@@ -113,7 +115,8 @@ The following example demonstrates how to show a tooltip conditionally with a dy
 
         if(dataItem.hasChildren){
           g.drawingElement.options.tooltip = {
-            content: "<span style='background:" + dataItem.colorScheme + "; float:left;width:100%'>" + dataItem.title + "</span>",
+            content: "<span style='background:" + kendo.htmlEncode(dataItem.colorScheme) + "; float:left;width:100%'>" + kendo.htmlEncode(dataItem.title) + "</span>",
+            encoded: false,
             shared: true
           };
         }

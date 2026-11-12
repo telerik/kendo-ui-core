@@ -2163,8 +2163,8 @@ How to customize buttons in task preview panel of Kendo UI TaskBoard? Customize 
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
                                     '<p>Order: {4}</p>',
-                                    card.title, card.description,
-                                    card.status, card.category, card.order));
+                                    kendo.htmlEncode(card.title), kendo.htmlEncode(card.description),
+                                    kendo.htmlEncode(card.status), kendo.htmlEncode(card.category), kendo.htmlEncode(card.order)), false);
         }
       });
     </script>
@@ -2221,8 +2221,8 @@ How to customize button names in Kendo UI TaskBoard preview pane? Configure and 
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
                                     '<p>Order: {4}</p>',
-                                    card.title, card.description,
-                                    card.status, card.category, card.order));
+                                    kendo.htmlEncode(card.title), kendo.htmlEncode(card.description),
+                                    kendo.htmlEncode(card.status), kendo.htmlEncode(card.category), kendo.htmlEncode(card.order)), false);
         }
       });
     </script>
@@ -2279,8 +2279,8 @@ How can I customize the action button label in Kendo UI taskboard preview pane? 
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
                                     '<p>Order: {4}</p>',
-                                    card.title, card.description,
-                                    card.status, card.category, card.order));
+                                    kendo.htmlEncode(card.title), kendo.htmlEncode(card.description),
+                                    kendo.htmlEncode(card.status), kendo.htmlEncode(card.category), kendo.htmlEncode(card.order)), false);
         }
       });
     </script>
@@ -2339,8 +2339,8 @@ How to customize icon for taskboard preview pane buttons in Kendo UI? Customize 
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
                                     '<p>Order: {4}</p>',
-                                    card.title, card.description,
-                                    card.status, card.category, card.order));
+                                    kendo.htmlEncode(card.title), kendo.htmlEncode(card.description),
+                                    kendo.htmlEncode(card.status), kendo.htmlEncode(card.category), kendo.htmlEncode(card.order)), false);
         }
       });
     </script>
@@ -2396,8 +2396,8 @@ How do I set an SVG icon name in a Kendo UI component configuration? Specify the
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
                                     '<p>Order: {4}</p>',
-                                    card.title, card.description,
-                                    card.status, card.category, card.order));
+                                    kendo.htmlEncode(card.title), kendo.htmlEncode(card.description),
+                                    kendo.htmlEncode(card.status), kendo.htmlEncode(card.category), kendo.htmlEncode(card.order)), false);
         }
       });
     </script>
@@ -2453,8 +2453,8 @@ How do I choose an outline, solid, or duotone SVG icon style in a Kendo UI compo
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
                                     '<p>Order: {4}</p>',
-                                    card.title, card.description,
-                                    card.status, card.category, card.order));
+                                    kendo.htmlEncode(card.title), kendo.htmlEncode(card.description),
+                                    kendo.htmlEncode(card.status), kendo.htmlEncode(card.category), kendo.htmlEncode(card.order)), false);
         }
       });
     </script>
@@ -2511,8 +2511,8 @@ How to customize icon styling for task board preview pane buttons using sprite C
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
                                     '<p>Order: {4}</p>',
-                                    card.title, card.description,
-                                    card.status, card.category, card.order));
+                                    kendo.htmlEncode(card.title), kendo.htmlEncode(card.description),
+                                    kendo.htmlEncode(card.status), kendo.htmlEncode(card.category), kendo.htmlEncode(card.order)), false);
         }
       });
     </script>
@@ -2569,8 +2569,8 @@ How do I customize the button behavior in a TaskBoard preview pane? Configure or
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
                                     '<p>Order: {4}</p>',
-                                    card.title, card.description,
-                                    card.status, card.category, card.order));
+                                    kendo.htmlEncode(card.title), kendo.htmlEncode(card.description),
+                                    kendo.htmlEncode(card.status), kendo.htmlEncode(card.category), kendo.htmlEncode(card.order)), false);
         }
       });
     </script>
@@ -2627,8 +2627,8 @@ How do I customize the buttons in Kendo UI TaskBoard's preview pane? Customize a
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
                                     '<p>Order: {4}</p>',
-                                    card.title, card.description,
-                                    card.status, card.category, card.order));
+                                    kendo.htmlEncode(card.title), kendo.htmlEncode(card.description),
+                                    kendo.htmlEncode(card.status), kendo.htmlEncode(card.category), kendo.htmlEncode(card.order)), false);
         }
       });
     </script>
@@ -2685,8 +2685,8 @@ How to change primary button color in TaskBoard preview pane? Toggle the main ac
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
                                     '<p>Order: {4}</p>',
-                                    card.title, card.description,
-                                    card.status, card.category, card.order));
+                                    kendo.htmlEncode(card.title), kendo.htmlEncode(card.description),
+                                    kendo.htmlEncode(card.status), kendo.htmlEncode(card.category), kendo.htmlEncode(card.order)), false);
         }
       });
     </script>

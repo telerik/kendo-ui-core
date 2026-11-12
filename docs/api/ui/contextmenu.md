@@ -449,6 +449,10 @@ How to inherit styles from anchor element in Kendo UI context menu? Configure th
 The data source of the widget which is used to render its items. Can be a JSON object/Array/[kendo.data.HierarchicalDataSource](/api/data/hierarchicaldatasource) that contains an item or an Array of items to be rendered.
 Refer to the example below for a list of the supported properties.
 
+The `text` and `content` of the items are HTML-encoded by default. Set the `encoded` property of an item to `false` to render its `text` and `content` as HTML.
+
+> **Security Warning:** Setting `encoded` to `false` renders the item `text` and `content` without encoding. Use it only with trusted content. Rendering unsanitized user input can lead to Cross-Site Scripting (XSS) vulnerabilities.
+
 
 <div class="meta-api-description">
 How do I bind dynamic menu items to a Kendo UI for jQuery ContextMenu using JSON objects? Configure or bind dynamic menu items for context menus using a flexible data source such as JSON objects, JavaScript arrays, or hierarchical data structures to populate options, submenus, and nested items. Enable setting, updating, or controlling menu entries for right-click or contextual action menus by supplying flat or hierarchical collections, including arrays with nested subitems or complex data models. Support for hierarchical or tree-like menu data allows rendering multi-level dropdowns, submenu structures, and grouped items, making it possible to load, modify, or update context menu content programmatically using various data formats and sources. Integrate, customize, or extend context-sensitive options by connecting any structured data as menu content, facilitating dynamic, data-driven right-click menus or interactive command lists in applications.
@@ -485,7 +489,7 @@ How do I bind dynamic menu items to a Kendo UI for jQuery ContextMenu using JSON
                     },
                     {
                         text: "<b>Item 2</b>",
-                        encoded: false,                              // Allows use of HTML for item text
+                        encoded: false,                              // Renders the item text and content as trusted HTML
                         content: "text"                              // content within an item
                     },
                     {

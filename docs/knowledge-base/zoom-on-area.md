@@ -54,7 +54,7 @@ To define the area, use a set of markers. You can use any list of locations. The
             type: "tile",
             urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "© <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>."
+            attribution: { text: "© <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>.", encoded: false }
         }, {
             type: "marker",
             dataSource: {

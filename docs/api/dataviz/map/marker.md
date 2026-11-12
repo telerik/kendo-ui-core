@@ -27,7 +27,7 @@ How do I set the location of a marker on a map in Kendo UI for jQuery? Specify o
         layers: [{
             type: "tile",
             urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; OpenStreetMap"
+            attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [{
             location: [42.3601, 71.0589], // Boston coordinates
@@ -59,7 +59,7 @@ How do I customize the appearance of map markers in Kendo UI for jQuery using th
         layers: [{
             type: "tile",
             urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; OpenStreetMap"
+            attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [{
             location: [42.3601, 71.0589],
@@ -86,7 +86,7 @@ How do I customize the hover label for map markers in Kendo UI? Set or configure
         layers: [{
             type: "tile",
             urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; OpenStreetMap"
+            attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [{
             location: [42.3601, 71.0589],
@@ -112,7 +112,7 @@ How to enable dynamic tooltips for map markers in Kendo UI map? Configure and en
         layers: [{
             type: "tile",
             urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; OpenStreetMap"
+            attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [{
             location: [42.3601, 71.0589],
@@ -142,7 +142,7 @@ How do I make Kendo UI map markers' tooltips automatically hide on mouseout? Con
         layers: [{
             type: "tile",
             urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; OpenStreetMap"
+            attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [{
             location: [42.3601, 71.0589],
@@ -172,7 +172,7 @@ How do I customize the animation of map marker tooltips in Kendo UI for jQuery? 
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -213,7 +213,7 @@ How to animate closing of marker tooltip in Kendo UI map control? Configure and 
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -249,7 +249,7 @@ How to customize the closing animation effect for a marker tooltip in Kendo UI f
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -284,7 +284,7 @@ How to set the duration of closing animations for map tooltips in Kendo UI? Adju
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -319,7 +319,7 @@ How can I customize the animation when opening tooltips on map markers in Kendo 
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -355,7 +355,7 @@ How to customize the animation effects for opening tooltips in Kendo UI map mark
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -390,7 +390,7 @@ How do I adjust the duration of the tooltip animation when opening a marker on a
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -426,7 +426,7 @@ How to customize the tooltip content for markers in Kendo UI Map? Set or customi
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -460,7 +460,7 @@ How do I set up dynamic content in Kendo UI map marker tooltips with a URL? Conf
         layers: [{
             type: "tile",
             urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; OpenStreetMap"
+            attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [{
             location: [42.3601, 71.0589],
@@ -499,7 +499,7 @@ How do I customize the tooltip content for markers in a Kendo UI map? Customize 
         layers: [{
             type: "tile",
             urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; OpenStreetMap"
+            attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [{
             location: [42.3601, 71.0589],
@@ -533,7 +533,7 @@ How do I hide the pointer on Kendo UI map marker tooltips? Configure the visibil
         layers: [{
             type: "tile",
             urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; OpenStreetMap"
+            attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [{
             location: [42.3601, 71.0589],
@@ -562,7 +562,7 @@ How to display marker tooltip content in an iframe with Kendo UI map? Control di
         layers: [{
             type: "tile",
             urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; OpenStreetMap"
+            attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [{
             location: [42.3601, 71.0589],
@@ -595,7 +595,7 @@ How do I set the height of a marker's tooltip in Kendo UI for jQuery? Adjusting 
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -626,7 +626,7 @@ How do I set a fixed width for a map marker's tooltip in Kendo UI for jQuery? Ad
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -657,7 +657,7 @@ How do I position tooltips for map markers in Kendo UI for jQuery? Adjust or set
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -688,7 +688,7 @@ How to adjust the delay before a tooltip appears on Kendo UI map markers? Adjust
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -719,7 +719,7 @@ How do I configure when tooltips appear on Kendo UI map markers using showOn pro
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [
           {
@@ -759,7 +759,7 @@ The marker location on the map. Coordinates are listed as `[Latitude, Longitude]
         layers: [{
             type: "tile",
             urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; OpenStreetMap"
+            attribution: "\u00A9 OpenStreetMap"
         }],
         markers: [{
             location: [42.3601, 71.0589],

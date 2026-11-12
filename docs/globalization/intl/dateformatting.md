@@ -18,7 +18,7 @@ The following runnable example demonstrates how to convert a JavaScript `Date` o
 
 ```dojo
     <!-- Add the de-DE culture file -->
-    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2022.1.119/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2026.4.1111/js/cultures/kendo.culture.de-DE.min.js"></script>
     <h4>Date formats with US culture.</h4>
     <div id="content"></div>
     <h4>Date formats with DE culture.</h4>

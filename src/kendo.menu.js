@@ -2,6 +2,7 @@ import "./kendo.popup.js";
 import "./kendo.data.js";
 import "./kendo.icons.js";
 import "./kendo.userevents.js";
+import { renderAttrs } from "./utils/html-attributes.js";
 
 export const __meta__ = {
     id: "menu",
@@ -29,12 +30,6 @@ export const __meta__ = {
         keys = kendo.keys,
         Widget = ui.Widget,
         excludedNodesRegExp = /^(ul|a|div)$/i,
-        validAttributeNameRegExp = /^[a-zA-Z][\w:.-]*$/,
-        eventHandlerRegExp = /^on/i,
-        // srcdoc holds markup rather than a URL, so neither encoding nor URL sanitization makes it safe.
-        markupAttributeRegExp = /^srcdoc$/i,
-        urlAttributeRegExp = /^(href|xlink:href|action|formaction|cite|data|ping|poster|background|longdesc|manifest)$/i,
-        imageSrcAttributeRegExp = /^src$/i,
         generatedItemAttributeRegExp = /^(class|role|aria-controls|aria-haspopup|aria-disabled|aria-expanded)$/i,
         generatedContentAttributeRegExp = /^tabindex$/i,
         NS = ".kendoMenu",
@@ -190,33 +185,11 @@ export const __meta__ = {
 
     // The rendered attribute name is not encodable, so unsafe names are dropped instead.
     function serializeAttributes(attributes, skipRegExp) {
-        var result = "";
         var uidAttribute = kendo.attr("uid").toLowerCase();
 
-        attributes = toPlainAttributes(attributes);
-
-        for (var attr in attributes) {
-            if (!Object.prototype.hasOwnProperty.call(attributes, attr) ||
-                !validAttributeNameRegExp.test(attr) ||
-                eventHandlerRegExp.test(attr) ||
-                markupAttributeRegExp.test(attr) ||
-                attr.toLowerCase() === uidAttribute ||
-                (skipRegExp && skipRegExp.test(attr))) {
-                continue;
-            }
-
-            result += attr + "=\"" + sanitizeAttributeValue(attr, attributes[attr]) + "\" ";
-        }
-
-        return result;
-    }
-
-    function sanitizeAttributeValue(name, value) {
-        if (imageSrcAttributeRegExp.test(name)) {
-            return kendo.sanitizeImageSrc(value);
-        }
-
-        return urlAttributeRegExp.test(name) ? kendo.sanitizeLink(value) : encode(value);
+        return renderAttrs(toPlainAttributes(attributes), function(attr) {
+            return attr.toLowerCase() === uidAttribute || (skipRegExp && skipRegExp.test(attr));
+        });
     }
 
     function toPlainAttributes(attributes) {
@@ -1339,7 +1312,7 @@ export const __meta__ = {
 
                         popup._hovered = true;
                         popup.open();
-                        that._applyPopupGap(popup, li, directions, root);
+                        that._applyPopupGap(popup, li, directions);
 
                         that._initPopupScrolling(popup);
                     }
@@ -1352,19 +1325,71 @@ export const __meta__ = {
             return that;
         },
 
-        _applyPopupGap: function(popup, li, directions, root) {
-            var originSide = directions.origin.split(" ")[1],
-                positionSide = directions.position.split(" ")[1],
-                parentPopup = li.closest(".k-menu-popup"),
-                gap = 0;
+        _applyPopupGap: function(popup, li, directions) {
+            var origin = directions.origin.split(" "),
+                position = directions.position.split(" "),
+                parentPopup = this._isRootItem(li) ? $(this.popup && this.popup.element) : li.closest(".k-menu-popup"),
+                horizontalGap = 0,
+                verticalGap = 0,
+                scaleX = 1,
+                scaleY = 1;
 
-            if (!root && parentPopup.length && originSide !== positionSide) {
-                var opensRight = originSide === "right";
-                var padding = parseFloat(parentPopup.css(opensRight ? "paddingRight" : "paddingLeft")) || 0;
-                gap = (padding + POPUP_GAP) * (opensRight !== !!popup.flipped ? 1 : -1);
+            if (parentPopup.length) {
+                var itemRect = li[0].getBoundingClientRect(),
+                    parentRect = parentPopup[0].getBoundingClientRect(),
+                    verticalOrigin = origin[0],
+                    horizontalOrigin = origin[1],
+                    verticalPosition = position[0],
+                    horizontalPosition = position[1];
+
+                scaleX = parentRect.width / parentPopup[0].offsetWidth || 1;
+                scaleY = parentRect.height / parentPopup[0].offsetHeight || 1;
+
+                if (horizontalOrigin !== horizontalPosition) {
+                    horizontalGap = this._popupGap(popup, horizontalOrigin === "right", (parentRect.right - itemRect.right) / scaleX, (itemRect.left - parentRect.left) / scaleX, "marginLeft", "marginRight");
+                } else if (verticalOrigin !== verticalPosition) {
+                    verticalGap = this._popupGap(popup, verticalOrigin === "bottom", (parentRect.bottom - itemRect.bottom) / scaleY, (itemRect.top - parentRect.top) / scaleY, "marginTop", "marginBottom");
+                }
             }
 
-            popup.wrapper.css("marginLeft", gap || "");
+            popup.wrapper.css({
+                marginLeft: horizontalGap || "",
+                marginTop: verticalGap || ""
+            });
+
+            if (horizontalGap || verticalGap) {
+                var rect = popup.wrapper[0].getBoundingClientRect(),
+                    viewport = this._popupViewportRect(popup);
+
+                popup.wrapper.css({
+                    marginLeft: this._fitPopupGap(horizontalGap, scaleX, rect.left, rect.right, viewport.left, viewport.right) || "",
+                    marginTop: this._fitPopupGap(verticalGap, scaleY, rect.top, rect.bottom, viewport.top, viewport.bottom) || ""
+                });
+            }
+        },
+
+        _fitPopupGap: function(gap, scale, start, end, viewportStart, viewportEnd) {
+            var overflow = gap > 0 ? end - viewportEnd : viewportStart - start;
+
+            return gap - Math.sign(gap) * Math.min(Math.max(overflow, 0) / scale, Math.abs(gap));
+        },
+
+        _popupViewportRect: function(popup) {
+            var viewport = $(popup.options.viewport)[0];
+
+            if (!viewport || viewport === window) {
+                return { left: 0, top: 0, right: document.documentElement.clientWidth, bottom: document.documentElement.clientHeight };
+            }
+
+            return viewport.getBoundingClientRect();
+        },
+
+        _popupGap: function(popup, forward, forwardSpace, backwardSpace, forwardMargin, backwardMargin) {
+            if (forward !== !!popup.flipped) {
+                return forwardSpace + POPUP_GAP - (parseFloat(popup.element.css(forwardMargin)) || 0);
+            }
+
+            return -(backwardSpace + POPUP_GAP - (parseFloat(popup.element.css(backwardMargin)) || 0));
         },
 
         _configurePopupOverflow: function(popup, popupOpener) {

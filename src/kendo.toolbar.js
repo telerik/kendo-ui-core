@@ -4,6 +4,7 @@ import "./kendo.dropdownbutton.js";
 import "./kendo.buttongroup.js";
 import "./kendo.menu.js";
 import "./kendo.icons.js";
+import { applyAttrs } from "./utils/html-attributes.js";
 
 export const __meta__ = {
     id: "toolbar",
@@ -864,7 +865,7 @@ export const __meta__ = {
                     delete attributes.class;
                 }
 
-                element.attr(attributes);
+                applyAttrs(element, attributes);
             }
 
             element.addClass(classes);
@@ -897,7 +898,7 @@ export const __meta__ = {
             if (options.attributes) {
                 classes = options.attributes.class;
                 delete options.attributes["class"];
-                element.attr(options.attributes);
+                applyAttrs(element, options.attributes);
                 delete options.attributes[ARIA_LABEL];
             }
 
