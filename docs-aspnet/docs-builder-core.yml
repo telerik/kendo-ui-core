@@ -287,6 +287,8 @@ excluded-files:
 - "**/knowledge-base/mvc-with-requirejs.md"
 - "**/knowledge-base/custom-builder-not-working-ui-for-aspnet-mvc.md"
 - "**/knowledge-base/grid-ambiguous-widgetfactory.md"
+- "**/knowledge-base/kb-security-class-factory-cve-2026-106137.md"
+- "**/knowledge-base/kb-security-filter-processing-cve-2026-106146.md"
 
 meta:
   "*/accessibility":

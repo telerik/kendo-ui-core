@@ -93,13 +93,25 @@ describe("tabstrip data binding", function() {
         });
     });
 
-    it("dataContentField", function() {
+    it("encodes dataContentField by default", function() {
+        const untrustedContent = "<strong>foo</strong>";
         let tabstrip = new kendo.ui.TabStrip(dom, {
             dataContentField: "foo",
-            dataSource: [{ foo: "foo" }]
+            dataSource: [{ foo: untrustedContent }]
         });
 
-        assert.equal(tabstrip.contentElements.first().text(), "foo");
+        const content = tabstrip.contentElements.first();
+        assert.equal(content.find("strong").length, 0);
+        assert.equal(content.text(), untrustedContent);
+    });
+
+    it("renders dataContentField as HTML when encoded is false", function() {
+        let tabstrip = new kendo.ui.TabStrip(dom, {
+            dataContentField: "foo",
+            dataSource: [{ foo: "<strong>foo</strong>", encoded: false }]
+        });
+
+        assert.equal(tabstrip.contentElements.first().find("strong").text(), "foo");
     });
 
     it("dataContentUrlField sanitizes attribute-bound URLs", function() {
@@ -125,6 +137,17 @@ describe("tabstrip data binding", function() {
 
         assert.isUndefined(sprite.attr("onmouseover"));
         assert.isOk(sprite.attr("class").includes(spriteCssClass));
+    });
+
+    it("iconClass does not inject unsafe markup", function() {
+        let iconClass = "foo' onmouseover='void(0)";
+        let tabstrip = new kendo.ui.TabStrip(dom, {
+            dataSource: [{ text: "Tab", icon: "home", iconClass: iconClass }]
+        });
+        let icon = tabstrip.tabGroup.find(".k-icon");
+
+        assert.isUndefined(icon.attr("onmouseover"));
+        assert.isOk(icon.attr("class").includes(iconClass));
     });
 
     it("dataImageUrlField prevents malicious injection", function() {

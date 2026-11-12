@@ -72,7 +72,7 @@ The following example demonstrates the full implementation of the suggested appr
         layers: [{
             type: "tile",
             urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; OpenStreetMap"
+            attribution: "\u00A9 OpenStreetMap"
         }]
     });
 

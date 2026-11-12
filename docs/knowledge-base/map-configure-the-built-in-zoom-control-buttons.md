@@ -62,7 +62,7 @@ The following example initializes a Map and uses the `zoomStart` event to interc
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap"
+          attribution: "\u00A9 OpenStreetMap"
         }],
         zoomStart: function(e) {
           var zoom = e.sender.zoom();

@@ -48,9 +48,9 @@ The watermark appears only for license problems that require it, for example, a 
 
 A banner with an action button appears on pages that use Kendo UI for jQuery components when the license is invalid, expired, or missing:
 
-![Banner](../../../knowledge-base/images/banner.png)
+![Missing-license banner with a yellow accent bar and a Start Free Trial button](../../../knowledge-base/images/banner.png)
 
-The colored accent bar on the left side of the banner and the action button reflect the severity of the message, for example, success, information, warning, or error.
+The colored accent bar on the left side of the banner and the action button reflect the severity of the message, for example, success, information, warning, or error. The title, message, and available action vary with the license status. 
 
 * Clicking the action button redirects you to start a trial, purchase, or renew your license, depending on your license status.
 * Clicking the x (**Close**) button of the banner closes it. For messages that support snoozing, the banner and the related watermark do not reappear on page reload until the snooze period, which is determined by the licensing package, ends. The browser remembers this choice in its `localStorage`, so clearing the site data resets it. Messages that do not support snoozing appear again on the next page load.
@@ -58,7 +58,11 @@ The colored accent bar on the left side of the banner and the action button refl
 
 ### Trial Notices
 
-When you use Kendo UI for jQuery with a valid trial license, a dismissible notice banner may appear on pages that use the components. The banner can display a badge with the remaining trial days, for example, `14d left`, next to its title. Trial notices do not add a watermark to the components.
+When you use Kendo UI for jQuery with a valid trial license, a dismissible notice banner may appear on pages that use the components. The banner can display a badge with the remaining trial days, for example, `8d left`, next to its title. Trial notices do not add a watermark to the components.
+
+![Trial notice with an 8d left badge and a See Plans button](../../../knowledge-base/images/trial-banner.png)
+
+The message and available action vary with the trial stage. A trial notice does not indicate that license activation has failed. 
 
 ### Console Warning
 

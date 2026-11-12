@@ -40,7 +40,7 @@ How do I configure Kendo UI for jQuery to automatically hide tooltips when the c
 
 ### content `String|Function`
 
-The text or a function which result will be shown within the tooltip.
+The text or a function which result will be shown within the tooltip. The content is HTML-encoded by default. To render trusted HTML, set the [`encoded`](#encoded) option to `false`.
 
 > If the content is not set or is an empty string then the tooltip will not be shown.
 
@@ -66,6 +66,31 @@ How can I dynamically update the content of a tooltip in Kendo UI for jQuery? Se
         }
     });
     
+    surface.draw(circle);
+    </script>
+
+### encoded `Boolean`*(default: true)*
+
+Specifies whether the `content` (a string or the result of the content function) is HTML-encoded. By default, the content is rendered as plain text. Set to `false` to render it as HTML.
+
+> **Security Warning:** Setting `encoded` to `false` renders the content as HTML without encoding. Use it only with trusted content. Rendering unsanitized user input can lead to Cross-Site Scripting (XSS) vulnerabilities.
+
+#### Example
+
+    <div id="surface"></div>
+    <script>
+    var draw = kendo.drawing;
+    var geom = kendo.geometry;
+    var surface = draw.Surface.create($("#surface"));
+
+    var circle = new draw.Circle(new geom.Circle([50, 50], 30), {
+        fill: { color: "red" },
+        tooltip: {
+            content: "<strong>Trusted</strong> content",
+            encoded: false
+        }
+    });
+
     surface.draw(circle);
     </script>
 

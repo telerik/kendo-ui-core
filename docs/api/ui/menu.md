@@ -304,6 +304,10 @@ How do I configure Kendo UI menu to close automatically when an item is clicked?
 The data source of the widget which is used to render its items. Can be a JSON object/Arra/[kendo.data.HierarchicalDataSource](/api/data/hierarchicaldatasource) that contains an item or an Array of items to be rendered.
 Refer to the example below for a list of the supported properties.
 
+The `text` and `content` of the items are HTML-encoded by default. Set the `encoded` property of an item to `false` to render its `text` and `content` as HTML.
+
+> **Security Warning:** Setting `encoded` to `false` renders the item `text` and `content` without encoding. Use it only with trusted content. Rendering unsanitized user input can lead to Cross-Site Scripting (XSS) vulnerabilities.
+
 
 <div class="meta-api-description">
 How do I configure data for a Kendo UI menu using the dataSource property? Configure or set the source data feeding the menu items by providing collections such as local arrays, JSON objects, or hierarchical data structures, enabling binding and rendering of nested or flat menu entries; this includes supplying single items or arrays in formats like JavaScript arrays, JSON datasets, or specialized hierarchical data sources to control menu content dynamically across various use cases for data-driven menus, hierarchical navigation, and dynamic item population.
@@ -328,7 +332,7 @@ How do I configure data for a Kendo UI menu using the dataSource property? Confi
           },
            {
              text: "<b>Item 2</b>",
-             encoded: false,                              // Allows use of HTML for item text
+             encoded: false,                              // Renders the item text and content as trusted HTML
              content: "text",                              // content within an item
              contentAttr: {
                style: 'border: 1px solid red; padding: 2px;', // Add attributes to the content container
@@ -605,6 +609,8 @@ How do I show a keyboard shortcut or trailing hint next to a Kendo UI Menu item?
 ### dataContentField `String`
 
 Sets the field of the data item that provides the content of the menu items. The content is HTML-encoded by default. To render it as raw HTML, set `encoded: false` on the data item and make sure that the value is trusted.
+
+The item content is HTML-encoded by default. Set `encoded: false` on an item to render trusted HTML in its text and content.
 
 
 <div class="meta-api-description">

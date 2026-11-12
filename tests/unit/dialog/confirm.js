@@ -112,6 +112,21 @@ describe("kendo.confirm method", function() {
         assert.equal($(".k-window-content").html(), "message");
     });
 
+    it("renders text argument as text", function() {
+        let text = '<img src=x onerror="void(0)">';
+        kendo.confirm(text);
+
+        let content = $(".k-window-content").last();
+        assert.equal(content.text(), text);
+        assert.equal(content.find("img, [onerror]").length, 0);
+    });
+
+    it("renders text argument as HTML when encoded is false", function() {
+        kendo.confirm("<strong>message</strong>", false);
+
+        assert.equal($(".k-window-content").last().find("strong").text(), "message");
+    });
+
     it("ok calls chained done handler", function() {
         kendo.confirm("message").done(function() { assert.isOk(true); });
         $(".k-window-content").data("kendoConfirm").wrapper.find(".k-button:first").click();

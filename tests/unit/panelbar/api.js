@@ -287,14 +287,15 @@ describe("api", function() {
         panelbar.append([
             {
                 text: "Item 1",
-                content: "Item 1 Content"
+                content: "<strong>Item 1 Content</strong>"
             },
             {
                 text: "Item 2",
                 items: [
                     {
                         text: "Sub Item 1",
-                        content: "Sub Item 1 Content"
+                        content: "<em>Sub Item 1 Content</em>",
+                        encoded: false
                     }
                 ]
             }
@@ -302,6 +303,11 @@ describe("api", function() {
 
         assert.isOk(empty_panelbar.children("li:first").children("div.k-panelbar-content")[0]);
         assert.isOk(empty_panelbar.find("> li:last > ul > li:first").children("div.k-panelbar-content")[0]);
+        const rootContent = empty_panelbar.children("li:first").children("div.k-panelbar-content");
+        const nestedContent = empty_panelbar.find("> li:last > ul > li:first").children("div.k-panelbar-content");
+        assert.equal(rootContent.find("strong").length, 0);
+        assert.equal(rootContent.text(), "<strong>Item 1 Content</strong>");
+        assert.equal(nestedContent.find("em").text(), "Sub Item 1 Content");
     });
 
     it("Adding dynamic contentUrl element renders contents on root and inner levels", function() {

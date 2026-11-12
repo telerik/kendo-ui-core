@@ -458,10 +458,10 @@ How do I customize the body content of a Kendo UI for jQuery popover? Define or 
         $(document).ready(function() {
           $("#target").kendoPopover({
             header: function (e) {
-              return e.target.text() + " header";
+              return kendo.htmlEncode(e.target.text()) + " header";
             },
             body: function (e) {
-              return e.target.text() + " description";
+              return kendo.htmlEncode(e.target.text()) + " description";
             }
           });
         });
@@ -526,10 +526,10 @@ How to customize the header section of a Kendo UI popover widget? Control and cu
         $(document).ready(function() {
           $("#target").kendoPopover({
             header: function (e) {
-              return e.target.text() + " header";
+              return kendo.htmlEncode(e.target.text()) + " header";
             },
             body: function (e) {
-              return e.target.text() + " description";
+              return kendo.htmlEncode(e.target.text()) + " description";
             }
           });
         });
@@ -827,7 +827,7 @@ How to get the element that triggers my Kendo UI for jQuery popover? Retrieve or
         var popover = $("#container").kendoPopover({
           filter: "span",
           template: function (e) {
-            return e.target.text();
+            return kendo.htmlEncode(e.target.text());
           },
           position: "right"
         }).data("kendoPopover");

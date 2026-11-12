@@ -41,11 +41,15 @@ This depends on your license:
      * A warning message will appear when calling the `kendo-ui-license activate` command.
 * *Trial licenses* will continue to function normally with an expired license key. The following will happen if you try to build or run the application:
      * A banner appears on application startup.
-     * A modal dialog appears on application startup.
-     * A warning message will appear when calling the kendo-ui-license activate command.
-     * A warning message similar to the following is logged in the build log.
+  * A watermark appears over selected Kendo UI for jQuery components.
+  * A warning message will appear when calling the `kendo-ui-license activate` command.
+  * Licensing warnings appear in the browser console and, when activation runs during a build, in the build log.
 
 See the [Invalid License section]({% slug activation-error-warnings %}#invalid-license) for more information.
+
+## Why do I see a banner with a valid trial license?
+
+A valid trial license may display a dismissible notice with the remaining trial days. This notice does not indicate an activation failure and does not add a watermark to the components. For examples and dismissal behavior, see [Trial Notices]({% slug activation-error-warnings %}#trial-notices).
 
 ## I updated the version of the Kendo UI for jQuery packages in my project and the invalid license errors have appeared. What is the cause for this behavior?
 

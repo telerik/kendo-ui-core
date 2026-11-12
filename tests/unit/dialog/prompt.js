@@ -123,6 +123,21 @@ describe("kendo.prompt method", function() {
         assert.equal($(".k-window-content").html(), "message");
     });
 
+    it("renders text argument as text", function() {
+        let text = '<img src=x onerror="void(0)">';
+        kendo.prompt(text);
+
+        let content = $(".k-window-content").last();
+        assert.equal(content.text(), text);
+        assert.equal(content.find("img, [onerror]").length, 0);
+    });
+
+    it("renders text argument as HTML when encoded is false", function() {
+        kendo.prompt("<strong>message</strong>", "test value", false);
+
+        assert.equal($(".k-window-content").last().find("strong").text(), "message");
+    });
+
     it("value sets default prompt value", function() {
         kendo.prompt("message", "test value");
         assert.equal($(".k-input-inner").val(), "test value");

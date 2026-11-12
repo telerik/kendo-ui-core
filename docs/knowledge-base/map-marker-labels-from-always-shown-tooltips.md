@@ -43,7 +43,7 @@ The map markers in the Kendo UI Map have tooltips which the user can display by 
 				type: "tile",
 				urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
 				subdomains: ["a", "b", "c"],
-				attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+				attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
 			}],
 			markerDefaults: { //make tooltips "sticky" by default
 				tooltip: {

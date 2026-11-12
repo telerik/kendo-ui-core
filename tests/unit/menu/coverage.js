@@ -361,7 +361,7 @@ describe("kendo.ui.Menu item templates", function() {
         assert.isOk(menu.element.find(".k-selected").length > 0);
     });
 
-    it("appending item with content renders content html", function() {
+    it("appending item with encoded false renders content html", function() {
         Mocha.fixture.append("<ul id='tmenu3'><li>Item 1</li></ul>");
         menu = new kendo.ui.Menu("#tmenu3", { animation: false });
 

@@ -25,7 +25,7 @@ The Map displays geospatial information organized in layers and is supported for
 
 ## Initializing the Map
 
-The following example demonstrates how to define the Map.
+The following example demonstrates how to define the Map. The attribution text is HTML-encoded and cannot contain markup.
 
 ```HtmlHelper
     @(Html.Kendo().Map()
@@ -38,7 +38,7 @@ The following example demonstrates how to define the Map.
                 .Type(MapLayerType.Tile)
                 .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
                 .Subdomains("a", "b", "c")
-                .Attribution("&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>");
+                .Attribution("\u00A9 OpenStreetMap contributors");
         })
         .Markers(markers =>
         {
@@ -62,7 +62,7 @@ The following example demonstrates how to define the Map.
             <layer type="MapLayerType.Tile"
                    url-template="https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png"
                    subdomains="subdomains"
-                   attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>">
+                   attribution="@("\u00A9 OpenStreetMap contributors")">
             </layer>
         </layers>
         <markers>
@@ -163,8 +163,8 @@ The following example demonstrates the basic configuration for the Map component
                 .Type(MapLayerType.Tile)
                 .UrlTemplate("http://tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png")
                 .Subdomains("a", "b", "c")
-                .Attribution("&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>." +
-                            "Tiles courtesy of <a href='http://www.opencyclemap.org/'>Andy Allan</a>");
+                .Attribution("\u00A9 OpenStreetMap contributors. " +
+                            "Tiles courtesy of Andy Allan");
         })
     )
 

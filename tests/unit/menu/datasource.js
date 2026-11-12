@@ -112,7 +112,7 @@ describe("Client side rendering", function() {
         assert.isUndefined(content.attr("onmouseover"));
     });
 
-    it('Event handler attribute names are not rendered', function() {
+    it('Configured event handler attributes are preserved', function() {
         createMenu({
             dataSource: [{
                 text: "Item 1",
@@ -132,9 +132,27 @@ describe("Client side rendering", function() {
 
         const item = menu.element.children("li").eq(0);
 
-        assert.isUndefined(item.attr("onclick"));
-        assert.isUndefined(menu.element.find("img").attr("onerror"));
-        assert.isUndefined(menu.element.find(".k-content").attr("onmouseover"));
+        assert.equal(item.attr("onclick"), "window.itemHandlerExecuted = true;");
+        assert.equal(menu.element.find("img").attr("onerror"), "window.imageHandlerExecuted = true;");
+        assert.equal(menu.element.find(".k-content").attr("onmouseover"), "window.contentHandlerExecuted = true;");
+    });
+
+    it("omits nullish attributes and preserves empty values", function() {
+        createMenu({
+            dataSource: [{
+                text: "Item 1",
+                attr: {
+                    "data-null": null,
+                    "data-undefined": undefined,
+                    "data-empty": ""
+                }
+            }]
+        });
+
+        const item = menu.element.children("li").eq(0);
+        assert.isFalse(item[0].hasAttribute("data-null"));
+        assert.isFalse(item[0].hasAttribute("data-undefined"));
+        assert.equal(item.attr("data-empty"), "");
     });
 
     it('Attribute names that cannot be rendered are discarded', function() {
@@ -196,6 +214,23 @@ describe("Client side rendering", function() {
         });
     });
 
+    it('Link and image attributes use their respective URL allowlists', function() {
+        const imageUrl = "blob:https://example.com/123";
+        createMenu({
+            dataSource: [{
+                text: "Item 1",
+                url: "mailto:user@example.com",
+                attr: { cite: imageUrl },
+                imageUrl: "placeholder.png",
+                imageAttr: { src: imageUrl }
+            }]
+        });
+
+        assert.equal(menu.element.find(".k-link").attr("href"), "mailto:user@example.com");
+        assert.equal(menu.element.children("li").attr("cite"), "#INVALIDLINK");
+        assert.equal(menu.element.find("img").attr("src"), imageUrl);
+    });
+
     it('Relative URL bearing attributes are preserved', function() {
         createMenu({
             dataSource: [{
@@ -229,7 +264,7 @@ describe("Client side rendering", function() {
         assert.isFalse(item[0].hasAttribute("srcdoc"));
     });
 
-    it('Every event handler casing is discarded', function() {
+    it('Every configured event handler casing is preserved', function() {
         createMenu({
             dataSource: [{
                 text: "Item 1",
@@ -245,7 +280,7 @@ describe("Client side rendering", function() {
         const item = menu.element.children("li").eq(0);
 
         ["onclick", "onerror", "onmouseover", "onfocusin"].forEach(function(name) {
-            assert.isFalse(item[0].hasAttribute(name), name + " was rendered");
+            assert.equal(item.attr(name), "alert(1)", name + " was not preserved");
         });
     });
 
@@ -797,21 +832,43 @@ describe("Client side rendering", function() {
         assert.equal(menu.element.find(".k-image").attr("src"), "TESTURL");
     });
 
-    it('dataContentField configures the item content', function() {
+    it('encodes dataContentField content by default', function() {
+        const untrustedContent = "<strong>CONTENT</strong>";
+
         createMenu({
             dataContentField: "desc",
             dataSource: new kendo.data.HierarchicalDataSource({
                 data: [
                     {
                         text: "RootItem",
-                        desc: "CONTENT"
+                        desc: untrustedContent
                     }
                 ]
             })
         });
 
         menu.dataSource.view()[0].load();
-        assert.equal(menu.element.find(".k-content").text(), "CONTENT");
+        const content = menu.element.find(".k-content").first();
+        assert.equal(content.find("strong").length, 0);
+        assert.equal(content.text(), untrustedContent);
+    });
+
+    it('renders dataContentField content as HTML when encoded is false', function() {
+        createMenu({
+            dataContentField: "desc",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                    {
+                        text: "RootItem",
+                        desc: "<strong>CONTENT</strong>",
+                        encoded: false
+                    }
+                ]
+            })
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-content strong").text(), "CONTENT");
     });
     it("dataContentField encodes content by default", function() {
         createMenu({

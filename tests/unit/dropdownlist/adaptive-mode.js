@@ -1,11 +1,13 @@
 import '@progress/kendo-ui/src/kendo.dropdownlist.js';
+import { page } from 'vitest/browser';
 
 let DropDownList = kendo.ui.DropDownList;
 let dropdownlist;
 let input;
 
 describe("kendo.ui.DropDownList adaptive mode switching", function() {
-    beforeEach(function() {
+    beforeEach(async function() {
+        await page.viewport(375, 812);
         input = $("<input />").appendTo(Mocha.fixture);
     });
 
@@ -89,11 +91,10 @@ describe("kendo.ui.DropDownList adaptive mode switching", function() {
         });
     });
 
-    it("adaptive ActionSheet popup element does not have k-popup class", function() {
+    it("automatically uses adaptive ActionSheet at a small viewport", function() {
         dropdownlist = createAdaptiveDropDownList();
 
-        dropdownlist._createActionSheet();
-
+        assert.isTrue(dropdownlist._hasActionSheet());
         assert.isFalse(dropdownlist.popup.element.hasClass("k-popup"));
     });
 
@@ -104,12 +105,25 @@ describe("kendo.ui.DropDownList adaptive mode switching", function() {
             adaptiveSubtitle: payload
         });
 
-        dropdownlist._createActionSheet();
         dropdownlist.popup.open();
 
         let header = dropdownlist.popup.element.find(".k-actionsheet-titlebar");
         assert.equal(header.find(".k-actionsheet-title > div:first-child").text(), payload);
         assert.equal(header.find(".k-actionsheet-subtitle").text(), payload);
+        assert.equal(header.find("img, [onerror]").length, 0);
+    });
+
+    it("encodes label fallback in the adaptive header", function() {
+        let label = "<b>Label</b>";
+        dropdownlist = createAdaptiveDropDownList({
+            label: label
+        });
+
+        dropdownlist.popup.open();
+
+        let header = dropdownlist.popup.element.find(".k-actionsheet-titlebar");
+        let title = header.find(".k-actionsheet-title > div:first-child");
+        assert.equal(title.text(), label);
         assert.equal(header.find("img, [onerror]").length, 0);
     });
 });

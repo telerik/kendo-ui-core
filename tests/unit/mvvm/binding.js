@@ -83,6 +83,59 @@ describe("mvvm binding", function() {
         assert.equal(dom.attr("href"), "foo");
     });
 
+    it("href binding rejects executable URL protocols", function() {
+        dom = $('<a data-bind="attr: { href:foo}"/>');
+
+        kendo.bind(dom, { foo: "javascript:alert(1)" });
+        assert.equal(dom.attr("href"), "#INVALIDLINK");
+    });
+
+    it("attr binding uses separate link and image URL allowlists when values change", function() {
+        dom = $('<a data-bind="attr: { href:url }"><img data-bind="attr: { src:url }"></a>');
+        let viewModel = kendo.observable({ url: "mailto:user@example.com" });
+
+        kendo.bind(dom, viewModel);
+        assert.equal(dom.attr("href"), "mailto:user@example.com");
+        assert.equal(dom.find("img").attr("src"), "#INVALIDLINK");
+
+        viewModel.set("url", "blob:https://example.com/123");
+        assert.equal(dom.attr("href"), "#INVALIDLINK");
+        assert.equal(dom.find("img").attr("src"), "blob:https://example.com/123");
+
+        viewModel.set("url", "javascript:alert(1)");
+        assert.equal(dom.attr("href"), "#INVALIDLINK");
+        assert.equal(dom.find("img").attr("src"), "#INVALIDLINK");
+    });
+
+    it("href binding preserves safe URL query parameters", function() {
+        dom = $('<a data-bind="attr: { href:foo}"/>');
+        let url = "https://example.com/?a=1&b=2";
+
+        kendo.bind(dom, { foo: url });
+        assert.equal(dom.attr("href"), url);
+    });
+
+    it("src binding rejects executable URL protocols", function() {
+        dom = $('<img data-bind="attr: { src:foo}"/>');
+
+        kendo.bind(dom, { foo: "javascript:alert(1)" });
+        assert.equal(dom.attr("src"), "#INVALIDLINK");
+    });
+
+    it("attr binding preserves configured event-handler attributes", function() {
+        dom = $('<img data-bind="attr: { onerror:foo}"/>');
+
+        kendo.bind(dom, { foo: "alert(1)" });
+        assert.equal(dom.attr("onerror"), "alert(1)");
+    });
+
+    it("attr binding does not set srcdoc content", function() {
+        dom = $('<iframe data-bind="attr: { srcdoc:foo}"/>');
+
+        kendo.bind(dom, { foo: '<img src=x onerror="alert(1)">' });
+        assert.isUndefined(dom.attr("srcdoc"));
+    });
+
     it("data attribute binding", function() {
         dom = $('<a data-bind="attr: { data-foo:foo}"/>');
 

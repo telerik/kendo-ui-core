@@ -27,7 +27,7 @@ How to add a new layer to a Kendo UI map? Control and manipulate map layers by a
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         }).data("kendoMap");
         
@@ -56,7 +56,7 @@ How do I set the initial center point of a Kendo UI map widget? Adjust or specif
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -81,7 +81,7 @@ How to customize zoom buttons on Kendo UI map? Configure and customize interacti
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -105,7 +105,7 @@ How do I customize map credits and attribution displays in Kendo UI for jQuery? 
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -136,7 +136,7 @@ How do I adjust the position of attribution controls in a Kendo UI map? Set or a
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -160,7 +160,7 @@ How can I enable or disable the navigator control in a Kendo UI map widget? Cont
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -191,7 +191,7 @@ How to position the navigator control on a Kendo UI map? Control the placement a
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -215,7 +215,7 @@ How do I customize the zoom controls on a Kendo UI map? Adjust zoom interface se
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -246,7 +246,7 @@ How to adjust the position of zoom controls on a Kendo UI map? Adjust, set, or c
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -272,7 +272,7 @@ How to set default settings for multiple map layers in Kendo UI Map? Set or cust
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -1131,7 +1131,7 @@ How to set default styles for all shape layers in a Kendo UI map? Set or customi
         $("#map").kendoMap({
             layerDefaults: {
                 shape: {
-                    attribution: "&copy; Company Inc."
+                    attribution: "\u00A9 Company Inc."
                 }
             },
             layers: [{
@@ -1149,9 +1149,10 @@ How to set default styles for all shape layers in a Kendo UI map? Set or customi
         });
     </script>
 
-### layerDefaults.shape.attribution `String`
+### layerDefaults.shape.attribution `String|Object`
 
 The attribution for all shape layers.
+String values are HTML-encoded by default. To render trusted HTML, pass an object with a `text` property and set `encoded: false`.
 
 
 <div class="meta-api-description">
@@ -1164,7 +1165,7 @@ How to set default attribution text for all shape layers in Kendo UI Map? Config
         $("#map").kendoMap({
             layerDefaults: {
                 shape: {
-                    attribution: "&copy; Company Inc."
+                    attribution: "\u00A9 Company Inc."
                 }
             },
             layers: [{
@@ -1181,6 +1182,16 @@ How to set default attribution text for all shape layers in Kendo UI Map? Config
             }]
         });
     </script>
+
+### layerDefaults.shape.attribution.text `String`
+
+The attribution text.
+
+### layerDefaults.shape.attribution.encoded `Boolean` *(default: true)*
+
+Specifies whether the attribution `text` is HTML-encoded. Set to `false` to render the `text` as trusted HTML.
+
+> **Security Warning:** Use `encoded: false` only with trusted content. Rendering unsanitized input can lead to Cross-Site Scripting (XSS) vulnerabilities.
 
 ### layerDefaults.shape.opacity `Number` *(default: 1)*
 
@@ -1590,7 +1601,7 @@ How to configure default bubble map layer settings globally in Kendo UI for jQue
         $("#map").kendoMap({
             layerDefaults: {
                 bubble: {
-                    attribution: "&copy; Company Inc."
+                    attribution: "\u00A9 Company Inc."
                 }
             },
             layers: [{
@@ -1606,9 +1617,10 @@ How to configure default bubble map layer settings globally in Kendo UI for jQue
         });
     </script>
 
-### layerDefaults.bubble.attribution `String`
+### layerDefaults.bubble.attribution `String|Object`
 
 The attribution for all bubble layers.
+String values are HTML-encoded by default. To render trusted HTML, pass an object with a `text` property and set `encoded: false`.
 
 
 <div class="meta-api-description">
@@ -1621,7 +1633,7 @@ How do I customize the default attribution for all bubble layers in a Kendo UI M
         $("#map").kendoMap({
             layerDefaults: {
                 bubble: {
-                    attribution: "&copy; Company Inc."
+                    attribution: "\u00A9 Company Inc."
                 }
             },
             layers: [{
@@ -1636,6 +1648,16 @@ How do I customize the default attribution for all bubble layers in a Kendo UI M
             }]
         });
     </script>
+
+### layerDefaults.bubble.attribution.text `String`
+
+The attribution text.
+
+### layerDefaults.bubble.attribution.encoded `Boolean` *(default: true)*
+
+Specifies whether the attribution `text` is HTML-encoded. Set to `false` to render the `text` as trusted HTML.
+
+> **Security Warning:** Use `encoded: false` only with trusted content. Rendering unsanitized input can lead to Cross-Site Scripting (XSS) vulnerabilities.
 
 ### layerDefaults.bubble.opacity `Number` *(default: 1)*
 
@@ -2136,7 +2158,7 @@ How to adjust the size of individual map tiles in Kendo UI for jQuery? Adjust th
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -2157,7 +2179,7 @@ How do I configure default tile layer settings in Kendo UI Map? Set default opti
             layerDefaults: {
                 tile: {
                     opacity: 0.8,
-                    attribution: "&copy; OpenStreetMap"
+                    attribution: "\u00A9 OpenStreetMap"
                 }
             },
             layers: [{
@@ -2188,7 +2210,7 @@ How do I customize the URL pattern for map tile requests in Kendo UI Map? Custom
             layerDefaults: {
                 tile: {
                     urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                    attribution: "&copy; OpenStreetMap"
+                    attribution: "\u00A9 OpenStreetMap"
                 }
             },
             layers: [{
@@ -2197,9 +2219,10 @@ How do I customize the URL pattern for map tile requests in Kendo UI Map? Custom
         });
     </script>
 
-### layerDefaults.tile.attribution `String`
+### layerDefaults.tile.attribution `String|Object`
 
 The attribution of all tile layers.
+String values are HTML-encoded by default. To render trusted HTML, pass an object with a `text` property and set `encoded: false`.
 
 
 <div class="meta-api-description">
@@ -2212,7 +2235,7 @@ How can I customize the attribution information for Kendo UI's map tile layers? 
         $("#map").kendoMap({
             layerDefaults: {
                 tile: {
-                    attribution: "&copy; OpenStreetMap"
+                    attribution: "\u00A9 OpenStreetMap"
                 }
             },
             layers: [{
@@ -2221,6 +2244,16 @@ How can I customize the attribution information for Kendo UI's map tile layers? 
             }]
         });
     </script>
+
+### layerDefaults.tile.attribution.text `String`
+
+The attribution text.
+
+### layerDefaults.tile.attribution.encoded `Boolean` *(default: true)*
+
+Specifies whether the attribution `text` is HTML-encoded. Set to `false` to render the `text` as trusted HTML.
+
+> **Security Warning:** Use `encoded: false` only with trusted content. Rendering unsanitized input can lead to Cross-Site Scripting (XSS) vulnerabilities.
 
 ### layerDefaults.tile.subdomains `Array`
 
@@ -2243,7 +2276,7 @@ How do I optimize Kendo UI map tile loading with multiple subdomains? Configure 
             layers: [{
                 type: "tile",
                 urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -2269,7 +2302,7 @@ How do I adjust the transparency of all tile-based map layers in Kendo UI for jQ
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -2299,9 +2332,10 @@ How do I configure default settings for Bing map tile layers with Kendo UI for j
         });
     </script>
 
-### layerDefaults.bing.attribution `String`
+### layerDefaults.bing.attribution `String|Object`
 
 The attribution of all Bing (tm) layers.
+String values are HTML-encoded by default. To render trusted HTML, pass an object with a `text` property and set `encoded: false`.
 
 
 <div class="meta-api-description">
@@ -2314,7 +2348,7 @@ How do I customize the attribution text on Bing map layers in Kendo UI Map? Cont
         $("#map").kendoMap({
             layerDefaults: {
                 bing: {
-                    attribution: "&copy; Microsoft"
+                    attribution: "\u00A9 Microsoft"
                 }
             },
             layers: [{
@@ -2323,6 +2357,16 @@ How do I customize the attribution text on Bing map layers in Kendo UI Map? Cont
             }]
         });
     </script>
+
+### layerDefaults.bing.attribution.text `String`
+
+The attribution text.
+
+### layerDefaults.bing.attribution.encoded `Boolean` *(default: true)*
+
+Specifies whether the attribution `text` is HTML-encoded. Set to `false` to render the `text` as trusted HTML.
+
+> **Security Warning:** Use `encoded: false` only with trusted content. Rendering unsanitized input can lead to Cross-Site Scripting (XSS) vulnerabilities.
 
 ### layerDefaults.bing.opacity `Number` *(default: 1)*
 
@@ -2444,7 +2488,7 @@ How do I customize the visible map layers in Kendo UI Map component? Control and
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }, {
                 type: "shape",
                 dataSource: {
@@ -2460,11 +2504,11 @@ How do I customize the visible map layers in Kendo UI Map component? Control and
         });
     </script>
 
-### layers.attribution `String`
+### layers.attribution `String|Object`
 
-The attribution for the layer. Accepts valid HTML.
+The attribution for the layer. String values are HTML-encoded by default. To render trusted HTML, pass an object with a `text` property and set `encoded: false`.
 
-> Attribution supplied by remote providers, such as Bing, is HTML-encoded before it is rendered. User-provided attribution is rendered as HTML.
+> Attribution supplied by remote providers, such as Bing, is HTML-encoded before it is rendered.
 
 
 <div class="meta-api-description">
@@ -2478,10 +2522,35 @@ How can I customize the attribution for individual layers in a Kendo UI map? Dis
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "OpenStreetMap"
             }]
         });
     </script>
+
+#### Example - render trusted HTML attribution
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            layers: [{
+                type: "tile",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                attribution: {
+                    text: "<a href='https://openstreetmap.org'>OpenStreetMap</a>",
+                    encoded: false
+                }
+            }]
+        });
+    </script>
+
+### layers.attribution.text `String`
+
+The attribution text.
+
+### layers.attribution.encoded `Boolean` *(default: true)*
+
+Specifies whether the attribution `text` is HTML-encoded. Set to `false` to render the `text` as trusted HTML.
+
+> **Security Warning:** Use `encoded: false` only with trusted content. Rendering unsanitized input can lead to Cross-Site Scripting (XSS) vulnerabilities.
 
 ### layers.autoBind `Boolean` *(default: true)*
 
@@ -2814,7 +2883,7 @@ How to adjust the size of map image tiles in Kendo UI Map? Adjust the pixel dime
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap",
+                attribution: "\u00A9 OpenStreetMap",
                 tileSize: 512
             }]
         });
@@ -3622,7 +3691,7 @@ How to adjust transparency of map layers in Kendo UI for jQuery? Adjust the tran
                 opacity: 0.5,
                 urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"],
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -3645,7 +3714,7 @@ How can I distribute Kendo UI map layer requests across multiple subdomains to i
                 type: "tile",
                 urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"],
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -3712,7 +3781,7 @@ How do I configure different types of map layers in Kendo UI for jQuery? Configu
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -4064,7 +4133,7 @@ How to configure URL pattern for loading map tiles with Kendo UI Map layers? Con
                 type: "tile",
                 urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"],
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -4117,7 +4186,7 @@ How do I control the order of map layers in Kendo UI for jQuery? Set or configur
         layers: [{
           type: "tile",
           urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-          attribution: "&copy; OpenStreetMap",
+          attribution: "\u00A9 OpenStreetMap",
           zIndex: 1
         }, {
         //this layer is not visible as the zIndex of the above one is higher
@@ -4151,7 +4220,7 @@ How do I set default settings for map pins in Kendo UI for jQuery? Set global de
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 shape: "pin"
@@ -4186,7 +4255,7 @@ How to customize default marker shape in Kendo UI Map widget? Set or customize t
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 shape: "pin"
@@ -4223,7 +4292,7 @@ How to set default tooltip settings for all map markers in Kendo UI? Set or cust
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -4244,7 +4313,7 @@ How do I prevent map marker tooltips from disappearing when the mouse leaves the
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4282,7 +4351,7 @@ How to customize animation for map marker tooltips in Kendo UI Map widget? Contr
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4319,7 +4388,7 @@ How do I customize the closing animation for Kendo UI map marker tooltips? Set a
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4360,7 +4429,7 @@ How to configure closing animation effects for map marker tooltips in Kendo UI? 
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4401,7 +4470,7 @@ How can I adjust the duration of the tooltip close animation for map markers in 
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4442,7 +4511,7 @@ How to customize the animation when opening a tooltip on a map marker in Kendo U
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4484,7 +4553,7 @@ How to animate opening of map marker tooltips with Kendo UI for jQuery? Control 
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4525,7 +4594,7 @@ How to adjust opening animation speed for map marker tooltips in Kendo UI Map? A
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4567,7 +4636,7 @@ How do I customize the content of map marker tooltips in Kendo UI for jQuery? Co
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4592,7 +4661,7 @@ How do I customize the content of map marker tooltips in Kendo UI for jQuery? Co
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4627,7 +4696,7 @@ How to dynamically load marker tooltip content from a remote URL in Kendo UI Map
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4669,7 +4738,7 @@ How do I customize the tooltips for markers in Kendo UI map? Customize marker to
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4700,7 +4769,7 @@ How to hide the pointer arrow on map marker tooltips in Kendo UI for jQuery? Con
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4732,7 +4801,7 @@ How to configure tooltip iframes in Kendo UI for jQuery Map widget? Configure wh
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4768,7 +4837,7 @@ How do I set a fixed height for tooltips on Kendo UI map markers? Adjust or conf
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4800,7 +4869,7 @@ How do I set the width of tooltips for map markers in Kendo UI? Adjust or define
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4832,7 +4901,7 @@ How can I position the tooltip for my Kendo UI map marker? Set or adjust the pla
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4864,7 +4933,7 @@ How do I adjust the delay before a map marker's tooltip appears when hovering ov
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4897,7 +4966,7 @@ How do I configure when tooltips for map markers appear in Kendo UI for jQuery? 
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 tooltip: {
@@ -4929,7 +4998,7 @@ How do I add fixed markers to a Kendo UI map? Add static location pins, markers,
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27]
@@ -4955,7 +5024,7 @@ How do I set the location of a map marker using latitude and longitude coordinat
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markerDefaults: {
                 shape: "pin"
@@ -4988,7 +5057,7 @@ How to customize the appearance of markers in Kendo UI Map widget? Select or con
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 shape: "pin",
@@ -5013,7 +5082,7 @@ How to customize the hover tooltip text for map markers in Kendo UI? Set or cust
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 shape: "pin",
@@ -5039,7 +5108,7 @@ How to customize hover hints for map markers in Kendo UI? Set or customize dynam
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42.6977, 23.3219],
@@ -5069,7 +5138,7 @@ How do I control when map marker tooltips automatically hide in Kendo UI for jQu
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5098,7 +5167,7 @@ How to control animation effects for marker tooltips in Kendo UI Map? Control an
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5126,7 +5195,7 @@ How can I customize the closing animation of tooltip markers on a Kendo UI map? 
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5158,7 +5227,7 @@ How to customize the closing animation of map marker tooltips in Kendo UI for jQ
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5190,7 +5259,7 @@ How do I adjust the closing animation duration for map marker tooltips in Kendo 
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5222,7 +5291,7 @@ How do I customize the animation of tooltips on map markers in Kendo UI for jQue
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5255,7 +5324,7 @@ How can I customize the opening animation effect for map marker tooltips in Kend
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5287,7 +5356,7 @@ How do I set the duration of the animation when a marker tooltip opens on a Kend
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5320,7 +5389,7 @@ How can I customize the content of tooltips for map markers in Kendo UI? Control
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5341,7 +5410,7 @@ How can I customize the content of tooltips for map markers in Kendo UI? Control
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5372,7 +5441,7 @@ How to dynamically load marker tooltip content from external URLs in Kendo UI Ma
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5410,7 +5479,7 @@ How can I customize the tooltip that appears when clicking on a marker in my Ken
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5437,7 +5506,7 @@ How do I show or hide the callout pointer for a map marker's tooltip in Kendo UI
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5465,7 +5534,7 @@ How to prevent CSS collisions in Kendo UI map marker tooltips? Control whether m
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5497,7 +5566,7 @@ How do I set the height of tooltips on Kendo UI Map markers? Adjust or configure
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5525,7 +5594,7 @@ How do I set the width of tooltips for map markers in Kendo UI for jQuery? Adjus
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5553,7 +5622,7 @@ How do I adjust the position of tooltips on Kendo UI Map markers? Adjust or conf
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5581,7 +5650,7 @@ How do I control when tooltips appear over map markers in Kendo UI for jQuery? C
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5610,7 +5679,7 @@ How to control when tooltips appear on map markers in Kendo UI for jQuery? Custo
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             markers: [{
                 location: [42, 27],
@@ -5641,7 +5710,7 @@ How do I set the minimum zoom level for a Kendo UI map to prevent users from zoo
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             minZoom: 3,
             zoom: 5
@@ -5667,7 +5736,7 @@ How do I set a maximum zoom level on my Kendo UI map? Set or configure the upper
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             maxZoom: 10,
             zoom: 5
@@ -5693,7 +5762,7 @@ How do I set the initial map size for Kendo UI Map to control zoom behaviors? Co
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -5719,7 +5788,7 @@ How do I customize UI text in Kendo UI Map? Customize and translate UI text labe
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -5745,7 +5814,7 @@ How do I customize alternative text labels for map tile images in Kendo UI for j
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
     </script>
@@ -5766,7 +5835,7 @@ How can I allow users to pan a Kendo UI map? Control the ability to enable or di
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             center: [32.7758, -96.7966],
             zoom: 9,
@@ -5790,7 +5859,7 @@ How to enable continuous east-west scrolling on Kendo UI Map? Control seamless h
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             wraparound: false
         });
@@ -5818,7 +5887,7 @@ How do I control the initial zoom level of a map view using Kendo UI for jQuery?
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             center: [32.7758, -96.7966],
             zoom: 9
@@ -5841,7 +5910,7 @@ Can I disable zooming on a Kendo UI map through user interactions? Control wheth
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             center: [32.7758, -96.7966],
             zoom: 9,
@@ -5879,7 +5948,7 @@ An array argument is assumed to be in [Latitude, Longitude] order.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -5905,7 +5974,7 @@ How do I properly dispose of a Kendo UI Map instance to prevent memory leaks? cl
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -5952,7 +6021,7 @@ The DOM or jQuery mouse event.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -5992,7 +6061,7 @@ The DOM or jQuery mouse event.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6030,7 +6099,7 @@ The DOM or jQuery mouse event.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6085,7 +6154,7 @@ The DOM or jQuery mouse event.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6123,7 +6192,7 @@ The new extent of the map.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6142,7 +6211,7 @@ The new extent of the map.
             type: "tile",
             urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "© <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: { text: "© <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
           }]
         });
 
@@ -6187,7 +6256,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6206,7 +6275,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6250,7 +6319,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6269,7 +6338,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6310,7 +6379,7 @@ An array argument is assumed to be in [Latitude, Longitude] order.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6330,7 +6399,7 @@ An array argument is assumed to be in [Latitude, Longitude] order.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6361,7 +6430,7 @@ How to resize a Kendo UI map after window resizing? Adjust map display to fit up
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6398,7 +6467,7 @@ The new options to be applied.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6430,7 +6499,7 @@ How do I get the current visible map area dimensions in Kendo UI Map? Retrieve o
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6474,7 +6543,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6494,7 +6563,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6534,7 +6603,7 @@ The new zoom level. The value is clamped to the
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             center: [32.7758, -96.7966]
         });
@@ -6565,7 +6634,7 @@ What happens when Kendo UI map is reset? Detect and respond to the event trigger
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             beforeReset: function(e) {
                 console.log("Map is about to reset");
@@ -6612,7 +6681,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             click: function(e) {
                 e.sender.markers.add({
@@ -6634,7 +6703,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6679,7 +6748,7 @@ If invoked cancels the default action that belongs to the keydown event.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             kendoKeydown: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -6698,7 +6767,7 @@ If invoked cancels the default action that belongs to the keydown event.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
         var widget = $("#map").data("kendoMap");
@@ -6825,7 +6894,7 @@ How do I handle click events on map markers with Kendo UI for jQuery? Detect and
             type: "tile",
             urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: { text: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
           }],
           markers: [{
             location: [30.268107, -97.744821],
@@ -6892,7 +6961,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             pan: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -6910,7 +6979,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -6957,7 +7026,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             panEnd: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -6975,7 +7044,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -7011,7 +7080,7 @@ The source widget instance.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             reset: function() {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -7029,7 +7098,7 @@ The source widget instance.
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -7076,7 +7145,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             shapeClick: function() {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -7094,7 +7163,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -7512,7 +7581,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             zoomStart: function() {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -7530,7 +7599,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 
@@ -7550,7 +7619,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             zoomStart: function(e) {
                 e.preventDefault();
@@ -7586,7 +7655,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }],
             zoomEnd: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -7604,7 +7673,7 @@ The source jQuery event instance
             layers: [{
                 type: "tile",
                 urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+                attribution: "\u00A9 OpenStreetMap"
             }]
         });
 

@@ -80,7 +80,7 @@ public ActionResult Index()
         Zoom = 3,
         TileUrlTemplate = "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
         TileSubdomains = new string[] { "a", "b", "c" },
-        TileAttribution = "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>",
+        TileAttribution = "\u00A9 OpenStreetMap contributors",
         Markers = new List<Marker>
         {
             new Marker(30.268107, -97.744821, "Austin, TX")

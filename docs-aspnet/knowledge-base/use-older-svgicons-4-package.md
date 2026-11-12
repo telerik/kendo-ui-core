@@ -18,7 +18,7 @@ components: ["general"]
  </tr>
  <tr>
   <td>{{ site.product }} version</td>
-  <td>2026.4.1110 and later</td>
+  <td>2026.4.1111 and later</td>
  </tr>
 </table>
 

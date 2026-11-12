@@ -29,7 +29,7 @@ The following example demonstrates how to display an OpenStreetMap tile layer.
           type: "tile",
             urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: { text: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>", encoded: false }
         }]
     });
     </script>

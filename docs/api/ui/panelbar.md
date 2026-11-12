@@ -423,6 +423,9 @@ If the `dataSource` option is set to a JavaScript object or array the widget wil
 
 If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/api/data/hierarchicaldatasource) instance the widget will use that instance and will **not** initialize a new one.
 
+The `text` and `content` of the items are HTML-encoded by default. Set the `encoded` property of an item to `false` to render its `text` and `content` as HTML.
+
+> **Security Warning:** Setting `encoded` to `false` renders the item `text` and `content` without encoding. Use it only with trusted content. Rendering unsanitized user input can lead to Cross-Site Scripting (XSS) vulnerabilities.
 
 <div class="meta-api-description">
 How do I configure data binding for a Kendo UI PanelBar to display hierarchical data? Configure hierarchical or nested data binding for the expandable menu by connecting it to structured data sources, including JavaScript objects, arrays, or pre-existing hierarchical data source instances; control dynamic loading, tree-like data rendering, and multi-level node population by setting data models or collections that represent parent-child relationships, ensuring the interface accurately reflects nested datasets and supports updating or manipulating complex item hierarchies using standard or custom data source formats for menus, panels, or tree views.
@@ -456,7 +459,7 @@ How do I configure data binding for a Kendo UI PanelBar to display hierarchical 
               },
               {
                   text: "<b>Item 2</b>",
-                  encoded: false,                                 // Allows use of HTML for item text
+                  encoded: false,                                 // Renders the item text and content as trusted HTML
                   content: "text"                                 // content within an item
               },
               {

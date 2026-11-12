@@ -86,6 +86,18 @@ For standalone icons, use the [`kendo.ui.icon` method](/api/ui/ui/methods/icon),
 
 To retain the version 4 icons with a newer Kendo UI for jQuery release, see [Using an Older Kendo SVG Icons Package]({% slug use-older-svg-icons-package-jquery %}).
 
+### `kendo.alert`, `kendo.confirm` and `kendo.prompt` render content encoded by default
+
+Starting with the **2026 November** release, the helper methods `kendo.alert`, `kendo.confirm` and `kendo.prompt` render content encoded by default. To render non encoded content set the `encoded` parameter to `false`:
+
+```js
+    <script>
+        kendo.alert("<b>This is an alert popup!</b>",false);
+        kendo.confirm("<i>Confirm text</i>", false);
+        kendo.prompt("<b>Prompt text</b>", "<b>Default input text</b>", false);
+    </script>
+```
+
 ## Kendo UI 2026 October
 
 ### Badge Text Is HTML-Encoded by Default

@@ -50,7 +50,7 @@ Follow the steps below to achieve the desired scenario:
                 .Type(MapLayerType.Tile)
                 .UrlTemplate("https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
                 .Subdomains("a", "b", "c")
-                .Attribution("&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>");
+                .Attribution("\u00A9 OpenStreetMap contributors");
 
             layers.Add() // Layer 2
                 .Type(MapLayerType.Shape);
@@ -84,7 +84,7 @@ Follow the steps below to achieve the desired scenario:
             <layer type="MapLayerType.Tile" 
                    url-template="https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/    #= y #.png"
                    subdomains="subdomains"
-                   attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap    contributors</a>."> // Layer 1
+                   attribution="@("\u00A9 OpenStreetMap contributors")"> // Layer 1
             </layer>
             <layer type="MapLayerType.Shape"> // Layer 2
             </layer>

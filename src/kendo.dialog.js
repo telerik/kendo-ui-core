@@ -991,8 +991,12 @@ import "./kendo.html.button.js";
 
         kendo.ui.plugin(Alert);
 
-        var kendoAlert = function(text) {
-            return $(templates.alert).kendoAlert({ content: text }).data("kendoAlert").open();
+        var encodeContent = function(text, encoded) {
+            return defined(text) && encoded !== false ? encode(text) : text;
+        };
+
+        var kendoAlert = function(text, encoded) {
+            return $(templates.alert).kendoAlert({ content: encodeContent(text, encoded) }).data("kendoAlert").open();
         };
 
         var Confirm = PopupBox.extend({
@@ -1022,8 +1026,8 @@ import "./kendo.html.button.js";
 
         kendo.ui.plugin(Confirm);
 
-        var kendoConfirm = function(text) {
-            var confirmDialog = $(templates.confirm).kendoConfirm({ content: text }).data("kendoConfirm").open();
+        var kendoConfirm = function(text, encoded) {
+            var confirmDialog = $(templates.confirm).kendoConfirm({ content: encodeContent(text, encoded) }).data("kendoConfirm").open();
             return confirmDialog.result;
         };
 
@@ -1080,9 +1084,9 @@ import "./kendo.html.button.js";
 
         kendo.ui.plugin(Prompt);
 
-        var kendoPrompt = function(text, value) {
+        var kendoPrompt = function(text, value, encoded) {
             var promptDialog = $(templates.prompt).kendoPrompt({
-                content: text,
+                content: encodeContent(text, encoded),
                 value: value
             }).data("kendoPrompt").open();
 

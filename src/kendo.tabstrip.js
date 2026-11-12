@@ -2,7 +2,7 @@ import "./kendo.data.js";
 import "./kendo.icons.js";
 import "./kendo.html.button.js";
 import "./kendo.sortable.js";
-
+import { renderAttrs, applyAttrs } from "./utils/html-attributes.js";
 export const __meta__ = {
     id: "tabstrip",
     name: "TabStrip",
@@ -71,7 +71,7 @@ export const __meta__ = {
 
         templates = {
             content: (data) =>
-                `<div class='k-tabstrip-content' ${data.contentAttributes(data)} tabindex='0'>${data.content(data.item)}</div>`,
+                `<div class='k-tabstrip-content' ${data.contentAttributes(data)} tabindex='0'>${data.content(data.item, data.trustedContent)}</div>`,
             textWrapper: ({ tag, item , contentUrl, textAttributes, image, sprite, text }) =>
                 `<${tag(item)} class='${LINK}' ${contentUrl(item)} ${textAttributes(item)}>` + `${image(item)}${sprite(item)}` +
                     ((item.icon || item.iconClass) && item.iconPosition === 'before' ? kendo.ui.icon({ icon: item.icon || "none", iconClass: item.iconClass }) : '') +
@@ -89,7 +89,7 @@ export const __meta__ = {
             itemActionsWrapperTemplate: () => `<span class="k-item-actions"></span>`,
             itemActionTemplate: ({ element, icon, iconClass, attributes }) => {
                 let resolvedAttributes = attributes ? (attributes.toJSON ? attributes.toJSON() : attributes) : {};
-                return kendo.html.renderButton(element || $("<button unselectable='on'></button>").attr(resolvedAttributes), { icon, iconClass, fillMode: "flat", size: "xsmall", autoAriaLabel: false });
+                return kendo.html.renderButton(element || applyAttrs($("<button unselectable='on'></button>"), resolvedAttributes), { icon, iconClass, fillMode: "flat", size: "xsmall", autoAriaLabel: false });
             },
         },
 
@@ -121,15 +121,8 @@ export const __meta__ = {
                 return result.join(" ");
             },
             itemAttributes: function(item) {
-                const attributes = item.attributes || {};
-                return Object.entries(attributes)
-                    .map(([key, value]) => {
-                        if (key === "class" || key === "role" || key === "aria-selected") {
-                            return "";
-                        }
-                        return `${key}='${kendo.htmlEncode(value)}'`;
-                    })
-                    .join(" ");
+                const attributes = item.attributes && item.attributes.toJSON ? item.attributes.toJSON() : item.attributes;
+                return renderAttrs(attributes, (name) => name === "class" || name === "role" || name === "aria-selected");
             },
             textAttributes: function(item) {
                 return item.url ? " href='" + kendo.sanitizeLink(item.url) + "'" : "";
@@ -143,8 +136,12 @@ export const __meta__ = {
             contentAttributes: function(content) {
                 return content.active !== true ? ` ${kendo.attr("style-display")}="none" aria-hidden='true'` : "";
             },
-            content: function(item) {
-                return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
+            content: function(item, trustedContent) {
+                if (item.content) {
+                    return item.encoded === false || trustedContent ? item.content : kendo.htmlEncode(item.content);
+                }
+
+                return item.contentUrl ? "" : "&nbsp;";
             },
             contentUrl: function(item) {
                 return item.contentUrl ? kendo.attr("content-url") + '="' + kendo.sanitizeLink(item.contentUrl) + '"' : "";
@@ -290,7 +287,6 @@ export const __meta__ = {
 
         options: {
             name: "TabStrip",
-            dataEncodedField: "",
             dataTextField: "",
             dataContentField: "",
             dataImageUrlField: "",
@@ -739,7 +735,6 @@ export const __meta__ = {
         refresh: function(e) {
             var that = this,
                 options = that.options,
-                encoded = kendo.getter(options.dataEncodedField),
                 text = kendo.getter(options.dataTextField),
                 content = kendo.getter(options.dataContentField),
                 contentUrl = kendo.getter(options.dataContentUrlField),
@@ -775,8 +770,8 @@ export const __meta__ = {
                     tab.template = options.tabTemplate;
                 }
 
-                if (options.dataEncodedField) {
-                    tab.encoded = encoded(view[idx]);
+                if (view[idx]?.encoded !== undefined) {
+                    tab.encoded = view[idx].encoded;
                 }
 
                 if (options.dataContentField) {
@@ -903,19 +898,25 @@ export const __meta__ = {
                 if (dataItem.text) {
                     if (dataItem.encoded) {
                         tabText.text(kendo.htmlEncode(dataItem.text));
-                    } else {
+                    } else if (dataItem.encoded === false) {
                         const tempDiv = $('<div>').html(dataItem.text);
                         if (tempDiv.children().length > 0) {
                             tabText.html(dataItem.text);
                         } else {
                             tabText.text(dataItem.text);
                         }
+                    } else {
+                        tabText.text(dataItem.text);
                     }
                 }
 
                 if (item.attr("data-content") && !dataItem.contentUrl) {
                     let tabContent = that.contentElements.eq(index);
-                    tabContent.text(dataItem.content);
+                    if (dataItem.encoded === false) {
+                        tabContent.html(dataItem.content);
+                    } else {
+                        tabContent.text(dataItem.content);
+                    }
                 }
 
                 if (dataItem.hasOwnProperty("enabled")) {
@@ -1244,7 +1245,8 @@ export const __meta__ = {
                     contents = map( tab, function(value, idx) {
                                 if (typeof value.content == "string" || value.contentUrl) {
                                     let tabstripContent = $(TabStrip.renderContent({
-                                        item: extend(value, { index: idx })
+                                        item: extend(value, { index: idx }),
+                                        trustedContent: that._usesDOMDataSource()
                                     }));
 
                                     kendo.applyStylesFromKendoAttributes(tabstripContent, ["display"]);
@@ -1315,6 +1317,10 @@ export const __meta__ = {
                                 .bind("change", that._refreshHandler);
         },
 
+        _usesDOMDataSource: function() {
+            return !!this.options._enableDOMDataSource && !this.options.dataSource;
+        },
+
         _createDataSourceFromDOM: function() {
             const that = this;
             const dataSourceOptions = [];
@@ -1361,6 +1367,7 @@ export const __meta__ = {
                         const linkText = $item.find(".k-link-text");
                         if (linkText.children().length > 0) {
                             data = linkText.html();
+                            itemData.encoded = false;
                         } else {
                             data = linkText.text().trim();
                         }

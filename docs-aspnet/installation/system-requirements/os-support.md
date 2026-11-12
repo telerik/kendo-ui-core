@@ -35,18 +35,25 @@ The {{ site.product }} components are designed to support all major operating sy
 {% if site.core %}
 The table below describes the minimum required version of Visual Studio based on the target `.NET Core SDK` version.
 
-| .NET CORE SDK     | VISUAL STUDIO                 | 
+| .NET CORE SDK     | VISUAL STUDIO                 |
 | :---------------- | :---------------------------- |
-| 9.0               | Visual Studio 2022 |
 | 8.0               | Visual Studio 2022 |
-
->The R1 2024 release will be the last release that supports .NET versions older than 6.0. One year of outstanding support service will be provided for the R1 2024 release. For more details on the reasons for dropping the support of the old .NET versions, see this [blog post](https://www.telerik.com/blogs/embracing-future-product-update-enhanced-performance-and-security).
+| 9.0               | Visual Studio 2022 |
+| 10.0              | Visual Studio 2026 |
+| 11.0              | Visual Studio 2026 |
 
 ### Dependencies and Requirements
 
 To create .NET Core applications, you need to install the `.NET Core SDK`. Follow the instructions from the [official .NET Core documentation site](https://docs.microsoft.com/en-us/dotnet/core/install/sdk?pivots=os-windows).
 
 For a full list of the `.NET Core` requirements, see [.NET Core dependencies and requirements](https://docs.microsoft.com/en-us/dotnet/core/install/dependencies?tabs=netcore31&pivots=os-windows).
+
+### Older .NET versions
+
+>{{ site.product }} will support .NET 8 and 9 until January 2027. Official support for both .NET versions will be dropped with the February 2027 release.
+
+* .NET 6 is no longer supported in Telerik UI for ASP.NET Core as of the Q2 2025 release
+* R1 2024 release was the last release that supports .NET versions older than 6.0
 
 {% else %}
 {{ site.product }} supports Visual Studio 2019 and later. The supported development environments also include:
@@ -56,17 +63,21 @@ For a full list of the `.NET Core` requirements, see [.NET Core dependencies and
 * [IIS](https://www.iis.net/) 5 and later.
 * [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx).
 
->As of the R3 2022 release, MVC 3 and MVC 4 are no longer supported by {{ site.product }}.
->The R1 2024 release will be the last release that supports .NET Framework versions older than 4.6.2 (4.5-4.6.1). One year of outstanding support service will be provided for the R1 2024 release. For more details on the reasons for dropping the support of the old .NET Framework versions, see this [blog post](https://www.telerik.com/blogs/embracing-future-product-update-enhanced-performance-and-security).  
-
 The table below displays the version of `System.Web.Mvc` matching the beginning of the corresponding Telerik Product version.
 
-| MVC Version     | Product Version                 | 
+| MVC Version     | Product Version                 |
 | :---------------- | :---------------------------- |
 | 5.2.4               | 2018.2.516 (2018 R2) |
 | 5.2.7              | 2019.1.220 (2019 R1 SP1) |
 | 5.2.9             | 2022.3.913 (2022 R3) |
-| 5.3.0               | 2024.1.130 (2024 Q1) | 
+| 5.3.0               | 2024.1.130 (2024 Q1) |
+
+### Older .NET Framework versions
+
+>{{ site.product }} will support .NET Framework 4.6.2 until January 2027. Official support will be dropped with the February 2027 release.
+
+* R1 2024 release was the last release that supports .NET Framework versions older than 4.6.2 (4.5-4.6.1).
+* As of the R3 2022 release, MVC 3 and MVC 4 are no longer supported by {{ site.product }}.
 
 {% endif %}
 
