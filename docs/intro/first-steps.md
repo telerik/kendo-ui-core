@@ -165,6 +165,7 @@ You now have your first Kendo UI for jQuery component running in your applicatio
 
 ## See Also
 
+* [Downloading the Kendo UI Bundles]({% slug hosting_kendoui %})
 * [Creating Custom Bundles]({% slug include_only_what_you_need_kendoui_scripts %})
 * [Video Onboarding]({% slug getting_started_video_onboarding %})
 * [Licensing Overview]({% slug licensing-overview %})
