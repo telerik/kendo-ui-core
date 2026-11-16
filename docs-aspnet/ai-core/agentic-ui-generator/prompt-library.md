@@ -7,7 +7,6 @@ position: 4
 tags: telerik,aspnet-core,ai,agentic,ui,generator,prompts
 previous_url: /ai/ai-coding-assistant/prompt-library
 published: True
-tag: updated
 ---
 
 # Agentic UI Generator Prompt Library

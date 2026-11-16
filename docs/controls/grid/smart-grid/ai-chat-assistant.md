@@ -3,7 +3,6 @@ title: AI Chat Assistant
 description: "Learn how to implement an AI Chat Assistant for the Kendo UI for jQuery Grid that enables natural language interactions to perform data operations through conversational commands."
 slug: ai_chat_assistant
 position: 4
-tag: new
 components: ["grid"]
 ---
 

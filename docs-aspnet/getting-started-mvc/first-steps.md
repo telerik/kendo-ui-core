@@ -4,7 +4,6 @@ page_title: Quick Start with Telerik UI for ASP.NET MVC
 meta_title: Quick Start with Telerik UI for ASP.NET MVC | Telerik UI for ASP.NET MVC
 description: "Learn how to use the Telerik UI for ASP.NET MVC components in an ASP.NET MVC application by setting up your Telerik development environment, creating a new project, and adding a UI component."
 components: ["general"]
-tag: "new"
 slug: gettingstartedtelerik_cli_aspnetmvc
 position: 1
 ---

@@ -5,7 +5,6 @@ description: 'Learn how to deploy the Telerik UI for ASP.NET Core AI tools Conte
 components: ["aicodingassistant"]
 slug: ai_coding_assistant_on_premises_aspnet-core
 position: 3
-tag: new
 ---
 
 # On-Premises Deployment

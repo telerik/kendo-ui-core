@@ -4,7 +4,6 @@ page_title: Quick Start with Your Kendo UI for jQuery Project Guide - Getting St
 meta_title: Quick Start with Kendo UI for jQuery | Kendo UI for jQuery
 description: "Learn how to use Kendo UI for jQuery by setting up your development environment, creating a new project, and adding a UI component."
 components: ["general"]
-tag: "updated"
 previous_url: /install/onsite, /getting-started, /intro/getting-started, /using-kendo-with, /getting-started/using-kendo-with, /bootstrapper, /intro/installation/getting-started
 slug: getting_started_installation_kendoui
 position: 0

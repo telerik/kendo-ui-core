@@ -6,7 +6,6 @@ description: "Learn how to use the Telerik UI for ASP.NET Core components in an 
 components: ["general"]
 previous_url: /getting-started/first-steps-windows, /getting-started/first-steps-cli, /getting-started-core/first-steps-cli
 slug: gettingstartedtelerik_aspnetcore
-tag: "new"
 position: 1
 ---
 

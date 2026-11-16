@@ -7,7 +7,6 @@ position: 2
 tags: telerik,aspnet-core,ai,agentic,cli,generator,installation
 previous_url: /ai/ai-coding-assistant/mcp-server, /ai/installation
 published: True
-tag: updated
 ---
 
 # Getting Started with the Agentic UI Generator

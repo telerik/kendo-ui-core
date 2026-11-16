@@ -4,7 +4,6 @@ description: "Learn how to use Semantic Search mode in the AI Smart Box to enabl
 slug: smartbox_semantic_search_mode
 position: 8
 components: ["grid"]
-tag: new
 ---
 
 # Kendo UI for jQuery Data Grid Semantic Search

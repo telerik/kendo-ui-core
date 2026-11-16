@@ -6,7 +6,6 @@ components: ["general"]
 slug: license-key-to-ci-services
 published: True
 position: 4
-tag: updated
 ---
 
 # Adding Deployment Keys to CI/CD Services

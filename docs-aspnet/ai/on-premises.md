@@ -5,7 +5,6 @@ description: 'Learn how to deploy the Telerik {{ site.framework }} Agentic UI Ge
 components: ["aicodingassistant"]
 slug: ai_coding_assistant_on_premises_aspnet
 position: 3
-tag: new
 ---
 
 # On-Premises Deployment
