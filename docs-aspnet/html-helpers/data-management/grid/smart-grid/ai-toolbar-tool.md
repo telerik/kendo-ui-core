@@ -4,7 +4,6 @@ description: "Use the AI Smart Box in the {{ site.framework }} Grid for unified 
 slug: ai_toolbar_tool_core_grid
 position: 3
 components: ["grid"]
-tag: new
 ---
 
 # {{ site.framework }} Data Grid AI Smart Box

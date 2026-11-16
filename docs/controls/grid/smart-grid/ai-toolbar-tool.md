@@ -4,7 +4,6 @@ description: "Learn how to use the AI Smart Box in the Kendo UI for jQuery Grid 
 slug: ai_toolbar_tool_kendoui_grid
 position: 3
 components: ["grid"]
-tag: new
 ---
 
 # Kendo UI for jQuery Data Grid AI Smart Box

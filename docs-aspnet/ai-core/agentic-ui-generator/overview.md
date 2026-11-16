@@ -7,7 +7,6 @@ tags: ai, mcp, assistant, agentic, generator
 published: True
 previous_url: /ai/overview, /ai/ai-coding-assistant/overview
 position: 1
-tag: updated
 ---
 
 # Telerik UI for ASP.NET Core AI Tools Overview

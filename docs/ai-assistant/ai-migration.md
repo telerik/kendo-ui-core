@@ -4,6 +4,7 @@ page_title: AI-Assisted Migration with the Kendo UI for jQuery Upgrade Assistant
 description: "Learn how to upgrade Kendo UI for jQuery projects with the Upgrade Assistant, Kendo CLI codemods, and AI-assisted code review."
 slug: ai_assisted_migration_kendoui
 components: ["aicodingassistant"]
+tag: new
 position: 6
 ---
 

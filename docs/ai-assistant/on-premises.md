@@ -5,7 +5,6 @@ description: 'Learn how to deploy the Kendo UI for jQuery Agentic UI Generator C
 slug: ai_coding_assistant_on_premises
 components: ["aicodingassistant"]
 position: 2
-tag: new
 ---
 
 # On-Premises Deployment

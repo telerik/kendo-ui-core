@@ -3,7 +3,6 @@ title: AI Chat Assistant
 description: "Use an AI Chat Assistant with the {{ site.framework }} Grid for natural language and common data commands."
 slug: ai_chat_assistant
 position: 4
-tag: new
 components: ["grid"]
 ---
 

@@ -4,7 +4,6 @@ description: "Use Semantic Search in the AI Smart Box to match related terms in 
 slug: smartbox_semantic_search_mode
 position: 8
 components: ["grid"]
-tag: new
 ---
 
 # {{ site.framework }} Data Grid Semantic Search
