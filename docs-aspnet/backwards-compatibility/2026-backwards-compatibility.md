@@ -13,6 +13,10 @@ This article lists the breaking or important changes in the 2026 releases of {{ 
 
 ## {{ site.product }} 2026 Q4
 
+### Kendo CDN Services Are Deprecated
+
+Starting with the 2026 Q4 release, the legacy Kendo CDN services (`kendo.cdn.telerik.com` and `cdn.kendostatic.com`) are deprecated. Use an npm-compatible CDN provider, such as `jsDelivr` or `unpkg`, to load client-side resources. For more details, see [Using CDN]({% slug cdnservices_core %}).
+
 ### Declarative `data-*` Configuration Requires Valid JSON
 
 Starting with the **2026 Q4** release, Kendo UI no longer evaluates invalid JSON in declarative `data-*` configuration attributes as JavaScript. Previously, object and array values that failed `JSON.parse` could be evaluated as JavaScript expressions.

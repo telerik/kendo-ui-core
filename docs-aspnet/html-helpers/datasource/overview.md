@@ -67,6 +67,12 @@ The following example demonstrates how to define the DataSource. You can access 
 > * As of the R1 2017 SP1 release, you can use the `ToDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
 > * If impersonation is enabled, use the `ToDataSourceResultAsync` extension method with only one thread in your ASP.NET application. If you create a new thread, the impersonation in the newly created child thread decreases because, by default, all newly created child threads in ASP.NET run under the ASP.NET identity of the worker process. To change this behavior, explicitly impersonate the current identity within the code of the child thread.
 
+### Default Ordering for Some Query Providers
+
+When the `DataSourceRequest` has no sort descriptors, `ToDataSourceResult()` adds a temporary sort for query providers that Kendo recognizes as requiring an `OrderBy` before paging. The fallback uses the first property with a predefined .NET type on the query element type. It does not check whether that property is mapped by the query provider, so an unmapped property can cause query translation to fail.
+
+The fallback is provider-dependent and may not apply to every Entity Framework provider. It is also applied with `OrderBy`, which can replace ordering already applied to the query. If you need a specific sort, configure a sort descriptor as described in [DataSource Sorting]({% slug htmlhelper_datasourcesort %}); do not rely on ordering the query before calling `ToDataSourceResult()` when the request has no sort descriptors.
+
 To use `DataSourceRequest` and `ToDataSourceResult()` with the DataSource HtmlHelper, add the following namespaces with `using` directives in the Controller:
 
 ```C#

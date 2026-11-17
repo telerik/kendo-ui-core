@@ -154,6 +154,23 @@ The following example demonstrates how to specify the operator for the field tha
 
 * When filtering is enabled, the filter textboxes for all Grid columns will be populated with the value entered in the search textbox.
 
+{% if site.core %}
+## Troubleshoot Filter Parsing Exceptions
+
+If a Grid search request throws an `InvalidCastException` involving `CompositeFilterDescriptor` and `FilterDescriptor`, inspect the server-side stack trace. If it includes `FilterNodeVisitor.Visit(PropertyNode)`, `FilterDescriptorFactory.Create`, and `DataSourceRequestModelBinder.CreateDataSourceRequest`, the failure occurs during filter parsing.
+
+The `DataSourceRequest` model binder parses the incoming filter before the controller action executes. Changing `ToDataSourceResult(request)` or traversing `request.Filters` inside that action cannot resolve an exception thrown during model binding. Composite filters are supported; their presence alone does not establish the cause.
+
+To investigate the failing request:
+
+1. Use the browser's network tools to capture the request's serialized `filter` parameter and the search text that triggers the exception.
+1. Record the Grid's `Search` fields, operators, DataSource configuration, and any custom `parameterMap` logic.
+1. Record the deployed Telerik UI NuGet package and Kendo UI script versions. Verify that they match, as required by the [installation guidance](slug:installation_license_key_aspnetcore).
+1. If the exception persists, provide Telerik Support with a minimal reproduction, the stack trace, and the captured configuration and request. Remove sensitive data before sharing these details.
+
+The stack trace identifies the failure stage, but does not establish a specific cause or a version-specific fix.
+{% endif %}
+
 ## See Also
 
 * [Search Panel in the Telerik UI Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/search-panel)

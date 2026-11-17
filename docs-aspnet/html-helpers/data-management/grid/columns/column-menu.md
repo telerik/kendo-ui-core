@@ -122,6 +122,18 @@ The following example demonstrates how to group columns by providing the model f
 ```
 {% endif %}
 
+## Preventing Filter Popup Clipping
+
+If a filter popup in the classic Column Menu clips the operator dropdown or date filter calendar, inspect the `.k-menu-popup` element for `overflow: auto`. This behavior was reported in version 2025.1.211. The following workaround was documented for that issue; verify it with your deployed version because later versions may not require the override.
+
+```CSS
+.k-menu-popup {
+    overflow: visible !important;
+}
+```
+
+For details, see the [classic Column Menu filter overflow issue](https://github.com/telerik/kendo-ui-core/issues/8140).
+
 ## Column Menu Types
 
 The Telerik UI for {{ site.framework }} Grid provides the following Column Menu component types:

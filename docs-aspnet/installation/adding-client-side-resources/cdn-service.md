@@ -129,7 +129,7 @@ The following complete example demonstrates how to add the [CSS files](#adding-t
 
 ## Using Legacy Kendo CDNs
 
-Up to Kendo UI version `2026.3.811`, client-side resources were also hosted on the legacy Kendo CDN services:
+The legacy Kendo CDN services host client-side resources only through Kendo UI version `2026.3.811`. Later versions are not available from these hosts.
 
 * `https://kendo.cdn.telerik.com`&mdash;The Kendo CDN.
 * `https://cdn.kendostatic.com`&mdash;The cookieless Kendo CDN host.
