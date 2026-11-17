@@ -80,6 +80,8 @@ The example below demonstrates how to use the [`Change` event](/api/kendo.mvc.ui
 ```
 {% endif %}
 
+The Grid fluent `Events(...)` configuration does not include a double-click event. For a DOM `dblclick` example, see [Open the Grid Popup Editor on a Row Double-Click]({% slug grid-popup-edit-double-click %}).
+
 ## Next Steps
 
 * [API for Configuring the Grid Events](/api/kendo.mvc.ui.fluent/grideventbuilder)

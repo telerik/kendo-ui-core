@@ -55,6 +55,32 @@ The following example demonstrates how to use a string row template which genera
 ```
 {% endif %}
 
+## Use a JavaScript Function as the Row Template
+
+To define the row template as a JavaScript function, register the function name with `ClientRowTemplateHandler()`. The function receives the data item and must return the complete row markup, including the `data-uid` attribute.
+
+```HtmlHelper
+@(Html.Kendo().Grid<ProductViewModel>()
+    .Name("grid")
+    .ClientRowTemplateHandler("rowTemplateFn")
+)
+```
+
+```JavaScript
+function rowTemplateFn(dataItem) {
+    return "<tr data-uid='" + dataItem.uid + "'>" +
+        "<td>" + kendo.htmlEncode(dataItem.OrderID) + "</td>" +
+        "<td>" + kendo.htmlEncode(dataItem.ShipCountry) + "</td>" +
+    "</tr>";
+}
+```
+
+Use `ClientRowTemplate()` for a Kendo template string; use `ClientRowTemplateHandler()` when the row template is a named JavaScript function.
+
+## Frozen Columns
+
+The Grid does not support row templates together with frozen (locked) columns.
+
 
 ![{{ site.product_short }} A Grid with an applied row template](../row-template.png)
 

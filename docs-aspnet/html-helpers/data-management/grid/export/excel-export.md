@@ -317,9 +317,30 @@ You can also set `Exportable` in a detailed fashion to include different values 
 ```
 {% endif %}
 
-In some scenarios, you may want to include instead of exclude columns. You can have defined Grid columns which are not displayed in the View mode and show them in the exported file. In this case, setting `.Exportable(true)` will not work automatically and you'll need to use `.Exportable(x=> x.Pdf(false).Excel(true));` explicitly.
+## Exporting Hidden Columns
 
-Also, note the difference between the `.Hidden()` and `.Visible()` properties of a Grid column. `.Hidden()` will hide the column only visually by using CSS. `.Visible()` will prevent the column from rendering at all.
+To export a field that is not displayed in the Grid, define a bound column and hide it with `.Hidden(true)`. Explicitly enable Excel export for that column; `.Exportable(true)` alone does not include hidden columns. The field must be available in the Grid's data items.
+
+Add the following column to the Grid's column configuration after you [enable Excel export](#getting-started):
+
+```HtmlHelper
+    columns.Bound(p => p.ProductName)
+        .Hidden(true)
+        .Exportable(exportable => exportable.Pdf(false).Excel(true));
+```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <column field="ProductName" hidden="true">
+        <exportable pdf="false" excel="true" />
+    </column>
+```
+
+Place the `<column>` element inside the Grid's `<columns>` element. Use `hidden="true"`, not `visible="false"`, to retain the column configuration for export.
+{% endif %}
+
+The column remains hidden in the Grid and appears in the exported Excel file. `.Hidden(true)` hides the column visually with CSS, whereas `.Visible(false)` prevents the column from rendering.
 
 
 ## Known Limitations

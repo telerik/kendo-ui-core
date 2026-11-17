@@ -103,6 +103,10 @@ The following example demonstrates how to configure the step change for each dat
 ```
 {% endif %}
 
+## Select the Day Segment When Empty
+
+The DateInput has no option for selecting the initial date segment. For a custom focus handler, see [Select the Day Segment in an Empty DateInput]({% slug dateinput-select-day-when-empty %}).
+
 ## See Also
 
 * [Date Editing of the DateInput for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dateinput/date-editing)

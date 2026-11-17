@@ -43,7 +43,7 @@ The following example demonstrates how to subscribe to the [`DataBound`](https:/
     <kendo-listview name="listView"
                     tag-name="div"
                     template-id="template"
-                    on-data-bound="onDataBound>
+                    on-data-bound="onDataBound">
         <datasource type="DataSourceTagHelperType.Ajax" page-size="21">
             <transport>
                 <read url="@Url.Action("Products_Read", "ListView")" />
@@ -62,6 +62,23 @@ The following example demonstrates how to subscribe to the [`DataBound`](https:/
         }
     </script>
 ```
+
+## Get the Data Item in the DataBound Handler
+
+You can register the `DataBound` handler in the ListView HtmlHelper with `.Events(e => e.DataBound("onListViewDataBound"))`. The event does not pass a specific data item ID. Use `e.sender` to access the ListView, then call `dataItem()` for each rendered item to read its fields.
+
+```JavaScript
+function onListViewDataBound(e) {
+    var listView = e.sender;
+
+    listView.items().each(function () {
+        var dataItem = listView.dataItem(this);
+        console.log(dataItem.ProductID);
+    });
+}
+```
+
+Replace `ProductID` with the ID field in your data item. You can also read other fields from `dataItem` and pass them to your tooltip initialization logic.
 
 ## Next Steps
 

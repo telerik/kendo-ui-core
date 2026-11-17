@@ -15,9 +15,15 @@ const licenseFile = fs.readFileSync('resources/legal/core-license.txt').toString
 const banner = licenseFile.replace('<%= year %>', new Date().getFullYear())
     .replace('/**', '/*!');
 
-const umdExternalRegex = [
-    /^(?:\.\.\/)*(?:\.\/)?kendo[\w\.\-]+\.js$/,
-];
+const srcDir = path.resolve('./src');
+
+const isExternalKendoModule = (id, importer) => {
+    if (!importer || !/^(?:\.{1,2}\/)+kendo[\w\.\-]+\.js$/.test(id)) {
+        return false;
+    }
+
+    return path.dirname(path.resolve(path.dirname(importer), id)) === srcDir;
+};
 
 const bundleFiles = new Set(
     files.filter(file => /["']bundle all["'];/.test(fs.readFileSync(file).toString()))
@@ -131,7 +137,7 @@ export default [
     ...files.map(file => ({
         input: file,
         treeshake: false,
-        external: bundleFiles.has(file) ? [] : umdExternalRegex,
+        external: bundleFiles.has(file) ? [] : isExternalKendoModule,
         output: [{
             dir: './dist/js',
             format: 'umd',
@@ -148,7 +154,7 @@ export default [
     ...cultures.map(file => ({
         input: file,
         treeshake: false,
-        external: umdExternalRegex,
+        external: isExternalKendoModule,
         output: [{
             dir: './dist/js/cultures',
             format: 'umd',
@@ -164,7 +170,7 @@ export default [
     ...messages.map(file => ({
         input: file,
         treeshake: false,
-        external: umdExternalRegex,
+        external: isExternalKendoModule,
         output: [{
             dir: './dist/js/messages',
             format: 'umd',

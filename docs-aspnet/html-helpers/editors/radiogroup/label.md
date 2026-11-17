@@ -39,6 +39,21 @@ To customize the text of the label, use the [`label`](https://docs.telerik.com/k
 ```
 {% endif %}
 
+## Change a Label with JavaScript
+
+To change a label after the RadioGroup initializes, retrieve the radio input by its zero-based index and update its label element:
+
+```JS script
+<script>
+    $(function() {
+        var radioGroup = $("#radiogroup").data("kendoRadioGroup");
+        radioGroup.item(1).closest("li").find("label").text("Updated second option");
+    });
+</script>
+```
+
+This updates the rendered label only. The RadioGroup does not provide a separate client-side method for changing an item's label.
+
 ## Add HTML to a Label
 
 To include Badge markup in a RadioGroup label, set the item label to an HTML string and disable label encoding. Without `Encoded(false)` or `encoded="false"`, the Badge markup is rendered as text.
