@@ -31,3 +31,4 @@ src/.tern-port
 build/timezone-js
 ci
 playground
+/.vs
