@@ -364,7 +364,7 @@ export const __meta__ = {
 
         _aria: function() {
             var that = this,
-                ul = that.ul,
+                ul = that._getListboxElement(),
                 id = ul.length ? ul[0].id : null,
                 autocomplete = this.options.filter === "none" ? "none" : "list",
                 tagListId = that.tagList.attr(ID);
@@ -380,6 +380,10 @@ export const __meta__ = {
                 "aria-autocomplete": autocomplete,
                 "aria-describedby": tagListId
             });
+
+            if (that.filterInput && that.filterInput.length) {
+                that.filterInput.attr("aria-controls", id);
+            }
 
             that._ariaLabel(that._focused);
         },

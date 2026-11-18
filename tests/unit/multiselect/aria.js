@@ -1,4 +1,5 @@
 import '@progress/kendo-ui/src/kendo.multiselect.js';
+import { page } from 'vitest/browser';
 
 let MultiSelect = kendo.ui.MultiSelect,
     keys = kendo.keys,
@@ -118,6 +119,45 @@ describe("kendo.ui.MultiSelect ARIA", function() {
         let multiselect = new MultiSelect(input);
 
         assert.equal(multiselect.input.attr("aria-controls"), multiselect.ul.attr("id"));
+    });
+
+    it("MultiSelect adds aria-controls pointing to the listbox of a grouped list", function() {
+        let multiselect = new MultiSelect(input, {
+            dataTextField: "text",
+            dataValueField: "text",
+            dataSource: {
+                data: [{ text: "a", group: "g1" }, { text: "b", group: "g2" }],
+                group: "group"
+            }
+        });
+
+        let content = multiselect.listView.content;
+
+        assert.equal(content.attr("role"), "listbox");
+        assert.equal(multiselect.input.attr("aria-controls"), content.attr("id"));
+        assert.equal(multiselect.list.find("[role=group]").length, 2);
+    });
+
+    it("MultiSelect adaptive filter input aria-controls points to the listbox of a grouped list", async function() {
+        await page.viewport(375, 812);
+
+        let multiselect = new MultiSelect(input, {
+            adaptiveMode: "auto",
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "text",
+            dataSource: {
+                data: [{ text: "a", group: "g1" }, { text: "b", group: "g2" }],
+                group: "group"
+            }
+        });
+
+        let content = multiselect.listView.content;
+
+        assert.isOk(multiselect.filterInput);
+        assert.equal(content.attr("role"), "listbox");
+        assert.equal(multiselect.filterInput.attr("aria-controls"), content.attr("id"));
+        assert.equal(multiselect.input.attr("aria-controls"), content.attr("id"));
     });
 
     it("MultiSelect adds aria-disabled='true'", function() {

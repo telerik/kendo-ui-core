@@ -124,6 +124,12 @@ describe("kendo.ui.DropDownList Aria", function() {
         assert.equal(dropdownlist.wrapper.attr("aria-expanded"), "false");
     });
 
+    it("DropDownList renders aria-haspopup", function() {
+        let dropdownlist = new DropDownList(input);
+
+        assert.equal(dropdownlist.wrapper.attr("aria-haspopup"), "listbox");
+    });
+
     it("DropDownList renders aria-controls", function() {
         let dropdownlist = new DropDownList(input.attr("id", "test"));
 

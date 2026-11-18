@@ -126,4 +126,61 @@ describe("kendo.ui.DropDownList adaptive mode switching", function() {
         assert.equal(title.text(), label);
         assert.equal(header.find("img, [onerror]").length, 0);
     });
+
+    it("labels the adaptive action sheet by its title", function() {
+        dropdownlist = createAdaptiveDropDownList({
+            adaptiveTitle: "Title"
+        });
+
+        let titleId = dropdownlist.popup.element.find(".k-actionsheet-title").attr("id");
+
+        assert.isOk(titleId);
+        assert.equal(dropdownlist.popup.element.attr("aria-labelledby"), titleId);
+    });
+
+    it("does not render aria-labelledby on the adaptive action sheet without a title", function() {
+        dropdownlist = createAdaptiveDropDownList();
+
+        assert.isUndefined(dropdownlist.popup.element.attr("aria-labelledby"));
+    });
+
+    it("renders aria-label on the adaptive apply button", function() {
+        dropdownlist = createAdaptiveDropDownList();
+
+        let button = dropdownlist.popup.element.find("[data-ref-actionsheet-close-button]");
+
+        assert.isOk(button.attr("aria-label"));
+    });
+
+    it("wraps the adaptive list in k-list-container and uses the large size", function() {
+        dropdownlist = createAdaptiveDropDownList();
+
+        let wrapper = dropdownlist.list.parent();
+
+        assert.isTrue(wrapper.hasClass("k-list-container"));
+        assert.isTrue(wrapper.parent().hasClass("k-actionsheet-content"));
+        assert.isTrue(dropdownlist.list.hasClass("k-list-lg"));
+    });
+
+    it("removes the adaptive list wrapper and the large size when switching to popup", function() {
+        dropdownlist = createAdaptiveDropDownList({ size: "small" });
+
+        dropdownlist._createPopup();
+
+        assert.isFalse(dropdownlist.list.hasClass("k-list-lg"));
+        assert.isTrue(dropdownlist.list.hasClass("k-list-sm"));
+        assert.isTrue(dropdownlist.list.parent().hasClass("k-popup"));
+        assert.equal(dropdownlist.list.parent().find(".k-list-container").length, 0);
+    });
+
+    it("does not nest the adaptive list wrapper after repeated mode switches", function() {
+        dropdownlist = createAdaptiveDropDownList();
+
+        dropdownlist._createPopup();
+        dropdownlist._createActionSheet();
+        dropdownlist._createActionSheet();
+
+        assert.equal(dropdownlist.popup.element.find(".k-list-container").length, 1);
+        assert.isTrue(dropdownlist.list.parent().hasClass("k-list-container"));
+    });
 });

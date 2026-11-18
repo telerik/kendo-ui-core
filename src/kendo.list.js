@@ -183,6 +183,12 @@ export const __meta__ = {
             return ul;
         },
 
+        _getListboxElement: function() {
+            const content = this.listView && this.listView.content;
+
+            return content && content.attr("role") ? content : this._getUlElement();
+        },
+
         _isTableVariant: function() {
             return this.options.columns && this.options.columns.length;
         },
@@ -456,7 +462,7 @@ export const __meta__ = {
                 ariaLabel: focusedElm.attr(ARIA_LABEL),
                 ariaLabelledBy: labelledBy,
                 ariaLive: !that._isFilterEnabled() ? "off" : "polite",
-                listSize: that._listSize
+                listSize: that._hasActionSheet() && !that._isTableVariant() ? that._getAdaptiveListSize() : that._listSize
             }, options, virtual, changeEventOption);
 
             if (!options.template) {
@@ -899,7 +905,7 @@ export const __meta__ = {
 
                 element.attr(ARIA_AUTOCOMPLETE, autocomplete);
             }
-            const ul = that.list.find(`.${LIST_UL}, .${TABLE_LIST}`).first();
+            const ul = that._getListboxElement();
             const allUls = that.list.find(`.${LIST_UL}, .${TABLE_LIST}`);
             const ariaLiveValue = !that._isFilterEnabled() ? "off" : "polite";
 
@@ -1301,6 +1307,23 @@ export const __meta__ = {
             }
         },
 
+        _unwrapAdaptiveList: function() {
+            var list = this;
+
+            if (list._adaptiveListWrapped) {
+                list.list.unwrap().removeClass(list._getAdaptiveListSize()).addClass(list._listSize);
+                list._adaptiveListWrapped = false;
+            }
+        },
+
+        _getAdaptiveListSize: function() {
+            return kendo.cssProperties.getValidClass({
+                widget: "List",
+                propName: "size",
+                value: "large"
+            });
+        },
+
         _createPopup: function() {
             var list = this;
             if (list._unboundClick) {
@@ -1313,6 +1336,7 @@ export const __meta__ = {
             }
 
             if (list.popup) {
+                list._unwrapAdaptiveList();
                 list._cachedFilterValue = list.filterInput ? list.filterInput.val() : null;
                 list.popup.destroy();
                 if (list.popup.wrapper) {
@@ -1346,8 +1370,11 @@ export const __meta__ = {
 
         _createActionSheet: function() {
             var list = this;
+            var adaptiveTitle = list.options.adaptiveTitle || list.options.label;
+            var titleId = adaptiveTitle ? (list._actionSheetTitleId = list._actionSheetTitleId || kendo.guid()) : null;
 
             if (list.popup) {
+                list._unwrapAdaptiveList();
                 list._cachedFilterValue = list.filterInput ? list.filterInput.val() : null;
                 list.popup.destroy();
                 if (list.popup.wrapper) {
@@ -1363,16 +1390,17 @@ export const __meta__ = {
             }
 
             list.popup = new ui.ActionSheet(list.list.parent(), {
+                title: adaptiveTitle || null,
                 headerTemplate: (options) =>
                 `<div class="k-actionsheet-titlebar">` +
                         '<div class="k-actionsheet-titlebar-group">' +
-                            `<div  class="k-actionsheet-title">` +
-                                (list.options.adaptiveTitle || list.options.label ? `<div class="k-text-center">${htmlEncode(list.options.adaptiveTitle || list.options.label)}</div>` : '') +
+                            `<div ${titleId ? `id="${titleId}" ` : ""}class="k-actionsheet-title">` +
+                                (adaptiveTitle ? `<div class="k-text-center">${htmlEncode(adaptiveTitle)}</div>` : '') +
                                 (list.options.adaptiveSubtitle ? `<div class="k-actionsheet-subtitle k-text-center">${htmlEncode(list.options.adaptiveSubtitle)}</div>` : "") +
                             '</div>' +
                             (options.closeButton ?
                             '<div class="k-actionsheet-actions">' +
-                                kendo.html.renderButton(`<button tabindex="-1" ${kendo.attr("ref-actionsheet-close-button")}></button>`, { icon: "check", fillMode: "flat", size: "large", themeColor: 'primary' }) +
+                                kendo.html.renderButton(`<button tabindex="-1" aria-label="Apply selection" ${kendo.attr("ref-actionsheet-close-button")}></button>`, { icon: "check", fillMode: "flat", size: "large", themeColor: 'primary' }) +
                             '</div>'
                             : "") +
                         '</div>' +
@@ -1392,6 +1420,11 @@ export const __meta__ = {
                 },
                 popup: list.options.popup
             });
+
+            if (!list._isTableVariant()) {
+                list.list.removeClass(list._listSize).addClass(list._getAdaptiveListSize()).wrap('<div class="k-list-container"></div>');
+                list._adaptiveListWrapped = true;
+            }
 
             list._postCreatePopup();
             list._onActionSheetCreate();
@@ -2320,6 +2353,36 @@ export const __meta__ = {
             ul.addClass(that._isTableVariant() ? `${TABLE_LIST} ${TABLE}` : LIST_UL);
         },
 
+        _applyContentAttributes: function(isGrouped) {
+            const options = this.options;
+            const content = this.content;
+
+            if (this._isTableVariant()) {
+                return;
+            }
+
+            content.removeAttr(`role id ${ARIA_LABEL} ${ARIA_LABELLEDBY} ${ARIA_MULTISELECTABLE}`);
+
+            if (!isGrouped) {
+                return;
+            }
+
+            content.attr({
+                role: (options.aria && options.aria.role) || 'listbox',
+                id: options.id
+            });
+
+            if (options.ariaLabel) {
+                content.attr(ARIA_LABEL, options.ariaLabel);
+            } else if (options.ariaLabelledBy) {
+                content.attr(ARIA_LABELLEDBY, options.ariaLabelledBy);
+            }
+
+            if (options.selectable === "multiple") {
+                content.attr(ARIA_MULTISELECTABLE, true);
+            }
+        },
+
         _isTableVariant: function() {
             return this.options.columns && this.options.columns.length;
         },
@@ -3154,7 +3217,9 @@ export const __meta__ = {
             const visibleItem = that._firstVisibleItem();
 
             if (visibleItem && visibleItem.group.toString().length) {
-                that.header.html(template(visibleItem.group));
+                const headerHtml = template(visibleItem.group);
+
+                that.header.html(that._isTableVariant() ? headerHtml : `<div class="k-list-header-text">${headerHtml}</div>`);
             }
         },
 
@@ -3395,6 +3460,8 @@ export const __meta__ = {
             this.content.find("ul").each((index, ul) => {
                 this._applyUlAttributes($(ul), index, isGrouped, groupIds[index]);
             });
+
+            this._applyContentAttributes(isGrouped);
 
             if (isGrouped && dataContext.length) {
                 this._renderHeader();

@@ -197,7 +197,7 @@ describe("kendo.ui.StaticList rendering", function() {
 
         let header = list.header;
 
-        assert.equal(header.html(), "a");
+        assert.equal(header.find(".k-list-header-text").html(), "a");
         assert.isOk(!header[0].style.display);
     });
 
@@ -223,7 +223,7 @@ describe("kendo.ui.StaticList rendering", function() {
 
         let header = list.header;
 
-        assert.equal(header.html(), "a");
+        assert.equal(header.find(".k-list-header-text").html(), "a");
         assert.isOk(!header[0].style.display);
     });
 
@@ -247,7 +247,7 @@ describe("kendo.ui.StaticList rendering", function() {
 
         let header = list.header;
 
-        assert.equal(header.html(), "0");
+        assert.equal(header.find(".k-list-header-text").html(), "0");
     });
 
     it("kendoStaticList hides fixed group header container if datasource is not grouped", function() {

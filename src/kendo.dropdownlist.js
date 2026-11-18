@@ -1398,6 +1398,7 @@ export const __meta__ = {
                     accesskey: element.attr("accesskey"),
                     unselectable: "on",
                     role: "combobox",
+                    "aria-haspopup": "listbox",
                     "aria-expanded": false
                 });
 
