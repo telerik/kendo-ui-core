@@ -111,7 +111,7 @@ class UtilsService {
             const propType = typeof propValue;
             let propInit = null;
             if (propType === OBJECT && propValue !== null) {
-                propInit = propValue.constructor;
+                propInit = propValue.constructor || Object;
             }
             let isRegExp = (propInit === null || propInit === void 0 ? void 0 : propInit.name) === 'RegExp';
             let isArrayBuffer = (propInit === null || propInit === void 0 ? void 0 : propInit.name) === 'ArrayBuffer';

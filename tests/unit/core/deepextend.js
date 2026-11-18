@@ -74,4 +74,18 @@ describe("deepExtend", function() {
         assert.isOk(dst.exp instanceof RegExp);
     });
 
+    it("Copies null-prototype namespace objects into writable objects", function() {
+        let namespace = Object.create(null);
+        Object.defineProperty(namespace, "Surface", { get: () => "surface", enumerable: true });
+        Object.defineProperty(namespace, Symbol.toStringTag, { value: "Module" });
+        Object.preventExtensions(namespace);
+
+        deepExtend(dst, { svg: namespace });
+        dst.svg.Surface = undefined;
+
+        assert.notEqual(dst.svg, namespace);
+        assert.isUndefined(dst.svg.Surface);
+        assert.equal(namespace.Surface, "surface");
+    });
+
 });
