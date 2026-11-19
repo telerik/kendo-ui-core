@@ -7,7 +7,7 @@ Kendo UI is everything you need to build sites and apps with HTML5 & JavaScript.
 
 ## Documentation
 
-For complete Kendo UI Documentation, visit http://docs.telerik.com/kendo-ui.
+For complete Kendo UI Documentation, visit https://www.telerik.com/kendo-jquery-ui/documentation/introduction.
 
 ## Getting Help
 
@@ -16,14 +16,14 @@ For complete Kendo UI Documentation, visit http://docs.telerik.com/kendo-ui.
 of this repo for bug reports, related both to Kendo UI Core and Kendo UI Professional
 
 * Get help on
-[Stack Overflow](http://stackoverflow.com/questions/tagged/kendo-ui)
+[Stack Overflow](https://stackoverflow.com/questions/tagged/kendo-ui)
 
 or the
-[Kendo UI Premium Forums](http://www.telerik.com/forums/kendo-ui-framework)
+[Kendo UI Premium Forums](https://www.telerik.com/forums/kendo-ui)
 
-* File feature requests on [User Voice](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback)
+* File feature requests on [Progress® Kendo UI® for jQuery Feedback Portal](https://feedback.telerik.com/kendo-jquery-ui)
 
 
 ## Release Notes
 
-For change logs and release notes, see the [online release notes at Telerik.com](http://www.telerik.com/support/whats-new/kendo-ui/release-history).
+For change logs and release notes, see the [online release notes at Telerik.com](https://www.telerik.com/support/whats-new/kendo-ui/release-history).
