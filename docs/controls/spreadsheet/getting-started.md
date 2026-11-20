@@ -108,7 +108,7 @@ You can add multiple sheets in the [`sheets`](/api/ui/spreadsheet/configuration/
 
 ## 4. Add Formula in the Cells
 
-You can use the [`formula`](/api/spreadsheet/range/methods/formula) method to add formulas, reference other cells and sheets, and calculate values. You can find the full list of the supported formulas and functions [here]({% slug list_offormulas_andfunctions_spreadsheet_widget %}).
+You can use the [`formula`](/api/spreadsheet/range/methods/formula) method to add formulas, reference other cells and sheets, and calculate values. You can find the full list of the supported formulas and functions in the [list of supported formulas and functions]({% slug list_offormulas_andfunctions_spreadsheet_widget %}).
 
 ```dojo
   <div id="spreadsheet"></div>

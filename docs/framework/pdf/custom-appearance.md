@@ -30,11 +30,13 @@ The following example demonstrates how to define a style that places a border ar
 
 Since drawing is essentially synchronous and there is no timeout between the moment the class is added and the moment when it is removed, there will be no flash in the browser when the generation happens. One drawback of this approach is that you cannot add background images. The code in the following example will not work because images are cached upfront. If you want to add any background images, use the next option.
 
-    <style>
-      .k-pdf-export p {
-        background: url("image.jpg");
-      }
-    </style>
+```html
+<style>
+  .k-pdf-export p {
+    background: url("image.jpg");
+  }
+</style>
+```
 
 ## The `kendo-pdf-document` Element
 
@@ -42,12 +44,14 @@ The `<kendo-pdf-document>` approach only works when multi-page documents are req
 
 When you use the `<kendo-pdf-document>` element, the DOM renderer clones the element and that clone handles the page-breaking without destroying the original content. The DOM renderer places the cloned element inside a custom `<kendo-pdf-document>` element which is hidden from the view. As a result, you can apply custom styles under `kendo-pdf-document` by restricting the rules to the elements. You can also use the `kendo-pdf-document` element to add images. Images are safe to add here.
 
-    <style>
-      kendo-pdf-document p {
-        border: 2px solid black;
-        background: url("image.jpg");
-      }
-    </style>
+```html
+<style>
+  kendo-pdf-document p {
+    border: 2px solid black;
+    background: url("image.jpg");
+  }
+</style>
+```
 
 ## Off-Screen Content
 

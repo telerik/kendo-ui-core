@@ -41,12 +41,12 @@ To define the current culture:
 1. Add the required culture script to the page, as demonstrated in the example below.
 
     ```
-        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="kendo.all.min.js"></script>
         <script src="kendo.culture.en-GB.js"></script>
 
         <!-- or when using the Kendo UI CDN -->
-        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.all.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/cultures/kendo.culture.en-GB.min.js"></script>
     ```

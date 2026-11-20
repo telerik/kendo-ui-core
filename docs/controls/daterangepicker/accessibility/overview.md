@@ -78,7 +78,7 @@ The DateRangePicker has been tested with [axe-core](https://github.com/dequelabs
 
 ### Test Example
 
-A live test example of the DateRangePicker component could be found here: https://demos.telerik.com/kendo-ui/accessibility/daterangepicker
+For a live test example, see the [DateRangePicker accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/daterangepicker).
 
 ## See Also
 

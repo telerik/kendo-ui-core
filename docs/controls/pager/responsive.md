@@ -7,7 +7,7 @@ slug: responsive_kendoui_pager_widget
 ---
 
 
-## Responsive Design
+# Responsive Design
 
 The Kendo UI for jQuery Pager is designed to automatically adjust its layout and visible elements based on the available width, ensuring a smooth experience across desktops, tablets, and mobile devices. No manual configuration is needed—responsiveness is enabled by default, but you can turn it off using the [`responsive`](/api/ui/pager/configuration/responsive) property.
 

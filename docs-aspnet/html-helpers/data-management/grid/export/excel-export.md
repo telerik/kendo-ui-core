@@ -21,9 +21,9 @@ To enable the Excel export option of the Grid:
 1. Include the [toolbar configuration](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#excel).
 1. Set the [export options](/api/kendo.mvc.ui.fluent/gridexcel{% if site.core %}settings{% endif %}builder).
 1. To take full advantage of the Excel export feature, download the JSZip library and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% slug exportsupport_core %}#jszip-library).
-    
+
     ```HtmlHelper
-        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
 
@@ -40,7 +40,7 @@ To enable the Excel export option of the Grid:
     ```
     {% if site.core %}
     ```TagHelper
-        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
 
@@ -57,7 +57,7 @@ To enable the Excel export option of the Grid:
         </kendo-grid>
     ```
     {% endif %}
-        
+
 
 To initiate the Excel export, press the **Toolbar** button or use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/ui/grid) and call the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/ui/grid/methods/saveasexcel) method.
 
@@ -125,7 +125,7 @@ The [`ExcelExport()`](/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsyste
 1. Attach an Excel export handler.
 
     ```HtmlHelper
-        @(Html.Kendo().Grid<OrderViewModel>()    
+        @(Html.Kendo().Grid<OrderViewModel>()
             .Name("grid")
             .ToolBar(tools => tools.Excel())
             .Events(e => e.ExcelExport("excelExport"))
@@ -179,7 +179,7 @@ The Telerik UI Grid for {{ site.framework }} does not use the `ClientTemplate` d
 1. Attach an Excel export handler.
 
     ```HtmlHelper
-        @(Html.Kendo().Grid<OrderViewModel>()    
+        @(Html.Kendo().Grid<OrderViewModel>()
             .Name("grid")
             .ToolBar(tools => tools.Excel())
             .Events(e => e.ExcelExport("excelExport"))
@@ -231,7 +231,7 @@ The [page on creating a custom number format](https://support.office.com/en-us/a
 1. Attach an excel export handler.
 
     ```HtmlHelper
-        @(Html.Kendo().Grid<OrderViewModel>()    
+        @(Html.Kendo().Grid<OrderViewModel>()
             .Name("grid")
             .ToolBar(tools => tools.Excel())
             .Events(e => e.ExcelExport("excelExport"))

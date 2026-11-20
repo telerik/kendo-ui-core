@@ -27,39 +27,44 @@ Depending on the enabled scroll mode, the rendering of the dimensions and layout
 
 When scrolling is enabled, the component renders two tables by default&mdash;one for the header area and one for the scrollable data area. The two tables are important when you need to manually make JavaScript or CSS updates to the Grid tables.
 
-    <div class="k-widget k-grid">
-        <div class="k-grid-header">
-            <div class="k-grid-header-wrap">
-                <table>...</table>
-            </div>
-        </div>
-        <div class="k-grid-content">
+```html
+<div class="k-widget k-grid">
+    <div class="k-grid-header">
+        <div class="k-grid-header-wrap">
             <table>...</table>
         </div>
     </div>
+    <div class="k-grid-content">
+        <table>...</table>
+    </div>
+</div>
+```
 
 The following example demonstrates the HTML output in a Grid with virtual scrolling. For more information, refer to the article on [on virtual scrolling]({% slug virtual_scrolling_kendoui_grid_widget %}).
 
-    <div class="k-widget k-grid">
-        <div class="k-grid-header">
-            <div class="k-grid-header-wrap">
-                <table>...</table>
-            </div>
-        </div>
-        <div class="k-grid-content">
-            <div class="k-virtual-scrollable-wrap">
-                <table>...</table>
-            </div>
+```html
+<div class="k-widget k-grid">
+    <div class="k-grid-header">
+        <div class="k-grid-header-wrap">
+            <table>...</table>
         </div>
     </div>
-
+    <div class="k-grid-content">
+        <div class="k-virtual-scrollable-wrap">
+            <table>...</table>
+        </div>
+    </div>
+</div>
+```
 
 However, to achieve a maximum level of accessibility through assistive technologies, disable the scrolling feature of the Grid. To disable scrolling, set the `scrollable` option to `false`.
 
+```js
     $("#grid").kendoGrid({
         scrollable: false,
         // other configuration
     });
+```
 
 ## Setting the Scrollbars
 
@@ -69,6 +74,7 @@ By default, the Grid does not display scrollbars when scrolling is enabled. To r
 
 When scrolling is enabled, the vertical scrollbar of the Grid is always visible even if not needed which simplifies the implementation and improves the performance of the component. To remove the vertical scrollbar, use CSS rules and make sure that neither the Grid nor its data area apply fixed heights so that they are able to shrink and expand according to the number of table rows. In the following example, the `#GridID` allows the application of styles only to a particular Grid instance. To use these styles in all Grid instances, replace the `ID` with the `.k-grid` CSS class. For a complete example on showing and hiding the scrollbar depending on the number of Grid rows, refer to [this example]({% slug howto_hide_vertical_scrollbar_grid %}).
 
+```css
     #GridID .k-grid-header
     {
        padding: 0 !important;
@@ -78,6 +84,7 @@ When scrolling is enabled, the vertical scrollbar of the Grid is always visible 
     {
        overflow-y: visible;
     }
+```
 
 ## Restoring the Scroll Position
 
@@ -88,6 +95,7 @@ In some scenarios, the scroll position of the Grid can be reset when the compone
 
 The scrollable container is `div.k-grid-content` and is possible to retrieve it as a child element of the component [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}). If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and is scrolled only horizontally.
 
+```js
     $(function () {
         // Initialize the variable which will hold the scroll positions.
         var scrollOffset = {
@@ -116,6 +124,7 @@ The scrollable container is `div.k-grid-content` and is possible to retrieve it 
             // ...the rest of the code is omitted for brevity...
         });
     });
+```
 
 ## Adjusting Scrollbar and Page Layout on Zoom
 
@@ -123,8 +132,10 @@ When a web page is zoomed, the browser changes the content size of all pages exc
 
 > If the Grid is in the right-to-left (RTL) mode, use the `"padding-left"` instead of the `"padding-right"` configuration.
 
+```js
     var grid = $('#GridID').data('kendoGrid');
     grid.thead.closest(".k-grid-header").css("padding-right", kendo.support.scrollbar(true));
+```
 
 ## See Also
 

@@ -13,19 +13,13 @@ The TextBox is accessible by screen readers and provides WAI-ARIA, Section 508, 
 
  For more information, refer to [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}).
 
-
-
-
 Out of the box, the Kendo UI for jQuery TextBox provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
-
 
 The TextBox is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
-
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
-
 
 No role attribute is implemented as the `html input type="text"` element is sufficient for defining the purpose of the component.
 
@@ -44,18 +38,15 @@ No role attribute is implemented as the `html input type="text"` element is suff
 
 ## Section 508
 
-
 The TextBox is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
-
 
 The TextBox has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
-
 
 The TextBox has been tested with the following screen readers and browsers combinations:
 
@@ -65,12 +56,15 @@ The TextBox has been tested with the following screen readers and browsers combi
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
 
-
-
 ### Automated Testing
+
 The TextBox has been tested with [axe-core](https://github.com/dequelabs/axe-core).
+
 ### Test Example
-A live test example of the TextBox component could be found here: https://demos.telerik.com/kendo-ui/accessibility/textbox
+
+For a live test example, see the [TextBox accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/textbox).
+
 ## See Also
+
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
 * [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

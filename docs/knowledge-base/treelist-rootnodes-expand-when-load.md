@@ -41,7 +41,10 @@ for(let i = 0; i < data.length; i++){
 }
 ```
 
-#### Example
+### Example
+
+The following example expands all root nodes of the TreeList after the data loads.
+
 ```dojo
 <div id="treeList"></div>
 <script>

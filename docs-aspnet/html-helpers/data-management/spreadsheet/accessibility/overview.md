@@ -9,23 +9,15 @@ position: 1
 
 # Spreadsheet Accessibility
 
-
-
-
-
 Out of the box, the {{ site.product }} Spreadsheet provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
-
 
 The Spreadsheet is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing keyboard navigation within its composite controls, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
-
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
-
 The Spreadsheet is a composite component that is used to render spreadsheet data and provide the proper means for its editing. It consists of the following structural elements:
-
 
  - Quick access elements - Undo and Redo buttons
  - Menu
@@ -52,13 +44,11 @@ The Spreadsheet is a composite component that is used to render spreadsheet data
 
 ### ToolBar Menu
 
-
 The Menu used for selecting the active ToolBar must implement the Menu specification.
 
 [Menu accessibility specification]({% slug htmlhelpers_menu_accessibility %})
 
 ### ToolBars
-
 
 All ToolBars must implement the ToolBar specification. Apart from that, they also need to be labeled as per their purpose.
 
@@ -69,7 +59,6 @@ All ToolBars must implement the ToolBar specification. Apart from that, they als
 [ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 ### Name editor
-
 
 The Name editor must implement the spec for a ComboBox component.
 
@@ -95,7 +84,6 @@ The Name editor must implement the spec for a ComboBox component.
 
 ### Sheet area
 
-
 The Sheet area must implement the spec for a Grid component. The column header cells are header cells are the members of the `.k-spreadsheet-column-header` element. The row header cells are the members of the `.k-spreadsheet-row-header` element.
 
 [Grid accessibility specification]({% slug htmlhelpers_grid_accessibility %})
@@ -110,7 +98,6 @@ The Sheet area must implement the spec for a Grid component. The column header c
 
 ### Menu sheet button
 
-
 The Menu sheet button must implement the spec for a DropDownButton component.
 
 [DropDownButton accessibility specification]({% slug htmlhelpers_dropdownbutton_accessibility %})
@@ -121,13 +108,11 @@ The Menu sheet button must implement the spec for a DropDownButton component.
 
 ### Sheets bar
 
-
 The Sheets bar of the Spreadsheet must implement the TabStrip specification.
 
 [TabStrip accessibility specification]({% slug htmlhelpers_tabstrip_accessibility %})
 
 ### Tab Menu button
-
 
 The Menu button is each TabStrip tab must implement the DropDownButton specification.
 
@@ -135,18 +120,15 @@ The Menu button is each TabStrip tab must implement the DropDownButton specifica
 
 ## Section 508
 
-
 The Spreadsheet is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
-
 
 The Spreadsheet has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
-
 
 The Spreadsheet has been tested with the following screen readers and browsers combinations:
 
@@ -156,11 +138,9 @@ The Spreadsheet has been tested with the following screen readers and browsers c
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
 
-
-
 ### Test Example
 
-To test the Spreadsheet component, refer to the [Spreadsheet Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/spreadsheet).
+For a live test example, see the [Spreadsheet accessibility demo](https://demos.telerik.com/{{ site.platform }}/accessibility/spreadsheet).
 
 ## Keyboard Navigation
 

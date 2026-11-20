@@ -12,6 +12,7 @@ components: ["datepicker"]
 ---
 
 ## Environment
+
 <table>
 	<tbody>
 		<tr>
@@ -36,7 +37,8 @@ In order to replace the default icon, use the [.removeClass()](https://api.jquer
 $(".k-icon").removeClass("k-i-calendar");
 $(".k-icon").addClass('k-i-calendar-date');
 ```
-#### Example
+
+### Example
 
 The following example demonstrates a DatePicker that replaces the default calendar icon with the `k-i-calendar-date` web font icon after initialization.
 
@@ -51,6 +53,8 @@ The following example demonstrates a DatePicker that replaces the default calend
 	});
 </script>
 ```
+
 ## See Also
+
 - [.removeClass()](https://api.jquery.com/removeClass/)
 - [.addClass()](https://api.jquery.com/addClass/)

@@ -49,7 +49,7 @@ There are two ways you can contribute to the public Kendo UI documentation: eith
 
 ## Local Generation
 
-You can generate a static website from the Kendo UI the documentation and browse it locally. You can check the prerequisites and steps to build here: https://github.com/telerik/docs-seed/#local-setup. 
+You can generate a static website from the Kendo UI the documentation and browse it locally. You can check the [prerequisites and steps to build the site](https://github.com/telerik/docs-seed/#local-setup).
 
 ## License
 

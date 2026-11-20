@@ -54,7 +54,7 @@ The QRCode has been tested with [axe-core](https://github.com/dequelabs/axe-core
 
 ### Test Example
 
-A live test example of the QRCode component could be found here: https://demos.telerik.com/kendo-ui/accessibility/qrcode
+For a live test example, see the [QRCode accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/qrcode).
 
 ## See Also
 

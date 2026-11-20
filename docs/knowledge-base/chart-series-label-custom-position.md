@@ -61,7 +61,7 @@ function left(e) {
 ```
 > Make sure to set the [series.labels.position](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series/labels#serieslabelsposition).
 
-#### Example
+### Example
 
 The following example demonstrates a Column Chart that renders the series label in the top-left corner of each bar by using a custom `visual` function.
 

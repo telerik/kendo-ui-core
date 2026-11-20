@@ -73,16 +73,14 @@ Here, you will specify the [`media`](/api/ui/mediaplayer/configuration/media) th
 >tip When using local sources, consider the video formats supported by the different browsers. For more information on the supported HTML5 video formats, refer to [the HTML Video documentation](http://www.w3schools.com/html/html5_video.asp). Once your video files are ready, initialize the MediaPlayer by using the `div` element.
 
 >tip Because of the [mobile considerations](https://developers.google.com/youtube/iframe_api_reference#Mobile_considerations), browsers on iOS do not automatically play embedded media. This limitation prevents unsolicited downloads over cellular networks at the expense of the user. The user always has to initiate a playback. For more information, refer to the article on [audio and video HTML](https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/AudioandVideoTagBasics/AudioandVideoTagBasics.html).
-Other functionalities may also be limited due to iOS restrictions. For more information, refer to [this article](https://community.shopify.com/c/shopify-design/html5-videos-do-not-work-in-safari-on-mac-or-ios-but-work-fine/td-p/2137777) and to other available resources on the Web.
+Other functionalities may also be limited due to iOS restrictions. For more information, refer to the Shopify community thread on [HTML5 videos not working in Safari on Mac or iOS](https://community.shopify.com/c/shopify-design/html5-videos-do-not-work-in-safari-on-mac-or-ios-but-work-fine/td-p/2137777) and to other available resources on the Web.
 
 ## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
 * [Demo Page for the MediaPlayer](https://demos.telerik.com/kendo-ui/mediaplayer/index)
 
-## See Also 
+## See Also
 
 * [JavaScript API Reference of the MediaPlayer](/api/ui/mediaplayer)
 * [Knowledge Base Section](/knowledge-base)
-
-

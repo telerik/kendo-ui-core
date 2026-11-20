@@ -11,7 +11,7 @@ slug: angular2support_integration_kendoui
 
 > Integrating Kendo UI components for jQuery in an Angular application is not officially supported and has certain limitations. Using the jQuery components within Angular components is possible and working as expected in multiple scenarios. The developers have to rely on this integration at their own discretion.
 
-For a runnable demo demonstrating how to use Kendo UI for jQuery components in Angular applications please refer to [this article](https://www.telerik.com/kendo-angular-ui/components/framework/kendo-jquery).
+For a runnable demo demonstrating how to use Kendo UI for jQuery components in Angular applications, refer to the [Kendo UI for jQuery integration demo for Angular](https://www.telerik.com/kendo-angular-ui/components/framework/kendo-jquery).
 
 ## Recommended Approach for Angular Applications
 
@@ -28,4 +28,3 @@ By choosing Kendo UI for Angular, you align with a framework-specific solution t
 * [TypeScript]({% slug typescript_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
 * [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
-

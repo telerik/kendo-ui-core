@@ -69,7 +69,7 @@ The Diagram has been tested with [axe-core](https://github.com/dequelabs/axe-cor
 
 ### Test Example
 
-A live test example of the Diagram component could be found here: https://demos.telerik.com/kendo-ui/accessibility/diagram
+For a live test example, see the [Diagram accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/diagram).
 
 ## Keyboard Navigation
 

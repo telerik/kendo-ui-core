@@ -27,7 +27,6 @@ The PropertyGrid is compliant with the Section 508 requirements. For more inform
 
 The PropertyGrid supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.2 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %})
 
-
 ## See Also
 
 * [Keyboard Navigation by the PropertyGrid (Demo)](https://demos.telerik.com/kendo-ui/propertygrid/keyboard-navigation)

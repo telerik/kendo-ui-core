@@ -22,7 +22,7 @@ This module will cover how to create a RESTful service with [ASP.NET Web API](ht
 
 ## Screencast
 
-<iframe width="640" height="360" src="https://www.youtube.com/embed/6RGS1ReBuPs?rel=0" frameborder="0"></iframe>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/6RGS1ReBuPs?rel=0" title="Hello Services course screencast" frameborder="0"></iframe>
 
 ## Written Summary
 
@@ -244,13 +244,27 @@ Open up the `Default.aspx` file. Create an HTML `table` element with an `employe
 
 
 
-    <table id="employees"></table>
+    <table id="employees">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+    </table>
 
 Below the `table` element that you just created, but before the closing `content` tag, open a new script block as demonstrated in the example below.
 
 
 
-    <table id="employees"></table>
+    <table id="employees">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+    </table>
 
     <script>
 
@@ -266,7 +280,14 @@ The example below demonstrates how to select a table when the document is ready.
 
 
 
-    <table id="employees"></table>
+    <table id="employees">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+    </table>
 
     <script>
 
@@ -296,7 +317,14 @@ The example below demonstrates how to make an AJAX call for employees data in JS
 
 
 
-    <table id="employees"></table>
+    <table id="employees">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+    </table>
 
     <script>
 
@@ -339,7 +367,14 @@ The example below demonstrates how to make an AJAX call fir the employees data i
 
 
 
-    <table id="employees"></table>
+    <table id="employees">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+    </table>
 
     <script>
 
@@ -416,7 +451,14 @@ The example below demonstrates how to create a block of template HTML.
 
 
 
-    <table id="employees"></table>
+    <table id="employees">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+    </table>
 
     <script>
 
@@ -463,14 +505,22 @@ The example below demonstrates how to create a block of template HTML.
     <div id="templates" style="display: none">
 
         <table>
-
-            <tr class="row-template">
-                <td class="firstName" style="width: 100px;"></td>
-                <td class="lastName" style="width: 100px;"></td>
-                <td>
-                    <input type="button" value="X" class="delete" />
-                </td>
-            </tr>
+            <thead>
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row-template">
+                    <td class="firstName" style="width: 100px;"></td>
+                    <td class="lastName" style="width: 100px;"></td>
+                    <td>
+                        <input type="button" value="X" class="delete" />
+                    </td>
+                </tr>
+            </tbody>
 
         </table>
 
@@ -486,7 +536,15 @@ The example below demonstrates how to create a block of template HTML.
 
 
 
-    <table id="employees"></table>
+    <table id="employees">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+    </table>
 
     <script>
 
@@ -556,14 +614,22 @@ The example below demonstrates how to create a block of template HTML.
     <div id="templates" style="display: none">
 
         <table>
-
-            <tr class="row-template">
-                <td class="firstName" style="width: 100px;"></td>
-                <td class="lastName" style="width: 100px;"></td>
-                <td>
-                    <input type="button" value="X" class="delete" />
-                </td>
-            </tr>
+            <thead>
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row-template">
+                    <td class="firstName" style="width: 100px;"></td>
+                    <td class="lastName" style="width: 100px;"></td>
+                    <td>
+                        <input type="button" value="X" class="delete" />
+                    </td>
+                </tr>
+            </tbody>
 
         </table>
 

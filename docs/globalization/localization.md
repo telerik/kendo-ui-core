@@ -22,13 +22,13 @@ By default, all Kendo UI widgets display their messages in US English. To replac
 
 The following example demonstrates how to add the localization script to a document.
 
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="kendo.all.min.js"></script>
     <script src="kendo.messages.bg-BG.js"></script>
 
 The following example demonstrates how to add the localization script to a document from the CDN.    
 
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/messages/kendo.messages.bg-BG.min.js"></script>
 

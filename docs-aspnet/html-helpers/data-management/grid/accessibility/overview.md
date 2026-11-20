@@ -27,7 +27,6 @@ The Grid is a composite component with four logically separated structural eleme
 
 ### Grid Toolbar
 
-
 The Grid Toolbar follows the specification of the ToolBar component.
 
 [ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
@@ -39,7 +38,6 @@ The Grid Toolbar follows the specification of the ToolBar component.
 |  | `aria-controls=.k-grid-aria-root id` | Points to the id of the element with `role=grid`. |
 
 ### Grid Grouping Header
-
 
 The Grid Grouping Header follows the specification of the ToolBar component.
 
@@ -56,7 +54,6 @@ The Grid Grouping Header follows the specification of the ToolBar component.
 
 ### Data Grid (excluding Toolbars and Pager)
 
-
 The element with `role=grid` must not include the ToolBar and Pager elements because they do not belong to the `role=grid` element itself.
 
 #### Grid element
@@ -67,9 +64,7 @@ The element with `role=grid` must not include the ToolBar and Pager elements bec
 | `.k-grid-aria-root` | `aria-colcount` | The total number of columns in the Grid. Needed only for Virtual columns and Hidden columns scenarios, when not all columns are rendered in the DOM. If the total number of columns is unknown, the value of `aria-colcount` must be set to -1. |
 |  | `aria-rowcount` | The total number of rows in the table (header rows + master rows + detail rows + data rows + footer rows + aggregates rows). Needed only when Paging (and more than one page is present in the component), Virtual rows, or Master/Detail rows (Hierarchical Grid, Detail Template Grid) are enabled. If data is also Grouped, the proper number of all rows could not be calculated. In that case the value must be set to -1. |
 
-
 When master and detail rows are present in the Grid (Hierarchical Grid, Detail Template Grid), calculate `aria-rowcount` (the total number of rows) as follows: `2 * (total number of items) + header rows + footer rows`. This is required because each item has a master row and a detail row, which doubles the row count.
-
 
 If the Grid is composed of a single table (there is no separate `<table>` element for its header), no `role` attributes should be set on its inner elements (`<thead>`, `<body>`, `<tr>`, `<th>`, and `<td>`). Their semantic meaning is used instead.
 
@@ -90,7 +85,6 @@ If the Grid is composed of a single table (there is no separate `<table>` elemen
 
 #### Grid filter row
 
-
 Even when it is part of the `<thead>`, the Filter row must use `<td>` elements.
 
 | Selector | Attribute | Usage |
@@ -100,13 +94,11 @@ Even when it is part of the `<thead>`, the Filter row must use `<td>` elements.
 
 #### Grid filter menu
 
-
 Implements the FilterMenu specification.
 
 [FilterMenu accessibility specification]({{filtermenu_a11y_link}})
 
 #### Grid column menu
-
 
 Implements the ColumnMenu specification.
 
@@ -133,7 +125,6 @@ Implements the ColumnMenu specification.
 
 #### Grid popup editor
 
-
 The popup editor consists of a Window component containing a Form component.
 
 [Window accessibility specification]({% slug htmlhelpers_window_accessibility %})
@@ -141,7 +132,6 @@ The popup editor consists of a Window component containing a Form component.
 [Form accessibility specification]({% slug htmlhelpers_form_accessibility %})
 
 #### Grid footer
-
 
 The Aggregates totals are placed within a `<tfoot>` element in the Content `<table>`.
 
@@ -155,13 +145,11 @@ The Aggregates totals are placed within a `<tfoot>` element in the Content `<tab
 
 ### Pager
 
-
 For the Grid Pager WAI-ARIA specification, review the Pager component.
 
 [Pager accessibility specification]({% slug htmlhelpers_pager_accessibility %})
 
 #### Grid selection aggregates
-
 
 The selection aggregates are placed within a `.k-grid-selection-aggregates` element after the Grid `.k-grid-aria-root` element.
 
@@ -170,7 +158,6 @@ The selection aggregates are placed within a `.k-grid-selection-aggregates` elem
 | `.k-grid-selection-aggregates` | `aria-live=polite` | Ensures that changes in the calculated selection aggregates are announced by assistive technologies. |
 
 ### Data Grid Stacked Layout
-
 
 The element is a regular Grid cell (td element) that holds a stacked layout content representing all available column headers and content for the given row. All internal "stacked cell" elements become focusable when focus is moved within the cell.
 
@@ -184,11 +171,9 @@ The element is a regular Grid cell (td element) that holds a stacked layout cont
 
 ## Section 508
 
-
 The Grid is fully compliant with [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
-
 
 The Grid has been extensively tested with automated checks through [axe-core](https://github.com/dequelabs/axe-core) and manual checks with popular screen readers.
 
@@ -196,7 +181,6 @@ The Grid has been extensively tested with automated checks through [axe-core](ht
 > To report accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
-
 
 The Grid has been tested with the following screen reader and browser combinations:
 
@@ -206,11 +190,9 @@ The Grid has been tested with the following screen reader and browser combinatio
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
 
-
-
 ### Test Example
 
-To test the Grid component, refer to the [Grid Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/grid).
+For a live test example, see the [Grid accessibility demo](https://demos.telerik.com/{{ site.platform }}/accessibility/grid).
 
 ## Keyboard Navigation
 

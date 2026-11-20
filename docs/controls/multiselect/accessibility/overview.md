@@ -15,21 +15,15 @@ The MultiSelect is accessible by screen readers and provides WAI-ARIA, Section 5
 * [Keyboard navigation by the Kendo UI MultiSelect]({% slug keynav_multiselect %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
 
-
-
-
 Out of the box, the Kendo UI for jQuery MultiSelect provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
-
 
 The MultiSelect is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
-
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 ### MultiSelect Wrapping Element
-
 
 The following table summarizes the selectors and attributes supported by the MultiSelect wrapper element:
 
@@ -54,7 +48,6 @@ The following table summarizes the selectors and attributes supported by the Mul
 
 ### Popup Listbox
 
-
 The popup element of the MultiSelect must implement the WAI-ARIA specification for a Popup List component. The following table summarizes the selectors and attributes supported by the listbox popup of the MultiSelect:
 
 | Selector | Attribute | Usage |
@@ -78,7 +71,6 @@ The popup element of the MultiSelect must implement the WAI-ARIA specification f
 
 ### Adaptive Mode
 
-
 When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
 
 [ActionSheet accessibility specification]({% slug jquery_actionsheet_accessibility %})
@@ -91,18 +83,15 @@ When the component is in adaptive mode, the popup element follows the specificat
 
 ## Section 508
 
-
 The MultiSelect is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
-
 
 The MultiSelect has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
-
 
 The MultiSelect has been tested with the following screen readers and browsers combinations:
 
@@ -112,13 +101,16 @@ The MultiSelect has been tested with the following screen readers and browsers c
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
 
-
-
 ### Automated Testing
+
 The MultiSelect has been tested with [axe-core](https://github.com/dequelabs/axe-core).
+
 ### Test Example
-A live test example of the MultiSelect component could be found here: https://demos.telerik.com/kendo-ui/accessibility/multiselect
+
+For a live test example, see the [MultiSelect accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/multiselect).
+
 ## See Also
+
 * [Keyboard Navigation by the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/keyboard-navigation)
 * [Keyboard Navigation by the MultiSelect]({% slug keynav_multiselect %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

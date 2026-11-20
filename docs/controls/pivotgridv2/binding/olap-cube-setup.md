@@ -30,7 +30,7 @@ To enable the HTTP access to the SQL Server Analysis Services, use an `MSMDPUMP.
 
 > If the cube will not be requested from different domains, skip this step.
 
-To allow cross-domain requests to the OLAP service, enable the CORS behavior of your server. For more information on Cross-Origin Resource Sharing (CORS), refer to [this link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
+To allow cross-domain requests to the OLAP service, enable the CORS behavior of your server. For more information on Cross-Origin Resource Sharing (CORS), refer to the [MDN article on CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
 
 The following sections demonstrate how to enable CORS on an [Internet Information Services (IIS)](http://www.iis.net/) server. Cross-domain access requires you to configure the HTTP Response Headers and the `OPTIONS` method server response.
 

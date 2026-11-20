@@ -45,7 +45,9 @@ The following example demonstrates how to use the `style` binding.
 
 The following example demonstrates the expected output.
 
-    <span style="color: #00ff00; font-weight: bold">42</span>
+```html
+<span style="color: #00ff00; font-weight: bold">42</span>
+```
 
 ## Using Style Attributes Which Contain Dashes
 

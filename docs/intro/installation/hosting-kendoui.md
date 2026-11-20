@@ -7,7 +7,7 @@ slug: hosting_kendoui
 position: 20
 ---
 
-## Downloading the Kendo UI Bundles
+# Downloading the Kendo UI Bundles
 
 You can download the Kendo UI for jQuery ZIP package directly or get the Windows MSI installer from the Downloads section of your Telerik account.
 

@@ -140,7 +140,7 @@ If you are using Kendo UI versions after `R3 2022` and loading the required scri
 
 ```js
       Promise.all([
-        loadScript(this, ScriptsPath + '/jquery-3.7.0.min.js'),
+        loadScript(this, ScriptsPath + '/jquery-3.7.1.min.js'),
         loadScript(this, ScriptsPath + '/kendo.all.min.js'),
         loadStyle(this, StylesPath + '/jquery-ui.min.css'),
         loadStyle(this, StylesPath + '/Kendo.css'),

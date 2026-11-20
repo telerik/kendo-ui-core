@@ -32,16 +32,18 @@ The implementation and specifics of the scrolling functionality in the TreeList 
 
 The following example demonstrates how to enable the scrolling functionality in the TreeList.
 
-    <div class="k-widget k-grid k-treelist">
-        <div class="k-grid-header">
-            <div class="k-grid-header-wrap">
-                <table>...</table>
-            </div>
-        </div>
-        <div class="k-grid-content">
+```html
+<div class="k-widget k-grid k-treelist">
+    <div class="k-grid-header">
+        <div class="k-grid-header-wrap">
             <table>...</table>
         </div>
     </div>
+    <div class="k-grid-content">
+        <table>...</table>
+    </div>
+</div>
+```
 
 ## See Also
 

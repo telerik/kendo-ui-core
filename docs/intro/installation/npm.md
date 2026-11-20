@@ -230,6 +230,7 @@ As of `2024.4.1112` the `@progress/kendo-ui` NPM package introduce a more fine-g
 
 #### Examples
 
+The following examples show how to import the package with different module systems.
 
 ```javascript
 import "@progress/kendo-ui"; //Imports the kendo.all.js 

@@ -6,7 +6,7 @@ components: ["pager"]
 slug: templates_kendoui_pager_widget
 ---
 
-## Pager Templates
+# Pager Templates
 
 The Kendo UI Pager features templates for its page number links.
 

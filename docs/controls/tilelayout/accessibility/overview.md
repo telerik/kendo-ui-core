@@ -15,16 +15,11 @@ The TileLayout is accessible by screen readers and provides WAI-ARIA, Section 50
 * [Keyboard navigation by the Kendo UI TileLayout]({% slug keynav_kendoui_tilelayout_widget %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
 
-
-
-
 Out of the box, the Kendo UI for jQuery TileLayout provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
-
 
 The TileLayout is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AAA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
-
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
@@ -41,18 +36,15 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 ## Section 508
 
-
 The TileLayout is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
-
 
 The TileLayout has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
-
 
 The TileLayout has been tested with the following screen readers and browsers combinations:
 
@@ -62,13 +54,16 @@ The TileLayout has been tested with the following screen readers and browsers co
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
 
-
-
 ### Automated Testing
+
 The TileLayout has been tested with [axe-core](https://github.com/dequelabs/axe-core).
+
 ### Test Example
-A live test example of the TileLayout component could be found here: https://demos.telerik.com/kendo-ui/accessibility/tilelayout
+
+For a live test example, see the [TileLayout accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/tilelayout).
+
 ## See Also
+
 * [Keyboard Navigation by the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/keyboard-navigation)
 * [Keyboard Navigation by the TileLayout]({% slug keynav_kendoui_tilelayout_widget %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

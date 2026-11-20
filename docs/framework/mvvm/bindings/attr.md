@@ -20,7 +20,7 @@ To set the `attr` binding, use the `attr: { attribute1: field1, attribute2: fiel
 
 The following example demonstrates how to implement the Attribute binding. The `src` and `alt` attributes of the image are bound to the View-Model.
 
-    <img id="logo" data-bind="attr: { src: imageSource, alt: imageAlt }" />
+    <img id="logo" src="https://www.telerik.com/image/kendo-logo.png" alt="Kendo Logo" data-bind="attr: { src: imageSource, alt: imageAlt }" />
     <script>
     var viewModel = kendo.observable({
         imageSource: "https://www.telerik.com/image/kendo-logo.png",

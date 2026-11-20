@@ -25,7 +25,7 @@ To implement an AI Chat Assistant for your Grid, follow the steps below:
     ```html
     <!-- Include Kendo styles and scripts -->
     <link href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@12.3.0/dist/all.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="js/kendo.all.min.js"></script>
 
     <!-- Grid and Chat placeholders -->

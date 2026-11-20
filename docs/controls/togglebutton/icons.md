@@ -20,7 +20,7 @@ The ToggleButton provides the following methods for configuring icons:
 
 Use only one of them with a particular ToggleButton instance. If you define multiple properties, only one of them will be obeyed according to the order stated above.
 
-### Icon
+## Icon
 
 The `icon` configuration displays the appropriate SVG Icon as a content of a `<span>` pseudo element. The ToggleButton enables you to completely omit any text to be specified for its contents.
 
@@ -33,7 +33,7 @@ The `icon` configuration displays the appropriate SVG Icon as a content of a `<s
     </script>
 ```
 
-### IconClass
+## IconClass
 
 Alternatively to the `icon` configuration, you can use the `iconClass` configuration to set a custom icon. It accepts a CSS class (or multiple space-separated CSS classes).
 
@@ -47,11 +47,11 @@ Alternatively to the `icon` configuration, you can use the `iconClass` configura
     </script>
 ```
 
-### SpriteClass
+## SpriteClass
 
 The `spriteCssClass` configuration  displays the icon as a background of a `span` element instead.
 
-```
+```dojo
     <button id="button" type="button">Edit</button>
     <script>
         $("#button").kendoButton({
@@ -60,7 +60,7 @@ The `spriteCssClass` configuration  displays the icon as a background of a `span
     </script>
 ```
 
-### ImageIcons
+## ImageIcons
 
 Image icons are applied by using the `imageUrl` configuration and are displayed as an `img` element.
 

@@ -43,7 +43,7 @@ Use the [select method](https://docs.telerik.com/kendo-ui/api/ui/listbox/methods
   });
 ```
 
-#### Example
+### Example
 
 The following example initializes a ListBox with a **Remove** toolbar button and uses a `setTimeout` call inside the `remove` event to select the first item after the removal is complete.
 

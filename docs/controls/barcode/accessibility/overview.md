@@ -54,7 +54,7 @@ The BarCode has been tested with [axe-core](https://github.com/dequelabs/axe-cor
 
 ### Test Example
 
-A live test example of the BarCode component could be found here: https://demos.telerik.com/kendo-ui/accessibility/barcode
+For a live test example, see the [BarCode accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/barcode).
 
 ## See Also
 

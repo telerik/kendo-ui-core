@@ -15,49 +15,51 @@ The Popup enables you to [align](#aligning-to-elements) and [append](#appending-
 
 To align the Popup to a specific element, use the `anchor` option. As a result, the Popup will open next to the defined anchor element.
 
-	<style>
-      .content {
-        padding: 10px;
-        color: #787878;
-        background-color: #fcf7f8;
-        font-size: 13px;
-        font-family: Helvetica, Arial, sans-serif;
-        letter-spacing: 1px;
-        text-align: center;
-        border: 1px solid rgba(0,0,0,.05);
-      }
+```html
+<style>
+  .content {
+    padding: 10px;
+    color: #787878;
+    background-color: #fcf7f8;
+    font-size: 13px;
+    font-family: Helvetica, Arial, sans-serif;
+    letter-spacing: 1px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,.05);
+  }
 
-      .anchor {
-        position: absolute;
-        top: 100px;
-        left: 100px;
-        width: 80px;
-      }
+  .anchor {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 80px;
+  }
 
-      .popup {
-        width: 100px;
-        height: 70px;
-      }
-	</style>
-    <div class="anchor content">Anchor</div>
-	<button> Open/Close </button>
-    <div class="popup content" id="popup">
-      <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-      </ul>
-    </div>
+  .popup {
+    width: 100px;
+    height: 70px;
+  }
+</style>
+<div class="anchor content">Anchor</div>
+<button> Open/Close </button>
+<div class="popup content" id="popup">
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+</div>
 
-    <script>
-      $("#popup").kendoPopup({
-        anchor: $(".anchor")
-      });
+<script>
+  $("#popup").kendoPopup({
+    anchor: $(".anchor")
+  });
 
-      $("button").click(function(){
-      	$("#popup").data("kendoPopup").toggle();
-      });
-    </script>
+  $("button").click(function(){
+    $("#popup").data("kendoPopup").toggle();
+  });
+</script>
+```
 
 ## Appending to Elements
 

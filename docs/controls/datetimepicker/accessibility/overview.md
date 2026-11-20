@@ -14,16 +14,11 @@ The DateTimePicker is accessible by screen readers and provides [`WAI-ARIA`](htt
 For more information, refer to:
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
 
-
-
-
 Out of the box, the Kendo UI for jQuery DateTimePicker provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
-
 
 The DateTimePicker is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
-
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
@@ -50,13 +45,11 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 ### Calendar Popup
 
-
 The Calendar in the Popup element of the component should implement the specification for the **Calendar** component.
 
 [Calendar accessibility specification]({% slug jquery_calendar_accessibility %})
 
 ### Popup Date/Time View Chooser
-
 
 The Date/Time view chooser in the Popup element of the component should implement the specification for the **ButtonGroup** component.
 
@@ -64,13 +57,11 @@ The Date/Time view chooser in the Popup element of the component should implemen
 
 ### TimePicker Popup
 
-
 Time Popup implementation should follow the specification for the TimePicker component.
 
 [TimePicker accessibility specification]({% slug jquery_timepicker_accessibility %})
 
 ### Adaptive Mode
-
 
 When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
 
@@ -86,18 +77,15 @@ When the component is in adaptive mode, the popup element follows the specificat
 
 ## Section 508
 
-
 The DateTimePicker is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
-
 
 The DateTimePicker has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
-
 
 The DateTimePicker has been tested with the following screen readers and browsers combinations:
 
@@ -107,15 +95,13 @@ The DateTimePicker has been tested with the following screen readers and browser
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
 
-
-
 ### Automated Testing
 
 The DateTimePicker has been tested with [axe-core](https://github.com/dequelabs/axe-core).
 
 ### Test Example
 
-A live test example of the DateTimePicker component could be found here: https://demos.telerik.com/kendo-ui/accessibility/datetimepicker
+For a live test example, see the [DateTimePicker accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/datetimepicker).
 
 ## See Also
 

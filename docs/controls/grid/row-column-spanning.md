@@ -84,7 +84,7 @@ The Column spanning is available through the [`attributes`](/api/ui/grid/configu
 The [`colspan`](https://www.w3schools.com/tags/att_colspan.asp) attribute defines the number of columns a table cell needs to span. 
 The [`hidden`](https://www.w3schools.com/tags/att_hidden.asp) attribute must be added to cells that should not be displayed when meets a condition.
 
-```
+```js
     { 
         field: "pass", 
         width: 100,
@@ -111,7 +111,7 @@ The [`hidden`](https://www.w3schools.com/tags/att_hidden.asp) attribute must be 
 ```
 Additionally, you can add different styling attributes or CSS classes to the `<td>` element of the cell. This allows you to style the spanned cells.
 
-```
+```js
     { 
     field: "pass", 
         width: 100,
@@ -127,7 +127,7 @@ Additionally, you can add different styling attributes or CSS classes to the `<t
     }
 ```
 
-#### Example 
+### Example
 
 The following example demonstrates how to span "pass" and "country" columns if the "pass" field value equals `false`.
 
@@ -177,9 +177,7 @@ The following example demonstrates how to span "pass" and "country" columns if t
     </script>
 ```
 
-
 ## See Also
 
 * [Row and Column Spanning in the Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/row-column-spanning)
 * [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/ui/grid)
-

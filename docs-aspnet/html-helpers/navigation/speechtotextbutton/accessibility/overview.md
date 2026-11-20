@@ -48,7 +48,7 @@ The SpeechToTextButton has been tested with the following screen readers and bro
 
 ### Test Example
 
-To test the SpeechToTextSpeechToTextButton component, refer to the [SpeechToTextSpeechToTextButton Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/speechtotextbutton).
+For a live test example, see the [SpeechToTextButton accessibility demo](https://demos.telerik.com/{{ site.platform }}/accessibility/speechtotextbutton).
 
 ## Keyboard Navigation
 

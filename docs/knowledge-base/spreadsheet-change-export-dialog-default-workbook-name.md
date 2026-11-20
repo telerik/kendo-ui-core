@@ -11,8 +11,6 @@ components: ["spreadsheet"]
 ---
 
 ## Environment
-
-## Environment
 <table>
 <tbody>
 <tr>

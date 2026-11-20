@@ -7,7 +7,11 @@ slug: draganddrop_kendoui_grid_widget
 position: 13
 ---
 
-# Row Click-Move-Click
+# Row Drag & Drop
+
+The Grid supports row reordering so users can move records to a new position within the same Grid or between Grid instances. Choose click-move-click or drag and drop to match your workflow.
+
+## Row Click-Move-Click
 
 As of Kendo UI R2 SP1 2023, users can reorder the Grid's rows by using the click-move-click functionality provided by the [clickMoveClick](/api/ui/grid/configuration/reorderable/rows#reorderablerowsclickmoveclick) option. To start moving the row, users can click the drag icon, and then click again to place the row in its new position.
 
@@ -33,67 +37,76 @@ As of Kendo UI R2 SP1 2023, users can reorder the Grid's rows by using the click
     </script>
 ```
 
-# Row Drag and Drop
+## Row Drag and Drop
 
 The Drag and Drop functionality for the Grid rows allows you to move a single row or multitude rows between different parents in the same Grid or between different Kendo UI Grid instances.
 
 For a runnable example, refer to the [demo on Row Drag & Drop in the Grid](https://demos.telerik.com/kendo-ui/grid/drag-drop).
 
-
-## Getting Started
+### Getting Started
 
 To enable the Drag and Drop functionality, set the `reorderable.rows` property to `true`.
 
 > * The Drag & Drop functionality requires defining the `id` field of the data items in [`schema.model`](/api/data/datasource/configuration/schema#schemamodel). This ensures the correct reordering of the data items.
 
-    $("#grid").kendoGrid({
-        dataSource: {
-            schema: {
-                model: {
-                    id: "ProductID"
-                    }
-                }
+```js
+$("#grid").kendoGrid({
+    dataSource: {
+        data: [
+            { ProductID: 1, ProductName: "Chai" },
+            { ProductID: 2, ProductName: "Chang" }
+        ],
+        schema: {
+            model: {
+                id: "ProductID"
+            }
         }
-        reorderable: {
-            rows: true
-        },
-        // Other configuration.
-     });
+    },
+    columns: ["ProductID", "ProductName"],
+    reorderable: {
+        rows: true
+    }
+});
+```
 
-## Drag handle
+### Drag handle
 
 You can render a drag handle and the user could reorder the rows by dragging the row through its drag handle. To enable the drag handle, add the `draggable: true` property in the columns configuration.
 
-    $("#grid").kendoGrid({
-        columns: [
-            { draggable: true },
-            { field: "ProductName", title: "Product Name", width: "200px" },
-        ],
-        // Other configuration.
-     });
+```js
+$("#grid").kendoGrid({
+    columns: [
+        { draggable: true },
+        { field: "ProductName", title: "Product Name", width: "200px" },
+    ],
+    // Other configuration.
+ });
+```
 
-## RowReorder Event
+### RowReorder Event
 
 The [`rowReorder`](/api/ui/grid/events/rowReorder) event fires when the user drops a row into a new location. It allows you to manipulate your data collection based on where the user dropped the element.
 
-    $("#grid").kendoGrid({
-        dataSource: {
-            schema: {
-                model: {
-                    id: "ProductID"
-                    }
+```js
+$("#grid").kendoGrid({
+    dataSource: {
+        schema: {
+            model: {
+                id: "ProductID"
                 }
-        }
-        reorderable: {
-            rows: true
-        },
-        rowReorder(ev) {
-            // TODO: update your data collection using ev.oldIndex and ev.newIndex.
-        }
-        // Other configuration.
-     });
+            }
+    }
+    reorderable: {
+        rows: true
+    },
+    rowReorder(ev) {
+        // TODO: update your data collection using ev.oldIndex and ev.newIndex.
+    }
+    // Other configuration.
+ });
+```
 
-## Keyboard Navigation
+### Keyboard Navigation
 
 The Grid supports its keyboard navigation functionality through the `navigatable` option.  Once enabled, the user will be able to reorder rows by using the following key combination:
 
@@ -105,7 +118,7 @@ When [`multiple selection`](/controls/grid/selection#multi-row-selection) is ena
 
 >tip As of Kendo UI version R3 2023, the Row Drag and Drop on mobile devices activates on `hold` & `slide` of the row.
 
-## Known Limitations
+### Known Limitations
 
 * Row Drag & Drop is not supported when [`sorting`](/controls/grid/sorting) is applied &mdash; The sort re-orders the data after every change, so a dropped row immediately returns to its sorted position instead of staying where it was placed.
 * Row Drag & Drop is not supported when [`filtering`](/controls/grid/filtering) is applied &mdash; Because the filter hides rows from the view, the drop position does not match the actual position in the full dataset, causing rows to land in the wrong place.
@@ -115,4 +128,3 @@ When [`multiple selection`](/controls/grid/selection#multi-row-selection) is ena
 
 * [Drag & Drop in the KendoUI Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/drag-drop)
 * [JavaScript API Reference of the KendoUI Grid](/api/ui/grid)
-

@@ -16,14 +16,15 @@ By default, the groups are rendered collapsed and each row signifies one item fr
 
 To enable group paging, set the dataSource [`groupPaging`](/api/data/datasource/configuration/group#groupPaging) option to `true`, add a [`group`](/api/data/datasource/configuration/group) and a [`pageSize`](/api/data/datasource/configuration/pagesize) to see the result.
 
-    $("#grid").kendoGrid({
-         dataSource: new kendo.data.DataSource({
-             groupPaging:true,
-             group:{ field: "Country", dir: "asc"},
-             pageSize:50
-         }) 
-         // Other configuration.
-    });   
+```js
+$("#grid").kendoGrid({
+    dataSource: new kendo.data.DataSource({
+        groupPaging: true,
+        group: { field: "Country", dir: "asc" },
+        pageSize: 50
+    })
+});
+```
 
 ## Using with Virtual Scrolling
 
@@ -42,26 +43,27 @@ When you use group paging with paging, the grid pager updates its total based on
 
 To use group paging with remote operations, ensure that all of the operations are preformed on the server - paging, sorting, filtering and aggregates.
 
-    $("#grid").kendoGrid({
-        dataSource: new kendo.data.DataSource({
-            groupPaging:true,
-            group:{ field: "Country", dir: "asc"},
-            pageSize:50,
-            serverPaging:true,
-            serverSorting:true,
-            serverFiltering:true,
-            serverGrouping:true,
-            serverAggregates:true             
-        }) 
-        // Other configuration.
-    });
+```js
+$("#grid").kendoGrid({
+    dataSource: new kendo.data.DataSource({
+        groupPaging: true,
+        group: { field: "Country", dir: "asc" },
+        pageSize: 50,
+        serverPaging: true,
+        serverSorting: true,
+        serverFiltering: true,
+        serverGrouping: true,
+        serverAggregates: true
+    })
+});
+```
 
 The grid data source will send the following additional parameters: `take`, `skip`, `groupPaging`. When a row is expanded, one or two requests will be issued. 
 
 - If the currently expanded row does not have subgroups, only one request is sent with the `filter` parameter containing the group and subgroup value for which the items are requested. 
 - If the currently expanded row has subgroups, an additional request is sent with the `includeSubGroupCount` parameter prompting that the response must include the total of items in the sub group
 
-For more information about the response when using server grouping, check the [`schema.groups`](/api/data/datasource/configuration/schema#schemagroups) and the article for the data source grouping [here](https://www.telerik.com/kendo-jquery-ui/documentation/framework/datasource/datasource-operations#server-grouping).
+For more information about the response when using server grouping, check the [`schema.groups`](/api/data/datasource/configuration/schema#schemagroups) and the article on [server grouping in the DataSource](https://www.telerik.com/kendo-jquery-ui/documentation/framework/datasource/datasource-operations#server-grouping).
 
 Alternatively, you can use the ASP.NET MVC or Core server-side extensions which perform all the data operations and group paging out of the box when used with the `aspnetmvc-ajax` and `webapi` transport type.
 

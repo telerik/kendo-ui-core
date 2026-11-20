@@ -17,7 +17,7 @@ For more information, refer to:
 
 ## WAI-ARIA
 
-The widget follows the WAI-ARIA Authoring Practices for implementing the keyboard navigation for its component role and is tested against the popular screen readers. 
+The widget follows the WAI-ARIA Authoring Practices for implementing the keyboard navigation for its component role and is tested against the popular screen readers.
 For more information, refer to the article on [WAI-ARIA support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#wai-aria).
 
 ## Section 508

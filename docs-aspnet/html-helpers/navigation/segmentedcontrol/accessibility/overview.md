@@ -38,7 +38,6 @@ The SegmentedControl is compliant with the [Section 508 requirements](http://www
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
-
 ## Keyboard Navigation
 
 For details on how the SegmentedControl keyboard navigation works, refer to the [SegmentedControl Keyboard Navigation]({%slug keynav_aspnetcore_segmentedcontrol%}) article.

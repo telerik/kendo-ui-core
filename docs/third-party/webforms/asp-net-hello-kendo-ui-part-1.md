@@ -16,7 +16,7 @@ In this tutorial, you will work with the most complex of the Kendo UI widgets&md
 
 ## Screencast
 
-<iframe height="360" src="https://www.youtube.com/embed/pFOJTlbbpIc?rel=0" frameborder="0" width="640"></iframe>
+<iframe height="360" src="https://www.youtube.com/embed/pFOJTlbbpIc?rel=0" title="Hello Kendo UI course screencast" frameborder="0" width="640"></iframe>
 
 
 ## Create Sample Application
@@ -54,7 +54,7 @@ Add the open source Kendo UI version to your project by installing it from [NuGe
 
 > **Important**
 >
-> While you are free to install and try out Kendo UI Core, make sure you have a licensed copy before using any of the Kendo UI enterprise distributions, such as Kendo UI Professional, which includes data-management and editors widgets, such as the Grid, as well as Bar Chart, Gauges, etc. Click [here](https://www.telerik.com/purchase/kendo-ui) for more information on Kendo UI licensing.
+> While you are free to install and try out Kendo UI Core, make sure you have a licensed copy before using any of the Kendo UI enterprise distributions, such as Kendo UI Professional, which includes data-management and editors widgets, such as the Grid, as well as Bar Chart, Gauges, etc. See the [Kendo UI licensing options](https://www.telerik.com/purchase/kendo-ui) for more information.
 
 Find more information on how to [host Kendo UI Professional in your project]({% slug getting_started_installation_kendoui %}##step-2-add-css-and-javascript-references).
 

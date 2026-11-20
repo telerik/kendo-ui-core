@@ -223,7 +223,7 @@ To send the generated file to a remote service, prevent the default file saving 
 To export large datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
 
 * For examples on exporting Excel files, refer to the [RadSpreadProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
-* For more information on the Grid server-side processing, refer to [this article](https://docs.telerik.com/aspnet-mvc/helpers/grid/excel-export#use-server-side-processing).
+* For more information on the Grid server-side processing, refer to the [Telerik UI for ASP.NET MVC Grid server-side Excel export](https://docs.telerik.com/aspnet-mvc/helpers/grid/excel-export#use-server-side-processing).
 
 ## Exclude Column From Exporting
 
@@ -250,7 +250,7 @@ columns: [
 * The Grid does not export its [detail template](/api/ui/grid/configuration/detailtemplate) for the same reason as it does not export its column templates. If the detail template contains another Grid, follow [the example on the exporting a detail Grid]({% slug howto_exportto_excel_masterand_detail_grid %}).
 * The Grid does not use [column formats](/api/ui/grid/configuration/columns#columnsformat) during the Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](/api/ooxml/workbook/configuration/sheets/rows/cells#sheetsrowscellsformat) option of the cells.
 
-  For more information on the formats that are supported by Excel, refer to [this page](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4). For more information on how to format cell values, refer to [this example]({% slug howto_format_cell_values_grid %}).
+  For more information on the formats that are supported by Excel, refer to the Microsoft article on [creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4). For more information on how to format cell values, refer to [this example]({% slug howto_format_cell_values_grid %}).
 
 ## Further Reading
 

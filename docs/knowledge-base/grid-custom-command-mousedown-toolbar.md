@@ -177,7 +177,7 @@ For more information on how to implement the approach, refer to the following re
     <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar#toolbartext">https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/toolbar#toolbartext</a></li>
     <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/methods/addrow">https://docs.telerik.com/kendo-ui/api/ui/grid/methods/addRow</a></li>
     <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/methods/savechanges">https://docs.telerik.com/kendo-ui/api/ui/grid/methods/saveChanges</a></li>
-    <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/methods/savechanges"></a><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/methods/cancelchanges">https://docs.telerik.com/kendo-ui/api/ui/grid/methods/cancelChanges</a></li>
+    <li><a href="https://docs.telerik.com/kendo-ui/api/ui/grid/methods/cancelchanges">https://docs.telerik.com/kendo-ui/api/ui/grid/methods/cancelChanges</a></li>
     <li><a href="https://api.jquery.com/mousedown/">https://api.jquery.com/mousedown/</a></li>
     <li><a href="https://api.jquery.com/unbind/">https://api.jquery.com/unbind/</a></li>
     <li><a href="https://api.jquery.com/blur/">https://api.jquery.com/blur/</a></li>

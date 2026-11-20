@@ -54,7 +54,7 @@ The CircularGauge has been tested with [axe-core](https://github.com/dequelabs/a
 
 ### Test Example
 
-A live test example of the CircularGauge component could be found here: https://demos.telerik.com/kendo-ui/accessibility/circulargauge
+For a live test example, see the [CircularGauge accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/circulargauge).
 
 ## See Also
 

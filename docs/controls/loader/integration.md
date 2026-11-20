@@ -7,7 +7,7 @@ slug: integration_kendoui_loader
 position: 3
 ---
 
-## Integration
+# Integration
 
 The Loader component can be integrated in another component or it can be used as a building block of a bigger functionality.
 

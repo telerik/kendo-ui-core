@@ -277,11 +277,11 @@ jQuery.fn.kendoMultiSelectStoreUserOptions = function (name, options) {
 }
 ````
 
-#### Example:
+### Example
 
 The following snippet chains `kendoDropDownListStoreUserOptions()` directly after `kendoDropDownList()` to save and restore the selected day value automatically using local storage.
 
-````
+````js
 $("#dropdownlistDay").kendoDropDownList({
                     dataTextField: "text",
                     dataValueField: "value",

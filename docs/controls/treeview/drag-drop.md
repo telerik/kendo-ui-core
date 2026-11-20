@@ -6,7 +6,11 @@ components: ["treeview"]
 slug: dragdrop_kendoui_treeview
 position: 3
 ---
-# Node Click-Move-Click
+# Dragging and Dropping
+
+The TreeView lets users move nodes within the hierarchy with click-move-click or drag and drop. Enable the interaction through the `dragAndDrop` option.
+
+## Node Click-Move-Click
 
 As of Kendo UI R2 SP1 2023, users can reorder the TreeView's nodes by using the click-move-click functionality provided by the [`clickMoveClick`](/api/ui/treeview/configuration/draganddrop#draganddropclickmoveclick) option. To start moving the node, users can click on it, and then click again to place the node in its new position.
 
@@ -27,7 +31,7 @@ As of Kendo UI R2 SP1 2023, users can reorder the TreeView's nodes by using the 
         });
     </script>
 ```
-# Dragging and Dropping
+## Dragging and Dropping
 
 When the drag-and-drop feature is enabled, the nodes of the TreeView can be dragged and dropped across all levels.
 
@@ -35,9 +39,11 @@ The functionality also features tooltips that help users indicate where the node
 
 The following example demonstrates how to enable the drag-and-drop functionality for the TreeView nodes.
 
-    $("#treeView").kendoTreeView({
-        dragAndDrop: true
-    });
+```js
+$("#treeView").kendoTreeView({
+    dragAndDrop: true
+});
+```
 
 ## See Also
 

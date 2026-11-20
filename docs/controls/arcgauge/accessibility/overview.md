@@ -54,7 +54,7 @@ The ArcGauge has been tested with [axe-core](https://github.com/dequelabs/axe-co
 
 ### Test Example
 
-A live test example of the ArcGauge component could be found here: https://demos.telerik.com/kendo-ui/accessibility/arcgauge
+For a live test example, see the [ArcGauge accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/arcgauge).
 
 ## See Also
 

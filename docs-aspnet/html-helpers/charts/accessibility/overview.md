@@ -58,7 +58,7 @@ The Chart has been tested with the following screen readers and browsers combina
 
 ### Test Example
 
-To test the Chart component, refer to the [Charts Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/chart).
+For a live test example, see the [Chart accessibility demo](https://demos.telerik.com/{{ site.platform }}/accessibility/chart).
 
 ## Keyboard Navigation
 
@@ -70,4 +70,3 @@ For details on how the Chart keyboard navigation works, refer to the [Chart Keyb
 * [Keyboard Navigation by the Chart for {{ site.framework }}]({% slug keynav_aspnetcore_charts %})
 * [Accessibility in {{ site.product }}]({%slug overview_accessibility%})
 * [Interacting with {{ site.product }} Charts and Graphs]({%slug accessible_charts%})
-

@@ -25,20 +25,23 @@ components: ["editor"]
 </tbody>
 </table>
 
-
 ## Description
 
 When I use the insert hyperlink dialog in Kendo UI for jQuery Editor I need to add custom class or attribute to the link. How can I achieve that?
 
 ## Solution
 
-####  The example below demonstrates how to extend the hyperlink dialog with Kendo UI R1 2023 SP1 (version 2023.1.314) and after
+Depending on your Kendo UI version, the approach to extend the hyperlink dialog may vary.
+
+### Solution for Kendo UI R1 2023 SP1 and Later
+
+To extend the insert hyperlink dialog to allow adding custom class names in Kendo UI Editor R1 2023 SP1 and later, follow the steps below:
 
 1. Customize the Link Dialog Form
 
 The `Insert hyperlink` dialog displays internally a `kendoForm` component. You need to override the internal `_createForm` method and add the needed additional elements to the Form:
 
-```
+```js
     kendo.ui.editor.LinkCommand.fn._createForm = function (dialog) {
         var that = this;
         var formElement = $("<div/>").appendTo(dialog.element);
@@ -55,7 +58,7 @@ The `Insert hyperlink` dialog displays internally a `kendoForm` component. You n
 
 2. In the kendo.ui.editor.LinkCommand `_apply` function you can check the state of the checkboxes and apply the custom attributes or classes:
 
-```
+```js
         if (
             $("#k-editor-link-class-green").is(":checked") &&
             !this.attributes.className
@@ -286,8 +289,9 @@ Below is a runnable example:
     </script>
 ```
 
-####  The solution below is suitable with Kendo UI versions before Kendo UI R1 2023 SP1 (version 2023.1.314)
+### Solution for Kendo UI Versions Before R1 2023 SP1
 
+To extend the insert hyperlink dialog with custom classes in Kendo UI versions before R1 2023 SP1, follow the steps below:
 
 1. You can extend the template for the insertHyperlink dialog in order to add custom checkboxes. The user can select the checkboxes when adding a custom class or attribute is needed:
 

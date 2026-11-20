@@ -21,15 +21,6 @@ The following table lists the available symbologies and their specifications sup
         border: 1px solid #E15613;
         border-collapse: collapse;
     }
-    .stripes th
-    {
-        background: #E15613;
-        color: #fff;
-    }
-    .stripes tr:nth-child(2n+1) td
-    {
-        background: #fed;
-    }
     .stripes td:nth-child(n+2)
     {
         text-align: center;
@@ -44,13 +35,15 @@ The following table lists the available symbologies and their specifications sup
 > If the value of a particular encoding does not meet the expected length or character set, it will throw an error.
 
 <table class="stripes" style="margin-top: 1.2em;">
-   <tbody>
+   <thead>
         <tr>
-            <th>Symbology</th>
-            <th>Character set</th>
-            <th>Length</th>
-            <th>Check digits</th>
+            <th scope="col">Symbology</th>
+            <th scope="col">Character set</th>
+            <th scope="col">Length</th>
+            <th scope="col">Check digits</th>
         </tr>
+   </thead>
+   <tbody>
         <tr>
            <td><a href="https://en.wikipedia.org/wiki/Code_128">Code 39 (default)</a></td>
            <td>[A-Z]; [0-9]; [ - . $ / + % ]</td>

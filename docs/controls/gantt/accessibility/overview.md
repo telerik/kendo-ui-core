@@ -16,22 +16,15 @@ The Gantt is accessible by screen readers and provides [`WAI-ARIA`](https://www.
 For more information, refer to:
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
 
-
-
-
 Out of the box, the Kendo UI for jQuery Grid provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
-
 
 The Grid is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
-
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
-
 The Grid is a composite component that consists of 4 logically separated structural elements:
-
 
  - Toolbar (`role=toolbar`);
  - Group header (`role=toolbar`);
@@ -39,7 +32,6 @@ The Grid is a composite component that consists of 4 logically separated structu
  - Pager (`role=application`);
 
 ### Grid Toolbar
-
 
 Grid Toolbar follows the specification of the ToolBar component.
 
@@ -52,7 +44,6 @@ Grid Toolbar follows the specification of the ToolBar component.
 |  | `aria-controls=.k-grid-content>table id` | Pointing to the id of the element with `role=grid`. |
 
 ### Grid Grouping Header
-
 
 Grid Grouping Header follows the specification of the ToolBar component.
 
@@ -69,9 +60,7 @@ Grid Grouping Header follows the specification of the ToolBar component.
 
 ### Data Grid (excluding Toolbars and Pager)
 
-
 The element with `role=grid` must not include the ToolBar and the Pager elements as those do not belong to the `role=grid` element itself.
-
 
 In the Kendo jQuery Grid, the `role=grid` is assigned to the `<table>` in the `k-grid-content` element.
 
@@ -83,9 +72,7 @@ In the Kendo jQuery Grid, the `role=grid` is assigned to the `<table>` in the `k
 | `.k-grid-aria-root` | `aria-colcount` | The total number of columns in the Grid. Needed only for Virtual columns and Hidden columns scenarios, when not all columns are rendered in the DOM. If the total number of columns is unknown, the value of `aria-colcount` must be set to -1. |
 |  | `aria-rowcount` | The total number of rows in the table (header rows + master rows + detail rows + data rows + footer rows + aggregates rows). Needed only when Paging (and more that 1 page is present in the component), Virtual rows, or Master/Detail rows (Hierarchical Grid, Detail Template Grid) are enabled. If data is also Grouped, the proper number of all rows could not be calculated. In that case the value must be set to -1. |
 
-
 In scenarios when master and detail rows are present in the Grid (Hierarchical Grid, Detail Template Grid), the `aria-rowcount` (the total number of rows) must be calculated: 2 * (total number of items) + header rows + footer rows. That is because for each item in the Grid there is a master row and a detail row duplicating this way the number of rows.
-
 
 If the Grid is composed of a single table (there is no separate `<table>` element for its header), no `role` attributes should be set on its inner elements(`<thead>`, `<body>`, `<tr>`, `<th>`, and `<td>`). Their semantic meaning will be used instead.
 
@@ -120,7 +107,6 @@ If the Grid is composed of a single table (there is no separate `<table>` elemen
 
 #### Grid filter row
 
-
 Even if part of the `<thead>`, the Filter row must be composed of `<td>` elements.
 
 | Selector | Attribute | Usage |
@@ -129,7 +115,6 @@ Even if part of the `<thead>`, the Filter row must be composed of `<td>` element
 |  | `aria-label` | Has a label indicating that the cell is part of a filter row. |
 
 #### Grid locked filter row
-
 
 Even if part of the `<thead>`, the Filter row must be composed of `<td>` elements.
 
@@ -141,13 +126,11 @@ Even if part of the `<thead>`, the Filter row must be composed of `<td>` element
 
 #### Grid filter menu
 
-
 Implements the FilterMenu specification.
 
 [FilterMenu accessibility specification]({{filtermenu_a11y_link}})
 
 #### Grid column menu
-
 
 Implements the ColumnMenu specification.
 
@@ -180,7 +163,6 @@ Implements the ColumnMenu specification.
 
 #### Grid popup editor
 
-
 The popup editor consists of a Window component containing a Form component.
 
 [Window accessibility specification]({% slug jquery_window_accessibility %})
@@ -188,7 +170,6 @@ The popup editor consists of a Window component containing a Form component.
 [Form accessibility specification]({% slug jquery_form_accessibility %})
 
 #### Grid footer
-
 
 The Aggregates totals are placed within a `<tfoot>` element in the Content `<table>`.
 
@@ -213,13 +194,11 @@ The Aggregates totals are placed within a `<tfoot>` element in the Content `<tab
 
 ### Pager
 
-
 For the Grid Pager WAI-ARIA spec, please review the Pager component.
 
 [Pager accessibility specification]({% slug jquery_pager_accessibility %})
 
 #### Grid selection aggregates
-
 
 The selection aggregates are placed within a `.k-grid-selection-aggregates` element after the Grid `.k-grid-aria-root` element.
 
@@ -228,7 +207,6 @@ The selection aggregates are placed within a `.k-grid-selection-aggregates` elem
 | `.k-grid-selection-aggregates` | `aria-live=polite` | Ensures that changes in the calculated selection aggregates are announced by assistive technologies. |
 
 ### Data Grid Stacked Layout
-
 
 The element is a regular Grid cell (td element) that holds a stacked layout content representing all available column headers and content for the given row. All internal "stacked cell" elements become focusable when focus is moved within the cell.
 
@@ -242,18 +220,15 @@ The element is a regular Grid cell (td element) that holds a stacked layout cont
 
 ## Section 508
 
-
 The Grid is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
-
 
 The Grid has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
-
 
 The Grid has been tested with the following screen readers and browsers combinations:
 
@@ -263,15 +238,13 @@ The Grid has been tested with the following screen readers and browsers combinat
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
 
-
-
 ### Automated Testing
 
 The Gantt has been tested with [axe-core](https://github.com/dequelabs/axe-core).
 
 ### Test Example
 
-A live test example of the Gantt component could be found here: https://demos.telerik.com/kendo-ui/accessibility/gantt
+For a live test example, see the [Gantt accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/gantt).
 
 ## See Also
 

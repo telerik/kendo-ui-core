@@ -8,6 +8,8 @@ position: 3
 ---
 
 
+# Pane Types
+
 The Kendo UI for jQuery DockManager widget exposes the ability to configure different pane types. The following types are as follows.  
 
 * `tab`&mdash;panes of tab type will group panes in a tab strip way, similar to the `TabStrip` component, users can navigate through panes via tabs in the header.

@@ -17,7 +17,7 @@ To set the adaptive mode, use the `adaptiveMode` option.
 
 <demo metaUrl="autocomplete/adaptive-mode/" height="600"></demo>
 
-# On-Screen Keyboard
+## On-Screen Keyboard
 
 To enhance the mobile user experience of your application, you can configure the type of the on-screen keyboard for the AutoComplete component.
 

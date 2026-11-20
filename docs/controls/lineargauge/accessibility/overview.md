@@ -54,7 +54,7 @@ The LinearGauge has been tested with [axe-core](https://github.com/dequelabs/axe
 
 ### Test Example
 
-A live test example of the LinearGauge component could be found here: https://demos.telerik.com/kendo-ui/accessibility/lineargauge
+For a live test example, see the [LinearGauge accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/lineargauge).
 
 ## See Also
 

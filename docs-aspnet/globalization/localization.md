@@ -57,7 +57,7 @@ The following example demonstrates how to register the localization script in th
 The following example demonstrates how to register the localization script in the`_Layout.cshtml` file by using CDN.
 
 ```HTML
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.aspnetmvc.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/messages/kendo.messages.es-ES.min.js"></script>

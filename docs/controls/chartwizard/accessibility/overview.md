@@ -31,7 +31,6 @@ The ChartWizard is compliant with the Section 508 requirements. For more informa
 
 The ChartWizard supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.2 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %})
 
-
 ## See Also
 
 * [Keyboard Navigation by the ChartWizard (Demo)](https://demos.telerik.com/kendo-ui/chartwizard/keyboard-navigation)

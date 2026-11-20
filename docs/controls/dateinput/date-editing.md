@@ -7,7 +7,11 @@ slug: dateediting_kendoui_dateinput
 position: 5
 ---
 
-# Segment Steps
+# Date Editing
+
+The DateInput lets users edit dates and times by segment. You can configure how segment values change, how invalid values are corrected, and how users move between segments.
+
+## Segment Steps
 
 The DateInput allows you to configure different [`steps`](/api/ui/dateinput/configuration/steps) for incrementing and decrementing the segments. 
 The example below demonstrates how you can set different steps for year, month, day, hour, minute and second.
@@ -29,12 +33,13 @@ The example below demonstrates how you can set different steps for year, month, 
     </script>
 ```
 
-# Auto Correct
+## Auto Correct
+
 By default, the automatic correction of the segments is enabled. Thus, when the entered value is not valid or is out of range it will be auto-corrected. You can disable auto-correction by setting the [`autoCorrectParts`](/api/ui/dateinput/configuration/autocorrectparts) option to `false`.
 
 In the example below, if you enter 1 (January) for the month value, and 31 for the day value and then change the month value to 2 (February), the day value in the first DateInput component will be automatically corrected to 29 as February does not have 31 days. If you follow the same steps in the second DateInput, where the `autoCorrectParts` option is disabled, the day value will remain 31.
 
-```
+```dojo
     <label for="dateinput">AutoCorrect enabled</label>
     <input id="dateinput" />
     <label for="dateinput-second">AutoCorrect disabled</label>
@@ -47,11 +52,11 @@ In the example below, if you enter 1 (January) for the month value, and 31 for t
     </script>
 ```
 
-# Auto Switch
+## Auto Switch
 
 The DateInput component allows you to automatically move to the next segment once a valid value is entered in the currently edited part. By default, this functionality is disabled. You can enable it by setting the [`autoSwitchParts`](/api/ui/dateinput/configuration/autoswitchparts) option to `true`.
 
-```
+```dojo
     <input id="dateinput" />
     <script>
       $("#dateinput").kendoDateInput({
@@ -60,11 +65,11 @@ The DateInput component allows you to automatically move to the next segment onc
     </script>
 ```
 
-# Auto Switch Keys
+## Auto Switch Keys
 
 You can configure the keys that can be used to move to the next segment. The example below demonstrates how different keys can be added in the [`autoSwitchKeys`](/api/ui/dateinput/configuration/autoswitchkeys) array:
 
-```
+```dojo
     <input id="dateinput" />
     <script>
       $("#dateinput").kendoDateInput({
@@ -73,10 +78,11 @@ You can configure the keys that can be used to move to the next segment. The exa
     </script>
 ```
 
-# Enable Mouse Wheel
+## Enable Mouse Wheel
+
 By default when a segment is selected its value can be increased or decreased using the mouse scroll. This behavior can be disabled by setting the [`enableMouseWheel`](/api/ui/dateinput/configuration/enablemousewheel) option to `false`.
 
-```
+```dojo
     <input id="dateinput" />
     <script>
       $("#dateinput").kendoDateInput({

@@ -42,7 +42,7 @@ The Kendo UI Spreadsheet is used for the implementation of related data and its 
 * [Fonts](#fonts)
 * [Filters](#filters)
 * [File import and export](#file-import-and-export)
-* [Other](#other)
+* [Other Actions](#other-actions)
 
 ### Sheets
 
@@ -128,7 +128,7 @@ You are able to export the content of your Spreadsheet to Portable Document Form
 | Import files				| <ol><li>Click **Open** [ <span class="k-icon k-font-icon k-i-folder-open"></span> ] on the **Toolbar**.</li> <li>From the dialog box select the Excel Workbook you want to import by clicking on it.</li> <li>Click **Open** to load its content.</li></ol> |
 | Export files 				| <ol><li> Click **Export** [ <span class="k-icon k-font-icon k-i-xls"></span> ].</li></ol>  <ul>Export to Excel <ul>2. In the **File name** field fill in a name for the file that is going to be exported. <p>3. From the **Save as type** drop-down list choose **Excel Workbook (.xlsx)**.</p> <p>4. Click **Save** to locally download the exported Excel file and follow your browser instructions to proceed further on.</p></ul></ul> <ul>Export in PDF <ul>2. In the **File name** field fill in a name for the file that is going to be exported. <p>3. From the drop-down list against **Save as type** choose **Portable Document Format (.pdf)**.</p> <p>4. From the **Export** drop-down list choose which part of the content you want to export&mdash;the entire workbook, active sheet, or a partial content selection.</p> <p>5. From the **Paper size** drop-down list pick the size in which you want the exported file to be displayed.</p> <p>6. From the **Margins** drop-down list select what the margins of the resulting pages&mdash;normal, narrow, or wide.</p> <p>7. Indicate whether you want to display the content of the resulting file in a horizontal or vertical orientation by clicking on the respective icon.</p> <p>8. By checking **Guidelines** against **Print**, your exported PDF document is going to display its content in a table format with gridlines. If you want to disable the gridlines, uncheck the button. By default, **Guidelines** is checked for you to provide for the better visualization of the content.</p> <p>9. Checking the **Fit to page** option against **Scale** is going to automatically make the content from your spreadsheets fit within the boundaries of the exported PDF document. By default, **Fit to page** is checked for you to provide for the better visualization of the content.</p> <p>10. By checking the **Horizontally** option against **Center**, the content of the exported PDF file is going to be centered according to the horizontal margins of each exported sheet. By checking the **Vertically** option against **Center**, the content of the exported PDF file is going to be centered according to the vertical margins of each exported sheet. By default, both options are checked for you to provide for the better visualization of the content.</p> <p>11. Click **Save** to locally download the exported PDF file and follow your browser instructions to proceed further on.</p></ul></ul> |
 
-### Other
+### Other Actions
 
 | What you want				| How to get there		|
 | :---						    | :---					|

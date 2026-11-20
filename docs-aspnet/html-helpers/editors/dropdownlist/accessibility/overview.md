@@ -9,22 +9,15 @@ position: 1
 
 # DropDownList Accessibility
 
-
-
-
-
 Out of the box, the {{ site.product }} DropDownList provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
-
 
 The DropDownList is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
-
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 ### DropDownList Wrapping Element
-
 
 The following table summarizes the selectors and attributes supported by the DropDownList wrapper element:
 
@@ -48,7 +41,6 @@ The following table summarizes the selectors and attributes supported by the Dro
 
 ### Popup
 
-
 The following table summarizes the selectors and attributes supported by the DropDownList popup:
 
 | Selector | Attribute | Usage |
@@ -62,7 +54,6 @@ The following table summarizes the selectors and attributes supported by the Dro
 | `.k-list-ul` | `aria-live=polite/off` | Assures the live updates on the selected value of the popup. |
 
 ### Popup Listbox
-
 
 The listbox placed in the popup element of the DropDownList has to implement the WAI-ARIA specification for a Popup List component. The following table summarizes the selectors and attributes supported by the listbox popup of the DropDownList:
 
@@ -83,7 +74,6 @@ The listbox placed in the popup element of the DropDownList has to implement the
 
 ### Adaptive Mode
 
-
 When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
 
 [ActionSheet accessibility specification]({% slug htmlhelpers_actionsheet_accessibility %})
@@ -94,18 +84,15 @@ When the component is in adaptive mode, the popup element follows the specificat
 
 ## Section 508
 
-
 The DropDownList is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
-
 
 The DropDownList has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
-
 
 The DropDownList has been tested with the following screen readers and browsers combinations:
 
@@ -115,11 +102,9 @@ The DropDownList has been tested with the following screen readers and browsers 
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
 
-
-
 ### Test Example
 
-To test the DropDownList component, refer to the [DropDownList Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/dropdownlist).
+For a live test example, see the [DropDownList accessibility demo](https://demos.telerik.com/{{ site.platform }}/accessibility/dropdownlist).
 
 ## Keyboard Navigation
 

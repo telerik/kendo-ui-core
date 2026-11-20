@@ -13,7 +13,7 @@ components: ["general"]
 <table>
 	<tbody>
 		<tr>
-			<td>Product Version</td>
+			<th>Product Version</th>
 			<td>2026.1.0 and later</td>
 		</tr>
 	</tbody>

@@ -27,7 +27,6 @@ components: ["grid"]
 	</tbody>
 </table>
 
-
 ## Description
 
 Currently, when I click and hold on a row and drag the mouse, that row will be removed from the grid. When I release the mouse click, the row will be added back to the grid.
@@ -64,7 +63,8 @@ Here is the method, just place it before the grid/sortable is initialized and re
         }
     }
 ```
-#### Example
+
+### Example
 
 The following example overrides `kendo.ui.Sortable.fn._dragstart` before initializing the Grid and Sortable so the dragged row remains visible in its original position until the user releases the mouse.
 

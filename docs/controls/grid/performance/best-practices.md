@@ -35,7 +35,7 @@ Use server-side operations when:
 
 ## Enabling Virtualization
 
-[Virtual scrolling](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) is an alternative to paging and renders the records over the previously rendered records. The approach reduces the DOM elements but enables the user to smoothly scroll the data. You can use both local binding or remote binding (for huge amounts of data) for the virtual scrolling. While the user scrolls down the records, new requests for retrieving the next view will be initiated. However, the virtualization delivers some known limitations&mdash;for more information about what they are, refer to [this article]({% slug virtual_scrolling_kendoui_grid_widget %}).
+[Virtual scrolling](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) is an alternative to paging and renders the records over the previously rendered records. The approach reduces the DOM elements but enables the user to smoothly scroll the data. You can use both local binding or remote binding (for huge amounts of data) for the virtual scrolling. While the user scrolls down the records, new requests for retrieving the next view will be initiated. However, the virtualization delivers some known limitations&mdash;for more information about what they are, refer to the article on [virtual scrolling]({% slug virtual_scrolling_kendoui_grid_widget %}).
 
 ## Reducing the Quantity of Data
 

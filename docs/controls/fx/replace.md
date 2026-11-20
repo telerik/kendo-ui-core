@@ -25,46 +25,48 @@ The `replace` configuration works in the following way:
 
 The following example demonstrates how to apply the Kendo UI `replace` effect.
 
-    <style>
-        #container {
-            position: relative;
-            width: 202px;
-            height: 202px;
-        }
+```html
+<style>
+    #container {
+        position: relative;
+        width: 202px;
+        height: 202px;
+    }
 
-        #step1, #step2  {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border: 1px solid gray;
-            background: #e4e4e4;
-        }
-        /* A custom swap effect. */
-        /* The initial position of the next element. */
-        .k-fx-swap.k-fx-start .k-fx-next {
-            -webkit-transform: translatex(100%);
-            -moz-transform: translatex(100%);
-            -ms-transform: translatex(100%);
-            transform: translatex(100%);
-        }
+    #step1, #step2  {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border: 1px solid gray;
+        background: #e4e4e4;
+    }
+    /* A custom swap effect. */
+    /* The initial position of the next element. */
+    .k-fx-swap.k-fx-start .k-fx-next {
+        -webkit-transform: translatex(100%);
+        -moz-transform: translatex(100%);
+        -ms-transform: translatex(100%);
+        transform: translatex(100%);
+    }
 
-        /* The initial position of the current element. */
-        .k-fx-swap.k-fx-end .k-fx-current {
-            opacity: 0;
-            -webkit-transform: scale(0.9);
-            -moz-transform: scale(0.9);
-            transform: scale(0.9);
-        }
-    </style>
+    /* The initial position of the current element. */
+    .k-fx-swap.k-fx-end .k-fx-current {
+        opacity: 0;
+        -webkit-transform: scale(0.9);
+        -moz-transform: scale(0.9);
+        transform: scale(0.9);
+    }
+</style>
 
-    <div id="container">
-        <div id="step1">Questionairre – Step 1</div>
-        <div id="step2" style="display: none">Questionairre – Step 2</div>
-    </div>
+<div id="container">
+    <div id="step1">Questionairre – Step 1</div>
+    <div id="step2" style="display: none">Questionairre – Step 2</div>
+</div>
 
-    <script>
-        kendo.fx("#step1").replace("#step2", "swap").run();
-    </script>
+<script>
+    kendo.fx("#step1").replace("#step2", "swap").run();
+</script>
+```
 
 <!--*-->
 

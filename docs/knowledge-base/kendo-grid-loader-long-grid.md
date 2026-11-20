@@ -50,6 +50,8 @@ Here is an example implementation:
 
 ### JavaScript
 
+The following `excelExport` event handler adds a CSS class to the loader based on the Grid height.
+
 ```javascript
 $("#grid").kendoGrid({
   excelExport: function (e) {
@@ -65,6 +67,8 @@ $("#grid").kendoGrid({
 ```
 
 ### CSS
+
+The following styles position the loader in the visible area of the page.
 
 ```css
 div.loaderPosition {

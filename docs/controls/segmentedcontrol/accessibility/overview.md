@@ -44,10 +44,9 @@ The SegmentedControl is compliant with the [Section 508 requirements](http://www
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
-
 ### Test Example
 
-A live test example of the SegmentedControl component could be found here: https://demos.telerik.com/kendo-ui/accessibility/segmentedcontrol
+For a live test example, see the [SegmentedControl accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/segmentedcontrol).
 
 ## See Also
 

@@ -33,7 +33,7 @@ To create AOth 2.0 credentials and add authorized JavaScript origin:
 
     ![Kendo UI for jQuery create OAuth client ID](images/gcl-auth.png)
 
-1. Select **Web Application** and add **Authorized JavaScript origins**. For the purposes of this sample project, add `runner.telerik.io` as authorized origin. `runner.telerik.io` is the domain of https://dojo.telerik.com/.
+1. Select **Web Application** and add **Authorized JavaScript origins**. For the purposes of this sample project, add `runner.telerik.io` as authorized origin. `runner.telerik.io` is the domain of [Telerik Dojo](https://dojo.telerik.com/).
 
     **Figure 3: Adding runner.telerik.io as authorized origin**
 

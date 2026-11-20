@@ -90,7 +90,7 @@ function transformTables(html) {
     <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
     <title></title>
     <link href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-meridian@14.1.0/dist/meridian-main.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     
     
     

@@ -71,7 +71,7 @@ The DockManager has been tested with [axe-core](https://github.com/dequelabs/axe
 
 ### Test Example
 
-A live test example of the DockManager component could be found here: https://demos.telerik.com/kendo-ui/accessibility/dockmanager
+For a live test example, see the [DockManager accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/dockmanager).
 
 ## See Also
 

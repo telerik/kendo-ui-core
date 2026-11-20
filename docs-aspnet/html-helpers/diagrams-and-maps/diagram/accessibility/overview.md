@@ -59,7 +59,7 @@ The Diagram has been tested with the following screen readers and browsers combi
 
 ### Test Example
 
-To test the Diagram component, refer to the [Diagram Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/diagram).
+For a live test example, see the [Diagram accessibility demo](https://demos.telerik.com/{{ site.platform }}/accessibility/diagram).
 
 ## Keyboard Navigation
 

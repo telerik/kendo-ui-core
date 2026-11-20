@@ -86,7 +86,7 @@ The PromptBox has been tested with [axe-core](https://github.com/dequelabs/axe-c
 
 ### Test Example
 
-A live test example of the PromptBox component could be found here: https://demos.telerik.com/kendo-ui/accessibility/promptbox
+For a live test example, see the [PromptBox accessibility demo](https://demos.telerik.com/kendo-ui/accessibility/promptbox).
 
 ## See Also
 

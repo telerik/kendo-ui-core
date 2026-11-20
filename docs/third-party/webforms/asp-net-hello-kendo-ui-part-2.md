@@ -14,11 +14,11 @@ In this tutorial, you will learn how to fully enable the Create, Read, Update, D
 
 ## Screencast
 
-<iframe height="360" src="https://www.youtube.com/embed/BRv7Gvf1w6A?rel=0" frameborder="0" width="640"></iframe>
+<iframe height="360" src="https://www.youtube.com/embed/BRv7Gvf1w6A?rel=0" title="Hello CRUD Data Operations course screencast" frameborder="0" width="640"></iframe>
 
 ## Written Summary
 
-You can build off of [Part 1](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-1), or you can download the completed code for Part 2 [here](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2).
+You can build off of [Part 1](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-1), or you can download the [completed code for Hello Kendo UI Part 2](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2).
 
 ## Create Sample Application
 
@@ -174,7 +174,7 @@ If you want to tweak this validation message, change the model definition for th
 
 ### Set CRUD Endpoints in Grid
 
-Right now the Grid seems to be editable, but is actually not, because it is not connected to the server in any way. The first step in doing that is specifying the `update` and `destroy` objects on the transport. The endpoints that you are going to call are very RESTful. This means that the `update` action is at `api/employees/id` with an HTTP verb of `POST`. See an example request [here](http://myapp.com/api/employees/31). This updates the employee with an `Id` of 31, sending in all of the information to update.
+Right now the Grid seems to be editable, but is actually not, because it is not connected to the server in any way. The first step in doing that is specifying the `update` and `destroy` objects on the transport. The endpoints that you are going to call are very RESTful. This means that the `update` action is at `api/employees/id` with an HTTP verb of `POST`. See an [example request to update employee 31](http://myapp.com/api/employees/31). This updates the employee with an `Id` of 31, sending in all of the information to update.
 
 The `delete` method needs to be handled in much the same way, except that its `type` is `DELETE`. Do not use `delete` as the object name because `delete` is a reserved keyword in JavaScript. Use `destroy` instead.
 
@@ -428,7 +428,7 @@ The code above roll backs the changes made to the Grid and puts the row back.
 
 ## Further Reading
 
-Download the finished code for this module from [here](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2).
+Download the [finished code for Hello Kendo UI Part 2](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2).
 
 Build on this tutorial by gradually adding more advanced functionalities to this application and consider the information from these pages:
 

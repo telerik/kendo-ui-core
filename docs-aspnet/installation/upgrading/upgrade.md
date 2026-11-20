@@ -37,7 +37,7 @@ To upgrade the version with NuGet or Bower:
 
       ```HTML _Layout.cshtml
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
-      <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
       ```
@@ -88,7 +88,7 @@ The project will be upgraded to the latest {{ site.product }} version.
 
       ```HTML _Layout.cshtml
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
-      <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
       ```
@@ -109,7 +109,7 @@ The project will be upgraded to the latest {{ site.product }} version.
 
       ```HTML _Layout.cshtml
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
-      <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.all.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@{{ site.mvcCoreVersion }}/umd/kendo.aspnetmvc.min.js"></script>
       ```
