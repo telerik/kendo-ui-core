@@ -25,6 +25,8 @@ My UI for ASP .NET Core project uses a Kendo UI Grid with templates and localiza
 
 ## Error Message
 
+The Grid throws the following error:
+
 `Uncaught Error: Invalid template:'....'`
 
 ## Cause

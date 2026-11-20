@@ -134,7 +134,7 @@ Selected item is still visible. This allows to de-select item from the popup lis
     		</script>
     ```
 
-* The widget will not select the first item, when its value is set to `""` (empty string). This is applicable to the editing of the Grid when the default model value is an empty string. However, this change improves the behavior discussed [here](https://github.com/telerik/kendo-ui-core/issues/312).
+* The widget will not select the first item, when its value is set to `""` (empty string). This is applicable to the editing of the Grid when the default model value is an empty string. However, this change improves the behavior discussed in [the related DropDownList selection issue](https://github.com/telerik/kendo-ui-core/issues/312).
 
     ```tab-Old
     	<input id="dropdownlist" />

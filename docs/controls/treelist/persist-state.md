@@ -78,8 +78,7 @@ The following example demonstrates how to automatically maintain an up-to-date s
                 treeList.setOptions(JSON.parse(options)); // Load the stored TreeList options after its initialization
             }
 
-            $(window).on( "unload", function(e){
-                e.preventDefault();
+            $(window).on("pagehide", function () {
                 localStorage["kendo-treelist-options"] = kendo.stringify(treeList.getOptions()); // Get and store the TreeList settings when navigating away from the page
             });
 

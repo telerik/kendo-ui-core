@@ -18,7 +18,7 @@ The filter descriptor is similar to [the filter option of the `kendo.data.DataSo
 - `operator`&mdash;All operators that work with strings. Note that the component treats field values as strings.
 - `value`&mdash;The filter value.
 
-### Filtering when using Xmla DataSource
+## Filtering when using Xmla DataSource
 
 To set a predefined filter when using Xmla data use the above-described approach and set the filter configuration of the dataSource, following the [guidelines for MDX queries](https://learn.microsoft.com/en-us/analysis-services/multidimensional-models/mdx/mdx-query-fundamentals-analysis-services?view=asallproducts-allversions) and [Members, Tuples, and Sets](https://learn.microsoft.com/en-us/analysis-services/multidimensional-models/mdx/working-with-members-tuples-and-sets-mdx?view=asallproducts-allversions).
 
@@ -66,7 +66,7 @@ The example below demonstrates how to filter data only for cities starting with 
     </script>
 ```
 
-### Filtering when using Flat Data
+## Filtering when using Flat Data
 
 Build the filter descriptor similar to [the filter option of the `kendo.data.DataSource`](/api/data/datasource/configuration/filter), keeping in mind the field values are treated as strings.
 

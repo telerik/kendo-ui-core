@@ -19,7 +19,7 @@ Due to the specifics of their implementation, both the Drawing library and the [
 * [Page breaking in elements](#page-breaking-in-elements)
 * [Limitations and Browser Support](#supported-browsers)
 
-### General
+## General
 
 - The drawing of HTML elements provides no right-to-left (RTL) support.
 - Exporting might not work when loading the page from a local file (`file://` protocol) due to CORS restrictions.

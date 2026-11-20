@@ -12,6 +12,7 @@ components: ["grid"]
 ---
 
 ## Environment
+
 <table>
 	<tbody>
 		<tr>
@@ -25,8 +26,8 @@ components: ["grid"]
 	</tbody>
 </table>
 
-
 ## Description
+
 How do I show the null values at the end of the Grid when I sort it in any order?
 
 ## Solution
@@ -50,7 +51,8 @@ Use the following custom function in the [columns.sortable.compare](https://docs
     }
   }]
 ```
-#### Example
+
+### Example
 
 The following example initializes a Grid with a sortable Name column that uses the custom compare function to position `null` values at the bottom for both ascending and descending sort directions.
 
@@ -109,6 +111,7 @@ The following example initializes a Grid with a sortable Name column that uses t
       });
   </script>
 ```
+
 ## See Also
 
 - [columns.sortable.compare](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns#columnssortable#columnssortablecompare) configuration

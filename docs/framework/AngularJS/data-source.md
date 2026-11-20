@@ -12,7 +12,7 @@ position: 4
 
 > Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
 > This does not impact [Kendo UI for Angular (2+)](https://www.telerik.com/kendo-angular-ui) suite.
-> If you still need to use AngularJS in your project, check [this article]({% slug angularjs_legacy_files_kendoui %}) that explains how to get the legacy files.
+> If you still need to use AngularJS in your project, check the [instructions for retrieving the AngularJS legacy files]({% slug angularjs_legacy_files_kendoui %}).
 >For information regarding extended support for AngularJS, please visit [Extended Long Term Support]({% slug supportedversions_kendoui %}#extended-long-term-support)
 
 Even though you do not have to always create a `DataSource` object, most Kendo UI widgets require it.
@@ -123,6 +123,5 @@ The recommended way to update the object is to use the `set` method of the [`Obs
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})
 * [Grid Settings]({% slug grid_settings_angularjs_directives %})
-
 
 

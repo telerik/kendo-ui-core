@@ -59,7 +59,7 @@ The following example demonstrates how to apply the custom transition duration a
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-meridian@14.5.0/dist/meridian-main.css" />
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2025.3.1002/umd/kendo.all.min.js"></script>
   <style>
     #drawer .k-drawer-wrapper {

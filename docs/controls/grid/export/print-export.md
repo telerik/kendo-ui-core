@@ -16,11 +16,11 @@ To print only the Grid from a page, use either of the following approaches:
 * Print the existing page and hide the irrelevant content with print CSS.
 * Print a separate web page with only the Grid on it.
 
-### Printing Existing Web Pages
+## Printing Existing Web Pages
 
 To print only the Grid as part of an existing web page, use a print stylesheet to hide the parts of the page that you do not need. The exact CSS for printing will depend on the existing page content.
 
-### Printing New Web Pages
+## Printing New Web Pages
 
 The following example demonstrates how to retrieve the HTML of the Grid, inject it in a new browser window, and print the new page. Please note this approach retrieves and prints only the current page of  the Grid.
 It also addresses the following important issues:

@@ -34,7 +34,9 @@ Widgets like the TreeView or the MultiSelect need only a simple array while the 
 
 The possible cause for the `e.slice is not a function` error is that the server does not return an actual list of objects but empty data, an error response, or a single item. In such cases, you get a single object or HTML instead of a serialized array.
 
-## Error Message 
+## Error Message
+
+The widget throws the following error:
 
 `Uncaught TypeError: e.slice is not a function`
 

@@ -17,28 +17,30 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 The item template manages the way the nodes in the DropDownTree are rendered.
 
-    <input id="dropdowntree">
-    <script id="treeview-template" type="text/kendo-ui-template">
-            #: item.text #
-            <a class='k-icon k-i-close' href='\#'></a>
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("#dropdowntree").kendoDropDownTree({
-                template: kendo.template($("#treeview-template").html()),
-                dataSource: [
-                {
-                    text: "Item 1",
-                    items: [
-                        { text: "Item 1.1" },
-                        { text: "Item 1.2" }
-                    ]
-                },
-                { text: "Item 2" }
+```html
+<input id="dropdowntree">
+<script id="treeview-template" type="text/kendo-ui-template">
+        #: item.text #
+        <a class='k-icon k-i-close' href='\#'></a>
+</script>
+<script>
+    $(document).ready(function() {
+        $("#dropdowntree").kendoDropDownTree({
+            template: kendo.template($("#treeview-template").html()),
+            dataSource: [
+            {
+                text: "Item 1",
+                items: [
+                    { text: "Item 1.1" },
+                    { text: "Item 1.2" }
                 ]
-            });
+            },
+            { text: "Item 2" }
+            ]
         });
-    </script>
+    });
+</script>
+```
 
 ## Value Template
 

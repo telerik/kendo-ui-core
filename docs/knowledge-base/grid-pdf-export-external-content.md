@@ -58,7 +58,8 @@ I am working on a multiple grid export to PDF which needs a custom template.
     <em style="color:red;">#=getDllValueForPrint()#</em>
   #}#
 ```
-#### Example
+
+### Example
 
 The following example exports two Grids to a single PDF file, adds a custom header and a DropDownList value to the first page only, and uses the `pageNum` condition inside the Kendo template to control visibility.
 

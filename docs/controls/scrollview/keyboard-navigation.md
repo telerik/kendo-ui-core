@@ -15,14 +15,14 @@ To enable it, use the [`navigatable`](/api/ui/scrollview/configuration/navigatab
 
 The ScrollView supports the following keyboard shortcuts:
 
-### Focus:
+## Focus:
 
 |Shortcut |Description
 |:---     |:---
 |`Access key + W`  |Focuses the widget
 
 
-### List of images:
+## List of images:
 
 |Shortcut |Description
 |:---     |:---
@@ -30,7 +30,7 @@ The ScrollView supports the following keyboard shortcuts:
 |`Right arrow`  |Switches to the next item
 
 
-### Prev/Next buttons:
+## Prev/Next buttons:
 
 |Shortcut |Description
 |:---     |:---
@@ -38,7 +38,7 @@ The ScrollView supports the following keyboard shortcuts:
 |`Space`  |Triggers a click for the button
 
 
-### Pager:
+## Pager:
 
 |Shortcut |Description
 |:---     |:---

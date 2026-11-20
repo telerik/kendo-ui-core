@@ -169,6 +169,6 @@ For more detailed information on configuring the columns and dropdown width of t
 
 ## See Also
 
-- [Kendo UI for jQuery MultiColumnComboBox Overview]https://docs.telerik.com/kendo-ui/controls/multicolumncombobox/overview)
+- [Kendo UI for jQuery MultiColumnComboBox Overview](https://docs.telerik.com/kendo-ui/controls/multicolumncombobox/overview)
 - [MultiColumnComboBox Open Event](https://docs.telerik.com/kendo-ui/api/ui/multicolumncombobox/events/open)
 - [MultiColumnComboBox setOptions Method](https://docs.telerik.com/kendo-ui/api/ui/widget/methods/setoptions)

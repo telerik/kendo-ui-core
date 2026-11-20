@@ -7,6 +7,8 @@ slug: searchpanel_kendoui_grid_widget
 position: 7
 ---
 
+# Search Panel
+
 The Grid component has built-in search functionality that you can use through either the SmartBox Search mode or the Search Panel in the toolbar. Both options rely on Grid filtering to show only the relevant records.
 
 ## SmartBox Search
@@ -45,13 +47,14 @@ To enable the functionality include the `search` option to the toolbar configura
 
 In addition it is possible to customize which fields to search when a value is entered in the search input.
 
-    $("#grid").kendoGrid({
-        toolbar: ["search"],
-        search: {
-            fields: ["ContactTitle"]
-        }
-        ...
-    });
+```js
+$("#grid").kendoGrid({
+    toolbar: ["search"],
+    search: {
+        fields: ["ContactTitle"]
+    }
+});
+```
 
 ### Specify the filter operator
 
@@ -59,31 +62,35 @@ As of Kendo UI 2021 R3 SP1, you can specify filter operators for each filter typ
 
 The following example demonstrates how to specify which fields to include in the search
 
-    $("#grid").kendoGrid({
-        columns: [
-            { field: "name" },
-            { field: "age" }
-        ],
-        dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
-        toolbar:["search"],
-        search: {
-            fields: ["name"] // Or, specify multiple fields by adding them to the array, e.g ["name", "age"]
-        }
-    });
+```js
+$("#grid").kendoGrid({
+    columns: [
+        { field: "name" },
+        { field: "age" }
+    ],
+    dataSource: [{ name: "Jane", age: 30 }, { name: "John", age: 33 }],
+    toolbar: ["search"],
+    search: {
+        fields: ["name"] // Or specify multiple fields with operators, e.g., { name: "age", operator: "eq" }
+    }
+});
+```
 
 The following example demonstrates how to specify the operator for the field that will be used in the filter expression.
 
-    $("#grid").kendoGrid({
-        columns: [
-            { field: "name" },
-            { field: "age" }
-        ],
-        dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
-        toolbar:["search"],
-        search: {
-            fields: ["name", { name: "age", operator: "eq" }]
-        }
-    });
+```js
+$("#grid").kendoGrid({
+    columns: [
+        { field: "name" },
+        { field: "age" }
+    ],
+    dataSource: [{ name: "Jane", age: 30 }, { name: "John", age: 33 }],
+    toolbar: ["search"],
+    search: {
+        fields: ["name", { name: "age", operator: "eq" }]
+    }
+});
+```
 
 
 ### Known Limitations

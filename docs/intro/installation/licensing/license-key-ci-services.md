@@ -32,7 +32,7 @@ The following general requirements apply to all CI/CD environments:
 * Store the deployment key in an environment variable, secret, or secure file. Never hardcode it in a build script or workflow definition.
 * The CI pipeline configurations are not executable. They merely outline the specific sequence of steps.
 
-# Creating an Environment Variable
+## Creating an Environment Variable
 
 Set `TELERIK_LICENSE` to your deployment key. Each platform has a different process for setting environment variables. The following examples cover popular CI/CD services.
 
@@ -94,6 +94,8 @@ activate_license:
 
 ### Example 1 - Azure YAML pipeline on Windows
 
+The following YAML configures an Azure Pipelines job that runs on a Windows agent and activates the license.
+
 ```yaml
 pool:
   vmImage: 'windows-latest'
@@ -117,6 +119,8 @@ steps:
 ```
 
 ### Example 2 - Azure YAML pipeline on Linux
+
+The following YAML configures an Azure Pipelines job that runs on a Linux agent and activates the license.
 
 ```yaml
 pool:

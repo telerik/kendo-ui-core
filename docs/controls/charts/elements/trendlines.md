@@ -233,7 +233,7 @@ To create a forecast, extend the trendline by specifying the number of intervals
 
 > The `forecast` option is supported for **linear**, **exponential**, **logarithmic** and **power** trendlines. The parent series must be either a [Date Series]({% slug dateseries_charts_widget %}), "scatter" or "scatterLine".
 
-#### Example - set the trendline forecast
+### Example - set the trendline forecast
 
 	  <div id="chart"></div>
     <script>

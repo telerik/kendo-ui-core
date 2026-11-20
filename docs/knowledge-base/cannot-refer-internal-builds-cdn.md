@@ -40,7 +40,7 @@ For internal builds, use private CDN services. It is recommended that you implem
         <title>Welcome to Kendo UI for jQuery</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css" />
 
-        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script>
             if (typeof jQuery == "undefined") {
                 // Fallback to local jQuery.

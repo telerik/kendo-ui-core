@@ -190,4 +190,9 @@ You now have your first Kendo UI for jQuery component running in your applicatio
     line-height: 1.4;
     vertical-align: middle;
 }
+
+body.t-dark [class^="tab-strip-module--tabList"] [class^="tab-strip-module--tabElement"]:first-child::after {
+    background: #173b27;
+    color: #b7f7cb;
+}
 </style>

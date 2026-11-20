@@ -52,7 +52,7 @@ Using the ```important``` selector with the specific class will make the scrollb
       }
 ```
 
-#### Example
+### Example
 
 The following example renders a horizontal and a vertical Menu, both marked with the `noScrollButtons` class, and uses the scoped CSS rule to hide the scroll buttons while keeping the scrollable behavior active.
 

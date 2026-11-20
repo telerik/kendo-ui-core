@@ -82,7 +82,9 @@ $("#gantt").kendoGantt({
 });
 ```
 
-### Example:
+### Example
+
+The following example removes the summary tasks from the Successors and Predecessors tabs of the Gantt popup editor.
 
 ```dojo
 <div id="gantt"></div>

@@ -24,7 +24,7 @@ Refer to [Creating an AWS Account and a User]({% slug aws_getting_started_aspnet
 
 ## Application Configuration
 
-Once you have a user with the necessary permissions, you can proceed with configuring the user authentication in your application. 
+Once you have a user with the necessary permissions, you can proceed with configuring the user authentication in your application.
 
 >Even though the following instructions demonstrate how to create a user identity and use that identity directly on the client to access a DynamoDB table, exposing user credentials directly on the client is not recommended. That is why, before sharing the client implementation with third parties or users, you should consider switching to the [Amazon Cognito](https://aws.amazon.com/cognito/getting-started/) authentication.
 
@@ -43,7 +43,7 @@ Once you have a user with the necessary permissions, you can proceed with config
   <link rel="stylesheet" href=""https://cdn.jsdelivr.net/npm/@@progress/kendo-theme-default@{{ site.themesCdnVersion }}/dist/default-main.css">
 
   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.221.1.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{site.cdnVersion}}/umd/kendo.all.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@@progress/kendo-ui@{{site.cdnVersion}}/umd/kendo.aspnetmvc.min.js"></script>
 
@@ -67,7 +67,7 @@ Once you have a user with the necessary permissions, you can proceed with config
 	```
 
 
-1. Initialize the Grid. 
+1. Initialize the Grid.
 
     The declaration of the Grid and the view model it uses are shown in the example below.
 
@@ -248,7 +248,7 @@ Once you have a user with the necessary permissions, you can proceed with config
     }
 	```
 
-1. The `onDestroy` handler for the `Destroy` data operation uses the [`delete`](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html) action to remove an item from the DynamoDB table. The item is identified by its `ID`. 
+1. The `onDestroy` handler for the `Destroy` data operation uses the [`delete`](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html) action to remove an item from the DynamoDB table. The item is identified by its `ID`.
 
 	```JavaScript
     function onDestroy(options) {

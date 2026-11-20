@@ -6,6 +6,10 @@ components: ["pager"]
 slug: settings_kendoui_pager_widget
 ---
 
+# Pager Settings and Types
+
+Configure the Pager's display mode and choose which navigation controls and status information it shows.
+
 ## Types
 
 The Pager has two types:

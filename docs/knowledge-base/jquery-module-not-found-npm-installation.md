@@ -29,6 +29,8 @@ During the NPM installation process, I get an error that the jQuery module is no
 
 ## Error Message
 
+The build throws the following error:
+
 `Error: Cannot find module 'jquery' from '/Users/bernhard/Documents/JavaScriptDevelopment/kendo-ui-npm-example/javascript-browserify'`
 
 ## Cause

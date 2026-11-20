@@ -52,7 +52,7 @@ The following examples demonstrate how to handle a custom command attribute to a
 
 ### Bound with JSON Data
 
-
+The following example binds the Menu to JSON data and sets a custom `command` attribute on each item through the `attr` field.
 
 ```dojo
 <ul id="menu"></ul>
@@ -101,7 +101,7 @@ The following examples demonstrate how to handle a custom command attribute to a
 
 ### Created with HTML Elements
 
-
+The following example initializes the Menu from HTML elements and sets a custom `data-command` attribute on each item.
 
 ```dojo
 <ul id="menu">

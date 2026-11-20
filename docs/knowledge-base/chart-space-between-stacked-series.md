@@ -12,6 +12,7 @@ components: ["chart"]
 ---
 
 ## Environment
+
 <table>
 	<tbody>
 		<tr>
@@ -24,7 +25,6 @@ components: ["chart"]
 		</tr>
 	</tbody>
 </table>
-
 
 ## Description
 How can I add space between the Stacked Series in the Kendo UI Column Chart?
@@ -61,7 +61,8 @@ function space(e) {
   return path;
 }
 ```
-#### Example
+
+### Example
 
 The following example demonstrates a Stacked Column Chart that uses the `space` visual function to render a visible gap between each stacked series segment.
 
@@ -146,4 +147,5 @@ The following example demonstrates a Stacked Column Chart that uses the `space` 
 ```
 
 ## See Also
+
 - [series.visual](https://docs.telerik.com/kendo-ui/api/dataviz/ui/chart/configuration/series#seriesvisual)

@@ -14,7 +14,7 @@ This module will cover HTML5 as a broad topic. Up to now, this course has not re
 
 ## Screencast
 
-<iframe height="360" src="https://www.youtube.com/embed/hRlaVe6Eqg0?rel=0" frameborder="0" width="640"></iframe>
+<iframe height="360" src="https://www.youtube.com/embed/hRlaVe6Eqg0?rel=0" title="Hello HTML5 course screencast" frameborder="0" width="640"></iframe>
 
 ## Written Summary
 

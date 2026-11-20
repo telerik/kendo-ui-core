@@ -24,7 +24,7 @@ The FileManager component provides the following commands that can be executed u
 
 Below you will find examples for each of the commands:
 
-#### CreateFolderCommand 
+## CreateFolderCommand
 
 You can use the command to add a new folder in the FileManager.
 
@@ -69,7 +69,7 @@ You can use the command to add a new folder in the FileManager.
     </script>
 ```
 
-#### RenameCommand
+## RenameCommand
 
 Use the command to open the popup for renaming a folder or for start editing the name of a file.
 
@@ -132,7 +132,7 @@ Use the command to open the popup for renaming a folder or for start editing the
   </script>
 ```
 
-#### DeleteCommand
+## DeleteCommand
 
 The command allows you to delete file or folder in the FileManager.
 
@@ -193,7 +193,7 @@ The command allows you to delete file or folder in the FileManager.
     </script>
 ```
 
-#### MoveCommand
+## MoveCommand
 
 The Move command will call the Create endpoint for adding the file to its new destination and the Destroy remote endpoint as the selected file is deleted from the origin folder. Below is an example for using the `MoveCommand`.
 
@@ -214,7 +214,7 @@ The Move command will call the Create endpoint for adding the file to its new de
     })
 ```
 
-#### CopyCommand
+## CopyCommand
 
 The copy command will call the `Create` remote endpoint as the selected file is not deleted from the destination. In the example below a `create` request containing the path to the selected file and target folder 'Documents' will be sent.
 
@@ -237,7 +237,7 @@ The copy command will call the `Create` remote endpoint as the selected file is 
 ```
 
 
-#### SortCommand
+## SortCommand
 
 The sort command provides an option to sort the items in the FileManager by specific field and direction. 
 
@@ -286,7 +286,7 @@ The sort command provides an option to sort the items in the FileManager by spec
     </script>
 ```
 
-#### SearchCommand
+## SearchCommand
 
 The command allows you to perform search on the currently rendered files and folders. The search will not be performed in the nested items. You can pass the field and value based on which the search will be applied as well as the filter operator. 
 
@@ -338,7 +338,7 @@ The command allows you to perform search on the currently rendered files and fol
     </script>
 ```
 
-#### ChangeViewCommand
+## ChangeViewCommand
 
 You can switch between the `grid` and the `list` view to display the files in the FileManager.
 
@@ -388,7 +388,7 @@ You can switch between the `grid` and the `list` view to display the files in th
   </script>
 ```
 
-#### OpenDialogCommand
+## OpenDialogCommand
 
 You can use the command to pass in the options the dialog that should be opened. 
 
@@ -435,7 +435,7 @@ You can use the command to pass in the options the dialog that should be opened.
   </script>
 ```
 
-#### TogglePaneCommand
+## TogglePaneCommand
 
 The toggle pane command opens the preview pane for reviewing the file details.
 

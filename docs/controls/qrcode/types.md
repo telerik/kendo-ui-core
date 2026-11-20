@@ -7,15 +7,17 @@ slug: types_kendoui_qrcode_widget
 position: 3
 ---
 
+# QRCode Types
+
 Kendo UI QRCode supports different types of overlay.
 
-# Swiss QR Type
+## Swiss QR Type
 
 The QRCode component supports the [Swiss QR Code format](https://blog.xsuite.com/en/swiss-qr-code). Enabling the `swiss` type of the overlay will add a swiss cross in the QRCode.
 
 The following implementation demonstrates the code needed for the Swiss Type:
 
-```
+```dojo
 <div id="example" class="demo-section k-content center">
     <div class="qr-wrapper">
             <h3>Swiss</h3>
@@ -53,13 +55,13 @@ Overview of the Swiss Type:
 
 * [Demo showing Swiss QRCode format](https://demos.telerik.com/kendo-ui/qrcode/swiss)
 
-# QRCode Image Type
+## QRCode Image Type
 
 The image type of the overlay is adding an image in the QRCode.
 
 The following implementation demonstrates the code needed for the Image Type:
 
-```
+```dojo
 <div id="example" class="demo-section k-content center">
     <div class="qr-wrapper">
         <h3>Image</h3>

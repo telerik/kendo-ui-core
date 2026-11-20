@@ -71,7 +71,7 @@ Use jsDelivr to load Kendo UI for jQuery from its NPM packages without hosting t
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@14.5.0/dist/default-ocean-blue.css" integrity="sha256-eNPRBUJRAdbNuZjjM0HWX4qWYUQONec3soGf9AgbjbE=" crossorigin="anonymous" />
 
-        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@2026.3.811/umd/kendo.all.min.js" integrity="sha256-Bjy6F9ho2vlkrHseUGTTc+Y6swvrpO7a10REh+IJHD4=" crossorigin="anonymous"></script>
     </head>
     <body>

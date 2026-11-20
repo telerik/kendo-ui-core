@@ -35,7 +35,7 @@ For more information, refer to the following resources:
 
 ## What Is XMLA?
 
-XMLA is an acronym that stands for [XML for Analysis](https://en.wikipedia.org/wiki/XML_for_Analysis). XMLA is a protocol that is designed for universal data access to a multidimensional data source which resides on the Web. For more information, refer to [this article](http://technet.microsoft.com/en-us/library/ms187178(v=sql.90).aspx).
+XMLA is an acronym that stands for [XML for Analysis](https://en.wikipedia.org/wiki/XML_for_Analysis). XMLA is a protocol that is designed for universal data access to a multidimensional data source which resides on the Web. For more information, refer to the Microsoft [XML for Analysis overview](http://technet.microsoft.com/en-us/library/ms187178(v=sql.90).aspx).
 
 The [`PivotDataSource`](/api/data/pivotdatasource) configuration provides built-in support for XMLA by using specific XMLA [`transport`](/api/framework/pivotdatasource#configuration-transport) and [`schema`](/api/framework/pivotdatasource#configuration-schema) options.
 

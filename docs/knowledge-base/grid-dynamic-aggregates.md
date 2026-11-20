@@ -25,7 +25,7 @@ ticketid: 1471295
 
 ## Description
 
-I have created a dynamic grid as shown in [this article]({% slug howto_createdynamiccolumnsdatatypes_grid %}). Now I need to implement a menu in the column headers that will allow the user to select the available aggregates for that column and apply the changes. This should refresh the grid and update the footers.
+I have created a dynamic grid as shown in the [Create Grids with Dynamic Columns and Data Types]({% slug howto_createdynamiccolumnsdatatypes_grid %}) article. Now I need to implement a menu in the column headers that will allow the user to select the available aggregates for that column and apply the changes. This should refresh the grid and update the footers.
 
 ## Solution
 

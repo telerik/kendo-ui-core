@@ -34,7 +34,7 @@ components: ["grid"]
 
 How can I export to Excel filtered Grid data when columns and data fields information is retrieved during runtime?
 
-> How to create a Grid with dynamic columns and data types you can learn at [this article]({% slug howto_createdynamiccolumnsdatatypes_grid %})
+> How to create a Grid with dynamic columns and data types you can learn in the [Create Grids with Dynamic Columns and Data Types]({% slug howto_createdynamiccolumnsdatatypes_grid %}) article
 
 ## Solution
 

@@ -54,7 +54,7 @@ The clear button can be appended to the [Kendo UI DatePicker's footer](https://d
       }
 ```
 
-#### Example
+### Example
 
 The following example demonstrates two DatePicker instances, each with a **Clear** button appended to the calendar footer through the `open` event handler.
 

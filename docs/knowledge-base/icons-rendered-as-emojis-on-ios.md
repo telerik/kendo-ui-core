@@ -27,6 +27,6 @@ I have a very simple application that uses several kendo controls.  Some are use
 
 The icons get loaded from another font(in this case it looks like the emoji built in Apple font) where the content codes for up and down arrow load ("\e006" and "\e004") the man and the T-shirt. If the icons are not immediately available Safari will go on and use its own icons.
 
-We have logged an item in the official Kendo UI Feedback Portal for enhancing the themes with a font-loading strategy that handles the reserved unicode numbers. Vote for it [here](https://feedback.telerik.com/kendo-jquery-ui/1405895-add-font-loading-strategy-to-handle-reserved-unicode-numbers-in-ios).
+We have logged an item in the official Kendo UI Feedback Portal for enhancing the themes with a font-loading strategy that handles the reserved unicode numbers. Vote for the [font-loading strategy feature request](https://feedback.telerik.com/kendo-jquery-ui/1405895-add-font-loading-strategy-to-handle-reserved-unicode-numbers-in-ios).
 
 Meanwhile, add the styles folder with the styles files on the server. This will reduce the time it takes for the styles to get loaded and should solve the issue with the man and the T-shirt.

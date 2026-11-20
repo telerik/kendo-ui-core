@@ -32,7 +32,7 @@ While Kendo UI allows you to create visual charts and graphs that enhance textua
 
 The [following video](https://www.youtube.com/watch?v=lymGnquNxBg&feature=youtu.be) uses the popular VoiceOver screen reader on Apple OS X to navigate a Donut chart.
 
-<iframe width="853" height="480" src="https://www.youtube.com/embed/lymGnquNxBg" frameborder="0" allowfullscreen></iframe>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/lymGnquNxBg" title="VoiceOver navigating a Donut Chart" frameborder="0" allowfullscreen></iframe>
 
 In the video, you can use a screen reader to hear both the title of the chart and the values in the legend. Because Kendo UI creates charts by using inline SVG elements, and SVG is markup, VoiceOver is able to drill into the chart and piece together a reasonable representation of the content which would not have been possible if the Charts needed a `canvas` element to create them.
 
@@ -112,7 +112,7 @@ The following example demonstrates the JavaScript for creating the Chart and add
 
 For more information, refer to the [brief video](https://www.youtube.com/watch?v=QyB3sTVRd3E&feature=youtu.be) of VoiceOver which interacts with the `figcaption` element.
 
-    <iframe width="853" height="480" src="https://www.youtube.com/embed/QyB3sTVRd3E" frameborder="0" allowfullscreen></iframe>
+    <iframe width="853" height="480" src="https://www.youtube.com/embed/QyB3sTVRd3E" title="VoiceOver interacting with a Chart figcaption element" frameborder="0" allowfullscreen></iframe>
 
 ### Adding role and title to Chart Elements
 
@@ -200,7 +200,7 @@ This approach and the following one deal with creating a data table to serve as 
 
     As a result, you create a simple and accessible table that is based on the same data as the chart itself. For more information on the way VoiceOver allows you to interact with the table, refer to the [quick video](https://www.youtube.com/watch?v=0xdrBjwiFVA&feature=plcp).
 
-        <iframe width="853" height="480" src="https://www.youtube.com/embed/0xdrBjwiFVA" frameborder="0" allowfullscreen></iframe>
+        <iframe width="853" height="480" src="https://www.youtube.com/embed/0xdrBjwiFVA" title="VoiceOver interacting with an accessible Chart data table" frameborder="0" allowfullscreen></iframe>
 
 ### Creating Off-Screen Tables and Swapped On-Screen Tables and Charts
 
@@ -221,7 +221,7 @@ If you do not want to display the raw data with the Chart for all users on-scree
 
     As a result, your data table is no longer on the screen but is accessible to screen readers as demonstrated in the [following video](https://www.youtube.com/watch?v=0xdrBjwiFVA&feature=youtu.be).
 
-        <iframe width="853" height="480" src="https://www.youtube.com/embed/0xdrBjwiFVA" frameborder="0" allowfullscreen></iframe>
+        <iframe width="853" height="480" src="https://www.youtube.com/embed/0xdrBjwiFVA" title="VoiceOver reading an off-screen Chart data table" frameborder="0" allowfullscreen></iframe>
 
 * Provide all users with the ability to switch between the Chart and the table.
 
@@ -244,7 +244,7 @@ If you do not want to display the raw data with the Chart for all users on-scree
 
     As a result, VoiceOver users can choose with which representation they wish to interact as demonstrated in the [following video](https://www.youtube.com/watch?v=kZNz1H2Zp3U&feature=relmfu).
 
-        <iframe width="853" height="480" src="https://www.youtube.com/embed/kZNz1H2Zp3U" frameborder="0" allowfullscreen></iframe>
+        <iframe width="853" height="480" src="https://www.youtube.com/embed/kZNz1H2Zp3U" title="VoiceOver users switching between a Chart and its data table" frameborder="0" allowfullscreen></iframe>
 
 ## See Also
 

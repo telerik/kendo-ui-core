@@ -40,7 +40,9 @@ The possible causes of the issue may be either of the following:
 
 * A JavaScript file is missing when using a DataSource type that is not included in `kendo.all.min.js`. For example, `aspnetmvc-ajax`, `jsdo`, and others. Specifically, `json` is not a valid DataSource `type` and it does not require a separate JavaScript file.
 
-## Error Message 
+## Error Message
+
+The DataSource throws the following error:
 
 `Unknown DataSource transport type json`
 

@@ -14,7 +14,7 @@ The native data format for the Spreadsheet component is [JSON]({% slug loadand_s
 The Spreadsheet also features built-in support for [Excel export]({% slug export_toexcel_spreadsheet_widget %}) that runs in the browser. To export huge datasets to Excel, you can use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP)](https://docs.telerik.com/devtools/document-processing/introduction).  
 
 * For examples on how to export Excel files, refer to the [RadSpreadProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
-* For more information on the Spreadsheet server-side processing, refer to [this article](https://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/spreadsheet-processing).
+* For more information on the Spreadsheet server-side processing, refer to the [Telerik UI for ASP.NET MVC Spreadsheet server-side processing](https://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/spreadsheet-processing).
 
 ## See Also
 

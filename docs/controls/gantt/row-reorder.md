@@ -7,7 +7,11 @@ slug: row_reorder_kendoui_gantt
 position: 7
 ---
 
-# Reorder Rows through Click-Move-Click
+# Row Reordering
+
+The Gantt lets users change task order in the TreeList with click-move-click or drag and drop. Enable the interaction that suits your workflow through the Gantt's `editable` options.
+
+## Reorder Rows through Click-Move-Click
 
 As of Kendo UI R2 SP1 2023, users can reorder the Gantt's TreeList rows by using the click-move-click functionality provided by the [`clickMoveClick`](/api/ui/gantt/configuration/editable#editableclickmoveclick) option. To use this functionality, you must also add a `draggable` column that allows the draggable icon to appear. Once enabled, users can move the row by clicking the icon to start moving the row, and then clicking again to place the row in its new position.
 
@@ -53,7 +57,7 @@ As of Kendo UI R2 SP1 2023, users can reorder the Gantt's TreeList rows by using
     </script>
 ```
 
-# Reorder Rows by Dragging and Dropping
+## Reorder Rows by Dragging and Dropping
 
 You can reorder the Gantt's TreeList rows by using the drag and drop functionality provided by the [`reorder`](/api/ui/gantt/configuration/editable#editablereorder) option.
 

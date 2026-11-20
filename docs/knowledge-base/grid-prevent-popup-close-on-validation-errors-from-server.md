@@ -48,18 +48,18 @@ I am returning errors from server and catch it in kendo datasource error event. 
         }
 ```
 
-###### Sample error response
+### Sample error response
 
 The following snippet shows the expected JSON structure the server returns when validation fails. The `errors` array is mapped through `schema.errors` so the DataSource fires its `error` event.
 
-```
+```json
     "errors": [{
 		"code": "400",
 		"reason": "Custom error!"
 	}]
 ```
 
-###### Example - the update response contains errors which trigger the error event of the dataSource
+### Example - the update response contains errors which trigger the error event of the dataSource
 
 The following example configures a Grid with an `update` transport that returns an error response. The `error` handler intercepts the `dataBinding` event to keep the popup open and display the server error messages.
 

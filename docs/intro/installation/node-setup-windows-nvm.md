@@ -26,7 +26,7 @@ position: 45
 
 Go to the official releases page:
 
-* https://github.com/coreybutler/nvm-windows/releases
+* [nvm-windows releases](https://github.com/coreybutler/nvm-windows/releases)
 
 Download the latest installer (`nvm-setup.exe`).
 

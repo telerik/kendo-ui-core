@@ -70,7 +70,11 @@ var stockChart = $("#stock-chart").kendoStockChart({
   }
 }).data("kendoStockChart");
 ```
-#### Example
+
+### Example
+
+The following example applies the `render` and `selectEnd` event handlers to a StockChart so that the maximum category axis label is always visible.
+
 ```dojo
 <div id="example">
   <div class="demo-section k-content wide">

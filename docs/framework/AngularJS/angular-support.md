@@ -7,7 +7,7 @@ slug: supportedversions_kendoui
 position: 6
 ---
 
-## KendoUI for AngularJS Support Status
+# AngularJS Support Status
 
 R1 2022 was the last release where the Kendo UI team added logic around the jQuery components to offer features for AngularJS 1.x and the last release with official support for AngularJS 1.x.
 
@@ -15,7 +15,7 @@ R1 2022 was the last release where the Kendo UI team added logic around the jQue
 
 More information can be found here=> [Kendo UI and AngularJS 1.x Support End of Life Plans (telerik.com)](https://www.telerik.com/blogs/kendo-ui-angularjs-1.x-support-end-life-plans)
 
-### AngularJS officially deprecated as of January 2022
+## AngularJS officially deprecated as of January 2022
 
 Google announced that code will remain accessible on [GitHub](https://github.com/angular/angular.js), [npm](https://www.npmjs.com/package/angular), [Bower](https://github.com/angular/bower-angular) and [Release archive](https://code.angularjs.org/1.8.2), however the GitHub repository will be archived (no new issues or pull requests can be submitted).
 

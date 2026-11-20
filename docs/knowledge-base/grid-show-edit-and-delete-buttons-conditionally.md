@@ -34,11 +34,11 @@ The following example demonstrates how to pass a value in the ViewBag for a key 
 
 To individually fine-tune a command, use the [`command visible`](https://docs.telerik.com/kendo-ui/api/ui/grid/configuration/columns/command#columnscommandvisible) function.
 
-###### Razor Example
+### Razor Example
 
 The following snippet passes an `IsAdmin` flag from the controller through `ViewBag` and uses it to toggle column visibility and the command column in the Razor template.
 
-```
+```csharp
 public ActionResult Index()
 {
     ViewBag.IsAdmin = true;
@@ -56,11 +56,11 @@ public ActionResult Index()
 )
 ```
 
-###### JavaScript Example
+### JavaScript Example
 
 The following snippet initializes a Grid in pure JavaScript and sets `hidden: !isAdmin` on the command column to control its visibility based on a boolean variable.
 
-```
+```js
 var isAdmin = false;
 $("#grid").kendoGrid({
   columns: [

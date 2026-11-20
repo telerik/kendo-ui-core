@@ -48,7 +48,7 @@ To use a culture that is different from the default `en-US` one in {{ site.produ
         <script src="~/lib/kendo-ui/js/cultures/kendo.culture.es-ES.min.js"></script>
     ```
     ```HTML CDN
-        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.all.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.aspnetmvc.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/cultures/kendo.culture.es-ES.min.js"></script>
@@ -61,7 +61,7 @@ To use a culture that is different from the default `en-US` one in {{ site.produ
         <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
     ```
     ```HTML CDN
-        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.all.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/umd/kendo.aspnetmvc.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@progress/kendo-ui@<version>/js/cultures/kendo.culture.es-ES.min.js"></script>

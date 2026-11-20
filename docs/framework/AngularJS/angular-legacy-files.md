@@ -11,7 +11,7 @@ position: 10
 
 As of the Kendo R3 SP1 2023 release, AngularJS support has been officially deprecated in Kendo UI. This means that the related script files for AngularJS are no longer distributed through the standard Kendo bundle. However, we understand that some users may still rely on AngularJS in their projects. To assist those users, we have made the AngularJS legacy files available for download separately. 
 
-# Retrieving AngularJS Legacy Files 
+## Retrieving AngularJS Legacy Files
 
 If you are still using AngularJS and need to include the associated script files, you can find them in the R3 2023 package. Follow the steps below to download the legacy files: 
 
@@ -23,11 +23,11 @@ If you are still using AngularJS and need to include the associated script files
  1. Look for the download option named "commercial-source.zip" and initiate the download. 
  1. After downloading the zip file, extract its contents to reveal the AngularJS legacy files. 
 
-# Using the Legacy Files 
+## Using the Legacy Files
 
 Once you have the AngularJS legacy files, you can include them in your project as needed. Please note that since AngularJS is deprecated, it is recommended to consider migrating to a more modern framework or library to ensure continued support and security updates. 
 
-# Conclusion 
+## Conclusion
 
 While we have deprecated AngularJS support in the Kendo UI framework, we understand that some users may still require access to the AngularJS legacy files. By following the steps outlined above, you can retrieve the necessary files from the R3 2023 package to continue using AngularJS in your projects. However, we strongly encourage you to explore modern alternatives to AngularJS for long-term project sustainability. If you have any questions or concerns, feel free to reach out to our support team for assistance. 
 

@@ -10,7 +10,7 @@ position: 7
 
 # Font Icons
 
-> Starting with the 2023 R3 release the font icons are detached from the Kendo Themes CDN. You can find more details on how to reference the icons in your project [here](https://www.telerik.com/design-system/docs/foundation/iconography/font-icons/#usage).
+> Starting with the 2023 R3 release the font icons are detached from the Kendo Themes CDN. For details on how to reference the icons in your project, see the [font icon usage instructions](https://www.telerik.com/design-system/docs/foundation/iconography/font-icons/#usage).
 
 > To ensure that all icons are displayed correctly, use one of the available [built-in themes]({% slug sassbasedthemes_kendoui%}).
 

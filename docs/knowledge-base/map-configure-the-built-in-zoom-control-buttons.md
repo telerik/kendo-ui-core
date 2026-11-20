@@ -49,7 +49,7 @@ One way the amount of zoom can be modified when pressing the plus or minus butto
   }
 ```
 
-#### Example
+### Example
 
 The following example initializes a Map and uses the `zoomStart` event to intercept the built-in zoom buttons and apply a step of `2` instead of `1` for each click.
 

@@ -25,11 +25,12 @@ components: ["chat"]
 	</tbody>
 </table>
 
-
 ## Description
+
 How can I change the font of the messages and the placeholder in the Kendo UI Chat?
 
 ## Solution
+
 Use the following CSS class to modify the font in the placeholder and the messages:
 
 ```css
@@ -38,7 +39,8 @@ Use the following CSS class to modify the font in the placeholder and the messag
   font: italic bold 20px Georgia, serif;
 }
 ```
-#### Example
+
+### Example
 
 The following example demonstrates a Chat component that uses a custom font for both the message bubbles and the input placeholder.
 

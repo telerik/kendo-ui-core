@@ -34,7 +34,9 @@ When a widget tries to add a WAI-ARIA attribute using the [`attr` jQuery method]
 
 >This issue affects all Kendo UI widgets that add WAI-ARIA attributes to HTML elements.
 
-## Error Message 
+## Error Message
+
+Internet Explorer throws the following error:
 
 `SCRIPT3: Member not found (in Internet Explorer 10+ in Compatibility Mode)`
 
