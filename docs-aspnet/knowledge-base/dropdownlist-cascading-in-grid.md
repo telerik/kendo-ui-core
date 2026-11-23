@@ -10,6 +10,8 @@ res_type: kb
 components: ["general"]
 ---
 
+# Handle Cascading DropDownLists within the Grid
+
 ## Environment
 
 <table>
@@ -141,8 +143,8 @@ public class License
 @addTagHelper *, Kendo.Mvc
 @model int
 
-<kendo-dropdownlist for="@Model" 
-    value-primitive="true" 
+<kendo-dropdownlist for="@Model"
+    value-primitive="true"
     option-label="Select Customer..."
     datatextfield="CustomerName"
     datavaluefield="CustomerId">
@@ -183,10 +185,10 @@ public class License
 @addTagHelper *, Kendo.Mvc
 @model int
 
-<kendo-dropdownlist for="@Model" 
+<kendo-dropdownlist for="@Model"
     auto-bind="false"
     cascade-from="CustomerId"
-    value-primitive="true" 
+    value-primitive="true"
     option-label="Select Vendor..."
     datatextfield="VendorName"
     datavaluefield="VendorId">
@@ -227,10 +229,10 @@ public class License
 @addTagHelper *, Kendo.Mvc
 @model int
 
-<kendo-dropdownlist for="@Model" 
+<kendo-dropdownlist for="@Model"
     auto-bind="false"
     cascade-from="VendorId"
-    value-primitive="true" 
+    value-primitive="true"
     option-label="Select Product..."
     datatextfield="ProductName"
     datavaluefield="ProductId">

@@ -19,11 +19,18 @@ The Agentic UI Generator is delivered through the [Kendo UI for jQuery MCP Serve
 
 > We recommend the [Kendo UI for jQuery MCP Server]({% slug kendo_jquery_mcp_server %}) for both **Ask** and **Agent** mode when using Visual Studio Code.
 
+To set up the Agentic UI Generator, add the MCP server to your AI client through a manual `mcp.json` configuration. The [Getting Started]({% slug kendo_jquery_mcp_server %}#installation) article explains the setup for VS Code and Cursor.
+
 ## Available Capabilities
 
-The capabilities and MCP tools of the Agentic UI Generator vary across the Telerik and Kendo UI products. The Kendo UI for jQuery MCP server exposes the `kendo_jquery_assistant` tool, which provides context about Kendo UI for jQuery components, their configuration, and API. Your AI client uses this context to generate and explain code that includes Kendo UI for jQuery components.
+The capabilities and MCP tools of the Agentic UI Generator vary across the Telerik and Kendo UI products. The Kendo UI for jQuery MCP server exposes the following tools:
 
-The server also provides the `kendo_jquery_upgrade_assistant` tool. It runs Kendo CLI codemods for an existing project and helps your AI client identify changes that need further attention. See [AI-Assisted Migration]({% slug ai_assisted_migration_kendoui %}) for prerequisites and upgrade steps.
+| Tool | Use it to | Learn more |
+| --- | --- | --- |
+| `kendo_jquery_assistant` | Get context about Kendo UI for jQuery components, their configuration, and API. Your AI client uses this context to generate and explain code that includes Kendo UI for jQuery components. | [Getting Started]({% slug kendo_jquery_mcp_server %}#usage) and [Prompt Library]({% slug ai_prompt_library %}) |
+| `kendo_jquery_upgrade_assistant` | Run Kendo CLI codemods for an existing project and identify changes that need further attention. | [AI-Assisted Migration]({% slug ai_assisted_migration_kendoui %}) |
+
+Use `kendo_jquery_assistant` for code generation, component configuration, and questions about the API. Use `kendo_jquery_upgrade_assistant` when you move an existing project to a newer version of Kendo UI for jQuery.
 
 ## Getting Started
 

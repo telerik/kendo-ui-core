@@ -455,12 +455,12 @@ How do I define dimension mappings for client-side cube processing in Kendo UI P
       var dataSource = new kendo.data.PivotDataSourceV2({
         columns: ["ProductName" ],
         rows: ["Category"],
-        data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+        data: [{ ProductName: "Chai", UnitPrice: 42, Category: "Beverages" } ],
         schema: {
           cube: {
             dimensions: {
               ProductName: { caption: "All Products" },
-              Category: { caption: "All Cateogries" }
+              Category: { caption: "All Categories" }
             }
           }
         }
@@ -505,12 +505,12 @@ How do I define calculated measures for client-side cube processing in Kendo UI 
         columns: ["ProductName" ],
         rows: ["Category"],
         measures: ["Sum"],
-        data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+        data: [{ ProductName: "Chai", UnitPrice: 42, Category: "Beverages" } ],
         schema: {
           cube: {
             dimensions: {
               ProductName: { caption: "All Products" },
-              Category: { caption: "All Cateogries" }
+              Category: { caption: "All Categories" }
             },
             measures: {
               "Sum": {
@@ -566,13 +566,13 @@ How do I select the aggregation function for a PivotDataSourceV2 measure? Config
       var dataSource = new kendo.data.PivotDataSourceV2({
         columns: ["ProductName" ],
         rows: ["Category"],
-        measures: ["Sum"],
-        data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+        measures: ["Average"],
+        data: [{ ProductName: "Chai", UnitPrice: 42, Category: "Beverages" } ],
         schema: {
           cube: {
             dimensions: {
               ProductName: { caption: "All Products" },
-              Category: { caption: "All Cateogries" }
+              Category: { caption: "All Categories" }
             },
             measures: {
               "Average": {

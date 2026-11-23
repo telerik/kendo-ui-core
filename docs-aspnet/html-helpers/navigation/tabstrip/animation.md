@@ -39,12 +39,45 @@ The following example demonstrates how to configure the TabStrip animation:
 {% if site.core %}
 ```TagHelper
 <kendo-tabstrip name="tabstrip">
-    <popup-animation enabled="true"> 
-        <open duration="300" effects="expand:vertical fade:in" /> 
-        <close duration="100" reverse="true" /> 
+    <popup-animation enabled="true">
+        <open duration="300" effects="expand:vertical fade:in" />
+        <close duration="100" reverse="true" />
     </popup-animation>
     <items>
         @*add Items*@
+    </items>
+</kendo-tabstrip>
+```
+{% endif %}
+
+## Disable Animations
+
+Set `Animation(false)` to disable the TabStrip content animations. {% if site.core %}In the TagHelper, set `enabled="false"` on `<popup-animation>`.{% endif %}
+
+```HtmlHelper
+@(Html.Kendo().TabStrip()
+    .Name("tabstrip")
+    .Animation(false)
+    .Items(items =>
+    {
+        items.Add().Text("First").Content("First tab content");
+        items.Add().Text("Second").Content("Second tab content");
+    })
+)
+```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+
+<kendo-tabstrip name="tabstrip">
+    <popup-animation enabled="false" />
+    <items>
+        <tabstrip-item text="First">
+            <content>First tab content</content>
+        </tabstrip-item>
+        <tabstrip-item text="Second">
+            <content>Second tab content</content>
+        </tabstrip-item>
     </items>
 </kendo-tabstrip>
 ```

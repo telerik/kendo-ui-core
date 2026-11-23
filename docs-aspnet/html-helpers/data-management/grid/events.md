@@ -11,6 +11,18 @@ position: 26
 
 You can subscribe to [all Grid events](/api/kendo.mvc.ui.fluent/grideventbuilder) and then use them to further customize the behavior of the Grid.
 
+{% if site.core %}
+In the ASP.NET Core TagHelper, use the event name in kebab case with the `on-` prefix:
+
+| Grid event | TagHelper attribute |
+|---|---|
+| `DataBound` | `on-data-bound` |
+| `DetailInit` | `on-detail-init` |
+| `Change` | `on-change` |
+
+`on-detail-init` runs when the Grid initializes a detail row. The TagHelper attribute names map to the corresponding JavaScript event names.
+{% endif %}
+
 The example below demonstrates how to use the [`Change` event](/api/kendo.mvc.ui.fluent/grideventbuilder#changesystemstring) that the Grid generates when the user selects a table row or a cell.
 
 ```HtmlHelper

@@ -16,15 +16,11 @@ ticketid: 1536486
 <tbody>
 <tr>
 <td> Product </td>
-<td>
-Kendo UI for jQuery
-</td>
+<td> Kendo UI for jQuery</td>
 </tr>
 <tr>
+<td> Version </td>
 <td> 2026.3.1015 </td>
-<td>
-Current
-</td>
 </tr>
 </tbody>
 </table>
@@ -58,6 +54,7 @@ To export an Excel file to a ZIP archive, follow these steps:
 Below is an example implementation:
 
 ```dojo
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 <button id="exportBtn" style="padding: 10px 20px; font-weight: bold; cursor: pointer;">
         Generate ZIP with Excel File
     </button>
@@ -134,4 +131,3 @@ Below is an example implementation:
 
 - [Kendo UI Workbook API](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook)
 - [JSZip Library](https://stuk.github.io/jszip/)
-```

@@ -239,6 +239,7 @@ excluded-files:
 - "**/knowledge-base/trial-to-commercial-license-troubleshooting.md"
 - "**/knowledge-base/vs-code-extension-issues.md"
 - "**/knowledge-base/razor-class-library.md"
+- "**/knowledge-base/dropdownlist-in-grid-popup-editor.md"
 - "**/html-helpers/hybrid/*"
 - "**/html-helpers/helper-basics/fundamentals.md"
 - "**/html-helpers/helper-basics/declarative-initialization.md"
@@ -857,6 +858,9 @@ meta:
     hideCta: true
 
 redirects:
+- from: "^/knowledge-base/export-excel-to-zip-kendo-ui-jquery$"
+  to: "https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/export-excel-to-zip-kendo-ui-jquery"
+
 - from: "^/?$"
   to: "/introduction"
 

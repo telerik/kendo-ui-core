@@ -22,6 +22,25 @@ The push mode is associated with specific page content and the element from whic
 
 The height of the Drawer is determined by the higher content of the template of the widget or of the wrapped content with which it is associated. You can use the [`MinHeight()`](/api/drawer) method to prevent the content from changing its height as the user toggles the drawer options.
 
+### Rendered Structure
+
+With `Mode("push")` and `Position("right")`, the Drawer adds the `k-drawer-push` class to the container and the `k-drawer-end` class to the Drawer element. The `Content()` markup is moved into `k-drawer-content`. The template referenced by `TemplateId()` is rendered inside `k-drawer-wrapper`.
+
+The following simplified structure shows where the Drawer panel and page content render:
+
+```HTML
+<div class="k-drawer-container k-drawer-push">
+    <div id="drawer" class="k-drawer k-drawer-end">
+        <div class="k-drawer-wrapper">
+            Drawer template content
+        </div>
+    </div>
+    <div class="k-drawer-content">
+        Content passed to Content()
+    </div>
+</div>
+```
+
 ## Mini Mode
 
 You can use the `Mini()` option both with the overlay and push modes by adding a the `Mini()` method. If set to `true`, a portion of the Drawer that is always visible occupies the default width of `50px` and the main template. If the `Mini()` configurator is used, the `Width()` and `Template()`/`TemplateId()` can also be changed.

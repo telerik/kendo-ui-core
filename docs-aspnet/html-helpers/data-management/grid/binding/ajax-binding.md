@@ -53,6 +53,8 @@ If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](
 
 {% endif %}
 
+## Configure the Controller Action
+
 1. Open the `HomeController.cs` and add a new action method which will return the Products as JSON. The Grid makes Ajax requests to this action.
 
     ```C#
@@ -110,6 +112,8 @@ If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](
         }
     }
     ```
+
+## Configure the Grid
 
 1. In the view, configure the Grid to use the action method created in the previous steps.
 
@@ -175,6 +179,63 @@ If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](
         )
     ```
     {% endif %}
+
+### Control Initial Binding and Read Parameters
+
+By default, the Grid reads data when it initializes. Set `AutoBind(false)` to defer the initial request. Add route values to the read action and use `Data()` to provide additional request parameters.
+
+```HtmlHelper
+@(Html.Kendo().Grid<Product>()
+    .Name("grid")
+    .AutoBind(false)
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read
+            .Action("Products_Read", "Home", new { categoryId = 4 })
+            .Data("getReadParameters")
+        )
+    )
+)
+```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+
+<kendo-grid name="grid" auto-bind="false">
+    <datasource type="DataSourceTagHelperType.Ajax">
+        <transport>
+            <read url="@Url.Action("Products_Read", "Home", new { categoryId = 4 })"
+                  data="getReadParameters" />
+        </transport>
+    </datasource>
+</kendo-grid>
+```
+{% endif %}
+
+The `Data()` handler returns an object whose properties are sent with the read request:
+
+```HTML
+<label>
+    <input id="includeDiscontinued" type="checkbox" />
+    Include discontinued products
+</label>
+```
+
+```JS scripts.js
+function getReadParameters() {
+    return {
+        includeDiscontinued: $("#includeDiscontinued").is(":checked")
+    };
+}
+```
+
+The action can receive the route value and additional read parameter through matching parameters, such as `categoryId` and `includeDiscontinued`.
+
+After deferring the initial request with `AutoBind(false)`, call the Grid DataSource `read()` method when the data should load:
+
+```JS
+$("#grid").data("kendoGrid").dataSource.read();
+```
 
 1. Build and run the application.
 

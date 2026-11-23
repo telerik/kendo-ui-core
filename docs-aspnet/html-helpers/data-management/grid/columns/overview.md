@@ -57,20 +57,20 @@ Bound columns support many settings, and the most commonly used settings are:
     .Columns(columns =>
     {
         // Define a column which will display the value of the ProductID property.
-        columns.Bound(product => product.ProductID);            
+        columns.Bound(product => product.ProductID);
 
         // Define the column title to be different than the field name.
-        columns.Bound(product => product.ProductName).Title("Product Name");            
+        columns.Bound(product => product.ProductName).Title("Product Name");
         // Define the column to use a standard date format
-        columns.Bound(product => product.OrderDate).Format("{0:d}"); 
+        columns.Bound(product => product.OrderDate).Format("{0:d}");
         {% if site.mvc %}
         // Define a template column. It needs a templated razor delegate.
         columns.Template(@<text>
             @Html.ActionLink("Edit", "Home", new { id = item.ProductID })
-        </text>);{% else %} 
+        </text>);{% else %}
         // Define a template only column to use a calculated field
         columns.Template("#=calculateField(data)#");
-        {% endif %}           
+        {% endif %}
 
         // Define a command column with a "Destroy" button.
         columns.Command(commands =>
@@ -106,6 +106,42 @@ Bound columns support many settings, and the most commonly used settings are:
 
 ```
 
+## Disabling Sorting, Filtering, and Grouping for a Column
+
+When the corresponding Grid features are enabled, you can disable them for an individual column with `Sortable(false)`, `Filterable(false)`, and `Groupable(false)`.
+
+```HtmlHelper
+@(Html.Kendo().Grid<Product>()
+    .Name("grid")
+    .Groupable()
+    .Sortable()
+    .Filterable()
+    .Columns(columns =>
+    {
+        columns.Bound(product => product.ProductName)
+            .Sortable(false)
+            .Filterable(false)
+            .Groupable(false);
+    })
+)
+```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+
+<kendo-grid name="grid">
+    <groupable enabled="true" />
+    <sortable enabled="true" />
+    <filterable enabled="true" />
+    <columns>
+        <column field="ProductName" groupable="false">
+            <sortable enabled="false" />
+            <filterable enabled="false" />
+        </column>
+    </columns>
+</kendo-grid>
+```
+{% endif %}
 
 The [`Columns`](/api/kendo.mvc.ui.fluent/gridbuilder#columnssystemaction) method configures the Grid columns. If not used, the Grid creates a column for every public property of the model.
 
@@ -140,7 +176,7 @@ The [`Columns`](/api/kendo.mvc.ui.fluent/gridbuilder#columnssystemaction) method
                 <read url="@Url.Action("Products_Read", "Home")" />
             </transport>
         </datasource>
-        
+
         <columns>
             <column field="ProductName" template="<strong>#:ProductName #</strong>" />
 

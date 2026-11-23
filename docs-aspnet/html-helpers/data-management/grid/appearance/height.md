@@ -81,12 +81,36 @@ You can make the Grid expand and shrink vertically based on the number of rows, 
   * If the Grid is placed inside a Kendo UI Splitter or Kendo UI Window, you do not need to call the `resize` method because these widgets will execute it automatically. Also, it is not necessary to apply the method if you use locked columns.
   * If the vertical space that is available for the Grid depends on a custom resizing of the layout, which is controlled by the user, use a suitable event or method related to the layout changes to execute the `resize` method of the Grid. In this case, call the `resize` method even if you use locked columns.
 
-    ```JS
-        $(window).resize(function (e) {
-            var grid = $("#GridID").data("kendoGrid");
-            grid.resize();
-        });
-    ```
+The parent element must have an explicit height for `height: 100%` to resolve. The following examples let the scrollable Grid fill a parent that is 400 pixels high.
+
+```HtmlHelper
+<div style="height: 400px;">
+    @(Html.Kendo().Grid<OrderViewModel>()
+        .Name("grid")
+        .Scrollable()
+        .HtmlAttributes(new { style = "height: 100%; border: 0;" })
+    )
+</div>
+```
+{% if site.core %}
+```TagHelper
+@using System.Collections.Generic
+@addTagHelper *, Kendo.Mvc
+
+<div style="height: 400px;">
+    <kendo-grid name="grid" style="height: 100%; border: 0;">
+        <scrollable enabled="true" />
+    </kendo-grid>
+</div>
+```
+{% endif %}
+
+```JS
+$(window).resize(function () {
+    var grid = $("#grid").data("kendoGrid");
+    grid.resize();
+});
+```
 
 ## Configuring the Loading Indicator
 

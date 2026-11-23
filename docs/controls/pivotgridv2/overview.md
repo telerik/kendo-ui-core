@@ -19,6 +19,7 @@ Compared to the legacy PivotGrid, the new PivotGridV2 offers a brand new design,
 
 * [Data Binding]({% slug databinding_kendoui_pivotgridv2 %})&mdash;The Kendo UI PivotGridV2 supports data binding to an HTTP-accessible Online Analytical Processing (OLAP) cube and to local arrays of data.
 * [Templates]({% slug templates_kendoui_pivotgridv2 %})&mdash;The Kendo UI PivotGridV2 provides the built-in functionality to change the appearance of the rendered data.
+* [Excel Export]({% slug excelexport_kendoui_pivotgridv2 %})&mdash;The PivotGridV2 provides a built-in Excel export functionality.
 * [PDF Export]({% slug pdfexport_kendoui_pivotgridv2 %})&mdash;The PivotGridV2 provides a built-in PDF export functionality.
 * [Filtering]({% slug filtering_kendoui_pivotgridv2 %})&mdash;The PivotGridV2 supports filtering both in the OLAP and flat data-binding scenarios.
 

@@ -43,6 +43,55 @@ To add a command column that renders a custom button in each row:
     </script>
     ```
 
+{% if site.core %}
+## Configure a TagHelper Command
+
+The `<column-command>` TagHelper supports the following attributes:
+
+| Attribute | Purpose |
+|---|---|
+| `name` | Sets the custom command name. |
+| `text` | Sets the button text. |
+| `icon-class` | Sets the web-font icon class. |
+| `class-name` | Adds a CSS class to the command button. |
+| `click` | Names the JavaScript click handler. |
+| `visible` | Names a JavaScript function that determines visibility for each row. |
+
+Use an empty `text` value with `icon-class` to render an icon-only command.
+
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+
+<kendo-grid name="grid">
+    <columns>
+        <column title="Actions" width="110">
+            <commands>
+                <column-command name="viewDetails"
+                                text=""
+                                icon-class="k-i-eye"
+                                class-name="view-details"
+                                click="showDetails"
+                                visible="isDetailsVisible" />
+            </commands>
+        </column>
+    </columns>
+</kendo-grid>
+
+<script>
+    function isDetailsVisible(dataItem) {
+        return dataItem.Status === "Active";
+    }
+
+    function showDetails(e) {
+        e.preventDefault();
+
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        kendo.alert(dataItem.ShipName);
+    }
+</script>
+```
+{% endif %}
+
 For a runnable example, refer to the [demo on implementing custom commands in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/custom-command).
 
 ## Features

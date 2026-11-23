@@ -62,6 +62,19 @@ The following example demonstrates how to position the TabStrip tabs to the righ
 ```
 {% endif %}
 
+## Selecting Tabs from Client Code
+
+Use the client-side `select(index)` method to select a tab by its zero-based index. Call `select()` without an argument to get the selected tab, then use `index()` to read its index.
+
+```JavaScript
+<script>
+    var tabStrip = $("#tabstrip").data("kendoTabStrip");
+
+    tabStrip.select(1);
+    var selectedIndex = tabStrip.select().index();
+</script>
+```
+
 ## Dynamic Tabs
 
 The TabStrip API provides methods for dynamically adding or removing TabStrip bars.
@@ -123,6 +136,54 @@ The following example demonstrates how to add a new TabStrip tab and position it
         );
     </script>
 ```
+
+## Nested TabStrips
+
+You can place a TabStrip inside a tab's content. Ensure each TabStrip has unique name.
+
+```HtmlHelper
+@(Html.Kendo().TabStrip()
+    .Name("parentTabs")
+    .Items(items =>
+    {
+        items.Add().Text("Account")
+            .Content(@<text>
+                @(Html.Kendo().TabStrip()
+                    .Name("accountTabs")
+                    .Items(nestedItems =>
+                    {
+                        nestedItems.Add().Text("Profile").Content("Profile details");
+                        nestedItems.Add().Text("Security").Content("Security settings");
+                    })
+                )
+            </text>);
+    })
+)
+```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+
+<kendo-tabstrip name="parentTabs">
+    <items>
+        <tabstrip-item text="Account">
+            <content>
+                <kendo-tabstrip name="accountTabs">
+                    <items>
+                        <tabstrip-item text="Profile">
+                            <content>Profile details</content>
+                        </tabstrip-item>
+                        <tabstrip-item text="Security">
+                            <content>Security settings</content>
+                        </tabstrip-item>
+                    </items>
+                </kendo-tabstrip>
+            </content>
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
+```
+{% endif %}
 
 ## Scrollable Tabs
 

@@ -12,9 +12,11 @@ position: 1
 
 With local binding, the Grid serializes data in its `DataSource` and performs paging, sorting, filtering, grouping, and aggregating on the client.
 
-For a runnable example, refer to the [demo on local binding of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/local-data-binding).  
+For a runnable example, refer to the [demo on local binding of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/local-data-binding).
 
 To configure the Grid for {{ site.framework }} to do local binding:
+
+## Configure the Controller Action
 
 1. Define a model class or use an existing one from your application.
 
@@ -35,11 +37,11 @@ To configure the Grid for {{ site.framework }} to do local binding:
             }
         }
     ```
-    
+
 1. Open `HomeController.cs` and return an `IEnumerable` of the model type to the view that contains the Grid definition.
 
     {% if site.core %}
-    ```C# HomeController.cs      
+    ```C# HomeController.cs
         public IActionResult Index()
         {
             // Returns a collection of OrderViewModels.
@@ -57,7 +59,7 @@ To configure the Grid for {{ site.framework }} to do local binding:
         }
     ```
     {% else %}
-    ```C# HomeController.cs  
+    ```C# HomeController.cs
         public ActionResult Index()
         {
             // Returns a collection of OrderViewModels.
@@ -72,11 +74,13 @@ To configure the Grid for {{ site.framework }} to do local binding:
             */
 
             return View(model);
-        }  
+        }
     ```
     {% endif %}
 
-1. In `Index.cshtml`, configure the Grid to accept the model in its constructor and set `ServerOperation(false)`.
+## Define the Grid
+
+1. In `Index.cshtml`, configure the Grid to accept the model in its constructor via the [`Grid(System.Collections.Generic.IEnumerable)`](api/kendo.mvc.ui.fluent/widgetfactory#gridsystemcollectionsgenericienumerable) factory method and set `ServerOperation(false)`.
 
     ```HtmlHelper
         @model IEnumerable<AspNetCoreGrid.Models.OrderViewModel>
@@ -127,8 +131,27 @@ To configure the Grid for {{ site.framework }} to do local binding:
         </kendo-grid>
     ```
     {% endif %}
-    
+
 1. Build and run the application.
+
+### Binding with BindTo
+
+Alternatively, you can bind the collection directly with `BindTo` method exposed by the Grid fluent API.
+
+```HtmlHelper
+@model IEnumerable<OrderViewModel>
+
+@(Html.Kendo().Grid<OrderViewModel>()
+    .Name("grid")
+    .BindTo(Model)
+    .DataSource(dataSource => dataSource.Ajax().ServerOperation(false))
+    .Columns(columns =>
+    {
+        columns.Bound(order => order.OrderID);
+        columns.Bound(order => order.ShipCountry);
+    })
+)
+```
 
 ## See Also
 

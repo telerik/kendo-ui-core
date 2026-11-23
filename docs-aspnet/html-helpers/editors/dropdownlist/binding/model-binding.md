@@ -52,6 +52,17 @@ Local data is the data that is available on the client when the DropDownList is 
         )
     ```
 
+## Binding to Nullable and Primitive Values
+
+When the DropDownList uses MVVM value binding and the initial model value is `null`, the `ValuePrimitive` option determines what is assigned to the bound property after a selection:
+
+* When set to `true`, it writes the selected item's `DataValueField` value, such as a `ProductID`.
+* When set to `false` (the default), it writes the entire selected item, such as a `ProductViewModel` object.
+
+An initially non-null primitive value remains primitive with the default setting. This option does not change ordinary server-side binding with `DropDownListFor`.
+
+For example, when using a DropDownList editor for a nullable primitive field in a Form component, set `ValuePrimitive(true)`.
+
 ## Remote Data
 
 You can configure the DropDownList to get its data from a remote source by making an AJAX request.
@@ -110,7 +121,7 @@ You can configure the DropDownList to get its data from a remote source by makin
             })
         )
     ```
-    
+
 ## See Also
 
 * [Server-Side API of the DropDownList HtmlHelper](/api/dropdownlist)

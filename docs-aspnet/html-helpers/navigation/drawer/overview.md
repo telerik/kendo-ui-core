@@ -25,43 +25,61 @@ The Drawer is a dismissible panel used for navigation in responsive web applicat
 
 ## Initializing the Drawer
 
-The following example demonstrates how to define the Drawer.
+Set `Mode()` to `overlay` or `push` to control how the Drawer appears, and `Position()` to `left` or `right` to choose its side. `Expanded()` sets whether the Drawer is open when initialized. `AutoCollapse()` controls whether it collapses after an item is selected, and `SwipeToOpen()` enables opening it with a swipe.
+
+Use `Width()` to set the expanded width. Configure `Mini()` to keep part of the Drawer visible while it is collapsed; its `Width()` sets the mini width. `Template()` defines the Drawer items, and `Content()` provides the page content that the Drawer interacts with in push mode.
 
 ```HtmlHelper
-    @(Html.Kendo().Drawer()
-        .Name("drawer")
-        .Template(@"<ul>
-                <li data-role='drawer-item'>First Item</li>
-                <li data-role='drawer-separator'></li>
-                <li data-role='drawer-item'>Second Item</li>
-                <li data-role='drawer-item' class='k-selected'>Third Item</li>
-            </ul>")
-        .Mode("push")
-        .Position("left")
-        .SwipeToOpen(true)
-        .Content(@"<div style='height: 200px;'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error accusantium odit, optio nulla maiores quo neque fugit debitis dignissimos incidunt maxime?</div>")
-    )
+@(Html.Kendo().Drawer()
+    .Name("drawer")
+    .Mode("push")
+    .Position("left")
+    .Expanded(false)
+    .AutoCollapse(true)
+    .SwipeToOpen(true)
+    .Width(320)
+    .Mini(mini => mini.Width(48))
+    .Template(@"<ul>
+        <li data-role='drawer-item'>First Item</li>
+        <li data-role='drawer-separator'></li>
+        <li data-role='drawer-item'>Second Item</li>
+        <li data-role='drawer-item' class='k-selected'>Third Item</li>
+    </ul>")
+    .Content(@<text>
+        <main style="height: 200px;">
+            <h2>Page content</h2>
+        </main>
+    </text>)
+)
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-drawer name="drawer"
-                template-id="template"
-                mode="push"
-                position="left"
-                swipe-to-open="true">
-        <content>
-            <div style='height: 200px;'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error accusantium odit, optio nulla maiores quo neque fugit debitis dignissimos incidunt maxime?</div>
-        </content>
-    </kendo-drawer>
-```
-```JS Template
-    <script id="template" type="text/x-kendo-template">
-        <ul>
-            <li data-role='drawer-item'>First Item</li>
-            <li data-role='drawer-separator'></li>
-            <li data-role='drawer-item'>Second Item</li>
-            <li data-role='drawer-item' class='k-selected'>Third Item</li>
-        </ul>
+@addTagHelper *, Kendo.Mvc
+
+<kendo-drawer name="drawer"
+              mode="push"
+              position="left"
+              expanded="false"
+              auto-collapse="true"
+              swipe-to-open="true"
+              width="320"
+              template-id="drawerTemplate">
+    <mini width="48" />
+    <content>
+        <main style="height: 200px;">
+            <h2>Page content</h2>
+        </main>
+    </content>
+</kendo-drawer>
+
+<script id="drawerTemplate" type="text/x-kendo-template">
+    <ul>
+        <li data-role="drawer-item">First Item</li>
+        <li data-role="drawer-separator"></li>
+        <li data-role="drawer-item">Second Item</li>
+        <li data-role="drawer-item" class="k-selected">Third Item</li>
+    </ul>
+</script>
 ```
 {% endif %}
 

@@ -46,7 +46,14 @@ The following example demonstrates how to set-up both a `columnHeaderTemplate` a
         rowHeaderTemplate: $("#headerTemplate").html()
     });
 
+## Templates and Excel Export
+
+The templates change only the rendered content of the PivotGridV2. During the [Excel export]({% slug excelexport_kendoui_pivotgridv2 %}), the PivotGridV2 exports the cell values and does not apply the `dataCellTemplate`, the `columnHeaderTemplate`, or the `rowHeaderTemplate`. To export the content that a template displays, modify the workbook in the [`excelExport`](/api/ui/pivotgridv2/events/excelexport) event.
+
+When the PivotGridV2 is bound to flat data, the `dataItem` of the `dataCellTemplate` contains the aggregated result of the cell and not the source records. For an example that displays and exports a value from another field of the source records, refer to the [Displaying and Exporting a Source Field Value in PivotGridV2 Data Cells]({% slug pivotgridv2-raw-field-display-and-excel %}) article.
+
 ## See also
 
 * [PivotGridV2 Templates (Demo)](https://demos.telerik.com/kendo-ui/pivotgridv2/templates)
+* [Excel Export in the PivotGridV2]({% slug excelexport_kendoui_pivotgridv2 %})
 * [PivotGridV2 JavaScript API Reference](/api/ui/pivotgridv2)
