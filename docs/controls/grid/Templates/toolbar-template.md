@@ -75,9 +75,48 @@ $("#grid").kendoGrid({
 </script>
 ```
 
+## Rendering Icons in a Toolbar Template
+
+To display a Kendo UI icon in a custom toolbar element, call the [`kendo.ui.icon`]({% slug svgicons_kendoui_desktopwidgets %}#rendering-svg-icons) method in a template expression. The method returns the icon markup, which the template inserts into the toolbar element when rendered. The icon is rendered as an SVG or a font icon according to the global icon configuration.
+
+The following example demonstrates how to render an icon in a toolbar button that is defined in a template.
+
+```dojo
+<div id="grid"></div>
+<script id="toolbarTemplate" type="text/x-kendo-template">
+    <button type="button" id="exportButton" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">
+        #= kendo.ui.icon({ icon: "file-excel", iconClass: "k-button-icon" }) #
+        <span class="k-button-text">Export</span>
+    </button>
+</script>
+<script>
+$("#grid").kendoGrid({
+  toolbar: [
+    { template: kendo.template($("#toolbarTemplate").html()) }
+  ],
+  columns: [
+    { field: "name" },
+    { field: "age" }
+  ],
+  dataSource: [
+      { name: "Jane Doe", age: 30 },
+      { name: "John Doe", age: 33 }
+  ]
+});
+
+$("#exportButton").on("click", function () {
+/* The result can be observed in the DevTools(F12) console of the browser. */
+  console.log("Export is clicked!");
+});
+</script>
+```
+
+> When you compile the toolbar template with `kendo.template` or set the `toolbar` option as a string, the `#` character marks a template expression. A literal `#`, such as the one in an ID selector or a URL, causes an `Invalid template` error unless you escape it. For more information, refer to the article on [using hash literals in templates]({% slug essentials_templates %}#using-hash-literals).
+
 ## KB Articles on Toolbar Templates
 
 * [Place Edit or Update Buttons to Grid Toolbar]({% slug grid-edit-command-toolbar %})
+* [Fixing the Invalid Template Error When Adding an Icon to the Grid Toolbar]({% slug grid-toolbar-invalid-template-svg-icon %})
 * [Lock and Unlock Grid Columns by Using Toolbar instead of Column Menu]({% slug grid-lock-unlock-using-toolbar %})
 * [Find Out More in the Knowledge Base](/knowledge-base)
 
@@ -85,4 +124,5 @@ $("#grid").kendoGrid({
 
 * [Using Toolbar Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/toolbar-template)
 * [Introduction on Templates]({% slug overview_kendoui_templatescomponent %})
+* [SVG Icons in Kendo UI for jQuery]({% slug svgicons_kendoui_desktopwidgets %})
 * [JavaScript API Reference of the Grid](/api/ui/grid)

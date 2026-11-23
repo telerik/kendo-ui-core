@@ -857,6 +857,9 @@ meta:
     hideCta: true
 
 redirects:
+- from: "^/knowledge-base/export-excel-to-zip-kendo-ui-jquery$"
+  to: "https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/export-excel-to-zip-kendo-ui-jquery"
+
 - from: "^/?$"
   to: "/introduction"
 

@@ -11,24 +11,33 @@ published: True
 
 # Agentic UI Generator Prompt Library
 
-The prompts in this library are optimized for use with the Telerik UI for ASP.NET Core AI tools - the Telerik ASP.NET Core MCP Server. They can help you accelerate the creation and styling of modern web applications, from individual components to complete responsive pages and custom themes.
+Use these prompts with the Agentic UI Generator to create or update Telerik UI for ASP.NET Core applications. The examples cover complete pages, individual components, layout, styling, icons, and accessibility.
 
 >tip [Go straight to the prompts ⬇️](#general-prompts)
 
-## How to Use the Prompts
+## Choose How to Invoke the Agentic UI Generator
 
-The prompts in this library target the [Agentic UI Generator](slug:agentic-ui-generator-getting-started-core). You can invoke them by using the dedicated assistant handle syntax in a supported AI client.
+Before you use a prompt, [set up the Agentic UI Generator](slug:agentic-ui-generator-getting-started-core#quick-start). Then use the option that matches your task:
 
-Use the dedicated `#handle` syntax, such as `#telerik_ui_generator`, to prefix your prompt when working with GitHub Copilot and the Telerik ASP.NET Core MCP Server.
+| Task | How to invoke it |
+| --- | --- |
+| A complete page or feature | Start with `#telerik_ui_generator`, then describe the task. |
+| A focused task | Start with the dedicated assistant handle, such as `#telerik_layout_assistant`, then describe the task. See [Assistant Prompts](#assistant-prompts). |
 
-Make sure that you have [installed and enabled](slug:agentic-ui-generator-getting-started-core#quick-start) the Agentic UI Generator before attempting to run the prompts.
+## Use a General Prompt
+
+Start with a general prompt when you want the Agentic UI Generator to coordinate the complete task. Select an example below, replace the business scenario and requirements with your own, add `#telerik_ui_generator` before the prompt, and send it in your AI chat:
+
+```TEXT.skip-repl
+#telerik_ui_generator Create a responsive sales dashboard with a Grid, a Chart, and a DateRangePicker.
+```
 
 1. Browse the [prompt library](#general-prompts) to find a prompt that suits your needs.
 2. Copy the prompt text, including the handle prefix if shown.
 3. (Optional) Customize the prompt as needed for your specific use case.
 4. Run the prompt in your AI-powered IDE.
 
-### General Prompts
+## General Prompts
 
 This section provides examples of common UI creation tasks that demonstrate the capabilities of the Agentic UI Generator. The Agentic UI Generator is the main tool for building full UI flows and coordinates all other tools to deliver complete solutions.
 
@@ -92,12 +101,9 @@ Create an employee onboarding wizard (using the Telerik Wizard) with step icons:
 ```Razor
 ```
 
-### Assistant Prompts
+## Assistant Prompts
 
-For more precise control, you can target a specific skill or assistant directly.
-
-
-You can invoke the specialized assistants individually using their dedicated handles.
+For more precise control, you can invoke the specialized assistants individually by using their dedicated handles.
 
 | Assistant | Handle | Purpose |
 |------------|-------------|-------------|
@@ -109,13 +115,13 @@ You can invoke the specialized assistants individually using their dedicated han
 | Accessibility Assistant | `#telerik_accessibility_assistant` | Provides WCAG 2.2 Level AA guidance and component-specific accessibility implementation details. Use this assistant to ensure your UI meets compliance standards, implement correct ARIA roles, validate color contrast, and retrieve accessibility API references for Telerik UI for ASP.NET Core components. |
 | Validator Assistant | n/a | Not designed to be invoked manually. It is called automatically by the UI Generator Orchestrator and ensures the generated code follows Telerik UI for ASP.NET Core best practices and standards. |
 
-#### Getting Started Assistant Prompts
+### Getting Started Assistant Prompts
 
 ```prompt
 #telerik_getting_started_assistant create a new telerik asp.net core web app with a responsive dashboard page and Telerik UI components configured through the Telerik MCP server
 ```
 
-#### Layout Assistant Prompts
+### Layout Assistant Prompts
 
 The Layout Assistant applies suitable CSS utility classes from the [Progress Design System](https://www.telerik.com/design-system/docs/) for styling and positioning elements. Use it when you need help with spacing, typography, colors, layout structure, or transforms.
 
@@ -125,7 +131,7 @@ The Layout Assistant applies suitable CSS utility classes from the [Progress Des
 ```Razor
 ```
 
-#### Component Assistant Prompts
+### Component Assistant Prompts
 
 The Component Assistant answers questions and generates code related to Telerik UI for ASP.NET Core components. Use this tool when you need to implement or configure specific Telerik UI for ASP.NET Core components like the Grid, Charts, Forms, and more.
 
@@ -141,7 +147,7 @@ The Component Assistant answers questions and generates code related to Telerik 
 ```Razor
 ```
 
-#### Style Assistant Prompts
+### Style Assistant Prompts
 
 The Style Assistant generates custom styles and theme configurations for your application. Use this assistant when you need to apply brand-specific colors, create custom themes, or modify the overall visual design of your UI.
 
@@ -161,7 +167,7 @@ The Style Assistant generates custom styles and theme configurations for your ap
 
 </div>
 
-#### Icon Assistant Prompts
+### Icon Assistant Prompts
 
 The Icon Assistant searches and retrieves icons from the Progress Design System iconography by name, category, or keywords. Use this assistant when you need to find and add specific icons for your UI components or design elements.
 
@@ -181,7 +187,7 @@ The Icon Assistant searches and retrieves icons from the Progress Design System 
 
 </div>
 
-#### Accessibility Assistant
+### Accessibility Assistant
 
 Use the `#telerik_accessibility_assistant` handle to verify WCAG 2.2 Level AA compliance, including color contrast verification, and implement proper accessibility features:
 

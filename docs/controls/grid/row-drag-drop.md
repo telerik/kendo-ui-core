@@ -106,6 +106,38 @@ $("#grid").kendoGrid({
  });
 ```
 
+### Customizing the Drag Clue
+
+While the user drags a row, the Grid displays a drag clue with the row's cell text. When the user drags multiple selected rows, the clue displays their count. The clue uses the `k-reorder-clue` and `k-drag-clue` classes.
+
+To limit the clue's width and show an ellipsis when its content is truncated, set `display: block` and `text-overflow: ellipsis`. The clue uses a flex container with a separate element for each cell, so changing its display makes the ellipsis apply to the whole clue.
+
+```css
+.k-reorder-clue.k-drag-clue {
+    display: block;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+```
+
+To customize the clue's appearance, use [theme CSS variables]({% slug sassbasedthemes_customization_kendoui %}#setting-theme-variables) for its CSS properties. For example, use the primary theme colors:
+
+```css
+.k-reorder-clue.k-drag-clue {
+    border-color: var(--kendo-color-primary);
+    color: var(--kendo-color-on-primary);
+    background-color: var(--kendo-color-primary);
+}
+```
+
+The clue is appended to `body`, not to the Grid. A Grid-scoped descendant selector does not match it, so a global selector affects all Grids and column-reorder clues on the page.
+
+When you [build a custom theme from source code]({% slug sassbasedthemes_customization_kendoui %}#building-themes-from-source-code), use the `$kendo-drag-hint-*` Sass variables to customize drag clues across Kendo UI components, including the Grid, TreeList, TreeView, and ListBox.
+
+For more information about the line that indicates the drop position, refer to the [Adjusting the Drop Hint Line Width in the Grid]({% slug adjust-drop-hint-line-width-kendo-jquery-grid %}) article.
+
 ### Keyboard Navigation
 
 The Grid supports its keyboard navigation functionality through the `navigatable` option.  Once enabled, the user will be able to reorder rows by using the following key combination:

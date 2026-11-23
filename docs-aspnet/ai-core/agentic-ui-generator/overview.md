@@ -11,19 +11,21 @@ position: 1
 
 # Telerik UI for ASP.NET Core AI Tools Overview
 
-The Telerik UI for ASP.NET Core AI Tools are delivered through a single [Model Context Protocol (MCP) server](https://modelcontextprotocol.io/docs/getting-started/intro) that connects your AI client to UI-generation capabilities and knowledge specific to Telerik UI for ASP.NET Core.
+The Agentic UI Generator provides AI assistance for building and updating Telerik UI for ASP.NET Core applications. It is delivered through a single [Model Context Protocol (MCP) server](https://modelcontextprotocol.io/docs/getting-started/intro) that connects your AI client to UI-generation capabilities and knowledge specific to Telerik UI for ASP.NET Core.
 
-From idea to implementation, you can use the MCP server to generate complete pages, configure components correctly, align with the Progress Design System, and reduce repetitive setup work.
+Use the Agentic UI Generator to generate complete pages, configure components correctly, align with the Progress Design System, and reduce repetitive setup work.
 
-## What Are the Telerik UI for ASP.NET Core AI Tools
+Set up the Agentic UI Generator with the Telerik CLI or a manual MCP server configuration. The [Agentic UI Generator Getting Started](slug:agentic-ui-generator-getting-started-core#quick-start) article explains both options.
+
+## What the Agentic UI Generator Does
 
 The Telerik ASP.NET Core MCP Server is a local MCP server that is distributed through the [Telerik.AspNetCore.MCP](https://www.nuget.org/packages/Telerik.AspNetCore.MCP) NuGet package.
 
-The Telerik ASP.NET Core MCP server uses an orchestration-first model, centered on the Agentic UI Generator tool. It contains a core set of specialized assistants. Click the cards below for more details on each assistant:
+The Agentic UI Generator uses an orchestration-first model and can use specialized assistants for different development tasks. Use the full generator for a complete page or select a specialized assistant when you need focused help. Click the cards below for more details on each assistant:
 
 <Row>
     <Column count={[24,12,8]}>
-        <Component className="tile card-icon" href="#how-the-agentic-flow-works">
+        <Component className="tile card-icon" href="#use-the-right-assistant-for-your-task">
             <ComponentTitle>UI Generator (Orchestrator)</ComponentTitle>
         </Component>
     </Column>
@@ -68,16 +70,26 @@ The Telerik ASP.NET Core MCP server uses an orchestration-first model, centered 
     </Column>
 </Row>
 
-The Agentic UI Generator orchestrates all assistants so you can build pages and components, apply styling and theming, and stay aligned with the design system in one seamless process. You can use the full end-to-end flow when you need complete page generation, or call a specific assistant directly when you need a focused change.
+The Agentic UI Generator coordinates the assistants that are relevant to your request. It can build pages and components, apply styling and theming, and follow the design system in one request.
 
 ![Diagram showing the IDE agent connected to the MCP server and Agentic UI Generator, which orchestrates specialized assistants](./images/ai-assistants.png)
 
 > The previously available `Telerik.ASPNETCoreHtml.MCP` and `Telerik.ASPNETCoreTag.MCP` packages will be deprecated in favor of the Agentic UI Generator.
 
+## Use the Right Assistant for Your Task
 
-## How the Agentic Flow Works
+Use the Agentic UI Generator for a complete task, such as creating a dashboard or adding a page with several components. It interprets the request, selects the relevant assistants, and combines their output into one response.
 
-The Agentic UI Generator takes one prompt and manages the flow for you. It decides which assistants to use and combines their output into a single result. Use it when you want to generate a full page quickly, or call a specific assistant when you need a focused update to the layout, components, styling, theme, or icons in your project.
+Use a specialized assistant when you need focused help with an area, such as:
+
+* Component configuration
+* Responsive layout
+* Custom themes
+* Icon selection
+* Accessibility requirements
+* Version upgrades
+
+Start a complete request with `#telerik_ui_generator`, or call a specialized assistant by its dedicated handle. See the [Prompt Library](slug:agentic-ui-generator-prompt-library-core#choose-how-to-invoke-the-agentic-ui-generator) for examples of both approaches.
 
 ![Collage of responsive page templates, including an admin dashboard and landing pages](./images/ui-templates.png)
 
@@ -133,10 +145,6 @@ The Validator Assistant is not designed to be invoked manually. The UI Generator
 ### Upgrade Assistant
 
 Use the Upgrade Assistant to update the `Telerik UI for ASP.NET Core` NuGet package to the latest version and automatically resolve breaking changes. If breaking changes are introduced in the release, the assistant automatically resolves them or provides guidance on how to resolve them.
-
-### When to Use Orchestrated vs Targeted Mode
-
-Use `#telerik_ui_generator` for a complete orchestration-first workflow from a single prompt. When you need finer control or want to adjust just one aspect (such as layout, theme, or a component), you can call a specialized assistant directly by its dedicated handle. For details, see [Target the Assistants (Advanced)](slug:agentic-ui-generator-prompt-library-core#assistant-specific-prompts).
 
 ## Start Building in Minutes
 

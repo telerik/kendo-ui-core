@@ -1287,7 +1287,6 @@ The fields which can be used in the template are:
 
 * columnTuple - the tuple of the corresponding column header cell
 * rowTuple - the tuple of the corresponding row header cell
-* measure - the value of the data cell measure
 * dataItem - the data item itself
 
 For information about the tuple structure check this [link](/api/data/pivotdatasource/configuration/schema#schemaaxes).
@@ -1305,9 +1304,16 @@ The `members` array of each tuple contains member objects. When the PivotGridV2 
 
 The members do not have a `dimension` field.
 
+When the PivotGridV2 is bound to flat data, `dataItem` holds the aggregated result of the cell and has the following fields:
+
+* value - the aggregated value of the cell
+* fmtValue - the formatted aggregated value of the cell
+
+To render a value from another field of the source records, use the members of `rowTuple` and `columnTuple` to locate the matching records in the data source. The Excel export writes the aggregated cell values. To customize the exported values, handle the [excelExport](/api/ui/pivotgridv2/events/excelexport) event. For a complete example, refer to the [Displaying and Exporting a Source Field Value in PivotGridV2 Data Cells](/knowledge-base/pivotgridv2-raw-field-display-and-excel) article.
+
 
 <div class="meta-api-description">
-How to customize data cell rendering in Kendo UI PivotGridV2? Control and customize the rendering of each data cell in a pivot grid by defining a dynamic template that can format, style, or manipulate the content based on the cell's value, associated row and column tuples, or the underlying data object. Enable setting custom display logic, conditional formatting, or injecting interactive elements by accessing the measure value, row headers, column headers, or the entire data item context. Adapt how data cells show numeric values, text, or complex structures to tailor reporting views, enhance data visualization, or implement specialized formatting and rendering behaviors. Configure flexible data cell content rendering by leveraging contextual information for precision display, custom formatting, or embedding controls, ensuring relevant and accurate presentation of pivot grid results.
+How to customize data cell rendering in Kendo UI PivotGridV2? Control and customize the rendering of each data cell in a pivot grid by defining a dynamic template that can format, style, or manipulate the content based on the cell's value, associated row and column tuples, or the underlying data object. Enable setting custom display logic, conditional formatting, or injecting interactive elements by accessing the cell value, row headers, column headers, or the entire data item context. Adapt how data cells show numeric values, text, or complex structures to tailor reporting views, enhance data visualization, or implement specialized formatting and rendering behaviors. Configure flexible data cell content rendering by leveraging contextual information for precision display, custom formatting, or embedding controls, ensuring relevant and accurate presentation of pivot grid results.
 </div>
 
 #### Example - bold the value for the *2010* column and use the formatted value for the other columns.
@@ -1350,7 +1356,6 @@ The fields which can be used in the template are:
 
 * columnTuple - the tuple of the corresponding column header cell
 * rowTuple - the tuple of the corresponding row header cell
-* measure - the value of the data cell measure
 * dataItem - the data item itself
 
 
@@ -1398,7 +1403,6 @@ The fields which can be used in the template are:
 
 * columnTuple - the tuple of the corresponding column header cell
 * rowTuple - the tuple of the corresponding row header cell
-* measure - the value of the data cell measure
 * dataItem - the data item itself
 
 
@@ -1770,6 +1774,46 @@ The data source to which the widget should be bound.
         }, 2000);
     </script>
 
+### saveAsExcel
+
+Initiates the Excel export. Also triggers the [excelExport](/api/ui/pivotgridv2/events/excelexport) event.
+
+> Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
+
+
+<div class="meta-api-description">
+How do I export a Kendo UI PivotGridV2 to an Excel file programmatically? Export, save, or download the current pivot table view with its expanded row and column headers and aggregated values as an xlsx spreadsheet, start the export from a button click to avoid popup blockers, and customize or cancel the generated workbook through the export event before the file is saved.
+</div>
+
+#### Example - manually initiate Excel export
+
+    <button id="export">Export to Excel</button>
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        height: 550,
+        columnWidth: 120,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+
+    $("#export").click(function(e) {
+        var pivotgrid = $("#pivotgrid").data("kendoPivotGridV2");
+        pivotgrid.saveAsExcel();
+    });
+    </script>
+
 ### saveAsPDF
 
 Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/ui/pivotgridv2/events/pdfexport) event.
@@ -2126,6 +2170,91 @@ The path to the field that will be collapsed.
     });
     var pivotgrid = $("#pivotgrid").data("kendoPivotGridV2");
     pivotgrid.bind("collapseMember", collapseMember);
+    </script>
+
+### excelExport
+
+Fired when the [saveAsExcel](/api/ui/pivotgridv2/methods/saveasexcel) method is called, before the file is saved.
+
+The PivotGridV2 exports the values of the data cells and does not apply the [dataCellTemplate](/api/ui/pivotgridv2/configuration/datacelltemplate). To change the exported values or styles, modify the workbook in the event handler.
+
+
+<div class="meta-api-description">
+How do I customize the Excel file exported from a Kendo UI PivotGridV2? Intercept the pivot grid export to xlsx before the download, change the file name, replace or format exported cell values so they match custom data cell templates, style header and data rows, modify the generated workbook sheets and rows, or cancel saving the spreadsheet by preventing the default action.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.PivotGridV2`
+
+The widget instance which fired the event.
+
+##### e.data `Array`
+
+The rows of the first sheet of the generated workbook.
+
+##### e.workbook `Object`
+
+The Excel [workbook configuration object](/api/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will reflect in the output Excel document. The header rows have a `type` of `"header"` and the data rows have a `type` of `"data"`. Each data row starts with its row header cells and ends with the data cells.
+
+##### e.preventDefault `Function`
+
+If invoked the PivotGridV2 will not save the generated file.
+
+#### Example - subscribe to the "excelExport" event during initialization
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        excelExport: function(e) {
+            e.workbook.fileName = "PivotGridV2.xlsx";
+        },
+        height: 550,
+        columnWidth: 120,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    var pivotgrid = $("#pivotgrid").data("kendoPivotGridV2");
+    pivotgrid.saveAsExcel();
+    </script>
+
+#### Example - subscribe to the "excelExport" event after initialization
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        height: 550,
+        columnWidth: 120,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    var pivotgrid = $("#pivotgrid").data("kendoPivotGridV2");
+    pivotgrid.bind("excelExport", function(e) {
+        e.workbook.fileName = "PivotGridV2.xlsx";
+    });
+    pivotgrid.saveAsExcel();
     </script>
 
 ### pdfExport

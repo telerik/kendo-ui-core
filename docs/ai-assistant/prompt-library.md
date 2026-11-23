@@ -17,6 +17,16 @@ The library will evolve over time as we add more component scenarios and pattern
 
 >tip [Skip to the component prompts ⬇️](#component-specific-prompts)
 
+## Choose How to Invoke the Agentic UI Generator
+
+Before you use a prompt, [set up the MCP server]({% slug kendo_jquery_mcp_server %}#installation). Then use the option that matches your task:
+
+| Task | How to invoke it |
+| --- | --- |
+| A general or component-specific task | Start with `/kendojquery` (recommended for VS Code and clients that support slash commands) or the `#kendo-jquery-assistant` handle, then describe the task. |
+| Upgrading an existing project | Follow the steps in [AI-Assisted Migration]({% slug ai_assisted_migration_kendoui %}). |
+| No MCP server | Remove the handle and mention "Use Kendo UI for jQuery APIs." See [Use Without the MCP Server](#use-without-the-mcp-server). |
+
 ## How to Use the Prompts
 
 All prompt examples target the MCP Server by invoking its handle. You can:
