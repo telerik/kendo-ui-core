@@ -6,11 +6,9 @@ import { DATE_FIELD_MAP, NAME_TYPES } from "../models/date-utils";
  * Extracted from kendo.date namespace
  */
 class DateUtilsService {
-    constructor() {
-        this.MS_PER_MINUTE = 60000;
-        this.MS_PER_HOUR = 60 * 60000;
-        this.MS_PER_DAY = 86400000;
-    }
+    MS_PER_MINUTE = 60000;
+    MS_PER_HOUR = 60 * 60000;
+    MS_PER_DAY = 86400000;
     /**
      * Adjust date for DST changes
      */
@@ -91,8 +89,10 @@ class DateUtilsService {
      * Get the week number in the year
      */
     weekInYear(date, weekStartDay) {
+        const culture = cultureService.culture();
+        const calendar = culture.calendar || culture.calendars.standard;
         if (weekStartDay === undefined) {
-            weekStartDay = cultureService.culture().calendar.firstDay;
+            weekStartDay = calendar.firstDay;
         }
         const prevWeekDate = this.addDays(date, -7);
         const nextWeekDate = this.addDays(date, 7);
@@ -299,7 +299,7 @@ class DateUtilsService {
         if (!result) {
             result = calendar.patterns.d;
         }
-        return result;
+        return result || "";
     }
     /**
      * Split a date format string into parts
@@ -360,9 +360,9 @@ class DateUtilsService {
      * Get date format names (month names, day names, etc.)
      */
     dateFormatNames(options) {
-        var _a, _b;
         let { type, nameType } = options;
         const info = cultureService.culture();
+        const calendar = (info.calendar || info.calendars.standard);
         if (nameType === "wide") {
             nameType = "names";
         }
@@ -372,19 +372,17 @@ class DateUtilsService {
         if (nameType === "narrow") {
             nameType = "namesShort";
         }
-        let result = (_a = info.calendar[type]) === null || _a === void 0 ? void 0 : _a[nameType];
-        if (!result) {
-            result = (_b = info.calendar[type]) === null || _b === void 0 ? void 0 : _b["name"];
-        }
-        return result || [];
+        const result = calendar[type]?.[nameType] ?? calendar[type]?.["name"];
+        return result ?? [];
     }
     /**
      * Get date field name
      */
     dateFieldName(options) {
         const info = cultureService.culture();
-        const dateFields = info.calendar.dateFields;
-        const fieldNameInfo = (dateFields === null || dateFields === void 0 ? void 0 : dateFields[options.type]) || {};
+        const calendar = info.calendar || info.calendars.standard;
+        const dateFields = calendar.dateFields;
+        const fieldNameInfo = dateFields?.[options.type] || {};
         return fieldNameInfo[options.nameType];
     }
     /**

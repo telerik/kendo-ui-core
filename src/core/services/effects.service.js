@@ -7,9 +7,22 @@ const BOOLEAN = "boolean";
  
  */
 class EffectsService {
+    _directions;
+    _effects;
+    _parseEffectsImpl;
+    _animateImpl;
+    _toggleClassImpl;
+    _transitionImpl;
+    _stopQueueImpl;
+    _effectRegistry;
     constructor() {
         this._directions = this.createDirections();
         this._effects = this.createEffects();
+        this._parseEffectsImpl = this.defaultParseEffects.bind(this);
+        this._animateImpl = this.defaultAnimate.bind(this);
+        this._toggleClassImpl = this.defaultToggleClass.bind(this);
+        this._stopQueueImpl = this.defaultStopQueue.bind(this);
+        this._effectRegistry = new Map();
     }
     /**
      * Create the directions map
@@ -116,6 +129,42 @@ class EffectsService {
     get effects() {
         return this._effects;
     }
+    get transition() {
+        return this._transitionImpl;
+    }
+    register(registration) {
+        if (registration.directions) {
+            this._directions = registration.directions;
+        }
+        if (registration.parseEffects) {
+            this._parseEffectsImpl = registration.parseEffects;
+        }
+        if (registration.toggleClass) {
+            this._toggleClassImpl = registration.toggleClass;
+        }
+        if (registration.transition) {
+            this._transitionImpl = registration.transition;
+        }
+        if (registration.stopQueue) {
+            this._stopQueueImpl = registration.stopQueue;
+        }
+    }
+    registerEffect(name, effectCtor) {
+        this._effectRegistry.set(name, effectCtor);
+    }
+    getEffect(name) {
+        return this._effectRegistry.get(name);
+    }
+    createEffect(name, element, direction, ...args) {
+        const effectCtor = this.getEffect(name);
+        if (!effectCtor) {
+            return undefined;
+        }
+        return new effectCtor(element, direction, ...args);
+    }
+    parseEffects(input, mirror) {
+        return this._parseEffectsImpl(input, mirror);
+    }
     /**
      * Prepare animation options with defaults
      */
@@ -157,6 +206,44 @@ class EffectsService {
      * Animate one or more elements
      */
     animate(element, options, duration, reverse, complete) {
+        return this._animateImpl(element, options, duration, reverse, complete);
+    }
+    /**
+     * Toggle CSS classes on element
+     */
+    toggleClass(element, classes, options, add) {
+        return this._toggleClassImpl(element, classes, options, add);
+    }
+    stopQueue(element, clearQueue, gotoEnd) {
+        return this._stopQueueImpl(element, clearQueue, gotoEnd);
+    }
+    /**
+     * Create an effects element wrapper
+     */
+    fx(element) {
+        return new this._effects.Element(element);
+    }
+    defaultParseEffects(input) {
+        if (typeof input === "string") {
+            const effects = {};
+            $.each(input.split(" "), function (idx) {
+                effects[idx] = this;
+            });
+            return effects;
+        }
+        if (!Array.isArray(input)) {
+            return input;
+        }
+        const effects = {};
+        $.each(input, function (idx) {
+            effects[idx] = this;
+        });
+        return effects;
+    }
+    /**
+     * Animate one or more elements
+     */
+    defaultAnimate(element, options, duration, reverse, complete) {
         const effects = this._effects;
         const preparedOptions = this.prepareAnimationOptions.bind(this);
         let idx = 0;
@@ -173,7 +260,7 @@ class EffectsService {
     /**
      * Toggle CSS classes on element
      */
-    toggleClass(element, classes, options, add) {
+    defaultToggleClass(element, classes, options, add) {
         if (classes) {
             const classArray = classes.split(" ");
             $.each(classArray, (idx, value) => {
@@ -182,11 +269,8 @@ class EffectsService {
         }
         return element;
     }
-    /**
-     * Create an effects element wrapper
-     */
-    fx(element) {
-        return new this._effects.Element(element);
+    defaultStopQueue(element, clearQueue, gotoEnd) {
+        return element.stop(clearQueue, gotoEnd);
     }
 }
 export const effectsService = new EffectsService();

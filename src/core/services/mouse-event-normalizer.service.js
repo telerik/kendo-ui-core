@@ -8,28 +8,30 @@ import { supportService } from "./support.service";
  * Prevents ghost clicks and normalizes touch events to mouse events.
  */
 class MouseEventNormalizerService {
-    constructor() {
-        /**
-         * Whether the mouse trap has been set up
-         */
-        this.mouseTrap = false;
-        /**
-         * Whether click events should be busted (prevented)
-         */
-        this.bustClick = false;
-        /**
-         * Whether mouse events are currently being captured/muted
-         */
-        this.captureMouse = false;
-        /**
-         * List of mouse events to capture
-         */
-        this.MOUSE_EVENTS = ["mousedown", "mousemove", "mouseenter", "mouseleave", "mouseover", "mouseout", "mouseup", "click"];
-        /**
-         * Selector for elements that should not have click busting
-         */
-        this.EXCLUDE_BUST_CLICK_SELECTOR = "label, input, [data-rel=external]";
-    }
+    /**
+     * Whether the mouse trap has been set up
+     */
+    mouseTrap = false;
+    /**
+     * Whether click events should be busted (prevented)
+     */
+    bustClick = false;
+    /**
+     * Whether mouse events are currently being captured/muted
+     */
+    captureMouse = false;
+    /**
+     * Timeout ID for the mouse trap release
+     */
+    mouseTrapTimeoutID;
+    /**
+     * List of mouse events to capture
+     */
+    MOUSE_EVENTS = ["mousedown", "mousemove", "mouseenter", "mouseleave", "mouseover", "mouseout", "mouseup", "click"];
+    /**
+     * Selector for elements that should not have click busting
+     */
+    EXCLUDE_BUST_CLICK_SELECTOR = "label, input, [data-rel=external]";
     /**
      * Set up mouse event capturing to prevent ghost clicks from touch events.
      * This sets up event listeners on document.documentElement to intercept
@@ -68,9 +70,8 @@ class MouseEventNormalizerService {
      * @param e - The jQuery event with bustClick data
      */
     muteMouse(e) {
-        var _a;
         this.captureMouse = true;
-        if ((_a = e.data) === null || _a === void 0 ? void 0 : _a.bustClick) {
+        if (e.data?.bustClick) {
             this.bustClick = true;
         }
         clearTimeout(this.mouseTrapTimeoutID);

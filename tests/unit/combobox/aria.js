@@ -381,5 +381,13 @@ it("ComboBox has its aria-autocomplete set to 'inline' when suggest is enabled",
     assert.equal(combobox.input.attr("aria-autocomplete"), "inline");
 });
 
+it("ComboBox renders aria-haspopup listbox on the input", function() {
+    let combobox = new ComboBox(input.attr("id", "test"), {
+        dataSource: ["item1", "item2"]
+    });
+
+    assert.equal(combobox.input.attr("aria-haspopup"), "listbox");
+});
+
     });
 

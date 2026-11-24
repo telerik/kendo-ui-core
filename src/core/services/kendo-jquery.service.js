@@ -19,8 +19,11 @@ const UNDEFINED = "undefined";
  * Creates and manages the KendoJQuery wrapper around jQuery
  */
 class KendoJQueryService {
+    kendoJQuery;
+    rootjQuery;
+    originalOn;
     constructor() {
-        this.originalOn = $.fn.on;
+        this.originalOn = jQuery.fn.on;
         this.kendoJQuery = this.createKendoJQuery();
         this.rootjQuery = this.kendoJQuery(document);
     }
@@ -54,14 +57,14 @@ class KendoJQueryService {
                         continue;
                     }
                     // Recurse if we're merging plain objects or arrays
-                    if (deep && copy && ($.isPlainObject(copy) ||
+                    if (deep && copy && (jQuery.isPlainObject(copy) ||
                         (copyIsArray = Array.isArray(copy)))) {
                         if (copyIsArray) {
                             copyIsArray = false;
                             clone = src && Array.isArray(src) ? src : [];
                         }
                         else {
-                            clone = src && $.isPlainObject(src) ? src : {};
+                            clone = src && jQuery.isPlainObject(src) ? src : {};
                         }
                         // Never move original objects, clone them
                         target[name] = this.noDeprecateExtend(deep, clone, copy);
@@ -86,22 +89,22 @@ class KendoJQueryService {
             return new kendoJQuery.fn.init(selector, context);
         };
         // Copy all jQuery static properties/methods (without deprecated warnings)
-        this.noDeprecateExtend(true, kendoJQuery, $);
+        this.noDeprecateExtend(true, kendoJQuery, jQuery);
         // Set up prototype chain - inherit from jQuery
-        // TypeScript doesn't like `new $()` but this is valid jQuery pattern
-        kendoJQuery.fn = kendoJQuery.prototype = new $();
+        // TypeScript doesn't like `new jQuery()` but this is valid jQuery pattern
+        kendoJQuery.fn = kendoJQuery.prototype = new jQuery();
         kendoJQuery.fn.constructor = kendoJQuery;
         // Override init to use kendoJQuery for context
         kendoJQuery.fn.init = function (selector, context) {
-            if (context && context instanceof $ && !(context instanceof kendoJQuery)) {
+            if (context && context instanceof jQuery && !(context instanceof kendoJQuery)) {
                 context = kendoJQuery(context);
             }
-            // $.fn.init exists on jQuery but TypeScript types don't expose it
-            return $.fn.init.call(this, selector, context, self.rootjQuery);
+            // jQuery.fn.init exists on jQuery but TypeScript types don't expose it
+            return jQuery.fn.init.call(this, selector, context, self.rootjQuery);
         };
         kendoJQuery.fn.init.prototype = kendoJQuery.fn;
         // Add Kendo-specific methods
-        $.extend(kendoJQuery.fn, {
+        jQuery.extend(kendoJQuery.fn, {
             handler: function (handler) {
                 this.data("handler", handler);
                 return this;
@@ -207,3 +210,4 @@ class KendoJQueryService {
     }
 }
 export const kendoJQueryService = new KendoJQueryService();
+export const $ = kendoJQueryService.getConstructor();

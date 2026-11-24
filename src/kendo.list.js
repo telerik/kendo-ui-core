@@ -96,7 +96,8 @@ export const __meta__ = {
         ARIA_MULTISELECTABLE = "aria-multiselectable",
         ARIA_SELECTED = "aria-selected",
         GROUP_ROW_SEL = ".k-table-group-row",
-        ACTIONSHEET_TITLEBAR = ".k-actionsheet-titlebar";
+        ACTIONSHEET_TITLEBAR = ".k-actionsheet-titlebar",
+        ADAPTIVE_TABLE_SIZE = "k-table-lg";
 
     var List = kendo.ui.DataBoundWidget.extend({
         init: function(element, options) {
@@ -320,13 +321,15 @@ export const __meta__ = {
         },
 
         _filterHeader: function() {
-            this.filterTemplate = '<div class="k-list-filter">' +
-                '<span class="k-searchbox k-input" type="text" autocomplete="off">' +
+            const getFilterTemplate = (searchboxClass) => '<div class="k-list-filter">' +
+                `<span class="${searchboxClass}" type="text" autocomplete="off">` +
                     kendo.ui.icon({ icon: "search", iconClass: "k-input-icon" }) +
                 '</span>' +
             '</div>';
 
-            this.actionSheetFilterTemplate = `<div class="k-actionsheet-titlebar-group k-actionsheet-filter">${this.filterTemplate}</div>`;
+            this.filterTemplate = getFilterTemplate("k-searchbox k-input");
+
+            this.actionSheetFilterTemplate = `<div class="k-actionsheet-titlebar-group k-actionsheet-filter">${getFilterTemplate("k-searchbox k-input k-input-lg")}</div>`;
 
             if (this._isFilterEnabled()) {
                 this.filterInput = $('<input class="k-input-inner" type="text" />')
@@ -462,7 +465,7 @@ export const __meta__ = {
                 ariaLabel: focusedElm.attr(ARIA_LABEL),
                 ariaLabelledBy: labelledBy,
                 ariaLive: !that._isFilterEnabled() ? "off" : "polite",
-                listSize: that._hasActionSheet() && !that._isTableVariant() ? that._getAdaptiveListSize() : that._listSize
+                listSize: that._hasActionSheet() ? that._getAdaptiveListSize() : that._listSize
             }, options, virtual, changeEventOption);
 
             if (!options.template) {
@@ -1311,7 +1314,14 @@ export const __meta__ = {
             var list = this;
 
             if (list._adaptiveListWrapped) {
-                list.list.unwrap().removeClass(list._getAdaptiveListSize()).addClass(list._listSize);
+                list.list.unwrap();
+
+                if (list._isTableVariant()) {
+                    list.list.removeClass(ADAPTIVE_TABLE_SIZE);
+                } else {
+                    list.list.removeClass(list._getAdaptiveListSize()).addClass(list._listSize);
+                }
+
                 list._adaptiveListWrapped = false;
             }
         },
@@ -1421,10 +1431,14 @@ export const __meta__ = {
                 popup: list.options.popup
             });
 
-            if (!list._isTableVariant()) {
-                list.list.removeClass(list._listSize).addClass(list._getAdaptiveListSize()).wrap('<div class="k-list-container"></div>');
-                list._adaptiveListWrapped = true;
+            if (list._isTableVariant()) {
+                list.list.addClass(ADAPTIVE_TABLE_SIZE);
+            } else {
+                list.list.removeClass(list._listSize).addClass(list._getAdaptiveListSize());
             }
+
+            list.list.wrap('<div class="k-list-container"></div>');
+            list._adaptiveListWrapped = true;
 
             list._postCreatePopup();
             list._onActionSheetCreate();

@@ -70,19 +70,19 @@
             PM: [ "PM", "pm", "PM" ],
             // The set of predefined date and time patterns used by the culture.
             patterns: {
-                d:"yyyy/MM/dd",
-                D:"yyyy MMMM dd",
-                F:"yyyy MMMM dd H:mm:ss",
-                g:"yyyy/MM/dd H:mm",
-                G:"yyyy/MM/dd H:mm:ss",
+                d: "yyyy/MM/dd",
+                D: "yyyy MMMM dd",
+                F: "yyyy MMMM dd H:mm:ss",
+                g: "yyyy/MM/dd H:mm",
+                G: "yyyy/MM/dd H:mm:ss",
                 m: "MMMM dd",
                 M: "MMMM dd",
                 s: "yyyy'-'MM'-'ddTHH':'mm':'ss",
                 t: "h:mm tt",
                 T: "h:mm:ss tt",
                 u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                y:"yyyy MMMM",
-                Y:"yyyy MMMM"
+                y: "yyyy MMMM",
+                Y: "yyyy MMMM"
             },
             // The first day of the week (0 = Sunday, 1 = Monday, and so on).
             firstDay: 0

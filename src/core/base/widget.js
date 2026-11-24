@@ -40,6 +40,19 @@ const LABELIDPART = "_label";
  */
 export class Widget extends Observable {
     /**
+     * Static reference to prototype (jQuery-like pattern used throughout Kendo)
+     */
+    static fn;
+    static options = {
+        prefix: ""
+    };
+    static events = [];
+    /**
+     * Maps feature names to widget options they implement.
+     * Override in subclasses to enable feature validation.
+     */
+    static featureMap;
+    /**
      * Static call method to support legacy pattern: Widget.call(this, element, options)
      *
      * ES6 classes cannot be invoked with Function.prototype.call(), but some legacy
@@ -65,8 +78,38 @@ export class Widget extends Observable {
      * @param args - Array of arguments [element, options]
      */
     static apply(thisArg, args) {
-        Widget.fn.init.apply(thisArg, args);
+        Reflect.apply(Widget.fn.init, thisArg, Array.from(args || []));
     }
+    /**
+     * The wrapped element for this widget
+     */
+    element;
+    /**
+     * The wrapper element (may differ from element for some widgets)
+     */
+    wrapper;
+    /**
+     * Default options for the widget
+     */
+    defaults;
+    /**
+     * Component type variations
+     */
+    componentTypes;
+    /**
+     * Internal size cache
+     */
+    _size;
+    /**
+     * Watermark overlay function (set when license validation fails)
+     */
+    _showWatermarkOverlay;
+    /**
+     * Features active on this widget instance.
+     */
+    _features = [];
+    _iconContextActive;
+    _iconContextToken = 0;
     /**
      * Constructor - receives element and options and calls init().
      * This mirrors the legacy extend() pattern where the constructor IS the init function.
@@ -76,11 +119,6 @@ export class Widget extends Observable {
      */
     constructor(element, options) {
         super();
-        /**
-         * Features active on this widget instance.
-         */
-        this._features = [];
-        this._iconContextToken = 0;
         if (element !== undefined) {
             this.init(element, options);
         }
@@ -91,11 +129,10 @@ export class Widget extends Observable {
      * @param options - Widget configuration options
      */
     init(element, options) {
-        var _a, _b, _c;
         const that = this;
         // Check licensing
         that._showWatermarkOverlay = addWatermarkOverlayAndBanner;
-        const componentName = (((_a = this.options) === null || _a === void 0 ? void 0 : _a.name) || "").toLowerCase();
+        const componentName = (this.options?.name || "").toLowerCase();
         // Wrap element with KendoJQuery and bind handler
         const kendoJQuery = kendoJQueryService.getConstructor();
         that.element = kendoJQuery(element).handler(that);
@@ -105,18 +142,22 @@ export class Widget extends Observable {
         // Initialize Observable
         Observable.fn.init.call(that);
         // Handle dataSource special case - avoid deep cloning
-        let dataSource = options ? options.dataSource : null;
+        let dataSource = options?.dataSource;
         let props;
+        const constructorMetadata = that.constructor;
+        const componentTypes = that.componentTypes ||
+            constructorMetadata.prototype?.componentTypes ||
+            constructorMetadata.prototypeMembers?.componentTypes;
         if (options) {
-            props = (that.componentTypes || {})[options.componentType];
+            props = componentTypes?.[options.componentType];
         }
         if (dataSource) {
             // Avoid deep cloning the data source
             options = kendoJQuery.extend({}, options, { dataSource: {} });
         }
-        const userFeatures = options === null || options === void 0 ? void 0 : options.features;
-        const protoFeatures = (_b = that.options) === null || _b === void 0 ? void 0 : _b.features;
-        const features = (_c = userFeatures !== null && userFeatures !== void 0 ? userFeatures : protoFeatures) !== null && _c !== void 0 ? _c : [];
+        const userFeatures = options?.features;
+        const protoFeatures = that.options?.features;
+        const features = userFeatures ?? protoFeatures ?? [];
         if (options) {
             delete options.features;
         }
@@ -149,12 +190,11 @@ export class Widget extends Observable {
         }
     }
     _renderWithIconContext(fn) {
-        var _a, _b;
-        const componentName = (((_a = this.options) === null || _a === void 0 ? void 0 : _a.name) || "").toLowerCase();
+        const componentName = (this.options?.name || "").toLowerCase();
         if (!componentName) {
             return fn();
         }
-        const token = iconService.beginInit(componentName, (_b = this.element) === null || _b === void 0 ? void 0 : _b[0]);
+        const token = iconService.beginInit(componentName, this.element?.[0]);
         const result = fn();
         iconService.finalizeContext(token);
         return result;
@@ -164,19 +204,20 @@ export class Widget extends Observable {
      * @returns true if the element has a bindingTarget
      */
     _hasBindingTarget() {
-        return !!this.element[0].kendoBindingTarget;
+        return !!this.element[0]?.kendoBindingTarget;
     }
     /**
      * Set up tabindex on target element
      * @param target - Target element (defaults to wrapper)
      */
     _tabindex(target) {
-        target = target || this.wrapper;
+        target = target || this.wrapper || this.element;
         const element = this.element;
         const TABINDEX = "tabindex";
         const tabindex = target.attr(TABINDEX) || element.attr(TABINDEX);
         element.removeAttr(TABINDEX);
-        target.attr(TABINDEX, !isNaN(tabindex) ? tabindex : 0);
+        const normalizedTabIndex = tabindex != null && !isNaN(Number(tabindex)) ? Number(tabindex) : 0;
+        target.attr(TABINDEX, normalizedTabIndex);
     }
     /**
      * Update widget options
@@ -257,13 +298,12 @@ export class Widget extends Observable {
         // noop - override in subclasses
     }
     _validateFeatures(features) {
-        var _a;
         const featureMap = this.constructor.featureMap;
         if (!featureMap) {
             return;
         }
         const ctor = this.constructor;
-        const defaults = ctor.options || ((_a = ctor.prototype) === null || _a === void 0 ? void 0 : _a.options);
+        const defaults = ctor.options || ctor.prototype?.options;
         if (!defaults) {
             return;
         }
@@ -313,7 +353,7 @@ export class Widget extends Observable {
      * @param element - Optional element to apply classes to
      */
     _applyCssClasses(element) {
-        const protoOptions = this.__proto__.options;
+        const protoOptions = Object.getPrototypeOf(this).options;
         const options = this.options;
         const el = element || this.wrapper || this.element;
         const classes = [];
@@ -322,14 +362,14 @@ export class Widget extends Observable {
         let widgetName;
         let widgetProperties;
         const cssProps = cssPropertiesService;
-        widgetName = this.options._altname || protoOptions.name;
+        widgetName = this.options._altname || protoOptions.name || "";
         widgetProperties = cssProps.propertyDictionary[widgetName];
         if (!cssProps || !widgetProperties) {
             return;
         }
         for (i = 0; i < cssPropertiesNames.length; i++) {
             prop = cssPropertiesNames[i];
-            widgetName = this.options._altname || protoOptions.name;
+            widgetName = this.options._altname || protoOptions.name || "";
             if ((prop in protoOptions) || (prop in options)) {
                 classes.push(cssProps.getValidClass({
                     widget: widgetName,
@@ -374,7 +414,7 @@ export class Widget extends Observable {
      * @param element - Optional element to clear classes from
      */
     _clearCssClasses(newOptions, element) {
-        const protoOptions = this.__proto__.options;
+        const protoOptions = Object.getPrototypeOf(this).options;
         const currentOptions = this.options;
         const el = element || this.wrapper || this.element;
         let i;
@@ -382,7 +422,7 @@ export class Widget extends Observable {
         let widgetName;
         let widgetProperties;
         const cssProps = cssPropertiesService;
-        widgetName = this.options._altname || protoOptions.name;
+        widgetName = this.options._altname || protoOptions.name || "";
         widgetProperties = cssProps.propertyDictionary[widgetName];
         if (!cssProps || !widgetProperties) {
             return;
@@ -395,7 +435,7 @@ export class Widget extends Observable {
                         widget: widgetName,
                         propName: prop,
                         value: currentOptions[prop],
-                        fill: currentOptions.fillMode
+                        fill: currentOptions["fillMode"]
                     }));
                 }
                 else {
@@ -403,8 +443,8 @@ export class Widget extends Observable {
                         el.removeClass(cssProps.getValidClass({
                             widget: widgetName,
                             propName: "themeColor",
-                            value: currentOptions.themeColor,
-                            fill: currentOptions.fillMode
+                            value: currentOptions["themeColor"],
+                            fill: currentOptions["fillMode"]
                         }));
                     }
                     el.removeClass(cssProps.getValidClass({
@@ -428,11 +468,5 @@ export class Widget extends Observable {
         return labelId;
     }
 }
-// Set up static fn reference (jQuery-like pattern)
-Widget.fn = Widget.prototype;
-// Define options and events on prototype (like original Kendo extend pattern)
-// This is critical for the legacy extend() pattern to work correctly
-Widget.prototype.options = {
-    prefix: ""
-};
-Widget.prototype.events = [];
+Widget.applyEnumerablePrototype();
+Widget.applyPrototypeMembers();

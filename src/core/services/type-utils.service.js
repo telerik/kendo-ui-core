@@ -7,11 +7,11 @@
  * Provides type() function that was deprecated in jQuery.
  */
 class TypeUtilsService {
+    /**
+     * Map of toString results to lowercase type names
+     */
+    class2type = {};
     constructor() {
-        /**
-         * Map of toString results to lowercase type names
-         */
-        this.class2type = {};
         // Build the class2type map for standard JavaScript types
         "Boolean Number String Function Array Date RegExp Object Error Symbol".split(" ")
             .forEach((name) => {

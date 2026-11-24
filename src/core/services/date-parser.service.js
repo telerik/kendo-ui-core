@@ -40,9 +40,7 @@ const NUMBER_REGEX = {
     exact3: /^\d{3}/
 };
 class DateParserService {
-    constructor() {
-        this.timezoneService = null;
-    }
+    timezoneService = null;
     /**
      * Set the timezone service (injected later due to circular dependency)
      */
@@ -379,10 +377,10 @@ class DateParserService {
             if (minutesOffset && minutes !== null) {
                 minutes += -minutesOffset;
             }
-            result = new Date(Date.UTC(year, month !== null && month !== void 0 ? month : 0, day, hours !== null && hours !== void 0 ? hours : 0, minutes !== null && minutes !== void 0 ? minutes : 0, seconds !== null && seconds !== void 0 ? seconds : 0, milliseconds !== null && milliseconds !== void 0 ? milliseconds : 0));
+            result = new Date(Date.UTC(year, month ?? 0, day, hours ?? 0, minutes ?? 0, seconds ?? 0, milliseconds ?? 0));
         }
         else {
-            result = new Date(year, month !== null && month !== void 0 ? month : 0, day, hours !== null && hours !== void 0 ? hours : 0, minutes !== null && minutes !== void 0 ? minutes : 0, seconds !== null && seconds !== void 0 ? seconds : 0, milliseconds !== null && milliseconds !== void 0 ? milliseconds : 0);
+            result = new Date(year, month ?? 0, day, hours ?? 0, minutes ?? 0, seconds ?? 0, milliseconds ?? 0);
             this.adjustDST(result, hours);
         }
         if (year < 100) {

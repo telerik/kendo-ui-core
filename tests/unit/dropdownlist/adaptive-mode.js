@@ -173,6 +173,27 @@ describe("kendo.ui.DropDownList adaptive mode switching", function() {
         assert.equal(dropdownlist.list.parent().find(".k-list-container").length, 0);
     });
 
+    it("renders the adaptive filter input with the large size", function() {
+        dropdownlist = createAdaptiveDropDownList({ filter: "contains" });
+
+        let searchbox = dropdownlist.popup.element.find(".k-actionsheet-filter .k-searchbox");
+
+        assert.equal(searchbox.length, 1);
+        assert.isTrue(searchbox.hasClass("k-input-lg"));
+    });
+
+    it("renders the desktop popup filter input with the default size", async function() {
+        await page.viewport(1200, 800);
+
+        dropdownlist = createAdaptiveDropDownList({ filter: "contains" });
+
+        let searchbox = dropdownlist.popup.element.find(".k-list-filter .k-searchbox");
+
+        assert.equal(searchbox.length, 1);
+        assert.isFalse(searchbox.hasClass("k-input-lg"));
+        assert.equal(dropdownlist.popup.element.find(".k-actionsheet-filter").length, 0);
+    });
+
     it("does not nest the adaptive list wrapper after repeated mode switches", function() {
         dropdownlist = createAdaptiveDropDownList();
 

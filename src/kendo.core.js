@@ -6,7 +6,7 @@ import {
     numberParserService,
     dateParserService,
     intlService,
-    templateService,
+    Template,
     htmlService,
     supportService,
     dateUtilsService,
@@ -28,11 +28,14 @@ import {
     widgetRegistryService,
     widgetUtilsService,
     namespaceService,
+    notifyService,
     iconService,
     Class,
     Observable,
     Widget,
-    DataBoundWidget
+    DataBoundWidget,
+    MobileWidget,
+    MobileDataBoundWidget
 } from './core/index.js';
 import { packageMetadata, setScriptKey } from './licensing/index.js';
 
@@ -64,27 +67,6 @@ const EN = "en-US";
 
 const kendoJQuery = kendoJQueryService.getConstructor();
 const eventMap = eventMapService.getFullEventMap();
-
-const Template = {
-    get paramName() {
-        return templateService.paramName;
-    },
-    set paramName(value) {
-        templateService.paramName = value;
-    },
-    get useWithBlock() {
-        return templateService.useWithBlock;
-    },
-    set useWithBlock(value) {
-        templateService.useWithBlock = value;
-    },
-    render: function(template, data) {
-        return templateService.render(template, data);
-    },
-    compile: function(template, options) {
-        return templateService.compile(template, options);
-    }
-};
 
 kendo.jQuery = kendoJQuery;
 kendo.eventMap = eventMap;
@@ -308,7 +290,7 @@ function getOffset(element, type, positioned) {
 }
 
 function parseEffects(input) {
-    return domUtilsService.parseEffects(input);
+    return effectsService.parseEffects(input);
 }
 
 kendo.toString = toString;
@@ -495,7 +477,9 @@ Object.defineProperty(kendo, "ns", {
     configurable: true
 });
 
-kendo.notify = noop;
+kendo.notify = function(widget, namespace) {
+    notifyService.notify(widget, namespace);
+};
 
 kendo.initWidget = function(element, options, roles, source) {
     return widgetUtilsService.initWidget(element, options, roles, source);
@@ -522,43 +506,6 @@ kendo.parseOptions = function(element, options, source) {
     return widgetUtilsService.parseOptions(element, options, source);
 };
 
-const ContainerNullObject = { bind: function() { return this; }, nullObject: true, options: {} };
-
-const MobileWidget = Widget.extend({
-    init: function(element, options) {
-        Widget.fn.init.call(this, element, options);
-        this.element.autoApplyNS();
-        this.wrapper = this.element;
-        this.element.addClass("km-widget");
-    },
-
-    destroy: function() {
-        Widget.fn.destroy.call(this);
-        this.element.kendoDestroy();
-    },
-
-    options: {
-        prefix: "Mobile"
-    },
-
-    events: [],
-
-    view: function() {
-        const viewElement = this.element.closest(kendo.roleSelector("view splitview modalview drawer"));
-        return widgetUtilsService.widgetInstance(viewElement, kendo.mobile.ui) || ContainerNullObject;
-    },
-
-    viewHasNativeScrolling: function() {
-        const view = this.view();
-        return view && view.options.useNativeScrolling;
-    },
-
-    container: function() {
-        const element = this.element.closest(kendo.roleSelector("view layout modalview drawer splitview"));
-        return widgetUtilsService.widgetInstance(element.eq(0), kendo.mobile.ui) || ContainerNullObject;
-    }
-});
-
 // Create the 'ui' registry namespace.
 kendo.ui = widgetRegistryService.createNamespace("ui", {
     Widget: Widget,
@@ -578,7 +525,7 @@ kendo.ui.progress.messages = {
 // Create the 'mobile.ui' registry namespace.
 kendo.mobile.ui = widgetRegistryService.createNamespace("mobile.ui", {
     Widget: MobileWidget,
-    DataBoundWidget: DataBoundWidget.extend(MobileWidget.prototype),
+    DataBoundWidget: MobileDataBoundWidget,
     plugin: function(widget) {
         widgetRegistryService.registerToNamespace(widget, kendo.mobile.ui, "Mobile");
     }
@@ -611,20 +558,7 @@ deepExtend(kendo.dataviz, {
 });
 
 kendo.touchScroller = function(elements, options) {
-    // return the first touch scroller
-    if (!options) { options = {}; }
-
-    options.useNative = true;
-
-    return $(elements).map(function(idx, element) {
-        element = $(element);
-        if (supportService.kineticScrollNeeded && kendo.mobile.ui.Scroller && !element.data("kendoMobileScroller")) {
-            element.kendoMobileScroller(options);
-            return element.data("kendoMobileScroller");
-        } else {
-            return false;
-        }
-    })[0];
+    return widgetUtilsService.touchScroller(elements, options);
 };
 
 kendo.preventDefault = function(e) {
@@ -810,22 +744,8 @@ kendo.getValidCssClass = function(prefix, propName, value) {
 
 kendo.propertyToCssClassMap = cssPropertiesService.propertyToCssClassMap;
 
-kendo.proxyModelSetters = function proxyModelSetters(data) {
-    const observable = {};
-
-    Object.keys(data || {}).forEach(function(property) {
-        Object.defineProperty(observable, property, {
-            get: function() {
-                return data[property];
-            },
-            set: function(value) {
-                data[property] = value;
-                data.dirty = true;
-            }
-        });
-    });
-
-    return observable;
+kendo.proxyModelSetters = function(data) {
+    return utilsService.proxyModelSetters(data);
 };
 
 kendo.getSeriesColors = function() {
@@ -853,4 +773,7 @@ kendo.type = function(obj) {
 };
 
 export { fromESClass };
+export * from './core';
+export * from './utils/html-attributes.js';
+export * from './utils/url.js';
 export default kendo;

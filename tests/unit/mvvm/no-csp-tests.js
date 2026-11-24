@@ -578,10 +578,10 @@ describe("mvvm observing - no CSP", function() {
             '#= get("foo").get("bar") #' +
             '</script>' +
             '<script>' +
-            'templateEvaluationCounter = 0;' +
+            'globalThis.templateEvaluationCounter = 0;' +
             '</script>' +
             '<script id="counting-template" type="text/x-kendo-template">' +
-            '# templateEvaluationCounter++; #' +
+            '# globalThis.templateEvaluationCounter++; #' +
             '#= get("foo") #' +
             '</script>' +
             '<script id="custom-binder-template" type="text/x-kendo-template">' +
@@ -737,13 +737,11 @@ describe("mvvm observing - no CSP", function() {
 
         viewModel.set("foo", "baz");
 
-        // eslint-disable-next-line no-undef
-        templateEvaluationCounter = 0;
+        globalThis.templateEvaluationCounter = 0;
 
         viewModel.set("foo", "boo");
 
-        // eslint-disable-next-line no-undef
-        assert.equal(templateEvaluationCounter, 1);
+        assert.equal(globalThis.templateEvaluationCounter, 1);
     });
 
     it("refreshing the source destroys the binder objects", function() {

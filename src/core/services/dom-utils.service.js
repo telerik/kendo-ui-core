@@ -8,8 +8,9 @@ const BOX_SHADOW_REGEXP = /(\d+(?:\.?)\d*)px\s*(\d+(?:\.?)\d*)px\s*(\d+(?:\.?)\d
  * Service providing DOM utility functions
  */
 class DomUtilsService {
+    animationQueue = [];
+    animationFrameFn;
     constructor() {
-        this.animationQueue = [];
         // Set up requestAnimationFrame with fallbacks
         const win = window;
         this.animationFrameFn =
@@ -160,21 +161,9 @@ class DomUtilsService {
         };
     }
     /**
-     * Parse effects string into object
-     */
-    parseEffects(input) {
-        const effects = {};
-        const items = typeof input === "string" ? input.split(" ") : input;
-        $.each(items, function (idx) {
-            effects[idx] = this;
-        });
-        return effects;
-    }
-    /**
      * Remove whitespace text nodes from an element
      */
     stripWhitespace(element) {
-        var _a, _b;
         if (document.createNodeIterator) {
             const iterator = document.createNodeIterator(element, NodeFilter.SHOW_TEXT, (node) => {
                 return node.parentNode === element
@@ -183,8 +172,8 @@ class DomUtilsService {
             });
             while (iterator.nextNode()) {
                 const refNode = iterator.referenceNode;
-                if (refNode && !((_a = refNode.textContent) === null || _a === void 0 ? void 0 : _a.trim())) {
-                    (_b = refNode.parentNode) === null || _b === void 0 ? void 0 : _b.removeChild(refNode);
+                if (refNode && !refNode.textContent?.trim()) {
+                    refNode.parentNode?.removeChild(refNode);
                 }
             }
         }
@@ -562,7 +551,6 @@ class DomUtilsService {
      * @param options - Optional configuration for the mask
      */
     progress(container, toggle, options) {
-        var _a, _b, _c;
         let mask = container.find(".k-loading-mask");
         const browser = supportService.browser;
         const opts = $.extend({}, {
@@ -583,7 +571,7 @@ class DomUtilsService {
                 }
                 // Note: The loading text message is set via kendo.ui.progress.messages.loading
                 // Sadly we must preserve this global for backward compatibility.
-                const loadingText = ((_c = (_b = (_a = window.kendo.ui) === null || _a === void 0 ? void 0 : _a.progress) === null || _b === void 0 ? void 0 : _b.messages) === null || _c === void 0 ? void 0 : _c.loading) || "Loading...";
+                const loadingText = (window.kendo.ui?.progress?.messages?.loading) || "Loading...";
                 $(`<div class='${cssClass}'><span role='alert' aria-live='polite' class='k-loading-text'>${loadingText}</span><div class='k-loading-image'></div><div class='k-loading-color'></div></div>`)
                     .width(opts.width)
                     .height(opts.height)
@@ -608,7 +596,7 @@ class DomUtilsService {
         }
         // Handle touch events - get element at touch point
         const originalEvent = e.originalEvent;
-        const touches = (originalEvent === null || originalEvent === void 0 ? void 0 : originalEvent.changedTouches) || e.changedTouches;
+        const touches = originalEvent?.changedTouches || e.changedTouches;
         if (touches && touches.length > 0) {
             return document.elementFromPoint(touches[0].clientX, touches[0].clientY);
         }
@@ -635,12 +623,17 @@ class DomUtilsService {
     }
 }
 class DragToScrollHandlerImpl {
+    static DRAG_THRESHOLD = 5;
+    scrollContainer;
+    namespace;
+    captureElement;
+    delegateSelector;
+    isDragging = false;
+    hasDragged = false;
+    dragStartX = 0;
+    scrollStartLeft = 0;
+    currentDragTarget = null;
     constructor(scrollContainer, options) {
-        this.isDragging = false;
-        this.hasDragged = false;
-        this.dragStartX = 0;
-        this.scrollStartLeft = 0;
-        this.currentDragTarget = null;
         this.scrollContainer = scrollContainer;
         this.namespace = options.namespace;
         this.captureElement = options.captureElement;
@@ -674,12 +667,11 @@ class DragToScrollHandlerImpl {
         this.scrollContainer[0].removeEventListener("click", this.preventClickOnce, true);
     }
     getClientX(e) {
-        var _a, _b, _c, _d, _e;
         if (e.type.indexOf("touch") !== -1) {
-            const touch = ((_b = (_a = e.originalEvent) === null || _a === void 0 ? void 0 : _a.touches) === null || _b === void 0 ? void 0 : _b[0]) || ((_d = (_c = e.originalEvent) === null || _c === void 0 ? void 0 : _c.changedTouches) === null || _d === void 0 ? void 0 : _d[0]);
+            const touch = e.originalEvent?.touches?.[0] || e.originalEvent?.changedTouches?.[0];
             return touch ? touch.clientX : 0;
         }
-        return e.clientX || ((_e = e.originalEvent) === null || _e === void 0 ? void 0 : _e.clientX) || 0;
+        return e.clientX || e.originalEvent?.clientX || 0;
     }
     preventClickOnce(e) {
         e.preventDefault();
@@ -745,27 +737,26 @@ class DragToScrollHandlerImpl {
         $(document).off(this.namespace);
     }
 }
-DragToScrollHandlerImpl.DRAG_THRESHOLD = 5;
 const DEFAULT_RESIZE_EVENT_TIME = 50;
 const HAS_OBSERVER = typeof ResizeObserver !== "undefined";
 /**
  * @hidden
  */
 class ResizeObserverService {
+    element;
+    resizeCallback;
+    debounceTime;
+    observeOptions;
+    resizeObserver;
+    debounceResize;
     static supported() {
         return HAS_OBSERVER;
     }
     constructor(options) {
-        var _a;
-        this.onResize = (_entries) => {
-            if (this.resizeCallback) {
-                this.resizeCallback();
-            }
-        };
         const el = options.element;
         this.element = el instanceof $ ? el[0] : el;
         this.resizeCallback = options.onResize;
-        this.debounceTime = (_a = options.debounceTime) !== null && _a !== void 0 ? _a : DEFAULT_RESIZE_EVENT_TIME;
+        this.debounceTime = options.debounceTime ?? DEFAULT_RESIZE_EVENT_TIME;
         this.observeOptions = options.observeOptions || {};
         this.resizeObserver = null;
         this.debounceResize = null;
@@ -778,6 +769,11 @@ class ResizeObserverService {
             this.resizeObserver.observe(this.element, this.observeOptions);
         }
     }
+    onResize = (_entries) => {
+        if (this.resizeCallback) {
+            this.resizeCallback();
+        }
+    };
     destroy() {
         this.destroyResizeObserver();
         this.element = null;

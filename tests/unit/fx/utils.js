@@ -4,10 +4,43 @@ describe("kendo.effects utils", function() {
     let box = kendo.effects.box;
     let transformOrigin = kendo.effects.transformOrigin;
     let fillScale = kendo.effects.fillScale;
+    let originalOffset = $.fn.offset;
+
+    beforeEach(function() {
+        $.fn.offset = function() {
+            let node = this[0];
+
+            if (!node) {
+                return originalOffset.apply(this, arguments);
+            }
+
+            return {
+                top: parseFloat(node.style.top) || 0,
+                left: parseFloat(node.style.left) || 0
+            };
+        };
+    });
+
+    afterEach(function() {
+        $.fn.offset = originalOffset;
+    });
 
 
     function createElement(top, left, width, height) {
-        return $("<div style='width:" + width + "px; height: " + height + "px; position: absolute; top: " + top + "px; left: " + left + "px;'>Div</div>").appendTo(Mocha.fixture);
+        let element = $("<div style='width:" + width + "px; height: " + height + "px; position: absolute; top: " + top + "px; left: " + left + "px;'>Div</div>").appendTo(Mocha.fixture);
+
+        element[0].getBoundingClientRect = function() {
+            return {
+                top: top,
+                left: left,
+                width: width,
+                height: height,
+                right: left + width,
+                bottom: top + height
+            };
+        };
+
+        return element;
     }
 
     it("box returns element offset and dimensions", function() {

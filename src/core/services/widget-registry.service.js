@@ -12,16 +12,14 @@ const FUNCTION = "function";
  * Widget Registry Service implementation
  */
 class WidgetRegistryService {
-    constructor() {
-        /**
-         * All registered widgets
-         */
-        this.widgets = [];
-        /**
-         * Namespace registers (e.g., { "ui": kendo.ui, "mobile.ui": kendo.mobile.ui })
-         */
-        this.namespaces = new Map();
-    }
+    /**
+     * All registered widgets
+     */
+    widgets = [];
+    /**
+     * Namespace registers (e.g., { "ui": kendo.ui, "mobile.ui": kendo.mobile.ui })
+     */
+    namespaces = new Map();
     isWidgetConstructor(value) {
         if (typeof value !== FUNCTION || value === null) {
             return false;
@@ -37,7 +35,10 @@ class WidgetRegistryService {
      * @returns The created namespace object
      */
     createNamespace(name, properties) {
-        const namespace = Object.assign({ roles: {} }, properties);
+        const namespace = {
+            roles: {},
+            ...properties
+        };
         this.namespaces.set(name, namespace);
         return namespace;
     }
@@ -65,8 +66,7 @@ class WidgetRegistryService {
      * This is the core implementation matching the original kendo.ui.plugin
      */
     registerToNamespace(widget, register, prefix) {
-        var _a;
-        const name = widget.fn.options.name || ((_a = widget.options) === null || _a === void 0 ? void 0 : _a.name);
+        const name = widget.fn?.options?.name || widget.options?.name;
         if (!name) {
             throw new Error("Widget must have a name in options");
         }
@@ -92,7 +92,7 @@ class WidgetRegistryService {
     getWidget(name, namespace) {
         if (namespace) {
             const register = this.namespaces.get(namespace);
-            const widget = register === null || register === void 0 ? void 0 : register[name];
+            const widget = register?.[name];
             return this.isWidgetConstructor(widget) ? widget : undefined;
         }
         // Search all namespaces
@@ -111,7 +111,7 @@ class WidgetRegistryService {
         const lowerRole = role.toLowerCase();
         if (namespace) {
             const register = this.namespaces.get(namespace);
-            return register === null || register === void 0 ? void 0 : register.roles[lowerRole];
+            return register?.roles[lowerRole];
         }
         // Search all namespaces
         for (const register of this.namespaces.values()) {
@@ -131,15 +131,14 @@ class WidgetRegistryService {
      * Get widget instance from an element
      */
     getWidgetInstance(element, namespace) {
-        var _a, _b, _c, _d;
         const el = $(element);
         let result;
         const searchNamespaces = namespace ? [namespace] : Array.from(this.namespaces.values());
         for (const ns of searchNamespaces) {
             for (const role in ns.roles) {
                 const widget = ns.roles[role];
-                const prefix = ((_b = (_a = widget.fn) === null || _a === void 0 ? void 0 : _a.options) === null || _b === void 0 ? void 0 : _b.prefix) || "";
-                const dataKey = "kendo" + prefix + (((_d = (_c = widget.fn) === null || _c === void 0 ? void 0 : _c.options) === null || _d === void 0 ? void 0 : _d.name) || "");
+                const prefix = widget.fn?.options?.prefix || "";
+                const dataKey = "kendo" + prefix + (widget.fn?.options?.name || "");
                 result = el.data(dataKey);
                 if (result) {
                     return result;
@@ -195,15 +194,15 @@ class WidgetRegistryService {
         const roles = [];
         let idx;
         let length;
-        // Use default namespaces if none provided or first element is falsy
         if (!namespaces[0] && defaultNamespaces) {
             namespaces = defaultNamespaces;
         }
+        namespaces = namespaces.filter(Boolean);
         for (idx = 0, length = namespaces.length; idx < length; idx++) {
             roles[idx] = namespaces[idx].roles;
         }
         const reversedRoles = [...roles].reverse();
-        return $.extend.apply(null, [{}].concat(reversedRoles));
+        return $.extend({}, ...reversedRoles);
     }
 }
 export const widgetRegistryService = new WidgetRegistryService();

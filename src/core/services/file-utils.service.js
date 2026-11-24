@@ -5,6 +5,9 @@ import { inputService } from "./input.service";
  
  */
 class FileUtilsService {
+    _fileGroupMap;
+    fileSaver;
+    downloadAttribute;
     constructor() {
         this._fileGroupMap = this.createFileGroupMap();
         this.fileSaver = document.createElement("a");
@@ -134,7 +137,9 @@ class FileUtilsService {
      * Save data as a file download
      */
     saveAs(options) {
-        let save = this.postToProxy.bind(this);
+        let save = (dataURI, fileName, proxyURL, proxyTarget) => {
+            this.postToProxy(dataURI, fileName, proxyURL, proxyTarget);
+        };
         if (!options.forceProxy) {
             if (this.downloadAttribute) {
                 save = this.saveAsDataURI.bind(this);

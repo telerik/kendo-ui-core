@@ -1,10 +1,15 @@
 import '@progress/kendo-ui/src/kendo.data.js';
 import '@progress/kendo-ui/src/kendo.data.odata.js';
+import { vi } from "vitest";
 
 let DataSource = kendo.data.DataSource;
 let parameterMap = kendo.data.transports["odata"].parameterMap.bind(kendo.data.transports["odata"]); // I am not sure if the bind is correct. If this breaks anything you can change it.
 
 describe("Odata", function() {
+
+    afterEach(function() {
+        vi.restoreAllMocks();
+    });
 
     it("datasource with type odata creates remote transport with parameterMap", function() {
         let dataSource = new DataSource({
@@ -328,6 +333,156 @@ describe("Odata", function() {
         date = kendo.timezone.apply(date, "Etc/UTC");
 
         assert.equal(result.$filter, "foo eq " + kendo.toString(date, "yyyy-MM-ddTHH:mm:ss+00:00"));
+    });
+
+    it("odata-v4 doesnotcontain uses indexof", function() {
+        let result = kendo.data.transports["odata-v4"].parameterMap({
+            filter: {
+                filters: [{ field: "Name", operator: "doesnotcontain", value: "bar" }]
+            }
+        }, "read");
+
+        assert.equal(result.$filter, "indexof(Name,'bar') eq -1");
+    });
+
+    it("odata-v4 parameterMap removes quotes around guid filters", function() {
+        let guid = "12345678-abcd-1234-abcd-1234567890ab";
+        let result = kendo.data.transports["odata-v4"].parameterMap({
+            filter: {
+                filters: [{ field: "Id", operator: "eq", value: guid }]
+            }
+        }, "read");
+
+        assert.equal(result.$filter, "Id eq " + guid);
+    });
+
+    it("odata-v4 schema strips metadata from array results", function() {
+        let data = [{ "@odata.etag": "etag", id: 1 }];
+        let result = kendo.data.schemas["odata-v4"].data(data);
+
+        assert.equal(result.length, 1);
+        assert.isUndefined(result[0]["@odata.etag"]);
+    });
+
+    it("odata-v4 schema unwraps value collections and total reads @odata.count", function() {
+        let result = kendo.data.schemas["odata-v4"].data({
+            "@odata.context": "context",
+            value: [{ id: 1 }]
+        });
+
+        assert.equal(result.length, 1);
+        assert.equal(result[0].id, 1);
+        assert.equal(kendo.data.schemas["odata-v4"].total({ "@odata.count": 3 }), 3);
+    });
+
+    it("odata-v4 submit skips ajax when there are no changes", function() {
+        let ajaxSpy = vi.spyOn(kendo.jQuery, "ajax");
+        let transport = {
+            options: $.extend(true, {}, kendo.data.transports["odata-v4"], {
+                batch: { url: "/$batch", type: "POST" }
+            })
+        };
+
+        kendo.data.transports["odata-v4"].submit.call(transport, {
+            data: { updated: [], destroyed: [], created: [] }
+        });
+
+        assert.equal(ajaxSpy.mock.calls.length, 0);
+    });
+
+    it("odata-v4 submit builds a batch request and routes successful responses", function() {
+        let transport = {
+            options: $.extend(true, {}, kendo.data.transports["odata-v4"], {
+                batch: { url: "/$batch", type: "POST" },
+                update: { url: function(item) { return "/items/" + item.id; }, type: "PUT" },
+                destroy: { url: "/items/2", type: "DELETE" },
+                create: { url: "/items", type: "POST" }
+            })
+        };
+        let success = vi.fn();
+        let responseText = [
+            "--changesetresponse_1",
+            "Content-Type: application/http",
+            "Content-Transfer-Encoding: binary",
+            "",
+            "HTTP/1.1 200 OK",
+            "",
+            "{\"id\":1}",
+            "--changesetresponse_1--",
+            "--changesetresponse_2",
+            "Content-Type: application/http",
+            "Content-Transfer-Encoding: binary",
+            "",
+            "HTTP/1.1 204 No Content",
+            "",
+            "--changesetresponse_2--",
+            "--changesetresponse_3",
+            "Content-Type: application/http",
+            "Content-Transfer-Encoding: binary",
+            "",
+            "HTTP/1.1 201 Created",
+            "",
+            "{\"id\":3}",
+            "--changesetresponse_3--"
+        ].join("\r\n");
+
+        vi.spyOn(kendo.jQuery, "ajax").mockImplementation(function(options) {
+            assert.equal(options.type, "POST");
+            assert.equal(options.url, "/$batch");
+            assert.isOk(options.headers["Content-Type"].indexOf("multipart/mixed; boundary=sf_batch_") === 0);
+            assert.isOk(options.data.indexOf("PUT /items/1 HTTP/1.1") >= 0);
+            assert.isOk(options.data.indexOf("DELETE /items/2 HTTP/1.1") >= 0);
+            assert.isOk(options.data.indexOf("POST /items HTTP/1.1") >= 0);
+            assert.isOk(options.data.indexOf("Content-ID: 0") >= 0);
+            assert.isOk(options.data.indexOf("Content-ID: 1") >= 0);
+            assert.isOk(options.data.indexOf("Content-ID: 2") >= 0);
+            options.success(responseText);
+        });
+
+        kendo.data.transports["odata-v4"].submit.call(transport, {
+            data: {
+                updated: [{ id: 1, name: "Updated" }],
+                destroyed: [{ id: 2 }],
+                created: [{ id: 3, name: "Created" }]
+            },
+            success: success,
+            error: vi.fn()
+        });
+
+        assert.equal(success.mock.calls.length, 3);
+        assert.deepEqual(success.mock.calls[0], [[{ id: 1 }], "update"]);
+        assert.deepEqual(success.mock.calls[1], [[], "destroy"]);
+        assert.deepEqual(success.mock.calls[2], [[{ id: 3 }], "create"]);
+    });
+
+    it("odata-v4 submit forwards ajax errors", function() {
+        let error = vi.fn();
+        let response = { status: 500 };
+        let transport = {
+            options: $.extend(true, {}, kendo.data.transports["odata-v4"], {
+                batch: { url: "/$batch", type: "POST" },
+                update: { url: "/items/1", type: "PUT" }
+            })
+        };
+
+        vi.spyOn(kendo.jQuery, "ajax").mockImplementation(function(options) {
+            options.error(response, "error", "boom");
+        });
+
+        kendo.data.transports["odata-v4"].submit.call(transport, {
+            data: {
+                updated: [{ id: 1 }],
+                destroyed: [],
+                created: []
+            },
+            success: vi.fn(),
+            error: error
+        });
+
+        assert.equal(error.mock.calls.length, 1);
+        assert.strictEqual(error.mock.calls[0][0], response);
+        assert.equal(error.mock.calls[0][1], "error");
+        assert.equal(error.mock.calls[0][2], "boom");
     });
 
     it("custom arguments are preserved", function() {

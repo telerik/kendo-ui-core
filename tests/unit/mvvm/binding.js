@@ -236,6 +236,16 @@ describe("mvvm binding", function() {
         dom.trigger("change");
     });
 
+    it("missing click handler throws when triggered", function() {
+        dom = $('<span data-bind="click:foo"/>');
+
+        kendo.bind(dom, kendo.observable({}));
+
+        assert.throws(function() {
+            dom.trigger("click");
+        });
+    });
+
     it("the context of the event handler is the viewmodel", function() {
         dom = $('<span data-bind="click:foo"/>');
         let viewModel = kendo.observable({
@@ -612,6 +622,18 @@ describe("mvvm binding", function() {
         assert.isOk(dom.find("option").last().is(":selected"));
     });
 
+    it("binding pre populated select value falls back to option text", function() {
+        dom = $('<select data-bind="value:selectedItem"><option>foo</option><option>bar</option>');
+
+        let viewModel = kendo.observable({
+            selectedItem: "bar"
+        });
+
+        kendo.bind(dom, viewModel);
+
+        assert.isOk(dom.find("option").last().is(":selected"));
+    });
+
     it("binding multi select value to multiple objects", function() {
         dom = $('<select multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
 
@@ -703,6 +725,25 @@ describe("mvvm binding", function() {
 
         assert.isOk(dom.find("option").eq(1).is(":selected"));
         assert.equal(dom.find("option:selected").length, 1);
+    });
+
+    it("multi select parsedValue uses option text when value attribute is missing", function() {
+        dom = $('<select multiple="multiple" data-type="number" data-bind="value:selectedItems"><option>1</option><option value="2">2</option><option>-3.14</option></select>');
+
+        let viewModel = kendo.observable({
+            selectedItems: []
+        });
+
+        kendo.bind(dom, viewModel);
+
+        dom.find("option").eq(0)[0].selected = true;
+        dom.find("option").eq(2)[0].selected = true;
+
+        let binder = dom[0].kendoBindingTarget.toDestroy.find(function(item) {
+            return item && item.element === dom[0] && typeof item.parsedValue === "function";
+        });
+
+        assert.deepEqual(binder.parsedValue(), [1, -3.14]);
     });
 
     it("checked binding binds radiobutton by value", function() {
@@ -1417,6 +1458,21 @@ describe("mvvm binding", function() {
         assert.isOk(!dom.is(":checked"));
     });
 
+    it("changing a date checkbox removes the matching date from the observable array", function() {
+        let dom = $('<input type="checkbox" value="2015-1-1" data-type="date" data-bind="checked:selectedItems"/>');
+
+        let viewModel = kendo.observable({
+            selectedItems: [kendo.parseDate(dom.val(), "yyyy-MM-dd")]
+        });
+
+        kendo.bind(dom, viewModel);
+
+        dom.prop("checked", false);
+        dom.trigger("change");
+
+        assert.equal(viewModel.selectedItems.length, 0);
+    });
+
     it("checked binding adding a boolean item should check the checkbox", function() {
         let dom = $('<input type="checkbox" value="false" data-type="boolean" data-bind="checked:selectedItems"/>');
 
@@ -1561,7 +1617,7 @@ describe("mvvm binding", function() {
                 date: new Date("2013/6/3 20:30:52")
             });
 
-            assert.equal(dom.val(), "2013-06-03T20:30:52");
+            assert.match(dom.val(), /^2013-06-03T20:30:52(?:\.000)?$/);
         });
 
         it("checked binding adding a datetime-local item should check the checkbox", function() {
@@ -1616,6 +1672,22 @@ describe("mvvm binding", function() {
             assert.isOk(!dom.is(":checked"));
         });
     }
+
+    it("checked binding detaches the change handler on unbind", function() {
+        dom = $('<input type="checkbox" value="foo" data-bind="checked:selectedItems"/>');
+
+        let viewModel = kendo.observable({
+            selectedItems: []
+        });
+
+        kendo.bind(dom, viewModel);
+        kendo.unbind(dom);
+
+        dom.prop("checked", true);
+        dom.trigger("change");
+
+        assert.equal(viewModel.selectedItems.length, 0);
+    });
 
     if (kendo.support.input.number) {
         it("input type number value binding", function() {

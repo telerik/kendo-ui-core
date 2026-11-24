@@ -4,14 +4,28 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
 let container;
 
 function getTransform(element) {
-    let chunks = $.grep(element.css("transform").split(/[\(, \)]/), function(chunk) {
+    let transform = element.css("transform");
+
+    if (transform == "none") {
+        return {
+            scale: 1,
+            translateX: 0,
+            translateY: 0
+        };
+    }
+
+    let directMatch = function(property) {
+            let match = transform.match(new RegExp(property + "\\(([-\\d\\.]+)", "i"));
+            return match ? parseFloat(match[1]) : undefined;
+        },
+        chunks = $.grep(transform.split(/[\(, \)]/), function(chunk) {
         return chunk.length > 0;
     });
 
     return {
-        scale: chunks[1],
-        translateX: chunks[5],
-        translateY: chunks[6]
+        scale: directMatch("scale") ?? parseFloat(chunks[1]),
+        translateX: directMatch("translateX") ?? parseFloat(chunks[5]),
+        translateY: directMatch("translateY") ?? parseFloat(chunks[6])
     };
 }
 
@@ -148,10 +162,25 @@ describe("kendo.effects Functionality", function() {
 });
 
 describe("kendo.effects Methods Functionality", function() {
+    let originalOffset = $.fn.offset;
+
     beforeEach(function() {
         kendo.effects.enable();
+        $.fn.offset = function() {
+            let node = this[0];
+
+            if (!node) {
+                return originalOffset.apply(this, arguments);
+            }
+
+            return {
+                top: parseFloat(node.style.top) || 0,
+                left: parseFloat(node.style.left) || 0
+            };
+        };
     });
     afterEach(function() {
+        $.fn.offset = originalOffset;
         kendo.destroy(container);
         Mocha.fixture.empty();
         kendo.destroy(Mocha.fixture);
@@ -159,10 +188,10 @@ describe("kendo.effects Methods Functionality", function() {
     });
 
     asyncTest("transfer transfers the element", function(done) {
-        let bar = $("<div style='width: 100px; height: 100px; margin-left: 300px; margin-right: 300px;' />"),
+        let bar = $("<div style='width: 100px; height: 100px; position: absolute; left: 300px; top: 0;' />"),
             effect;
 
-        container = $("<div style='width: 200px; height: 200px;' />");
+        container = $("<div style='width: 200px; height: 200px; position: absolute; left: 0; top: 0;' />").appendTo(Mocha.fixture);
 
         bar.prependTo(Mocha.fixture);
         effect = kendo.fx(container).transfer(bar);
@@ -170,17 +199,20 @@ describe("kendo.effects Methods Functionality", function() {
         effect.duration(0);
 
         effect.run().then(function() {
-            assert.equal(container.css("transform"), "matrix(0.5, 0, 0, 0.5, 0, 0)");
-            let transformOrigin = container.css("transformOrigin").match(/(\d+)\.?\d+px/g).map(function(px) { return parseInt(px); });
+            done(() => {
+                let transformOrigin = container.css("transformOrigin") || container[0].style.transformOrigin,
+                    matches = transformOrigin.match(/(\d+)\.?\d*px/g).map(function(px) { return parseInt(px, 10); });
 
-            done(() => assert.equal(transformOrigin[0], 600));
+                assert.equal(getTransform(container).scale, 0.5);
+                assert.equal(matches[0], 600);
+            });
         });
     });
 
     asyncTest("page turn turns the two pages, hiding the first one", function(done) {
         let foo, bar, effect;
 
-        container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>");
+        container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>").appendTo(Mocha.fixture);
         foo = container.find("#foo");
         bar = container.find("#bar");
         effect = kendo.fx(container).pageturn("horizontal", foo, bar);
@@ -198,7 +230,7 @@ describe("kendo.effects Methods Functionality", function() {
     asyncTest("flip flips the two pages, hiding the first one", function(done) {
         let foo, bar, effect;
 
-        container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>");
+        container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>").appendTo(Mocha.fixture);
         foo = container.find("#foo");
         bar = container.find("#bar");
         effect = kendo.fx(container).flip("horizontal", foo, bar);

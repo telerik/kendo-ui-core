@@ -506,5 +506,4 @@ describe("DataSource initialization", function() {
             type: "jsdo"
         });
     });
-
 });

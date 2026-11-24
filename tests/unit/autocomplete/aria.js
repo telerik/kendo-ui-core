@@ -182,4 +182,12 @@ let AutoComplete = kendo.ui.AutoComplete,
             assert.isOk(!!autocomplete.element.attr("aria-activedescendant"));
             assert.equal(autocomplete.element.attr("aria-activedescendant"), autocomplete.current()[0].id);
         });
+
+        it("AutoComplete renders aria-haspopup listbox on the input", function() {
+            let autocomplete = new AutoComplete(input, {
+                dataSource: ["Item", "Item2"]
+            });
+
+            assert.equal(autocomplete.element.attr("aria-haspopup"), "listbox");
+        });
     });

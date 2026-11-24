@@ -9,11 +9,15 @@ import { supportService } from "./support.service";
  * browser-specific events based on touch/pointer/mouse support.
  */
 class EventMapService {
+    /**
+     * The current event map based on browser capabilities
+     */
+    eventMap;
+    /**
+     * Regex for matching event names in a string
+     */
+    eventRegEx = /([^ ]+)/g;
     constructor() {
-        /**
-         * Regex for matching event names in a string
-         */
-        this.eventRegEx = /([^ ]+)/g;
         this.eventMap = this.buildEventMap();
         this.setupMSPointerEvents();
     }
@@ -101,7 +105,7 @@ class EventMapService {
      * Get the full event map object
      */
     getFullEventMap() {
-        return Object.assign({}, this.eventMap);
+        return { ...this.eventMap };
     }
     /**
      * Apply event mapping to a space-separated list of events

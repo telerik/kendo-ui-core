@@ -6,55 +6,52 @@ const UNDEFINED = "undefined";
  
  */
 class UtilsService {
-    constructor() {
-        /**
-         * Keyboard key codes for handling keyboard events.
-         * Maps common key names to their numeric key codes.
-         */
-        this.keys = {
-            INSERT: 45,
-            DELETE: 46,
-            BACKSPACE: 8,
-            TAB: 9,
-            ENTER: 13,
-            ESC: 27,
-            LEFT: 37,
-            UP: 38,
-            RIGHT: 39,
-            DOWN: 40,
-            END: 35,
-            HOME: 36,
-            SPACEBAR: 32,
-            PAGEUP: 33,
-            PAGEDOWN: 34,
-            F2: 113,
-            F10: 121,
-            F12: 123,
-            SHIFT: 16,
-            NUMPAD_PLUS: 107,
-            NUMPAD_MINUS: 109,
-            NUMPAD_DOT: 110
-        };
-        /**
-         * Days of the week mapping.
-         * Sunday = 0, Saturday = 6 (matches JavaScript Date.getDay())
-         */
-        this.days = {
-            Sunday: 0,
-            Monday: 1,
-            Tuesday: 2,
-            Wednesday: 3,
-            Thursday: 4,
-            Friday: 5,
-            Saturday: 6
-        };
-    }
+    /**
+     * Keyboard key codes for handling keyboard events.
+     * Maps common key names to their numeric key codes.
+     */
+    keys = {
+        INSERT: 45,
+        DELETE: 46,
+        BACKSPACE: 8,
+        TAB: 9,
+        ENTER: 13,
+        ESC: 27,
+        LEFT: 37,
+        UP: 38,
+        RIGHT: 39,
+        DOWN: 40,
+        END: 35,
+        HOME: 36,
+        SPACEBAR: 32,
+        PAGEUP: 33,
+        PAGEDOWN: 34,
+        F2: 113,
+        F10: 121,
+        F12: 123,
+        SHIFT: 16,
+        NUMPAD_PLUS: 107,
+        NUMPAD_MINUS: 109,
+        NUMPAD_DOT: 110
+    };
+    /**
+     * Days of the week mapping.
+     * Sunday = 0, Saturday = 6 (matches JavaScript Date.getDay())
+     */
+    days = {
+        Sunday: 0,
+        Monday: 1,
+        Tuesday: 2,
+        Wednesday: 3,
+        Thursday: 4,
+        Friday: 5,
+        Saturday: 6
+    };
     /**
      * Get kendo.data namespace (accessed at call time for lazy loading)
      */
     get kendoData() {
-        var _a;
-        return ((_a = window.kendo) === null || _a === void 0 ? void 0 : _a.data) || {};
+        return window.kendo?.data || {};
     }
     /**
      * Convert camelCase to hyphen-case
@@ -113,9 +110,9 @@ class UtilsService {
             if (propType === OBJECT && propValue !== null) {
                 propInit = propValue.constructor || Object;
             }
-            let isRegExp = (propInit === null || propInit === void 0 ? void 0 : propInit.name) === 'RegExp';
-            let isArrayBuffer = (propInit === null || propInit === void 0 ? void 0 : propInit.name) === 'ArrayBuffer';
-            let isDate = (propInit === null || propInit === void 0 ? void 0 : propInit.name) === 'Date';
+            let isRegExp = propInit?.name === 'RegExp';
+            let isArrayBuffer = propInit?.name === 'ArrayBuffer';
+            let isDate = propInit?.name === 'Date';
             if (propInit &&
                 !Array.isArray(propValue) &&
                 propInit !== ObservableArray &&
@@ -158,7 +155,7 @@ class UtilsService {
      * Check if an object has a clone method
      */
     isCloneable(obj) {
-        return typeof obj.clone === "function";
+        return obj !== null && typeof obj === "object" && typeof obj.clone === "function";
     }
     /**
      * Create a throttled version of a function.
@@ -233,7 +230,7 @@ class UtilsService {
      */
     trim(value) {
         if (value) {
-            return value.toString().trim();
+            return String(value).trim();
         }
         return "";
     }
@@ -265,7 +262,7 @@ class UtilsService {
      * Check if a value is an integer
      */
     isInteger(value) {
-        return Number.isInteger(value);
+        return typeof value === "number" && Number.isInteger(value);
     }
     /**
      * Check if a value is numeric
@@ -277,7 +274,7 @@ class UtilsService {
      * Check if a value is a Date object
      */
     isDate(value) {
-        return value && value.getTime;
+        return !!(value && value.getTime);
     }
     /**
      * Check if a value is a function
@@ -300,7 +297,7 @@ class UtilsService {
     logToConsole(message, type) {
         const console = window.console;
         const kendo = window.kendo;
-        if (!kendo.suppressLog && typeof console !== "undefined" && console.log) {
+        if (!kendo.suppressLog && typeof console !== "undefined") {
             console[type || "log"](message);
         }
     }
@@ -361,7 +358,7 @@ class UtilsService {
      * @returns True if the URL is local
      */
     isLocalUrl(url) {
-        return url && !/^([a-z]+:)?\/\//i.test(url);
+        return !!url && !/^([a-z]+:)?\/\//i.test(url);
     }
     /**
      * Get all method names (static and instance) from a class
@@ -412,6 +409,21 @@ class UtilsService {
         const deferred = $.Deferred();
         promise.finally(deferred.always).then(deferred.resolve).catch(deferred.reject);
         return deferred.promise();
+    }
+    proxyModelSetters(data) {
+        const observable = {};
+        Object.keys(data || {}).forEach(function (property) {
+            Object.defineProperty(observable, property, {
+                get: function () {
+                    return data[property];
+                },
+                set: function (value) {
+                    data[property] = value;
+                    data.dirty = true;
+                }
+            });
+        });
+        return observable;
     }
 }
 export const utilsService = new UtilsService();

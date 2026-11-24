@@ -20,7 +20,7 @@ export const resolveUrlProtocol = (url) => {
     try {
         return new URL(url, URL_VALIDATION_BASE).protocol;
     }
-    catch (_a) {
+    catch {
         return null;
     }
 };

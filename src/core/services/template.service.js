@@ -11,7 +11,12 @@ const sharpRegExp = /__SHARP__/g;
  */
 function compilePart(part, stringPart) {
     if (stringPart) {
-        return "'" + part.split("'").join("\\'").split('\\"').join('\\\\\\"').replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t") + "'";
+        return "'" +
+            part.split("'").join("\\'")
+                .split('\\"').join('\\\\\\"')
+                .replace(/\n/g, "\\n")
+                .replace(/\r/g, "\\r")
+                .replace(/\t/g, "\\t") + "'";
     }
     else {
         const first = part.charAt(0);
@@ -35,40 +40,27 @@ function compilePart(part, stringPart) {
  * - #: expression # - Output HTML-encoded expression result
  * - # code # - Execute JavaScript code
  */
-class TemplateService {
-    constructor() {
-        this.paramName = "data";
-        this.useWithBlock = true;
-        this.debugTemplates = false;
+class Template {
+    static paramName = "data";
+    static useWithBlock = true;
+    static debugTemplates = false;
+    static setDebugMode(enabled) {
+        Template.debugTemplates = enabled;
     }
-    /**
-     * Enable or disable template debugging
-     */
-    setDebugMode(enabled) {
-        this.debugTemplates = enabled;
-    }
-    /**
-     * Render a template with an array of data items
-     */
-    render(template, data) {
+    static render(template, data) {
         let html = "";
         for (let idx = 0; idx < data.length; idx++) {
             html += template(data[idx]);
         }
         return html;
     }
-    /**
-     * Compile a template string into a function
-     */
-    compile(template, options) {
-        // If already a function, return as-is
+    static compile(template, options) {
         if (typeof template === "function") {
             return template;
         }
-        // Use options values only if they're not undefined (matches original jQuery extend behavior)
         const settings = {
-            paramName: (options === null || options === void 0 ? void 0 : options.paramName) !== undefined ? options.paramName : this.paramName,
-            useWithBlock: (options === null || options === void 0 ? void 0 : options.useWithBlock) !== undefined ? options.useWithBlock : this.useWithBlock,
+            paramName: options?.paramName !== undefined ? options.paramName : Template.paramName,
+            useWithBlock: options?.useWithBlock !== undefined ? options.useWithBlock : Template.useWithBlock
         };
         const paramName = settings.paramName;
         const argumentName = paramName.match(argumentNameRegExp)[0];
@@ -76,7 +68,12 @@ class TemplateService {
         let functionBody = "var $kendoOutput, $kendoHtmlEncode = kendo.htmlEncode;";
         functionBody += useWithBlock ? "with(" + paramName + "){" : "";
         functionBody += "$kendoOutput=";
-        const parts = template.replace(escapedCurlyRegExp, "__CURLY__").replace(encodeRegExp, "#=$kendoHtmlEncode($1)#").replace(curlyRegExp, "}").replace(escapedSharpRegExp, "__SHARP__").split("#");
+        const parts = template
+            .replace(escapedCurlyRegExp, "__CURLY__")
+            .replace(encodeRegExp, "#=$kendoHtmlEncode($1)#")
+            .replace(curlyRegExp, "}")
+            .replace(escapedSharpRegExp, "__SHARP__")
+            .split("#");
         for (let idx = 0; idx < parts.length; idx++) {
             functionBody += compilePart(parts[idx], idx % 2 === 0);
         }
@@ -84,16 +81,14 @@ class TemplateService {
         functionBody += "return $kendoOutput;";
         functionBody = functionBody.replace(sharpRegExp, "#");
         try {
-            // This function evaluation is required for legacy support of the Kendo Template syntax - non CSP compliant.
-            // It is a valid security concern, however this is required for backward compatibility
+            // Function evaluation required for legacy Kendo Template syntax (non-CSP compliant)
             const fn = new Function(argumentName, functionBody);
             fn._slotCount = Math.floor(parts.length / 2);
             return fn;
         }
         catch (e) {
-            if (this.debugTemplates) {
+            if (Template.debugTemplates) {
                 console.warn(`Invalid template:'${template}' Generated code:'${functionBody}'`);
-                // Return a no-op function in debug mode
                 return (() => "");
             }
             else {
@@ -102,4 +97,5 @@ class TemplateService {
         }
     }
 }
-export const templateService = new TemplateService();
+export { Template };
+export const templateService = Template;

@@ -99,4 +99,42 @@ describe("Observable wrapped keys", function() {
         assert.equal(wrappedKeys.length, 6); // includes the contructor prop as part of the prototype
         assert.isOk(observable.hasOwnProperty("toString"));
     });
+
+    it("shouldSerialize honors per-field function serialization options", function() {
+        let observable = kendo.observable({
+            name: "Jane",
+            formatter: function() { return "x"; }
+        });
+
+        assert.isTrue(observable.shouldSerialize("formatter", { formatter: true }));
+        assert.isFalse(observable.shouldSerialize("formatter", { formatter: false }));
+    });
+
+    it("forEach iterates serializable fields", function() {
+        let observable = kendo.observable({
+            name: "Jane",
+            age: 30
+        });
+        let fields = [];
+
+        observable.forEach(function(value, field) {
+            fields.push(field);
+        });
+
+        assert.deepEqual(fields.sort(), ["age", "name"]);
+    });
+
+    it("get returns the observable itself for this", function() {
+        let observable = kendo.observable({ name: "Jane" });
+
+        assert.strictEqual(observable.get("this"), observable);
+    });
+
+    it("set wraps plain objects as observable objects", function() {
+        let observable = kendo.observable({ item: null });
+
+        observable.set("item", { name: "Jane" });
+
+        assert.isOk(observable.get("item") instanceof kendo.data.ObservableObject);
+    });
 });

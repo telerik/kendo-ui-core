@@ -10,8 +10,6 @@ res_type: kb
 components: ["general"]
 ---
 
-# Handle Cascading DropDownLists within the Grid
-
 ## Environment
 
 <table>

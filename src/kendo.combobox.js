@@ -1094,6 +1094,7 @@ export const __meta__ = {
                 })
                 .attr({
                     "role": "combobox",
+                    "aria-haspopup": "listbox",
                     "aria-expanded": false,
                     inputmode: options.inputMode
                 })

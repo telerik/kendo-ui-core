@@ -375,6 +375,7 @@ export const __meta__ = {
 
             that.input.attr({
                 "role": "combobox",
+                "aria-haspopup": "listbox",
                 "aria-expanded": false,
                 "aria-controls": id,
                 "aria-autocomplete": autocomplete,

@@ -4,71 +4,71 @@ const PREFIX = "prefix";
  * Service for managing CSS class properties for widgets
  */
 class CssPropertiesService {
+    /**
+     * Predefined theme color values
+     */
+    themeColorValues = [
+        'base', 'primary', 'secondary', 'tertiary', 'inherit',
+        'info', 'success', 'warning', 'error', 'inverse'
+    ];
+    /**
+     * Predefined fill mode values
+     */
+    fillModeValues = ['solid', 'outline', 'flat'];
+    /**
+     * Predefined shape values
+     */
+    shapeValues = ['rectangle', 'square'];
+    /**
+     * Predefined size values
+     */
+    sizeValues = [
+        ['xsmall', 'xs'], ['small', 'sm'], ['medium', 'md'], ['large', 'lg']
+    ];
+    /**
+     * Predefined rounded values
+     */
+    roundedValues = [
+        ['small', 'sm'], ['medium', 'md'], ['large', 'lg'], ['full', 'full'], ['none', 'none']
+    ];
+    /**
+     * Predefined position mode values
+     */
+    positionModeValues = [
+        'fixed', 'static', 'sticky', 'absolute'
+    ];
+    /**
+     * Predefined resize values
+     */
+    resizeValues = [
+        ['both', 'resize'], ['horizontal', 'resize-x'], ['vertical', 'resize-y']
+    ];
+    /**
+     * Predefined overflow values
+     */
+    overflowValues = [
+        'auto', 'hidden', 'visible', 'scroll', 'clip'
+    ];
+    /**
+     * Predefined layout flow values
+     */
+    layoutFlowValues = [
+        ['vertical', '!k-flex-col'], ['horizontal', '!k-flex-row']
+    ];
+    /**
+     * Default values dictionary
+     */
+    defaultValues = {};
+    /**
+     * Widget property dictionary
+     */
+    propertyDictionary = {};
+    /**
+     * Legacy property to CSS class map (for BottomNavigation compatibility)
+     * TODO: delete after implementing new styles and classes for BottomNavigation
+     */
+    propertyToCssClassMap = {};
     constructor() {
-        /**
-         * Predefined theme color values
-         */
-        this.themeColorValues = [
-            'base', 'primary', 'secondary', 'tertiary', 'inherit',
-            'info', 'success', 'warning', 'error', 'inverse'
-        ];
-        /**
-         * Predefined fill mode values
-         */
-        this.fillModeValues = ['solid', 'outline', 'flat'];
-        /**
-         * Predefined shape values
-         */
-        this.shapeValues = ['rectangle', 'square'];
-        /**
-         * Predefined size values
-         */
-        this.sizeValues = [
-            ['xsmall', 'xs'], ['small', 'sm'], ['medium', 'md'], ['large', 'lg']
-        ];
-        /**
-         * Predefined rounded values
-         */
-        this.roundedValues = [
-            ['small', 'sm'], ['medium', 'md'], ['large', 'lg'], ['full', 'full'], ['none', 'none']
-        ];
-        /**
-         * Predefined position mode values
-         */
-        this.positionModeValues = [
-            'fixed', 'static', 'sticky', 'absolute'
-        ];
-        /**
-         * Predefined resize values
-         */
-        this.resizeValues = [
-            ['both', 'resize'], ['horizontal', 'resize-x'], ['vertical', 'resize-y']
-        ];
-        /**
-         * Predefined overflow values
-         */
-        this.overflowValues = [
-            'auto', 'hidden', 'visible', 'scroll', 'clip'
-        ];
-        /**
-         * Predefined layout flow values
-         */
-        this.layoutFlowValues = [
-            ['vertical', '!k-flex-col'], ['horizontal', '!k-flex-row']
-        ];
-        /**
-         * Default values dictionary
-         */
-        this.defaultValues = {};
-        /**
-         * Widget property dictionary
-         */
-        this.propertyDictionary = {};
-        /**
-         * Legacy property to CSS class map (for BottomNavigation compatibility)
-         * TODO: delete after implementing new styles and classes for BottomNavigation
-         */
-        this.propertyToCssClassMap = {};
         // Register default CSS classes
         this.registerDefaultCssClasses("themeColor", this.themeColorValues);
         this.registerDefaultCssClasses("fillMode", this.fillModeValues);
@@ -225,11 +225,10 @@ class CssPropertiesService {
      * Get a valid legacy CSS class
      */
     getValidCssClass(prefix, propName, value) {
-        var _a;
         if (value === undefined) {
             return "";
         }
-        const validValue = (_a = this.propertyToCssClassMap[propName]) === null || _a === void 0 ? void 0 : _a[value];
+        const validValue = this.propertyToCssClassMap[propName]?.[value];
         if (validValue) {
             return prefix + validValue;
         }

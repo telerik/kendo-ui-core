@@ -6,10 +6,8 @@ const unsafeFields = ["__proto__", "constructor", "prototype"];
  
  */
 class PropertyAccessService {
-    constructor() {
-        this.getterCache = Object.create(null);
-        this.setterCache = Object.create(null);
-    }
+    getterCache = Object.create(null);
+    setterCache = Object.create(null);
     /**
      * Wrap an expression for safe access.
      * Generates nested null-safe property access.

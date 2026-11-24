@@ -117,6 +117,7 @@ export const __meta__ = {
                 .attr({
                     autocomplete: AUTOCOMPLETEVALUE,
                     role: "combobox",
+                    "aria-haspopup": "listbox",
                     "aria-expanded": false,
                     inputmode: options.inputMode
                 });

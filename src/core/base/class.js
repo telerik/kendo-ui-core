@@ -50,6 +50,11 @@ import { kendoJQueryService } from "../services/kendo-jquery.service";
  */
 export class Class {
     /**
+     * Static reference to prototype (jQuery-like pattern used throughout Kendo)
+     */
+    static fn;
+    static prototypeMembers;
+    /**
      * Creates a subclass with the given prototype.
      * This is the legacy extend pattern used throughout Kendo UI.
      *
@@ -76,19 +81,21 @@ export class Class {
      */
     static extend(proto) {
         const that = this;
+        const protoInit = proto?.init;
         // Create a temp base for prototype chain setup (matches original pattern)
         const base = function () { };
         base.prototype = that.prototype;
         // Create the subclass constructor
-        // If proto has init, use it; otherwise create a constructor that calls parent's init (if any)
+        // If proto has init, use it; otherwise create a constructor that calls the parent's init when present
         // Note: Original uses `that.apply(this, arguments)` but ES6 classes can't be called with apply.
         // Instead, we call the parent's init method directly from the prototype chain.
-        const subclass = proto && proto.init ? proto.init : function (...args) {
+        const subclass = (protoInit || function (...args) {
             // Call parent's init if it exists (this mimics `that.apply(this, arguments)`)
-            if (that.prototype.init) {
-                that.prototype.init.apply(this, args);
+            const parentPrototype = that.prototype;
+            if (parentPrototype.init) {
+                parentPrototype.init.apply(this, args);
             }
-        };
+        });
         // Set up prototype chain: subclass.prototype inherits from base class prototype
         const fn = subclass.fn = subclass.prototype = new base();
         // Copy all members from proto to the new prototype
@@ -109,33 +116,62 @@ export class Class {
         fn.constructor = subclass;
         // Allow subclass to be further extended
         subclass.extend = that.extend;
+        subclass.applyEnumerablePrototype = that.applyEnumerablePrototype;
+        subclass.applyPrototypeMembers = that.applyPrototypeMembers;
         return subclass;
     }
+    static applyEnumerablePrototype() {
+        const prototype = this.prototype;
+        for (const member of Reflect.ownKeys(prototype)) {
+            if (member === "constructor") {
+                continue;
+            }
+            const descriptor = Object.getOwnPropertyDescriptor(prototype, member);
+            const isAccessor = descriptor && (typeof descriptor.get === "function" || typeof descriptor.set === "function");
+            const isMethod = descriptor && "value" in descriptor && typeof descriptor.value === "function";
+            if (!descriptor || (!isAccessor && !isMethod) ||
+                descriptor.enumerable || descriptor.configurable === false) {
+                continue;
+            }
+            Object.defineProperty(prototype, member, {
+                ...descriptor,
+                enumerable: true
+            });
+        }
+    }
+    static applyPrototypeMembers() {
+        const prototype = this.prototype;
+        const $ = kendoJQueryService.getConstructor();
+        this.fn = prototype;
+        if (Object.prototype.hasOwnProperty.call(this, "prototypeMembers") && this.prototypeMembers) {
+            for (const member of Reflect.ownKeys(this.prototypeMembers)) {
+                const value = this.prototypeMembers[member];
+                if (value != null && value.constructor === Object) {
+                    prototype[member] = $.extend(true, {}, prototype[member], value);
+                }
+                else {
+                    prototype[member] = value;
+                }
+            }
+        }
+        if (Object.prototype.hasOwnProperty.call(this, "options")) {
+            const superPrototype = Object.getPrototypeOf(prototype);
+            const inheritedOptions = superPrototype && typeof superPrototype.options === "object"
+                ? superPrototype.options
+                : undefined;
+            const options = $.extend(true, {}, inheritedOptions, this.options);
+            this.options = options;
+            prototype.options = options;
+        }
+    }
+    static makePrototypeMethodsEnumerable(ctor = this) {
+        Class.applyEnumerablePrototype.call(ctor);
+    }
+    init(..._args) {
+    }
+    _initOptions(options) {
+        this.options = kendoJQueryService.getConstructor().extend(true, {}, this.options, options);
+    }
 }
-// Initialize static fn reference
-Class.fn = Class.prototype;
-/**
- * Define init and _initOptions on the prototype as ENUMERABLE properties.
- *
- * ES6 class methods are non-enumerable by default, which breaks the
- * legacy extend() pattern because when we do:
- *   base.prototype = that.prototype;
- *   fn = new base();
- *
- * The inherited methods from the ES6 class prototype don't appear in
- * for...in loops or when the object is logged/inspected. This causes
- * issues when deepExtend copies class instances - the non-enumerable
- * methods are not properly inherited through the prototype chain.
- *
- * By defining these methods directly on the prototype (like the original
- * Kendo Class did), we ensure they're enumerable and properly inherited.
- */
-// Base init method - does nothing by default, override in subclasses
-Class.prototype.init = function (..._args) {
-    // Base init does nothing - override in subclasses
-};
-// Initialize options by deep extending with the provided options
-Class.prototype._initOptions = function (options) {
-    // Use jQuery's extend directly to match original behavior exactly
-    this.options = kendoJQueryService.getConstructor().extend(true, {}, this.options, options);
-};
+Class.applyEnumerablePrototype();
+Class.applyPrototypeMembers();

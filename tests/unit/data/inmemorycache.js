@@ -75,4 +75,20 @@ describe("InMemoryCache", function() {
         assert.equal(cache.find({ foo: 2 }), 2);
     });
 
+    it("create returns a new cache for true and inmemory", function() {
+        assert.isOk(Cache.create(true) instanceof Cache);
+        assert.isOk(Cache.create("inmemory") instanceof Cache);
+    });
+
+    it("create returns the provided custom cache object", function() {
+        let customCache = {
+            add: $.noop,
+            find: $.noop,
+            clear: $.noop,
+            remove: $.noop
+        };
+
+        assert.equal(Cache.create(customCache), customCache);
+    });
+
 });

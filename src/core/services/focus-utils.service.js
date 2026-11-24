@@ -12,12 +12,17 @@ class FocusUtilsService {
      */
     focusable(element, isTabIndexNotNaN) {
         const nodeName = element.nodeName.toLowerCase();
-        return (/input|select|textarea|button|object/.test(nodeName) ?
-            !element.disabled :
-            nodeName === "a" ?
-                element.href || isTabIndexNotNaN :
-                isTabIndexNotNaN) &&
-            this.visible(element);
+        let isFocusable;
+        if (/input|select|textarea|button|object/.test(nodeName)) {
+            isFocusable = !element.disabled;
+        }
+        else if (nodeName === "a") {
+            isFocusable = !!(element.href || isTabIndexNotNaN);
+        }
+        else {
+            isFocusable = isTabIndexNotNaN;
+        }
+        return isFocusable && this.visible(element);
     }
     /**
      * Check if an element is visible (not hidden or with visibility:hidden)
@@ -114,9 +119,10 @@ class FocusUtilsService {
             target = nextFocusable;
         }
         else if (widgetInstance) {
+            const widgetWrapper = widgetInstance._inputWrapper || widgetInstance.wrapper;
             target = widgetInstance.options.name === 'Editor' ?
                 $(widgetInstance.body) :
-                widgetInstance.wrapper.find(":kendoFocusable").first();
+                widgetWrapper ? widgetWrapper.find(":kendoFocusable").first() : element;
         }
         else {
             target = element;

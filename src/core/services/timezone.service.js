@@ -6,29 +6,27 @@ const STRING = "string";
  * Service for timezone conversions
  */
 class TimezoneService {
-    constructor() {
-        /**
-         * Timezone zone definitions - populated externally
-         */
-        this.zones = {};
-        /**
-         * Timezone rule definitions - populated externally
-         */
-        this.rules = {};
-        /**
-         * Month name to index mapping
-         */
-        this.months = {
-            Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
-            Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
-        };
-        /**
-         * Day name to index mapping
-         */
-        this.days = {
-            Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6
-        };
-    }
+    /**
+     * Timezone zone definitions - populated externally
+     */
+    zones = {};
+    /**
+     * Timezone rule definitions - populated externally
+     */
+    rules = {};
+    /**
+     * Month name to index mapping
+     */
+    months = {
+        Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+        Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+    };
+    /**
+     * Day name to index mapping
+     */
+    days = {
+        Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6
+    };
     /**
      * Get the UTC offset for a given time in a timezone
      */
@@ -39,7 +37,7 @@ class TimezoneService {
         const info = this.zoneAndRule(utcTime, this.zones, this.rules, timezone);
         const zone = info.zone;
         const rule = info.rule;
-        return numberParserService.parseFloat(rule ? zone[0] - rule[6] : zone[0]);
+        return numberParserService.parseFloat(rule ? zone[0] - rule[6] : zone[0]) ?? 0;
     }
     /**
      * Get the timezone abbreviation for a given time

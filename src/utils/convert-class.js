@@ -1,3 +1,5 @@
+import { Class } from "../core/index.js";
+
 export function fromESClass(ESClass) {
     class ExtendedClass extends ESClass {
         static extend(proto) {
@@ -26,6 +28,8 @@ export function fromESClass(ESClass) {
 
     // Apply the prototype to fn to allow for chaining
     ExtendedClass.fn = ExtendedClass.prototype;
+    ExtendedClass.applyEnumerablePrototype = Class.applyEnumerablePrototype;
+    ExtendedClass.applyPrototypeMembers = Class.applyPrototypeMembers;
 
     return ExtendedClass;
 }

@@ -261,6 +261,18 @@ describe("kendo.data.Model.set", function() {
         assert.equal(typeof m.get("bar"), "number");
     });
 
+    it("setting number null string returns null", function() {
+        let MyModel = kendo.data.Model.define({
+            fields: {
+                bar: { field: "bar", type: "number" }
+            }
+        }), m = new MyModel();
+
+        m.set("bar", "null");
+
+        assert.equal(m.get("bar"), null);
+    });
+
     it("setting number when no type defined", function() {
         let MyModel = kendo.data.Model.define({
             fields: {
@@ -317,6 +329,18 @@ describe("kendo.data.Model.set", function() {
         }), m = new MyModel();
 
         m.set("bar", null);
+        assert.equal(m.get("bar"), null);
+    });
+
+    it("setting boolean null string returns null", function() {
+        let MyModel = kendo.data.Model.define({
+            fields: {
+                bar: { field: "bar", type: "boolean" }
+            }
+        }), m = new MyModel();
+
+        m.set("bar", "null");
+
         assert.equal(m.get("bar"), null);
     });
 
@@ -390,6 +414,56 @@ describe("kendo.data.Model.set", function() {
         m.set("bar", "1/1/2000");
         assert.equal(m.get("bar").getTime(), new Date("1/1/2000").getTime());
         assert.equal(typeof m.get("bar"), "object");
+    });
+
+    it("setting date null string returns null", function() {
+        let MyModel = kendo.data.Model.define({
+            fields: {
+                bar: { field: "bar", type: "date" }
+            }
+        }), m = new MyModel();
+
+        m.set("bar", "null");
+
+        assert.equal(m.get("bar"), null);
+    });
+
+    it("setting string null string returns null", function() {
+        let MyModel = kendo.data.Model.define({
+            fields: {
+                bar: { field: "bar", type: "string" }
+            }
+        }), m = new MyModel();
+
+        m.set("bar", "null");
+
+        assert.equal(m.get("bar"), null);
+    });
+
+    it("_parse resolves field name mappings defined as strings", function() {
+        let MyModel = kendo.data.Model.define({
+            fields: {
+                bar: "baz"
+            }
+        }), m = new MyModel();
+
+        assert.equal(m._parse("baz", "value"), "value");
+    });
+
+    it("accept wraps nested objects and resets dirty state", function() {
+        let MyModel = kendo.data.Model.define();
+        let m = new MyModel();
+
+        m.dirty = true;
+        m.accept({
+            foo: {
+                bar: "baz"
+            }
+        });
+
+        assert.equal(m.get("foo.bar"), "baz");
+        assert.strictEqual(m.foo.parent(), m);
+        assert.isFalse(m.dirty);
     });
 
 

@@ -176,6 +176,16 @@ describe("ObservableArray find", function() {
 
         assert.equal(actual, expected);
     });
+
+    it("find returns the first matching item", function() {
+        let array = new kendo.data.ObservableArray([1, 2, 3]);
+
+        let result = array.find(function(item) {
+            return item > 1;
+        });
+
+        assert.equal(result, 2);
+    });
 });
 
 describe("ObservableArray every", function() {
@@ -191,6 +201,16 @@ describe("ObservableArray every", function() {
         }, expected);
 
         assert.equal(actual, expected);
+    });
+
+    it("every returns true when all items match", function() {
+        let array = new kendo.data.ObservableArray([2, 4, 6]);
+
+        let result = array.every(function(item) {
+            return item % 2 === 0;
+        });
+
+        assert.isTrue(result);
     });
 });
 
@@ -225,6 +245,60 @@ describe("LazyObservableArray", function() {
             array = new kendo.data.LazyObservableArray(source);
 
         assert.isOk(array._loadedNodes);
+    });
+
+    it("loading returns the current loading state", function() {
+        let array = new kendo.data.LazyObservableArray([]);
+
+        assert.isUndefined(array.loading());
+
+        array._loading = true;
+
+        assert.isTrue(array.loading());
+    });
+
+});
+
+describe("ObservableArray collection methods", function() {
+
+    it("shift removes the first item and triggers change", function() {
+        let array = new kendo.data.ObservableArray([1, 2]);
+        let args;
+
+        array.bind("change", function(e) {
+            args = e;
+        });
+
+        let removed = array.shift();
+
+        assert.equal(removed, 1);
+        assert.equal(args.action, "remove");
+        assert.equal(args.index, 0);
+        assert.equal(args.items[0], 1);
+    });
+
+    it("unshift inserts items at the beginning and triggers change", function() {
+        let array = new kendo.data.ObservableArray([2]);
+        let args;
+
+        array.bind("change", function(e) {
+            args = e;
+        });
+
+        let length = array.unshift(1);
+
+        assert.equal(length, 2);
+        assert.equal(array[0], 1);
+        assert.equal(args.action, "add");
+        assert.equal(args.index, 0);
+        assert.equal(args.items[0], 1);
+    });
+
+    it("indexOf returns the item index or -1 when missing", function() {
+        let array = new kendo.data.ObservableArray(["a", "b"]);
+
+        assert.equal(array.indexOf("b"), 1);
+        assert.equal(array.indexOf("c"), -1);
     });
 
 });

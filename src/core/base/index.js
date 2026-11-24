@@ -10,3 +10,4 @@ export * from "./class";
 export * from "./observable";
 export * from "./widget";
 export * from "./databound-widget";
+export * from "./mobile-widget";

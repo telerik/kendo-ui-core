@@ -5,9 +5,7 @@
  * This allows customization of data-role attributes (e.g., data-kendo-role instead of data-role).
  */
 class NamespaceService {
-    constructor() {
-        this._ns = "";
-    }
+    _ns = "";
     /**
      * Get the current namespace prefix
      */

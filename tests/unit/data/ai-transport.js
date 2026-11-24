@@ -1,5 +1,5 @@
 import '@progress/kendo-ui/src/kendo.data.js';
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 describe('AiTransport tests', () => {
     const AiTransport = kendo.data.AiTransport;
@@ -7,14 +7,9 @@ describe('AiTransport tests', () => {
     let service;
 
     beforeEach(() => {
-        kendo.guid = vi.fn().mockReturnValue('test-guid');
         service = { url: 'http://example.com' };
 
         instance = new AiTransport({ service });
-    });
-
-    afterEach(()=> {
-        kendo.guid.mockClear();
     });
 
     it('should call requestStart and $.ajax with the setup options', () => {
@@ -61,7 +56,7 @@ describe('AiTransport tests', () => {
         const callArg = successSpy.mock.calls[0][0];
 
         expect(callArg).toMatchObject({
-            id: 'test-guid',
+            id: expect.any(String),
             output: 'custom-output',
             prompt: 'test',
             isRetry: false
@@ -93,7 +88,7 @@ describe('AiTransport tests', () => {
         const callArg = successSpy.mock.calls[0][0];
 
         expect(callArg).toMatchObject({
-            id: 'test-guid',
+            id: expect.any(String),
             output: 'default-output',
             prompt: 'default test',
             isRetry: true
@@ -104,13 +99,13 @@ describe('AiTransport tests', () => {
         const errorSpy = vi.fn();
         instance.options.error = errorSpy;
         const response = { error: 'error-data' };
-        const newResponseObject = {
-            "id": "test-guid",
+        const newResponseObject = expect.objectContaining({
+            "id": expect.any(String),
             "isRetry": undefined,
             "output": "An error occurred while processing the request.",
             "prompt": undefined,
             "response": response,
-        };
+        });
 
         instance.error(response);
 

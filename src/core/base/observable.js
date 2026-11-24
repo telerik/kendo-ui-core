@@ -61,6 +61,15 @@ function isDefaultPrevented() {
  */
 export class Observable extends Class {
     /**
+     * Static reference to prototype (jQuery-like pattern used throughout Kendo)
+     */
+    static fn;
+    static events = [];
+    /**
+     * Internal storage for event handlers.
+     */
+    _events;
+    /**
      * Constructor - initializes the Observable's _events storage.
      */
     constructor() {
@@ -70,7 +79,7 @@ export class Observable extends Class {
     /**
      * Initialize the Observable instance.
      * Sets up the internal _events storage.
-     * Accepts any arguments to allow subclasses to override with different signatures.
+     * Accepts arbitrary arguments to allow subclasses to override with different signatures.
      *
      * Note: For direct Observable usage, this is called by the constructor.
      * For subclasses, they should call Observable.fn.init.call(this) in their init.
@@ -125,7 +134,7 @@ export class Observable extends Class {
                     handler = (function (evtName, originalHandler) {
                         const wrappedHandler = function () {
                             that.unbind(evtName, wrappedHandler);
-                            originalHandler.apply(that, arguments);
+                            originalHandler.call(that, arguments[0]);
                         };
                         wrappedHandler.original = originalHandler;
                         return wrappedHandler;
@@ -177,32 +186,21 @@ export class Observable extends Class {
         }
         return that;
     }
-    /**
-     * Triggers an event, invoking all bound handlers.
-     *
-     * @param eventName - Name of the event to trigger
-     * @param e - Optional event data object
-     * @returns true if preventDefault() was called, false otherwise
-     */
     trigger(eventName, e) {
         const that = this;
         let events = that._events[eventName];
         let idx;
         const length = events ? events.length : 0;
         if (events) {
-            // Create or extend event object
             const eventObj = (e || {});
             eventObj.sender = that;
             eventObj._defaultPrevented = false;
             eventObj.preventDefault = preventDefault;
             eventObj.isDefaultPrevented = isDefaultPrevented;
-            // Clone array to allow modifications during iteration
-            // (e.g., unbinding in a handler)
             events = events.slice();
             for (idx = 0; idx < length; idx++) {
                 events[idx].call(that, eventObj);
             }
-            // Check if preventDefault was called by a handler
             return eventObj._defaultPrevented === true;
         }
         return false;
@@ -242,24 +240,18 @@ export class Observable extends Class {
         }
         return that;
     }
+    static applyPrototypeMembers() {
+        super.applyPrototypeMembers();
+        const prototype = this.prototype;
+        const superPrototype = Object.getPrototypeOf(prototype);
+        if (Object.prototype.hasOwnProperty.call(this, "events")) {
+            const inheritedEvents = Array.isArray(superPrototype?.events) ? superPrototype.events : [];
+            const ownEvents = Array.isArray(this.events) ? this.events : [];
+            const events = inheritedEvents.concat(ownEvents);
+            this.events = events;
+            prototype.events = events;
+        }
+    }
 }
-/**
- * Make Observable methods ENUMERABLE by deleting and reassigning them.
- *
- * ES6 class methods are non-enumerable by default, which breaks legacy patterns
- * like `$.extend({}, observableInstance, ...)` which copies properties using
- * for...in loops. By deleting and reassigning, we create enumerable properties.
- */
-const proto = Observable.prototype;
-const methods = ['init', 'bind', 'one', 'first', 'trigger', 'unbind'];
-methods.forEach(method => {
-    const fn = proto[method];
-    Object.defineProperty(proto, method, {
-        value: fn,
-        writable: true,
-        configurable: true,
-        enumerable: true
-    });
-});
-// Set up static fn reference (jQuery-like pattern)
-Observable.fn = Observable.prototype;
+Observable.applyEnumerablePrototype();
+Observable.applyPrototypeMembers();

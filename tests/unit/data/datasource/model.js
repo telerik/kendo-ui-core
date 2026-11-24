@@ -429,6 +429,19 @@ describe("DataSource", function() {
         assert.isOk(model.dirtyFields["foo"]);
     });
 
+    it("adding to a nested collection marks a defined model and its field dirty", function() {
+        let MyModel = kendo.data.Model.define({});
+        let model = new MyModel({ tags: [] });
+
+        assert.isFalse(model.dirty);
+        assert.deepEqual(model.dirtyFields, {});
+
+        model.get("tags").push("new");
+
+        assert.isTrue(model.dirty);
+        assert.deepEqual(model.dirtyFields, { tags: true });
+    });
+
     it("removing items from array field sets the dirty flag to true", function() {
         let model = new kendo.data.Model({
             foo: ["foo"]

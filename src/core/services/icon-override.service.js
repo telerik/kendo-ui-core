@@ -1,12 +1,10 @@
 class IconService {
-    constructor() {
-        this.overrides = {};
-        this._hasOverrides = false;
-        this.registry = new WeakMap();
-        this._tokenCounter = 0;
-        this._activeContexts = new Map();
-        this._contextOrder = [];
-    }
+    overrides = {};
+    _hasOverrides = false;
+    registry = new WeakMap();
+    _tokenCounter = 0;
+    _activeContexts = new Map();
+    _contextOrder = [];
     setIcons(dictionary) {
         const keys = Object.keys(dictionary);
         for (let i = 0; i < keys.length; i++) {

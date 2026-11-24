@@ -8,12 +8,10 @@ import { utilsService } from "./utils.service";
  * Supports deep path-based setting with automatic object creation.
  */
 class DefaultsService {
-    constructor() {
-        /**
-         * The defaults storage object
-         */
-        this.defaults = {};
-    }
+    /**
+     * The defaults storage object
+     */
+    defaults = {};
     /**
      * Get the current defaults object
      */

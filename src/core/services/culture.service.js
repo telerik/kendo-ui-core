@@ -62,6 +62,7 @@ const DEFAULT_EN_US_CULTURE = {
     }
 };
 class CultureService {
+    cultures;
     constructor() {
         if (!window.kendo) {
             window.kendo = {};

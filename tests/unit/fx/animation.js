@@ -13,11 +13,11 @@ function animationProperty(element, property) {
         return property == "scale" ? 1 : 0;
     }
 
-    let match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
+    let match = transform.match(new RegExp(property + "\\s*\\(([-\\d\\.]+)", "i")),
         computed = 0;
 
     if (match) {
-        computed = parseInt(match[1], 10);
+        computed = parseFloat(match[1]);
     } else {
         match = transform.match(matrix3dRegExp) || [0, 0, 0, 0, 0];
         property = property.toLowerCase();
@@ -301,7 +301,7 @@ describe("kendo.animate", function() {
         });
 
         asyncTest("slideIn:down moves the element down from - its height to 0", function(done) {
-            span.css({ position: "absolute", display: "block", top: 10 });
+            span.css({ position: "absolute", display: "block", top: 10, height: 10 });
 
             let position = 1;
             span.css(TRANSFORM, "translateY(10px)");

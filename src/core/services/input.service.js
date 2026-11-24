@@ -39,7 +39,9 @@ class InputService {
                     return [start, end];
                 }
                 else {
-                    return [inputElement.selectionStart, inputElement.selectionEnd];
+                    const selectionStart = inputElement.selectionStart;
+                    const selectionEnd = inputElement.selectionEnd;
+                    return selectionStart !== null && selectionEnd !== null ? [selectionStart, selectionEnd] : [];
                 }
             }
             else if (document.selection) {
@@ -81,7 +83,8 @@ class InputService {
         const csrfToken = $("meta[name=csrf-token],meta[name=_csrf]").attr("content");
         const csrfParam = $("meta[name=csrf-param],meta[name=_csrf_header]").attr("content");
         $("input[name^='__RequestVerificationToken']").each(function () {
-            tokens[this.name] = this.value;
+            const input = this;
+            tokens[input.name] = input.value;
         });
         if (csrfParam !== undefined && csrfToken !== undefined) {
             tokens[csrfParam] = csrfToken;

@@ -10,7 +10,9 @@ import { propertyAccessService } from "./property-access.service";
 import { templateService } from "./template.service";
 import { utilsService } from "./utils.service";
 import { namespaceService } from "./namespace.service";
+import { supportService } from "./support.service";
 import { Observable } from "../base";
+import { kendoJQueryService } from "./kendo-jquery.service";
 // Constants - match original kendo.core.js
 const STRING = "string";
 const FUNCTION = "function";
@@ -333,6 +335,24 @@ class WidgetUtilsService {
                 }
             }
         }
+    }
+    touchScroller(elements, options) {
+        const $ = kendoJQueryService.getConstructor();
+        if (!options) {
+            options = {};
+        }
+        options.useNative = true;
+        return $(elements).map(function (_idx, element) {
+            element = $(element);
+            const mobileUi = widgetRegistryService.getNamespace("mobile.ui");
+            if (supportService.kineticScrollNeeded && mobileUi && mobileUi.Scroller && !element.data("kendoMobileScroller")) {
+                element.kendoMobileScroller(options);
+                return element.data("kendoMobileScroller");
+            }
+            else {
+                return false;
+            }
+        })[0];
     }
 }
 export const widgetUtilsService = new WidgetUtilsService();

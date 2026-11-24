@@ -486,4 +486,10 @@ describe("kendo.ui.MultiSelect Select All ARIA", function() {
         let ms = new MultiSelect(input, { dataSource: ["a","b"], selectAll: true, checkboxes: true, animation: false, value: ["a"] });
         await axeRunFixture();
     });
+
+    it("MultiSelect renders aria-haspopup listbox on the input", function() {
+        let ms = new MultiSelect(input, { dataSource: ["a", "b"], animation: false });
+
+        assert.equal(ms.input.attr("aria-haspopup"), "listbox");
+    });
 });

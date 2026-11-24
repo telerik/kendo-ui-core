@@ -14,8 +14,43 @@ function testRx(agent, rxs, dflt) {
  * Support detection service for browser, OS, and feature detection
  */
 class SupportService {
+    _scrollbar = undefined;
+    browser;
+    mobileOS;
+    touch;
+    tbodyInnerHtml;
+    transforms;
+    transitions;
+    hasHW3D;
+    cssFlexbox;
+    cssFloat;
+    devicePixelRatio;
+    screenWidth;
+    screenHeight;
+    wpDevicePixelRatio;
+    hasNativeScrolling;
+    mouseAndTouchPresent;
+    clipboard;
+    eventCapture;
+    placeholder;
+    propertyChangeEvent;
+    input;
+    stableSort;
+    matchesSelector;
+    matchMedia;
+    pushState;
+    hashChange;
+    customElements;
+    msPointers;
+    pointers;
+    kineticScrollNeeded;
+    resize;
+    mousedown;
+    mouseup;
+    mousemove;
+    mousecancel;
+    click;
     constructor() {
-        this._scrollbar = undefined;
         this.scrollbar = this.scrollbar.bind(this);
         this.isRtl = this.isRtl.bind(this);
         this.detectOS = this.detectOS.bind(this);
@@ -102,16 +137,16 @@ class SupportService {
         // Stable sort detection
         this.stableSort = this.detectStableSort();
         // Matches selector
-        this.matchesSelector = elementProto.webkitMatchesSelector ||
-            elementProto.mozMatchesSelector ||
-            elementProto.msMatchesSelector ||
-            elementProto.oMatchesSelector ||
-            elementProto.matchesSelector ||
+        const elementProtoBoundary = elementProto;
+        this.matchesSelector = elementProtoBoundary.webkitMatchesSelector ||
+            elementProtoBoundary.mozMatchesSelector ||
+            elementProtoBoundary.msMatchesSelector ||
+            elementProtoBoundary.oMatchesSelector ||
+            elementProtoBoundary.matchesSelector ||
             elementProto.matches ||
             function (selector) {
-                const nodeList = doc.querySelectorAll ?
-                    (this.parentNode || doc).querySelectorAll(selector) || [] :
-                    $(selector);
+                const queryRoot = (this.parentNode || doc);
+                const nodeList = queryRoot.querySelectorAll(selector);
                 let i = nodeList.length;
                 while (i--) {
                     if (nodeList[i] === this) {

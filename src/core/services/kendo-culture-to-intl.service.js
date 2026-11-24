@@ -53,7 +53,6 @@ class KendoCultureToIntlService {
         };
     }
     buildLocaleInfoAll(kendoCulture, currencies) {
-        var _a, _b, _c, _d, _e, _f;
         const localeInfoAll = {};
         // Extract the name and split into language and territory if possible
         const [language, territory] = kendoCulture.name.split('-');
@@ -68,20 +67,20 @@ class KendoCultureToIntlService {
                 symbols: {
                     decimal: kendoCulture.numberFormat["."],
                     group: kendoCulture.numberFormat[","],
-                    percentSign: ((_a = kendoCulture.numberFormat.percent) === null || _a === void 0 ? void 0 : _a.symbol) || "%"
+                    percentSign: kendoCulture.numberFormat.percent?.symbol || "%"
                 },
                 decimal: {
                     patterns: kendoCulture.numberFormat.pattern,
                     groupSize: kendoCulture.numberFormat.groupSize
                 },
                 currency: {
-                    patterns: (_b = kendoCulture.numberFormat.currency) === null || _b === void 0 ? void 0 : _b.pattern,
-                    groupSize: (_c = kendoCulture.numberFormat.currency) === null || _c === void 0 ? void 0 : _c.groupSize
+                    patterns: kendoCulture.numberFormat.currency?.pattern,
+                    groupSize: kendoCulture.numberFormat.currency?.groupSize
                 },
                 percent: {
-                    patterns: (_d = kendoCulture.numberFormat.percent) === null || _d === void 0 ? void 0 : _d.pattern,
-                    groupSize: (_e = kendoCulture.numberFormat.percent) === null || _e === void 0 ? void 0 : _e.groupSize,
-                    decimals: (_f = kendoCulture.numberFormat.percent) === null || _f === void 0 ? void 0 : _f.decimals
+                    patterns: kendoCulture.numberFormat.percent?.pattern,
+                    groupSize: kendoCulture.numberFormat.percent?.groupSize,
+                    decimals: kendoCulture.numberFormat.percent?.decimals
                 }
             };
             // Map currency information if available

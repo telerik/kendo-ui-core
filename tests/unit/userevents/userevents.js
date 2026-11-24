@@ -3,11 +3,30 @@ import { press, move, release } from '../../helpers/unit/general-utils.js';
 import { asyncTest } from '../../helpers/unit/async-utils.js';
 
 let userEvents,
+    clickMoveClick,
     UserEvents = kendo.UserEvents,
+    ClickMoveClick = kendo.ClickMoveClick,
     element,
     parentEvents,
     childElement,
     childEvents;
+
+function mouseEvent(type, target, x, y, which) {
+    return {
+        type: type,
+        pageX: x,
+        pageY: y,
+        clientX: x,
+        clientY: y,
+        screenX: x,
+        screenY: y,
+        which: which || 1,
+        target: target,
+        currentTarget: target,
+        preventDefault: $.noop,
+        stopPropagation: $.noop
+    };
+}
 
 describe("UserEvents", function() {
     beforeEach(function() {
@@ -479,5 +498,521 @@ describe("doubleTap", function() {
             }, 300);
 
         }, 450);
+    });
+});
+
+describe("UserEvents coverage", function() {
+    let originalPointers;
+    let originalMsPointers;
+    let originalEventCapture;
+    let originalDelayedClick;
+    let originalBrowserVersion;
+
+    beforeEach(function() {
+        element = $('<div />').appendTo(Mocha.fixture);
+        originalPointers = kendo.support.pointers;
+        originalMsPointers = kendo.support.msPointers;
+        originalEventCapture = kendo.support.eventCapture;
+        originalDelayedClick = kendo.support.delayedClick;
+        originalBrowserVersion = kendo.support.browser.version;
+    });
+
+    afterEach(function() {
+        if (userEvents) {
+            userEvents.destroy();
+            userEvents = null;
+        }
+
+        if (parentEvents) {
+            parentEvents.destroy();
+            parentEvents = null;
+        }
+
+        kendo.support.pointers = originalPointers;
+        kendo.support.msPointers = originalMsPointers;
+        kendo.support.eventCapture = originalEventCapture;
+        kendo.support.delayedClick = originalDelayedClick;
+        kendo.support.browser.version = originalBrowserVersion;
+        UserEvents.current = null;
+        kendo.destroy(Mocha.fixture);
+    });
+
+    it("creates mouse touches from mouse events", function() {
+        userEvents = new UserEvents(element, { fastTap: true });
+
+        userEvents._start(mouseEvent("mousedown", element[0], 10, 20));
+
+        assert.equal(userEvents.touches[0].type, "mouse");
+    });
+
+    it("creates pointer touches from pointer events", function() {
+        userEvents = new UserEvents(element, { fastTap: true });
+        kendo.support.pointers = true;
+        kendo.support.msPointers = false;
+
+        userEvents._start({
+            type: "pointerdown",
+            target: element[0],
+            currentTarget: element[0],
+            originalEvent: {
+                pointerId: 7,
+                pageX: 10,
+                pageY: 20,
+                clientX: 10,
+                clientY: 20,
+                screenX: 10,
+                screenY: 20
+            },
+            preventDefault: $.noop,
+            stopPropagation: $.noop
+        });
+
+        assert.equal(userEvents.touches[0].type, "pointer");
+    });
+
+    it("applies pointer touch-action styles for old and new browsers", function() {
+        kendo.support.pointers = true;
+        kendo.support.msPointers = false;
+        kendo.support.browser.version = 10;
+
+        userEvents = new UserEvents(element, { touchAction: "pan-x" });
+
+        userEvents.destroy();
+        userEvents = null;
+
+        kendo.support.browser.version = 11;
+        userEvents = new UserEvents(element, { touchAction: "manipulation" });
+
+        assert.isOk(true);
+    });
+
+    it("binds dragstart prevention when configured", function() {
+        userEvents = new UserEvents(element, { preventDragEvent: true });
+
+        assert.isOk($._data(element[0], "events").dragstart);
+    });
+
+    it("prevents click when tap is prevented for click-based taps", function() {
+        let prevented = false;
+
+        kendo.support.delayedClick = function() {
+            return false;
+        };
+
+        userEvents = new UserEvents(element);
+        userEvents.bind("tap", function(e) {
+            e.preventDefault();
+        });
+
+        let event = $.Event("click", { pageX: 1, pageY: 2, clientX: 1, clientY: 2 });
+        event.preventDefault = function() {
+            prevented = true;
+        };
+
+        element.trigger(event);
+
+        assert.isTrue(prevented);
+    });
+
+    it("prevents selection when allowSelection is disabled", function() {
+        let prevented = false;
+        userEvents = new UserEvents(element, { allowSelection: false });
+
+        userEvents._select({
+            preventDefault: function() {
+                prevented = true;
+            }
+        });
+
+        assert.isTrue(prevented);
+    });
+
+    it("forwards preventDefault and stopPropagation from start options", function() {
+        let defaultPrevented = false;
+        let propagationStopped = false;
+
+        userEvents = new UserEvents(element, {
+            fastTap: true,
+            preventDefault: true,
+            stopPropagation: true
+        });
+
+        userEvents._start({
+            type: "touchstart",
+            which: 1,
+            target: element[0],
+            currentTarget: element[0],
+            originalEvent: {
+                changedTouches: [{
+                    pageX: 10,
+                    pageY: 20,
+                    clientX: 10,
+                    clientY: 20,
+                    screenX: 10,
+                    screenY: 20,
+                    identifier: 1,
+                    target: element[0]
+                }]
+            },
+            preventDefault: function() {
+                defaultPrevented = true;
+            },
+            stopPropagation: function() {
+                propagationStopped = true;
+            }
+        });
+
+        assert.isTrue(defaultPrevented);
+        assert.isTrue(propagationStopped);
+    });
+
+    it("prevents surface up when a touch has moved", function() {
+        let prevented = false;
+        userEvents = new UserEvents(element, { fastTap: true });
+
+        press(element, 10, 20);
+        move(element, 30, 40);
+
+        userEvents.preventIfMoving({
+            preventDefault: function() {
+                prevented = true;
+            }
+        });
+
+        assert.isTrue(prevented);
+    });
+
+    it("stops processing touches once the max touches limit is reached", function() {
+        userEvents = new UserEvents(element, { fastTap: true });
+
+        userEvents._start({
+            type: "touchstart",
+            which: 1,
+            target: element[0],
+            currentTarget: element[0],
+            originalEvent: {
+                changedTouches: [{
+                    pageX: 10,
+                    pageY: 20,
+                    clientX: 10,
+                    clientY: 20,
+                    screenX: 10,
+                    screenY: 20,
+                    identifier: 1,
+                    target: element[0]
+                }, {
+                    pageX: 30,
+                    pageY: 40,
+                    clientX: 30,
+                    clientY: 40,
+                    screenX: 30,
+                    screenY: 40,
+                    identifier: 2,
+                    target: element[0]
+                }]
+            },
+            preventDefault: $.noop,
+            stopPropagation: $.noop
+        });
+
+        assert.equal(userEvents.touches.length, 1);
+    });
+
+    it("skips touches that do not resolve to a filtered target", function() {
+        userEvents = new UserEvents(element, { fastTap: true, filter: ".match" });
+
+        userEvents._start({
+            type: "touchstart",
+            which: 1,
+            target: element[0],
+            originalEvent: {
+                changedTouches: [{
+                    pageX: 10,
+                    pageY: 20,
+                    clientX: 10,
+                    clientY: 20,
+                    screenX: 10,
+                    screenY: 20,
+                    identifier: 1,
+                    target: element[0]
+                }]
+            },
+            preventDefault: $.noop,
+            stopPropagation: $.noop
+        });
+
+        assert.equal(userEvents.touches.length, 0);
+    });
+
+    it("ignores move when movement is temporarily disabled", function() {
+        userEvents = new UserEvents(element, { fastTap: true });
+
+        press(element, 10, 20);
+        userEvents._shouldNotMove = true;
+        move(element, 30, 40);
+
+        assert.isFalse(userEvents.touches[0].isMoved());
+    });
+
+    it("disposes a competing touch when another user events instance captured movement", function() {
+        let otherElement = $('<div />').appendTo(Mocha.fixture);
+
+        userEvents = new UserEvents(element, { fastTap: true, threshold: 0 });
+        parentEvents = new UserEvents(otherElement, { fastTap: true });
+
+        press(element, 10, 20);
+        parentEvents.capture();
+        move(element, 30, 40);
+
+        assert.equal(userEvents.touches.length, 0);
+    });
+
+    it("supports skipping and canceling touches directly", function() {
+        userEvents = new UserEvents(element, { fastTap: true });
+
+        press(element, 10, 20);
+        userEvents.touches[0].skip();
+        assert.equal(userEvents.touches.length, 0);
+
+        press(element, 10, 20);
+        userEvents.touches[0].cancel();
+        assert.equal(userEvents.touches.length, 0);
+    });
+
+    it("does not process a touch twice after it has finished", function() {
+        userEvents = new UserEvents(element, { fastTap: true });
+
+        press(element, 10, 20);
+
+        let touch = userEvents.touches[0];
+        touch.end({
+            event: {
+                preventDefault: $.noop
+            }
+        });
+
+        touch.end({
+            event: {
+                preventDefault: function() {
+                    assert.isOk(false);
+                }
+            }
+        });
+
+        assert.isTrue(touch._finished);
+    });
+
+    it("prevents the native event when a start handler prevents default", function() {
+        let prevented = false;
+
+        userEvents = new UserEvents(element, { fastTap: true });
+        userEvents.bind("start", function(e) {
+            e.preventDefault();
+        });
+
+        press(element, 10, 20);
+
+        let touch = userEvents.touches[0];
+        touch.x.initialDelta = 10;
+        touch.y.initialDelta = 10;
+
+        touch._start({
+            event: {
+                preventDefault: function() {
+                    prevented = true;
+                }
+            }
+        });
+
+        assert.isTrue(prevented);
+    });
+
+    it("raises gesturetap for multitouch taps", function() {
+        let fired = false;
+        userEvents = new UserEvents(element, { multiTouch: true, fastTap: true });
+
+        userEvents.bind("gesturetap", function() {
+            fired = true;
+        });
+
+        press(element, 10, 20, 1);
+        press(element, 20, 30, 2);
+        release(element, 10, 20, 1);
+
+        assert.isTrue(fired);
+    });
+
+    it("wires and unwires capture listeners when captureUpIfMoved is enabled", function() {
+        let addCount = 0;
+        let removeCount = 0;
+        let surfaceElement = element[0];
+        let originalAdd = surfaceElement.addEventListener;
+        let originalRemove = surfaceElement.removeEventListener;
+
+        surfaceElement.addEventListener = function() {
+            addCount++;
+            return originalAdd.apply(this, arguments);
+        };
+
+        surfaceElement.removeEventListener = function() {
+            removeCount++;
+            return originalRemove.apply(this, arguments);
+        };
+
+        kendo.support.eventCapture = true;
+        userEvents = new UserEvents(element, { captureUpIfMoved: true });
+
+        assert.isTrue(addCount > 0);
+
+        userEvents.destroy();
+        userEvents = null;
+
+        surfaceElement.addEventListener = originalAdd;
+        surfaceElement.removeEventListener = originalRemove;
+
+        assert.isTrue(removeCount > 0);
+    });
+});
+
+describe("ClickMoveClick coverage", function() {
+    beforeEach(function() {
+        element = $('<div />').appendTo(Mocha.fixture);
+        clickMoveClick = new ClickMoveClick(element);
+    });
+
+    afterEach(function() {
+        if (clickMoveClick) {
+            clickMoveClick.destroy();
+            clickMoveClick = null;
+        }
+
+        kendo.destroy(Mocha.fixture);
+    });
+
+    it("marks notification payloads as clickMoveClick", function() {
+        clickMoveClick.bind("start", function(e) {
+            assert.isTrue(e.clickMoveClick);
+        });
+
+        clickMoveClick._start(mouseEvent("mousedown", element[0], 10, 20));
+    });
+
+    it("cancels on right mouse button down", function() {
+        let canceled = false;
+        clickMoveClick.cancel = function() {
+            canceled = true;
+        };
+
+        clickMoveClick._down({ which: 2 });
+
+        assert.isTrue(canceled);
+    });
+
+    it("cancels when up target does not match the down target", function() {
+        let canceled = false;
+
+        clickMoveClick.cancel = function() {
+            canceled = true;
+        };
+
+        clickMoveClick._down({ which: 1, target: element[0] });
+        clickMoveClick._up({ which: 1, target: $("<span />")[0] });
+
+        assert.isTrue(canceled);
+    });
+
+    it("starts on matching up and ends on the next surface up", function() {
+        let ended = false;
+
+        clickMoveClick.bind("end", function() {
+            ended = true;
+        });
+
+        clickMoveClick._down({ which: 1, target: element[0] });
+        clickMoveClick._up(mouseEvent("mouseup", element[0], 10, 20));
+
+        assert.equal(clickMoveClick.touches.length, 1);
+
+        clickMoveClick._surfaceUp(mouseEvent("mouseup", element[0], 10, 20));
+        clickMoveClick._surfaceUp(mouseEvent("mouseup", element[0], 10, 20));
+
+        assert.isTrue(ended);
+        assert.equal(clickMoveClick.touches.length, 0);
+    });
+
+    it("ends immediately on up when a touch is already active", function() {
+        let ended = false;
+
+        clickMoveClick.bind("end", function() {
+            ended = true;
+        });
+
+        clickMoveClick._start(mouseEvent("mousedown", element[0], 10, 20));
+        clickMoveClick._down({ which: 1, target: element[0] });
+        clickMoveClick._up(mouseEvent("mouseup", element[0], 10, 20));
+
+        assert.isTrue(ended);
+        assert.equal(clickMoveClick.touches.length, 0);
+    });
+
+    it("ignores cancel-like surface up events", function() {
+        clickMoveClick._start(mouseEvent("mousedown", element[0], 10, 20));
+
+        clickMoveClick._surfaceUp({ type: "touchcancel" });
+
+        assert.equal(clickMoveClick.touches.length, 1);
+    });
+
+    it("ignores right-button surface up events", function() {
+        clickMoveClick._start(mouseEvent("mousedown", element[0], 10, 20));
+
+        clickMoveClick._surfaceUp({ type: "mouseup", which: 2 });
+
+        assert.equal(clickMoveClick.touches.length, 1);
+    });
+
+    it("does not cancel while preventCancel flag is set", function() {
+        clickMoveClick._start(mouseEvent("mousedown", element[0], 10, 20));
+        clickMoveClick._preventCancel = true;
+
+        clickMoveClick.cancel();
+
+        assert.isFalse(clickMoveClick._preventCancel);
+        assert.equal(clickMoveClick.touches.length, 1);
+    });
+
+    it("cancel disposes active touches and fires cancel", function() {
+        let canceled = false;
+
+        clickMoveClick.bind("cancel", function() {
+            canceled = true;
+        });
+
+        clickMoveClick._start(mouseEvent("mousedown", element[0], 10, 20));
+        clickMoveClick.cancel();
+
+        assert.isTrue(canceled);
+        assert.equal(clickMoveClick.touches.length, 0);
+    });
+
+    it("ignores additional starts after reaching the max touches", function() {
+        clickMoveClick._start(mouseEvent("mousedown", element[0], 10, 20));
+        clickMoveClick._start(mouseEvent("mousedown", element[0], 20, 30));
+
+        assert.equal(clickMoveClick.touches.length, 1);
+    });
+
+    it("captures the current click move click instance", function() {
+        clickMoveClick.capture();
+
+        assert.equal(ClickMoveClick.current, clickMoveClick);
+    });
+
+    it("is safe to destroy twice", function() {
+        clickMoveClick.destroy();
+        clickMoveClick.destroy();
+        clickMoveClick = null;
+
+        assert.isOk(true);
     });
 });

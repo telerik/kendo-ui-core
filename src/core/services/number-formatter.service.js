@@ -54,7 +54,7 @@ class NumberFormatterService {
             isPercent = format === "p";
             if (isCurrency || isPercent) {
                 // Get specific number format information if format is currency or percent
-                numberFormat = isCurrency ? numberFormat.currency : numberFormat.percent;
+                numberFormat = (isCurrency ? numberFormat.currency : numberFormat.percent);
                 decimal = numberFormat[DOT];
                 precision = numberFormat.decimals;
                 symbol = numberFormat.symbol;
@@ -128,7 +128,7 @@ class NumberFormatterService {
         }
         if (isCurrency || isPercent) {
             // Get specific number format information if format is currency or percent
-            numberFormat = isCurrency ? numberFormat.currency : numberFormat.percent;
+            numberFormat = (isCurrency ? numberFormat.currency : numberFormat.percent);
             decimal = numberFormat[DOT];
             precision = numberFormat.decimals;
             symbol = numberFormat.symbol;

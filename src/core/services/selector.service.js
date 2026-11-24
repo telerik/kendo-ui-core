@@ -1,3 +1,4 @@
+import { namespaceService } from "./namespace.service";
 /**
  * Selector Service Implementation
  * Provides utilities for building CSS selectors.
@@ -13,7 +14,7 @@ class SelectorService {
     /**
      * Build a role selector for data-role attributes.
      */
-    roleSelector(role, ns) {
+    roleSelector(role, ns = namespaceService.ns) {
         return role.replace(/(\S+)/g, "[data-" + ns + "role=$1],").slice(0, -1);
     }
     /**
