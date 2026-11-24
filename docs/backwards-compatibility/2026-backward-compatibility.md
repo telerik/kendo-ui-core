@@ -102,6 +102,16 @@ Starting with the **2026 November** release, the helper methods `kendo.alert`, `
     </script>
 ```
 
+### Menu and ContextMenu Redesign
+
+Starting with the **2026 November** release, the Menu and ContextMenu rendering has been updated. The `.k-first` and `.k-last` classes are no longer rendered. Use `:first-child` or `:last-child` selectors, stable attributes, item IDs, or element indices instead.
+
+Menu separators no longer render the `.k-menu-item` class and now use `.k-separator` and `.k-separator-horizontal` with `role="separator"`. Update custom CSS, DOM queries, and automated tests that target the previous separator markup.
+
+Item `content`, `actions`, and `description` values are HTML-encoded by default. To render trusted HTML, set `encoded: false` on the item.
+
+Icons now include the `.k-menu-link-icon` class, and the order of elements inside a menu link is standardized. In particular, when an item has a description, `.k-menu-link-description` follows the expand arrow and is the last child.
+
 ## Kendo UI 2026 October
 
 ### Badge Text Is HTML-Encoded by Default
