@@ -25,7 +25,6 @@
 import { Observable } from "./observable";
 import { kendoJQueryService } from "../services/kendo-jquery.service";
 import { domUtilsService } from "../services/dom-utils.service";
-import { utilsService } from "../services/utils.service";
 import { cssPropertiesService } from "../services/css-properties.service";
 import { iconService } from "../services/icon-override.service";
 import { addWatermarkOverlayAndBanner } from "../../licensing";
@@ -389,7 +388,9 @@ export class Widget extends Observable {
         const inputElm = that.element;
         const inputId = inputElm.attr("id");
         const $ = kendoJQueryService.getConstructor();
-        const labelElm = $("label[for=\"" + inputId + "\"]");
+        const labelElm = (inputId
+            ? $("label").filter((_, label) => $(label).attr("for") === inputId)
+            : $());
         const ariaLabel = inputElm.attr(ARIA_LABEL);
         const ariaLabelledBy = inputElm.attr(ARIA_LABELLEDBY);
         let labelId;
@@ -403,8 +404,7 @@ export class Widget extends Observable {
             target.attr(ARIA_LABELLEDBY, ariaLabelledBy);
         }
         else if (labelElm.length) {
-            const guid = utilsService.guid();
-            labelId = labelElm.attr("id") || that._generateLabelId(labelElm, inputId || guid);
+            labelId = labelElm.attr("id") || that._generateLabelId(labelElm, inputId);
             target.attr(ARIA_LABELLEDBY, labelId);
         }
     }

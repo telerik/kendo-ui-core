@@ -25,7 +25,7 @@
     "@rollup/stream": "3.0.1",
     "@vitest/browser-playwright": "4.1.12",
     "acorn": "^8.19.0",
-    "axe-core": "^4.14.0",
+    "axe-core": "^4.14.1",
     "chai": "^4.3.9",
     "colors": "1.4.0",
     "cz-conventional-changelog": "1.2.0",

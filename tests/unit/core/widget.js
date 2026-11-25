@@ -83,6 +83,65 @@ import { stub } from '../../helpers/unit/stub.js';
             assert.equal(el.getKendoBar(), el.data("kendoBar"));
         });
 
+        it("_ariaLabel references the label element of the widget element", function() {
+            let element = $("<input id='widget-a11y' />").appendTo(Mocha.fixture),
+                label = $("<label for='widget-a11y'>Name</label>").appendTo(Mocha.fixture),
+                target = $("<span />").appendTo(Mocha.fixture),
+                widget = new Widget(element);
+
+            widget._ariaLabel(target);
+
+            assert.isOk(label.attr("id"));
+            assert.equal(target.attr("aria-labelledby"), label.attr("id"));
+        });
+
+        it("_ariaLabel finds the label element of an id containing quotes and backslashes", function() {
+            let id = "a\"b'c\\d]e",
+                element = $("<input />").attr("id", id).appendTo(Mocha.fixture),
+                label = $("<label>Name</label>").attr("for", id).appendTo(Mocha.fixture),
+                target = $("<span />").appendTo(Mocha.fixture),
+                widget = new Widget(element);
+
+            widget._ariaLabel(target);
+
+            assert.isOk(label.attr("id"));
+            assert.equal(target.attr("aria-labelledby"), label.attr("id"));
+        });
+
+        it("_ariaLabel does not match a label with another for value", function() {
+            let element = $("<input id='widget-a11y-b' />").appendTo(Mocha.fixture),
+                target = $("<span />").appendTo(Mocha.fixture),
+                widget = new Widget(element);
+
+            $("<label for='widget-a11y-b-other'>Other</label>").appendTo(Mocha.fixture);
+            widget._ariaLabel(target);
+
+            assert.isNotOk(target.attr("aria-labelledby"));
+        });
+
+        it("_ariaLabel does not match a label with for undefined when the element has no id", function() {
+            let element = $("<input />").appendTo(Mocha.fixture),
+                target = $("<span />").appendTo(Mocha.fixture),
+                widget = new Widget(element);
+
+            $("<label for='undefined'>Unrelated</label>").appendTo(Mocha.fixture);
+            widget._ariaLabel(target);
+
+            assert.isNotOk(target.attr("aria-labelledby"));
+        });
+
+        it("_ariaLabel prefers the aria-label of the widget element", function() {
+            let element = $("<input id='widget-a11y-c' aria-label='Own name' />").appendTo(Mocha.fixture),
+                target = $("<span />").appendTo(Mocha.fixture),
+                widget = new Widget(element);
+
+            $("<label for='widget-a11y-c'>Label</label>").appendTo(Mocha.fixture);
+            widget._ariaLabel(target);
+
+            assert.equal(target.attr("aria-label"), "Own name");
+            assert.isNotOk(target.attr("aria-labelledby"));
+        });
+
         it("destroy removes the instance of the widget", function() {
             let Foo = Widget.extend({
                 options: {

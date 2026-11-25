@@ -48,6 +48,7 @@ export const __meta__ = {
         TABINDEX = "tabindex",
         getTouches = kendo.getTouches,
 
+        ARIA_DISABLED = "aria-disabled",
         ARIA_VALUETEXT = "aria-valuetext",
         ARIA_VALUENOW = "aria-valuenow";
 
@@ -567,12 +568,12 @@ export const __meta__ = {
     }
 
     function createSliderItems(options, distance) {
-        var result = "<ul class='k-reset k-slider-items' role='presentation'>",
+        var result = "<ul class='k-reset k-slider-items' aria-hidden='true'>",
             count = math.floor(round(distance / options.smallStep)) + 1,
             i;
 
         for (i = 0; i < count; i++) {
-            result += "<li class='k-tick'></li>";
+            result += "<li class='k-tick' role='presentation'></li>";
         }
 
         result += "</ul>";
@@ -778,6 +779,7 @@ export const __meta__ = {
             that.wrapper
                 .find(DRAG_HANDLE)
                 .attr(TABINDEX, 0)
+                .removeAttr(ARIA_DISABLED)
                 .on(MOUSE_UP, function() {
                     that._setTooltipTimeout();
                 })
@@ -853,6 +855,7 @@ export const __meta__ = {
             that.wrapper
                 .find(DRAG_HANDLE)
                 .attr(TABINDEX, -1)
+                .attr(ARIA_DISABLED, true)
                 .off(MOUSE_UP)
                 .off(KEY_DOWN)
                 .off(CLICK)
@@ -1413,6 +1416,56 @@ export const __meta__ = {
             selectionEnd: null
         },
 
+        _ariaLabel: function(handles) {
+            var that = this,
+                inputs = $(that.element).find("input");
+
+            handles.each(function(index) {
+                var handle = handles.eq(index),
+                    input = inputs.eq(index),
+                    inputId = input.attr("id"),
+                    ariaLabel = input.attr("aria-label"),
+                    ariaLabelledBy = input.attr("aria-labelledby"),
+                    labelIds = [];
+
+                if (ariaLabel || ariaLabelledBy) {
+                    if (ariaLabel) {
+                        handle.attr("aria-label", ariaLabel);
+                    }
+
+                    if (ariaLabelledBy) {
+                        handle.attr("aria-labelledby", ariaLabelledBy);
+                    }
+
+                    return;
+                }
+
+                if (inputId) {
+                    var root = input[0].getRootNode ? input[0].getRootNode() : document;
+
+                    $(root).find("label").add($(root).filter("label")).filter(function() {
+                        return $(this).attr("for") === inputId;
+                    }).each(function() {
+                        var label = $(this),
+                            labelId = label.attr("id");
+
+                        if (!labelId) {
+                            labelId = kendo.guid() + "_label";
+                            label.attr("id", labelId);
+                        }
+
+                        labelIds.push(labelId);
+                    });
+                }
+
+                if (labelIds.length) {
+                    handle.attr("aria-labelledby", labelIds.join(" "));
+                } else {
+                    Widget.fn._ariaLabel.call(that, handle);
+                }
+            });
+        },
+
         enable: function(enable) {
             var that = this,
                 options = that.options,
@@ -1485,6 +1538,7 @@ export const __meta__ = {
             that.wrapper
                 .find(DRAG_HANDLE)
                 .attr(TABINDEX, 0)
+                .removeAttr(ARIA_DISABLED)
                 .on(MOUSE_UP, function() {
                     that._setTooltipTimeout();
                 })
@@ -1526,6 +1580,7 @@ export const __meta__ = {
             that.wrapper
                 .find(DRAG_HANDLE)
                 .attr(TABINDEX, -1)
+                .attr(ARIA_DISABLED, true)
                 .off(MOUSE_UP)
                 .off(KEY_DOWN)
                 .off(CLICK)
