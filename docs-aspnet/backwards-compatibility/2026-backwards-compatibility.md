@@ -275,6 +275,20 @@ The following breaking changes also alter the rendered structure:
 
 These changes are structural and may affect styling overrides or selectors that depend on removed classes, added wrappers, or previous element nesting.
 
+### Scheduler `ISchedulerEvent` Interface
+
+Starting with the **2026 Q3** release, the `ISchedulerEvent` interface includes an `IsReadonly` property to support read-only Scheduler events. Custom classes that implement the interface must now implement this property with a getter and a setter. Otherwise, they fail to compile after upgrading.
+
+Add the property to each custom implementation:
+
+```csharp
+public bool IsReadonly { get; set; }
+```
+
+If your class has a `[DataContract]` attribute and uses [DataContractSerializer](https://learn.microsoft.com/en-us/dotnet/framework/wcf/feature-details/using-data-contracts), mark the property with `[DataMember]` to include it in the serialized output.
+
+If you do not need read-only events, leave the property at its default value of `false`.
+
 ### Scheduler - Enhanced Rendering (HTML and CSS)
 
 Starting with the **2026 Q3** release, the Scheduler adopts enhanced rendering that updates the generated HTML and the CSS hooks used for styling. Custom CSS or DOM queries that target the previous markup must be updated.

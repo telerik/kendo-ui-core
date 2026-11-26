@@ -11,6 +11,8 @@ position: 1
 
 The Editor allows you to create rich textual content through a What-You-See-Is-What-You-Get (WYSIWYG) interface and generate component value as an XHTML markup.
 
+> With an upcoming release, the Editor's current editing engine is planned to be replaced. This update will change how the Editor processes and formats content, including how it handles selections and HTML. It is also expected to preserve more of the original formatting when users paste content from sources such as Microsoft Word and Excel. Detailed information about the changes will be available with the release.
+
 * [Demo page for the Editor](https://demos.telerik.com/kendo-ui/editor/index)
 
 ## Functionality and Features
