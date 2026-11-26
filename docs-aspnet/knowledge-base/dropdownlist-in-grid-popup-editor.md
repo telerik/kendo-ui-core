@@ -10,8 +10,6 @@ components: ["general"]
 component: grid
 ---
 
-# Use a DropDownList in a Grid Popup Editor
-
 ## Environment
 
 <table>
