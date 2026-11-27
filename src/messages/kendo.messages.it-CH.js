@@ -120,12 +120,12 @@
         "repeat": "Ripeti",
         "daily": {
           "interval": "giorno(i)",
-          "repeatEvery": "Ripeti ogni: "
+          "repeatEvery": "Ripeti ogni"
         },
         "end": {
           "after": "Dopo",
           "occurrence": "Occorrenza(e)",
-          "label": "Fine:",
+          "label": "Fine",
           "never": "Mai",
           "on": "Il",
           "mobileLabel": "Ends"
@@ -140,8 +140,8 @@
         "monthly": {
           "day": "Giorno",
           "interval": "mese(i)",
-          "repeatEvery": "Ripeti ogni: ",
-          "repeatOn": "Repeti quando: ",
+          "repeatEvery": "Ripeti ogni",
+          "repeatOn": "Repeti quando",
           "date": "Data"
         },
         "offsetPositions": {
@@ -152,14 +152,14 @@
           "third": "terzo"
         },
         "weekly": {
-          "repeatEvery": "Ripeti ogni:",
-          "repeatOn": "Ripeti quando:",
+          "repeatEvery": "Ripeti ogni",
+          "repeatOn": "Ripeti quando",
           "interval": "settimana(e)"
         },
         "yearly": {
           "of": "di",
-          "repeatEvery": "Ripeti ogni:",
-          "repeatOn": "Ripeti quando:",
+          "repeatEvery": "Ripeti ogni",
+          "repeatOn": "Ripeti quando",
           "interval": "anno(i)",
           "month": "mese",
           "day": "giorno",
@@ -171,6 +171,7 @@
           "weekend": "giorno finesettimana"
         },
         "makeRecurring": "Rendi ricorrente",
+        "editRecurring": "Modifica ricorrenza",
         "summary": {
           "on": "il",
           "onThe": "il",

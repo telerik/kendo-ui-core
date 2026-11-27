@@ -102,7 +102,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   },
   "end": {
     "after": "Na",
-    "label": "Eind:",
+    "label": "Eind",
     "never": "Nooit",
     "occurrence": "gebeurtenis(sen)",
     "on": "Op",
@@ -118,8 +118,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "monthly": {
     "day": "Dag",
     "interval": "maand(en)",
-    "repeatEvery": "Herhaal elke:",
-    "repeatOn": "Herhaal op:"
+    "repeatEvery": "Herhaal elke",
+    "repeatOn": "Herhaal op"
   },
   "offsetPositions": {
     "first": "eerste",
@@ -134,6 +134,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "weekend dag"
   },
   "makeRecurring": "Herhalend maken",
+  "editRecurring": "Herhaling bewerken",
   "summary": {
     "on": "op",
     "onThe": "op de",
@@ -142,14 +143,14 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   },
   "weekly": {
     "interval": "week/weken",
-    "repeatEvery": "Herhaal elke:",
-    "repeatOn": "Herhaal op:"
+    "repeatEvery": "Herhaal elke",
+    "repeatOn": "Herhaal op"
   },
   "yearly": {
     "interval": "jaar/jaren",
     "of": "van",
-    "repeatEvery": "Herhaal elke:",
-    "repeatOn": "Herhaal op:"
+    "repeatEvery": "Herhaal elke",
+    "repeatOn": "Herhaal op"
   }
 });
 }

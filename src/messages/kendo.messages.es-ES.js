@@ -471,8 +471,6 @@
           "collapse": "Contraer"
         },
         "expandCollapseColumnHeader": "",
-        "groupHeader": "Presione ctrl + espacio para agrupar",
-        "ungroupHeader": "Presione ctrl + espacio para desagrupar",
         "toolbarLabel": "barra de herramientas de cuadrícula",
         "groupingHeaderLabel": "encabezado de agrupación de cuadrícula",
         "filterCellTitle": "celda de filtro",
@@ -625,32 +623,32 @@
           "yearly": "Anualmente"
         },
         "hourly": {
-          "repeatEvery": "Repetir cada: ",
+          "repeatEvery": "Repetir cada",
           "interval": " hora(s)"
         },
         "daily": {
-          "repeatEvery": "Repetir cada: ",
+          "repeatEvery": "Repetir cada",
           "interval": " día(s)"
         },
         "weekly": {
           "interval": " semana(s)",
-          "repeatEvery": "Repetir cada: ",
-          "repeatOn": "Repetir en: "
+          "repeatEvery": "Repetir cada",
+          "repeatOn": "Repetir en"
         },
         "monthly": {
-          "repeatEvery": "Repetir cada: ",
-          "repeatOn": "Repetir en: ",
+          "repeatEvery": "Repetir cada",
+          "repeatOn": "Repetir en",
           "interval": " mes(es)",
           "day": "Día "
         },
         "yearly": {
-          "repeatEvery": "Repetir cada: ",
-          "repeatOn": "Repetir en: ",
+          "repeatEvery": "Repetir cada",
+          "repeatOn": "Repetir en",
           "interval": " año(s)",
           "of": " de "
         },
         "end": {
-          "label": "Fin:",
+          "label": "Fin",
           "mobileLabel": "Fin",
           "never": "Nunca",
           "after": "Después",
@@ -670,6 +668,7 @@
           "weekend": "día de fin de semana"
         },
         "makeRecurring": "Hacer recurrente",
+        "editRecurring": "Editar recurrencia",
         "summary": {
           "on": "el",
           "onThe": "el",

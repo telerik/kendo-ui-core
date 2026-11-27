@@ -98,12 +98,12 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "update": "Зберегти",
   "daily": {
     "interval": "days(s)",
-    "repeatEvery": "Repeat every:"
+    "repeatEvery": "Repeats every"
   },
   "end": {
     "after": "After",
     "occurrence": "occurrence(s)",
-    "label": "End:",
+    "label": "Ends",
     "never": "Never",
     "on": "On",
     "mobileLabel": "Ends"
@@ -118,8 +118,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "monthly": {
     "day": "Day",
     "interval": "month(s)",
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:"
+    "repeatEvery": "Repeats every",
+    "repeatOn": "On"
   },
   "offsetPositions": {
     "first": "first",
@@ -129,14 +129,14 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "third": "third"
   },
   "weekly": {
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:",
+    "repeatEvery": "Repeats every",
+    "repeatOn": "On",
     "interval": "week(s)"
   },
   "yearly": {
     "of": "of",
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:",
+    "repeatEvery": "Repeats every",
+    "repeatOn": "On",
     "interval": "year(s)"
   },
   "weekdays": {
@@ -145,6 +145,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "weekend day"
   },
   "makeRecurring": "Задати повторення",
+  "editRecurring": "Редагувати повторення",
   "summary": {
     "on": "в",
     "onThe": "в",

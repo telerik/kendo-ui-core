@@ -536,8 +536,6 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "noRecords": "Žádný záznam nenalezen.",
   "search": "Hledat...",
   "expandCollapseColumnHeader": "",
-  "groupHeader": "Stiskněte ctrl + mezerník pro seskupení",
-  "ungroupHeader": "Stiskněte ctrl + mezerník pro zrušení seskupení",
   "toolbarLabel": "grid toolbar",
   "groupingHeaderLabel": "grid grouping header",
   "filterCellTitle": "filter cell"
@@ -725,28 +723,28 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "yearly": "Ročně"
   },
   "hourly": {
-    "repeatEvery": "Opakovat každých: ",
+    "repeatEvery": "Opakovat každých",
     "interval": " hodin"
   },
   "daily": {
-    "repeatEvery": "Opakovat každý:",
+    "repeatEvery": "Opakovat každý",
     "interval": " dní"
   },
   "weekly": {
     "interval": "týden(ny)",
-    "repeatEvery": "Opakovat každý:",
-    "repeatOn": "Opakovat v:"
+    "repeatEvery": "Opakovat každý",
+    "repeatOn": "Opakovat v"
   },
   "monthly": {
-    "repeatEvery": "Opakovat každý:",
-    "repeatOn": "Opakovat v:",
+    "repeatEvery": "Opakovat každý",
+    "repeatOn": "Opakovat v",
     "interval": " měsíc(e)",
     "day": "den",
     "date": "Datum"
   },
   "yearly": {
-    "repeatEvery": "Opakovat každý:",
-    "repeatOn": "Opakovat v:",
+    "repeatEvery": "Opakovat každý",
+    "repeatOn": "Opakovat v",
     "interval": " rok(y)",
     "of": " v ",
     "month": "měsíc",
@@ -754,7 +752,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "date": "Datum"
   },
   "end": {
-    "label": "Konec:",
+    "label": "Konec",
     "mobileLabel": "Končí",
     "never": "Nikdy",
     "after": "Konec po",
@@ -774,6 +772,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "víkend"
   },
   "makeRecurring": "Nastavit opakování",
+  "editRecurring": "Upravit opakování",
   "summary": {
     "on": "v",
     "onThe": "v",

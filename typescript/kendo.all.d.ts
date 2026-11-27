@@ -11958,6 +11958,7 @@ declare namespace kendo.ui {
         monthly?: SchedulerMessagesRecurrenceEditorMonthly | undefined;
         offsetPositions?: SchedulerMessagesRecurrenceEditorOffsetPositions | undefined;
         makeRecurring?: string | undefined;
+        editRecurring?: string | undefined;
         recurrenceEditorTitle?: string | undefined;
         removeRecurrence?: string | undefined;
         summary?: SchedulerMessagesRecurrenceEditorSummary | undefined;
@@ -12166,7 +12167,7 @@ declare namespace kendo.ui {
         mobile?: boolean | string | undefined;
         ongoingEvents?: boolean | SchedulerOngoing | undefined;
         pdf?: SchedulerPdf | undefined;
-        recurrenceRuleLabelTemplate?: string | Function | undefined;
+        recurrenceSummaryTemplate?: string | Function | undefined;
         resources?: SchedulerResource[] | undefined;
         selectable?: boolean | undefined;
         showWorkHours?: boolean | undefined;

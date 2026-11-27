@@ -393,8 +393,6 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   },
   "noRecords": "Không có bản ghi nào sẵn có.",
   "expandCollapseColumnHeader": "",
-  "groupHeader": "Bấm tổ hợp phím Ctrl + Space để nhóm lại với nhau",
-  "ungroupHeader": "Bấm tổ hợp phím Ctrl + Space để tách ra khỏi nhóm"
 });
 }
 
@@ -546,32 +544,32 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "yearly": "Hàng năm"
   },
   "hourly": {
-    "repeatEvery": "Lặp lại sau mỗi: ",
+    "repeatEvery": "Lặp lại sau mỗi",
     "interval": " giờ"
   },
   "daily": {
-    "repeatEvery": "Lặp lại sau mỗi: ",
+    "repeatEvery": "Lặp lại sau mỗi",
     "interval": " ngày"
   },
   "weekly": {
     "interval": " tuần",
-    "repeatEvery": "Lặp lại sau mỗi: ",
-    "repeatOn": "Lặp lại trên: "
+    "repeatEvery": "Lặp lại sau mỗi",
+    "repeatOn": "Lặp lại trên"
   },
   "monthly": {
-    "repeatEvery": "Lặp lại sau mỗi: ",
-    "repeatOn": "Lặp lại trên: ",
+    "repeatEvery": "Lặp lại sau mỗi",
+    "repeatOn": "Lặp lại trên",
     "interval": " tháng",
     "day": "Ngày "
   },
   "yearly": {
-    "repeatEvery": "Lặp lại sau mỗi: ",
-    "repeatOn": "Lặp lại trên: ",
+    "repeatEvery": "Lặp lại sau mỗi",
+    "repeatOn": "Lặp lại trên",
     "interval": " năm",
     "of": " của "
   },
   "end": {
-    "label": "Kết thúc:",
+    "label": "Kết thúc",
     "mobileLabel": "Kết thúc",
     "never": "Không bao giờ",
     "after": "Sau ",
@@ -591,6 +589,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "ngày cuối tuần"
   },
   "makeRecurring": "Đặt lặp lại",
+  "editRecurring": "Chỉnh sửa lặp lại",
   "summary": {
     "on": "vào",
     "onThe": "vào",

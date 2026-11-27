@@ -111,12 +111,12 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "update": "Spara",
   "daily": {
     "interval": "dag(ar)",
-    "repeatEvery": "Återkommer varje:"
+    "repeatEvery": "Återkommer varje"
   },
   "end": {
     "after": "Efter",
     "occurrence": "förekomst(er)",
-    "label": "Slut:",
+    "label": "Slut",
     "never": "Aldrig",
     "on": "På",
     "mobileLabel": "Slutar"
@@ -131,8 +131,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "monthly": {
     "day": "Dag",
     "interval": "månad(er)",
-    "repeatEvery": "Återkommer varje:",
-    "repeatOn": "Återkommer på:"
+    "repeatEvery": "Återkommer varje",
+    "repeatOn": "Återkommer på"
   },
   "offsetPositions": {
     "first": "första",
@@ -142,14 +142,14 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "third": "tredje"
   },
   "weekly": {
-    "repeatEvery": "Återkommer varje:",
-    "repeatOn": "Återkommer på:",
+    "repeatEvery": "Återkommer varje",
+    "repeatOn": "Återkommer på",
     "interval": "vecka(or)"
   },
   "yearly": {
     "of": "av",
-    "repeatEvery": "Återkommer varje:",
-    "repeatOn": "Återkommer på:",
+    "repeatEvery": "Återkommer varje",
+    "repeatOn": "Återkommer på",
     "interval": "år"
   },
   "weekdays": {
@@ -158,6 +158,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "helgdag"
   },
   "makeRecurring": "Gör återkommande",
+  "editRecurring": "Redigera upprepning",
   "summary": {
     "on": "på",
     "onThe": "den",

@@ -98,12 +98,12 @@ if (kendo.ui.RecurrenceEditor) {
         "update": "Lagre",
         "daily": {
             "interval": "dag(er)",
-            "repeatEvery": "Gjenta hver:"
+            "repeatEvery": "Gjenta hver"
         },
         "end": {
             "after": "Etter",
             "occurrence": "forekomst(er)",
-            "label": "Slutt:",
+            "label": "Slutt",
             "never": "Aldri",
             "on": "På",
             "mobileLabel": "Slutter"
@@ -118,8 +118,8 @@ if (kendo.ui.RecurrenceEditor) {
         "monthly": {
             "day": "Dag",
             "interval": "måned(er)",
-            "repeatEvery": "Gjenta hver:",
-            "repeatOn": "Gjenta på:"
+            "repeatEvery": "Gjenta hver",
+            "repeatOn": "Gjenta på"
         },
         "offsetPositions": {
             "first": "første",
@@ -129,14 +129,14 @@ if (kendo.ui.RecurrenceEditor) {
             "third": "tredje"
         },
         "weekly": {
-            "repeatEvery": "Gjenta hver:",
-            "repeatOn": "Gjenta på:",
+            "repeatEvery": "Gjenta hver",
+            "repeatOn": "Gjenta på",
             "interval": "uke(r)"
         },
         "yearly": {
             "of": "av",
-            "repeatEvery": "Gjenta hver:",
-            "repeatOn": "Gjenta på:",
+            "repeatEvery": "Gjenta hver",
+            "repeatOn": "Gjenta på",
             "interval": "år"
         },
         "weekdays": {
@@ -145,6 +145,7 @@ if (kendo.ui.RecurrenceEditor) {
             "weekend": "helgedag"
         },
         "makeRecurring": "Gjør gjentagende",
+        "editRecurring": "Rediger gjentakelse",
         "summary": {
           "on": "på",
           "onThe": "den",

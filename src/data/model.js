@@ -256,7 +256,7 @@ export class Model extends ObservableObject {
         if (!fieldDefinition) {
             fieldDefinition = getFieldByName(fields, fieldName) || undefined;
         }
-        if (isModelFieldDefinition(fieldDefinition)) {
+        if (fieldDefinition && isModelFieldDefinition(fieldDefinition)) {
             parse = fieldDefinition.parse;
             if (!parse && fieldDefinition.type) {
                 parse = parsers[fieldDefinition.type.toLowerCase()];

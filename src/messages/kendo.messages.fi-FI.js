@@ -418,32 +418,32 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "yearly": "Joka vuosi"
   },
   "hourly": {
-    "repeatEvery": "Toista joka: ",
+    "repeatEvery": "Toista joka",
     "interval": " tunti"
   },
   "daily": {
-    "repeatEvery": "Toista joka: ",
+    "repeatEvery": "Toista joka",
     "interval": " päivä"
   },
   "weekly": {
     "interval": " viikko",
-    "repeatEvery": "Toista joka: ",
-    "repeatOn": "Toista tällöin: "
+    "repeatEvery": "Toista joka",
+    "repeatOn": "Toista tällöin"
   },
   "monthly": {
-    "repeatEvery": "Toista joka: ",
-    "repeatOn": "Toista tällöin: ",
+    "repeatEvery": "Toista joka",
+    "repeatOn": "Toista tällöin",
     "interval": " kuukausi",
     "day": "Päivä "
   },
   "yearly": {
-    "repeatEvery": "Toista joka: ",
-    "repeatOn": "Toista tällöin: ",
+    "repeatEvery": "Toista joka",
+    "repeatOn": "Toista tällöin",
     "interval": " vuosi",
     "of": " kk: "
   },
   "end": {
-    "label": "Loppu:",
+    "label": "Loppu",
     "mobileLabel": "Loppuu",
     "never": "Ei koskaan",
     "after": "Kun toistettu ",
@@ -463,6 +463,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "viikonloppu"
   },
   "makeRecurring": "Aseta toistuvaksi",
+  "editRecurring": "Muokkaa toistuvuutta",
   "summary": {
     "on": "joka",
     "onThe": "joka",

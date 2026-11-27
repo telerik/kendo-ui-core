@@ -414,32 +414,32 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "yearly": "毎年"
   },
   "hourly": {
-    "repeatEvery": "次の間隔で繰り返す: ",
+    "repeatEvery": "次の間隔で繰り返す",
     "interval": " 時間"
   },
   "daily": {
-    "repeatEvery": "次の間隔で繰り返す: ",
+    "repeatEvery": "次の間隔で繰り返す",
     "interval": " 日"
   },
   "weekly": {
     "interval": " 週間",
-    "repeatEvery": "次の間隔で繰り返す: ",
-    "repeatOn": "次のときに繰り返す: "
+    "repeatEvery": "次の間隔で繰り返す",
+    "repeatOn": "次のときに繰り返す"
   },
   "monthly": {
-    "repeatEvery": "次の間隔で繰り返す: ",
-    "repeatOn": "次のときに繰り返す: ",
+    "repeatEvery": "次の間隔で繰り返す",
+    "repeatOn": "次のときに繰り返す",
     "interval": " か月",
     "day": "日 "
   },
   "yearly": {
-    "repeatEvery": "次の間隔で繰り返す: ",
-    "repeatOn": "次のときに繰り返す: ",
+    "repeatEvery": "次の間隔で繰り返す",
+    "repeatOn": "次のときに繰り返す",
     "interval": " 年",
     "of": " の "
   },
   "end": {
-    "label": "終了:",
+    "label": "終了",
     "mobileLabel": "終了",
     "never": "なし",
     "after": "後 ",
@@ -459,6 +459,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "週末"
   },
   "makeRecurring": "繰り返しを設定",
+  "editRecurring": "繰り返しを編集",
   "summary": {
     "on": "の",
     "onThe": "の",

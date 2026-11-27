@@ -568,8 +568,6 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   },
     "noRecords": "Salvestisi pole saadaval",
     "expandCollapseColumnHeader": "",
-    "groupHeader": "Grupeerimiseks vajutage ctrl + tühik ",
-    "ungroupHeader": "Grupeeringust vabastamiseks vajutage ctrl + tühik",
     "toolbarLabel": "Joonvõrestiku tööriistariba",
     "groupingHeaderLabel": "Joonvõrestiku grupeerimise pealkiri",
     "filterCellTitle": "Lahtrite filter"
@@ -757,28 +755,28 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
         "yearly": "Iga aasta"
   },
   "hourly": {
-      "repeatEvery": "Korda iga...: ",
+      "repeatEvery": "Korda iga...",
       "intervall": "tund(-nid)"
   },
   "daily": {
-      "repeatEvery": "Korda iga...: ",
+      "repeatEvery": "Korda iga...",
       "intervall": " päev(-ad)"
   },
   "weekly": {
       "interval": " nädal(-ad)",
-      "repeatEvery": "Korda iga...: ",
-      "repeatOn": "Korda….: "
+      "repeatEvery": "Korda iga...",
+      "repeatOn": "Korda…."
   },
   "monthly": {
-      "repeatEvery": "Korda iga...: ",
-      "repeatOn": "Korda...: ",
+      "repeatEvery": "Korda iga...",
+      "repeatOn": "Korda...",
       "interval": " kuu(-d)",
       "day": "Päev ",
       "date": "Kuupäev"
   },
   "yearly": {
-      "repeatEvery": "Korda iga...: ",
-      "repeatOn": "Korda...: ",
+      "repeatEvery": "Korda iga...",
+      "repeatOn": "Korda...",
       "interval": " aasta(-d)",
       "of": "millegi oma... ",
       "month": "kuu...",
@@ -786,7 +784,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
       "date": "Kuupäev"
   },
   "end": {
-      "label": "Lõpp:",
+      "label": "Lõpp",
       "mobileLabel": "Lõpeb",
       "never": "Mitte kunagi",
       "after": "Pärast... ",
@@ -806,6 +804,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
       "weekend": "nädalavahetuse päev"
   },
   "makeRecurring": "Muuda korduvaks",
+  "editRecurring": "Muuda kordust",
   "summary": {
     "on": "nädalapäeval",
     "onThe": "päeval",

@@ -31,28 +31,28 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "yearly": "Godišnje"
   },
   "hourly": {
-    "repeatEvery": "Ponovi svaki: ",
+    "repeatEvery": "Ponovi svaki",
     "interval": " hour(s)"
   },
   "daily": {
-    "repeatEvery": "Ponovi svaki:",
+    "repeatEvery": "Ponovi svaki",
     "interval": "dan(i)"
   },
   "weekly": {
     "interval": " tjedan(ni)",
-    "repeatEvery": "Ponovi svaki: ",
-    "repeatOn": "Ponovi na: "
+    "repeatEvery": "Ponovi svaki",
+    "repeatOn": "Ponovi na"
   },
   "monthly": {
-    "repeatEvery": "Ponovi svaki: ",
-    "repeatOn": "Ponovi na: ",
+    "repeatEvery": "Ponovi svaki",
+    "repeatOn": "Ponovi na",
     "interval": " mjesec(i)",
     "day": "Dan ",
     "date": "Date"
   },
   "yearly": {
-    "repeatEvery": "Ponovi svaki: ",
-    "repeatOn": "Ponovi na: ",
+    "repeatEvery": "Ponovi svaki",
+    "repeatOn": "Ponovi na",
     "interval": " godina(e)",
     "of": " od ",
     "month": "month",
@@ -60,7 +60,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "date": "Date"
   },
   "end": {
-    "label": "Završi:",
+    "label": "Završi",
     "mobileLabel": "Završava",
     "never": "Nikad",
     "after": "Nakon ",
@@ -80,6 +80,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "vikend"
   },
   "makeRecurring": "Postavi ponavljanje",
+  "editRecurring": "Uredi ponavljanje",
   "summary": {
     "on": "svaki",
     "onThe": "svaki",
@@ -299,8 +300,6 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   },
   "noRecords": "No records available.",
   "expandCollapseColumnHeader": "",
-  "groupHeader": "Press ctrl + space to group",
-  "ungroupHeader": "Press ctrl + space to ungroup",
   "toolbarLabel": "grid toolbar",
   "groupingHeaderLabel": "grid grouping header",
   "filterCellTitle": "filter cell"

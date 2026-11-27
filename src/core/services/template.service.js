@@ -1,6 +1,7 @@
 import { formatterService } from "./formatter.service";
 // Regex patterns for template parsing
 const argumentNameRegExp = /^\w+/;
+const paramNameRegExp = /^\w+(?:\.[\p{ID_Start}$_][\p{ID_Continue}$\u200C\u200D]*|\[(?:'(?:[^'\\\r\n\u2028\u2029]|\\[^\r\n\u2028\u2029])*'|"(?:[^"\\\r\n\u2028\u2029]|\\[^\r\n\u2028\u2029])*"|\d+)\])*$/u;
 const encodeRegExp = /\$\{([^}]*)\}/g;
 const escapedCurlyRegExp = /\\\}/g;
 const curlyRegExp = /__CURLY__/g;
@@ -63,6 +64,9 @@ class Template {
             useWithBlock: options?.useWithBlock !== undefined ? options.useWithBlock : Template.useWithBlock
         };
         const paramName = settings.paramName;
+        if (typeof paramName !== "string" || !paramNameRegExp.test(paramName)) {
+            throw new Error(formatterService.format("Invalid template paramName:'{0}'", paramName));
+        }
         const argumentName = paramName.match(argumentNameRegExp)[0];
         const useWithBlock = settings.useWithBlock;
         let functionBody = "var $kendoOutput, $kendoHtmlEncode = kendo.htmlEncode;";

@@ -442,32 +442,32 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "yearly": "Ročne"
   },
   "hourly": {
-    "repeatEvery": "Opakovať každú: ",
+    "repeatEvery": "Opakovať každú",
     "interval": " hodinu(hodín)"
   },
   "daily": {
-    "repeatEvery": "Opakovať každý: ",
+    "repeatEvery": "Opakovať každý",
     "interval": " deň(dní)"
   },
   "weekly": {
     "interval": " týždeň(týždňov)",
-    "repeatEvery": "Opakovať každý: ",
-    "repeatOn": "Opakovať: "
+    "repeatEvery": "Opakovať každý",
+    "repeatOn": "Opakovať"
   },
   "monthly": {
-    "repeatEvery": "Opakovať každý: ",
-    "repeatOn": "Opakovať: ",
+    "repeatEvery": "Opakovať každý",
+    "repeatOn": "Opakovať",
     "interval": " mesiac(mesiacov)",
     "day": "Deň "
   },
   "yearly": {
-    "repeatEvery": "Opakovať každý: ",
-    "repeatOn": "Opakovať: ",
+    "repeatEvery": "Opakovať každý",
+    "repeatOn": "Opakovať",
     "interval": " rok(rokov)",
     "of": " z "
   },
   "end": {
-    "label": "Koniec:",
+    "label": "Koniec",
     "mobileLabel": "Ukončiť",
     "never": "Nikdy",
     "after": "Po ",
@@ -487,6 +487,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "víkend"
   },
   "makeRecurring": "Nastaviť opakovanie",
+  "editRecurring": "Upraviť opakovanie",
   "summary": {
     "on": "v",
     "onThe": "v",

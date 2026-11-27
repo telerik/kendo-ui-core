@@ -259,12 +259,12 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "update": "שמור",
   "daily": {
     "interval": "מחזוריות",
-    "repeatEvery": "חזור כל: "
+    "repeatEvery": "חזור כל"
   },
   "end": {
     "after": "לאחר ",
     "occurrence": "מחזוריות",
-    "label": "תגית:",
+    "label": "תגית",
     "never": "אף פעם",
     "on": "ב ",
     "mobileLabel": "נייד"
@@ -279,8 +279,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "monthly": {
     "day": "יום ",
     "interval": " מחזוריות",
-    "repeatEvery": "חזרה כל: ",
-    "repeatOn": "חזור ב: "
+    "repeatEvery": "חזרה כל",
+    "repeatOn": "חזור ב"
   },
   "offsetPositions": {
     "first": "ראשון",
@@ -290,14 +290,14 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "third": "שלישי"
   },
   "weekly": {
-    "repeatEvery": "חזור כל: ",
-    "repeatOn": "חזור ב: ",
+    "repeatEvery": "חזור כל",
+    "repeatOn": "חזור ב",
     "interval": "מחזוריות"
   },
   "yearly": {
     "of": " ב ",
-    "repeatEvery": "חזור כל: ",
-    "repeatOn": "חזור ב: ",
+    "repeatEvery": "חזור כל",
+    "repeatOn": "חזור ב",
     "interval": "מחזוריות"
   },
   "weekdays": {
@@ -306,6 +306,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "בסוף שבוע"
   },
   "makeRecurring": "הפוך לאירוע חוזר",
+  "editRecurring": "ערוך חזרה",
   "summary": {
     "on": "ב",
     "onThe": "ב",

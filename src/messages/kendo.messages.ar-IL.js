@@ -497,8 +497,6 @@
         "noRecords": "لا توجد سجلات متاحة.",
         "search": "بحث...",
         "expandCollapseColumnHeader": "",
-        "groupHeader": "ctrl + space لعمل مجموعة اضغط",
-        "ungroupHeader": "ctrl + space لإلغاء المجموعة اضغط"
       });
   }
 
@@ -685,24 +683,24 @@
           "interval": "ساعة"
         },
         "daily": {
-          "repeatEvery": "تكرار كل:",
+          "repeatEvery": "تكرار كل",
           "interval": "يوم"
         },
         "weekly": {
           "interval": "أسبوع",
-          "repeatEvery": "تكرار كل:",
-          "repeatOn": "تكرار على:"
+          "repeatEvery": "تكرار كل",
+          "repeatOn": "تكرار على"
         },
         "monthly": {
-          "repeatEvery": "تكرار كل:",
-          "repeatOn": "تكرار على:",
+          "repeatEvery": "تكرار كل",
+          "repeatOn": "تكرار على",
           "interval": "شهر",
           "day": "يوم",
           "date": "تاريخ"
         },
         "yearly": {
-          "repeatEvery": "تكرار كل:",
-          "repeatOn": "كرر على:",
+          "repeatEvery": "تكرار كل",
+          "repeatOn": "كرر على",
           "interval": "سنة",
           "of": "من",
           "month": "شهر",
@@ -710,7 +708,7 @@
           "date": "تاريخ"
         },
         "end": {
-          "label": "النهاية:",
+          "label": "النهاية",
           "mobileLabel": "ينتهي",
           "never": "ابدًا",
           "after": "بعد",
@@ -730,6 +728,7 @@
           "weekend": "يوم عطلة نهاية الأسبوع"
         },
         "makeRecurring": "اجعله متكرراً",
+        "editRecurring": "تعديل التكرار",
         "summary": {
           "on": "في",
           "onThe": "في",

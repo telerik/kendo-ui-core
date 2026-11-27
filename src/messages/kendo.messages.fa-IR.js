@@ -417,32 +417,32 @@
                 "yearly": "سالیانه"
             },
             "hourly": {
-                "repeatEvery": "تکرار کن هر: ",
+                "repeatEvery": "تکرار کن هر",
                 "interval": " ساعت"
             },
             "daily": {
-                "repeatEvery": "تکرار کن هر: ",
+                "repeatEvery": "تکرار کن هر",
                 "interval": " روز"
             },
             "weekly": {
                 "interval": " هفته",
-                "repeatEvery": "تکرار کن هر: ",
-                "repeatOn": "تکرار کن در: "
+                "repeatEvery": "تکرار کن هر",
+                "repeatOn": "تکرار کن در"
             },
             "monthly": {
-                "repeatEvery": "تکرار کن هر: ",
-                "repeatOn": "تکرار کن در: ",
+                "repeatEvery": "تکرار کن هر",
+                "repeatOn": "تکرار کن در",
                 "interval": " ماه",
                 "day": "روز "
             },
             "yearly": {
-                "repeatEvery": "تکرار کن هر: ",
-                "repeatOn": "تکرار کن در: ",
+                "repeatEvery": "تکرار کن هر",
+                "repeatOn": "تکرار کن در",
                 "interval": " سال",
                 "of": " از "
             },
             "end": {
-                "label": "پایان:",
+                "label": "پایان",
                 "mobileLabel": "پایان",
                 "never": "هیچ وقت",
                 "after": "بعد از ",
@@ -462,6 +462,7 @@
                 "weekend": "پایان هفته"
             },
             "makeRecurring": "تکراری کنید",
+            "editRecurring": "ویرایش تکرار",
             "summary": {
               "on": "در",
               "onThe": "در",

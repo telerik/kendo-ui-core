@@ -144,12 +144,12 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "update": "Zapisz",
   "daily": {
     "interval": "dni",
-    "repeatEvery": "Powtarzaj co:"
+    "repeatEvery": "Powtarzaj co"
   },
   "end": {
     "after": "Po",
     "occurrence": "występowanie",
-    "label": "Koniec:",
+    "label": "Koniec",
     "never": "Nigdy",
     "on": "On",
     "mobileLabel": "Koniec"
@@ -164,8 +164,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "monthly": {
     "day": "Dzień",
     "interval": "miesiąc(e)",
-    "repeatEvery": "Cyklicznie co:",
-    "repeatOn": "Powtórz:"
+    "repeatEvery": "Cyklicznie co",
+    "repeatOn": "Powtórz"
   },
   "offsetPositions": {
     "first": "pierwszy",
@@ -175,14 +175,14 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "third": "trzeci"
   },
   "weekly": {
-    "repeatEvery": "Powtarzaj co:",
-    "repeatOn": "Powtórz:",
+    "repeatEvery": "Powtarzaj co",
+    "repeatOn": "Powtórz",
     "interval": "tydzień"
   },
   "yearly": {
     "of": "of",
-    "repeatEvery": "Powtarzaj co:",
-    "repeatOn": "Powtórz:",
+    "repeatEvery": "Powtarzaj co",
+    "repeatOn": "Powtórz",
     "interval": "rok/lata"
   },
   "weekdays": {
@@ -191,6 +191,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "dzień weekendu"
   },
   "makeRecurring": "Ustaw powtarzanie",
+  "editRecurring": "Edytuj cykl",
   "summary": {
     "on": "w",
     "onThe": "w",

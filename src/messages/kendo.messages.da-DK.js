@@ -107,12 +107,12 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "update": "Gem",
   "daily": {
     "interval": "days(s)",
-    "repeatEvery": "Gentag hver:"
+    "repeatEvery": "Gentag hver"
   },
   "end": {
     "after": "Efter",
     "occurrence": "forekomst(er)",
-    "label": "Slut:",
+    "label": "Slut",
     "never": "Aldrig",
     "on": "Den",
     "mobileLabel": "Slutter"
@@ -127,8 +127,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "monthly": {
     "day": "Dag",
     "interval": "måned(er)",
-    "repeatEvery": "Gentag hver:",
-    "repeatOn": "Gentag den:"
+    "repeatEvery": "Gentag hver",
+    "repeatOn": "Gentag den"
   },
   "offsetPositions": {
     "first": "første",
@@ -138,14 +138,14 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "third": "tredje"
   },
   "weekly": {
-    "repeatEvery": "Gentag hver:",
-    "repeatOn": "Gentag den:",
+    "repeatEvery": "Gentag hver",
+    "repeatOn": "Gentag den",
     "interval": "uge(r)"
   },
   "yearly": {
     "of": "of",
-    "repeatEvery": "Gentag hvert:",
-    "repeatOn": "Gentag den:",
+    "repeatEvery": "Gentag hvert",
+    "repeatOn": "Gentag den",
     "interval": "år"
   },
   "weekdays": {
@@ -154,6 +154,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "weekend dag"
   },
   "makeRecurring": "Opret gentagelse",
+  "editRecurring": "Rediger gentagelse",
   "summary": {
     "on": "om",
     "onThe": "om den",

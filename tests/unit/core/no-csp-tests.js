@@ -187,6 +187,19 @@ describe("Template", function() {
         assert.equal(t({ foo: { bar: "baz" } }), "baz");
     });
 
+    it("allows identifier and escaped quoted key members as a context", function() {
+        assert.equal(template.compile("#= bar #", { paramName: "data.$foo" })({ $foo: { bar: "baz" } }), "baz");
+        assert.equal(template.compile("#= bar #", { paramName: "data.café" })({ "café": { bar: "baz" } }), "baz");
+        assert.equal(template.compile("#= bar #", { paramName: "data['a\\'b']" })({ "a'b": { bar: "baz" } }), "baz");
+        assert.equal(template.compile("#= bar #", { paramName: "data[\"a\\\"b\"]" })({ "a\"b": { bar: "baz" } }), "baz");
+    });
+
+    it("throws for paramName that is not a member expression", function() {
+        assert.throws(() => template.compile("#= bar #", { paramName: "data){alert(1)}with(data" }), /Invalid template paramName/);
+        assert.throws(() => template.compile("#= bar #", { paramName: "data['a'];alert(1);//']" }), /Invalid template paramName/);
+        assert.throws(() => template.compile("#= bar #", { paramName: "data['a\\\\'];alert(1);//']" }), /Invalid template paramName/);
+    });
+
     it("can execute code", function() {
         let executed = false,
             t = template.compile("# let result='foo'; ##= result#");

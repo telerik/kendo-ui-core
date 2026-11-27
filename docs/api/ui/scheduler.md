@@ -2875,13 +2875,13 @@ How do I customize the recurrence editor labels in Kendo UI Scheduler? Control a
                     yearly: "Yearly"
                 },
                 daily: {
-                    repeatEvery: "Repeat every: ",
+                    repeatEvery: "Repeats every",
                     interval: " day(s)"
                 },
                 weekly: {
-                    repeatEvery: "Repeat every: ",
+                    repeatEvery: "Repeats every",
                     interval: " week(s) on:",
-                    repeatOn: "Repeat on:"
+                    repeatOn: "On"
                 },
                 update: "Update"
             }
@@ -2956,7 +2956,7 @@ How to customize daily recurrence options in Kendo UI Scheduler? Adjust, customi
         messages: {
             recurrenceEditor: {
                 daily: {
-                    repeatEvery: "Repeat every: ",
+                    repeatEvery: "Repeats every",
                     interval: " day(s)"
                 }
             }
@@ -2999,7 +2999,7 @@ How to customize the daily interval label in Kendo UI Scheduler's recurrence edi
 
 ### messages.recurrenceEditor.daily.repeatEvery `String`
 
-The text similar to "Repeat every: " displayed in the scheduler recurrence editor.
+The text similar to "Repeats every" displayed in the scheduler recurrence editor.
 
 
 <div class="meta-api-description">
@@ -3015,7 +3015,7 @@ How to customize the "Repeat every" label in Kendo UI Scheduler's daily recurren
       messages: {
         recurrenceEditor: {
             daily: {
-                repeatEvery: "Repeat on: "
+                repeatEvery: "Repeats every"
             }
         }
       },
@@ -3141,11 +3141,11 @@ How to customize the text suffix for recurring events in a Kendo UI Scheduler? C
 
 ### messages.recurrenceEditor.end.label `String`
 
-The text similar to "End:" displayed in the scheduler recurrence editor.
+The label displayed in the Scheduler recurrence editor, such as "Ends". In count-based summaries, the label is lowercased.
 
 
 <div class="meta-api-description">
-How can I customize the "End:" label in a Kendo UI Scheduler's recurrence settings dialog? Adjust, configure, or customize the text label shown for the ending point in a scheduler's recurrence settings, including modifying how the "End:" descriptor appears, changing the end date prompt, renaming the conclusion label in repeat or recurring event dialogs, and controlling the wording displayed for ending or stopping recurrence patterns in calendar or scheduling interfaces.
+How can I customize the "Ends" label in a Kendo UI Scheduler's recurrence settings dialog or count-based summary? Configure the label for the ending point of a recurring event.
 </div>
 
 #### Example - set the "label" scheduler recurrence editor message
@@ -3553,6 +3553,28 @@ How to customize the title in the recurrence editor of a Kendo UI Scheduler? Cus
     });
     </script>
 
+### messages.recurrenceEditor.editRecurring `String` *(default: "Edit recurrence")*
+
+The text displayed by the recurrence button in the desktop event editor when the event has a recurrence rule. The recurrence summary is displayed separately below the button.
+
+
+<div class="meta-api-description">
+How do I customize or translate the Edit recurrence button in the Scheduler event editor? Set the localized label for editing an existing repeating appointment or recurring series without changing the separate recurrence summary.
+</div>
+
+#### Example - customize the edit recurrence label
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      messages: { recurrenceEditor: { editRecurring: "Change recurrence" } },
+      dataSource: [
+        { id: 1, title: "Safety Review", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00"), recurrenceRule: "FREQ=WEEKLY;BYDAY=MO" }
+      ]
+    });
+    </script>
+
 ### messages.recurrenceEditor.makeRecurring `String` *(default: "Make recurring")*
 
 The text displayed by the recurrence trigger when the event does not have a recurrence rule.
@@ -3609,8 +3631,8 @@ How do I customize the monthly recurrence editor messages in Kendo UI Scheduler?
                     day: "Day ",
                     interval: " month(s)",
                     of: " of ",
-                    repeatEvery: "Repeat every: ",
-                    repeatOn: "Repeat on: "
+                    repeatEvery: "Repeats every",
+                    repeatOn: "On"
                 }
             }
         }
@@ -3718,7 +3740,7 @@ How to customize the interval label in Kendo UI Scheduler's monthly recurrence e
 
 ### messages.recurrenceEditor.monthly.repeatEvery `String`
 
-The text similar to "Repeat every: " displayed in the scheduler recurrence editor.
+The text similar to "Repeats every" displayed in the scheduler recurrence editor.
 
 
 <div class="meta-api-description">
@@ -3751,7 +3773,7 @@ How can I customize the "repeat every" label in Kendo UI Scheduler's recurrence 
 
 ### messages.recurrenceEditor.monthly.repeatOn `String`
 
-The text similar to "Repeat on: " displayed in the scheduler recurrence editor.
+The text similar to "On" displayed in the scheduler recurrence editor.
 
 
 <div class="meta-api-description">
@@ -4275,8 +4297,8 @@ How to customize weekly recurrence options in Kendo UI Scheduler? Customize and 
             recurrenceEditor: {
                 weekly: {
                     interval: " week(s) on:",
-                    repeatEvery: "Repeat every: ",
-                    repeatOn: "Repeat on:"
+                    repeatEvery: "Repeats every",
+                    repeatOn: "On"
                 }
             }
         }
@@ -4318,7 +4340,7 @@ How to customize weekly recurrence interval label in Kendo UI Scheduler? Customi
 
 ### messages.recurrenceEditor.weekly.repeatEvery `String`
 
-The text similar to "Repeat every: " displayed in the scheduler recurrence editor.
+The text similar to "Repeats every" displayed in the scheduler recurrence editor.
 
 
 <div class="meta-api-description">
@@ -4351,11 +4373,11 @@ How to customize "Repeat every" label in Kendo UI Scheduler's recurrence editor 
 
 ### messages.recurrenceEditor.weekly.repeatOn `String`
 
-The text similar to "Repeat on: " displayed in the scheduler recurrence editor.
+The text similar to "On" displayed in the scheduler recurrence editor.
 
 
 <div class="meta-api-description">
-How do I customize the "Repeat on:" label in Kendo UI Scheduler's recurrence editor for weekly repetition? Customize or translate the label that prompts users to select specific days for weekly repetition patterns in scheduling interfaces, enabling localization or adjustment of the "Repeat on:" text within recurrence editors, recurring event planners, or calendar settings to match different languages, regional formats, or personalized phrasing in user interfaces that manage repeated weekly events or schedules.
+How do I customize the "On" label in Kendo UI Scheduler's recurrence editor for weekly repetition? Customize or translate the label that prompts users to select specific days for weekly repetition patterns in scheduling interfaces, enabling localization or adjustment of the "On" text within recurrence editors, recurring event planners, or calendar settings to match different languages, regional formats, or personalized phrasing in user interfaces that manage repeated weekly events or schedules.
 </div>
 
 #### Example - set the "repeatOn" scheduler recurrence editor message
@@ -4556,8 +4578,8 @@ How can I customize yearly recurrence messages in Kendo UI Scheduler? Customize,
                     interval: " year(s)",
                     month: "month",
                     of: " of ",
-                    repeatEvery: "Repeat every: ",
-                    repeatOn: "Repeat on: "
+                    repeatEvery: "Repeats every",
+                    repeatOn: "On"
                 }
             }
         }
@@ -4665,7 +4687,7 @@ How to customize the "of" label in Kendo UI Scheduler's yearly recurrence editor
 
 ### messages.recurrenceEditor.yearly.repeatEvery `String`
 
-The text similar to "Repeat every: " displayed in the scheduler recurrence editor.
+The text similar to "Repeats every" displayed in the scheduler recurrence editor.
 
 
 <div class="meta-api-description">
@@ -4698,11 +4720,11 @@ How to change the "repeat every year" label in Kendo UI Scheduler's recurrence e
 
 ### messages.recurrenceEditor.yearly.repeatOn `String`
 
-The text similar to "Repeat on: " displayed in the scheduler recurrence editor.
+The text similar to "On" displayed in the scheduler recurrence editor.
 
 
 <div class="meta-api-description">
-How to change the "Repeat on" label for yearly recurrence in Kendo UI Scheduler? Control the label text for the yearly recurrence "Repeat on:" option in scheduling interfaces, enabling customization, localization, translation, or modification of the prompt that specifies how users select repeat dates or intervals on an annual basis; adjust, configure, or override the default label displayed in recurrence editors, calendars, or event schedulers to match language preferences or custom wording for yearly repetition settings.
+How to change the "On" label for yearly recurrence in Kendo UI Scheduler? Control the label text for the yearly recurrence "On" option in scheduling interfaces, enabling customization, localization, translation, or modification of the prompt that specifies how users select repeat dates or intervals on an annual basis; adjust, configure, or override the default label displayed in recurrence editors, calendars, or event schedulers to match language preferences or custom wording for yearly repetition settings.
 </div>
 
 #### Example - set the "repeatOn" scheduler recurrence editor message
@@ -6518,9 +6540,15 @@ How do I customize the title in the exported Kendo UI Scheduler PDF? Control the
     });
     </script>
 
-### recurrenceRuleLabelTemplate `String|Function`
+### recurrenceSummaryTemplate `String|Function` *(default: null)*
 
-The [template](/api/kendo/methods/template) used to render the recurrence trigger summary in the desktop event editor.
+The [template](/api/kendo/methods/template) used to customize the recurrence summary both below the recurrence button in the desktop event editor and inside the recurrence dialog. The template output is displayed as text, not HTML.
+
+For a series that ends after a set number of occurrences, the default summary uses the recurrence editor's end messages, for example, "ends after 6 occurrence(s)."
+
+The button always displays the localized [Make recurring](/api/javascript/ui/scheduler/configuration/messages.recurrenceeditor.makerecurring) or [Edit recurrence](/api/javascript/ui/scheduler/configuration/messages.recurrenceeditor.editrecurring) message. The summary template does not change the button label.
+
+Below the button, long summaries are clamped to two lines by the theme. The complete text is available through the native browser tooltip.
 
 The template data contains the following fields:
 
@@ -6529,16 +6557,16 @@ The template data contains the following fields:
 
 
 <div class="meta-api-description">
-How do I customize the recurrence summary shown by the Kendo UI Scheduler event editor? Provide a string or function template for the recurring-event trigger label and format its text from the parsed recurrence rule object or the serialized recurrence rule string.
+How do I customize the recurrence summary shown below the Scheduler recurrence button and inside the recurrence dialog? Provide a string or function template to format repeating appointment descriptions from the parsed recurrence rule or serialized recurrence string while keeping the button label separate.
 </div>
 
-#### Example - customize the recurrence trigger summary
+#### Example - customize both recurrence summaries
 
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
       date: new Date("2026/8/3"),
-      recurrenceRuleLabelTemplate: function(data) {
+      recurrenceSummaryTemplate: function(data) {
         return data.rule.freq.toUpperCase() + ": " + data.recurrenceRule;
       },
       dataSource: [

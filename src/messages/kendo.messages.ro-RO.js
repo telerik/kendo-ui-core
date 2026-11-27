@@ -98,12 +98,12 @@ if (kendo.ui.RecurrenceEditor) {
       "update": "Salvați",
       "daily": {
         "interval": "zi/zile",
-        "repeatEvery": "Repetă în fiecare:"
+        "repeatEvery": "Repetă în fiecare"
       },
       "end": {
         "after": "După",
         "occurrence": "ocurență(e)",
-        "label": "Sfărsit:",
+        "label": "Sfărsit",
         "never": "Niciodată",
         "on": "On",
         "mobileLabel": "Sfărseste"
@@ -118,8 +118,8 @@ if (kendo.ui.RecurrenceEditor) {
       "monthly": {
         "day": "Day",
         "interval": "luna(luni)",
-        "repeatEvery": "Repetă în fiecare:",
-        "repeatOn": "Repetă la:"
+        "repeatEvery": "Repetă în fiecare",
+        "repeatOn": "Repetă la"
       },
       "offsetPositions": {
         "first": "primul",
@@ -129,14 +129,14 @@ if (kendo.ui.RecurrenceEditor) {
         "third": "al treilea"
       },
       "weekly": {
-        "repeatEvery": "Repetă în fiecare:",
-        "repeatOn": "Repetă la:",
+        "repeatEvery": "Repetă în fiecare",
+        "repeatOn": "Repetă la",
         "interval": "saptamana(i)"
       },
       "yearly": {
         "of": "din",
-        "repeatEvery": "Repetă în fiecare:",
-        "repeatOn": "Repetă la:",
+        "repeatEvery": "Repetă în fiecare",
+        "repeatOn": "Repetă la",
         "interval": "an(ani)"
       },
       "weekdays": {
@@ -145,6 +145,7 @@ if (kendo.ui.RecurrenceEditor) {
         "weekend": "zi de weekend"
       },
       "makeRecurring": "Setați ca recurent",
+      "editRecurring": "Editați recurența",
       "summary": {
         "on": "în",
         "onThe": "în",
@@ -287,8 +288,6 @@ if (kendo.ui.Grid) {
       "noRecords": "Nicio inregistrare disponibila.",
       "search": "Cautare...",
       "expandCollapseColumnHeader": "",
-      "groupHeader": "Apasati CTRL + spatiu pentru a grupa",
-      "ungroupHeader": "Apasati CTRL + spatiu pentru a degrupa"
     });
 }
 

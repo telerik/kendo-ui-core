@@ -481,8 +481,6 @@
                 },
                 "noRecords": "无相关数据",
                 "expandCollapseColumnHeader": "...",
-                "groupHeader": "按 Ctrl + 空格 进行分组",
-                "ungroupHeader": "按 Ctrl + 空格 取消分组"
             });
         kendo.ui.Grid.prototype.options =
             $.extend(true, kendo.ui.Grid.prototype.options, {
@@ -677,6 +675,7 @@
                     "weekend": "周末"
                 },
                 "makeRecurring": "设为重复",
+                "editRecurring": "编辑重复设置",
                 "summary": {
                   "on": "在",
                   "onThe": "在",

@@ -366,8 +366,6 @@
         },
         "noRecords": "無相關資料",
         "expandCollapseColumnHeader": "...",
-        "groupHeader": "按 Ctrl + 空格 進行分組",
-        "ungroupHeader": "按 Ctrl + 空格 取消分組"
       });
   }
 
@@ -568,6 +566,7 @@
           "weekend": "週末"
         },
         "makeRecurring": "設為重複",
+        "editRecurring": "編輯重複設定",
         "summary": {
           "on": "在",
           "onThe": "在",

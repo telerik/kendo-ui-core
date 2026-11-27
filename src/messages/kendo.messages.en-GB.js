@@ -580,8 +580,6 @@
         },
         "noRecords": "No records available.",
         "expandCollapseColumnHeader": "",
-        "groupHeader": "Press ctrl + space to group",
-        "ungroupHeader": "Press ctrl + space to ungroup",
         "toolbarLabel": "grid toolbar",
         "groupingHeaderLabel": "grid grouping header",
         "filterCellTitle": "filter cell",
@@ -831,28 +829,28 @@
           "yearly": "Yearly"
         },
         "hourly": {
-          "repeatEvery": "Repeat every: ",
+          "repeatEvery": "Repeats every",
           "interval": " hour(s)"
         },
         "daily": {
-          "repeatEvery": "Repeat every: ",
+          "repeatEvery": "Repeats every",
           "interval": " day(s)"
         },
         "weekly": {
           "interval": " week(s)",
-          "repeatEvery": "Repeat every: ",
-          "repeatOn": "Repeat on: "
+          "repeatEvery": "Repeats every",
+          "repeatOn": "On"
         },
         "monthly": {
-          "repeatEvery": "Repeat every: ",
-          "repeatOn": "Repeat on: ",
+          "repeatEvery": "Repeats every",
+          "repeatOn": "On",
           "interval": " month(s)",
           "day": "Day ",
           "date": "Date"
         },
         "yearly": {
-          "repeatEvery": "Repeat every: ",
-          "repeatOn": "Repeat on: ",
+          "repeatEvery": "Repeats every",
+          "repeatOn": "On",
           "interval": " year(s)",
           "of": " of ",
           "month": "month",
@@ -860,7 +858,7 @@
           "date": "Date"
         },
         "end": {
-          "label": "End:",
+          "label": "Ends",
           "mobileLabel": "Ends",
           "never": "Never",
           "after": "After ",
@@ -880,6 +878,7 @@
           "weekend": "weekend day"
         },
         "makeRecurring": "Make recurring",
+        "editRecurring": "Edit recurrence",
         "summary": {
           "on": "on",
           "onThe": "on the",
@@ -923,7 +922,7 @@
           "repeatBy": "Repeat by: ",
           "dayOfMonth": "Day of the month",
           "dayOfWeek": "Day of the week",
-          "repeatEvery": "Repeat every",
+          "repeatEvery": "Repeats every",
           "every": "Every",
           "day": "Day "
         },
@@ -932,7 +931,7 @@
           "repeatBy": "Repeat by: ",
           "dayOfMonth": "Day of the month",
           "dayOfWeek": "Day of the week",
-          "repeatEvery": "Repeat every: ",
+          "repeatEvery": "Repeats every",
           "every": "Every",
           "month": "Month",
           "day": "Day"

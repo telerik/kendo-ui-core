@@ -516,32 +516,32 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "yearly": "Anualmente"
   },
   "hourly": {
-    "repeatEvery": "Repetir toda: ",
+    "repeatEvery": "Repetir toda",
     "interval": " hora(s)"
   },
   "daily": {
-    "repeatEvery": "Repetir todo: ",
+    "repeatEvery": "Repetir todo",
     "interval": " dia(s)"
   },
   "weekly": {
     "interval": "semana(s)",
-    "repeatEvery": "Repetir todo: ",
-    "repeatOn": "Repetir em: "
+    "repeatEvery": "Repetir todo",
+    "repeatOn": "Repetir em"
   },
   "monthly": {
-    "repeatEvery": "Repetir todo: ",
-    "repeatOn": "Repetir em: ",
+    "repeatEvery": "Repetir todo",
+    "repeatOn": "Repetir em",
     "interval": " mês(es)",
     "day": "Dia "
   },
   "yearly": {
-    "repeatEvery": "Repetir todo: ",
-    "repeatOn": "Repetir em: ",
+    "repeatEvery": "Repetir todo",
+    "repeatOn": "Repetir em",
     "interval": " ano(s) ",
     "of": " de "
   },
   "end": {
-    "label": "Fim:",
+    "label": "Fim",
     "mobileLabel": "Final",
     "never": "Nunca",
     "after": "Após ",
@@ -561,6 +561,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "final de semana"
   },
   "makeRecurring": "Tornar recorrente",
+  "editRecurring": "Editar recorrência",
   "summary": {
     "on": "na",
     "onThe": "na",

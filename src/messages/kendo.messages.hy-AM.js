@@ -99,12 +99,12 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "update": "Պահպանել",
   "daily": {
     "interval": "օր(եր)",
-    "repeatEvery": "Կրկնել ամեն:"
+    "repeatEvery": "Կրկնել ամեն"
   },
   "end": {
     "after": "Հետո",
     "occurrence": "occurrence(s)",
-    "label": "Վերջ:",
+    "label": "Վերջ",
     "never": "Երբեք",
     "on": "On",
     "mobileLabel": "Ends"
@@ -119,8 +119,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "monthly": {
     "day": "Օր",
     "interval": "ամիս(ներ)",
-    "repeatEvery": "Կրկնել ամեն:",
-    "repeatOn": "Կրկնել:"
+    "repeatEvery": "Կրկնել ամեն",
+    "repeatOn": "Կրկնել"
   },
   "offsetPositions": {
     "first": "առաջին",
@@ -130,14 +130,14 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "third": "երրորդ"
   },
   "weekly": {
-    "repeatEvery": "Կրկնել ամեն:",
-    "repeatOn": "Կրկնել:",
+    "repeatEvery": "Կրկնել ամեն",
+    "repeatOn": "Կրկնել",
     "interval": "շաբաթ(ներ)"
   },
   "yearly": {
     "of": "of",
-    "repeatEvery": "Կրկնել ամեն:",
-    "repeatOn": "Կրկնել:",
+    "repeatEvery": "Կրկնել ամեն",
+    "repeatOn": "Կրկնել",
     "interval": "տարի(ներ)"
   },
   "weekdays": {
@@ -146,6 +146,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "ոչ աշխատանքային օր"
   },
   "makeRecurring": "Դարձնել կրկնվող",
+  "editRecurring": "Խմբագրել կրկնությունը",
   "summary": {
     "on": "ն",
     "onThe": "ն",

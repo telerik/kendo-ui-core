@@ -217,12 +217,12 @@
         "update": "Sauvegarder",
         "daily": {
           "interval": "jour(s)",
-          "repeatEvery": "Répéter chaque:"
+          "repeatEvery": "Répéter chaque"
         },
         "end": {
           "after": " Après",
           "occurrence": "occurrence(s)",
-          "label": "Finir:",
+          "label": "Finir",
           "never": "Jamais",
           "on": "Sur",
           "mobileLabel": "Ends"
@@ -236,15 +236,15 @@
           "yearly": "Une fois par an"
         },
         "hourly": {
-          "repeatEvery": "Répéter chaque :",
+          "repeatEvery": "Répéter chaque",
           "interval": " heure(s)"
         },
         "monthly": {
           "day": "Jour",
           "date": "Date",
           "interval": "mois",
-          "repeatEvery": "Répéter chaque:",
-          "repeatOn": "Répéter l'opération sur:"
+          "repeatEvery": "Répéter chaque",
+          "repeatOn": "Répéter l'opération sur"
         },
         "offsetPositions": {
           "first": "premier",
@@ -254,14 +254,14 @@
           "third": "troisième"
         },
         "weekly": {
-          "repeatEvery": "Répéter chaque:",
-          "repeatOn": "Répéter l'opération sur:",
+          "repeatEvery": "Répéter chaque",
+          "repeatOn": "Répéter l'opération sur",
           "interval": "semaine(s)"
         },
         "yearly": {
           "of": "de",
-          "repeatEvery": "Répéter chaque:",
-          "repeatOn": "Répéter l'opération sur:",
+          "repeatEvery": "Répéter chaque",
+          "repeatOn": "Répéter l'opération sur",
           "interval": "année(ans)",
           "month": "mois",
           "day": "jour",
@@ -273,6 +273,7 @@
           "weekend": "jour de week-end"
         },
         "makeRecurring": "Rendre récurrent",
+        "editRecurring": "Modifier la récurrence",
         "summary": {
           "on": "le",
           "onThe": "le",
@@ -332,8 +333,6 @@
           "collapse": "Réduire"
         },
         "expandCollapseColumnHeader": "",
-        "groupHeader": "Appuyer sur ctrl + espace pour grouper",
-        "ungroupHeader": "Appuyer sur ctrl + espace pour dissocier",
         "toolbarLabel": "Barre d'outils",
         "groupingHeaderLabel": "En-tête du groupe",
         "filterCellTitle": "Filtre de la cellule",

@@ -367,8 +367,6 @@
           "confirmDelete": "Διαγραφή"
         },
         "noRecords": "Δεν υπάρχουν εγγραφές.",
-        "groupHeader": "Πατήστε ctrl + space για να ομαδοποιήσετε",
-        "ungroupHeader": "Πατήστε ctrl + space για να την αποκλείσετε"
       });
   }
 
@@ -520,32 +518,32 @@
           "yearly": "Ετήσια"
         },
         "hourly": {
-          "repeatEvery": "Επανάληψη κάθε: ",
+          "repeatEvery": "Επανάληψη κάθε",
           "interval": " ώρα(ες)"
         },
         "daily": {
-          "repeatEvery": "Επανάληψη κάθε: ",
+          "repeatEvery": "Επανάληψη κάθε",
           "interval": " μέρα(ες)"
         },
         "weekly": {
           "interval": " εβδομάδα(ες)",
-          "repeatEvery": "Επανάληψη κάθε: ",
-          "repeatOn": "Επανάληψη την: "
+          "repeatEvery": "Επανάληψη κάθε",
+          "repeatOn": "Επανάληψη την"
         },
         "monthly": {
-          "repeatEvery": "Επανάληψη κάθε: ",
-          "repeatOn": "Επανάληψη τον: ",
+          "repeatEvery": "Επανάληψη κάθε",
+          "repeatOn": "Επανάληψη τον",
           "interval": " μήνα(ες)",
           "day": "Ημέρα "
         },
         "yearly": {
-          "repeatEvery": "Επανάληψη κάθε: ",
-          "repeatOn": "Επανάληψη το: ",
+          "repeatEvery": "Επανάληψη κάθε",
+          "repeatOn": "Επανάληψη το",
           "interval": " χρόνο(ια)",
           "of": " από "
         },
         "end": {
-          "label": "Τέλος:",
+          "label": "Τέλος",
           "mobileLabel": "Τελειώνει",
           "never": "Ποτέ",
           "after": "Μετά ",
@@ -565,6 +563,7 @@
           "weekend": "σαββατοκύριακο"
         },
         "makeRecurring": "Ορισμός επανάληψης",
+        "editRecurring": "Επεξεργασία επανάληψης",
         "summary": {
           "on": "τη",
           "onThe": "τη",

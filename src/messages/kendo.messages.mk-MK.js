@@ -529,32 +529,32 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "yearly": "Годишно"
   },
   "hourly": {
-    "repeatEvery": "Повтори на секој/и: ",
+    "repeatEvery": "Повтори на секој/и",
     "interval": " час(ови)"
   },
   "daily": {
-    "repeatEvery": "Повтори на секој/и: ",
+    "repeatEvery": "Повтори на секој/и",
     "interval": " ден(ови)"
   },
   "weekly": {
     "interval": " недела/и",
-    "repeatEvery": "Повтори на секој/и: ",
-    "repeatOn": "Повтори на: "
+    "repeatEvery": "Повтори на секој/и",
+    "repeatOn": "Повтори на"
   },
   "monthly": {
-    "repeatEvery": "Повтори на секој/и: ",
-    "repeatOn": "Повтори на: ",
+    "repeatEvery": "Повтори на секој/и",
+    "repeatOn": "Повтори на",
     "interval": " месец(и)",
     "day": "Ден "
   },
   "yearly": {
-    "repeatEvery": "Повтори на секоја/и: ",
-    "repeatOn": "Повтори на: ",
+    "repeatEvery": "Повтори на секоја/и",
+    "repeatOn": "Повтори на",
     "interval": " година/и",
     "of": " од "
   },
   "end": {
-    "label": "Крај:",
+    "label": "Крај",
     "mobileLabel": "Завршува",
     "never": "Никогаш",
     "after": "По ",
@@ -574,6 +574,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "ден од викенд"
   },
   "makeRecurring": "Постави повторување",
+  "editRecurring": "Уреди повторување",
   "summary": {
     "on": "во",
     "onThe": "во",

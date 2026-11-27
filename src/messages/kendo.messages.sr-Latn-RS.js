@@ -529,32 +529,32 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "yearly": "Godišnje"
   },
   "hourly": {
-    "repeatEvery": "Ponovite svako: ",
+    "repeatEvery": "Ponovite svako",
     "interval": " sat(i)"
   },
   "daily": {
-    "repeatEvery": "Ponovite svako: ",
+    "repeatEvery": "Ponovite svako",
     "interval": " dan/ovi"
   },
   "weekly": {
     "interval": " nedelja(ma)",
-    "repeatEvery": "Ponovite svako: ",
-    "repeatOn": "Ponoviti na: "
+    "repeatEvery": "Ponovite svako",
+    "repeatOn": "Ponoviti na"
   },
   "monthly": {
-    "repeatEvery": "Ponovite svako: ",
-    "repeatOn": "Ponoviti na: ",
+    "repeatEvery": "Ponovite svako",
+    "repeatOn": "Ponoviti na",
     "interval": " mesec/i",
     "day": "Day "
   },
   "yearly": {
-    "repeatEvery": "Ponovite svako: ",
-    "repeatOn": "Ponoviti na: ",
+    "repeatEvery": "Ponovite svako",
+    "repeatOn": "Ponoviti na",
     "interval": " godina(e)",
     "of": " od "
   },
   "end": {
-    "label": "Kraj:",
+    "label": "Kraj",
     "mobileLabel": "Završava",
     "never": "Nikad",
     "after": "Posle",
@@ -574,6 +574,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "vikend"
   },
   "makeRecurring": "Postavi ponavljanje",
+  "editRecurring": "Uredi ponavljanje",
   "summary": {
     "on": "u",
     "onThe": "u",

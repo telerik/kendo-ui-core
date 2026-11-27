@@ -652,19 +652,17 @@ export class DataSource extends Observable {
         });
         if (!isPrevented) {
             this.trigger(PROGRESS);
-            if (options) {
-                options.groupPaging = this._groupPaging;
-            }
+            options.groupPaging = this._groupPaging;
             result = this._queryProcess(this._data, this._mergeState(options));
             this._setFilterTotal(result.total, true);
-            this._aggregateResult = this._calculateAggregates(result.dataToAggregate || this._data, options || {});
+            this._aggregateResult = this._calculateAggregates(result.dataToAggregate || this._data, options);
             this._setView(result, options);
             this.trigger(REQUESTEND, {
                 type: "read"
             });
             this.trigger(CHANGE, {
                 items: result.data,
-                action: options ? options.action : ""
+                action: options.action
             });
         }
         return $.Deferred().resolve(isPrevented).promise();

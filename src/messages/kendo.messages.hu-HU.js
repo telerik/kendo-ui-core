@@ -523,32 +523,32 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "yearly": "Évente"
   },
   "hourly": {
-    "repeatEvery": "Ismételje minden: ",
+    "repeatEvery": "Ismételje minden",
     "interval": " óra(k)"
   },
   "daily": {
-    "repeatEvery": "Ismételje minden: ",
+    "repeatEvery": "Ismételje minden",
     "interval": " nap(ok)"
   },
   "weekly": {
     "interval": " hét(ek)",
-    "repeatEvery": "Ismételje minden: ",
-    "repeatOn": "Ismételje: "
+    "repeatEvery": "Ismételje minden",
+    "repeatOn": "Ismételje"
   },
   "monthly": {
-    "repeatEvery": "Ismételje minden: ",
-    "repeatOn": "Ismételje: ",
+    "repeatEvery": "Ismételje minden",
+    "repeatOn": "Ismételje",
     "interval": " hónap(ok)",
     "day": "nap "
   },
   "yearly": {
-    "repeatEvery": "Ismételje minden: ",
-    "repeatOn": "Ismételje: ",
+    "repeatEvery": "Ismételje minden",
+    "repeatOn": "Ismételje",
     "interval": " év(ek)",
     "of": " a(z) "
   },
   "end": {
-    "label": "Vége:",
+    "label": "Vége",
     "mobileLabel": "Végződik",
     "never": "Soha",
     "after": "Után ",
@@ -568,6 +568,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "pihenőnap"
   },
   "makeRecurring": "Ismétlővé tétel",
+  "editRecurring": "Ismétlődés szerkesztése",
   "summary": {
     "on": "napján",
     "onThe": "napján",

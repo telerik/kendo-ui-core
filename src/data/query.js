@@ -141,20 +141,16 @@ export const operators = (function () {
         neq: function (a, b, ignore, accentFoldingFiltering) {
             return operator("!=", a, b, ignore, accentFoldingFiltering);
         },
-        gt: function (a, b, ignore, accentFoldingFiltering) {
-            void accentFoldingFiltering;
+        gt: function (a, b, ignore) {
             return operator(">", a, b, ignore);
         },
-        gte: function (a, b, ignore, accentFoldingFiltering) {
-            void accentFoldingFiltering;
+        gte: function (a, b, ignore) {
             return operator(">=", a, b, ignore);
         },
-        lt: function (a, b, ignore, accentFoldingFiltering) {
-            void accentFoldingFiltering;
+        lt: function (a, b, ignore) {
             return operator("<", a, b, ignore);
         },
-        lte: function (a, b, ignore, accentFoldingFiltering) {
-            void accentFoldingFiltering;
+        lte: function (a, b, ignore) {
             return operator("<=", a, b, ignore);
         },
         startswith: textOp(function (a, b) {
@@ -398,7 +394,7 @@ export class Query {
                 field: field,
                 dir: dir
             } : field;
-            const descriptors = isArray(descriptor) ? descriptor : descriptor !== undefined ? [descriptor] : [];
+            const descriptors = isArray(descriptor) ? descriptor : [descriptor];
             return grep(descriptors, function (d) {
                 return !!d.dir;
             });
@@ -639,7 +635,7 @@ export function normalizeSort(field, dir) {
             field: field,
             dir: dir
         } : field;
-        const descriptors = isArray(descriptor) ? descriptor : descriptor !== undefined ? [descriptor] : [];
+        const descriptors = isArray(descriptor) ? descriptor : [descriptor];
         return grep(descriptors, function (d) {
             return !!d.dir;
         });
@@ -653,7 +649,7 @@ export function sortFields(sorts, dir) {
             field: sorts,
             dir: dir
         } : sorts;
-        const descriptors = isArray(descriptor) ? descriptor : descriptor !== undefined ? [descriptor] : [];
+        const descriptors = isArray(descriptor) ? descriptor : [descriptor];
         for (i = 0; i < descriptors.length; i++) {
             sortObject[String(descriptors[i].field)] = {
                 dir: descriptors[i].dir,

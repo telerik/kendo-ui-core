@@ -249,12 +249,12 @@
         "update": "Speichern",
         "daily": {
           "interval": "Tag(e)",
-          "repeatEvery": "Wiederholen an jedem:"
+          "repeatEvery": "Wiederholen an jedem"
         },
         "end": {
           "after": "Nach",
           "occurrence": "Anzahl Wiederholungen",
-          "label": "Beenden:",
+          "label": "Beenden",
           "never": "Nie",
           "on": "Am",
           "mobileLabel": "Endet"
@@ -268,15 +268,15 @@
           "yearly": "Jährlich"
         },
         "hourly": {
-          "repeatEvery": "Wiederholen alle:",
+          "repeatEvery": "Wiederholen alle",
           "interval": " Stunde(n)"
         },
         "monthly": {
           "day": "Tag",
           "date": "Datum",
           "interval": "Monat(e)",
-          "repeatEvery": "Wiederholen an jedem:",
-          "repeatOn": "Wiederholen am:"
+          "repeatEvery": "Wiederholen an jedem",
+          "repeatOn": "Wiederholen am"
         },
         "offsetPositions": {
           "first": "ersten",
@@ -286,14 +286,14 @@
           "third": "dritten"
         },
         "weekly": {
-          "repeatEvery": "Wiederholen an jedem:",
-          "repeatOn": "Wiederholen am:",
+          "repeatEvery": "Wiederholen an jedem",
+          "repeatOn": "Wiederholen am",
           "interval": "Woche(n)"
         },
         "yearly": {
           "of": "von",
-          "repeatEvery": "Wiederholen an jedem:",
-          "repeatOn": "Wiederholen am:",
+          "repeatEvery": "Wiederholen an jedem",
+          "repeatOn": "Wiederholen am",
           "interval": "Jahr(e)",
           "month": "Monat",
           "day": "Tag",
@@ -305,6 +305,7 @@
           "weekend": "Tag am Wochenende"
         },
         "makeRecurring": "Wiederkehrend machen",
+        "editRecurring": "Wiederholung bearbeiten",
         "summary": {
           "on": "am",
           "onThe": "am",
@@ -593,8 +594,6 @@
           "collapse": "Reduzieren"
         },
         "expandCollapseColumnHeader": "",
-        "groupHeader": "Strg + Leertaste drücken zum Gruppieren",
-        "ungroupHeader": "Strg + Leertaste drücken zum Entgruppieren",
         "toolbarLabel": "Raster-Symbolleiste",
         "groupingHeaderLabel": "Raster-Gruppierungsüberschrift",
         "filterCellTitle": "Filterzelle",

@@ -648,12 +648,12 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "update": "Запази",
   "daily": {
     "interval": " ден(дни)",
-    "repeatEvery": "Повтаряй всеки: "
+    "repeatEvery": "Повтаряй всеки"
   },
   "end": {
     "after": "След ",
     "occurrence": " повторение(я)",
-    "label": "Край:",
+    "label": "Край",
     "never": "Никога",
     "on": "На ",
     "mobileLabel": "Край"
@@ -668,8 +668,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "monthly": {
     "day": "Ден ",
     "interval": " месец(и)",
-    "repeatEvery": "Повтаряй всеки: ",
-    "repeatOn": "Повтаряй на: ",
+    "repeatEvery": "Повтаряй всеки",
+    "repeatOn": "Повтаряй на",
     "date": "Дата"
   },
   "offsetPositions": {
@@ -680,14 +680,14 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "third": "трети(та)"
   },
   "weekly": {
-    "repeatEvery": "Повтаряй на: ",
-    "repeatOn": "Повтаряй всеки: ",
+    "repeatEvery": "Повтаряй на",
+    "repeatOn": "Повтаряй всеки",
     "interval": " седмица(и)"
   },
   "yearly": {
     "of": " от ",
-    "repeatEvery": "Повтаряй всеки: ",
-    "repeatOn": "Повтаряй на: ",
+    "repeatEvery": "Повтаряй всеки",
+    "repeatOn": "Повтаряй на",
     "interval": " година(ни)",
     "month": "месец",
     "day": "ден",
@@ -699,6 +699,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "почивен ден"
   },
   "makeRecurring": "Задай повторение",
+  "editRecurring": "Редактиране на повторението",
   "summary": {
     "on": "в",
     "onThe": "на",
@@ -784,8 +785,6 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmDelete": "Изтрий"
   },
   "noRecords": "Няма налични записи.",
-  "groupHeader": "Натиснете ctrl + space за да групирате",
-  "ungroupHeader": "Натиснете ctrl + space за да разгрупирате",
   "toolbarLabel": "тулбар на таблицата",
   "groupingHeaderLabel": "ред за групиране на таблицата",
   "filterCellTitle": "клетка за филтриране",

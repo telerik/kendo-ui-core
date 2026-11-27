@@ -529,32 +529,32 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "yearly": "Çdo vit"
   },
   "hourly": {
-    "repeatEvery": "Përsëriteni çdo: ",
+    "repeatEvery": "Përsëriteni çdo",
     "interval": " orë"
   },
   "daily": {
-    "repeatEvery": "Përsëriteni çdo: ",
+    "repeatEvery": "Përsëriteni çdo",
     "interval": " ditë"
   },
   "weekly": {
     "interval": " javë",
-    "repeatEvery": "Përsëriteni çdo: ",
-    "repeatOn": "Përsëriteni në: "
+    "repeatEvery": "Përsëriteni çdo",
+    "repeatOn": "Përsëriteni në"
   },
   "monthly": {
-    "repeatEvery": "Përsëriteni çdo: ",
-    "repeatOn": "Përsëriteni në: ",
+    "repeatEvery": "Përsëriteni çdo",
+    "repeatOn": "Përsëriteni në",
     "interval": " muaj",
     "day": "Ditë "
   },
   "yearly": {
-    "repeatEvery": "Përsëriteni çdo: ",
-    "repeatOn": "Përsëriteni në: ",
+    "repeatEvery": "Përsëriteni çdo",
+    "repeatOn": "Përsëriteni në",
     "interval": " vit",
     "of": " të "
   },
   "end": {
-    "label": "Përfundoj:",
+    "label": "Përfundoj",
     "mobileLabel": "Pëfundon",
     "never": "Asnjëherë",
     "after": "Pas ",
@@ -574,6 +574,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "ditë e fundjavës"
   },
   "makeRecurring": "Bëje të përsëritur",
+  "editRecurring": "Redakto përsëritjen",
   "summary": {
     "on": "në",
     "onThe": "në",

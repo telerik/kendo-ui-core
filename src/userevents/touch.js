@@ -153,7 +153,7 @@ export class Touch extends Class {
             target: that.target,
             event: jQueryEvent,
         };
-        if (that.userEvents.notify(name, data)) {
+        if (that.userEvents.notify(name, data) && jQueryEvent) {
             jQueryEvent.preventDefault();
         }
     }
